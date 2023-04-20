@@ -104,6 +104,7 @@ public class VerificationSession extends ApiResource
   @SerializedName("object")
   String object;
 
+  /** A set of options for the session’s verification checks. */
   @SerializedName("options")
   Options options;
 
