@@ -21,7 +21,7 @@ import lombok.Setter;
  * payments within a region, enabling you to <a href="https://stripe.com/docs/tax">automatically
  * collect tax</a>.
  *
- * <p>Stripe will not register on your behalf with the relevant authorities when you create a Tax
+ * <p>Stripe doesn't register on your behalf with the relevant authorities when you create a Tax
  * {@code Registration} object. For more information on how to register to collect tax, see <a
  * href="https://stripe.com/docs/tax/registering">our guide</a>.
  */
@@ -1280,7 +1280,10 @@ public class Registration extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class LocalLeaseTax extends StripeObject {
-        /** A FIPS/GNIS code representing the local jurisdiction. */
+        /**
+         * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+         * representing the local jurisdiction.
+         */
         @SerializedName("jurisdiction")
         String jurisdiction;
       }

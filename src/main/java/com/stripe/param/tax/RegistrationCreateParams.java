@@ -7306,7 +7306,11 @@ public class RegistrationCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> A FIPS/GNIS code representing the local jurisdiction. */
+        /**
+         * <strong>Required.</strong> A <a
+         * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+         * representing the local jurisdiction.
+         */
         @SerializedName("jurisdiction")
         String jurisdiction;
 
@@ -7358,7 +7362,11 @@ public class RegistrationCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> A FIPS/GNIS code representing the local jurisdiction. */
+          /**
+           * <strong>Required.</strong> A <a
+           * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+           * representing the local jurisdiction.
+           */
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;
             return this;
