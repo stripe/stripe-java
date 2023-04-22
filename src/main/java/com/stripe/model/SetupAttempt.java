@@ -431,9 +431,39 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      /** Check results by Card networks on Card address and CVC at time of payment. */
+      @SerializedName("checks")
+      Checks checks;
+
       /** Populated if this authorization used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Checks extends StripeObject {
+        /**
+         * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
+         * {@code unavailable}, or {@code unchecked}.
+         */
+        @SerializedName("address_line1_check")
+        String addressLine1Check;
+
+        /**
+         * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
+         */
+        @SerializedName("address_postal_code_check")
+        String addressPostalCodeCheck;
+
+        /**
+         * If a CVC was provided, results of the check, one of {@code pass}, {@code fail}, {@code
+         * unavailable}, or {@code unchecked}.
+         */
+        @SerializedName("cvc_check")
+        String cvcCheck;
+      }
 
       @Getter
       @Setter
