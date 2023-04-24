@@ -563,6 +563,10 @@ public class Authorization extends ApiResource
     @SerializedName("state")
     String state;
 
+    /** An ID assigned by the seller to the location of the sale. */
+    @SerializedName("terminal_id")
+    String terminalId;
+
     /** URL provided by the merchant on a 3DS request. */
     @SerializedName("url")
     String url;
