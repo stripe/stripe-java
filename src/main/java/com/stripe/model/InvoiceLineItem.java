@@ -62,9 +62,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    * with this line item if any.
    */
   @SerializedName("invoice_item")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<InvoiceItem> invoiceItem;
+  String invoiceItem;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -115,18 +113,14 @@ public class InvoiceLineItem extends StripeObject implements HasId {
 
   /** The subscription that the invoice item pertains to, if any. */
   @SerializedName("subscription")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Subscription> subscription;
+  String subscription;
 
   /**
    * The subscription item that generated this line item. Left empty if the line item is not an
    * explicit result of a subscription.
    */
   @SerializedName("subscription_item")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<SubscriptionItem> subscriptionItem;
+  String subscriptionItem;
 
   /** The amount of tax calculated per tax rate for this line item. */
   @SerializedName("tax_amounts")
@@ -151,62 +145,6 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    */
   @SerializedName("unit_amount_excluding_tax")
   BigDecimal unitAmountExcludingTax;
-
-  /** Get ID of expandable {@code invoiceItem} object. */
-  public String getInvoiceItem() {
-    return (this.invoiceItem != null) ? this.invoiceItem.getId() : null;
-  }
-
-  public void setInvoiceItem(String id) {
-    this.invoiceItem = ApiResource.setExpandableFieldId(id, this.invoiceItem);
-  }
-
-  /** Get expanded {@code invoiceItem}. */
-  public InvoiceItem getInvoiceItemObject() {
-    return (this.invoiceItem != null) ? this.invoiceItem.getExpanded() : null;
-  }
-
-  public void setInvoiceItemObject(InvoiceItem expandableObject) {
-    this.invoiceItem = new ExpandableField<InvoiceItem>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code subscription} object. */
-  public String getSubscription() {
-    return (this.subscription != null) ? this.subscription.getId() : null;
-  }
-
-  public void setSubscription(String id) {
-    this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
-  }
-
-  /** Get expanded {@code subscription}. */
-  public Subscription getSubscriptionObject() {
-    return (this.subscription != null) ? this.subscription.getExpanded() : null;
-  }
-
-  public void setSubscriptionObject(Subscription expandableObject) {
-    this.subscription =
-        new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code subscriptionItem} object. */
-  public String getSubscriptionItem() {
-    return (this.subscriptionItem != null) ? this.subscriptionItem.getId() : null;
-  }
-
-  public void setSubscriptionItem(String id) {
-    this.subscriptionItem = ApiResource.setExpandableFieldId(id, this.subscriptionItem);
-  }
-
-  /** Get expanded {@code subscriptionItem}. */
-  public SubscriptionItem getSubscriptionItemObject() {
-    return (this.subscriptionItem != null) ? this.subscriptionItem.getExpanded() : null;
-  }
-
-  public void setSubscriptionItemObject(SubscriptionItem expandableObject) {
-    this.subscriptionItem =
-        new ExpandableField<SubscriptionItem>(expandableObject.getId(), expandableObject);
-  }
 
   /** Get IDs of expandable {@code discounts} object list. */
   public List<String> getDiscounts() {
