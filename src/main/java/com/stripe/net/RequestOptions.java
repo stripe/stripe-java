@@ -14,8 +14,7 @@ public class RequestOptions {
   private final String stripeAccount;
 
   private final String baseUrl;
-
-  /** Uses the globally set version by default, unless an override is provided. */
+  /** Uses the globally set version by defaeult, unless an override is provided. */
   private final String stripeVersion = Stripe.stripeVersion;
 
   /**
@@ -31,12 +30,6 @@ public class RequestOptions {
   private final Proxy connectionProxy;
   private final PasswordAuthentication proxyCredential;
 
-  /**
-   * The encoding to use when serializing parameters, JSON or form encoding.
-   * Use form by default, unless an override is provided.
-   */
-  private final Encoding encoding;
-
   public static RequestOptions getDefault() {
     return new RequestOptions(
         Stripe.apiKey,
@@ -49,8 +42,7 @@ public class RequestOptions {
         Stripe.getReadTimeout(),
         Stripe.getMaxNetworkRetries(),
         Stripe.getConnectionProxy(),
-        Stripe.getProxyCredential(),
-            Encoding.FORM);
+        Stripe.getProxyCredential());
   }
 
   private RequestOptions(
@@ -64,8 +56,7 @@ public class RequestOptions {
       int readTimeout,
       int maxNetworkRetries,
       Proxy connectionProxy,
-      PasswordAuthentication proxyCredential,
-      Encoding encoding) {
+      PasswordAuthentication proxyCredential) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -77,12 +68,6 @@ public class RequestOptions {
     this.maxNetworkRetries = maxNetworkRetries;
     this.connectionProxy = connectionProxy;
     this.proxyCredential = proxyCredential;
-    this.encoding = encoding;
-  }
-
-  public enum Encoding {
-    FORM,
-    JSON,
   }
 
   public String getApiKey() {
@@ -129,10 +114,6 @@ public class RequestOptions {
     return proxyCredential;
   }
 
-  public Encoding getEncoding() {
-    return encoding;
-  }
-
   public String getBaseUrl() {
     return baseUrl;
   }
@@ -170,8 +151,7 @@ public class RequestOptions {
             .setReadTimeout(this.readTimeout)
             .setMaxNetworkRetries(this.maxNetworkRetries)
             .setConnectionProxy(this.connectionProxy)
-            .setProxyCredential(this.proxyCredential)
-            .setEncoding(this.encoding),
+            .setProxyCredential(this.proxyCredential),
         stripeVersionOverride);
   }
 
@@ -186,7 +166,6 @@ public class RequestOptions {
     private int maxNetworkRetries;
     private Proxy connectionProxy;
     private PasswordAuthentication proxyCredential;
-    private Encoding encoding;
     private String baseUrl;
 
     /**
@@ -301,16 +280,6 @@ public class RequestOptions {
       return this;
     }
 
-    public Encoding getEncoding() {
-      return encoding;
-    }
-
-    public RequestOptionsBuilder setEncoding(Encoding encoding) {
-      this.encoding = encoding;
-      return this;
-    }
-
-
     public RequestOptionsBuilder clearIdempotencyKey() {
       this.idempotencyKey = null;
       return this;
@@ -367,8 +336,7 @@ public class RequestOptions {
           readTimeout,
           maxNetworkRetries,
           connectionProxy,
-          proxyCredential,
-          encoding);
+          proxyCredential);
     }
   }
 

@@ -1,13 +1,5 @@
 package com.stripe;
 
-import com.stripe.exception.*;
-import com.stripe.net.*;
-import com.stripe.util.StreamUtils;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
@@ -213,39 +205,5 @@ public abstract class Stripe {
 
   public static Map<String, String> getAppInfo() {
     return appInfo;
-  }
-
-  /**
-   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe API.
-   * This method is useful for interacting with endpoints that are not covered yet in stripe-java.
-   *
-   * @param method the HTTP method
-   * @param url the URL of the request
-   * @param params the parameters of the request
-   * @param options the special modifiers of the request
-   * @return the JSON response as a string
-   */
-  public static StripeResponse rawRequest(
-      final ApiResource.RequestMethod method,
-      final String url,
-      final Map<String, Object> params,
-      final RawRequestOptions options)
-      throws StripeException {
-    StripeRequest request = new StripeRequest(method, url, params, options);
-    StripeResponseStream responseStream = new HttpURLConnectionClient().requestStream(request);
-
-    try {
-      StripeResponse response = responseStream.unstream();
-      return response;
-    } catch (IOException e) {
-      throw new ApiConnectionException(
-              String.format(
-                      "IOException during API request to Stripe (%s): %s "
-                              + "Please check your internet connection and try again. If this problem persists,"
-                              + "you should check Stripe's service status at https://twitter.com/stripestatus,"
-                              + " or let us know at support@stripe.com.",
-                      Stripe.getApiBase(), e.getMessage()),
-              e);
-    }
   }
 }
