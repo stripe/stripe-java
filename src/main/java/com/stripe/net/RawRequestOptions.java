@@ -1,6 +1,5 @@
 package com.stripe.net;
 
-import com.stripe.Stripe;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
@@ -63,12 +62,12 @@ public class RawRequestOptions extends RequestOptions {
     private Map<String, String> additionalHeaders;
 
     /**
-     * Constructs a raw request options builder with the global parameters (API key and client ID)
-     * as default values.
+     * Constructs a raw request options builder with default values. Encoding is set to {@code
+     * Encoding.FORM} by default.
      */
     public RawRequestOptionsBuilder() {
       super();
-      encoding = Stripe.getEncoding();
+      encoding = Encoding.FORM;
     }
 
     public Encoding getEncoding() {

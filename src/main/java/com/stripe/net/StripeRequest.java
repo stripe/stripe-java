@@ -71,7 +71,14 @@ public class StripeRequest {
       this.options = (options != null) ? options : RequestOptions.getDefault();
       this.method = method;
       this.url = buildURL(method, url, params);
-      this.content = buildContent(method, params);
+
+      if (this.options instanceof RawRequestOptions) {
+        RawRequestOptions rawOptions = (RawRequestOptions) this.options;
+        this.content = buildContent(method, params, rawOptions.getEncoding());
+      } else {
+        this.content = buildContent(method, params, RawRequestOptions.Encoding.FORM);
+      }
+
       this.headers = buildHeaders(method, this.options);
     } catch (IOException e) {
       throw new ApiConnectionException(
@@ -129,9 +136,16 @@ public class StripeRequest {
   }
 
   private static HttpContent buildContent(
-      ApiResource.RequestMethod method, Map<String, Object> params) throws IOException {
+      ApiResource.RequestMethod method,
+      Map<String, Object> params,
+      RawRequestOptions.Encoding encoding)
+      throws IOException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
+    }
+
+    if (encoding == RawRequestOptions.Encoding.JSON) {
+      return JsonEncoder.createHttpContent(params);
     }
 
     return FormEncoder.createHttpContent(params);

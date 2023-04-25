@@ -213,19 +213,6 @@ public abstract class Stripe {
   }
 
   /**
-   * Set encoding to encode params.
-   *
-   * @param paramEncoding encoding type
-   */
-  public static void setEncoding(final RawRequestOptions.Encoding paramEncoding) {
-    encoding = paramEncoding;
-  }
-
-  public static RawRequestOptions.Encoding getEncoding() {
-    return encoding;
-  }
-
-  /**
    * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
    * API. This method is useful for interacting with endpoints that are not covered yet in
    * stripe-java.
@@ -244,7 +231,6 @@ public abstract class Stripe {
       throws StripeException {
     StripeRequest request = new StripeRequest(method, url, params, options);
 
-    // Add additional headers to request
     for (Map.Entry<String, String> entry : options.getAdditionalHeaders().entrySet()) {
       String key = entry.getKey();
       String value = entry.getValue();
