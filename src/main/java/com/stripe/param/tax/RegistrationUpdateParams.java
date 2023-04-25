@@ -14,7 +14,7 @@ import lombok.Getter;
 public class RegistrationUpdateParams extends ApiRequestParams {
   /** Time at which the registration becomes active. Measured in seconds since the Unix epoch. */
   @SerializedName("active_from")
-  Long activeFrom;
+  Object activeFrom;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -37,7 +37,7 @@ public class RegistrationUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   private RegistrationUpdateParams(
-      Long activeFrom, List<String> expand, Object expiresAt, Map<String, Object> extraParams) {
+      Object activeFrom, List<String> expand, Object expiresAt, Map<String, Object> extraParams) {
     this.activeFrom = activeFrom;
     this.expand = expand;
     this.expiresAt = expiresAt;
@@ -49,7 +49,7 @@ public class RegistrationUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Long activeFrom;
+    private Object activeFrom;
 
     private List<String> expand;
 
@@ -65,6 +65,12 @@ public class RegistrationUpdateParams extends ApiRequestParams {
 
     /** Time at which the registration becomes active. Measured in seconds since the Unix epoch. */
     public Builder setActiveFrom(Long activeFrom) {
+      this.activeFrom = activeFrom;
+      return this;
+    }
+
+    /** Time at which the registration becomes active. Measured in seconds since the Unix epoch. */
+    public Builder setActiveFrom(RegistrationUpdateParams.ActiveFrom activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }
@@ -108,6 +114,15 @@ public class RegistrationUpdateParams extends ApiRequestParams {
      * If set, the registration stops being active at this time. If not set, the registration will
      * be active indefinitely. Measured in seconds since the Unix epoch.
      */
+    public Builder setExpiresAt(RegistrationUpdateParams.ExpiresAt expiresAt) {
+      this.expiresAt = expiresAt;
+      return this;
+    }
+
+    /**
+     * If set, the registration stops being active at this time. If not set, the registration will
+     * be active indefinitely. Measured in seconds since the Unix epoch.
+     */
     public Builder setExpiresAt(EmptyParam expiresAt) {
       this.expiresAt = expiresAt;
       return this;
@@ -137,6 +152,30 @@ public class RegistrationUpdateParams extends ApiRequestParams {
       }
       this.extraParams.putAll(map);
       return this;
+    }
+  }
+
+  public enum ActiveFrom implements ApiRequestParams.EnumParam {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ActiveFrom(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum ExpiresAt implements ApiRequestParams.EnumParam {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ExpiresAt(String value) {
+      this.value = value;
     }
   }
 }

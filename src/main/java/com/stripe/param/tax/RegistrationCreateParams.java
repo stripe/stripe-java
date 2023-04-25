@@ -16,7 +16,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
    * seconds since the Unix epoch.
    */
   @SerializedName("active_from")
-  Long activeFrom;
+  Object activeFrom;
 
   /**
    * <strong>Required.</strong> Two-letter country code (<a
@@ -53,7 +53,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   private RegistrationCreateParams(
-      Long activeFrom,
+      Object activeFrom,
       String country,
       CountryOptions countryOptions,
       List<String> expand,
@@ -72,7 +72,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Long activeFrom;
+    private Object activeFrom;
 
     private String country;
 
@@ -100,6 +100,15 @@ public class RegistrationCreateParams extends ApiRequestParams {
      * seconds since the Unix epoch.
      */
     public Builder setActiveFrom(Long activeFrom) {
+      this.activeFrom = activeFrom;
+      return this;
+    }
+
+    /**
+     * <strong>Required.</strong> Time at which the Tax Registration becomes active. Measured in
+     * seconds since the Unix epoch.
+     */
+    public Builder setActiveFrom(RegistrationCreateParams.ActiveFrom activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }
@@ -7467,6 +7476,18 @@ public class RegistrationCreateParams extends ApiRequestParams {
           this.value = value;
         }
       }
+    }
+  }
+
+  public enum ActiveFrom implements ApiRequestParams.EnumParam {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ActiveFrom(String value) {
+      this.value = value;
     }
   }
 }
