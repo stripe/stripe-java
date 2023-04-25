@@ -2,12 +2,7 @@ package com.stripe;
 
 import com.stripe.exception.*;
 import com.stripe.net.*;
-import com.stripe.util.StreamUtils;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
@@ -27,6 +22,8 @@ public abstract class Stripe {
   public static volatile String clientId;
   public static volatile boolean enableTelemetry = true;
   public static volatile String partnerId;
+
+  public static volatile RawRequestOptions.Encoding encoding = RawRequestOptions.Encoding.FORM;;
 
   /**
    * Stripe API version which is sent by default on requests. This can be updated to include beta
@@ -216,8 +213,22 @@ public abstract class Stripe {
   }
 
   /**
-   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe API.
-   * This method is useful for interacting with endpoints that are not covered yet in stripe-java.
+   * Set encoding to encode params.
+   *
+   * @param paramEncoding encoding type
+   */
+  public static void setEncoding(final RawRequestOptions.Encoding paramEncoding) {
+    encoding = paramEncoding;
+  }
+
+  public static RawRequestOptions.Encoding getEncoding() {
+    return encoding;
+  }
+
+  /**
+   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
+   * API. This method is useful for interacting with endpoints that are not covered yet in
+   * stripe-java.
    *
    * @param method the HTTP method
    * @param url the URL of the request
@@ -239,13 +250,13 @@ public abstract class Stripe {
       return response;
     } catch (IOException e) {
       throw new ApiConnectionException(
-              String.format(
-                      "IOException during API request to Stripe (%s): %s "
-                              + "Please check your internet connection and try again. If this problem persists,"
-                              + "you should check Stripe's service status at https://twitter.com/stripestatus,"
-                              + " or let us know at support@stripe.com.",
-                      Stripe.getApiBase(), e.getMessage()),
-              e);
+          String.format(
+              "IOException during API request to Stripe (%s): %s "
+                  + "Please check your internet connection and try again. If this problem persists,"
+                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                  + " or let us know at support@stripe.com.",
+              Stripe.getApiBase(), e.getMessage()),
+          e);
     }
   }
 }

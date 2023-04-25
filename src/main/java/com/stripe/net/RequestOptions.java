@@ -14,8 +14,7 @@ public class RequestOptions {
   private final String stripeAccount;
 
   private final String baseUrl;
-
-  /** Uses the globally set version by default, unless an override is provided. */
+  /** Uses the globally set version by defaeult, unless an override is provided. */
   private final String stripeVersion = Stripe.stripeVersion;
 
   /**
@@ -31,12 +30,6 @@ public class RequestOptions {
   private final Proxy connectionProxy;
   private final PasswordAuthentication proxyCredential;
 
-  /**
-   * The encoding to use when serializing parameters, JSON or form encoding.
-   * Use form by default, unless an override is provided.
-   */
-  private final Encoding encoding;
-
   public static RequestOptions getDefault() {
     return new RequestOptions(
         Stripe.apiKey,
@@ -49,11 +42,10 @@ public class RequestOptions {
         Stripe.getReadTimeout(),
         Stripe.getMaxNetworkRetries(),
         Stripe.getConnectionProxy(),
-        Stripe.getProxyCredential(),
-            Encoding.FORM);
+        Stripe.getProxyCredential());
   }
 
-  private RequestOptions(
+  protected RequestOptions(
       String apiKey,
       String clientId,
       String idempotencyKey,
@@ -64,8 +56,7 @@ public class RequestOptions {
       int readTimeout,
       int maxNetworkRetries,
       Proxy connectionProxy,
-      PasswordAuthentication proxyCredential,
-      Encoding encoding) {
+      PasswordAuthentication proxyCredential) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -77,12 +68,6 @@ public class RequestOptions {
     this.maxNetworkRetries = maxNetworkRetries;
     this.connectionProxy = connectionProxy;
     this.proxyCredential = proxyCredential;
-    this.encoding = encoding;
-  }
-
-  public enum Encoding {
-    FORM,
-    JSON,
   }
 
   public String getApiKey() {
@@ -129,10 +114,6 @@ public class RequestOptions {
     return proxyCredential;
   }
 
-  public Encoding getEncoding() {
-    return encoding;
-  }
-
   public String getBaseUrl() {
     return baseUrl;
   }
@@ -170,24 +151,22 @@ public class RequestOptions {
             .setReadTimeout(this.readTimeout)
             .setMaxNetworkRetries(this.maxNetworkRetries)
             .setConnectionProxy(this.connectionProxy)
-            .setProxyCredential(this.proxyCredential)
-            .setEncoding(this.encoding),
+            .setProxyCredential(this.proxyCredential),
         stripeVersionOverride);
   }
 
-  public static final class RequestOptionsBuilder {
-    private String apiKey;
-    private String clientId;
-    private String idempotencyKey;
-    private String stripeAccount;
-    private String stripeVersionOverride;
-    private int connectTimeout;
-    private int readTimeout;
-    private int maxNetworkRetries;
-    private Proxy connectionProxy;
-    private PasswordAuthentication proxyCredential;
-    private Encoding encoding;
-    private String baseUrl;
+  public static class RequestOptionsBuilder {
+    protected String apiKey;
+    protected String clientId;
+    protected String idempotencyKey;
+    protected String stripeAccount;
+    protected String stripeVersionOverride;
+    protected int connectTimeout;
+    protected int readTimeout;
+    protected int maxNetworkRetries;
+    protected Proxy connectionProxy;
+    protected PasswordAuthentication proxyCredential;
+    protected String baseUrl;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -301,16 +280,6 @@ public class RequestOptions {
       return this;
     }
 
-    public Encoding getEncoding() {
-      return encoding;
-    }
-
-    public RequestOptionsBuilder setEncoding(Encoding encoding) {
-      this.encoding = encoding;
-      return this;
-    }
-
-
     public RequestOptionsBuilder clearIdempotencyKey() {
       this.idempotencyKey = null;
       return this;
@@ -367,12 +336,11 @@ public class RequestOptions {
           readTimeout,
           maxNetworkRetries,
           connectionProxy,
-          proxyCredential,
-          encoding);
+          proxyCredential);
     }
   }
 
-  private static String normalizeApiKey(String apiKey) {
+  protected static String normalizeApiKey(String apiKey) {
     // null apiKeys are considered "valid"
     if (apiKey == null) {
       return null;
@@ -384,7 +352,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeClientId(String clientId) {
+  protected static String normalizeClientId(String clientId) {
     // null client_ids are considered "valid"
     if (clientId == null) {
       return null;
@@ -396,7 +364,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeStripeVersion(String stripeVersion) {
+  protected static String normalizeStripeVersion(String stripeVersion) {
     // null stripeVersions are considered "valid" and use Stripe.stripeVersion
     if (stripeVersion == null) {
       return null;
@@ -408,7 +376,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeBaseUrl(String baseUrl) {
+  protected static String normalizeBaseUrl(String baseUrl) {
     // null baseUrl is valid, and will fall back to e.g. Stripe.apiBase or Stripe.connectBase
     // (depending on the method)
     if (baseUrl == null) {
@@ -421,7 +389,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeIdempotencyKey(String idempotencyKey) {
+  protected static String normalizeIdempotencyKey(String idempotencyKey) {
     if (idempotencyKey == null) {
       return null;
     }
@@ -438,7 +406,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeStripeAccount(String stripeAccount) {
+  protected static String normalizeStripeAccount(String stripeAccount) {
     if (stripeAccount == null) {
       return null;
     }
