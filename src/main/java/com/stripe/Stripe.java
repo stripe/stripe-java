@@ -243,6 +243,14 @@ public abstract class Stripe {
       final RawRequestOptions options)
       throws StripeException {
     StripeRequest request = new StripeRequest(method, url, params, options);
+
+    // Add additional headers to request
+    for (Map.Entry<String, String> entry : options.getAdditionalHeaders().entrySet()) {
+      String key = entry.getKey();
+      String value = entry.getValue();
+      request = request.withAdditionalHeader(key, value);
+    }
+
     StripeResponseStream responseStream = new HttpURLConnectionClient().requestStream(request);
 
     try {

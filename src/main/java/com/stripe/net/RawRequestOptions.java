@@ -3,9 +3,12 @@ package com.stripe.net;
 import com.stripe.Stripe;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
+import java.util.Map;
 
 public class RawRequestOptions extends RequestOptions {
   private Encoding encoding;
+
+  private Map<String, String> additionalHeaders;
 
   public enum Encoding {
     FORM,
@@ -24,7 +27,8 @@ public class RawRequestOptions extends RequestOptions {
       int maxNetworkRetries,
       Proxy connectionProxy,
       PasswordAuthentication proxyCredential,
-      Encoding encoding) {
+      Encoding encoding,
+      Map<String, String> additionalHeaders) {
     super(
         apiKey,
         clientId,
@@ -38,10 +42,15 @@ public class RawRequestOptions extends RequestOptions {
         connectionProxy,
         proxyCredential);
     this.encoding = encoding;
+    this.additionalHeaders = additionalHeaders;
   }
 
   public Encoding getEncoding() {
     return encoding;
+  }
+
+  public Map<String, String> getAdditionalHeaders() {
+    return additionalHeaders;
   }
 
   public static RawRequestOptionsBuilder builder() {
@@ -50,6 +59,8 @@ public class RawRequestOptions extends RequestOptions {
 
   public static final class RawRequestOptionsBuilder extends RequestOptions.RequestOptionsBuilder {
     private Encoding encoding;
+
+    private Map<String, String> additionalHeaders;
 
     /**
      * Constructs a raw request options builder with the global parameters (API key and client ID)
@@ -69,6 +80,15 @@ public class RawRequestOptions extends RequestOptions {
       return this;
     }
 
+    public Map<String, String> getAdditionalHeaders() {
+      return this.additionalHeaders;
+    }
+
+    public RawRequestOptionsBuilder setAdditionalHeaders(Map<String, String> additionalHeaders) {
+      this.additionalHeaders = additionalHeaders;
+      return this;
+    }
+
     @Override
     public RawRequestOptions build() {
       return new RawRequestOptions(
@@ -83,7 +103,8 @@ public class RawRequestOptions extends RequestOptions {
           maxNetworkRetries,
           connectionProxy,
           proxyCredential,
-          encoding);
+          encoding,
+          additionalHeaders);
     }
   }
 }
