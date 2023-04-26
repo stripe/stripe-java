@@ -11259,6 +11259,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
+    /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
+    @SerializedName("billing_cycle_anchor")
+    Long billingCycleAnchor;
+
     /**
      * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
      * only affect invoices created for that particular subscription.
@@ -11304,6 +11308,13 @@ public class SessionCreateParams extends ApiRequestParams {
     String onBehalfOf;
 
     /**
+     * Determines how to handle prorations resulting from the {@code billing_cycle_anchor}. If no
+     * value is passed, the default is {@code create_prorations}.
+     */
+    @SerializedName("proration_behavior")
+    ProrationBehavior prorationBehavior;
+
+    /**
      * If specified, the funds from the subscription's invoices will be transferred to the
      * destination and the ID of the resulting transfers will be found on the resulting charges.
      */
@@ -11338,24 +11349,28 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private SubscriptionData(
         BigDecimal applicationFeePercent,
+        Long billingCycleAnchor,
         String coupon,
         List<String> defaultTaxRates,
         String description,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
         String onBehalfOf,
+        ProrationBehavior prorationBehavior,
         TransferData transferData,
         Long trialEnd,
         Boolean trialFromPlan,
         Long trialPeriodDays,
         TrialSettings trialSettings) {
       this.applicationFeePercent = applicationFeePercent;
+      this.billingCycleAnchor = billingCycleAnchor;
       this.coupon = coupon;
       this.defaultTaxRates = defaultTaxRates;
       this.description = description;
       this.extraParams = extraParams;
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
+      this.prorationBehavior = prorationBehavior;
       this.transferData = transferData;
       this.trialEnd = trialEnd;
       this.trialFromPlan = trialFromPlan;
@@ -11370,6 +11385,8 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private BigDecimal applicationFeePercent;
 
+      private Long billingCycleAnchor;
+
       private String coupon;
 
       private List<String> defaultTaxRates;
@@ -11381,6 +11398,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private Map<String, String> metadata;
 
       private String onBehalfOf;
+
+      private ProrationBehavior prorationBehavior;
 
       private TransferData transferData;
 
@@ -11396,12 +11415,14 @@ public class SessionCreateParams extends ApiRequestParams {
       public SessionCreateParams.SubscriptionData build() {
         return new SessionCreateParams.SubscriptionData(
             this.applicationFeePercent,
+            this.billingCycleAnchor,
             this.coupon,
             this.defaultTaxRates,
             this.description,
             this.extraParams,
             this.metadata,
             this.onBehalfOf,
+            this.prorationBehavior,
             this.transferData,
             this.trialEnd,
             this.trialFromPlan,
@@ -11419,6 +11440,12 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
         this.applicationFeePercent = applicationFeePercent;
+        return this;
+      }
+
+      /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
+      public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
+        this.billingCycleAnchor = billingCycleAnchor;
         return this;
       }
 
@@ -11522,6 +11549,16 @@ public class SessionCreateParams extends ApiRequestParams {
       /** The account on behalf of which to charge, for each of the subscription's invoices. */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+
+      /**
+       * Determines how to handle prorations resulting from the {@code billing_cycle_anchor}. If no
+       * value is passed, the default is {@code create_prorations}.
+       */
+      public Builder setProrationBehavior(
+          SessionCreateParams.SubscriptionData.ProrationBehavior prorationBehavior) {
+        this.prorationBehavior = prorationBehavior;
         return this;
       }
 
@@ -11841,6 +11878,21 @@ public class SessionCreateParams extends ApiRequestParams {
             this.value = value;
           }
         }
+      }
+    }
+
+    public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("create_prorations")
+      CREATE_PRORATIONS("create_prorations"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ProrationBehavior(String value) {
+        this.value = value;
       }
     }
   }
