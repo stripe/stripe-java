@@ -5,7 +5,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.stripe.net.ApiResource;
 import com.stripe.net.UntypedMapDeserializer;
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -40,21 +39,5 @@ public class EventDataDeserializer implements JsonDeserializer<Event.Data> {
       }
     }
     return eventData;
-  }
-
-  /**
-   * Deserialize JSON into super class {@code StripeObject} where the underlying concrete class
-   * corresponds to type specified in root-level {@code object} field of the JSON input.
-   *
-   * <p>Note that the expected JSON input is data at the {@code object} value, as a sibling to
-   * {@code previousAttributes}, and not the discriminator field containing a string.
-   *
-   * @return JSON data to be deserialized to super class {@code StripeObject}
-   */
-  static StripeObject deserializeStripeObject(JsonObject eventDataObjectJson) {
-    String type = eventDataObjectJson.getAsJsonObject().get("object").getAsString();
-    Class<? extends StripeObject> cl = EventDataClassLookup.classLookup.get(type);
-    return ApiResource.GSON.fromJson(
-        eventDataObjectJson, cl != null ? cl : StripeRawJsonObject.class);
   }
 }

@@ -8,7 +8,6 @@ import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class RawRequestOptionsTest extends BaseStripeTest {
@@ -17,7 +16,8 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   public void testRawRequestOptionsBuilder() {
     Map<String, String> additionalHeaders = new HashMap<>();
     additionalHeaders.put("foo", "bar");
-    RawRequestOptions opts = RawRequestOptions.builder()
+    RawRequestOptions opts =
+        RawRequestOptions.builder()
             .setApiKey("sk_foo")
             .setClientId("123")
             .setIdempotencyKey("123")
@@ -25,9 +25,8 @@ public class RawRequestOptionsTest extends BaseStripeTest {
             .setConnectTimeout(100)
             .setReadTimeout(100)
             .setConnectionProxy(
-                    new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
-            .setProxyCredential(
-                    new PasswordAuthentication("username", "password".toCharArray()))
+                new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
+            .setProxyCredential(new PasswordAuthentication("username", "password".toCharArray()))
             .setEncoding(RawRequestOptions.Encoding.JSON)
             .setAdditionalHeaders(additionalHeaders)
             .build();

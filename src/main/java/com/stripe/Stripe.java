@@ -1,6 +1,8 @@
 package com.stripe;
 
+import com.google.gson.JsonObject;
 import com.stripe.exception.*;
+import com.stripe.model.*;
 import com.stripe.net.*;
 import java.io.IOException;
 import java.net.PasswordAuthentication;
@@ -257,14 +259,13 @@ public abstract class Stripe {
     }
   }
 
-//  /**
-//   * Deserializes StripeResponse returned by rawRequest into the provided class.
-//   */
-//  public static <T> T deserialize(StripeResponse response, Class<T> clazz) throws StripeException {
-//      // if no class is provided, return StripeRawJsonObjectDeserializer.deserialize(response)
-//
-//    // if class is provided, return StripeObjectDeserializer.deserialize(response, clazz)
-//
-//
-//  }
+  /** Deserializes StripeResponse returned by rawRequest into a similar class. */
+  public static StripeObject deserialize(String rawJson) throws StripeException {
+    if (rawJson == null) {
+      throw new IllegalArgumentException("rawJson cannot be null");
+    }
+
+    return StripeObject.deserializeStripeObject(
+        ApiResource.GSON.fromJson(rawJson, JsonObject.class));
+  }
 }

@@ -1,7 +1,5 @@
 package com.stripe.net;
 
-import com.stripe.Stripe;
-
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
