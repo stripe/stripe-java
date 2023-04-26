@@ -12,7 +12,10 @@ import lombok.Getter;
 
 @Getter
 public class RegistrationUpdateParams extends ApiRequestParams {
-  /** Time at which the registration becomes active. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the registration becomes active. It can be either {@code now} to indicate the
+   * current time, or a timestamp measured in seconds since the Unix epoch.
+   */
   @SerializedName("active_from")
   Object activeFrom;
 
@@ -22,7 +25,8 @@ public class RegistrationUpdateParams extends ApiRequestParams {
 
   /**
    * If set, the registration stops being active at this time. If not set, the registration will be
-   * active indefinitely. Measured in seconds since the Unix epoch.
+   * active indefinitely. It can be either {@code now} to indicate the current time, or a timestamp
+   * measured in seconds since the Unix epoch.
    */
   @SerializedName("expires_at")
   Object expiresAt;
@@ -63,13 +67,19 @@ public class RegistrationUpdateParams extends ApiRequestParams {
           this.activeFrom, this.expand, this.expiresAt, this.extraParams);
     }
 
-    /** Time at which the registration becomes active. Measured in seconds since the Unix epoch. */
+    /**
+     * Time at which the registration becomes active. It can be either {@code now} to indicate the
+     * current time, or a timestamp measured in seconds since the Unix epoch.
+     */
     public Builder setActiveFrom(Long activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }
 
-    /** Time at which the registration becomes active. Measured in seconds since the Unix epoch. */
+    /**
+     * Time at which the registration becomes active. It can be either {@code now} to indicate the
+     * current time, or a timestamp measured in seconds since the Unix epoch.
+     */
     public Builder setActiveFrom(RegistrationUpdateParams.ActiveFrom activeFrom) {
       this.activeFrom = activeFrom;
       return this;
@@ -103,7 +113,8 @@ public class RegistrationUpdateParams extends ApiRequestParams {
 
     /**
      * If set, the registration stops being active at this time. If not set, the registration will
-     * be active indefinitely. Measured in seconds since the Unix epoch.
+     * be active indefinitely. It can be either {@code now} to indicate the current time, or a
+     * timestamp measured in seconds since the Unix epoch.
      */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
@@ -112,7 +123,8 @@ public class RegistrationUpdateParams extends ApiRequestParams {
 
     /**
      * If set, the registration stops being active at this time. If not set, the registration will
-     * be active indefinitely. Measured in seconds since the Unix epoch.
+     * be active indefinitely. It can be either {@code now} to indicate the current time, or a
+     * timestamp measured in seconds since the Unix epoch.
      */
     public Builder setExpiresAt(RegistrationUpdateParams.ExpiresAt expiresAt) {
       this.expiresAt = expiresAt;
@@ -121,7 +133,8 @@ public class RegistrationUpdateParams extends ApiRequestParams {
 
     /**
      * If set, the registration stops being active at this time. If not set, the registration will
-     * be active indefinitely. Measured in seconds since the Unix epoch.
+     * be active indefinitely. It can be either {@code now} to indicate the current time, or a
+     * timestamp measured in seconds since the Unix epoch.
      */
     public Builder setExpiresAt(EmptyParam expiresAt) {
       this.expiresAt = expiresAt;
