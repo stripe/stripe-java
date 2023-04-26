@@ -1,5 +1,7 @@
 package com.stripe.net;
 
+import com.stripe.Stripe;
+
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
@@ -85,6 +87,66 @@ public class RawRequestOptions extends RequestOptions {
 
     public RawRequestOptionsBuilder setAdditionalHeaders(Map<String, String> additionalHeaders) {
       this.additionalHeaders = additionalHeaders;
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setApiKey(String apiKey) {
+      super.setApiKey(apiKey);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setClientId(String clientId) {
+      super.setClientId(clientId);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setIdempotencyKey(String idempotencyKey) {
+      super.setIdempotencyKey(idempotencyKey);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setStripeAccount(String stripeAccount) {
+      super.setStripeAccount(stripeAccount);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setBaseUrl(String baseUrl) {
+      super.setBaseUrl(baseUrl);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setConnectTimeout(int timeout) {
+      super.setConnectTimeout(timeout);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setReadTimeout(int timeout) {
+      super.setReadTimeout(timeout);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setMaxNetworkRetries(int maxNetworkRetries) {
+      super.setMaxNetworkRetries(maxNetworkRetries);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setConnectionProxy(Proxy connectionProxy) {
+      super.setConnectionProxy(connectionProxy);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setProxyCredential(PasswordAuthentication proxyCredential) {
+      super.setProxyCredential(proxyCredential);
       return this;
     }
 

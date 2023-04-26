@@ -23,8 +23,6 @@ public abstract class Stripe {
   public static volatile boolean enableTelemetry = true;
   public static volatile String partnerId;
 
-  public static volatile RawRequestOptions.Encoding encoding = RawRequestOptions.Encoding.FORM;;
-
   /**
    * Stripe API version which is sent by default on requests. This can be updated to include beta
    * headers.
@@ -218,23 +216,28 @@ public abstract class Stripe {
    * stripe-java.
    *
    * @param method the HTTP method
-   * @param url the URL of the request
+   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
    * @param params the parameters of the request
    * @param options the special modifiers of the request
    * @return the JSON response as a string
    */
   public static StripeResponse rawRequest(
       final ApiResource.RequestMethod method,
-      final String url,
+      final String relativeUrl,
       final Map<String, Object> params,
       final RawRequestOptions options)
       throws StripeException {
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, relativeUrl);
     StripeRequest request = new StripeRequest(method, url, params, options);
 
-    for (Map.Entry<String, String> entry : options.getAdditionalHeaders().entrySet()) {
-      String key = entry.getKey();
-      String value = entry.getValue();
-      request = request.withAdditionalHeader(key, value);
+    Map<String, String> additionalHeaders = options.getAdditionalHeaders();
+
+    if (additionalHeaders != null) {
+      for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
+        String key = entry.getKey();
+        String value = entry.getValue();
+        request = request.withAdditionalHeader(key, value);
+      }
     }
 
     StripeResponseStream responseStream = new HttpURLConnectionClient().requestStream(request);
@@ -253,4 +256,15 @@ public abstract class Stripe {
           e);
     }
   }
+
+//  /**
+//   * Deserializes StripeResponse returned by rawRequest into the provided class.
+//   */
+//  public static <T> T deserialize(StripeResponse response, Class<T> clazz) throws StripeException {
+//      // if no class is provided, return StripeRawJsonObjectDeserializer.deserialize(response)
+//
+//    // if class is provided, return StripeObjectDeserializer.deserialize(response, clazz)
+//
+//
+//  }
 }

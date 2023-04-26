@@ -1,12 +1,5 @@
 package com.stripe.net;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -15,6 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StripeRequestTest extends BaseStripeTest {
   @Test
@@ -207,5 +202,37 @@ public class StripeRequestTest extends BaseStripeTest {
     StripeRequest updatedRequest = request.withAdditionalHeader("New-Header", "bar");
     assertTrue(updatedRequest.headers().firstValue("New-Header").isPresent());
     assertEquals("bar", updatedRequest.headers().firstValue("New-Header").get());
+  }
+
+  @Test
+  public void testBuildContentIsNullWhenRequestIsGet() throws StripeException {
+    StripeRequest request =
+            new StripeRequest(
+                    ApiResource.RequestMethod.GET,
+                    "http://example.com/get",
+                    ImmutableMap.of("key", "value!"),
+                    null);
+
+    assertNull(request.content());
+  }
+
+  @Test
+  public void testBuildContentHasJsonContentWhenRequestIsPostAndEncodingOptionIsJson()
+          throws StripeException {
+    RawRequestOptions options = RawRequestOptions.builder()
+            .setEncoding(RawRequestOptions.Encoding.JSON)
+            .build();
+    StripeRequest request =
+            new StripeRequest(
+                    ApiResource.RequestMethod.POST,
+                    "http://example.com/post",
+                    ImmutableMap.of("key", "value!"),
+                    options);
+
+    assertInstanceOf(HttpContent.class, request.content());
+    assertEquals("application/json", request.content().contentType());
+    assertArrayEquals(
+            "{\"key\":\"value!\"}".getBytes(StandardCharsets.UTF_8),
+            request.content().byteArrayContent());
   }
 }
