@@ -1,5 +1,16 @@
 # Changelog
 
+## 22.17.0 - 2023-04-27
+* [#1551](https://github.com/stripe/stripe-java/pull/1551) Update generated code
+  * Add support for `billing_cycle_anchor` and `proration_behavior` on `CheckoutSessionCreateParams.subscription_data`
+  * Add support for `terminal_id` on `Issuing.Authorization.merchant_data` and `Issuing.Transaction.merchant_data`
+  * Add support for `metadata` on `PaymentIntentCaptureParams`
+  * Add support for `checks` on `SetupAttempt.payment_method_details.card`
+  * Add support for `tax_breakdown` on `Tax.Calculation.shipping_cost` and `Tax.Transaction.shipping_cost`
+* [#1547](https://github.com/stripe/stripe-java/pull/1547) Update generated code
+* [#1544](https://github.com/stripe/stripe-java/pull/1544) Update generated code
+
+
 ## 22.16.0 - 2023-04-06
 * [#1540](https://github.com/stripe/stripe-java/pull/1540) Update generated code
   * Add support for `country` on `PaymentMethod.link`
