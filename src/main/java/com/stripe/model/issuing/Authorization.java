@@ -560,6 +560,10 @@ public class Authorization extends ApiResource
     /** State where the seller is located. */
     @SerializedName("state")
     String state;
+
+    /** An ID assigned by the seller to the location of the sale. */
+    @SerializedName("terminal_id")
+    String terminalId;
   }
 
   @Getter

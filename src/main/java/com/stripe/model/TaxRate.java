@@ -102,7 +102,10 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   @SerializedName("object")
   String object;
 
-  /** This represents the tax rate percent out of 100. */
+  /**
+   * Tax rate percentage out of 100. For tax calculations with automatic_tax[enabled]=true, this
+   * percentage includes the statutory tax rate of non-taxable jurisdictions.
+   */
   @SerializedName("percentage")
   BigDecimal percentage;
 
