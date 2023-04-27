@@ -542,9 +542,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
-   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
-   * refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -561,9 +560,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
-   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
-   * refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -580,9 +578,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
-   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
-   * refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -599,9 +596,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
-   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
-   * refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -625,9 +621,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
-   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
-   * refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -644,9 +639,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
-   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
-   * refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>

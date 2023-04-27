@@ -2662,6 +2662,21 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testPlanCreate2() throws StripeException {
+    PlanCreateParams params =
+        PlanCreateParams.builder()
+            .setAmount(2000L)
+            .setCurrency("usd")
+            .setInterval(PlanCreateParams.Interval.MONTH)
+            .setProduct(PlanCreateParams.Product.builder().setName("My product").build())
+            .build();
+
+    Plan plan = Plan.create(params);
+    assertNotNull(plan);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/plans", params.toMap());
+  }
+
+  @Test
   public void testPlanDelete() throws StripeException {
     Plan resource = Plan.retrieve("price_xxxxxxxxxxxxx");
 
