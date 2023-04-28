@@ -12,11 +12,12 @@ import lombok.Getter;
 @Getter
 public class RegistrationCreateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> Time at which the Tax Registration becomes active. Measured in
-   * seconds since the Unix epoch.
+   * <strong>Required.</strong> Time at which the Tax Registration becomes active. It can be either
+   * {@code now} to indicate the current time, or a timestamp measured in seconds since the Unix
+   * epoch.
    */
   @SerializedName("active_from")
-  Long activeFrom;
+  Object activeFrom;
 
   /**
    * <strong>Required.</strong> Two-letter country code (<a
@@ -38,7 +39,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
   /**
    * If set, the Tax Registration stops being active at this time. If not set, the Tax Registration
-   * will be active indefinitely. Measured in seconds since the Unix epoch.
+   * will be active indefinitely. Timestamp measured in seconds since the Unix epoch.
    */
   @SerializedName("expires_at")
   Long expiresAt;
@@ -53,7 +54,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   private RegistrationCreateParams(
-      Long activeFrom,
+      Object activeFrom,
       String country,
       CountryOptions countryOptions,
       List<String> expand,
@@ -72,7 +73,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Long activeFrom;
+    private Object activeFrom;
 
     private String country;
 
@@ -96,10 +97,21 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Time at which the Tax Registration becomes active. Measured in
-     * seconds since the Unix epoch.
+     * <strong>Required.</strong> Time at which the Tax Registration becomes active. It can be
+     * either {@code now} to indicate the current time, or a timestamp measured in seconds since the
+     * Unix epoch.
      */
     public Builder setActiveFrom(Long activeFrom) {
+      this.activeFrom = activeFrom;
+      return this;
+    }
+
+    /**
+     * <strong>Required.</strong> Time at which the Tax Registration becomes active. It can be
+     * either {@code now} to indicate the current time, or a timestamp measured in seconds since the
+     * Unix epoch.
+     */
+    public Builder setActiveFrom(RegistrationCreateParams.ActiveFrom activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }
@@ -150,7 +162,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
     /**
      * If set, the Tax Registration stops being active at this time. If not set, the Tax
-     * Registration will be active indefinitely. Measured in seconds since the Unix epoch.
+     * Registration will be active indefinitely. Timestamp measured in seconds since the Unix epoch.
      */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
@@ -7467,6 +7479,18 @@ public class RegistrationCreateParams extends ApiRequestParams {
           this.value = value;
         }
       }
+    }
+  }
+
+  public enum ActiveFrom implements ApiRequestParams.EnumParam {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ActiveFrom(String value) {
+      this.value = value;
     }
   }
 }
