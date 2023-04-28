@@ -1,37 +1,115 @@
 package com.stripe.net;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stripe.BaseStripeTest;
-import java.net.InetSocketAddress;
-import java.net.PasswordAuthentication;
-import java.net.Proxy;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
+import com.stripe.net.RawRequestOptions.Encoding;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class RawRequestOptionsTest extends BaseStripeTest {
+  public static MockWebServer server;
+
+  @BeforeEach
+  void setUp() throws IOException {
+    server = new MockWebServer();
+    server.enqueue(
+        new MockResponse()
+            .setBody(
+                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
+    server.start();
+    Stripe.overrideApiBase(server.url("").toString());
+  }
+
+  @AfterEach
+  void tearDown() throws IOException {
+    server.shutdown();
+  }
 
   @Test
-  public void testRawRequestOptionsBuilder() {
+  public void testEncodingForm() throws StripeException, InterruptedException {
+    final Encoding encoding = Encoding.FORM;
+
+    final RawRequestOptions options = RawRequestOptions.builder().setEncoding(encoding).build();
+
+    assertEquals(encoding, options.getEncoding());
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("description", "test customer");
+
+    final StripeResponse response =
+        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", params, options);
+
+    assertNotNull(response);
+    assertEquals(200, response.code());
+    assertTrue(response.body().length() > 0);
+
+    RecordedRequest request = server.takeRequest();
+    assertEquals(
+        "application/x-www-form-urlencoded;charset=UTF-8", request.getHeader("Content-Type"));
+    assertEquals("description=test+customer", request.getBody().readUtf8());
+
+    Customer customer = (Customer) Stripe.deserialize(response.body());
+    assertTrue(customer.getId().startsWith("cus_"));
+    assertEquals("test customer", customer.getDescription());
+  }
+
+  @Test
+  public void testEncodingJson() throws StripeException, InterruptedException {
+    final Encoding encoding = Encoding.JSON;
+    final RawRequestOptions options =
+        RawRequestOptions.builder().setEncoding(RawRequestOptions.Encoding.JSON).build();
+
+    assertEquals(encoding, options.getEncoding());
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("description", "test customer");
+
+    final StripeResponse response =
+        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", params, options);
+
+    RecordedRequest request = server.takeRequest();
+    assertEquals("application/json", request.getHeader("Content-Type"));
+    assertEquals("{\"description\":\"test customer\"}", request.getBody().readUtf8());
+
+    assertNotNull(response);
+    assertEquals(200, response.code());
+    assertTrue(response.body().length() > 0);
+
+    Customer customer = (Customer) Stripe.deserialize(response.body());
+    assertTrue(customer.getId().startsWith("cus_"));
+    assertEquals("test customer", customer.getDescription());
+  }
+
+  @Test
+  public void testAdditionalHeaders() throws StripeException, InterruptedException {
     Map<String, String> additionalHeaders = new HashMap<>();
     additionalHeaders.put("foo", "bar");
-    RawRequestOptions opts =
-        RawRequestOptions.builder()
-            .setApiKey("sk_foo")
-            .setClientId("123")
-            .setIdempotencyKey("123")
-            .setStripeAccount("acct_bar")
-            .setConnectTimeout(100)
-            .setReadTimeout(100)
-            .setConnectionProxy(
-                new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
-            .setProxyCredential(new PasswordAuthentication("username", "password".toCharArray()))
-            .setEncoding(RawRequestOptions.Encoding.JSON)
-            .setAdditionalHeaders(additionalHeaders)
-            .build();
+    final RawRequestOptions options =
+        RawRequestOptions.builder().setAdditionalHeaders(additionalHeaders).build();
 
-    assertEquals(RawRequestOptions.Encoding.JSON, opts.getEncoding());
-    assertEquals(additionalHeaders, opts.getAdditionalHeaders());
+    assertEquals(additionalHeaders, options.getAdditionalHeaders());
+
+    final StripeResponse response =
+        Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", new HashMap<>(), options);
+
+    RecordedRequest request = server.takeRequest();
+    assertEquals("bar", request.getHeader("foo"));
+
+    assertNotNull(response);
+    assertEquals(200, response.code());
+    assertTrue(response.body().length() > 0);
   }
 }
