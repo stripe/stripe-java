@@ -10,7 +10,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.net.RawRequestOptions.Encoding;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -25,10 +27,6 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   @BeforeEach
   void setUp() throws IOException {
     server = new MockWebServer();
-    server.enqueue(
-        new MockResponse()
-            .setBody(
-                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
     server.start();
     Stripe.overrideApiBase(server.url("").toString());
   }
@@ -39,7 +37,12 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   }
 
   @Test
-  public void testEncodingForm() throws StripeException, InterruptedException {
+  public void testFormEncoding() throws StripeException, InterruptedException {
+    server.enqueue(
+        new MockResponse()
+            .setBody(
+                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
+
     final Encoding encoding = Encoding.FORM;
 
     final RawRequestOptions options = RawRequestOptions.builder().setEncoding(encoding).build();
@@ -67,10 +70,56 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   }
 
   @Test
-  public void testEncodingJson() throws StripeException, InterruptedException {
+  public void testJsonEncoding() throws StripeException, InterruptedException {
+    server.enqueue(
+        new MockResponse()
+            .setBody(
+                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
     final Encoding encoding = Encoding.JSON;
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setEncoding(RawRequestOptions.Encoding.JSON).build();
+    final RawRequestOptions options = RawRequestOptions.builder().setEncoding(encoding).build();
+
+    assertEquals(encoding, options.getEncoding());
+
+    List<Object> phases = new ArrayList<>();
+    List<Object> items = new ArrayList<>();
+    Map<String, Object> item1 = new HashMap<>();
+    item1.put("price", "price_123");
+    item1.put("quantity", 1);
+    items.add(item1);
+    Map<String, Object> phase1 = new HashMap<>();
+    phase1.put("items", items);
+    phase1.put("iterations", 12);
+    phases.add(phase1);
+    Map<String, Object> params = new HashMap<>();
+    params.put("customer", "cus_123");
+    params.put("start_date", 1683338558);
+    params.put("end_behavior", "release");
+    params.put("phases", phases);
+
+    final StripeResponse response =
+        Stripe.rawRequest(
+            ApiResource.RequestMethod.POST, "/v1/subscription_schedules", params, options);
+
+    RecordedRequest request = server.takeRequest();
+    assertEquals("application/json", request.getHeader("Content-Type"));
+    assertEquals(
+        "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
+        request.getBody().readUtf8());
+
+    assertNotNull(response);
+    assertEquals(200, response.code());
+    assertTrue(response.body().length() > 0);
+  }
+
+  @Test
+  public void testJsonEncodingComplexParams() throws StripeException, InterruptedException {
+    server.enqueue(
+        new MockResponse()
+            .setBody(
+                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
+
+    final Encoding encoding = Encoding.JSON;
+    final RawRequestOptions options = RawRequestOptions.builder().setEncoding(encoding).build();
 
     assertEquals(encoding, options.getEncoding());
 
@@ -95,7 +144,13 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
   @Test
   public void testAdditionalHeaders() throws StripeException, InterruptedException {
+    server.enqueue(
+        new MockResponse()
+            .setBody(
+                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
+
     Map<String, String> additionalHeaders = new HashMap<>();
+
     additionalHeaders.put("foo", "bar");
     final RawRequestOptions options =
         RawRequestOptions.builder().setAdditionalHeaders(additionalHeaders).build();
