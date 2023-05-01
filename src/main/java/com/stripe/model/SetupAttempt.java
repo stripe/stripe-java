@@ -431,13 +431,91 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
-      /** Check results by Card networks on Card address and CVC at time of payment. */
+      /**
+       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       */
+      @SerializedName("brand")
+      String brand;
+
+      /** Check results by Card networks on Card address and CVC at the time of authorization. */
       @SerializedName("checks")
       Checks checks;
+
+      /**
+       * Two-letter ISO code representing the country of the card. You could use this attribute to
+       * get a sense of the international breakdown of cards you've collected.
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * A high-level description of the type of cards issued in this range. (For internal use only
+       * and not typically available in standard API requests.)
+       */
+      @SerializedName("description")
+      String description;
+
+      /** Two-digit number representing the card's expiration month. */
+      @SerializedName("exp_month")
+      Long expMonth;
+
+      /** Four-digit number representing the card's expiration year. */
+      @SerializedName("exp_year")
+      Long expYear;
+
+      /**
+       * Uniquely identifies this particular card number. You can use this attribute to check
+       * whether two customers who’ve signed up with you are using the same card number, for
+       * example. For payment methods that tokenize card information (Apple Pay, Google Pay), the
+       * tokenized number might be provided instead of the underlying card number.
+       *
+       * <p><em>Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
+       * fingerprints for the same card --- one for India and one for the rest of the world.</em>
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /**
+       * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+       * unknown}.
+       */
+      @SerializedName("funding")
+      String funding;
+
+      /**
+       * Issuer identification number of the card. (For internal use only and not typically
+       * available in standard API requests.)
+       */
+      @SerializedName("iin")
+      String iin;
+
+      /**
+       * The name of the card's issuing bank. (For internal use only and not typically available in
+       * standard API requests.)
+       */
+      @SerializedName("issuer")
+      String issuer;
+
+      /** The last four digits of the card. */
+      @SerializedName("last4")
+      String last4;
+
+      /**
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       */
+      @SerializedName("network")
+      String network;
 
       /** Populated if this authorization used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
+
+      /** If this Card is part of a card wallet, this contains the details of the card wallet. */
+      @SerializedName("wallet")
+      Wallet wallet;
 
       @Getter
       @Setter
@@ -504,6 +582,35 @@ public class SetupAttempt extends ApiResource implements HasId {
          */
         @SerializedName("version")
         String version;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Wallet extends StripeObject {
+        @SerializedName("apple_pay")
+        ApplePay applePay;
+
+        @SerializedName("google_pay")
+        GooglePay googlePay;
+
+        /**
+         * The type of the card wallet, one of {@code apple_pay}, {@code google_pay}, or {@code
+         * link}. An additional hash is included on the Wallet subhash with a name matching this
+         * value. It contains additional information specific to the card wallet type.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ApplePay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class GooglePay extends StripeObject {}
       }
     }
 
