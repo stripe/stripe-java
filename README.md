@@ -1,4 +1,4 @@
- # Stripe Java client library
+# Stripe Java client library
 
 [![Maven Central](https://img.shields.io/badge/maven--central-v22.18.0-beta.1-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
