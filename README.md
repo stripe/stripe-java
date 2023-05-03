@@ -268,22 +268,19 @@ If you would like to send a request to an undocumented API (for example you are 
 // configuration options like additional headers.
 Map<String, String> stripeVersionHeader = new HashMap<>();
 stripeVersionHeader.put("Stripe-Version", "2022-11-15; feature_beta=v3");
-RawRequestOptions options = 
+RawRequestOptions options =
   RawRequestOptions.builder()
     .setAdditionalHeaders(stripeVersionHeader)
     .build();
 
 // Create a map of request parameters to pass to the request.
-List<Object> include = new ArrayList<>();       
-include.add("defaults.legal_entity");
-include.add("configuration.recipient");
 Map<String, Object> params = new HashMap<>();
-params.put("include", include);
+params.put("param", 123);
 
 // Make the request using the Stripe.rawRequest() method.
 final StripeResponse response =
   Stripe.rawRequest(
-    ApiResource.RequestMethod.POST, "/v2/accounts", params, options);
+    ApiResource.RequestMethod.POST, "/v1/beta_endpoint", params, options);
 
 // (Optional) response.body() is a string. You can call
 // Stripe.deserialize() to get a StripeObject.
