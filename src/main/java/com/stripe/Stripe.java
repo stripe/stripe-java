@@ -223,10 +223,10 @@ public abstract class Stripe {
    * @return the JSON response as a string
    */
   public static StripeResponse rawRequest(
-          final ApiResource.RequestMethod method,
-          final String relativeUrl,
-          final Map<String, Object> params)
-          throws StripeException {
+      final ApiResource.RequestMethod method,
+      final String relativeUrl,
+      final Map<String, Object> params)
+      throws StripeException {
     RawRequestOptions options = RawRequestOptions.builder().build();
     return rawRequest(method, relativeUrl, params, options);
   }
