@@ -220,6 +220,25 @@ public abstract class Stripe {
    * @param method the HTTP method
    * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
    * @param params the parameters of the request
+   * @return the JSON response as a string
+   */
+  public static StripeResponse rawRequest(
+          final ApiResource.RequestMethod method,
+          final String relativeUrl,
+          final Map<String, Object> params)
+          throws StripeException {
+    RawRequestOptions options = RawRequestOptions.builder().build();
+    return rawRequest(method, relativeUrl, params, options);
+  }
+
+  /**
+   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
+   * API. This method is useful for interacting with endpoints that are not covered yet in
+   * stripe-java.
+   *
+   * @param method the HTTP method
+   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
+   * @param params the parameters of the request
    * @param options the special modifiers of the request
    * @return the JSON response as a string
    */

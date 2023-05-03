@@ -1,4 +1,4 @@
-# Stripe Java client library
+ # Stripe Java client library
 
 [![Maven Central](https://img.shields.io/badge/maven--central-v22.18.0-beta.1-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
@@ -253,10 +253,43 @@ We highly recommend keeping an eye on when the beta feature you are interested i
 If your beta feature requires a `Stripe-Version` header to be sent, use the `Stripe.stripeVersion` field to set it:
 
 > **Note**
-> The `stripeVersion` can only be set in beta versions of the library. 
+> The `stripeVersion` can only be set in beta versions of the library.
 
 ```java
 Stripe.stripeVersion += "; feature_beta=v3";
+```
+
+### Custom requests
+
+If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `Stripe`.
+
+```java
+// Create a RawRequestOptions object, allowing you to set per-request
+// configuration options like additional headers.
+Map<String, String> stripeVersionHeader = new HashMap<>();
+stripeVersionHeader.put("Stripe-Version", "2022-11-15; feature_beta=v3");
+RawRequestOptions options = 
+  RawRequestOptions.builder()
+    .setAdditionalHeaders(stripeVersionHeader)
+    .build();
+
+// Create a map of request parameters to pass to the request.
+List<Object> include = new ArrayList<>();       
+include.add("defaults.legal_entity");
+include.add("configuration.recipient");
+Map<String, Object> params = new HashMap<>();
+params.put("include", include);
+
+// Make the request using the Stripe.rawRequest() method.
+final StripeResponse response =
+  Stripe.rawRequest(
+    ApiResource.RequestMethod.POST, "/v2/accounts", params, options);
+
+// (Optional) response.body() is a string. You can call
+// Stripe.deserialize() to get a StripeObject.
+StripeObject obj = Stripe.deserialize(response.body());
+
+// Handle response...
 ```
 
 ## Support
