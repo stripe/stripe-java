@@ -364,7 +364,8 @@ public class Transaction extends ApiResource implements HasId {
 
     /**
      * The ID of an existing <a
-     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate.</a>
+     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate</a>. (It is not
+     * populated for the transaction resource object and will be removed in the next API version.)
      */
     @SerializedName("shipping_rate")
     String shippingRate;
@@ -378,7 +379,10 @@ public class Transaction extends ApiResource implements HasId {
     @SerializedName("tax_behavior")
     String taxBehavior;
 
-    /** Detailed account of taxes relevant to shipping cost. */
+    /**
+     * Detailed account of taxes relevant to shipping cost. (It is not populated for the transaction
+     * resource object and will be removed in the next API version.)
+     */
     @SerializedName("tax_breakdown")
     List<Transaction.ShippingCost.TaxBreakdown> taxBreakdown;
 
