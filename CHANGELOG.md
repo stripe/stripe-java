@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.18.0 - 2023-05-04
+* [#1555](https://github.com/stripe/stripe-java/pull/1555) Update generated code
+  * Add support for `link` on `Checkout.Session.payment_method_options` and `CheckoutSessionCreateParams.payment_method_options`
+  * Add support for `brand`, `country`, `description`, `exp_month`, `exp_year`, `fingerprint`, `funding`, `iin`, `issuer`, `last4`, `network`, and `wallet` on `SetupAttempt.payment_method_details.card`
+
 ## 22.17.0 - 2023-04-27
 * [#1551](https://github.com/stripe/stripe-java/pull/1551) Update generated code
   * Add support for `billing_cycle_anchor` and `proration_behavior` on `CheckoutSessionCreateParams.subscription_data`
