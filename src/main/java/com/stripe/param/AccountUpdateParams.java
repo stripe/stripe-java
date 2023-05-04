@@ -9842,7 +9842,9 @@ public class AccountUpdateParams extends ApiRequestParams {
          * The number of days charge funds are held before being paid out. May also be set to {@code
          * minimum}, representing the lowest available value for the account country. Default is
          * {@code minimum}. The {@code delay_days} parameter does not apply when the {@code
-         * interval} is {@code manual}.
+         * interval} is {@code manual}. <a
+         * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
+         * controlling payout delay days</a>.
          */
         @SerializedName("delay_days")
         Object delayDays;
@@ -9923,7 +9925,9 @@ public class AccountUpdateParams extends ApiRequestParams {
            * The number of days charge funds are held before being paid out. May also be set to
            * {@code minimum}, representing the lowest available value for the account country.
            * Default is {@code minimum}. The {@code delay_days} parameter does not apply when the
-           * {@code interval} is {@code manual}.
+           * {@code interval} is {@code manual}. <a
+           * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
+           * controlling payout delay days</a>.
            */
           public Builder setDelayDays(
               AccountUpdateParams.Settings.Payouts.Schedule.DelayDays delayDays) {
@@ -9935,7 +9939,9 @@ public class AccountUpdateParams extends ApiRequestParams {
            * The number of days charge funds are held before being paid out. May also be set to
            * {@code minimum}, representing the lowest available value for the account country.
            * Default is {@code minimum}. The {@code delay_days} parameter does not apply when the
-           * {@code interval} is {@code manual}.
+           * {@code interval} is {@code manual}. <a
+           * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
+           * controlling payout delay days</a>.
            */
           public Builder setDelayDays(Long delayDays) {
             this.delayDays = delayDays;
