@@ -11719,6 +11719,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("reference_id")
       String referenceId;
 
+      /** The risk correlation ID for an on-session payment using a saved PayPal payment method. */
+      @SerializedName("risk_correlation_id")
+      String riskCorrelationId;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -11747,12 +11751,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           PreferredLocale preferredLocale,
           String reference,
           String referenceId,
+          String riskCorrelationId,
           ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.preferredLocale = preferredLocale;
         this.reference = reference;
         this.referenceId = referenceId;
+        this.riskCorrelationId = riskCorrelationId;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -11771,6 +11777,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private String referenceId;
 
+        private String riskCorrelationId;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -11781,6 +11789,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.preferredLocale,
               this.reference,
               this.referenceId,
+              this.riskCorrelationId,
               this.setupFutureUsage);
         }
 
@@ -11836,6 +11845,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         public Builder setReferenceId(String referenceId) {
           this.referenceId = referenceId;
+          return this;
+        }
+
+        /**
+         * The risk correlation ID for an on-session payment using a saved PayPal payment method.
+         */
+        public Builder setRiskCorrelationId(String riskCorrelationId) {
+          this.riskCorrelationId = riskCorrelationId;
           return this;
         }
 

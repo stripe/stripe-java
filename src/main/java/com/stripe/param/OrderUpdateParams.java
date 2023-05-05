@@ -5917,6 +5917,12 @@ public class OrderUpdateParams extends ApiRequestParams {
           Object referenceId;
 
           /**
+           * The risk correlation ID for an on-session payment using a saved PayPal payment method.
+           */
+          @SerializedName("risk_correlation_id")
+          Object riskCorrelationId;
+
+          /**
            * Indicates that you intend to make future payments with this PaymentIntent's payment
            * method.
            *
@@ -5946,12 +5952,14 @@ public class OrderUpdateParams extends ApiRequestParams {
               PreferredLocale preferredLocale,
               Object reference,
               Object referenceId,
+              Object riskCorrelationId,
               ApiRequestParams.EnumParam setupFutureUsage) {
             this.captureMethod = captureMethod;
             this.extraParams = extraParams;
             this.preferredLocale = preferredLocale;
             this.reference = reference;
             this.referenceId = referenceId;
+            this.riskCorrelationId = riskCorrelationId;
             this.setupFutureUsage = setupFutureUsage;
           }
 
@@ -5970,6 +5978,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
             private Object referenceId;
 
+            private Object riskCorrelationId;
+
             private ApiRequestParams.EnumParam setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
@@ -5980,6 +5990,7 @@ public class OrderUpdateParams extends ApiRequestParams {
                   this.preferredLocale,
                   this.reference,
                   this.referenceId,
+                  this.riskCorrelationId,
                   this.setupFutureUsage);
             }
 
@@ -6049,6 +6060,24 @@ public class OrderUpdateParams extends ApiRequestParams {
 
             public Builder setReferenceId(EmptyParam referenceId) {
               this.referenceId = referenceId;
+              return this;
+            }
+
+            /**
+             * The risk correlation ID for an on-session payment using a saved PayPal payment
+             * method.
+             */
+            public Builder setRiskCorrelationId(String riskCorrelationId) {
+              this.riskCorrelationId = riskCorrelationId;
+              return this;
+            }
+
+            /**
+             * The risk correlation ID for an on-session payment using a saved PayPal payment
+             * method.
+             */
+            public Builder setRiskCorrelationId(EmptyParam riskCorrelationId) {
+              this.riskCorrelationId = riskCorrelationId;
               return this;
             }
 
