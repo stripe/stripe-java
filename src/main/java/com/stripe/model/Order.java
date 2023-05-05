@@ -1314,6 +1314,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String preferredLocale;
 
           /**
+           * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+           * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+           * settings to block multiple payments per invoice ID.
+           */
+          @SerializedName("reference")
+          String reference;
+
+          /**
            * A unique reference ID of the PayPal transaction. This must be a globally unique ID
            * across all PayPal transactions or the transaction will fail.
            */

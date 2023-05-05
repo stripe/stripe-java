@@ -5910,6 +5910,9 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName("preferred_locale")
           PreferredLocale preferredLocale;
 
+          @SerializedName("reference")
+          Object reference;
+
           @SerializedName("reference_id")
           Object referenceId;
 
@@ -5941,11 +5944,13 @@ public class OrderUpdateParams extends ApiRequestParams {
               ApiRequestParams.EnumParam captureMethod,
               Map<String, Object> extraParams,
               PreferredLocale preferredLocale,
+              Object reference,
               Object referenceId,
               ApiRequestParams.EnumParam setupFutureUsage) {
             this.captureMethod = captureMethod;
             this.extraParams = extraParams;
             this.preferredLocale = preferredLocale;
+            this.reference = reference;
             this.referenceId = referenceId;
             this.setupFutureUsage = setupFutureUsage;
           }
@@ -5961,6 +5966,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
             private PreferredLocale preferredLocale;
 
+            private Object reference;
+
             private Object referenceId;
 
             private ApiRequestParams.EnumParam setupFutureUsage;
@@ -5971,6 +5978,7 @@ public class OrderUpdateParams extends ApiRequestParams {
                   this.captureMethod,
                   this.extraParams,
                   this.preferredLocale,
+                  this.reference,
                   this.referenceId,
                   this.setupFutureUsage);
             }
@@ -6021,6 +6029,16 @@ public class OrderUpdateParams extends ApiRequestParams {
                 OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Paypal.PreferredLocale
                     preferredLocale) {
               this.preferredLocale = preferredLocale;
+              return this;
+            }
+
+            public Builder setReference(String reference) {
+              this.reference = reference;
+              return this;
+            }
+
+            public Builder setReference(EmptyParam reference) {
+              this.reference = reference;
               return this;
             }
 

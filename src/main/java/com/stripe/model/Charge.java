@@ -2545,9 +2545,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paypal extends StripeObject {
+      /**
+       * Owner's email. Values are provided by PayPal directly (if supported) at the time of
+       * authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("payer_email")
+      String payerEmail;
+
       /** PayPal account PayerID. This identifier uniquely identifies the PayPal customer. */
       @SerializedName("payer_id")
       String payerId;
+
+      /**
+       * Owner's full name. Values provided by PayPal directly (if supported) at the time of
+       * authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("payer_name")
+      String payerName;
 
       /**
        * The shipping address for the customer, as supplied by the merchant at the point of payment

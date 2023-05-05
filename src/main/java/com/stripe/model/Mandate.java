@@ -346,6 +346,24 @@ public class Mandate extends ApiResource implements HasId {
        */
       @SerializedName("billing_agreement_id")
       String billingAgreementId;
+
+      /**
+       * Uniquely identifies this particular PayPal account. You can use this attribute to check
+       * whether two PayPal accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** PayPal account PayerID. This identifier uniquely identifies the PayPal customer. */
+      @SerializedName("payer_id")
+      String payerId;
+
+      /**
+       * Owner's verified email. Values are verified or provided by PayPal directly (if supported)
+       * at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_email")
+      String verifiedEmail;
     }
 
     @Getter

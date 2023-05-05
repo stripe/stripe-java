@@ -11291,6 +11291,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("preferred_locale")
       PreferredLocale preferredLocale;
 
+      @SerializedName("reference")
+      String reference;
+
       @SerializedName("reference_id")
       String referenceId;
 
@@ -11320,11 +11323,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           PreferredLocale preferredLocale,
+          String reference,
           String referenceId,
           ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.preferredLocale = preferredLocale;
+        this.reference = reference;
         this.referenceId = referenceId;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -11340,6 +11345,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private PreferredLocale preferredLocale;
 
+        private String reference;
+
         private String referenceId;
 
         private ApiRequestParams.EnumParam setupFutureUsage;
@@ -11350,6 +11357,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.captureMethod,
               this.extraParams,
               this.preferredLocale,
+              this.reference,
               this.referenceId,
               this.setupFutureUsage);
         }
@@ -11397,6 +11405,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             PaymentIntentConfirmParams.PaymentMethodOptions.Paypal.PreferredLocale
                 preferredLocale) {
           this.preferredLocale = preferredLocale;
+          return this;
+        }
+
+        public Builder setReference(String reference) {
+          this.reference = reference;
           return this;
         }
 
