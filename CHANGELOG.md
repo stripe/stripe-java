@@ -1,5 +1,9 @@
 # Changelog
 
+## 22.19.0-beta.1 - 2023-05-04
+* [#1554](https://github.com/stripe/stripe-java/pull/1554) Update generated code for beta
+  * Updated stable APIs to the latest version
+
 ## 22.18.0 - 2023-05-04
 * [#1555](https://github.com/stripe/stripe-java/pull/1555) Update generated code
   * Add support for `link` on `Checkout.Session.payment_method_options` and `CheckoutSessionCreateParams.payment_method_options`
