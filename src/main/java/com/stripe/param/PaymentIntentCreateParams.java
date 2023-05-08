@@ -268,8 +268,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   String transferGroup;
 
   /**
-   * Set to {@code true} only when using manual confirmation and the iOS or Android SDKs to handle
-   * additional authentication steps.
+   * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+   * client-side SDKs to handle the next actions.
    */
   @SerializedName("use_stripe_sdk")
   Boolean useStripeSdk;
@@ -845,8 +845,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set to {@code true} only when using manual confirmation and the iOS or Android SDKs to handle
-     * additional authentication steps.
+     * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+     * client-side SDKs to handle the next actions.
      */
     public Builder setUseStripeSdk(Boolean useStripeSdk) {
       this.useStripeSdk = useStripeSdk;
