@@ -5437,6 +5437,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         @SerializedName("discover")
         DISCOVER("discover"),
 
+        @SerializedName("eftpos_au")
+        EFTPOS_AU("eftpos_au"),
+
         @SerializedName("interac")
         INTERAC("interac"),
 
