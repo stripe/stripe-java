@@ -8481,11 +8481,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Paypal {
-      @SerializedName("billing_agreement_id")
-      String billingAgreementId;
-
-      @SerializedName("currency")
-      String currency;
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8496,10 +8493,56 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Paypal(String billingAgreementId, String currency, Map<String, Object> extraParams) {
-        this.billingAgreementId = billingAgreementId;
-        this.currency = currency;
+      @SerializedName("preferred_locale")
+      PreferredLocale preferredLocale;
+
+      @SerializedName("reference")
+      String reference;
+
+      @SerializedName("reference_id")
+      String referenceId;
+
+      /** The risk correlation ID for an on-session payment using a saved PayPal payment method. */
+      @SerializedName("risk_correlation_id")
+      String riskCorrelationId;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Paypal(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          PreferredLocale preferredLocale,
+          String reference,
+          String referenceId,
+          String riskCorrelationId,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.preferredLocale = preferredLocale;
+        this.reference = reference;
+        this.referenceId = referenceId;
+        this.riskCorrelationId = riskCorrelationId;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -8507,25 +8550,40 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String billingAgreementId;
-
-        private String currency;
+        private ApiRequestParams.EnumParam captureMethod;
 
         private Map<String, Object> extraParams;
+
+        private PreferredLocale preferredLocale;
+
+        private String reference;
+
+        private String referenceId;
+
+        private String riskCorrelationId;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Paypal build() {
           return new SessionCreateParams.PaymentMethodOptions.Paypal(
-              this.billingAgreementId, this.currency, this.extraParams);
+              this.captureMethod,
+              this.extraParams,
+              this.preferredLocale,
+              this.reference,
+              this.referenceId,
+              this.riskCorrelationId,
+              this.setupFutureUsage);
         }
 
-        public Builder setBillingAgreementId(String billingAgreementId) {
-          this.billingAgreementId = billingAgreementId;
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.Paypal.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
           return this;
         }
 
-        public Builder setCurrency(String currency) {
-          this.currency = currency;
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
           return this;
         }
 
@@ -8555,6 +8613,180 @@ public class SessionCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        public Builder setPreferredLocale(
+            SessionCreateParams.PaymentMethodOptions.Paypal.PreferredLocale preferredLocale) {
+          this.preferredLocale = preferredLocale;
+          return this;
+        }
+
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        public Builder setReferenceId(String referenceId) {
+          this.referenceId = referenceId;
+          return this;
+        }
+
+        /**
+         * The risk correlation ID for an on-session payment using a saved PayPal payment method.
+         */
+        public Builder setRiskCorrelationId(String riskCorrelationId) {
+          this.riskCorrelationId = riskCorrelationId;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Paypal.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum PreferredLocale implements ApiRequestParams.EnumParam {
+        @SerializedName("cs-CZ")
+        CS_CZ("cs-CZ"),
+
+        @SerializedName("da-DK")
+        DA_DK("da-DK"),
+
+        @SerializedName("de-AT")
+        DE_AT("de-AT"),
+
+        @SerializedName("de-DE")
+        DE_DE("de-DE"),
+
+        @SerializedName("de-LU")
+        DE_LU("de-LU"),
+
+        @SerializedName("el-GR")
+        EL_GR("el-GR"),
+
+        @SerializedName("en-GB")
+        EN_GB("en-GB"),
+
+        @SerializedName("en-US")
+        EN_US("en-US"),
+
+        @SerializedName("es-ES")
+        ES_ES("es-ES"),
+
+        @SerializedName("fi-FI")
+        FI_FI("fi-FI"),
+
+        @SerializedName("fr-BE")
+        FR_BE("fr-BE"),
+
+        @SerializedName("fr-FR")
+        FR_FR("fr-FR"),
+
+        @SerializedName("fr-LU")
+        FR_LU("fr-LU"),
+
+        @SerializedName("hu-HU")
+        HU_HU("hu-HU"),
+
+        @SerializedName("it-IT")
+        IT_IT("it-IT"),
+
+        @SerializedName("nl-BE")
+        NL_BE("nl-BE"),
+
+        @SerializedName("nl-NL")
+        NL_NL("nl-NL"),
+
+        @SerializedName("pl-PL")
+        PL_PL("pl-PL"),
+
+        @SerializedName("pt-PT")
+        PT_PT("pt-PT"),
+
+        @SerializedName("sk-SK")
+        SK_SK("sk-SK"),
+
+        @SerializedName("sv-SE")
+        SV_SE("sv-SE");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredLocale(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
         }
       }
     }
