@@ -11626,6 +11626,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Paypal {
+      /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
       ApiRequestParams.EnumParam captureMethod;
 
@@ -11641,9 +11642,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("preferred_locale")
       PreferredLocale preferredLocale;
 
+      /**
+       * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+       * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+       * settings to block multiple payments per invoice ID.
+       */
       @SerializedName("reference")
       Object reference;
 
+      /**
+       * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+       * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+       * settings to block multiple payments per invoice ID.
+       */
       @SerializedName("reference_id")
       Object referenceId;
 
@@ -11721,12 +11732,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.setupFutureUsage);
         }
 
+        /** Controls when the funds will be captured from the customer's account. */
         public Builder setCaptureMethod(
             PaymentIntentUpdateParams.PaymentMethodOptions.Paypal.CaptureMethod captureMethod) {
           this.captureMethod = captureMethod;
           return this;
         }
 
+        /** Controls when the funds will be captured from the customer's account. */
         public Builder setCaptureMethod(EmptyParam captureMethod) {
           this.captureMethod = captureMethod;
           return this;
@@ -11766,21 +11779,41 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+         * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+         * settings to block multiple payments per invoice ID.
+         */
         public Builder setReference(String reference) {
           this.reference = reference;
           return this;
         }
 
+        /**
+         * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+         * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+         * settings to block multiple payments per invoice ID.
+         */
         public Builder setReference(EmptyParam reference) {
           this.reference = reference;
           return this;
         }
 
+        /**
+         * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+         * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+         * settings to block multiple payments per invoice ID.
+         */
         public Builder setReferenceId(String referenceId) {
           this.referenceId = referenceId;
           return this;
         }
 
+        /**
+         * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+         * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+         * settings to block multiple payments per invoice ID.
+         */
         public Builder setReferenceId(EmptyParam referenceId) {
           this.referenceId = referenceId;
           return this;
