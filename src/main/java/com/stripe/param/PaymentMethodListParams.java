@@ -283,6 +283,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("paynow")
     PAYNOW("paynow"),
 
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
     @SerializedName("pix")
     PIX("pix"),
 

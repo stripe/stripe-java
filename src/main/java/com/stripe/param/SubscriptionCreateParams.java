@@ -3918,6 +3918,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("paynow")
       PAYNOW("paynow"),
 
+      @SerializedName("paypal")
+      PAYPAL("paypal"),
+
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
 
