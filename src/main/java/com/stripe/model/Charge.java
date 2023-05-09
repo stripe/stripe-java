@@ -2564,6 +2564,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String payerName;
 
       /**
+       * The level of protection offered as defined by PayPal Seller Protection for Merchants, for
+       * this transaction.
+       */
+      @SerializedName("seller_protection")
+      SellerProtection sellerProtection;
+
+      /**
        * The shipping address for the customer, as supplied by the merchant at the point of payment
        * execution. This shipping address will not be updated if the merchant updates the shipping
        * address on the PaymentIntent after the PaymentIntent was successfully confirmed.
@@ -2596,6 +2603,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("verified_name")
       String verifiedName;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SellerProtection extends StripeObject {
+        /** An array of conditions that are covered for the transaction, if applicable. */
+        @SerializedName("dispute_categories")
+        List<String> disputeCategories;
+
+        /**
+         * Indicates whether the transaction is eligible for PayPal's seller protection.
+         *
+         * <p>One of {@code eligible}, {@code not_eligible}, or {@code partially_eligible}.
+         */
+        @SerializedName("status")
+        String status;
+      }
     }
 
     @Getter
