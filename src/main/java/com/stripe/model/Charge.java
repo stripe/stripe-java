@@ -1634,6 +1634,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("network")
       String network;
 
+      /**
+       * If this card has network token credentials, this contains the details of the network token
+       * credentials.
+       */
+      @SerializedName("network_token")
+      NetworkToken networkToken;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
@@ -1698,6 +1705,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
           @SerializedName("type")
           String type;
         }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class NetworkToken extends StripeObject {
+        /**
+         * Indicates if Stripe used a network token, either user provided or Stripe managed when
+         * processing the transaction.
+         */
+        @SerializedName("used")
+        Boolean used;
       }
 
       @Getter
