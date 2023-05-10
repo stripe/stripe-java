@@ -957,7 +957,88 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CardPresent extends StripeObject {}
+  public static class CardPresent extends StripeObject {
+    /**
+     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
+     * jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+     */
+    @SerializedName("brand")
+    String brand;
+
+    /**
+     * The cardholder name as read from the card, in <a
+     * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
+     * alphanumeric characters, special characters and first/last name separator ({@code /}). In
+     * some cases, the cardholder name may not be available depending on how the issuer has
+     * configured the card. Cardholder name is typically not available on swipe or contactless
+     * payments, such as those made with Apple Pay and Google Pay.
+     */
+    @SerializedName("cardholder_name")
+    String cardholderName;
+
+    /**
+     * Two-letter ISO code representing the country of the card. You could use this attribute to get
+     * a sense of the international breakdown of cards you've collected.
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Two-digit number representing the card's expiration month. */
+    @SerializedName("exp_month")
+    Long expMonth;
+
+    /** Four-digit number representing the card's expiration year. */
+    @SerializedName("exp_year")
+    Long expYear;
+
+    /**
+     * Uniquely identifies this particular card number. You can use this attribute to check whether
+     * two customers who’ve signed up with you are using the same card number, for example. For
+     * payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number
+     * might be provided instead of the underlying card number.
+     *
+     * <p><em>Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
+     * fingerprints for the same card --- one for India and one for the rest of the world.</em>
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /**
+     * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code unknown}.
+     */
+    @SerializedName("funding")
+    String funding;
+
+    /** The last four digits of the card. */
+    @SerializedName("last4")
+    String last4;
+
+    /** Contains information about card networks that can be used to process the payment. */
+    @SerializedName("networks")
+    Networks networks;
+
+    /**
+     * How card details were read in this transaction.
+     *
+     * <p>One of {@code contact_emv}, {@code contactless_emv}, {@code contactless_magstripe_mode},
+     * {@code magnetic_stripe_fallback}, or {@code magnetic_stripe_track2}.
+     */
+    @SerializedName("read_method")
+    String readMethod;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Networks extends StripeObject {
+      /** All available networks for the card. */
+      @SerializedName("available")
+      List<String> available;
+
+      /** The preferred network for the card. */
+      @SerializedName("preferred")
+      String preferred;
+    }
+  }
 
   @Getter
   @Setter
@@ -1049,7 +1130,89 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InteracPresent extends StripeObject {}
+  public static class InteracPresent extends StripeObject {
+    /** Card brand. Can be {@code interac}, {@code mastercard} or {@code visa}. */
+    @SerializedName("brand")
+    String brand;
+
+    /**
+     * The cardholder name as read from the card, in <a
+     * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
+     * alphanumeric characters, special characters and first/last name separator ({@code /}). In
+     * some cases, the cardholder name may not be available depending on how the issuer has
+     * configured the card. Cardholder name is typically not available on swipe or contactless
+     * payments, such as those made with Apple Pay and Google Pay.
+     */
+    @SerializedName("cardholder_name")
+    String cardholderName;
+
+    /**
+     * Two-letter ISO code representing the country of the card. You could use this attribute to get
+     * a sense of the international breakdown of cards you've collected.
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Two-digit number representing the card's expiration month. */
+    @SerializedName("exp_month")
+    Long expMonth;
+
+    /** Four-digit number representing the card's expiration year. */
+    @SerializedName("exp_year")
+    Long expYear;
+
+    /**
+     * Uniquely identifies this particular card number. You can use this attribute to check whether
+     * two customers who’ve signed up with you are using the same card number, for example. For
+     * payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number
+     * might be provided instead of the underlying card number.
+     *
+     * <p><em>Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
+     * fingerprints for the same card --- one for India and one for the rest of the world.</em>
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /**
+     * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code unknown}.
+     */
+    @SerializedName("funding")
+    String funding;
+
+    /** The last four digits of the card. */
+    @SerializedName("last4")
+    String last4;
+
+    /** Contains information about card networks that can be used to process the payment. */
+    @SerializedName("networks")
+    Networks networks;
+
+    /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+    @SerializedName("preferred_locales")
+    List<String> preferredLocales;
+
+    /**
+     * How card details were read in this transaction.
+     *
+     * <p>One of {@code contact_emv}, {@code contactless_emv}, {@code contactless_magstripe_mode},
+     * {@code magnetic_stripe_fallback}, or {@code magnetic_stripe_track2}.
+     */
+    @SerializedName("read_method")
+    String readMethod;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Networks extends StripeObject {
+      /** All available networks for the card. */
+      @SerializedName("available")
+      List<String> available;
+
+      /** The preferred network for the card. */
+      @SerializedName("preferred")
+      String preferred;
+    }
+  }
 
   @Getter
   @Setter
