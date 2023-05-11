@@ -4662,4 +4662,15 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(paymentIntent);
     verifyRequest(ApiResource.RequestMethod.POST, "/v1/payment_intents", params.toMap());
   }
+
+  @Test
+  public void testQuoteListLineItems() throws StripeException {
+    Quote resource = Quote.retrieve("qt_xxxxxxxxxxxxx");
+    QuoteListLineItemsParams params = QuoteListLineItemsParams.builder().build();
+
+    LineItemCollection lineItems = resource.listLineItems(params);
+    assertNotNull(lineItems);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/quotes/qt_xxxxxxxxxxxxx/line_items", params.toMap());
+  }
 }
