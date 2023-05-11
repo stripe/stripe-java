@@ -5908,6 +5908,10 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /**
+           * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred
+           * locale</a> of the PayPal checkout page that the customer is redirected to.
+           */
           @SerializedName("preferred_locale")
           PreferredLocale preferredLocale;
 
@@ -6049,6 +6053,10 @@ public class OrderUpdateParams extends ApiRequestParams {
               return this;
             }
 
+            /**
+             * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred
+             * locale</a> of the PayPal checkout page that the customer is redirected to.
+             */
             public Builder setPreferredLocale(
                 OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Paypal.PreferredLocale
                     preferredLocale) {
