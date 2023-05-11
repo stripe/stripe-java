@@ -287,6 +287,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("paypal")
+    Paypal paypal;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -747,6 +750,11 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypal extends StripeObject {}
 
     @Getter
     @Setter

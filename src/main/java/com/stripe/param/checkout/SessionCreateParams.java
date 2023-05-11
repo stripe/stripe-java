@@ -4644,6 +4644,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("paynow")
     Paynow paynow;
 
+    /** contains details about the PayPal payment method options. */
+    @SerializedName("paypal")
+    Paypal paypal;
+
     /** contains details about the Pix payment method options. */
     @SerializedName("pix")
     Pix pix;
@@ -4688,6 +4692,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
+        Paypal paypal,
         Pix pix,
         SepaDebit sepaDebit,
         Sofort sofort,
@@ -4716,6 +4721,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.paypal = paypal;
       this.pix = pix;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
@@ -4774,6 +4780,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Paynow paynow;
 
+      private Paypal paypal;
+
       private Pix pix;
 
       private SepaDebit sepaDebit;
@@ -4810,6 +4818,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.paypal,
             this.pix,
             this.sepaDebit,
             this.sofort,
@@ -4976,6 +4985,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the PayNow payment method options. */
       public Builder setPaynow(SessionCreateParams.PaymentMethodOptions.Paynow paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /** contains details about the PayPal payment method options. */
+      public Builder setPaypal(SessionCreateParams.PaymentMethodOptions.Paypal paypal) {
+        this.paypal = paypal;
         return this;
       }
 
@@ -8454,6 +8469,326 @@ public class SessionCreateParams extends ApiRequestParams {
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
         NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Paypal {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred locale</a> of
+       * the PayPal checkout page that the customer is redirected to.
+       */
+      @SerializedName("preferred_locale")
+      PreferredLocale preferredLocale;
+
+      /**
+       * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+       * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+       * settings to block multiple payments per invoice ID.
+       */
+      @SerializedName("reference")
+      String reference;
+
+      /** The risk correlation ID for an on-session payment using a saved PayPal payment method. */
+      @SerializedName("risk_correlation_id")
+      String riskCorrelationId;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Paypal(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          PreferredLocale preferredLocale,
+          String reference,
+          String riskCorrelationId,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.preferredLocale = preferredLocale;
+        this.reference = reference;
+        this.riskCorrelationId = riskCorrelationId;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private PreferredLocale preferredLocale;
+
+        private String reference;
+
+        private String riskCorrelationId;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Paypal build() {
+          return new SessionCreateParams.PaymentMethodOptions.Paypal(
+              this.captureMethod,
+              this.extraParams,
+              this.preferredLocale,
+              this.reference,
+              this.riskCorrelationId,
+              this.setupFutureUsage);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.Paypal.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred locale</a>
+         * of the PayPal checkout page that the customer is redirected to.
+         */
+        public Builder setPreferredLocale(
+            SessionCreateParams.PaymentMethodOptions.Paypal.PreferredLocale preferredLocale) {
+          this.preferredLocale = preferredLocale;
+          return this;
+        }
+
+        /**
+         * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+         * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+         * settings to block multiple payments per invoice ID.
+         */
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /**
+         * The risk correlation ID for an on-session payment using a saved PayPal payment method.
+         */
+        public Builder setRiskCorrelationId(String riskCorrelationId) {
+          this.riskCorrelationId = riskCorrelationId;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Paypal.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum PreferredLocale implements ApiRequestParams.EnumParam {
+        @SerializedName("cs-CZ")
+        CS_CZ("cs-CZ"),
+
+        @SerializedName("da-DK")
+        DA_DK("da-DK"),
+
+        @SerializedName("de-AT")
+        DE_AT("de-AT"),
+
+        @SerializedName("de-DE")
+        DE_DE("de-DE"),
+
+        @SerializedName("de-LU")
+        DE_LU("de-LU"),
+
+        @SerializedName("el-GR")
+        EL_GR("el-GR"),
+
+        @SerializedName("en-GB")
+        EN_GB("en-GB"),
+
+        @SerializedName("en-US")
+        EN_US("en-US"),
+
+        @SerializedName("es-ES")
+        ES_ES("es-ES"),
+
+        @SerializedName("fi-FI")
+        FI_FI("fi-FI"),
+
+        @SerializedName("fr-BE")
+        FR_BE("fr-BE"),
+
+        @SerializedName("fr-FR")
+        FR_FR("fr-FR"),
+
+        @SerializedName("fr-LU")
+        FR_LU("fr-LU"),
+
+        @SerializedName("hu-HU")
+        HU_HU("hu-HU"),
+
+        @SerializedName("it-IT")
+        IT_IT("it-IT"),
+
+        @SerializedName("nl-BE")
+        NL_BE("nl-BE"),
+
+        @SerializedName("nl-NL")
+        NL_NL("nl-NL"),
+
+        @SerializedName("pl-PL")
+        PL_PL("pl-PL"),
+
+        @SerializedName("pt-PT")
+        PT_PT("pt-PT"),
+
+        @SerializedName("sk-SK")
+        SK_SK("sk-SK"),
+
+        @SerializedName("sv-SE")
+        SV_SE("sv-SE");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredLocale(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -12195,6 +12530,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("paynow")
     PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
 
     @SerializedName("pix")
     PIX("pix"),

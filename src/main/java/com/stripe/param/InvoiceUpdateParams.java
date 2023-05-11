@@ -2917,6 +2917,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("paynow")
       PAYNOW("paynow"),
 
+      @SerializedName("paypal")
+      PAYPAL("paypal"),
+
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
 

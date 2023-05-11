@@ -3678,6 +3678,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           @SerializedName("discover")
           DISCOVER("discover"),
 
+          @SerializedName("eftpos_au")
+          EFTPOS_AU("eftpos_au"),
+
           @SerializedName("interac")
           INTERAC("interac"),
 
@@ -4409,6 +4412,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("paynow")
       PAYNOW("paynow"),
+
+      @SerializedName("paypal")
+      PAYPAL("paypal"),
 
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
