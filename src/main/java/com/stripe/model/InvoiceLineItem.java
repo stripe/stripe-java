@@ -279,6 +279,23 @@ public class InvoiceLineItem extends StripeObject implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<TaxRate> taxRate;
 
+    /**
+     * The reasoning behind this tax, for example, if the product is tax exempt. The possible values
+     * for this field may be extended as new tax rules are supported.
+     *
+     * <p>One of {@code customer_exempt}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
+     * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
+     * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
+     * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code standard_rated},
+     * {@code taxable_basis_reduced}, or {@code zero_rated}.
+     */
+    @SerializedName("taxability_reason")
+    String taxabilityReason;
+
+    /** The amount on which tax is calculated, in %s. */
+    @SerializedName("taxable_amount")
+    Long taxableAmount;
+
     /** Get ID of expandable {@code taxRate} object. */
     public String getTaxRate() {
       return (this.taxRate != null) ? this.taxRate.getId() : null;
