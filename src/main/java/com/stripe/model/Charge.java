@@ -2078,7 +2078,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Cashapp extends StripeObject {}
+    public static class Cashapp extends StripeObject {
+      /** A unique and immutable identifier assigned by Cash App to every buyer. */
+      @SerializedName("buyer_id")
+      String buyerId;
+
+      /** A public identifier for buyers using Cash App. */
+      @SerializedName("cashtag")
+      String cashtag;
+    }
 
     @Getter
     @Setter
