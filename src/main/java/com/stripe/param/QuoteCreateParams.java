@@ -1349,7 +1349,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     ProrationBehavior prorationBehavior;
 
     /**
-     * Timestsamp helper to end the underlying schedule early, based on the acompanying line's start
+     * Timestamp helper to end the underlying schedule early, based on the acompanying line's start
      * or end date.
      */
     @SerializedName("set_schedule_end")
@@ -1511,7 +1511,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Timestsamp helper to end the underlying schedule early, based on the acompanying line's
+       * Timestamp helper to end the underlying schedule early, based on the acompanying line's
        * start or end date.
        */
       public Builder setSetScheduleEnd(QuoteCreateParams.Line.SetScheduleEnd setScheduleEnd) {
