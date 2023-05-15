@@ -1777,6 +1777,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("google_pay")
         GooglePay googlePay;
 
+        @SerializedName("link")
+        Link link;
+
         @SerializedName("masterpass")
         Masterpass masterpass;
 
@@ -1809,6 +1812,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class GooglePay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Link extends StripeObject {}
 
         @Getter
         @Setter
