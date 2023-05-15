@@ -48,7 +48,7 @@ import lombok.Setter;
  * <p>By using SetupIntents, you ensure that your customers experience the minimum set of required
  * friction, even as regulations change over time.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/payments/setup-intents">Setup Intents API</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/setup-intents">Setup Intents API</a>
  */
 @Getter
 @Setter

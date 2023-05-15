@@ -35,7 +35,7 @@ import lombok.Setter;
  *
  * <p>Related guide: <a
  * href="https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token">Accept a
- * payment</a>
+ * payment with Charges and Tokens</a>
  */
 @Getter
 @Setter
@@ -49,8 +49,8 @@ public class Token extends ApiResource implements HasId {
    * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a>. They can be bank
    * accounts or debit cards as well, and are documented in the links above.
    *
-   * <p>Related guide: <a href="https://stripe.com/docs/payments/bank-debits-transfers">Bank Debits
-   * and Transfers</a>.
+   * <p>Related guide: <a href="https://stripe.com/docs/payments/bank-debits-transfers">Bank debits
+   * and transfers</a>
    */
   @SerializedName("bank_account")
   BankAccount bankAccount;
@@ -59,8 +59,8 @@ public class Token extends ApiResource implements HasId {
    * You can store multiple cards on a customer in order to charge the customer later. You can also
    * store multiple debit cards on a recipient in order to transfer to those cards later.
    *
-   * <p>Related guide: <a href="https://stripe.com/docs/sources/cards">Card Payments with
-   * Sources</a>.
+   * <p>Related guide: <a href="https://stripe.com/docs/sources/cards">Card payments with
+   * Sources</a>
    */
   @SerializedName("card")
   Card card;

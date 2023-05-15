@@ -26,7 +26,7 @@ import lombok.Setter;
  *
  * <p>Related guide: <a
  * href="https://stripe.com/docs/connect/charges-transfers#reversing-transfers">Reversing
- * Transfers</a>.
+ * transfers</a>
  */
 @Getter
 @Setter

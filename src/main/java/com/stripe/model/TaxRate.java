@@ -23,7 +23,7 @@ import lombok.Setter;
  * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
  * Sessions</a> to collect tax.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
  */
 @Getter
 @Setter

@@ -27,7 +27,7 @@ import lombok.Setter;
  * href="https://stripe.com/docs/issuing">issued</a> cards.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/issuing/cards#create-cardholder">How to create
- * a Cardholder</a>
+ * a cardholder</a>
  */
 @Getter
 @Setter

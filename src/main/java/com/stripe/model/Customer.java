@@ -28,7 +28,7 @@ import lombok.Setter;
  * track payments that belong to the same customer.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/payments/save-during-payment">Save a card
- * during payment</a>.
+ * during payment</a>
  */
 @Getter
 @Setter
