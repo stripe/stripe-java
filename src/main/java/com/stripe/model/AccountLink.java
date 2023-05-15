@@ -17,7 +17,7 @@ import lombok.Setter;
  * access Stripe-hosted applications, such as Connect Onboarding.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/connect/connect-onboarding">Connect
- * Onboarding</a>.
+ * Onboarding</a>
  */
 @Getter
 @Setter

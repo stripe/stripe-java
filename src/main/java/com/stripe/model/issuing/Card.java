@@ -50,7 +50,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
    * href="https://stripe.com/docs/issuing">issued</a> cards.
    *
    * <p>Related guide: <a href="https://stripe.com/docs/issuing/cards#create-cardholder">How to
-   * create a Cardholder</a>
+   * create a cardholder</a>
    */
   @SerializedName("cardholder")
   Cardholder cardholder;

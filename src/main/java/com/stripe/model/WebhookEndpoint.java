@@ -24,7 +24,7 @@ import lombok.Setter;
  * dashboard</a>, which provides a user interface for registering and testing your webhook
  * endpoints.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/webhooks/configure">Setting up Webhooks</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/webhooks/configure">Setting up webhooks</a>
  */
 @Getter
 @Setter

@@ -22,7 +22,7 @@ import lombok.Setter;
  * fraudulent.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/disputes/measuring#early-fraud-warnings">Early
- * Fraud Warnings</a>.
+ * fraud warnings</a>
  */
 @Getter
 @Setter

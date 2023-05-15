@@ -17,7 +17,7 @@ import lombok.Setter;
  * This is an object representing a capability for a Stripe account.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/connect/account-capabilities">Account
- * capabilities</a>.
+ * capabilities</a>
  */
 @Getter
 @Setter

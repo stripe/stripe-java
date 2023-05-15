@@ -20,7 +20,7 @@ import lombok.Setter;
  * every type of transaction that comes into or flows out of your Stripe account balance.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/reports/balance-transaction-types">Balance
- * Transaction Types</a>.
+ * transaction types</a>
  */
 @Getter
 @Setter

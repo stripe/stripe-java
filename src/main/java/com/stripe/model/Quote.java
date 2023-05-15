@@ -973,8 +973,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
              * to.
              *
              * <p>Related guide: <a
-             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
-             * Subscriptions</a>.
+             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+             * subscriptions</a>
              */
             @SerializedName("discount")
             com.stripe.model.Discount discount;
@@ -996,7 +996,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
              * Sessions</a> to collect tax.
              *
              * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
-             * Rates</a>.
+             * rates</a>
              */
             @SerializedName("rate")
             TaxRate rate;
@@ -1094,8 +1094,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
              * to.
              *
              * <p>Related guide: <a
-             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
-             * Subscriptions</a>.
+             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+             * subscriptions</a>
              */
             @SerializedName("discount")
             com.stripe.model.Discount discount;
@@ -1117,7 +1117,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
              * Sessions</a> to collect tax.
              *
              * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
-             * Rates</a>.
+             * rates</a>
              */
             @SerializedName("rate")
             TaxRate rate;
@@ -1281,8 +1281,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
          * information about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
-         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
-         * Subscriptions</a>.
+         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+         * subscriptions</a>
          */
         @SerializedName("discount")
         com.stripe.model.Discount discount;
@@ -1303,8 +1303,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
          * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
          * Sessions</a> to collect tax.
          *
-         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
-         * Rates</a>.
+         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
          */
         @SerializedName("rate")
         TaxRate rate;

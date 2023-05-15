@@ -24,7 +24,7 @@ import lombok.Setter;
  * ID.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/payments/accept-a-payment-charges">Accept a
- * payment with the Charges API</a>.
+ * payment with the Charges API</a>
  */
 @Getter
 @Setter

@@ -377,7 +377,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
        * made on <a href="https://stripe.com/docs/connect/manage-payout-schedule">varying
        * schedules</a>, depending on your country and industry.
        *
-       * <p>Related guide: <a href="https://stripe.com/docs/payouts">Receiving Payouts</a>.
+       * <p>Related guide: <a href="https://stripe.com/docs/payouts">Receiving payouts</a>
        */
       @SerializedName("payout")
       Payout payout;

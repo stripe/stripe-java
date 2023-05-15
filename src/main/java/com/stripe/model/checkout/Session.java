@@ -48,7 +48,7 @@ import lombok.Setter;
  *
  * <p>You can create a Checkout Session on your server and redirect to its URL to begin Checkout.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/checkout/quickstart">Checkout Quickstart</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/checkout/quickstart">Checkout quickstart</a>
  */
 @Getter
 @Setter
@@ -2117,7 +2117,7 @@ public class Session extends ApiResource implements HasId {
        * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
        * Sessions</a> to collect tax.
        *
-       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
        */
       @SerializedName("rate")
       TaxRate rate;
@@ -2231,8 +2231,8 @@ public class Session extends ApiResource implements HasId {
          * information about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
-         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
-         * Subscriptions</a>.
+         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+         * subscriptions</a>
          */
         @SerializedName("discount")
         Discount discount;
@@ -2253,8 +2253,7 @@ public class Session extends ApiResource implements HasId {
          * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
          * Sessions</a> to collect tax.
          *
-         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
-         * Rates</a>.
+         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
          */
         @SerializedName("rate")
         TaxRate rate;

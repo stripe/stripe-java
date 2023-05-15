@@ -25,7 +25,7 @@ import lombok.Setter;
  *
  * <p>Related guide: <a
  * href="https://stripe.com/docs/connect/identity-verification-api#person-information">Handling
- * Identity Verification with the API</a>.
+ * identity verification with the API</a>
  */
 @Getter
 @Setter

@@ -21,7 +21,7 @@ import lombok.Setter;
  * Value lists allow you to group values together which can then be referenced in rules.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/radar/lists#managing-list-items">Default
- * Stripe Lists</a>.
+ * Stripe lists</a>
  */
 @Getter
 @Setter

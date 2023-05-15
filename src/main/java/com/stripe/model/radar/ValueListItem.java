@@ -19,8 +19,8 @@ import lombok.Setter;
  * Value list items allow you to add specific values to a given Radar value list, which can then be
  * used in rules.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/radar/lists#managing-list-items">Managing List
- * Items</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/radar/lists#managing-list-items">Managing list
+ * items</a>
  */
 @Getter
 @Setter

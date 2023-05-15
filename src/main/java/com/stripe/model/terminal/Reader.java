@@ -34,7 +34,7 @@ import lombok.Setter;
  * A Reader represents a physical device for accepting payment details.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/terminal/payments/connect-reader">Connecting
- * to a Reader</a>.
+ * to a reader</a>
  */
 @Getter
 @Setter
