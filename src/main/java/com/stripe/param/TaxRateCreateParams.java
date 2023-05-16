@@ -311,6 +311,12 @@ public class TaxRateCreateParams extends ApiRequestParams {
   }
 
   public enum TaxType implements ApiRequestParams.EnumParam {
+    @SerializedName("amusement_tax")
+    AMUSEMENT_TAX("amusement_tax"),
+
+    @SerializedName("communications_tax")
+    COMMUNICATIONS_TAX("communications_tax"),
+
     @SerializedName("gst")
     GST("gst"),
 
