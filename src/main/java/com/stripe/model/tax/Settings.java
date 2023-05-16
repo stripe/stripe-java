@@ -51,6 +51,18 @@ public class Settings extends ApiResource {
   @SerializedName("object")
   String object;
 
+  /**
+   * The {@code active} status indicates you have all required settings to calculate tax. A status
+   * can transition out of {@code active} when new required settings are introduced.
+   *
+   * <p>One of {@code active}, or {@code pending}.
+   */
+  @SerializedName("status")
+  String status;
+
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
+
   /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve() throws StripeException {
     return retrieve((Map<String, Object>) null, (RequestOptions) null);
@@ -159,5 +171,35 @@ public class Settings extends ApiResource {
      */
     @SerializedName("role")
     String role;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("active")
+    Active active;
+
+    @SerializedName("pending")
+    Pending pending;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Active extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pending extends StripeObject {
+      /**
+       * The list of missing fields that are required to perform calculations. It includes at least
+       * one entry when the status is {@code pending}. It is recommended to set the optional values
+       * even if they aren't listed as required for calculating taxes. Calculations can fail if
+       * missing fields aren't explicitly provided on every call.
+       */
+      @SerializedName("missing_fields")
+      List<String> missingFields;
+    }
   }
 }
