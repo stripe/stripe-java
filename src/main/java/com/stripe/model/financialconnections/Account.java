@@ -678,6 +678,13 @@ public class Account extends ApiResource implements HasId {
     Long lastAttemptedAt;
 
     /**
+     * Time at which the next balance refresh can be initiated. This value will be {@code null} when
+     * when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
+
+    /**
      * The status of the last refresh attempt.
      *
      * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
@@ -698,6 +705,13 @@ public class Account extends ApiResource implements HasId {
     Long lastAttemptedAt;
 
     /**
+     * Time at which the next inferred balance refresh can be initiated. This value will be {@code
+     * null} when when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
+
+    /**
      * The status of the last refresh attempt.
      *
      * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
@@ -716,6 +730,13 @@ public class Account extends ApiResource implements HasId {
      */
     @SerializedName("last_attempted_at")
     Long lastAttemptedAt;
+
+    /**
+     * Time at which the next ownership refresh can be initiated. This value will be {@code null}
+     * when when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
 
     /**
      * The status of the last refresh attempt.
@@ -741,6 +762,13 @@ public class Account extends ApiResource implements HasId {
      */
     @SerializedName("last_attempted_at")
     Long lastAttemptedAt;
+
+    /**
+     * Time at which the next transaction refresh can be initiated. This value will be {@code null}
+     * when when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
 
     /**
      * The status of the last refresh attempt.
