@@ -7130,14 +7130,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Details of the BLIK mandate. */
-      @SerializedName("mandate_options")
-      MandateOptions mandateOptions;
-
-      private Blik(Object code, Map<String, Object> extraParams, MandateOptions mandateOptions) {
+      private Blik(Object code, Map<String, Object> extraParams) {
         this.code = code;
         this.extraParams = extraParams;
-        this.mandateOptions = mandateOptions;
       }
 
       public static Builder builder() {
@@ -7149,12 +7144,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private MandateOptions mandateOptions;
-
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Blik build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.Blik(
-              this.code, this.extraParams, this.mandateOptions);
+              this.code, this.extraParams);
         }
 
         /**
@@ -7201,216 +7194,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
-        }
-
-        /** Details of the BLIK mandate. */
-        public Builder setMandateOptions(
-            PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions mandateOptions) {
-          this.mandateOptions = mandateOptions;
-          return this;
-        }
-      }
-
-      @Getter
-      public static class MandateOptions {
-        /** Expiry date of the mandate. */
-        @SerializedName("expires_after")
-        Long expiresAfter;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /** Details of off-session mandate. */
-        @SerializedName("off_session")
-        OffSession offSession;
-
-        private MandateOptions(
-            Long expiresAfter, Map<String, Object> extraParams, OffSession offSession) {
-          this.expiresAfter = expiresAfter;
-          this.extraParams = extraParams;
-          this.offSession = offSession;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Long expiresAfter;
-
-          private Map<String, Object> extraParams;
-
-          private OffSession offSession;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions build() {
-            return new PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions(
-                this.expiresAfter, this.extraParams, this.offSession);
-          }
-
-          /** Expiry date of the mandate. */
-          public Builder setExpiresAfter(Long expiresAfter) {
-            this.expiresAfter = expiresAfter;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** Details of off-session mandate. */
-          public Builder setOffSession(
-              PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions.OffSession
-                  offSession) {
-            this.offSession = offSession;
-            return this;
-          }
-        }
-
-        @Getter
-        public static class OffSession {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** <strong>Required.</strong> Frequency interval of each recurring payment. */
-          @SerializedName("interval")
-          Interval interval;
-
-          /** <strong>Required.</strong> Frequency indicator of each recurring payment. */
-          @SerializedName("interval_count")
-          Long intervalCount;
-
-          private OffSession(
-              Map<String, Object> extraParams, Interval interval, Long intervalCount) {
-            this.extraParams = extraParams;
-            this.interval = interval;
-            this.intervalCount = intervalCount;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Interval interval;
-
-            private Long intervalCount;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions.OffSession
-                build() {
-              return new PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions
-                  .OffSession(this.extraParams, this.interval, this.intervalCount);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions.OffSession#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions.OffSession#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /** <strong>Required.</strong> Frequency interval of each recurring payment. */
-            public Builder setInterval(
-                PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions.OffSession
-                        .Interval
-                    interval) {
-              this.interval = interval;
-              return this;
-            }
-
-            /** <strong>Required.</strong> Frequency indicator of each recurring payment. */
-            public Builder setIntervalCount(Long intervalCount) {
-              this.intervalCount = intervalCount;
-              return this;
-            }
-          }
-
-          public enum Interval implements ApiRequestParams.EnumParam {
-            @SerializedName("day")
-            DAY("day"),
-
-            @SerializedName("month")
-            MONTH("month"),
-
-            @SerializedName("week")
-            WEEK("week"),
-
-            @SerializedName("year")
-            YEAR("year");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            Interval(String value) {
-              this.value = value;
-            }
-          }
         }
       }
     }
