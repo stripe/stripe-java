@@ -26,7 +26,7 @@ import lombok.Setter;
  * href="https://stripe.com/docs/tax/registering">our guide</a>.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/tax/registrations-api">Using the Registrations
- * API</a>.
+ * API</a>
  */
 @Getter
 @Setter

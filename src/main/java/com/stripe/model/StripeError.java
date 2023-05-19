@@ -62,7 +62,7 @@ public class StripeError extends StripeObject {
    * ultimately creates at most one successful charge.
    *
    * <p>Related guide: <a href="https://stripe.com/docs/payments/payment-intents">Payment Intents
-   * API</a>.
+   * API</a>
    */
   @SerializedName("payment_intent")
   PaymentIntent paymentIntent;
@@ -121,7 +121,7 @@ public class StripeError extends StripeObject {
    * friction, even as regulations change over time.
    *
    * <p>Related guide: <a href="https://stripe.com/docs/payments/setup-intents">Setup Intents
-   * API</a>.
+   * API</a>
    */
   @SerializedName("setup_intent")
   SetupIntent setupIntent;

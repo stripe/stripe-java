@@ -56,8 +56,8 @@ import lombok.Setter;
  * <p>More details on the customer's credit balance are <a
  * href="https://stripe.com/docs/billing/customer/balance">here</a>.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/billing/invoices/sending">Send Invoices to
- * Customers</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/invoices/sending">Send invoices to
+ * customers</a>
  */
 @Getter
 @Setter
@@ -2116,7 +2116,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
        * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
        * Sessions</a> to collect tax.
        *
-       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
        */
       @SerializedName("rate")
       TaxRate rate;

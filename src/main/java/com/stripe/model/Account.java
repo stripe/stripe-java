@@ -118,7 +118,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>Related guide: <a
    * href="https://stripe.com/docs/connect/identity-verification-api#person-information">Handling
-   * Identity Verification with the API</a>.
+   * identity verification with the API</a>
    */
   @SerializedName("individual")
   Person individual;

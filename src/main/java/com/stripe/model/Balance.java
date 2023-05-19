@@ -25,7 +25,7 @@ import lombok.Setter;
  * types.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/connect/account-balances">Understanding
- * Connect Account Balances</a>.
+ * Connect account balances</a>
  */
 @Getter
 @Setter

@@ -1,5 +1,13 @@
 # Changelog
 
+## 22.20.0 - 2023-05-19
+* [#1563](https://github.com/stripe/stripe-java/pull/1563) Update generated code
+  * Add support for `subscription_update_confirm` and `subscription_update` on `BillingPortal.Session.flow` and `BillingPortalSessionCreateParams.flow_data`
+  * Add support for new values `subscription_update_confirm` and `subscription_update` on enum `BillingPortalSessionCreateParams.flow_data.type`
+  * Add support for `link` on `Charge.payment_method_details.card.wallet` and `PaymentMethod.card.wallet`
+  * Add support for `buyer_id` and `cashtag` on `Charge.payment_method_details.cashapp` and `PaymentMethod.cashapp`
+  * Add support for new values `amusement_tax` and `communications_tax` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
+
 ## 22.20.0-beta.1 - 2023-05-11
 * [#1561](https://github.com/stripe/stripe-java/pull/1561) Update generated code for beta
   * Add support for `payer_email`, `payer_name`, and `seller_protection` on `Charge.payment_method_details.paypal`

@@ -35,7 +35,7 @@ import lombok.Setter;
  * creates at most one successful charge.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/payments/payment-intents">Payment Intents
- * API</a>.
+ * API</a>
  */
 @Getter
 @Setter

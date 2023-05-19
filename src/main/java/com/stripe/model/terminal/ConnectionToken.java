@@ -15,8 +15,7 @@ import lombok.Setter;
 /**
  * A Connection Token is used by the Stripe Terminal SDK to connect to a reader.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/terminal/fleet/locations">Fleet
- * Management</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/terminal/fleet/locations">Fleet management</a>
  */
 @Getter
 @Setter

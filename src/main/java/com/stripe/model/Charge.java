@@ -24,7 +24,7 @@ import lombok.Setter;
  * ID.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/payments/accept-a-payment-charges">Accept a
- * payment with the Charges API</a>.
+ * payment with the Charges API</a>
  */
 @Getter
 @Setter
@@ -1784,6 +1784,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("google_pay")
         GooglePay googlePay;
 
+        @SerializedName("link")
+        Link link;
+
         @SerializedName("masterpass")
         Masterpass masterpass;
 
@@ -1816,6 +1819,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class GooglePay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Link extends StripeObject {}
 
         @Getter
         @Setter
@@ -2085,7 +2093,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Cashapp extends StripeObject {}
+    public static class Cashapp extends StripeObject {
+      /** A unique and immutable identifier assigned by Cash App to every buyer. */
+      @SerializedName("buyer_id")
+      String buyerId;
+
+      /** A public identifier for buyers using Cash App. */
+      @SerializedName("cashtag")
+      String cashtag;
+    }
 
     @Getter
     @Setter

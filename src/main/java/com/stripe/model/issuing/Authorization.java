@@ -28,8 +28,8 @@ import lombok.Setter;
  * href="https://stripe.com/docs/issuing/purchases/authorizations">Authorizations</a> must be
  * approved for the purchase to be completed successfully.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/authorizations">Issued Card
- * Authorizations</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/authorizations">Issued card
+ * authorizations</a>
  */
 @Getter
 @Setter

@@ -25,8 +25,8 @@ import lombok.Setter;
  * endpoints. For more information, read about the <a
  * href="https://stripe.com/docs/transfer-payout-split">transfer/payout split</a>.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/connect/charges-transfers">Creating Separate
- * Charges and Transfers</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/connect/charges-transfers">Creating separate
+ * charges and transfers</a>
  */
 @Getter
 @Setter

@@ -17,7 +17,7 @@ import lombok.Setter;
  * subscription prices.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/metered-billing">Metered
- * Billing</a>.
+ * billing</a>
  */
 @Getter
 @Setter
