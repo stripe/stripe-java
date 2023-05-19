@@ -236,9 +236,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * If set, the proration will be calculated as though the subscription was updated at the given
    * time. This can be used to apply exactly the same proration that was previewed with <a
-   * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint. It
-   * can also be used to implement custom proration logic, such as prorating by day instead of by
-   * second, by providing the time that you wish to use for proration calculations.
+   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint. It can also
+   * be used to implement custom proration logic, such as prorating by day instead of by second, by
+   * providing the time that you wish to use for proration calculations.
    */
   @SerializedName("proration_date")
   Long prorationDate;
@@ -975,9 +975,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * If set, the proration will be calculated as though the subscription was updated at the given
      * time. This can be used to apply exactly the same proration that was previewed with <a
-     * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
-     * It can also be used to implement custom proration logic, such as prorating by day instead of
-     * by second, by providing the time that you wish to use for proration calculations.
+     * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint. It can
+     * also be used to implement custom proration logic, such as prorating by day instead of by
+     * second, by providing the time that you wish to use for proration calculations.
      */
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;

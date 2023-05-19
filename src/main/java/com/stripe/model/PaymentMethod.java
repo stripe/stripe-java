@@ -848,6 +848,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("google_pay")
       GooglePay googlePay;
 
+      @SerializedName("link")
+      Link link;
+
       @SerializedName("masterpass")
       Masterpass masterpass;
 
@@ -880,6 +883,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class GooglePay extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Link extends StripeObject {}
 
       @Getter
       @Setter
@@ -1043,7 +1051,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Cashapp extends StripeObject {}
+  public static class Cashapp extends StripeObject {
+    /** A unique and immutable identifier assigned by Cash App to every buyer. */
+    @SerializedName("buyer_id")
+    String buyerId;
+
+    /** A public identifier for buyers using Cash App. */
+    @SerializedName("cashtag")
+    String cashtag;
+  }
 
   @Getter
   @Setter

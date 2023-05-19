@@ -26,7 +26,7 @@ import lombok.Setter;
  *
  * <p>Related guide: <a
  * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules">Subscription
- * Schedules</a>.
+ * schedules</a>
  */
 @Getter
 @Setter

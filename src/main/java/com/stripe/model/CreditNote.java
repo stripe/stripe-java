@@ -22,7 +22,7 @@ import lombok.Setter;
  * Issue a credit note to adjust an invoice's amount after the invoice is finalized.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/billing/invoices/credit-notes">Credit
- * Notes</a>.
+ * notes</a>
  */
 @Getter
 @Setter
@@ -664,7 +664,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
        * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
        * Sessions</a> to collect tax.
        *
-       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
        */
       @SerializedName("rate")
       TaxRate rate;

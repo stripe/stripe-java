@@ -27,8 +27,8 @@ import lombok.Setter;
  * As a <a href="https://stripe.com/docs/issuing">card issuer</a>, you can dispute transactions that
  * the cardholder does not recognize, suspects to be fraudulent, or has other issues with.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/disputes">Disputing
- * Transactions</a>
+ * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/disputes">Issuing
+ * disputes</a>
  */
 @Getter
 @Setter

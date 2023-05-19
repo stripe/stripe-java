@@ -14,7 +14,7 @@ import lombok.Setter;
  * about when the discount began, when it will end, and what it is applied to.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/discounts">Applying
- * Discounts to Subscriptions</a>.
+ * discounts to subscriptions</a>
  */
 @Getter
 @Setter

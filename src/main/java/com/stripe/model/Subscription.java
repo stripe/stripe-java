@@ -25,7 +25,7 @@ import lombok.Setter;
  * Subscriptions allow you to charge a customer on a recurring basis.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/creating">Creating
- * Subscriptions</a>.
+ * subscriptions</a>
  */
 @Getter
 @Setter

@@ -24,8 +24,8 @@ import lombok.Setter;
  * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a>. They can be bank
  * accounts or debit cards as well, and are documented in the links above.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/payments/bank-debits-transfers">Bank Debits
- * and Transfers</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/bank-debits-transfers">Bank debits
+ * and transfers</a>
  */
 @Getter
 @Setter

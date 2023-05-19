@@ -26,8 +26,8 @@ import lombok.Setter;
  * entering or leaving your Stripe account, such as a completed purchase or refund, is represented
  * by an Issuing {@code Transaction} object.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/transactions">Issued Card
- * Transactions</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/transactions">Issued card
+ * transactions</a>
  */
 @Getter
 @Setter

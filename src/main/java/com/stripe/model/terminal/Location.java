@@ -21,8 +21,7 @@ import lombok.Setter;
 /**
  * A Location represents a grouping of readers.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/terminal/fleet/locations">Fleet
- * Management</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/terminal/fleet/locations">Fleet management</a>
  */
 @Getter
 @Setter

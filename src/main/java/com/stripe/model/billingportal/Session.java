@@ -10,6 +10,7 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.billingportal.SessionCreateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -169,10 +170,19 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
+    /** Configuration when {@code flow.type=subscription_update}. */
+    @SerializedName("subscription_update")
+    SubscriptionUpdate subscriptionUpdate;
+
+    /** Configuration when {@code flow.type=subscription_update_confirm}. */
+    @SerializedName("subscription_update_confirm")
+    SubscriptionUpdateConfirm subscriptionUpdateConfirm;
+
     /**
      * Type of flow that the customer will go through.
      *
-     * <p>One of {@code payment_method_update}, or {@code subscription_cancel}.
+     * <p>One of {@code payment_method_update}, {@code subscription_cancel}, {@code
+     * subscription_update}, or {@code subscription_update_confirm}.
      */
     @SerializedName("type")
     String type;
@@ -223,6 +233,82 @@ public class Session extends ApiResource implements HasId {
       /** The ID of the subscription to be canceled. */
       @SerializedName("subscription")
       String subscription;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionUpdate extends StripeObject {
+      /** The ID of the subscription to be updated. */
+      @SerializedName("subscription")
+      String subscription;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionUpdateConfirm extends StripeObject {
+      /**
+       * The coupon or promotion code to apply to this subscription update. Currently, only up to
+       * one may be specified.
+       */
+      @SerializedName("discounts")
+      List<Session.Flow.SubscriptionUpdateConfirm.Discount> discounts;
+
+      /**
+       * The <a href="https://stripe.com/docs/api/subscription_items">subscription item</a> to be
+       * updated through this flow. Currently, only up to one may be specified and subscriptions
+       * with multiple items are not updatable.
+       */
+      @SerializedName("items")
+      List<Session.Flow.SubscriptionUpdateConfirm.Item> items;
+
+      /** The ID of the subscription to be updated. */
+      @SerializedName("subscription")
+      String subscription;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Discount extends StripeObject {
+        /** The ID of the coupon to apply to this subscription update. */
+        @SerializedName("coupon")
+        String coupon;
+
+        /** The ID of a promotion code to apply to this subscription update. */
+        @SerializedName("promotion_code")
+        String promotionCode;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Item extends StripeObject implements HasId {
+        /**
+         * The ID of the <a
+         * href="https://stripe.com/docs/api/subscriptions/object#subscription_object-items-data-id">subscription
+         * item</a> to be updated.
+         */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /**
+         * The price the customer should subscribe to through this flow. The price must also be
+         * included in the configuration's <a
+         * href="docs/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
+         * features.subscription_update.products}</a>.
+         */
+        @SerializedName("price")
+        String price;
+
+        /**
+         * <a href="https://stripe.com/docs/subscriptions/quantities">Quantity</a> for this item
+         * that the customer should subscribe to through this flow.
+         */
+        @SerializedName("quantity")
+        Long quantity;
+      }
     }
   }
 }

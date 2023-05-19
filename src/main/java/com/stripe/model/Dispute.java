@@ -22,7 +22,7 @@ import lombok.Setter;
  * is legitimate. You can find more information about the dispute process in our <a
  * href="https://stripe.com/docs/disputes">Disputes and Fraud</a> documentation.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/disputes">Disputes and Fraud</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/disputes">Disputes and fraud</a>
  */
 @Getter
 @Setter
