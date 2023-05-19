@@ -1641,6 +1641,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("network")
       String network;
 
+      /**
+       * If this card has network token credentials, this contains the details of the network token
+       * credentials.
+       */
+      @SerializedName("network_token")
+      NetworkToken networkToken;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
@@ -1705,6 +1712,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
           @SerializedName("type")
           String type;
         }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class NetworkToken extends StripeObject {
+        /**
+         * Indicates if Stripe used a network token, either user provided or Stripe managed when
+         * processing the transaction.
+         */
+        @SerializedName("used")
+        Boolean used;
       }
 
       @Getter
@@ -2545,9 +2564,30 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paypal extends StripeObject {
+      /**
+       * Owner's email. Values are provided by PayPal directly (if supported) at the time of
+       * authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("payer_email")
+      String payerEmail;
+
       /** PayPal account PayerID. This identifier uniquely identifies the PayPal customer. */
       @SerializedName("payer_id")
       String payerId;
+
+      /**
+       * Owner's full name. Values provided by PayPal directly (if supported) at the time of
+       * authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("payer_name")
+      String payerName;
+
+      /**
+       * The level of protection offered as defined by PayPal Seller Protection for Merchants, for
+       * this transaction.
+       */
+      @SerializedName("seller_protection")
+      SellerProtection sellerProtection;
 
       /**
        * The shipping address for the customer, as supplied by the merchant at the point of payment
@@ -2582,6 +2622,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("verified_name")
       String verifiedName;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SellerProtection extends StripeObject {
+        /** An array of conditions that are covered for the transaction, if applicable. */
+        @SerializedName("dispute_categories")
+        List<String> disputeCategories;
+
+        /**
+         * Indicates whether the transaction is eligible for PayPal's seller protection.
+         *
+         * <p>One of {@code eligible}, {@code not_eligible}, or {@code partially_eligible}.
+         */
+        @SerializedName("status")
+        String status;
+      }
     }
 
     @Getter

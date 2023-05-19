@@ -158,6 +158,12 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
       @SerializedName("eu_bank_transfer")
       EuBankTransfer euBankTransfer;
 
+      @SerializedName("gb_bank_transfer")
+      GbBankTransfer gbBankTransfer;
+
+      @SerializedName("jp_bank_transfer")
+      JpBankTransfer jpBankTransfer;
+
       /** The user-supplied reference field on the bank transfer. */
       @SerializedName("reference")
       String reference;
@@ -184,6 +190,40 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
         /** The last 4 digits of the IBAN of the sender of the funding. */
         @SerializedName("iban_last4")
         String ibanLast4;
+
+        /** The full name of the sender, as supplied by the sending bank. */
+        @SerializedName("sender_name")
+        String senderName;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class GbBankTransfer extends StripeObject {
+        /** The last 4 digits of the account number of the sender of the funding. */
+        @SerializedName("account_number_last4")
+        String accountNumberLast4;
+
+        /** The full name of the sender, as supplied by the sending bank. */
+        @SerializedName("sender_name")
+        String senderName;
+
+        /** The sort code of the bank of the sender of the funding. */
+        @SerializedName("sort_code")
+        String sortCode;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class JpBankTransfer extends StripeObject {
+        /** The name of the bank of the sender of the funding. */
+        @SerializedName("sender_bank")
+        String senderBank;
+
+        /** The name of the bank branch of the sender of the funding. */
+        @SerializedName("sender_branch")
+        String senderBranch;
 
         /** The full name of the sender, as supplied by the sending bank. */
         @SerializedName("sender_name")

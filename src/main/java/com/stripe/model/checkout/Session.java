@@ -1180,6 +1180,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("konbini")
     Konbini konbini;
 
+    @SerializedName("link")
+    Link link;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -1816,6 +1819,31 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Link extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {
       /**
        * The number of calendar days before an OXXO invoice expires. For example, if you create an
@@ -2117,6 +2145,24 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("rate")
       TaxRate rate;
+
+      /**
+       * The reasoning behind this tax, for example, if the product is tax exempt. The possible
+       * values for this field may be extended as new tax rules are supported.
+       *
+       * <p>One of {@code customer_exempt}, {@code excluded_territory}, {@code
+       * jurisdiction_unsupported}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
+       * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
+       * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
+       * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code
+       * standard_rated}, {@code taxable_basis_reduced}, {@code vat_exempt}, or {@code zero_rated}.
+       */
+      @SerializedName("taxability_reason")
+      String taxabilityReason;
+
+      /** The amount on which tax is calculated, in %s. */
+      @SerializedName("taxable_amount")
+      Long taxableAmount;
     }
   }
 
@@ -2236,6 +2282,25 @@ public class Session extends ApiResource implements HasId {
          */
         @SerializedName("rate")
         TaxRate rate;
+
+        /**
+         * The reasoning behind this tax, for example, if the product is tax exempt. The possible
+         * values for this field may be extended as new tax rules are supported.
+         *
+         * <p>One of {@code customer_exempt}, {@code excluded_territory}, {@code
+         * jurisdiction_unsupported}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
+         * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
+         * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
+         * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code
+         * standard_rated}, {@code taxable_basis_reduced}, {@code vat_exempt}, or {@code
+         * zero_rated}.
+         */
+        @SerializedName("taxability_reason")
+        String taxabilityReason;
+
+        /** The amount on which tax is calculated, in %s. */
+        @SerializedName("taxable_amount")
+        Long taxableAmount;
       }
     }
   }

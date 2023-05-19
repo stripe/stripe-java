@@ -159,7 +159,7 @@ public class FinancingOffer extends ApiResource implements HasId {
 
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
+   * merchant recipient.
    */
   public FinancingOffer markDelivered() throws StripeException {
     return markDelivered((Map<String, Object>) null, (RequestOptions) null);
@@ -167,7 +167,7 @@ public class FinancingOffer extends ApiResource implements HasId {
 
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
+   * merchant recipient.
    */
   public FinancingOffer markDelivered(RequestOptions options) throws StripeException {
     return markDelivered((Map<String, Object>) null, options);
@@ -175,7 +175,7 @@ public class FinancingOffer extends ApiResource implements HasId {
 
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
+   * merchant recipient.
    */
   public FinancingOffer markDelivered(Map<String, Object> params) throws StripeException {
     return markDelivered(params, (RequestOptions) null);
@@ -183,7 +183,7 @@ public class FinancingOffer extends ApiResource implements HasId {
 
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
+   * merchant recipient.
    */
   public FinancingOffer markDelivered(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -200,7 +200,7 @@ public class FinancingOffer extends ApiResource implements HasId {
 
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
+   * merchant recipient.
    */
   public FinancingOffer markDelivered(FinancingOfferMarkDeliveredParams params)
       throws StripeException {
@@ -209,7 +209,7 @@ public class FinancingOffer extends ApiResource implements HasId {
 
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
+   * merchant recipient.
    */
   public FinancingOffer markDelivered(
       FinancingOfferMarkDeliveredParams params, RequestOptions options) throws StripeException {

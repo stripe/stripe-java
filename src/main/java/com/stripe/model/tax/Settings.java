@@ -19,7 +19,7 @@ import lombok.Setter;
 /**
  * You can use Tax {@code Settings} to manage configurations used by Stripe Tax calculations.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/tax/connect/settings">Account settings</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/tax/settings-api">Using the Settings API</a>.
  */
 @Getter
 @Setter
@@ -28,6 +28,10 @@ public class Settings extends ApiResource {
   @SerializedName("defaults")
   Defaults defaults;
 
+  /** The place where your business is located. */
+  @SerializedName("head_office")
+  HeadOffice headOffice;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -35,7 +39,7 @@ public class Settings extends ApiResource {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The places where your business is located. */
+  /** The deprecated places where your business is located. */
   @SerializedName("locations")
   List<Settings.Location> locations;
 
@@ -131,6 +135,14 @@ public class Settings extends ApiResource {
      */
     @SerializedName("tax_code")
     String taxCode;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class HeadOffice extends StripeObject {
+    @SerializedName("address")
+    Address address;
   }
 
   @Getter

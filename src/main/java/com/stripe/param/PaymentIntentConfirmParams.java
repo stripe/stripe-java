@@ -136,8 +136,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Object shipping;
 
   /**
-   * Set to {@code true} only when using manual confirmation and the iOS or Android SDKs to handle
-   * additional authentication steps.
+   * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+   * client-side SDKs to handle the next actions.
    */
   @SerializedName("use_stripe_sdk")
   Boolean useStripeSdk;
@@ -497,8 +497,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to {@code true} only when using manual confirmation and the iOS or Android SDKs to handle
-     * additional authentication steps.
+     * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+     * client-side SDKs to handle the next actions.
      */
     public Builder setUseStripeSdk(Boolean useStripeSdk) {
       this.useStripeSdk = useStripeSdk;
@@ -8516,6 +8516,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName("discover")
         DISCOVER("discover"),
 
+        @SerializedName("eftpos_au")
+        EFTPOS_AU("eftpos_au"),
+
         @SerializedName("interac")
         INTERAC("interac"),
 
@@ -11276,6 +11279,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     public static class Paypal {
+      /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
       ApiRequestParams.EnumParam captureMethod;
 
@@ -11288,11 +11292,32 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /**
+       * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred locale</a> of
+       * the PayPal checkout page that the customer is redirected to.
+       */
       @SerializedName("preferred_locale")
       PreferredLocale preferredLocale;
 
+      /**
+       * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+       * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+       * settings to block multiple payments per invoice ID.
+       */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+       * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+       * settings to block multiple payments per invoice ID.
+       */
       @SerializedName("reference_id")
       String referenceId;
+
+      /** The risk correlation ID for an on-session payment using a saved PayPal payment method. */
+      @SerializedName("risk_correlation_id")
+      String riskCorrelationId;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -11320,12 +11345,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           PreferredLocale preferredLocale,
+          String reference,
           String referenceId,
+          String riskCorrelationId,
           ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.preferredLocale = preferredLocale;
+        this.reference = reference;
         this.referenceId = referenceId;
+        this.riskCorrelationId = riskCorrelationId;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -11340,7 +11369,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private PreferredLocale preferredLocale;
 
+        private String reference;
+
         private String referenceId;
+
+        private String riskCorrelationId;
 
         private ApiRequestParams.EnumParam setupFutureUsage;
 
@@ -11350,16 +11383,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.captureMethod,
               this.extraParams,
               this.preferredLocale,
+              this.reference,
               this.referenceId,
+              this.riskCorrelationId,
               this.setupFutureUsage);
         }
 
+        /** Controls when the funds will be captured from the customer's account. */
         public Builder setCaptureMethod(
             PaymentIntentConfirmParams.PaymentMethodOptions.Paypal.CaptureMethod captureMethod) {
           this.captureMethod = captureMethod;
           return this;
         }
 
+        /** Controls when the funds will be captured from the customer's account. */
         public Builder setCaptureMethod(EmptyParam captureMethod) {
           this.captureMethod = captureMethod;
           return this;
@@ -11393,6 +11430,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred locale</a>
+         * of the PayPal checkout page that the customer is redirected to.
+         */
         public Builder setPreferredLocale(
             PaymentIntentConfirmParams.PaymentMethodOptions.Paypal.PreferredLocale
                 preferredLocale) {
@@ -11400,8 +11441,31 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+         * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+         * settings to block multiple payments per invoice ID.
+         */
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /**
+         * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+         * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+         * settings to block multiple payments per invoice ID.
+         */
         public Builder setReferenceId(String referenceId) {
           this.referenceId = referenceId;
+          return this;
+        }
+
+        /**
+         * The risk correlation ID for an on-session payment using a saved PayPal payment method.
+         */
+        public Builder setRiskCorrelationId(String riskCorrelationId) {
+          this.riskCorrelationId = riskCorrelationId;
           return this;
         }
 
@@ -11471,68 +11535,68 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public enum PreferredLocale implements ApiRequestParams.EnumParam {
-        @SerializedName("cs_CZ")
-        CS_CZ("cs_CZ"),
+        @SerializedName("cs-CZ")
+        CS_CZ("cs-CZ"),
 
-        @SerializedName("da_DK")
-        DA_DK("da_DK"),
+        @SerializedName("da-DK")
+        DA_DK("da-DK"),
 
-        @SerializedName("de_AT")
-        DE_AT("de_AT"),
+        @SerializedName("de-AT")
+        DE_AT("de-AT"),
 
-        @SerializedName("de_DE")
-        DE_DE("de_DE"),
+        @SerializedName("de-DE")
+        DE_DE("de-DE"),
 
-        @SerializedName("de_LU")
-        DE_LU("de_LU"),
+        @SerializedName("de-LU")
+        DE_LU("de-LU"),
 
-        @SerializedName("el_GR")
-        EL_GR("el_GR"),
+        @SerializedName("el-GR")
+        EL_GR("el-GR"),
 
-        @SerializedName("en_GB")
-        EN_GB("en_GB"),
+        @SerializedName("en-GB")
+        EN_GB("en-GB"),
 
-        @SerializedName("en_US")
-        EN_US("en_US"),
+        @SerializedName("en-US")
+        EN_US("en-US"),
 
-        @SerializedName("es_ES")
-        ES_ES("es_ES"),
+        @SerializedName("es-ES")
+        ES_ES("es-ES"),
 
-        @SerializedName("fi_FI")
-        FI_FI("fi_FI"),
+        @SerializedName("fi-FI")
+        FI_FI("fi-FI"),
 
-        @SerializedName("fr_BE")
-        FR_BE("fr_BE"),
+        @SerializedName("fr-BE")
+        FR_BE("fr-BE"),
 
-        @SerializedName("fr_FR")
-        FR_FR("fr_FR"),
+        @SerializedName("fr-FR")
+        FR_FR("fr-FR"),
 
-        @SerializedName("fr_LU")
-        FR_LU("fr_LU"),
+        @SerializedName("fr-LU")
+        FR_LU("fr-LU"),
 
-        @SerializedName("hu_HU")
-        HU_HU("hu_HU"),
+        @SerializedName("hu-HU")
+        HU_HU("hu-HU"),
 
-        @SerializedName("it_IT")
-        IT_IT("it_IT"),
+        @SerializedName("it-IT")
+        IT_IT("it-IT"),
 
-        @SerializedName("nl_BE")
-        NL_BE("nl_BE"),
+        @SerializedName("nl-BE")
+        NL_BE("nl-BE"),
 
-        @SerializedName("nl_NL")
-        NL_NL("nl_NL"),
+        @SerializedName("nl-NL")
+        NL_NL("nl-NL"),
 
-        @SerializedName("pl_PL")
-        PL_PL("pl_PL"),
+        @SerializedName("pl-PL")
+        PL_PL("pl-PL"),
 
-        @SerializedName("pt_PT")
-        PT_PT("pt_PT"),
+        @SerializedName("pt-PT")
+        PT_PT("pt-PT"),
 
-        @SerializedName("sk_SK")
-        SK_SK("sk_SK"),
+        @SerializedName("sk-SK")
+        SK_SK("sk-SK"),
 
-        @SerializedName("sv_SE")
-        SV_SE("sv_SE");
+        @SerializedName("sv-SE")
+        SV_SE("sv-SE");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

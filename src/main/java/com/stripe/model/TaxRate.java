@@ -62,6 +62,14 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   @SerializedName("display_name")
   String displayName;
 
+  /**
+   * Actual/effective tax rate percentage out of 100. For tax calculations with
+   * automatic_tax[enabled]=true, this percentage does not include the statutory tax rate of
+   * non-taxable jurisdictions.
+   */
+  @SerializedName("effective_percentage")
+  BigDecimal effectivePercentage;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
