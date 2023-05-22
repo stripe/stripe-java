@@ -229,7 +229,7 @@ public class Transaction extends ApiResource implements HasId {
      * approved for the purchase to be completed successfully.
      *
      * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/authorizations">Issued
-     * Card Authorizations</a>.
+     * card authorizations</a>
      */
     @SerializedName("issuing_authorization")
     Authorization issuingAuthorization;

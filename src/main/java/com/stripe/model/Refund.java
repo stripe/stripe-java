@@ -21,7 +21,7 @@ import lombok.Setter;
  * {@code Refund} objects allow you to refund a charge that has previously been created but not yet
  * refunded. Funds will be refunded to the credit or debit card that was originally charged.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/refunds">Refunds</a>.
+ * <p>Related guide: <a href="https://stripe.com/docs/refunds">Refunds</a>
  */
 @Getter
 @Setter

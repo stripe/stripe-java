@@ -22,7 +22,7 @@ import lombok.Setter;
  *
  * <p>Related guide: <a
  * href="https://stripe.com/docs/connect/get-started-connect-embedded-components">Connect embedded
- * components</a>.
+ * components</a>
  */
 @Getter
 @Setter
