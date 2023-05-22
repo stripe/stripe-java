@@ -5,13 +5,13 @@ import java.net.Proxy;
 import java.util.Map;
 
 public class RawRequestOptions extends RequestOptions {
-  private Encoding encoding;
+  private ApiMode apiMode;
 
   private Map<String, String> additionalHeaders;
 
-  public enum Encoding {
-    FORM,
-    JSON
+  public enum ApiMode {
+    STANDARD,
+    PREVIEW
   }
 
   public RawRequestOptions(
@@ -26,7 +26,7 @@ public class RawRequestOptions extends RequestOptions {
       int maxNetworkRetries,
       Proxy connectionProxy,
       PasswordAuthentication proxyCredential,
-      Encoding encoding,
+      ApiMode apiMode,
       Map<String, String> additionalHeaders) {
     super(
         apiKey,
@@ -40,12 +40,12 @@ public class RawRequestOptions extends RequestOptions {
         maxNetworkRetries,
         connectionProxy,
         proxyCredential);
-    this.encoding = encoding;
+    this.apiMode = apiMode;
     this.additionalHeaders = additionalHeaders;
   }
 
-  public Encoding getEncoding() {
-    return encoding;
+  public ApiMode getApiMode() {
+    return apiMode;
   }
 
   public Map<String, String> getAdditionalHeaders() {
@@ -57,25 +57,25 @@ public class RawRequestOptions extends RequestOptions {
   }
 
   public static final class RawRequestOptionsBuilder extends RequestOptions.RequestOptionsBuilder {
-    private Encoding encoding;
+    private ApiMode apiMode;
 
     private Map<String, String> additionalHeaders;
 
     /**
-     * Constructs a raw request options builder with default values. Encoding is set to {@code
-     * Encoding.FORM} by default.
+     * Constructs a raw request options builder with default values. ApiMode is set to {@code
+     * ApiMode.STANDARD} by default.
      */
     public RawRequestOptionsBuilder() {
       super();
-      encoding = Encoding.FORM;
+      apiMode = ApiMode.STANDARD;
     }
 
-    public Encoding getEncoding() {
-      return this.encoding;
+    public ApiMode getApiMode() {
+      return this.apiMode;
     }
 
-    public RawRequestOptionsBuilder setEncoding(Encoding encoding) {
-      this.encoding = encoding;
+    public RawRequestOptionsBuilder setApiMode(ApiMode apiMode) {
+      this.apiMode = apiMode;
       return this;
     }
 
@@ -162,7 +162,7 @@ public class RawRequestOptions extends RequestOptions {
           maxNetworkRetries,
           connectionProxy,
           proxyCredential,
-          encoding,
+          apiMode,
           additionalHeaders);
     }
   }

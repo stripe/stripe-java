@@ -227,7 +227,7 @@ public class StripeRequestTest extends BaseStripeTest {
   public void testBuildContentHasJsonContentWhenRequestIsPostAndEncodingOptionIsJson()
       throws StripeException {
     RawRequestOptions options =
-        RawRequestOptions.builder().setEncoding(RawRequestOptions.Encoding.JSON).build();
+        RawRequestOptions.builder().setApiMode(RawRequestOptions.ApiMode.PREVIEW).build();
     StripeRequest request =
         new StripeRequest(
             ApiResource.RequestMethod.POST,

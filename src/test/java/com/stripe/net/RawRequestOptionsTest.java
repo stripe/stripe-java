@@ -8,7 +8,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
-import com.stripe.net.RawRequestOptions.Encoding;
+import com.stripe.net.RawRequestOptions.ApiMode;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,11 +43,11 @@ public class RawRequestOptionsTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final Encoding encoding = Encoding.FORM;
+    final ApiMode apiMode = ApiMode.STANDARD;
 
-    final RawRequestOptions options = RawRequestOptions.builder().setEncoding(encoding).build();
+    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
 
-    assertEquals(encoding, options.getEncoding());
+    assertEquals(apiMode, options.getApiMode());
 
     Map<String, Object> params = new HashMap<>();
     params.put("description", "test customer");
@@ -75,10 +75,10 @@ public class RawRequestOptionsTest extends BaseStripeTest {
         new MockResponse()
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
-    final Encoding encoding = Encoding.JSON;
-    final RawRequestOptions options = RawRequestOptions.builder().setEncoding(encoding).build();
+    final ApiMode apiMode = ApiMode.PREVIEW;
+    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
 
-    assertEquals(encoding, options.getEncoding());
+    assertEquals(apiMode, options.getApiMode());
 
     List<Object> phases = new ArrayList<>();
     List<Object> items = new ArrayList<>();
@@ -118,10 +118,10 @@ public class RawRequestOptionsTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final Encoding encoding = Encoding.JSON;
-    final RawRequestOptions options = RawRequestOptions.builder().setEncoding(encoding).build();
+    final ApiMode apiMode = ApiMode.PREVIEW;
+    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
 
-    assertEquals(encoding, options.getEncoding());
+    assertEquals(apiMode, options.getApiMode());
 
     Map<String, Object> params = new HashMap<>();
     params.put("description", "test customer");

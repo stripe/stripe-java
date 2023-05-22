@@ -74,9 +74,9 @@ public class StripeRequest {
 
       if (this.options instanceof RawRequestOptions) {
         RawRequestOptions rawOptions = (RawRequestOptions) this.options;
-        this.content = buildContent(method, params, rawOptions.getEncoding());
+        this.content = buildContent(method, params, rawOptions.getApiMode());
       } else {
-        this.content = buildContent(method, params, RawRequestOptions.Encoding.FORM);
+        this.content = buildContent(method, params, RawRequestOptions.ApiMode.STANDARD);
       }
 
       this.headers = buildHeaders(method, this.options);
@@ -138,13 +138,13 @@ public class StripeRequest {
   private static HttpContent buildContent(
       ApiResource.RequestMethod method,
       Map<String, Object> params,
-      RawRequestOptions.Encoding encoding)
+      RawRequestOptions.ApiMode apiMode)
       throws IOException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
     }
 
-    if (encoding == RawRequestOptions.Encoding.JSON) {
+    if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
       return JsonEncoder.createHttpContent(params);
     }
 
