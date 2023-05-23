@@ -89,8 +89,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   Boolean detailsSubmitted;
 
   /**
-   * An email address associated with the account. You can treat this as metadata: it is not used
-   * for authentication or messaging account holders.
+   * An email address associated with the account. It's not used for authentication and Stripe
+   * doesn't market to this field without explicit approval from the platform.
    */
   @SerializedName("email")
   String email;
