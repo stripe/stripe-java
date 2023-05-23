@@ -839,6 +839,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
 
+    /**
+     * If this is a {@code zip} PaymentMethod, this hash contains details about the Zip payment
+     * method.
+     */
+    @SerializedName("zip")
+    Zip zip;
+
     private PaymentMethodData(
         AcssDebit acssDebit,
         Affirm affirm,
@@ -874,7 +881,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Sofort sofort,
         Type type,
         UsBankAccount usBankAccount,
-        WechatPay wechatPay) {
+        WechatPay wechatPay,
+        Zip zip) {
       this.acssDebit = acssDebit;
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
@@ -910,6 +918,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
+      this.zip = zip;
     }
 
     public static Builder builder() {
@@ -987,6 +996,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private WechatPay wechatPay;
 
+      private Zip zip;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SetupIntentConfirmParams.PaymentMethodData build() {
         return new SetupIntentConfirmParams.PaymentMethodData(
@@ -1024,7 +1035,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.sofort,
             this.type,
             this.usBankAccount,
-            this.wechatPay);
+            this.wechatPay,
+            this.zip);
       }
 
       /**
@@ -1384,6 +1396,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setWechatPay(SetupIntentConfirmParams.PaymentMethodData.WechatPay wechatPay) {
         this.wechatPay = wechatPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code zip} PaymentMethod, this hash contains details about the Zip payment
+       * method.
+       */
+      public Builder setZip(SetupIntentConfirmParams.PaymentMethodData.Zip zip) {
+        this.zip = zip;
         return this;
       }
     }
@@ -4249,6 +4270,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
     }
 
+    @Getter
+    public static class Zip {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Zip(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Zip build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Zip(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Zip#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Zip#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
@@ -4335,7 +4413,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       US_BANK_ACCOUNT("us_bank_account"),
 
       @SerializedName("wechat_pay")
-      WECHAT_PAY("wechat_pay");
+      WECHAT_PAY("wechat_pay"),
+
+      @SerializedName("zip")
+      ZIP("zip");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

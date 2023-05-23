@@ -985,6 +985,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("us_bank_account_ach_payments")
     String usBankAccountAchPayments;
+
+    /**
+     * The status of the Zip capability of the account, or whether the account can directly process
+     * Zip charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("zip_payments")
+    String zipPayments;
   }
 
   @Getter

@@ -181,8 +181,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps}, {@code
    * fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code klarna},
    * {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
-   * {@code pix}, {@code promptpay}, {@code sepa_debit}, {@code sofort}, {@code us_bank_account}, or
-   * {@code wechat_pay}.
+   * {@code pix}, {@code promptpay}, {@code sepa_debit}, {@code sofort}, {@code us_bank_account},
+   * {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -192,6 +192,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   @SerializedName("wechat_pay")
   WechatPay wechatPay;
+
+  @SerializedName("zip")
+  Zip zip;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -1543,4 +1546,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class WechatPay extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Zip extends StripeObject {}
 }

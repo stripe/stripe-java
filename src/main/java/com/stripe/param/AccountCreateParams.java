@@ -979,6 +979,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("us_bank_account_ach_payments")
     UsBankAccountAchPayments usBankAccountAchPayments;
 
+    /** The zip_payments capability. */
+    @SerializedName("zip_payments")
+    ZipPayments zipPayments;
+
     private Capabilities(
         AcssDebitPayments acssDebitPayments,
         AffirmPayments affirmPayments,
@@ -1015,7 +1019,8 @@ public class AccountCreateParams extends ApiRequestParams {
         TaxReportingUs1099Misc taxReportingUs1099Misc,
         Transfers transfers,
         Treasury treasury,
-        UsBankAccountAchPayments usBankAccountAchPayments) {
+        UsBankAccountAchPayments usBankAccountAchPayments,
+        ZipPayments zipPayments) {
       this.acssDebitPayments = acssDebitPayments;
       this.affirmPayments = affirmPayments;
       this.afterpayClearpayPayments = afterpayClearpayPayments;
@@ -1052,6 +1057,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.transfers = transfers;
       this.treasury = treasury;
       this.usBankAccountAchPayments = usBankAccountAchPayments;
+      this.zipPayments = zipPayments;
     }
 
     public static Builder builder() {
@@ -1131,6 +1137,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private UsBankAccountAchPayments usBankAccountAchPayments;
 
+      private ZipPayments zipPayments;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AccountCreateParams.Capabilities build() {
         return new AccountCreateParams.Capabilities(
@@ -1169,7 +1177,8 @@ public class AccountCreateParams extends ApiRequestParams {
             this.taxReportingUs1099Misc,
             this.transfers,
             this.treasury,
-            this.usBankAccountAchPayments);
+            this.usBankAccountAchPayments,
+            this.zipPayments);
       }
 
       /** The acss_debit_payments capability. */
@@ -1429,6 +1438,12 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setUsBankAccountAchPayments(
           AccountCreateParams.Capabilities.UsBankAccountAchPayments usBankAccountAchPayments) {
         this.usBankAccountAchPayments = usBankAccountAchPayments;
+        return this;
+      }
+
+      /** The zip_payments capability. */
+      public Builder setZipPayments(AccountCreateParams.Capabilities.ZipPayments zipPayments) {
+        this.zipPayments = zipPayments;
         return this;
       }
     }
@@ -4170,6 +4185,84 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.UsBankAccountAchPayments#extraParams}
          * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class ZipPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private ZipPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.ZipPayments build() {
+          return new AccountCreateParams.Capabilities.ZipPayments(this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.ZipPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.ZipPayments#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
