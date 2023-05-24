@@ -219,7 +219,7 @@ public abstract class Stripe {
    *
    * @param method the HTTP method
    * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
-   * @param params the parameters of the request
+   * @param content the body of the request as a string
    * @return the JSON response as a string
    */
   public static StripeResponse rawRequest(
@@ -236,7 +236,7 @@ public abstract class Stripe {
    *
    * @param method the HTTP method
    * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
-   * @param params the parameters of the request
+   * @param content the body of the request as a string
    * @param options the special modifiers of the request
    * @return the JSON response as a string
    */
