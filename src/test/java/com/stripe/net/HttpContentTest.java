@@ -18,10 +18,10 @@ public class HttpContentTest extends BaseStripeTest {
     String stringContent = null;
     Collection<KeyValuePair<String, String>> nameValueCollectionContent = null;
     assertThrows(
-      NullPointerException.class,
-      () -> {
-        HttpContent.buildFormURLEncodedContent(stringContent);
-      });
+        NullPointerException.class,
+        () -> {
+          HttpContent.buildFormURLEncodedContent(stringContent);
+        });
     assertThrows(
         NullPointerException.class,
         () -> {

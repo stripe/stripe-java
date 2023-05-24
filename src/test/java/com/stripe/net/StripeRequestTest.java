@@ -133,8 +133,7 @@ public class StripeRequestTest extends BaseStripeTest {
     assertEquals(originalVersion, request.headers().firstValue("Stripe-Version").get());
 
     Stripe.stripeVersion = "2022-08-19";
-    request =
-        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", "", null);
+    request = new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", "", null);
     assertEquals("2022-08-19", request.headers().firstValue("Stripe-Version").get());
   }
 

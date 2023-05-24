@@ -102,10 +102,7 @@ public class StripeRequest {
    * @throws StripeException if the request cannot be initialized for any reason
    */
   public StripeRequest(
-      ApiResource.RequestMethod method,
-      String url,
-      String content,
-      RequestOptions options)
+      ApiResource.RequestMethod method, String url, String content, RequestOptions options)
       throws StripeException {
     try {
       this.params = null;
@@ -193,20 +190,18 @@ public class StripeRequest {
   }
 
   private static HttpContent buildContent(
-    ApiResource.RequestMethod method,
-    String content,
-    RawRequestOptions.ApiMode apiMode)
-    throws IOException {
-  if (method != ApiResource.RequestMethod.POST) {
-    return null;
-  }
+      ApiResource.RequestMethod method, String content, RawRequestOptions.ApiMode apiMode)
+      throws IOException {
+    if (method != ApiResource.RequestMethod.POST) {
+      return null;
+    }
 
-  if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
-    return HttpContent.buildJsonContent(content);
-  }
+    if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
+      return HttpContent.buildJsonContent(content);
+    }
 
-  return HttpContent.buildFormURLEncodedContent(content);
-}
+    return HttpContent.buildFormURLEncodedContent(content);
+  }
 
   private static HttpHeaders buildHeaders(ApiResource.RequestMethod method, RequestOptions options)
       throws AuthenticationException {

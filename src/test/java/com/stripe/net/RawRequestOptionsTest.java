@@ -48,7 +48,8 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(apiMode, options.getApiMode());
 
     final StripeResponse response =
-        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
+        Stripe.rawRequest(
+            ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
 
     assertNotNull(response);
     assertEquals(200, response.code());
@@ -77,7 +78,10 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     final StripeResponse response =
         Stripe.rawRequest(
-            ApiResource.RequestMethod.POST, "/v1/subscription_schedules", "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}", options);
+            ApiResource.RequestMethod.POST,
+            "/v1/subscription_schedules",
+            "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
+            options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals("application/json", request.getHeader("Content-Type"));
@@ -103,7 +107,11 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(apiMode, options.getApiMode());
 
     final StripeResponse response =
-        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", "{\"description\":\"test customer\"}", options);
+        Stripe.rawRequest(
+            ApiResource.RequestMethod.POST,
+            "/v1/customers",
+            "{\"description\":\"test customer\"}",
+            options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals("application/json", request.getHeader("Content-Type"));
