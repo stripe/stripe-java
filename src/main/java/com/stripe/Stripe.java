@@ -225,10 +225,10 @@ public abstract class Stripe {
   public static StripeResponse rawRequest(
       final ApiResource.RequestMethod method,
       final String relativeUrl,
-      final Map<String, Object> params)
+      final String content)
       throws StripeException {
     RawRequestOptions options = RawRequestOptions.builder().build();
-    return rawRequest(method, relativeUrl, params, options);
+    return rawRequest(method, relativeUrl, content, options);
   }
 
   /**
@@ -245,11 +245,11 @@ public abstract class Stripe {
   public static StripeResponse rawRequest(
       final ApiResource.RequestMethod method,
       final String relativeUrl,
-      final Map<String, Object> params,
+      final String content,
       final RawRequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, relativeUrl);
-    StripeRequest request = new StripeRequest(method, url, params, options);
+    StripeRequest request = new StripeRequest(method, url, content, options);
 
     Map<String, String> additionalHeaders = options.getAdditionalHeaders();
 

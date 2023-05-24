@@ -10,9 +10,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.net.RawRequestOptions.ApiMode;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -49,11 +47,8 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     assertEquals(apiMode, options.getApiMode());
 
-    Map<String, Object> params = new HashMap<>();
-    params.put("description", "test customer");
-
     final StripeResponse response =
-        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", params, options);
+        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
 
     assertNotNull(response);
     assertEquals(200, response.code());
@@ -80,25 +75,9 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     assertEquals(apiMode, options.getApiMode());
 
-    List<Object> phases = new ArrayList<>();
-    List<Object> items = new ArrayList<>();
-    Map<String, Object> item1 = new HashMap<>();
-    item1.put("price", "price_123");
-    item1.put("quantity", 1);
-    items.add(item1);
-    Map<String, Object> phase1 = new HashMap<>();
-    phase1.put("items", items);
-    phase1.put("iterations", 12);
-    phases.add(phase1);
-    Map<String, Object> params = new HashMap<>();
-    params.put("customer", "cus_123");
-    params.put("start_date", 1683338558);
-    params.put("end_behavior", "release");
-    params.put("phases", phases);
-
     final StripeResponse response =
         Stripe.rawRequest(
-            ApiResource.RequestMethod.POST, "/v1/subscription_schedules", params, options);
+            ApiResource.RequestMethod.POST, "/v1/subscription_schedules", "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals("application/json", request.getHeader("Content-Type"));
@@ -123,11 +102,8 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     assertEquals(apiMode, options.getApiMode());
 
-    Map<String, Object> params = new HashMap<>();
-    params.put("description", "test customer");
-
     final StripeResponse response =
-        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", params, options);
+        Stripe.rawRequest(ApiResource.RequestMethod.POST, "/v1/customers", "{\"description\":\"test customer\"}", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals("application/json", request.getHeader("Content-Type"));
@@ -158,7 +134,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(additionalHeaders, options.getAdditionalHeaders());
 
     final StripeResponse response =
-        Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", new HashMap<>(), options);
+        Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", null, options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals("bar", request.getHeader("foo"));

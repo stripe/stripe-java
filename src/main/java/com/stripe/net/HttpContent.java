@@ -49,6 +49,20 @@ public class HttpContent {
         String.format("application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET));
   }
 
+  /**
+   * Builds a new HttpContent for name/value tuples encoded using {@code
+   * application/x-www-form-urlencoded} MIME type.
+   *
+   * @param content the form-encoded content string
+   * @return the encoded HttpContent instance
+   * @throws IllegalArgumentException if nameValueCollection is null
+   */
+  public static HttpContent buildFormURLEncodedContent(String content) throws IOException {
+    return new HttpContent(
+        content.getBytes(ApiResource.CHARSET),
+        String.format("application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET));
+  }
+
   /** The request's content, as a string. */
   public String stringContent() {
     return new String(this.byteArrayContent, ApiResource.CHARSET);

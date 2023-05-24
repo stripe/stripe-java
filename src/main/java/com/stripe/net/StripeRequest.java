@@ -93,6 +93,47 @@ public class StripeRequest {
   }
 
   /**
+   * Initializes a new instance of the {@link StripeRequest} class.
+   *
+   * @param method the HTTP method
+   * @param url the URL of the request
+   * @param content the body of the request
+   * @param options the special modifiers of the request
+   * @throws StripeException if the request cannot be initialized for any reason
+   */
+  public StripeRequest(
+      ApiResource.RequestMethod method,
+      String url,
+      String content,
+      RequestOptions options)
+      throws StripeException {
+    try {
+      this.params = null;
+      this.options = (options != null) ? options : RequestOptions.getDefault();
+      this.method = method;
+      this.url = buildURL(method, url, params);
+
+      if (this.options instanceof RawRequestOptions) {
+        RawRequestOptions rawOptions = (RawRequestOptions) this.options;
+        this.content = buildContent(method, content, rawOptions.getApiMode());
+      } else {
+        this.content = buildContent(method, content, RawRequestOptions.ApiMode.STANDARD);
+      }
+
+      this.headers = buildHeaders(method, this.options);
+    } catch (IOException e) {
+      throw new ApiConnectionException(
+          String.format(
+              "IOException during API request to Stripe (%s): %s "
+                  + "Please check your internet connection and try again. If this problem persists,"
+                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                  + " or let us know at support@stripe.com.",
+              Stripe.getApiBase(), e.getMessage()),
+          e);
+    }
+  }
+
+  /**
    * Returns a new {@link StripeRequest} instance with an additional header.
    *
    * @param name the additional header's name
@@ -150,6 +191,22 @@ public class StripeRequest {
 
     return FormEncoder.createHttpContent(params);
   }
+
+  private static HttpContent buildContent(
+    ApiResource.RequestMethod method,
+    String content,
+    RawRequestOptions.ApiMode apiMode)
+    throws IOException {
+  if (method != ApiResource.RequestMethod.POST) {
+    return null;
+  }
+
+  if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
+    return HttpContent.buildJsonContent(content);
+  }
+
+  return HttpContent.buildFormURLEncodedContent(content);
+}
 
   private static HttpHeaders buildHeaders(ApiResource.RequestMethod method, RequestOptions options)
       throws AuthenticationException {
