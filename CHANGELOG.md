@@ -1,5 +1,8 @@
 # Changelog
 
+## 22.22.0-beta.1 - 2023-05-25
+* [#1565](https://github.com/stripe/stripe-java/pull/1565) Update generated code for beta
+
 ## 22.21.0 - 2023-05-25
 * [#1566](https://github.com/stripe/stripe-java/pull/1566) Update generated code
   * Add support for `zip_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
