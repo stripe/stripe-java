@@ -193,10 +193,10 @@ public class Settings extends ApiResource {
     @EqualsAndHashCode(callSuper = false)
     public static class Pending extends StripeObject {
       /**
-       * The list of missing fields that are required to perform calculations. It includes at least
-       * one entry when the status is {@code pending}. It is recommended to set the optional values
-       * even if they aren't listed as required for calculating taxes. Calculations can fail if
-       * missing fields aren't explicitly provided on every call.
+       * The list of missing fields that are required to perform calculations. It includes the entry
+       * {@code head_office} when the status is {@code pending}. It is recommended to set the
+       * optional values even if they aren't listed as required for calculating taxes. Calculations
+       * can fail if missing fields aren't explicitly provided on every call.
        */
       @SerializedName("missing_fields")
       List<String> missingFields;
