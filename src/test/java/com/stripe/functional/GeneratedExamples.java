@@ -4673,4 +4673,36 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/quotes/qt_xxxxxxxxxxxxx/line_items", params.toMap());
   }
+
+  @Test
+  public void testCalculationCreate() throws StripeException {
+    com.stripe.param.tax.CalculationCreateParams params =
+        com.stripe.param.tax.CalculationCreateParams.builder()
+            .setCurrency("usd")
+            .addLineItem(
+                com.stripe.param.tax.CalculationCreateParams.LineItem.builder()
+                    .setAmount(1000L)
+                    .setReference("L1")
+                    .build())
+            .setCustomerDetails(
+                com.stripe.param.tax.CalculationCreateParams.CustomerDetails.builder()
+                    .setAddress(
+                        com.stripe.param.tax.CalculationCreateParams.CustomerDetails.Address
+                            .builder()
+                            .setLine1("354 Oyster Point Blvd")
+                            .setCity("South San Francisco")
+                            .setState("CA")
+                            .setPostalCode("94080")
+                            .setCountry("US")
+                            .build())
+                    .setAddressSource(
+                        com.stripe.param.tax.CalculationCreateParams.CustomerDetails.AddressSource
+                            .SHIPPING)
+                    .build())
+            .build();
+
+    com.stripe.model.tax.Calculation calculation = com.stripe.model.tax.Calculation.create(params);
+    assertNotNull(calculation);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/tax/calculations", params.toMap());
+  }
 }
