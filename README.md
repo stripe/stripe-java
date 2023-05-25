@@ -273,14 +273,10 @@ RawRequestOptions options =
     .setAdditionalHeaders(stripeVersionHeader)
     .build();
 
-// Create a map of request parameters to pass to the request.
-Map<String, Object> params = new HashMap<>();
-params.put("param", 123);
-
 // Make the request using the Stripe.rawRequest() method.
 final StripeResponse response =
   Stripe.rawRequest(
-    ApiResource.RequestMethod.POST, "/v1/beta_endpoint", params, options);
+    ApiResource.RequestMethod.POST, "/v1/beta_endpoint", "param=123", options);
 
 // (Optional) response.body() is a string. You can call
 // Stripe.deserialize() to get a StripeObject.
