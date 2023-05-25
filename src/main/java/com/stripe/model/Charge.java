@@ -19,12 +19,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * To charge a credit or a debit card, you create a {@code Charge} object. You can retrieve and
- * refund individual charges as well as list all charges. Charges are identified by a unique, random
- * ID.
- *
- * <p>Related guide: <a href="https://stripe.com/docs/payments/accept-a-payment-charges">Accept a
- * payment with the Charges API</a>
+ * The {@code Charge} object represents a single attempt to move money into your Stripe account.
+ * PaymentIntent confirmation is the most common way to create Charges, but transferring money to a
+ * different Stripe account through Connect also creates Charges. Some legacy payment flows create
+ * Charges directly, which is not recommended for new integrations.
  */
 @Getter
 @Setter
@@ -607,56 +605,60 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
-   * charge</a> with the capture option set to false.
+   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
+   * option set to false.
    *
    * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
-   * captured by that point in time, they will be marked as refunded and will no longer be
-   * capturable.
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
+   * marked as refunded and capture attempts will fail.
+   *
+   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
+   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture() throws StripeException {
     return capture((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
-   * charge</a> with the capture option set to false.
+   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
+   * option set to false.
    *
    * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
-   * captured by that point in time, they will be marked as refunded and will no longer be
-   * capturable.
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
+   * marked as refunded and capture attempts will fail.
+   *
+   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
+   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture(RequestOptions options) throws StripeException {
     return capture((Map<String, Object>) null, options);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
-   * charge</a> with the capture option set to false.
+   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
+   * option set to false.
    *
    * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
-   * captured by that point in time, they will be marked as refunded and will no longer be
-   * capturable.
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
+   * marked as refunded and capture attempts will fail.
+   *
+   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
+   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture(Map<String, Object> params) throws StripeException {
     return capture(params, (RequestOptions) null);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
-   * charge</a> with the capture option set to false.
+   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
+   * option set to false.
    *
    * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
-   * captured by that point in time, they will be marked as refunded and will no longer be
-   * capturable.
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
+   * marked as refunded and capture attempts will fail.
+   *
+   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
+   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -668,28 +670,30 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
-   * charge</a> with the capture option set to false.
+   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
+   * option set to false.
    *
    * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
-   * captured by that point in time, they will be marked as refunded and will no longer be
-   * capturable.
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
+   * marked as refunded and capture attempts will fail.
+   *
+   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
+   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture(ChargeCaptureParams params) throws StripeException {
     return capture(params, (RequestOptions) null);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
-   * charge</a> with the capture option set to false.
+   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
+   * option set to false.
    *
    * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
-   * captured by that point in time, they will be marked as refunded and will no longer be
-   * capturable.
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
+   * marked as refunded and capture attempts will fail.
+   *
+   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
+   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture(ChargeCaptureParams params, RequestOptions options) throws StripeException {
     String url =
@@ -701,20 +705,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
-   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
-   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
-   * have completed successfully).
+   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
+   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
+   * the {@code Charge} object used to request payment, so this method is limited to legacy
+   * integrations.
    */
   public static Charge create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
-   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
-   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
-   * have completed successfully).
+   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
+   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
+   * the {@code Charge} object used to request payment, so this method is limited to legacy
+   * integrations.
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -723,20 +727,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
-   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
-   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
-   * have completed successfully).
+   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
+   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
+   * the {@code Charge} object used to request payment, so this method is limited to legacy
+   * integrations.
    */
   public static Charge create(ChargeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
-   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
-   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
-   * have completed successfully).
+   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
+   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
+   * the {@code Charge} object used to request payment, so this method is limited to legacy
+   * integrations.
    */
   public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {
