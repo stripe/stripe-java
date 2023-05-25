@@ -968,6 +968,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
 
+    /**
+     * If this is a {@code zip} PaymentMethod, this hash contains details about the Zip payment
+     * method.
+     */
+    @SerializedName("zip")
+    Zip zip;
+
     private PaymentMethodData(
         AcssDebit acssDebit,
         Affirm affirm,
@@ -1003,7 +1010,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Sofort sofort,
         Type type,
         UsBankAccount usBankAccount,
-        WechatPay wechatPay) {
+        WechatPay wechatPay,
+        Zip zip) {
       this.acssDebit = acssDebit;
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
@@ -1039,6 +1047,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
+      this.zip = zip;
     }
 
     public static Builder builder() {
@@ -1116,6 +1125,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private WechatPay wechatPay;
 
+      private Zip zip;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentUpdateParams.PaymentMethodData build() {
         return new PaymentIntentUpdateParams.PaymentMethodData(
@@ -1153,7 +1164,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.sofort,
             this.type,
             this.usBankAccount,
-            this.wechatPay);
+            this.wechatPay,
+            this.zip);
       }
 
       /**
@@ -1513,6 +1525,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setWechatPay(PaymentIntentUpdateParams.PaymentMethodData.WechatPay wechatPay) {
         this.wechatPay = wechatPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code zip} PaymentMethod, this hash contains details about the Zip payment
+       * method.
+       */
+      public Builder setZip(PaymentIntentUpdateParams.PaymentMethodData.Zip zip) {
+        this.zip = zip;
         return this;
       }
     }
@@ -4514,6 +4535,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
+    public static class Zip {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Zip(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.Zip build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.Zip(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Zip#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Zip#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
@@ -4600,7 +4678,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       US_BANK_ACCOUNT("us_bank_account"),
 
       @SerializedName("wechat_pay")
-      WECHAT_PAY("wechat_pay");
+      WECHAT_PAY("wechat_pay"),
+
+      @SerializedName("zip")
+      ZIP("zip");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -4843,6 +4924,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("wechat_pay")
     Object wechatPay;
 
+    /**
+     * If this is a {@code zip} PaymentMethod, this sub-hash contains details about the Zip payment
+     * method options.
+     */
+    @SerializedName("zip")
+    Object zip;
+
     private PaymentMethodOptions(
         Object acssDebit,
         Object affirm,
@@ -4876,7 +4964,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object sepaDebit,
         Object sofort,
         Object usBankAccount,
-        Object wechatPay) {
+        Object wechatPay,
+        Object zip) {
       this.acssDebit = acssDebit;
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
@@ -4910,6 +4999,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.sofort = sofort;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
+      this.zip = zip;
     }
 
     public static Builder builder() {
@@ -4983,6 +5073,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Object wechatPay;
 
+      private Object zip;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentUpdateParams.PaymentMethodOptions build() {
         return new PaymentIntentUpdateParams.PaymentMethodOptions(
@@ -5018,7 +5110,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.usBankAccount,
-            this.wechatPay);
+            this.wechatPay,
+            this.zip);
       }
 
       /**
@@ -5627,6 +5720,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setWechatPay(EmptyParam wechatPay) {
         this.wechatPay = wechatPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code zip} PaymentMethod, this sub-hash contains details about the Zip
+       * payment method options.
+       */
+      public Builder setZip(PaymentIntentUpdateParams.PaymentMethodOptions.Zip zip) {
+        this.zip = zip;
+        return this;
+      }
+
+      /**
+       * If this is a {@code zip} PaymentMethod, this sub-hash contains details about the Zip
+       * payment method options.
+       */
+      public Builder setZip(EmptyParam zip) {
+        this.zip = zip;
         return this;
       }
     }
@@ -12942,6 +13053,127 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         Client(String value) {
           this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Zip {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Zip(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodOptions.Zip build() {
+          return new PaymentIntentUpdateParams.PaymentMethodOptions.Zip(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Zip#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Zip#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Zip.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
         }
       }
 

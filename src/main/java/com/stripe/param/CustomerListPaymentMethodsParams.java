@@ -287,7 +287,10 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     US_BANK_ACCOUNT("us_bank_account"),
 
     @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay");
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

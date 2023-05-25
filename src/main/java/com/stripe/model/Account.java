@@ -89,8 +89,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   Boolean detailsSubmitted;
 
   /**
-   * An email address associated with the account. You can treat this as metadata: it is not used
-   * for authentication or messaging account holders.
+   * An email address associated with the account. It's not used for authentication and Stripe
+   * doesn't market to this field without explicit approval from the platform.
    */
   @SerializedName("email")
   String email;
@@ -985,6 +985,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("us_bank_account_ach_payments")
     String usBankAccountAchPayments;
+
+    /**
+     * The status of the Zip capability of the account, or whether the account can directly process
+     * Zip charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("zip_payments")
+    String zipPayments;
   }
 
   @Getter

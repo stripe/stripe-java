@@ -1253,6 +1253,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
 
+    @SerializedName("zip")
+    Zip zip;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2847,6 +2850,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Zip extends StripeObject {}
   }
 
   /**
