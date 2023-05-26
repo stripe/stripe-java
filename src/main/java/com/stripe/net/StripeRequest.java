@@ -74,7 +74,6 @@ public class StripeRequest {
     this.options = (options != null) ? options : RequestOptions.getDefault();
     this.method = method;
     this.url = buildURL(method, url, params);
-
     this.headers = buildHeaders(method, this.options);
   }
 
