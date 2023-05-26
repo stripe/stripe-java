@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,7 +36,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   }
 
   @Test
-  public void testFormEncoding() throws StripeException, InterruptedException {
+  public void testStandardRequest() throws StripeException, InterruptedException {
     server.enqueue(
         new MockResponse()
             .setBody(
@@ -58,6 +59,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     RecordedRequest request = server.takeRequest();
     assertEquals(
         "application/x-www-form-urlencoded;charset=UTF-8", request.getHeader("Content-Type"));
+    assertEquals(Stripe.API_VERSION, request.getHeader("Stripe-Version"));
     assertEquals("description=test+customer", request.getBody().readUtf8());
 
     Customer customer = (Customer) Stripe.deserialize(response.body());
@@ -66,7 +68,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   }
 
   @Test
-  public void testJsonEncoding() throws StripeException, InterruptedException {
+  public void testPreviewRequest() throws StripeException, InterruptedException {
     server.enqueue(
         new MockResponse()
             .setBody(
@@ -85,6 +87,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     RecordedRequest request = server.takeRequest();
     assertEquals("application/json", request.getHeader("Content-Type"));
+    assertNotEquals(Stripe.API_VERSION, request.getHeader("Stripe-Version"));
     assertEquals(
         "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
         request.getBody().readUtf8());
@@ -95,7 +98,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   }
 
   @Test
-  public void testJsonEncodingComplexParams() throws StripeException, InterruptedException {
+  public void testPreviewRequestWithComplexParams() throws StripeException, InterruptedException {
     server.enqueue(
         new MockResponse()
             .setBody(
@@ -115,6 +118,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     RecordedRequest request = server.takeRequest();
     assertEquals("application/json", request.getHeader("Content-Type"));
+    assertNotEquals(Stripe.API_VERSION, request.getHeader("Stripe-Version"));
     assertEquals("{\"description\":\"test customer\"}", request.getBody().readUtf8());
 
     assertNotNull(response);

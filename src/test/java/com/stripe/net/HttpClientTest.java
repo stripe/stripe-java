@@ -37,7 +37,7 @@ public class HttpClientTest extends BaseStripeTest {
         new StripeRequest(
             ApiResource.RequestMethod.GET,
             "http://example.com/get",
-            "",
+            null,
             RequestOptions.builder().setMaxNetworkRetries(2).build());
   }
 

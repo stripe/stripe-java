@@ -110,7 +110,7 @@ public class StripeRequestTest extends BaseStripeTest {
                 "2012-12-21")
             .build();
     StripeRequest request =
-        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", "", options);
+        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, options);
 
     assertEquals(ApiResource.RequestMethod.GET, request.method());
     assertEquals("http://example.com/get", request.url().toString());
@@ -129,11 +129,12 @@ public class StripeRequestTest extends BaseStripeTest {
 
     String originalVersion = Stripe.stripeVersion;
     StripeRequest request =
-        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", "", null);
+        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
     assertEquals(originalVersion, request.headers().firstValue("Stripe-Version").get());
 
     Stripe.stripeVersion = "2022-08-19";
-    request = new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", "", null);
+    request =
+        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
     assertEquals("2022-08-19", request.headers().firstValue("Stripe-Version").get());
   }
 
@@ -149,7 +150,7 @@ public class StripeRequestTest extends BaseStripeTest {
               AuthenticationException.class,
               () -> {
                 new StripeRequest(
-                    ApiResource.RequestMethod.GET, "http://example.com/get", "", null);
+                    ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
               });
       assertTrue(e.getMessage().contains("No API key provided."));
     } finally {
@@ -169,7 +170,7 @@ public class StripeRequestTest extends BaseStripeTest {
               AuthenticationException.class,
               () -> {
                 new StripeRequest(
-                    ApiResource.RequestMethod.GET, "http://example.com/get", "", null);
+                    ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
               });
       assertTrue(e.getMessage().contains("Your API key is invalid, as it is an empty string."));
     } finally {
@@ -189,7 +190,7 @@ public class StripeRequestTest extends BaseStripeTest {
               AuthenticationException.class,
               () -> {
                 new StripeRequest(
-                    ApiResource.RequestMethod.GET, "http://example.com/get", "", null);
+                    ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
               });
       assertTrue(e.getMessage().contains("Your API key is invalid, as it contains whitespace."));
     } finally {
@@ -223,8 +224,7 @@ public class StripeRequestTest extends BaseStripeTest {
   }
 
   @Test
-  public void testBuildContentHasJsonContentWhenRequestIsPostAndEncodingOptionIsJson()
-      throws StripeException {
+  public void testBuildsJsonContentWhenPreviewPost() throws StripeException {
     RawRequestOptions options =
         RawRequestOptions.builder().setApiMode(RawRequestOptions.ApiMode.PREVIEW).build();
     StripeRequest request =

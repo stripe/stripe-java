@@ -4,6 +4,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
+import com.stripe.net.RawRequestOptions.ApiMode;
 import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +57,32 @@ public class StripeRequest {
    *
    * @param method the HTTP method
    * @param url the URL of the request
+   * @param content the body of the request
+   * @param params the parameters of the request
+   * @param options the special modifiers of the request
+   * @throws StripeException if the request cannot be initialized for any reason
+   */
+  private StripeRequest(
+      ApiResource.RequestMethod method,
+      String url,
+      HttpContent content,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws StripeException {
+    this.content = content;
+    this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
+    this.options = (options != null) ? options : RequestOptions.getDefault();
+    this.method = method;
+    this.url = buildURL(method, url, params);
+
+    this.headers = buildHeaders(method, this.options);
+  }
+
+  /**
+   * Initializes a new instance of the {@link StripeRequest} class.
+   *
+   * @param method the HTTP method
+   * @param url the URL of the request
    * @param params the parameters of the request
    * @param options the special modifiers of the request
    * @throws StripeException if the request cannot be initialized for any reason
@@ -66,30 +93,7 @@ public class StripeRequest {
       Map<String, Object> params,
       RequestOptions options)
       throws StripeException {
-    try {
-      this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
-      this.options = (options != null) ? options : RequestOptions.getDefault();
-      this.method = method;
-      this.url = buildURL(method, url, params);
-
-      if (this.options instanceof RawRequestOptions) {
-        RawRequestOptions rawOptions = (RawRequestOptions) this.options;
-        this.content = buildContent(method, params, rawOptions.getApiMode());
-      } else {
-        this.content = buildContent(method, params, RawRequestOptions.ApiMode.STANDARD);
-      }
-
-      this.headers = buildHeaders(method, this.options);
-    } catch (IOException e) {
-      throw new ApiConnectionException(
-          String.format(
-              "IOException during API request to Stripe (%s): %s "
-                  + "Please check your internet connection and try again. If this problem persists,"
-                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
-                  + " or let us know at support@stripe.com.",
-              Stripe.getApiBase(), e.getMessage()),
-          e);
-    }
+    this(method, url, buildContent(method, params, calculateApiMode(options)), params, options);
   }
 
   /**
@@ -101,32 +105,22 @@ public class StripeRequest {
    * @param options the special modifiers of the request
    * @throws StripeException if the request cannot be initialized for any reason
    */
-  public StripeRequest(
+  public static StripeRequest createWithStringContent(
       ApiResource.RequestMethod method, String url, String content, RequestOptions options)
       throws StripeException {
-    try {
-      this.params = null;
-      this.options = (options != null) ? options : RequestOptions.getDefault();
-      this.method = method;
-      this.url = buildURL(method, url, params);
+    return new StripeRequest(
+        method,
+        url,
+        buildContent(method, content != null ? content : "", calculateApiMode(options)),
+        null,
+        options);
+  }
 
-      if (this.options instanceof RawRequestOptions) {
-        RawRequestOptions rawOptions = (RawRequestOptions) this.options;
-        this.content = buildContent(method, content, rawOptions.getApiMode());
-      } else {
-        this.content = buildContent(method, content, RawRequestOptions.ApiMode.STANDARD);
-      }
-
-      this.headers = buildHeaders(method, this.options);
-    } catch (IOException e) {
-      throw new ApiConnectionException(
-          String.format(
-              "IOException during API request to Stripe (%s): %s "
-                  + "Please check your internet connection and try again. If this problem persists,"
-                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
-                  + " or let us know at support@stripe.com.",
-              Stripe.getApiBase(), e.getMessage()),
-          e);
+  private static ApiMode calculateApiMode(RequestOptions options) {
+    if (options instanceof RawRequestOptions) {
+      return ((RawRequestOptions) options).getApiMode();
+    } else {
+      return ApiMode.STANDARD;
     }
   }
 
@@ -149,58 +143,88 @@ public class StripeRequest {
 
   private static URL buildURL(
       ApiResource.RequestMethod method, String spec, Map<String, Object> params)
-      throws IOException {
+      throws ApiConnectionException {
     StringBuilder sb = new StringBuilder();
 
     sb.append(spec);
 
-    URL specUrl = new URL(spec);
-    String specQueryString = specUrl.getQuery();
+    URL url = null;
+    try {
+      URL specUrl = new URL(spec);
+      String specQueryString = specUrl.getQuery();
 
-    if ((method != ApiResource.RequestMethod.POST) && (params != null)) {
-      String queryString = FormEncoder.createQueryString(params);
+      if ((method != ApiResource.RequestMethod.POST) && (params != null)) {
+        String queryString = FormEncoder.createQueryString(params);
 
-      if (queryString != null && !queryString.isEmpty()) {
-        if (specQueryString != null && !specQueryString.isEmpty()) {
-          sb.append("&");
-        } else {
-          sb.append("?");
+        if (queryString != null && !queryString.isEmpty()) {
+          if (specQueryString != null && !specQueryString.isEmpty()) {
+            sb.append("&");
+          } else {
+            sb.append("?");
+          }
+          sb.append(queryString);
         }
-        sb.append(queryString);
       }
-    }
 
-    return new URL(sb.toString());
+      url = new URL(sb.toString());
+    } catch (IOException e) {
+      handleIOException(e);
+    }
+    return url;
   }
 
   private static HttpContent buildContent(
       ApiResource.RequestMethod method,
       Map<String, Object> params,
       RawRequestOptions.ApiMode apiMode)
-      throws IOException {
+      throws ApiConnectionException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
     }
 
-    if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
-      return JsonEncoder.createHttpContent(params);
-    }
+    HttpContent httpContent = null;
+    try {
+      if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
+        httpContent = JsonEncoder.createHttpContent(params);
+      } else {
+        httpContent = FormEncoder.createHttpContent(params);
+      }
 
-    return FormEncoder.createHttpContent(params);
+    } catch (IOException e) {
+      handleIOException(e);
+    }
+    return httpContent;
   }
 
   private static HttpContent buildContent(
       ApiResource.RequestMethod method, String content, RawRequestOptions.ApiMode apiMode)
-      throws IOException {
-    if (method != ApiResource.RequestMethod.POST) {
-      return null;
+      throws ApiConnectionException {
+    if (method != ApiResource.RequestMethod.POST && !content.equals("")) {
+      throw new IllegalArgumentException("content is not allowed for non-POST requests.");
     }
 
     if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
       return HttpContent.buildJsonContent(content);
     }
 
-    return HttpContent.buildFormURLEncodedContent(content);
+    HttpContent httpContent = null;
+    try {
+      httpContent = HttpContent.buildFormURLEncodedContent(content);
+    } catch (IOException e) {
+      handleIOException(e);
+    }
+    return httpContent;
+  }
+
+  private static void handleIOException(IOException e) throws ApiConnectionException {
+    throw new ApiConnectionException(
+        String.format(
+            "IOException during API request to Stripe (%s): %s "
+                + "Please check your internet connection and try again. If this problem persists,"
+                + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                + " or let us know at support@stripe.com.",
+            Stripe.getApiBase(), e.getMessage()),
+        e);
   }
 
   private static HttpHeaders buildHeaders(ApiResource.RequestMethod method, RequestOptions options)

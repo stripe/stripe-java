@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.stripe.exception.*;
 import com.stripe.model.*;
 import com.stripe.net.*;
+import com.stripe.net.RawRequestOptions.ApiMode;
 import java.io.IOException;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
@@ -247,7 +248,7 @@ public abstract class Stripe {
       final RawRequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, relativeUrl);
-    StripeRequest request = new StripeRequest(method, url, content, options);
+    StripeRequest request = StripeRequest.createWithStringContent(method, url, content, options);
 
     Map<String, String> additionalHeaders = options.getAdditionalHeaders();
 
@@ -257,6 +258,10 @@ public abstract class Stripe {
         String value = entry.getValue();
         request = request.withAdditionalHeader(key, value);
       }
+    }
+
+    if (options.getApiMode() == ApiMode.PREVIEW) {
+      request = request.withAdditionalHeader("Stripe-Version", ApiVersion.PREVIEW_CURRENT);
     }
 
     StripeResponseStream responseStream = new HttpURLConnectionClient().requestStream(request);
