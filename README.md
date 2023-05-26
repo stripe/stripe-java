@@ -281,8 +281,6 @@ final StripeResponse response =
 // (Optional) response.body() is a string. You can call
 // Stripe.deserialize() to get a StripeObject.
 StripeObject obj = Stripe.deserialize(response.body());
-
-// Handle response...
 ```
 
 ## Support
