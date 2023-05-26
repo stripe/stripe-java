@@ -164,6 +164,34 @@ public class Calculation extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, CalculationLineItemCollection.class, options);
   }
 
+  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  public static CalculationLineItemCollection listLineItems(
+      String calculation, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(calculation)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CalculationLineItemCollection.class, options);
+  }
+
+  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  public static CalculationLineItemCollection listLineItems(
+      String calculation, CalculationListLineItemsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(calculation)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CalculationLineItemCollection.class, options);
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
