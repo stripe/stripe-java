@@ -4,8 +4,6 @@ import com.google.gson.JsonObject;
 import com.stripe.exception.*;
 import com.stripe.model.*;
 import com.stripe.net.*;
-import com.stripe.net.RawRequestOptions.ApiMode;
-import java.io.IOException;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
@@ -16,6 +14,7 @@ public abstract class Stripe {
   public static final int DEFAULT_READ_TIMEOUT = 80 * 1000;
 
   public static final String API_VERSION = ApiVersion.CURRENT;
+  public static final String PREVIEW_API_VERSION = ApiVersion.PREVIEW_CURRENT;
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
@@ -248,37 +247,8 @@ public abstract class Stripe {
       final RawRequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, relativeUrl);
-    StripeRequest request = StripeRequest.createWithStringContent(method, url, content, options);
 
-    Map<String, String> additionalHeaders = options.getAdditionalHeaders();
-
-    if (additionalHeaders != null) {
-      for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
-        String key = entry.getKey();
-        String value = entry.getValue();
-        request = request.withAdditionalHeader(key, value);
-      }
-    }
-
-    if (options.getApiMode() == ApiMode.PREVIEW) {
-      request = request.withAdditionalHeader("Stripe-Version", ApiVersion.PREVIEW_CURRENT);
-    }
-
-    StripeResponseStream responseStream = new HttpURLConnectionClient().requestStream(request);
-
-    try {
-      StripeResponse response = responseStream.unstream();
-      return response;
-    } catch (IOException e) {
-      throw new ApiConnectionException(
-          String.format(
-              "IOException during API request to Stripe (%s): %s "
-                  + "Please check your internet connection and try again. If this problem persists,"
-                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
-                  + " or let us know at support@stripe.com.",
-              Stripe.getApiBase(), e.getMessage()),
-          e);
-    }
+    return ApiResource.rawRequestStream(method, url, content, options);
   }
 
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */

@@ -1,6 +1,5 @@
 package com.stripe.net;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,18 +60,13 @@ public class RawRequestOptionsTest extends BaseStripeTest {
         "application/x-www-form-urlencoded;charset=UTF-8", request.getHeader("Content-Type"));
     assertEquals(Stripe.API_VERSION, request.getHeader("Stripe-Version"));
     assertEquals("description=test+customer", request.getBody().readUtf8());
-
-    Customer customer = (Customer) Stripe.deserialize(response.body());
-    assertTrue(customer.getId().startsWith("cus_"));
-    assertEquals("test customer", customer.getDescription());
   }
 
   @Test
   public void testPreviewRequest() throws StripeException, InterruptedException {
     server.enqueue(
         new MockResponse()
-            .setBody(
-                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
+            .setBody("{\"id\": \"sub_sched_123\",\n  \"object\": \"subscription_schedule\"}"));
     final ApiMode apiMode = ApiMode.PREVIEW;
     final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
 
@@ -87,7 +81,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     RecordedRequest request = server.takeRequest();
     assertEquals("application/json", request.getHeader("Content-Type"));
-    assertNotEquals(Stripe.API_VERSION, request.getHeader("Stripe-Version"));
+    assertEquals(Stripe.PREVIEW_API_VERSION, request.getHeader("Stripe-Version"));
     assertEquals(
         "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
         request.getBody().readUtf8());
@@ -95,39 +89,6 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertNotNull(response);
     assertEquals(200, response.code());
     assertTrue(response.body().length() > 0);
-  }
-
-  @Test
-  public void testPreviewRequestWithComplexParams() throws StripeException, InterruptedException {
-    server.enqueue(
-        new MockResponse()
-            .setBody(
-                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
-
-    final ApiMode apiMode = ApiMode.PREVIEW;
-    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
-
-    assertEquals(apiMode, options.getApiMode());
-
-    final StripeResponse response =
-        Stripe.rawRequest(
-            ApiResource.RequestMethod.POST,
-            "/v1/customers",
-            "{\"description\":\"test customer\"}",
-            options);
-
-    RecordedRequest request = server.takeRequest();
-    assertEquals("application/json", request.getHeader("Content-Type"));
-    assertNotEquals(Stripe.API_VERSION, request.getHeader("Stripe-Version"));
-    assertEquals("{\"description\":\"test customer\"}", request.getBody().readUtf8());
-
-    assertNotNull(response);
-    assertEquals(200, response.code());
-    assertTrue(response.body().length() > 0);
-
-    Customer customer = (Customer) Stripe.deserialize(response.body());
-    assertTrue(customer.getId().startsWith("cus_"));
-    assertEquals("test customer", customer.getDescription());
   }
 
   @Test
@@ -154,5 +115,31 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertNotNull(response);
     assertEquals(200, response.code());
     assertTrue(response.body().length() > 0);
+  }
+
+  @Test
+  public void testDeserialize() throws StripeException, InterruptedException {
+    server.enqueue(
+        new MockResponse()
+            .setBody(
+                "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
+
+    final ApiMode apiMode = ApiMode.STANDARD;
+
+    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
+
+    assertEquals(apiMode, options.getApiMode());
+
+    final StripeResponse response =
+        Stripe.rawRequest(
+            ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
+
+    assertNotNull(response);
+    assertEquals(200, response.code());
+    assertTrue(response.body().length() > 0);
+
+    Customer customer = (Customer) Stripe.deserialize(response.body());
+    assertTrue(customer.getId().startsWith("cus_"));
+    assertEquals("test customer", customer.getDescription());
   }
 }

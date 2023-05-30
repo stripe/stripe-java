@@ -22,6 +22,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeObjectInterface;
 import com.stripe.model.oauth.OAuthError;
+import com.stripe.net.RawRequestOptions.ApiMode;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -107,6 +108,50 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     return responseStream.body();
+  }
+
+  @Override
+  public StripeResponse rawRequestStream(
+      ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
+      throws StripeException {
+    StripeRequest request = StripeRequest.createWithStringContent(method, url, content, options);
+
+    Map<String, String> additionalHeaders = options.getAdditionalHeaders();
+
+    if (additionalHeaders != null) {
+      for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
+        String key = entry.getKey();
+        String value = entry.getValue();
+        request = request.withAdditionalHeader(key, value);
+      }
+    }
+
+    if (options.getApiMode() == ApiMode.PREVIEW) {
+      request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
+    }
+
+    StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
+
+    int responseCode = responseStream.code();
+
+    StripeResponse response;
+    try {
+      response = responseStream.unstream();
+    } catch (IOException e) {
+      throw new ApiConnectionException(
+          String.format(
+              "IOException during API request to Stripe (%s): %s "
+                  + "Please check your internet connection and try again. If this problem persists,"
+                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                  + " or let us know at support@stripe.com.",
+              Stripe.getApiBase(), e.getMessage()),
+          e);
+    }
+    if (responseCode < 200 || responseCode >= 300) {
+      handleApiError(response);
+    }
+
+    return response;
   }
 
   @Override

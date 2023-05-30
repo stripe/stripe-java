@@ -22,7 +22,7 @@ public class StripeResponseStream extends AbstractStripeResponse<InputStream> {
    *
    * @return the StripeResponse
    */
-  public StripeResponse unstream() throws IOException {
+  StripeResponse unstream() throws IOException {
     final String bodyString = StreamUtils.readToEnd(this.body, ApiResource.CHARSET);
     this.body.close();
     return new StripeResponse(this.code, this.headers, bodyString);
