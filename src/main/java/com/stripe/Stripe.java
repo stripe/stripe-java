@@ -247,11 +247,12 @@ public abstract class Stripe {
       final RawRequestOptions options)
       throws StripeException {
     if (method != ApiResource.RequestMethod.POST && content != null && !content.equals("")) {
-      throw new IllegalArgumentException("content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");
+      throw new IllegalArgumentException(
+          "content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");
     }
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, relativeUrl);
 
-    return ApiResource.rawRequestStream(method, url, content, options);
+    return ApiResource.rawRequest(method, url, content, options);
   }
 
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */

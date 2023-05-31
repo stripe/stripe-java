@@ -103,11 +103,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(apiMode, options.getApiMode());
 
     final StripeResponse response =
-        Stripe.rawRequest(
-            ApiResource.RequestMethod.GET,
-            "/v1/subscription_schedules",
-            "",
-            options);
+        Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));
@@ -174,11 +170,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   @Test
   public void testRaisesErrorWhenGetRequestAndContentIsNonNull() throws StripeException {
     try {
-      Stripe.rawRequest(
-          ApiResource.RequestMethod.GET,
-          "/v1/customers",
-          "key=value!",
-          null);
+      Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", "key=value!", null);
       fail("Expected illegal argument exception.");
     } catch (IllegalArgumentException e) {
       assertTrue(e.getMessage().contains("content is not allowed for non-POST requests."));

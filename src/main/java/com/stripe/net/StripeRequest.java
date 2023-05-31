@@ -108,11 +108,7 @@ public class StripeRequest {
       ApiResource.RequestMethod method, String url, String content, RequestOptions options)
       throws StripeException {
     return new StripeRequest(
-        method,
-        url,
-        buildContent(method, content, calculateApiMode(options)),
-        null,
-        options);
+        method, url, buildContent(method, content, calculateApiMode(options)), null, options);
   }
 
   private static ApiMode calculateApiMode(RequestOptions options) {
@@ -173,9 +169,7 @@ public class StripeRequest {
   }
 
   private static HttpContent buildContent(
-      ApiResource.RequestMethod method,
-      Map<String, Object> params)
-      throws ApiConnectionException {
+      ApiResource.RequestMethod method, Map<String, Object> params) throws ApiConnectionException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
     }

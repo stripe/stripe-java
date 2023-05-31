@@ -111,7 +111,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
-  public StripeResponse rawRequestStream(
+  public StripeResponse rawRequest(
       ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
       throws StripeException {
     StripeRequest request = StripeRequest.createWithStringContent(method, url, content, options);
@@ -130,23 +130,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
     }
 
-    StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
+    StripeResponse response = httpClient.requestWithRetries(request);
 
-    int responseCode = responseStream.code();
+    int responseCode = response.code();
 
-    StripeResponse response;
-    try {
-      response = responseStream.unstream();
-    } catch (IOException e) {
-      throw new ApiConnectionException(
-          String.format(
-              "IOException during API request to Stripe (%s): %s "
-                  + "Please check your internet connection and try again. If this problem persists,"
-                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
-                  + " or let us know at support@stripe.com.",
-              Stripe.getApiBase(), e.getMessage()),
-          e);
-    }
     if (responseCode < 200 || responseCode >= 300) {
       handleApiError(response);
     }

@@ -211,10 +211,10 @@ public abstract class ApiResource extends StripeObject {
     return ApiResource.stripeResponseGetter.requestStream(method, url, params, options);
   }
 
-  public static StripeResponse rawRequestStream(
+  public static StripeResponse rawRequest(
       ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
       throws StripeException {
-    return ApiResource.stripeResponseGetter.rawRequestStream(method, url, content, options);
+    return ApiResource.stripeResponseGetter.rawRequest(method, url, content, options);
   }
 
   public static <T extends StripeCollectionInterface<?>> T requestCollection(

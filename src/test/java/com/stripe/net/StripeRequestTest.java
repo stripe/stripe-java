@@ -215,10 +215,7 @@ public class StripeRequestTest extends BaseStripeTest {
   public void testBuildContentIsNullWhenRequestIsGet() throws StripeException {
     StripeRequest request =
         StripeRequest.createWithStringContent(
-            ApiResource.RequestMethod.GET,
-            "http://example.com/get",
-            "key=value!",
-            null);
+            ApiResource.RequestMethod.GET, "http://example.com/get", "key=value!", null);
 
     assertNull(request.content());
   }
