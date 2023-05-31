@@ -84,4 +84,20 @@ public abstract class StripeObject implements StripeObjectInterface {
   protected static boolean equals(Object a, Object b) {
     return a == null ? b == null : a.equals(b);
   }
+
+  /**
+   * Deserialize JSON into super class {@code StripeObject} where the underlying concrete class
+   * corresponds to type specified in root-level {@code object} field of the JSON input.
+   *
+   * <p>Note that the expected JSON input is data at the {@code object} value, as a sibling to
+   * {@code previousAttributes}, and not the discriminator field containing a string.
+   *
+   * @return JSON data to be deserialized to super class {@code StripeObject}
+   */
+  static StripeObject deserializeStripeObject(JsonObject eventDataObjectJson) {
+    String type = eventDataObjectJson.getAsJsonObject().get("object").getAsString();
+    Class<? extends StripeObject> cl = EventDataClassLookup.classLookup.get(type);
+    return ApiResource.GSON.fromJson(
+        eventDataObjectJson, cl != null ? cl : StripeRawJsonObject.class);
+  }
 }
