@@ -92,7 +92,7 @@ public class StripeRequest {
       Map<String, Object> params,
       RequestOptions options)
       throws StripeException {
-    this(method, url, buildContent(method, params, calculateApiMode(options)), params, options);
+    this(method, url, buildContent(method, params), params, options);
   }
 
   /**
@@ -110,7 +110,7 @@ public class StripeRequest {
     return new StripeRequest(
         method,
         url,
-        buildContent(method, content != null ? content : "", calculateApiMode(options)),
+        buildContent(method, content, calculateApiMode(options)),
         null,
         options);
   }
@@ -174,8 +174,7 @@ public class StripeRequest {
 
   private static HttpContent buildContent(
       ApiResource.RequestMethod method,
-      Map<String, Object> params,
-      RawRequestOptions.ApiMode apiMode)
+      Map<String, Object> params)
       throws ApiConnectionException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
@@ -183,12 +182,7 @@ public class StripeRequest {
 
     HttpContent httpContent = null;
     try {
-      if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
-        httpContent = JsonEncoder.createHttpContent(params);
-      } else {
-        httpContent = FormEncoder.createHttpContent(params);
-      }
-
+      httpContent = FormEncoder.createHttpContent(params);
     } catch (IOException e) {
       handleIOException(e);
     }
@@ -198,8 +192,8 @@ public class StripeRequest {
   private static HttpContent buildContent(
       ApiResource.RequestMethod method, String content, RawRequestOptions.ApiMode apiMode)
       throws ApiConnectionException {
-    if (method != ApiResource.RequestMethod.POST && !content.equals("")) {
-      throw new IllegalArgumentException("content is not allowed for non-POST requests.");
+    if (method != ApiResource.RequestMethod.POST) {
+      return null;
     }
 
     if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {

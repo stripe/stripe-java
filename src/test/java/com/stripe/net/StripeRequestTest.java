@@ -214,24 +214,24 @@ public class StripeRequestTest extends BaseStripeTest {
   @Test
   public void testBuildContentIsNullWhenRequestIsGet() throws StripeException {
     StripeRequest request =
-        new StripeRequest(
+        StripeRequest.createWithStringContent(
             ApiResource.RequestMethod.GET,
             "http://example.com/get",
-            ImmutableMap.of("key", "value!"),
+            "key=value!",
             null);
 
     assertNull(request.content());
   }
 
   @Test
-  public void testBuildsJsonContentWhenPreviewPost() throws StripeException {
+  public void testBuildsJsonContentWhenPreviewMode() throws StripeException {
     RawRequestOptions options =
         RawRequestOptions.builder().setApiMode(RawRequestOptions.ApiMode.PREVIEW).build();
     StripeRequest request =
-        new StripeRequest(
+        StripeRequest.createWithStringContent(
             ApiResource.RequestMethod.POST,
             "http://example.com/post",
-            ImmutableMap.of("key", "value!"),
+            "{\"key\":\"value!\"}",
             options);
 
     assertInstanceOf(HttpContent.class, request.content());
