@@ -93,6 +93,15 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("phone_number")
   String phoneNumber;
 
+  /**
+   * The cardholder’s preferred locales (languages), ordered by preference. Locales can be {@code
+   * de}, {@code en}, {@code es}, {@code fr}, or {@code it}. This changes the language of the <a
+   * href="https://stripe.com/docs/issuing/3d-secure">3D Secure flow</a> and one-time password
+   * messages sent to the cardholder.
+   */
+  @SerializedName("preferred_locales")
+  List<String> preferredLocales;
+
   @SerializedName("requirements")
   Requirements requirements;
 
