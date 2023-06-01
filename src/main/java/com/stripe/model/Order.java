@@ -1105,10 +1105,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             /**
              * The bank transfer type that this PaymentIntent is allowed to use for funding
              * Permitted values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-             * jp_bank_transfer}, or {@code mx_bank_transfer}.
+             * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
              *
              * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-             * jp_bank_transfer}, or {@code mx_bank_transfer}.
+             * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
              */
             @SerializedName("type")
             String type;
