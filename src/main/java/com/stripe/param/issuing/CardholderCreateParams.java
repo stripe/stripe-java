@@ -70,6 +70,15 @@ public class CardholderCreateParams extends ApiRequestParams {
   String phoneNumber;
 
   /**
+   * The cardholder’s preferred locales (languages), ordered by preference. Locales can be {@code
+   * de}, {@code en}, {@code es}, {@code fr}, or {@code it}. This changes the language of the <a
+   * href="https://stripe.com/docs/issuing/3d-secure">3D Secure flow</a> and one-time password
+   * messages sent to the cardholder.
+   */
+  @SerializedName("preferred_locales")
+  List<CardholderCreateParams.PreferredLocale> preferredLocales;
+
+  /**
    * Rules that control spending across this cardholder's cards. Refer to our <a
    * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
    * details.
@@ -102,6 +111,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String name,
       String phoneNumber,
+      List<CardholderCreateParams.PreferredLocale> preferredLocales,
       SpendingControls spendingControls,
       Status status,
       Type type) {
@@ -114,6 +124,7 @@ public class CardholderCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.name = name;
     this.phoneNumber = phoneNumber;
+    this.preferredLocales = preferredLocales;
     this.spendingControls = spendingControls;
     this.status = status;
     this.type = type;
@@ -142,6 +153,8 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     private String phoneNumber;
 
+    private List<CardholderCreateParams.PreferredLocale> preferredLocales;
+
     private SpendingControls spendingControls;
 
     private Status status;
@@ -160,6 +173,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           this.metadata,
           this.name,
           this.phoneNumber,
+          this.preferredLocales,
           this.spendingControls,
           this.status,
           this.type);
@@ -288,6 +302,32 @@ public class CardholderCreateParams extends ApiRequestParams {
      */
     public Builder setPhoneNumber(String phoneNumber) {
       this.phoneNumber = phoneNumber;
+      return this;
+    }
+
+    /**
+     * Add an element to `preferredLocales` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * CardholderCreateParams#preferredLocales} for the field documentation.
+     */
+    public Builder addPreferredLocale(CardholderCreateParams.PreferredLocale element) {
+      if (this.preferredLocales == null) {
+        this.preferredLocales = new ArrayList<>();
+      }
+      this.preferredLocales.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `preferredLocales` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * CardholderCreateParams#preferredLocales} for the field documentation.
+     */
+    public Builder addAllPreferredLocale(List<CardholderCreateParams.PreferredLocale> elements) {
+      if (this.preferredLocales == null) {
+        this.preferredLocales = new ArrayList<>();
+      }
+      this.preferredLocales.addAll(elements);
       return this;
     }
 
@@ -4330,6 +4370,30 @@ public class CardholderCreateParams extends ApiRequestParams {
       BlockedCategory(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum PreferredLocale implements ApiRequestParams.EnumParam {
+    @SerializedName("de")
+    DE("de"),
+
+    @SerializedName("en")
+    EN("en"),
+
+    @SerializedName("es")
+    ES("es"),
+
+    @SerializedName("fr")
+    FR("fr"),
+
+    @SerializedName("it")
+    IT("it");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PreferredLocale(String value) {
+      this.value = value;
     }
   }
 

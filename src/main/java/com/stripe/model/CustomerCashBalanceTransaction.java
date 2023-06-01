@@ -170,14 +170,17 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
 
       /**
        * The funding method type used to fund the customer balance. Permitted values include: {@code
-       * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
-       * mx_bank_transfer}.
+       * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, {@code
+       * mx_bank_transfer}, or {@code us_bank_transfer}.
        *
-       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
-       * {@code mx_bank_transfer}.
+       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer},
+       * {@code mx_bank_transfer}, or {@code us_bank_transfer}.
        */
       @SerializedName("type")
       String type;
+
+      @SerializedName("us_bank_transfer")
+      UsBankTransfer usBankTransfer;
 
       @Getter
       @Setter
@@ -224,6 +227,23 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
         /** The name of the bank branch of the sender of the funding. */
         @SerializedName("sender_branch")
         String senderBranch;
+
+        /** The full name of the sender, as supplied by the sending bank. */
+        @SerializedName("sender_name")
+        String senderName;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class UsBankTransfer extends StripeObject {
+        /**
+         * The banking network used for this funding.
+         *
+         * <p>One of {@code ach}, {@code domestic_wire_us}, or {@code swift}.
+         */
+        @SerializedName("network")
+        String network;
 
         /** The full name of the sender, as supplied by the sending bank. */
         @SerializedName("sender_name")

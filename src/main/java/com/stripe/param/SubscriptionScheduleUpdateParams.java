@@ -1177,6 +1177,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     @SerializedName("on_behalf_of")
     Object onBehalfOf;
 
+    /** If specified, payment collection for this subscription will be paused. */
+    @SerializedName("pause_collection")
+    PauseCollection pauseCollection;
+
     /**
      * Whether the subscription schedule will create <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
@@ -1246,6 +1250,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Long iterations,
         Map<String, String> metadata,
         Object onBehalfOf,
+        PauseCollection pauseCollection,
         ProrationBehavior prorationBehavior,
         Object startDate,
         TransferData transferData,
@@ -1272,6 +1277,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.iterations = iterations;
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
+      this.pauseCollection = pauseCollection;
       this.prorationBehavior = prorationBehavior;
       this.startDate = startDate;
       this.transferData = transferData;
@@ -1324,6 +1330,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private Object onBehalfOf;
 
+      private PauseCollection pauseCollection;
+
       private ProrationBehavior prorationBehavior;
 
       private Object startDate;
@@ -1360,6 +1368,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.iterations,
             this.metadata,
             this.onBehalfOf,
+            this.pauseCollection,
             this.prorationBehavior,
             this.startDate,
             this.transferData,
@@ -1763,6 +1772,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        */
       public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+
+      /** If specified, payment collection for this subscription will be paused. */
+      public Builder setPauseCollection(
+          SubscriptionScheduleUpdateParams.Phase.PauseCollection pauseCollection) {
+        this.pauseCollection = pauseCollection;
         return this;
       }
 
@@ -4567,6 +4583,102 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           Type(String value) {
             this.value = value;
           }
+        }
+      }
+    }
+
+    @Getter
+    public static class PauseCollection {
+      /**
+       * <strong>Required.</strong> The payment collection behavior for this subscription while
+       * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       */
+      @SerializedName("behavior")
+      Behavior behavior;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private PauseCollection(Behavior behavior, Map<String, Object> extraParams) {
+        this.behavior = behavior;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Behavior behavior;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleUpdateParams.Phase.PauseCollection build() {
+          return new SubscriptionScheduleUpdateParams.Phase.PauseCollection(
+              this.behavior, this.extraParams);
+        }
+
+        /**
+         * <strong>Required.</strong> The payment collection behavior for this subscription while
+         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         */
+        public Builder setBehavior(
+            SubscriptionScheduleUpdateParams.Phase.PauseCollection.Behavior behavior) {
+          this.behavior = behavior;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.PauseCollection#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.PauseCollection#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum Behavior implements ApiRequestParams.EnumParam {
+        @SerializedName("keep_as_draft")
+        KEEP_AS_DRAFT("keep_as_draft"),
+
+        @SerializedName("mark_uncollectible")
+        MARK_UNCOLLECTIBLE("mark_uncollectible"),
+
+        @SerializedName("void")
+        VOID("void");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Behavior(String value) {
+          this.value = value;
         }
       }
     }

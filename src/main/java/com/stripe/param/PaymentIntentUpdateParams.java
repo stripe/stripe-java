@@ -9407,7 +9407,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
          * allowed to use for funding Permitted values include: {@code eu_bank_transfer}, {@code
-         * gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
+         * gb_bank_transfer}, {@code jp_bank_transfer}, {@code mx_bank_transfer}, or {@code
+         * us_bank_transfer}.
          */
         @SerializedName("type")
         Type type;
@@ -9528,7 +9529,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           /**
            * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
            * allowed to use for funding Permitted values include: {@code eu_bank_transfer}, {@code
-           * gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
+           * gb_bank_transfer}, {@code jp_bank_transfer}, {@code mx_bank_transfer}, or {@code
+           * us_bank_transfer}.
            */
           public Builder setType(
               PaymentIntentUpdateParams.PaymentMethodOptions.CustomerBalance.BankTransfer.Type
@@ -9633,6 +9635,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         public enum RequestedAddressType implements ApiRequestParams.EnumParam {
+          @SerializedName("aba")
+          ABA("aba"),
+
           @SerializedName("iban")
           IBAN("iban"),
 
@@ -9644,6 +9649,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
           @SerializedName("spei")
           SPEI("spei"),
+
+          @SerializedName("swift")
+          SWIFT("swift"),
 
           @SerializedName("zengin")
           ZENGIN("zengin");
@@ -9667,7 +9675,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           JP_BANK_TRANSFER("jp_bank_transfer"),
 
           @SerializedName("mx_bank_transfer")
-          MX_BANK_TRANSFER("mx_bank_transfer");
+          MX_BANK_TRANSFER("mx_bank_transfer"),
+
+          @SerializedName("us_bank_transfer")
+          US_BANK_TRANSFER("us_bank_transfer");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

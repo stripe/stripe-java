@@ -39,10 +39,6 @@ public class Settings extends ApiResource {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The deprecated places where your business is located. */
-  @SerializedName("locations")
-  List<Settings.Location> locations;
-
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -155,22 +151,6 @@ public class Settings extends ApiResource {
   public static class HeadOffice extends StripeObject {
     @SerializedName("address")
     Address address;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Location extends StripeObject {
-    @SerializedName("address")
-    Address address;
-
-    /**
-     * The role of this location address.
-     *
-     * <p>Equal to {@code head_office}.
-     */
-    @SerializedName("role")
-    String role;
   }
 
   @Getter

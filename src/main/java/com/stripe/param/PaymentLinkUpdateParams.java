@@ -889,12 +889,20 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("label")
     Label label;
 
+    /** Configuration for {@code type=numeric} fields. */
+    @SerializedName("numeric")
+    Numeric numeric;
+
     /**
      * Whether the customer is required to complete the field before completing the Checkout
      * Session. Defaults to {@code false}.
      */
     @SerializedName("optional")
     Boolean optional;
+
+    /** Configuration for {@code type=text} fields. */
+    @SerializedName("text")
+    Text text;
 
     /** <strong>Required.</strong> The type of the field. */
     @SerializedName("type")
@@ -905,13 +913,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Object key,
         Label label,
+        Numeric numeric,
         Boolean optional,
+        Text text,
         Type type) {
       this.dropdown = dropdown;
       this.extraParams = extraParams;
       this.key = key;
       this.label = label;
+      this.numeric = numeric;
       this.optional = optional;
+      this.text = text;
       this.type = type;
     }
 
@@ -928,14 +940,25 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Label label;
 
+      private Numeric numeric;
+
       private Boolean optional;
+
+      private Text text;
 
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.CustomField build() {
         return new PaymentLinkUpdateParams.CustomField(
-            this.dropdown, this.extraParams, this.key, this.label, this.optional, this.type);
+            this.dropdown,
+            this.extraParams,
+            this.key,
+            this.label,
+            this.numeric,
+            this.optional,
+            this.text,
+            this.type);
       }
 
       /** Configuration for {@code type=dropdown} fields. */
@@ -994,12 +1017,24 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Configuration for {@code type=numeric} fields. */
+      public Builder setNumeric(PaymentLinkUpdateParams.CustomField.Numeric numeric) {
+        this.numeric = numeric;
+        return this;
+      }
+
       /**
        * Whether the customer is required to complete the field before completing the Checkout
        * Session. Defaults to {@code false}.
        */
       public Builder setOptional(Boolean optional) {
         this.optional = optional;
+        return this;
+      }
+
+      /** Configuration for {@code type=text} fields. */
+      public Builder setText(PaymentLinkUpdateParams.CustomField.Text text) {
+        this.text = text;
         return this;
       }
 
@@ -1331,6 +1366,174 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
         Type(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Numeric {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The maximum character length constraint for the customer's input. */
+      @SerializedName("maximum_length")
+      Long maximumLength;
+
+      /** The minimum character length requirement for the customer's input. */
+      @SerializedName("minimum_length")
+      Long minimumLength;
+
+      private Numeric(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+        this.extraParams = extraParams;
+        this.maximumLength = maximumLength;
+        this.minimumLength = minimumLength;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long maximumLength;
+
+        private Long minimumLength;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.CustomField.Numeric build() {
+          return new PaymentLinkUpdateParams.CustomField.Numeric(
+              this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomField.Numeric#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomField.Numeric#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The maximum character length constraint for the customer's input. */
+        public Builder setMaximumLength(Long maximumLength) {
+          this.maximumLength = maximumLength;
+          return this;
+        }
+
+        /** The minimum character length requirement for the customer's input. */
+        public Builder setMinimumLength(Long minimumLength) {
+          this.minimumLength = minimumLength;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Text {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The maximum character length constraint for the customer's input. */
+      @SerializedName("maximum_length")
+      Long maximumLength;
+
+      /** The minimum character length requirement for the customer's input. */
+      @SerializedName("minimum_length")
+      Long minimumLength;
+
+      private Text(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+        this.extraParams = extraParams;
+        this.maximumLength = maximumLength;
+        this.minimumLength = minimumLength;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long maximumLength;
+
+        private Long minimumLength;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.CustomField.Text build() {
+          return new PaymentLinkUpdateParams.CustomField.Text(
+              this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomField.Text#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomField.Text#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The maximum character length constraint for the customer's input. */
+        public Builder setMaximumLength(Long maximumLength) {
+          this.maximumLength = maximumLength;
+          return this;
+        }
+
+        /** The minimum character length requirement for the customer's input. */
+        public Builder setMinimumLength(Long minimumLength) {
+          this.minimumLength = minimumLength;
+          return this;
         }
       }
     }

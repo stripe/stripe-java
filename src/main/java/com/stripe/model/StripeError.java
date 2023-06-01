@@ -209,10 +209,35 @@ public class StripeError extends StripeObject {
   @SerializedName("developer_message")
   String developerMessage;
 
+  @SerializedName("user_message")
+  String userMessage;
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InvalidField {
+    @SerializedName("field")
+    String field;
+
+    @SerializedName("message")
+    String message;
+  }
+
+  @SerializedName("invalid_fields")
+  java.util.List<InvalidField> invalidFields;
+
   public String getMessage() {
-    if (this.message == null) {
-      return this.developerMessage;
+    String fieldMessage = "";
+    if (this.invalidFields != null) {
+      fieldMessage +=
+          "Fields: "
+              + this.invalidFields.stream()
+                  .map((x) -> x.getField() + " (" + x.getMessage() + ")")
+                  .collect(java.util.stream.Collectors.joining(", "));
     }
-    return this.message;
+    if (this.message == null) {
+      return this.developerMessage + fieldMessage;
+    }
+    return this.message + fieldMessage;
   }
 }

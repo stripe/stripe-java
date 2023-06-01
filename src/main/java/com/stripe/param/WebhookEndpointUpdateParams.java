@@ -432,6 +432,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("customer.source.updated")
     CUSTOMER__SOURCE__UPDATED("customer.source.updated"),
 
+    @SerializedName("customer.subscription.collection_paused")
+    CUSTOMER__SUBSCRIPTION__COLLECTION_PAUSED("customer.subscription.collection_paused"),
+
+    @SerializedName("customer.subscription.collection_resumed")
+    CUSTOMER__SUBSCRIPTION__COLLECTION_RESUMED("customer.subscription.collection_resumed"),
+
     @SerializedName("customer.subscription.created")
     CUSTOMER__SUBSCRIPTION__CREATED("customer.subscription.created"),
 
