@@ -113,7 +113,7 @@ public class EventDataObjectDeserializer {
       return true;
     } else {
       try {
-        object = EventDataDeserializer.deserializeStripeObject(rawJsonObject);
+        object = StripeObject.deserializeStripeObject(rawJsonObject);
         return true;
       } catch (JsonParseException e) {
         // intentionally ignore exception to fulfill simply whether deserialization succeeds
@@ -138,7 +138,7 @@ public class EventDataObjectDeserializer {
    */
   public StripeObject deserializeUnsafe() throws EventDataObjectDeserializationException {
     try {
-      return EventDataDeserializer.deserializeStripeObject(rawJsonObject);
+      return StripeObject.deserializeStripeObject(rawJsonObject);
     } catch (JsonParseException e) {
       String errorMessage;
       if (!apiVersionMatch()) {
@@ -180,7 +180,7 @@ public class EventDataObjectDeserializer {
    * @return deserialized {@code StripeObject} from user-supplied compatible JSON.
    */
   public StripeObject deserializeUnsafeWith(CompatibilityTransformer transformer) {
-    return EventDataDeserializer.deserializeStripeObject(
+    return StripeObject.deserializeStripeObject(
         transformer.transform(rawJsonObject.deepCopy(), apiVersion, eventType));
   }
 
