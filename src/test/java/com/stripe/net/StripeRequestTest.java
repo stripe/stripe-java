@@ -1,7 +1,9 @@
 package com.stripe.net;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -207,5 +209,32 @@ public class StripeRequestTest extends BaseStripeTest {
     StripeRequest updatedRequest = request.withAdditionalHeader("New-Header", "bar");
     assertTrue(updatedRequest.headers().firstValue("New-Header").isPresent());
     assertEquals("bar", updatedRequest.headers().firstValue("New-Header").get());
+  }
+
+  @Test
+  public void testBuildContentIsNullWhenRequestIsGet() throws StripeException {
+    StripeRequest request =
+        StripeRequest.createWithStringContent(
+            ApiResource.RequestMethod.GET, "http://example.com/get", "key=value!", null);
+
+    assertNull(request.content());
+  }
+
+  @Test
+  public void testBuildsJsonContentWhenPreviewMode() throws StripeException {
+    RawRequestOptions options =
+        RawRequestOptions.builder().setApiMode(RawRequestOptions.ApiMode.PREVIEW).build();
+    StripeRequest request =
+        StripeRequest.createWithStringContent(
+            ApiResource.RequestMethod.POST,
+            "http://example.com/post",
+            "{\"key\":\"value!\"}",
+            options);
+
+    assertInstanceOf(HttpContent.class, request.content());
+    assertEquals("application/json", request.content().contentType());
+    assertArrayEquals(
+        "{\"key\":\"value!\"}".getBytes(StandardCharsets.UTF_8),
+        request.content().byteArrayContent());
   }
 }

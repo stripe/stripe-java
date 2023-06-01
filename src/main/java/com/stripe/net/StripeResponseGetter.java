@@ -31,4 +31,11 @@ public interface StripeResponseGetter {
     throw new UnsupportedOperationException(
         "requestStream is unimplemented for this StripeResponseGetter");
   }
+
+  default StripeResponse rawRequest(
+      ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
+      throws StripeException {
+    throw new UnsupportedOperationException(
+        "rawRequest is unimplemented for this StripeResponseGetter");
+  }
 }

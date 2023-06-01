@@ -1,5 +1,9 @@
 package com.stripe;
 
+import com.google.gson.JsonObject;
+import com.stripe.exception.*;
+import com.stripe.model.*;
+import com.stripe.net.*;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
@@ -10,6 +14,7 @@ public abstract class Stripe {
   public static final int DEFAULT_READ_TIMEOUT = 80 * 1000;
 
   public static final String API_VERSION = ApiVersion.CURRENT;
+  public static final String PREVIEW_API_VERSION = ApiVersion.PREVIEW_CURRENT;
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
@@ -205,5 +210,58 @@ public abstract class Stripe {
 
   public static Map<String, String> getAppInfo() {
     return appInfo;
+  }
+
+  /**
+   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
+   * API. This method is useful for interacting with endpoints that are not covered yet in
+   * stripe-java.
+   *
+   * @param method the HTTP method
+   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
+   * @param content the body of the request as a string
+   * @return the JSON response as a string
+   */
+  public static StripeResponse rawRequest(
+      final ApiResource.RequestMethod method, final String relativeUrl, final String content)
+      throws StripeException {
+    RawRequestOptions options = RawRequestOptions.builder().build();
+    return rawRequest(method, relativeUrl, content, options);
+  }
+
+  /**
+   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
+   * API. This method is useful for interacting with endpoints that are not covered yet in
+   * stripe-java.
+   *
+   * @param method the HTTP method
+   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
+   * @param content the body of the request as a string
+   * @param options the special modifiers of the request
+   * @return the JSON response as a string
+   */
+  public static StripeResponse rawRequest(
+      final ApiResource.RequestMethod method,
+      final String relativeUrl,
+      final String content,
+      final RawRequestOptions options)
+      throws StripeException {
+    if (method != ApiResource.RequestMethod.POST && content != null && !content.equals("")) {
+      throw new IllegalArgumentException(
+          "content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");
+    }
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, relativeUrl);
+
+    return ApiResource.rawRequest(method, url, content, options);
+  }
+
+  /** Deserializes StripeResponse returned by rawRequest into a similar class. */
+  public static StripeObject deserialize(String rawJson) throws StripeException {
+    if (rawJson == null) {
+      throw new IllegalArgumentException("rawJson cannot be null");
+    }
+
+    return StripeObject.deserializeStripeObject(
+        ApiResource.GSON.fromJson(rawJson, JsonObject.class));
   }
 }

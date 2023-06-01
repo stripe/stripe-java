@@ -9,6 +9,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.exception.oauth.InvalidClientException;
 import com.stripe.model.Balance;
+import com.stripe.net.ApiResource;
 import com.stripe.net.OAuth;
 import java.io.IOException;
 import lombok.Cleanup;
@@ -68,5 +69,28 @@ public class ErrorTest extends BaseStripeTest {
     } finally {
       Stripe.overrideConnectBase(oldBase);
     }
+  }
+
+  @Test
+  public void testErrorWithDeveloperMessage()
+      throws StripeException, IOException, InterruptedException {
+    InvalidRequestException exception = null;
+    @Cleanup MockWebServer server = new MockWebServer();
+    server.enqueue(
+        new MockResponse()
+            .setResponseCode(400)
+            .setBody("{\"error\": {\"developer_message\": \"Unacceptable\"}}"));
+
+    Stripe.overrideApiBase(server.url("").toString());
+
+    try {
+      Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", null);
+    } catch (InvalidRequestException e) {
+      exception = e;
+    }
+
+    assertNotNull(exception);
+    assertEquals(Integer.valueOf(400), exception.getStatusCode());
+    assertEquals("Unacceptable", exception.getMessage());
   }
 }

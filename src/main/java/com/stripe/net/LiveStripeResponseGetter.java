@@ -110,6 +110,33 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
+  public StripeResponse rawRequest(
+      ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
+      throws StripeException {
+    StripeRequest request = StripeRequest.createWithStringContent(method, url, content, options);
+
+    Map<String, String> additionalHeaders = options.getAdditionalHeaders();
+
+    if (additionalHeaders != null) {
+      for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
+        String key = entry.getKey();
+        String value = entry.getValue();
+        request = request.withAdditionalHeader(key, value);
+      }
+    }
+
+    StripeResponse response = httpClient.requestWithRetries(request);
+
+    int responseCode = response.code();
+
+    if (responseCode < 200 || responseCode >= 300) {
+      handleApiError(response);
+    }
+
+    return response;
+  }
+
+  @Override
   public <T extends StripeObjectInterface> T oauthRequest(
       ApiResource.RequestMethod method,
       String url,

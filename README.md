@@ -253,10 +253,34 @@ We highly recommend keeping an eye on when the beta feature you are interested i
 If your beta feature requires a `Stripe-Version` header to be sent, use the `Stripe.stripeVersion` field to set it:
 
 > **Note**
-> The `stripeVersion` can only be set in beta versions of the library. 
+> The `stripeVersion` can only be set in beta versions of the library.
 
 ```java
 Stripe.stripeVersion += "; feature_beta=v3";
+```
+
+### Custom requests
+
+If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `Stripe`.
+
+```java
+// Create a RawRequestOptions object, allowing you to set per-request
+// configuration options like additional headers.
+Map<String, String> stripeVersionHeader = new HashMap<>();
+stripeVersionHeader.put("Stripe-Version", "2022-11-15; feature_beta=v3");
+RawRequestOptions options =
+  RawRequestOptions.builder()
+    .setAdditionalHeaders(stripeVersionHeader)
+    .build();
+
+// Make the request using the Stripe.rawRequest() method.
+final StripeResponse response =
+  Stripe.rawRequest(
+    ApiResource.RequestMethod.POST, "/v1/beta_endpoint", "param=123", options);
+
+// (Optional) response.body() is a string. You can call
+// Stripe.deserialize() to get a StripeObject.
+StripeObject obj = Stripe.deserialize(response.body());
 ```
 
 ## Support
