@@ -1799,8 +1799,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         /**
          * The type of method to specify the {@code bill_from} time.
          *
-         * <p>One of {@code line_starts_at}, {@code now}, {@code quote_acceptance_date}, or {@code
-         * timestamp}.
+         * <p>One of {@code line_starts_at}, {@code now}, {@code pause_collection_start}, {@code
+         * quote_acceptance_date}, or {@code timestamp}.
          */
         @SerializedName("type")
         String type;
@@ -1998,8 +1998,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         /**
          * The type of method to specify the {@code bill_from} time.
          *
-         * <p>One of {@code line_starts_at}, {@code now}, {@code quote_acceptance_date}, or {@code
-         * timestamp}.
+         * <p>One of {@code line_starts_at}, {@code now}, {@code pause_collection_start}, {@code
+         * quote_acceptance_date}, or {@code timestamp}.
          */
         @SerializedName("type")
         String type;

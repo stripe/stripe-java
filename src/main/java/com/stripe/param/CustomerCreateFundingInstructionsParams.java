@@ -398,7 +398,10 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       JP_BANK_TRANSFER("jp_bank_transfer"),
 
       @SerializedName("mx_bank_transfer")
-      MX_BANK_TRANSFER("mx_bank_transfer");
+      MX_BANK_TRANSFER("mx_bank_transfer"),
+
+      @SerializedName("us_bank_transfer")
+      US_BANK_TRANSFER("us_bank_transfer");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

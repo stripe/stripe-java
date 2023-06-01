@@ -996,6 +996,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("country")
     String country;
 
+    /**
+     * A high-level description of the type of cards issued in this range. (For internal use only
+     * and not typically available in standard API requests.)
+     */
+    @SerializedName("description")
+    String description;
+
     /** Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")
     Long expMonth;
@@ -1021,6 +1028,20 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("funding")
     String funding;
+
+    /**
+     * Issuer identification number of the card. (For internal use only and not typically available
+     * in standard API requests.)
+     */
+    @SerializedName("iin")
+    String iin;
+
+    /**
+     * The name of the card's issuing bank. (For internal use only and not typically available in
+     * standard API requests.)
+     */
+    @SerializedName("issuer")
+    String issuer;
 
     /** The last four digits of the card. */
     @SerializedName("last4")
@@ -1174,6 +1195,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("country")
     String country;
 
+    /**
+     * A high-level description of the type of cards issued in this range. (For internal use only
+     * and not typically available in standard API requests.)
+     */
+    @SerializedName("description")
+    String description;
+
     /** Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")
     Long expMonth;
@@ -1199,6 +1227,20 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("funding")
     String funding;
+
+    /**
+     * Issuer identification number of the card. (For internal use only and not typically available
+     * in standard API requests.)
+     */
+    @SerializedName("iin")
+    String iin;
+
+    /**
+     * The name of the card's issuing bank. (For internal use only and not typically available in
+     * standard API requests.)
+     */
+    @SerializedName("issuer")
+    String issuer;
 
     /** The last four digits of the card. */
     @SerializedName("last4")
@@ -1326,6 +1368,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("fingerprint")
     String fingerprint;
+
+    /**
+     * Owner's email. Values are provided by PayPal directly (if supported) at the time of
+     * authorization or settlement. They cannot be set or mutated.
+     */
+    @SerializedName("payer_email")
+    String payerEmail;
 
     /** PayPal account PayerID. This identifier uniquely identifies the PayPal customer. */
     @SerializedName("payer_id")

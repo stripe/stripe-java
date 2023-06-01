@@ -61,6 +61,10 @@ public class QuoteLine extends StripeObject implements HasId {
   @SerializedName("proration_behavior")
   String prorationBehavior;
 
+  /** Details to modify the pause_collection behavior of the subscription schedule. */
+  @SerializedName("set_pause_collection")
+  SetPauseCollection setPauseCollection;
+
   /**
    * Timestamp helper to end the underlying schedule early, based on the acompanying line's start or
    * end date.
@@ -778,6 +782,40 @@ public class QuoteLine extends StripeObject implements HasId {
        */
       @SerializedName("interval_count")
       Long intervalCount;
+    }
+  }
+
+  /** Configures the pause collection settings for a subscription during a phase. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SetPauseCollection extends StripeObject {
+    /** If specified, payment collection for this subscription will be paused. */
+    @SerializedName("set")
+    Set set;
+
+    /**
+     * Defines the type of the pause_collection behavior for the quote line.
+     *
+     * <p>One of {@code remove}, or {@code set}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * The Pause Collection settings specify how to pause collection for a subscription during a
+     * phase by modifying the behavior of the invoices that are generated during the paused period.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Set extends StripeObject {
+      /**
+       * The payment collection behavior for this subscription while paused. One of {@code
+       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       */
+      @SerializedName("behavior")
+      String behavior;
     }
   }
 
