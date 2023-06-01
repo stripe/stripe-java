@@ -22,7 +22,6 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeObjectInterface;
 import com.stripe.model.oauth.OAuthError;
-import com.stripe.net.RawRequestOptions.ApiMode;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;

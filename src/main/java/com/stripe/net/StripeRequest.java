@@ -109,8 +109,8 @@ public class StripeRequest {
       throws StripeException {
     ApiMode apiMode = calculateApiMode(options);
 
-    StripeRequest request = new StripeRequest(
-        method, url, buildContent(method, content, apiMode), null, options);
+    StripeRequest request =
+        new StripeRequest(method, url, buildContent(method, content, apiMode), null, options);
 
     if (apiMode == ApiMode.PREVIEW) {
       request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
