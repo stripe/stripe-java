@@ -890,6 +890,14 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric extends StripeObject {
+      /** The maximum character length constraint for the customer's input. */
+      @SerializedName("maximum_length")
+      Long maximumLength;
+
+      /** The minimum character length requirement for the customer's input. */
+      @SerializedName("minimum_length")
+      Long minimumLength;
+
       /** The value entered by the customer, containing only digits. */
       @SerializedName("value")
       String value;
@@ -899,6 +907,14 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Text extends StripeObject {
+      /** The maximum character length constraint for the customer's input. */
+      @SerializedName("maximum_length")
+      Long maximumLength;
+
+      /** The minimum character length requirement for the customer's input. */
+      @SerializedName("minimum_length")
+      Long minimumLength;
+
       /** The value entered by the customer. */
       @SerializedName("value")
       String value;
@@ -1604,10 +1620,10 @@ public class Session extends ApiResource implements HasId {
         /**
          * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
          * values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-         * jp_bank_transfer}, or {@code mx_bank_transfer}.
+         * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
          *
          * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer},
-         * or {@code mx_bank_transfer}.
+         * {@code mx_bank_transfer}, or {@code us_bank_transfer}.
          */
         @SerializedName("type")
         String type;

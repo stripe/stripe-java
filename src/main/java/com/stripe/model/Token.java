@@ -32,10 +32,6 @@ import lombok.Setter;
  * <a href="https://stripe.com/docs/api#external_accounts">Custom accounts</a>. Note that <a
  * href="https://stripe.com/docs/radar">Radar</a>, our integrated solution for automatic fraud
  * protection, performs best with integrations that use client-side tokenization.
- *
- * <p>Related guide: <a
- * href="https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token">Accept a
- * payment with Charges and Tokens</a>
  */
 @Getter
 @Setter
