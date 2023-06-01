@@ -1,5 +1,16 @@
 # Changelog
 
+## 22.22.0 - 2023-06-01
+* [#1569](https://github.com/stripe/stripe-java/pull/1569) Update generated code
+  * Add support for `numeric` and `text` on `CheckoutSessionCreateParams.custom_fields[]`, `PaymentLinkCreateParams.custom_fields[]`, and `PaymentLinkUpdateParams.custom_fields[]`
+  * Add support for new values `aba` and `swift` on enums `CheckoutSessionCreateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `PaymentIntentConfirmParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `PaymentIntentCreateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, and `PaymentIntentUpdateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`
+  * Add support for new value `us_bank_transfer` on enums `CheckoutSessionCreateParams.payment_method_options.customer_balance.bank_transfer.type`, `CustomerCreateFundingInstructionsParams.bank_transfer.type`, `PaymentIntentConfirmParams.payment_method_options.customer_balance.bank_transfer.type`, `PaymentIntentCreateParams.payment_method_options.customer_balance.bank_transfer.type`, and `PaymentIntentUpdateParams.payment_method_options.customer_balance.bank_transfer.type`
+  * Add support for `maximum_length` and `minimum_length` on `Checkout.Session.custom_fields[].numeric` and `Checkout.Session.custom_fields[].text`
+  * Add support for `preferred_locales` on `Issuing.Cardholder`, `IssuingCardholderCreateParams`, and `IssuingCardholderUpdateParams`
+  * Add support for `description`, `iin`, and `issuer` on `PaymentMethod.card_present` and `PaymentMethod.interac_present`
+  * Add support for `payer_email` on `PaymentMethod.paypal`
+* [#1572](https://github.com/stripe/stripe-java/pull/1572) Move deserializeStripeObject to StripeObject
+
 ## 22.21.0 - 2023-05-25
 * [#1566](https://github.com/stripe/stripe-java/pull/1566) Update generated code
   * Add support for `zip_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
