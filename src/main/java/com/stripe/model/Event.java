@@ -236,7 +236,7 @@ public class Event extends ApiResource implements HasId {
      */
     @Deprecated
     public StripeObject getObject() {
-      return EventDataDeserializer.deserializeStripeObject(object);
+      return StripeObject.deserializeStripeObject(object);
     }
   }
 
