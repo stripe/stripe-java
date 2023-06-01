@@ -1369,6 +1369,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("fingerprint")
     String fingerprint;
 
+    /**
+     * Owner's email. Values are provided by PayPal directly (if supported) at the time of
+     * authorization or settlement. They cannot be set or mutated.
+     */
+    @SerializedName("payer_email")
+    String payerEmail;
+
     /** PayPal account PayerID. This identifier uniquely identifies the PayPal customer. */
     @SerializedName("payer_id")
     String payerId;
