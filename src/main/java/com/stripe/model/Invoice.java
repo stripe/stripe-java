@@ -523,6 +523,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
+  /** Details about the subscription that created this invoice. */
+  @SerializedName("subscription_details")
+  SubscriptionDetails subscriptionDetails;
+
   /**
    * Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
    */
@@ -2160,6 +2164,35 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /** The time that the invoice was voided. */
     @SerializedName("voided_at")
     Long voidedAt;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SubscriptionDetails extends StripeObject {
+    /** If specified, payment collection for this subscription will be paused. */
+    @SerializedName("pause_collection")
+    PauseCollection pauseCollection;
+
+    /**
+     * The Pause Collection settings determine how we will pause collection for this subscription
+     * and for how long the subscription should be paused.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PauseCollection extends StripeObject {
+      /**
+       * The payment collection behavior for this subscription while paused. One of {@code
+       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       */
+      @SerializedName("behavior")
+      String behavior;
+
+      /** The time after which the subscription will resume collecting payments. */
+      @SerializedName("resumes_at")
+      Long resumesAt;
+    }
   }
 
   @Getter

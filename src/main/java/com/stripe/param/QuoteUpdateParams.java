@@ -1269,6 +1269,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
     ProrationBehavior prorationBehavior;
 
     /**
+     * Defines how to pause collection for the underlying subscription throughout the duration of
+     * the amendment.
+     */
+    @SerializedName("set_pause_collection")
+    SetPauseCollection setPauseCollection;
+
+    /**
      * Timestamp helper to end the underlying schedule early, based on the acompanying line's start
      * or end date.
      */
@@ -1291,6 +1298,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Object id,
         ProrationBehavior prorationBehavior,
+        SetPauseCollection setPauseCollection,
         SetScheduleEnd setScheduleEnd,
         StartsAt startsAt,
         TrialSettings trialSettings) {
@@ -1301,6 +1309,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.id = id;
       this.prorationBehavior = prorationBehavior;
+      this.setPauseCollection = setPauseCollection;
       this.setScheduleEnd = setScheduleEnd;
       this.startsAt = startsAt;
       this.trialSettings = trialSettings;
@@ -1325,6 +1334,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       private ProrationBehavior prorationBehavior;
 
+      private SetPauseCollection setPauseCollection;
+
       private SetScheduleEnd setScheduleEnd;
 
       private StartsAt startsAt;
@@ -1341,6 +1352,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
             this.extraParams,
             this.id,
             this.prorationBehavior,
+            this.setPauseCollection,
             this.setScheduleEnd,
             this.startsAt,
             this.trialSettings);
@@ -1444,6 +1456,16 @@ public class QuoteUpdateParams extends ApiRequestParams {
       public Builder setProrationBehavior(
           QuoteUpdateParams.Line.ProrationBehavior prorationBehavior) {
         this.prorationBehavior = prorationBehavior;
+        return this;
+      }
+
+      /**
+       * Defines how to pause collection for the underlying subscription throughout the duration of
+       * the amendment.
+       */
+      public Builder setSetPauseCollection(
+          QuoteUpdateParams.Line.SetPauseCollection setPauseCollection) {
+        this.setPauseCollection = setPauseCollection;
         return this;
       }
 
@@ -4256,6 +4278,202 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
         @SerializedName("upcoming_invoice")
         UPCOMING_INVOICE("upcoming_invoice");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class SetPauseCollection {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Details of the pause_collection behavior to apply to the amendment. */
+      @SerializedName("set")
+      Set set;
+
+      /** <strong>Required.</strong> Determines the type of the pause_collection amendment. */
+      @SerializedName("type")
+      Type type;
+
+      private SetPauseCollection(Map<String, Object> extraParams, Set set, Type type) {
+        this.extraParams = extraParams;
+        this.set = set;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Set set;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public QuoteUpdateParams.Line.SetPauseCollection build() {
+          return new QuoteUpdateParams.Line.SetPauseCollection(
+              this.extraParams, this.set, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteUpdateParams.Line.SetPauseCollection#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteUpdateParams.Line.SetPauseCollection#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Details of the pause_collection behavior to apply to the amendment. */
+        public Builder setSet(QuoteUpdateParams.Line.SetPauseCollection.Set set) {
+          this.set = set;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Determines the type of the pause_collection amendment. */
+        public Builder setType(QuoteUpdateParams.Line.SetPauseCollection.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Set {
+        /**
+         * <strong>Required.</strong> The payment collection behavior for this subscription while
+         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         */
+        @SerializedName("behavior")
+        Behavior behavior;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Set(Behavior behavior, Map<String, Object> extraParams) {
+          this.behavior = behavior;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Behavior behavior;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public QuoteUpdateParams.Line.SetPauseCollection.Set build() {
+            return new QuoteUpdateParams.Line.SetPauseCollection.Set(
+                this.behavior, this.extraParams);
+          }
+
+          /**
+           * <strong>Required.</strong> The payment collection behavior for this subscription while
+           * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+           */
+          public Builder setBehavior(
+              QuoteUpdateParams.Line.SetPauseCollection.Set.Behavior behavior) {
+            this.behavior = behavior;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteUpdateParams.Line.SetPauseCollection.Set#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteUpdateParams.Line.SetPauseCollection.Set#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum Behavior implements ApiRequestParams.EnumParam {
+          @SerializedName("keep_as_draft")
+          KEEP_AS_DRAFT("keep_as_draft"),
+
+          @SerializedName("mark_uncollectible")
+          MARK_UNCOLLECTIBLE("mark_uncollectible"),
+
+          @SerializedName("void")
+          VOID("void");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Behavior(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("remove")
+        REMOVE("remove"),
+
+        @SerializedName("set")
+        SET("set");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -8220,6 +8438,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
           @SerializedName("now")
           NOW("now"),
 
+          @SerializedName("pause_collection_start")
+          PAUSE_COLLECTION_START("pause_collection_start"),
+
           @SerializedName("quote_acceptance_date")
           QUOTE_ACCEPTANCE_DATE("quote_acceptance_date"),
 
@@ -9443,6 +9664,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           @SerializedName("now")
           NOW("now"),
+
+          @SerializedName("pause_collection_start")
+          PAUSE_COLLECTION_START("pause_collection_start"),
 
           @SerializedName("quote_acceptance_date")
           QUOTE_ACCEPTANCE_DATE("quote_acceptance_date"),

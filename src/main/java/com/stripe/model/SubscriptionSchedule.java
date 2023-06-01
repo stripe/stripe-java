@@ -965,6 +965,10 @@ public class SubscriptionSchedule extends ApiResource
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> onBehalfOf;
 
+    /** If specified, payment collection for this subscription will be paused. */
+    @SerializedName("pause_collection")
+    PauseCollection pauseCollection;
+
     /**
      * If the subscription schedule will prorate when transitioning to this phase. Possible values
      * are {@code create_prorations} and {@code none}.
@@ -1487,6 +1491,22 @@ public class SubscriptionSchedule extends ApiResource
         @SerializedName("type")
         String type;
       }
+    }
+
+    /**
+     * The Pause Collection settings specify how to pause collection for a subscription during a
+     * phase by modifying the behavior of the invoices that are generated during the paused period.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PauseCollection extends StripeObject {
+      /**
+       * The payment collection behavior for this subscription while paused. One of {@code
+       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       */
+      @SerializedName("behavior")
+      String behavior;
     }
 
     @Getter
