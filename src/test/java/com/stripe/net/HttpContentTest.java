@@ -8,16 +8,24 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class HttpContentTest extends BaseStripeTest {
   @Test
   public void testBuildFormURLEncodedContentNull() throws IOException {
+    String stringContent = null;
+    Collection<KeyValuePair<String, String>> nameValueCollectionContent = null;
     assertThrows(
         NullPointerException.class,
         () -> {
-          HttpContent.buildFormURLEncodedContent(null);
+          HttpContent.buildFormURLEncodedContent(stringContent);
+        });
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          HttpContent.buildFormURLEncodedContent(nameValueCollectionContent);
         });
   }
 
