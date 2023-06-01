@@ -7213,6 +7213,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the local amusement tax registration. */
+      @SerializedName("local_amusement_tax")
+      LocalAmusementTax localAmusementTax;
+
       /** Options for the local lease tax registration. */
       @SerializedName("local_lease_tax")
       LocalLeaseTax localLeaseTax;
@@ -7229,8 +7233,13 @@ public class RegistrationCreateParams extends ApiRequestParams {
       Type type;
 
       private Us(
-          Map<String, Object> extraParams, LocalLeaseTax localLeaseTax, String state, Type type) {
+          Map<String, Object> extraParams,
+          LocalAmusementTax localAmusementTax,
+          LocalLeaseTax localLeaseTax,
+          String state,
+          Type type) {
         this.extraParams = extraParams;
+        this.localAmusementTax = localAmusementTax;
         this.localLeaseTax = localLeaseTax;
         this.state = state;
         this.type = type;
@@ -7243,6 +7252,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private LocalAmusementTax localAmusementTax;
+
         private LocalLeaseTax localLeaseTax;
 
         private String state;
@@ -7252,7 +7263,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Us build() {
           return new RegistrationCreateParams.CountryOptions.Us(
-              this.extraParams, this.localLeaseTax, this.state, this.type);
+              this.extraParams, this.localAmusementTax, this.localLeaseTax, this.state, this.type);
         }
 
         /**
@@ -7283,6 +7294,13 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the local amusement tax registration. */
+        public Builder setLocalAmusementTax(
+            RegistrationCreateParams.CountryOptions.Us.LocalAmusementTax localAmusementTax) {
+          this.localAmusementTax = localAmusementTax;
+          return this;
+        }
+
         /** Options for the local lease tax registration. */
         public Builder setLocalLeaseTax(
             RegistrationCreateParams.CountryOptions.Us.LocalLeaseTax localLeaseTax) {
@@ -7303,6 +7321,88 @@ public class RegistrationCreateParams extends ApiRequestParams {
         public Builder setType(RegistrationCreateParams.CountryOptions.Us.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      public static class LocalAmusementTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A <a
+         * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+         * representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private LocalAmusementTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.LocalAmusementTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.LocalAmusementTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.LocalAmusementTax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.LocalAmusementTax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A <a
+           * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+           * representing the local jurisdiction.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
         }
       }
 

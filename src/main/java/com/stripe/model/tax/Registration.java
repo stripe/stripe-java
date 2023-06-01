@@ -1261,6 +1261,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Us extends StripeObject {
+      @SerializedName("local_amusement_tax")
+      LocalAmusementTax localAmusementTax;
+
       @SerializedName("local_lease_tax")
       LocalLeaseTax localLeaseTax;
 
@@ -1278,6 +1281,18 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LocalAmusementTax extends StripeObject {
+        /**
+         * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+         * representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
 
       @Getter
       @Setter
