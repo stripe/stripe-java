@@ -126,10 +126,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       }
     }
 
-    if (options.getApiMode() == ApiMode.PREVIEW) {
-      request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
-    }
-
     StripeResponse response = httpClient.requestWithRetries(request);
 
     int responseCode = response.code();

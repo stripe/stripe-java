@@ -107,8 +107,16 @@ public class StripeRequest {
   public static StripeRequest createWithStringContent(
       ApiResource.RequestMethod method, String url, String content, RequestOptions options)
       throws StripeException {
-    return new StripeRequest(
-        method, url, buildContent(method, content, calculateApiMode(options)), null, options);
+    ApiMode apiMode = calculateApiMode(options);
+
+    StripeRequest request = new StripeRequest(
+        method, url, buildContent(method, content, apiMode), null, options);
+
+    if (apiMode == ApiMode.PREVIEW) {
+      request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
+    }
+
+    return request;
   }
 
   private static ApiMode calculateApiMode(RequestOptions options) {
