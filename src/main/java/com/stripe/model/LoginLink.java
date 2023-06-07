@@ -12,6 +12,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Login Links are single-use login link for an Express account to access their Stripe dashboard.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
