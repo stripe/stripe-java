@@ -27,9 +27,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Long applicationFeeAmount;
 
   /**
-   * Controls whether Stripe will perform <a
-   * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic collection</a>
-   * of the invoice.
+   * Controls whether Stripe performs <a
+   * href="https://stripe.com/docs/invoicing/integration/automatic-advancement-collection">automatic
+   * collection</a> of the invoice.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
@@ -368,8 +368,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Controls whether Stripe will perform <a
-     * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic
+     * Controls whether Stripe performs <a
+     * href="https://stripe.com/docs/invoicing/integration/automatic-advancement-collection">automatic
      * collection</a> of the invoice.
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
