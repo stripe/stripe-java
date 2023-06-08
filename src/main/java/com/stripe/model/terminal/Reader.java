@@ -259,12 +259,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Finializes a payment on a Reader. */
+  /** Finalizes a payment on a Reader. */
   public Reader confirmPaymentIntent(Map<String, Object> params) throws StripeException {
     return confirmPaymentIntent(params, (RequestOptions) null);
   }
 
-  /** Finializes a payment on a Reader. */
+  /** Finalizes a payment on a Reader. */
   public Reader confirmPaymentIntent(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -277,13 +277,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Finializes a payment on a Reader. */
+  /** Finalizes a payment on a Reader. */
   public Reader confirmPaymentIntent(ReaderConfirmPaymentIntentParams params)
       throws StripeException {
     return confirmPaymentIntent(params, (RequestOptions) null);
   }
 
-  /** Finializes a payment on a Reader. */
+  /** Finalizes a payment on a Reader. */
   public Reader confirmPaymentIntent(
       ReaderConfirmPaymentIntentParams params, RequestOptions options) throws StripeException {
     String url =
