@@ -12,6 +12,7 @@ final class EventDataClassLookup {
   public static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
 
   static {
+    classLookup.put("accepted_financing", AcceptedFinancing.class);
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
     classLookup.put("account_session", AccountSession.class);
