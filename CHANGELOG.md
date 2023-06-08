@@ -1,5 +1,9 @@
 # Changelog
 
+## 22.23.0 - 2023-06-08
+* [#1577](https://github.com/stripe/stripe-java/pull/1577) Update generated code
+  * Add support for `taxability_reason` on `Tax.Calculation.tax_breakdown[]`
+
 ## 22.22.0 - 2023-06-01
 * [#1569](https://github.com/stripe/stripe-java/pull/1569) Update generated code
   * Add support for `numeric` and `text` on `CheckoutSessionCreateParams.custom_fields[]`, `PaymentLinkCreateParams.custom_fields[]`, and `PaymentLinkUpdateParams.custom_fields[]`
