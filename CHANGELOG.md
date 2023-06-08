@@ -1,5 +1,9 @@
 # Changelog
 
+## 22.24.0-beta.1 - 2023-06-08
+* [#1576](https://github.com/stripe/stripe-java/pull/1576) Update generated code for beta
+  * Updated beta APIs to the latest stable version
+
 ## 22.23.0-beta.1 - 2023-06-01
 * [#1575](https://github.com/stripe/stripe-java/pull/1575) Update generated code for beta
   * Add support for `subscription_details` on `Invoice`
