@@ -760,10 +760,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
    * {@code requires_action} status and suggest additional actions via {@code next_action}. If
-   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
-   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
-   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
-   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
+   * payment fails, the PaymentIntent transitions to the {@code requires_payment_method} status or
+   * the {@code canceled} status if the confirmation limit is reached. If payment succeeds, the
+   * PaymentIntent will transition to the {@code succeeded} status (or {@code requires_capture}, if
+   * {@code capture_method} is set to {@code manual}). If the {@code confirmation_method} is {@code
+   * automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
@@ -785,10 +786,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
    * {@code requires_action} status and suggest additional actions via {@code next_action}. If
-   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
-   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
-   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
-   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
+   * payment fails, the PaymentIntent transitions to the {@code requires_payment_method} status or
+   * the {@code canceled} status if the confirmation limit is reached. If payment succeeds, the
+   * PaymentIntent will transition to the {@code succeeded} status (or {@code requires_capture}, if
+   * {@code capture_method} is set to {@code manual}). If the {@code confirmation_method} is {@code
+   * automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
@@ -810,10 +812,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
    * {@code requires_action} status and suggest additional actions via {@code next_action}. If
-   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
-   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
-   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
-   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
+   * payment fails, the PaymentIntent transitions to the {@code requires_payment_method} status or
+   * the {@code canceled} status if the confirmation limit is reached. If payment succeeds, the
+   * PaymentIntent will transition to the {@code succeeded} status (or {@code requires_capture}, if
+   * {@code capture_method} is set to {@code manual}). If the {@code confirmation_method} is {@code
+   * automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
@@ -835,10 +838,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
    * {@code requires_action} status and suggest additional actions via {@code next_action}. If
-   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
-   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
-   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
-   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
+   * payment fails, the PaymentIntent transitions to the {@code requires_payment_method} status or
+   * the {@code canceled} status if the confirmation limit is reached. If payment succeeds, the
+   * PaymentIntent will transition to the {@code succeeded} status (or {@code requires_capture}, if
+   * {@code capture_method} is set to {@code manual}). If the {@code confirmation_method} is {@code
+   * automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
@@ -867,10 +871,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
    * {@code requires_action} status and suggest additional actions via {@code next_action}. If
-   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
-   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
-   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
-   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
+   * payment fails, the PaymentIntent transitions to the {@code requires_payment_method} status or
+   * the {@code canceled} status if the confirmation limit is reached. If payment succeeds, the
+   * PaymentIntent will transition to the {@code succeeded} status (or {@code requires_capture}, if
+   * {@code capture_method} is set to {@code manual}). If the {@code confirmation_method} is {@code
+   * automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
@@ -892,10 +897,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
    * {@code requires_action} status and suggest additional actions via {@code next_action}. If
-   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
-   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
-   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
-   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
+   * payment fails, the PaymentIntent transitions to the {@code requires_payment_method} status or
+   * the {@code canceled} status if the confirmation limit is reached. If payment succeeds, the
+   * PaymentIntent will transition to the {@code succeeded} status (or {@code requires_capture}, if
+   * {@code capture_method} is set to {@code manual}). If the {@code confirmation_method} is {@code
+   * automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
