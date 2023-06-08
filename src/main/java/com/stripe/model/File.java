@@ -6,6 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.FileCreateParams;
 import com.stripe.param.FileListParams;
 import com.stripe.param.FileRetrieveParams;
 import java.util.Map;
@@ -111,6 +112,32 @@ public class File extends ApiResource implements HasId {
    * multipart/form-data}.
    */
   public static File create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, File.class, options);
+  }
+
+  /**
+   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
+   * The request should contain the file you would like to upload, as well as the parameters for
+   * creating a file.
+   *
+   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * multipart/form-data}.
+   */
+  public static File create(FileCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
+   * The request should contain the file you would like to upload, as well as the parameters for
+   * creating a file.
+   *
+   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * multipart/form-data}.
+   */
+  public static File create(FileCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, File.class, options);
