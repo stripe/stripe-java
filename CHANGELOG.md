@@ -1,5 +1,8 @@
 # Changelog
 
+## 22.23.1 - 2023-06-09
+* [#1582](https://github.com/stripe/stripe-java/pull/1582) Bugfix: fix `Customer.retrievePaymentMethod` URL interpolation
+
 ## 22.23.0 - 2023-06-08
 * [#1577](https://github.com/stripe/stripe-java/pull/1577) Update generated code
   * Add support for `taxability_reason` on `Tax.Calculation.tax_breakdown[]`
