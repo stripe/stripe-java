@@ -32,7 +32,7 @@ public class FileCreateParams extends ApiRequestParams {
    * 2388 (which defines file transfers for the {@code multipart/form-data} protocol).
    */
   @SerializedName("file")
-  Object file;
+  transient Object file;
 
   /**
    * Optional parameters to automatically create a <a
