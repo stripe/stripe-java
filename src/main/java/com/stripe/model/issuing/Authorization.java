@@ -217,7 +217,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow. You can also respond directly to the webhook request to approve an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization approve() throws StripeException {
     return approve((Map<String, Object>) null, (RequestOptions) null);
@@ -229,7 +229,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow. You can also respond directly to the webhook request to approve an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization approve(RequestOptions options) throws StripeException {
     return approve((Map<String, Object>) null, options);
@@ -241,7 +241,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow. You can also respond directly to the webhook request to approve an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization approve(Map<String, Object> params) throws StripeException {
     return approve(params, (RequestOptions) null);
@@ -253,7 +253,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow. You can also respond directly to the webhook request to approve an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization approve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -273,7 +273,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow. You can also respond directly to the webhook request to approve an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization approve(AuthorizationApproveParams params) throws StripeException {
     return approve(params, (RequestOptions) null);
@@ -285,7 +285,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow. You can also respond directly to the webhook request to approve an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
@@ -305,7 +305,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
    * authorization</a> flow. You can also respond directly to the webhook request to decline an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization decline() throws StripeException {
     return decline((Map<String, Object>) null, (RequestOptions) null);
@@ -317,7 +317,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
    * authorization</a> flow. You can also respond directly to the webhook request to decline an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization decline(RequestOptions options) throws StripeException {
     return decline((Map<String, Object>) null, options);
@@ -329,7 +329,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
    * authorization</a> flow. You can also respond directly to the webhook request to decline an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization decline(Map<String, Object> params) throws StripeException {
     return decline(params, (RequestOptions) null);
@@ -341,7 +341,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
    * authorization</a> flow. You can also respond directly to the webhook request to decline an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization decline(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -361,7 +361,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
    * authorization</a> flow. You can also respond directly to the webhook request to decline an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization decline(AuthorizationDeclineParams params) throws StripeException {
     return decline(params, (RequestOptions) null);
@@ -373,7 +373,7 @@ public class Authorization extends ApiResource
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
    * authorization</a> flow. You can also respond directly to the webhook request to decline an
    * authorization (preferred). More details can be found <a
-   * href="https://site-admin.stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
    */
   public Authorization decline(AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
