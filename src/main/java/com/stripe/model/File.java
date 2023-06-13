@@ -113,7 +113,7 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
+    String url = ApiResource.fullUrl(Stripe.getUploadBase(), options, "/v1/files");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, File.class, options);
   }
 
@@ -139,7 +139,7 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(FileCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
+    String url = ApiResource.fullUrl(Stripe.getUploadBase(), options, "/v1/files");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, File.class, options);
   }
 
