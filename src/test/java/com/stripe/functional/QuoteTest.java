@@ -144,7 +144,8 @@ public class QuoteTest extends BaseStripeTest {
   @Test
   public void testQuoteList() throws StripeException {
     Quote quote = Quote.retrieve("q_123");
-    InvoiceLineItemCollection lines = quote.previewInvoiceLines("inv_123", null, null);
+    InvoiceLineItemCollection lines =
+        quote.previewInvoiceLines("inv_123", (Map<String, Object>) null, null);
     assertNotNull(lines);
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/quotes/q_123/preview_invoices/inv_123/lines", null);
