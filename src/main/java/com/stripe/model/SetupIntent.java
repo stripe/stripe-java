@@ -436,7 +436,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    *
    * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
    * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status.
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
    */
   public SetupIntent confirm() throws StripeException {
     return confirm((Map<String, Object>) null, (RequestOptions) null);
@@ -452,7 +453,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    *
    * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
    * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status.
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
    */
   public SetupIntent confirm(RequestOptions options) throws StripeException {
     return confirm((Map<String, Object>) null, options);
@@ -468,7 +470,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    *
    * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
    * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status.
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
    */
   public SetupIntent confirm(Map<String, Object> params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -484,7 +487,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    *
    * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
    * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status.
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
    */
   public SetupIntent confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -507,7 +511,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    *
    * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
    * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status.
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
    */
   public SetupIntent confirm(SetupIntentConfirmParams params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -523,7 +528,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    *
    * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
    * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status.
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
    */
   public SetupIntent confirm(SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {

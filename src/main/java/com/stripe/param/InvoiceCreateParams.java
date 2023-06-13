@@ -27,10 +27,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Long applicationFeeAmount;
 
   /**
-   * Controls whether Stripe will perform <a
-   * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic collection</a>
-   * of the invoice. When {@code false}, the invoice's state will not automatically advance without
-   * an explicit action.
+   * Controls whether Stripe performs <a
+   * href="https://stripe.com/docs/invoicing/integration/automatic-advancement-collection">automatic
+   * collection</a> of the invoice. If {@code false}, the invoice's state doesn't automatically
+   * advance without an explicit action.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
@@ -423,9 +423,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Controls whether Stripe will perform <a
-     * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic
-     * collection</a> of the invoice. When {@code false}, the invoice's state will not automatically
+     * Controls whether Stripe performs <a
+     * href="https://stripe.com/docs/invoicing/integration/automatic-advancement-collection">automatic
+     * collection</a> of the invoice. If {@code false}, the invoice's state doesn't automatically
      * advance without an explicit action.
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
