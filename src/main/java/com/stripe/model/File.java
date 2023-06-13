@@ -1,3 +1,4 @@
+// File generated from our OpenAPI spec
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -7,11 +8,21 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.FileCreateParams;
 import com.stripe.param.FileListParams;
+import com.stripe.param.FileRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This is an object representing a file hosted on Stripe's servers. The file may have been uploaded
+ * by yourself using the <a href="https://stripe.com/docs/api#create_file">create file</a> request
+ * (for example, when uploading dispute evidence) or it may have been created by Stripe (for
+ * example, the results of a <a href="https://stripe.com/docs/api#scheduled_queries">Sigma scheduled
+ * query</a>).
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/file-upload">File upload guide</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -33,18 +44,31 @@ public class File extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  /**
+   * A list of <a href="https://stripe.com/docs/api#file_links">file links</a> that point at this
+   * file.
+   */
   @SerializedName("links")
   FileLinkCollection links;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to {@code file}.
+   */
   @SerializedName("object")
   String object;
 
   /**
-   * The purpose of the file. Possible values are {@code business_icon}, {@code business_logo},
-   * {@code customer_signature}, {@code dispute_evidence}, {@code finance_report_run}, {@code
-   * identity_document}, {@code pci_document}, {@code sigma_scheduled_query}, or {@code
-   * tax_document_user_upload}.
+   * The <a href="https://stripe.com/docs/file-upload#uploading-a-file">purpose</a> of the uploaded
+   * file.
+   *
+   * <p>One of {@code account_requirement}, {@code additional_verification}, {@code business_icon},
+   * {@code business_logo}, {@code customer_signature}, {@code dispute_evidence}, {@code
+   * document_provider_identity_document}, {@code finance_report_run}, {@code identity_document},
+   * {@code identity_document_downloadable}, {@code pci_document}, {@code selfie}, {@code
+   * sigma_scheduled_query}, {@code tax_document_user_upload}, or {@code
+   * terminal_reader_splashscreen}.
    */
   @SerializedName("purpose")
   String purpose;
@@ -71,6 +95,9 @@ public class File extends ApiResource implements HasId {
    * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
    * The request should contain the file you would like to upload, as well as the parameters for
    * creating a file.
+   *
+   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * multipart/form-data}.
    */
   public static File create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -80,6 +107,23 @@ public class File extends ApiResource implements HasId {
    * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
    * The request should contain the file you would like to upload, as well as the parameters for
    * creating a file.
+   *
+   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * multipart/form-data}.
+   */
+  public static File create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, File.class, options);
+  }
+
+  /**
+   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
+   * The request should contain the file you would like to upload, as well as the parameters for
+   * creating a file.
+   *
+   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * multipart/form-data}.
    */
   public static File create(FileCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -89,26 +133,14 @@ public class File extends ApiResource implements HasId {
    * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
    * The request should contain the file you would like to upload, as well as the parameters for
    * creating a file.
+   *
+   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * multipart/form-data}.
    */
   public static File create(FileCreateParams params, RequestOptions options)
       throws StripeException {
-    checkNullTypedParams(ApiResource.fullUrl(Stripe.getUploadBase(), options, "/v1/files"), params);
-    return create(params.toMap(), options);
-  }
-
-  /**
-   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
-   * The request should contain the file you would like to upload, as well as the parameters for
-   * creating a file.
-   */
-  public static File create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    return request(
-        RequestMethod.POST,
-        ApiResource.fullUrl(Stripe.getUploadBase(), options, "/v1/files"),
-        params,
-        File.class,
-        options);
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, File.class, options);
   }
 
   /**
@@ -116,7 +148,7 @@ public class File extends ApiResource implements HasId {
    * creation date, with the most recently created files appearing first.
    */
   public static FileCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, null);
+    return list(params, (RequestOptions) null);
   }
 
   /**
@@ -125,8 +157,9 @@ public class File extends ApiResource implements HasId {
    */
   public static FileCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return requestCollection(
-        String.format("%s/v1/files", Stripe.getApiBase()), params, FileCollection.class, options);
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FileCollection.class, options);
   }
 
   /**
@@ -143,37 +176,56 @@ public class File extends ApiResource implements HasId {
    */
   public static FileCollection list(FileListParams params, RequestOptions options)
       throws StripeException {
-    return requestCollection(
-        String.format("%s/v1/files", Stripe.getApiBase()), params, FileCollection.class, options);
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/files");
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FileCollection.class, options);
   }
 
   /**
    * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
-   * Stripe will return the corresponding file object.
+   * Stripe will return the corresponding file object. To access file contents, see the <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
    */
-  public static File retrieve(String id) throws StripeException {
-    return retrieve(id, (RequestOptions) null);
+  public static File retrieve(String file) throws StripeException {
+    return retrieve(file, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
-   * Stripe will return the corresponding file object.
+   * Stripe will return the corresponding file object. To access file contents, see the <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
    */
-  public static File retrieve(String id, RequestOptions options) throws StripeException {
-    return retrieve(id, null, options);
+  public static File retrieve(String file, RequestOptions options) throws StripeException {
+    return retrieve(file, (Map<String, Object>) null, options);
   }
 
   /**
    * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
-   * Stripe will return the corresponding file object.
+   * Stripe will return the corresponding file object. To access file contents, see the <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
    */
-  public static File retrieve(String id, Map<String, Object> params, RequestOptions options)
+  public static File retrieve(String file, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return request(
-        RequestMethod.GET,
-        String.format("%s/v1/files/%s", Stripe.getApiBase(), id),
-        params,
-        File.class,
-        options);
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/files/%s", ApiResource.urlEncodeId(file)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, File.class, options);
+  }
+
+  /**
+   * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
+   * Stripe will return the corresponding file object. To access file contents, see the <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
+   */
+  public static File retrieve(String file, FileRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/files/%s", ApiResource.urlEncodeId(file)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, File.class, options);
   }
 }
