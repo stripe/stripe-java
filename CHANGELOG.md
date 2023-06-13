@@ -4,6 +4,13 @@
 * [#1576](https://github.com/stripe/stripe-java/pull/1576) Update generated code for beta
   * Updated beta APIs to the latest stable version
 
+## 22.23.1 - 2023-06-09
+* [#1582](https://github.com/stripe/stripe-java/pull/1582) Bugfix: fix `Customer.retrievePaymentMethod` URL interpolation
+
+## 22.23.0 - 2023-06-08
+* [#1577](https://github.com/stripe/stripe-java/pull/1577) Update generated code
+  * Add support for `taxability_reason` on `Tax.Calculation.tax_breakdown[]`
+
 ## 22.23.0-beta.1 - 2023-06-01
 * [#1575](https://github.com/stripe/stripe-java/pull/1575) Update generated code for beta
   * Add support for `subscription_details` on `Invoice`

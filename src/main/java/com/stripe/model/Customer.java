@@ -572,21 +572,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
-      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
-            options,
-            String.format(
-                "/v1/customers/%s/payment_methods/%s",
-                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
-  }
-
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(
-      String customer, CustomerRetrievePaymentMethodParams params, RequestOptions options)
+      String paymentMethod, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -594,7 +580,22 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             String.format(
                 "/v1/customers/%s/payment_methods/%s",
-                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
+                ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(paymentMethod)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+  }
+
+  /** Retrieves a PaymentMethod object for a given Customer. */
+  public PaymentMethod retrievePaymentMethod(
+      String paymentMethod, CustomerRetrievePaymentMethodParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/customers/%s/payment_methods/%s",
+                ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(paymentMethod)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
   }
