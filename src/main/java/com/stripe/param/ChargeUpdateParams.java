@@ -78,7 +78,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
   /**
    * A string that identifies this transaction as part of a group. {@code transfer_group} may only
    * be provided if it has not been set. See the <a
-   * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Connect
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")
@@ -334,7 +334,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     /**
      * A string that identifies this transaction as part of a group. {@code transfer_group} may only
      * be provided if it has not been set. See the <a
-     * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Connect
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
      * documentation</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {
@@ -345,7 +345,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     /**
      * A string that identifies this transaction as part of a group. {@code transfer_group} may only
      * be provided if it has not been set. See the <a
-     * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Connect
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
      * documentation</a> for details.
      */
     public Builder setTransferGroup(EmptyParam transferGroup) {

@@ -25,8 +25,9 @@ import lombok.Setter;
  * endpoints. For more information, read about the <a
  * href="https://stripe.com/docs/transfer-payout-split">transfer/payout split</a>.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/connect/charges-transfers">Creating separate
- * charges and transfers</a>
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/connect/separate-charges-and-transfers">Creating separate charges
+ * and transfers</a>
  */
 @Getter
 @Setter
@@ -138,7 +139,7 @@ public class Transfer extends ApiResource
 
   /**
    * A string that identifies this transaction as part of a group. See the <a
-   * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Connect
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")

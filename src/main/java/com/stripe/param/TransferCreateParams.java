@@ -28,8 +28,8 @@ public class TransferCreateParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The ID of a connected Stripe account. <a
-   * href="https://stripe.com/docs/connect/charges-transfers">See the Connect documentation</a> for
-   * details.
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers">See the Connect
+   * documentation</a> for details.
    */
   @SerializedName("destination")
   String destination;
@@ -60,8 +60,8 @@ public class TransferCreateParams extends ApiRequestParams {
    * You can use this parameter to transfer funds from a charge before they are added to your
    * available balance. A pending balance will transfer immediately but the funds will not become
    * available until the original charge becomes available. <a
-   * href="https://stripe.com/docs/connect/charges-transfers#transfer-availability">See the Connect
-   * documentation</a> for details.
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-availability">See
+   * the Connect documentation</a> for details.
    */
   @SerializedName("source_transaction")
   String sourceTransaction;
@@ -75,7 +75,7 @@ public class TransferCreateParams extends ApiRequestParams {
 
   /**
    * A string that identifies this transaction as part of a group. See the <a
-   * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Connect
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")
@@ -167,8 +167,8 @@ public class TransferCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The ID of a connected Stripe account. <a
-     * href="https://stripe.com/docs/connect/charges-transfers">See the Connect documentation</a>
-     * for details.
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">See the Connect
+     * documentation</a> for details.
      */
     public Builder setDestination(String destination) {
       this.destination = destination;
@@ -257,8 +257,8 @@ public class TransferCreateParams extends ApiRequestParams {
      * You can use this parameter to transfer funds from a charge before they are added to your
      * available balance. A pending balance will transfer immediately but the funds will not become
      * available until the original charge becomes available. <a
-     * href="https://stripe.com/docs/connect/charges-transfers#transfer-availability">See the
-     * Connect documentation</a> for details.
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-availability">See
+     * the Connect documentation</a> for details.
      */
     public Builder setSourceTransaction(String sourceTransaction) {
       this.sourceTransaction = sourceTransaction;
@@ -276,7 +276,7 @@ public class TransferCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies this transaction as part of a group. See the <a
-     * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Connect
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
      * documentation</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {
