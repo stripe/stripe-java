@@ -227,6 +227,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  @SerializedName("payment_details")
+  PaymentDetails paymentDetails;
+
   /** ID of the payment method used in this PaymentIntent. */
   @SerializedName("payment_method")
   @Getter(lombok.AccessLevel.NONE)
@@ -2109,6 +2112,88 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class PaymentDetails extends StripeObject {
+    @SerializedName("car_rental")
+    CarRental carRental;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CarRental extends StripeObject {
+      /** The booking number associated with the car rental. */
+      @SerializedName("booking_number")
+      String bookingNumber;
+
+      /** Class code of the car. */
+      @SerializedName("car_class_code")
+      String carClassCode;
+
+      /** Make of the car. */
+      @SerializedName("car_make")
+      String carMake;
+
+      /** Model of the car. */
+      @SerializedName("car_model")
+      String carModel;
+
+      /** The name of the rental car company. */
+      @SerializedName("company")
+      String company;
+
+      /** The customer service phone number of the car rental company. */
+      @SerializedName("customer_service_phone_number")
+      String customerServicePhoneNumber;
+
+      /** Number of days the car is being rented. */
+      @SerializedName("days_rented")
+      Long daysRented;
+
+      /** List of additional charges being billed. */
+      @SerializedName("extra_charges")
+      List<String> extraCharges;
+
+      /** Indicates if the customer did not keep nor cancel their booking. */
+      @SerializedName("no_show")
+      Boolean noShow;
+
+      @SerializedName("pickup_address")
+      com.stripe.model.Address pickupAddress;
+
+      /** Car pick-up time. Measured in seconds since the Unix epoch. */
+      @SerializedName("pickup_at")
+      Long pickupAt;
+
+      /** Rental rate. */
+      @SerializedName("rate_amount")
+      Long rateAmount;
+
+      /**
+       * The frequency at which the rate amount is applied. One of {@code day}, {@code week} or
+       * {@code month}
+       */
+      @SerializedName("rate_interval")
+      String rateInterval;
+
+      /** The full name of the person or entity renting the car. */
+      @SerializedName("renter_name")
+      String renterName;
+
+      @SerializedName("return_address")
+      com.stripe.model.Address returnAddress;
+
+      /** Car return time. Measured in seconds since the Unix epoch. */
+      @SerializedName("return_at")
+      Long returnAt;
+
+      /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
+      @SerializedName("tax_exempt")
+      Boolean taxExempt;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
@@ -2590,6 +2675,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("statement_descriptor_suffix_kanji")
       String statementDescriptorSuffixKanji;
 
+      @SerializedName("statement_details")
+      StatementDetails statementDetails;
+
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2713,6 +2801,50 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         /** Specifies the type of mandates supported. Possible values are {@code india}. */
         @SerializedName("supported_types")
         List<String> supportedTypes;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StatementDetails extends StripeObject {
+        @SerializedName("address")
+        com.stripe.model.PaymentIntent.PaymentMethodOptions.Card.StatementDetails.Address address;
+
+        /** Phone number. */
+        @SerializedName("phone")
+        String phone;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Address extends StripeObject {
+          /** City, district, suburb, town, or village. */
+          @SerializedName("city")
+          String city;
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          @SerializedName("country")
+          String country;
+
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          @SerializedName("line1")
+          String line1;
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          @SerializedName("line2")
+          String line2;
+
+          /** ZIP or postal code. */
+          @SerializedName("postal_code")
+          String postalCode;
+
+          /** State, county, province, or region. */
+          @SerializedName("state")
+          String state;
+        }
       }
     }
 
