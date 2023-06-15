@@ -96,8 +96,8 @@ public class ChargeCreateParams extends ApiRequestParams {
   /**
    * The Stripe account ID for which these funds are intended. Automatically set if you use the
    * {@code destination} parameter. For details, see <a
-   * href="https://stripe.com/docs/connect/charges-transfers#on-behalf-of">Creating Separate Charges
-   * and Transfers</a>.
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#on-behalf-of">Creating
+   * Separate Charges and Transfers</a>.
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
@@ -167,7 +167,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
   /**
    * A string that identifies this transaction as part of a group. For details, see <a
-   * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Grouping
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Grouping
    * transactions</a>.
    */
   @SerializedName("transfer_group")
@@ -467,8 +467,8 @@ public class ChargeCreateParams extends ApiRequestParams {
     /**
      * The Stripe account ID for which these funds are intended. Automatically set if you use the
      * {@code destination} parameter. For details, see <a
-     * href="https://stripe.com/docs/connect/charges-transfers#on-behalf-of">Creating Separate
-     * Charges and Transfers</a>.
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#on-behalf-of">Creating
+     * Separate Charges and Transfers</a>.
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
@@ -555,7 +555,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies this transaction as part of a group. For details, see <a
-     * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Grouping
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Grouping
      * transactions</a>.
      */
     public Builder setTransferGroup(String transferGroup) {

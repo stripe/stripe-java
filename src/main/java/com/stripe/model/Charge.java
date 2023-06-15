@@ -216,8 +216,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * The account (if any) the charge was made on behalf of without triggering an automatic transfer.
-   * See the <a href="https://stripe.com/docs/connect/charges-transfers">Connect documentation</a>
-   * for details.
+   * See the <a href="https://stripe.com/docs/connect/separate-charges-and-transfers">Connect
+   * documentation</a> for details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -357,7 +357,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * A string that identifies this transaction as part of a group. See the <a
-   * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Connect
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")
