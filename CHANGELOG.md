@@ -1,5 +1,12 @@
 # Changelog
 
+## 22.24.0-beta.2 - 2023-06-15
+* [#1587](https://github.com/stripe/stripe-java/pull/1587) Update generated code for beta
+  * Add support for `payment_details` on `ChargeCaptureParams`, `ChargeUpdateParams`, `PaymentIntentCaptureParams`, `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, and `PaymentIntent`
+  * Add support for `statement_details` on `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, and `PaymentIntentUpdateParams.payment_method_options.card`
+* [#1580](https://github.com/stripe/stripe-java/pull/1580) Update generated code for beta
+
+
 ## 22.24.0-beta.1 - 2023-06-08
 * [#1576](https://github.com/stripe/stripe-java/pull/1576) Update generated code for beta
   * Updated beta APIs to the latest stable version
