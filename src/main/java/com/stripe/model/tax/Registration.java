@@ -1277,7 +1277,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in the US.
        *
-       * <p>Equal to {@code state_sales_tax}.
+       * <p>One of {@code local_lease_tax}, or {@code state_sales_tax}.
        */
       @SerializedName("type")
       String type;
