@@ -1,4 +1,3 @@
-// File generated from our OpenAPI spec
 package com.stripe.functional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,8 +18,6 @@ import org.junit.jupiter.api.Test;
 
 class DeserializationTest extends BaseStripeTest {
   public static class MyResourceCollection extends StripeCollection<MyResource> {}
-
-  public static class MyResourceSearchResult extends StripeSearchResult<MyResource> {}
 
   @Getter
   @Setter
