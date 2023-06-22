@@ -1,5 +1,17 @@
 # Changelog
 
+## 22.24.0 - 2023-06-22
+* [#1591](https://github.com/stripe/stripe-java/pull/1591) Update generated code
+  * Add support for `on_behalf_of` on `Mandate`
+* [#1593](https://github.com/stripe/stripe-java/pull/1593) Add deserialization test
+* [#1588](https://github.com/stripe/stripe-java/pull/1588) Update generated code
+  * Release specs are identical.
+* [#1585](https://github.com/stripe/stripe-java/pull/1585) Update generated code
+  * Release specs are identical.
+* [#1579](https://github.com/stripe/stripe-java/pull/1579) Update generated code
+  * Change type of `FileCreateParams.file` from `string` to `file`
+* [#1578](https://github.com/stripe/stripe-java/pull/1578) Generate file classes
+
 ## 22.23.1 - 2023-06-09
 * [#1582](https://github.com/stripe/stripe-java/pull/1582) Bugfix: fix `Customer.retrievePaymentMethod` URL interpolation
 
