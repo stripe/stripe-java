@@ -46,6 +46,10 @@ public class Mandate extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The account (if any) for which the mandate is intended. */
+  @SerializedName("on_behalf_of")
+  String onBehalfOf;
+
   /** ID of the payment method associated with this mandate. */
   @SerializedName("payment_method")
   @Getter(lombok.AccessLevel.NONE)
