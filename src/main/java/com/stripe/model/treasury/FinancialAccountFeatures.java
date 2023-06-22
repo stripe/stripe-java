@@ -170,11 +170,11 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class FinancialAddresses extends StripeObject {
-    /** Toggle settings for enabling/disabling a feature. */
+    /** Toggle settings for enabling/disabling the ABA address feature. */
     @SerializedName("aba")
     Aba aba;
 
-    /** Toggle settings for enabling/disabling a feature. */
+    /** Toggle settings for enabling/disabling the ABA address feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
