@@ -1,5 +1,11 @@
 # Changelog
 
+## 22.25.0-beta.1 - 2023-06-22
+* [#1590](https://github.com/stripe/stripe-java/pull/1590) Update generated code for beta
+  * Add support for new resource `CustomerSession`
+  * Add support for `create` method on resource `CustomerSession`
+  * Change type of `Tax.Registration.country_options.us.type` and `TaxRegistrationCreateParams.country_options.us.type` from `literal('state_sales_tax')` to `enum('local_lease_tax'|'state_sales_tax')`
+
 ## 22.24.0 - 2023-06-22
 * [#1591](https://github.com/stripe/stripe-java/pull/1591) Update generated code
   * Add support for `on_behalf_of` on `Mandate`
