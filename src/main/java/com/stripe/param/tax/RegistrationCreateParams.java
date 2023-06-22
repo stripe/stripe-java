@@ -7491,6 +7491,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("local_lease_tax")
+        LOCAL_LEASE_TAX("local_lease_tax"),
+
         @SerializedName("state_sales_tax")
         STATE_SALES_TAX("state_sales_tax");
 

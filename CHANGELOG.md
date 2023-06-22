@@ -1,11 +1,22 @@
 # Changelog
 
+## 22.24.0 - 2023-06-22
+* [#1591](https://github.com/stripe/stripe-java/pull/1591) Update generated code
+  * Add support for `on_behalf_of` on `Mandate`
+* [#1593](https://github.com/stripe/stripe-java/pull/1593) Add deserialization test
+* [#1588](https://github.com/stripe/stripe-java/pull/1588) Update generated code
+  * Release specs are identical.
+* [#1585](https://github.com/stripe/stripe-java/pull/1585) Update generated code
+  * Release specs are identical.
+* [#1579](https://github.com/stripe/stripe-java/pull/1579) Update generated code
+  * Change type of `FileCreateParams.file` from `string` to `file`
+* [#1578](https://github.com/stripe/stripe-java/pull/1578) Generate file classes
+
 ## 22.24.0-beta.2 - 2023-06-15
 * [#1587](https://github.com/stripe/stripe-java/pull/1587) Update generated code for beta
   * Add support for `payment_details` on `ChargeCaptureParams`, `ChargeUpdateParams`, `PaymentIntentCaptureParams`, `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, and `PaymentIntent`
   * Add support for `statement_details` on `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, and `PaymentIntentUpdateParams.payment_method_options.card`
 * [#1580](https://github.com/stripe/stripe-java/pull/1580) Update generated code for beta
-
 
 ## 22.24.0-beta.1 - 2023-06-08
 * [#1576](https://github.com/stripe/stripe-java/pull/1576) Update generated code for beta

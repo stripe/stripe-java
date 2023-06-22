@@ -49,8 +49,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   String originalTransaction;
 
   /**
-   * <strong>Required.</strong> A custom identifier for this reversal, such as
-   * 'myOrder_123-refund_1', which must be unique across all transactions. The reference helps
+   * <strong>Required.</strong> A custom identifier for this reversal, such as {@code
+   * myOrder_123-refund_1}, which must be unique across all transactions. The reference helps
    * identify this reversal transaction in exported <a
    * href="https://stripe.com/docs/tax/reports">tax reports</a>.
    */
@@ -234,8 +234,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A custom identifier for this reversal, such as
-     * 'myOrder_123-refund_1', which must be unique across all transactions. The reference helps
+     * <strong>Required.</strong> A custom identifier for this reversal, such as {@code
+     * myOrder_123-refund_1}, which must be unique across all transactions. The reference helps
      * identify this reversal transaction in exported <a
      * href="https://stripe.com/docs/tax/reports">tax reports</a>.
      */
