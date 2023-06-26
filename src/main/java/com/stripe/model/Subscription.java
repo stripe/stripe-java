@@ -306,9 +306,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * <p>A subscription that is currently in a trial period is {@code trialing} and moves to {@code
    * active} when the trial period is over.
    *
-   * <p>If subscription {@code collection_method=charge_automatically} it becomes {@code past_due}
-   * when payment to renew it fails and {@code canceled} or {@code unpaid} (depending on your
-   * subscriptions settings) when Stripe has exhausted all payment retry attempts.
+   * <p>If subscription {@code collection_method=charge_automatically}, it becomes {@code past_due}
+   * when payment is required but cannot be paid (due to failed payment or awaiting additional user
+   * actions). Once Stripe has exhausted all payment retry attempts, the subscription will become
+   * {@code canceled} or {@code unpaid} (depending on your subscriptions settings).
    *
    * <p>If subscription {@code collection_method=send_invoice} it becomes {@code past_due} when its
    * invoice is not paid by the due date, and {@code canceled} or {@code unpaid} if it is still not
