@@ -67,6 +67,14 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("discount_amounts")
   List<CreditNote.DiscountAmount> discountAmounts;
 
+  /**
+   * The date when this credit note is in effect. Same as {@code created} unless overwritten by the
+   * user. When defined, this value replaces the system-generated 'Date of issue' printed on the
+   * credit note PDF.
+   */
+  @SerializedName("effective_at")
+  Long effectiveAt;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
