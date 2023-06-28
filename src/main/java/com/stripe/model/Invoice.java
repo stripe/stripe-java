@@ -313,6 +313,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Long dueDate;
 
   /**
+   * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten by the
+   * user. When defined, this value replaces the system-generated 'Date of issue' printed on the
+   * invoice PDF and receipt.
+   */
+  @SerializedName("effective_at")
+  Long effectiveAt;
+
+  /**
    * Ending customer balance after the invoice is finalized. Invoices are finalized approximately an
    * hour after successful webhook delivery or when payment collection is attempted for the invoice.
    * If the invoice has not been finalized yet, this will be null.

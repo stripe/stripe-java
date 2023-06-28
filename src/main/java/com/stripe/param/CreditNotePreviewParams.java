@@ -27,6 +27,14 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   @SerializedName("credit_amount")
   Long creditAmount;
 
+  /**
+   * The date when this credit note is in effect. Same as {@code created} unless overwritten by the
+   * user. When defined, this value replaces the system-generated 'Date of issue' printed on the
+   * credit note PDF.
+   */
+  @SerializedName("effective_at")
+  Long effectiveAt;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -96,6 +104,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   private CreditNotePreviewParams(
       Long amount,
       Long creditAmount,
+      Long effectiveAt,
       List<String> expand,
       Map<String, Object> extraParams,
       String invoice,
@@ -109,6 +118,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       ShippingCost shippingCost) {
     this.amount = amount;
     this.creditAmount = creditAmount;
+    this.effectiveAt = effectiveAt;
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoice = invoice;
@@ -130,6 +140,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     private Long amount;
 
     private Long creditAmount;
+
+    private Long effectiveAt;
 
     private List<String> expand;
 
@@ -158,6 +170,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       return new CreditNotePreviewParams(
           this.amount,
           this.creditAmount,
+          this.effectiveAt,
           this.expand,
           this.extraParams,
           this.invoice,
@@ -186,6 +199,16 @@ public class CreditNotePreviewParams extends ApiRequestParams {
      */
     public Builder setCreditAmount(Long creditAmount) {
       this.creditAmount = creditAmount;
+      return this;
+    }
+
+    /**
+     * The date when this credit note is in effect. Same as {@code created} unless overwritten by
+     * the user. When defined, this value replaces the system-generated 'Date of issue' printed on
+     * the credit note PDF.
+     */
+    public Builder setEffectiveAt(Long effectiveAt) {
+      this.effectiveAt = effectiveAt;
       return this;
     }
 

@@ -110,6 +110,14 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("due_date")
   Long dueDate;
 
+  /**
+   * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten by the
+   * user. When defined, this value replaces the system-generated 'Date of issue' printed on the
+   * invoice PDF and receipt.
+   */
+  @SerializedName("effective_at")
+  Long effectiveAt;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -224,6 +232,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       String description,
       Object discounts,
       Long dueDate,
+      Long effectiveAt,
       List<String> expand,
       Map<String, Object> extraParams,
       String footer,
@@ -253,6 +262,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.description = description;
     this.discounts = discounts;
     this.dueDate = dueDate;
+    this.effectiveAt = effectiveAt;
     this.expand = expand;
     this.extraParams = extraParams;
     this.footer = footer;
@@ -304,6 +314,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private Long dueDate;
 
+    private Long effectiveAt;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -350,6 +362,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.description,
           this.discounts,
           this.dueDate,
+          this.effectiveAt,
           this.expand,
           this.extraParams,
           this.footer,
@@ -621,6 +634,16 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setDueDate(Long dueDate) {
       this.dueDate = dueDate;
+      return this;
+    }
+
+    /**
+     * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten by
+     * the user. When defined, this value replaces the system-generated 'Date of issue' printed on
+     * the invoice PDF and receipt.
+     */
+    public Builder setEffectiveAt(Long effectiveAt) {
+      this.effectiveAt = effectiveAt;
       return this;
     }
 
