@@ -310,9 +310,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Long dueDate;
 
   /**
-   * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten by the
-   * user. When defined, this value replaces the system-generated 'Date of issue' printed on the
-   * invoice PDF and receipt.
+   * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten. When
+   * defined, this value replaces the system-generated 'Date of issue' printed on the invoice PDF
+   * and receipt.
    */
   @SerializedName("effective_at")
   Long effectiveAt;
