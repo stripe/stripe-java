@@ -9746,8 +9746,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         /**
          * The number of days charge funds are held before being paid out. May also be set to {@code
          * minimum}, representing the lowest available value for the account country. Default is
-         * {@code minimum}. The {@code delay_days} parameter does not apply when the {@code
-         * interval} is {@code manual}. <a
+         * {@code minimum}. The {@code delay_days} parameter remains at the last configured value if
+         * {@code interval} is {@code manual}. <a
          * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
          * controlling payout delay days</a>.
          */
@@ -9829,8 +9829,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           /**
            * The number of days charge funds are held before being paid out. May also be set to
            * {@code minimum}, representing the lowest available value for the account country.
-           * Default is {@code minimum}. The {@code delay_days} parameter does not apply when the
-           * {@code interval} is {@code manual}. <a
+           * Default is {@code minimum}. The {@code delay_days} parameter remains at the last
+           * configured value if {@code interval} is {@code manual}. <a
            * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
            * controlling payout delay days</a>.
            */
@@ -9843,8 +9843,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           /**
            * The number of days charge funds are held before being paid out. May also be set to
            * {@code minimum}, representing the lowest available value for the account country.
-           * Default is {@code minimum}. The {@code delay_days} parameter does not apply when the
-           * {@code interval} is {@code manual}. <a
+           * Default is {@code minimum}. The {@code delay_days} parameter remains at the last
+           * configured value if {@code interval} is {@code manual}. <a
            * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
            * controlling payout delay days</a>.
            */
