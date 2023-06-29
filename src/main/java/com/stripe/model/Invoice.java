@@ -2181,6 +2181,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionDetails extends StripeObject {
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will reflect
+     * the metadata of the subscription at the time of invoice creation. <em>Note: This attribute is
+     * populated only for invoices created on or after June 28, 2023.</em>
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
     /** If specified, payment collection for this subscription will be paused. */
     @SerializedName("pause_collection")
     PauseCollection pauseCollection;
