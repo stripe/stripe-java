@@ -105,6 +105,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @SerializedName("due_date")
   Long dueDate;
 
+  /**
+   * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten. When
+   * defined, this value replaces the system-generated 'Date of issue' printed on the invoice PDF
+   * and receipt.
+   */
+  @SerializedName("effective_at")
+  Object effectiveAt;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -192,6 +200,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object description,
       Object discounts,
       Long dueDate,
+      Object effectiveAt,
       List<String> expand,
       Map<String, Object> extraParams,
       Object footer,
@@ -216,6 +225,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.description = description;
     this.discounts = discounts;
     this.dueDate = dueDate;
+    this.effectiveAt = effectiveAt;
     this.expand = expand;
     this.extraParams = extraParams;
     this.footer = footer;
@@ -260,6 +270,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private Long dueDate;
 
+    private Object effectiveAt;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -298,6 +310,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.description,
           this.discounts,
           this.dueDate,
+          this.effectiveAt,
           this.expand,
           this.extraParams,
           this.footer,
@@ -606,6 +619,26 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      */
     public Builder setDueDate(Long dueDate) {
       this.dueDate = dueDate;
+      return this;
+    }
+
+    /**
+     * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten.
+     * When defined, this value replaces the system-generated 'Date of issue' printed on the invoice
+     * PDF and receipt.
+     */
+    public Builder setEffectiveAt(Long effectiveAt) {
+      this.effectiveAt = effectiveAt;
+      return this;
+    }
+
+    /**
+     * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten.
+     * When defined, this value replaces the system-generated 'Date of issue' printed on the invoice
+     * PDF and receipt.
+     */
+    public Builder setEffectiveAt(EmptyParam effectiveAt) {
+      this.effectiveAt = effectiveAt;
       return this;
     }
 

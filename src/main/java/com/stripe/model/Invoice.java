@@ -310,6 +310,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Long dueDate;
 
   /**
+   * The date when this invoice is in effect. Same as {@code finalized_at} unless overwritten. When
+   * defined, this value replaces the system-generated 'Date of issue' printed on the invoice PDF
+   * and receipt.
+   */
+  @SerializedName("effective_at")
+  Long effectiveAt;
+
+  /**
    * Ending customer balance after the invoice is finalized. Invoices are finalized approximately an
    * hour after successful webhook delivery or when payment collection is attempted for the invoice.
    * If the invoice has not been finalized yet, this will be null.
@@ -1729,16 +1737,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerTaxId extends StripeObject {
     /**
-     * The type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code
-     * eu_oss_vat}, {@code gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst},
-     * {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code
-     * ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code
-     * th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid}, {@code my_itn}, {@code
-     * us_ein}, {@code kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code
-     * ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code
-     * cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat},
-     * {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code
-     * ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, or {@code unknown}.
+     * The type of the tax ID, one of {@code ad_nrt}, {@code ar_cuit}, {@code eu_vat}, {@code
+     * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+     * {@code do_rcn}, {@code ec_ruc}, {@code eu_oss_vat}, {@code pe_ruc}, {@code rs_pib}, {@code
+     * sv_nit}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, {@code gb_vat}, {@code nz_gst},
+     * {@code au_abn}, {@code au_arn}, {@code in_gst}, {@code no_vat}, {@code za_vat}, {@code
+     * ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ru_kpp}, {@code ca_bn},
+     * {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn},
+     * {@code jp_trn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
+     * ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code
+     * my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp},
+     * {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code
+     * bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin},
+     * {@code ph_tin}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
