@@ -1,16 +1,13 @@
 # Changelog
 
+## 22.25.0 - 2023-06-29
+* [#1597](https://github.com/stripe/stripe-java/pull/1597) Update generated code
+  * Add support for `effective_at` on `CreditNoteCreateParams`, `CreditNotePreviewLinesParams`, `CreditNotePreviewParams`, `CreditNote`, `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`
+  * Add support for new values `ad_nrt`, `ar_cuit`, `bo_tin`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `pe_ruc`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, and `vn_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `TaxCalculationCreateParams.customer_details.tax_ids[].type`
+
 ## 22.24.0 - 2023-06-22
 * [#1591](https://github.com/stripe/stripe-java/pull/1591) Update generated code
   * Add support for `on_behalf_of` on `Mandate`
-* [#1593](https://github.com/stripe/stripe-java/pull/1593) Add deserialization test
-* [#1588](https://github.com/stripe/stripe-java/pull/1588) Update generated code
-  * Release specs are identical.
-* [#1585](https://github.com/stripe/stripe-java/pull/1585) Update generated code
-  * Release specs are identical.
-* [#1579](https://github.com/stripe/stripe-java/pull/1579) Update generated code
-  * Change type of `FileCreateParams.file` from `string` to `file`
-* [#1578](https://github.com/stripe/stripe-java/pull/1578) Generate file classes
 
 ## 22.23.1 - 2023-06-09
 * [#1582](https://github.com/stripe/stripe-java/pull/1582) Bugfix: fix `Customer.retrievePaymentMethod` URL interpolation
