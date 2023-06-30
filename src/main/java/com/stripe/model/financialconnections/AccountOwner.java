@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Describes an owner of an account. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

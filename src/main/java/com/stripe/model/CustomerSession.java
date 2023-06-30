@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A customer session allows you to grant client access to Stripe's frontend SDKs (like BillingJs)
+ * A customer session allows you to grant client access to Stripe's frontend SDKs (like StripeJs)
  * control over a customer.
  */
 @Getter
