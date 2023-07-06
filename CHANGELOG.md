@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.26.0 - 2023-07-06
+* [#1601](https://github.com/stripe/stripe-java/pull/1601) Update generated code
+  * Add support for `numeric` and `text` on `PaymentLink.custom_fields[]`
+  * Add support for `automatic_tax` on `SubscriptionListParams`
+
 ## 22.25.0 - 2023-06-29
 * [#1597](https://github.com/stripe/stripe-java/pull/1597) Update generated code
   * Add support for `effective_at` on `CreditNoteCreateParams`, `CreditNotePreviewLinesParams`, `CreditNotePreviewParams`, `CreditNote`, `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`
