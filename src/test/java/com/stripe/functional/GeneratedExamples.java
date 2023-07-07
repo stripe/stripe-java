@@ -129,6 +129,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testSessionExpire() throws StripeException {
     com.stripe.model.checkout.Session resource =
         com.stripe.model.checkout.Session.retrieve("sess_xyz");
+
     com.stripe.param.checkout.SessionExpireParams params =
         com.stripe.param.checkout.SessionExpireParams.builder().build();
 
@@ -141,6 +142,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerCreateFundingInstructions() throws StripeException {
     Customer resource = Customer.retrieve("cus_123");
+
     CustomerCreateFundingInstructionsParams params =
         CustomerCreateFundingInstructionsParams.builder()
             .setBankTransfer(
@@ -166,6 +168,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerListPaymentMethods() throws StripeException {
     Customer resource = Customer.retrieve("cus_xyz");
+
     CustomerListPaymentMethodsParams params =
         CustomerListPaymentMethodsParams.builder()
             .setType(CustomerListPaymentMethodsParams.Type.CARD)
@@ -201,6 +204,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountDisconnect() throws StripeException {
     com.stripe.model.financialconnections.Account resource =
         com.stripe.model.financialconnections.Account.retrieve("fca_xyz");
+
     com.stripe.param.financialconnections.AccountDisconnectParams params =
         com.stripe.param.financialconnections.AccountDisconnectParams.builder().build();
 
@@ -216,6 +220,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountListOwners() throws StripeException {
     com.stripe.model.financialconnections.Account resource =
         com.stripe.model.financialconnections.Account.retrieve("fca_xyz");
+
     com.stripe.param.financialconnections.AccountListOwnersParams params =
         com.stripe.param.financialconnections.AccountListOwnersParams.builder()
             .setOwnership("fcaowns_xyz")
@@ -234,6 +239,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountRefresh() throws StripeException {
     com.stripe.model.financialconnections.Account resource =
         com.stripe.model.financialconnections.Account.retrieve("fca_xyz");
+
     com.stripe.param.financialconnections.AccountRefreshParams params =
         com.stripe.param.financialconnections.AccountRefreshParams.builder()
             .addFeature(com.stripe.param.financialconnections.AccountRefreshParams.Feature.BALANCE)
@@ -307,6 +313,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentVerifyMicrodeposits() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentVerifyMicrodepositsParams params =
         PaymentIntentVerifyMicrodepositsParams.builder().build();
 
@@ -344,6 +351,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentLinkListLineItems() throws StripeException {
     PaymentLink resource = PaymentLink.retrieve("pl_xyz");
+
     PaymentLinkListLineItemsParams params = PaymentLinkListLineItemsParams.builder().build();
 
     LineItemCollection lineItems = resource.listLineItems(params);
@@ -387,6 +395,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSetupIntentVerifyMicrodeposits() throws StripeException {
     SetupIntent resource = SetupIntent.retrieve("seti_xxxxxxxxxxxxx");
+
     SetupIntentVerifyMicrodepositsParams params =
         SetupIntentVerifyMicrodepositsParams.builder().build();
 
@@ -469,6 +478,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testConfigurationUpdate() throws StripeException {
     com.stripe.model.terminal.Configuration resource =
         com.stripe.model.terminal.Configuration.retrieve("uc_123");
+
     com.stripe.param.terminal.ConfigurationUpdateParams params =
         com.stripe.param.terminal.ConfigurationUpdateParams.builder()
             .setTipping(
@@ -489,6 +499,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerFundCashBalance() throws StripeException {
     Customer resource = Customer.retrieve("cus_123");
+
     CustomerFundCashBalanceParams params =
         CustomerFundCashBalanceParams.builder().setAmount(30L).setCurrency("eur").build();
 
@@ -504,6 +515,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCardDeliverCard() throws StripeException {
     com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+
     com.stripe.param.issuing.CardDeliverCardParams params =
         com.stripe.param.issuing.CardDeliverCardParams.builder().build();
 
@@ -518,6 +530,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCardFailCard() throws StripeException {
     com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+
     com.stripe.param.issuing.CardFailCardParams params =
         com.stripe.param.issuing.CardFailCardParams.builder().build();
 
@@ -532,6 +545,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCardReturnCard() throws StripeException {
     com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+
     com.stripe.param.issuing.CardReturnCardParams params =
         com.stripe.param.issuing.CardReturnCardParams.builder().build();
 
@@ -546,6 +560,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCardShipCard() throws StripeException {
     com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+
     com.stripe.param.issuing.CardShipCardParams params =
         com.stripe.param.issuing.CardShipCardParams.builder().build();
 
@@ -560,6 +575,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testRefundExpire() throws StripeException {
     Refund resource = Refund.retrieve("re_123");
+
     RefundExpireParams params = RefundExpireParams.builder().build();
 
     Refund refund = resource.getTestHelpers().expire(params);
@@ -615,6 +631,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testTestClockAdvance() throws StripeException {
     com.stripe.model.testhelpers.TestClock resource =
         com.stripe.model.testhelpers.TestClock.retrieve("clock_xyz");
+
     com.stripe.param.testhelpers.TestClockAdvanceParams params =
         com.stripe.param.testhelpers.TestClockAdvanceParams.builder().setFrozenTime(142L).build();
 
@@ -630,6 +647,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testInboundTransferFail() throws StripeException {
     com.stripe.model.treasury.InboundTransfer resource =
         com.stripe.model.treasury.InboundTransfer.retrieve("ibt_123");
+
     com.stripe.param.treasury.InboundTransferFailParams params =
         com.stripe.param.treasury.InboundTransferFailParams.builder()
             .setFailureDetails(
@@ -653,6 +671,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testInboundTransferReturnInboundTransfer() throws StripeException {
     com.stripe.model.treasury.InboundTransfer resource =
         com.stripe.model.treasury.InboundTransfer.retrieve("ibt_123");
+
     com.stripe.param.treasury.InboundTransferReturnInboundTransferParams params =
         com.stripe.param.treasury.InboundTransferReturnInboundTransferParams.builder().build();
 
@@ -669,6 +688,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testInboundTransferSucceed() throws StripeException {
     com.stripe.model.treasury.InboundTransfer resource =
         com.stripe.model.treasury.InboundTransfer.retrieve("ibt_123");
+
     com.stripe.param.treasury.InboundTransferSucceedParams params =
         com.stripe.param.treasury.InboundTransferSucceedParams.builder().build();
 
@@ -685,6 +705,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testOutboundTransferFail() throws StripeException {
     com.stripe.model.treasury.OutboundTransfer resource =
         com.stripe.model.treasury.OutboundTransfer.retrieve("obt_123");
+
     com.stripe.param.treasury.OutboundTransferFailParams params =
         com.stripe.param.treasury.OutboundTransferFailParams.builder().build();
 
@@ -701,6 +722,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testOutboundTransferPost() throws StripeException {
     com.stripe.model.treasury.OutboundTransfer resource =
         com.stripe.model.treasury.OutboundTransfer.retrieve("obt_123");
+
     com.stripe.param.treasury.OutboundTransferPostParams params =
         com.stripe.param.treasury.OutboundTransferPostParams.builder().build();
 
@@ -717,6 +739,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testOutboundTransferReturnOutboundTransfer() throws StripeException {
     com.stripe.model.treasury.OutboundTransfer resource =
         com.stripe.model.treasury.OutboundTransfer.retrieve("obt_123");
+
     com.stripe.param.treasury.OutboundTransferReturnOutboundTransferParams params =
         com.stripe.param.treasury.OutboundTransferReturnOutboundTransferParams.builder()
             .setReturnedDetails(
@@ -861,6 +884,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testAccountUpdate() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     AccountUpdateParams params =
         AccountUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -873,6 +897,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testAccountReject() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     AccountRejectParams params = AccountRejectParams.builder().setReason("fraud").build();
 
     Account account = resource.reject(params);
@@ -884,6 +909,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testAccountCapabilities() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     AccountCapabilitiesParams params = AccountCapabilitiesParams.builder().build();
 
     CapabilityCollection capabilities = resource.capabilities(params);
@@ -908,7 +934,9 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCapabilityUpdate() throws StripeException {
     Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     Capability resource = account.capabilities().retrieve("card_payments");
+
     CapabilityUpdateParams params = CapabilityUpdateParams.builder().setRequested(true).build();
 
     Capability capability = resource.update(params);
@@ -922,6 +950,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testAccountPersons() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     AccountPersonsParams params = AccountPersonsParams.builder().setLimit(3L).build();
 
     PersonCollection persons = resource.persons(params);
@@ -933,6 +962,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPersonCreate() throws StripeException {
     Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     PersonCollectionCreateParams params =
         PersonCollectionCreateParams.builder().setFirstName("Jane").setLastName("Diaz").build();
 
@@ -945,6 +975,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPersonDelete() throws StripeException {
     Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     Person resource = account.persons().retrieve("person_xxxxxxxxxxxxx");
 
     Person person = resource.delete();
@@ -968,7 +999,9 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPersonUpdate() throws StripeException {
     Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+
     Person resource = account.persons().retrieve("person_xxxxxxxxxxxxx");
+
     PersonUpdateParams params =
         PersonUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -999,6 +1032,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testFeeRefundList() throws StripeException {
     ApplicationFee applicationFee = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx");
+
     FeeRefundCollectionListParams params =
         FeeRefundCollectionListParams.builder().setLimit(3L).build();
 
@@ -1013,6 +1047,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testFeeRefundCreate() throws StripeException {
     ApplicationFee applicationFee = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx");
+
     FeeRefundCollectionCreateParams params = FeeRefundCollectionCreateParams.builder().build();
 
     FeeRefund feeRefund = applicationFee.getRefunds().create(params);
@@ -1037,7 +1072,9 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testFeeRefundUpdate() throws StripeException {
     ApplicationFee applicationFee = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx");
+
     FeeRefund resource = applicationFee.getRefunds().retrieve("fr_xxxxxxxxxxxxx");
+
     FeeRefundUpdateParams params =
         FeeRefundUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1161,6 +1198,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testConfigurationUpdate2() throws StripeException {
     com.stripe.model.billingportal.Configuration resource =
         com.stripe.model.billingportal.Configuration.retrieve("bpc_xxxxxxxxxxxxx");
+
     com.stripe.param.billingportal.ConfigurationUpdateParams params =
         com.stripe.param.billingportal.ConfigurationUpdateParams.builder()
             .setBusinessProfile(
@@ -1227,6 +1265,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testChargeUpdate() throws StripeException {
     Charge resource = Charge.retrieve("ch_xxxxxxxxxxxxx");
+
     ChargeUpdateParams params =
         ChargeUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1238,6 +1277,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testChargeCapture() throws StripeException {
     Charge resource = Charge.retrieve("ch_xxxxxxxxxxxxx");
+
     ChargeCaptureParams params = ChargeCaptureParams.builder().build();
 
     Charge charge = resource.capture(params);
@@ -1297,6 +1337,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testSessionExpire2() throws StripeException {
     com.stripe.model.checkout.Session resource =
         com.stripe.model.checkout.Session.retrieve("cs_test_xxxxxxxxxxxxx");
+
     com.stripe.param.checkout.SessionExpireParams params =
         com.stripe.param.checkout.SessionExpireParams.builder().build();
 
@@ -1366,6 +1407,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCouponUpdate() throws StripeException {
     Coupon resource = Coupon.retrieve("Z4OV52SU");
+
     CouponUpdateParams params =
         CouponUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1404,6 +1446,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCreditNoteVoidCreditNote() throws StripeException {
     CreditNote resource = CreditNote.retrieve("cn_xxxxxxxxxxxxx");
+
     CreditNoteVoidCreditNoteParams params = CreditNoteVoidCreditNoteParams.builder().build();
 
     CreditNote creditNote = resource.voidCreditNote(params);
@@ -1415,6 +1458,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCreditNoteLineItemList() throws StripeException {
     CreditNote creditNote = CreditNote.retrieve("cn_xxxxxxxxxxxxx");
+
     CreditNoteLineItemCollectionListParams params =
         CreditNoteLineItemCollectionListParams.builder().setLimit(3L).build();
 
@@ -1492,6 +1536,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerUpdate() throws StripeException {
     Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx");
+
     CustomerUpdateParams params =
         CustomerUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1504,6 +1549,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerBalanceTransactions() throws StripeException {
     Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx");
+
     CustomerBalanceTransactionsParams params =
         CustomerBalanceTransactionsParams.builder().setLimit(3L).build();
 
@@ -1519,6 +1565,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerBalanceTransactionCreate() throws StripeException {
     Customer customer = Customer.retrieve("cus_xxxxxxxxxxxxx");
+
     CustomerBalanceTransactionCollectionCreateParams params =
         CustomerBalanceTransactionCollectionCreateParams.builder()
             .setAmount(-500L)
@@ -1549,8 +1596,10 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerBalanceTransactionUpdate() throws StripeException {
     Customer customer = Customer.retrieve("cus_xxxxxxxxxxxxx");
+
     CustomerBalanceTransaction resource =
         customer.balanceTransactions().retrieve("cbtxn_xxxxxxxxxxxxx");
+
     CustomerBalanceTransactionUpdateParams params =
         CustomerBalanceTransactionUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1565,6 +1614,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerListPaymentMethods2() throws StripeException {
     Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx");
+
     CustomerListPaymentMethodsParams params =
         CustomerListPaymentMethodsParams.builder()
             .setType(CustomerListPaymentMethodsParams.Type.CARD)
@@ -1621,6 +1671,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testDisputeUpdate() throws StripeException {
     Dispute resource = Dispute.retrieve("dp_xxxxxxxxxxxxx");
+
     DisputeUpdateParams params =
         DisputeUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1632,6 +1683,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testDisputeClose() throws StripeException {
     Dispute resource = Dispute.retrieve("dp_xxxxxxxxxxxxx");
+
     DisputeCloseParams params = DisputeCloseParams.builder().build();
 
     Dispute dispute = resource.close(params);
@@ -1685,6 +1737,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testFileLinkUpdate() throws StripeException {
     FileLink resource = FileLink.retrieve("link_xxxxxxxxxxxxx");
+
     FileLinkUpdateParams params =
         FileLinkUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1724,6 +1777,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountDisconnect2() throws StripeException {
     com.stripe.model.financialconnections.Account resource =
         com.stripe.model.financialconnections.Account.retrieve("fca_xxxxxxxxxxxxx");
+
     com.stripe.param.financialconnections.AccountDisconnectParams params =
         com.stripe.param.financialconnections.AccountDisconnectParams.builder().build();
 
@@ -1739,6 +1793,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountListOwners2() throws StripeException {
     com.stripe.model.financialconnections.Account resource =
         com.stripe.model.financialconnections.Account.retrieve("fca_xxxxxxxxxxxxx");
+
     com.stripe.param.financialconnections.AccountListOwnersParams params =
         com.stripe.param.financialconnections.AccountListOwnersParams.builder()
             .setLimit(3L)
@@ -1851,6 +1906,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testVerificationSessionUpdate() throws StripeException {
     com.stripe.model.identity.VerificationSession resource =
         com.stripe.model.identity.VerificationSession.retrieve("vs_xxxxxxxxxxxxx");
+
     com.stripe.param.identity.VerificationSessionUpdateParams params =
         com.stripe.param.identity.VerificationSessionUpdateParams.builder()
             .setType(com.stripe.param.identity.VerificationSessionUpdateParams.Type.ID_NUMBER)
@@ -1868,6 +1924,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testVerificationSessionCancel() throws StripeException {
     com.stripe.model.identity.VerificationSession resource =
         com.stripe.model.identity.VerificationSession.retrieve("vs_xxxxxxxxxxxxx");
+
     com.stripe.param.identity.VerificationSessionCancelParams params =
         com.stripe.param.identity.VerificationSessionCancelParams.builder().build();
 
@@ -1883,6 +1940,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testVerificationSessionRedact() throws StripeException {
     com.stripe.model.identity.VerificationSession resource =
         com.stripe.model.identity.VerificationSession.retrieve("vs_xxxxxxxxxxxxx");
+
     com.stripe.param.identity.VerificationSessionRedactParams params =
         com.stripe.param.identity.VerificationSessionRedactParams.builder().build();
 
@@ -1935,6 +1993,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoiceItemUpdate() throws StripeException {
     InvoiceItem resource = InvoiceItem.retrieve("ii_xxxxxxxxxxxxx");
+
     InvoiceItemUpdateParams params =
         InvoiceItemUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -1991,6 +2050,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoiceUpdate() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
+
     InvoiceUpdateParams params =
         InvoiceUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -2002,6 +2062,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoiceFinalizeInvoice() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
+
     InvoiceFinalizeInvoiceParams params = InvoiceFinalizeInvoiceParams.builder().build();
 
     Invoice invoice = resource.finalizeInvoice(params);
@@ -2013,6 +2074,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoiceMarkUncollectible() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
+
     InvoiceMarkUncollectibleParams params = InvoiceMarkUncollectibleParams.builder().build();
 
     Invoice invoice = resource.markUncollectible(params);
@@ -2026,6 +2088,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoicePay() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
+
     InvoicePayParams params = InvoicePayParams.builder().build();
 
     Invoice invoice = resource.pay(params);
@@ -2037,6 +2100,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoiceSendInvoice() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
+
     InvoiceSendInvoiceParams params = InvoiceSendInvoiceParams.builder().build();
 
     Invoice invoice = resource.sendInvoice(params);
@@ -2048,6 +2112,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoiceVoidInvoice() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
+
     InvoiceVoidInvoiceParams params = InvoiceVoidInvoiceParams.builder().build();
 
     Invoice invoice = resource.voidInvoice(params);
@@ -2089,6 +2154,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAuthorizationUpdate() throws StripeException {
     com.stripe.model.issuing.Authorization resource =
         com.stripe.model.issuing.Authorization.retrieve("iauth_xxxxxxxxxxxxx");
+
     com.stripe.param.issuing.AuthorizationUpdateParams params =
         com.stripe.param.issuing.AuthorizationUpdateParams.builder()
             .putMetadata("order_id", "6735")
@@ -2106,6 +2172,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAuthorizationApprove() throws StripeException {
     com.stripe.model.issuing.Authorization resource =
         com.stripe.model.issuing.Authorization.retrieve("iauth_xxxxxxxxxxxxx");
+
     com.stripe.param.issuing.AuthorizationApproveParams params =
         com.stripe.param.issuing.AuthorizationApproveParams.builder().build();
 
@@ -2121,6 +2188,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAuthorizationDecline() throws StripeException {
     com.stripe.model.issuing.Authorization resource =
         com.stripe.model.issuing.Authorization.retrieve("iauth_xxxxxxxxxxxxx");
+
     com.stripe.param.issuing.AuthorizationDeclineParams params =
         com.stripe.param.issuing.AuthorizationDeclineParams.builder().build();
 
@@ -2182,6 +2250,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCardholderUpdate() throws StripeException {
     com.stripe.model.issuing.Cardholder resource =
         com.stripe.model.issuing.Cardholder.retrieve("ich_xxxxxxxxxxxxx");
+
     com.stripe.param.issuing.CardholderUpdateParams params =
         com.stripe.param.issuing.CardholderUpdateParams.builder()
             .putMetadata("order_id", "6735")
@@ -2230,6 +2299,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCardUpdate() throws StripeException {
     com.stripe.model.issuing.Card resource =
         com.stripe.model.issuing.Card.retrieve("ic_xxxxxxxxxxxxx");
+
     com.stripe.param.issuing.CardUpdateParams params =
         com.stripe.param.issuing.CardUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -2283,6 +2353,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testDisputeSubmit() throws StripeException {
     com.stripe.model.issuing.Dispute resource =
         com.stripe.model.issuing.Dispute.retrieve("idp_xxxxxxxxxxxxx");
+
     com.stripe.param.issuing.DisputeSubmitParams params =
         com.stripe.param.issuing.DisputeSubmitParams.builder().build();
 
@@ -2317,6 +2388,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testTransactionUpdate() throws StripeException {
     com.stripe.model.issuing.Transaction resource =
         com.stripe.model.issuing.Transaction.retrieve("ipi_xxxxxxxxxxxxx");
+
     com.stripe.param.issuing.TransactionUpdateParams params =
         com.stripe.param.issuing.TransactionUpdateParams.builder()
             .putMetadata("order_id", "6735")
@@ -2373,6 +2445,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentUpdate() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentUpdateParams params =
         PaymentIntentUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -2385,6 +2458,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentApplyCustomerBalance() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentApplyCustomerBalanceParams params =
         PaymentIntentApplyCustomerBalanceParams.builder().build();
 
@@ -2399,6 +2473,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentCancel() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentCancelParams params = PaymentIntentCancelParams.builder().build();
 
     PaymentIntent paymentIntent = resource.cancel(params);
@@ -2412,6 +2487,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentCapture() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentCaptureParams params = PaymentIntentCaptureParams.builder().build();
 
     PaymentIntent paymentIntent = resource.capture(params);
@@ -2425,6 +2501,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentConfirm() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentConfirmParams params =
         PaymentIntentConfirmParams.builder().setPaymentMethod("pm_card_visa").build();
 
@@ -2439,6 +2516,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentIncrementAuthorization() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentIncrementAuthorizationParams params =
         PaymentIntentIncrementAuthorizationParams.builder().setAmount(2099L).build();
 
@@ -2453,6 +2531,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentIntentVerifyMicrodeposits2() throws StripeException {
     PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+
     PaymentIntentVerifyMicrodepositsParams params =
         PaymentIntentVerifyMicrodepositsParams.builder().addAmount(32L).addAmount(45L).build();
 
@@ -2511,6 +2590,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentLinkUpdate() throws StripeException {
     PaymentLink resource = PaymentLink.retrieve("plink_xxxxxxxxxxxxx");
+
     PaymentLinkUpdateParams params = PaymentLinkUpdateParams.builder().setActive(false).build();
 
     PaymentLink paymentLink = resource.update(params);
@@ -2542,6 +2622,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentMethodUpdate() throws StripeException {
     PaymentMethod resource = PaymentMethod.retrieve("pm_xxxxxxxxxxxxx");
+
     PaymentMethodUpdateParams params =
         PaymentMethodUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -2554,6 +2635,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentMethodAttach() throws StripeException {
     PaymentMethod resource = PaymentMethod.retrieve("pm_xxxxxxxxxxxxx");
+
     PaymentMethodAttachParams params =
         PaymentMethodAttachParams.builder().setCustomer("cus_xxxxxxxxxxxxx").build();
 
@@ -2568,6 +2650,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPaymentMethodDetach() throws StripeException {
     PaymentMethod resource = PaymentMethod.retrieve("pm_xxxxxxxxxxxxx");
+
     PaymentMethodDetachParams params = PaymentMethodDetachParams.builder().build();
 
     PaymentMethod paymentMethod = resource.detach(params);
@@ -2607,6 +2690,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPayoutUpdate() throws StripeException {
     Payout resource = Payout.retrieve("po_xxxxxxxxxxxxx");
+
     PayoutUpdateParams params =
         PayoutUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -2618,6 +2702,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPayoutCancel() throws StripeException {
     Payout resource = Payout.retrieve("po_xxxxxxxxxxxxx");
+
     PayoutCancelParams params = PayoutCancelParams.builder().build();
 
     Payout payout = resource.cancel(params);
@@ -2629,6 +2714,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPayoutReverse() throws StripeException {
     Payout resource = Payout.retrieve("po_xxxxxxxxxxxxx");
+
     PayoutReverseParams params = PayoutReverseParams.builder().build();
 
     Payout payout = resource.reverse(params);
@@ -2695,6 +2781,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPlanUpdate() throws StripeException {
     Plan resource = Plan.retrieve("price_xxxxxxxxxxxxx");
+
     PlanUpdateParams params = PlanUpdateParams.builder().putMetadata("order_id", "6735").build();
 
     Plan plan = resource.update(params);
@@ -2739,6 +2826,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPriceUpdate() throws StripeException {
     Price resource = Price.retrieve("price_xxxxxxxxxxxxx");
+
     PriceUpdateParams params = PriceUpdateParams.builder().putMetadata("order_id", "6735").build();
 
     Price price = resource.update(params);
@@ -2795,6 +2883,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testProductUpdate() throws StripeException {
     Product resource = Product.retrieve("prod_xxxxxxxxxxxxx");
+
     ProductUpdateParams params =
         ProductUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -2845,6 +2934,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPromotionCodeUpdate() throws StripeException {
     PromotionCode resource = PromotionCode.retrieve("promo_xxxxxxxxxxxxx");
+
     PromotionCodeUpdateParams params =
         PromotionCodeUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -2890,6 +2980,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testQuoteUpdate() throws StripeException {
     Quote resource = Quote.retrieve("qt_xxxxxxxxxxxxx");
+
     QuoteUpdateParams params = QuoteUpdateParams.builder().putMetadata("order_id", "6735").build();
 
     Quote quote = resource.update(params);
@@ -2900,6 +2991,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testQuoteAccept() throws StripeException {
     Quote resource = Quote.retrieve("qt_xxxxxxxxxxxxx");
+
     QuoteAcceptParams params = QuoteAcceptParams.builder().build();
 
     Quote quote = resource.accept(params);
@@ -2911,6 +3003,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testQuoteCancel() throws StripeException {
     Quote resource = Quote.retrieve("qt_xxxxxxxxxxxxx");
+
     QuoteCancelParams params = QuoteCancelParams.builder().build();
 
     Quote quote = resource.cancel(params);
@@ -2922,6 +3015,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testQuoteFinalizeQuote() throws StripeException {
     Quote resource = Quote.retrieve("qt_xxxxxxxxxxxxx");
+
     QuoteFinalizeQuoteParams params = QuoteFinalizeQuoteParams.builder().build();
 
     Quote quote = resource.finalizeQuote(params);
@@ -3044,6 +3138,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testValueListUpdate() throws StripeException {
     com.stripe.model.radar.ValueList resource =
         com.stripe.model.radar.ValueList.retrieve("rsl_xxxxxxxxxxxxx");
+
     com.stripe.param.radar.ValueListUpdateParams params =
         com.stripe.param.radar.ValueListUpdateParams.builder()
             .setName("Updated IP Block List")
@@ -3083,6 +3178,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testRefundUpdate() throws StripeException {
     Refund resource = Refund.retrieve("re_xxxxxxxxxxxxx");
+
     RefundUpdateParams params =
         RefundUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -3094,6 +3190,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testRefundCancel() throws StripeException {
     Refund resource = Refund.retrieve("re_xxxxxxxxxxxxx");
+
     RefundCancelParams params = RefundCancelParams.builder().build();
 
     Refund refund = resource.cancel(params);
@@ -3177,6 +3274,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testReviewApprove() throws StripeException {
     Review resource = Review.retrieve("prv_xxxxxxxxxxxxx");
+
     ReviewApproveParams params = ReviewApproveParams.builder().build();
 
     Review review = resource.approve(params);
@@ -3214,6 +3312,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSetupIntentUpdate() throws StripeException {
     SetupIntent resource = SetupIntent.retrieve("seti_xxxxxxxxxxxxx");
+
     SetupIntentUpdateParams params =
         SetupIntentUpdateParams.builder().putMetadata("user_id", "3435453").build();
 
@@ -3226,6 +3325,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSetupIntentCancel() throws StripeException {
     SetupIntent resource = SetupIntent.retrieve("seti_xxxxxxxxxxxxx");
+
     SetupIntentCancelParams params = SetupIntentCancelParams.builder().build();
 
     SetupIntent setupIntent = resource.cancel(params);
@@ -3239,6 +3339,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSetupIntentConfirm() throws StripeException {
     SetupIntent resource = SetupIntent.retrieve("seti_xxxxxxxxxxxxx");
+
     SetupIntentConfirmParams params =
         SetupIntentConfirmParams.builder().setPaymentMethod("pm_card_visa").build();
 
@@ -3253,6 +3354,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSetupIntentVerifyMicrodeposits2() throws StripeException {
     SetupIntent resource = SetupIntent.retrieve("seti_xxxxxxxxxxxxx");
+
     SetupIntentVerifyMicrodepositsParams params =
         SetupIntentVerifyMicrodepositsParams.builder().addAmount(32L).addAmount(45L).build();
 
@@ -3301,6 +3403,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testShippingRateUpdate() throws StripeException {
     ShippingRate resource = ShippingRate.retrieve("shr_xxxxxxxxxxxxx");
+
     ShippingRateUpdateParams params =
         ShippingRateUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -3347,6 +3450,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSourceUpdate() throws StripeException {
     Source resource = Source.retrieve("src_xxxxxxxxxxxxx");
+
     SourceUpdateParams params =
         SourceUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -3382,6 +3486,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionItemDelete() throws StripeException {
     SubscriptionItem resource = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
+
     SubscriptionItemDeleteParams params = SubscriptionItemDeleteParams.builder().build();
 
     SubscriptionItem subscriptionItem = resource.delete(params);
@@ -3402,6 +3507,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionItemUpdate() throws StripeException {
     SubscriptionItem resource = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
+
     SubscriptionItemUpdateParams params =
         SubscriptionItemUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -3414,6 +3520,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionItemUsageRecordSummaries() throws StripeException {
     SubscriptionItem resource = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
+
     SubscriptionItemUsageRecordSummariesParams params =
         SubscriptionItemUsageRecordSummariesParams.builder().setLimit(3L).build();
 
@@ -3470,6 +3577,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionScheduleUpdate() throws StripeException {
     SubscriptionSchedule resource = SubscriptionSchedule.retrieve("sub_sched_xxxxxxxxxxxxx");
+
     SubscriptionScheduleUpdateParams params =
         SubscriptionScheduleUpdateParams.builder()
             .setEndBehavior(SubscriptionScheduleUpdateParams.EndBehavior.RELEASE)
@@ -3486,6 +3594,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionScheduleCancel() throws StripeException {
     SubscriptionSchedule resource = SubscriptionSchedule.retrieve("sub_sched_xxxxxxxxxxxxx");
+
     SubscriptionScheduleCancelParams params = SubscriptionScheduleCancelParams.builder().build();
 
     SubscriptionSchedule subscriptionSchedule = resource.cancel(params);
@@ -3499,6 +3608,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionScheduleRelease() throws StripeException {
     SubscriptionSchedule resource = SubscriptionSchedule.retrieve("sub_sched_xxxxxxxxxxxxx");
+
     SubscriptionScheduleReleaseParams params = SubscriptionScheduleReleaseParams.builder().build();
 
     SubscriptionSchedule subscriptionSchedule = resource.release(params);
@@ -3535,6 +3645,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionCancel() throws StripeException {
     Subscription resource = Subscription.retrieve("sub_xxxxxxxxxxxxx");
+
     SubscriptionCancelParams params = SubscriptionCancelParams.builder().build();
 
     Subscription subscription = resource.cancel(params);
@@ -3553,6 +3664,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSubscriptionUpdate() throws StripeException {
     Subscription resource = Subscription.retrieve("sub_xxxxxxxxxxxxx");
+
     SubscriptionUpdateParams params =
         SubscriptionUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -3625,6 +3737,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testTaxRateUpdate() throws StripeException {
     TaxRate resource = TaxRate.retrieve("txr_xxxxxxxxxxxxx");
+
     TaxRateUpdateParams params = TaxRateUpdateParams.builder().setActive(false).build();
 
     TaxRate taxRate = resource.update(params);
@@ -3683,6 +3796,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testConfigurationUpdate3() throws StripeException {
     com.stripe.model.terminal.Configuration resource =
         com.stripe.model.terminal.Configuration.retrieve("tmc_xxxxxxxxxxxxx");
+
     com.stripe.param.terminal.ConfigurationUpdateParams params =
         com.stripe.param.terminal.ConfigurationUpdateParams.builder()
             .setBbposWiseposE(
@@ -3763,6 +3877,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testLocationUpdate() throws StripeException {
     com.stripe.model.terminal.Location resource =
         com.stripe.model.terminal.Location.retrieve("tml_xxxxxxxxxxxxx");
+
     com.stripe.param.terminal.LocationUpdateParams params =
         com.stripe.param.terminal.LocationUpdateParams.builder()
             .setDisplayName("My First Store")
@@ -3821,6 +3936,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testReaderUpdate() throws StripeException {
     com.stripe.model.terminal.Reader resource =
         com.stripe.model.terminal.Reader.retrieve("tmr_xxxxxxxxxxxxx");
+
     com.stripe.param.terminal.ReaderUpdateParams params =
         com.stripe.param.terminal.ReaderUpdateParams.builder().setLabel("Blue Rabbit").build();
 
@@ -3834,6 +3950,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testReaderCancelAction() throws StripeException {
     com.stripe.model.terminal.Reader resource =
         com.stripe.model.terminal.Reader.retrieve("tmr_xxxxxxxxxxxxx");
+
     com.stripe.param.terminal.ReaderCancelActionParams params =
         com.stripe.param.terminal.ReaderCancelActionParams.builder().build();
 
@@ -3849,6 +3966,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testReaderProcessPaymentIntent() throws StripeException {
     com.stripe.model.terminal.Reader resource =
         com.stripe.model.terminal.Reader.retrieve("tmr_xxxxxxxxxxxxx");
+
     com.stripe.param.terminal.ReaderProcessPaymentIntentParams params =
         com.stripe.param.terminal.ReaderProcessPaymentIntentParams.builder()
             .setPaymentIntent("pi_xxxxxxxxxxxxx")
@@ -3866,6 +3984,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testReaderProcessSetupIntent() throws StripeException {
     com.stripe.model.terminal.Reader resource =
         com.stripe.model.terminal.Reader.retrieve("tmr_xxxxxxxxxxxxx");
+
     com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
         com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
             .setSetupIntent("seti_xxxxxxxxxxxxx")
@@ -3928,6 +4047,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testTestClockAdvance2() throws StripeException {
     com.stripe.model.testhelpers.TestClock resource =
         com.stripe.model.testhelpers.TestClock.retrieve("clock_xxxxxxxxxxxxx");
+
     com.stripe.param.testhelpers.TestClockAdvanceParams params =
         com.stripe.param.testhelpers.TestClockAdvanceParams.builder()
             .setFrozenTime(1675552261L)
@@ -4065,6 +4185,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testTopupUpdate() throws StripeException {
     Topup resource = Topup.retrieve("tu_xxxxxxxxxxxxx");
+
     TopupUpdateParams params = TopupUpdateParams.builder().putMetadata("order_id", "6735").build();
 
     Topup topup = resource.update(params);
@@ -4075,6 +4196,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testTopupCancel() throws StripeException {
     Topup resource = Topup.retrieve("tu_xxxxxxxxxxxxx");
+
     TopupCancelParams params = TopupCancelParams.builder().build();
 
     Topup topup = resource.cancel(params);
@@ -4117,6 +4239,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testTransferUpdate() throws StripeException {
     Transfer resource = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+
     TransferUpdateParams params =
         TransferUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -4128,6 +4251,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testTransferReversalList() throws StripeException {
     Transfer transfer = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+
     TransferReversalCollectionListParams params =
         TransferReversalCollectionListParams.builder().setLimit(3L).build();
 
@@ -4140,6 +4264,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testTransferReversalCreate() throws StripeException {
     Transfer transfer = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+
     TransferReversalCollectionCreateParams params =
         TransferReversalCollectionCreateParams.builder().setAmount(100L).build();
 
@@ -4163,7 +4288,9 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testTransferReversalUpdate() throws StripeException {
     Transfer transfer = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+
     TransferReversal resource = transfer.getReversals().retrieve("trr_xxxxxxxxxxxxx");
+
     TransferReversalUpdateParams params =
         TransferReversalUpdateParams.builder().putMetadata("order_id", "6735").build();
 
@@ -4287,6 +4414,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testFinancialAccountUpdate() throws StripeException {
     com.stripe.model.treasury.FinancialAccount resource =
         com.stripe.model.treasury.FinancialAccount.retrieve("fa_xxxxxxxxxxxxx");
+
     com.stripe.param.treasury.FinancialAccountUpdateParams params =
         com.stripe.param.treasury.FinancialAccountUpdateParams.builder()
             .putMetadata("order_id", "6735")
@@ -4304,6 +4432,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testFinancialAccountRetrieveFeatures() throws StripeException {
     com.stripe.model.treasury.FinancialAccount resource =
         com.stripe.model.treasury.FinancialAccount.retrieve("fa_xxxxxxxxxxxxx");
+
     com.stripe.param.treasury.FinancialAccountRetrieveFeaturesParams params =
         com.stripe.param.treasury.FinancialAccountRetrieveFeaturesParams.builder().build();
 
@@ -4360,6 +4489,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testInboundTransferCancel() throws StripeException {
     com.stripe.model.treasury.InboundTransfer resource =
         com.stripe.model.treasury.InboundTransfer.retrieve("ibt_xxxxxxxxxxxxx");
+
     com.stripe.param.treasury.InboundTransferCancelParams params =
         com.stripe.param.treasury.InboundTransferCancelParams.builder().build();
 
@@ -4416,6 +4546,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testOutboundPaymentCancel() throws StripeException {
     com.stripe.model.treasury.OutboundPayment resource =
         com.stripe.model.treasury.OutboundPayment.retrieve("bot_xxxxxxxxxxxxx");
+
     com.stripe.param.treasury.OutboundPaymentCancelParams params =
         com.stripe.param.treasury.OutboundPaymentCancelParams.builder().build();
 
@@ -4472,6 +4603,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testOutboundTransferCancel() throws StripeException {
     com.stripe.model.treasury.OutboundTransfer resource =
         com.stripe.model.treasury.OutboundTransfer.retrieve("obt_xxxxxxxxxxxxx");
+
     com.stripe.param.treasury.OutboundTransferCancelParams params =
         com.stripe.param.treasury.OutboundTransferCancelParams.builder().build();
 
@@ -4615,6 +4747,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testWebhookEndpointUpdate() throws StripeException {
     WebhookEndpoint resource = WebhookEndpoint.retrieve("we_xxxxxxxxxxxxx");
+
     WebhookEndpointUpdateParams params =
         WebhookEndpointUpdateParams.builder().setUrl("https://example.com/new_endpoint").build();
 
@@ -4666,6 +4799,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testQuoteListLineItems() throws StripeException {
     Quote resource = Quote.retrieve("qt_xxxxxxxxxxxxx");
+
     QuoteListLineItemsParams params = QuoteListLineItemsParams.builder().build();
 
     LineItemCollection lineItems = resource.listLineItems(params);
