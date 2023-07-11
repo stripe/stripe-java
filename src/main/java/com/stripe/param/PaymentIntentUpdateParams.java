@@ -100,6 +100,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   Object paymentMethod;
 
+  /** The ID of the payment method configuration to use with this PaymentIntent. */
+  @SerializedName("payment_method_configuration")
+  Object paymentMethodConfiguration;
+
   /**
    * If provided, this hash will be used to create a PaymentMethod. The new PaymentMethod will
    * appear in the <a
@@ -198,6 +202,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object metadata,
       Object paymentDetails,
       Object paymentMethod,
+      Object paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes,
@@ -220,6 +225,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.paymentDetails = paymentDetails;
     this.paymentMethod = paymentMethod;
+    this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -261,6 +267,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Object paymentMethod;
 
+    private Object paymentMethodConfiguration;
+
     private PaymentMethodData paymentMethodData;
 
     private PaymentMethodOptions paymentMethodOptions;
@@ -296,6 +304,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.metadata,
           this.paymentDetails,
           this.paymentMethod,
+          this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
@@ -551,6 +560,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      */
     public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /** The ID of the payment method configuration to use with this PaymentIntent. */
+    public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
+      this.paymentMethodConfiguration = paymentMethodConfiguration;
+      return this;
+    }
+
+    /** The ID of the payment method configuration to use with this PaymentIntent. */
+    public Builder setPaymentMethodConfiguration(EmptyParam paymentMethodConfiguration) {
+      this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
     }
 
