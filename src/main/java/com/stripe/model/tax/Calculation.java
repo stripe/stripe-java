@@ -276,7 +276,7 @@ public class Calculation extends ApiResource implements HasId {
 
     /**
      * The ID of an existing <a
-     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate.</a>
+     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate</a>.
      */
     @SerializedName("shipping_rate")
     String shippingRate;

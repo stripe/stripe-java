@@ -44,7 +44,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** A Product ID. */
+  /** The ID of an existing <a href="https://stripe.com/docs/api/products/object">Product</a>. */
   @SerializedName("product")
   String product;
 

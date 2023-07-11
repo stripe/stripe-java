@@ -52,6 +52,10 @@ public class TransactionLineItem extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The ID of an existing <a href="https://stripe.com/docs/api/products/object">Product</a>. */
+  @SerializedName("product")
+  String product;
+
   /**
    * The number of units of the item being purchased. For reversals, this is the quantity reversed.
    */
