@@ -366,8 +366,7 @@ public class Transaction extends ApiResource implements HasId {
 
     /**
      * The ID of an existing <a
-     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate</a>. (It is not
-     * populated for the transaction resource object and will be removed in the next API version.)
+     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate</a>.
      */
     @SerializedName("shipping_rate")
     String shippingRate;
