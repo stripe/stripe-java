@@ -502,6 +502,18 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   @Getter
   public static class AutomaticPaymentMethods {
+    /**
+     * Controls whether this SetupIntent will accept redirect-based payment methods.
+     *
+     * <p>Redirect-based payment methods may require your customer to be redirected to a payment
+     * method's app or site for authentication or additional steps. To <a
+     * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> this SetupIntent, you
+     * may be required to provide a {@code return_url} to redirect customers back to your site after
+     * they authenticate or complete the setup.
+     */
+    @SerializedName("allow_redirects")
+    AllowRedirects allowRedirects;
+
     /** <strong>Required.</strong> Whether this feature is enabled. */
     @SerializedName("enabled")
     Boolean enabled;
@@ -515,7 +527,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private AutomaticPaymentMethods(Boolean enabled, Map<String, Object> extraParams) {
+    private AutomaticPaymentMethods(
+        AllowRedirects allowRedirects, Boolean enabled, Map<String, Object> extraParams) {
+      this.allowRedirects = allowRedirects;
       this.enabled = enabled;
       this.extraParams = extraParams;
     }
@@ -525,13 +539,31 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AllowRedirects allowRedirects;
+
       private Boolean enabled;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SetupIntentCreateParams.AutomaticPaymentMethods build() {
-        return new SetupIntentCreateParams.AutomaticPaymentMethods(this.enabled, this.extraParams);
+        return new SetupIntentCreateParams.AutomaticPaymentMethods(
+            this.allowRedirects, this.enabled, this.extraParams);
+      }
+
+      /**
+       * Controls whether this SetupIntent will accept redirect-based payment methods.
+       *
+       * <p>Redirect-based payment methods may require your customer to be redirected to a payment
+       * method's app or site for authentication or additional steps. To <a
+       * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> this SetupIntent, you
+       * may be required to provide a {@code return_url} to redirect customers back to your site
+       * after they authenticate or complete the setup.
+       */
+      public Builder setAllowRedirects(
+          SetupIntentCreateParams.AutomaticPaymentMethods.AllowRedirects allowRedirects) {
+        this.allowRedirects = allowRedirects;
+        return this;
       }
 
       /** <strong>Required.</strong> Whether this feature is enabled. */
@@ -565,6 +597,21 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    public enum AllowRedirects implements ApiRequestParams.EnumParam {
+      @SerializedName("always")
+      ALWAYS("always"),
+
+      @SerializedName("never")
+      NEVER("never");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AllowRedirects(String value) {
+        this.value = value;
       }
     }
   }
