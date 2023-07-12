@@ -1363,6 +1363,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay extends StripeObject {
+      /** The Afterpay order ID associated with this payment intent. */
+      @SerializedName("order_id")
+      String orderId;
+
       /** Order identifier shown to the merchant in Afterpay’s online portal. */
       @SerializedName("reference")
       String reference;
