@@ -8,6 +8,14 @@
   * Add support for `payment_method_configuration_details` on `PaymentIntent`
 * [#1602](https://github.com/stripe/stripe-java/pull/1602) Update generated code for beta
 
+## 22.27.0 - 2023-07-13
+* [#1606](https://github.com/stripe/stripe-java/pull/1606) Update generated code
+  * Add support for new resource `Tax.Settings`
+  * Add support for `retrieve` and `update` methods on resource `Settings`
+  * Add support for `order_id` on `Charge.payment_method_details.afterpay_clearpay`
+  * Add support for `allow_redirects` on `PaymentIntent.automatic_payment_methods`, `PaymentIntentCreateParams.automatic_payment_methods`, `SetupIntent.automatic_payment_methods`, and `SetupIntentCreateParams.automatic_payment_methods`
+  * Add support for `product` on `Tax.TransactionLineItem`
+  * Add support for new value `tax.settings.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 22.26.0 - 2023-07-06
 * [#1601](https://github.com/stripe/stripe-java/pull/1601) Update generated code
