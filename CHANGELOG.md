@@ -1,5 +1,14 @@
 # Changelog
 
+## 22.28.0-beta.1 - 2023-07-13
+* [#1605](https://github.com/stripe/stripe-java/pull/1605) Update generated code for beta
+  * Add support for new resource `PaymentMethodConfiguration`
+  * Add support for `create`, `list`, `retrieve`, and `update` methods on resource `PaymentMethodConfiguration`
+  * Add support for `payment_method_configuration` on `PaymentIntentCreateParams` and `PaymentIntentUpdateParams`
+  * Add support for `payment_method_configuration_details` on `PaymentIntent`
+* [#1602](https://github.com/stripe/stripe-java/pull/1602) Update generated code for beta
+
+
 ## 22.26.0 - 2023-07-06
 * [#1601](https://github.com/stripe/stripe-java/pull/1601) Update generated code
   * Add support for `numeric` and `text` on `PaymentLink.custom_fields[]`
