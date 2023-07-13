@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.26.0 - 2023-07-06
+* [#1601](https://github.com/stripe/stripe-java/pull/1601) Update generated code
+  * Add support for `numeric` and `text` on `PaymentLink.custom_fields[]`
+  * Add support for `automatic_tax` on `SubscriptionListParams`
+
 ## 22.26.0-beta.1 - 2023-06-29
 * [#1598](https://github.com/stripe/stripe-java/pull/1598) Update generated code for beta
   * Add support for `metadata` on `Invoice.subscription_details`
