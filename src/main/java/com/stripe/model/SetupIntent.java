@@ -776,6 +776,20 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticPaymentMethods extends StripeObject {
+    /**
+     * Controls whether this SetupIntent will accept redirect-based payment methods.
+     *
+     * <p>Redirect-based payment methods may require your customer to be redirected to a payment
+     * method's app or site for authentication or additional steps. To <a
+     * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> this SetupIntent, you
+     * may be required to provide a {@code return_url} to redirect customers back to your site after
+     * they authenticate or complete the setup.
+     *
+     * <p>One of {@code always}, or {@code never}.
+     */
+    @SerializedName("allow_redirects")
+    String allowRedirects;
+
     /** Automatically calculates compatible payment methods. */
     @SerializedName("enabled")
     Boolean enabled;
