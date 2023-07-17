@@ -142,6 +142,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("usage")
   Usage usage;
 
+  /**
+   * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+   * client-side SDKs to handle the next actions.
+   */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   private SetupIntentCreateParams(
       Boolean attachToSelf,
       AutomaticPaymentMethods automaticPaymentMethods,
@@ -160,7 +167,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       List<String> paymentMethodTypes,
       String returnUrl,
       SingleUse singleUse,
-      Usage usage) {
+      Usage usage,
+      Boolean useStripeSdk) {
     this.attachToSelf = attachToSelf;
     this.automaticPaymentMethods = automaticPaymentMethods;
     this.confirm = confirm;
@@ -179,6 +187,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     this.returnUrl = returnUrl;
     this.singleUse = singleUse;
     this.usage = usage;
+    this.useStripeSdk = useStripeSdk;
   }
 
   public static Builder builder() {
@@ -222,6 +231,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private Usage usage;
 
+    private Boolean useStripeSdk;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentCreateParams build() {
       return new SetupIntentCreateParams(
@@ -242,7 +253,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.paymentMethodTypes,
           this.returnUrl,
           this.singleUse,
-          this.usage);
+          this.usage,
+          this.useStripeSdk);
     }
 
     /**
@@ -496,6 +508,15 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      */
     public Builder setUsage(SetupIntentCreateParams.Usage usage) {
       this.usage = usage;
+      return this;
+    }
+
+    /**
+     * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+     * client-side SDKs to handle the next actions.
+     */
+    public Builder setUseStripeSdk(Boolean useStripeSdk) {
+      this.useStripeSdk = useStripeSdk;
       return this;
     }
   }
