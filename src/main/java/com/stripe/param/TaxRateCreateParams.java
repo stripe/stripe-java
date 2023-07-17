@@ -344,6 +344,9 @@ public class TaxRateCreateParams extends ApiRequestParams {
     @SerializedName("sales_tax")
     SALES_TAX("sales_tax"),
 
+    @SerializedName("service_tax")
+    SERVICE_TAX("service_tax"),
+
     @SerializedName("vat")
     VAT("vat");
 
