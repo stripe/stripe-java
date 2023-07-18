@@ -702,7 +702,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /**
          * Which supported input type will be collected.
          *
-         * <p>One of {@code selection}, or {@code signature}.
+         * <p>One of {@code email}, {@code numeric}, {@code phone}, {@code selection}, {@code
+         * signature}, or {@code text}.
          */
         @SerializedName("type")
         String type;
