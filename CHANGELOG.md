@@ -51,8 +51,8 @@
 
 ## 22.20.0 - 2023-05-19
 * [#1563](https://github.com/stripe/stripe-java/pull/1563) Update generated code
-  * Add support for `subscription_update_confirm` and `subscription_update` on `BillingPortal.Session.flow` and `billing_portal.SessionCreateParams.flow_data`
-  * Add support for new values `subscription_update_confirm` and `subscription_update` on enum `billing_portal.SessionCreateParams.flow_data.type`
+  * Add support for `subscription_update_confirm` and `subscription_update` on `BillingPortal.Session.flow` and `billingportal.SessionCreateParams.flow_data`
+  * Add support for new values `subscription_update_confirm` and `subscription_update` on enum `billingportal.SessionCreateParams.flow_data.type`
   * Add support for `link` on `Charge.payment_method_details.card.wallet` and `PaymentMethod.card.wallet`
   * Add support for `buyer_id` and `cashtag` on `Charge.payment_method_details.cashapp` and `PaymentMethod.cashapp`
   * Add support for new values `amusement_tax` and `communications_tax` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
@@ -146,7 +146,7 @@
 ## 22.9.0 - 2023-02-16
 * [#1514](https://github.com/stripe/stripe-java/pull/1514) API Updates
   * Add support for `refund_payment` method on resource `Terminal.Reader`
-  * Add support for new value `name` on enums `billing_portal.ConfigurationCreateParams.features.customer_update.allowed_updates[]` and `billing_portal.ConfigurationUpdateParams.features.customer_update.allowed_updates[]`
+  * Add support for new value `name` on enums `billingportal.ConfigurationCreateParams.features.customer_update.allowed_updates[]` and `billingportal.ConfigurationUpdateParams.features.customer_update.allowed_updates[]`
   * Add support for `custom_fields` on `Checkout.Session`, `checkout.SessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
   * Add support for `interac_present` on `terminal.ReaderPresentPaymentMethodParams`
   * Change type of `terminal.ReaderPresentPaymentMethodParams.type` from `literal('card_present')` to `enum('card_present'|'interac_present')`
@@ -202,7 +202,7 @@
 
 ## 22.2.0 - 2022-12-06
 * [#1484](https://github.com/stripe/stripe-java/pull/1484) API Updates
-  * Add support for `flow_data` on `billing_portal.SessionCreateParams`
+  * Add support for `flow_data` on `billingportal.SessionCreateParams`
   * Add support for `flow` on `BillingPortal.Session`
 * [#1483](https://github.com/stripe/stripe-java/pull/1483) API Updates
   * Add support for `india_international_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
@@ -329,7 +329,7 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
 
 ## 21.4.0 - 2022-08-26
 * [#1430](https://github.com/stripe/stripe-java/pull/1430) API Updates
-  * Add support for `login_page` on `BillingPortal.Configuration`, `billing_portal.ConfigurationCreateParams`, and `billing_portal.ConfigurationUpdateParams`
+  * Add support for `login_page` on `BillingPortal.Configuration`, `billingportal.ConfigurationCreateParams`, and `billingportal.ConfigurationUpdateParams`
   * Add support for `customs` and `phone_number` on `Issuing.Card.shipping` and `issuing.CardCreateParams.shipping`
   * Add support for new value `deutsche_bank_ag` on enums `PaymentIntentConfirmParams.payment_method_data.eps.bank`, `PaymentIntentCreateParams.payment_method_data.eps.bank`, `PaymentIntentUpdateParams.payment_method_data.eps.bank`, `PaymentMethodCreateParams.eps.bank`, `SetupIntentConfirmParams.payment_method_data.eps.bank`, `SetupIntentCreateParams.payment_method_data.eps.bank`, and `SetupIntentUpdateParams.payment_method_data.eps.bank`
   * Add support for `description` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, `QuoteUpdateParams.subscription_data`, `SubscriptionSchedule.default_settings`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.default_settings`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.default_settings`, and `SubscriptionScheduleUpdateParams.phases[]`
@@ -569,7 +569,7 @@ This release includes breaking changes resulting from:
   * Add support for new resources `Treasury.CreditReversal`, `Treasury.DebitReversal`, `Treasury.FinancialAccountFeatures`, `Treasury.FinancialAccount`, `Treasury.FlowDetails`, `Treasury.InboundTransfer`, `Treasury.OutboundPayment`, `Treasury.OutboundTransfer`, `Treasury.ReceivedCredit`, `Treasury.ReceivedDebit`, `Treasury.TransactionEntry`, and `Treasury.Transaction`
   * Add support for `retrieve_payment_method` method on resource `Customer`
   * Add support for `list_owners` and `list` methods on resource `FinancialConnections.Account`
-  * Change `billing_portal.ConfigurationCreateParams.features.customer_update.allowed_updates` to be optional
+  * Change `billingportal.ConfigurationCreateParams.features.customer_update.allowed_updates` to be optional
   * Add support for `afterpay_clearpay`, `au_becs_debit`, `bacs_debit`, `eps`, `fpx`, `giropay`, `grabpay`, `klarna`, `paynow`, and `sepa_debit` on `Checkout.Session.payment_method_options`
   * Add support for `treasury` on `Issuing.Authorization`, `Issuing.Dispute`, `Issuing.Transaction`, and `issuing.DisputeCreateParams`
   * Add support for `financial_account` on `Issuing.Card` and `issuing.CardCreateParams`
@@ -830,7 +830,7 @@ This release includes breaking changes resulting from:
 
 ## 20.92.0 - 2021-12-09
 * [#1295](https://github.com/stripe/stripe-java/pull/1295) API Updates
-  * Add support for `metadata` on `billing_portal.ConfigurationCreateParams`, `billing_portal.ConfigurationUpdateParams`, and `BillingPortal.Configuration`
+  * Add support for `metadata` on `billingportal.ConfigurationCreateParams`, `billingportal.ConfigurationUpdateParams`, and `BillingPortal.Configuration`
 
 ## 20.91.0 - 2021-12-09
 * [#1294](https://github.com/stripe/stripe-java/pull/1294) API Updates
@@ -953,7 +953,7 @@ This release includes breaking changes resulting from:
 
 ## 20.71.0 - 2021-08-27
 * [#1250](https://github.com/stripe/stripe-java/pull/1250) API Updates
-  * Add support for `cancellation_reason` on `billing_portal.ConfigurationCreateParams.features.subscription_cancel`, `billing_portal.ConfigurationUpdateParams.features.subscription_cancel`, and `BillingPortal.Configuration.features.subscription_cancel`
+  * Add support for `cancellation_reason` on `billingportal.ConfigurationCreateParams.features.subscription_cancel`, `billingportal.ConfigurationUpdateParams.features.subscription_cancel`, and `BillingPortal.Configuration.features.subscription_cancel`
 
 ## 20.70.0 - 2021-08-19
 * [#1249](https://github.com/stripe/stripe-java/pull/1249) API Updates
@@ -962,7 +962,7 @@ This release includes breaking changes resulting from:
 
 ## 20.69.0 - 2021-08-11
 * [#1248](https://github.com/stripe/stripe-java/pull/1248) API Updates
-  * Add support for `locale` on `billing_portal.SessionCreateParams` and `BillingPortal.Session`
+  * Add support for `locale` on `billingportal.SessionCreateParams` and `BillingPortal.Session`
 
 ## 20.68.0 - 2021-08-04
 * [#1246](https://github.com/stripe/stripe-java/pull/1246) API Updates
