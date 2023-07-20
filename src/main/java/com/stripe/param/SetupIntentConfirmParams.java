@@ -57,6 +57,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
   @SerializedName("return_url")
   String returnUrl;
 
+  /**
+   * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+   * client-side SDKs to handle the next actions.
+   */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   private SetupIntentConfirmParams(
       List<String> expand,
       Map<String, Object> extraParams,
@@ -64,7 +71,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       String paymentMethod,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
-      String returnUrl) {
+      String returnUrl,
+      Boolean useStripeSdk) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.mandateData = mandateData;
@@ -72,6 +80,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.returnUrl = returnUrl;
+    this.useStripeSdk = useStripeSdk;
   }
 
   public static Builder builder() {
@@ -93,6 +102,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     private String returnUrl;
 
+    private Boolean useStripeSdk;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentConfirmParams build() {
       return new SetupIntentConfirmParams(
@@ -102,7 +113,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           this.paymentMethod,
           this.paymentMethodData,
           this.paymentMethodOptions,
-          this.returnUrl);
+          this.returnUrl,
+          this.useStripeSdk);
     }
 
     /**
@@ -198,6 +210,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /**
+     * Set to {@code true} when confirming server-side and using Stripe.js, iOS, or Android
+     * client-side SDKs to handle the next actions.
+     */
+    public Builder setUseStripeSdk(Boolean useStripeSdk) {
+      this.useStripeSdk = useStripeSdk;
       return this;
     }
   }
