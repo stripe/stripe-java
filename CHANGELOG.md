@@ -1,5 +1,16 @@
 # Changelog
 
+## 22.28.0 - 2023-07-20
+* [#1611](https://github.com/stripe/stripe-java/pull/1611) Update generated code
+  * Add support for new value `ro_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for `use_stripe_sdk` on `SetupIntentConfirmParams` and `SetupIntentCreateParams`
+  * Add support for new value `service_tax` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
+* [#1609](https://github.com/stripe/stripe-java/pull/1609) Update generated code
+  * Add support for new value `ro_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for `use_stripe_sdk` on `SetupIntentConfirmParams` and `SetupIntentCreateParams`
+  * Add support for new value `service_tax` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
+* [#1610](https://github.com/stripe/stripe-java/pull/1610) Changelog: fix namespaced param names
+
 ## 22.28.0-beta.1 - 2023-07-13
 * [#1605](https://github.com/stripe/stripe-java/pull/1605) Update generated code for beta
   * Add support for new resource `PaymentMethodConfiguration`
