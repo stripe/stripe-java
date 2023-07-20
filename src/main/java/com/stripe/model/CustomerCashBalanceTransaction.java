@@ -81,11 +81,13 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
   RefundedFromPayment refundedFromPayment;
 
   /**
-   * The type of the cash balance transaction. One of {@code applied_to_payment}, {@code
-   * unapplied_from_payment}, {@code refunded_from_payment}, {@code funded}, {@code
-   * return_initiated}, or {@code return_canceled}. New types may be added in future. See <a
+   * The type of the cash balance transaction. New types may be added in future. See <a
    * href="https://stripe.com/docs/payments/customer-balance#types">Customer Balance</a> to learn
    * more about these types.
+   *
+   * <p>One of {@code applied_to_payment}, {@code funded}, {@code funding_reversed}, {@code
+   * refunded_from_payment}, {@code return_canceled}, {@code return_initiated}, or {@code
+   * unapplied_from_payment}.
    */
   @SerializedName("type")
   String type;
