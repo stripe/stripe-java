@@ -1748,6 +1748,37 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testFileList() throws StripeException {
+    FileListParams params = FileListParams.builder().setLimit(3L).build();
+
+    FileCollection files = File.list(params);
+    assertNotNull(files);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/files", params.toMap());
+  }
+
+  @Test
+  public void testFileCreate() throws StripeException {
+    FileCreateParams params =
+        FileCreateParams.builder()
+            .setPurpose(FileCreateParams.Purpose.ACCOUNT_REQUIREMENT)
+            .setFile(
+                new java.io.ByteArrayInputStream(
+                    "Hello world".getBytes(java.nio.charset.Charset.defaultCharset())))
+            .build();
+
+    File file = File.create(params);
+    assertNotNull(file);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/files", params.toMap());
+  }
+
+  @Test
+  public void testFileRetrieve() throws StripeException {
+    File file = File.retrieve("file_xxxxxxxxxxxxx");
+    assertNotNull(file);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/files/file_xxxxxxxxxxxxx");
+  }
+
+  @Test
   public void testAccountList3() throws StripeException {
     com.stripe.param.financialconnections.AccountListParams params =
         com.stripe.param.financialconnections.AccountListParams.builder()
