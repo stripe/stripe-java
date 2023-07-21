@@ -1183,6 +1183,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("subscription_schedule.updated")
     SUBSCRIPTION_SCHEDULE__UPDATED("subscription_schedule.updated"),
 
+    @SerializedName("tax.form.updated")
+    TAX__FORM__UPDATED("tax.form.updated"),
+
     @SerializedName("tax.settings.updated")
     TAX__SETTINGS__UPDATED("tax.settings.updated"),
 
