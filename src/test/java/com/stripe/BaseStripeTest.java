@@ -30,6 +30,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
+import org.mockito.exceptions.base.MockitoAssertionError;
 
 public class BaseStripeTest {
   private static final String MOCK_MINIMUM_VERSION = "0.109.0";
@@ -182,17 +183,30 @@ public class BaseStripeTest {
       url = path;
     }
 
-    Mockito.verify(networkSpy)
-        .request(
-            Mockito.eq(method),
-            Mockito.eq(url),
-            (params != null)
-                ? Mockito.argThat(new ParamMapMatcher(params))
-                : Mockito.<Map<String, Object>>any(),
-            Mockito.<Class<T>>any(),
-            (options != null)
-                ? Mockito.argThat(new RequestOptionsMatcher(options))
-                : Mockito.<RequestOptions>any());
+    try {
+      Mockito.verify(networkSpy)
+          .requestStream(
+              Mockito.eq(method),
+              Mockito.eq(url),
+              (params != null)
+                  ? Mockito.argThat(new ParamMapMatcher(params))
+                  : Mockito.<Map<String, Object>>any(),
+              (options != null)
+                  ? Mockito.argThat(new RequestOptionsMatcher(options))
+                  : Mockito.<RequestOptions>any());
+    } catch (MockitoAssertionError e) {
+      Mockito.verify(networkSpy)
+          .request(
+              Mockito.eq(method),
+              Mockito.eq(url),
+              (params != null)
+                  ? Mockito.argThat(new ParamMapMatcher(params))
+                  : Mockito.<Map<String, Object>>any(),
+              Mockito.<Class<T>>any(),
+              (options != null)
+                  ? Mockito.argThat(new RequestOptionsMatcher(options))
+                  : Mockito.<RequestOptions>any());
+    }
   }
 
   /** Verifies that no request was made. */
