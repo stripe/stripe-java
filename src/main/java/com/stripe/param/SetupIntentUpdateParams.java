@@ -75,6 +75,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   Object paymentMethod;
 
+  /** The ID of the payment method configuration to use with this SetupIntent. */
+  @SerializedName("payment_method_configuration")
+  Object paymentMethodConfiguration;
+
   /**
    * When included, this hash creates a PaymentMethod that is set as the <a
    * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-payment_method">{@code
@@ -103,6 +107,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       List<SetupIntentUpdateParams.FlowDirection> flowDirections,
       Object metadata,
       Object paymentMethod,
+      Object paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes) {
@@ -114,6 +119,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     this.flowDirections = flowDirections;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
+    this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -140,6 +146,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     private Object paymentMethod;
 
+    private Object paymentMethodConfiguration;
+
     private PaymentMethodData paymentMethodData;
 
     private PaymentMethodOptions paymentMethodOptions;
@@ -157,6 +165,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           this.flowDirections,
           this.metadata,
           this.paymentMethod,
+          this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentMethodTypes);
@@ -355,6 +364,18 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /** The ID of the payment method configuration to use with this SetupIntent. */
+    public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
+      this.paymentMethodConfiguration = paymentMethodConfiguration;
+      return this;
+    }
+
+    /** The ID of the payment method configuration to use with this SetupIntent. */
+    public Builder setPaymentMethodConfiguration(EmptyParam paymentMethodConfiguration) {
+      this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
     }
 

@@ -185,6 +185,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentMethod> paymentMethod;
 
+  /** Information about the payment method configuration used for this Setup Intent. */
+  @SerializedName("payment_method_configuration_details")
+  PaymentMethodConfigurationDetails paymentMethodConfigurationDetails;
+
   /** Payment-method-specific configuration for this SetupIntent. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
@@ -902,6 +906,20 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("microdeposit_type")
       String microdepositType;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodConfigurationDetails extends StripeObject implements HasId {
+    /** ID of the payment method configuration used. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /** ID of the parent payment method configuration used. */
+    @SerializedName("parent")
+    String parent;
   }
 
   @Getter
