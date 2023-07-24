@@ -4870,4 +4870,15 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(calculation);
     verifyRequest(ApiResource.RequestMethod.POST, "/v1/tax/calculations", params.toMap());
   }
+
+  @Test
+  public void testQuotePdf() throws StripeException {
+    Quote resource = Quote.retrieve("qt_xxxxxxxxxxxxx");
+
+    QuotePdfParams params = QuotePdfParams.builder().build();
+
+    java.io.InputStream file = resource.pdf(params);
+    assertNotNull(file);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/quotes/qt_xxxxxxxxxxxxx/pdf", params.toMap());
+  }
 }
