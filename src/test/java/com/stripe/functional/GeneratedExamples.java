@@ -4881,4 +4881,17 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(file);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/quotes/qt_xxxxxxxxxxxxx/pdf", params.toMap());
   }
+
+  @Test
+  public void testFormPdf() throws StripeException {
+    com.stripe.model.tax.Form resource = com.stripe.model.tax.Form.retrieve("form_xxxxxxxxxxxxx");
+
+    com.stripe.param.tax.FormPdfParams params =
+        com.stripe.param.tax.FormPdfParams.builder().build();
+
+    com.stripe.model.tax.java.io.InputStream file = resource.pdf(params);
+    assertNotNull(file);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/tax/forms/form_xxxxxxxxxxxxx/pdf", params.toMap());
+  }
 }
