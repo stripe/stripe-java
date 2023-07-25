@@ -4889,7 +4889,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.tax.FormPdfParams params =
         com.stripe.param.tax.FormPdfParams.builder().build();
 
-    com.stripe.model.tax.java.io.InputStream file = resource.pdf(params);
+    java.io.InputStream file = resource.pdf(params);
     assertNotNull(file);
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/tax/forms/form_xxxxxxxxxxxxx/pdf", params.toMap());
