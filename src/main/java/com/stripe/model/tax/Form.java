@@ -160,7 +160,7 @@ public class Form extends ApiResource implements HasId {
       throws StripeException {
     String url =
         ApiResource.fullUrl(
-            Stripe.getApiBase(),
+            Stripe.getUploadBase(),
             options,
             String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
@@ -175,7 +175,7 @@ public class Form extends ApiResource implements HasId {
   public InputStream pdf(FormPdfParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
-            Stripe.getApiBase(),
+            Stripe.getUploadBase(),
             options,
             String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
