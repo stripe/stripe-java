@@ -9,7 +9,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.exception.oauth.InvalidClientException;
 import com.stripe.model.Balance;
-import com.stripe.net.ApiResource;
 import com.stripe.net.OAuth;
 import java.io.IOException;
 import lombok.Cleanup;
