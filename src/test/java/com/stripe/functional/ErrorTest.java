@@ -70,27 +70,4 @@ public class ErrorTest extends BaseStripeTest {
       Stripe.overrideConnectBase(oldBase);
     }
   }
-
-  @Test
-  public void testErrorWithDeveloperMessage()
-      throws StripeException, IOException, InterruptedException {
-    InvalidRequestException exception = null;
-    @Cleanup MockWebServer server = new MockWebServer();
-    server.enqueue(
-        new MockResponse()
-            .setResponseCode(400)
-            .setBody("{\"error\": {\"developer_message\": \"Unacceptable\"}}"));
-
-    Stripe.overrideApiBase(server.url("").toString());
-
-    try {
-      Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", null);
-    } catch (InvalidRequestException e) {
-      exception = e;
-    }
-
-    assertNotNull(exception);
-    assertEquals(Integer.valueOf(400), exception.getStatusCode());
-    assertEquals("Unacceptable", exception.getMessage());
-  }
 }
