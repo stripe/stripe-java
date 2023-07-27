@@ -1,5 +1,9 @@
 # Changelog
 
+## 22.29.0 - 2023-07-27
+* [#1614](https://github.com/stripe/stripe-java/pull/1614) Update generated code
+  * Add support for `monthly_estimated_revenue` on `Account.business_profile`, `AccountCreateParams.business_profile`, and `AccountUpdateParams.business_profile`
+
 ## 22.28.0 - 2023-07-20
 * [#1611](https://github.com/stripe/stripe-java/pull/1611) Update generated code
   * Add support for new value `ro_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
