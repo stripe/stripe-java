@@ -114,7 +114,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * onboarding, such as after generating an account link for the account. See the <a
    * href="https://stripe.com/docs/connect/standard-accounts">Standard onboarding</a> or <a
    * href="https://stripe.com/docs/connect/express-accounts">Express onboarding documentation</a>
-   * for information about platform pre-filling and account onboarding steps.
+   * for information about platform prefilling and account onboarding steps.
    *
    * <p>Related guide: <a
    * href="https://stripe.com/docs/connect/identity-verification-api#person-information">Handling
@@ -217,9 +217,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
-   * information during account onboarding. You can pre-fill any information on the account.
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
+   * information during account onboarding. You can prefill any information on the account.
    */
   public static Account create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -231,9 +231,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
-   * information during account onboarding. You can pre-fill any information on the account.
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
+   * information during account onboarding. You can prefill any information on the account.
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -247,9 +247,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
-   * information during account onboarding. You can pre-fill any information on the account.
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
+   * information during account onboarding. You can prefill any information on the account.
    */
   public static Account create(AccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -261,9 +261,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
-   * information during account onboarding. You can pre-fill any information on the account.
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
+   * information during account onboarding. You can prefill any information on the account.
    */
   public static Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException {
@@ -639,6 +639,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("mcc")
     String mcc;
 
+    @SerializedName("monthly_estimated_revenue")
+    MonthlyEstimatedRevenue monthlyEstimatedRevenue;
+
     /** The customer-facing business name. */
     @SerializedName("name")
     String name;
@@ -669,6 +672,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** The business's publicly available website. */
     @SerializedName("url")
     String url;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MonthlyEstimatedRevenue extends StripeObject {
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+    }
   }
 
   @Getter
