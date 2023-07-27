@@ -6106,7 +6106,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Token used for persistent Link logins. */
+      /** [Deprecated] This is a legacy parameter that no longer has any function. */
       @SerializedName("persistent_token")
       String persistentToken;
 
@@ -6158,7 +6158,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Token used for persistent Link logins. */
+        /** [Deprecated] This is a legacy parameter that no longer has any function. */
         public Builder setPersistentToken(String persistentToken) {
           this.persistentToken = persistentToken;
           return this;

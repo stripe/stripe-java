@@ -1146,7 +1146,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {
-      /** Token used for persistent Link logins. */
+      /** [Deprecated] This is a legacy parameter that no longer has any function. */
       @SerializedName("persistent_token")
       String persistentToken;
     }
