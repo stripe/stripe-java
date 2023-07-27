@@ -1324,7 +1324,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("email")
     String email;
 
-    /** Token used for persistent Link logins. */
+    /** [Deprecated] This is a legacy parameter that no longer has any function. */
     @SerializedName("persistent_token")
     String persistentToken;
   }
