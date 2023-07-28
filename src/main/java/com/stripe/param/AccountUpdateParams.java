@@ -489,6 +489,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("mcc")
     Object mcc;
 
+    /**
+     * An estimate of the monthly revenue of the business. Only accepted for accounts in Brazil and
+     * India.
+     */
+    @SerializedName("monthly_estimated_revenue")
+    MonthlyEstimatedRevenue monthlyEstimatedRevenue;
+
     /** The customer-facing business name. */
     @SerializedName("name")
     Object name;
@@ -523,6 +530,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     private BusinessProfile(
         Map<String, Object> extraParams,
         Object mcc,
+        MonthlyEstimatedRevenue monthlyEstimatedRevenue,
         Object name,
         Object productDescription,
         SupportAddress supportAddress,
@@ -532,6 +540,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object url) {
       this.extraParams = extraParams;
       this.mcc = mcc;
+      this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
       this.name = name;
       this.productDescription = productDescription;
       this.supportAddress = supportAddress;
@@ -549,6 +558,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       private Object mcc;
+
+      private MonthlyEstimatedRevenue monthlyEstimatedRevenue;
 
       private Object name;
 
@@ -569,6 +580,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         return new AccountUpdateParams.BusinessProfile(
             this.extraParams,
             this.mcc,
+            this.monthlyEstimatedRevenue,
             this.name,
             this.productDescription,
             this.supportAddress,
@@ -621,6 +633,16 @@ public class AccountUpdateParams extends ApiRequestParams {
        */
       public Builder setMcc(EmptyParam mcc) {
         this.mcc = mcc;
+        return this;
+      }
+
+      /**
+       * An estimate of the monthly revenue of the business. Only accepted for accounts in Brazil
+       * and India.
+       */
+      public Builder setMonthlyEstimatedRevenue(
+          AccountUpdateParams.BusinessProfile.MonthlyEstimatedRevenue monthlyEstimatedRevenue) {
+        this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
         return this;
       }
 
@@ -707,6 +729,115 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setUrl(EmptyParam url) {
         this.url = url;
         return this;
+      }
+    }
+
+    @Getter
+    public static class MonthlyEstimatedRevenue {
+      /**
+       * <strong>Required.</strong> A non-negative integer representing how much to charge in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
+      @SerializedName("currency")
+      Object currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private MonthlyEstimatedRevenue(
+          Long amount, Object currency, Map<String, Object> extraParams) {
+        this.amount = amount;
+        this.currency = currency;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amount;
+
+        private Object currency;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.BusinessProfile.MonthlyEstimatedRevenue build() {
+          return new AccountUpdateParams.BusinessProfile.MonthlyEstimatedRevenue(
+              this.amount, this.currency, this.extraParams);
+        }
+
+        /**
+         * <strong>Required.</strong> A non-negative integer representing how much to charge in the
+         * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.BusinessProfile.MonthlyEstimatedRevenue#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.BusinessProfile.MonthlyEstimatedRevenue#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 

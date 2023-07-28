@@ -102,6 +102,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   String paymentMethod;
 
+  /** The ID of the payment method configuration to use with this Setup Intent. */
+  @SerializedName("payment_method_configuration")
+  String paymentMethodConfiguration;
+
   /**
    * When included, this hash creates a PaymentMethod that is set as the <a
    * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-payment_method">{@code
@@ -162,6 +166,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String onBehalfOf,
       String paymentMethod,
+      String paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes,
@@ -181,6 +186,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentMethod = paymentMethod;
+    this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -219,6 +225,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private String paymentMethod;
 
+    private String paymentMethodConfiguration;
+
     private PaymentMethodData paymentMethodData;
 
     private PaymentMethodOptions paymentMethodOptions;
@@ -248,6 +256,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.metadata,
           this.onBehalfOf,
           this.paymentMethod,
+          this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
@@ -435,6 +444,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /** The ID of the payment method configuration to use with this Setup Intent. */
+    public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
+      this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
     }
 
@@ -6106,7 +6121,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Token used for persistent Link logins. */
+      /** [Deprecated] This is a legacy parameter that no longer has any function. */
       @SerializedName("persistent_token")
       String persistentToken;
 
@@ -6158,7 +6173,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Token used for persistent Link logins. */
+        /** [Deprecated] This is a legacy parameter that no longer has any function. */
         public Builder setPersistentToken(String persistentToken) {
           this.persistentToken = persistentToken;
           return this;

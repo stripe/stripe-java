@@ -1208,7 +1208,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           @SerializedName("capture_method")
           String captureMethod;
 
-          /** Token used for persistent Link logins. */
+          /** [Deprecated] This is a legacy parameter that no longer has any function. */
           @SerializedName("persistent_token")
           String persistentToken;
 

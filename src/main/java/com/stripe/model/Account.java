@@ -645,6 +645,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("mcc")
     String mcc;
 
+    @SerializedName("monthly_estimated_revenue")
+    MonthlyEstimatedRevenue monthlyEstimatedRevenue;
+
     /** The customer-facing business name. */
     @SerializedName("name")
     String name;
@@ -675,6 +678,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** The business's publicly available website. */
     @SerializedName("url")
     String url;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MonthlyEstimatedRevenue extends StripeObject {
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+    }
   }
 
   @Getter

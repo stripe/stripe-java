@@ -5391,7 +5391,7 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Token used for persistent Link logins. */
+          /** [Deprecated] This is a legacy parameter that no longer has any function. */
           @SerializedName("persistent_token")
           Object persistentToken;
 
@@ -5512,13 +5512,13 @@ public class OrderUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Token used for persistent Link logins. */
+            /** [Deprecated] This is a legacy parameter that no longer has any function. */
             public Builder setPersistentToken(String persistentToken) {
               this.persistentToken = persistentToken;
               return this;
             }
 
-            /** Token used for persistent Link logins. */
+            /** [Deprecated] This is a legacy parameter that no longer has any function. */
             public Builder setPersistentToken(EmptyParam persistentToken) {
               this.persistentToken = persistentToken;
               return this;
