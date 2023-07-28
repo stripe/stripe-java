@@ -528,6 +528,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
+  /** Details about the subscription that created this invoice. */
+  @SerializedName("subscription_details")
+  SubscriptionDetails subscriptionDetails;
+
   /**
    * Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
    */
@@ -2133,6 +2137,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /** The time that the invoice was voided. */
     @SerializedName("voided_at")
     Long voidedAt;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SubscriptionDetails extends StripeObject {
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will reflect
+     * the metadata of the subscription at the time of invoice creation. <em>Note: This attribute is
+     * populated only for invoices created on or after June 29, 2023.</em>
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
   }
 
   @Getter
