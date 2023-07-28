@@ -1,5 +1,9 @@
 # Changelog
 
+## 22.30.0-beta.1 - 2023-07-27
+* [#1617](https://github.com/stripe/stripe-java/pull/1617) Update generated code for beta
+    * Updated stable APIs to the latest version
+
 ## 22.28.0 - 2023-07-20
 * [#1611](https://github.com/stripe/stripe-java/pull/1611) Update generated code
   * Add support for new value `ro_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
@@ -61,7 +65,7 @@
 
 ## 22.24.0-beta.1 - 2023-06-08
 * [#1576](https://github.com/stripe/stripe-java/pull/1576) Update generated code for beta
-  * Updated beta APIs to the latest stable version
+  * Updated stable APIs to the latest version
 
 ## 22.23.1 - 2023-06-09
 * [#1582](https://github.com/stripe/stripe-java/pull/1582) Bugfix: fix `Customer.retrievePaymentMethod` URL interpolation
@@ -527,7 +531,7 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
 
 ## 21.14.0-beta.2 - 2022-11-02
 * [#1467](https://github.com/stripe/stripe-java/pull/1467) API Updates for beta branch
-  * Updated beta APIs to the latest stable version
+  * Updated stable APIs to the latest version
   * Add support for `cashappPayments` and `zipPayments` on `Account`, `AccountCreateParams`, `AccountUpdateParams`.
   * Add support for `cashapp` and `zip` on `Charge`, `PaymentMethod`, `PaymentMethodCreateParams`, `PaymentMethodUpdateParams`.
   * Add support for `trialSettings` on `SubscriptionSchedule`.
