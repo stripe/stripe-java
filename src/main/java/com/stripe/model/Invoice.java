@@ -2184,7 +2184,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will reflect
      * the metadata of the subscription at the time of invoice creation. <em>Note: This attribute is
-     * populated only for invoices created on or after June 28, 2023.</em>
+     * populated only for invoices created on or after June 29, 2023.</em>
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
