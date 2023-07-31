@@ -23,7 +23,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
-   * percentage of the subscription invoice subtotal that will be transferred to the application
+   * percentage of the subscription invoice total that will be transferred to the application
    * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
    * field.
    */
@@ -295,9 +295,9 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. There must be at least 1 line item with a recurring price
-     * to use this field.
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
+     * field.
      */
     public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
@@ -306,9 +306,9 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. There must be at least 1 line item with a recurring price
-     * to use this field.
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
+     * field.
      */
     public Builder setApplicationFeePercent(EmptyParam applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
@@ -1614,9 +1614,9 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * destination account. By default, the entire amount is transferred to the destination. There
-     * must be at least 1 line item with a recurring price to use this field.
+     * the percentage of the subscription invoice total that will be transferred to the destination
+     * account. By default, the entire amount is transferred to the destination. There must be at
+     * least 1 line item with a recurring price to use this field.
      */
     @SerializedName("amount_percent")
     BigDecimal amountPercent;
@@ -1676,7 +1676,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * destination account. By default, the entire amount is transferred to the destination. There
        * must be at least 1 line item with a recurring price to use this field.
        */

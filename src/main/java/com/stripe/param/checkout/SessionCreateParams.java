@@ -11763,10 +11763,10 @@ public class SessionCreateParams extends ApiRequestParams {
   public static class SubscriptionData {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. To use an application fee percent, the request must be
-     * made on behalf of another account, using the {@code Stripe-Account} header or an OAuth key.
-     * For more information, see the application fees <a
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. To use an application fee percent, the request must be made on behalf
+     * of another account, using the {@code Stripe-Account} header or an OAuth key. For more
+     * information, see the application fees <a
      * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
      */
     @SerializedName("application_fee_percent")
@@ -11945,7 +11945,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * application owner's Stripe account. To use an application fee percent, the request must be
        * made on behalf of another account, using the {@code Stripe-Account} header or an OAuth key.
        * For more information, see the application fees <a
@@ -12125,7 +12125,7 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class TransferData {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * destination account. By default, the entire amount is transferred to the destination.
        */
       @SerializedName("amount_percent")
@@ -12170,9 +12170,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * A non-negative decimal between 0 and 100, with at most two decimal places. This
-         * represents the percentage of the subscription invoice subtotal that will be transferred
-         * to the destination account. By default, the entire amount is transferred to the
-         * destination.
+         * represents the percentage of the subscription invoice total that will be transferred to
+         * the destination account. By default, the entire amount is transferred to the destination.
          */
         public Builder setAmountPercent(BigDecimal amountPercent) {
           this.amountPercent = amountPercent;
