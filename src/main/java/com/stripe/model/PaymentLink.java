@@ -57,7 +57,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   Long applicationFeeAmount;
 
   /**
-   * This represents the percentage of the subscription invoice subtotal that will be transferred to
+   * This represents the percentage of the subscription invoice total that will be transferred to
    * the application owner's Stripe account.
    */
   @SerializedName("application_fee_percent")
