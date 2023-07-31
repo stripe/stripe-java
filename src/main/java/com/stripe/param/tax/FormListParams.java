@@ -224,7 +224,7 @@ public class FormListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Specifies the payee type. Always {@code account}. */
+    /** Specifies the payee type. Always {@code account}. */
     @SerializedName("type")
     Type type;
 
@@ -282,7 +282,7 @@ public class FormListParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Specifies the payee type. Always {@code account}. */
+      /** Specifies the payee type. Always {@code account}. */
       public Builder setType(FormListParams.Payee.Type type) {
         this.type = type;
         return this;
