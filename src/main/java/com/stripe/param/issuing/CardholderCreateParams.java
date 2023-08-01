@@ -3,6 +3,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -908,10 +909,10 @@ public class CardholderCreateParams extends ApiRequestParams {
          * Terms.
          */
         @SerializedName("user_agent")
-        String userAgent;
+        Object userAgent;
 
         private UserTermsAcceptance(
-            Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+            Long date, Map<String, Object> extraParams, String ip, Object userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -929,7 +930,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
           private String ip;
 
-          private String userAgent;
+          private Object userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
           public CardholderCreateParams.Individual.CardIssuing.UserTermsAcceptance build() {
@@ -990,6 +991,15 @@ public class CardholderCreateParams extends ApiRequestParams {
            * Terms.
            */
           public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the cardholder accepted the Authorized User
+           * Terms.
+           */
+          public Builder setUserAgent(EmptyParam userAgent) {
             this.userAgent = userAgent;
             return this;
           }

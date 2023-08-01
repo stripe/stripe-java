@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import lombok.Getter;
 public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   /** The Connect application to filter by. */
   @SerializedName("application")
-  String application;
+  Object application;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -29,7 +30,7 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   private PaymentMethodConfigurationListParams(
-      String application, List<String> expand, Map<String, Object> extraParams) {
+      Object application, List<String> expand, Map<String, Object> extraParams) {
     this.application = application;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -40,7 +41,7 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String application;
+    private Object application;
 
     private List<String> expand;
 
@@ -54,6 +55,12 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
 
     /** The Connect application to filter by. */
     public Builder setApplication(String application) {
+      this.application = application;
+      return this;
+    }
+
+    /** The Connect application to filter by. */
+    public Builder setApplication(EmptyParam application) {
       this.application = application;
       return this;
     }

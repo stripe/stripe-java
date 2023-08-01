@@ -8921,10 +8921,10 @@ public class AccountCreateParams extends ApiRequestParams {
          * agreement.
          */
         @SerializedName("user_agent")
-        String userAgent;
+        Object userAgent;
 
         private TosAcceptance(
-            Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+            Long date, Map<String, Object> extraParams, String ip, Object userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -8942,7 +8942,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private String ip;
 
-          private String userAgent;
+          private Object userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountCreateParams.Settings.CardIssuing.TosAcceptance build() {
@@ -9000,6 +9000,15 @@ public class AccountCreateParams extends ApiRequestParams {
            * service agreement.
            */
           public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the account representative accepted the
+           * service agreement.
+           */
+          public Builder setUserAgent(EmptyParam userAgent) {
             this.userAgent = userAgent;
             return this;
           }
@@ -9877,10 +9886,10 @@ public class AccountCreateParams extends ApiRequestParams {
          * agreement.
          */
         @SerializedName("user_agent")
-        String userAgent;
+        Object userAgent;
 
         private TosAcceptance(
-            Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+            Long date, Map<String, Object> extraParams, String ip, Object userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -9898,7 +9907,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private String ip;
 
-          private String userAgent;
+          private Object userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountCreateParams.Settings.Treasury.TosAcceptance build() {
@@ -9956,6 +9965,15 @@ public class AccountCreateParams extends ApiRequestParams {
            * service agreement.
            */
           public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the account representative accepted the
+           * service agreement.
+           */
+          public Builder setUserAgent(EmptyParam userAgent) {
             this.userAgent = userAgent;
             return this;
           }
