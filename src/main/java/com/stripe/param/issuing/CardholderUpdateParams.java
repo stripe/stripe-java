@@ -660,7 +660,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
 
-    /** The date of birth of this cardholder. */
+    /** The date of birth of this cardholder. Cardholders must be older than 13 years old. */
     @SerializedName("dob")
     Dob dob;
 
@@ -742,7 +742,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The date of birth of this cardholder. */
+      /** The date of birth of this cardholder. Cardholders must be older than 13 years old. */
       public Builder setDob(CardholderUpdateParams.Individual.Dob dob) {
         this.dob = dob;
         return this;
