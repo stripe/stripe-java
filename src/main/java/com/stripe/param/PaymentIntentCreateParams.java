@@ -2695,18 +2695,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /** Full name. */
       @SerializedName("name")
-      String name;
+      Object name;
 
       /** Billing phone number (including extension). */
       @SerializedName("phone")
-      String phone;
+      Object phone;
 
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
-          String name,
-          String phone) {
+          Object name,
+          Object phone) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
@@ -2725,9 +2725,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String name;
+        private Object name;
 
-        private String phone;
+        private Object phone;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodData.BillingDetails build() {
@@ -2794,8 +2794,20 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Full name. */
+        public Builder setName(EmptyParam name) {
+          this.name = name;
+          return this;
+        }
+
         /** Billing phone number (including extension). */
         public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+
+        /** Billing phone number (including extension). */
+        public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
           return this;
         }
@@ -10881,7 +10893,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        * case of insufficient uniqueness. We recommend to use the customer's phone number.
        */
       @SerializedName("confirmation_number")
-      String confirmationNumber;
+      Object confirmationNumber;
 
       /**
        * The number of calendar days (between 1 and 60) after which Konbini payment instructions
@@ -10913,7 +10925,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        * convenience store.
        */
       @SerializedName("product_description")
-      String productDescription;
+      Object productDescription;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -10938,11 +10950,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private Konbini(
-          String confirmationNumber,
+          Object confirmationNumber,
           Object expiresAfterDays,
           Object expiresAt,
           Map<String, Object> extraParams,
-          String productDescription,
+          Object productDescription,
           SetupFutureUsage setupFutureUsage) {
         this.confirmationNumber = confirmationNumber;
         this.expiresAfterDays = expiresAfterDays;
@@ -10957,7 +10969,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String confirmationNumber;
+        private Object confirmationNumber;
 
         private Object expiresAfterDays;
 
@@ -10965,7 +10977,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String productDescription;
+        private Object productDescription;
 
         private SetupFutureUsage setupFutureUsage;
 
@@ -10986,6 +10998,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * case of insufficient uniqueness. We recommend to use the customer's phone number.
          */
         public Builder setConfirmationNumber(String confirmationNumber) {
+          this.confirmationNumber = confirmationNumber;
+          return this;
+        }
+
+        /**
+         * An optional 10 to 11 digit numeric-only string determining the confirmation code at
+         * applicable convenience stores. Must not consist of only zeroes and could be rejected in
+         * case of insufficient uniqueness. We recommend to use the customer's phone number.
+         */
+        public Builder setConfirmationNumber(EmptyParam confirmationNumber) {
           this.confirmationNumber = confirmationNumber;
           return this;
         }
@@ -11063,6 +11085,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * convenience store.
          */
         public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /**
+         * A product descriptor of up to 22 characters, which will appear to customers at the
+         * convenience store.
+         */
+        public Builder setProductDescription(EmptyParam productDescription) {
           this.productDescription = productDescription;
           return this;
         }

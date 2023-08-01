@@ -28,7 +28,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
   /** An optional description of what the webhook is used for. */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /**
    * <strong>Required.</strong> The list of events to enable for this endpoint. You may specify
@@ -66,7 +66,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   private WebhookEndpointCreateParams(
       ApiVersion apiVersion,
       Boolean connect,
-      String description,
+      Object description,
       List<WebhookEndpointCreateParams.EnabledEvent> enabledEvents,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -91,7 +91,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     private Boolean connect;
 
-    private String description;
+    private Object description;
 
     private List<WebhookEndpointCreateParams.EnabledEvent> enabledEvents;
 
@@ -136,6 +136,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     /** An optional description of what the webhook is used for. */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** An optional description of what the webhook is used for. */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
