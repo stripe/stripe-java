@@ -24,9 +24,15 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private QuoteMarkStaleQuoteParams(List<String> expand, Map<String, Object> extraParams) {
+  /** Reason the Quote is being marked stale. */
+  @SerializedName("reason")
+  String reason;
+
+  private QuoteMarkStaleQuoteParams(
+      List<String> expand, Map<String, Object> extraParams, String reason) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.reason = reason;
   }
 
   public static Builder builder() {
@@ -38,9 +44,11 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String reason;
+
     /** Finalize and obtain parameter instance from this builder. */
     public QuoteMarkStaleQuoteParams build() {
-      return new QuoteMarkStaleQuoteParams(this.expand, this.extraParams);
+      return new QuoteMarkStaleQuoteParams(this.expand, this.extraParams, this.reason);
     }
 
     /**
@@ -92,6 +100,12 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Reason the Quote is being marked stale. */
+    public Builder setReason(String reason) {
+      this.reason = reason;
       return this;
     }
   }

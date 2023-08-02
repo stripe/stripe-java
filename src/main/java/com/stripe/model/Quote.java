@@ -1588,6 +1588,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @SerializedName("line_invalid")
         String lineInvalid;
 
+        /** The user supplied mark stale reason. */
+        @SerializedName("marked_stale")
+        String markedStale;
+
         /** The ID of the subscription that was canceled. */
         @SerializedName("subscription_canceled")
         String subscriptionCanceled;
