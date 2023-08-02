@@ -33,11 +33,19 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
+  /**
+   * The identifier of the customer whose upcoming invoice you'd like to retrieve. If {@code
+   * automatic_tax} is enabled then one of {@code customer}, {@code customer_details}, {@code
+   * subscription}, or {@code schedule} must be set.
+   */
   @SerializedName("customer")
   String customer;
 
-  /** Details about the customer you want to invoice or overrides for an existing customer. */
+  /**
+   * Details about the customer you want to invoice or overrides for an existing customer. If {@code
+   * automatic_tax} is enabled then one of {@code customer}, {@code customer_details}, {@code
+   * subscription}, or {@code schedule} must be set.
+   */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
 
@@ -369,13 +377,21 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       return this;
     }
 
-    /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
+    /**
+     * The identifier of the customer whose upcoming invoice you'd like to retrieve. If {@code
+     * automatic_tax} is enabled then one of {@code customer}, {@code customer_details}, {@code
+     * subscription}, or {@code schedule} must be set.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /** Details about the customer you want to invoice or overrides for an existing customer. */
+    /**
+     * Details about the customer you want to invoice or overrides for an existing customer. If
+     * {@code automatic_tax} is enabled then one of {@code customer}, {@code customer_details},
+     * {@code subscription}, or {@code schedule} must be set.
+     */
     public Builder setCustomerDetails(InvoiceUpcomingLinesParams.CustomerDetails customerDetails) {
       this.customerDetails = customerDetails;
       return this;
