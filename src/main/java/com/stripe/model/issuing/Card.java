@@ -18,6 +18,7 @@ import com.stripe.param.issuing.CardListParams;
 import com.stripe.param.issuing.CardRetrieveParams;
 import com.stripe.param.issuing.CardReturnCardParams;
 import com.stripe.param.issuing.CardShipCardParams;
+import com.stripe.param.issuing.CardSubmitCardParams;
 import com.stripe.param.issuing.CardUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -387,6 +388,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("address")
     Address address;
 
+    /** Address validation details for the shipment. */
+    @SerializedName("address_validation")
+    AddressValidation addressValidation;
+
     /**
      * The delivery company that shipped a card.
      *
@@ -434,7 +439,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      * The delivery status of the card.
      *
      * <p>One of {@code canceled}, {@code delivered}, {@code failure}, {@code pending}, {@code
-     * returned}, or {@code shipped}.
+     * returned}, {@code shipped}, or {@code submitted}.
      */
     @SerializedName("status")
     String status;
@@ -457,6 +462,33 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AddressValidation extends StripeObject {
+      /**
+       * The address validation capabilities to use.
+       *
+       * <p>One of {@code disabled}, {@code normalization_only}, or {@code
+       * validation_and_normalization}.
+       */
+      @SerializedName("mode")
+      String mode;
+
+      /** The normalized shipping address. */
+      @SerializedName("normalized_address")
+      Address normalizedAddress;
+
+      /**
+       * The validation result for the shipping address.
+       *
+       * <p>One of {@code indeterminate}, {@code likely_deliverable}, or {@code
+       * likely_undeliverable}.
+       */
+      @SerializedName("result")
+      String result;
+    }
 
     @Getter
     @Setter
@@ -834,6 +866,70 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
               options,
               String.format(
                   "/v1/test_helpers/issuing/cards/%s/shipping/fail",
+                  ApiResource.urlEncodeId(this.resource.getId())));
+      return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    }
+
+    /**
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * submitted}.
+     */
+    public Card submitCard() throws StripeException {
+      return submitCard((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /**
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * submitted}.
+     */
+    public Card submitCard(RequestOptions options) throws StripeException {
+      return submitCard((Map<String, Object>) null, options);
+    }
+
+    /**
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * submitted}.
+     */
+    public Card submitCard(Map<String, Object> params) throws StripeException {
+      return submitCard(params, (RequestOptions) null);
+    }
+
+    /**
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * submitted}.
+     */
+    public Card submitCard(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String url =
+          ApiResource.fullUrl(
+              Stripe.getApiBase(),
+              options,
+              String.format(
+                  "/v1/test_helpers/issuing/cards/%s/shipping/submit",
+                  ApiResource.urlEncodeId(this.resource.getId())));
+      return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    }
+
+    /**
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * submitted}.
+     */
+    public Card submitCard(CardSubmitCardParams params) throws StripeException {
+      return submitCard(params, (RequestOptions) null);
+    }
+
+    /**
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * submitted}.
+     */
+    public Card submitCard(CardSubmitCardParams params, RequestOptions options)
+        throws StripeException {
+      String url =
+          ApiResource.fullUrl(
+              Stripe.getApiBase(),
+              options,
+              String.format(
+                  "/v1/test_helpers/issuing/cards/%s/shipping/submit",
                   ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
     }
