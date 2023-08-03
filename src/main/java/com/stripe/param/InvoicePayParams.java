@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,7 @@ public class InvoicePayParams extends ApiRequestParams {
    * default_source, if set.
    */
   @SerializedName("mandate")
-  String mandate;
+  Object mandate;
 
   /**
    * Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to
@@ -78,7 +79,7 @@ public class InvoicePayParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Boolean forgive,
-      String mandate,
+      Object mandate,
       Boolean offSession,
       Boolean paidOutOfBand,
       String paymentMethod,
@@ -104,7 +105,7 @@ public class InvoicePayParams extends ApiRequestParams {
 
     private Boolean forgive;
 
-    private String mandate;
+    private Object mandate;
 
     private Boolean offSession;
 
@@ -201,6 +202,16 @@ public class InvoicePayParams extends ApiRequestParams {
      * default_payment_method or default_source, if set.
      */
     public Builder setMandate(String mandate) {
+      this.mandate = mandate;
+      return this;
+    }
+
+    /**
+     * ID of the mandate to be used for this invoice. It must correspond to the payment method used
+     * to pay the invoice, including the payment_method param or the invoice's
+     * default_payment_method or default_source, if set.
+     */
+    public Builder setMandate(EmptyParam mandate) {
       this.mandate = mandate;
       return this;
     }

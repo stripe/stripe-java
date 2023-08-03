@@ -162,7 +162,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
      * cancelled explicitly by the user.
      */
     @SerializedName("comment")
-    String comment;
+    Object comment;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -181,7 +181,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
     ApiRequestParams.EnumParam feedback;
 
     private CancellationDetails(
-        String comment, Map<String, Object> extraParams, ApiRequestParams.EnumParam feedback) {
+        Object comment, Map<String, Object> extraParams, ApiRequestParams.EnumParam feedback) {
       this.comment = comment;
       this.extraParams = extraParams;
       this.feedback = feedback;
@@ -192,7 +192,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String comment;
+      private Object comment;
 
       private Map<String, Object> extraParams;
 
@@ -209,6 +209,15 @@ public class SubscriptionCancelParams extends ApiRequestParams {
        * cancelled explicitly by the user.
        */
       public Builder setComment(String comment) {
+        this.comment = comment;
+        return this;
+      }
+
+      /**
+       * Additional comments about why the user canceled the subscription, if the subscription was
+       * cancelled explicitly by the user.
+       */
+      public Builder setComment(EmptyParam comment) {
         this.comment = comment;
         return this;
       }

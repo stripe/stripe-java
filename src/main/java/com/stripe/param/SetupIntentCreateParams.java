@@ -2376,18 +2376,18 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       /** Full name. */
       @SerializedName("name")
-      String name;
+      Object name;
 
       /** Billing phone number (including extension). */
       @SerializedName("phone")
-      String phone;
+      Object phone;
 
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
-          String name,
-          String phone) {
+          Object name,
+          Object phone) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
@@ -2406,9 +2406,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String name;
+        private Object name;
 
-        private String phone;
+        private Object phone;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentCreateParams.PaymentMethodData.BillingDetails build() {
@@ -2475,8 +2475,20 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Full name. */
+        public Builder setName(EmptyParam name) {
+          this.name = name;
+          return this;
+        }
+
         /** Billing phone number (including extension). */
         public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+
+        /** Billing phone number (including extension). */
+        public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
           return this;
         }

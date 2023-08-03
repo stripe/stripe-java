@@ -1581,7 +1581,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       @SerializedName("taxability_reason")
       String taxabilityReason;
 
-      /** The amount on which tax is calculated, in %s. */
+      /** The amount on which tax is calculated, in cents (or local equivalent). */
       @SerializedName("taxable_amount")
       Long taxableAmount;
     }
@@ -1736,7 +1736,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         @SerializedName("taxability_reason")
         String taxabilityReason;
 
-        /** The amount on which tax is calculated, in %s. */
+        /** The amount on which tax is calculated, in cents (or local equivalent). */
         @SerializedName("taxable_amount")
         Long taxableAmount;
       }

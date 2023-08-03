@@ -1607,7 +1607,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * purposes.
        */
       @SerializedName("description")
-      String description;
+      Object description;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1660,14 +1660,14 @@ public class OrderCreateParams extends ApiRequestParams {
 
       /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
       @SerializedName("tax_code")
-      String taxCode;
+      Object taxCode;
 
       /** A URL of a publicly-accessible webpage for this product. */
       @SerializedName("url")
       Object url;
 
       private ProductData(
-          String description,
+          Object description,
           Map<String, Object> extraParams,
           String id,
           Object images,
@@ -1675,7 +1675,7 @@ public class OrderCreateParams extends ApiRequestParams {
           String name,
           Object packageDimensions,
           Boolean shippable,
-          String taxCode,
+          Object taxCode,
           Object url) {
         this.description = description;
         this.extraParams = extraParams;
@@ -1694,7 +1694,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String description;
+        private Object description;
 
         private Map<String, Object> extraParams;
 
@@ -1710,7 +1710,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
         private Boolean shippable;
 
-        private String taxCode;
+        private Object taxCode;
 
         private Object url;
 
@@ -1735,6 +1735,16 @@ public class OrderCreateParams extends ApiRequestParams {
          * purposes.
          */
         public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        /**
+         * The product's description, meant to be displayable to the customer. Use this field to
+         * optionally store a long form explanation of the product being sold for your own rendering
+         * purposes.
+         */
+        public Builder setDescription(EmptyParam description) {
           this.description = description;
           return this;
         }
@@ -1908,6 +1918,12 @@ public class OrderCreateParams extends ApiRequestParams {
 
         /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
         public Builder setTaxCode(String taxCode) {
+          this.taxCode = taxCode;
+          return this;
+        }
+
+        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+        public Builder setTaxCode(EmptyParam taxCode) {
           this.taxCode = taxCode;
           return this;
         }
@@ -7527,10 +7543,10 @@ public class OrderCreateParams extends ApiRequestParams {
 
     /** The phone number (including extension) for the recipient of the order. */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     private ShippingDetails(
-        Address address, Map<String, Object> extraParams, String name, String phone) {
+        Address address, Map<String, Object> extraParams, String name, Object phone) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
@@ -7548,7 +7564,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
       private String name;
 
-      private String phone;
+      private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
       public OrderCreateParams.ShippingDetails build() {
@@ -7596,6 +7612,12 @@ public class OrderCreateParams extends ApiRequestParams {
 
       /** The phone number (including extension) for the recipient of the order. */
       public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+
+      /** The phone number (including extension) for the recipient of the order. */
+      public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }

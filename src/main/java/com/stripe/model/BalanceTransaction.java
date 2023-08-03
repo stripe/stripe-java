@@ -26,7 +26,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class BalanceTransaction extends ApiResource implements HasId {
-  /** Gross amount of the transaction, in %s. */
+  /** Gross amount of the transaction, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
 
@@ -61,11 +61,11 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("exchange_rate")
   BigDecimal exchangeRate;
 
-  /** Fees (in %s) paid for this transaction. */
+  /** Fees (in cents (or local equivalent)) paid for this transaction. */
   @SerializedName("fee")
   Long fee;
 
-  /** Detailed breakdown of fees (in %s) paid for this transaction. */
+  /** Detailed breakdown of fees (in cents (or local equivalent)) paid for this transaction. */
   @SerializedName("fee_details")
   List<BalanceTransaction.FeeDetail> feeDetails;
 
@@ -74,7 +74,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
-  /** Net amount of the transaction, in %s. */
+  /** Net amount of the transaction, in cents (or local equivalent). */
   @SerializedName("net")
   Long net;
 

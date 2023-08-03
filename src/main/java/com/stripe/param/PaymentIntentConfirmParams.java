@@ -3984,18 +3984,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /** Full name. */
       @SerializedName("name")
-      String name;
+      Object name;
 
       /** Billing phone number (including extension). */
       @SerializedName("phone")
-      String phone;
+      Object phone;
 
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
-          String name,
-          String phone) {
+          Object name,
+          Object phone) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
@@ -4014,9 +4014,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String name;
+        private Object name;
 
-        private String phone;
+        private Object phone;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodData.BillingDetails build() {
@@ -4083,8 +4083,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
+        /** Full name. */
+        public Builder setName(EmptyParam name) {
+          this.name = name;
+          return this;
+        }
+
         /** Billing phone number (including extension). */
         public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+
+        /** Billing phone number (including extension). */
+        public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
           return this;
         }
@@ -12457,7 +12469,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * case of insufficient uniqueness. We recommend to use the customer's phone number.
        */
       @SerializedName("confirmation_number")
-      String confirmationNumber;
+      Object confirmationNumber;
 
       /**
        * The number of calendar days (between 1 and 60) after which Konbini payment instructions
@@ -12489,7 +12501,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * convenience store.
        */
       @SerializedName("product_description")
-      String productDescription;
+      Object productDescription;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -12514,11 +12526,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private Konbini(
-          String confirmationNumber,
+          Object confirmationNumber,
           Object expiresAfterDays,
           Object expiresAt,
           Map<String, Object> extraParams,
-          String productDescription,
+          Object productDescription,
           SetupFutureUsage setupFutureUsage) {
         this.confirmationNumber = confirmationNumber;
         this.expiresAfterDays = expiresAfterDays;
@@ -12533,7 +12545,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String confirmationNumber;
+        private Object confirmationNumber;
 
         private Object expiresAfterDays;
 
@@ -12541,7 +12553,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String productDescription;
+        private Object productDescription;
 
         private SetupFutureUsage setupFutureUsage;
 
@@ -12562,6 +12574,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * case of insufficient uniqueness. We recommend to use the customer's phone number.
          */
         public Builder setConfirmationNumber(String confirmationNumber) {
+          this.confirmationNumber = confirmationNumber;
+          return this;
+        }
+
+        /**
+         * An optional 10 to 11 digit numeric-only string determining the confirmation code at
+         * applicable convenience stores. Must not consist of only zeroes and could be rejected in
+         * case of insufficient uniqueness. We recommend to use the customer's phone number.
+         */
+        public Builder setConfirmationNumber(EmptyParam confirmationNumber) {
           this.confirmationNumber = confirmationNumber;
           return this;
         }
@@ -12639,6 +12661,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * convenience store.
          */
         public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /**
+         * A product descriptor of up to 22 characters, which will appear to customers at the
+         * convenience store.
+         */
+        public Builder setProductDescription(EmptyParam productDescription) {
           this.productDescription = productDescription;
           return this;
         }
@@ -14397,6 +14428,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("networks")
       Networks networks;
 
+      /** Preferred transaction settlement speed. */
+      @SerializedName("preferred_settlement_speed")
+      ApiRequestParams.EnumParam preferredSettlementSpeed;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -14427,11 +14462,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           FinancialConnections financialConnections,
           Networks networks,
+          ApiRequestParams.EnumParam preferredSettlementSpeed,
           ApiRequestParams.EnumParam setupFutureUsage,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.financialConnections = financialConnections;
         this.networks = networks;
+        this.preferredSettlementSpeed = preferredSettlementSpeed;
         this.setupFutureUsage = setupFutureUsage;
         this.verificationMethod = verificationMethod;
       }
@@ -14447,6 +14484,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Networks networks;
 
+        private ApiRequestParams.EnumParam preferredSettlementSpeed;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private VerificationMethod verificationMethod;
@@ -14457,6 +14496,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.extraParams,
               this.financialConnections,
               this.networks,
+              this.preferredSettlementSpeed,
               this.setupFutureUsage,
               this.verificationMethod);
         }
@@ -14503,6 +14543,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public Builder setNetworks(
             PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks networks) {
           this.networks = networks;
+          return this;
+        }
+
+        /** Preferred transaction settlement speed. */
+        public Builder setPreferredSettlementSpeed(
+            PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.PreferredSettlementSpeed
+                preferredSettlementSpeed) {
+          this.preferredSettlementSpeed = preferredSettlementSpeed;
+          return this;
+        }
+
+        /** Preferred transaction settlement speed. */
+        public Builder setPreferredSettlementSpeed(EmptyParam preferredSettlementSpeed) {
+          this.preferredSettlementSpeed = preferredSettlementSpeed;
           return this;
         }
 
@@ -15039,6 +15093,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           Requested(String value) {
             this.value = value;
           }
+        }
+      }
+
+      public enum PreferredSettlementSpeed implements ApiRequestParams.EnumParam {
+        @SerializedName("fastest")
+        FASTEST("fastest"),
+
+        @SerializedName("standard")
+        STANDARD("standard");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredSettlementSpeed(String value) {
+          this.value = value;
         }
       }
 
