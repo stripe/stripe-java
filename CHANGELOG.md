@@ -1,5 +1,15 @@
 # Changelog
 
+## 22.31.0-beta.1 - 2023-08-03
+* [#1621](https://github.com/stripe/stripe-java/pull/1621) Update generated code for beta
+  * Add support for `submit_card` test helper method on resource `Issuing.Card`
+  * Add support for `address_validation` on `Issuing.Card.shipping` and `issuing.CardCreateParams.shipping`
+  * Add support for `shipping` on `issuing.CardUpdateParams`
+  * Change type of `OrderCreateParams.line_items[].product_data.description`, `OrderCreateParams.line_items[].product_data.tax_code`, `OrderCreateParams.shipping_details.phone`, `OrderUpdateParams.description`, `OrderUpdateParams.line_items[].product_data.description`, `OrderUpdateParams.line_items[].product_data.tax_code`, `OrderUpdateParams.shipping_details.phone`, `PaymentMethodConfigurationListParams.application`, and `QuoteUpdateParams.subscription_data_overrides[].description` from `string` to `emptyStringable(string)`
+  * Add support for `reason` on `QuoteMarkStaleQuoteParams`
+  * Add support for `marked_stale` on `Quote.status_details.stale.last_reason`
+  * Change `tax.FormListParams.payee.type` to be optional
+
 ## 22.30.0-beta.1 - 2023-07-27
 * [#1617](https://github.com/stripe/stripe-java/pull/1617) Update generated code for beta
     * Updated stable APIs to the latest version
