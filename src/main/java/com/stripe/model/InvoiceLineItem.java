@@ -15,13 +15,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class InvoiceLineItem extends StripeObject implements HasId {
-  /** The amount, in %s. */
+  /** The amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * The integer amount in %s representing the amount for this line item, excluding all tax and
-   * discounts.
+   * The integer amount in cents (or local equivalent) representing the amount for this line item,
+   * excluding all tax and discounts.
    */
   @SerializedName("amount_excluding_tax")
   Long amountExcludingTax;
@@ -140,8 +140,8 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   String type;
 
   /**
-   * The amount in %s representing the unit amount for this line item, excluding all tax and
-   * discounts.
+   * The amount in cents (or local equivalent) representing the unit amount for this line item,
+   * excluding all tax and discounts.
    */
   @SerializedName("unit_amount_excluding_tax")
   BigDecimal unitAmountExcludingTax;
@@ -191,7 +191,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class DiscountAmount extends StripeObject {
-    /** The amount, in %s, of the discount. */
+    /** The amount, in cents (or local equivalent), of the discount. */
     @SerializedName("amount")
     Long amount;
 
@@ -265,7 +265,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TaxAmount extends StripeObject {
-    /** The amount, in %s, of the tax. */
+    /** The amount, in cents (or local equivalent), of the tax. */
     @SerializedName("amount")
     Long amount;
 
@@ -292,7 +292,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
     @SerializedName("taxability_reason")
     String taxabilityReason;
 
-    /** The amount on which tax is calculated, in %s. */
+    /** The amount on which tax is calculated, in cents (or local equivalent). */
     @SerializedName("taxable_amount")
     Long taxableAmount;
 

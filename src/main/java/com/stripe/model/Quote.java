@@ -1355,7 +1355,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             @SerializedName("taxability_reason")
             String taxabilityReason;
 
-            /** The amount on which tax is calculated, in %s. */
+            /** The amount on which tax is calculated, in cents (or local equivalent). */
             @SerializedName("taxable_amount")
             Long taxableAmount;
           }
@@ -1476,7 +1476,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             @SerializedName("taxability_reason")
             String taxabilityReason;
 
-            /** The amount on which tax is calculated, in %s. */
+            /** The amount on which tax is calculated, in cents (or local equivalent). */
             @SerializedName("taxable_amount")
             Long taxableAmount;
           }
@@ -2224,7 +2224,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @SerializedName("taxability_reason")
         String taxabilityReason;
 
-        /** The amount on which tax is calculated, in %s. */
+        /** The amount on which tax is calculated, in cents (or local equivalent). */
         @SerializedName("taxable_amount")
         Long taxableAmount;
       }
@@ -2236,8 +2236,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
     /**
-     * The amount in %s that will be transferred to the destination account when the invoice is
-     * paid. By default, the entire amount is transferred to the destination.
+     * The amount in cents (or local equivalent) that will be transferred to the destination account
+     * when the invoice is paid. By default, the entire amount is transferred to the destination.
      */
     @SerializedName("amount")
     Long amount;

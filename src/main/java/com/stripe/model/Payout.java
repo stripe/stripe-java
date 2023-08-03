@@ -31,7 +31,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Payout extends ApiResource implements MetadataStore<Payout>, BalanceTransactionSource {
-  /** Amount (in %s) to be transferred to your bank account or debit card. */
+  /**
+   * Amount (in cents (or local equivalent)) to be transferred to your bank account or debit card.
+   */
   @SerializedName("amount")
   Long amount;
 

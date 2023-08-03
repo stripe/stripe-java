@@ -183,15 +183,15 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   String type;
 
   /**
-   * The unit amount in %s to be charged, represented as a whole integer if possible. Only set if
-   * {@code billing_scheme=per_unit}.
+   * The unit amount in cents (or local equivalent) to be charged, represented as a whole integer if
+   * possible. Only set if {@code billing_scheme=per_unit}.
    */
   @SerializedName("unit_amount")
   Long unitAmount;
 
   /**
-   * The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal
-   * places. Only set if {@code billing_scheme=per_unit}.
+   * The unit amount in cents (or local equivalent) to be charged, represented as a decimal string
+   * with at most 12 decimal places. Only set if {@code billing_scheme=per_unit}.
    */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
@@ -424,15 +424,15 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     List<Price.CurrencyOption.Tier> tiers;
 
     /**
-     * The unit amount in %s to be charged, represented as a whole integer if possible. Only set if
-     * {@code billing_scheme=per_unit}.
+     * The unit amount in cents (or local equivalent) to be charged, represented as a whole integer
+     * if possible. Only set if {@code billing_scheme=per_unit}.
      */
     @SerializedName("unit_amount")
     Long unitAmount;
 
     /**
-     * The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal
-     * places. Only set if {@code billing_scheme=per_unit}.
+     * The unit amount in cents (or local equivalent) to be charged, represented as a decimal string
+     * with at most 12 decimal places. Only set if {@code billing_scheme=per_unit}.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;

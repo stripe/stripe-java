@@ -19,7 +19,7 @@ public class Transaction extends StripeObject implements HasId {
   @SerializedName("account")
   String account;
 
-  /** The amount of this transaction, in %s. */
+  /** The amount of this transaction, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
 
