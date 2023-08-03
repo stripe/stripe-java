@@ -3374,6 +3374,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       FinancialConnections financialConnections;
 
       /**
+       * Preferred transaction settlement speed
+       *
+       * <p>One of {@code fastest}, or {@code standard}.
+       */
+      @SerializedName("preferred_settlement_speed")
+      String preferredSettlementSpeed;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>Providing this parameter will <a
