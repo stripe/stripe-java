@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ConnectCollectionTransfer extends StripeObject implements BalanceTransactionSource {
-  /** Amount transferred, in %s. */
+  /** Amount transferred, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
 

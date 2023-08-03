@@ -244,7 +244,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     /** The messaging shown to customers in the portal. */
     @SerializedName("headline")
-    String headline;
+    Object headline;
 
     /** A link to the business’s publicly available privacy policy. */
     @SerializedName("privacy_policy_url")
@@ -256,7 +256,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private BusinessProfile(
         Map<String, Object> extraParams,
-        String headline,
+        Object headline,
         String privacyPolicyUrl,
         String termsOfServiceUrl) {
       this.extraParams = extraParams;
@@ -272,7 +272,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private String headline;
+      private Object headline;
 
       private String privacyPolicyUrl;
 
@@ -313,6 +313,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
       /** The messaging shown to customers in the portal. */
       public Builder setHeadline(String headline) {
+        this.headline = headline;
+        return this;
+      }
+
+      /** The messaging shown to customers in the portal. */
+      public Builder setHeadline(EmptyParam headline) {
         this.headline = headline;
         return this;
       }

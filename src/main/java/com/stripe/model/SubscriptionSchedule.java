@@ -548,8 +548,8 @@ public class SubscriptionSchedule extends ApiResource
   public static class DefaultSettings extends StripeObject {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account during this phase of the schedule.
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account during this phase of the schedule.
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
@@ -708,7 +708,7 @@ public class SubscriptionSchedule extends ApiResource
     public static class TransferData extends StripeObject {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * destination account. By default, the entire amount is transferred to the destination.
        */
       @SerializedName("amount_percent")
@@ -757,8 +757,8 @@ public class SubscriptionSchedule extends ApiResource
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account during this phase of the schedule.
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account during this phase of the schedule.
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
@@ -1127,7 +1127,7 @@ public class SubscriptionSchedule extends ApiResource
     public static class TransferData extends StripeObject {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * destination account. By default, the entire amount is transferred to the destination.
        */
       @SerializedName("amount_percent")

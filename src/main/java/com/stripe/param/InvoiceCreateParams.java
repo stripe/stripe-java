@@ -1207,7 +1207,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * to pay the invoice, including the invoice's default_payment_method or default_source, if set.
      */
     @SerializedName("default_mandate")
-    String defaultMandate;
+    Object defaultMandate;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1233,7 +1233,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     Object paymentMethodTypes;
 
     private PaymentSettings(
-        String defaultMandate,
+        Object defaultMandate,
         Map<String, Object> extraParams,
         PaymentMethodOptions paymentMethodOptions,
         Object paymentMethodTypes) {
@@ -1248,7 +1248,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String defaultMandate;
+      private Object defaultMandate;
 
       private Map<String, Object> extraParams;
 
@@ -1271,6 +1271,16 @@ public class InvoiceCreateParams extends ApiRequestParams {
        * if set.
        */
       public Builder setDefaultMandate(String defaultMandate) {
+        this.defaultMandate = defaultMandate;
+        return this;
+      }
+
+      /**
+       * ID of the mandate to be used for this invoice. It must correspond to the payment method
+       * used to pay the invoice, including the invoice's default_payment_method or default_source,
+       * if set.
+       */
+      public Builder setDefaultMandate(EmptyParam defaultMandate) {
         this.defaultMandate = defaultMandate;
         return this;
       }
@@ -4072,10 +4082,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /** Recipient phone (including extension). */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     private ShippingDetails(
-        Address address, Map<String, Object> extraParams, String name, String phone) {
+        Address address, Map<String, Object> extraParams, String name, Object phone) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
@@ -4093,7 +4103,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       private String name;
 
-      private String phone;
+      private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceCreateParams.ShippingDetails build() {
@@ -4141,6 +4151,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       /** Recipient phone (including extension). */
       public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+
+      /** Recipient phone (including extension). */
+      public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }
