@@ -1347,9 +1347,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        * of {@code account_requirement}.
        */
       @SerializedName("files")
-      List<Object> files;
+      List<String> files;
 
-      private CompanyAuthorization(Map<String, Object> extraParams, List<Object> files) {
+      private CompanyAuthorization(Map<String, Object> extraParams, List<String> files) {
         this.extraParams = extraParams;
         this.files = files;
       }
@@ -1361,7 +1361,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private List<Object> files;
+        private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PersonCollectionCreateParams.Documents.CompanyAuthorization build() {
@@ -1424,34 +1424,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
           this.files.addAll(elements);
           return this;
         }
-
-        /**
-         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * PersonCollectionCreateParams.Documents.CompanyAuthorization#files} for the field
-         * documentation.
-         */
-        public Builder addFile(EmptyParam element) {
-          if (this.files == null) {
-            this.files = new ArrayList<>();
-          }
-          this.files.add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * PersonCollectionCreateParams.Documents.CompanyAuthorization#files} for the field
-         * documentation.
-         */
-        public Builder addAllFile(List<EmptyParam> elements) {
-          if (this.files == null) {
-            this.files = new ArrayList<>();
-          }
-          this.files.addAll(elements);
-          return this;
-        }
       }
     }
 
@@ -1472,9 +1444,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        * of {@code account_requirement}.
        */
       @SerializedName("files")
-      List<Object> files;
+      List<String> files;
 
-      private Passport(Map<String, Object> extraParams, List<Object> files) {
+      private Passport(Map<String, Object> extraParams, List<String> files) {
         this.extraParams = extraParams;
         this.files = files;
       }
@@ -1486,7 +1458,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private List<Object> files;
+        private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PersonCollectionCreateParams.Documents.Passport build() {
@@ -1546,32 +1518,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
           this.files.addAll(elements);
           return this;
         }
-
-        /**
-         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * PersonCollectionCreateParams.Documents.Passport#files} for the field documentation.
-         */
-        public Builder addFile(EmptyParam element) {
-          if (this.files == null) {
-            this.files = new ArrayList<>();
-          }
-          this.files.add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * PersonCollectionCreateParams.Documents.Passport#files} for the field documentation.
-         */
-        public Builder addAllFile(List<EmptyParam> elements) {
-          if (this.files == null) {
-            this.files = new ArrayList<>();
-          }
-          this.files.addAll(elements);
-          return this;
-        }
       }
     }
 
@@ -1592,9 +1538,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        * of {@code account_requirement}.
        */
       @SerializedName("files")
-      List<Object> files;
+      List<String> files;
 
-      private Visa(Map<String, Object> extraParams, List<Object> files) {
+      private Visa(Map<String, Object> extraParams, List<String> files) {
         this.extraParams = extraParams;
         this.files = files;
       }
@@ -1606,7 +1552,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private List<Object> files;
+        private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PersonCollectionCreateParams.Documents.Visa build() {
@@ -1660,32 +1606,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
          * PersonCollectionCreateParams.Documents.Visa#files} for the field documentation.
          */
         public Builder addAllFile(List<String> elements) {
-          if (this.files == null) {
-            this.files = new ArrayList<>();
-          }
-          this.files.addAll(elements);
-          return this;
-        }
-
-        /**
-         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * PersonCollectionCreateParams.Documents.Visa#files} for the field documentation.
-         */
-        public Builder addFile(EmptyParam element) {
-          if (this.files == null) {
-            this.files = new ArrayList<>();
-          }
-          this.files.add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * PersonCollectionCreateParams.Documents.Visa#files} for the field documentation.
-         */
-        public Builder addAllFile(List<EmptyParam> elements) {
           if (this.files == null) {
             this.files = new ArrayList<>();
           }
