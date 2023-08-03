@@ -23,13 +23,13 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> account;
 
-  /** Amount earned, in %s. */
+  /** Amount earned, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Amount in %s refunded (can be less than the amount attribute on the fee if a partial refund was
-   * issued).
+   * Amount in cents (or local equivalent) refunded (can be less than the amount attribute on the
+   * fee if a partial refund was issued).
    */
   @SerializedName("amount_refunded")
   Long amountRefunded;

@@ -849,8 +849,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
     /**
-     * The amount in %s that will be transferred to the destination account. By default, the entire
-     * amount is transferred to the destination.
+     * The amount in cents (or local equivalent) that will be transferred to the destination
+     * account. By default, the entire amount is transferred to the destination.
      */
     @SerializedName("amount")
     Long amount;

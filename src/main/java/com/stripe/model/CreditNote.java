@@ -28,7 +28,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CreditNote extends ApiResource implements HasId, MetadataStore<CreditNote> {
-  /** The integer amount in %s representing the total amount of the credit note, including tax. */
+  /**
+   * The integer amount in cents (or local equivalent) representing the total amount of the credit
+   * note, including tax.
+   */
   @SerializedName("amount")
   Long amount;
 
@@ -59,7 +62,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<CustomerBalanceTransaction> customerBalanceTransaction;
 
-  /** The integer amount in %s representing the total amount of discount that was credited. */
+  /**
+   * The integer amount in cents (or local equivalent) representing the total amount of discount
+   * that was credited.
+   */
   @SerializedName("discount_amount")
   Long discountAmount;
 
@@ -158,15 +164,15 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   String status;
 
   /**
-   * The integer amount in %s representing the amount of the credit note, excluding exclusive tax
-   * and invoice level discounts.
+   * The integer amount in cents (or local equivalent) representing the amount of the credit note,
+   * excluding exclusive tax and invoice level discounts.
    */
   @SerializedName("subtotal")
   Long subtotal;
 
   /**
-   * The integer amount in %s representing the amount of the credit note, excluding all tax and
-   * invoice level discounts.
+   * The integer amount in cents (or local equivalent) representing the amount of the credit note,
+   * excluding all tax and invoice level discounts.
    */
   @SerializedName("subtotal_excluding_tax")
   Long subtotalExcludingTax;
@@ -176,15 +182,15 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   List<CreditNote.TaxAmount> taxAmounts;
 
   /**
-   * The integer amount in %s representing the total amount of the credit note, including tax and
-   * all discount.
+   * The integer amount in cents (or local equivalent) representing the total amount of the credit
+   * note, including tax and all discount.
    */
   @SerializedName("total")
   Long total;
 
   /**
-   * The integer amount in %s representing the total amount of the credit note, excluding tax, but
-   * including discounts.
+   * The integer amount in cents (or local equivalent) representing the total amount of the credit
+   * note, excluding tax, but including discounts.
    */
   @SerializedName("total_excluding_tax")
   Long totalExcludingTax;
@@ -583,7 +589,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class DiscountAmount extends StripeObject {
-    /** The amount, in %s, of the discount. */
+    /** The amount, in cents (or local equivalent), of the discount. */
     @SerializedName("amount")
     Long amount;
 
@@ -691,7 +697,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
       @SerializedName("taxability_reason")
       String taxabilityReason;
 
-      /** The amount on which tax is calculated, in %s. */
+      /** The amount on which tax is calculated, in cents (or local equivalent). */
       @SerializedName("taxable_amount")
       Long taxableAmount;
     }
@@ -701,7 +707,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TaxAmount extends StripeObject {
-    /** The amount, in %s, of the tax. */
+    /** The amount, in cents (or local equivalent), of the tax. */
     @SerializedName("amount")
     Long amount;
 
@@ -728,7 +734,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @SerializedName("taxability_reason")
     String taxabilityReason;
 
-    /** The amount on which tax is calculated, in %s. */
+    /** The amount on which tax is calculated, in cents (or local equivalent). */
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
