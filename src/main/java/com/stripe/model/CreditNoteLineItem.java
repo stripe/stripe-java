@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** The credit note line item object. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
