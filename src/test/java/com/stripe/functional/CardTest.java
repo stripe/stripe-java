@@ -27,6 +27,7 @@ public class CardTest extends BaseStripeTest {
         ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/customer_with_sources_and_tax_ids.json"),
             Customer.class);
+    customer.setResponseGetter(networkSpy);
 
     return customer;
   }
@@ -36,6 +37,7 @@ public class CardTest extends BaseStripeTest {
     final Card card =
         ApiResource.GSON.fromJson(getResourceAsString("/api_fixtures/card.json"), Card.class);
     card.setCustomer(customer.getId());
+    card.setResponseGetter(networkSpy);
 
     return card;
   }

@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class OAuth {
-  private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
+  private static StripeResponseGetter globalResponseGetter = new LiveStripeResponseGetter();
 
-  public static void setStripeResponseGetter(StripeResponseGetter srg) {
-    OAuth.stripeResponseGetter = srg;
+  public static void setGlobalResponseGetter(StripeResponseGetter srg) {
+    OAuth.globalResponseGetter = srg;
   }
 
   /**
@@ -46,9 +46,14 @@ public final class OAuth {
    */
   public static TokenResponse token(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getConnectBase(), options, "/oauth/token");
-    return OAuth.stripeResponseGetter.oauthRequest(
-        ApiResource.RequestMethod.POST, url, params, TokenResponse.class, options);
+    return OAuth.globalResponseGetter.request(
+        BaseAddress.CONNECT,
+        ApiResource.RequestMethod.POST,
+        "/oauth/token",
+        params,
+        TokenResponse.class,
+        options,
+        ApiMode.OAuth);
   }
 
   /**
@@ -63,10 +68,15 @@ public final class OAuth {
     Map<String, Object> paramsCopy = new HashMap<>();
     paramsCopy.putAll(params);
 
-    String url = ApiResource.fullUrl(Stripe.getConnectBase(), options, "/oauth/deauthorize");
     paramsCopy.put("client_id", getClientId(paramsCopy, options));
-    return OAuth.stripeResponseGetter.oauthRequest(
-        ApiResource.RequestMethod.POST, url, paramsCopy, DeauthorizedAccount.class, options);
+    return OAuth.globalResponseGetter.request(
+        BaseAddress.CONNECT,
+        ApiResource.RequestMethod.POST,
+        "/oauth/deauthorize",
+        paramsCopy,
+        DeauthorizedAccount.class,
+        options,
+        ApiMode.OAuth);
   }
 
   /**

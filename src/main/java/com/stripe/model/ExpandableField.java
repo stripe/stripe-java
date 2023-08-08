@@ -1,10 +1,12 @@
 package com.stripe.model;
 
+import com.stripe.net.StripeResponseGetter;
+
 // This class is meant to be used for expandable fields in the Stripe API.
 // For example, ExpandableField<BalanceTransaction> in Charge.
 // The class should always contain a String id, and may have a null or type T expandedObject.
 // More info here: https://stripe.com/docs/api#expanding_objects
-public class ExpandableField<T extends HasId> {
+public class ExpandableField<T extends HasId> implements StripeActiveObject {
   private String id;
   private T expandedObject;
 
@@ -31,5 +33,10 @@ public class ExpandableField<T extends HasId> {
 
   public void setExpanded(T expandedObject) {
     this.expandedObject = expandedObject;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(expandedObject, responseGetter);
   }
 }

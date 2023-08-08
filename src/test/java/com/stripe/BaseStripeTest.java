@@ -6,11 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObjectInterface;
-import com.stripe.net.ApiResource;
-import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.OAuth;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
+import com.stripe.net.*;
+import com.stripe.net.ApiMode;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,7 +34,9 @@ public class BaseStripeTest {
 
   private static String port;
 
+  public static HttpClient httpClientSpy;
   public static StripeResponseGetter networkSpy;
+  public static StripeClient mockClient;
 
   private String origApiBase;
   private String origApiKey;
@@ -119,9 +118,11 @@ public class BaseStripeTest {
     Stripe.clientId = "ca_123";
     Stripe.enableTelemetry = false;
 
-    networkSpy = Mockito.spy(new LiveStripeResponseGetter());
+    httpClientSpy = Mockito.spy(new HttpURLConnectionClient());
+    networkSpy = Mockito.spy(new LiveStripeResponseGetter(null, httpClientSpy));
+    mockClient = new StripeClient(networkSpy);
     ApiResource.setStripeResponseGetter(networkSpy);
-    OAuth.setStripeResponseGetter(networkSpy);
+    OAuth.setGlobalResponseGetter(networkSpy);
   }
 
   /**
@@ -145,7 +146,7 @@ public class BaseStripeTest {
    */
   public static <T> void verifyRequest(ApiResource.RequestMethod method, String path)
       throws StripeException {
-    verifyRequest(method, path, null, null);
+    verifyRequest(method, path, null);
   }
 
   /**
@@ -159,6 +160,14 @@ public class BaseStripeTest {
     verifyRequest(method, path, params, null);
   }
 
+  public static <T extends StripeObjectInterface> void verifyRequest(
+      ApiResource.RequestMethod method,
+      String path,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws StripeException {
+    verifyRequest(BaseAddress.API, method, path, params, options);
+  }
   /**
    * Verifies that a request was made with the provided parameters.
    *
@@ -168,41 +177,40 @@ public class BaseStripeTest {
    * @param options request options. If null, the options are not checked.
    */
   public static <T extends StripeObjectInterface> void verifyRequest(
+      BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
       RequestOptions options)
       throws StripeException {
-    String url;
-    if (path.startsWith("/")) {
-      url = String.format("%s%s", Stripe.getApiBase(), path);
-    } else {
-      url = path;
-    }
 
     try {
       Mockito.verify(networkSpy)
           .requestStream(
+              Mockito.eq(baseAddress),
               Mockito.eq(method),
-              Mockito.eq(url),
+              Mockito.eq(path),
               (params != null)
                   ? Mockito.argThat(new ParamMapMatcher(params))
                   : Mockito.<Map<String, Object>>any(),
               (options != null)
                   ? Mockito.argThat(new RequestOptionsMatcher(options))
-                  : Mockito.<RequestOptions>any());
+                  : Mockito.<RequestOptions>any(),
+              Mockito.eq(ApiMode.V1));
     } catch (MockitoAssertionError e) {
       Mockito.verify(networkSpy)
           .request(
+              Mockito.eq(baseAddress),
               Mockito.eq(method),
-              Mockito.eq(url),
+              Mockito.eq(path),
               (params != null)
                   ? Mockito.argThat(new ParamMapMatcher(params))
                   : Mockito.<Map<String, Object>>any(),
-              Mockito.<Class<T>>any(),
+              Mockito.<Type>any(),
               (options != null)
                   ? Mockito.argThat(new RequestOptionsMatcher(options))
-                  : Mockito.<RequestOptions>any());
+                  : Mockito.<RequestOptions>any(),
+              Mockito.eq(ApiMode.V1));
     }
   }
 
@@ -223,9 +231,9 @@ public class BaseStripeTest {
    *     String)
    */
   public static <T extends StripeObjectInterface> void stubRequest(
-      ApiResource.RequestMethod method, String path, Class<T> clazz, String response)
+      ApiResource.RequestMethod method, String path, Type typeToken, String response)
       throws StripeException {
-    stubRequest(method, path, null, null, clazz, response);
+    stubRequest(BaseAddress.API, method, path, null, null, typeToken, response);
   }
 
   /**
@@ -238,10 +246,10 @@ public class BaseStripeTest {
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
-      Class<T> clazz,
+      Type typeToken,
       String response)
       throws StripeException {
-    stubRequest(method, path, params, null, clazz, response);
+    stubRequest(BaseAddress.API, method, path, params, null, typeToken, response);
   }
 
   /**
@@ -256,32 +264,29 @@ public class BaseStripeTest {
    * @param response JSON payload of the API resource that will be returned for the stubbed request.
    */
   public static <T extends StripeObjectInterface> void stubRequest(
+      BaseAddress mode,
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
       RequestOptions options,
-      Class<T> clazz,
+      Type typeToken,
       String response)
       throws StripeException {
-    String url;
-    if (path.startsWith("/")) {
-      url = String.format("%s%s", Stripe.getApiBase(), path);
-    } else {
-      url = path;
-    }
 
-    Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
+    Mockito.doReturn(ApiResource.GSON.fromJson(response, typeToken))
         .when(networkSpy)
         .request(
+            Mockito.eq(mode),
             Mockito.eq(method),
-            Mockito.eq(url),
+            Mockito.eq(path),
             (params != null)
                 ? Mockito.argThat(new ParamMapMatcher(params))
                 : Mockito.<Map<String, Object>>any(),
-            Mockito.<Class<T>>any(),
+            Mockito.<Type>any(),
             (options != null)
                 ? Mockito.argThat(new RequestOptionsMatcher(options))
-                : Mockito.<RequestOptions>any());
+                : Mockito.<RequestOptions>any(),
+            Mockito.<ApiMode>any());
   }
 
   /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
@@ -289,12 +294,14 @@ public class BaseStripeTest {
       Class<T> clazz, String response) throws StripeException {
     Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy)
-        .oauthRequest(
+        .request(
+            Mockito.any(BaseAddress.class),
             Mockito.any(ApiResource.RequestMethod.class),
             Mockito.anyString(),
             Mockito.<Map<String, Object>>any(),
             Mockito.<Class<T>>any(),
-            Mockito.<RequestOptions>any());
+            Mockito.<RequestOptions>any(),
+            Mockito.eq(ApiMode.OAuth));
   }
 
   /**

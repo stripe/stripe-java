@@ -38,7 +38,7 @@ public class HttpClientTest extends BaseStripeTest {
             ApiResource.RequestMethod.GET,
             "http://example.com/get",
             null,
-            RequestOptions.builder().setMaxNetworkRetries(2).build());
+            RequestOptions.builder().setApiKey("sk_test_123").setMaxNetworkRetries(2).build());
   }
 
   @Test

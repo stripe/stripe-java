@@ -9,7 +9,9 @@ import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.util.StreamUtils;
 import java.io.IOException;
@@ -29,22 +31,27 @@ public class StripeResponseStreamTest extends BaseStripeTest {
     String id;
 
     public static TestResource retrieve(String id) throws StripeException {
-      return ApiResource.request(
-          ApiResource.RequestMethod.GET,
-          String.format("%s/v1/foos/%s", Stripe.getApiBase(), ApiResource.urlEncodeId(id)),
-          (Map<String, Object>) null,
-          TestResource.class,
-          (RequestOptions) null);
+      return getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.GET,
+              String.format("/v1/foos/%s", ApiResource.urlEncodeId(id)),
+              (Map<String, Object>) null,
+              TestResource.class,
+              (RequestOptions) null,
+              ApiMode.V1);
     }
 
     public InputStream pdf() throws StripeException {
-      String url =
-          String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format("/v1/foobars/%s/pdf", ApiResource.urlEncodeId(this.getId())));
-      return ApiResource.requestStream(
-          ApiResource.RequestMethod.POST, url, (Map<String, Object>) null, (RequestOptions) null);
+      String url = String.format("/v1/foobars/%s/pdf", ApiResource.urlEncodeId(this.getId()));
+      return getResponseGetter()
+          .requestStream(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              url,
+              (Map<String, Object>) null,
+              (RequestOptions) null,
+              ApiMode.V1);
     }
   }
 

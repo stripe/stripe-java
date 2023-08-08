@@ -3,9 +3,6 @@ package com.stripe;
 import com.stripe.net.*;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.Getter;
 
 public class StripeClient {
@@ -301,8 +298,7 @@ public class StripeClient {
         PasswordAuthentication proxyCredential,
         String apiBase,
         String filesBase,
-        String connectBase
-        ) {
+        String connectBase) {
       this.apiKey = apiKey;
       this.clientId = clientId;
       this.connectTimeout = connectTimeout;
@@ -482,8 +478,8 @@ public class StripeClient {
           connectionProxy,
           proxyCredential,
           apiBase,
-              filesBase,
-              connectBase);
+          filesBase,
+          connectBase);
     }
   }
 }

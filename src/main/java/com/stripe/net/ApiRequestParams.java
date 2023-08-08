@@ -3,10 +3,8 @@ package com.stripe.net;
 import java.util.Map;
 
 /**
- * Super class to all api request params objects. This common abstraction is internally used in
- * {@link ApiResource#request(ApiResource.RequestMethod, String, ApiRequestParams, Class,
- * RequestOptions)}. It also exposes a convenient method converting the typed parameter into the
- * legacy support of untyped {@code Map<String, Object>} param.
+ * Super class to all api request params objects. It exposes a convenient method converting the
+ * typed parameter into the legacy support of untyped {@code Map<String, Object>} param.
  */
 public abstract class ApiRequestParams {
   /**
@@ -36,5 +34,17 @@ public abstract class ApiRequestParams {
    */
   public Map<String, Object> toMap() {
     return PARAMS_CONVERTER.convert(this);
+  }
+
+  /**
+   * Convert `params` api request params to an untyped map. The conversion is specific to api
+   * request params object. Please see documentation in {@link
+   * ApiRequestParamsConverter#convert(ApiRequestParams)}.
+   */
+  public static Map<String, Object> paramsToMap(ApiRequestParams params) {
+    if (params == null) {
+      return null;
+    }
+    return params.toMap();
   }
 }

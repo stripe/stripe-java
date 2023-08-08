@@ -27,19 +27,6 @@ class ApiResourceTest {
         });
   }
 
-  @Test
-  public void testFullUrl() {
-    assertEquals(
-        "http://example.com/override/foo",
-        ApiResource.fullUrl(
-            "http://example.com",
-            RequestOptions.builder().setBaseUrl("http://example.com/override").build(),
-            "/foo"));
-    assertEquals(
-        "http://example.com/foo",
-        ApiResource.fullUrl("http://example.com", RequestOptions.builder().build(), "/foo"));
-  }
-
   static class MyClass extends ApiResource {
     public Proxy proxy;
   }

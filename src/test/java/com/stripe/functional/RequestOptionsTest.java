@@ -9,9 +9,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
-import com.stripe.net.ApiResource;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponse;
+import com.stripe.net.*;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Cleanup;
@@ -54,10 +52,15 @@ public class RequestOptionsTest extends BaseStripeTest {
 
     public static MyResource myMethod(Map<String, Object> params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(Stripe.getUploadBase(), options, String.format("/v1/foo/bar"));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, MyResource.class, options);
+      return getGlobalResponseGetter()
+          .request(
+              BaseAddress.FILES,
+              ApiResource.RequestMethod.POST,
+              "/v1/foo/bar",
+              params,
+              MyResource.class,
+              options,
+              ApiMode.V1);
     }
   }
 

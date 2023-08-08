@@ -8,14 +8,10 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.ApiKeyMissingException;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiResource;
-import com.stripe.net.RequestOptions;
+import com.stripe.net.*;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -28,16 +24,32 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
 
     public static SearchableModelCollection search(
         Map<String, Object> params, RequestOptions options) throws StripeException {
-      return requestSearchResult(
-          String.format("%s/v1/searchable_models", Stripe.getApiBase()),
-          params,
-          SearchableModelCollection.class,
-          options);
+      return getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              RequestMethod.GET,
+              "/v1/searchable_models",
+              params,
+              SearchableModelCollection.class,
+              options,
+              ApiMode.V1);
     }
 
     @Override
     public String getId() {
       return id;
+    }
+
+    public SearchableModel delete() throws StripeException {
+      return getResponseGetter()
+          .request(
+              BaseAddress.API,
+              RequestMethod.DELETE,
+              String.format("/v1/searchable_models/%s", getId()),
+              (Map<String, Object>) null,
+              SearchableModel.class,
+              null,
+              ApiMode.V1);
     }
   }
 
@@ -52,29 +64,24 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     pages.add(getResourceAsString("/model_fixtures/searchable_model_page_2.json"));
 
     Mockito.doAnswer(
-            new Answer<SearchableModelCollection>() {
+            new Answer<StripeResponse>() {
               private int count = 0;
 
               // essentially all we're doing here is returning the first page of
               // results on the first request and the second page of results on
               // the second
               @Override
-              public SearchableModelCollection answer(InvocationOnMock invocation) {
+              public StripeResponse answer(InvocationOnMock invocation) {
                 if (count >= pages.size()) {
                   throw new RuntimeException("Page out of bounds");
                 }
 
-                return ApiResource.GSON.fromJson(
-                    pages.get(count++), SearchableModelCollection.class);
+                return new StripeResponse(
+                    200, HttpHeaders.of(Collections.emptyMap()), pages.get(count++));
               }
             })
-        .when(networkSpy)
-        .request(
-            Mockito.any(ApiResource.RequestMethod.class),
-            Mockito.anyString(),
-            Mockito.<Map<String, Object>>any(),
-            Mockito.<Class<SearchableModelCollection>>any(),
-            Mockito.<RequestOptions>any());
+        .when(httpClientSpy)
+        .request(Mockito.any());
   }
 
   @Test
@@ -107,9 +114,13 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     assertEquals("pm_126", models.get(3).getId());
     assertEquals("pm_127", models.get(4).getId());
 
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/searchable_models", page0Params);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/searchable_models", page1Params);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/searchable_models", page2Params);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/searchable_models", page0Params, null);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/searchable_models", page1Params, null);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/searchable_models", page2Params, null);
+    Mockito.verify(networkSpy).validateRequestOptions(Mockito.<RequestOptions>any());
     verifyNoMoreInteractions(networkSpy);
   }
 
@@ -147,9 +158,26 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     assertEquals("pm_126", models.get(3).getId());
     assertEquals("pm_127", models.get(4).getId());
 
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/searchable_models", page0Params, options);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/searchable_models", page1Params, options);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/searchable_models", page2Params, options);
+    // First request made using a static method
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/searchable_models",
+        page0Params,
+        options);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/searchable_models",
+        page1Params,
+        options);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/searchable_models",
+        page2Params,
+        options);
+    Mockito.verify(networkSpy).validateRequestOptions(Mockito.<RequestOptions>any());
     verifyNoMoreInteractions(networkSpy);
   }
 
@@ -167,6 +195,37 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
         () -> {
           collection.autoPagingIterable();
         });
+  }
+
+  @Test
+  public void testPropagatesResponseGetter() throws Exception {
+    Mockito.doAnswer((Answer<SearchableModel>) invocation -> new SearchableModel())
+        .when(networkSpy)
+        .request(
+            Mockito.<BaseAddress>any(),
+            Mockito.eq(ApiResource.RequestMethod.DELETE),
+            Mockito.anyString(),
+            Mockito.<Map<String, Object>>any(),
+            Mockito.<Class<SearchableModel>>any(),
+            Mockito.<RequestOptions>any(),
+            Mockito.<ApiMode>any());
+
+    final String data = getResourceAsString("/model_fixtures/searchable_model_page_0.json");
+    SearchableModelCollection collection =
+        ApiResource.GSON.fromJson(data, SearchableModelCollection.class);
+
+    collection.setResponseGetter(networkSpy);
+
+    SearchableModel model = collection.getData().get(1);
+
+    model.delete();
+
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/searchable_models/%s", model.getId()),
+        null,
+        null);
   }
 
   @Test
