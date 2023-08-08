@@ -33,7 +33,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class TransferReversal extends ApiResource
     implements MetadataStore<TransferReversal>, BalanceTransactionSource {
-  /** Amount, in %s. */
+  /** Amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
 

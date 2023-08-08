@@ -26,7 +26,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class FeeRefund extends ApiResource
     implements MetadataStore<FeeRefund>, BalanceTransactionSource {
-  /** Amount, in %s. */
+  /** Amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
 

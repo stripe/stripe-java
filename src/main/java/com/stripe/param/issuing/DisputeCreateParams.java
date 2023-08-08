@@ -460,7 +460,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Reason for canceling the order. */
       @SerializedName("cancellation_reason")
-      String cancellationReason;
+      Object cancellationReason;
 
       /** Date when the cardholder expected to receive the product. */
       @SerializedName("expected_at")
@@ -468,7 +468,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Explanation of why the cardholder is disputing this transaction. */
       @SerializedName("explanation")
-      String explanation;
+      Object explanation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -481,7 +481,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Description of the merchandise or service that was purchased. */
       @SerializedName("product_description")
-      String productDescription;
+      Object productDescription;
 
       /** Whether the product was a merchandise or service. */
       @SerializedName("product_type")
@@ -499,11 +499,11 @@ public class DisputeCreateParams extends ApiRequestParams {
           Object additionalDocumentation,
           Object canceledAt,
           Object cancellationPolicyProvided,
-          String cancellationReason,
+          Object cancellationReason,
           Object expectedAt,
-          String explanation,
+          Object explanation,
           Map<String, Object> extraParams,
-          String productDescription,
+          Object productDescription,
           ApiRequestParams.EnumParam productType,
           ApiRequestParams.EnumParam returnStatus,
           Object returnedAt) {
@@ -531,15 +531,15 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private Object cancellationPolicyProvided;
 
-        private String cancellationReason;
+        private Object cancellationReason;
 
         private Object expectedAt;
 
-        private String explanation;
+        private Object explanation;
 
         private Map<String, Object> extraParams;
 
-        private String productDescription;
+        private Object productDescription;
 
         private ApiRequestParams.EnumParam productType;
 
@@ -611,6 +611,12 @@ public class DisputeCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Reason for canceling the order. */
+        public Builder setCancellationReason(EmptyParam cancellationReason) {
+          this.cancellationReason = cancellationReason;
+          return this;
+        }
+
         /** Date when the cardholder expected to receive the product. */
         public Builder setExpectedAt(Long expectedAt) {
           this.expectedAt = expectedAt;
@@ -625,6 +631,12 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         /** Explanation of why the cardholder is disputing this transaction. */
         public Builder setExplanation(String explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
           this.explanation = explanation;
           return this;
         }
@@ -659,6 +671,12 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         /** Description of the merchandise or service that was purchased. */
         public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /** Description of the merchandise or service that was purchased. */
+        public Builder setProductDescription(EmptyParam productDescription) {
           this.productDescription = productDescription;
           return this;
         }
@@ -765,7 +783,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Explanation of why the cardholder is disputing this transaction. */
       @SerializedName("explanation")
-      String explanation;
+      Object explanation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -788,7 +806,7 @@ public class DisputeCreateParams extends ApiRequestParams {
           Object cardStatement,
           Object cashReceipt,
           Object checkImage,
-          String explanation,
+          Object explanation,
           Map<String, Object> extraParams,
           String originalTransaction) {
         this.additionalDocumentation = additionalDocumentation;
@@ -813,7 +831,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private Object checkImage;
 
-        private String explanation;
+        private Object explanation;
 
         private Map<String, Object> extraParams;
 
@@ -909,6 +927,12 @@ public class DisputeCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
@@ -959,7 +983,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Explanation of why the cardholder is disputing this transaction. */
       @SerializedName("explanation")
-      String explanation;
+      Object explanation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -971,7 +995,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       private Fraudulent(
-          Object additionalDocumentation, String explanation, Map<String, Object> extraParams) {
+          Object additionalDocumentation, Object explanation, Map<String, Object> extraParams) {
         this.additionalDocumentation = additionalDocumentation;
         this.explanation = explanation;
         this.extraParams = extraParams;
@@ -984,7 +1008,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       public static class Builder {
         private Object additionalDocumentation;
 
-        private String explanation;
+        private Object explanation;
 
         private Map<String, Object> extraParams;
 
@@ -1014,6 +1038,12 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         /** Explanation of why the cardholder is disputing this transaction. */
         public Builder setExplanation(String explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
           this.explanation = explanation;
           return this;
         }
@@ -1059,7 +1089,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Explanation of why the cardholder is disputing this transaction. */
       @SerializedName("explanation")
-      String explanation;
+      Object explanation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1076,7 +1106,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Description of the cardholder's attempt to return the product. */
       @SerializedName("return_description")
-      String returnDescription;
+      Object returnDescription;
 
       /** Result of cardholder's attempt to return the product. */
       @SerializedName("return_status")
@@ -1088,10 +1118,10 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       private MerchandiseNotAsDescribed(
           Object additionalDocumentation,
-          String explanation,
+          Object explanation,
           Map<String, Object> extraParams,
           Object receivedAt,
-          String returnDescription,
+          Object returnDescription,
           ApiRequestParams.EnumParam returnStatus,
           Object returnedAt) {
         this.additionalDocumentation = additionalDocumentation;
@@ -1110,13 +1140,13 @@ public class DisputeCreateParams extends ApiRequestParams {
       public static class Builder {
         private Object additionalDocumentation;
 
-        private String explanation;
+        private Object explanation;
 
         private Map<String, Object> extraParams;
 
         private Object receivedAt;
 
-        private String returnDescription;
+        private Object returnDescription;
 
         private ApiRequestParams.EnumParam returnStatus;
 
@@ -1154,6 +1184,12 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         /** Explanation of why the cardholder is disputing this transaction. */
         public Builder setExplanation(String explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
           this.explanation = explanation;
           return this;
         }
@@ -1200,6 +1236,12 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         /** Description of the cardholder's attempt to return the product. */
         public Builder setReturnDescription(String returnDescription) {
+          this.returnDescription = returnDescription;
+          return this;
+        }
+
+        /** Description of the cardholder's attempt to return the product. */
+        public Builder setReturnDescription(EmptyParam returnDescription) {
           this.returnDescription = returnDescription;
           return this;
         }
@@ -1261,7 +1303,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Explanation of why the cardholder is disputing this transaction. */
       @SerializedName("explanation")
-      String explanation;
+      Object explanation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1274,7 +1316,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Description of the merchandise or service that was purchased. */
       @SerializedName("product_description")
-      String productDescription;
+      Object productDescription;
 
       /** Whether the product was a merchandise or service. */
       @SerializedName("product_type")
@@ -1283,9 +1325,9 @@ public class DisputeCreateParams extends ApiRequestParams {
       private NotReceived(
           Object additionalDocumentation,
           Object expectedAt,
-          String explanation,
+          Object explanation,
           Map<String, Object> extraParams,
-          String productDescription,
+          Object productDescription,
           ApiRequestParams.EnumParam productType) {
         this.additionalDocumentation = additionalDocumentation;
         this.expectedAt = expectedAt;
@@ -1304,11 +1346,11 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private Object expectedAt;
 
-        private String explanation;
+        private Object explanation;
 
         private Map<String, Object> extraParams;
 
-        private String productDescription;
+        private Object productDescription;
 
         private ApiRequestParams.EnumParam productType;
 
@@ -1359,6 +1401,12 @@ public class DisputeCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
@@ -1389,6 +1437,12 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         /** Description of the merchandise or service that was purchased. */
         public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /** Description of the merchandise or service that was purchased. */
+        public Builder setProductDescription(EmptyParam productDescription) {
           this.productDescription = productDescription;
           return this;
         }
@@ -1434,7 +1488,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Explanation of why the cardholder is disputing this transaction. */
       @SerializedName("explanation")
-      String explanation;
+      Object explanation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1447,7 +1501,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Description of the merchandise or service that was purchased. */
       @SerializedName("product_description")
-      String productDescription;
+      Object productDescription;
 
       /** Whether the product was a merchandise or service. */
       @SerializedName("product_type")
@@ -1455,9 +1509,9 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       private Other(
           Object additionalDocumentation,
-          String explanation,
+          Object explanation,
           Map<String, Object> extraParams,
-          String productDescription,
+          Object productDescription,
           ApiRequestParams.EnumParam productType) {
         this.additionalDocumentation = additionalDocumentation;
         this.explanation = explanation;
@@ -1473,11 +1527,11 @@ public class DisputeCreateParams extends ApiRequestParams {
       public static class Builder {
         private Object additionalDocumentation;
 
-        private String explanation;
+        private Object explanation;
 
         private Map<String, Object> extraParams;
 
-        private String productDescription;
+        private Object productDescription;
 
         private ApiRequestParams.EnumParam productType;
 
@@ -1515,6 +1569,12 @@ public class DisputeCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
@@ -1545,6 +1605,12 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         /** Description of the merchandise or service that was purchased. */
         public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /** Description of the merchandise or service that was purchased. */
+        public Builder setProductDescription(EmptyParam productDescription) {
           this.productDescription = productDescription;
           return this;
         }
@@ -1593,11 +1659,11 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Reason for canceling the order. */
       @SerializedName("cancellation_reason")
-      String cancellationReason;
+      Object cancellationReason;
 
       /** Explanation of why the cardholder is disputing this transaction. */
       @SerializedName("explanation")
-      String explanation;
+      Object explanation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1615,8 +1681,8 @@ public class DisputeCreateParams extends ApiRequestParams {
       private ServiceNotAsDescribed(
           Object additionalDocumentation,
           Object canceledAt,
-          String cancellationReason,
-          String explanation,
+          Object cancellationReason,
+          Object explanation,
           Map<String, Object> extraParams,
           Object receivedAt) {
         this.additionalDocumentation = additionalDocumentation;
@@ -1636,9 +1702,9 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private Object canceledAt;
 
-        private String cancellationReason;
+        private Object cancellationReason;
 
-        private String explanation;
+        private Object explanation;
 
         private Map<String, Object> extraParams;
 
@@ -1691,8 +1757,20 @@ public class DisputeCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Reason for canceling the order. */
+        public Builder setCancellationReason(EmptyParam cancellationReason) {
+          this.cancellationReason = cancellationReason;
+          return this;
+        }
+
         /** Explanation of why the cardholder is disputing this transaction. */
         public Builder setExplanation(String explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
           this.explanation = explanation;
           return this;
         }

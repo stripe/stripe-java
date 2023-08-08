@@ -23,7 +23,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
-   * percentage of the subscription invoice subtotal that will be transferred to the application
+   * percentage of the subscription invoice total that will be transferred to the application
    * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
    * field.
    */
@@ -62,7 +62,7 @@ public class QuoteCreateParams extends ApiRequestParams {
    * used.
    */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /** The discounts applied to the quote. You can only set up to one discount. */
   @SerializedName("discounts")
@@ -96,7 +96,7 @@ public class QuoteCreateParams extends ApiRequestParams {
    * settings</a> will be used.
    */
   @SerializedName("footer")
-  String footer;
+  Object footer;
 
   /**
    * Clone an existing quote. The new quote will be created in {@code status=draft}. When using this
@@ -111,7 +111,7 @@ public class QuoteCreateParams extends ApiRequestParams {
    * settings</a> will be used.
    */
   @SerializedName("header")
-  String header;
+  Object header;
 
   /** All invoices will be billed using the specified settings. */
   @SerializedName("invoice_settings")
@@ -162,14 +162,14 @@ public class QuoteCreateParams extends ApiRequestParams {
       CollectionMethod collectionMethod,
       String customer,
       Object defaultTaxRates,
-      String description,
+      Object description,
       Object discounts,
       List<String> expand,
       Long expiresAt,
       Map<String, Object> extraParams,
-      String footer,
+      Object footer,
       FromQuote fromQuote,
-      String header,
+      Object header,
       InvoiceSettings invoiceSettings,
       List<QuoteCreateParams.LineItem> lineItems,
       Map<String, String> metadata,
@@ -217,7 +217,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     private Object defaultTaxRates;
 
-    private String description;
+    private Object description;
 
     private Object discounts;
 
@@ -227,11 +227,11 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String footer;
+    private Object footer;
 
     private FromQuote fromQuote;
 
-    private String header;
+    private Object header;
 
     private InvoiceSettings invoiceSettings;
 
@@ -295,9 +295,9 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. There must be at least 1 line item with a recurring price
-     * to use this field.
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
+     * field.
      */
     public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
@@ -306,9 +306,9 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. There must be at least 1 line item with a recurring price
-     * to use this field.
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
+     * field.
      */
     public Builder setApplicationFeePercent(EmptyParam applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
@@ -391,6 +391,17 @@ public class QuoteCreateParams extends ApiRequestParams {
      * be used.
      */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * A description that will be displayed on the quote PDF. If no value is passed, the default
+     * description configured in your <a
+     * href="https://dashboard.stripe.com/settings/billing/quote">quote template settings</a> will
+     * be used.
+     */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
@@ -510,6 +521,16 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     /**
+     * A footer that will be displayed on the quote PDF. If no value is passed, the default footer
+     * configured in your <a href="https://dashboard.stripe.com/settings/billing/quote">quote
+     * template settings</a> will be used.
+     */
+    public Builder setFooter(EmptyParam footer) {
+      this.footer = footer;
+      return this;
+    }
+
+    /**
      * Clone an existing quote. The new quote will be created in {@code status=draft}. When using
      * this parameter, you cannot specify any other parameters except for {@code expires_at}.
      */
@@ -524,6 +545,16 @@ public class QuoteCreateParams extends ApiRequestParams {
      * template settings</a> will be used.
      */
     public Builder setHeader(String header) {
+      this.header = header;
+      return this;
+    }
+
+    /**
+     * A header that will be displayed on the quote PDF. If no value is passed, the default header
+     * configured in your <a href="https://dashboard.stripe.com/settings/billing/quote">quote
+     * template settings</a> will be used.
+     */
+    public Builder setHeader(EmptyParam header) {
       this.header = header;
       return this;
     }
@@ -1614,9 +1645,9 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * destination account. By default, the entire amount is transferred to the destination. There
-     * must be at least 1 line item with a recurring price to use this field.
+     * the percentage of the subscription invoice total that will be transferred to the destination
+     * account. By default, the entire amount is transferred to the destination. There must be at
+     * least 1 line item with a recurring price to use this field.
      */
     @SerializedName("amount_percent")
     BigDecimal amountPercent;
@@ -1676,7 +1707,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * destination account. By default, the entire amount is transferred to the destination. There
        * must be at least 1 line item with a recurring price to use this field.
        */

@@ -92,11 +92,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("amount_due")
   Long amountDue;
 
-  /** The amount, in %s, that was paid. */
+  /** The amount, in cents (or local equivalent), that was paid. */
   @SerializedName("amount_paid")
   Long amountPaid;
 
-  /** The difference between amount_due and amount_paid, in %s. */
+  /** The difference between amount_due and amount_paid, in cents (or local equivalent). */
   @SerializedName("amount_remaining")
   Long amountRemaining;
 
@@ -111,8 +111,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   ExpandableField<Application> application;
 
   /**
-   * The fee in %s that will be applied to the invoice and transferred to the application owner's
-   * Stripe account when the invoice is paid.
+   * The fee in cents (or local equivalent) that will be applied to the invoice and transferred to
+   * the application owner's Stripe account when the invoice is paid.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -528,6 +528,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
+  /** Details about the subscription that created this invoice. */
+  @SerializedName("subscription_details")
+  SubscriptionDetails subscriptionDetails;
+
   /**
    * Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
    */
@@ -542,8 +546,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Long subtotal;
 
   /**
-   * The integer amount in %s representing the subtotal of the invoice before any invoice level
-   * discount or tax is applied. Item discounts are already incorporated
+   * The integer amount in cents (or local equivalent) representing the subtotal of the invoice
+   * before any invoice level discount or tax is applied. Item discounts are already incorporated
    */
   @SerializedName("subtotal_excluding_tax")
   Long subtotalExcludingTax;
@@ -570,8 +574,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   List<Invoice.TotalDiscountAmount> totalDiscountAmounts;
 
   /**
-   * The integer amount in %s representing the total amount of the invoice including all discounts
-   * but excluding all tax.
+   * The integer amount in cents (or local equivalent) representing the total amount of the invoice
+   * including all discounts but excluding all tax.
    */
   @SerializedName("total_excluding_tax")
   Long totalExcludingTax;
@@ -2108,7 +2112,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @SerializedName("taxability_reason")
       String taxabilityReason;
 
-      /** The amount on which tax is calculated, in %s. */
+      /** The amount on which tax is calculated, in cents (or local equivalent). */
       @SerializedName("taxable_amount")
       Long taxableAmount;
     }
@@ -2133,6 +2137,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /** The time that the invoice was voided. */
     @SerializedName("voided_at")
     Long voidedAt;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SubscriptionDetails extends StripeObject {
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will reflect
+     * the metadata of the subscription at the time of invoice creation. <em>Note: This attribute is
+     * populated only for invoices created on or after June 29, 2023.</em>
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
   }
 
   @Getter
@@ -2165,7 +2182,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TotalDiscountAmount extends StripeObject {
-    /** The amount, in %s, of the discount. */
+    /** The amount, in cents (or local equivalent), of the discount. */
     @SerializedName("amount")
     Long amount;
 
@@ -2198,7 +2215,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TotalTaxAmount extends StripeObject {
-    /** The amount, in %s, of the tax. */
+    /** The amount, in cents (or local equivalent), of the tax. */
     @SerializedName("amount")
     Long amount;
 
@@ -2225,7 +2242,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @SerializedName("taxability_reason")
     String taxabilityReason;
 
-    /** The amount on which tax is calculated, in %s. */
+    /** The amount on which tax is calculated, in cents (or local equivalent). */
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
@@ -2253,8 +2270,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
     /**
-     * The amount in %s that will be transferred to the destination account when the invoice is
-     * paid. By default, the entire amount is transferred to the destination.
+     * The amount in cents (or local equivalent) that will be transferred to the destination account
+     * when the invoice is paid. By default, the entire amount is transferred to the destination.
      */
     @SerializedName("amount")
     Long amount;

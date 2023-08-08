@@ -34,13 +34,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Transfer extends ApiResource
     implements MetadataStore<Transfer>, BalanceTransactionSource {
-  /** Amount in %s to be transferred. */
+  /** Amount in cents (or local equivalent) to be transferred. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Amount in %s reversed (can be less than the amount attribute on the transfer if a partial
-   * reversal was issued).
+   * Amount in cents (or local equivalent) reversed (can be less than the amount attribute on the
+   * transfer if a partial reversal was issued).
    */
   @SerializedName("amount_reversed")
   Long amountReversed;

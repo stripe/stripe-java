@@ -126,7 +126,7 @@ public class LineItem extends StripeObject implements HasId {
     @SerializedName("taxability_reason")
     String taxabilityReason;
 
-    /** The amount on which tax is calculated, in %s. */
+    /** The amount on which tax is calculated, in cents (or local equivalent). */
     @SerializedName("taxable_amount")
     Long taxableAmount;
   }

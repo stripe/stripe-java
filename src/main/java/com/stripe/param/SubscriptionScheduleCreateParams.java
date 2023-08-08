@@ -326,10 +326,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   public static class DefaultSettings {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. The request must be made by a platform account on a
-     * connected account in order to set an application fee percentage. For more information, see
-     * the application fees <a
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. The request must be made by a platform account on a connected account
+     * in order to set an application fee percentage. For more information, see the application fees
+     * <a
      * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
      */
     @SerializedName("application_fee_percent")
@@ -378,7 +378,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * optionally store an explanation of the subscription.
      */
     @SerializedName("description")
-    String description;
+    Object description;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -413,7 +413,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Object billingThresholds,
         CollectionMethod collectionMethod,
         String defaultPaymentMethod,
-        String description,
+        Object description,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
         Object onBehalfOf,
@@ -448,7 +448,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private String defaultPaymentMethod;
 
-      private String description;
+      private Object description;
 
       private Map<String, Object> extraParams;
 
@@ -476,7 +476,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * application owner's Stripe account. The request must be made by a platform account on a
        * connected account in order to set an application fee percentage. For more information, see
        * the application fees <a
@@ -553,6 +553,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        * optionally store an explanation of the subscription.
        */
       public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
+       * Subscription description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription.
+       */
+      public Builder setDescription(EmptyParam description) {
         this.description = description;
         return this;
       }
@@ -888,7 +897,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public static class TransferData {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * destination account. By default, the entire amount is transferred to the destination.
        */
       @SerializedName("amount_percent")
@@ -933,9 +942,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * A non-negative decimal between 0 and 100, with at most two decimal places. This
-         * represents the percentage of the subscription invoice subtotal that will be transferred
-         * to the destination account. By default, the entire amount is transferred to the
-         * destination.
+         * represents the percentage of the subscription invoice total that will be transferred to
+         * the destination account. By default, the entire amount is transferred to the destination.
          */
         public Builder setAmountPercent(BigDecimal amountPercent) {
           this.amountPercent = amountPercent;
@@ -1022,10 +1030,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-     * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. The request must be made by a platform account on a
-     * connected account in order to set an application fee percentage. For more information, see
-     * the application fees <a
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. The request must be made by a platform account on a connected account
+     * in order to set an application fee percentage. For more information, see the application fees
+     * <a
      * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
      */
     @SerializedName("application_fee_percent")
@@ -1097,7 +1105,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * optionally store an explanation of the subscription.
      */
     @SerializedName("description")
-    String description;
+    Object description;
 
     /**
      * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
@@ -1198,7 +1206,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         String currency,
         String defaultPaymentMethod,
         Object defaultTaxRates,
-        String description,
+        Object description,
         Long endDate,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
@@ -1259,7 +1267,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Object defaultTaxRates;
 
-      private String description;
+      private Object description;
 
       private Long endDate;
 
@@ -1340,7 +1348,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * application owner's Stripe account. The request must be made by a platform account on a
        * connected account in order to set an application fee percentage. For more information, see
        * the application fees <a
@@ -1487,6 +1495,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        * optionally store an explanation of the subscription.
        */
       public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
+       * Subscription description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription.
+       */
+      public Builder setDescription(EmptyParam description) {
         this.description = description;
         return this;
       }
@@ -2967,7 +2984,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public static class TransferData {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
-       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * the percentage of the subscription invoice total that will be transferred to the
        * destination account. By default, the entire amount is transferred to the destination.
        */
       @SerializedName("amount_percent")
@@ -3012,9 +3029,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * A non-negative decimal between 0 and 100, with at most two decimal places. This
-         * represents the percentage of the subscription invoice subtotal that will be transferred
-         * to the destination account. By default, the entire amount is transferred to the
-         * destination.
+         * represents the percentage of the subscription invoice total that will be transferred to
+         * the destination account. By default, the entire amount is transferred to the destination.
          */
         public Builder setAmountPercent(BigDecimal amountPercent) {
           this.amountPercent = amountPercent;
