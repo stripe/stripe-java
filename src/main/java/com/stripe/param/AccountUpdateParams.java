@@ -7240,7 +7240,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * AccountUpdateParams.Individual#fullNameAliases} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addFullNameAliase(String element) {
+      public Builder addFullNameAlias(String element) {
         if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
           this.fullNameAliases = new ArrayList<String>();
         }
@@ -7254,7 +7254,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * {@link AccountUpdateParams.Individual#fullNameAliases} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllFullNameAliase(List<String> elements) {
+      public Builder addAllFullNameAlias(List<String> elements) {
         if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
           this.fullNameAliases = new ArrayList<String>();
         }
