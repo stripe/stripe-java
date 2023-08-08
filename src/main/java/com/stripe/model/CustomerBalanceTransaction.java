@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CustomerBalanceTransactionUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -190,15 +193,18 @@ public class CustomerBalanceTransaction extends ApiResource
   public CustomerBalanceTransaction update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/customers/%s/balance_transactions/%s",
+            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            CustomerBalanceTransaction.class,
             options,
-            String.format(
-                "/v1/customers/%s/balance_transactions/%s",
-                ApiResource.urlEncodeId(this.getCustomer()),
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -218,14 +224,26 @@ public class CustomerBalanceTransaction extends ApiResource
       CustomerBalanceTransactionUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/customers/%s/balance_transactions/%s",
+            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            CustomerBalanceTransaction.class,
             options,
-            String.format(
-                "/v1/customers/%s/balance_transactions/%s",
-                ApiResource.urlEncodeId(this.getCustomer()),
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+            ApiMode.V1);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(creditNote, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(invoice, responseGetter);
   }
 }

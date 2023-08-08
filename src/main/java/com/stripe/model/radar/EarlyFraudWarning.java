@@ -2,14 +2,17 @@
 package com.stripe.model.radar;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.PaymentIntent;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.EarlyFraudWarningListParams;
 import com.stripe.param.radar.EarlyFraudWarningRetrieveParams;
 import java.util.Map;
@@ -126,9 +129,16 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /** Returns a list of early fraud warnings. */
   public static EarlyFraudWarningCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/early_fraud_warnings");
-    return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
+    String url = "/v1/radar/early_fraud_warnings";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            EarlyFraudWarningCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of early fraud warnings. */
@@ -140,9 +150,17 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /** Returns a list of early fraud warnings. */
   public static EarlyFraudWarningCollection list(
       EarlyFraudWarningListParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/early_fraud_warnings");
-    return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
+    String url = "/v1/radar/early_fraud_warnings";
+    ApiResource.checkNullTypedParams(url, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            EarlyFraudWarningCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -176,13 +194,17 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
       String earlyFraudWarning, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            EarlyFraudWarning.class,
             options,
-            String.format(
-                "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, EarlyFraudWarning.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -195,12 +217,24 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
       String earlyFraudWarning, EarlyFraudWarningRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning));
+    ApiResource.checkNullTypedParams(url, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            EarlyFraudWarning.class,
             options,
-            String.format(
-                "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, EarlyFraudWarning.class, options);
+            ApiMode.V1);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(charge, responseGetter);
+    trySetResponseGetter(paymentIntent, responseGetter);
   }
 }

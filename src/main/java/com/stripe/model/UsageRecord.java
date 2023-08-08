@@ -2,9 +2,11 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.UsageRecordCreateOnSubscriptionItemParams;
 import java.util.Map;
@@ -81,14 +83,17 @@ public class UsageRecord extends ApiResource implements HasId {
       String subscriptionItem, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(subscriptionItem));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            UsageRecord.class,
             options,
-            String.format(
-                "/v1/subscription_items/%s/usage_records",
-                ApiResource.urlEncodeId(subscriptionItem)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -119,13 +124,17 @@ public class UsageRecord extends ApiResource implements HasId {
       RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(subscriptionItem));
+    ApiResource.checkNullTypedParams(url, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            UsageRecord.class,
             options,
-            String.format(
-                "/v1/subscription_items/%s/usage_records",
-                ApiResource.urlEncodeId(subscriptionItem)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
+            ApiMode.V1);
   }
 }

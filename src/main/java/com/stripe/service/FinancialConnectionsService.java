@@ -1,0 +1,19 @@
+// File generated from our OpenAPI spec
+package com.stripe.service;
+
+import com.stripe.net.ApiService;
+import com.stripe.net.StripeResponseGetter;
+
+public final class FinancialConnectionsService extends ApiService {
+  public FinancialConnectionsService(StripeResponseGetter responseGetter) {
+    super(responseGetter);
+  }
+
+  public com.stripe.service.financialconnections.AccountService accounts() {
+    return new com.stripe.service.financialconnections.AccountService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.financialconnections.SessionService sessions() {
+    return new com.stripe.service.financialconnections.SessionService(this.getResponseGetter());
+  }
+}

@@ -2,15 +2,18 @@
 package com.stripe.model.issuing;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.AuthorizationApproveParams;
 import com.stripe.param.issuing.AuthorizationDeclineParams;
 import com.stripe.param.issuing.AuthorizationListParams;
@@ -258,13 +261,17 @@ public class Authorization extends ApiResource
   public Authorization approve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            Authorization.class,
             options,
-            String.format(
-                "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -290,13 +297,18 @@ public class Authorization extends ApiResource
   public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Authorization.class,
             options,
-            String.format(
-                "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -346,13 +358,17 @@ public class Authorization extends ApiResource
   public Authorization decline(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            Authorization.class,
             options,
-            String.format(
-                "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -378,13 +394,18 @@ public class Authorization extends ApiResource
   public Authorization decline(AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Authorization.class,
             options,
-            String.format(
-                "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -401,8 +422,16 @@ public class Authorization extends ApiResource
    */
   public static AuthorizationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/authorizations");
-    return ApiResource.requestCollection(url, params, AuthorizationCollection.class, options);
+    String url = "/v1/issuing/authorizations";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            AuthorizationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -420,8 +449,17 @@ public class Authorization extends ApiResource
    */
   public static AuthorizationCollection list(AuthorizationListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/authorizations");
-    return ApiResource.requestCollection(url, params, AuthorizationCollection.class, options);
+    String url = "/v1/issuing/authorizations";
+    ApiResource.checkNullTypedParams(url, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            AuthorizationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves an Issuing {@code Authorization} object. */
@@ -440,12 +478,16 @@ public class Authorization extends ApiResource
       String authorization, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            Authorization.class,
             options,
-            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves an Issuing {@code Authorization} object. */
@@ -453,12 +495,17 @@ public class Authorization extends ApiResource
       String authorization, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
+    ApiResource.checkNullTypedParams(url, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Authorization.class,
             options,
-            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -478,12 +525,16 @@ public class Authorization extends ApiResource
   public Authorization update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            Authorization.class,
             options,
-            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -501,12 +552,17 @@ public class Authorization extends ApiResource
   public Authorization update(AuthorizationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Authorization.class,
             options,
-            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -786,5 +842,18 @@ public class Authorization extends ApiResource
      */
     @SerializedName("expiry_check")
     String expiryCheck;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(amountDetails, responseGetter);
+    trySetResponseGetter(card, responseGetter);
+    trySetResponseGetter(cardholder, responseGetter);
+    trySetResponseGetter(merchantData, responseGetter);
+    trySetResponseGetter(networkData, responseGetter);
+    trySetResponseGetter(pendingRequest, responseGetter);
+    trySetResponseGetter(treasury, responseGetter);
+    trySetResponseGetter(verificationData, responseGetter);
   }
 }

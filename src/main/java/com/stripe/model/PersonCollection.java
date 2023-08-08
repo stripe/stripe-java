@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.model;
 
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.PersonCollectionCreateParams;
 import com.stripe.param.PersonCollectionListParams;
@@ -18,8 +20,16 @@ public class PersonCollection extends StripeCollection<Person> {
 
   /** Creates a new person. */
   public Person create(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+    String url = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            Person.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a new person. */
@@ -30,8 +40,17 @@ public class PersonCollection extends StripeCollection<Person> {
   /** Creates a new person. */
   public Person create(PersonCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+    String url = this.getUrl();
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Person.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -48,8 +67,16 @@ public class PersonCollection extends StripeCollection<Person> {
    */
   public PersonCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+    String url = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            PersonCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -66,8 +93,17 @@ public class PersonCollection extends StripeCollection<Person> {
    */
   public PersonCollection list(PersonCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+    String url = this.getUrl();
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            PersonCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves an existing person. */
@@ -83,22 +119,31 @@ public class PersonCollection extends StripeCollection<Person> {
   /** Retrieves an existing person. */
   public Person retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            Person.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Person.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves an existing person. */
   public Person retrieve(String id, PersonCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Person.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Person.class, options);
+            ApiMode.V1);
   }
 }

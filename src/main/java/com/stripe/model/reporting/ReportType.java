@@ -2,10 +2,12 @@
 package com.stripe.model.reporting;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.reporting.ReportTypeListParams;
 import com.stripe.param.reporting.ReportTypeRetrieveParams;
@@ -97,8 +99,16 @@ public class ReportType extends ApiResource implements HasId {
   /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_types");
-    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
+    String url = "/v1/reporting/report_types";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            ReportTypeCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a full list of Report Types. */
@@ -109,8 +119,17 @@ public class ReportType extends ApiResource implements HasId {
   /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_types");
-    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
+    String url = "/v1/reporting/report_types";
+    ApiResource.checkNullTypedParams(url, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            ReportTypeCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -138,12 +157,16 @@ public class ReportType extends ApiResource implements HasId {
       String reportType, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            ReportType.class,
             options,
-            String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -154,11 +177,16 @@ public class ReportType extends ApiResource implements HasId {
       String reportType, ReportTypeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
+    ApiResource.checkNullTypedParams(url, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            ReportType.class,
             options,
-            String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
+            ApiMode.V1);
   }
 }

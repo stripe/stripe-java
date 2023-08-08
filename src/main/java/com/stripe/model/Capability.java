@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CapabilityUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -90,14 +93,18 @@ public class Capability extends ApiResource implements HasId {
   public Capability update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/accounts/%s/capabilities/%s",
+            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            Capability.class,
             options,
-            String.format(
-                "/v1/accounts/%s/capabilities/%s",
-                ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Capability.class, options);
+            ApiMode.V1);
   }
 
   /** Updates an existing Account Capability. */
@@ -109,14 +116,19 @@ public class Capability extends ApiResource implements HasId {
   public Capability update(CapabilityUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+        String.format(
+            "/v1/accounts/%s/capabilities/%s",
+            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Capability.class,
             options,
-            String.format(
-                "/v1/accounts/%s/capabilities/%s",
-                ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Capability.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -398,5 +410,13 @@ public class Capability extends ApiResource implements HasId {
       @SerializedName("requirement")
       String requirement;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(account, responseGetter);
+    trySetResponseGetter(futureRequirements, responseGetter);
+    trySetResponseGetter(requirements, responseGetter);
   }
 }

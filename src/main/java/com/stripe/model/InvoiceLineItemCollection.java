@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.model;
 
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.InvoiceLineItemCollectionListParams;
 import java.util.Map;
@@ -25,8 +27,16 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
    */
   public InvoiceLineItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+    String url = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            params,
+            InvoiceLineItemCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -46,7 +56,16 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
    */
   public InvoiceLineItemCollection list(
       InvoiceLineItemCollectionListParams params, RequestOptions options) throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+    String url = this.getUrl();
+    ApiResource.checkNullTypedParams(url, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            InvoiceLineItemCollection.class,
+            options,
+            ApiMode.V1);
   }
 }
