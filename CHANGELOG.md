@@ -40,11 +40,11 @@ To migrate from resource-based to service-based pattern:
 3. Convert instance resource method calls to `StripeClient` calls. Params classes will, in most cases, stay the same as you used for resource-based calls.
     ```java
    // Before
+   Customer customer = Customer.retrive("cus_123");
    customer.delete();
-
-   // Before
-   customer.delete();
-   PaymentMethod pm = customers.retrievePaymentMethod("pm_123");
+   
+   // After
+   client.customers().delete("cus_123");
 
    // After
    client.customers().delete(customer.id);
@@ -53,10 +53,10 @@ To migrate from resource-based to service-based pattern:
 
 ### Breaking changes
 
-- `RequestOption.getReadTimeout()`, `getConnectTimeout()`, `getMaxNetworkRetries()` now return `Integer` instead of `int`.
-- `RequestOption.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+- `RequestOptions.getReadTimeout()`, `getConnectTimeout()`, `getMaxNetworkRetries()` now return `Integer` instead of `int`.
+- `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
 - `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
-- `StripeResponseGetter.oathRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
+- `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
 - `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
   - `BaseAddress` parameter added.
   - `url` renamed to `path` and is a relative to the base address
@@ -111,7 +111,6 @@ To migrate from resource-based to service-based pattern:
 * [#1601](https://github.com/stripe/stripe-java/pull/1601) Update generated code
   * Add support for `numeric` and `text` on `PaymentLink.custom_fields[]`
   * Add support for `automatic_tax` on `SubscriptionListParams`
-
 
 ## 22.25.0 - 2023-06-29
 * [#1597](https://github.com/stripe/stripe-java/pull/1597) Update generated code
