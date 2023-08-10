@@ -487,6 +487,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("receipt_number")
   String receiptNumber;
 
+  /**
+   * The rendering-related settings that control how the invoice is displayed on customer-facing
+   * surfaces such as PDF and Hosted Invoice Page.
+   */
+  @SerializedName("rendering")
+  Rendering rendering;
+
   /** Options for invoice PDF rendering. */
   @SerializedName("rendering_options")
   RenderingOptions renderingOptions;
@@ -2059,6 +2066,29 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
           List<String> prefetch;
         }
       }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Rendering extends StripeObject {
+    /** Invoice pdf rendering options. */
+    @SerializedName("pdf")
+    Pdf pdf;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pdf extends StripeObject {
+      /**
+       * Page size of invoice pdf. Options include a4, letter, and auto. If set to auto, page size
+       * will be switched to a4 or letter based on customer locale.
+       *
+       * <p>One of {@code a4}, {@code auto}, or {@code letter}.
+       */
+      @SerializedName("page_size")
+      String pageSize;
     }
   }
 

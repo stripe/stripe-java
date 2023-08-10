@@ -177,6 +177,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("pending_invoice_items_behavior")
   PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
 
+  /**
+   * The rendering-related settings that control how the invoice is displayed on customer-facing
+   * surfaces such as PDF and Hosted Invoice Page.
+   */
+  @SerializedName("rendering")
+  Rendering rendering;
+
   /** Options for invoice PDF rendering. */
   @SerializedName("rendering_options")
   Object renderingOptions;
@@ -241,6 +248,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       String onBehalfOf,
       PaymentSettings paymentSettings,
       PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior,
+      Rendering rendering,
       Object renderingOptions,
       ShippingCost shippingCost,
       ShippingDetails shippingDetails,
@@ -271,6 +279,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.onBehalfOf = onBehalfOf;
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
+    this.rendering = rendering;
     this.renderingOptions = renderingOptions;
     this.shippingCost = shippingCost;
     this.shippingDetails = shippingDetails;
@@ -332,6 +341,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
 
+    private Rendering rendering;
+
     private Object renderingOptions;
 
     private ShippingCost shippingCost;
@@ -371,6 +382,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.onBehalfOf,
           this.paymentSettings,
           this.pendingInvoiceItemsBehavior,
+          this.rendering,
           this.renderingOptions,
           this.shippingCost,
           this.shippingDetails,
@@ -794,6 +806,15 @@ public class InvoiceCreateParams extends ApiRequestParams {
     public Builder setPendingInvoiceItemsBehavior(
         InvoiceCreateParams.PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior) {
       this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
+      return this;
+    }
+
+    /**
+     * The rendering-related settings that control how the invoice is displayed on customer-facing
+     * surfaces such as PDF and Hosted Invoice Page.
+     */
+    public Builder setRendering(InvoiceCreateParams.Rendering rendering) {
+      this.rendering = rendering;
       return this;
     }
 
@@ -3328,6 +3349,168 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       PaymentMethodType(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Rendering {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Invoice pdf rendering options. */
+    @SerializedName("pdf")
+    Pdf pdf;
+
+    private Rendering(Map<String, Object> extraParams, Pdf pdf) {
+      this.extraParams = extraParams;
+      this.pdf = pdf;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Pdf pdf;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceCreateParams.Rendering build() {
+        return new InvoiceCreateParams.Rendering(this.extraParams, this.pdf);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreateParams.Rendering#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreateParams.Rendering#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Invoice pdf rendering options. */
+      public Builder setPdf(InvoiceCreateParams.Rendering.Pdf pdf) {
+        this.pdf = pdf;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Pdf {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Page size for invoice PDF. Can be set to a4, letter, or auto. If set to auto, page size
+       * will be switched to a4 or letter based on customer locale.
+       */
+      @SerializedName("page_size")
+      PageSize pageSize;
+
+      private Pdf(Map<String, Object> extraParams, PageSize pageSize) {
+        this.extraParams = extraParams;
+        this.pageSize = pageSize;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private PageSize pageSize;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreateParams.Rendering.Pdf build() {
+          return new InvoiceCreateParams.Rendering.Pdf(this.extraParams, this.pageSize);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.Rendering.Pdf#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.Rendering.Pdf#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Page size for invoice PDF. Can be set to a4, letter, or auto. If set to auto, page size
+         * will be switched to a4 or letter based on customer locale.
+         */
+        public Builder setPageSize(InvoiceCreateParams.Rendering.Pdf.PageSize pageSize) {
+          this.pageSize = pageSize;
+          return this;
+        }
+      }
+
+      public enum PageSize implements ApiRequestParams.EnumParam {
+        @SerializedName("a4")
+        A4("a4"),
+
+        @SerializedName("auto")
+        AUTO("auto"),
+
+        @SerializedName("letter")
+        LETTER("letter");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PageSize(String value) {
+          this.value = value;
+        }
       }
     }
   }
