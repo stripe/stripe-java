@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PlanCreateParams;
 import com.stripe.param.PlanListParams;
 import com.stripe.param.PlanRetrieveParams;
@@ -227,8 +230,16 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    */
   public static Plan create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/plans");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+    String path = "/v1/plans";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Plan.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -247,8 +258,17 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    */
   public static Plan create(PlanCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/plans");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+    String path = "/v1/plans";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Plan.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
@@ -268,12 +288,16 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
   public Plan delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            params,
+            Plan.class,
             options,
-            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, Plan.class, options);
+            ApiMode.V1);
   }
 
   /** Returns a list of your plans. */
@@ -284,8 +308,16 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Returns a list of your plans. */
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/plans");
-    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
+    String path = "/v1/plans";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            PlanCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of your plans. */
@@ -296,8 +328,17 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Returns a list of your plans. */
   public static PlanCollection list(PlanListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/plans");
-    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
+    String path = "/v1/plans";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PlanCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the plan with the given ID. */
@@ -313,23 +354,32 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Retrieves the plan with the given ID. */
   public static Plan retrieve(String plan, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Plan.class,
             options,
-            String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the plan with the given ID. */
   public static Plan retrieve(String plan, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Plan.class,
             options,
-            String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -349,12 +399,16 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    */
   @Override
   public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Plan.class,
             options,
-            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -372,12 +426,17 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * billing cycle.
    */
   public Plan update(PlanUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Plan.class,
             options,
-            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -420,5 +479,12 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
      */
     @SerializedName("round")
     String round;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(product, responseGetter);
+    trySetResponseGetter(transformUsage, responseGetter);
   }
 }

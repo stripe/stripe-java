@@ -1,8 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.Stripe;
-import com.stripe.net.ApiResource;
-import com.stripe.net.RequestOptions;
+import com.stripe.net.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,13 +17,15 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
 
   private String lastId;
 
-  PagingIterator(final StripeCollectionInterface<T> stripeCollection) {
-    this.url = Stripe.getApiBase() + stripeCollection.getUrl();
+  PagingIterator(
+      final StripeCollectionInterface<T> stripeCollection, StripeResponseGetter responseGetter) {
+    this.url = stripeCollection.getUrl();
 
     this.collectionType = stripeCollection.getClass();
 
     this.currentCollection = stripeCollection;
     this.currentDataIterator = stripeCollection.getData().iterator();
+    setResponseGetter(responseGetter);
   }
 
   @Override
@@ -75,6 +75,8 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
   @SuppressWarnings("unchecked")
   private StripeCollectionInterface<T> list(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
-    return ApiResource.requestCollection(url, params, collectionType, options);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API, RequestMethod.GET, url, params, collectionType, options, ApiMode.V1);
   }
 }

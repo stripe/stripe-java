@@ -2,13 +2,16 @@
 package com.stripe.model.identity;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.identity.VerificationReportListParams;
 import com.stripe.param.identity.VerificationReportRetrieveParams;
 import java.util.List;
@@ -97,9 +100,16 @@ public class VerificationReport extends ApiResource implements HasId {
   /** List all verification reports. */
   public static VerificationReportCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_reports");
-    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
+    String path = "/v1/identity/verification_reports";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            VerificationReportCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List all verification reports. */
@@ -111,9 +121,17 @@ public class VerificationReport extends ApiResource implements HasId {
   /** List all verification reports. */
   public static VerificationReportCollection list(
       VerificationReportListParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_reports");
-    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
+    String path = "/v1/identity/verification_reports";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            VerificationReportCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves an existing VerificationReport. */
@@ -130,26 +148,35 @@ public class VerificationReport extends ApiResource implements HasId {
   /** Retrieves an existing VerificationReport. */
   public static VerificationReport retrieve(
       String report, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            VerificationReport.class,
             options,
-            String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, VerificationReport.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves an existing VerificationReport. */
   public static VerificationReport retrieve(
       String report, VerificationReportRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            VerificationReport.class,
             options,
-            String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, VerificationReport.class, options);
+            ApiMode.V1);
   }
 
   /** Result from a document check. */
@@ -477,5 +504,14 @@ public class VerificationReport extends ApiResource implements HasId {
       @SerializedName("reason")
       String reason;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(document, responseGetter);
+    trySetResponseGetter(idNumber, responseGetter);
+    trySetResponseGetter(options, responseGetter);
+    trySetResponseGetter(selfie, responseGetter);
   }
 }

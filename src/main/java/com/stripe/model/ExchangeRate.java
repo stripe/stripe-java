@@ -2,9 +2,11 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.ExchangeRateListParams;
 import com.stripe.param.ExchangeRateRetrieveParams;
@@ -66,8 +68,16 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   public static ExchangeRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/exchange_rates");
-    return ApiResource.requestCollection(url, params, ExchangeRateCollection.class, options);
+    String path = "/v1/exchange_rates";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ExchangeRateCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -84,8 +94,17 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   public static ExchangeRateCollection list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/exchange_rates");
-    return ApiResource.requestCollection(url, params, ExchangeRateCollection.class, options);
+    String path = "/v1/exchange_rates";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ExchangeRateCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the exchange rates from the given currency to every supported currency. */
@@ -102,25 +121,32 @@ public class ExchangeRate extends ApiResource implements HasId {
   /** Retrieves the exchange rates from the given currency to every supported currency. */
   public static ExchangeRate retrieve(
       String rateId, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ExchangeRate.class,
             options,
-            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the exchange rates from the given currency to every supported currency. */
   public static ExchangeRate retrieve(
       String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ExchangeRate.class,
             options,
-            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);
+            ApiMode.V1);
   }
 }

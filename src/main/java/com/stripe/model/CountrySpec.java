@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CountrySpecListParams;
 import com.stripe.param.CountrySpecRetrieveParams;
 import java.util.List;
@@ -77,8 +80,16 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Lists all Country Spec objects available in the API. */
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/country_specs");
-    return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
+    String path = "/v1/country_specs";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CountrySpecCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Lists all Country Spec objects available in the API. */
@@ -89,8 +100,17 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Lists all Country Spec objects available in the API. */
   public static CountrySpecCollection list(CountrySpecListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/country_specs");
-    return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
+    String path = "/v1/country_specs";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CountrySpecCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a Country Spec for a given Country code. */
@@ -107,26 +127,33 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Returns a Country Spec for a given Country code. */
   public static CountrySpec retrieve(
       String country, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CountrySpec.class,
             options,
-            String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
+            ApiMode.V1);
   }
 
   /** Returns a Country Spec for a given Country code. */
   public static CountrySpec retrieve(
       String country, CountrySpecRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CountrySpec.class,
             options,
-            String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -164,5 +191,11 @@ public class CountrySpec extends ApiResource implements HasId {
       @SerializedName("minimum")
       List<String> minimum;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(verificationFields, responseGetter);
   }
 }

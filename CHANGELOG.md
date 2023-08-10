@@ -1,5 +1,81 @@
 # Changelog
 
+## 23.0.0 - 2023-08-16
+
+### StripeClient
+
+`StripeClient` and the new service-based pattern is introduced. `StripeClient` has multiple benefits over existing resource-based patterns:
+1. Allows to have multiple clients with different connection options (different API keys).
+2. All operations can be performed in a single HTTP call.
+    ```java
+    // Before: creating funding instructions takes two HTTP calls
+    Customer customer = Customer.retrieve("cus_123"); // HTTP call 1
+    customer.createFundingInstructions(..); // HTTP call 2
+
+    // After: creating funding instructions is a single HTTP call
+    StripeClient client = new StripeClient();
+    client.customers().createFundingInstructions("cus_123", ...); // HTTP call 1
+    ```
+3. `StripeClient` is easier to mock for testing as all methods are instance methods.
+
+### Migration
+
+To migrate from resource-based to service-based pattern:
+1. Initialize a `StripeClient` instance.
+    ```java
+    // Before
+    Stripe.apiKey = "sk_test_123"
+
+    // After
+    StripeClient client = new StripeClient("sk_test_123");
+    ```
+2. Convert static resource method calls to `StripeClient` calls:
+    ```java
+   // Before
+   Customer customer = Customer.retrieve("cus_123");
+
+   // After
+   client.customers().retrieve("cus_123");
+    ```
+3. Convert instance resource method calls to `StripeClient` calls. Params classes will, in most cases, stay the same as you used for resource-based calls.
+    ```java
+   // Before
+   Customer customer = Customer.retrive("cus_123");
+   customer.delete();
+   
+   // After
+   client.customers().delete("cus_123");
+
+   // After
+   client.customers().delete(customer.id);
+   PaymentMethod pm = client.customers().retrievePaymentMethod(customer.id, "pm_123");
+    ```
+
+### Breaking changes
+
+- `RequestOptions.getReadTimeout()`, `getConnectTimeout()`, `getMaxNetworkRetries()` now return `Integer` instead of `int`.
+- `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+- `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+- `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
+- `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
+  - `BaseAddress` parameter added.
+  - `url` renamed to `path` and is a relative to the base address
+  - `apiMode` parameter added to control how request is sent and response is handled, `V1` and `OAuth` are supported values.
+- Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
+- `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
+    If you were using one of these methods, please migrate to `StripeClient.getResponseGetter().request()`:
+    ```java
+    StripeClient client = new StripeClient("sk_test_...");
+    client.getResponseGetter().request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            "/customers",
+            null, // params
+            Customer.class,  // type
+            null, // options
+            ApiMode.V1);
+    ```
+
 ## 22.30.0 - 2023-08-03
 * [#1620](https://github.com/stripe/stripe-java/pull/1620) Update generated code
   * Change type of `AccountCreateParams.settings.card_issuing.tos_acceptance.user_agent`, `AccountCreateParams.settings.treasury.tos_acceptance.user_agent`, `AccountUpdateParams.settings.card_issuing.tos_acceptance.user_agent`, `AccountUpdateParams.settings.treasury.tos_acceptance.user_agent`, `InvoiceCreateParams.payment_settings.default_mandate`, `InvoiceCreateParams.shipping_details.phone`, `InvoicePayParams.mandate`, `InvoiceUpdateParams.default_source`, `InvoiceUpdateParams.payment_settings.default_mandate`, `InvoiceUpdateParams.shipping_details.phone`, `PaymentIntentConfirmParams.payment_method_data.billing_details.name`, `PaymentIntentConfirmParams.payment_method_data.billing_details.phone`, `PaymentIntentConfirmParams.payment_method_options.konbini.confirmation_number`, `PaymentIntentConfirmParams.payment_method_options.konbini.product_description`, `PaymentIntentCreateParams.payment_method_data.billing_details.name`, `PaymentIntentCreateParams.payment_method_data.billing_details.phone`, `PaymentIntentCreateParams.payment_method_options.konbini.confirmation_number`, `PaymentIntentCreateParams.payment_method_options.konbini.product_description`, `PaymentIntentUpdateParams.payment_method_data.billing_details.name`, `PaymentIntentUpdateParams.payment_method_data.billing_details.phone`, `PaymentIntentUpdateParams.payment_method_options.konbini.confirmation_number`, `PaymentIntentUpdateParams.payment_method_options.konbini.product_description`, `PaymentMethodCreateParams.billing_details.name`, `PaymentMethodCreateParams.billing_details.phone`, `PaymentMethodUpdateParams.billing_details.name`, `PaymentMethodUpdateParams.billing_details.phone`, `ProductUpdateParams.caption`, `ProductUpdateParams.description`, `ProductUpdateParams.unit_label`, `QuoteCreateParams.description`, `QuoteCreateParams.footer`, `QuoteCreateParams.header`, `QuoteUpdateParams.description`, `QuoteUpdateParams.footer`, `QuoteUpdateParams.header`, `QuoteUpdateParams.subscription_data.description`, `SetupIntentConfirmParams.payment_method_data.billing_details.name`, `SetupIntentConfirmParams.payment_method_data.billing_details.phone`, `SetupIntentCreateParams.payment_method_data.billing_details.name`, `SetupIntentCreateParams.payment_method_data.billing_details.phone`, `SetupIntentUpdateParams.payment_method_data.billing_details.name`, `SetupIntentUpdateParams.payment_method_data.billing_details.phone`, `SubscriptionCancelParams.cancellation_details.comment`, `SubscriptionScheduleCreateParams.default_settings.description`, `SubscriptionScheduleCreateParams.phases[].description`, `SubscriptionScheduleUpdateParams.default_settings.description`, `SubscriptionScheduleUpdateParams.phases[].description`, `SubscriptionUpdateParams.cancellation_details.comment`, `SubscriptionUpdateParams.default_source`, `SubscriptionUpdateParams.description`, `TokenCreateParams.person.documents.company_authorization.files[]`, `TokenCreateParams.person.documents.passport.files[]`, `TokenCreateParams.person.documents.visa.files[]`, `WebhookEndpointCreateParams.description`, `WebhookEndpointUpdateParams.description`, `billingportal.ConfigurationCreateParams.business_profile.headline`, `billingportal.ConfigurationUpdateParams.business_profile.headline`, `issuing.CardholderCreateParams.individual.card_issuing.user_terms_acceptance.user_agent`, `issuing.CardholderUpdateParams.individual.card_issuing.user_terms_acceptance.user_agent`, `issuing.DisputeCreateParams.evidence.canceled.cancellation_reason`, `issuing.DisputeCreateParams.evidence.canceled.explanation`, `issuing.DisputeCreateParams.evidence.canceled.product_description`, `issuing.DisputeCreateParams.evidence.duplicate.explanation`, `issuing.DisputeCreateParams.evidence.fraudulent.explanation`, `issuing.DisputeCreateParams.evidence.merchandise_not_as_described.explanation`, `issuing.DisputeCreateParams.evidence.merchandise_not_as_described.return_description`, `issuing.DisputeCreateParams.evidence.not_received.explanation`, `issuing.DisputeCreateParams.evidence.not_received.product_description`, `issuing.DisputeCreateParams.evidence.other.explanation`, `issuing.DisputeCreateParams.evidence.other.product_description`, `issuing.DisputeCreateParams.evidence.service_not_as_described.cancellation_reason`, `issuing.DisputeCreateParams.evidence.service_not_as_described.explanation`, `issuing.DisputeUpdateParams.evidence.canceled.cancellation_reason`, `issuing.DisputeUpdateParams.evidence.canceled.explanation`, `issuing.DisputeUpdateParams.evidence.canceled.product_description`, `issuing.DisputeUpdateParams.evidence.duplicate.explanation`, `issuing.DisputeUpdateParams.evidence.fraudulent.explanation`, `issuing.DisputeUpdateParams.evidence.merchandise_not_as_described.explanation`, `issuing.DisputeUpdateParams.evidence.merchandise_not_as_described.return_description`, `issuing.DisputeUpdateParams.evidence.not_received.explanation`, `issuing.DisputeUpdateParams.evidence.not_received.product_description`, `issuing.DisputeUpdateParams.evidence.other.explanation`, `issuing.DisputeUpdateParams.evidence.other.product_description`, `issuing.DisputeUpdateParams.evidence.service_not_as_described.cancellation_reason`, `issuing.DisputeUpdateParams.evidence.service_not_as_described.explanation`, `tax.CalculationCreateParams.customer_details.address.city`, `tax.CalculationCreateParams.customer_details.address.line1`, `tax.CalculationCreateParams.customer_details.address.line2`, `tax.CalculationCreateParams.customer_details.address.postal_code`, `tax.CalculationCreateParams.customer_details.address.state`, `terminal.LocationUpdateParams.configuration_overrides`, `terminal.ReaderUpdateParams.label`, `treasury.OutboundPaymentCreateParams.destination_payment_method_data.billing_details.name`, and `treasury.OutboundPaymentCreateParams.destination_payment_method_data.billing_details.phone` from `string` to `emptyStringable(string)`
