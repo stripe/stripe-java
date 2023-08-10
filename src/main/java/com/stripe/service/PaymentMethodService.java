@@ -79,12 +79,12 @@ public final class PaymentMethodService extends ApiService {
    */
   public PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/payment_methods";
+    String path = "/v1/payment_methods";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentMethod.class,
             options,
@@ -126,12 +126,12 @@ public final class PaymentMethodService extends ApiService {
    */
   public StripeCollection<PaymentMethod> list(
       PaymentMethodListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/payment_methods";
+    String path = "/v1/payment_methods";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<PaymentMethod>>() {}.getType(),
             options,
@@ -175,12 +175,12 @@ public final class PaymentMethodService extends ApiService {
   public PaymentMethod retrieve(
       String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
+    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentMethod.class,
             options,
@@ -203,12 +203,12 @@ public final class PaymentMethodService extends ApiService {
   public PaymentMethod update(
       String paymentMethod, PaymentMethodUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
+    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentMethod.class,
             options,
@@ -255,13 +255,13 @@ public final class PaymentMethodService extends ApiService {
   public PaymentMethod attach(
       String paymentMethod, PaymentMethodAttachParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(paymentMethod));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentMethod.class,
             options,
@@ -296,13 +296,13 @@ public final class PaymentMethodService extends ApiService {
   public PaymentMethod detach(
       String paymentMethod, PaymentMethodDetachParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(paymentMethod));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentMethod.class,
             options,

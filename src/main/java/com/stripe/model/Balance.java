@@ -107,12 +107,12 @@ public class Balance extends ApiResource {
    */
   public static Balance retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/balance";
+    String path = "/v1/balance";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Balance.class,
             options,
@@ -127,13 +127,13 @@ public class Balance extends ApiResource {
    */
   public static Balance retrieve(BalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/balance";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/balance";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Balance.class,
             options,

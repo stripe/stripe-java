@@ -215,12 +215,12 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    */
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/application_fees";
+    String path = "/v1/application_fees";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ApplicationFeeCollection.class,
             options,
@@ -242,13 +242,13 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    */
   public static ApplicationFeeCollection list(
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/application_fees";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/application_fees";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ApplicationFeeCollection.class,
             options,
@@ -277,12 +277,12 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    */
   public static ApplicationFee retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ApplicationFee.class,
             options,
@@ -296,13 +296,13 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFee retrieve(
       String id, ApplicationFeeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ApplicationFee.class,
             options,

@@ -37,12 +37,12 @@ public final class TransactionEntryService extends ApiService {
   public TransactionEntry retrieve(
       String id, TransactionEntryRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransactionEntry.class,
             options,
@@ -56,12 +56,12 @@ public final class TransactionEntryService extends ApiService {
   /** Retrieves a list of TransactionEntry objects. */
   public StripeCollection<TransactionEntry> list(
       TransactionEntryListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/treasury/transaction_entries";
+    String path = "/v1/treasury/transaction_entries";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<TransactionEntry>>() {}.getType(),
             options,

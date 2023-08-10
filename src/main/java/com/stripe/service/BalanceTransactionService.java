@@ -64,12 +64,12 @@ public final class BalanceTransactionService extends ApiService {
    */
   public StripeCollection<BalanceTransaction> list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/balance_transactions";
+    String path = "/v1/balance_transactions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<BalanceTransaction>>() {}.getType(),
             options,
@@ -108,12 +108,12 @@ public final class BalanceTransactionService extends ApiService {
   public BalanceTransaction retrieve(
       String id, BalanceTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             BalanceTransaction.class,
             options,

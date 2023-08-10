@@ -30,12 +30,12 @@ public final class AccountLinkService extends ApiService {
    */
   public AccountLink create(AccountLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/account_links";
+    String path = "/v1/account_links";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             AccountLink.class,
             options,

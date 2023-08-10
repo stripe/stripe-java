@@ -143,12 +143,12 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Reverses a ReceivedDebit and creates a DebitReversal object. */
   public static DebitReversal create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/debit_reversals";
+    String path = "/v1/treasury/debit_reversals";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             DebitReversal.class,
             options,
@@ -163,13 +163,13 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Reverses a ReceivedDebit and creates a DebitReversal object. */
   public static DebitReversal create(DebitReversalCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/debit_reversals";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/treasury/debit_reversals";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             DebitReversal.class,
             options,
@@ -184,12 +184,12 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Returns a list of DebitReversals. */
   public static DebitReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/debit_reversals";
+    String path = "/v1/treasury/debit_reversals";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             DebitReversalCollection.class,
             options,
@@ -205,13 +205,13 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Returns a list of DebitReversals. */
   public static DebitReversalCollection list(DebitReversalListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/debit_reversals";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/treasury/debit_reversals";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             DebitReversalCollection.class,
             options,
@@ -233,13 +233,13 @@ public class DebitReversal extends ApiResource implements HasId {
   public static DebitReversal retrieve(
       String debitReversal, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             DebitReversal.class,
             options,
@@ -250,14 +250,14 @@ public class DebitReversal extends ApiResource implements HasId {
   public static DebitReversal retrieve(
       String debitReversal, DebitReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             DebitReversal.class,
             options,

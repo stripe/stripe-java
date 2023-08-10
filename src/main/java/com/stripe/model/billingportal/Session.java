@@ -147,12 +147,12 @@ public class Session extends ApiResource implements HasId {
   /** Creates a session of the customer portal. */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/billing_portal/sessions";
+    String path = "/v1/billing_portal/sessions";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Session.class,
             options,
@@ -167,13 +167,13 @@ public class Session extends ApiResource implements HasId {
   /** Creates a session of the customer portal. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/billing_portal/sessions";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/billing_portal/sessions";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,

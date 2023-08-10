@@ -116,12 +116,12 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/files";
+    String path = "/v1/files";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.FILES,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             File.class,
             options,
@@ -150,13 +150,13 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(FileCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/files";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/files";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.FILES,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             File.class,
             options,
@@ -177,12 +177,12 @@ public class File extends ApiResource implements HasId {
    */
   public static FileCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/files";
+    String path = "/v1/files";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             FileCollection.class,
             options,
@@ -203,13 +203,13 @@ public class File extends ApiResource implements HasId {
    */
   public static FileCollection list(FileListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/files";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/files";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FileCollection.class,
             options,
@@ -241,12 +241,12 @@ public class File extends ApiResource implements HasId {
    */
   public static File retrieve(String file, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
+    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             File.class,
             options,
@@ -260,13 +260,13 @@ public class File extends ApiResource implements HasId {
    */
   public static File retrieve(String file, FileRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             File.class,
             options,

@@ -75,12 +75,12 @@ public class Settings extends ApiResource {
   /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/settings";
+    String path = "/v1/tax/settings";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Settings.class,
             options,
@@ -90,13 +90,13 @@ public class Settings extends ApiResource {
   /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve(SettingsRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/settings";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/tax/settings";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Settings.class,
             options,
@@ -117,12 +117,12 @@ public class Settings extends ApiResource {
    */
   public static Settings update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/settings";
+    String path = "/v1/tax/settings";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Settings.class,
             options,
@@ -143,13 +143,13 @@ public class Settings extends ApiResource {
    */
   public static Settings update(SettingsUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/settings";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/tax/settings";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Settings.class,
             options,

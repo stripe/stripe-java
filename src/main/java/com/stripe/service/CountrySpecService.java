@@ -35,12 +35,12 @@ public final class CountrySpecService extends ApiService {
   /** Lists all Country Spec objects available in the API. */
   public StripeCollection<CountrySpec> list(CountrySpecListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/country_specs";
+    String path = "/v1/country_specs";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CountrySpec>>() {}.getType(),
             options,
@@ -63,12 +63,12 @@ public final class CountrySpecService extends ApiService {
   public CountrySpec retrieve(
       String country, CountrySpecRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CountrySpec.class,
             options,

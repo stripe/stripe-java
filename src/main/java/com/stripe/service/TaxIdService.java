@@ -28,12 +28,12 @@ public final class TaxIdService extends ApiService {
   /** Creates a new {@code TaxID} object for a customer. */
   public TaxId create(String customer, TaxIdCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxId.class,
             options,
@@ -56,12 +56,12 @@ public final class TaxIdService extends ApiService {
   /** Returns a list of tax IDs for a customer. */
   public StripeCollection<TaxId> list(
       String customer, TaxIdListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<TaxId>>() {}.getType(),
             options,
@@ -84,7 +84,7 @@ public final class TaxIdService extends ApiService {
   public TaxId retrieve(
       String customer, String id, TaxIdRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
@@ -92,7 +92,7 @@ public final class TaxIdService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxId.class,
             options,
@@ -104,7 +104,7 @@ public final class TaxIdService extends ApiService {
   }
   /** Deletes an existing {@code TaxID} object. */
   public TaxId delete(String customer, String id, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
@@ -112,7 +112,7 @@ public final class TaxIdService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             TaxId.class,
             options,

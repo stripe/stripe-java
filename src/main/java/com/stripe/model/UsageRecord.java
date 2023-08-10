@@ -82,14 +82,14 @@ public class UsageRecord extends ApiResource implements HasId {
   public static UsageRecord createOnSubscriptionItem(
       String subscriptionItem, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(subscriptionItem));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             UsageRecord.class,
             options,
@@ -123,15 +123,15 @@ public class UsageRecord extends ApiResource implements HasId {
       UsageRecordCreateOnSubscriptionItemParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(subscriptionItem));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             UsageRecord.class,
             options,

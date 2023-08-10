@@ -128,12 +128,12 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   /** Creates a configuration that describes the functionality and behavior of a PortalSession. */
   public static Configuration create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/billing_portal/configurations";
+    String path = "/v1/billing_portal/configurations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Configuration.class,
             options,
@@ -148,13 +148,13 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   /** Creates a configuration that describes the functionality and behavior of a PortalSession. */
   public static Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/billing_portal/configurations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/billing_portal/configurations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -169,12 +169,12 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   /** Returns a list of configurations that describe the functionality of the customer portal. */
   public static ConfigurationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/billing_portal/configurations";
+    String path = "/v1/billing_portal/configurations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ConfigurationCollection.class,
             options,
@@ -190,13 +190,13 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   /** Returns a list of configurations that describe the functionality of the customer portal. */
   public static ConfigurationCollection list(ConfigurationListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/billing_portal/configurations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/billing_portal/configurations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ConfigurationCollection.class,
             options,
@@ -218,14 +218,14 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   public static Configuration retrieve(
       String configuration, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Configuration.class,
             options,
@@ -236,15 +236,15 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   public static Configuration retrieve(
       String configuration, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -261,14 +261,14 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   @Override
   public Configuration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Configuration.class,
             options,
@@ -283,15 +283,15 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   /** Updates a configuration that describes the functionality of the customer portal. */
   public Configuration update(ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,

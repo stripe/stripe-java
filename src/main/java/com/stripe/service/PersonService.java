@@ -51,12 +51,12 @@ public final class PersonService extends ApiService {
    */
   public StripeCollection<Person> list(
       String account, PersonListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Person>>() {}.getType(),
             options,
@@ -77,12 +77,12 @@ public final class PersonService extends ApiService {
   /** Creates a new person. */
   public Person create(String account, PersonCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Person.class,
             options,
@@ -106,7 +106,7 @@ public final class PersonService extends ApiService {
   public Person retrieve(
       String account, String person, PersonRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
@@ -114,7 +114,7 @@ public final class PersonService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Person.class,
             options,
@@ -138,7 +138,7 @@ public final class PersonService extends ApiService {
   public Person update(
       String account, String person, PersonUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
@@ -146,7 +146,7 @@ public final class PersonService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Person.class,
             options,
@@ -169,7 +169,7 @@ public final class PersonService extends ApiService {
    */
   public Person delete(String account, String person, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
@@ -177,7 +177,7 @@ public final class PersonService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Person.class,
             options,

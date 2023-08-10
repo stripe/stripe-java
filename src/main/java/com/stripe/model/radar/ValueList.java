@@ -100,12 +100,12 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public static ValueList create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/radar/value_lists";
+    String path = "/v1/radar/value_lists";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             ValueList.class,
             options,
@@ -120,13 +120,13 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public static ValueList create(ValueListCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/radar/value_lists";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/radar/value_lists";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueList.class,
             options,
@@ -163,12 +163,12 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    */
   public ValueList delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             ValueList.class,
             options,
@@ -189,12 +189,12 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    */
   public static ValueListCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/radar/value_lists";
+    String path = "/v1/radar/value_lists";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ValueListCollection.class,
             options,
@@ -215,13 +215,13 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    */
   public static ValueListCollection list(ValueListListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/radar/value_lists";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/radar/value_lists";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueListCollection.class,
             options,
@@ -242,12 +242,12 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   /** Retrieves a {@code ValueList} object. */
   public static ValueList retrieve(
       String valueList, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ValueList.class,
             options,
@@ -258,13 +258,13 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   public static ValueList retrieve(
       String valueList, ValueListRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueList.class,
             options,
@@ -287,12 +287,12 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   @Override
   public ValueList update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             ValueList.class,
             options,
@@ -313,13 +313,13 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    */
   public ValueList update(ValueListUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueList.class,
             options,

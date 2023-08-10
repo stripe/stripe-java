@@ -37,12 +37,12 @@ public final class TransferService extends ApiService {
    */
   public Transfer create(TransferCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/transfers";
+    String path = "/v1/transfers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transfer.class,
             options,
@@ -75,12 +75,12 @@ public final class TransferService extends ApiService {
    */
   public StripeCollection<Transfer> list(TransferListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/transfers";
+    String path = "/v1/transfers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Transfer>>() {}.getType(),
             options,
@@ -117,12 +117,12 @@ public final class TransferService extends ApiService {
    */
   public Transfer retrieve(String transfer, TransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transfer.class,
             options,
@@ -163,12 +163,12 @@ public final class TransferService extends ApiService {
    */
   public Transfer update(String transfer, TransferUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transfer.class,
             options,

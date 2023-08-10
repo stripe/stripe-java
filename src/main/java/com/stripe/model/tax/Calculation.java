@@ -106,12 +106,12 @@ public class Calculation extends ApiResource implements HasId {
   /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
   public static Calculation create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/calculations";
+    String path = "/v1/tax/calculations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Calculation.class,
             options,
@@ -126,13 +126,13 @@ public class Calculation extends ApiResource implements HasId {
   /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
   public static Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/calculations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/tax/calculations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Calculation.class,
             options,
@@ -153,13 +153,13 @@ public class Calculation extends ApiResource implements HasId {
   /** Retrieves the line items of a persisted tax calculation as a collection. */
   public CalculationLineItemCollection listLineItems(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CalculationLineItemCollection.class,
             options,
@@ -175,14 +175,14 @@ public class Calculation extends ApiResource implements HasId {
   /** Retrieves the line items of a persisted tax calculation as a collection. */
   public CalculationLineItemCollection listLineItems(
       CalculationListLineItemsParams params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CalculationLineItemCollection.class,
             options,

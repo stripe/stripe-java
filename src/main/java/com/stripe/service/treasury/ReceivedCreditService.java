@@ -28,12 +28,12 @@ public final class ReceivedCreditService extends ApiService {
   /** Returns a list of ReceivedCredits. */
   public StripeCollection<ReceivedCredit> list(
       ReceivedCreditListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/treasury/received_credits";
+    String path = "/v1/treasury/received_credits";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ReceivedCredit>>() {}.getType(),
             options,
@@ -68,12 +68,12 @@ public final class ReceivedCreditService extends ApiService {
   public ReceivedCredit retrieve(
       String id, ReceivedCreditRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReceivedCredit.class,
             options,

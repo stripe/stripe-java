@@ -151,12 +151,12 @@ public class ReceivedDebit extends ApiResource implements HasId {
   /** Returns a list of ReceivedDebits. */
   public static ReceivedDebitCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/received_debits";
+    String path = "/v1/treasury/received_debits";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ReceivedDebitCollection.class,
             options,
@@ -172,13 +172,13 @@ public class ReceivedDebit extends ApiResource implements HasId {
   /** Returns a list of ReceivedDebits. */
   public static ReceivedDebitCollection list(ReceivedDebitListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/received_debits";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/treasury/received_debits";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReceivedDebitCollection.class,
             options,
@@ -207,12 +207,12 @@ public class ReceivedDebit extends ApiResource implements HasId {
    */
   public static ReceivedDebit retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ReceivedDebit.class,
             options,
@@ -226,13 +226,13 @@ public class ReceivedDebit extends ApiResource implements HasId {
   public static ReceivedDebit retrieve(
       String id, ReceivedDebitRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReceivedDebit.class,
             options,
@@ -392,12 +392,12 @@ public class ReceivedDebit extends ApiResource implements HasId {
      */
     public static ReceivedDebit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
-      String url = "/v1/test_helpers/treasury/received_debits";
+      String path = "/v1/test_helpers/treasury/received_debits";
       return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
-              url,
+              path,
               params,
               ReceivedDebit.class,
               options,
@@ -418,13 +418,13 @@ public class ReceivedDebit extends ApiResource implements HasId {
      */
     public static ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
         throws StripeException {
-      String url = "/v1/test_helpers/treasury/received_debits";
-      ApiResource.checkNullTypedParams(url, params);
+      String path = "/v1/test_helpers/treasury/received_debits";
+      ApiResource.checkNullTypedParams(path, params);
       return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
-              url,
+              path,
               ApiRequestParams.paramsToMap(params),
               ReceivedDebit.class,
               options,

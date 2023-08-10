@@ -35,7 +35,7 @@ public final class BankAccountService extends ApiService {
   public BankAccount verify(
       String customer, String id, BankAccountVerifyParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/sources/%s/verify",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
@@ -43,7 +43,7 @@ public final class BankAccountService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             BankAccount.class,
             options,

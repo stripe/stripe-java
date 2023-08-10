@@ -39,12 +39,12 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    */
   public TransferReversal create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             TransferReversal.class,
             options,
@@ -79,13 +79,13 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   public TransferReversal create(
       TransferReversalCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransferReversal.class,
             options,
@@ -110,12 +110,12 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    */
   public TransferReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TransferReversalCollection.class,
             options,
@@ -141,13 +141,13 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    */
   public TransferReversalCollection list(
       TransferReversalCollectionListParams params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransferReversalCollection.class,
             options,
@@ -176,12 +176,12 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    */
   public TransferReversal retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TransferReversal.class,
             options,
@@ -195,13 +195,13 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   public TransferReversal retrieve(
       String id, TransferReversalCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransferReversal.class,
             options,

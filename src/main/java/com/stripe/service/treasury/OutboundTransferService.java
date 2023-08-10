@@ -29,12 +29,12 @@ public final class OutboundTransferService extends ApiService {
   /** Creates an OutboundTransfer. */
   public OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/outbound_transfers";
+    String path = "/v1/treasury/outbound_transfers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundTransfer.class,
             options,
@@ -48,12 +48,12 @@ public final class OutboundTransferService extends ApiService {
   /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
   public StripeCollection<OutboundTransfer> list(
       OutboundTransferListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/treasury/outbound_transfers";
+    String path = "/v1/treasury/outbound_transfers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType(),
             options,
@@ -89,14 +89,14 @@ public final class OutboundTransferService extends ApiService {
   public OutboundTransfer retrieve(
       String outboundTransfer, OutboundTransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundTransfer.class,
             options,
@@ -120,14 +120,14 @@ public final class OutboundTransferService extends ApiService {
   public OutboundTransfer cancel(
       String outboundTransfer, OutboundTransferCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/outbound_transfers/%s/cancel", ApiResource.urlEncodeId(outboundTransfer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundTransfer.class,
             options,

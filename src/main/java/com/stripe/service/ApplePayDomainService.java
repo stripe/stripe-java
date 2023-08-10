@@ -37,12 +37,12 @@ public final class ApplePayDomainService extends ApiService {
   /** List apple pay domains. */
   public StripeCollection<ApplePayDomain> list(
       ApplePayDomainListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/apple_pay/domains";
+    String path = "/v1/apple_pay/domains";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ApplePayDomain>>() {}.getType(),
             options,
@@ -55,12 +55,12 @@ public final class ApplePayDomainService extends ApiService {
   /** Create an apple pay domain. */
   public ApplePayDomain create(ApplePayDomainCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/apple_pay/domains";
+    String path = "/v1/apple_pay/domains";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ApplePayDomain.class,
             options,
@@ -83,12 +83,12 @@ public final class ApplePayDomainService extends ApiService {
   public ApplePayDomain retrieve(
       String domain, ApplePayDomainRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ApplePayDomain.class,
             options,
@@ -100,12 +100,12 @@ public final class ApplePayDomainService extends ApiService {
   }
   /** Delete an apple pay domain. */
   public ApplePayDomain delete(String domain, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             ApplePayDomain.class,
             options,

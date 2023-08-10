@@ -55,12 +55,12 @@ public final class EventService extends ApiService {
    */
   public StripeCollection<Event> list(EventListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/events";
+    String path = "/v1/events";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Event>>() {}.getType(),
             options,
@@ -93,12 +93,12 @@ public final class EventService extends ApiService {
    */
   public Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Event.class,
             options,

@@ -90,12 +90,12 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public static Location create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/locations";
+    String path = "/v1/terminal/locations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Location.class,
             options,
@@ -118,13 +118,13 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public static Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/locations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/terminal/locations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Location.class,
             options,
@@ -149,12 +149,12 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Deletes a {@code Location} object. */
   public Location delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             Location.class,
             options,
@@ -169,12 +169,12 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/locations";
+    String path = "/v1/terminal/locations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             LocationCollection.class,
             options,
@@ -189,13 +189,13 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(LocationListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/locations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/terminal/locations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             LocationCollection.class,
             options,
@@ -215,12 +215,12 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Retrieves a {@code Location} object. */
   public static Location retrieve(
       String location, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Location.class,
             options,
@@ -231,13 +231,13 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   public static Location retrieve(
       String location, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Location.class,
             options,
@@ -260,12 +260,12 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   @Override
   public Location update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Location.class,
             options,
@@ -286,13 +286,13 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public Location update(LocationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Location.class,
             options,

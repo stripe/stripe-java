@@ -48,12 +48,12 @@ public final class FileService extends ApiService {
    */
   public StripeCollection<File> list(FileListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/files";
+    String path = "/v1/files";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<File>>() {}.getType(),
             options,
@@ -79,12 +79,12 @@ public final class FileService extends ApiService {
    * multipart/form-data}.
    */
   public File create(FileCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/files";
+    String path = "/v1/files";
     return getResponseGetter()
         .request(
             BaseAddress.FILES,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             File.class,
             options,
@@ -121,12 +121,12 @@ public final class FileService extends ApiService {
    */
   public File retrieve(String file, FileRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
+    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             File.class,
             options,

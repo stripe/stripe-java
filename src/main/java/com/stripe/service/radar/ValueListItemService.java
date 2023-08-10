@@ -35,12 +35,12 @@ public final class ValueListItemService extends ApiService {
    */
   public StripeCollection<ValueListItem> list(
       ValueListItemListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/radar/value_list_items";
+    String path = "/v1/radar/value_list_items";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ValueListItem>>() {}.getType(),
             options,
@@ -57,12 +57,12 @@ public final class ValueListItemService extends ApiService {
    */
   public ValueListItem create(ValueListItemCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/radar/value_list_items";
+    String path = "/v1/radar/value_list_items";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueListItem.class,
             options,
@@ -85,12 +85,12 @@ public final class ValueListItemService extends ApiService {
   public ValueListItem retrieve(
       String item, ValueListItemRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueListItem.class,
             options,
@@ -102,12 +102,12 @@ public final class ValueListItemService extends ApiService {
   }
   /** Deletes a {@code ValueListItem} object, removing it from its parent value list. */
   public ValueListItem delete(String item, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             ValueListItem.class,
             options,

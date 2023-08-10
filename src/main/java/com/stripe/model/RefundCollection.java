@@ -30,12 +30,12 @@ public class RefundCollection extends StripeCollection<Refund> {
    */
   public RefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             RefundCollection.class,
             options,
@@ -60,13 +60,13 @@ public class RefundCollection extends StripeCollection<Refund> {
    */
   public RefundCollection list(RefundCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             RefundCollection.class,
             options,
@@ -86,12 +86,12 @@ public class RefundCollection extends StripeCollection<Refund> {
   /** Retrieves the details of an existing refund. */
   public Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Refund.class,
             options,
@@ -101,13 +101,13 @@ public class RefundCollection extends StripeCollection<Refund> {
   /** Retrieves the details of an existing refund. */
   public Refund retrieve(String id, RefundCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Refund.class,
             options,

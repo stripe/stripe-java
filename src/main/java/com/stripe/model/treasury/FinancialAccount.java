@@ -138,12 +138,12 @@ public class FinancialAccount extends ApiResource
    */
   public static FinancialAccount create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/financial_accounts";
+    String path = "/v1/treasury/financial_accounts";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             FinancialAccount.class,
             options,
@@ -165,13 +165,13 @@ public class FinancialAccount extends ApiResource
    */
   public static FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/financial_accounts";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/treasury/financial_accounts";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccount.class,
             options,
@@ -186,12 +186,12 @@ public class FinancialAccount extends ApiResource
   /** Returns a list of FinancialAccounts. */
   public static FinancialAccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/financial_accounts";
+    String path = "/v1/treasury/financial_accounts";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             FinancialAccountCollection.class,
             options,
@@ -207,13 +207,13 @@ public class FinancialAccount extends ApiResource
   /** Returns a list of FinancialAccounts. */
   public static FinancialAccountCollection list(
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/treasury/financial_accounts";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/treasury/financial_accounts";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccountCollection.class,
             options,
@@ -235,14 +235,14 @@ public class FinancialAccount extends ApiResource
   public static FinancialAccount retrieve(
       String financialAccount, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             FinancialAccount.class,
             options,
@@ -253,15 +253,15 @@ public class FinancialAccount extends ApiResource
   public static FinancialAccount retrieve(
       String financialAccount, FinancialAccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccount.class,
             options,
@@ -282,14 +282,14 @@ public class FinancialAccount extends ApiResource
   /** Retrieves Features information associated with the FinancialAccount. */
   public FinancialAccountFeatures retrieveFeatures(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             FinancialAccountFeatures.class,
             options,
@@ -306,15 +306,15 @@ public class FinancialAccount extends ApiResource
   public FinancialAccountFeatures retrieveFeatures(
       FinancialAccountRetrieveFeaturesParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccountFeatures.class,
             options,
@@ -331,13 +331,13 @@ public class FinancialAccount extends ApiResource
   @Override
   public FinancialAccount update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             FinancialAccount.class,
             options,
@@ -352,14 +352,14 @@ public class FinancialAccount extends ApiResource
   /** Updates the details of a FinancialAccount. */
   public FinancialAccount update(FinancialAccountUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccount.class,
             options,
@@ -385,14 +385,14 @@ public class FinancialAccount extends ApiResource
   /** Updates the Features associated with a FinancialAccount. */
   public FinancialAccountFeatures updateFeatures(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             FinancialAccountFeatures.class,
             options,
@@ -408,15 +408,15 @@ public class FinancialAccount extends ApiResource
   /** Updates the Features associated with a FinancialAccount. */
   public FinancialAccountFeatures updateFeatures(
       FinancialAccountUpdateFeaturesParams params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccountFeatures.class,
             options,

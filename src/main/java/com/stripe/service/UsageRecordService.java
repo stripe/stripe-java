@@ -68,14 +68,14 @@ public final class UsageRecordService extends ApiService {
   public UsageRecord create(
       String subscriptionItem, UsageRecordCreateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(subscriptionItem));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             UsageRecord.class,
             options,

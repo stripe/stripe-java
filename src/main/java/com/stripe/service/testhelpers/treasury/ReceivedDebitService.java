@@ -30,12 +30,12 @@ public final class ReceivedDebitService extends ApiService {
    */
   public ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/treasury/received_debits";
+    String path = "/v1/test_helpers/treasury/received_debits";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReceivedDebit.class,
             options,

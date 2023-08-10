@@ -59,12 +59,12 @@ public class AccountLink extends ApiResource {
    */
   public static AccountLink create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/account_links";
+    String path = "/v1/account_links";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             AccountLink.class,
             options,
@@ -85,13 +85,13 @@ public class AccountLink extends ApiResource {
    */
   public static AccountLink create(AccountLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/account_links";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/account_links";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             AccountLink.class,
             options,

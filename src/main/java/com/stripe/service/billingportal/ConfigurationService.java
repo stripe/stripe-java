@@ -38,12 +38,12 @@ public final class ConfigurationService extends ApiService {
   /** Returns a list of configurations that describe the functionality of the customer portal. */
   public StripeCollection<Configuration> list(
       ConfigurationListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/billing_portal/configurations";
+    String path = "/v1/billing_portal/configurations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Configuration>>() {}.getType(),
             options,
@@ -56,12 +56,12 @@ public final class ConfigurationService extends ApiService {
   /** Creates a configuration that describes the functionality and behavior of a PortalSession. */
   public Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/billing_portal/configurations";
+    String path = "/v1/billing_portal/configurations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -84,14 +84,14 @@ public final class ConfigurationService extends ApiService {
   public Configuration update(
       String configuration, ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -115,14 +115,14 @@ public final class ConfigurationService extends ApiService {
   public Configuration retrieve(
       String configuration, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,

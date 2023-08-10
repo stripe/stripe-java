@@ -26,12 +26,12 @@ public final class SetupAttemptService extends ApiService {
   /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
   public StripeCollection<SetupAttempt> list(SetupAttemptListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/setup_attempts";
+    String path = "/v1/setup_attempts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<SetupAttempt>>() {}.getType(),
             options,

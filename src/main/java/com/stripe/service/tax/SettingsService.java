@@ -33,12 +33,12 @@ public final class SettingsService extends ApiService {
   /** Retrieves Tax {@code Settings} for a merchant. */
   public Settings retrieve(SettingsRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/settings";
+    String path = "/v1/tax/settings";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Settings.class,
             options,
@@ -71,12 +71,12 @@ public final class SettingsService extends ApiService {
    */
   public Settings update(SettingsUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/settings";
+    String path = "/v1/tax/settings";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Settings.class,
             options,

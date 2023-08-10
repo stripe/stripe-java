@@ -37,12 +37,12 @@ public final class CouponService extends ApiService {
   /** Returns a list of your coupons. */
   public StripeCollection<Coupon> list(CouponListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/coupons";
+    String path = "/v1/coupons";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Coupon>>() {}.getType(),
             options,
@@ -102,12 +102,12 @@ public final class CouponService extends ApiService {
    * final total of 100 if a coupon with an {@code amount_off} of 200 is applied to it.
    */
   public Coupon create(CouponCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/coupons";
+    String path = "/v1/coupons";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Coupon.class,
             options,
@@ -128,12 +128,12 @@ public final class CouponService extends ApiService {
   /** Retrieves the coupon with the given ID. */
   public Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Coupon.class,
             options,
@@ -166,12 +166,12 @@ public final class CouponService extends ApiService {
    */
   public Coupon update(String coupon, CouponUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Coupon.class,
             options,
@@ -193,12 +193,12 @@ public final class CouponService extends ApiService {
    * coupon. You can also delete coupons via the API.
    */
   public Coupon delete(String coupon, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Coupon.class,
             options,

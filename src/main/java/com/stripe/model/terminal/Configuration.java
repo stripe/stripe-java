@@ -73,12 +73,12 @@ public class Configuration extends ApiResource implements HasId {
   /** Creates a new {@code Configuration} object. */
   public static Configuration create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/configurations";
+    String path = "/v1/terminal/configurations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Configuration.class,
             options,
@@ -93,13 +93,13 @@ public class Configuration extends ApiResource implements HasId {
   /** Creates a new {@code Configuration} object. */
   public static Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/configurations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/terminal/configurations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -124,13 +124,13 @@ public class Configuration extends ApiResource implements HasId {
   /** Deletes a {@code Configuration} object. */
   public Configuration delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             Configuration.class,
             options,
@@ -145,12 +145,12 @@ public class Configuration extends ApiResource implements HasId {
   /** Returns a list of {@code Configuration} objects. */
   public static ConfigurationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/configurations";
+    String path = "/v1/terminal/configurations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ConfigurationCollection.class,
             options,
@@ -166,13 +166,13 @@ public class Configuration extends ApiResource implements HasId {
   /** Returns a list of {@code Configuration} objects. */
   public static ConfigurationCollection list(ConfigurationListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/configurations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/terminal/configurations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ConfigurationCollection.class,
             options,
@@ -194,13 +194,13 @@ public class Configuration extends ApiResource implements HasId {
   public static Configuration retrieve(
       String configuration, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Configuration.class,
             options,
@@ -211,14 +211,14 @@ public class Configuration extends ApiResource implements HasId {
   public static Configuration retrieve(
       String configuration, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -233,13 +233,13 @@ public class Configuration extends ApiResource implements HasId {
   /** Updates a new {@code Configuration} object. */
   public Configuration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Configuration.class,
             options,
@@ -254,14 +254,14 @@ public class Configuration extends ApiResource implements HasId {
   /** Updates a new {@code Configuration} object. */
   public Configuration update(ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,

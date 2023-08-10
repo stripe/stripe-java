@@ -26,14 +26,14 @@ public final class CustomerService extends ApiService {
   public CustomerCashBalanceTransaction fundCashBalance(
       String customer, CustomerFundCashBalanceParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/customers/%s/fund_cash_balance", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerCashBalanceTransaction.class,
             options,

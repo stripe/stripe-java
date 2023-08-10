@@ -260,14 +260,14 @@ public class Authorization extends ApiResource
    */
   public Authorization approve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Authorization.class,
             options,
@@ -296,15 +296,15 @@ public class Authorization extends ApiResource
    */
   public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,
@@ -357,14 +357,14 @@ public class Authorization extends ApiResource
    */
   public Authorization decline(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Authorization.class,
             options,
@@ -393,15 +393,15 @@ public class Authorization extends ApiResource
    */
   public Authorization decline(AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,
@@ -422,12 +422,12 @@ public class Authorization extends ApiResource
    */
   public static AuthorizationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/authorizations";
+    String path = "/v1/issuing/authorizations";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             AuthorizationCollection.class,
             options,
@@ -449,13 +449,13 @@ public class Authorization extends ApiResource
    */
   public static AuthorizationCollection list(AuthorizationListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/authorizations";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/issuing/authorizations";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             AuthorizationCollection.class,
             options,
@@ -477,13 +477,13 @@ public class Authorization extends ApiResource
   public static Authorization retrieve(
       String authorization, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Authorization.class,
             options,
@@ -494,14 +494,14 @@ public class Authorization extends ApiResource
   public static Authorization retrieve(
       String authorization, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,
@@ -524,13 +524,13 @@ public class Authorization extends ApiResource
   @Override
   public Authorization update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Authorization.class,
             options,
@@ -551,14 +551,14 @@ public class Authorization extends ApiResource
    */
   public Authorization update(AuthorizationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,

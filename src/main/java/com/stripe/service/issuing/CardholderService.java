@@ -49,12 +49,12 @@ public final class CardholderService extends ApiService {
    */
   public StripeCollection<Cardholder> list(CardholderListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/cardholders";
+    String path = "/v1/issuing/cardholders";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Cardholder>>() {}.getType(),
             options,
@@ -67,12 +67,12 @@ public final class CardholderService extends ApiService {
   /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public Cardholder create(CardholderCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/cardholders";
+    String path = "/v1/issuing/cardholders";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Cardholder.class,
             options,
@@ -95,12 +95,12 @@ public final class CardholderService extends ApiService {
   public Cardholder retrieve(
       String cardholder, CardholderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Cardholder.class,
             options,
@@ -134,12 +134,12 @@ public final class CardholderService extends ApiService {
    */
   public Cardholder update(String cardholder, CardholderUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Cardholder.class,
             options,

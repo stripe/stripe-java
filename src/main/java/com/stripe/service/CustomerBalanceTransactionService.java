@@ -62,7 +62,7 @@ public final class CustomerBalanceTransactionService extends ApiService {
       CustomerBalanceTransactionRetrieveParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(transaction));
@@ -70,7 +70,7 @@ public final class CustomerBalanceTransactionService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerBalanceTransaction.class,
             options,
@@ -115,7 +115,7 @@ public final class CustomerBalanceTransactionService extends ApiService {
       CustomerBalanceTransactionUpdateParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(transaction));
@@ -123,7 +123,7 @@ public final class CustomerBalanceTransactionService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerBalanceTransaction.class,
             options,
@@ -159,13 +159,13 @@ public final class CustomerBalanceTransactionService extends ApiService {
   public StripeCollection<CustomerBalanceTransaction> list(
       String customer, CustomerBalanceTransactionListParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CustomerBalanceTransaction>>() {}.getType(),
             options,
@@ -186,13 +186,13 @@ public final class CustomerBalanceTransactionService extends ApiService {
   public CustomerBalanceTransaction create(
       String customer, CustomerBalanceTransactionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerBalanceTransaction.class,
             options,

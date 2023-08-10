@@ -33,12 +33,12 @@ public final class TokenService extends ApiService {
   /** Retrieves the token with the given ID. */
   public Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Token.class,
             options,
@@ -74,12 +74,12 @@ public final class TokenService extends ApiService {
    * attaching it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
    */
   public Token create(TokenCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/tokens";
+    String path = "/v1/tokens";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Token.class,
             options,

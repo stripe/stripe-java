@@ -23,12 +23,12 @@ public final class SessionService extends ApiService {
   }
   /** Creates a session of the customer portal. */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/billing_portal/sessions";
+    String path = "/v1/billing_portal/sessions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,

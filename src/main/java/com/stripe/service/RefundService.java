@@ -54,12 +54,12 @@ public final class RefundService extends ApiService {
    */
   public StripeCollection<Refund> list(RefundListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/refunds";
+    String path = "/v1/refunds";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Refund>>() {}.getType(),
             options,
@@ -79,12 +79,12 @@ public final class RefundService extends ApiService {
   }
   /** Create a refund. */
   public Refund create(RefundCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/refunds";
+    String path = "/v1/refunds";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Refund.class,
             options,
@@ -105,12 +105,12 @@ public final class RefundService extends ApiService {
   /** Retrieves the details of an existing refund. */
   public Refund retrieve(String refund, RefundRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Refund.class,
             options,
@@ -151,12 +151,12 @@ public final class RefundService extends ApiService {
    */
   public Refund update(String refund, RefundUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Refund.class,
             options,
@@ -197,12 +197,12 @@ public final class RefundService extends ApiService {
    */
   public Refund cancel(String refund, RefundCancelParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(refund));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Refund.class,
             options,

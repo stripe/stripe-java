@@ -40,12 +40,12 @@ public final class TransactionService extends ApiService {
   public Transaction retrieve(
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction));
+    String path = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transaction.class,
             options,
@@ -58,12 +58,12 @@ public final class TransactionService extends ApiService {
   /** Partially or fully reverses a previously created {@code Transaction}. */
   public Transaction createReversal(TransactionCreateReversalParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/transactions/create_reversal";
+    String path = "/v1/tax/transactions/create_reversal";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transaction.class,
             options,
@@ -78,12 +78,12 @@ public final class TransactionService extends ApiService {
   public Transaction createFromCalculation(
       TransactionCreateFromCalculationParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/transactions/create_from_calculation";
+    String path = "/v1/tax/transactions/create_from_calculation";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transaction.class,
             options,
@@ -108,13 +108,13 @@ public final class TransactionService extends ApiService {
   public StripeCollection<TransactionLineItem> listLineItems(
       String transaction, TransactionListLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(transaction));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<TransactionLineItem>>() {}.getType(),
             options,

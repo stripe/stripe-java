@@ -49,12 +49,12 @@ public final class InvoiceItemService extends ApiService {
    */
   public StripeCollection<InvoiceItem> list(InvoiceItemListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/invoiceitems";
+    String path = "/v1/invoiceitems";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<InvoiceItem>>() {}.getType(),
             options,
@@ -73,12 +73,12 @@ public final class InvoiceItemService extends ApiService {
    */
   public InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/invoiceitems";
+    String path = "/v1/invoiceitems";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InvoiceItem.class,
             options,
@@ -101,12 +101,12 @@ public final class InvoiceItemService extends ApiService {
   public InvoiceItem retrieve(
       String invoiceitem, InvoiceItemRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InvoiceItem.class,
             options,
@@ -141,12 +141,12 @@ public final class InvoiceItemService extends ApiService {
   public InvoiceItem update(
       String invoiceitem, InvoiceItemUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InvoiceItem.class,
             options,
@@ -164,12 +164,12 @@ public final class InvoiceItemService extends ApiService {
    * when they’re not attached to invoices, or if it’s attached to a draft invoice.
    */
   public InvoiceItem delete(String invoiceitem, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             InvoiceItem.class,
             options,

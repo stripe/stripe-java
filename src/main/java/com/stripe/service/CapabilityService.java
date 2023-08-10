@@ -50,12 +50,12 @@ public final class CapabilityService extends ApiService {
    */
   public StripeCollection<Capability> list(
       String account, CapabilityListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Capability>>() {}.getType(),
             options,
@@ -79,7 +79,7 @@ public final class CapabilityService extends ApiService {
   public Capability retrieve(
       String account, String capability, CapabilityRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/capabilities/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(capability));
@@ -87,7 +87,7 @@ public final class CapabilityService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Capability.class,
             options,
@@ -111,7 +111,7 @@ public final class CapabilityService extends ApiService {
   public Capability update(
       String account, String capability, CapabilityUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/capabilities/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(capability));
@@ -119,7 +119,7 @@ public final class CapabilityService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Capability.class,
             options,

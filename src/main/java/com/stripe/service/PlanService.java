@@ -37,12 +37,12 @@ public final class PlanService extends ApiService {
   /** Returns a list of your plans. */
   public StripeCollection<Plan> list(PlanListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/plans";
+    String path = "/v1/plans";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Plan>>() {}.getType(),
             options,
@@ -62,12 +62,12 @@ public final class PlanService extends ApiService {
    * backwards compatible to simplify your migration.
    */
   public Plan create(PlanCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/plans";
+    String path = "/v1/plans";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Plan.class,
             options,
@@ -88,12 +88,12 @@ public final class PlanService extends ApiService {
   /** Retrieves the plan with the given ID. */
   public Plan retrieve(String plan, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Plan.class,
             options,
@@ -130,12 +130,12 @@ public final class PlanService extends ApiService {
    */
   public Plan update(String plan, PlanUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Plan.class,
             options,
@@ -147,12 +147,12 @@ public final class PlanService extends ApiService {
   }
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
   public Plan delete(String plan, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Plan.class,
             options,

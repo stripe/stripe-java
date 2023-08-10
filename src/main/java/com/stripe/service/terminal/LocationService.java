@@ -37,12 +37,12 @@ public final class LocationService extends ApiService {
   /** Retrieves a {@code Location} object. */
   public Location retrieve(String location, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Location.class,
             options,
@@ -75,12 +75,12 @@ public final class LocationService extends ApiService {
    */
   public Location update(String location, LocationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Location.class,
             options,
@@ -92,12 +92,12 @@ public final class LocationService extends ApiService {
   }
   /** Deletes a {@code Location} object. */
   public Location delete(String location, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Location.class,
             options,
@@ -118,12 +118,12 @@ public final class LocationService extends ApiService {
    */
   public Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/locations";
+    String path = "/v1/terminal/locations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Location.class,
             options,
@@ -144,12 +144,12 @@ public final class LocationService extends ApiService {
   /** Returns a list of {@code Location} objects. */
   public StripeCollection<Location> list(LocationListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/locations";
+    String path = "/v1/terminal/locations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Location>>() {}.getType(),
             options,

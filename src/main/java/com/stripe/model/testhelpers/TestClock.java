@@ -91,14 +91,14 @@ public class TestClock extends ApiResource implements HasId {
    */
   public TestClock advance(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             TestClock.class,
             options,
@@ -119,15 +119,15 @@ public class TestClock extends ApiResource implements HasId {
    */
   public TestClock advance(TestClockAdvanceParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TestClock.class,
             options,
@@ -142,12 +142,12 @@ public class TestClock extends ApiResource implements HasId {
   /** Creates a new test clock that can be attached to new customers and quotes. */
   public static TestClock create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/test_clocks";
+    String path = "/v1/test_helpers/test_clocks";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             TestClock.class,
             options,
@@ -162,13 +162,13 @@ public class TestClock extends ApiResource implements HasId {
   /** Creates a new test clock that can be attached to new customers and quotes. */
   public static TestClock create(TestClockCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/test_clocks";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/test_helpers/test_clocks";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TestClock.class,
             options,
@@ -193,13 +193,13 @@ public class TestClock extends ApiResource implements HasId {
   /** Deletes a test clock. */
   public TestClock delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             TestClock.class,
             options,
@@ -214,12 +214,12 @@ public class TestClock extends ApiResource implements HasId {
   /** Returns a list of your test clocks. */
   public static TestClockCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/test_clocks";
+    String path = "/v1/test_helpers/test_clocks";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TestClockCollection.class,
             options,
@@ -234,13 +234,13 @@ public class TestClock extends ApiResource implements HasId {
   /** Returns a list of your test clocks. */
   public static TestClockCollection list(TestClockListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/test_clocks";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/test_helpers/test_clocks";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TestClockCollection.class,
             options,
@@ -261,13 +261,13 @@ public class TestClock extends ApiResource implements HasId {
   /** Retrieves a test clock. */
   public static TestClock retrieve(
       String testClock, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TestClock.class,
             options,
@@ -278,14 +278,14 @@ public class TestClock extends ApiResource implements HasId {
   public static TestClock retrieve(
       String testClock, TestClockRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TestClock.class,
             options,

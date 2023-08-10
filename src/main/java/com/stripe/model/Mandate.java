@@ -113,12 +113,12 @@ public class Mandate extends ApiResource implements HasId {
   /** Retrieves a Mandate object. */
   public static Mandate retrieve(String mandate, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Mandate.class,
             options,
@@ -128,13 +128,13 @@ public class Mandate extends ApiResource implements HasId {
   /** Retrieves a Mandate object. */
   public static Mandate retrieve(
       String mandate, MandateRetrieveParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Mandate.class,
             options,

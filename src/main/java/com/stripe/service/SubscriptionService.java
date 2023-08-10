@@ -49,12 +49,12 @@ public final class SubscriptionService extends ApiService {
    */
   public StripeSearchResult<Subscription> search(
       SubscriptionSearchParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/subscriptions/search";
+    String path = "/v1/subscriptions/search";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeSearchResult<Subscription>>() {}.getType(),
             options,
@@ -87,12 +87,12 @@ public final class SubscriptionService extends ApiService {
    */
   public StripeCollection<Subscription> list(SubscriptionListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/subscriptions";
+    String path = "/v1/subscriptions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Subscription>>() {}.getType(),
             options,
@@ -131,12 +131,12 @@ public final class SubscriptionService extends ApiService {
    */
   public Subscription create(SubscriptionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/subscriptions";
+    String path = "/v1/subscriptions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Subscription.class,
             options,
@@ -180,13 +180,13 @@ public final class SubscriptionService extends ApiService {
   public Subscription update(
       String subscriptionExposedId, SubscriptionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Subscription.class,
             options,
@@ -211,13 +211,13 @@ public final class SubscriptionService extends ApiService {
   public Subscription retrieve(
       String subscriptionExposedId, SubscriptionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Subscription.class,
             options,
@@ -305,13 +305,13 @@ public final class SubscriptionService extends ApiService {
   public Subscription cancel(
       String subscriptionExposedId, SubscriptionCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Subscription.class,
             options,
@@ -358,13 +358,13 @@ public final class SubscriptionService extends ApiService {
   public Subscription resume(
       String subscription, SubscriptionResumeParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(subscription));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Subscription.class,
             options,
@@ -377,14 +377,14 @@ public final class SubscriptionService extends ApiService {
   /** Removes the currently applied discount on a subscription. */
   public Discount deleteDiscount(String subscriptionExposedId, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(subscriptionExposedId));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Discount.class,
             options,

@@ -664,12 +664,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Charge.class,
             options,
@@ -703,13 +703,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
    */
   public Charge capture(ChargeCaptureParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,
@@ -734,12 +734,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges";
+    String path = "/v1/charges";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Charge.class,
             options,
@@ -764,13 +764,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/charges";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,
@@ -791,12 +791,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges";
+    String path = "/v1/charges";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ChargeCollection.class,
             options,
@@ -817,13 +817,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static ChargeCollection list(ChargeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/charges";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ChargeCollection.class,
             options,
@@ -855,12 +855,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static Charge retrieve(String charge, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Charge.class,
             options,
@@ -874,13 +874,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,
@@ -909,12 +909,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static ChargeSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges/search";
+    String path = "/v1/charges/search";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ChargeSearchResult.class,
             options,
@@ -943,13 +943,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   public static ChargeSearchResult search(ChargeSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges/search";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/charges/search";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ChargeSearchResult.class,
             options,
@@ -971,12 +971,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   @Override
   public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Charge.class,
             options,
@@ -996,13 +996,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * provided will be left unchanged.
    */
   public Charge update(ChargeUpdateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,

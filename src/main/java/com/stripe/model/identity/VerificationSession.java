@@ -212,14 +212,14 @@ public class VerificationSession extends ApiResource
    */
   public VerificationSession cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s/cancel", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             VerificationSession.class,
             options,
@@ -246,15 +246,15 @@ public class VerificationSession extends ApiResource
    */
   public VerificationSession cancel(VerificationSessionCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s/cancel", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -291,12 +291,12 @@ public class VerificationSession extends ApiResource
    */
   public static VerificationSession create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/identity/verification_sessions";
+    String path = "/v1/identity/verification_sessions";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             VerificationSession.class,
             options,
@@ -334,13 +334,13 @@ public class VerificationSession extends ApiResource
    */
   public static VerificationSession create(
       VerificationSessionCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/identity/verification_sessions";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/identity/verification_sessions";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -356,12 +356,12 @@ public class VerificationSession extends ApiResource
   /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = "/v1/identity/verification_sessions";
+    String path = "/v1/identity/verification_sessions";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             VerificationSessionCollection.class,
             options,
@@ -377,13 +377,13 @@ public class VerificationSession extends ApiResource
   /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(
       VerificationSessionListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/identity/verification_sessions";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/identity/verification_sessions";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSessionCollection.class,
             options,
@@ -488,14 +488,14 @@ public class VerificationSession extends ApiResource
    */
   public VerificationSession redact(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s/redact", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             VerificationSession.class,
             options,
@@ -550,15 +550,15 @@ public class VerificationSession extends ApiResource
    */
   public VerificationSession redact(VerificationSessionRedactParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s/redact", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -594,13 +594,13 @@ public class VerificationSession extends ApiResource
    */
   public static VerificationSession retrieve(
       String session, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             VerificationSession.class,
             options,
@@ -616,14 +616,14 @@ public class VerificationSession extends ApiResource
   public static VerificationSession retrieve(
       String session, VerificationSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -650,14 +650,14 @@ public class VerificationSession extends ApiResource
   @Override
   public VerificationSession update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             VerificationSession.class,
             options,
@@ -682,15 +682,15 @@ public class VerificationSession extends ApiResource
    */
   public VerificationSession update(VerificationSessionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,

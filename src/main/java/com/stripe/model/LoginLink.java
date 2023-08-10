@@ -46,12 +46,12 @@ public class LoginLink extends ApiResource {
    */
   public static LoginLink createOnAccount(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             LoginLink.class,
             options,
@@ -68,13 +68,13 @@ public class LoginLink extends ApiResource {
   public static LoginLink createOnAccount(
       String account, LoginLinkCreateOnAccountParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             LoginLink.class,
             options,

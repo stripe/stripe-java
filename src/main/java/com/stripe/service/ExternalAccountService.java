@@ -40,13 +40,13 @@ public final class ExternalAccountService extends ApiService {
   public StripeCollection<ExternalAccount> list(
       String account, ExternalAccountListParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ExternalAccount>>() {}.getType(),
             options,
@@ -61,13 +61,13 @@ public final class ExternalAccountService extends ApiService {
   public ExternalAccount create(
       String account, ExternalAccountCreateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExternalAccount.class,
             options,
@@ -91,7 +91,7 @@ public final class ExternalAccountService extends ApiService {
   public ExternalAccount retrieve(
       String account, String id, ExternalAccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
@@ -99,7 +99,7 @@ public final class ExternalAccountService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExternalAccount.class,
             options,
@@ -151,7 +151,7 @@ public final class ExternalAccountService extends ApiService {
   public ExternalAccount update(
       String account, String id, ExternalAccountUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
@@ -159,7 +159,7 @@ public final class ExternalAccountService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExternalAccount.class,
             options,
@@ -172,7 +172,7 @@ public final class ExternalAccountService extends ApiService {
   /** Delete a specified external account for a given account. */
   public ExternalAccount delete(String account, String id, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
@@ -180,7 +180,7 @@ public final class ExternalAccountService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             ExternalAccount.class,
             options,

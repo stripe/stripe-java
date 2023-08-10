@@ -28,12 +28,12 @@ public final class CalculationService extends ApiService {
   /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
   public Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax/calculations";
+    String path = "/v1/tax/calculations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Calculation.class,
             options,
@@ -58,13 +58,13 @@ public final class CalculationService extends ApiService {
   public StripeCollection<CalculationLineItem> listLineItems(
       String calculation, CalculationListLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(calculation));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CalculationLineItem>>() {}.getType(),
             options,

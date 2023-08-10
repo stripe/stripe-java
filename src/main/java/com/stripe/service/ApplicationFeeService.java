@@ -48,12 +48,12 @@ public final class ApplicationFeeService extends ApiService {
    */
   public StripeCollection<ApplicationFee> list(
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/application_fees";
+    String path = "/v1/application_fees";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ApplicationFee>>() {}.getType(),
             options,
@@ -88,12 +88,12 @@ public final class ApplicationFeeService extends ApiService {
   public ApplicationFee retrieve(
       String id, ApplicationFeeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ApplicationFee.class,
             options,

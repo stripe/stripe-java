@@ -33,12 +33,12 @@ public final class EphemeralKeyService extends ApiService {
   /** Creates a short-lived API key for a given resource. */
   public EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/ephemeral_keys";
+    String path = "/v1/ephemeral_keys";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             EphemeralKey.class,
             options,
@@ -59,12 +59,12 @@ public final class EphemeralKeyService extends ApiService {
   /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(String key, EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(key));
+    String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(key));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             EphemeralKey.class,
             options,

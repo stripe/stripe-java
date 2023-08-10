@@ -79,12 +79,12 @@ public final class CreditNoteService extends ApiService {
    */
   public CreditNote create(CreditNoteCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/credit_notes";
+    String path = "/v1/credit_notes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CreditNote.class,
             options,
@@ -105,12 +105,12 @@ public final class CreditNoteService extends ApiService {
   /** Returns a list of credit notes. */
   public StripeCollection<CreditNote> list(CreditNoteListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/credit_notes";
+    String path = "/v1/credit_notes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CreditNote>>() {}.getType(),
             options,
@@ -123,12 +123,12 @@ public final class CreditNoteService extends ApiService {
   /** Get a preview of a credit note without creating it. */
   public CreditNote preview(CreditNotePreviewParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/credit_notes/preview";
+    String path = "/v1/credit_notes/preview";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CreditNote.class,
             options,
@@ -149,12 +149,12 @@ public final class CreditNoteService extends ApiService {
   /** Retrieves the credit note object with the given identifier. */
   public CreditNote retrieve(String id, CreditNoteRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CreditNote.class,
             options,
@@ -175,12 +175,12 @@ public final class CreditNoteService extends ApiService {
   /** Updates an existing credit note. */
   public CreditNote update(String id, CreditNoteUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CreditNote.class,
             options,
@@ -215,12 +215,12 @@ public final class CreditNoteService extends ApiService {
   public CreditNote voidCreditNote(
       String id, CreditNoteVoidCreditNoteParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CreditNote.class,
             options,
@@ -242,12 +242,12 @@ public final class CreditNoteService extends ApiService {
    */
   public StripeCollection<CreditNoteLineItem> listPreviewLineItems(
       CreditNoteListPreviewLineItemsParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/credit_notes/preview/lines";
+    String path = "/v1/credit_notes/preview/lines";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CreditNoteLineItem>>() {}.getType(),
             options,

@@ -39,12 +39,12 @@ public final class AccountService extends ApiService {
   /** Returns a list of Financial Connections {@code Account} objects. */
   public StripeCollection<Account> list(AccountListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/financial_connections/accounts";
+    String path = "/v1/financial_connections/accounts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Account>>() {}.getType(),
             options,
@@ -65,13 +65,13 @@ public final class AccountService extends ApiService {
   /** Retrieves the details of an Financial Connections {@code Account}. */
   public Account retrieve(String account, AccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -86,14 +86,14 @@ public final class AccountService extends ApiService {
   public StripeCollection<AccountOwner> listOwners(
       String account, AccountListOwnersParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/financial_connections/accounts/%s/owners", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<AccountOwner>>() {}.getType(),
             options,
@@ -106,14 +106,14 @@ public final class AccountService extends ApiService {
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public Account refresh(String account, AccountRefreshParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -146,14 +146,14 @@ public final class AccountService extends ApiService {
    */
   public Account disconnect(String account, AccountDisconnectParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/financial_connections/accounts/%s/disconnect", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,

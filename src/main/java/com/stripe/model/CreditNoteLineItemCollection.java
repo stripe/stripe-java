@@ -27,12 +27,12 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
    */
   public CreditNoteLineItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CreditNoteLineItemCollection.class,
             options,
@@ -57,13 +57,13 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
   public CreditNoteLineItemCollection list(
       CreditNoteLineItemCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CreditNoteLineItemCollection.class,
             options,

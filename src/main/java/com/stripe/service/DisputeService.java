@@ -37,12 +37,12 @@ public final class DisputeService extends ApiService {
   /** Returns a list of your disputes. */
   public StripeCollection<Dispute> list(DisputeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/disputes";
+    String path = "/v1/disputes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Dispute>>() {}.getType(),
             options,
@@ -63,12 +63,12 @@ public final class DisputeService extends ApiService {
   /** Retrieves the dispute with the given ID. */
   public Dispute retrieve(String dispute, DisputeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Dispute.class,
             options,
@@ -125,12 +125,12 @@ public final class DisputeService extends ApiService {
    */
   public Dispute update(String dispute, DisputeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Dispute.class,
             options,
@@ -175,12 +175,12 @@ public final class DisputeService extends ApiService {
    */
   public Dispute close(String dispute, DisputeCloseParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(dispute));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Dispute.class,
             options,

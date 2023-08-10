@@ -64,12 +64,12 @@ public final class SetupIntentService extends ApiService {
    */
   public SetupIntent create(SetupIntentCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/setup_intents";
+    String path = "/v1/setup_intents";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SetupIntent.class,
             options,
@@ -90,12 +90,12 @@ public final class SetupIntentService extends ApiService {
   /** Returns a list of SetupIntents. */
   public StripeCollection<SetupIntent> list(SetupIntentListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/setup_intents";
+    String path = "/v1/setup_intents";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<SetupIntent>>() {}.getType(),
             options,
@@ -154,12 +154,12 @@ public final class SetupIntentService extends ApiService {
   public SetupIntent retrieve(
       String intent, SetupIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SetupIntent.class,
             options,
@@ -180,12 +180,12 @@ public final class SetupIntentService extends ApiService {
   /** Updates a SetupIntent object. */
   public SetupIntent update(String intent, SetupIntentUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SetupIntent.class,
             options,
@@ -255,12 +255,12 @@ public final class SetupIntentService extends ApiService {
    */
   public SetupIntent confirm(String intent, SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SetupIntent.class,
             options,
@@ -305,12 +305,12 @@ public final class SetupIntentService extends ApiService {
    */
   public SetupIntent cancel(String intent, SetupIntentCancelParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SetupIntent.class,
             options,
@@ -335,13 +335,13 @@ public final class SetupIntentService extends ApiService {
   public SetupIntent verifyMicrodeposits(
       String intent, SetupIntentVerifyMicrodepositsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/setup_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SetupIntent.class,
             options,

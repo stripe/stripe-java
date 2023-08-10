@@ -221,12 +221,12 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public static Price create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices";
+    String path = "/v1/prices";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Price.class,
             options,
@@ -241,13 +241,13 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public static Price create(PriceCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/prices";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Price.class,
             options,
@@ -262,12 +262,12 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Returns a list of your prices. */
   public static PriceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices";
+    String path = "/v1/prices";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PriceCollection.class,
             options,
@@ -282,13 +282,13 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Returns a list of your prices. */
   public static PriceCollection list(PriceListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/prices";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PriceCollection.class,
             options,
@@ -308,12 +308,12 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Retrieves the price with the given ID. */
   public static Price retrieve(String price, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Price.class,
             options,
@@ -323,13 +323,13 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Retrieves the price with the given ID. */
   public static Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Price.class,
             options,
@@ -358,12 +358,12 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    */
   public static PriceSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices/search";
+    String path = "/v1/prices/search";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PriceSearchResult.class,
             options,
@@ -392,13 +392,13 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    */
   public static PriceSearchResult search(PriceSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices/search";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/prices/search";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PriceSearchResult.class,
             options,
@@ -420,12 +420,12 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    */
   @Override
   public Price update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Price.class,
             options,
@@ -445,13 +445,13 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    * provided are left unchanged.
    */
   public Price update(PriceUpdateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Price.class,
             options,

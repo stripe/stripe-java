@@ -32,12 +32,12 @@ public final class MandateService extends ApiService {
   /** Retrieves a Mandate object. */
   public Mandate retrieve(String mandate, MandateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Mandate.class,
             options,

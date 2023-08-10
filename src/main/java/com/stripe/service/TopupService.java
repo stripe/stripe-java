@@ -29,12 +29,12 @@ public final class TopupService extends ApiService {
   }
   /** Top up the balance of an account. */
   public Topup create(TopupCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/topups";
+    String path = "/v1/topups";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Topup.class,
             options,
@@ -55,12 +55,12 @@ public final class TopupService extends ApiService {
   /** Returns a list of top-ups. */
   public StripeCollection<Topup> list(TopupListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/topups";
+    String path = "/v1/topups";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Topup>>() {}.getType(),
             options,
@@ -97,12 +97,12 @@ public final class TopupService extends ApiService {
    */
   public Topup retrieve(String topup, TopupRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Topup.class,
             options,
@@ -123,12 +123,12 @@ public final class TopupService extends ApiService {
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
   public Topup update(String topup, TopupUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Topup.class,
             options,
@@ -149,12 +149,12 @@ public final class TopupService extends ApiService {
   /** Cancels a top-up. Only pending top-ups can be canceled. */
   public Topup cancel(String topup, TopupCancelParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(topup));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Topup.class,
             options,

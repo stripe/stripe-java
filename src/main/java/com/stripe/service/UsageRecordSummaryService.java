@@ -73,7 +73,7 @@ public final class UsageRecordSummaryService extends ApiService {
   public StripeCollection<UsageRecordSummary> list(
       String subscriptionItem, UsageRecordSummaryListParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/subscription_items/%s/usage_record_summaries",
             ApiResource.urlEncodeId(subscriptionItem));
@@ -81,7 +81,7 @@ public final class UsageRecordSummaryService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<UsageRecordSummary>>() {}.getType(),
             options,

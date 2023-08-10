@@ -30,12 +30,12 @@ public final class SessionService extends ApiService {
    * {@code client_secret} can be used to launch the flow using Stripe.js.
    */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/financial_connections/sessions";
+    String path = "/v1/financial_connections/sessions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,
@@ -56,13 +56,13 @@ public final class SessionService extends ApiService {
   /** Retrieves the details of a Financial Connections {@code Session}. */
   public Session retrieve(String session, SessionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,

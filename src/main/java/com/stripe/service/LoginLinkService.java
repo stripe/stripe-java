@@ -56,12 +56,12 @@ public final class LoginLinkService extends ApiService {
    */
   public LoginLink create(String account, LoginLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             LoginLink.class,
             options,

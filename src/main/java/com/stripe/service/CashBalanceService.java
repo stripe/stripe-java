@@ -35,12 +35,12 @@ public final class CashBalanceService extends ApiService {
   public CashBalance retrieve(
       String customer, CashBalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CashBalance.class,
             options,
@@ -62,12 +62,12 @@ public final class CashBalanceService extends ApiService {
   /** Changes the settings on a customer’s cash balance. */
   public CashBalance update(String customer, CashBalanceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CashBalance.class,
             options,

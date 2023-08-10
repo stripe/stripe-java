@@ -38,12 +38,12 @@ public final class AccountService extends ApiService {
   /** Retrieves the details of an account. */
   public Account retrieve(AccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/account";
+    String path = "/v1/account";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -64,12 +64,12 @@ public final class AccountService extends ApiService {
   /** Retrieves the details of an account. */
   public Account retrieve(String account, AccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -146,12 +146,12 @@ public final class AccountService extends ApiService {
    */
   public Account update(String account, AccountUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -183,12 +183,12 @@ public final class AccountService extends ApiService {
    * settings</a> instead.
    */
   public Account delete(String account, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Account.class,
             options,
@@ -225,12 +225,12 @@ public final class AccountService extends ApiService {
    */
   public StripeCollection<Account> list(AccountListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/accounts";
+    String path = "/v1/accounts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Account>>() {}.getType(),
             options,
@@ -286,12 +286,12 @@ public final class AccountService extends ApiService {
    * information during account onboarding. You can prefill any information on the account.
    */
   public Account create(AccountCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/accounts";
+    String path = "/v1/accounts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -316,12 +316,12 @@ public final class AccountService extends ApiService {
    */
   public Account reject(String account, AccountRejectParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,

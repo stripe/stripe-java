@@ -160,12 +160,12 @@ public class Review extends ApiResource implements HasId {
 
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Review.class,
             options,
@@ -179,13 +179,13 @@ public class Review extends ApiResource implements HasId {
 
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Review.class,
             options,
@@ -208,12 +208,12 @@ public class Review extends ApiResource implements HasId {
    */
   public static ReviewCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reviews";
+    String path = "/v1/reviews";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ReviewCollection.class,
             options,
@@ -236,13 +236,13 @@ public class Review extends ApiResource implements HasId {
    */
   public static ReviewCollection list(ReviewListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reviews";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/reviews";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReviewCollection.class,
             options,
@@ -262,12 +262,12 @@ public class Review extends ApiResource implements HasId {
   /** Retrieves a {@code Review} object. */
   public static Review retrieve(String review, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
+    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Review.class,
             options,
@@ -277,13 +277,13 @@ public class Review extends ApiResource implements HasId {
   /** Retrieves a {@code Review} object. */
   public static Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Review.class,
             options,

@@ -28,12 +28,12 @@ public final class SecretService extends ApiService {
   }
   /** Finds a secret in the secret store by name and scope. */
   public Secret find(SecretFindParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/apps/secrets/find";
+    String path = "/v1/apps/secrets/find";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Secret.class,
             options,
@@ -45,12 +45,12 @@ public final class SecretService extends ApiService {
   }
   /** Create or replace a secret in the secret store. */
   public Secret create(SecretCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/apps/secrets";
+    String path = "/v1/apps/secrets";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Secret.class,
             options,
@@ -63,12 +63,12 @@ public final class SecretService extends ApiService {
   /** List all secrets stored on the given scope. */
   public StripeCollection<Secret> list(SecretListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/apps/secrets";
+    String path = "/v1/apps/secrets";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Secret>>() {}.getType(),
             options,
@@ -81,12 +81,12 @@ public final class SecretService extends ApiService {
   /** Deletes a secret from the secret store by name and scope. */
   public Secret deleteWhere(SecretDeleteWhereParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/apps/secrets/delete";
+    String path = "/v1/apps/secrets/delete";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Secret.class,
             options,

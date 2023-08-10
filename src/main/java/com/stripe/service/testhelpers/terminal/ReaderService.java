@@ -47,7 +47,7 @@ public final class ReaderService extends ApiService {
   public Reader presentPaymentMethod(
       String reader, ReaderPresentPaymentMethodParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/terminal/readers/%s/present_payment_method",
             ApiResource.urlEncodeId(reader));
@@ -55,7 +55,7 @@ public final class ReaderService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Reader.class,
             options,

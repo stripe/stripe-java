@@ -20,12 +20,12 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
 
   /** Creates a new {@code TaxID} object for a customer. */
   public TaxId create(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             TaxId.class,
             options,
@@ -40,13 +40,13 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Creates a new {@code TaxID} object for a customer. */
   public TaxId create(TaxIdCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxId.class,
             options,
@@ -61,12 +61,12 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Returns a list of tax IDs for a customer. */
   public TaxIdCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TaxIdCollection.class,
             options,
@@ -81,13 +81,13 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Returns a list of tax IDs for a customer. */
   public TaxIdCollection list(TaxIdCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxIdCollection.class,
             options,
@@ -107,12 +107,12 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Retrieves the {@code TaxID} object with the given identifier. */
   public TaxId retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TaxId.class,
             options,
@@ -122,13 +122,13 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Retrieves the {@code TaxID} object with the given identifier. */
   public TaxId retrieve(String id, TaxIdCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxId.class,
             options,

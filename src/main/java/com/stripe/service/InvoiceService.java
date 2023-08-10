@@ -53,12 +53,12 @@ public final class InvoiceService extends ApiService {
    */
   public StripeSearchResult<Invoice> search(InvoiceSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/invoices/search";
+    String path = "/v1/invoices/search";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeSearchResult<Invoice>>() {}.getType(),
             options,
@@ -155,12 +155,12 @@ public final class InvoiceService extends ApiService {
    */
   public Invoice upcoming(InvoiceUpcomingParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/invoices/upcoming";
+    String path = "/v1/invoices/upcoming";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -217,12 +217,12 @@ public final class InvoiceService extends ApiService {
    */
   public Invoice update(String invoice, InvoiceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -243,12 +243,12 @@ public final class InvoiceService extends ApiService {
   /** Retrieves the invoice with the given ID. */
   public Invoice retrieve(String invoice, InvoiceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -270,12 +270,12 @@ public final class InvoiceService extends ApiService {
    * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete(String invoice, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Invoice.class,
             options,
@@ -320,12 +320,12 @@ public final class InvoiceService extends ApiService {
    */
   public Invoice pay(String invoice, InvoicePayParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoices/%s/pay", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/pay", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -364,12 +364,12 @@ public final class InvoiceService extends ApiService {
    */
   public StripeCollection<InvoiceLineItem> listUpcomingLines(
       InvoiceListUpcomingLinesParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/invoices/upcoming/lines";
+    String path = "/v1/invoices/upcoming/lines";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType(),
             options,
@@ -409,12 +409,12 @@ public final class InvoiceService extends ApiService {
    * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
    */
   public Invoice create(InvoiceCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/invoices";
+    String path = "/v1/invoices";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -447,12 +447,12 @@ public final class InvoiceService extends ApiService {
    */
   public StripeCollection<Invoice> list(InvoiceListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/invoices";
+    String path = "/v1/invoices";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Invoice>>() {}.getType(),
             options,
@@ -487,12 +487,12 @@ public final class InvoiceService extends ApiService {
   public Invoice finalizeInvoice(
       String invoice, InvoiceFinalizeInvoiceParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoices/%s/finalize", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/finalize", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -551,12 +551,12 @@ public final class InvoiceService extends ApiService {
   public Invoice sendInvoice(
       String invoice, InvoiceSendInvoiceParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -591,13 +591,13 @@ public final class InvoiceService extends ApiService {
   public Invoice markUncollectible(
       String invoice, InvoiceMarkUncollectibleParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/invoices/%s/mark_uncollectible", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,
@@ -636,12 +636,12 @@ public final class InvoiceService extends ApiService {
   public Invoice voidInvoice(
       String invoice, InvoiceVoidInvoiceParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Invoice.class,
             options,

@@ -38,12 +38,12 @@ public final class FinancialAccountService extends ApiService {
    */
   public FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/financial_accounts";
+    String path = "/v1/treasury/financial_accounts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccount.class,
             options,
@@ -65,12 +65,12 @@ public final class FinancialAccountService extends ApiService {
   /** Returns a list of FinancialAccounts. */
   public StripeCollection<FinancialAccount> list(
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/treasury/financial_accounts";
+    String path = "/v1/treasury/financial_accounts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<FinancialAccount>>() {}.getType(),
             options,
@@ -94,14 +94,14 @@ public final class FinancialAccountService extends ApiService {
   public FinancialAccount update(
       String financialAccount, FinancialAccountUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccount.class,
             options,
@@ -125,14 +125,14 @@ public final class FinancialAccountService extends ApiService {
   public FinancialAccount retrieve(
       String financialAccount, FinancialAccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccount.class,
             options,
@@ -157,7 +157,7 @@ public final class FinancialAccountService extends ApiService {
   public FinancialAccountFeatures updateFeatures(
       String financialAccount, FinancialAccountUpdateFeaturesParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features",
             ApiResource.urlEncodeId(financialAccount));
@@ -165,7 +165,7 @@ public final class FinancialAccountService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccountFeatures.class,
             options,
@@ -194,7 +194,7 @@ public final class FinancialAccountService extends ApiService {
       FinancialAccountRetrieveFeaturesParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features",
             ApiResource.urlEncodeId(financialAccount));
@@ -202,7 +202,7 @@ public final class FinancialAccountService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FinancialAccountFeatures.class,
             options,

@@ -60,7 +60,7 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
       CustomerCashBalanceTransactionRetrieveParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/cash_balance_transactions/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(transaction));
@@ -68,7 +68,7 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerCashBalanceTransaction.class,
             options,
@@ -105,14 +105,14 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
   public StripeCollection<CustomerCashBalanceTransaction> list(
       String customer, CustomerCashBalanceTransactionListParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CustomerCashBalanceTransaction>>() {}.getType(),
             options,

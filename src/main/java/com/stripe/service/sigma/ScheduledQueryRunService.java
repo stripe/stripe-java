@@ -36,12 +36,12 @@ public final class ScheduledQueryRunService extends ApiService {
   /** Returns a list of scheduled query runs. */
   public StripeCollection<ScheduledQueryRun> list(
       ScheduledQueryRunListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/sigma/scheduled_query_runs";
+    String path = "/v1/sigma/scheduled_query_runs";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ScheduledQueryRun>>() {}.getType(),
             options,
@@ -66,14 +66,14 @@ public final class ScheduledQueryRunService extends ApiService {
   public ScheduledQueryRun retrieve(
       String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ScheduledQueryRun.class,
             options,

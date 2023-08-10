@@ -38,12 +38,12 @@ public final class ReportRunService extends ApiService {
   public ReportRun retrieve(
       String reportRun, ReportRunRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
+    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportRun.class,
             options,
@@ -62,12 +62,12 @@ public final class ReportRunService extends ApiService {
    */
   public ReportRun create(ReportRunCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_runs";
+    String path = "/v1/reporting/report_runs";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportRun.class,
             options,
@@ -88,12 +88,12 @@ public final class ReportRunService extends ApiService {
   /** Returns a list of Report Runs, with the most recent appearing first. */
   public StripeCollection<ReportRun> list(ReportRunListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_runs";
+    String path = "/v1/reporting/report_runs";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ReportRun>>() {}.getType(),
             options,

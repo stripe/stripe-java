@@ -121,12 +121,12 @@ public class Event extends ApiResource implements HasId {
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/events";
+    String path = "/v1/events";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             EventCollection.class,
             options,
@@ -151,13 +151,13 @@ public class Event extends ApiResource implements HasId {
    */
   public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/events";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/events";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             EventCollection.class,
             options,
@@ -186,12 +186,12 @@ public class Event extends ApiResource implements HasId {
    */
   public static Event retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Event.class,
             options,
@@ -204,13 +204,13 @@ public class Event extends ApiResource implements HasId {
    */
   public static Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Event.class,
             options,

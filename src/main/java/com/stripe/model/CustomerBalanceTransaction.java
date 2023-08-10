@@ -192,7 +192,7 @@ public class CustomerBalanceTransaction extends ApiResource
   @Override
   public CustomerBalanceTransaction update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
@@ -200,7 +200,7 @@ public class CustomerBalanceTransaction extends ApiResource
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             CustomerBalanceTransaction.class,
             options,
@@ -223,16 +223,16 @@ public class CustomerBalanceTransaction extends ApiResource
   public CustomerBalanceTransaction update(
       CustomerBalanceTransactionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerBalanceTransaction.class,
             options,

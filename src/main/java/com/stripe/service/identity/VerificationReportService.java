@@ -37,13 +37,13 @@ public final class VerificationReportService extends ApiService {
   public VerificationReport retrieve(
       String report, VerificationReportRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationReport.class,
             options,
@@ -65,12 +65,12 @@ public final class VerificationReportService extends ApiService {
   /** List all verification reports. */
   public StripeCollection<VerificationReport> list(
       VerificationReportListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/identity/verification_reports";
+    String path = "/v1/identity/verification_reports";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<VerificationReport>>() {}.getType(),
             options,

@@ -81,12 +81,12 @@ public class EphemeralKey extends ApiResource implements HasId {
   /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             EphemeralKey.class,
             options,
@@ -101,13 +101,13 @@ public class EphemeralKey extends ApiResource implements HasId {
   /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             EphemeralKey.class,
             options,

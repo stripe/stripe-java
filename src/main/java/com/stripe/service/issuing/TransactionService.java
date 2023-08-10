@@ -48,12 +48,12 @@ public final class TransactionService extends ApiService {
    */
   public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/transactions";
+    String path = "/v1/issuing/transactions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Transaction>>() {}.getType(),
             options,
@@ -76,12 +76,13 @@ public final class TransactionService extends ApiService {
   public Transaction retrieve(
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+    String path =
+        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transaction.class,
             options,
@@ -116,12 +117,13 @@ public final class TransactionService extends ApiService {
   public Transaction update(
       String transaction, TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+    String path =
+        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transaction.class,
             options,

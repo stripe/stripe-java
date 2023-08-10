@@ -28,12 +28,12 @@ public class CustomerCashBalanceTransactionCollection
    */
   public CustomerCashBalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CustomerCashBalanceTransactionCollection.class,
             options,
@@ -56,13 +56,13 @@ public class CustomerCashBalanceTransactionCollection
   public CustomerCashBalanceTransactionCollection list(
       CustomerCashBalanceTransactionCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerCashBalanceTransactionCollection.class,
             options,
@@ -92,12 +92,12 @@ public class CustomerCashBalanceTransactionCollection
    */
   public CustomerCashBalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CustomerCashBalanceTransaction.class,
             options,
@@ -113,13 +113,13 @@ public class CustomerCashBalanceTransactionCollection
       CustomerCashBalanceTransactionCollectionRetrieveParams params,
       RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CustomerCashBalanceTransaction.class,
             options,

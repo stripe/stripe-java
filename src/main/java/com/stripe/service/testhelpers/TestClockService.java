@@ -39,13 +39,13 @@ public final class TestClockService extends ApiService {
   public TestClock retrieve(
       String testClock, TestClockRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TestClock.class,
             options,
@@ -57,13 +57,13 @@ public final class TestClockService extends ApiService {
   }
   /** Deletes a test clock. */
   public TestClock delete(String testClock, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             TestClock.class,
             options,
@@ -76,12 +76,12 @@ public final class TestClockService extends ApiService {
   /** Creates a new test clock that can be attached to new customers and quotes. */
   public TestClock create(TestClockCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/test_clocks";
+    String path = "/v1/test_helpers/test_clocks";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TestClock.class,
             options,
@@ -102,12 +102,12 @@ public final class TestClockService extends ApiService {
   /** Returns a list of your test clocks. */
   public StripeCollection<TestClock> list(TestClockListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/test_clocks";
+    String path = "/v1/test_helpers/test_clocks";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<TestClock>>() {}.getType(),
             options,
@@ -126,14 +126,14 @@ public final class TestClockService extends ApiService {
    */
   public TestClock advance(String testClock, TestClockAdvanceParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(testClock));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TestClock.class,
             options,

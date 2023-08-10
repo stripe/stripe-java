@@ -51,12 +51,12 @@ public final class CustomerService extends ApiService {
    */
   public StripeSearchResult<Customer> search(CustomerSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/customers/search";
+    String path = "/v1/customers/search";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeSearchResult<Customer>>() {}.getType(),
             options,
@@ -89,12 +89,12 @@ public final class CustomerService extends ApiService {
    */
   public StripeCollection<Customer> list(CustomerListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/customers";
+    String path = "/v1/customers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Customer>>() {}.getType(),
             options,
@@ -115,12 +115,12 @@ public final class CustomerService extends ApiService {
   /** Creates a new customer object. */
   public Customer create(CustomerCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/customers";
+    String path = "/v1/customers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Customer.class,
             options,
@@ -141,12 +141,12 @@ public final class CustomerService extends ApiService {
   /** Retrieves a Customer object. */
   public Customer retrieve(String customer, CustomerRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Customer.class,
             options,
@@ -219,12 +219,12 @@ public final class CustomerService extends ApiService {
    */
   public Customer update(String customer, CustomerUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Customer.class,
             options,
@@ -242,12 +242,12 @@ public final class CustomerService extends ApiService {
    * subscriptions on the customer.
    */
   public Customer delete(String customer, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Customer.class,
             options,
@@ -273,13 +273,13 @@ public final class CustomerService extends ApiService {
   public StripeCollection<PaymentMethod> listPaymentMethods(
       String customer, CustomerListPaymentMethodsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<PaymentMethod>>() {}.getType(),
             options,
@@ -310,7 +310,7 @@ public final class CustomerService extends ApiService {
       CustomerRetrievePaymentMethodParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/payment_methods/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(paymentMethod));
@@ -318,7 +318,7 @@ public final class CustomerService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentMethod.class,
             options,
@@ -343,13 +343,13 @@ public final class CustomerService extends ApiService {
   public FundingInstructions createFundingInstructions(
       String customer, CustomerCreateFundingInstructionsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FundingInstructions.class,
             options,
@@ -361,12 +361,12 @@ public final class CustomerService extends ApiService {
   }
   /** Removes the currently applied discount on a customer. */
   public Discount deleteDiscount(String customer, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Discount.class,
             options,

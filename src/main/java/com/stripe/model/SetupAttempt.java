@@ -234,12 +234,12 @@ public class SetupAttempt extends ApiResource implements HasId {
   /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
   public static SetupAttemptCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/setup_attempts";
+    String path = "/v1/setup_attempts";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             SetupAttemptCollection.class,
             options,
@@ -254,13 +254,13 @@ public class SetupAttempt extends ApiResource implements HasId {
   /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
   public static SetupAttemptCollection list(SetupAttemptListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/setup_attempts";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/setup_attempts";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SetupAttemptCollection.class,
             options,

@@ -217,12 +217,12 @@ public class Dispute extends ApiResource
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Dispute.class,
             options,
@@ -248,13 +248,13 @@ public class Dispute extends ApiResource
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Dispute.class,
             options,
@@ -269,12 +269,12 @@ public class Dispute extends ApiResource
   /** Returns a list of your disputes. */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/disputes";
+    String path = "/v1/disputes";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             DisputeCollection.class,
             options,
@@ -289,13 +289,13 @@ public class Dispute extends ApiResource
   /** Returns a list of your disputes. */
   public static DisputeCollection list(DisputeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/disputes";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/disputes";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             DisputeCollection.class,
             options,
@@ -315,12 +315,12 @@ public class Dispute extends ApiResource
   /** Retrieves the dispute with the given ID. */
   public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Dispute.class,
             options,
@@ -330,13 +330,13 @@ public class Dispute extends ApiResource
   /** Retrieves the dispute with the given ID. */
   public static Dispute retrieve(
       String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Dispute.class,
             options,
@@ -370,12 +370,12 @@ public class Dispute extends ApiResource
    */
   @Override
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Dispute.class,
             options,
@@ -407,13 +407,13 @@ public class Dispute extends ApiResource
    * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Dispute.class,
             options,

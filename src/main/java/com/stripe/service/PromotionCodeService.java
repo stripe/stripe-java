@@ -56,12 +56,12 @@ public final class PromotionCodeService extends ApiService {
   public PromotionCode retrieve(
       String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PromotionCode.class,
             options,
@@ -96,12 +96,12 @@ public final class PromotionCodeService extends ApiService {
   public PromotionCode update(
       String promotionCode, PromotionCodeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PromotionCode.class,
             options,
@@ -120,12 +120,12 @@ public final class PromotionCodeService extends ApiService {
    */
   public PromotionCode create(PromotionCodeCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/promotion_codes";
+    String path = "/v1/promotion_codes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PromotionCode.class,
             options,
@@ -147,12 +147,12 @@ public final class PromotionCodeService extends ApiService {
   /** Returns a list of your promotion codes. */
   public StripeCollection<PromotionCode> list(
       PromotionCodeListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/promotion_codes";
+    String path = "/v1/promotion_codes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<PromotionCode>>() {}.getType(),
             options,

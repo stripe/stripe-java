@@ -37,12 +37,12 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    */
   public PaymentSource create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             PaymentSource.class,
             options,
@@ -73,13 +73,13 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    */
   public PaymentSource create(PaymentSourceCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentSource.class,
             options,
@@ -94,12 +94,12 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   /** List sources for a specified customer. */
   public PaymentSourceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PaymentSourceCollection.class,
             options,
@@ -115,13 +115,13 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   /** List sources for a specified customer. */
   public PaymentSourceCollection list(
       PaymentSourceCollectionListParams params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentSourceCollection.class,
             options,
@@ -141,12 +141,12 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   /** Retrieve a specified source for a given customer. */
   public PaymentSource retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PaymentSource.class,
             options,
@@ -157,13 +157,13 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   public PaymentSource retrieve(
       String id, PaymentSourceCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentSource.class,
             options,

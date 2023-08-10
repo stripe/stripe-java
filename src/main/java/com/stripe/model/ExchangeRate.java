@@ -68,12 +68,12 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   public static ExchangeRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/exchange_rates";
+    String path = "/v1/exchange_rates";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ExchangeRateCollection.class,
             options,
@@ -94,13 +94,13 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   public static ExchangeRateCollection list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/exchange_rates";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/exchange_rates";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExchangeRateCollection.class,
             options,
@@ -121,12 +121,12 @@ public class ExchangeRate extends ApiResource implements HasId {
   /** Retrieves the exchange rates from the given currency to every supported currency. */
   public static ExchangeRate retrieve(
       String rateId, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ExchangeRate.class,
             options,
@@ -137,13 +137,13 @@ public class ExchangeRate extends ApiResource implements HasId {
   public static ExchangeRate retrieve(
       String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExchangeRate.class,
             options,

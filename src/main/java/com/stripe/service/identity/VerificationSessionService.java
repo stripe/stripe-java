@@ -53,12 +53,12 @@ public final class VerificationSessionService extends ApiService {
    */
   public VerificationSession create(VerificationSessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/identity/verification_sessions";
+    String path = "/v1/identity/verification_sessions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -80,12 +80,12 @@ public final class VerificationSessionService extends ApiService {
   /** Returns a list of VerificationSessions. */
   public StripeCollection<VerificationSession> list(
       VerificationSessionListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/identity/verification_sessions";
+    String path = "/v1/identity/verification_sessions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<VerificationSession>>() {}.getType(),
             options,
@@ -129,13 +129,13 @@ public final class VerificationSessionService extends ApiService {
   public VerificationSession retrieve(
       String session, VerificationSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -178,13 +178,13 @@ public final class VerificationSessionService extends ApiService {
   public VerificationSession update(
       String session, VerificationSessionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -231,14 +231,14 @@ public final class VerificationSessionService extends ApiService {
   public VerificationSession cancel(
       String session, VerificationSessionCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s/cancel", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,
@@ -341,14 +341,14 @@ public final class VerificationSessionService extends ApiService {
   public VerificationSession redact(
       String session, VerificationSessionRedactParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/identity/verification_sessions/%s/redact", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationSession.class,
             options,

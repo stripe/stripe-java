@@ -20,12 +20,12 @@ public class PersonCollection extends StripeCollection<Person> {
 
   /** Creates a new person. */
   public Person create(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Person.class,
             options,
@@ -40,13 +40,13 @@ public class PersonCollection extends StripeCollection<Person> {
   /** Creates a new person. */
   public Person create(PersonCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Person.class,
             options,
@@ -67,12 +67,12 @@ public class PersonCollection extends StripeCollection<Person> {
    */
   public PersonCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PersonCollection.class,
             options,
@@ -93,13 +93,13 @@ public class PersonCollection extends StripeCollection<Person> {
    */
   public PersonCollection list(PersonCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PersonCollection.class,
             options,
@@ -119,12 +119,12 @@ public class PersonCollection extends StripeCollection<Person> {
   /** Retrieves an existing person. */
   public Person retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Person.class,
             options,
@@ -134,13 +134,13 @@ public class PersonCollection extends StripeCollection<Person> {
   /** Retrieves an existing person. */
   public Person retrieve(String id, PersonCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Person.class,
             options,

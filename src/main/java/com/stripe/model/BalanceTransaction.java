@@ -181,12 +181,12 @@ public class BalanceTransaction extends ApiResource implements HasId {
    */
   public static BalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = "/v1/balance_transactions";
+    String path = "/v1/balance_transactions";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             BalanceTransactionCollection.class,
             options,
@@ -216,13 +216,13 @@ public class BalanceTransaction extends ApiResource implements HasId {
    */
   public static BalanceTransactionCollection list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/balance_transactions";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/balance_transactions";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             BalanceTransactionCollection.class,
             options,
@@ -255,12 +255,12 @@ public class BalanceTransaction extends ApiResource implements HasId {
    */
   public static BalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             BalanceTransaction.class,
             options,
@@ -275,13 +275,13 @@ public class BalanceTransaction extends ApiResource implements HasId {
   public static BalanceTransaction retrieve(
       String id, BalanceTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             BalanceTransaction.class,
             options,

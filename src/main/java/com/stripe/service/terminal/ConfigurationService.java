@@ -37,12 +37,12 @@ public final class ConfigurationService extends ApiService {
   /** Creates a new {@code Configuration} object. */
   public Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/configurations";
+    String path = "/v1/terminal/configurations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -64,12 +64,12 @@ public final class ConfigurationService extends ApiService {
   /** Returns a list of {@code Configuration} objects. */
   public StripeCollection<Configuration> list(
       ConfigurationListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/terminal/configurations";
+    String path = "/v1/terminal/configurations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Configuration>>() {}.getType(),
             options,
@@ -93,13 +93,13 @@ public final class ConfigurationService extends ApiService {
   public Configuration retrieve(
       String configuration, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -122,13 +122,13 @@ public final class ConfigurationService extends ApiService {
   public Configuration update(
       String configuration, ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Configuration.class,
             options,
@@ -140,13 +140,13 @@ public final class ConfigurationService extends ApiService {
   }
   /** Deletes a {@code Configuration} object. */
   public Configuration delete(String configuration, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Configuration.class,
             options,

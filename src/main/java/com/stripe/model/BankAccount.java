@@ -222,7 +222,7 @@ public class BankAccount extends ApiResource
   /** Verify a specified bank account for a given customer. */
   public BankAccount verify(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/sources/%s/verify",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
@@ -230,7 +230,7 @@ public class BankAccount extends ApiResource
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             BankAccount.class,
             options,
@@ -245,16 +245,16 @@ public class BankAccount extends ApiResource
   /** Verify a specified bank account for a given customer. */
   public BankAccount verify(BankAccountVerifyParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/sources/%s/verify",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             BankAccount.class,
             options,

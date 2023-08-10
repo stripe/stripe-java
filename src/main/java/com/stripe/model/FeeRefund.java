@@ -135,7 +135,7 @@ public class FeeRefund extends ApiResource
   @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
             ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId()));
@@ -143,7 +143,7 @@ public class FeeRefund extends ApiResource
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             FeeRefund.class,
             options,
@@ -168,16 +168,16 @@ public class FeeRefund extends ApiResource
    */
   public FeeRefund update(FeeRefundUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
             ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FeeRefund.class,
             options,

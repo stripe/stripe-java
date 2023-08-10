@@ -38,12 +38,12 @@ public final class WebhookEndpointService extends ApiService {
   /** Returns a list of your webhook endpoints. */
   public StripeCollection<WebhookEndpoint> list(
       WebhookEndpointListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/webhook_endpoints";
+    String path = "/v1/webhook_endpoints";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType(),
             options,
@@ -72,12 +72,12 @@ public final class WebhookEndpointService extends ApiService {
    */
   public WebhookEndpoint create(WebhookEndpointCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/webhook_endpoints";
+    String path = "/v1/webhook_endpoints";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             WebhookEndpoint.class,
             options,
@@ -101,13 +101,13 @@ public final class WebhookEndpointService extends ApiService {
   public WebhookEndpoint retrieve(
       String webhookEndpoint, WebhookEndpointRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             WebhookEndpoint.class,
             options,
@@ -143,13 +143,13 @@ public final class WebhookEndpointService extends ApiService {
   public WebhookEndpoint update(
       String webhookEndpoint, WebhookEndpointUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             WebhookEndpoint.class,
             options,
@@ -170,13 +170,13 @@ public final class WebhookEndpointService extends ApiService {
    */
   public WebhookEndpoint delete(String webhookEndpoint, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             WebhookEndpoint.class,
             options,

@@ -80,12 +80,12 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Lists all Country Spec objects available in the API. */
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/country_specs";
+    String path = "/v1/country_specs";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CountrySpecCollection.class,
             options,
@@ -100,13 +100,13 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Lists all Country Spec objects available in the API. */
   public static CountrySpecCollection list(CountrySpecListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/country_specs";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/country_specs";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CountrySpecCollection.class,
             options,
@@ -127,12 +127,12 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Returns a Country Spec for a given Country code. */
   public static CountrySpec retrieve(
       String country, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CountrySpec.class,
             options,
@@ -143,13 +143,13 @@ public class CountrySpec extends ApiResource implements HasId {
   public static CountrySpec retrieve(
       String country, CountrySpecRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CountrySpec.class,
             options,

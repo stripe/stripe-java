@@ -52,12 +52,12 @@ public final class PaymentIntentService extends ApiService {
    */
   public StripeSearchResult<PaymentIntent> search(
       PaymentIntentSearchParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/payment_intents/search";
+    String path = "/v1/payment_intents/search";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeSearchResult<PaymentIntent>>() {}.getType(),
             options,
@@ -94,12 +94,12 @@ public final class PaymentIntentService extends ApiService {
    */
   public PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/payment_intents";
+    String path = "/v1/payment_intents";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -121,12 +121,12 @@ public final class PaymentIntentService extends ApiService {
   /** Returns a list of PaymentIntents. */
   public StripeCollection<PaymentIntent> list(
       PaymentIntentListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/payment_intents";
+    String path = "/v1/payment_intents";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<PaymentIntent>>() {}.getType(),
             options,
@@ -185,12 +185,12 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent retrieve(
       String intent, PaymentIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -245,12 +245,12 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent update(
       String intent, PaymentIntentUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -357,12 +357,12 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent confirm(
       String intent, PaymentIntentConfirmParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -437,12 +437,12 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent cancel(
       String intent, PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -501,12 +501,12 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent capture(
       String intent, PaymentIntentCaptureParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -573,14 +573,14 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent incrementAuthorization(
       String intent, PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/payment_intents/%s/increment_authorization", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -605,14 +605,14 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent verifyMicrodeposits(
       String intent, PaymentIntentVerifyMicrodepositsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/payment_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,
@@ -637,14 +637,14 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent applyCustomerBalance(
       String intent, PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/payment_intents/%s/apply_customer_balance", ApiResource.urlEncodeId(intent));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentIntent.class,
             options,

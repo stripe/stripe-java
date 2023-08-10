@@ -49,12 +49,12 @@ public final class ValueListService extends ApiService {
    */
   public StripeCollection<ValueList> list(ValueListListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/radar/value_lists";
+    String path = "/v1/radar/value_lists";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ValueList>>() {}.getType(),
             options,
@@ -67,12 +67,12 @@ public final class ValueListService extends ApiService {
   /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public ValueList create(ValueListCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/radar/value_lists";
+    String path = "/v1/radar/value_lists";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueList.class,
             options,
@@ -95,12 +95,12 @@ public final class ValueListService extends ApiService {
   public ValueList retrieve(
       String valueList, ValueListRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueList.class,
             options,
@@ -133,12 +133,12 @@ public final class ValueListService extends ApiService {
    */
   public ValueList update(String valueList, ValueListUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ValueList.class,
             options,
@@ -156,12 +156,12 @@ public final class ValueListService extends ApiService {
    * be deleted, a value list must not be referenced in any rules.
    */
   public ValueList delete(String valueList, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             ValueList.class,
             options,

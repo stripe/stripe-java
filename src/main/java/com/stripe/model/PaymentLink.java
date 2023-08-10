@@ -240,12 +240,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   /** Creates a payment link. */
   public static PaymentLink create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/payment_links";
+    String path = "/v1/payment_links";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             PaymentLink.class,
             options,
@@ -260,13 +260,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   /** Creates a payment link. */
   public static PaymentLink create(PaymentLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/payment_links";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/payment_links";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentLink.class,
             options,
@@ -281,12 +281,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   /** Returns a list of your payment links. */
   public static PaymentLinkCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/payment_links";
+    String path = "/v1/payment_links";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PaymentLinkCollection.class,
             options,
@@ -301,13 +301,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   /** Returns a list of your payment links. */
   public static PaymentLinkCollection list(PaymentLinkListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/payment_links";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/payment_links";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentLinkCollection.class,
             options,
@@ -339,13 +339,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
    */
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/payment_links/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             LineItemCollection.class,
             options,
@@ -369,14 +369,14 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
    */
   public LineItemCollection listLineItems(
       PaymentLinkListLineItemsParams params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/payment_links/%s/line_items", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             LineItemCollection.class,
             options,
@@ -398,12 +398,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   public static PaymentLink retrieve(
       String paymentLink, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PaymentLink.class,
             options,
@@ -414,13 +414,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   public static PaymentLink retrieve(
       String paymentLink, PaymentLinkRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentLink.class,
             options,
@@ -437,12 +437,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Override
   public PaymentLink update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             PaymentLink.class,
             options,
@@ -457,13 +457,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   /** Updates a payment link. */
   public PaymentLink update(PaymentLinkUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentLink.class,
             options,

@@ -46,14 +46,14 @@ public final class OutboundPaymentService extends ApiService {
    */
   public OutboundPayment fail(String id, OutboundPaymentFailParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_payments/%s/fail", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundPayment.class,
             options,
@@ -86,14 +86,14 @@ public final class OutboundPaymentService extends ApiService {
    */
   public OutboundPayment post(String id, OutboundPaymentPostParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_payments/%s/post", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundPayment.class,
             options,
@@ -130,14 +130,14 @@ public final class OutboundPaymentService extends ApiService {
   public OutboundPayment returnOutboundPayment(
       String id, OutboundPaymentReturnOutboundPaymentParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_payments/%s/return", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundPayment.class,
             options,

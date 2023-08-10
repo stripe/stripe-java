@@ -41,12 +41,12 @@ public final class PaymentSourceService extends ApiService {
   public StripeCollection<PaymentSource> list(
       String customer, PaymentSourceListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<PaymentSource>>() {}.getType(),
             options,
@@ -77,12 +77,12 @@ public final class PaymentSourceService extends ApiService {
   public PaymentSource create(
       String customer, PaymentSourceCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentSource.class,
             options,
@@ -106,7 +106,7 @@ public final class PaymentSourceService extends ApiService {
   public PaymentSource retrieve(
       String customer, String id, PaymentSourceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/sources/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
@@ -114,7 +114,7 @@ public final class PaymentSourceService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentSource.class,
             options,
@@ -138,7 +138,7 @@ public final class PaymentSourceService extends ApiService {
   public PaymentSource update(
       String customer, String id, PaymentSourceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/sources/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
@@ -146,7 +146,7 @@ public final class PaymentSourceService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentSource.class,
             options,
@@ -170,7 +170,7 @@ public final class PaymentSourceService extends ApiService {
   public PaymentSource delete(
       String customer, String id, PaymentSourceDeleteParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/sources/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
@@ -178,7 +178,7 @@ public final class PaymentSourceService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PaymentSource.class,
             options,

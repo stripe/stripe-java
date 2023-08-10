@@ -124,7 +124,7 @@ public class TaxId extends ApiResource implements HasId {
 
   /** Deletes an existing {@code TaxID} object. */
   public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
@@ -132,7 +132,7 @@ public class TaxId extends ApiResource implements HasId {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             TaxId.class,
             options,

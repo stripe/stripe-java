@@ -90,12 +90,12 @@ public class Session extends ApiResource implements HasId {
    */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/financial_connections/sessions";
+    String path = "/v1/financial_connections/sessions";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Session.class,
             options,
@@ -116,13 +116,13 @@ public class Session extends ApiResource implements HasId {
    */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/financial_connections/sessions";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/financial_connections/sessions";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,
@@ -142,13 +142,13 @@ public class Session extends ApiResource implements HasId {
   /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Session.class,
             options,
@@ -158,14 +158,14 @@ public class Session extends ApiResource implements HasId {
   /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,

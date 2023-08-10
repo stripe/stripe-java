@@ -41,12 +41,12 @@ public final class SubscriptionScheduleService extends ApiService {
   /** Retrieves the list of your subscription schedules. */
   public StripeCollection<SubscriptionSchedule> list(
       SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/subscription_schedules";
+    String path = "/v1/subscription_schedules";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<SubscriptionSchedule>>() {}.getType(),
             options,
@@ -80,12 +80,12 @@ public final class SubscriptionScheduleService extends ApiService {
    */
   public SubscriptionSchedule create(
       SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/subscription_schedules";
+    String path = "/v1/subscription_schedules";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionSchedule.class,
             options,
@@ -121,12 +121,12 @@ public final class SubscriptionScheduleService extends ApiService {
   public SubscriptionSchedule retrieve(
       String schedule, SubscriptionScheduleRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
+    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionSchedule.class,
             options,
@@ -150,12 +150,12 @@ public final class SubscriptionScheduleService extends ApiService {
   public SubscriptionSchedule update(
       String schedule, SubscriptionScheduleUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
+    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionSchedule.class,
             options,
@@ -195,13 +195,13 @@ public final class SubscriptionScheduleService extends ApiService {
   public SubscriptionSchedule cancel(
       String schedule, SubscriptionScheduleCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(schedule));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionSchedule.class,
             options,
@@ -249,13 +249,13 @@ public final class SubscriptionScheduleService extends ApiService {
   public SubscriptionSchedule release(
       String schedule, SubscriptionScheduleReleaseParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(schedule));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionSchedule.class,
             options,

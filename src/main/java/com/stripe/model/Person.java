@@ -218,7 +218,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    * delete the only verified {@code executive} on file.
    */
   public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
@@ -226,7 +226,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             Person.class,
             options,
@@ -242,7 +242,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /** Updates an existing person. */
   @Override
   public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
@@ -250,7 +250,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Person.class,
             options,
@@ -264,16 +264,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /** Updates an existing person. */
   public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Person.class,
             options,

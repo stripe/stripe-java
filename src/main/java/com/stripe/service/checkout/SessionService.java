@@ -39,12 +39,12 @@ public final class SessionService extends ApiService {
   /** Returns a list of Checkout Sessions. */
   public StripeCollection<Session> list(SessionListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/checkout/sessions";
+    String path = "/v1/checkout/sessions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Session>>() {}.getType(),
             options,
@@ -56,12 +56,12 @@ public final class SessionService extends ApiService {
   }
   /** Creates a Session object. */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/checkout/sessions";
+    String path = "/v1/checkout/sessions";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,
@@ -82,12 +82,12 @@ public final class SessionService extends ApiService {
   /** Retrieves a Session object. */
   public Session retrieve(String session, SessionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,
@@ -127,13 +127,13 @@ public final class SessionService extends ApiService {
   public StripeCollection<LineItem> listLineItems(
       String session, SessionListLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<LineItem>>() {}.getType(),
             options,
@@ -174,12 +174,13 @@ public final class SessionService extends ApiService {
    */
   public Session expire(String session, SessionExpireParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(session));
+    String path =
+        String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(session));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,

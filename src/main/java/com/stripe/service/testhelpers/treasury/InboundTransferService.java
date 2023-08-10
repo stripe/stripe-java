@@ -48,14 +48,14 @@ public final class InboundTransferService extends ApiService {
   public InboundTransfer succeed(
       String id, InboundTransferSucceedParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/inbound_transfers/%s/succeed", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InboundTransfer.class,
             options,
@@ -88,14 +88,14 @@ public final class InboundTransferService extends ApiService {
    */
   public InboundTransfer fail(String id, InboundTransferFailParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/inbound_transfers/%s/fail", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InboundTransfer.class,
             options,
@@ -132,14 +132,14 @@ public final class InboundTransferService extends ApiService {
   public InboundTransfer returnInboundTransfer(
       String id, InboundTransferReturnInboundTransferParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/inbound_transfers/%s/return", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InboundTransfer.class,
             options,

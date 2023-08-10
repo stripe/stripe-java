@@ -53,12 +53,12 @@ public final class CreditNoteLineItemService extends ApiService {
   public StripeCollection<CreditNoteLineItem> list(
       String creditNote, CreditNoteLineItemListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/credit_notes/%s/lines", ApiResource.urlEncodeId(creditNote));
+    String path = String.format("/v1/credit_notes/%s/lines", ApiResource.urlEncodeId(creditNote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CreditNoteLineItem>>() {}.getType(),
             options,

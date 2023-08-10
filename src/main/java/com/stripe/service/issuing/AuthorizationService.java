@@ -51,12 +51,12 @@ public final class AuthorizationService extends ApiService {
    */
   public StripeCollection<Authorization> list(
       AuthorizationListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/issuing/authorizations";
+    String path = "/v1/issuing/authorizations";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Authorization>>() {}.getType(),
             options,
@@ -80,13 +80,13 @@ public final class AuthorizationService extends ApiService {
   public Authorization retrieve(
       String authorization, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,
@@ -121,13 +121,13 @@ public final class AuthorizationService extends ApiService {
   public Authorization update(
       String authorization, AuthorizationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,
@@ -179,14 +179,14 @@ public final class AuthorizationService extends ApiService {
   public Authorization approve(
       String authorization, AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(authorization));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,
@@ -238,14 +238,14 @@ public final class AuthorizationService extends ApiService {
   public Authorization decline(
       String authorization, AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(authorization));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Authorization.class,
             options,

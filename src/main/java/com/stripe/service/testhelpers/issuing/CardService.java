@@ -43,14 +43,14 @@ public final class CardService extends ApiService {
    */
   public Card deliverCard(String card, CardDeliverCardParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/deliver", ApiResource.urlEncodeId(card));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Card.class,
             options,
@@ -79,14 +79,14 @@ public final class CardService extends ApiService {
    */
   public Card shipCard(String card, CardShipCardParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/ship", ApiResource.urlEncodeId(card));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Card.class,
             options,
@@ -115,14 +115,14 @@ public final class CardService extends ApiService {
    */
   public Card returnCard(String card, CardReturnCardParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/return", ApiResource.urlEncodeId(card));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Card.class,
             options,
@@ -151,14 +151,14 @@ public final class CardService extends ApiService {
    */
   public Card failCard(String card, CardFailCardParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/fail", ApiResource.urlEncodeId(card));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Card.class,
             options,

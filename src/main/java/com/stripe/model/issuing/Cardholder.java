@@ -140,12 +140,12 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/cardholders";
+    String path = "/v1/issuing/cardholders";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Cardholder.class,
             options,
@@ -160,13 +160,13 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(CardholderCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/cardholders";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/issuing/cardholders";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Cardholder.class,
             options,
@@ -187,12 +187,12 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    */
   public static CardholderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/cardholders";
+    String path = "/v1/issuing/cardholders";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CardholderCollection.class,
             options,
@@ -213,13 +213,13 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    */
   public static CardholderCollection list(CardholderListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/cardholders";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/issuing/cardholders";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CardholderCollection.class,
             options,
@@ -241,12 +241,12 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static Cardholder retrieve(
       String cardholder, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Cardholder.class,
             options,
@@ -257,13 +257,13 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static Cardholder retrieve(
       String cardholder, CardholderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Cardholder.class,
             options,
@@ -286,12 +286,13 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Override
   public Cardholder update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId()));
+    String path =
+        String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Cardholder.class,
             options,
@@ -312,13 +313,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    */
   public Cardholder update(CardholderUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path =
+        String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Cardholder.class,
             options,

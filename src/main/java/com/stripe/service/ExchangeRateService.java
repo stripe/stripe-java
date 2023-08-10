@@ -47,12 +47,12 @@ public final class ExchangeRateService extends ApiService {
    */
   public StripeCollection<ExchangeRate> list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/exchange_rates";
+    String path = "/v1/exchange_rates";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ExchangeRate>>() {}.getType(),
             options,
@@ -75,12 +75,12 @@ public final class ExchangeRateService extends ApiService {
   public ExchangeRate retrieve(
       String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExchangeRate.class,
             options,

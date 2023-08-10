@@ -27,12 +27,12 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
    */
   public InvoiceLineItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             InvoiceLineItemCollection.class,
             options,
@@ -56,13 +56,13 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
    */
   public InvoiceLineItemCollection list(
       InvoiceLineItemCollectionListParams params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InvoiceLineItemCollection.class,
             options,

@@ -48,12 +48,12 @@ public final class ConnectionTokenService extends ApiService {
    */
   public ConnectionToken create(ConnectionTokenCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/terminal/connection_tokens";
+    String path = "/v1/terminal/connection_tokens";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ConnectionToken.class,
             options,

@@ -31,12 +31,12 @@ public final class SubscriptionItemService extends ApiService {
   /** Returns a list of your subscription items for a given subscription. */
   public StripeCollection<SubscriptionItem> list(
       SubscriptionItemListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/subscription_items";
+    String path = "/v1/subscription_items";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType(),
             options,
@@ -49,12 +49,12 @@ public final class SubscriptionItemService extends ApiService {
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public SubscriptionItem create(SubscriptionItemCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/subscription_items";
+    String path = "/v1/subscription_items";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionItem.class,
             options,
@@ -77,12 +77,12 @@ public final class SubscriptionItemService extends ApiService {
   public SubscriptionItem retrieve(
       String item, SubscriptionItemRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionItem.class,
             options,
@@ -105,12 +105,12 @@ public final class SubscriptionItemService extends ApiService {
   public SubscriptionItem update(
       String item, SubscriptionItemUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionItem.class,
             options,
@@ -145,12 +145,12 @@ public final class SubscriptionItemService extends ApiService {
   public SubscriptionItem delete(
       String item, SubscriptionItemDeleteParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SubscriptionItem.class,
             options,

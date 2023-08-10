@@ -58,12 +58,12 @@ public class TaxCode extends ApiResource implements HasId {
    */
   public static TaxCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax_codes";
+    String path = "/v1/tax_codes";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TaxCodeCollection.class,
             options,
@@ -84,13 +84,13 @@ public class TaxCode extends ApiResource implements HasId {
    */
   public static TaxCodeCollection list(TaxCodeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax_codes";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/tax_codes";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxCodeCollection.class,
             options,
@@ -119,12 +119,12 @@ public class TaxCode extends ApiResource implements HasId {
    */
   public static TaxCode retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TaxCode.class,
             options,
@@ -137,13 +137,13 @@ public class TaxCode extends ApiResource implements HasId {
    */
   public static TaxCode retrieve(String id, TaxCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxCode.class,
             options,

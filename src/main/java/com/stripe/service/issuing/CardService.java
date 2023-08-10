@@ -49,12 +49,12 @@ public final class CardService extends ApiService {
    */
   public StripeCollection<Card> list(CardListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/issuing/cards";
+    String path = "/v1/issuing/cards";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Card>>() {}.getType(),
             options,
@@ -66,12 +66,12 @@ public final class CardService extends ApiService {
   }
   /** Creates an Issuing {@code Card} object. */
   public Card create(CardCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/issuing/cards";
+    String path = "/v1/issuing/cards";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Card.class,
             options,
@@ -92,12 +92,12 @@ public final class CardService extends ApiService {
   /** Retrieves an Issuing {@code Card} object. */
   public Card retrieve(String card, CardRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
+    String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Card.class,
             options,
@@ -130,12 +130,12 @@ public final class CardService extends ApiService {
    */
   public Card update(String card, CardUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
+    String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Card.class,
             options,

@@ -36,12 +36,12 @@ public final class EarlyFraudWarningService extends ApiService {
   /** Returns a list of early fraud warnings. */
   public StripeCollection<EarlyFraudWarning> list(
       EarlyFraudWarningListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/radar/early_fraud_warnings";
+    String path = "/v1/radar/early_fraud_warnings";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<EarlyFraudWarning>>() {}.getType(),
             options,
@@ -86,14 +86,14 @@ public final class EarlyFraudWarningService extends ApiService {
   public EarlyFraudWarning retrieve(
       String earlyFraudWarning, EarlyFraudWarningRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             EarlyFraudWarning.class,
             options,

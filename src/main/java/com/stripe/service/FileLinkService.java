@@ -37,12 +37,12 @@ public final class FileLinkService extends ApiService {
   /** Retrieves the file link with the given ID. */
   public FileLink retrieve(String link, FileLinkRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
+    String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FileLink.class,
             options,
@@ -63,12 +63,12 @@ public final class FileLinkService extends ApiService {
   /** Updates an existing file link object. Expired links can no longer be updated. */
   public FileLink update(String link, FileLinkUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
+    String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FileLink.class,
             options,
@@ -81,12 +81,12 @@ public final class FileLinkService extends ApiService {
   /** Creates a new file link object. */
   public FileLink create(FileLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/file_links";
+    String path = "/v1/file_links";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FileLink.class,
             options,
@@ -107,12 +107,12 @@ public final class FileLinkService extends ApiService {
   /** Returns a list of file links. */
   public StripeCollection<FileLink> list(FileLinkListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/file_links";
+    String path = "/v1/file_links";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<FileLink>>() {}.getType(),
             options,

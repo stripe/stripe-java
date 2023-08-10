@@ -21,12 +21,12 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   /** Create an external account for a given account. */
   public ExternalAccount create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             ExternalAccount.class,
             options,
@@ -42,13 +42,13 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   /** Create an external account for a given account. */
   public ExternalAccount create(
       ExternalAccountCollectionCreateParams params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExternalAccount.class,
             options,
@@ -63,12 +63,12 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   /** List external accounts for an account. */
   public ExternalAccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ExternalAccountCollection.class,
             options,
@@ -84,13 +84,13 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   /** List external accounts for an account. */
   public ExternalAccountCollection list(
       ExternalAccountCollectionListParams params, RequestOptions options) throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExternalAccountCollection.class,
             options,
@@ -110,12 +110,12 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   /** Retrieve a specified external account for a given account. */
   public ExternalAccount retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ExternalAccount.class,
             options,
@@ -126,13 +126,13 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   public ExternalAccount retrieve(
       String id, ExternalAccountCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ExternalAccount.class,
             options,

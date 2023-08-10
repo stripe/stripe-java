@@ -114,12 +114,12 @@ public class ReportRun extends ApiResource implements HasId {
    */
   public static ReportRun create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_runs";
+    String path = "/v1/reporting/report_runs";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             ReportRun.class,
             options,
@@ -140,13 +140,13 @@ public class ReportRun extends ApiResource implements HasId {
    */
   public static ReportRun create(ReportRunCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_runs";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/reporting/report_runs";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportRun.class,
             options,
@@ -161,12 +161,12 @@ public class ReportRun extends ApiResource implements HasId {
   /** Returns a list of Report Runs, with the most recent appearing first. */
   public static ReportRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_runs";
+    String path = "/v1/reporting/report_runs";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ReportRunCollection.class,
             options,
@@ -181,13 +181,13 @@ public class ReportRun extends ApiResource implements HasId {
   /** Returns a list of Report Runs, with the most recent appearing first. */
   public static ReportRunCollection list(ReportRunListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_runs";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/reporting/report_runs";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportRunCollection.class,
             options,
@@ -208,12 +208,12 @@ public class ReportRun extends ApiResource implements HasId {
   /** Retrieves the details of an existing Report Run. */
   public static ReportRun retrieve(
       String reportRun, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
+    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ReportRun.class,
             options,
@@ -224,13 +224,13 @@ public class ReportRun extends ApiResource implements HasId {
   public static ReportRun retrieve(
       String reportRun, ReportRunRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportRun.class,
             options,

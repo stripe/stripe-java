@@ -52,12 +52,12 @@ public final class BalanceService extends ApiService {
    */
   public Balance retrieve(BalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/balance";
+    String path = "/v1/balance";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Balance.class,
             options,

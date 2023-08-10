@@ -136,12 +136,12 @@ public class TransactionEntry extends ApiResource implements HasId {
   /** Retrieves a list of TransactionEntry objects. */
   public static TransactionEntryCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/transaction_entries";
+    String path = "/v1/treasury/transaction_entries";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TransactionEntryCollection.class,
             options,
@@ -157,13 +157,13 @@ public class TransactionEntry extends ApiResource implements HasId {
   /** Retrieves a list of TransactionEntry objects. */
   public static TransactionEntryCollection list(
       TransactionEntryListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/treasury/transaction_entries";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/treasury/transaction_entries";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransactionEntryCollection.class,
             options,
@@ -184,12 +184,12 @@ public class TransactionEntry extends ApiResource implements HasId {
   /** Retrieves a TransactionEntry object. */
   public static TransactionEntry retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TransactionEntry.class,
             options,
@@ -200,13 +200,13 @@ public class TransactionEntry extends ApiResource implements HasId {
   public static TransactionEntry retrieve(
       String id, TransactionEntryRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransactionEntry.class,
             options,

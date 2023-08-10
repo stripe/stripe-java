@@ -41,12 +41,12 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefund create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             FeeRefund.class,
             options,
@@ -81,13 +81,13 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefund create(FeeRefundCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FeeRefund.class,
             options,
@@ -112,12 +112,12 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
+    String path = this.getUrl();
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             FeeRefundCollection.class,
             options,
@@ -142,13 +142,13 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefundCollection list(FeeRefundCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = this.getUrl();
-    ApiResource.checkNullTypedParams(url, params);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FeeRefundCollection.class,
             options,
@@ -180,12 +180,12 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             FeeRefund.class,
             options,
@@ -200,13 +200,13 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefund retrieve(
       String id, FeeRefundCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FeeRefund.class,
             options,

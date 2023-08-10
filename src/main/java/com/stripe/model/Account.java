@@ -183,13 +183,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public CapabilityCollection capabilities(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             CapabilityCollection.class,
             options,
@@ -211,14 +211,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public CapabilityCollection capabilities(AccountCapabilitiesParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             CapabilityCollection.class,
             options,
@@ -251,12 +251,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/accounts";
+    String path = "/v1/accounts";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Account.class,
             options,
@@ -289,13 +289,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public static Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/accounts";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/accounts";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -359,12 +359,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * settings</a> instead.
    */
   public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             params,
             Account.class,
             options,
@@ -387,12 +387,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/accounts";
+    String path = "/v1/accounts";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             AccountCollection.class,
             options,
@@ -415,13 +415,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public static AccountCollection list(AccountListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/accounts";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/accounts";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             AccountCollection.class,
             options,
@@ -450,12 +450,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public PersonCollection persons(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             PersonCollection.class,
             options,
@@ -476,13 +476,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             PersonCollection.class,
             options,
@@ -508,12 +508,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * live-mode keys may only be rejected once all balances are zero.
    */
   public Account reject(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Account.class,
             options,
@@ -539,13 +539,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * live-mode keys may only be rejected once all balances are zero.
    */
   public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -565,12 +565,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /** Retrieves the details of an account. */
   public static Account retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/account";
+    String path = "/v1/account";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Account.class,
             options,
@@ -580,13 +580,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /** Retrieves the details of an account. */
   public static Account retrieve(AccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/account";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/account";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -606,12 +606,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /** Retrieves the details of an account. */
   public static Account retrieve(String account, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Account.class,
             options,
@@ -621,13 +621,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /** Retrieves the details of an account. */
   public static Account retrieve(
       String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,
@@ -671,12 +671,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    */
   @Override
   public Account update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Account.class,
             options,
@@ -718,13 +718,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * more about updating accounts.
    */
   public Account update(AccountUpdateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Account.class,
             options,

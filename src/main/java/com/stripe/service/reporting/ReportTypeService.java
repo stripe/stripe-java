@@ -49,13 +49,13 @@ public final class ReportTypeService extends ApiService {
   public ReportType retrieve(
       String reportType, ReportTypeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportType.class,
             options,
@@ -76,12 +76,12 @@ public final class ReportTypeService extends ApiService {
   /** Returns a full list of Report Types. */
   public StripeCollection<ReportType> list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_types";
+    String path = "/v1/reporting/report_types";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<ReportType>>() {}.getType(),
             options,

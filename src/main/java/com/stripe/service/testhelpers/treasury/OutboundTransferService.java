@@ -49,7 +49,7 @@ public final class OutboundTransferService extends ApiService {
   public OutboundTransfer fail(
       String outboundTransfer, OutboundTransferFailParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
             ApiResource.urlEncodeId(outboundTransfer));
@@ -57,7 +57,7 @@ public final class OutboundTransferService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundTransfer.class,
             options,
@@ -93,7 +93,7 @@ public final class OutboundTransferService extends ApiService {
   public OutboundTransfer post(
       String outboundTransfer, OutboundTransferPostParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_transfers/%s/post",
             ApiResource.urlEncodeId(outboundTransfer));
@@ -101,7 +101,7 @@ public final class OutboundTransferService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundTransfer.class,
             options,
@@ -144,7 +144,7 @@ public final class OutboundTransferService extends ApiService {
       OutboundTransferReturnOutboundTransferParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_transfers/%s/return",
             ApiResource.urlEncodeId(outboundTransfer));
@@ -152,7 +152,7 @@ public final class OutboundTransferService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             OutboundTransfer.class,
             options,

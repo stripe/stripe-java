@@ -47,12 +47,12 @@ public final class TaxCodeService extends ApiService {
    */
   public StripeCollection<TaxCode> list(TaxCodeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax_codes";
+    String path = "/v1/tax_codes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<TaxCode>>() {}.getType(),
             options,
@@ -85,12 +85,12 @@ public final class TaxCodeService extends ApiService {
    */
   public TaxCode retrieve(String id, TaxCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxCode.class,
             options,

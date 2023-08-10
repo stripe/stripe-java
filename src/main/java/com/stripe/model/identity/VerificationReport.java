@@ -100,12 +100,12 @@ public class VerificationReport extends ApiResource implements HasId {
   /** List all verification reports. */
   public static VerificationReportCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = "/v1/identity/verification_reports";
+    String path = "/v1/identity/verification_reports";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             VerificationReportCollection.class,
             options,
@@ -121,13 +121,13 @@ public class VerificationReport extends ApiResource implements HasId {
   /** List all verification reports. */
   public static VerificationReportCollection list(
       VerificationReportListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/identity/verification_reports";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/identity/verification_reports";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationReportCollection.class,
             options,
@@ -148,13 +148,13 @@ public class VerificationReport extends ApiResource implements HasId {
   /** Retrieves an existing VerificationReport. */
   public static VerificationReport retrieve(
       String report, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             VerificationReport.class,
             options,
@@ -165,14 +165,14 @@ public class VerificationReport extends ApiResource implements HasId {
   public static VerificationReport retrieve(
       String report, VerificationReportRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             VerificationReport.class,
             options,

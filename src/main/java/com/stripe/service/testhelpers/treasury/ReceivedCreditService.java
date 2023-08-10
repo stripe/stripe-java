@@ -30,12 +30,12 @@ public final class ReceivedCreditService extends ApiService {
    */
   public ReceivedCredit create(ReceivedCreditCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/test_helpers/treasury/received_credits";
+    String path = "/v1/test_helpers/treasury/received_credits";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReceivedCredit.class,
             options,

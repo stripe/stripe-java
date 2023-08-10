@@ -45,12 +45,12 @@ public final class PriceService extends ApiService {
    */
   public StripeSearchResult<Price> search(PriceSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices/search";
+    String path = "/v1/prices/search";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeSearchResult<Price>>() {}.getType(),
             options,
@@ -71,12 +71,12 @@ public final class PriceService extends ApiService {
   /** Returns a list of your prices. */
   public StripeCollection<Price> list(PriceListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/prices";
+    String path = "/v1/prices";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Price>>() {}.getType(),
             options,
@@ -88,12 +88,12 @@ public final class PriceService extends ApiService {
   }
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public Price create(PriceCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/prices";
+    String path = "/v1/prices";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Price.class,
             options,
@@ -114,12 +114,12 @@ public final class PriceService extends ApiService {
   /** Retrieves the price with the given ID. */
   public Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Price.class,
             options,
@@ -152,12 +152,12 @@ public final class PriceService extends ApiService {
    */
   public Price update(String price, PriceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Price.class,
             options,

@@ -46,12 +46,12 @@ public final class ChargeService extends ApiService {
    */
   public StripeSearchResult<Charge> search(ChargeSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges/search";
+    String path = "/v1/charges/search";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeSearchResult<Charge>>() {}.getType(),
             options,
@@ -84,12 +84,12 @@ public final class ChargeService extends ApiService {
    */
   public StripeCollection<Charge> list(ChargeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/charges";
+    String path = "/v1/charges";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Charge>>() {}.getType(),
             options,
@@ -129,12 +129,12 @@ public final class ChargeService extends ApiService {
    * integrations.
    */
   public Charge create(ChargeCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/charges";
+    String path = "/v1/charges";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,
@@ -171,12 +171,12 @@ public final class ChargeService extends ApiService {
    */
   public Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,
@@ -209,12 +209,12 @@ public final class ChargeService extends ApiService {
    */
   public Charge update(String charge, ChargeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,
@@ -275,12 +275,12 @@ public final class ChargeService extends ApiService {
    */
   public Charge capture(String charge, ChargeCaptureParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(charge));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Charge.class,
             options,

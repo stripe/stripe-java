@@ -49,12 +49,12 @@ public final class TaxRateService extends ApiService {
    */
   public StripeCollection<TaxRate> list(TaxRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tax_rates";
+    String path = "/v1/tax_rates";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<TaxRate>>() {}.getType(),
             options,
@@ -66,12 +66,12 @@ public final class TaxRateService extends ApiService {
   }
   /** Creates a new tax rate. */
   public TaxRate create(TaxRateCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/tax_rates";
+    String path = "/v1/tax_rates";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxRate.class,
             options,
@@ -92,12 +92,12 @@ public final class TaxRateService extends ApiService {
   /** Retrieves a tax rate with the given ID. */
   public TaxRate retrieve(String taxRate, TaxRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
+    String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxRate.class,
             options,
@@ -118,12 +118,12 @@ public final class TaxRateService extends ApiService {
   /** Updates an existing tax rate. */
   public TaxRate update(String taxRate, TaxRateUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
+    String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TaxRate.class,
             options,

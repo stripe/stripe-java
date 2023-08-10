@@ -53,12 +53,12 @@ public final class InvoiceLineItemService extends ApiService {
   public StripeCollection<InvoiceLineItem> list(
       String invoice, InvoiceLineItemListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/invoices/%s/lines", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/lines", ApiResource.urlEncodeId(invoice));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType(),
             options,

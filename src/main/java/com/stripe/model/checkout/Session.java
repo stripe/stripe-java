@@ -471,12 +471,12 @@ public class Session extends ApiResource implements HasId {
   /** Creates a Session object. */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/checkout/sessions";
+    String path = "/v1/checkout/sessions";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Session.class,
             options,
@@ -491,13 +491,13 @@ public class Session extends ApiResource implements HasId {
   /** Creates a Session object. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/checkout/sessions";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/checkout/sessions";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,
@@ -541,13 +541,13 @@ public class Session extends ApiResource implements HasId {
    * a message saying the Session is expired.
    */
   public Session expire(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Session.class,
             options,
@@ -571,14 +571,14 @@ public class Session extends ApiResource implements HasId {
    * a message saying the Session is expired.
    */
   public Session expire(SessionExpireParams params, RequestOptions options) throws StripeException {
-    String url =
+    String path =
         String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,
@@ -593,12 +593,12 @@ public class Session extends ApiResource implements HasId {
   /** Returns a list of Checkout Sessions. */
   public static SessionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/checkout/sessions";
+    String path = "/v1/checkout/sessions";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             SessionCollection.class,
             options,
@@ -613,13 +613,13 @@ public class Session extends ApiResource implements HasId {
   /** Returns a list of Checkout Sessions. */
   public static SessionCollection list(SessionListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/checkout/sessions";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/checkout/sessions";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             SessionCollection.class,
             options,
@@ -651,13 +651,13 @@ public class Session extends ApiResource implements HasId {
    */
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             LineItemCollection.class,
             options,
@@ -681,14 +681,14 @@ public class Session extends ApiResource implements HasId {
    */
   public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             LineItemCollection.class,
             options,
@@ -708,12 +708,12 @@ public class Session extends ApiResource implements HasId {
   /** Retrieves a Session object. */
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Session.class,
             options,
@@ -723,13 +723,13 @@ public class Session extends ApiResource implements HasId {
   /** Retrieves a Session object. */
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Session.class,
             options,

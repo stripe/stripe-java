@@ -239,12 +239,12 @@ public class Transfer extends ApiResource
    */
   public static Transfer create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/transfers";
+    String path = "/v1/transfers";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Transfer.class,
             options,
@@ -267,13 +267,13 @@ public class Transfer extends ApiResource
    */
   public static Transfer create(TransferCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/transfers";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/transfers";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transfer.class,
             options,
@@ -294,12 +294,12 @@ public class Transfer extends ApiResource
    */
   public static TransferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/transfers";
+    String path = "/v1/transfers";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             TransferCollection.class,
             options,
@@ -320,13 +320,13 @@ public class Transfer extends ApiResource
    */
   public static TransferCollection list(TransferListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/transfers";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/transfers";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransferCollection.class,
             options,
@@ -358,12 +358,12 @@ public class Transfer extends ApiResource
    */
   public static Transfer retrieve(
       String transfer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Transfer.class,
             options,
@@ -378,13 +378,13 @@ public class Transfer extends ApiResource
   public static Transfer retrieve(
       String transfer, TransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transfer.class,
             options,
@@ -411,12 +411,12 @@ public class Transfer extends ApiResource
   @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId()));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Transfer.class,
             options,
@@ -441,13 +441,13 @@ public class Transfer extends ApiResource
    */
   public Transfer update(TransferUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Transfer.class,
             options,

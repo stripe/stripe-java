@@ -116,12 +116,12 @@ public class Token extends ApiResource implements HasId {
    */
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tokens";
+    String path = "/v1/tokens";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             Token.class,
             options,
@@ -144,13 +144,13 @@ public class Token extends ApiResource implements HasId {
    */
   public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/tokens";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/tokens";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Token.class,
             options,
@@ -170,12 +170,12 @@ public class Token extends ApiResource implements HasId {
   /** Retrieves the token with the given ID. */
   public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             Token.class,
             options,
@@ -185,13 +185,13 @@ public class Token extends ApiResource implements HasId {
   /** Retrieves the token with the given ID. */
   public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
-    ApiResource.checkNullTypedParams(url, params);
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Token.class,
             options,

@@ -45,12 +45,12 @@ public final class QuoteService extends ApiService {
   /** Retrieves the quote with the given ID. */
   public Quote retrieve(String quote, QuoteRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Quote.class,
             options,
@@ -71,12 +71,12 @@ public final class QuoteService extends ApiService {
   /** A quote models prices and services for a customer. */
   public Quote update(String quote, QuoteUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Quote.class,
             options,
@@ -112,12 +112,12 @@ public final class QuoteService extends ApiService {
    * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
    */
   public Quote create(QuoteCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/quotes";
+    String path = "/v1/quotes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Quote.class,
             options,
@@ -138,12 +138,12 @@ public final class QuoteService extends ApiService {
   /** Returns a list of your quotes. */
   public StripeCollection<Quote> list(QuoteListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/quotes";
+    String path = "/v1/quotes";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Quote>>() {}.getType(),
             options,
@@ -164,12 +164,12 @@ public final class QuoteService extends ApiService {
   /** Cancels the quote. */
   public Quote cancel(String quote, QuoteCancelParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Quote.class,
             options,
@@ -190,12 +190,12 @@ public final class QuoteService extends ApiService {
   /** Finalizes the quote. */
   public Quote finalizeQuote(String quote, QuoteFinalizeQuoteParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/quotes/%s/finalize", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/finalize", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Quote.class,
             options,
@@ -216,12 +216,12 @@ public final class QuoteService extends ApiService {
   /** Accepts the specified quote. */
   public Quote accept(String quote, QuoteAcceptParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Quote.class,
             options,
@@ -261,12 +261,12 @@ public final class QuoteService extends ApiService {
   public StripeCollection<LineItem> listLineItems(
       String quote, QuoteListLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<LineItem>>() {}.getType(),
             options,
@@ -313,13 +313,13 @@ public final class QuoteService extends ApiService {
   public StripeCollection<LineItem> listComputedUpfrontLineItems(
       String quote, QuoteListComputedUpfrontLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/quotes/%s/computed_upfront_line_items", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<LineItem>>() {}.getType(),
             options,
@@ -340,12 +340,12 @@ public final class QuoteService extends ApiService {
   /** Download the PDF for a finalized quote. */
   public InputStream pdf(String quote, QuotePdfParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
         .requestStream(
             BaseAddress.FILES,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);

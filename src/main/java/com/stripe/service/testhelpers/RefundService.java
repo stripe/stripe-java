@@ -32,13 +32,13 @@ public final class RefundService extends ApiService {
   /** Expire a refund with a status of {@code requires_action}. */
   public Refund expire(String refund, RefundExpireParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/test_helpers/refunds/%s/expire", ApiResource.urlEncodeId(refund));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Refund.class,
             options,

@@ -40,14 +40,14 @@ public final class InboundTransferService extends ApiService {
   public InboundTransfer cancel(
       String inboundTransfer, InboundTransferCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(inboundTransfer));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InboundTransfer.class,
             options,
@@ -60,12 +60,12 @@ public final class InboundTransferService extends ApiService {
   /** Creates an InboundTransfer. */
   public InboundTransfer create(InboundTransferCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/treasury/inbound_transfers";
+    String path = "/v1/treasury/inbound_transfers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InboundTransfer.class,
             options,
@@ -79,12 +79,12 @@ public final class InboundTransferService extends ApiService {
   /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
   public StripeCollection<InboundTransfer> list(
       InboundTransferListParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/treasury/inbound_transfers";
+    String path = "/v1/treasury/inbound_transfers";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<InboundTransfer>>() {}.getType(),
             options,
@@ -107,12 +107,12 @@ public final class InboundTransferService extends ApiService {
   public InboundTransfer retrieve(
       String id, InboundTransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             InboundTransfer.class,
             options,

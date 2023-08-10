@@ -77,12 +77,12 @@ public final class FeeRefundService extends ApiService {
    */
   public FeeRefund create(String id, FeeRefundCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FeeRefund.class,
             options,
@@ -125,12 +125,12 @@ public final class FeeRefundService extends ApiService {
    */
   public StripeCollection<FeeRefund> list(
       String id, FeeRefundListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<FeeRefund>>() {}.getType(),
             options,
@@ -169,7 +169,7 @@ public final class FeeRefundService extends ApiService {
   public FeeRefund retrieve(
       String fee, String id, FeeRefundRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
             ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(id));
@@ -177,7 +177,7 @@ public final class FeeRefundService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FeeRefund.class,
             options,
@@ -220,7 +220,7 @@ public final class FeeRefundService extends ApiService {
   public FeeRefund update(
       String fee, String id, FeeRefundUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
             ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(id));
@@ -228,7 +228,7 @@ public final class FeeRefundService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             FeeRefund.class,
             options,

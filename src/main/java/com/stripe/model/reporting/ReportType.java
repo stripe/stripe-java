@@ -99,12 +99,12 @@ public class ReportType extends ApiResource implements HasId {
   /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_types";
+    String path = "/v1/reporting/report_types";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ReportTypeCollection.class,
             options,
@@ -119,13 +119,13 @@ public class ReportType extends ApiResource implements HasId {
   /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/reporting/report_types";
-    ApiResource.checkNullTypedParams(url, params);
+    String path = "/v1/reporting/report_types";
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportTypeCollection.class,
             options,
@@ -156,13 +156,13 @@ public class ReportType extends ApiResource implements HasId {
   public static ReportType retrieve(
       String reportType, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             params,
             ReportType.class,
             options,
@@ -176,14 +176,14 @@ public class ReportType extends ApiResource implements HasId {
   public static ReportType retrieve(
       String reportType, ReportTypeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             ReportType.class,
             options,

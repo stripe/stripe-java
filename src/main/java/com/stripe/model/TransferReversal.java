@@ -194,7 +194,7 @@ public class TransferReversal extends ApiResource
   @Override
   public TransferReversal update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/transfers/%s/reversals/%s",
             ApiResource.urlEncodeId(this.getTransfer()), ApiResource.urlEncodeId(this.getId()));
@@ -202,7 +202,7 @@ public class TransferReversal extends ApiResource
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             params,
             TransferReversal.class,
             options,
@@ -227,16 +227,16 @@ public class TransferReversal extends ApiResource
    */
   public TransferReversal update(TransferReversalUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
+    String path =
         String.format(
             "/v1/transfers/%s/reversals/%s",
             ApiResource.urlEncodeId(this.getTransfer()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(url, params);
+    ApiResource.checkNullTypedParams(path, params);
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             TransferReversal.class,
             options,

@@ -45,12 +45,12 @@ public final class ProductService extends ApiService {
    */
   public StripeSearchResult<Product> search(ProductSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/products/search";
+    String path = "/v1/products/search";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeSearchResult<Product>>() {}.getType(),
             options,
@@ -62,12 +62,12 @@ public final class ProductService extends ApiService {
   }
   /** Creates a new product object. */
   public Product create(ProductCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/products";
+    String path = "/v1/products";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Product.class,
             options,
@@ -100,12 +100,12 @@ public final class ProductService extends ApiService {
    */
   public StripeCollection<Product> list(ProductListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/products";
+    String path = "/v1/products";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Product>>() {}.getType(),
             options,
@@ -142,12 +142,12 @@ public final class ProductService extends ApiService {
    */
   public Product retrieve(String id, ProductRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Product.class,
             options,
@@ -180,12 +180,12 @@ public final class ProductService extends ApiService {
    */
   public Product update(String id, ProductUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Product.class,
             options,
@@ -205,12 +205,12 @@ public final class ProductService extends ApiService {
    * associated with it.
    */
   public Product delete(String id, RequestOptions options) throws StripeException {
-    String url = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
-            url,
+            path,
             null,
             Product.class,
             options,

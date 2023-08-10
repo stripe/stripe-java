@@ -55,12 +55,12 @@ public final class PayoutService extends ApiService {
    */
   public Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Payout.class,
             options,
@@ -93,12 +93,12 @@ public final class PayoutService extends ApiService {
    */
   public Payout update(String payout, PayoutUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Payout.class,
             options,
@@ -135,12 +135,12 @@ public final class PayoutService extends ApiService {
    */
   public StripeCollection<Payout> list(PayoutListParams params, RequestOptions options)
       throws StripeException {
-    String url = "/v1/payouts";
+    String path = "/v1/payouts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<Payout>>() {}.getType(),
             options,
@@ -176,12 +176,12 @@ public final class PayoutService extends ApiService {
    * pending amounts by source type.
    */
   public Payout create(PayoutCreateParams params, RequestOptions options) throws StripeException {
-    String url = "/v1/payouts";
+    String path = "/v1/payouts";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Payout.class,
             options,
@@ -214,12 +214,12 @@ public final class PayoutService extends ApiService {
    */
   public Payout cancel(String payout, PayoutCancelParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(payout));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Payout.class,
             options,
@@ -272,12 +272,12 @@ public final class PayoutService extends ApiService {
    */
   public Payout reverse(String payout, PayoutReverseParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(payout));
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            url,
+            path,
             ApiRequestParams.paramsToMap(params),
             Payout.class,
             options,
