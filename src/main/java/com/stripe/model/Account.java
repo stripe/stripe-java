@@ -279,7 +279,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete() throws StripeException {
@@ -294,7 +294,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(RequestOptions options) throws StripeException {
@@ -309,7 +309,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(Map<String, Object> params) throws StripeException {
@@ -324,7 +324,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -550,7 +550,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -570,7 +570,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -595,7 +595,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -614,7 +614,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -1106,12 +1106,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      *
      * <p>One of {@code free_zone_establishment}, {@code free_zone_llc}, {@code
      * government_instrumentality}, {@code governmental_unit}, {@code incorporated_non_profit},
-     * {@code limited_liability_partnership}, {@code llc}, {@code multi_member_llc}, {@code
-     * private_company}, {@code private_corporation}, {@code private_partnership}, {@code
-     * public_company}, {@code public_corporation}, {@code public_partnership}, {@code
-     * single_member_llc}, {@code sole_establishment}, {@code sole_proprietorship}, {@code
-     * tax_exempt_government_instrumentality}, {@code unincorporated_association}, or {@code
-     * unincorporated_non_profit}.
+     * {@code incorporated_partnership}, {@code limited_liability_partnership}, {@code llc}, {@code
+     * multi_member_llc}, {@code private_company}, {@code private_corporation}, {@code
+     * private_partnership}, {@code public_company}, {@code public_corporation}, {@code
+     * public_partnership}, {@code single_member_llc}, {@code sole_establishment}, {@code
+     * sole_proprietorship}, {@code tax_exempt_government_instrumentality}, {@code
+     * unincorporated_association}, {@code unincorporated_non_profit}, or {@code
+     * unincorporated_partnership}.
      */
     @SerializedName("structure")
     String structure;
