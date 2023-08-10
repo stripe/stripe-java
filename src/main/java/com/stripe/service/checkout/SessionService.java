@@ -3,7 +3,6 @@ package com.stripe.service.checkout;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
-import com.stripe.model.LineItem;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.checkout.Session;
 import com.stripe.net.ApiMode;
@@ -15,7 +14,6 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionExpireParams;
-import com.stripe.param.checkout.SessionListLineItemsParams;
 import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
 
@@ -94,52 +92,6 @@ public final class SessionService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String session, SessionListLineItemsParams params)
-      throws StripeException {
-    return listLineItems(session, params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String session, RequestOptions options)
-      throws StripeException {
-    return listLineItems(session, (SessionListLineItemsParams) null, options);
-  }
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String session) throws StripeException {
-    return listLineItems(session, (SessionListLineItemsParams) null, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(
-      String session, SessionListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<LineItem>>() {}.getType(),
-            options,
-            ApiMode.V1);
-  }
-  /**
    * A Session can be expired when it is in one of these statuses: {@code open}
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
@@ -185,5 +137,9 @@ public final class SessionService extends ApiService {
             Session.class,
             options,
             ApiMode.V1);
+  }
+
+  public com.stripe.service.checkout.SessionLineItemService lineItems() {
+    return new com.stripe.service.checkout.SessionLineItemService(this.getResponseGetter());
   }
 }

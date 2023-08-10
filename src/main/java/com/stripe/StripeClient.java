@@ -6,16 +6,16 @@ import java.net.Proxy;
 import lombok.Getter;
 
 /**
- * This is the primary entrypoint to make requests against Stripe's API.
- * It provides a means of accessing all the methods on the Stripe API,
- * and the ability to set configuration such as apiKey and connection timeouts.
+ * This is the primary entrypoint to make requests against Stripe's API. It provides a means of
+ * accessing all the methods on the Stripe API, and the ability to set configuration such as apiKey
+ * and connection timeouts.
  */
 public class StripeClient {
   private final StripeResponseGetter responseGetter;
 
   /**
-   * Constructs a StripeClient with default settings, using the provided API key.
-   * Use the builder instead if you require more complex configuration.
+   * Constructs a StripeClient with default settings, using the provided API key. Use the builder
+   * instead if you require more complex configuration.
    */
   public StripeClient(String apiKey) {
     this.responseGetter =
@@ -25,8 +25,8 @@ public class StripeClient {
   /**
    * Constructs a StripeClient with a custom StripeResponseGetter.
    *
-   * Use this for testing, or advanced use cases where you need to make fundamental
-   * changes to how the StripeClient makes requests.
+   * <p>Use this for testing, or advanced use cases where you need to make fundamental changes to
+   * how the StripeClient makes requests.
    */
   public StripeClient(StripeResponseGetter responseGetter) {
     this.responseGetter = responseGetter;
@@ -328,8 +328,8 @@ public class StripeClient {
   }
 
   /**
-   * Builder class for creating a {@link StripeClient} instance.
-   * Allows you to specify settings like the API key, connect and read timeouts, and proxy settings.
+   * Builder class for creating a {@link StripeClient} instance. Allows you to specify settings like
+   * the API key, connect and read timeouts, and proxy settings.
    */
   public static StripeClientBuilder builder() {
     return new StripeClientBuilder();
@@ -457,10 +457,10 @@ public class StripeClient {
     }
 
     /**
-     * Set the base URL for the Stripe API. By default this is
-     * "https://api.stripe.com".
+     * Set the base URL for the Stripe API. By default this is "https://api.stripe.com".
      *
-     * This only affects requests made with a {@link com.stripe.net.BaseAddress} of API. Use {@link setFilesBase} or {@link setConnectBase} to interpect requests with other bases.
+     * <p>This only affects requests made with a {@link com.stripe.net.BaseAddress} of API. Use
+     * {@link setFilesBase} or {@link setConnectBase} to interpect requests with other bases.
      */
     public StripeClientBuilder setApiBase(String address) {
       this.apiBase = address;
@@ -472,10 +472,9 @@ public class StripeClient {
     }
 
     /**
-     * Set the base URL for the Stripe Files API. By default this is
-     * "https://files.stripe.com".
+     * Set the base URL for the Stripe Files API. By default this is "https://files.stripe.com".
      *
-     * This only affects requests made with a {@link com.stripe.net.BaseAddress} of FILES.
+     * <p>This only affects requests made with a {@link com.stripe.net.BaseAddress} of FILES.
      */
     public StripeClientBuilder setFilesBase(String address) {
       this.filesBase = address;
@@ -487,10 +486,9 @@ public class StripeClient {
     }
 
     /**
-     * Set the base URL for the Stripe Connect API. By default this is
-     * "https://connect.stripe.com".
+     * Set the base URL for the Stripe Connect API. By default this is "https://connect.stripe.com".
      *
-     * This only affects requests made with a {@link com.stripe.net.BaseAddress} of CONNECT.
+     * <p>This only affects requests made with a {@link com.stripe.net.BaseAddress} of CONNECT.
      */
     public StripeClientBuilder setConnectBase(String address) {
       this.connectBase = address;

@@ -175,7 +175,7 @@ public final class TransferService extends ApiService {
             ApiMode.V1);
   }
 
-  public com.stripe.service.TransferReversalService transferReversals() {
+  public com.stripe.service.TransferReversalService reversals() {
     return new com.stripe.service.TransferReversalService(this.getResponseGetter());
   }
 }

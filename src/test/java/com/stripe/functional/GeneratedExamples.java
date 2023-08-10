@@ -340,14 +340,14 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testSessionServiceListLineItems() throws StripeException {
+  public void testSessionLineItemServiceList() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.checkout.SessionListLineItemsParams params =
-        com.stripe.param.checkout.SessionListLineItemsParams.builder().build();
+    com.stripe.param.checkout.SessionLineItemListParams params =
+        com.stripe.param.checkout.SessionLineItemListParams.builder().build();
 
     com.stripe.model.StripeCollection<com.stripe.model.LineItem> stripeCollection =
-        client.checkout().sessions().listLineItems("sess_xyz", params);
+        client.checkout().sessions().lineItems().list("sess_xyz", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -428,27 +428,27 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testCustomerServiceCreateFundingInstructions() throws StripeException {
+  public void testCustomerFundingInstructionsServiceCreate() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CustomerCreateFundingInstructionsParams params =
-        com.stripe.param.CustomerCreateFundingInstructionsParams.builder()
+    com.stripe.param.CustomerFundingInstructionsCreateParams params =
+        com.stripe.param.CustomerFundingInstructionsCreateParams.builder()
             .setBankTransfer(
-                com.stripe.param.CustomerCreateFundingInstructionsParams.BankTransfer.builder()
+                com.stripe.param.CustomerFundingInstructionsCreateParams.BankTransfer.builder()
                     .addRequestedAddressType(
-                        com.stripe.param.CustomerCreateFundingInstructionsParams.BankTransfer
+                        com.stripe.param.CustomerFundingInstructionsCreateParams.BankTransfer
                             .RequestedAddressType.ZENGIN)
                     .setType(
-                        com.stripe.param.CustomerCreateFundingInstructionsParams.BankTransfer.Type
+                        com.stripe.param.CustomerFundingInstructionsCreateParams.BankTransfer.Type
                             .JP_BANK_TRANSFER)
                     .build())
             .setCurrency("usd")
             .setFundingType(
-                com.stripe.param.CustomerCreateFundingInstructionsParams.FundingType.BANK_TRANSFER)
+                com.stripe.param.CustomerFundingInstructionsCreateParams.FundingType.BANK_TRANSFER)
             .build();
 
     com.stripe.model.FundingInstructions fundingInstructions =
-        client.customers().createFundingInstructions("cus_123", params);
+        client.customers().fundingInstructions().create("cus_123", params);
     assertNotNull(fundingInstructions);
     verifyRequest(
         BaseAddress.API,
@@ -478,16 +478,16 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testCustomerServiceListPaymentMethods() throws StripeException {
+  public void testCustomerPaymentMethodServiceList() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CustomerListPaymentMethodsParams params =
-        com.stripe.param.CustomerListPaymentMethodsParams.builder()
-            .setType(com.stripe.param.CustomerListPaymentMethodsParams.Type.CARD)
+    com.stripe.param.CustomerPaymentMethodListParams params =
+        com.stripe.param.CustomerPaymentMethodListParams.builder()
+            .setType(com.stripe.param.CustomerPaymentMethodListParams.Type.CARD)
             .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.PaymentMethod> stripeCollection =
-        client.customers().listPaymentMethods("cus_xyz", params);
+        client.customers().paymentMethods().list("cus_xyz", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -638,16 +638,17 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testAccountServiceListOwners() throws StripeException {
+  public void testAccountOwnerServiceList() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.financialconnections.AccountListOwnersParams params =
-        com.stripe.param.financialconnections.AccountListOwnersParams.builder()
+    com.stripe.param.financialconnections.AccountOwnerListParams params =
+        com.stripe.param.financialconnections.AccountOwnerListParams.builder()
             .setOwnership("fcaowns_xyz")
             .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.financialconnections.AccountOwner>
-        stripeCollection = client.financialConnections().accounts().listOwners("fca_xyz", params);
+        stripeCollection =
+            client.financialConnections().accounts().owners().list("fca_xyz", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -973,14 +974,14 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testPaymentLinkServiceListLineItems() throws StripeException {
+  public void testPaymentLinkLineItemServiceList() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentLinkListLineItemsParams params =
-        com.stripe.param.PaymentLinkListLineItemsParams.builder().build();
+    com.stripe.param.PaymentLinkLineItemListParams params =
+        com.stripe.param.PaymentLinkLineItemListParams.builder().build();
 
     com.stripe.model.StripeCollection<com.stripe.model.LineItem> stripeCollection =
-        client.paymentLinks().listLineItems("pl_xyz", params);
+        client.paymentLinks().lineItems().list("pl_xyz", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -4029,7 +4030,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.CreditNoteLineItemListParams.builder().setLimit(3L).build();
 
     com.stripe.model.StripeCollection<com.stripe.model.CreditNoteLineItem> stripeCollection =
-        client.creditNotes().creditNoteLineItems().list("cn_xxxxxxxxxxxxx", params);
+        client.creditNotes().lineItems().list("cn_xxxxxxxxxxxxx", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -4283,7 +4284,7 @@ class GeneratedExamples extends BaseStripeTest {
 
     com.stripe.model.StripeCollection<com.stripe.model.CustomerBalanceTransaction>
         stripeCollection =
-            client.customers().customerBalanceTransactions().list("cus_xxxxxxxxxxxxx", params);
+            client.customers().balanceTransactions().list("cus_xxxxxxxxxxxxx", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -4325,7 +4326,7 @@ class GeneratedExamples extends BaseStripeTest {
             .build();
 
     com.stripe.model.CustomerBalanceTransaction customerBalanceTransaction =
-        client.customers().customerBalanceTransactions().create("cus_xxxxxxxxxxxxx", params);
+        client.customers().balanceTransactions().create("cus_xxxxxxxxxxxxx", params);
     assertNotNull(customerBalanceTransaction);
     verifyRequest(
         BaseAddress.API,
@@ -4360,7 +4361,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.model.CustomerBalanceTransaction customerBalanceTransaction =
         client
             .customers()
-            .customerBalanceTransactions()
+            .balanceTransactions()
             .retrieve("cus_xxxxxxxxxxxxx", "cbtxn_xxxxxxxxxxxxx", params);
     assertNotNull(customerBalanceTransaction);
     verifyRequest(
@@ -4403,7 +4404,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.model.CustomerBalanceTransaction customerBalanceTransaction =
         client
             .customers()
-            .customerBalanceTransactions()
+            .balanceTransactions()
             .update("cus_xxxxxxxxxxxxx", "cbtxn_xxxxxxxxxxxxx", params);
     assertNotNull(customerBalanceTransaction);
     verifyRequest(
@@ -4434,16 +4435,16 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testCustomerServiceListPaymentMethods2() throws StripeException {
+  public void testCustomerPaymentMethodServiceList2() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CustomerListPaymentMethodsParams params =
-        com.stripe.param.CustomerListPaymentMethodsParams.builder()
-            .setType(com.stripe.param.CustomerListPaymentMethodsParams.Type.CARD)
+    com.stripe.param.CustomerPaymentMethodListParams params =
+        com.stripe.param.CustomerPaymentMethodListParams.builder()
+            .setType(com.stripe.param.CustomerPaymentMethodListParams.Type.CARD)
             .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.PaymentMethod> stripeCollection =
-        client.customers().listPaymentMethods("cus_xxxxxxxxxxxxx", params);
+        client.customers().paymentMethods().list("cus_xxxxxxxxxxxxx", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -5309,18 +5310,18 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testAccountServiceListOwners2() throws StripeException {
+  public void testAccountOwnerServiceList2() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.financialconnections.AccountListOwnersParams params =
-        com.stripe.param.financialconnections.AccountListOwnersParams.builder()
+    com.stripe.param.financialconnections.AccountOwnerListParams params =
+        com.stripe.param.financialconnections.AccountOwnerListParams.builder()
             .setLimit(3L)
             .setOwnership("fcaowns_xxxxxxxxxxxxx")
             .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.financialconnections.AccountOwner>
         stripeCollection =
-            client.financialConnections().accounts().listOwners("fca_xxxxxxxxxxxxx", params);
+            client.financialConnections().accounts().owners().list("fca_xxxxxxxxxxxxx", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -12228,7 +12229,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.TransferReversalListParams.builder().setLimit(3L).build();
 
     com.stripe.model.StripeCollection<com.stripe.model.TransferReversal> stripeCollection =
-        client.transfers().transferReversals().list("tr_xxxxxxxxxxxxx", params);
+        client.transfers().reversals().list("tr_xxxxxxxxxxxxx", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -12263,7 +12264,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.TransferReversalCreateParams.builder().setAmount(100L).build();
 
     com.stripe.model.TransferReversal transferReversal =
-        client.transfers().transferReversals().create("tr_xxxxxxxxxxxxx", params);
+        client.transfers().reversals().create("tr_xxxxxxxxxxxxx", params);
     assertNotNull(transferReversal);
     verifyRequest(
         BaseAddress.API,
@@ -12295,10 +12296,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.TransferReversalRetrieveParams.builder().build();
 
     com.stripe.model.TransferReversal transferReversal =
-        client
-            .transfers()
-            .transferReversals()
-            .retrieve("tr_xxxxxxxxxxxxx", "trr_xxxxxxxxxxxxx", params);
+        client.transfers().reversals().retrieve("tr_xxxxxxxxxxxxx", "trr_xxxxxxxxxxxxx", params);
     assertNotNull(transferReversal);
     verifyRequest(
         BaseAddress.API,
@@ -12337,10 +12335,7 @@ class GeneratedExamples extends BaseStripeTest {
             .build();
 
     com.stripe.model.TransferReversal transferReversal =
-        client
-            .transfers()
-            .transferReversals()
-            .update("tr_xxxxxxxxxxxxx", "trr_xxxxxxxxxxxxx", params);
+        client.transfers().reversals().update("tr_xxxxxxxxxxxxx", "trr_xxxxxxxxxxxxx", params);
     assertNotNull(transferReversal);
     verifyRequest(
         BaseAddress.API,
@@ -12735,14 +12730,14 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testFinancialAccountServiceRetrieveFeatures() throws StripeException {
+  public void testFinancialAccountFeaturesServiceList() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.treasury.FinancialAccountRetrieveFeaturesParams params =
-        com.stripe.param.treasury.FinancialAccountRetrieveFeaturesParams.builder().build();
+    com.stripe.param.treasury.FinancialAccountFeaturesListParams params =
+        com.stripe.param.treasury.FinancialAccountFeaturesListParams.builder().build();
 
     com.stripe.model.treasury.FinancialAccountFeatures financialAccountFeatures =
-        client.treasury().financialAccounts().retrieveFeatures("fa_xxxxxxxxxxxxx", params);
+        client.treasury().financialAccounts().features().list("fa_xxxxxxxxxxxxx", params);
     assertNotNull(financialAccountFeatures);
     verifyRequest(
         BaseAddress.API,
@@ -13783,14 +13778,14 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testQuoteServiceListLineItems() throws StripeException {
+  public void testQuoteLineItemServiceList() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.QuoteListLineItemsParams params =
-        com.stripe.param.QuoteListLineItemsParams.builder().build();
+    com.stripe.param.QuoteLineItemListParams params =
+        com.stripe.param.QuoteLineItemListParams.builder().build();
 
     com.stripe.model.StripeCollection<com.stripe.model.LineItem> stripeCollection =
-        client.quotes().listLineItems("qt_xxxxxxxxxxxxx", params);
+        client.quotes().lineItems().list("qt_xxxxxxxxxxxxx", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -13877,17 +13872,17 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testCreditNoteServiceListPreviewLineItems() throws StripeException {
+  public void testCreditNotePreviewLinesServiceList() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CreditNoteListPreviewLineItemsParams params =
-        com.stripe.param.CreditNoteListPreviewLineItemsParams.builder()
+    com.stripe.param.CreditNotePreviewLinesListParams params =
+        com.stripe.param.CreditNotePreviewLinesListParams.builder()
             .setLimit(3L)
             .setInvoice("in_xxxxxxxxxxxxx")
             .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.CreditNoteLineItem> stripeCollection =
-        client.creditNotes().listPreviewLineItems(params);
+        client.creditNotes().previewLines().list(params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,

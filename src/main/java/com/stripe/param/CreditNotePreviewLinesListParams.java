@@ -12,7 +12,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
+public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   /**
    * The integer amount in cents (or local equivalent) representing the total amount of the credit
    * note.
@@ -70,7 +70,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
 
   /** Line items that make up the credit note. */
   @SerializedName("lines")
-  List<CreditNoteListPreviewLineItemsParams.Line> lines;
+  List<CreditNotePreviewLinesListParams.Line> lines;
 
   /** The credit note's memo appears on the credit note PDF. */
   @SerializedName("memo")
@@ -126,7 +126,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private CreditNoteListPreviewLineItemsParams(
+  private CreditNotePreviewLinesListParams(
       Long amount,
       Long creditAmount,
       Long effectiveAt,
@@ -135,7 +135,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String invoice,
       Long limit,
-      List<CreditNoteListPreviewLineItemsParams.Line> lines,
+      List<CreditNotePreviewLinesListParams.Line> lines,
       String memo,
       Map<String, String> metadata,
       Long outOfBandAmount,
@@ -184,7 +184,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
 
     private Long limit;
 
-    private List<CreditNoteListPreviewLineItemsParams.Line> lines;
+    private List<CreditNotePreviewLinesListParams.Line> lines;
 
     private String memo;
 
@@ -203,8 +203,8 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CreditNoteListPreviewLineItemsParams build() {
-      return new CreditNoteListPreviewLineItemsParams(
+    public CreditNotePreviewLinesListParams build() {
+      return new CreditNotePreviewLinesListParams(
           this.amount,
           this.creditAmount,
           this.effectiveAt,
@@ -266,7 +266,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CreditNoteListPreviewLineItemsParams#expand} for the field documentation.
+     * CreditNotePreviewLinesListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -279,7 +279,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CreditNoteListPreviewLineItemsParams#expand} for the field documentation.
+     * CreditNotePreviewLinesListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -292,7 +292,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CreditNoteListPreviewLineItemsParams#extraParams} for the field documentation.
+     * CreditNotePreviewLinesListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -305,7 +305,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CreditNoteListPreviewLineItemsParams#extraParams} for the field documentation.
+     * See {@link CreditNotePreviewLinesListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -333,9 +333,9 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add an element to `lines` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CreditNoteListPreviewLineItemsParams#lines} for the field documentation.
+     * CreditNotePreviewLinesListParams#lines} for the field documentation.
      */
-    public Builder addLine(CreditNoteListPreviewLineItemsParams.Line element) {
+    public Builder addLine(CreditNotePreviewLinesListParams.Line element) {
       if (this.lines == null) {
         this.lines = new ArrayList<>();
       }
@@ -346,9 +346,9 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add all elements to `lines` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CreditNoteListPreviewLineItemsParams#lines} for the field documentation.
+     * CreditNotePreviewLinesListParams#lines} for the field documentation.
      */
-    public Builder addAllLine(List<CreditNoteListPreviewLineItemsParams.Line> elements) {
+    public Builder addAllLine(List<CreditNotePreviewLinesListParams.Line> elements) {
       if (this.lines == null) {
         this.lines = new ArrayList<>();
       }
@@ -365,7 +365,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CreditNoteListPreviewLineItemsParams#metadata} for the field documentation.
+     * CreditNotePreviewLinesListParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -378,7 +378,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CreditNoteListPreviewLineItemsParams#metadata} for the field documentation.
+     * See {@link CreditNotePreviewLinesListParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -401,7 +401,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
      * Reason for issuing this credit note, one of {@code duplicate}, {@code fraudulent}, {@code
      * order_change}, or {@code product_unsatisfactory}.
      */
-    public Builder setReason(CreditNoteListPreviewLineItemsParams.Reason reason) {
+    public Builder setReason(CreditNotePreviewLinesListParams.Reason reason) {
       this.reason = reason;
       return this;
     }
@@ -425,7 +425,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
      * When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is included
      * in the credit note.
      */
-    public Builder setShippingCost(CreditNoteListPreviewLineItemsParams.ShippingCost shippingCost) {
+    public Builder setShippingCost(CreditNotePreviewLinesListParams.ShippingCost shippingCost) {
       this.shippingCost = shippingCost;
       return this;
     }
@@ -552,8 +552,8 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       private BigDecimal unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CreditNoteListPreviewLineItemsParams.Line build() {
-        return new CreditNoteListPreviewLineItemsParams.Line(
+      public CreditNotePreviewLinesListParams.Line build() {
+        return new CreditNotePreviewLinesListParams.Line(
             this.amount,
             this.description,
             this.extraParams,
@@ -585,7 +585,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CreditNoteListPreviewLineItemsParams.Line#extraParams} for the field documentation.
+       * CreditNotePreviewLinesListParams.Line#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -598,8 +598,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CreditNoteListPreviewLineItemsParams.Line#extraParams} for the field
-       * documentation.
+       * See {@link CreditNotePreviewLinesListParams.Line#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -627,7 +626,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       /**
        * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * CreditNoteListPreviewLineItemsParams.Line#taxRates} for the field documentation.
+       * CreditNotePreviewLinesListParams.Line#taxRates} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder addTaxRate(String element) {
@@ -641,7 +640,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       /**
        * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * CreditNoteListPreviewLineItemsParams.Line#taxRates} for the field documentation.
+       * CreditNotePreviewLinesListParams.Line#taxRates} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder addAllTaxRate(List<String> elements) {
@@ -674,7 +673,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
        * <strong>Required.</strong> Type of the credit note line item, one of {@code
        * invoice_line_item} or {@code custom_line_item}
        */
-      public Builder setType(CreditNoteListPreviewLineItemsParams.Line.Type type) {
+      public Builder setType(CreditNotePreviewLinesListParams.Line.Type type) {
         this.type = type;
         return this;
       }
@@ -746,15 +745,15 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       private String shippingRate;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CreditNoteListPreviewLineItemsParams.ShippingCost build() {
-        return new CreditNoteListPreviewLineItemsParams.ShippingCost(
+      public CreditNotePreviewLinesListParams.ShippingCost build() {
+        return new CreditNotePreviewLinesListParams.ShippingCost(
             this.extraParams, this.shippingRate);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CreditNoteListPreviewLineItemsParams.ShippingCost#extraParams} for the field documentation.
+       * CreditNotePreviewLinesListParams.ShippingCost#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -767,7 +766,7 @@ public class CreditNoteListPreviewLineItemsParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CreditNoteListPreviewLineItemsParams.ShippingCost#extraParams} for the field
+       * See {@link CreditNotePreviewLinesListParams.ShippingCost#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {

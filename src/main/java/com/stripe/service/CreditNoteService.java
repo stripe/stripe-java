@@ -4,7 +4,6 @@ package com.stripe.service;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.CreditNote;
-import com.stripe.model.CreditNoteLineItem;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequestParams;
@@ -15,7 +14,6 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CreditNoteCreateParams;
 import com.stripe.param.CreditNoteListParams;
-import com.stripe.param.CreditNoteListPreviewLineItemsParams;
 import com.stripe.param.CreditNotePreviewParams;
 import com.stripe.param.CreditNoteRetrieveParams;
 import com.stripe.param.CreditNoteUpdateParams;
@@ -226,35 +224,12 @@ public final class CreditNoteService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /**
-   * When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing
-   * the first handful of those items. This URL you can retrieve the full (paginated) list of line
-   * items.
-   */
-  public StripeCollection<CreditNoteLineItem> listPreviewLineItems(
-      CreditNoteListPreviewLineItemsParams params) throws StripeException {
-    return listPreviewLineItems(params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing
-   * the first handful of those items. This URL you can retrieve the full (paginated) list of line
-   * items.
-   */
-  public StripeCollection<CreditNoteLineItem> listPreviewLineItems(
-      CreditNoteListPreviewLineItemsParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/credit_notes/preview/lines";
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<CreditNoteLineItem>>() {}.getType(),
-            options,
-            ApiMode.V1);
+
+  public com.stripe.service.CreditNoteLineItemService lineItems() {
+    return new com.stripe.service.CreditNoteLineItemService(this.getResponseGetter());
   }
 
-  public com.stripe.service.CreditNoteLineItemService creditNoteLineItems() {
-    return new com.stripe.service.CreditNoteLineItemService(this.getResponseGetter());
+  public com.stripe.service.CreditNotePreviewLinesService previewLines() {
+    return new com.stripe.service.CreditNotePreviewLinesService(this.getResponseGetter());
   }
 }

@@ -5,8 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.Discount;
-import com.stripe.model.FundingInstructions;
-import com.stripe.model.PaymentMethod;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiMode;
@@ -16,12 +14,9 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.CustomerCreateFundingInstructionsParams;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerListParams;
-import com.stripe.param.CustomerListPaymentMethodsParams;
 import com.stripe.param.CustomerRetrieveParams;
-import com.stripe.param.CustomerRetrievePaymentMethodParams;
 import com.stripe.param.CustomerSearchParams;
 import com.stripe.param.CustomerUpdateParams;
 
@@ -253,108 +248,6 @@ public final class CustomerService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public StripeCollection<PaymentMethod> listPaymentMethods(
-      String customer, CustomerListPaymentMethodsParams params) throws StripeException {
-    return listPaymentMethods(customer, params, (RequestOptions) null);
-  }
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public StripeCollection<PaymentMethod> listPaymentMethods(String customer, RequestOptions options)
-      throws StripeException {
-    return listPaymentMethods(customer, (CustomerListPaymentMethodsParams) null, options);
-  }
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public StripeCollection<PaymentMethod> listPaymentMethods(String customer)
-      throws StripeException {
-    return listPaymentMethods(
-        customer, (CustomerListPaymentMethodsParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public StripeCollection<PaymentMethod> listPaymentMethods(
-      String customer, CustomerListPaymentMethodsParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PaymentMethod>>() {}.getType(),
-            options,
-            ApiMode.V1);
-  }
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(
-      String customer, String paymentMethod, CustomerRetrievePaymentMethodParams params)
-      throws StripeException {
-    return retrievePaymentMethod(customer, paymentMethod, params, (RequestOptions) null);
-  }
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(
-      String customer, String paymentMethod, RequestOptions options) throws StripeException {
-    return retrievePaymentMethod(
-        customer, paymentMethod, (CustomerRetrievePaymentMethodParams) null, options);
-  }
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(String customer, String paymentMethod)
-      throws StripeException {
-    return retrievePaymentMethod(
-        customer, paymentMethod, (CustomerRetrievePaymentMethodParams) null, (RequestOptions) null);
-  }
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(
-      String customer,
-      String paymentMethod,
-      CustomerRetrievePaymentMethodParams params,
-      RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/customers/%s/payment_methods/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(paymentMethod));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            PaymentMethod.class,
-            options,
-            ApiMode.V1);
-  }
-  /**
-   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
-   * exist for the customer, new funding instructions will be created. If funding instructions have
-   * already been created for a given customer, the same funding instructions will be retrieved. In
-   * other words, we will return the same funding instructions each time.
-   */
-  public FundingInstructions createFundingInstructions(
-      String customer, CustomerCreateFundingInstructionsParams params) throws StripeException {
-    return createFundingInstructions(customer, params, (RequestOptions) null);
-  }
-  /**
-   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
-   * exist for the customer, new funding instructions will be created. If funding instructions have
-   * already been created for a given customer, the same funding instructions will be retrieved. In
-   * other words, we will return the same funding instructions each time.
-   */
-  public FundingInstructions createFundingInstructions(
-      String customer, CustomerCreateFundingInstructionsParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            FundingInstructions.class,
-            options,
-            ApiMode.V1);
-  }
   /** Removes the currently applied discount on a customer. */
   public Discount deleteDiscount(String customer) throws StripeException {
     return deleteDiscount(customer, (RequestOptions) null);
@@ -373,17 +266,24 @@ public final class CustomerService extends ApiService {
             ApiMode.V1);
   }
 
+  public com.stripe.service.CustomerBalanceTransactionService balanceTransactions() {
+    return new com.stripe.service.CustomerBalanceTransactionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CashBalanceService cashBalance() {
     return new com.stripe.service.CashBalanceService(this.getResponseGetter());
   }
 
-  public com.stripe.service.CustomerBalanceTransactionService customerBalanceTransactions() {
-    return new com.stripe.service.CustomerBalanceTransactionService(this.getResponseGetter());
+  public com.stripe.service.CustomerCashBalanceTransactionService cashBalanceTransactions() {
+    return new com.stripe.service.CustomerCashBalanceTransactionService(this.getResponseGetter());
   }
 
-  public com.stripe.service.CustomerCashBalanceTransactionService
-      customerCashBalanceTransactions() {
-    return new com.stripe.service.CustomerCashBalanceTransactionService(this.getResponseGetter());
+  public com.stripe.service.CustomerFundingInstructionsService fundingInstructions() {
+    return new com.stripe.service.CustomerFundingInstructionsService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.CustomerPaymentMethodService paymentMethods() {
+    return new com.stripe.service.CustomerPaymentMethodService(this.getResponseGetter());
   }
 
   public com.stripe.service.PaymentSourceService paymentSources() {

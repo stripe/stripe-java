@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.FinancialAccount;
-import com.stripe.model.treasury.FinancialAccountFeatures;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -15,9 +14,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.treasury.FinancialAccountCreateParams;
 import com.stripe.param.treasury.FinancialAccountListParams;
-import com.stripe.param.treasury.FinancialAccountRetrieveFeaturesParams;
 import com.stripe.param.treasury.FinancialAccountRetrieveParams;
-import com.stripe.param.treasury.FinancialAccountUpdateFeaturesParams;
 import com.stripe.param.treasury.FinancialAccountUpdateParams;
 
 public final class FinancialAccountService extends ApiService {
@@ -138,74 +135,9 @@ public final class FinancialAccountService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(
-      String financialAccount, FinancialAccountUpdateFeaturesParams params) throws StripeException {
-    return updateFeatures(financialAccount, params, (RequestOptions) null);
-  }
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(String financialAccount, RequestOptions options)
-      throws StripeException {
-    return updateFeatures(financialAccount, (FinancialAccountUpdateFeaturesParams) null, options);
-  }
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(String financialAccount) throws StripeException {
-    return updateFeatures(
-        financialAccount, (FinancialAccountUpdateFeaturesParams) null, (RequestOptions) null);
-  }
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(
-      String financialAccount, FinancialAccountUpdateFeaturesParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s/features",
-            ApiResource.urlEncodeId(financialAccount));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            FinancialAccountFeatures.class,
-            options,
-            ApiMode.V1);
-  }
-  /** Retrieves Features information associated with the FinancialAccount. */
-  public FinancialAccountFeatures retrieveFeatures(
-      String financialAccount, FinancialAccountRetrieveFeaturesParams params)
-      throws StripeException {
-    return retrieveFeatures(financialAccount, params, (RequestOptions) null);
-  }
-  /** Retrieves Features information associated with the FinancialAccount. */
-  public FinancialAccountFeatures retrieveFeatures(String financialAccount, RequestOptions options)
-      throws StripeException {
-    return retrieveFeatures(
-        financialAccount, (FinancialAccountRetrieveFeaturesParams) null, options);
-  }
-  /** Retrieves Features information associated with the FinancialAccount. */
-  public FinancialAccountFeatures retrieveFeatures(String financialAccount) throws StripeException {
-    return retrieveFeatures(
-        financialAccount, (FinancialAccountRetrieveFeaturesParams) null, (RequestOptions) null);
-  }
-  /** Retrieves Features information associated with the FinancialAccount. */
-  public FinancialAccountFeatures retrieveFeatures(
-      String financialAccount,
-      FinancialAccountRetrieveFeaturesParams params,
-      RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s/features",
-            ApiResource.urlEncodeId(financialAccount));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            FinancialAccountFeatures.class,
-            options,
-            ApiMode.V1);
+
+  public com.stripe.service.treasury.FinancialAccountFeaturesService features() {
+    return new com.stripe.service.treasury.FinancialAccountFeaturesService(
+        this.getResponseGetter());
   }
 }

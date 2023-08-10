@@ -4,7 +4,6 @@ package com.stripe.service;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Invoice;
-import com.stripe.model.InvoiceLineItem;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiMode;
@@ -17,7 +16,6 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
-import com.stripe.param.InvoiceListUpcomingLinesParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
 import com.stripe.param.InvoicePayParams;
 import com.stripe.param.InvoiceRetrieveParams;
@@ -332,50 +330,6 @@ public final class InvoiceService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> listUpcomingLines(InvoiceListUpcomingLinesParams params)
-      throws StripeException {
-    return listUpcomingLines(params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> listUpcomingLines(RequestOptions options)
-      throws StripeException {
-    return listUpcomingLines((InvoiceListUpcomingLinesParams) null, options);
-  }
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> listUpcomingLines() throws StripeException {
-    return listUpcomingLines((InvoiceListUpcomingLinesParams) null, (RequestOptions) null);
-  }
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> listUpcomingLines(
-      InvoiceListUpcomingLinesParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/invoices/upcoming/lines";
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType(),
-            options,
-            ApiMode.V1);
-  }
-  /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
    * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
@@ -648,7 +602,11 @@ public final class InvoiceService extends ApiService {
             ApiMode.V1);
   }
 
-  public com.stripe.service.InvoiceLineItemService invoiceLineItems() {
+  public com.stripe.service.InvoiceLineItemService lineItems() {
     return new com.stripe.service.InvoiceLineItemService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.InvoiceUpcomingLinesService upcomingLines() {
+    return new com.stripe.service.InvoiceUpcomingLinesService(this.getResponseGetter());
   }
 }

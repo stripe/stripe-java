@@ -12,7 +12,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
+public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   /** Settings for automatic tax lookup for this invoice preview. */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
@@ -83,7 +83,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
 
   /** List of invoice items to add or update in the upcoming invoice preview. */
   @SerializedName("invoice_items")
-  List<InvoiceListUpcomingLinesParams.InvoiceItem> invoiceItems;
+  List<InvoiceUpcomingLinesListParams.InvoiceItem> invoiceItems;
 
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
@@ -155,7 +155,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
 
   /** A list of up to 20 subscription items, each with an attached price. */
   @SerializedName("subscription_items")
-  List<InvoiceListUpcomingLinesParams.SubscriptionItem> subscriptionItems;
+  List<InvoiceUpcomingLinesListParams.SubscriptionItem> subscriptionItems;
 
   /**
    * Determines how to handle <a
@@ -207,7 +207,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
   @SerializedName("subscription_trial_from_plan")
   Boolean subscriptionTrialFromPlan;
 
-  private InvoiceListUpcomingLinesParams(
+  private InvoiceUpcomingLinesListParams(
       AutomaticTax automaticTax,
       String coupon,
       String currency,
@@ -217,7 +217,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
-      List<InvoiceListUpcomingLinesParams.InvoiceItem> invoiceItems,
+      List<InvoiceUpcomingLinesListParams.InvoiceItem> invoiceItems,
       Long limit,
       String schedule,
       String startingAfter,
@@ -227,7 +227,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       Boolean subscriptionCancelAtPeriodEnd,
       Boolean subscriptionCancelNow,
       Object subscriptionDefaultTaxRates,
-      List<InvoiceListUpcomingLinesParams.SubscriptionItem> subscriptionItems,
+      List<InvoiceUpcomingLinesListParams.SubscriptionItem> subscriptionItems,
       SubscriptionProrationBehavior subscriptionProrationBehavior,
       Long subscriptionProrationDate,
       SubscriptionResumeAt subscriptionResumeAt,
@@ -285,7 +285,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<InvoiceListUpcomingLinesParams.InvoiceItem> invoiceItems;
+    private List<InvoiceUpcomingLinesListParams.InvoiceItem> invoiceItems;
 
     private Long limit;
 
@@ -305,7 +305,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
 
     private Object subscriptionDefaultTaxRates;
 
-    private List<InvoiceListUpcomingLinesParams.SubscriptionItem> subscriptionItems;
+    private List<InvoiceUpcomingLinesListParams.SubscriptionItem> subscriptionItems;
 
     private SubscriptionProrationBehavior subscriptionProrationBehavior;
 
@@ -320,8 +320,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     private Boolean subscriptionTrialFromPlan;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public InvoiceListUpcomingLinesParams build() {
-      return new InvoiceListUpcomingLinesParams(
+    public InvoiceUpcomingLinesListParams build() {
+      return new InvoiceUpcomingLinesListParams(
           this.automaticTax,
           this.coupon,
           this.currency,
@@ -351,7 +351,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     }
 
     /** Settings for automatic tax lookup for this invoice preview. */
-    public Builder setAutomaticTax(InvoiceListUpcomingLinesParams.AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(InvoiceUpcomingLinesListParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -393,7 +393,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
      * {@code subscription}, or {@code schedule} must be set.
      */
     public Builder setCustomerDetails(
-        InvoiceListUpcomingLinesParams.CustomerDetails customerDetails) {
+        InvoiceUpcomingLinesListParams.CustomerDetails customerDetails) {
       this.customerDetails = customerDetails;
       return this;
     }
@@ -401,28 +401,28 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceListUpcomingLinesParams#discounts} for the field documentation.
+     * InvoiceUpcomingLinesListParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(InvoiceListUpcomingLinesParams.Discount element) {
+    public Builder addDiscount(InvoiceUpcomingLinesListParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
-        this.discounts = new ArrayList<InvoiceListUpcomingLinesParams.Discount>();
+        this.discounts = new ArrayList<InvoiceUpcomingLinesListParams.Discount>();
       }
-      ((List<InvoiceListUpcomingLinesParams.Discount>) this.discounts).add(element);
+      ((List<InvoiceUpcomingLinesListParams.Discount>) this.discounts).add(element);
       return this;
     }
 
     /**
      * Add all elements to `discounts` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceListUpcomingLinesParams#discounts} for the field documentation.
+     * InvoiceUpcomingLinesListParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<InvoiceListUpcomingLinesParams.Discount> elements) {
+    public Builder addAllDiscount(List<InvoiceUpcomingLinesListParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
-        this.discounts = new ArrayList<InvoiceListUpcomingLinesParams.Discount>();
+        this.discounts = new ArrayList<InvoiceUpcomingLinesListParams.Discount>();
       }
-      ((List<InvoiceListUpcomingLinesParams.Discount>) this.discounts).addAll(elements);
+      ((List<InvoiceUpcomingLinesListParams.Discount>) this.discounts).addAll(elements);
       return this;
     }
 
@@ -445,7 +445,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
      * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
      * invoice for a subscription that hasn't been created, use {@code coupon} instead.
      */
-    public Builder setDiscounts(List<InvoiceListUpcomingLinesParams.Discount> discounts) {
+    public Builder setDiscounts(List<InvoiceUpcomingLinesListParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -464,7 +464,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceListUpcomingLinesParams#expand} for the field documentation.
+     * InvoiceUpcomingLinesListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -477,7 +477,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceListUpcomingLinesParams#expand} for the field documentation.
+     * InvoiceUpcomingLinesListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -490,7 +490,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InvoiceListUpcomingLinesParams#extraParams} for the field documentation.
+     * InvoiceUpcomingLinesListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -503,7 +503,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InvoiceListUpcomingLinesParams#extraParams} for the field documentation.
+     * See {@link InvoiceUpcomingLinesListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -516,9 +516,9 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add an element to `invoiceItems` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceListUpcomingLinesParams#invoiceItems} for the field documentation.
+     * InvoiceUpcomingLinesListParams#invoiceItems} for the field documentation.
      */
-    public Builder addInvoiceItem(InvoiceListUpcomingLinesParams.InvoiceItem element) {
+    public Builder addInvoiceItem(InvoiceUpcomingLinesListParams.InvoiceItem element) {
       if (this.invoiceItems == null) {
         this.invoiceItems = new ArrayList<>();
       }
@@ -529,9 +529,9 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add all elements to `invoiceItems` list. A list is initialized for the first `add/addAll`
      * call, and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceListUpcomingLinesParams#invoiceItems} for the field documentation.
+     * InvoiceUpcomingLinesListParams#invoiceItems} for the field documentation.
      */
-    public Builder addAllInvoiceItem(List<InvoiceListUpcomingLinesParams.InvoiceItem> elements) {
+    public Builder addAllInvoiceItem(List<InvoiceUpcomingLinesListParams.InvoiceItem> elements) {
       if (this.invoiceItems == null) {
         this.invoiceItems = new ArrayList<>();
       }
@@ -588,7 +588,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
      * the value can only be set to {@code now} or {@code unchanged}.
      */
     public Builder setSubscriptionBillingCycleAnchor(
-        InvoiceListUpcomingLinesParams.SubscriptionBillingCycleAnchor
+        InvoiceUpcomingLinesListParams.SubscriptionBillingCycleAnchor
             subscriptionBillingCycleAnchor) {
       this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
       return this;
@@ -641,7 +641,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add an element to `subscriptionDefaultTaxRates` list. A list is initialized for the first
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link InvoiceListUpcomingLinesParams#subscriptionDefaultTaxRates} for the field
+     * {@link InvoiceUpcomingLinesListParams#subscriptionDefaultTaxRates} for the field
      * documentation.
      */
     @SuppressWarnings("unchecked")
@@ -657,7 +657,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add all elements to `subscriptionDefaultTaxRates` list. A list is initialized for the first
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link InvoiceListUpcomingLinesParams#subscriptionDefaultTaxRates} for the field
+     * {@link InvoiceUpcomingLinesListParams#subscriptionDefaultTaxRates} for the field
      * documentation.
      */
     @SuppressWarnings("unchecked")
@@ -693,9 +693,9 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add an element to `subscriptionItems` list. A list is initialized for the first `add/addAll`
      * call, and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceListUpcomingLinesParams#subscriptionItems} for the field documentation.
+     * InvoiceUpcomingLinesListParams#subscriptionItems} for the field documentation.
      */
-    public Builder addSubscriptionItem(InvoiceListUpcomingLinesParams.SubscriptionItem element) {
+    public Builder addSubscriptionItem(InvoiceUpcomingLinesListParams.SubscriptionItem element) {
       if (this.subscriptionItems == null) {
         this.subscriptionItems = new ArrayList<>();
       }
@@ -706,10 +706,10 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
     /**
      * Add all elements to `subscriptionItems` list. A list is initialized for the first
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link InvoiceListUpcomingLinesParams#subscriptionItems} for the field documentation.
+     * {@link InvoiceUpcomingLinesListParams#subscriptionItems} for the field documentation.
      */
     public Builder addAllSubscriptionItem(
-        List<InvoiceListUpcomingLinesParams.SubscriptionItem> elements) {
+        List<InvoiceUpcomingLinesListParams.SubscriptionItem> elements) {
       if (this.subscriptionItems == null) {
         this.subscriptionItems = new ArrayList<>();
       }
@@ -725,7 +725,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
      * The default value is {@code create_prorations}.
      */
     public Builder setSubscriptionProrationBehavior(
-        InvoiceListUpcomingLinesParams.SubscriptionProrationBehavior
+        InvoiceUpcomingLinesListParams.SubscriptionProrationBehavior
             subscriptionProrationBehavior) {
       this.subscriptionProrationBehavior = subscriptionProrationBehavior;
       return this;
@@ -750,7 +750,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
      * the invoice that will be generated if the subscription is resumed.
      */
     public Builder setSubscriptionResumeAt(
-        InvoiceListUpcomingLinesParams.SubscriptionResumeAt subscriptionResumeAt) {
+        InvoiceUpcomingLinesListParams.SubscriptionResumeAt subscriptionResumeAt) {
       this.subscriptionResumeAt = subscriptionResumeAt;
       return this;
     }
@@ -766,7 +766,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
      * trial end. If set, one of {@code subscription_items} or {@code subscription} is required.
      */
     public Builder setSubscriptionTrialEnd(
-        InvoiceListUpcomingLinesParams.SubscriptionTrialEnd subscriptionTrialEnd) {
+        InvoiceUpcomingLinesListParams.SubscriptionTrialEnd subscriptionTrialEnd) {
       this.subscriptionTrialEnd = subscriptionTrialEnd;
       return this;
     }
@@ -828,8 +828,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceListUpcomingLinesParams.AutomaticTax build() {
-        return new InvoiceListUpcomingLinesParams.AutomaticTax(this.enabled, this.extraParams);
+      public InvoiceUpcomingLinesListParams.AutomaticTax build() {
+        return new InvoiceUpcomingLinesListParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -846,7 +846,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceListUpcomingLinesParams.AutomaticTax#extraParams} for the field documentation.
+       * InvoiceUpcomingLinesListParams.AutomaticTax#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -859,7 +859,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceListUpcomingLinesParams.AutomaticTax#extraParams} for the field
+       * See {@link InvoiceUpcomingLinesListParams.AutomaticTax#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -901,7 +901,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
 
     /** The customer's tax IDs. */
     @SerializedName("tax_ids")
-    List<InvoiceListUpcomingLinesParams.CustomerDetails.TaxId> taxIds;
+    List<InvoiceUpcomingLinesListParams.CustomerDetails.TaxId> taxIds;
 
     private CustomerDetails(
         Object address,
@@ -909,7 +909,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         Object shipping,
         Tax tax,
         ApiRequestParams.EnumParam taxExempt,
-        List<InvoiceListUpcomingLinesParams.CustomerDetails.TaxId> taxIds) {
+        List<InvoiceUpcomingLinesListParams.CustomerDetails.TaxId> taxIds) {
       this.address = address;
       this.extraParams = extraParams;
       this.shipping = shipping;
@@ -933,16 +933,16 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
 
       private ApiRequestParams.EnumParam taxExempt;
 
-      private List<InvoiceListUpcomingLinesParams.CustomerDetails.TaxId> taxIds;
+      private List<InvoiceUpcomingLinesListParams.CustomerDetails.TaxId> taxIds;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceListUpcomingLinesParams.CustomerDetails build() {
-        return new InvoiceListUpcomingLinesParams.CustomerDetails(
+      public InvoiceUpcomingLinesListParams.CustomerDetails build() {
+        return new InvoiceUpcomingLinesListParams.CustomerDetails(
             this.address, this.extraParams, this.shipping, this.tax, this.taxExempt, this.taxIds);
       }
 
       /** The customer's address. */
-      public Builder setAddress(InvoiceListUpcomingLinesParams.CustomerDetails.Address address) {
+      public Builder setAddress(InvoiceUpcomingLinesListParams.CustomerDetails.Address address) {
         this.address = address;
         return this;
       }
@@ -956,7 +956,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceListUpcomingLinesParams.CustomerDetails#extraParams} for the field documentation.
+       * InvoiceUpcomingLinesListParams.CustomerDetails#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -969,7 +969,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceListUpcomingLinesParams.CustomerDetails#extraParams} for the field
+       * See {@link InvoiceUpcomingLinesListParams.CustomerDetails#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -981,7 +981,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       }
 
       /** The customer's shipping information. Appears on invoices emailed to this customer. */
-      public Builder setShipping(InvoiceListUpcomingLinesParams.CustomerDetails.Shipping shipping) {
+      public Builder setShipping(InvoiceUpcomingLinesListParams.CustomerDetails.Shipping shipping) {
         this.shipping = shipping;
         return this;
       }
@@ -993,14 +993,14 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       }
 
       /** Tax details about the customer. */
-      public Builder setTax(InvoiceListUpcomingLinesParams.CustomerDetails.Tax tax) {
+      public Builder setTax(InvoiceUpcomingLinesListParams.CustomerDetails.Tax tax) {
         this.tax = tax;
         return this;
       }
 
       /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
       public Builder setTaxExempt(
-          InvoiceListUpcomingLinesParams.CustomerDetails.TaxExempt taxExempt) {
+          InvoiceUpcomingLinesListParams.CustomerDetails.TaxExempt taxExempt) {
         this.taxExempt = taxExempt;
         return this;
       }
@@ -1014,9 +1014,9 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add an element to `taxIds` list. A list is initialized for the first `add/addAll` call, and
        * subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.CustomerDetails#taxIds} for the field documentation.
+       * InvoiceUpcomingLinesListParams.CustomerDetails#taxIds} for the field documentation.
        */
-      public Builder addTaxId(InvoiceListUpcomingLinesParams.CustomerDetails.TaxId element) {
+      public Builder addTaxId(InvoiceUpcomingLinesListParams.CustomerDetails.TaxId element) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -1027,10 +1027,10 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all elements to `taxIds` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.CustomerDetails#taxIds} for the field documentation.
+       * InvoiceUpcomingLinesListParams.CustomerDetails#taxIds} for the field documentation.
        */
       public Builder addAllTaxId(
-          List<InvoiceListUpcomingLinesParams.CustomerDetails.TaxId> elements) {
+          List<InvoiceUpcomingLinesListParams.CustomerDetails.TaxId> elements) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -1114,8 +1114,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.CustomerDetails.Address build() {
-          return new InvoiceListUpcomingLinesParams.CustomerDetails.Address(
+        public InvoiceUpcomingLinesListParams.CustomerDetails.Address build() {
+          return new InvoiceUpcomingLinesListParams.CustomerDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -1143,7 +1143,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.Address#extraParams} for
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.Address#extraParams} for
          * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -1157,7 +1157,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.Address#extraParams} for
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.Address#extraParams} for
          * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1239,14 +1239,14 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private String phone;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.CustomerDetails.Shipping build() {
-          return new InvoiceListUpcomingLinesParams.CustomerDetails.Shipping(
+        public InvoiceUpcomingLinesListParams.CustomerDetails.Shipping build() {
+          return new InvoiceUpcomingLinesListParams.CustomerDetails.Shipping(
               this.address, this.extraParams, this.name, this.phone);
         }
 
         /** <strong>Required.</strong> Customer shipping address. */
         public Builder setAddress(
-            InvoiceListUpcomingLinesParams.CustomerDetails.Shipping.Address address) {
+            InvoiceUpcomingLinesListParams.CustomerDetails.Shipping.Address address) {
           this.address = address;
           return this;
         }
@@ -1254,7 +1254,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.Shipping#extraParams} for
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.Shipping#extraParams} for
          * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -1268,7 +1268,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.Shipping#extraParams} for
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.Shipping#extraParams} for
          * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1368,8 +1368,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public InvoiceListUpcomingLinesParams.CustomerDetails.Shipping.Address build() {
-            return new InvoiceListUpcomingLinesParams.CustomerDetails.Shipping.Address(
+          public InvoiceUpcomingLinesListParams.CustomerDetails.Shipping.Address build() {
+            return new InvoiceUpcomingLinesListParams.CustomerDetails.Shipping.Address(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -1398,7 +1398,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * InvoiceListUpcomingLinesParams.CustomerDetails.Shipping.Address#extraParams} for the
+           * InvoiceUpcomingLinesListParams.CustomerDetails.Shipping.Address#extraParams} for the
            * field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
@@ -1413,7 +1413,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * InvoiceListUpcomingLinesParams.CustomerDetails.Shipping.Address#extraParams} for the
+           * InvoiceUpcomingLinesListParams.CustomerDetails.Shipping.Address#extraParams} for the
            * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1486,15 +1486,15 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private Object ipAddress;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.CustomerDetails.Tax build() {
-          return new InvoiceListUpcomingLinesParams.CustomerDetails.Tax(
+        public InvoiceUpcomingLinesListParams.CustomerDetails.Tax build() {
+          return new InvoiceUpcomingLinesListParams.CustomerDetails.Tax(
               this.extraParams, this.ipAddress);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.Tax#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.Tax#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -1508,7 +1508,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.Tax#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.Tax#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1594,15 +1594,15 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private String value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.CustomerDetails.TaxId build() {
-          return new InvoiceListUpcomingLinesParams.CustomerDetails.TaxId(
+        public InvoiceUpcomingLinesListParams.CustomerDetails.TaxId build() {
+          return new InvoiceUpcomingLinesListParams.CustomerDetails.TaxId(
               this.extraParams, this.type, this.value);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.TaxId#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.TaxId#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -1616,7 +1616,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.CustomerDetails.TaxId#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.CustomerDetails.TaxId#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1642,7 +1642,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
          * si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat},
          * {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, or {@code za_vat}
          */
-        public Builder setType(InvoiceListUpcomingLinesParams.CustomerDetails.TaxId.Type type) {
+        public Builder setType(InvoiceUpcomingLinesListParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
           return this;
         }
@@ -1918,8 +1918,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceListUpcomingLinesParams.Discount build() {
-        return new InvoiceListUpcomingLinesParams.Discount(
+      public InvoiceUpcomingLinesListParams.Discount build() {
+        return new InvoiceUpcomingLinesListParams.Discount(
             this.coupon, this.discount, this.extraParams);
       }
 
@@ -1938,7 +1938,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceListUpcomingLinesParams.Discount#extraParams} for the field documentation.
+       * InvoiceUpcomingLinesListParams.Discount#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -1951,7 +1951,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceListUpcomingLinesParams.Discount#extraParams} for the field
+       * See {@link InvoiceUpcomingLinesListParams.Discount#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2162,8 +2162,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       private BigDecimal unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceListUpcomingLinesParams.InvoiceItem build() {
-        return new InvoiceListUpcomingLinesParams.InvoiceItem(
+      public InvoiceUpcomingLinesListParams.InvoiceItem build() {
+        return new InvoiceUpcomingLinesListParams.InvoiceItem(
             this.amount,
             this.currency,
             this.description,
@@ -2220,29 +2220,29 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.InvoiceItem#discounts} for the field documentation.
+       * InvoiceUpcomingLinesListParams.InvoiceItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addDiscount(InvoiceListUpcomingLinesParams.InvoiceItem.Discount element) {
+      public Builder addDiscount(InvoiceUpcomingLinesListParams.InvoiceItem.Discount element) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
-          this.discounts = new ArrayList<InvoiceListUpcomingLinesParams.InvoiceItem.Discount>();
+          this.discounts = new ArrayList<InvoiceUpcomingLinesListParams.InvoiceItem.Discount>();
         }
-        ((List<InvoiceListUpcomingLinesParams.InvoiceItem.Discount>) this.discounts).add(element);
+        ((List<InvoiceUpcomingLinesListParams.InvoiceItem.Discount>) this.discounts).add(element);
         return this;
       }
 
       /**
        * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.InvoiceItem#discounts} for the field documentation.
+       * InvoiceUpcomingLinesListParams.InvoiceItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder addAllDiscount(
-          List<InvoiceListUpcomingLinesParams.InvoiceItem.Discount> elements) {
+          List<InvoiceUpcomingLinesListParams.InvoiceItem.Discount> elements) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
-          this.discounts = new ArrayList<InvoiceListUpcomingLinesParams.InvoiceItem.Discount>();
+          this.discounts = new ArrayList<InvoiceUpcomingLinesListParams.InvoiceItem.Discount>();
         }
-        ((List<InvoiceListUpcomingLinesParams.InvoiceItem.Discount>) this.discounts)
+        ((List<InvoiceUpcomingLinesListParams.InvoiceItem.Discount>) this.discounts)
             .addAll(elements);
         return this;
       }
@@ -2255,7 +2255,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
 
       /** The coupons to redeem into discounts for the invoice item in the preview. */
       public Builder setDiscounts(
-          List<InvoiceListUpcomingLinesParams.InvoiceItem.Discount> discounts) {
+          List<InvoiceUpcomingLinesListParams.InvoiceItem.Discount> discounts) {
         this.discounts = discounts;
         return this;
       }
@@ -2263,7 +2263,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceListUpcomingLinesParams.InvoiceItem#extraParams} for the field documentation.
+       * InvoiceUpcomingLinesListParams.InvoiceItem#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -2276,7 +2276,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceListUpcomingLinesParams.InvoiceItem#extraParams} for the field
+       * See {@link InvoiceUpcomingLinesListParams.InvoiceItem#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2299,7 +2299,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceListUpcomingLinesParams.InvoiceItem#metadata} for the field documentation.
+       * InvoiceUpcomingLinesListParams.InvoiceItem#metadata} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder putMetadata(String key, String value) {
@@ -2313,7 +2313,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceListUpcomingLinesParams.InvoiceItem#metadata} for the field
+       * See {@link InvoiceUpcomingLinesListParams.InvoiceItem#metadata} for the field
        * documentation.
        */
       @SuppressWarnings("unchecked")
@@ -2355,7 +2355,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
        * href="https://stripe.com/docs/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
        * Recognition documentation</a> for details.
        */
-      public Builder setPeriod(InvoiceListUpcomingLinesParams.InvoiceItem.Period period) {
+      public Builder setPeriod(InvoiceUpcomingLinesListParams.InvoiceItem.Period period) {
         this.period = period;
         return this;
       }
@@ -2370,7 +2370,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline.
        */
-      public Builder setPriceData(InvoiceListUpcomingLinesParams.InvoiceItem.PriceData priceData) {
+      public Builder setPriceData(InvoiceUpcomingLinesListParams.InvoiceItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -2390,7 +2390,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
        * exclusive}, it cannot be changed.
        */
       public Builder setTaxBehavior(
-          InvoiceListUpcomingLinesParams.InvoiceItem.TaxBehavior taxBehavior) {
+          InvoiceUpcomingLinesListParams.InvoiceItem.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }
@@ -2410,7 +2410,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.InvoiceItem#taxRates} for the field documentation.
+       * InvoiceUpcomingLinesListParams.InvoiceItem#taxRates} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder addTaxRate(String element) {
@@ -2424,7 +2424,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.InvoiceItem#taxRates} for the field documentation.
+       * InvoiceUpcomingLinesListParams.InvoiceItem#taxRates} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder addAllTaxRate(List<String> elements) {
@@ -2512,8 +2512,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.InvoiceItem.Discount build() {
-          return new InvoiceListUpcomingLinesParams.InvoiceItem.Discount(
+        public InvoiceUpcomingLinesListParams.InvoiceItem.Discount build() {
+          return new InvoiceUpcomingLinesListParams.InvoiceItem.Discount(
               this.coupon, this.discount, this.extraParams);
         }
 
@@ -2532,7 +2532,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.InvoiceItem.Discount#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.InvoiceItem.Discount#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -2546,7 +2546,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.InvoiceItem.Discount#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.InvoiceItem.Discount#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2599,8 +2599,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private Long start;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.InvoiceItem.Period build() {
-          return new InvoiceListUpcomingLinesParams.InvoiceItem.Period(
+        public InvoiceUpcomingLinesListParams.InvoiceItem.Period build() {
+          return new InvoiceUpcomingLinesListParams.InvoiceItem.Period(
               this.end, this.extraParams, this.start);
         }
 
@@ -2616,7 +2616,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.InvoiceItem.Period#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.InvoiceItem.Period#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -2630,7 +2630,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.InvoiceItem.Period#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.InvoiceItem.Period#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2731,8 +2731,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.InvoiceItem.PriceData build() {
-          return new InvoiceListUpcomingLinesParams.InvoiceItem.PriceData(
+        public InvoiceUpcomingLinesListParams.InvoiceItem.PriceData build() {
+          return new InvoiceUpcomingLinesListParams.InvoiceItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -2754,7 +2754,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.InvoiceItem.PriceData#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.InvoiceItem.PriceData#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -2768,7 +2768,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.InvoiceItem.PriceData#extraParams} for the
+         * map. See {@link InvoiceUpcomingLinesListParams.InvoiceItem.PriceData#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2794,7 +2794,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
          * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
-            InvoiceListUpcomingLinesParams.InvoiceItem.PriceData.TaxBehavior taxBehavior) {
+            InvoiceUpcomingLinesListParams.InvoiceItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -2984,8 +2984,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceListUpcomingLinesParams.SubscriptionItem build() {
-        return new InvoiceListUpcomingLinesParams.SubscriptionItem(
+      public InvoiceUpcomingLinesListParams.SubscriptionItem build() {
+        return new InvoiceUpcomingLinesListParams.SubscriptionItem(
             this.billingThresholds,
             this.clearUsage,
             this.deleted,
@@ -3005,7 +3005,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
        * thresholds.
        */
       public Builder setBillingThresholds(
-          InvoiceListUpcomingLinesParams.SubscriptionItem.BillingThresholds billingThresholds) {
+          InvoiceUpcomingLinesListParams.SubscriptionItem.BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -3038,7 +3038,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceListUpcomingLinesParams.SubscriptionItem#extraParams} for the field documentation.
+       * InvoiceUpcomingLinesListParams.SubscriptionItem#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -3051,7 +3051,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceListUpcomingLinesParams.SubscriptionItem#extraParams} for the field
+       * See {@link InvoiceUpcomingLinesListParams.SubscriptionItem#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -3071,7 +3071,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceListUpcomingLinesParams.SubscriptionItem#metadata} for the field documentation.
+       * InvoiceUpcomingLinesListParams.SubscriptionItem#metadata} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder putMetadata(String key, String value) {
@@ -3085,7 +3085,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceListUpcomingLinesParams.SubscriptionItem#metadata} for the field
+       * See {@link InvoiceUpcomingLinesListParams.SubscriptionItem#metadata} for the field
        * documentation.
        */
       @SuppressWarnings("unchecked")
@@ -3139,7 +3139,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
        * inline.
        */
       public Builder setPriceData(
-          InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData priceData) {
+          InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -3153,7 +3153,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.SubscriptionItem#taxRates} for the field documentation.
+       * InvoiceUpcomingLinesListParams.SubscriptionItem#taxRates} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder addTaxRate(String element) {
@@ -3167,7 +3167,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
       /**
        * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * InvoiceListUpcomingLinesParams.SubscriptionItem#taxRates} for the field documentation.
+       * InvoiceUpcomingLinesListParams.SubscriptionItem#taxRates} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder addAllTaxRate(List<String> elements) {
@@ -3238,8 +3238,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private Long usageGte;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.SubscriptionItem.BillingThresholds build() {
-          return new InvoiceListUpcomingLinesParams.SubscriptionItem.BillingThresholds(
+        public InvoiceUpcomingLinesListParams.SubscriptionItem.BillingThresholds build() {
+          return new InvoiceUpcomingLinesListParams.SubscriptionItem.BillingThresholds(
               this.extraParams, this.usageGte);
         }
 
@@ -3247,7 +3247,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link
-         * InvoiceListUpcomingLinesParams.SubscriptionItem.BillingThresholds#extraParams} for the
+         * InvoiceUpcomingLinesListParams.SubscriptionItem.BillingThresholds#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -3262,7 +3262,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link
-         * InvoiceListUpcomingLinesParams.SubscriptionItem.BillingThresholds#extraParams} for the
+         * InvoiceUpcomingLinesListParams.SubscriptionItem.BillingThresholds#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -3379,8 +3379,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData build() {
-          return new InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData(
+        public InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData build() {
+          return new InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -3403,7 +3403,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData#extraParams}
+         * map. See {@link InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData#extraParams}
          * for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -3417,7 +3417,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData#extraParams}
+         * map. See {@link InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData#extraParams}
          * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -3439,7 +3439,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
          * and {@code interval_count}.
          */
         public Builder setRecurring(
-            InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData.Recurring recurring) {
+            InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData.Recurring recurring) {
           this.recurring = recurring;
           return this;
         }
@@ -3453,7 +3453,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
          * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
-            InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData.TaxBehavior taxBehavior) {
+            InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -3523,8 +3523,8 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
           private Long intervalCount;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData.Recurring build() {
-            return new InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData.Recurring(
+          public InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData.Recurring build() {
+            return new InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData.Recurring(
                 this.extraParams, this.interval, this.intervalCount);
           }
 
@@ -3532,7 +3532,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData.Recurring#extraParams} for
+           * InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData.Recurring#extraParams} for
            * the field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
@@ -3547,7 +3547,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData.Recurring#extraParams} for
+           * InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData.Recurring#extraParams} for
            * the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
@@ -3563,7 +3563,7 @@ public class InvoiceListUpcomingLinesParams extends ApiRequestParams {
            * week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
-              InvoiceListUpcomingLinesParams.SubscriptionItem.PriceData.Recurring.Interval
+              InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData.Recurring.Interval
                   interval) {
             this.interval = interval;
             return this;

@@ -1,11 +1,8 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.tax;
 
-import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
-import com.stripe.model.StripeCollection;
 import com.stripe.model.tax.Transaction;
-import com.stripe.model.tax.TransactionLineItem;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -15,7 +12,6 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.TransactionCreateFromCalculationParams;
 import com.stripe.param.tax.TransactionCreateReversalParams;
-import com.stripe.param.tax.TransactionListLineItemsParams;
 import com.stripe.param.tax.TransactionRetrieveParams;
 
 public final class TransactionService extends ApiService {
@@ -89,35 +85,8 @@ public final class TransactionService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public StripeCollection<TransactionLineItem> listLineItems(
-      String transaction, TransactionListLineItemsParams params) throws StripeException {
-    return listLineItems(transaction, params, (RequestOptions) null);
-  }
-  /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public StripeCollection<TransactionLineItem> listLineItems(
-      String transaction, RequestOptions options) throws StripeException {
-    return listLineItems(transaction, (TransactionListLineItemsParams) null, options);
-  }
-  /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public StripeCollection<TransactionLineItem> listLineItems(String transaction)
-      throws StripeException {
-    return listLineItems(transaction, (TransactionListLineItemsParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public StripeCollection<TransactionLineItem> listLineItems(
-      String transaction, TransactionListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<TransactionLineItem>>() {}.getType(),
-            options,
-            ApiMode.V1);
+
+  public com.stripe.service.tax.TransactionLineItemService lineItems() {
+    return new com.stripe.service.tax.TransactionLineItemService(this.getResponseGetter());
   }
 }

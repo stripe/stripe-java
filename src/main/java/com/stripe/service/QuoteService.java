@@ -3,7 +3,6 @@ package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
-import com.stripe.model.LineItem;
 import com.stripe.model.Quote;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
@@ -17,8 +16,6 @@ import com.stripe.param.QuoteAcceptParams;
 import com.stripe.param.QuoteCancelParams;
 import com.stripe.param.QuoteCreateParams;
 import com.stripe.param.QuoteFinalizeQuoteParams;
-import com.stripe.param.QuoteListComputedUpfrontLineItemsParams;
-import com.stripe.param.QuoteListLineItemsParams;
 import com.stripe.param.QuoteListParams;
 import com.stripe.param.QuotePdfParams;
 import com.stripe.param.QuoteRetrieveParams;
@@ -227,104 +224,6 @@ public final class QuoteService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String quote, QuoteListLineItemsParams params)
-      throws StripeException {
-    return listLineItems(quote, params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String quote, RequestOptions options)
-      throws StripeException {
-    return listLineItems(quote, (QuoteListLineItemsParams) null, options);
-  }
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String quote) throws StripeException {
-    return listLineItems(quote, (QuoteListLineItemsParams) null, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(
-      String quote, QuoteListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(quote));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<LineItem>>() {}.getType(),
-            options,
-            ApiMode.V1);
-  }
-  /**
-   * When retrieving a quote, there is an includable <a
-   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
-   * property containing the first handful of those items. There is also a URL where you can
-   * retrieve the full (paginated) list of upfront line items.
-   */
-  public StripeCollection<LineItem> listComputedUpfrontLineItems(
-      String quote, QuoteListComputedUpfrontLineItemsParams params) throws StripeException {
-    return listComputedUpfrontLineItems(quote, params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a quote, there is an includable <a
-   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
-   * property containing the first handful of those items. There is also a URL where you can
-   * retrieve the full (paginated) list of upfront line items.
-   */
-  public StripeCollection<LineItem> listComputedUpfrontLineItems(
-      String quote, RequestOptions options) throws StripeException {
-    return listComputedUpfrontLineItems(
-        quote, (QuoteListComputedUpfrontLineItemsParams) null, options);
-  }
-  /**
-   * When retrieving a quote, there is an includable <a
-   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
-   * property containing the first handful of those items. There is also a URL where you can
-   * retrieve the full (paginated) list of upfront line items.
-   */
-  public StripeCollection<LineItem> listComputedUpfrontLineItems(String quote)
-      throws StripeException {
-    return listComputedUpfrontLineItems(
-        quote, (QuoteListComputedUpfrontLineItemsParams) null, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a quote, there is an includable <a
-   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
-   * property containing the first handful of those items. There is also a URL where you can
-   * retrieve the full (paginated) list of upfront line items.
-   */
-  public StripeCollection<LineItem> listComputedUpfrontLineItems(
-      String quote, QuoteListComputedUpfrontLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/quotes/%s/computed_upfront_line_items", ApiResource.urlEncodeId(quote));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<LineItem>>() {}.getType(),
-            options,
-            ApiMode.V1);
-  }
   /** Download the PDF for a finalized quote. */
   public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
     return pdf(quote, params, (RequestOptions) null);
@@ -349,5 +248,13 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+  }
+
+  public com.stripe.service.QuoteComputedUpfrontLineItemsService computedUpfrontLineItems() {
+    return new com.stripe.service.QuoteComputedUpfrontLineItemsService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.QuoteLineItemService lineItems() {
+    return new com.stripe.service.QuoteLineItemService(this.getResponseGetter());
   }
 }

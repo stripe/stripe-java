@@ -3,7 +3,6 @@ package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
-import com.stripe.model.LineItem;
 import com.stripe.model.PaymentLink;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
@@ -14,7 +13,6 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentLinkCreateParams;
-import com.stripe.param.PaymentLinkListLineItemsParams;
 import com.stripe.param.PaymentLinkListParams;
 import com.stripe.param.PaymentLinkRetrieveParams;
 import com.stripe.param.PaymentLinkUpdateParams;
@@ -124,50 +122,8 @@ public final class PaymentLinkService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /**
-   * When retrieving a payment link, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(
-      String paymentLink, PaymentLinkListLineItemsParams params) throws StripeException {
-    return listLineItems(paymentLink, params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a payment link, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String paymentLink, RequestOptions options)
-      throws StripeException {
-    return listLineItems(paymentLink, (PaymentLinkListLineItemsParams) null, options);
-  }
-  /**
-   * When retrieving a payment link, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(String paymentLink) throws StripeException {
-    return listLineItems(paymentLink, (PaymentLinkListLineItemsParams) null, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a payment link, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public StripeCollection<LineItem> listLineItems(
-      String paymentLink, PaymentLinkListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/payment_links/%s/line_items", ApiResource.urlEncodeId(paymentLink));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<LineItem>>() {}.getType(),
-            options,
-            ApiMode.V1);
+
+  public com.stripe.service.PaymentLinkLineItemService lineItems() {
+    return new com.stripe.service.PaymentLinkLineItemService(this.getResponseGetter());
   }
 }

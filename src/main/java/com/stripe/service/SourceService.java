@@ -1,12 +1,9 @@
 // File generated from our OpenAPI spec
 package com.stripe.service;
 
-import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentSource;
 import com.stripe.model.Source;
-import com.stripe.model.SourceTransaction;
-import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -16,7 +13,6 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.SourceCreateParams;
 import com.stripe.param.SourceDetachParams;
-import com.stripe.param.SourceListSourceTransactionsParams;
 import com.stripe.param.SourceRetrieveParams;
 import com.stripe.param.SourceUpdateParams;
 import com.stripe.param.SourceVerifyParams;
@@ -193,36 +189,8 @@ public final class SourceService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** List source transactions for a given source. */
-  public StripeCollection<SourceTransaction> listSourceTransactions(
-      String source, SourceListSourceTransactionsParams params) throws StripeException {
-    return listSourceTransactions(source, params, (RequestOptions) null);
-  }
-  /** List source transactions for a given source. */
-  public StripeCollection<SourceTransaction> listSourceTransactions(
-      String source, RequestOptions options) throws StripeException {
-    return listSourceTransactions(source, (SourceListSourceTransactionsParams) null, options);
-  }
-  /** List source transactions for a given source. */
-  public StripeCollection<SourceTransaction> listSourceTransactions(String source)
-      throws StripeException {
-    return listSourceTransactions(
-        source, (SourceListSourceTransactionsParams) null, (RequestOptions) null);
-  }
-  /** List source transactions for a given source. */
-  public StripeCollection<SourceTransaction> listSourceTransactions(
-      String source, SourceListSourceTransactionsParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(source));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<SourceTransaction>>() {}.getType(),
-            options,
-            ApiMode.V1);
+
+  public com.stripe.service.SourceTransactionService transactions() {
+    return new com.stripe.service.SourceTransactionService(this.getResponseGetter());
   }
 }
