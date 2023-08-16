@@ -127,11 +127,10 @@ public class Dispute extends ApiResource
   /**
    * Current status of dispute. Possible values are {@code warning_needs_response}, {@code
    * warning_under_review}, {@code warning_closed}, {@code needs_response}, {@code under_review},
-   * {@code charge_refunded}, {@code won}, or {@code lost}.
+   * {@code won}, or {@code lost}.
    *
-   * <p>One of {@code charge_refunded}, {@code lost}, {@code needs_response}, {@code under_review},
-   * {@code warning_closed}, {@code warning_needs_response}, {@code warning_under_review}, or {@code
-   * won}.
+   * <p>One of {@code lost}, {@code needs_response}, {@code under_review}, {@code warning_closed},
+   * {@code warning_needs_response}, {@code warning_under_review}, or {@code won}.
    */
   @SerializedName("status")
   String status;

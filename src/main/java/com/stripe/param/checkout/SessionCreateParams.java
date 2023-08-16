@@ -267,10 +267,6 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("shipping_options")
   List<SessionCreateParams.ShippingOption> shippingOptions;
 
-  /** [Deprecated] The shipping rate to apply to this Session. Only up to one may be specified. */
-  @SerializedName("shipping_rates")
-  List<String> shippingRates;
-
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
@@ -333,7 +329,6 @@ public class SessionCreateParams extends ApiRequestParams {
       SetupIntentData setupIntentData,
       ShippingAddressCollection shippingAddressCollection,
       List<SessionCreateParams.ShippingOption> shippingOptions,
-      List<String> shippingRates,
       SubmitType submitType,
       SubscriptionData subscriptionData,
       String successUrl,
@@ -369,7 +364,6 @@ public class SessionCreateParams extends ApiRequestParams {
     this.setupIntentData = setupIntentData;
     this.shippingAddressCollection = shippingAddressCollection;
     this.shippingOptions = shippingOptions;
-    this.shippingRates = shippingRates;
     this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
@@ -443,8 +437,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private List<SessionCreateParams.ShippingOption> shippingOptions;
 
-    private List<String> shippingRates;
-
     private SubmitType submitType;
 
     private SubscriptionData subscriptionData;
@@ -487,7 +479,6 @@ public class SessionCreateParams extends ApiRequestParams {
           this.setupIntentData,
           this.shippingAddressCollection,
           this.shippingOptions,
-          this.shippingRates,
           this.submitType,
           this.subscriptionData,
           this.successUrl,
@@ -934,32 +925,6 @@ public class SessionCreateParams extends ApiRequestParams {
         this.shippingOptions = new ArrayList<>();
       }
       this.shippingOptions.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `shippingRates` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#shippingRates} for the field documentation.
-     */
-    public Builder addShippingRate(String element) {
-      if (this.shippingRates == null) {
-        this.shippingRates = new ArrayList<>();
-      }
-      this.shippingRates.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `shippingRates` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#shippingRates} for the field documentation.
-     */
-    public Builder addAllShippingRate(List<String> elements) {
-      if (this.shippingRates == null) {
-        this.shippingRates = new ArrayList<>();
-      }
-      this.shippingRates.addAll(elements);
       return this;
     }
 
@@ -11777,13 +11742,6 @@ public class SessionCreateParams extends ApiRequestParams {
     Long billingCycleAnchor;
 
     /**
-     * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-     * only affect invoices created for that particular subscription.
-     */
-    @SerializedName("coupon")
-    String coupon;
-
-    /**
      * The tax rates that will apply to any subscription item that does not have {@code tax_rates}
      * set. Invoices created will have their {@code default_tax_rates} populated from the
      * subscription.
@@ -11843,14 +11801,6 @@ public class SessionCreateParams extends ApiRequestParams {
     Long trialEnd;
 
     /**
-     * Indicates if a plan’s {@code trial_period_days} should be applied to the subscription.
-     * Setting {@code trial_end} on {@code subscription_data} is preferred. Defaults to {@code
-     * false}.
-     */
-    @SerializedName("trial_from_plan")
-    Boolean trialFromPlan;
-
-    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time. Has to be at least 1.
      */
@@ -11864,7 +11814,6 @@ public class SessionCreateParams extends ApiRequestParams {
     private SubscriptionData(
         BigDecimal applicationFeePercent,
         Long billingCycleAnchor,
-        String coupon,
         List<String> defaultTaxRates,
         String description,
         Map<String, Object> extraParams,
@@ -11873,12 +11822,10 @@ public class SessionCreateParams extends ApiRequestParams {
         ProrationBehavior prorationBehavior,
         TransferData transferData,
         Long trialEnd,
-        Boolean trialFromPlan,
         Long trialPeriodDays,
         TrialSettings trialSettings) {
       this.applicationFeePercent = applicationFeePercent;
       this.billingCycleAnchor = billingCycleAnchor;
-      this.coupon = coupon;
       this.defaultTaxRates = defaultTaxRates;
       this.description = description;
       this.extraParams = extraParams;
@@ -11887,7 +11834,6 @@ public class SessionCreateParams extends ApiRequestParams {
       this.prorationBehavior = prorationBehavior;
       this.transferData = transferData;
       this.trialEnd = trialEnd;
-      this.trialFromPlan = trialFromPlan;
       this.trialPeriodDays = trialPeriodDays;
       this.trialSettings = trialSettings;
     }
@@ -11900,8 +11846,6 @@ public class SessionCreateParams extends ApiRequestParams {
       private BigDecimal applicationFeePercent;
 
       private Long billingCycleAnchor;
-
-      private String coupon;
 
       private List<String> defaultTaxRates;
 
@@ -11919,8 +11863,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Long trialEnd;
 
-      private Boolean trialFromPlan;
-
       private Long trialPeriodDays;
 
       private TrialSettings trialSettings;
@@ -11930,7 +11872,6 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.SubscriptionData(
             this.applicationFeePercent,
             this.billingCycleAnchor,
-            this.coupon,
             this.defaultTaxRates,
             this.description,
             this.extraParams,
@@ -11939,7 +11880,6 @@ public class SessionCreateParams extends ApiRequestParams {
             this.prorationBehavior,
             this.transferData,
             this.trialEnd,
-            this.trialFromPlan,
             this.trialPeriodDays,
             this.trialSettings);
       }
@@ -11960,15 +11900,6 @@ public class SessionCreateParams extends ApiRequestParams {
       /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
       public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
-        return this;
-      }
-
-      /**
-       * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-       * only affect invoices created for that particular subscription.
-       */
-      public Builder setCoupon(String coupon) {
-        this.coupon = coupon;
         return this;
       }
 
@@ -12092,16 +12023,6 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
-        return this;
-      }
-
-      /**
-       * Indicates if a plan’s {@code trial_period_days} should be applied to the subscription.
-       * Setting {@code trial_end} on {@code subscription_data} is preferred. Defaults to {@code
-       * false}.
-       */
-      public Builder setTrialFromPlan(Boolean trialFromPlan) {
-        this.trialFromPlan = trialFromPlan;
         return this;
       }
 

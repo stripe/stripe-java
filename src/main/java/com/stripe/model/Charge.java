@@ -28,9 +28,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Charge extends ApiResource implements MetadataStore<Charge>, BalanceTransactionSource {
-  @SerializedName("alternate_statement_descriptors")
-  AlternateStatementDescriptors alternateStatementDescriptors;
-
   /**
    * Amount intended to be collected by this payment. A positive integer representing how much to
    * charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
@@ -132,21 +129,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
-
-  /**
-   * ID of an existing, connected Stripe account to transfer funds to if {@code transfer_data} was
-   * specified in the charge request.
-   */
-  @SerializedName("destination")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Account> destination;
-
-  /** Details about the dispute if the charge has been disputed. */
-  @SerializedName("dispute")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Dispute> dispute;
 
   /** Whether the charge has been disputed. */
   @SerializedName("disputed")
@@ -435,42 +417,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code destination} object. */
-  public String getDestination() {
-    return (this.destination != null) ? this.destination.getId() : null;
-  }
-
-  public void setDestination(String id) {
-    this.destination = ApiResource.setExpandableFieldId(id, this.destination);
-  }
-
-  /** Get expanded {@code destination}. */
-  public Account getDestinationObject() {
-    return (this.destination != null) ? this.destination.getExpanded() : null;
-  }
-
-  public void setDestinationObject(Account expandableObject) {
-    this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code dispute} object. */
-  public String getDispute() {
-    return (this.dispute != null) ? this.dispute.getId() : null;
-  }
-
-  public void setDispute(String id) {
-    this.dispute = ApiResource.setExpandableFieldId(id, this.dispute);
-  }
-
-  /** Get expanded {@code dispute}. */
-  public Dispute getDisputeObject() {
-    return (this.dispute != null) ? this.dispute.getExpanded() : null;
-  }
-
-  public void setDisputeObject(Dispute expandableObject) {
-    this.dispute = new ExpandableField<Dispute>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code failureBalanceTransaction} object. */
@@ -926,19 +872,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             options,
             String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AlternateStatementDescriptors extends StripeObject {
-    /** The Kana variation of the descriptor. */
-    @SerializedName("kana")
-    String kana;
-
-    /** The Kanji variation of the descriptor. */
-    @SerializedName("kanji")
-    String kanji;
   }
 
   @Getter
