@@ -105,8 +105,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   PaymentMethodCollection paymentMethodCollection;
 
   /**
-   * The list of payment method types that customers can use. Pass an empty string to enable
-   * automatic payment methods that use your <a
+   * The list of payment method types that customers can use. Pass an empty string to enable dynamic
+   * payment methods that use your <a
    * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
    */
   @SerializedName("payment_method_types")
@@ -463,7 +463,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * The list of payment method types that customers can use. Pass an empty string to enable
-     * automatic payment methods that use your <a
+     * dynamic payment methods that use your <a
      * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
      */
     public Builder setPaymentMethodTypes(EmptyParam paymentMethodTypes) {
@@ -473,7 +473,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * The list of payment method types that customers can use. Pass an empty string to enable
-     * automatic payment methods that use your <a
+     * dynamic payment methods that use your <a
      * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
      */
     public Builder setPaymentMethodTypes(

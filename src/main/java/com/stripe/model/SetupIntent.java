@@ -70,7 +70,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("attach_to_self")
   Boolean attachToSelf;
 
-  /** Settings for automatic payment methods compatible with this Setup Intent. */
+  /** Settings for dynamic payment methods compatible with this Setup Intent. */
   @SerializedName("automatic_payment_methods")
   AutomaticPaymentMethods automaticPaymentMethods;
 
