@@ -58,10 +58,6 @@ public class PriceUpdateParams extends ApiRequestParams {
   @SerializedName("nickname")
   Object nickname;
 
-  /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
-  @SerializedName("recurring")
-  Object recurring;
-
   /**
    * Only required if a <a
    * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
@@ -88,7 +84,6 @@ public class PriceUpdateParams extends ApiRequestParams {
       Object lookupKey,
       Object metadata,
       Object nickname,
-      Object recurring,
       TaxBehavior taxBehavior,
       Boolean transferLookupKey) {
     this.active = active;
@@ -98,7 +93,6 @@ public class PriceUpdateParams extends ApiRequestParams {
     this.lookupKey = lookupKey;
     this.metadata = metadata;
     this.nickname = nickname;
-    this.recurring = recurring;
     this.taxBehavior = taxBehavior;
     this.transferLookupKey = transferLookupKey;
   }
@@ -122,8 +116,6 @@ public class PriceUpdateParams extends ApiRequestParams {
 
     private Object nickname;
 
-    private Object recurring;
-
     private TaxBehavior taxBehavior;
 
     private Boolean transferLookupKey;
@@ -138,7 +130,6 @@ public class PriceUpdateParams extends ApiRequestParams {
           this.lookupKey,
           this.metadata,
           this.nickname,
-          this.recurring,
           this.taxBehavior,
           this.transferLookupKey);
     }
@@ -327,18 +318,6 @@ public class PriceUpdateParams extends ApiRequestParams {
     /** A brief description of the price, hidden from customers. */
     public Builder setNickname(EmptyParam nickname) {
       this.nickname = nickname;
-      return this;
-    }
-
-    /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
-    public Builder setRecurring(PriceUpdateParams.Recurring recurring) {
-      this.recurring = recurring;
-      return this;
-    }
-
-    /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
-    public Builder setRecurring(EmptyParam recurring) {
-      this.recurring = recurring;
       return this;
     }
 
@@ -911,82 +890,6 @@ public class PriceUpdateParams extends ApiRequestParams {
 
       TaxBehavior(String value) {
         this.value = value;
-      }
-    }
-  }
-
-  @Getter
-  public static class Recurring {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * Default number of trial days when subscribing a customer to this plan using <a
-     * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
-     * trial_from_plan=true}</a>.
-     */
-    @SerializedName("trial_period_days")
-    Long trialPeriodDays;
-
-    private Recurring(Map<String, Object> extraParams, Long trialPeriodDays) {
-      this.extraParams = extraParams;
-      this.trialPeriodDays = trialPeriodDays;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Long trialPeriodDays;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PriceUpdateParams.Recurring build() {
-        return new PriceUpdateParams.Recurring(this.extraParams, this.trialPeriodDays);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PriceUpdateParams.Recurring#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PriceUpdateParams.Recurring#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Default number of trial days when subscribing a customer to this plan using <a
-       * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
-       * trial_from_plan=true}</a>.
-       */
-      public Builder setTrialPeriodDays(Long trialPeriodDays) {
-        this.trialPeriodDays = trialPeriodDays;
-        return this;
       }
     }
   }

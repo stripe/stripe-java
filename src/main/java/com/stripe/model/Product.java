@@ -43,30 +43,9 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("active")
   Boolean active;
 
-  /**
-   * A list of up to 5 attributes that each SKU can provide values for (e.g., {@code ["color",
-   * "size"]}).
-   */
-  @SerializedName("attributes")
-  List<String> attributes;
-
-  /**
-   * A short one-line description of the product, meant to be displayable to the customer. Only
-   * applicable to products of {@code type=good}.
-   */
-  @SerializedName("caption")
-  String caption;
-
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
-
-  /**
-   * An array of connect application identifiers that cannot purchase this product. Only applicable
-   * to products of {@code type=good}.
-   */
-  @SerializedName("deactivate_on")
-  List<String> deactivateOn;
 
   /**
    * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the default

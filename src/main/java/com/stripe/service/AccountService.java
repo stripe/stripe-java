@@ -15,6 +15,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.AccountCreateParams;
 import com.stripe.param.AccountListParams;
 import com.stripe.param.AccountRejectParams;
+import com.stripe.param.AccountRetrieveCurrentParams;
 import com.stripe.param.AccountRetrieveParams;
 import com.stripe.param.AccountUpdateParams;
 
@@ -24,19 +25,19 @@ public final class AccountService extends ApiService {
   }
 
   /** Retrieves the details of an account. */
-  public Account retrieve(AccountRetrieveParams params) throws StripeException {
-    return retrieve(params, (RequestOptions) null);
+  public Account retrieveCurrent(AccountRetrieveCurrentParams params) throws StripeException {
+    return retrieveCurrent(params, (RequestOptions) null);
   }
   /** Retrieves the details of an account. */
-  public Account retrieve(RequestOptions options) throws StripeException {
-    return retrieve((AccountRetrieveParams) null, options);
+  public Account retrieveCurrent(RequestOptions options) throws StripeException {
+    return retrieveCurrent((AccountRetrieveCurrentParams) null, options);
   }
   /** Retrieves the details of an account. */
-  public Account retrieve() throws StripeException {
-    return retrieve((AccountRetrieveParams) null, (RequestOptions) null);
+  public Account retrieveCurrent() throws StripeException {
+    return retrieveCurrent((AccountRetrieveCurrentParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of an account. */
-  public Account retrieve(AccountRetrieveParams params, RequestOptions options)
+  public Account retrieveCurrent(AccountRetrieveCurrentParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/account";
     return getResponseGetter()
@@ -86,7 +87,7 @@ public final class AccountService extends ApiService {
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -104,7 +105,7 @@ public final class AccountService extends ApiService {
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -122,7 +123,7 @@ public final class AccountService extends ApiService {
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -140,7 +141,7 @@ public final class AccountService extends ApiService {
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -165,7 +166,7 @@ public final class AccountService extends ApiService {
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(String account) throws StripeException {
@@ -179,7 +180,7 @@ public final class AccountService extends ApiService {
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(String account, RequestOptions options) throws StripeException {

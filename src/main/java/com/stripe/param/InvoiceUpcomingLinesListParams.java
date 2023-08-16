@@ -93,8 +93,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve. Cannot
-   * be used with subscription or subscription fields.
+   * The identifier of the schedule whose upcoming invoice you'd like to retrieve. Cannot be used
+   * with subscription or subscription fields.
    */
   @SerializedName("schedule")
   String schedule;
@@ -549,8 +549,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve.
-     * Cannot be used with subscription or subscription fields.
+     * The identifier of the schedule whose upcoming invoice you'd like to retrieve. Cannot be used
+     * with subscription or subscription fields.
      */
     public Builder setSchedule(String schedule) {
       this.schedule = schedule;
