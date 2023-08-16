@@ -54,8 +54,10 @@
     * ⚠️ `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
     * ⚠️ `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
 
-## 23.0.0 - 2023-08-16
-
+## 22.32.0-beta.1 - 2023-08-10
+* [#1624](https://github.com/stripe/stripe-java/pull/1624) Update generated code for beta
+  * Add support for `paypal` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
+  * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 22.31.0-beta.1 - 2023-08-03
 * [#1621](https://github.com/stripe/stripe-java/pull/1621) Update generated code for beta

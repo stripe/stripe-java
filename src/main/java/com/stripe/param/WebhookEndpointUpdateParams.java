@@ -736,6 +736,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("promotion_code.updated")
     PROMOTION_CODE__UPDATED("promotion_code.updated"),
 
+    @SerializedName("quote.accept_failed")
+    QUOTE__ACCEPT_FAILED("quote.accept_failed"),
+
     @SerializedName("quote.accepted")
     QUOTE__ACCEPTED("quote.accepted"),
 
