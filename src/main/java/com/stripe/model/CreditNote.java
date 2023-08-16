@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CreditNoteCreateParams;
 import com.stripe.param.CreditNoteListParams;
 import com.stripe.param.CreditNotePreviewParams;
@@ -339,9 +342,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   public static CreditNote create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+    String path = "/v1/credit_notes";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            CreditNote.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -398,9 +408,17 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   public static CreditNote create(CreditNoteCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+    String path = "/v1/credit_notes";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CreditNote.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of credit notes. */
@@ -411,9 +429,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Returns a list of credit notes. */
   public static CreditNoteCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditNoteCollection.class, options);
+    String path = "/v1/credit_notes";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CreditNoteCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of credit notes. */
@@ -424,9 +449,17 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Returns a list of credit notes. */
   public static CreditNoteCollection list(CreditNoteListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditNoteCollection.class, options);
+    String path = "/v1/credit_notes";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CreditNoteCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Get a preview of a credit note without creating it. */
@@ -437,9 +470,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Get a preview of a credit note without creating it. */
   public static CreditNote preview(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes/preview");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
+    String path = "/v1/credit_notes/preview";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CreditNote.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Get a preview of a credit note without creating it. */
@@ -450,9 +490,17 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Get a preview of a credit note without creating it. */
   public static CreditNote preview(CreditNotePreviewParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes/preview");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
+    String path = "/v1/credit_notes/preview";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CreditNote.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the credit note object with the given identifier. */
@@ -468,25 +516,32 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Retrieves the credit note object with the given identifier. */
   public static CreditNote retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CreditNote.class,
             options,
-            String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the credit note object with the given identifier. */
   public static CreditNote retrieve(
       String id, CreditNoteRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CreditNote.class,
             options,
-            String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
+            ApiMode.V1);
   }
 
   /** Updates an existing credit note. */
@@ -499,13 +554,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Override
   public CreditNote update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            CreditNote.class,
             options,
-            String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+            ApiMode.V1);
   }
 
   /** Updates an existing credit note. */
@@ -516,13 +574,17 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Updates an existing credit note. */
   public CreditNote update(CreditNoteUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CreditNote.class,
             options,
-            String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -555,13 +617,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   public CreditNote voidCreditNote(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            CreditNote.class,
             options,
-            String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -578,13 +643,17 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   public CreditNote voidCreditNote(CreditNoteVoidCreditNoteParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CreditNote.class,
             options,
-            String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -689,12 +758,11 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
        * The reasoning behind this tax, for example, if the product is tax exempt. The possible
        * values for this field may be extended as new tax rules are supported.
        *
-       * <p>One of {@code customer_exempt}, {@code excluded_territory}, {@code
-       * jurisdiction_unsupported}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
-       * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
-       * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
-       * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code
-       * standard_rated}, {@code taxable_basis_reduced}, {@code vat_exempt}, or {@code zero_rated}.
+       * <p>One of {@code customer_exempt}, {@code not_collecting}, {@code not_subject_to_tax},
+       * {@code not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated},
+       * {@code portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday},
+       * {@code proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code
+       * standard_rated}, {@code taxable_basis_reduced}, or {@code zero_rated}.
        */
       @SerializedName("taxability_reason")
       String taxabilityReason;
@@ -757,5 +825,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     public void setTaxRateObject(TaxRate expandableObject) {
       this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(customerBalanceTransaction, responseGetter);
+    trySetResponseGetter(invoice, responseGetter);
+    trySetResponseGetter(lines, responseGetter);
+    trySetResponseGetter(refund, responseGetter);
+    trySetResponseGetter(shippingCost, responseGetter);
   }
 }

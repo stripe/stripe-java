@@ -2,14 +2,17 @@
 package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.FormListParams;
 import com.stripe.param.tax.FormPdfParams;
 import com.stripe.param.tax.FormRetrieveParams;
@@ -121,9 +124,16 @@ public class Form extends ApiResource implements HasId {
    */
   public static FormCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/forms");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FormCollection.class, options);
+    String path = "/v1/tax/forms";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            FormCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -140,9 +150,17 @@ public class Form extends ApiResource implements HasId {
    */
   public static FormCollection list(FormListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/forms");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FormCollection.class, options);
+    String path = "/v1/tax/forms";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            FormCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Download the PDF for a tax form. */
@@ -158,12 +176,10 @@ public class Form extends ApiResource implements HasId {
   /** Download the PDF for a tax form. */
   public InputStream pdf(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getUploadBase(),
-            options,
-            String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
+    String path = String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .requestStream(
+            BaseAddress.FILES, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
   }
 
   /** Download the PDF for a tax form. */
@@ -173,12 +189,16 @@ public class Form extends ApiResource implements HasId {
 
   /** Download the PDF for a tax form. */
   public InputStream pdf(FormPdfParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getUploadBase(),
+    String path = String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .requestStream(
+            BaseAddress.FILES,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
             options,
-            String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
+            ApiMode.V1);
   }
 
   /**
@@ -206,12 +226,16 @@ public class Form extends ApiResource implements HasId {
    */
   public static Form retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tax/forms/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Form.class,
             options,
-            String.format("/v1/tax/forms/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Form.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -221,12 +245,17 @@ public class Form extends ApiResource implements HasId {
    */
   public static Form retrieve(String id, FormRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tax/forms/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Form.class,
             options,
-            String.format("/v1/tax/forms/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Form.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -338,5 +367,15 @@ public class Form extends ApiResource implements HasId {
     /** Year represented by the information reported on the tax form. */
     @SerializedName("reporting_year")
     Long reportingYear;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(correctedBy, responseGetter);
+    trySetResponseGetter(payee, responseGetter);
+    trySetResponseGetter(us1099K, responseGetter);
+    trySetResponseGetter(us1099Misc, responseGetter);
+    trySetResponseGetter(us1099Nec, responseGetter);
   }
 }

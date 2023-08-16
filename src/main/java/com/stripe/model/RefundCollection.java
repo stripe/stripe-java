@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.model;
 
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.RefundCollectionListParams;
 import com.stripe.param.RefundCollectionRetrieveParams;
@@ -28,9 +30,16 @@ public class RefundCollection extends StripeCollection<Refund> {
    */
   public RefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, RefundCollection.class, options);
+    String path = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            RefundCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -51,9 +60,17 @@ public class RefundCollection extends StripeCollection<Refund> {
    */
   public RefundCollection list(RefundCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, RefundCollection.class, options);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            RefundCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an existing refund. */
@@ -69,22 +86,31 @@ public class RefundCollection extends StripeCollection<Refund> {
   /** Retrieves the details of an existing refund. */
   public Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Refund.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an existing refund. */
   public Refund retrieve(String id, RefundCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Refund.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 }

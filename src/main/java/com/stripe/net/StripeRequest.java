@@ -4,7 +4,6 @@ import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
-import com.stripe.net.RawRequestOptions.ApiMode;
 import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
@@ -105,26 +104,16 @@ public class StripeRequest {
    * @throws StripeException if the request cannot be initialized for any reason
    */
   public static StripeRequest createWithStringContent(
-      ApiResource.RequestMethod method, String url, String content, RequestOptions options)
+      ApiResource.RequestMethod method,
+      String url,
+      String content,
+      RequestOptions options,
+      boolean json)
       throws StripeException {
-    ApiMode apiMode = calculateApiMode(options);
-
     StripeRequest request =
-        new StripeRequest(method, url, buildContent(method, content, apiMode), null, options);
-
-    if (apiMode == ApiMode.PREVIEW) {
-      request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
-    }
+        new StripeRequest(method, url, buildContent(method, content, json), null, options);
 
     return request;
-  }
-
-  private static ApiMode calculateApiMode(RequestOptions options) {
-    if (options instanceof RawRequestOptions) {
-      return ((RawRequestOptions) options).getApiMode();
-    } else {
-      return ApiMode.STANDARD;
-    }
   }
 
   /**
@@ -192,13 +181,13 @@ public class StripeRequest {
   }
 
   private static HttpContent buildContent(
-      ApiResource.RequestMethod method, String content, RawRequestOptions.ApiMode apiMode)
+      ApiResource.RequestMethod method, String content, boolean json)
       throws ApiConnectionException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
     }
 
-    if (apiMode == RawRequestOptions.ApiMode.PREVIEW) {
+    if (json) {
       return HttpContent.buildJsonContent(content);
     }
 

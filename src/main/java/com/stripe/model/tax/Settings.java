@@ -2,12 +2,15 @@
 package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.SettingsRetrieveParams;
 import com.stripe.param.tax.SettingsUpdateParams;
 import java.util.List;
@@ -72,15 +75,32 @@ public class Settings extends ApiResource {
   /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/settings");
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Settings.class, options);
+    String path = "/v1/tax/settings";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Settings.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve(SettingsRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/settings");
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Settings.class, options);
+    String path = "/v1/tax/settings";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Settings.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -97,9 +117,16 @@ public class Settings extends ApiResource {
    */
   public static Settings update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/settings");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Settings.class, options);
+    String path = "/v1/tax/settings";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Settings.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -116,9 +143,17 @@ public class Settings extends ApiResource {
    */
   public static Settings update(SettingsUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/settings");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Settings.class, options);
+    String path = "/v1/tax/settings";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Settings.class,
+            options,
+            ApiMode.V1);
   }
 
   @Getter
@@ -181,5 +216,13 @@ public class Settings extends ApiResource {
       @SerializedName("missing_fields")
       List<String> missingFields;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(defaults, responseGetter);
+    trySetResponseGetter(headOffice, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
   }
 }

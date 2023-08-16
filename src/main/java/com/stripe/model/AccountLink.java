@@ -2,9 +2,11 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.AccountLinkCreateParams;
 import java.util.Map;
@@ -57,9 +59,16 @@ public class AccountLink extends ApiResource {
    */
   public static AccountLink create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_links");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);
+    String path = "/v1/account_links";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            AccountLink.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -76,8 +85,16 @@ public class AccountLink extends ApiResource {
    */
   public static AccountLink create(AccountLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_links");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);
+    String path = "/v1/account_links";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            AccountLink.class,
+            options,
+            ApiMode.V1);
   }
 }

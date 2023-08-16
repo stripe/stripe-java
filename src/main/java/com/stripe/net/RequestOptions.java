@@ -23,26 +23,14 @@ public class RequestOptions {
    */
   private final String stripeVersionOverride;
 
-  private final int connectTimeout;
-  private final int readTimeout;
-
-  private final int maxNetworkRetries;
+  private final Integer connectTimeout;
+  private final Integer readTimeout;
+  private final Integer maxNetworkRetries;
   private final Proxy connectionProxy;
   private final PasswordAuthentication proxyCredential;
 
   public static RequestOptions getDefault() {
-    return new RequestOptions(
-        Stripe.apiKey,
-        Stripe.clientId,
-        null,
-        null,
-        null,
-        null,
-        Stripe.getConnectTimeout(),
-        Stripe.getReadTimeout(),
-        Stripe.getMaxNetworkRetries(),
-        Stripe.getConnectionProxy(),
-        Stripe.getProxyCredential());
+    return new RequestOptions(null, null, null, null, null, null, null, null, null, null, null);
   }
 
   protected RequestOptions(
@@ -52,9 +40,9 @@ public class RequestOptions {
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
-      int connectTimeout,
-      int readTimeout,
-      int maxNetworkRetries,
+      Integer connectTimeout,
+      Integer readTimeout,
+      Integer maxNetworkRetries,
       Proxy connectionProxy,
       PasswordAuthentication proxyCredential) {
     this.apiKey = apiKey;
@@ -94,15 +82,15 @@ public class RequestOptions {
     return options.stripeVersionOverride;
   }
 
-  public int getReadTimeout() {
+  public Integer getReadTimeout() {
     return readTimeout;
   }
 
-  public int getConnectTimeout() {
+  public Integer getConnectTimeout() {
     return connectTimeout;
   }
 
-  public int getMaxNetworkRetries() {
+  public Integer getMaxNetworkRetries() {
     return maxNetworkRetries;
   }
 
@@ -161,9 +149,9 @@ public class RequestOptions {
     protected String idempotencyKey;
     protected String stripeAccount;
     protected String stripeVersionOverride;
-    protected int connectTimeout;
-    protected int readTimeout;
-    protected int maxNetworkRetries;
+    protected Integer connectTimeout;
+    protected Integer readTimeout;
+    protected Integer maxNetworkRetries;
     protected Proxy connectionProxy;
     protected PasswordAuthentication proxyCredential;
     protected String baseUrl;
@@ -172,15 +160,7 @@ public class RequestOptions {
      * Constructs a request options builder with the global parameters (API key and client ID) as
      * default values.
      */
-    public RequestOptionsBuilder() {
-      this.apiKey = Stripe.apiKey;
-      this.clientId = Stripe.clientId;
-      this.connectTimeout = Stripe.getConnectTimeout();
-      this.readTimeout = Stripe.getReadTimeout();
-      this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
-      this.connectionProxy = Stripe.getConnectionProxy();
-      this.proxyCredential = Stripe.getProxyCredential();
-    }
+    public RequestOptionsBuilder() {}
 
     public String getApiKey() {
       return apiKey;
@@ -225,12 +205,12 @@ public class RequestOptions {
      *
      * @param timeout timeout value in milliseconds
      */
-    public RequestOptionsBuilder setConnectTimeout(int timeout) {
+    public RequestOptionsBuilder setConnectTimeout(Integer timeout) {
       this.connectTimeout = timeout;
       return this;
     }
 
-    public int getReadTimeout() {
+    public Integer getReadTimeout() {
       return readTimeout;
     }
 
@@ -243,12 +223,12 @@ public class RequestOptions {
      *
      * @param timeout timeout value in milliseconds
      */
-    public RequestOptionsBuilder setReadTimeout(int timeout) {
+    public RequestOptionsBuilder setReadTimeout(Integer timeout) {
       this.readTimeout = timeout;
       return this;
     }
 
-    public int getMaxNetworkRetries() {
+    public Integer getMaxNetworkRetries() {
       return maxNetworkRetries;
     }
 
@@ -257,7 +237,7 @@ public class RequestOptions {
      *
      * @param maxNetworkRetries the number of times to retry the request
      */
-    public RequestOptionsBuilder setMaxNetworkRetries(int maxNetworkRetries) {
+    public RequestOptionsBuilder setMaxNetworkRetries(Integer maxNetworkRetries) {
       this.maxNetworkRetries = maxNetworkRetries;
       return this;
     }
@@ -345,11 +325,7 @@ public class RequestOptions {
     if (apiKey == null) {
       return null;
     }
-    String normalized = apiKey.trim();
-    if (normalized.isEmpty()) {
-      throw new InvalidRequestOptionsException("Empty API key specified!");
-    }
-    return normalized;
+    return apiKey.trim();
   }
 
   protected static String normalizeClientId(String clientId) {
@@ -415,6 +391,46 @@ public class RequestOptions {
       throw new InvalidRequestOptionsException("Empty stripe account specified!");
     }
     return normalized;
+  }
+
+  static RequestOptions merge(StripeResponseGetterOptions clientOptions, RequestOptions options) {
+    if (options == null) {
+      return new RequestOptions(
+          clientOptions.getApiKey(), // authenticator
+          clientOptions.getClientId(), // clientId
+          null, // idempotencyKey
+          null, // stripeAccount
+          null, // stripeVersionOverride
+          null, // baseUrl
+          clientOptions.getConnectTimeout(), // connectTimeout
+          clientOptions.getReadTimeout(), // readTimeout
+          clientOptions.getMaxNetworkRetries(), // maxNetworkRetries
+          clientOptions.getConnectionProxy(), // connectionProxy
+          clientOptions.getProxyCredential() // proxyCredential
+          );
+    }
+    return new RequestOptions(
+        options.getApiKey() != null ? options.getApiKey() : clientOptions.getApiKey(),
+        options.getClientId() != null ? options.getClientId() : clientOptions.getClientId(),
+        options.getIdempotencyKey(),
+        options.getStripeAccount(),
+        RequestOptions.unsafeGetStripeVersionOverride(options),
+        options.getBaseUrl(),
+        options.getConnectTimeout() != null
+            ? options.getConnectTimeout()
+            : clientOptions.getConnectTimeout(),
+        options.getReadTimeout() != null
+            ? options.getReadTimeout()
+            : clientOptions.getReadTimeout(),
+        options.getMaxNetworkRetries() != null
+            ? options.getMaxNetworkRetries()
+            : clientOptions.getMaxNetworkRetries(),
+        options.getConnectionProxy() != null
+            ? options.getConnectionProxy()
+            : clientOptions.getConnectionProxy(),
+        options.getProxyCredential() != null
+            ? options.getProxyCredential()
+            : clientOptions.getProxyCredential());
   }
 
   public static class InvalidRequestOptionsException extends RuntimeException {

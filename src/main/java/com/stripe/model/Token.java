@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.TokenCreateParams;
 import com.stripe.param.TokenRetrieveParams;
 import java.util.Map;
@@ -113,8 +116,16 @@ public class Token extends ApiResource implements HasId {
    */
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tokens");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
+    String path = "/v1/tokens";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Token.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -133,8 +144,17 @@ public class Token extends ApiResource implements HasId {
    */
   public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tokens");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
+    String path = "/v1/tokens";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Token.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the token with the given ID. */
@@ -150,22 +170,38 @@ public class Token extends ApiResource implements HasId {
   /** Retrieves the token with the given ID. */
   public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Token.class,
             options,
-            String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the token with the given ID. */
   public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Token.class,
             options,
-            String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
+            ApiMode.V1);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(bankAccount, responseGetter);
+    trySetResponseGetter(card, responseGetter);
   }
 }

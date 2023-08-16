@@ -27,7 +27,7 @@ public class BankAccountTest extends BaseStripeTest {
         ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/customer_with_sources_and_tax_ids.json"),
             Customer.class);
-
+    customer.setResponseGetter(networkSpy);
     return customer;
   }
 
@@ -37,7 +37,7 @@ public class BankAccountTest extends BaseStripeTest {
         ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/bank_account.json"), BankAccount.class);
     bankAccount.setCustomer(customer.getId());
-
+    bankAccount.setResponseGetter(networkSpy);
     return bankAccount;
   }
 

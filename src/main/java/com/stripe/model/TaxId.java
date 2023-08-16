@@ -2,10 +2,12 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -122,15 +124,19 @@ public class TaxId extends ApiResource implements HasId {
 
   /** Deletes an existing {@code TaxID} object. */
   public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/customers/%s/tax_ids/%s",
+            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            params,
+            TaxId.class,
             options,
-            String.format(
-                "/v1/customers/%s/tax_ids/%s",
-                ApiResource.urlEncodeId(this.getCustomer()),
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, TaxId.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -151,5 +157,12 @@ public class TaxId extends ApiResource implements HasId {
     /** Verified name. */
     @SerializedName("verified_name")
     String verifiedName;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(verification, responseGetter);
   }
 }

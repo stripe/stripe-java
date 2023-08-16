@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.SetupAttemptListParams;
 import java.util.List;
 import java.util.Map;
@@ -231,9 +234,16 @@ public class SetupAttempt extends ApiResource implements HasId {
   /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
   public static SetupAttemptCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_attempts");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SetupAttemptCollection.class, options);
+    String path = "/v1/setup_attempts";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            SetupAttemptCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
@@ -244,9 +254,17 @@ public class SetupAttempt extends ApiResource implements HasId {
   /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
   public static SetupAttemptCollection list(SetupAttemptListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_attempts");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SetupAttemptCollection.class, options);
+    String path = "/v1/setup_attempts";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupAttemptCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   @Getter
@@ -860,5 +878,17 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {}
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(onBehalfOf, responseGetter);
+    trySetResponseGetter(paymentMethod, responseGetter);
+    trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(setupError, responseGetter);
+    trySetResponseGetter(setupIntent, responseGetter);
   }
 }

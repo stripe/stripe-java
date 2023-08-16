@@ -2,9 +2,11 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.EphemeralKeyCreateParams;
 import com.stripe.param.EphemeralKeyDeleteParams;
@@ -79,13 +81,16 @@ public class EphemeralKey extends ApiResource implements HasId {
   /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            params,
+            EphemeralKey.class,
             options,
-            String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);
+            ApiMode.V1);
   }
 
   /** Invalidates a short-lived API key for a given resource. */
@@ -96,13 +101,17 @@ public class EphemeralKey extends ApiResource implements HasId {
   /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            EphemeralKey.class,
             options,
-            String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);
+            ApiMode.V1);
   }
 
   /** Creates a short-lived API key for a given resource. */
@@ -134,13 +143,15 @@ public class EphemeralKey extends ApiResource implements HasId {
     // request body.
     final Map<String, Object> overriddenParams = new java.util.HashMap<String, Object>(params);
     overriddenParams.remove("stripe-version");
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), overriddenOptions, "/v1/ephemeral_keys");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        overriddenParams,
-        EphemeralKey.class,
-        overriddenOptions);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            "/v1/ephemeral_keys",
+            overriddenParams,
+            EphemeralKey.class,
+            overriddenOptions,
+            ApiMode.V1);
   }
 
   /** Creates a short-lived API key for a given resource. */

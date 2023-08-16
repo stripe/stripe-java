@@ -1,7 +1,6 @@
 package com.stripe.net;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -43,12 +42,12 @@ public class RequestOptionsTest extends BaseStripeTest {
 
     assertNull(optsRebuilt.getIdempotencyKey());
     assertNull(RequestOptions.unsafeGetStripeVersionOverride(optsRebuilt));
-    assertEquals("other value", optsRebuilt.getClientId());
-    assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, optsRebuilt.getConnectTimeout());
-    assertEquals(Stripe.DEFAULT_READ_TIMEOUT, optsRebuilt.getReadTimeout());
-    assertEquals(Stripe.getConnectionProxy(), optsRebuilt.getConnectionProxy());
-    assertEquals(Stripe.getProxyCredential(), optsRebuilt.getProxyCredential());
-    assertEquals(null, optsRebuilt.getBaseUrl());
+    assertNull(optsRebuilt.getClientId());
+    assertNull(optsRebuilt.getConnectTimeout());
+    assertNull(optsRebuilt.getReadTimeout());
+    assertNull(optsRebuilt.getConnectionProxy());
+    assertNull(optsRebuilt.getProxyCredential());
+    assertNull(optsRebuilt.getBaseUrl());
   }
 
   @Test
@@ -144,45 +143,93 @@ public class RequestOptionsTest extends BaseStripeTest {
   }
 
   @Test
-  public void testTimeoutDefaultValues() {
-    int origConnectTimeout = Stripe.getConnectTimeout();
-    int origReadTimeout = Stripe.getReadTimeout();
+  public void mergeOverwritesClientOptions() {
+    Proxy clientProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 8080));
+    PasswordAuthentication clientProxyCred =
+        new PasswordAuthentication("username", "password".toCharArray());
 
-    try {
-      Stripe.setConnectTimeout(123);
-      Stripe.setReadTimeout(234);
+    Proxy requestProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 8080));
+    PasswordAuthentication requestProxyCred =
+        new PasswordAuthentication("username", "password".toCharArray());
 
-      RequestOptions opts = RequestOptions.builder().build();
+    StripeResponseGetterOptions clientOptions =
+        TestStripeResponseGetterOptions.builder()
+            .setApiKey("key1")
+            .setConnectTimeout(1)
+            .setMaxNetworkRetries(2)
+            .setReadTimeout(3)
+            .setClientId("1")
+            .setConnectionProxy(clientProxy)
+            .setProxyCredential(clientProxyCred)
+            .build();
 
-      assertEquals(123, opts.getConnectTimeout());
-      assertEquals(234, opts.getReadTimeout());
-    } finally {
-      Stripe.setConnectTimeout(origConnectTimeout);
-      Stripe.setReadTimeout(origReadTimeout);
-    }
+    RequestOptions requestOptions =
+        RequestOptions.builder()
+            .setApiKey("key2")
+            .setConnectTimeout(3)
+            .setMaxNetworkRetries(4)
+            .setReadTimeout(5)
+            .setClientId("2")
+            .setConnectionProxy(requestProxy)
+            .setProxyCredential(requestProxyCred)
+            .setIdempotencyKey("3")
+            .setStripeAccount("4")
+            .build();
+
+    RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
+    assertEquals("key2", merged.getApiKey());
+    assertEquals(3, merged.getConnectTimeout());
+    assertEquals(4, merged.getMaxNetworkRetries());
+    assertEquals(5, merged.getReadTimeout());
+    assertEquals("2", merged.getClientId());
+    assertEquals(requestProxy, merged.getConnectionProxy());
+    assertEquals(requestProxyCred, merged.getProxyCredential());
+    assertEquals("3", merged.getIdempotencyKey());
+    assertEquals("4", merged.getStripeAccount());
   }
 
   @Test
-  public void testProxyDefaultValues() {
-    Proxy origConnectionProxy = Stripe.getConnectionProxy();
-    PasswordAuthentication origProxyCredential = Stripe.getProxyCredential();
+  public void mergeFallsBackToClientOptions() {
+    Proxy clientProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 8080));
+    PasswordAuthentication clientProxyCred =
+        new PasswordAuthentication("username", "password".toCharArray());
 
-    try {
-      Proxy newConnectionProxy =
-          new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 8080));
-      PasswordAuthentication newProxyCredential =
-          new PasswordAuthentication("username", "password".toCharArray());
+    StripeResponseGetterOptions clientOptions =
+        TestStripeResponseGetterOptions.builder()
+            .setApiKey("key1")
+            .setConnectTimeout(1)
+            .setMaxNetworkRetries(1)
+            .setReadTimeout(1)
+            .setClientId("1")
+            .setConnectionProxy(clientProxy)
+            .setProxyCredential(clientProxyCred)
+            .build();
 
-      Stripe.setConnectionProxy(newConnectionProxy);
-      Stripe.setProxyCredential(newProxyCredential);
+    RequestOptions requestOptions = RequestOptions.builder().build();
 
-      RequestOptions opts = RequestOptions.builder().build();
+    RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
+    assertEquals("key1", merged.getApiKey());
+    assertEquals(1, merged.getConnectTimeout());
+    assertEquals(1, merged.getMaxNetworkRetries());
+    assertEquals(1, merged.getReadTimeout());
+    assertEquals("1", merged.getClientId());
+    assertEquals(clientProxy, merged.getConnectionProxy());
+    assertEquals(clientProxyCred, merged.getProxyCredential());
+    assertEquals(null, merged.getIdempotencyKey());
+    assertEquals(null, merged.getStripeAccount());
+  }
 
-      assertEquals(newConnectionProxy, opts.getConnectionProxy());
-      assertEquals(newProxyCredential, opts.getProxyCredential());
-    } finally {
-      Stripe.setConnectionProxy(origConnectionProxy);
-      Stripe.setProxyCredential(origProxyCredential);
-    }
+  @Test
+  public void defaultsToAllNullValues() {
+    RequestOptions merged = RequestOptions.getDefault();
+    assertEquals(null, merged.getApiKey());
+    assertEquals(null, merged.getConnectTimeout());
+    assertEquals(null, merged.getMaxNetworkRetries());
+    assertEquals(null, merged.getReadTimeout());
+    assertEquals(null, merged.getClientId());
+    assertEquals(null, merged.getConnectionProxy());
+    assertEquals(null, merged.getProxyCredential());
+    assertEquals(null, merged.getIdempotencyKey());
+    assertEquals(null, merged.getStripeAccount());
   }
 }

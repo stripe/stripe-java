@@ -2,9 +2,11 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.AccountSessionCreateParams;
 import java.util.Map;
@@ -80,9 +82,16 @@ public class AccountSession extends ApiResource {
    */
   public static AccountSession create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_sessions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, AccountSession.class, options);
+    String path = "/v1/account_sessions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            AccountSession.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -99,8 +108,16 @@ public class AccountSession extends ApiResource {
    */
   public static AccountSession create(AccountSessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_sessions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, AccountSession.class, options);
+    String path = "/v1/account_sessions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            AccountSession.class,
+            options,
+            ApiMode.V1);
   }
 }

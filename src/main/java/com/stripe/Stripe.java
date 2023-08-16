@@ -250,9 +250,7 @@ public abstract class Stripe {
       throw new IllegalArgumentException(
           "content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");
     }
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, relativeUrl);
-
-    return ApiResource.rawRequest(method, url, content, options);
+    return ApiResource.rawRequest(method, relativeUrl, content, options);
   }
 
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */

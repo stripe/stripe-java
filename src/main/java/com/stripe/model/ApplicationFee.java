@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.ApplicationFeeListParams;
 import com.stripe.param.ApplicationFeeRetrieveParams;
 import java.util.Map;
@@ -212,9 +215,16 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    */
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/application_fees");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplicationFeeCollection.class, options);
+    String path = "/v1/application_fees";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ApplicationFeeCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -232,9 +242,17 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    */
   public static ApplicationFeeCollection list(
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/application_fees");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplicationFeeCollection.class, options);
+    String path = "/v1/application_fees";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ApplicationFeeCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -259,13 +277,16 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    */
   public static ApplicationFee retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ApplicationFee.class,
             options,
-            String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -275,12 +296,27 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFee retrieve(
       String id, ApplicationFeeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ApplicationFee.class,
             options,
-            String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
+            ApiMode.V1);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(account, responseGetter);
+    trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(balanceTransaction, responseGetter);
+    trySetResponseGetter(charge, responseGetter);
+    trySetResponseGetter(originatingTransaction, responseGetter);
+    trySetResponseGetter(refunds, responseGetter);
   }
 }

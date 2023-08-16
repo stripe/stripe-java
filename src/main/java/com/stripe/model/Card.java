@@ -2,10 +2,12 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.CardUpdateOnAccountParams;
 import com.stripe.param.CardUpdateOnCustomerParams;
@@ -291,22 +293,14 @@ public class Card extends ApiResource
     String url;
     if (this.getAccount() != null) {
       url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
-              options,
-              String.format(
-                  "/v1/accounts/%s/external_accounts/%s",
-                  ApiResource.urlEncodeId(this.getAccount()),
-                  ApiResource.urlEncodeId(this.getId())));
+          String.format(
+              "/v1/accounts/%s/external_accounts/%s",
+              ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
     } else if (this.getCustomer() != null) {
       url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
-              options,
-              String.format(
-                  "/v1/customers/%s/sources/%s",
-                  ApiResource.urlEncodeId(this.getCustomer()),
-                  ApiResource.urlEncodeId(this.getId())));
+          String.format(
+              "/v1/customers/%s/sources/%s",
+              ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account, customer] field(s) are all null",
@@ -316,7 +310,15 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            params,
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -346,13 +348,9 @@ public class Card extends ApiResource
     String url;
     if (this.getAccount() != null) {
       url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
-              options,
-              String.format(
-                  "/v1/accounts/%s/external_accounts/%s",
-                  ApiResource.urlEncodeId(this.getAccount()),
-                  ApiResource.urlEncodeId(this.getId())));
+          String.format(
+              "/v1/accounts/%s/external_accounts/%s",
+              ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account] field(s) are all null",
@@ -362,7 +360,15 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -392,13 +398,9 @@ public class Card extends ApiResource
     String url;
     if (this.getCustomer() != null) {
       url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
-              options,
-              String.format(
-                  "/v1/customers/%s/sources/%s",
-                  ApiResource.urlEncodeId(this.getCustomer()),
-                  ApiResource.urlEncodeId(this.getId())));
+          String.format(
+              "/v1/customers/%s/sources/%s",
+              ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [customer] field(s) are all null",
@@ -408,7 +410,15 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            url,
+            ApiRequestParams.paramsToMap(params),
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -451,22 +461,14 @@ public class Card extends ApiResource
     String url;
     if (this.getAccount() != null) {
       url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
-              options,
-              String.format(
-                  "/v1/accounts/%s/external_accounts/%s",
-                  ApiResource.urlEncodeId(this.getAccount()),
-                  ApiResource.urlEncodeId(this.getId())));
+          String.format(
+              "/v1/accounts/%s/external_accounts/%s",
+              ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
     } else if (this.getCustomer() != null) {
       url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
-              options,
-              String.format(
-                  "/v1/customers/%s/sources/%s",
-                  ApiResource.urlEncodeId(this.getCustomer()),
-                  ApiResource.urlEncodeId(this.getId())));
+          String.format(
+              "/v1/customers/%s/sources/%s",
+              ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account, customer] field(s) are all null",
@@ -476,6 +478,14 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return request(ApiResource.RequestMethod.DELETE, url, params, Card.class, options);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            url,
+            params,
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 }

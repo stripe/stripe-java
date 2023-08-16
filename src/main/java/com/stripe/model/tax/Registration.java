@@ -2,12 +2,15 @@
 package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.RegistrationCreateParams;
 import com.stripe.param.tax.RegistrationListParams;
 import com.stripe.param.tax.RegistrationUpdateParams;
@@ -94,9 +97,16 @@ public class Registration extends ApiResource implements HasId {
   /** Creates a new Tax {@code Registration} object. */
   public static Registration create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Registration.class, options);
+    String path = "/v1/tax/registrations";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Registration.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a new Tax {@code Registration} object. */
@@ -107,9 +117,17 @@ public class Registration extends ApiResource implements HasId {
   /** Creates a new Tax {@code Registration} object. */
   public static Registration create(RegistrationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Registration.class, options);
+    String path = "/v1/tax/registrations";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Registration.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of Tax {@code Registration} objects. */
@@ -120,9 +138,16 @@ public class Registration extends ApiResource implements HasId {
   /** Returns a list of Tax {@code Registration} objects. */
   public static RegistrationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, RegistrationCollection.class, options);
+    String path = "/v1/tax/registrations";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            RegistrationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of Tax {@code Registration} objects. */
@@ -133,9 +158,17 @@ public class Registration extends ApiResource implements HasId {
   /** Returns a list of Tax {@code Registration} objects. */
   public static RegistrationCollection list(RegistrationListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, RegistrationCollection.class, options);
+    String path = "/v1/tax/registrations";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            RegistrationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -156,13 +189,16 @@ public class Registration extends ApiResource implements HasId {
    */
   public Registration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Registration.class,
             options,
-            String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Registration.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -183,13 +219,17 @@ public class Registration extends ApiResource implements HasId {
    */
   public Registration update(RegistrationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Registration.class,
             options,
-            String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Registration.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -1319,5 +1359,11 @@ public class Registration extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(countryOptions, responseGetter);
   }
 }

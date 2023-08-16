@@ -2,10 +2,12 @@
 package com.stripe.model.issuing;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.issuing.CardBundleListParams;
 import com.stripe.param.issuing.CardBundleRetrieveParams;
@@ -76,9 +78,16 @@ public class CardBundle extends ApiResource implements HasId {
    */
   public static CardBundleCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/card_bundles");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardBundleCollection.class, options);
+    String path = "/v1/issuing/card_bundles";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CardBundleCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -95,9 +104,17 @@ public class CardBundle extends ApiResource implements HasId {
    */
   public static CardBundleCollection list(CardBundleListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/card_bundles");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardBundleCollection.class, options);
+    String path = "/v1/issuing/card_bundles";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CardBundleCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves a card bundle object. */
@@ -115,25 +132,32 @@ public class CardBundle extends ApiResource implements HasId {
   public static CardBundle retrieve(
       String cardBundle, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/issuing/card_bundles/%s", ApiResource.urlEncodeId(cardBundle));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CardBundle.class,
             options,
-            String.format("/v1/issuing/card_bundles/%s", ApiResource.urlEncodeId(cardBundle)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardBundle.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a card bundle object. */
   public static CardBundle retrieve(
       String cardBundle, CardBundleRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/issuing/card_bundles/%s", ApiResource.urlEncodeId(cardBundle));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CardBundle.class,
             options,
-            String.format("/v1/issuing/card_bundles/%s", ApiResource.urlEncodeId(cardBundle)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardBundle.class, options);
+            ApiMode.V1);
   }
 }

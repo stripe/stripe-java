@@ -2,12 +2,15 @@
 package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.TransactionCreateFromCalculationParams;
 import com.stripe.param.tax.TransactionCreateReversalParams;
 import com.stripe.param.tax.TransactionListLineItemsParams;
@@ -114,11 +117,16 @@ public class Transaction extends ApiResource implements HasId {
   /** Creates a Tax {@code Transaction} from a calculation. */
   public static Transaction createFromCalculation(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(), options, "/v1/tax/transactions/create_from_calculation");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    String path = "/v1/tax/transactions/create_from_calculation";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Transaction.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a Tax {@code Transaction} from a calculation. */
@@ -131,11 +139,17 @@ public class Transaction extends ApiResource implements HasId {
   public static Transaction createFromCalculation(
       TransactionCreateFromCalculationParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(), options, "/v1/tax/transactions/create_from_calculation");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    String path = "/v1/tax/transactions/create_from_calculation";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Partially or fully reverses a previously created {@code Transaction}. */
@@ -146,10 +160,16 @@ public class Transaction extends ApiResource implements HasId {
   /** Partially or fully reverses a previously created {@code Transaction}. */
   public static Transaction createReversal(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions/create_reversal");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    String path = "/v1/tax/transactions/create_reversal";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Transaction.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Partially or fully reverses a previously created {@code Transaction}. */
@@ -161,10 +181,17 @@ public class Transaction extends ApiResource implements HasId {
   /** Partially or fully reverses a previously created {@code Transaction}. */
   public static Transaction createReversal(
       TransactionCreateReversalParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions/create_reversal");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    String path = "/v1/tax/transactions/create_reversal";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
@@ -181,14 +208,17 @@ public class Transaction extends ApiResource implements HasId {
   /** Retrieves the line items of a committed standalone transaction as a collection. */
   public TransactionLineItemCollection listLineItems(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            TransactionLineItemCollection.class,
             options,
-            String.format(
-                "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionLineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
@@ -200,14 +230,18 @@ public class Transaction extends ApiResource implements HasId {
   /** Retrieves the line items of a committed standalone transaction as a collection. */
   public TransactionLineItemCollection listLineItems(
       TransactionListLineItemsParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            TransactionLineItemCollection.class,
             options,
-            String.format(
-                "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionLineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a Tax {@code Transaction} object. */
@@ -225,26 +259,33 @@ public class Transaction extends ApiResource implements HasId {
   public static Transaction retrieve(
       String transaction, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Transaction.class,
             options,
-            String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a Tax {@code Transaction} object. */
   public static Transaction retrieve(
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
             options,
-            String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -500,5 +541,14 @@ public class Transaction extends ApiResource implements HasId {
         String taxType;
       }
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(customerDetails, responseGetter);
+    trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(reversal, responseGetter);
+    trySetResponseGetter(shippingCost, responseGetter);
   }
 }

@@ -191,7 +191,7 @@ public class CardDesignListParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * CardDesignListParams#lookupKeys} for the field documentation.
      */
-    public Builder addLookupKeys(String element) {
+    public Builder addLookupKey(String element) {
       if (this.lookupKeys == null) {
         this.lookupKeys = new ArrayList<>();
       }
@@ -204,7 +204,7 @@ public class CardDesignListParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * CardDesignListParams#lookupKeys} for the field documentation.
      */
-    public Builder addAllLookupKeys(List<String> elements) {
+    public Builder addAllLookupKey(List<String> elements) {
       if (this.lookupKeys == null) {
         this.lookupKeys = new ArrayList<>();
       }

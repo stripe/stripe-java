@@ -1,8 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.Stripe;
-import com.stripe.exception.ApiKeyMissingException;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -37,8 +36,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public abstract class StripeCollection<T extends HasId> extends StripeObject
-    implements StripeCollectionInterface<T> {
+public class StripeCollection<T extends HasId> extends StripeObject
+    implements StripeCollectionInterface<T>, StripeActiveObject {
+  private transient StripeResponseGetter responseGetter;
   String object;
 
   @Getter(onMethod_ = {@Override})
@@ -59,23 +59,15 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   private Map<String, Object> requestParams;
 
   public Iterable<T> autoPagingIterable() {
-    if (Stripe.apiKey == null
-        && (this.requestOptions == null || this.requestOptions.getApiKey() == null)) {
-      throw new ApiKeyMissingException(
-          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
-    }
-    return new PagingIterable<>(this);
+    this.responseGetter.validateRequestOptions(this.requestOptions);
+    return new PagingIterable<>(this, responseGetter);
   }
 
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
-    if (Stripe.apiKey == null
-        && (this.requestOptions == null || this.requestOptions.getApiKey() == null)) {
-      throw new ApiKeyMissingException(
-          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
-    }
+    this.responseGetter.validateRequestOptions(this.requestOptions);
 
     this.setRequestParams(params);
-    return new PagingIterable<>(this);
+    return new PagingIterable<>(this, responseGetter);
   }
 
   /**
@@ -87,13 +79,19 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
    * @param options request options (will override the options from the initial list request)
    */
   public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
-    String apiKey = options.getApiKey();
-    if (Stripe.apiKey == null && apiKey == null) {
-      throw new ApiKeyMissingException(
-          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
-    }
+    this.responseGetter.validateRequestOptions(options);
     this.setRequestOptions(options);
     this.setRequestParams(params);
-    return new PagingIterable<>(this);
+    return new PagingIterable<>(this, responseGetter);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    this.responseGetter = responseGetter;
+    if (this.data != null) {
+      for (T item : data) {
+        trySetResponseGetter(item, responseGetter);
+      }
+    }
   }
 }

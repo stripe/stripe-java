@@ -2,15 +2,18 @@
 package com.stripe.model.issuing;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.TransactionListParams;
 import com.stripe.param.issuing.TransactionRetrieveParams;
 import com.stripe.param.issuing.TransactionUpdateParams;
@@ -273,9 +276,16 @@ public class Transaction extends ApiResource
    */
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
+    String path = "/v1/issuing/transactions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            TransactionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -292,9 +302,17 @@ public class Transaction extends ApiResource
    */
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
+    String path = "/v1/issuing/transactions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            TransactionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves an Issuing {@code Transaction} object. */
@@ -312,26 +330,35 @@ public class Transaction extends ApiResource
   public static Transaction retrieve(
       String transaction, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Transaction.class,
             options,
-            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves an Issuing {@code Transaction} object. */
   public static Transaction retrieve(
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
             options,
-            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -350,13 +377,17 @@ public class Transaction extends ApiResource
   @Override
   public Transaction update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Transaction.class,
             options,
-            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -373,13 +404,18 @@ public class Transaction extends ApiResource
    */
   public Transaction update(TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
             options,
-            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -617,5 +653,20 @@ public class Transaction extends ApiResource
      */
     @SerializedName("received_debit")
     String receivedDebit;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(amountDetails, responseGetter);
+    trySetResponseGetter(authorization, responseGetter);
+    trySetResponseGetter(balanceTransaction, responseGetter);
+    trySetResponseGetter(card, responseGetter);
+    trySetResponseGetter(cardholder, responseGetter);
+    trySetResponseGetter(dispute, responseGetter);
+    trySetResponseGetter(merchantData, responseGetter);
+    trySetResponseGetter(networkData, responseGetter);
+    trySetResponseGetter(purchaseDetails, responseGetter);
+    trySetResponseGetter(treasury, responseGetter);
   }
 }

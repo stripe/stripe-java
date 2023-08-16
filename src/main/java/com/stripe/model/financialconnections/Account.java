@@ -2,14 +2,17 @@
 package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.financialconnections.AccountDisconnectParams;
 import com.stripe.param.financialconnections.AccountListOwnersParams;
 import com.stripe.param.financialconnections.AccountListParams;
@@ -197,19 +200,19 @@ public class Account extends ApiResource implements HasId {
    */
   public com.stripe.model.financialconnections.Account disconnect(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/disconnect",
+            ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /**
@@ -227,19 +230,20 @@ public class Account extends ApiResource implements HasId {
    */
   public com.stripe.model.financialconnections.Account disconnect(
       AccountDisconnectParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/disconnect",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /** Returns a list of Financial Connections {@code Account} objects. */
@@ -250,10 +254,16 @@ public class Account extends ApiResource implements HasId {
   /** Returns a list of Financial Connections {@code Account} objects. */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/accounts");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
+    String path = "/v1/financial_connections/accounts";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            AccountCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of Financial Connections {@code Account} objects. */
@@ -264,10 +274,17 @@ public class Account extends ApiResource implements HasId {
   /** Returns a list of Financial Connections {@code Account} objects. */
   public static AccountCollection list(AccountListParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/accounts");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
+    String path = "/v1/financial_connections/accounts";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            AccountCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Lists all owners for a given {@code Account}. */
@@ -278,15 +295,18 @@ public class Account extends ApiResource implements HasId {
   /** Lists all owners for a given {@code Account}. */
   public AccountOwnerCollection listOwners(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/owners", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            AccountOwnerCollection.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/owners",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, AccountOwnerCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Lists all owners for a given {@code Account}. */
@@ -297,15 +317,19 @@ public class Account extends ApiResource implements HasId {
   /** Lists all owners for a given {@code Account}. */
   public AccountOwnerCollection listOwners(AccountListOwnersParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/owners", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            AccountOwnerCollection.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/owners",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, AccountOwnerCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
@@ -317,19 +341,18 @@ public class Account extends ApiResource implements HasId {
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public com.stripe.model.financialconnections.Account refresh(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
@@ -341,19 +364,19 @@ public class Account extends ApiResource implements HasId {
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public com.stripe.model.financialconnections.Account refresh(
       AccountRefreshParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an Financial Connections {@code Account}. */
@@ -371,35 +394,34 @@ public class Account extends ApiResource implements HasId {
   /** Retrieves the details of an Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /**
@@ -417,19 +439,19 @@ public class Account extends ApiResource implements HasId {
    */
   public com.stripe.model.financialconnections.Account subscribe(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/subscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/subscribe",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /**
@@ -447,19 +469,20 @@ public class Account extends ApiResource implements HasId {
    */
   public com.stripe.model.financialconnections.Account subscribe(
       AccountSubscribeParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/subscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/subscribe",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /**
@@ -477,19 +500,19 @@ public class Account extends ApiResource implements HasId {
    */
   public com.stripe.model.financialconnections.Account unsubscribe(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/unsubscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/unsubscribe",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   /**
@@ -507,19 +530,20 @@ public class Account extends ApiResource implements HasId {
    */
   public com.stripe.model.financialconnections.Account unsubscribe(
       AccountUnsubscribeParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/unsubscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            com.stripe.model.financialconnections.Account.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/unsubscribe",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -777,5 +801,17 @@ public class Account extends ApiResource implements HasId {
      */
     @SerializedName("status")
     String status;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(accountHolder, responseGetter);
+    trySetResponseGetter(balance, responseGetter);
+    trySetResponseGetter(balanceRefresh, responseGetter);
+    trySetResponseGetter(inferredBalancesRefresh, responseGetter);
+    trySetResponseGetter(ownership, responseGetter);
+    trySetResponseGetter(ownershipRefresh, responseGetter);
+    trySetResponseGetter(transactionRefresh, responseGetter);
   }
 }

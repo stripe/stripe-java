@@ -2,14 +2,17 @@
 package com.stripe.model.treasury;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.treasury.OutboundPaymentCancelParams;
 import com.stripe.param.treasury.OutboundPaymentCreateParams;
 import com.stripe.param.treasury.OutboundPaymentFailParams;
@@ -195,14 +198,18 @@ public class OutboundPayment extends ApiResource implements HasId {
   /** Cancel an OutboundPayment. */
   public OutboundPayment cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            OutboundPayment.class,
             options,
-            String.format(
-                "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+            ApiMode.V1);
   }
 
   /** Cancel an OutboundPayment. */
@@ -213,14 +220,19 @@ public class OutboundPayment extends ApiResource implements HasId {
   /** Cancel an OutboundPayment. */
   public OutboundPayment cancel(OutboundPaymentCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            OutboundPayment.class,
             options,
-            String.format(
-                "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+            ApiMode.V1);
   }
 
   /** Creates an OutboundPayment. */
@@ -231,10 +243,16 @@ public class OutboundPayment extends ApiResource implements HasId {
   /** Creates an OutboundPayment. */
   public static OutboundPayment create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_payments");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+    String path = "/v1/treasury/outbound_payments";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            OutboundPayment.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates an OutboundPayment. */
@@ -245,10 +263,17 @@ public class OutboundPayment extends ApiResource implements HasId {
   /** Creates an OutboundPayment. */
   public static OutboundPayment create(OutboundPaymentCreateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_payments");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+    String path = "/v1/treasury/outbound_payments";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            OutboundPayment.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
@@ -259,10 +284,16 @@ public class OutboundPayment extends ApiResource implements HasId {
   /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
   public static OutboundPaymentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_payments");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OutboundPaymentCollection.class, options);
+    String path = "/v1/treasury/outbound_payments";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            OutboundPaymentCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
@@ -274,10 +305,17 @@ public class OutboundPayment extends ApiResource implements HasId {
   /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
   public static OutboundPaymentCollection list(
       OutboundPaymentListParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_payments");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OutboundPaymentCollection.class, options);
+    String path = "/v1/treasury/outbound_payments";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            OutboundPaymentCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -302,13 +340,16 @@ public class OutboundPayment extends ApiResource implements HasId {
    */
   public static OutboundPayment retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/treasury/outbound_payments/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            OutboundPayment.class,
             options,
-            String.format("/v1/treasury/outbound_payments/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OutboundPayment.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -318,13 +359,17 @@ public class OutboundPayment extends ApiResource implements HasId {
   public static OutboundPayment retrieve(
       String id, OutboundPaymentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/treasury/outbound_payments/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            OutboundPayment.class,
             options,
-            String.format("/v1/treasury/outbound_payments/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OutboundPayment.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -554,15 +599,20 @@ public class OutboundPayment extends ApiResource implements HasId {
      */
     public OutboundPayment fail(Map<String, Object> params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s/fail",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              OutboundPayment.class,
               options,
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_payments/%s/fail",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+              ApiMode.V1);
     }
 
     /**
@@ -579,15 +629,21 @@ public class OutboundPayment extends ApiResource implements HasId {
      */
     public OutboundPayment fail(OutboundPaymentFailParams params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s/fail",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              OutboundPayment.class,
               options,
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_payments/%s/fail",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+              ApiMode.V1);
     }
 
     /**
@@ -620,15 +676,20 @@ public class OutboundPayment extends ApiResource implements HasId {
      */
     public OutboundPayment post(Map<String, Object> params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s/post",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              OutboundPayment.class,
               options,
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_payments/%s/post",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+              ApiMode.V1);
     }
 
     /**
@@ -645,15 +706,21 @@ public class OutboundPayment extends ApiResource implements HasId {
      */
     public OutboundPayment post(OutboundPaymentPostParams params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s/post",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              OutboundPayment.class,
               options,
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_payments/%s/post",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+              ApiMode.V1);
     }
 
     /**
@@ -687,15 +754,20 @@ public class OutboundPayment extends ApiResource implements HasId {
      */
     public OutboundPayment returnOutboundPayment(Map<String, Object> params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s/return",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              OutboundPayment.class,
               options,
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_payments/%s/return",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+              ApiMode.V1);
     }
 
     /**
@@ -714,15 +786,31 @@ public class OutboundPayment extends ApiResource implements HasId {
     public OutboundPayment returnOutboundPayment(
         OutboundPaymentReturnOutboundPaymentParams params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s/return",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              OutboundPayment.class,
               options,
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_payments/%s/return",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+              ApiMode.V1);
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(destinationPaymentMethodDetails, responseGetter);
+    trySetResponseGetter(endUserDetails, responseGetter);
+    trySetResponseGetter(returnedDetails, responseGetter);
+    trySetResponseGetter(statusTransitions, responseGetter);
+    trySetResponseGetter(transaction, responseGetter);
   }
 }

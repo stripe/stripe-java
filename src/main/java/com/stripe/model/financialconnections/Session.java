@@ -2,15 +2,18 @@
 package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.financialconnections.SessionCreateParams;
 import com.stripe.param.financialconnections.SessionRetrieveParams;
 import java.util.List;
@@ -108,9 +111,16 @@ public class Session extends ApiResource implements HasId {
    */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/sessions");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+    String path = "/v1/financial_connections/sessions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Session.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -127,9 +137,17 @@ public class Session extends ApiResource implements HasId {
    */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/sessions");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+    String path = "/v1/financial_connections/sessions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Session.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the details of a Financial Connections {@code Session}. */
@@ -145,25 +163,34 @@ public class Session extends ApiResource implements HasId {
   /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Session.class,
             options,
-            String.format(
-                "/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Session.class,
             options,
-            String.format(
-                "/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -275,5 +302,16 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("reason")
       String reason;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(accountHolder, responseGetter);
+    trySetResponseGetter(accounts, responseGetter);
+    trySetResponseGetter(filters, responseGetter);
+    trySetResponseGetter(limits, responseGetter);
+    trySetResponseGetter(manualEntry, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
   }
 }
