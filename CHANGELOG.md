@@ -2,6 +2,60 @@
 
 
 ## 23.0.0 - 2023-08-16
+* This release changes the pinned API version to `2023-08-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
+* More information is available in the [stripe-node v13 migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23)
+
+"⚠️" symbol highlights breaking changes.
+
+* [#1632](https://github.com/stripe/stripe-java/pull/1632) Update generated code
+  * ⚠️Remove support for values `custom_account_update` and `custom_account_verification` from enum `AccountLinkCreateParams.type`
+    * These values are not fully operational
+  * ⚠️Remove support for `available_on` on `BalanceTransactionListParams`
+    * Use of this parameter is discouraged. You may use [`.putExtraParam`](https://github.com/stripe/stripe-java/#parameters) if sending the parameter is still required.
+  * ⚠️Remove support for `alternate_statement_descriptors`, `destination`, and `dispute` on `Charge`
+    * Use of these fields is discouraged.
+  * Remove support for `shipping_rates` on `checkout.SessionCreateParams`
+  * ⚠️Remove support for `shipping_rates` on `checkout.SessionCreateParams`
+    * Please use `shipping_options` instead.
+  * ⚠️Remove support for `coupon` and `trial_from_plan` on `checkout.SessionCreateParams.subscription_data`
+    * Please [migrate to the Prices API](https://stripe.com/docs/billing/migration/migrating-prices), or use [`.putExtraParam`](https://github.com/stripe/stripe-java/#parameters) if sending the parameter is still required.
+  * ⚠️Remove support for value `card_present` from enums `CustomerListPaymentMethodsParams.type` and `PaymentMethodListParams.type`
+    * This value was not fully operational.
+  * ⚠️Remove support for `blik` on `Mandate.payment_method_details`, `PaymentMethodUpdateParams`, `SetupAttempt.payment_method_details`, `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_options`, and `SetupIntentUpdateParams.payment_method_options`
+    * These fields were mistakenly released.
+  * ⚠️Remove support for `acss_debit`, `affirm`, `au_becs_debit`, `bacs_debit`, `cashapp`, `sepa_debit`, and `zip` on `PaymentMethodUpdateParams`
+    * These fields are empty.
+  * ⚠️Remove support for `country` on `PaymentMethod.link`
+    * This field was not fully operational.
+  * ⚠️Remove support for `recurring` on `PriceUpdateParams`
+    * This property should be set on create only.
+  * ⚠️Remove support for `attributes`, `caption`, and `deactivate_on` on `ProductCreateParams`, `ProductUpdateParams`, and `Product`
+    * These fields are not fully operational.
+  * Add support for new value `2023-08-16` on enum `WebhookEndpointCreateParams.api_version`
+* [#1622](https://github.com/stripe/stripe-java/pull/1622) - StripeClient
+  * Introduces `StripeClient` and the service-based pattern, a new interface for calling the Stripe API with many benefits over the existing resource-based paradigm.
+    * No global config: you can simultaneously use multiple clients with different configuration options (such as API keys)
+    * No extra API calls. All API endpoints can be accessed with a single method call. You don't have to call `retrieve` before doing an `update`.
+    * No static methods. Much easier mocking.
+    * Visit the [migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23) to learn more.
+  * **Removals**
+    * ⚠️ `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
+    * ⚠️ `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
+    *  ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
+  * **Type changes**
+    * ⚠️ `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
+      * `BaseAddress` parameter added.
+      * `url` renamed to `path` and is a relative to the base address
+      * `apiMode` parameter added to control how request is sent and response is handled, `V1` and `OAuth` are supported values.
+      * ⚠️ `RequestOptions.getReadTimeout()`, `getConnectTimeout()`, `getMaxNetworkRetries()` now return `Integer` instead of `int`.
+  * **Renames**
+    * ⚠️ `addFullNameAliase` renamed to `addFullNameAlias` in `AccountCreateParams`, `AccountUpdateParams`, `PersonCollectionCreateParams`, `TokenCreateParams`, `PersonCollectionCreateParams`, `PersonUpdateParams`.
+    * ⚠️ `addLookupKeys` renamed to `addLookupKey` in `PriceListParams`
+  * **Behavior Changes**
+    * ⚠️ `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+    * ⚠️ `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+
+## 23.0.0 - 2023-08-16
 
 ### StripeClient
 
