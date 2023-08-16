@@ -9,6 +9,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.FileCollection;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.FileCreateParams;
 import com.stripe.param.FileListParams;
@@ -33,7 +34,7 @@ public class FileTest extends BaseStripeTest {
     final com.stripe.model.File file = com.stripe.model.File.create(params);
 
     assertNotNull(file);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/files", params, null);
+    verifyRequest(BaseAddress.FILES, ApiResource.RequestMethod.POST, "/v1/files", params, null);
   }
 
   @Test
@@ -51,6 +52,7 @@ public class FileTest extends BaseStripeTest {
 
     assertNotNull(file);
     verifyRequest(
+        BaseAddress.FILES,
         ApiResource.RequestMethod.POST,
         "/v1/files",
         ImmutableMap.of(
@@ -84,7 +86,7 @@ public class FileTest extends BaseStripeTest {
     final com.stripe.model.File file = com.stripe.model.File.create(params);
 
     assertNotNull(file);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/files", params, null);
+    verifyRequest(BaseAddress.FILES, ApiResource.RequestMethod.POST, "/v1/files", params, null);
   }
 
   @Test
@@ -98,7 +100,7 @@ public class FileTest extends BaseStripeTest {
     final com.stripe.model.File file = com.stripe.model.File.create(params);
 
     assertNotNull(file);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/files", params, null);
+    verifyRequest(BaseAddress.FILES, ApiResource.RequestMethod.POST, "/v1/files", params, null);
   }
 
   @Test

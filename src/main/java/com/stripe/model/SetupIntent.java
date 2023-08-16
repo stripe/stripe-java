@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.SetupIntentCancelParams;
 import com.stripe.param.SetupIntentConfirmParams;
 import com.stripe.param.SetupIntentCreateParams;
@@ -388,13 +391,17 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public SetupIntent cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -417,13 +424,18 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public SetupIntent cancel(SetupIntentCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -492,13 +504,17 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public SetupIntent confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -533,13 +549,18 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public SetupIntent confirm(SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -562,9 +583,16 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public static SetupIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    String path = "/v1/setup_intents";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            SetupIntent.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -587,9 +615,17 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public static SetupIntent create(SetupIntentCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    String path = "/v1/setup_intents";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupIntent.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of SetupIntents. */
@@ -600,8 +636,16 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /** Returns a list of SetupIntents. */
   public static SetupIntentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
-    return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
+    String path = "/v1/setup_intents";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            SetupIntentCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of SetupIntents. */
@@ -612,8 +656,17 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /** Returns a list of SetupIntents. */
   public static SetupIntentCollection list(SetupIntentListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
-    return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
+    String path = "/v1/setup_intents";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupIntentCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -656,13 +709,16 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public static SetupIntent retrieve(
       String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -678,13 +734,17 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntent retrieve(
       String intent, SetupIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /** Updates a SetupIntent object. */
@@ -697,13 +757,16 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Override
   public SetupIntent update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /** Updates a SetupIntent object. */
@@ -714,13 +777,17 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /** Updates a SetupIntent object. */
   public SetupIntent update(SetupIntentUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupIntent.class,
             options,
-            String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /** Verifies microdeposits on a SetupIntent object. */
@@ -741,15 +808,18 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /** Verifies microdeposits on a SetupIntent object. */
   public SetupIntent verifyMicrodeposits(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/setup_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            SetupIntent.class,
             options,
-            String.format(
-                "/v1/setup_intents/%s/verify_microdeposits",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   /** Verifies microdeposits on a SetupIntent object. */
@@ -761,15 +831,19 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /** Verifies microdeposits on a SetupIntent object. */
   public SetupIntent verifyMicrodeposits(
       SetupIntentVerifyMicrodepositsParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/setup_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SetupIntent.class,
             options,
-            String.format(
-                "/v1/setup_intents/%s/verify_microdeposits",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -1210,5 +1284,21 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         String returnUrl;
       }
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(automaticPaymentMethods, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(lastSetupError, responseGetter);
+    trySetResponseGetter(latestAttempt, responseGetter);
+    trySetResponseGetter(mandate, responseGetter);
+    trySetResponseGetter(nextAction, responseGetter);
+    trySetResponseGetter(onBehalfOf, responseGetter);
+    trySetResponseGetter(paymentMethod, responseGetter);
+    trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(singleUseMandate, responseGetter);
   }
 }

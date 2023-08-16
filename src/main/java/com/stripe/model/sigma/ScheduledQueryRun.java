@@ -2,13 +2,16 @@
 package com.stripe.model.sigma;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.sigma.ScheduledQueryRunListParams;
 import com.stripe.param.sigma.ScheduledQueryRunRetrieveParams;
 import java.util.Map;
@@ -89,9 +92,16 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   /** Returns a list of scheduled query runs. */
   public static ScheduledQueryRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/sigma/scheduled_query_runs");
-    return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
+    String path = "/v1/sigma/scheduled_query_runs";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ScheduledQueryRunCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of scheduled query runs. */
@@ -103,9 +113,17 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   /** Returns a list of scheduled query runs. */
   public static ScheduledQueryRunCollection list(
       ScheduledQueryRunListParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/sigma/scheduled_query_runs");
-    return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
+    String path = "/v1/sigma/scheduled_query_runs";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ScheduledQueryRunCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an scheduled query run. */
@@ -123,28 +141,37 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   public static ScheduledQueryRun retrieve(
       String scheduledQueryRun, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ScheduledQueryRun.class,
             options,
-            String.format(
-                "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an scheduled query run. */
   public static ScheduledQueryRun retrieve(
       String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ScheduledQueryRun.class,
             options,
-            String.format(
-                "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -154,5 +181,12 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
     /** Information about the run failure. */
     @SerializedName("message")
     String message;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(error, responseGetter);
+    trySetResponseGetter(file, responseGetter);
   }
 }

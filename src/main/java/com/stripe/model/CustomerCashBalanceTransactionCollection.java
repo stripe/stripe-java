@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.model;
 
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerCashBalanceTransactionCollectionListParams;
 import com.stripe.param.CustomerCashBalanceTransactionCollectionRetrieveParams;
@@ -26,9 +28,16 @@ public class CustomerCashBalanceTransactionCollection
    */
   public CustomerCashBalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(
-        url, params, CustomerCashBalanceTransactionCollection.class, options);
+    String path = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CustomerCashBalanceTransactionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -47,9 +56,17 @@ public class CustomerCashBalanceTransactionCollection
   public CustomerCashBalanceTransactionCollection list(
       CustomerCashBalanceTransactionCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(
-        url, params, CustomerCashBalanceTransactionCollection.class, options);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CustomerCashBalanceTransactionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -75,13 +92,16 @@ public class CustomerCashBalanceTransactionCollection
    */
   public CustomerCashBalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CustomerCashBalanceTransaction.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CustomerCashBalanceTransaction.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -93,12 +113,16 @@ public class CustomerCashBalanceTransactionCollection
       CustomerCashBalanceTransactionCollectionRetrieveParams params,
       RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CustomerCashBalanceTransaction.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CustomerCashBalanceTransaction.class, options);
+            ApiMode.V1);
   }
 }

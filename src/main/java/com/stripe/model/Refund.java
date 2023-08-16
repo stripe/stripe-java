@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.RefundCancelParams;
 import com.stripe.param.RefundCreateParams;
 import com.stripe.param.RefundExpireParams;
@@ -312,12 +315,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Refund.class,
             options,
-            String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -337,12 +344,17 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel(RefundCancelParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Refund.class,
             options,
-            String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 
   /** Create a refund. */
@@ -353,8 +365,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   /** Create a refund. */
   public static Refund create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/refunds");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+    String path = "/v1/refunds";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Refund.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Create a refund. */
@@ -365,8 +385,17 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   /** Create a refund. */
   public static Refund create(RefundCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/refunds");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+    String path = "/v1/refunds";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Refund.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -385,8 +414,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    */
   public static RefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/refunds");
-    return ApiResource.requestCollection(url, params, RefundCollection.class, options);
+    String path = "/v1/refunds";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            RefundCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -405,8 +442,17 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    */
   public static RefundCollection list(RefundListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/refunds");
-    return ApiResource.requestCollection(url, params, RefundCollection.class, options);
+    String path = "/v1/refunds";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            RefundCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an existing refund. */
@@ -422,23 +468,32 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   /** Retrieves the details of an existing refund. */
   public static Refund retrieve(String refund, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Refund.class,
             options,
-            String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the details of an existing refund. */
   public static Refund retrieve(String refund, RefundRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Refund.class,
             options,
-            String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -460,12 +515,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    */
   @Override
   public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Refund.class,
             options,
-            String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -485,12 +544,17 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    * <p>This request only accepts {@code metadata} as an argument.
    */
   public Refund update(RefundUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Refund.class,
             options,
-            String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -560,15 +624,19 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire(Map<String, Object> params, RequestOptions options)
         throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/refunds/%s/expire", ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Refund.class,
               options,
-              String.format(
-                  "/v1/test_helpers/refunds/%s/expire",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+              ApiMode.V1);
     }
 
     /** Expire a refund with a status of {@code requires_action}. */
@@ -578,15 +646,32 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
 
     /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire(RefundExpireParams params, RequestOptions options) throws StripeException {
-      String url =
-          ApiResource.fullUrl(
-              Stripe.getApiBase(),
+      String path =
+          String.format(
+              "/v1/test_helpers/refunds/%s/expire", ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Refund.class,
               options,
-              String.format(
-                  "/v1/test_helpers/refunds/%s/expire",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+              ApiMode.V1);
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(balanceTransaction, responseGetter);
+    trySetResponseGetter(charge, responseGetter);
+    trySetResponseGetter(failureBalanceTransaction, responseGetter);
+    trySetResponseGetter(nextAction, responseGetter);
+    trySetResponseGetter(paymentIntent, responseGetter);
+    trySetResponseGetter(sourceTransferReversal, responseGetter);
+    trySetResponseGetter(transferReversal, responseGetter);
   }
 }

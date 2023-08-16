@@ -2,7 +2,6 @@
 package com.stripe.model.issuing;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
@@ -10,8 +9,12 @@ import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.CardholderCreateParams;
 import com.stripe.param.issuing.CardholderListParams;
 import com.stripe.param.issuing.CardholderRetrieveParams;
@@ -137,9 +140,16 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+    String path = "/v1/issuing/cardholders";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Cardholder.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
@@ -150,9 +160,17 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(CardholderCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+    String path = "/v1/issuing/cardholders";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Cardholder.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -169,8 +187,16 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    */
   public static CardholderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
-    return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
+    String path = "/v1/issuing/cardholders";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CardholderCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -187,8 +213,17 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    */
   public static CardholderCollection list(CardholderListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
-    return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
+    String path = "/v1/issuing/cardholders";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CardholderCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves an Issuing {@code Cardholder} object. */
@@ -206,26 +241,33 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static Cardholder retrieve(
       String cardholder, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Cardholder.class,
             options,
-            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves an Issuing {@code Cardholder} object. */
   public static Cardholder retrieve(
       String cardholder, CardholderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Cardholder.class,
             options,
-            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -244,13 +286,17 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Override
   public Cardholder update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Cardholder.class,
             options,
-            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -267,13 +313,18 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    */
   public Cardholder update(CardholderUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Cardholder.class,
             options,
-            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -530,5 +581,15 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @SerializedName("interval")
       String interval;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(billing, responseGetter);
+    trySetResponseGetter(company, responseGetter);
+    trySetResponseGetter(individual, responseGetter);
+    trySetResponseGetter(requirements, responseGetter);
+    trySetResponseGetter(spendingControls, responseGetter);
   }
 }

@@ -2,9 +2,11 @@
 package com.stripe.model.terminal;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.terminal.ConnectionTokenCreateParams;
 import java.util.Map;
@@ -58,10 +60,16 @@ public class ConnectionToken extends ApiResource {
    */
   public static ConnectionToken create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/connection_tokens");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ConnectionToken.class, options);
+    String path = "/v1/terminal/connection_tokens";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            ConnectionToken.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -80,9 +88,16 @@ public class ConnectionToken extends ApiResource {
    */
   public static ConnectionToken create(ConnectionTokenCreateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/connection_tokens");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ConnectionToken.class, options);
+    String path = "/v1/terminal/connection_tokens";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ConnectionToken.class,
+            options,
+            ApiMode.V1);
   }
 }
