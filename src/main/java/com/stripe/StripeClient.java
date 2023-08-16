@@ -32,7 +32,7 @@ public class StripeClient {
     this.responseGetter = responseGetter;
   }
 
-  protected StripeResponseGetter getResponseGetter() {
+  public StripeResponseGetter getResponseGetter() {
     return responseGetter;
   }
 
