@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.BalanceRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -104,8 +107,16 @@ public class Balance extends ApiResource {
    */
   public static Balance retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/balance");
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Balance.class, options);
+    String path = "/v1/balance";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Balance.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -116,8 +127,17 @@ public class Balance extends ApiResource {
    */
   public static Balance retrieve(BalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/balance");
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Balance.class, options);
+    String path = "/v1/balance";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Balance.class,
+            options,
+            ApiMode.V1);
   }
 
   @Getter
@@ -312,5 +332,11 @@ public class Balance extends ApiResource {
       @SerializedName("fpx")
       Long fpx;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(issuing, responseGetter);
   }
 }

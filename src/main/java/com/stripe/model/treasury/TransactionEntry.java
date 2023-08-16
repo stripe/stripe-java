@@ -2,14 +2,17 @@
 package com.stripe.model.treasury;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.model.issuing.Authorization;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.treasury.TransactionEntryListParams;
 import com.stripe.param.treasury.TransactionEntryRetrieveParams;
 import java.util.Map;
@@ -133,10 +136,16 @@ public class TransactionEntry extends ApiResource implements HasId {
   /** Retrieves a list of TransactionEntry objects. */
   public static TransactionEntryCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transaction_entries");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionEntryCollection.class, options);
+    String path = "/v1/treasury/transaction_entries";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            TransactionEntryCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves a list of TransactionEntry objects. */
@@ -148,10 +157,17 @@ public class TransactionEntry extends ApiResource implements HasId {
   /** Retrieves a list of TransactionEntry objects. */
   public static TransactionEntryCollection list(
       TransactionEntryListParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transaction_entries");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionEntryCollection.class, options);
+    String path = "/v1/treasury/transaction_entries";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            TransactionEntryCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves a TransactionEntry object. */
@@ -168,26 +184,33 @@ public class TransactionEntry extends ApiResource implements HasId {
   /** Retrieves a TransactionEntry object. */
   public static TransactionEntry retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            TransactionEntry.class,
             options,
-            String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionEntry.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a TransactionEntry object. */
   public static TransactionEntry retrieve(
       String id, TransactionEntryRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            TransactionEntry.class,
             options,
-            String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionEntry.class, options);
+            ApiMode.V1);
   }
 
   /** Change to a FinancialAccount's balance. */
@@ -310,5 +333,13 @@ public class TransactionEntry extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(balanceImpact, responseGetter);
+    trySetResponseGetter(flowDetails, responseGetter);
+    trySetResponseGetter(transaction, responseGetter);
   }
 }

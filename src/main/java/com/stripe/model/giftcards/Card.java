@@ -2,13 +2,16 @@
 package com.stripe.model.giftcards;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.giftcards.CardCreateParams;
 import com.stripe.param.giftcards.CardListParams;
 import com.stripe.param.giftcards.CardRetrieveParams;
@@ -92,8 +95,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** Creates a new gift card object. */
   public static Card create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    String path = "/v1/gift_cards/cards";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a new gift card object. */
@@ -104,8 +115,17 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** Creates a new gift card object. */
   public static Card create(CardCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    String path = "/v1/gift_cards/cards";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List gift cards for an account. */
@@ -116,9 +136,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** List gift cards for an account. */
   public static CardCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardCollection.class, options);
+    String path = "/v1/gift_cards/cards";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CardCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List gift cards for an account. */
@@ -129,9 +156,17 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** List gift cards for an account. */
   public static CardCollection list(CardListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardCollection.class, options);
+    String path = "/v1/gift_cards/cards";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CardCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieve a gift card by id. */
@@ -147,23 +182,32 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** Retrieve a gift card by id. */
   public static Card retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Card.class,
             options,
-            String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Card.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieve a gift card by id. */
   public static Card retrieve(String id, CardRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Card.class,
             options,
-            String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Card.class, options);
+            ApiMode.V1);
   }
 
   /** Update a gift card. */
@@ -175,12 +219,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** Update a gift card. */
   @Override
   public Card update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Card.class,
             options,
-            String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+            ApiMode.V1);
   }
 
   /** Update a gift card. */
@@ -190,12 +238,17 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /** Update a gift card. */
   public Card update(CardUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Card.class,
             options,
-            String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+            ApiMode.V1);
   }
 
   /** Validates a gift card code, returning the matching gift card object if it exists. */
@@ -206,8 +259,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** Validates a gift card code, returning the matching gift card object if it exists. */
   public static Card validate(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards/validate");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    String path = "/v1/gift_cards/cards/validate";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Validates a gift card code, returning the matching gift card object if it exists. */
@@ -218,8 +279,17 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** Validates a gift card code, returning the matching gift card object if it exists. */
   public static Card validate(CardValidateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards/validate");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+    String path = "/v1/gift_cards/cards/validate";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Card.class,
+            options,
+            ApiMode.V1);
   }
 
   @Getter
@@ -277,5 +347,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       @SerializedName("payment_intent")
       String paymentIntent;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(createdBy, responseGetter);
+    trySetResponseGetter(transactions, responseGetter);
   }
 }

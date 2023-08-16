@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentMethodConfigurationCreateParams;
 import com.stripe.param.PaymentMethodConfigurationListParams;
 import com.stripe.param.PaymentMethodConfigurationRetrieveParams;
@@ -180,10 +183,16 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   /** Creates a payment method configuration. */
   public static PaymentMethodConfiguration create(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_method_configurations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethodConfiguration.class, options);
+    String path = "/v1/payment_method_configurations";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            PaymentMethodConfiguration.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a payment method configuration. */
@@ -196,10 +205,17 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   public static PaymentMethodConfiguration create(
       PaymentMethodConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_method_configurations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethodConfiguration.class, options);
+    String path = "/v1/payment_method_configurations";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PaymentMethodConfiguration.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List payment method configurations. */
@@ -211,14 +227,16 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   /** List payment method configurations. */
   public static PaymentMethodConfigurationCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_method_configurations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET,
-        url,
-        params,
-        PaymentMethodConfigurationCollection.class,
-        options);
+    String path = "/v1/payment_method_configurations";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            PaymentMethodConfigurationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List payment method configurations. */
@@ -230,14 +248,17 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   /** List payment method configurations. */
   public static PaymentMethodConfigurationCollection list(
       PaymentMethodConfigurationListParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_method_configurations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET,
-        url,
-        params,
-        PaymentMethodConfigurationCollection.class,
-        options);
+    String path = "/v1/payment_method_configurations";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PaymentMethodConfigurationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieve payment method configuration. */
@@ -255,28 +276,37 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   public static PaymentMethodConfiguration retrieve(
       String configuration, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            PaymentMethodConfiguration.class,
             options,
-            String.format(
-                "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethodConfiguration.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieve payment method configuration. */
   public static PaymentMethodConfiguration retrieve(
       String configuration, PaymentMethodConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PaymentMethodConfiguration.class,
             options,
-            String.format(
-                "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethodConfiguration.class, options);
+            ApiMode.V1);
   }
 
   /** Update payment method configuration. */
@@ -287,14 +317,18 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   /** Update payment method configuration. */
   public PaymentMethodConfiguration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            PaymentMethodConfiguration.class,
             options,
-            String.format(
-                "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethodConfiguration.class, options);
+            ApiMode.V1);
   }
 
   /** Update payment method configuration. */
@@ -307,14 +341,19 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   public PaymentMethodConfiguration update(
       PaymentMethodConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PaymentMethodConfiguration.class,
             options,
-            String.format(
-                "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethodConfiguration.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -1906,5 +1945,46 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(acssDebit, responseGetter);
+    trySetResponseGetter(affirm, responseGetter);
+    trySetResponseGetter(afterpayClearpay, responseGetter);
+    trySetResponseGetter(alipay, responseGetter);
+    trySetResponseGetter(applePay, responseGetter);
+    trySetResponseGetter(auBecsDebit, responseGetter);
+    trySetResponseGetter(bacsDebit, responseGetter);
+    trySetResponseGetter(bancontact, responseGetter);
+    trySetResponseGetter(blik, responseGetter);
+    trySetResponseGetter(boleto, responseGetter);
+    trySetResponseGetter(card, responseGetter);
+    trySetResponseGetter(cartesBancaires, responseGetter);
+    trySetResponseGetter(cashapp, responseGetter);
+    trySetResponseGetter(eps, responseGetter);
+    trySetResponseGetter(fpx, responseGetter);
+    trySetResponseGetter(giropay, responseGetter);
+    trySetResponseGetter(googlePay, responseGetter);
+    trySetResponseGetter(grabpay, responseGetter);
+    trySetResponseGetter(idBankTransfer, responseGetter);
+    trySetResponseGetter(ideal, responseGetter);
+    trySetResponseGetter(jcb, responseGetter);
+    trySetResponseGetter(klarna, responseGetter);
+    trySetResponseGetter(konbini, responseGetter);
+    trySetResponseGetter(link, responseGetter);
+    trySetResponseGetter(multibanco, responseGetter);
+    trySetResponseGetter(netbanking, responseGetter);
+    trySetResponseGetter(oxxo, responseGetter);
+    trySetResponseGetter(p24, responseGetter);
+    trySetResponseGetter(payByBank, responseGetter);
+    trySetResponseGetter(paynow, responseGetter);
+    trySetResponseGetter(promptpay, responseGetter);
+    trySetResponseGetter(sepaDebit, responseGetter);
+    trySetResponseGetter(sofort, responseGetter);
+    trySetResponseGetter(upi, responseGetter);
+    trySetResponseGetter(usBankAccount, responseGetter);
+    trySetResponseGetter(wechatPay, responseGetter);
   }
 }

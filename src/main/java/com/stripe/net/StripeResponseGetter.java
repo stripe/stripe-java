@@ -3,39 +3,44 @@ package com.stripe.net;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObjectInterface;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 public interface StripeResponseGetter {
+  @SuppressWarnings("TypeParameterUnusedInFormals")
   <T extends StripeObjectInterface> T request(
+      BaseAddress baseAddress,
       ApiResource.RequestMethod method,
-      String url,
+      String path,
       Map<String, Object> params,
-      Class<T> clazz,
-      RequestOptions options)
+      Type typeToken,
+      RequestOptions options,
+      ApiMode apiMode)
       throws StripeException;
 
-  <T extends StripeObjectInterface> T oauthRequest(
+  InputStream requestStream(
+      BaseAddress baseAddress,
       ApiResource.RequestMethod method,
-      String url,
+      String path,
       Map<String, Object> params,
-      Class<T> clazz,
-      RequestOptions options)
+      RequestOptions options,
+      ApiMode apiMode)
       throws StripeException;
-
-  default InputStream requestStream(
-      ApiResource.RequestMethod method,
-      String url,
-      Map<String, Object> params,
-      RequestOptions options)
-      throws StripeException {
-    throw new UnsupportedOperationException(
-        "requestStream is unimplemented for this StripeResponseGetter");
-  }
 
   default StripeResponse rawRequest(
-      ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
+      BaseAddress baseAddress,
+      ApiResource.RequestMethod method,
+      String path,
+      String content,
+      RawRequestOptions options)
       throws StripeException {
     throw new UnsupportedOperationException(
         "rawRequest is unimplemented for this StripeResponseGetter");
   }
+
+  /**
+   * This method should e.g. throws an ApiKeyMissingError if a proper API Key cannot be determined
+   * by the ResponseGetter or from the RequestOptions passed in.
+   */
+  default void validateRequestOptions(RequestOptions options) {}
 }

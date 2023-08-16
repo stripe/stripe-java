@@ -9,11 +9,6 @@ public class RawRequestOptions extends RequestOptions {
 
   private Map<String, String> additionalHeaders;
 
-  public enum ApiMode {
-    STANDARD,
-    PREVIEW
-  }
-
   public RawRequestOptions(
       String apiKey,
       String clientId,
@@ -21,9 +16,9 @@ public class RawRequestOptions extends RequestOptions {
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
-      int connectTimeout,
-      int readTimeout,
-      int maxNetworkRetries,
+      Integer connectTimeout,
+      Integer readTimeout,
+      Integer maxNetworkRetries,
       Proxy connectionProxy,
       PasswordAuthentication proxyCredential,
       ApiMode apiMode,
@@ -67,7 +62,7 @@ public class RawRequestOptions extends RequestOptions {
      */
     public RawRequestOptionsBuilder() {
       super();
-      apiMode = ApiMode.STANDARD;
+      apiMode = ApiMode.V1;
     }
 
     public ApiMode getApiMode() {
@@ -119,19 +114,19 @@ public class RawRequestOptions extends RequestOptions {
     }
 
     @Override
-    public RawRequestOptionsBuilder setConnectTimeout(int timeout) {
+    public RawRequestOptionsBuilder setConnectTimeout(Integer timeout) {
       super.setConnectTimeout(timeout);
       return this;
     }
 
     @Override
-    public RawRequestOptionsBuilder setReadTimeout(int timeout) {
+    public RawRequestOptionsBuilder setReadTimeout(Integer timeout) {
       super.setReadTimeout(timeout);
       return this;
     }
 
     @Override
-    public RawRequestOptionsBuilder setMaxNetworkRetries(int maxNetworkRetries) {
+    public RawRequestOptionsBuilder setMaxNetworkRetries(Integer maxNetworkRetries) {
       super.setMaxNetworkRetries(maxNetworkRetries);
       return this;
     }

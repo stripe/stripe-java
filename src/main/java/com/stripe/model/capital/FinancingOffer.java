@@ -2,12 +2,15 @@
 package com.stripe.model.capital;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.capital.FinancingOfferListParams;
 import com.stripe.param.capital.FinancingOfferMarkDeliveredParams;
 import com.stripe.param.capital.FinancingOfferRetrieveParams;
@@ -134,9 +137,16 @@ public class FinancingOffer extends ApiResource implements HasId {
    */
   public static FinancingOfferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_offers");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FinancingOfferCollection.class, options);
+    String path = "/v1/capital/financing_offers";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            FinancingOfferCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -152,9 +162,17 @@ public class FinancingOffer extends ApiResource implements HasId {
    */
   public static FinancingOfferCollection list(
       FinancingOfferListParams params, RequestOptions options) throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_offers");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FinancingOfferCollection.class, options);
+    String path = "/v1/capital/financing_offers";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            FinancingOfferCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -187,15 +205,19 @@ public class FinancingOffer extends ApiResource implements HasId {
    */
   public FinancingOffer markDelivered(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/capital/financing_offers/%s/mark_delivered",
+            ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            FinancingOffer.class,
             options,
-            String.format(
-                "/v1/capital/financing_offers/%s/mark_delivered",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancingOffer.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -213,15 +235,20 @@ public class FinancingOffer extends ApiResource implements HasId {
    */
   public FinancingOffer markDelivered(
       FinancingOfferMarkDeliveredParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/capital/financing_offers/%s/mark_delivered",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            FinancingOffer.class,
             options,
-            String.format(
-                "/v1/capital/financing_offers/%s/mark_delivered",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancingOffer.class, options);
+            ApiMode.V1);
   }
 
   /** Get the details of the financing offer. */
@@ -239,28 +266,35 @@ public class FinancingOffer extends ApiResource implements HasId {
   public static FinancingOffer retrieve(
       String financingOffer, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            FinancingOffer.class,
             options,
-            String.format(
-                "/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FinancingOffer.class, options);
+            ApiMode.V1);
   }
 
   /** Get the details of the financing offer. */
   public static FinancingOffer retrieve(
       String financingOffer, FinancingOfferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            FinancingOffer.class,
             options,
-            String.format(
-                "/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FinancingOffer.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -337,5 +371,12 @@ public class FinancingOffer extends ApiResource implements HasId {
     /** Per-transaction rate at which Stripe will withhold funds to repay the financing. */
     @SerializedName("withhold_rate")
     BigDecimal withholdRate;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(acceptedTerms, responseGetter);
+    trySetResponseGetter(offeredTerms, responseGetter);
   }
 }

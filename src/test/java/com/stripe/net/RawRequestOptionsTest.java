@@ -9,7 +9,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
-import com.stripe.net.RawRequestOptions.ApiMode;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,9 +41,10 @@ public class RawRequestOptionsTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final ApiMode apiMode = ApiMode.STANDARD;
+    final ApiMode apiMode = ApiMode.V1;
 
-    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
+    final RawRequestOptions options =
+        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
 
     assertEquals(apiMode, options.getApiMode());
 
@@ -69,7 +69,8 @@ public class RawRequestOptionsTest extends BaseStripeTest {
         new MockResponse()
             .setBody("{\"id\": \"sub_sched_123\",\n  \"object\": \"subscription_schedule\"}"));
     final ApiMode apiMode = ApiMode.PREVIEW;
-    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
+    final RawRequestOptions options =
+        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
 
     assertEquals(apiMode, options.getApiMode());
 
@@ -98,7 +99,8 @@ public class RawRequestOptionsTest extends BaseStripeTest {
         new MockResponse()
             .setBody("{\"id\": \"sub_sched_123\",\n  \"object\": \"subscription_schedule\"}"));
     final ApiMode apiMode = ApiMode.PREVIEW;
-    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
+    final RawRequestOptions options =
+        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
 
     assertEquals(apiMode, options.getApiMode());
 
@@ -148,9 +150,10 @@ public class RawRequestOptionsTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final ApiMode apiMode = ApiMode.STANDARD;
+    final ApiMode apiMode = ApiMode.V1;
 
-    final RawRequestOptions options = RawRequestOptions.builder().setApiMode(apiMode).build();
+    final RawRequestOptions options =
+        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
 
     assertEquals(apiMode, options.getApiMode());
 

@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.model;
 
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.FeeRefundCollectionCreateParams;
 import com.stripe.param.FeeRefundCollectionListParams;
@@ -39,9 +41,16 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefund create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+    String path = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            FeeRefund.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -72,9 +81,17 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefund create(FeeRefundCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            FeeRefund.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -95,9 +112,16 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FeeRefundCollection.class, options);
+    String path = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            FeeRefundCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -118,9 +142,17 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefundCollection list(FeeRefundCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FeeRefundCollection.class, options);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            FeeRefundCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -148,13 +180,16 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    */
   public FeeRefund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            FeeRefund.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -165,12 +200,16 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefund retrieve(
       String id, FeeRefundCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            FeeRefund.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
+            ApiMode.V1);
   }
 }

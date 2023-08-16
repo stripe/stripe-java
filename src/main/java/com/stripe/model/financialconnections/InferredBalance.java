@@ -2,10 +2,12 @@
 package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.financialconnections.InferredBalanceListParams;
 import java.util.Map;
@@ -63,15 +65,19 @@ public class InferredBalance extends ApiResource implements HasId {
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static InferredBalanceCollection list(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/inferred_balances",
+            ApiResource.urlEncodeId(account));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            InferredBalanceCollection.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/inferred_balances",
-                ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, InferredBalanceCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
@@ -84,14 +90,19 @@ public class InferredBalance extends ApiResource implements HasId {
   public static InferredBalanceCollection list(
       String account, InferredBalanceListParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/inferred_balances",
+            ApiResource.urlEncodeId(account));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            InferredBalanceCollection.class,
             options,
-            String.format(
-                "/v1/financial_connections/accounts/%s/inferred_balances",
-                ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, InferredBalanceCollection.class, options);
+            ApiMode.V1);
   }
 }

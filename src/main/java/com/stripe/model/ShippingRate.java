@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.ShippingRateCreateParams;
 import com.stripe.param.ShippingRateListParams;
 import com.stripe.param.ShippingRateRetrieveParams;
@@ -128,9 +131,16 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Creates a new shipping rate object. */
   public static ShippingRate create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+    String path = "/v1/shipping_rates";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            ShippingRate.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a new shipping rate object. */
@@ -141,9 +151,17 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Creates a new shipping rate object. */
   public static ShippingRate create(ShippingRateCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+    String path = "/v1/shipping_rates";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ShippingRate.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of your shipping rates. */
@@ -154,9 +172,16 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Returns a list of your shipping rates. */
   public static ShippingRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ShippingRateCollection.class, options);
+    String path = "/v1/shipping_rates";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ShippingRateCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of your shipping rates. */
@@ -167,9 +192,17 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Returns a list of your shipping rates. */
   public static ShippingRateCollection list(ShippingRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ShippingRateCollection.class, options);
+    String path = "/v1/shipping_rates";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ShippingRateCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns the shipping rate object with the given ID. */
@@ -187,26 +220,35 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   public static ShippingRate retrieve(
       String shippingRateToken, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ShippingRate.class,
             options,
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ShippingRate.class, options);
+            ApiMode.V1);
   }
 
   /** Returns the shipping rate object with the given ID. */
   public static ShippingRate retrieve(
       String shippingRateToken, ShippingRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ShippingRate.class,
             options,
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ShippingRate.class, options);
+            ApiMode.V1);
   }
 
   /** Updates an existing shipping rate object. */
@@ -219,13 +261,16 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @Override
   public ShippingRate update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            ShippingRate.class,
             options,
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+            ApiMode.V1);
   }
 
   /** Updates an existing shipping rate object. */
@@ -236,13 +281,17 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Updates an existing shipping rate object. */
   public ShippingRate update(ShippingRateUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ShippingRate.class,
             options,
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -333,5 +382,13 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
       @SerializedName("tax_behavior")
       String taxBehavior;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(deliveryEstimate, responseGetter);
+    trySetResponseGetter(fixedAmount, responseGetter);
+    trySetResponseGetter(taxCode, responseGetter);
   }
 }

@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.OrderCancelParams;
 import com.stripe.param.OrderCreateParams;
 import com.stripe.param.OrderListLineItemsParams;
@@ -270,12 +273,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
   /** Cancels the order as well as the payment intent if one is attached. */
   public Order cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Order.class,
             options,
-            String.format("/v1/orders/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /** Cancels the order as well as the payment intent if one is attached. */
@@ -285,12 +292,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
   /** Cancels the order as well as the payment intent if one is attached. */
   public Order cancel(OrderCancelParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Order.class,
             options,
-            String.format("/v1/orders/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /** Creates a new {@code open} order object. */
@@ -301,8 +313,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /** Creates a new {@code open} order object. */
   public static Order create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    String path = "/v1/orders";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Order.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a new {@code open} order object. */
@@ -313,8 +333,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /** Creates a new {@code open} order object. */
   public static Order create(OrderCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    String path = "/v1/orders";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Order.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -331,9 +360,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public static OrderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OrderCollection.class, options);
+    String path = "/v1/orders";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            OrderCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -350,9 +386,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public static OrderCollection list(OrderListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OrderCollection.class, options);
+    String path = "/v1/orders";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            OrderCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -380,13 +424,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            LineItemCollection.class,
             options,
-            String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -405,13 +452,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public LineItemCollection listLineItems(OrderListLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            LineItemCollection.class,
             options,
-            String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Reopens a {@code submitted} order. */
@@ -431,12 +482,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
   /** Reopens a {@code submitted} order. */
   public Order reopen(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Order.class,
             options,
-            String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /** Reopens a {@code submitted} order. */
@@ -446,12 +501,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
   /** Reopens a {@code submitted} order. */
   public Order reopen(OrderReopenParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Order.class,
             options,
-            String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -476,12 +536,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Order.class,
             options,
-            String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -490,12 +554,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public static Order retrieve(String id, OrderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Order.class,
             options,
-            String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -517,12 +586,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * called.
    */
   public Order submit(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/submit", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Order.class,
             options,
-            String.format("/v1/orders/%s/submit", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -544,12 +617,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * called.
    */
   public Order submit(OrderSubmitParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s/submit", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Order.class,
             options,
-            String.format("/v1/orders/%s/submit", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -567,12 +645,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   @Override
   public Order update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Order.class,
             options,
-            String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -588,12 +670,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * provided will be left unchanged.
    */
   public Order update(OrderUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Order.class,
             options,
-            String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -1741,5 +1828,20 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         Long taxableAmount;
       }
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(automaticTax, responseGetter);
+    trySetResponseGetter(billingDetails, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(payment, responseGetter);
+    trySetResponseGetter(shippingCost, responseGetter);
+    trySetResponseGetter(shippingDetails, responseGetter);
+    trySetResponseGetter(taxDetails, responseGetter);
+    trySetResponseGetter(totalDetails, responseGetter);
   }
 }

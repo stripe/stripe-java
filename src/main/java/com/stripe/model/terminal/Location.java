@@ -2,13 +2,16 @@
 package com.stripe.model.terminal;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.LocationCreateParams;
 import com.stripe.param.terminal.LocationListParams;
 import com.stripe.param.terminal.LocationRetrieveParams;
@@ -87,9 +90,16 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public static Location create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+    String path = "/v1/terminal/locations";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Location.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -108,9 +118,17 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public static Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+    String path = "/v1/terminal/locations";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Location.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Deletes a {@code Location} object. */
@@ -131,13 +149,16 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Deletes a {@code Location} object. */
   public Location delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            params,
+            Location.class,
             options,
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
+            ApiMode.V1);
   }
 
   /** Returns a list of {@code Location} objects. */
@@ -148,9 +169,16 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LocationCollection.class, options);
+    String path = "/v1/terminal/locations";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            LocationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of {@code Location} objects. */
@@ -161,9 +189,17 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(LocationListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LocationCollection.class, options);
+    String path = "/v1/terminal/locations";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            LocationCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves a {@code Location} object. */
@@ -179,24 +215,33 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Retrieves a {@code Location} object. */
   public static Location retrieve(
       String location, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Location.class,
             options,
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a {@code Location} object. */
   public static Location retrieve(
       String location, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Location.class,
             options,
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -215,13 +260,16 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   @Override
   public Location update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Location.class,
             options,
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -238,12 +286,22 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public Location update(LocationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Location.class,
             options,
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+            ApiMode.V1);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(address, responseGetter);
   }
 }

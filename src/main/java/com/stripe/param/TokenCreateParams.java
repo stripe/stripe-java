@@ -1598,9 +1598,6 @@ public class TokenCreateParams extends ApiRequestParams {
         @SerializedName("incorporated_non_profit")
         INCORPORATED_NON_PROFIT("incorporated_non_profit"),
 
-        @SerializedName("incorporated_partnership")
-        INCORPORATED_PARTNERSHIP("incorporated_partnership"),
-
         @SerializedName("limited_liability_partnership")
         LIMITED_LIABILITY_PARTNERSHIP("limited_liability_partnership"),
 
@@ -1644,10 +1641,7 @@ public class TokenCreateParams extends ApiRequestParams {
         UNINCORPORATED_ASSOCIATION("unincorporated_association"),
 
         @SerializedName("unincorporated_non_profit")
-        UNINCORPORATED_NON_PROFIT("unincorporated_non_profit"),
-
-        @SerializedName("unincorporated_partnership")
-        UNINCORPORATED_PARTNERSHIP("unincorporated_partnership");
+        UNINCORPORATED_NON_PROFIT("unincorporated_non_profit");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -2001,7 +1995,7 @@ public class TokenCreateParams extends ApiRequestParams {
          * documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addFullNameAliase(String element) {
+        public Builder addFullNameAlias(String element) {
           if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
             this.fullNameAliases = new ArrayList<String>();
           }
@@ -2016,7 +2010,7 @@ public class TokenCreateParams extends ApiRequestParams {
          * documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addAllFullNameAliase(List<String> elements) {
+        public Builder addAllFullNameAlias(List<String> elements) {
           if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
             this.fullNameAliases = new ArrayList<String>();
           }
@@ -4188,7 +4182,7 @@ public class TokenCreateParams extends ApiRequestParams {
        * TokenCreateParams.Person#fullNameAliases} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addFullNameAliase(String element) {
+      public Builder addFullNameAlias(String element) {
         if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
           this.fullNameAliases = new ArrayList<String>();
         }
@@ -4202,7 +4196,7 @@ public class TokenCreateParams extends ApiRequestParams {
        * {@link TokenCreateParams.Person#fullNameAliases} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllFullNameAliase(List<String> elements) {
+      public Builder addAllFullNameAlias(List<String> elements) {
         if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
           this.fullNameAliases = new ArrayList<String>();
         }

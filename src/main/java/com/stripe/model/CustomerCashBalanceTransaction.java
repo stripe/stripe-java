@@ -17,9 +17,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CustomerCashBalanceTransaction extends StripeObject implements HasId {
-  @SerializedName("adjusted_for_overdraft")
-  AdjustedForOverdraft adjustedForOverdraft;
-
   @SerializedName("applied_to_payment")
   AppliedToPayment appliedToPayment;
 
@@ -88,9 +85,9 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
    * href="https://stripe.com/docs/payments/customer-balance#types">Customer Balance</a> to learn
    * more about these types.
    *
-   * <p>One of {@code adjusted_for_overdraft}, {@code applied_to_payment}, {@code funded}, {@code
-   * funding_reversed}, {@code refunded_from_payment}, {@code return_canceled}, {@code
-   * return_initiated}, or {@code unapplied_from_payment}.
+   * <p>One of {@code applied_to_payment}, {@code funded}, {@code funding_reversed}, {@code
+   * refunded_from_payment}, {@code return_canceled}, {@code return_initiated}, or {@code
+   * unapplied_from_payment}.
    */
   @SerializedName("type")
   String type;
@@ -114,40 +111,6 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AdjustedForOverdraft extends StripeObject {
-    /**
-     * The <a href="https://stripe.com/docs/api/cash_balance_transactions/object">Cash Balance
-     * Transaction</a> that brought the customer balance negative, triggering the clawback of funds.
-     */
-    @SerializedName("linked_transaction")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<CustomerCashBalanceTransaction> linkedTransaction;
-
-    /** Get ID of expandable {@code linkedTransaction} object. */
-    public String getLinkedTransaction() {
-      return (this.linkedTransaction != null) ? this.linkedTransaction.getId() : null;
-    }
-
-    public void setLinkedTransaction(String id) {
-      this.linkedTransaction = ApiResource.setExpandableFieldId(id, this.linkedTransaction);
-    }
-
-    /** Get expanded {@code linkedTransaction}. */
-    public CustomerCashBalanceTransaction getLinkedTransactionObject() {
-      return (this.linkedTransaction != null) ? this.linkedTransaction.getExpanded() : null;
-    }
-
-    public void setLinkedTransactionObject(CustomerCashBalanceTransaction expandableObject) {
-      this.linkedTransaction =
-          new ExpandableField<CustomerCashBalanceTransaction>(
-              expandableObject.getId(), expandableObject);
-    }
   }
 
   @Getter

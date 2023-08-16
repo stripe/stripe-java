@@ -2,13 +2,16 @@
 package com.stripe.model.giftcards;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.giftcards.TransactionCancelParams;
 import com.stripe.param.giftcards.TransactionConfirmParams;
 import com.stripe.param.giftcards.TransactionCreateParams;
@@ -118,14 +121,18 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Cancel a gift card transaction. */
   public Transaction cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/gift_cards/transactions/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Transaction.class,
             options,
-            String.format(
-                "/v1/gift_cards/transactions/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Cancel a gift card transaction. */
@@ -136,14 +143,19 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Cancel a gift card transaction. */
   public Transaction cancel(TransactionCancelParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/gift_cards/transactions/%s/cancel", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
             options,
-            String.format(
-                "/v1/gift_cards/transactions/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Confirm a gift card transaction. */
@@ -164,14 +176,18 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Confirm a gift card transaction. */
   public Transaction confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/gift_cards/transactions/%s/confirm", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Transaction.class,
             options,
-            String.format(
-                "/v1/gift_cards/transactions/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Confirm a gift card transaction. */
@@ -182,14 +198,19 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Confirm a gift card transaction. */
   public Transaction confirm(TransactionConfirmParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/gift_cards/transactions/%s/confirm", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
             options,
-            String.format(
-                "/v1/gift_cards/transactions/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Create a gift card transaction. */
@@ -200,9 +221,16 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Create a gift card transaction. */
   public static Transaction create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    String path = "/v1/gift_cards/transactions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Transaction.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Create a gift card transaction. */
@@ -213,9 +241,17 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Create a gift card transaction. */
   public static Transaction create(TransactionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    String path = "/v1/gift_cards/transactions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List gift card transactions for a gift card. */
@@ -226,9 +262,16 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** List gift card transactions for a gift card. */
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
+    String path = "/v1/gift_cards/transactions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            TransactionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List gift card transactions for a gift card. */
@@ -239,9 +282,17 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** List gift card transactions for a gift card. */
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
+    String path = "/v1/gift_cards/transactions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            TransactionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the gift card transaction. */
@@ -257,25 +308,32 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Retrieves the gift card transaction. */
   public static Transaction retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Transaction.class,
             options,
-            String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the gift card transaction. */
   public static Transaction retrieve(
       String id, TransactionRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
             options,
-            String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Update a gift card transaction. */
@@ -288,13 +346,17 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   @Override
   public Transaction update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Transaction.class,
             options,
-            String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   /** Update a gift card transaction. */
@@ -305,13 +367,18 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   /** Update a gift card transaction. */
   public Transaction update(TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
             options,
-            String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -369,5 +436,11 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
       @SerializedName("payment_intent")
       String paymentIntent;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(createdBy, responseGetter);
   }
 }

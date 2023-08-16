@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.QuotePhaseListLineItemsParams;
 import com.stripe.param.QuotePhaseRetrieveParams;
 import java.util.List;
@@ -230,13 +233,17 @@ public class QuotePhase extends ApiResource implements HasId {
    */
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            LineItemCollection.class,
             options,
-            String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -256,13 +263,18 @@ public class QuotePhase extends ApiResource implements HasId {
    */
   public LineItemCollection listLineItems(
       QuotePhaseListLineItemsParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            LineItemCollection.class,
             options,
-            String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the quote phase with the given ID. */
@@ -280,26 +292,33 @@ public class QuotePhase extends ApiResource implements HasId {
   public static QuotePhase retrieve(
       String quotePhase, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            QuotePhase.class,
             options,
-            String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the quote phase with the given ID. */
   public static QuotePhase retrieve(
       String quotePhase, QuotePhaseRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            QuotePhase.class,
             options,
-            String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -406,5 +425,13 @@ public class QuotePhase extends ApiResource implements HasId {
         Long taxableAmount;
       }
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(invoiceSettings, responseGetter);
+    trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(totalDetails, responseGetter);
   }
 }

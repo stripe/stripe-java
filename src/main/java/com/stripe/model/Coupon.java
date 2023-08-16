@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CouponCreateParams;
 import com.stripe.param.CouponListParams;
 import com.stripe.param.CouponRetrieveParams;
@@ -169,8 +172,16 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   public static Coupon create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
+    String path = "/v1/coupons";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Coupon.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -201,8 +212,17 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   public static Coupon create(CouponCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
+    String path = "/v1/coupons";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Coupon.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -242,13 +262,16 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * coupon. You can also delete coupons via the API.
    */
   public Coupon delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            params,
+            Coupon.class,
             options,
-            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Coupon.class, options);
+            ApiMode.V1);
   }
 
   /** Returns a list of your coupons. */
@@ -259,9 +282,16 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /** Returns a list of your coupons. */
   public static CouponCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CouponCollection.class, options);
+    String path = "/v1/coupons";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CouponCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of your coupons. */
@@ -272,9 +302,17 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /** Returns a list of your coupons. */
   public static CouponCollection list(CouponListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CouponCollection.class, options);
+    String path = "/v1/coupons";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CouponCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves the coupon with the given ID. */
@@ -290,23 +328,32 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /** Retrieves the coupon with the given ID. */
   public static Coupon retrieve(String coupon, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Coupon.class,
             options,
-            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Coupon.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves the coupon with the given ID. */
   public static Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Coupon.class,
             options,
-            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Coupon.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -324,12 +371,16 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   @Override
   public Coupon update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Coupon.class,
             options,
-            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -345,12 +396,17 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * design, not editable.
    */
   public Coupon update(CouponUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Coupon.class,
             options,
-            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -372,5 +428,11 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
      */
     @SerializedName("amount_off")
     Long amountOff;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(appliesTo, responseGetter);
   }
 }

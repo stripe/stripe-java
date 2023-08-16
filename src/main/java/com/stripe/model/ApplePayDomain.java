@@ -2,9 +2,11 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.ApplePayDomainCreateParams;
 import com.stripe.param.ApplePayDomainListParams;
@@ -57,9 +59,16 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** Create an apple pay domain. */
   public static ApplePayDomain create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
+    String path = "/v1/apple_pay/domains";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            ApplePayDomain.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Create an apple pay domain. */
@@ -70,9 +79,17 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** Create an apple pay domain. */
   public static ApplePayDomain create(ApplePayDomainCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
+    String path = "/v1/apple_pay/domains";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ApplePayDomain.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Delete an apple pay domain. */
@@ -93,13 +110,16 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** Delete an apple pay domain. */
   public ApplePayDomain delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            params,
+            ApplePayDomain.class,
             options,
-            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, ApplePayDomain.class, options);
+            ApiMode.V1);
   }
 
   /** List apple pay domains. */
@@ -110,9 +130,16 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** List apple pay domains. */
   public static ApplePayDomainCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplePayDomainCollection.class, options);
+    String path = "/v1/apple_pay/domains";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ApplePayDomainCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** List apple pay domains. */
@@ -124,9 +151,17 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** List apple pay domains. */
   public static ApplePayDomainCollection list(
       ApplePayDomainListParams params, RequestOptions options) throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplePayDomainCollection.class, options);
+    String path = "/v1/apple_pay/domains";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ApplePayDomainCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieve an apple pay domain. */
@@ -143,25 +178,32 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** Retrieve an apple pay domain. */
   public static ApplePayDomain retrieve(
       String domain, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            ApplePayDomain.class,
             options,
-            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieve an apple pay domain. */
   public static ApplePayDomain retrieve(
       String domain, ApplePayDomainRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            ApplePayDomain.class,
             options,
-            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);
+            ApiMode.V1);
   }
 }

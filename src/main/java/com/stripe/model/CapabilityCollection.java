@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.model;
 
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.CapabilityCollectionListParams;
 import com.stripe.param.CapabilityCollectionRetrieveParams;
@@ -24,9 +26,16 @@ public class CapabilityCollection extends StripeCollection<Capability> {
    */
   public CapabilityCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CapabilityCollection.class, options);
+    String path = this.getUrl();
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            CapabilityCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -43,9 +52,17 @@ public class CapabilityCollection extends StripeCollection<Capability> {
    */
   public CapabilityCollection list(CapabilityCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CapabilityCollection.class, options);
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CapabilityCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Retrieves information about the specified Account Capability. */
@@ -61,25 +78,32 @@ public class CapabilityCollection extends StripeCollection<Capability> {
   /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Capability.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Capability.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(
       String id, CapabilityCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Capability.class,
             options,
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Capability.class, options);
+            ApiMode.V1);
   }
 }
