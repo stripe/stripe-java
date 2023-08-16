@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PromotionCodeCreateParams;
 import com.stripe.param.PromotionCodeListParams;
 import com.stripe.param.PromotionCodeRetrieveParams;
@@ -137,9 +140,16 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    */
   public static PromotionCode create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
+    String path = "/v1/promotion_codes";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            PromotionCode.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -156,9 +166,17 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    */
   public static PromotionCode create(PromotionCodeCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
+    String path = "/v1/promotion_codes";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PromotionCode.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of your promotion codes. */
@@ -169,8 +187,16 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   /** Returns a list of your promotion codes. */
   public static PromotionCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
-    return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
+    String path = "/v1/promotion_codes";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            PromotionCodeCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of your promotion codes. */
@@ -182,8 +208,17 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   /** Returns a list of your promotion codes. */
   public static PromotionCodeCollection list(PromotionCodeListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
-    return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
+    String path = "/v1/promotion_codes";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PromotionCodeCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -213,13 +248,16 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   public static PromotionCode retrieve(
       String promotionCode, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            PromotionCode.class,
             options,
-            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PromotionCode.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -230,13 +268,17 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   public static PromotionCode retrieve(
       String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PromotionCode.class,
             options,
-            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PromotionCode.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -255,13 +297,16 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @Override
   public PromotionCode update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            PromotionCode.class,
             options,
-            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -278,13 +323,17 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    */
   public PromotionCode update(PromotionCodeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            PromotionCode.class,
             options,
-            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -328,5 +377,13 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("minimum_amount")
       Long minimumAmount;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(coupon, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(restrictions, responseGetter);
   }
 }

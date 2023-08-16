@@ -1,8 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.Stripe;
-import com.stripe.net.ApiResource;
-import com.stripe.net.RequestOptions;
+import com.stripe.net.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,14 +17,17 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
 
   private String nextPage;
 
-  SearchPagingIterator(final StripeSearchResultInterface<T> stripeSearchResult) {
-    this.url = Stripe.getApiBase() + stripeSearchResult.getUrl();
+  SearchPagingIterator(
+      final StripeSearchResultInterface<T> stripeSearchResult,
+      StripeResponseGetter responseGetter) {
+    this.url = stripeSearchResult.getUrl();
     this.nextPage = stripeSearchResult.getNextPage();
 
     this.collectionType = stripeSearchResult.getClass();
 
     this.currentSearchResult = stripeSearchResult;
     this.currentDataIterator = stripeSearchResult.getData().iterator();
+    setResponseGetter(responseGetter);
   }
 
   @Override
@@ -76,6 +77,8 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
   @SuppressWarnings("unchecked")
   private StripeSearchResultInterface<T> search(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
-    return ApiResource.requestSearchResult(url, params, collectionType, options);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API, RequestMethod.GET, url, params, collectionType, options, ApiMode.V1);
   }
 }

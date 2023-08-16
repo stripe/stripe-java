@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.MandateRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -110,23 +113,32 @@ public class Mandate extends ApiResource implements HasId {
   /** Retrieves a Mandate object. */
   public static Mandate retrieve(String mandate, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Mandate.class,
             options,
-            String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Mandate.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a Mandate object. */
   public static Mandate retrieve(
       String mandate, MandateRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Mandate.class,
             options,
-            String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Mandate.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -341,5 +353,15 @@ public class Mandate extends ApiResource implements HasId {
     /** On a single use mandate, the currency of the payment. */
     @SerializedName("currency")
     String currency;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(customerAcceptance, responseGetter);
+    trySetResponseGetter(multiUse, responseGetter);
+    trySetResponseGetter(paymentMethod, responseGetter);
+    trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(singleUse, responseGetter);
   }
 }

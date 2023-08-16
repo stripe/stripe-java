@@ -2,10 +2,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PersonUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
@@ -215,15 +218,19 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    * delete the only verified {@code executive} on file.
    */
   public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/accounts/%s/persons/%s",
+            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            params,
+            Person.class,
             options,
-            String.format(
-                "/v1/accounts/%s/persons/%s",
-                ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Person.class, options);
+            ApiMode.V1);
   }
 
   /** Updates an existing person. */
@@ -235,14 +242,19 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /** Updates an existing person. */
   @Override
   public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/accounts/%s/persons/%s",
+            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Person.class,
             options,
-            String.format(
-                "/v1/accounts/%s/persons/%s",
-                ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+            ApiMode.V1);
   }
 
   /** Updates an existing person. */
@@ -252,14 +264,20 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /** Updates an existing person. */
   public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format(
+            "/v1/accounts/%s/persons/%s",
+            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Person.class,
             options,
-            String.format(
-                "/v1/accounts/%s/persons/%s",
-                ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -836,5 +854,19 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
         this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(address, responseGetter);
+    trySetResponseGetter(addressKana, responseGetter);
+    trySetResponseGetter(addressKanji, responseGetter);
+    trySetResponseGetter(dob, responseGetter);
+    trySetResponseGetter(futureRequirements, responseGetter);
+    trySetResponseGetter(registeredAddress, responseGetter);
+    trySetResponseGetter(relationship, responseGetter);
+    trySetResponseGetter(requirements, responseGetter);
+    trySetResponseGetter(verification, responseGetter);
   }
 }

@@ -4,10 +4,13 @@ package com.stripe.model;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.EventListParams;
 import com.stripe.param.EventRetrieveParams;
 import java.util.Map;
@@ -118,8 +121,16 @@ public class Event extends ApiResource implements HasId {
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/events");
-    return ApiResource.requestCollection(url, params, EventCollection.class, options);
+    String path = "/v1/events";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            EventCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -140,8 +151,17 @@ public class Event extends ApiResource implements HasId {
    */
   public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/events");
-    return ApiResource.requestCollection(url, params, EventCollection.class, options);
+    String path = "/v1/events";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            EventCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -166,12 +186,16 @@ public class Event extends ApiResource implements HasId {
    */
   public static Event retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Event.class,
             options,
-            String.format("/v1/events/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Event.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -180,12 +204,17 @@ public class Event extends ApiResource implements HasId {
    */
   public static Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Event.class,
             options,
-            String.format("/v1/events/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Event.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -261,5 +290,12 @@ public class Event extends ApiResource implements HasId {
      */
     @SerializedName("idempotency_key")
     String idempotencyKey;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(data, responseGetter);
+    trySetResponseGetter(request, responseGetter);
   }
 }

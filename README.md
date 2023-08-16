@@ -1,6 +1,6 @@
 # Stripe Java client library
 
-[![Maven Central](https://img.shields.io/badge/maven--central-v22.31.0-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
+[![Maven Central](https://img.shields.io/badge/maven--central-v22.30.0-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/stripe/stripe-java/badge.svg?branch=master)](https://coveralls.io/github/stripe/stripe-java?branch=master)
@@ -18,7 +18,7 @@ The official [Stripe][stripe] Java client library.
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:22.31.0"
+implementation "com.stripe:stripe-java:22.30.0"
 ```
 
 ### Maven users
@@ -29,7 +29,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>22.31.0</version>
+  <version>22.30.0</version>
 </dependency>
 ```
 
@@ -37,7 +37,7 @@ Add this dependency to your project's POM:
 
 You'll need to manually install the following JARs:
 
-- [The Stripe JAR](https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/22.31.0/stripe-java-22.31.0.jar)
+- [The Stripe JAR](https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/22.30.0/stripe-java-22.30.0.jar)
 - [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar>.
 
 ### [ProGuard][proguard]
@@ -67,7 +67,7 @@ StripeExample.java
 import java.util.HashMap;
 import java.util.Map;
 
-import com.stripe.Stripe;
+import com.stripe.StripeClient;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.net.RequestOptions;
@@ -76,8 +76,7 @@ import com.stripe.param.CustomerCreateParams;
 public class StripeExample {
 
     public static void main(String[] args) {
-        Stripe.apiKey = "sk_test_...";
-
+        StripeClient client = new StripeClient("sk_test_...");
         CustomerCreateParams params =
             CustomerCreateParams
                 .builder()
@@ -87,7 +86,7 @@ public class StripeExample {
                 .build();
 
         try {
-            Customer customer = Customer.create(params);
+            Customer customer = client.customers().create(params);
             System.out.println(customer);
         } catch (StripeException e) {
             e.printStackTrace();
@@ -112,9 +111,9 @@ RequestOptions requestOptions = RequestOptions.builder()
     .setStripeAccount("acct_...")
     .build();
 
-Customer.list(null, requestOptions);
+client.customers().list(requestOptions);
 
-Customer.retrieve("cus_123456789", requestOptions);
+client.customers().retrieve("cus_123456789", requestOptions);
 ```
 
 ### Configuring automatic retries
@@ -124,7 +123,9 @@ an intermittent network problem or other knowingly non-deterministic errors.
 This can be enabled globally:
 
 ```java
-Stripe.setMaxNetworkRetries(2);
+StripeClient client = StripeClient.builder()
+        .setMaxNetworkRetries(2)
+        .build();
 ```
 
 Or on a finer grain level using `RequestOptions`:
@@ -133,7 +134,7 @@ Or on a finer grain level using `RequestOptions`:
 RequestOptions options = RequestOptions.builder()
     .setMaxNetworkRetries(2)
     .build();
-Customer.create(params, options);
+client.customers().create(params, options);
 ```
 
 [Idempotency keys][idempotency-keys] are added to requests to guarantee that
@@ -144,8 +145,10 @@ retries are safe.
 Connect and read timeouts can be configured globally:
 
 ```java
-Stripe.setConnectTimeout(30 * 1000); // in milliseconds
-Stripe.setReadTimeout(80 * 1000);
+StripeClient client = StripeClient.builder()
+        .setConnectTimeout(30 * 1000); // in milliseconds
+        .setReadTimeout(80 * 1000);
+        .build();
 ```
 
 Or on a finer grain level using `RequestOptions`:
@@ -155,7 +158,7 @@ RequestOptions options = RequestOptions.builder()
     .setConnectTimeout(30 * 1000) // in milliseconds
     .setReadTimeout(80 * 1000)
     .build();
-Customer.create(params, options);
+client.customers().create(params, options);
 ```
 
 Please take care to set conservative read timeouts. Some API requests can take
@@ -191,7 +194,7 @@ CustomerCreateParams params =
     .putExtraParam("secret_parameter[secondary]", "secondary value")
     .build();
 
-Customer customer = customer.Create(params);
+client.customers().create(params);
 ```
 
 #### Properties
@@ -199,7 +202,7 @@ Customer customer = customer.Create(params);
 To retrieve undocumented properties from Stripe using Java you can use an option in the library to return the raw JSON object and return the property as a native type. An example of this is shown below:
 
 ```java
-final Customer customer = Customer.retrieve("cus_1234");
+final Customer customer = client.customers().retrieve("cus_1234");
 Boolean featureEnabled =
   customer.getRawJsonObject()
     .getAsJsonPrimitive("secret_feature_enabled")

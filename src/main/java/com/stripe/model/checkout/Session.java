@@ -2,7 +2,6 @@
 package com.stripe.model.checkout;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.Customer;
@@ -20,8 +19,12 @@ import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
 import com.stripe.model.TaxId;
 import com.stripe.model.TaxRate;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionExpireParams;
 import com.stripe.param.checkout.SessionListLineItemsParams;
@@ -468,8 +471,16 @@ public class Session extends ApiResource implements HasId {
   /** Creates a Session object. */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/checkout/sessions");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+    String path = "/v1/checkout/sessions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Session.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Creates a Session object. */
@@ -480,8 +491,17 @@ public class Session extends ApiResource implements HasId {
   /** Creates a Session object. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/checkout/sessions");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+    String path = "/v1/checkout/sessions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Session.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -521,13 +541,17 @@ public class Session extends ApiResource implements HasId {
    * a message saying the Session is expired.
    */
   public Session expire(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Session.class,
             options,
-            String.format(
-                "/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -547,13 +571,18 @@ public class Session extends ApiResource implements HasId {
    * a message saying the Session is expired.
    */
   public Session expire(SessionExpireParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Session.class,
             options,
-            String.format(
-                "/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+            ApiMode.V1);
   }
 
   /** Returns a list of Checkout Sessions. */
@@ -564,8 +593,16 @@ public class Session extends ApiResource implements HasId {
   /** Returns a list of Checkout Sessions. */
   public static SessionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/checkout/sessions");
-    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
+    String path = "/v1/checkout/sessions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            SessionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /** Returns a list of Checkout Sessions. */
@@ -576,8 +613,17 @@ public class Session extends ApiResource implements HasId {
   /** Returns a list of Checkout Sessions. */
   public static SessionCollection list(SessionListParams params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/checkout/sessions");
-    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
+    String path = "/v1/checkout/sessions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            SessionCollection.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -605,13 +651,17 @@ public class Session extends ApiResource implements HasId {
    */
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            LineItemCollection.class,
             options,
-            String.format(
-                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /**
@@ -631,13 +681,18 @@ public class Session extends ApiResource implements HasId {
    */
   public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path =
+        String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            LineItemCollection.class,
             options,
-            String.format(
-                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a Session object. */
@@ -653,23 +708,32 @@ public class Session extends ApiResource implements HasId {
   /** Retrieves a Session object. */
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Session.class,
             options,
-            String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
+            ApiMode.V1);
   }
 
   /** Retrieves a Session object. */
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Session.class,
             options,
-            String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
+            ApiMode.V1);
   }
 
   @Getter
@@ -2296,5 +2360,32 @@ public class Session extends ApiResource implements HasId {
         Long taxableAmount;
       }
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(afterExpiration, responseGetter);
+    trySetResponseGetter(automaticTax, responseGetter);
+    trySetResponseGetter(consent, responseGetter);
+    trySetResponseGetter(consentCollection, responseGetter);
+    trySetResponseGetter(currencyConversion, responseGetter);
+    trySetResponseGetter(customText, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(customerDetails, responseGetter);
+    trySetResponseGetter(invoice, responseGetter);
+    trySetResponseGetter(invoiceCreation, responseGetter);
+    trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(paymentIntent, responseGetter);
+    trySetResponseGetter(paymentLink, responseGetter);
+    trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(phoneNumberCollection, responseGetter);
+    trySetResponseGetter(setupIntent, responseGetter);
+    trySetResponseGetter(shippingAddressCollection, responseGetter);
+    trySetResponseGetter(shippingCost, responseGetter);
+    trySetResponseGetter(shippingDetails, responseGetter);
+    trySetResponseGetter(subscription, responseGetter);
+    trySetResponseGetter(taxIdCollection, responseGetter);
+    trySetResponseGetter(totalDetails, responseGetter);
   }
 }
