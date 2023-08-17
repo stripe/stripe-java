@@ -299,7 +299,6 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("hu")
     Hu hu;
 
-    @Getter(onMethod_ = {@Override})
     @SerializedName("id")
     Id id;
 
