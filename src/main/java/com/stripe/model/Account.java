@@ -310,7 +310,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete() throws StripeException {
@@ -325,7 +325,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(RequestOptions options) throws StripeException {
@@ -340,7 +340,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(Map<String, Object> params) throws StripeException {
@@ -355,7 +355,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
   public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -645,7 +645,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -665,7 +665,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -694,7 +694,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -713,7 +713,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
-   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
@@ -1219,12 +1219,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      *
      * <p>One of {@code free_zone_establishment}, {@code free_zone_llc}, {@code
      * government_instrumentality}, {@code governmental_unit}, {@code incorporated_non_profit},
-     * {@code limited_liability_partnership}, {@code llc}, {@code multi_member_llc}, {@code
-     * private_company}, {@code private_corporation}, {@code private_partnership}, {@code
-     * public_company}, {@code public_corporation}, {@code public_partnership}, {@code
-     * single_member_llc}, {@code sole_establishment}, {@code sole_proprietorship}, {@code
-     * tax_exempt_government_instrumentality}, {@code unincorporated_association}, or {@code
-     * unincorporated_non_profit}.
+     * {@code incorporated_partnership}, {@code limited_liability_partnership}, {@code llc}, {@code
+     * multi_member_llc}, {@code private_company}, {@code private_corporation}, {@code
+     * private_partnership}, {@code public_company}, {@code public_corporation}, {@code
+     * public_partnership}, {@code single_member_llc}, {@code sole_establishment}, {@code
+     * sole_proprietorship}, {@code tax_exempt_government_instrumentality}, {@code
+     * unincorporated_association}, {@code unincorporated_non_profit}, or {@code
+     * unincorporated_partnership}.
      */
     @SerializedName("structure")
     String structure;
@@ -1579,27 +1580,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_dob_age_under_18},
        * {@code invalid_representative_country}, {@code invalid_street_address}, {@code
        * invalid_tos_acceptance}, {@code invalid_value_other}, {@code
-       * verification_document_address_mismatch}, {@code verification_document_address_missing},
-       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
-       * {@code verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
-       * {@code verification_document_expired}, {@code verification_document_failed_copy}, {@code
-       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
-       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
-       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
-       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
-       * verification_document_issue_or_expiry_date_missing}, {@code
-       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
-       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
-       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
-       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
-       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
-       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
-       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
-       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
-       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_executives}, {@code
+       * verification_directors_mismatch}, {@code verification_document_address_mismatch}, {@code
+       * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+       * verification_document_country_not_supported}, {@code
+       * verification_document_directors_mismatch}, {@code verification_document_dob_mismatch},
+       * {@code verification_document_duplicate_type}, {@code verification_document_expired}, {@code
+       * verification_document_failed_copy}, {@code verification_document_failed_greyscale}, {@code
+       * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
+       * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
+       * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
+       * verification_document_invalid}, {@code verification_document_issue_or_expiry_date_missing},
+       * {@code verification_document_manipulated}, {@code verification_document_missing_back},
+       * {@code verification_document_missing_front}, {@code verification_document_name_mismatch},
+       * {@code verification_document_name_missing}, {@code
+       * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
+       * {@code verification_document_not_signed}, {@code verification_document_not_uploaded},
+       * {@code verification_document_photo_mismatch}, {@code verification_document_too_large},
+       * {@code verification_document_type_not_supported}, {@code
+       * verification_extraneous_directors}, {@code verification_failed_address_match}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_residential_address}, {@code
+       * verification_failed_tax_id_match}, {@code verification_failed_tax_id_not_issued}, {@code
+       * verification_missing_directors}, {@code verification_missing_executives}, {@code
        * verification_missing_owners}, or {@code
        * verification_requires_additional_memorandum_of_associations}.
        */
@@ -1714,27 +1718,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_dob_age_under_18},
        * {@code invalid_representative_country}, {@code invalid_street_address}, {@code
        * invalid_tos_acceptance}, {@code invalid_value_other}, {@code
-       * verification_document_address_mismatch}, {@code verification_document_address_missing},
-       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
-       * {@code verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
-       * {@code verification_document_expired}, {@code verification_document_failed_copy}, {@code
-       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
-       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
-       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
-       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
-       * verification_document_issue_or_expiry_date_missing}, {@code
-       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
-       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
-       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
-       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
-       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
-       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
-       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
-       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
-       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_executives}, {@code
+       * verification_directors_mismatch}, {@code verification_document_address_mismatch}, {@code
+       * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+       * verification_document_country_not_supported}, {@code
+       * verification_document_directors_mismatch}, {@code verification_document_dob_mismatch},
+       * {@code verification_document_duplicate_type}, {@code verification_document_expired}, {@code
+       * verification_document_failed_copy}, {@code verification_document_failed_greyscale}, {@code
+       * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
+       * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
+       * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
+       * verification_document_invalid}, {@code verification_document_issue_or_expiry_date_missing},
+       * {@code verification_document_manipulated}, {@code verification_document_missing_back},
+       * {@code verification_document_missing_front}, {@code verification_document_name_mismatch},
+       * {@code verification_document_name_missing}, {@code
+       * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
+       * {@code verification_document_not_signed}, {@code verification_document_not_uploaded},
+       * {@code verification_document_photo_mismatch}, {@code verification_document_too_large},
+       * {@code verification_document_type_not_supported}, {@code
+       * verification_extraneous_directors}, {@code verification_failed_address_match}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_residential_address}, {@code
+       * verification_failed_tax_id_match}, {@code verification_failed_tax_id_not_issued}, {@code
+       * verification_missing_directors}, {@code verification_missing_executives}, {@code
        * verification_missing_owners}, or {@code
        * verification_requires_additional_memorandum_of_associations}.
        */

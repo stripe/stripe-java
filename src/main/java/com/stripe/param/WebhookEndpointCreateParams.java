@@ -574,7 +574,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2022_08_01("2022-08-01"),
 
     @SerializedName("2022-11-15")
-    VERSION_2022_11_15("2022-11-15");
+    VERSION_2022_11_15("2022-11-15"),
+
+    @SerializedName("2023-08-16")
+    VERSION_2023_08_16("2023-08-16");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

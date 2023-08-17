@@ -1105,6 +1105,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("generated_card")
       String generatedCard;
 
+      /** Represents a per-setup override of a reader configuration. */
+      @SerializedName("process_config")
+      ProcessConfig processConfig;
+
       /** Most recent SetupIntent processed by the reader. */
       @SerializedName("setup_intent")
       @Getter(lombok.AccessLevel.NONE)
@@ -1129,6 +1133,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         this.setupIntent =
             new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
       }
+
+      /** Represents a per-setup override of a reader configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ProcessConfig extends StripeObject {}
     }
 
     /** Represents a reader action to refund a payment. */

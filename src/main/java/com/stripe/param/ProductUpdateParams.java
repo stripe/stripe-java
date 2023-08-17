@@ -18,29 +18,6 @@ public class ProductUpdateParams extends ApiRequestParams {
   Boolean active;
 
   /**
-   * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., {@code
-   * ["color", "size"]}). If a value for {@code attributes} is specified, the list specified will
-   * replace the existing attributes list on this product. Any attributes not present after the
-   * update will be deleted from the SKUs for this product.
-   */
-  @SerializedName("attributes")
-  Object attributes;
-
-  /**
-   * A short one-line description of the product, meant to be displayable to the customer. May only
-   * be set if {@code type=good}.
-   */
-  @SerializedName("caption")
-  Object caption;
-
-  /**
-   * An array of Connect application names or identifiers that should not be able to order the SKUs
-   * for this product. May only be set if {@code type=good}.
-   */
-  @SerializedName("deactivate_on")
-  List<String> deactivateOn;
-
-  /**
    * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the default
    * price for this product.
    */
@@ -123,9 +100,6 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   private ProductUpdateParams(
       Boolean active,
-      Object attributes,
-      Object caption,
-      List<String> deactivateOn,
       Object defaultPrice,
       Object description,
       List<String> expand,
@@ -140,9 +114,6 @@ public class ProductUpdateParams extends ApiRequestParams {
       Object unitLabel,
       Object url) {
     this.active = active;
-    this.attributes = attributes;
-    this.caption = caption;
-    this.deactivateOn = deactivateOn;
     this.defaultPrice = defaultPrice;
     this.description = description;
     this.expand = expand;
@@ -164,12 +135,6 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private Boolean active;
-
-    private Object attributes;
-
-    private Object caption;
-
-    private List<String> deactivateOn;
 
     private Object defaultPrice;
 
@@ -201,9 +166,6 @@ public class ProductUpdateParams extends ApiRequestParams {
     public ProductUpdateParams build() {
       return new ProductUpdateParams(
           this.active,
-          this.attributes,
-          this.caption,
-          this.deactivateOn,
           this.defaultPrice,
           this.description,
           this.expand,
@@ -222,100 +184,6 @@ public class ProductUpdateParams extends ApiRequestParams {
     /** Whether the product is available for purchase. */
     public Builder setActive(Boolean active) {
       this.active = active;
-      return this;
-    }
-
-    /**
-     * Add an element to `attributes` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductUpdateParams#attributes} for the field documentation.
-     */
-    @SuppressWarnings("unchecked")
-    public Builder addAttribute(String element) {
-      if (this.attributes == null || this.attributes instanceof EmptyParam) {
-        this.attributes = new ArrayList<String>();
-      }
-      ((List<String>) this.attributes).add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `attributes` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductUpdateParams#attributes} for the field documentation.
-     */
-    @SuppressWarnings("unchecked")
-    public Builder addAllAttribute(List<String> elements) {
-      if (this.attributes == null || this.attributes instanceof EmptyParam) {
-        this.attributes = new ArrayList<String>();
-      }
-      ((List<String>) this.attributes).addAll(elements);
-      return this;
-    }
-
-    /**
-     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., {@code
-     * ["color", "size"]}). If a value for {@code attributes} is specified, the list specified will
-     * replace the existing attributes list on this product. Any attributes not present after the
-     * update will be deleted from the SKUs for this product.
-     */
-    public Builder setAttributes(EmptyParam attributes) {
-      this.attributes = attributes;
-      return this;
-    }
-
-    /**
-     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., {@code
-     * ["color", "size"]}). If a value for {@code attributes} is specified, the list specified will
-     * replace the existing attributes list on this product. Any attributes not present after the
-     * update will be deleted from the SKUs for this product.
-     */
-    public Builder setAttributes(List<String> attributes) {
-      this.attributes = attributes;
-      return this;
-    }
-
-    /**
-     * A short one-line description of the product, meant to be displayable to the customer. May
-     * only be set if {@code type=good}.
-     */
-    public Builder setCaption(String caption) {
-      this.caption = caption;
-      return this;
-    }
-
-    /**
-     * A short one-line description of the product, meant to be displayable to the customer. May
-     * only be set if {@code type=good}.
-     */
-    public Builder setCaption(EmptyParam caption) {
-      this.caption = caption;
-      return this;
-    }
-
-    /**
-     * Add an element to `deactivateOn` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductUpdateParams#deactivateOn} for the field documentation.
-     */
-    public Builder addDeactivateOn(String element) {
-      if (this.deactivateOn == null) {
-        this.deactivateOn = new ArrayList<>();
-      }
-      this.deactivateOn.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `deactivateOn` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * ProductUpdateParams#deactivateOn} for the field documentation.
-     */
-    public Builder addAllDeactivateOn(List<String> elements) {
-      if (this.deactivateOn == null) {
-        this.deactivateOn = new ArrayList<>();
-      }
-      this.deactivateOn.addAll(elements);
       return this;
     }
 

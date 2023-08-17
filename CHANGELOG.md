@@ -13,7 +13,6 @@
     * Use of this parameter is discouraged. You may use [`.putExtraParam`](https://github.com/stripe/stripe-java/#parameters) if sending the parameter is still required.
   * ⚠️Remove support for `alternate_statement_descriptors`, `destination`, and `dispute` on `Charge`
     * Use of these fields is discouraged.
-  * Remove support for `shipping_rates` on `checkout.SessionCreateParams`
   * ⚠️Remove support for `shipping_rates` on `checkout.SessionCreateParams`
     * Please use `shipping_options` instead.
   * ⚠️Remove support for `coupon` and `trial_from_plan` on `checkout.SessionCreateParams.subscription_data`
@@ -40,7 +39,7 @@
   * **Removals**
     * ⚠️ `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
     * ⚠️ `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
-    *  ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
+    * ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
   * **Type changes**
     * ⚠️ `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
       * `BaseAddress` parameter added.

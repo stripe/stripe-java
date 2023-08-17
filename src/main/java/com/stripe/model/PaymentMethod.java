@@ -1377,14 +1377,6 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Link extends StripeObject {
-    /**
-     * Two-letter ISO code representing the funding source (i.e. card, bank) country beneath the
-     * Link payment method. You could use this attribute to get a sense of the international
-     * breakdown of funding sources you've collected.
-     */
-    @SerializedName("country")
-    String country;
-
     /** Account owner's email address. */
     @SerializedName("email")
     String email;

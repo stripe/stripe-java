@@ -1980,6 +1980,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(p24, responseGetter);
     trySetResponseGetter(payByBank, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
+    trySetResponseGetter(paypal, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
