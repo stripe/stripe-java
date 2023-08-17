@@ -235,7 +235,7 @@ public class Registration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CountryOptions extends StripeObject implements HasId {
+  public static class CountryOptions extends StripeObject {
     @SerializedName("ae")
     Ae ae;
 
