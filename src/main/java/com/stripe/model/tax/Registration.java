@@ -293,9 +293,6 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("gr")
     Gr gr;
 
-    @SerializedName("hk")
-    Hk hk;
-
     @SerializedName("hr")
     Hr hr;
 
@@ -839,19 +836,6 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Hk extends StripeObject {
-      /**
-       * Type of registration in {@code country}.
-       *
-       * <p>Equal to {@code standard}.
-       */
-      @SerializedName("type")
-      String type;
     }
 
     @Getter
