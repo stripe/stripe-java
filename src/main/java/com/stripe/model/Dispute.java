@@ -116,6 +116,9 @@ public class Dispute extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentIntent> paymentIntent;
 
+  @SerializedName("payment_method_details")
+  PaymentMethodDetails paymentMethodDetails;
+
   /**
    * Reason given by cardholder for dispute. Possible values are {@code bank_cannot_process}, {@code
    * check_returned}, {@code credit_not_processed}, {@code customer_initiated}, {@code
@@ -818,6 +821,44 @@ public class Dispute extends ApiResource
     Long submissionCount;
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodDetails extends StripeObject {
+    /** Card specific dispute details. */
+    @SerializedName("card")
+    Card card;
+
+    /**
+     * Payment method type.
+     *
+     * <p>Equal to {@code card}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       */
+      @SerializedName("brand")
+      String brand;
+
+      /**
+       * The card network's specific dispute reason code, which maps to one of Stripe's primary
+       * dispute categories to simplify response guidance. The <a
+       * href="https://stripe.com/docs/disputes/categories#network-code-map">Network code map</a>
+       * lists all available dispute reason codes by network.
+       */
+      @SerializedName("network_reason_code")
+      String networkReasonCode;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -825,5 +866,6 @@ public class Dispute extends ApiResource
     trySetResponseGetter(evidence, responseGetter);
     trySetResponseGetter(evidenceDetails, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
+    trySetResponseGetter(paymentMethodDetails, responseGetter);
   }
 }
