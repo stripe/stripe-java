@@ -307,6 +307,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
+    /** This hash contains details about the Mandate to create. */
+    public Builder setMandateData(EmptyParam mandateData) {
+      this.mandateData = mandateData;
+      return this;
+    }
+
     /**
      * Set to {@code true} to indicate that the customer is not in your checkout flow during this
      * payment attempt, and therefore is unable to authenticate. This parameter is intended for
