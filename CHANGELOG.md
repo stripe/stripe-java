@@ -12,7 +12,7 @@
 
 * [#1632](https://github.com/stripe/stripe-java/pull/1632) Update generated code
   * ⚠️Remove support for values `custom_account_update` and `custom_account_verification` from enum `AccountLinkCreateParams.type`
-    * These values are not fully operational
+    * These values are not fully operational. Please use `account_update` and `account_onboarding` instead (see [API reference](https://stripe.com/docs/api/account_links/create#create_account_link-type)).
   * ⚠️Remove support for `available_on` on `BalanceTransactionListParams`
     * Use of this parameter is discouraged. You may use [`.putExtraParam`](https://github.com/stripe/stripe-java/#parameters) if sending the parameter is still required.
   * ⚠️Remove support for `alternate_statement_descriptors`, `destination`, and `dispute` on `Charge`
