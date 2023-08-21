@@ -1410,6 +1410,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
            */
           @SerializedName("permissions")
           List<String> permissions;
+
+          /** Data features requested to be retrieved upon account creation. */
+          @SerializedName("prefetch")
+          List<String> prefetch;
         }
       }
     }

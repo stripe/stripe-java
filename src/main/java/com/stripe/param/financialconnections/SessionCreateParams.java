@@ -41,6 +41,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("permissions")
   List<SessionCreateParams.Permission> permissions;
 
+  /** List of data features that you would like to retrieve upon account creation. */
+  @SerializedName("prefetch")
+  List<SessionCreateParams.Prefetch> prefetch;
+
   /**
    * For webview integrations only. Upon completing OAuth login in the native browser, the user will
    * be redirected to this URL to return to your app.
@@ -54,12 +58,14 @@ public class SessionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Filters filters,
       List<SessionCreateParams.Permission> permissions,
+      List<SessionCreateParams.Prefetch> prefetch,
       String returnUrl) {
     this.accountHolder = accountHolder;
     this.expand = expand;
     this.extraParams = extraParams;
     this.filters = filters;
     this.permissions = permissions;
+    this.prefetch = prefetch;
     this.returnUrl = returnUrl;
   }
 
@@ -78,6 +84,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private List<SessionCreateParams.Permission> permissions;
 
+    private List<SessionCreateParams.Prefetch> prefetch;
+
     private String returnUrl;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -88,6 +96,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams,
           this.filters,
           this.permissions,
+          this.prefetch,
           this.returnUrl);
     }
 
@@ -178,6 +187,32 @@ public class SessionCreateParams extends ApiRequestParams {
         this.permissions = new ArrayList<>();
       }
       this.permissions.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `prefetch` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#prefetch} for the field documentation.
+     */
+    public Builder addPrefetch(SessionCreateParams.Prefetch element) {
+      if (this.prefetch == null) {
+        this.prefetch = new ArrayList<>();
+      }
+      this.prefetch.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#prefetch} for the field documentation.
+     */
+    public Builder addAllPrefetch(List<SessionCreateParams.Prefetch> elements) {
+      if (this.prefetch == null) {
+        this.prefetch = new ArrayList<>();
+      }
+      this.prefetch.addAll(elements);
       return this;
     }
 
@@ -419,6 +454,21 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     Permission(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Prefetch implements ApiRequestParams.EnumParam {
+    @SerializedName("balances")
+    BALANCES("balances"),
+
+    @SerializedName("ownership")
+    OWNERSHIP("ownership");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Prefetch(String value) {
       this.value = value;
     }
   }
