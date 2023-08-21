@@ -24,6 +24,13 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * A flat amount to reverse across the entire transaction, in negative integer cents. This value
+   * represents the total amount to refund from the transaction, including taxes.
+   */
+  @SerializedName("flat_amount")
+  Long flatAmount;
+
   /** The line item amounts to reverse. */
   @SerializedName("line_items")
   List<TransactionCreateReversalParams.LineItem> lineItems;
@@ -64,6 +71,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   private TransactionCreateReversalParams(
       List<String> expand,
       Map<String, Object> extraParams,
+      Long flatAmount,
       List<TransactionCreateReversalParams.LineItem> lineItems,
       Map<String, String> metadata,
       Mode mode,
@@ -72,6 +80,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
       ShippingCost shippingCost) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.flatAmount = flatAmount;
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.mode = mode;
@@ -88,6 +97,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Long flatAmount;
 
     private List<TransactionCreateReversalParams.LineItem> lineItems;
 
@@ -106,6 +117,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
       return new TransactionCreateReversalParams(
           this.expand,
           this.extraParams,
+          this.flatAmount,
           this.lineItems,
           this.metadata,
           this.mode,
@@ -163,6 +175,15 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * A flat amount to reverse across the entire transaction, in negative integer cents. This value
+     * represents the total amount to refund from the transaction, including taxes.
+     */
+    public Builder setFlatAmount(Long flatAmount) {
+      this.flatAmount = flatAmount;
       return this;
     }
 

@@ -1,6 +1,10 @@
 # Changelog
 
 
+## 23.1.0 - 2023-08-17
+* [#1634](https://github.com/stripe/stripe-java/pull/1634) Update generated code
+  * Add support for `flat_amount` on `tax.TransactionCreateReversalParams`
+
 ## 23.0.0 - 2023-08-16
 * This release changes the pinned API version to `2023-08-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
 * More information is available in the [stripe-java v23 migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23)
@@ -9,12 +13,11 @@
 
 * [#1632](https://github.com/stripe/stripe-java/pull/1632) Update generated code
   * ⚠️Remove support for values `custom_account_update` and `custom_account_verification` from enum `AccountLinkCreateParams.type`
-    * These values are not fully operational
+    * These values are not fully operational. Please use `account_update` and `account_onboarding` instead (see [API reference](https://stripe.com/docs/api/account_links/create#create_account_link-type)).
   * ⚠️Remove support for `available_on` on `BalanceTransactionListParams`
     * Use of this parameter is discouraged. You may use [`.putExtraParam`](https://github.com/stripe/stripe-java/#parameters) if sending the parameter is still required.
   * ⚠️Remove support for `alternate_statement_descriptors`, `destination`, and `dispute` on `Charge`
     * Use of these fields is discouraged.
-  * Remove support for `shipping_rates` on `checkout.SessionCreateParams`
   * ⚠️Remove support for `shipping_rates` on `checkout.SessionCreateParams`
     * Please use `shipping_options` instead.
   * ⚠️Remove support for `coupon` and `trial_from_plan` on `checkout.SessionCreateParams.subscription_data`
@@ -41,7 +44,7 @@
   * **Removals**
     * ⚠️ `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
     * ⚠️ `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
-    *  ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
+    * ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
   * **Type changes**
     * ⚠️ `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
       * `BaseAddress` parameter added.
@@ -54,83 +57,6 @@
   * **Behavior Changes**
     * ⚠️ `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
     * ⚠️ `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
-
-## 23.0.0 - 2023-08-16
-
-### StripeClient
-
-`StripeClient` and the new service-based pattern is introduced. `StripeClient` has multiple benefits over existing resource-based patterns:
-1. Allows to have multiple clients with different connection options (different API keys).
-2. All operations can be performed in a single HTTP call.
-    ```java
-    // Before: creating funding instructions takes two HTTP calls
-    Customer customer = Customer.retrieve("cus_123"); // HTTP call 1
-    customer.createFundingInstructions(..); // HTTP call 2
-
-    // After: creating funding instructions is a single HTTP call
-    StripeClient client = new StripeClient();
-    client.customers().createFundingInstructions("cus_123", ...); // HTTP call 1
-    ```
-3. `StripeClient` is easier to mock for testing as all methods are instance methods.
-
-### Migration
-
-To migrate from resource-based to service-based pattern:
-1. Initialize a `StripeClient` instance.
-    ```java
-    // Before
-    Stripe.apiKey = "sk_test_123"
-
-    // After
-    StripeClient client = new StripeClient("sk_test_123");
-    ```
-2. Convert static resource method calls to `StripeClient` calls:
-    ```java
-   // Before
-   Customer customer = Customer.retrieve("cus_123");
-
-   // After
-   client.customers().retrieve("cus_123");
-    ```
-3. Convert instance resource method calls to `StripeClient` calls. Params classes will, in most cases, stay the same as you used for resource-based calls.
-    ```java
-   // Before
-   Customer customer = Customer.retrive("cus_123");
-   customer.delete();
-
-   // After
-   client.customers().delete("cus_123");
-
-   // After
-   client.customers().delete(customer.id);
-   PaymentMethod pm = client.customers().retrievePaymentMethod(customer.id, "pm_123");
-    ```
-
-### Breaking changes
-
-- `RequestOptions.getReadTimeout()`, `getConnectTimeout()`, `getMaxNetworkRetries()` now return `Integer` instead of `int`.
-- `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
-- `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
-- `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
-- `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
-  - `BaseAddress` parameter added.
-  - `url` renamed to `path` and is a relative to the base address
-  - `apiMode` parameter added to control how request is sent and response is handled, `V1` and `OAuth` are supported values.
-- Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
-- `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
-    If you were using one of these methods, please migrate to `StripeClient.getResponseGetter().request()`:
-    ```java
-    StripeClient client = new StripeClient("sk_test_...");
-    client.getResponseGetter().request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            "/customers",
-            null, // params
-            Customer.class,  // type
-            null, // options
-            ApiMode.V1);
-    ```
-
 
 ## 22.30.0 - 2023-08-03
 * [#1620](https://github.com/stripe/stripe-java/pull/1620) Update generated code
