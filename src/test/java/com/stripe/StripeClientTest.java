@@ -38,6 +38,9 @@ public class StripeClientTest {
 
     assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, options.getConnectTimeout());
     assertEquals(Stripe.DEFAULT_READ_TIMEOUT, options.getReadTimeout());
+    assertEquals(Stripe.LIVE_API_BASE, options.getApiBase());
+    assertEquals(Stripe.CONNECT_API_BASE, options.getConnectBase());
+    assertEquals(Stripe.UPLOAD_API_BASE, options.getFilesBase());
     assertEquals(0, options.getMaxNetworkRetries());
   }
 }
