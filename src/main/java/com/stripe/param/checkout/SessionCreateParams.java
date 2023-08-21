@@ -4030,7 +4030,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
      * accounts</a> for details.
      */
     @SerializedName("transfer_group")
@@ -4279,8 +4279,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-       * <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-       * accounts</a> for details.
+       * <a href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for
+       * connected accounts</a> for details.
        */
       public Builder setTransferGroup(String transferGroup) {
         this.transferGroup = transferGroup;
