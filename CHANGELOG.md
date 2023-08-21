@@ -1,5 +1,9 @@
 # Changelog
 
+## 23.1.1 - 2023-08-21
+* [#1638](https://github.com/stripe/stripe-java/pull/1638) Set default API endpoints in StripeClient builder
+* [#1636](https://github.com/stripe/stripe-java/pull/1636) Update v23.0.0 Changelog
+
 ## 23.1.0 - 2023-08-17
 * [#1634](https://github.com/stripe/stripe-java/pull/1634) Update generated code
   * Add support for `flat_amount` on `tax.TransactionCreateReversalParams`
