@@ -80,7 +80,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
    * confirm=true}</a>.
    */
   @SerializedName("mandate_data")
-  MandateData mandateData;
+  Object mandateData;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -158,7 +158,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       List<SetupIntentCreateParams.FlowDirection> flowDirections,
-      MandateData mandateData,
+      Object mandateData,
       Map<String, String> metadata,
       String onBehalfOf,
       String paymentMethod,
@@ -211,7 +211,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private List<SetupIntentCreateParams.FlowDirection> flowDirections;
 
-    private MandateData mandateData;
+    private Object mandateData;
 
     private Map<String, String> metadata;
 
@@ -393,6 +393,16 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      * confirm=true}</a>.
      */
     public Builder setMandateData(SetupIntentCreateParams.MandateData mandateData) {
+      this.mandateData = mandateData;
+      return this;
+    }
+
+    /**
+     * This hash contains details about the Mandate to create. This parameter can only be used with
+     * <a href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+     * confirm=true}</a>.
+     */
+    public Builder setMandateData(EmptyParam mandateData) {
       this.mandateData = mandateData;
       return this;
     }

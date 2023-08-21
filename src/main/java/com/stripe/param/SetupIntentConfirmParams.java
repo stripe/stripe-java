@@ -175,6 +175,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
+    /** This hash contains details about the Mandate to create. */
+    public Builder setMandateData(EmptyParam mandateData) {
+      this.mandateData = mandateData;
+      return this;
+    }
+
     /**
      * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
      * SetupIntent.
