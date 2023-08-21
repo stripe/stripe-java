@@ -544,7 +544,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -557,7 +557,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -902,7 +902,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -999,7 +999,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -1128,7 +1128,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -1141,7 +1141,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -1296,7 +1296,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -1409,7 +1409,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -1422,7 +1422,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -1485,7 +1485,7 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in {@code country}.
        *
-       * <p>One of {@code simplified}, or {@code standard}.
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;

@@ -2082,10 +2082,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -2167,10 +2164,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -4512,10 +4506,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -5157,10 +5148,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -6034,10 +6022,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -6119,10 +6104,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -7160,10 +7142,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -7921,10 +7900,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -8006,10 +7982,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -8395,10 +8368,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("simplified")
-        SIMPLIFIED("simplified"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
+        SIMPLIFIED("simplified");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
