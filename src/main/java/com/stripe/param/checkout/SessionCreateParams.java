@@ -263,7 +263,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("shipping_address_collection")
   ShippingAddressCollection shippingAddressCollection;
 
-  /** The shipping rate options to apply to this Session. */
+  /** The shipping rate options to apply to this Session. Up to a maximum of 5. */
   @SerializedName("shipping_options")
   List<SessionCreateParams.ShippingOption> shippingOptions;
 
