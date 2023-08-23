@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class QuotePreviewInvoicesParams extends ApiRequestParams {
+public class QuotePreviewScheduleListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -49,7 +49,7 @@ public class QuotePreviewInvoicesParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private QuotePreviewInvoicesParams(
+  private QuotePreviewScheduleListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -78,8 +78,8 @@ public class QuotePreviewInvoicesParams extends ApiRequestParams {
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public QuotePreviewInvoicesParams build() {
-      return new QuotePreviewInvoicesParams(
+    public QuotePreviewScheduleListParams build() {
+      return new QuotePreviewScheduleListParams(
           this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
     }
 
@@ -97,7 +97,7 @@ public class QuotePreviewInvoicesParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuotePreviewInvoicesParams#expand} for the field documentation.
+     * QuotePreviewScheduleListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -110,7 +110,7 @@ public class QuotePreviewInvoicesParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuotePreviewInvoicesParams#expand} for the field documentation.
+     * QuotePreviewScheduleListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -123,7 +123,7 @@ public class QuotePreviewInvoicesParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuotePreviewInvoicesParams#extraParams} for the field documentation.
+     * QuotePreviewScheduleListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -136,7 +136,7 @@ public class QuotePreviewInvoicesParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuotePreviewInvoicesParams#extraParams} for the field documentation.
+     * See {@link QuotePreviewScheduleListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
