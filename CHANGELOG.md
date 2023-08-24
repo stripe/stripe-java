@@ -1,5 +1,14 @@
 # Changelog
 
+## 23.0.0-beta.1 - 2023-08-24
+* [#1630](https://github.com/stripe/stripe-java/pull/1630) Update generated code for beta
+  * Add support for new resources `QuotePreviewInvoice` and `QuotePreviewSchedule`
+  * Remove support for `applies_to` on `Invoice` and `SubscriptionSchedule`
+  * Add support for `cl`, `co`, `id`, `kr`, `mx`, `my`, `sa`, `th`, `tr`, and `vn` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+  * Remove support for `hk` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+  * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
+
 ## 23.1.1 - 2023-08-21
 * [#1638](https://github.com/stripe/stripe-java/pull/1638) Set default API endpoints in StripeClient builder
 * [#1636](https://github.com/stripe/stripe-java/pull/1636) Update v23.0.0 Changelog
