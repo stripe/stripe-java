@@ -124,7 +124,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * confirm=true}</a>.
    */
   @SerializedName("mandate_data")
-  MandateData mandateData;
+  Object mandateData;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -261,8 +261,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>
-   * for details.
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+   * accounts</a> for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -288,7 +288,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String mandate,
-      MandateData mandateData,
+      Object mandateData,
       Map<String, String> metadata,
       Object offSession,
       String onBehalfOf,
@@ -370,7 +370,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String mandate;
 
-    private MandateData mandateData;
+    private Object mandateData;
 
     private Map<String, String> metadata;
 
@@ -623,6 +623,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
+     * This hash contains details about the Mandate to create. This parameter can only be used with
+     * <a
+     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * confirm=true}</a>.
+     */
+    public Builder setMandateData(EmptyParam mandateData) {
+      this.mandateData = mandateData;
+      return this;
+    }
+
+    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * PaymentIntentCreateParams#metadata} for the field documentation.
@@ -836,7 +847,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
      * accounts</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {
@@ -13040,6 +13051,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                     .Permission>
             permissions;
 
+        /** List of data features that you would like to retrieve upon account creation. */
+        @SerializedName("prefetch")
+        List<
+                PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                    .Prefetch>
+            prefetch;
+
         /**
          * For webview integrations only. Upon completing OAuth login in the native browser, the
          * user will be redirected to this URL to return to your app.
@@ -13053,9 +13071,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                     PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount
                         .FinancialConnections.Permission>
                 permissions,
+            List<
+                    PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Prefetch>
+                prefetch,
             String returnUrl) {
           this.extraParams = extraParams;
           this.permissions = permissions;
+          this.prefetch = prefetch;
           this.returnUrl = returnUrl;
         }
 
@@ -13071,13 +13094,19 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                       .Permission>
               permissions;
 
+          private List<
+                  PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Prefetch>
+              prefetch;
+
           private String returnUrl;
 
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
               build() {
             return new PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount
-                .FinancialConnections(this.extraParams, this.permissions, this.returnUrl);
+                .FinancialConnections(
+                this.extraParams, this.permissions, this.prefetch, this.returnUrl);
           }
 
           /**
@@ -13147,6 +13176,41 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           }
 
           /**
+           * Add an element to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addPrefetch(
+              PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Prefetch
+                  element) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addAllPrefetch(
+              List<
+                      PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Prefetch>
+                  elements) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.addAll(elements);
+            return this;
+          }
+
+          /**
            * For webview integrations only. Upon completing OAuth login in the native browser, the
            * user will be redirected to this URL to return to your app.
            */
@@ -13173,6 +13237,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           private final String value;
 
           Permission(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Prefetch implements ApiRequestParams.EnumParam {
+          @SerializedName("balances")
+          BALANCES("balances");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Prefetch(String value) {
             this.value = value;
           }
         }

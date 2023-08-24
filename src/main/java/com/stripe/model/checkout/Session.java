@@ -2107,6 +2107,10 @@ public class Session extends ApiResource implements HasId {
         @SerializedName("permissions")
         List<String> permissions;
 
+        /** Data features requested to be retrieved upon account creation. */
+        @SerializedName("prefetch")
+        List<String> prefetch;
+
         /**
          * For webview integrations only. Upon completing OAuth login in the native browser, the
          * user will be redirected to this URL to return to your app.

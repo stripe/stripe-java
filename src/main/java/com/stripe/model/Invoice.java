@@ -2173,6 +2173,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
            */
           @SerializedName("permissions")
           List<String> permissions;
+
+          /** Data features requested to be retrieved upon account creation. */
+          @SerializedName("prefetch")
+          List<String> prefetch;
         }
       }
     }

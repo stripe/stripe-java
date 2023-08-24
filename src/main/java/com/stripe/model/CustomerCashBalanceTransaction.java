@@ -121,6 +121,15 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
   @EqualsAndHashCode(callSuper = false)
   public static class AdjustedForOverdraft extends StripeObject {
     /**
+     * The <a href="docs/api/balance_transactions/object">Balance Transaction</a> that corresponds
+     * to funds taken out of your Stripe balance.
+     */
+    @SerializedName("balance_transaction")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<BalanceTransaction> balanceTransaction;
+
+    /**
      * The <a href="https://stripe.com/docs/api/cash_balance_transactions/object">Cash Balance
      * Transaction</a> that brought the customer balance negative, triggering the clawback of funds.
      */
@@ -128,6 +137,25 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<CustomerCashBalanceTransaction> linkedTransaction;
+
+    /** Get ID of expandable {@code balanceTransaction} object. */
+    public String getBalanceTransaction() {
+      return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
+    }
+
+    public void setBalanceTransaction(String id) {
+      this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
+    }
+
+    /** Get expanded {@code balanceTransaction}. */
+    public BalanceTransaction getBalanceTransactionObject() {
+      return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
+    }
+
+    public void setBalanceTransactionObject(BalanceTransaction expandableObject) {
+      this.balanceTransaction =
+          new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
+    }
 
     /** Get ID of expandable {@code linkedTransaction} object. */
     public String getLinkedTransaction() {

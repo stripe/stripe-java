@@ -263,7 +263,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("shipping_address_collection")
   ShippingAddressCollection shippingAddressCollection;
 
-  /** The shipping rate options to apply to this Session. */
+  /** The shipping rate options to apply to this Session. Up to a maximum of 5. */
   @SerializedName("shipping_options")
   List<SessionCreateParams.ShippingOption> shippingOptions;
 
@@ -4030,7 +4030,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
      * accounts</a> for details.
      */
     @SerializedName("transfer_group")
@@ -4279,8 +4279,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-       * <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-       * accounts</a> for details.
+       * <a href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for
+       * connected accounts</a> for details.
        */
       public Builder setTransferGroup(String transferGroup) {
         this.transferGroup = transferGroup;
@@ -9444,14 +9444,24 @@ public class SessionCreateParams extends ApiRequestParams {
         List<SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Permission>
             permissions;
 
+        /** List of data features that you would like to retrieve upon account creation. */
+        @SerializedName("prefetch")
+        List<SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Prefetch>
+            prefetch;
+
         private FinancialConnections(
             Map<String, Object> extraParams,
             List<
                     SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
                         .Permission>
-                permissions) {
+                permissions,
+            List<
+                    SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                        .Prefetch>
+                prefetch) {
           this.extraParams = extraParams;
           this.permissions = permissions;
+          this.prefetch = prefetch;
         }
 
         public static Builder builder() {
@@ -9466,11 +9476,16 @@ public class SessionCreateParams extends ApiRequestParams {
                       .Permission>
               permissions;
 
+          private List<
+                  SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Prefetch>
+              prefetch;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
               build() {
             return new SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections(
-                this.extraParams, this.permissions);
+                this.extraParams, this.permissions, this.prefetch);
           }
 
           /**
@@ -9537,6 +9552,40 @@ public class SessionCreateParams extends ApiRequestParams {
             this.permissions.addAll(elements);
             return this;
           }
+
+          /**
+           * Add an element to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addPrefetch(
+              SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Prefetch
+                  element) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addAllPrefetch(
+              List<
+                      SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                          .Prefetch>
+                  elements) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.addAll(elements);
+            return this;
+          }
         }
 
         public enum Permission implements ApiRequestParams.EnumParam {
@@ -9556,6 +9605,18 @@ public class SessionCreateParams extends ApiRequestParams {
           private final String value;
 
           Permission(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Prefetch implements ApiRequestParams.EnumParam {
+          @SerializedName("balances")
+          BALANCES("balances");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Prefetch(String value) {
             this.value = value;
           }
         }

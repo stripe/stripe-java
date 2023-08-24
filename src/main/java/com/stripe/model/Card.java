@@ -158,8 +158,8 @@ public class Card extends ApiResource
    * payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number
    * might be provided instead of the underlying card number.
    *
-   * <p><em>Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
-   * fingerprints for the same card --- one for India and one for the rest of the world.</em>
+   * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+   * fingerprints for the same card---one for India and one for the rest of the world.</em>
    */
   @SerializedName("fingerprint")
   String fingerprint;

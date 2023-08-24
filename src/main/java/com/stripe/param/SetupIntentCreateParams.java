@@ -80,7 +80,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
    * confirm=true}</a>.
    */
   @SerializedName("mandate_data")
-  MandateData mandateData;
+  Object mandateData;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -158,7 +158,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       List<SetupIntentCreateParams.FlowDirection> flowDirections,
-      MandateData mandateData,
+      Object mandateData,
       Map<String, String> metadata,
       String onBehalfOf,
       String paymentMethod,
@@ -211,7 +211,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private List<SetupIntentCreateParams.FlowDirection> flowDirections;
 
-    private MandateData mandateData;
+    private Object mandateData;
 
     private Map<String, String> metadata;
 
@@ -393,6 +393,16 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      * confirm=true}</a>.
      */
     public Builder setMandateData(SetupIntentCreateParams.MandateData mandateData) {
+      this.mandateData = mandateData;
+      return this;
+    }
+
+    /**
+     * This hash contains details about the Mandate to create. This parameter can only be used with
+     * <a href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+     * confirm=true}</a>.
+     */
+    public Builder setMandateData(EmptyParam mandateData) {
       this.mandateData = mandateData;
       return this;
     }
@@ -6419,6 +6429,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
                     .Permission>
             permissions;
 
+        /** List of data features that you would like to retrieve upon account creation. */
+        @SerializedName("prefetch")
+        List<
+                SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                    .Prefetch>
+            prefetch;
+
         /**
          * For webview integrations only. Upon completing OAuth login in the native browser, the
          * user will be redirected to this URL to return to your app.
@@ -6432,9 +6449,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
                     SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
                         .Permission>
                 permissions,
+            List<
+                    SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                        .Prefetch>
+                prefetch,
             String returnUrl) {
           this.extraParams = extraParams;
           this.permissions = permissions;
+          this.prefetch = prefetch;
           this.returnUrl = returnUrl;
         }
 
@@ -6450,13 +6472,19 @@ public class SetupIntentCreateParams extends ApiRequestParams {
                       .Permission>
               permissions;
 
+          private List<
+                  SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Prefetch>
+              prefetch;
+
           private String returnUrl;
 
           /** Finalize and obtain parameter instance from this builder. */
           public SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
               build() {
             return new SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount
-                .FinancialConnections(this.extraParams, this.permissions, this.returnUrl);
+                .FinancialConnections(
+                this.extraParams, this.permissions, this.prefetch, this.returnUrl);
           }
 
           /**
@@ -6526,6 +6554,41 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           }
 
           /**
+           * Add an element to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addPrefetch(
+              SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Prefetch
+                  element) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addAllPrefetch(
+              List<
+                      SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Prefetch>
+                  elements) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.addAll(elements);
+            return this;
+          }
+
+          /**
            * For webview integrations only. Upon completing OAuth login in the native browser, the
            * user will be redirected to this URL to return to your app.
            */
@@ -6552,6 +6615,18 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           private final String value;
 
           Permission(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Prefetch implements ApiRequestParams.EnumParam {
+          @SerializedName("balances")
+          BALANCES("balances");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Prefetch(String value) {
             this.value = value;
           }
         }
