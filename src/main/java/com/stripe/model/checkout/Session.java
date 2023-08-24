@@ -256,7 +256,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("payment_method_collection")
   String paymentMethodCollection;
 
-  /** Information about the payment method configuration used for this Checkout session. */
+  /**
+   * Information about the payment method configuration used for this Checkout session if using
+   * dynamic payment methods.
+   */
   @SerializedName("payment_method_configuration_details")
   PaymentMethodConfigurationDetails paymentMethodConfigurationDetails;
 

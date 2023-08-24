@@ -6038,6 +6038,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("incorporated_non_profit")
       INCORPORATED_NON_PROFIT("incorporated_non_profit"),
 
+      @SerializedName("incorporated_partnership")
+      INCORPORATED_PARTNERSHIP("incorporated_partnership"),
+
       @SerializedName("limited_liability_partnership")
       LIMITED_LIABILITY_PARTNERSHIP("limited_liability_partnership"),
 
@@ -6081,7 +6084,10 @@ public class AccountUpdateParams extends ApiRequestParams {
       UNINCORPORATED_ASSOCIATION("unincorporated_association"),
 
       @SerializedName("unincorporated_non_profit")
-      UNINCORPORATED_NON_PROFIT("unincorporated_non_profit");
+      UNINCORPORATED_NON_PROFIT("unincorporated_non_profit"),
+
+      @SerializedName("unincorporated_partnership")
+      UNINCORPORATED_PARTNERSHIP("unincorporated_partnership");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

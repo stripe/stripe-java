@@ -386,13 +386,11 @@ public final class QuoteService extends ApiService {
     return new com.stripe.service.QuoteLineService(this.getResponseGetter());
   }
 
-  public com.stripe.service.QuotepreviewInvoicesService previewInvoices() {
-    return new com.stripe.service.QuotepreviewInvoicesService(this.getResponseGetter());
+  public com.stripe.service.QuotePreviewInvoiceService previewInvoices() {
+    return new com.stripe.service.QuotePreviewInvoiceService(this.getResponseGetter());
   }
 
-  public com.stripe.service.QuotepreviewSubscriptionSchedulesService
-      previewSubscriptionSchedules() {
-    return new com.stripe.service.QuotepreviewSubscriptionSchedulesService(
-        this.getResponseGetter());
+  public com.stripe.service.QuotePreviewScheduleService previewSchedules() {
+    return new com.stripe.service.QuotePreviewScheduleService(this.getResponseGetter());
   }
 }

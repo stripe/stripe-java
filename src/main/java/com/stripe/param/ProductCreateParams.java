@@ -16,24 +16,6 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("active")
   Boolean active;
 
-  /** A list of up to 5 alphanumeric attributes. Should only be set if type={@code good}. */
-  @SerializedName("attributes")
-  List<String> attributes;
-
-  /**
-   * A short one-line description of the product, meant to be displayable to the customer. May only
-   * be set if type={@code good}.
-   */
-  @SerializedName("caption")
-  String caption;
-
-  /**
-   * An array of Connect application names or identifiers that should not be able to order the SKUs
-   * for this product. May only be set if type={@code good}.
-   */
-  @SerializedName("deactivate_on")
-  List<String> deactivateOn;
-
   /**
    * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object. This
    * Price will be set as the default price for this product.
@@ -137,9 +119,6 @@ public class ProductCreateParams extends ApiRequestParams {
 
   private ProductCreateParams(
       Boolean active,
-      List<String> attributes,
-      String caption,
-      List<String> deactivateOn,
       DefaultPriceData defaultPriceData,
       String description,
       List<String> expand,
@@ -157,9 +136,6 @@ public class ProductCreateParams extends ApiRequestParams {
       String unitLabel,
       String url) {
     this.active = active;
-    this.attributes = attributes;
-    this.caption = caption;
-    this.deactivateOn = deactivateOn;
     this.defaultPriceData = defaultPriceData;
     this.description = description;
     this.expand = expand;
@@ -184,12 +160,6 @@ public class ProductCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Boolean active;
-
-    private List<String> attributes;
-
-    private String caption;
-
-    private List<String> deactivateOn;
 
     private DefaultPriceData defaultPriceData;
 
@@ -227,9 +197,6 @@ public class ProductCreateParams extends ApiRequestParams {
     public ProductCreateParams build() {
       return new ProductCreateParams(
           this.active,
-          this.attributes,
-          this.caption,
-          this.deactivateOn,
           this.defaultPriceData,
           this.description,
           this.expand,
@@ -251,67 +218,6 @@ public class ProductCreateParams extends ApiRequestParams {
     /** Whether the product is currently available for purchase. Defaults to {@code true}. */
     public Builder setActive(Boolean active) {
       this.active = active;
-      return this;
-    }
-
-    /**
-     * Add an element to `attributes` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#attributes} for the field documentation.
-     */
-    public Builder addAttribute(String element) {
-      if (this.attributes == null) {
-        this.attributes = new ArrayList<>();
-      }
-      this.attributes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `attributes` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#attributes} for the field documentation.
-     */
-    public Builder addAllAttribute(List<String> elements) {
-      if (this.attributes == null) {
-        this.attributes = new ArrayList<>();
-      }
-      this.attributes.addAll(elements);
-      return this;
-    }
-
-    /**
-     * A short one-line description of the product, meant to be displayable to the customer. May
-     * only be set if type={@code good}.
-     */
-    public Builder setCaption(String caption) {
-      this.caption = caption;
-      return this;
-    }
-
-    /**
-     * Add an element to `deactivateOn` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#deactivateOn} for the field documentation.
-     */
-    public Builder addDeactivateOn(String element) {
-      if (this.deactivateOn == null) {
-        this.deactivateOn = new ArrayList<>();
-      }
-      this.deactivateOn.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `deactivateOn` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#deactivateOn} for the field documentation.
-     */
-    public Builder addAllDeactivateOn(List<String> elements) {
-      if (this.deactivateOn == null) {
-        this.deactivateOn = new ArrayList<>();
-      }
-      this.deactivateOn.addAll(elements);
       return this;
     }
 

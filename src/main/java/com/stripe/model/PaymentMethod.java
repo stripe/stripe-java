@@ -811,8 +811,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      * payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number
      * might be provided instead of the underlying card number.
      *
-     * <p><em>Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
-     * fingerprints for the same card --- one for India and one for the rest of the world.</em>
+     * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+     * fingerprints for the same card---one for India and one for the rest of the world.</em>
      */
     @SerializedName("fingerprint")
     String fingerprint;
@@ -1082,8 +1082,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      * payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number
      * might be provided instead of the underlying card number.
      *
-     * <p><em>Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
-     * fingerprints for the same card --- one for India and one for the rest of the world.</em>
+     * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+     * fingerprints for the same card---one for India and one for the rest of the world.</em>
      */
     @SerializedName("fingerprint")
     String fingerprint;
@@ -1281,8 +1281,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      * payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number
      * might be provided instead of the underlying card number.
      *
-     * <p><em>Starting May 1, 2021, card fingerprint in India for Connect will change to allow two
-     * fingerprints for the same card --- one for India and one for the rest of the world.</em>
+     * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+     * fingerprints for the same card---one for India and one for the rest of the world.</em>
      */
     @SerializedName("fingerprint")
     String fingerprint;
@@ -1377,14 +1377,6 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Link extends StripeObject {
-    /**
-     * Two-letter ISO code representing the funding source (i.e. card, bank) country beneath the
-     * Link payment method. You could use this attribute to get a sense of the international
-     * breakdown of funding sources you've collected.
-     */
-    @SerializedName("country")
-    String country;
-
     /** Account owner's email address. */
     @SerializedName("email")
     String email;

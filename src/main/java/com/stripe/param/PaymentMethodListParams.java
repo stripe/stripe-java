@@ -241,9 +241,6 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
-    @SerializedName("card_present")
-    CARD_PRESENT("card_present"),
-
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 

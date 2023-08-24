@@ -371,9 +371,9 @@ public class StripeClient {
     private int maxNetworkRetries;
     private Proxy connectionProxy;
     private PasswordAuthentication proxyCredential;
-    private String apiBase;
-    private String filesBase;
-    private String connectBase;
+    private String apiBase = Stripe.LIVE_API_BASE;
+    private String filesBase = Stripe.UPLOAD_API_BASE;
+    private String connectBase = Stripe.CONNECT_API_BASE;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as

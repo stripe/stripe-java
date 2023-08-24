@@ -124,7 +124,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * confirm=true}</a>.
    */
   @SerializedName("mandate_data")
-  MandateData mandateData;
+  Object mandateData;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -276,8 +276,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>
-   * for details.
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+   * accounts</a> for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -303,7 +303,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String mandate,
-      MandateData mandateData,
+      Object mandateData,
       Map<String, String> metadata,
       Object offSession,
       String onBehalfOf,
@@ -391,7 +391,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String mandate;
 
-    private MandateData mandateData;
+    private Object mandateData;
 
     private Map<String, String> metadata;
 
@@ -653,6 +653,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
+     * This hash contains details about the Mandate to create. This parameter can only be used with
+     * <a
+     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * confirm=true}</a>.
+     */
+    public Builder setMandateData(EmptyParam mandateData) {
+      this.mandateData = mandateData;
+      return this;
+    }
+
+    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * PaymentIntentCreateParams#metadata} for the field documentation.
@@ -888,7 +899,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
      * accounts</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {

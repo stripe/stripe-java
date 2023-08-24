@@ -1,5 +1,13 @@
 # Changelog
 
+## 23.1.1 - 2023-08-21
+* [#1638](https://github.com/stripe/stripe-java/pull/1638) Set default API endpoints in StripeClient builder
+* [#1636](https://github.com/stripe/stripe-java/pull/1636) Update v23.0.0 Changelog
+
+## 23.1.0 - 2023-08-17
+* [#1634](https://github.com/stripe/stripe-java/pull/1634) Update generated code
+  * Add support for `flat_amount` on `tax.TransactionCreateReversalParams`
+
 ## 23.0.0 - 2023-08-16
 * This release changes the pinned API version to `2023-08-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
 * More information is available in the [stripe-java v23 migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23)
@@ -8,12 +16,11 @@
 
 * [#1632](https://github.com/stripe/stripe-java/pull/1632) Update generated code
   * ⚠️Remove support for values `custom_account_update` and `custom_account_verification` from enum `AccountLinkCreateParams.type`
-    * These values are not fully operational
+    * These values are not fully operational. Please use `account_update` and `account_onboarding` instead (see [API reference](https://stripe.com/docs/api/account_links/create#create_account_link-type)).
   * ⚠️Remove support for `available_on` on `BalanceTransactionListParams`
     * Use of this parameter is discouraged. You may use [`.putExtraParam`](https://github.com/stripe/stripe-java/#parameters) if sending the parameter is still required.
   * ⚠️Remove support for `alternate_statement_descriptors`, `destination`, and `dispute` on `Charge`
     * Use of these fields is discouraged.
-  * Remove support for `shipping_rates` on `checkout.SessionCreateParams`
   * ⚠️Remove support for `shipping_rates` on `checkout.SessionCreateParams`
     * Please use `shipping_options` instead.
   * ⚠️Remove support for `coupon` and `trial_from_plan` on `checkout.SessionCreateParams.subscription_data`
@@ -40,7 +47,7 @@
   * **Removals**
     * ⚠️ `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
     * ⚠️ `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
-    *  ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
+    * ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
   * **Type changes**
     * ⚠️ `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
       * `BaseAddress` parameter added.

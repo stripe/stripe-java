@@ -251,9 +251,39 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionCancel extends StripeObject {
+      /** Specify a retention strategy to be used in the cancellation flow. */
+      @SerializedName("retention")
+      Retention retention;
+
       /** The ID of the subscription to be canceled. */
       @SerializedName("subscription")
       String subscription;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Retention extends StripeObject {
+        /** Configuration when {@code retention.type=coupon_offer}. */
+        @SerializedName("coupon_offer")
+        CouponOffer couponOffer;
+
+        /**
+         * Type of retention strategy that will be used.
+         *
+         * <p>Equal to {@code coupon_offer}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CouponOffer extends StripeObject {
+          /** The ID of the coupon to be offered. */
+          @SerializedName("coupon")
+          String coupon;
+        }
+      }
     }
 
     @Getter
