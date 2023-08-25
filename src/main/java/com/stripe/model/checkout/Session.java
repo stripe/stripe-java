@@ -135,9 +135,10 @@ public class Session extends ApiResource implements HasId {
   CustomText customText;
 
   /**
-   * The ID of the customer for this Session. For Checkout Sessions in {@code payment} or {@code
-   * subscription} mode, Checkout will create a new customer object based on information provided
-   * during the payment flow unless an existing customer was provided when the Session was created.
+   * The ID of the customer for this Session. For Checkout Sessions in {@code subscription} mode or
+   * Checkout Sessions with {@code customer_creation} set as {@code always} in {@code payment} mode,
+   * Checkout will create a new customer object based on information provided during the payment
+   * flow unless an existing customer was provided when the Session was created.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
