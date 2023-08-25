@@ -82,8 +82,9 @@ public class SessionCreateParams extends ApiRequestParams {
    * email will be prefilled and not editable in Checkout. If the Customer does not have a valid
    * {@code email}, Checkout will set the email entered during the session on the Customer.
    *
-   * <p>If blank for Checkout Sessions in {@code payment} or {@code subscription} mode, Checkout
-   * will create a new Customer object based on information provided during the payment flow.
+   * <p>If blank for Checkout Sessions in {@code subscription} mode or with {@code
+   * customer_creation} set as {@code always} in {@code payment} mode, Checkout will create a new
+   * Customer object based on information provided during the payment flow.
    *
    * <p>You can set <a
    * href="https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-setup_future_usage">{@code
@@ -593,8 +594,9 @@ public class SessionCreateParams extends ApiRequestParams {
      * email will be prefilled and not editable in Checkout. If the Customer does not have a valid
      * {@code email}, Checkout will set the email entered during the session on the Customer.
      *
-     * <p>If blank for Checkout Sessions in {@code payment} or {@code subscription} mode, Checkout
-     * will create a new Customer object based on information provided during the payment flow.
+     * <p>If blank for Checkout Sessions in {@code subscription} mode or with {@code
+     * customer_creation} set as {@code always} in {@code payment} mode, Checkout will create a new
+     * Customer object based on information provided during the payment flow.
      *
      * <p>You can set <a
      * href="https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-setup_future_usage">{@code
