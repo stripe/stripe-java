@@ -103,8 +103,10 @@ public class BankAccount extends ApiResource
   String fingerprint;
 
   /**
-   * Information about upcoming new requirements for the bank account, including what information
-   * needs to be collected.
+   * Information about the <a
+   * href="https://stripe.com/docs/connect/custom-accounts/future-requirements">upcoming new
+   * requirements for the bank account</a>, including what information needs to be collected, and by
+   * when.
    */
   @SerializedName("future_requirements")
   FutureRequirements futureRequirements;
