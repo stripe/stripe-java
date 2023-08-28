@@ -150,15 +150,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   AutomaticTax automaticTax;
 
   /**
-   * Indicates the reason why the invoice was created. {@code subscription_cycle} indicates an
-   * invoice created by a subscription advancing into a new period. {@code subscription_create}
-   * indicates an invoice created due to creating a subscription. {@code subscription_update}
-   * indicates an invoice created due to updating a subscription. {@code subscription} is set for
-   * all old invoices to indicate either a change to a subscription or a period advancement. {@code
-   * manual} is set for all invoices unrelated to a subscription (for example: created via the
-   * invoice editor). The {@code upcoming} value is reserved for simulated invoices per the upcoming
-   * invoice endpoint. {@code subscription_threshold} indicates an invoice created due to a billing
-   * threshold being reached.
+   * Indicates the reason why the invoice was created.
+   *
+   * <p>* {@code manual}: Unrelated to a subscription, for example, created via the invoice editor.
+   * * {@code subscription}: No longer in use. Applies to subscriptions from before May 2018 where
+   * no distinction was made between updates, cycles, and thresholds. * {@code subscription_create}:
+   * A new subscription was created. * {@code subscription_cycle}: A subscription advanced into a
+   * new period. * {@code subscription_threshold}: A subscription reached a billing threshold. *
+   * {@code subscription_update}: A subscription was updated. * {@code upcoming}: Reserved for
+   * simulated invoices, per the upcoming invoice endpoint.
    *
    * <p>One of {@code automatic_pending_invoice_item_invoice}, {@code manual}, {@code quote_accept},
    * {@code subscription}, {@code subscription_create}, {@code subscription_cycle}, {@code
