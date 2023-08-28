@@ -115,9 +115,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
    * charge}, {@code connect_collection_transfer}, {@code contribution}, {@code
    * issuing_authorization_hold}, {@code issuing_authorization_release}, {@code issuing_dispute},
-   * {@code issuing_transaction}, {@code obligation_inbound}, {@code obligation_outbound}, {@code
-   * obligation_reversal_inbound}, {@code obligation_reversal_outbound}, {@code obligation_payout},
-   * {@code obligation_payout_failure}, {@code payment}, {@code payment_failure_refund}, {@code
+   * {@code issuing_transaction}, {@code payment}, {@code payment_failure_refund}, {@code
    * payment_refund}, {@code payment_reversal}, {@code payout}, {@code payout_cancel}, {@code
    * payout_failure}, {@code refund}, {@code refund_failure}, {@code reserve_transaction}, {@code
    * reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup},
@@ -131,9 +129,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
    * charge}, {@code connect_collection_transfer}, {@code contribution}, {@code
    * issuing_authorization_hold}, {@code issuing_authorization_release}, {@code issuing_dispute},
-   * {@code issuing_transaction}, {@code obligation_inbound}, {@code obligation_outbound}, {@code
-   * obligation_payout}, {@code obligation_payout_failure}, {@code obligation_reversal_inbound},
-   * {@code obligation_reversal_outbound}, {@code payment}, {@code payment_failure_refund}, {@code
+   * {@code issuing_transaction}, {@code payment}, {@code payment_failure_refund}, {@code
    * payment_refund}, {@code payment_reversal}, {@code payout}, {@code payout_cancel}, {@code
    * payout_failure}, {@code refund}, {@code refund_failure}, {@code reserve_transaction}, {@code
    * reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup},

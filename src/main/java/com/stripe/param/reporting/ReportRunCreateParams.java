@@ -415,9 +415,6 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("network_cost")
       NETWORK_COST("network_cost"),
 
-      @SerializedName("obligation")
-      OBLIGATION("obligation"),
-
       @SerializedName("other_adjustment")
       OTHER_ADJUSTMENT("other_adjustment"),
 
