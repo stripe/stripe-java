@@ -21,6 +21,11 @@ public class TokenCreateParams extends ApiRequestParams {
   @SerializedName("bank_account")
   BankAccount bankAccount;
 
+  /**
+   * The card this token will represent. If you also pass in a customer, the card must be the ID of
+   * a card belonging to the customer. Otherwise, if you do not pass in a customer, this is a
+   * dictionary containing a user's credit card details, with the options described below.
+   */
   @SerializedName("card")
   Object card;
 
@@ -129,11 +134,21 @@ public class TokenCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The card this token will represent. If you also pass in a customer, the card must be the ID
+     * of a card belonging to the customer. Otherwise, if you do not pass in a customer, this is a
+     * dictionary containing a user's credit card details, with the options described below.
+     */
     public Builder setCard(TokenCreateParams.Card card) {
       this.card = card;
       return this;
     }
 
+    /**
+     * The card this token will represent. If you also pass in a customer, the card must be the ID
+     * of a card belonging to the customer. Otherwise, if you do not pass in a customer, this is a
+     * dictionary containing a user's credit card details, with the options described below.
+     */
     public Builder setCard(String card) {
       this.card = card;
       return this;
@@ -3529,35 +3544,49 @@ public class TokenCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Card {
+    /** City / District / Suburb / Town / Village. */
     @SerializedName("address_city")
     String addressCity;
 
+    /** Billing address country, if provided. */
     @SerializedName("address_country")
     String addressCountry;
 
+    /** Address line 1 (Street address / PO Box / Company name). */
     @SerializedName("address_line1")
     String addressLine1;
 
+    /** Address line 2 (Apartment / Suite / Unit / Building). */
     @SerializedName("address_line2")
     String addressLine2;
 
+    /** State / County / Province / Region. */
     @SerializedName("address_state")
     String addressState;
 
+    /** ZIP or postal code. */
     @SerializedName("address_zip")
     String addressZip;
 
+    /**
+     * Required in order to add the card to an account; in all other cases, this parameter is not
+     * used. When added to an account, the card (which must be a debit card) can be used as a
+     * transfer destination for funds in this currency.
+     */
     @SerializedName("currency")
     String currency;
 
+    /** Card security code. Highly recommended to always include this value. */
     @SerializedName("cvc")
     String cvc;
 
-    /** <strong>Required.</strong> */
+    /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")
     String expMonth;
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> Two- or four-digit number representing the card's expiration year.
+     */
     @SerializedName("exp_year")
     String expYear;
 
@@ -3570,10 +3599,11 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Cardholder's full name. */
     @SerializedName("name")
     String name;
 
-    /** <strong>Required.</strong> */
+    /** <strong>Required.</strong> The card number, as a string without any separators. */
     @SerializedName("number")
     String number;
 
@@ -3655,53 +3685,68 @@ public class TokenCreateParams extends ApiRequestParams {
             this.number);
       }
 
+      /** City / District / Suburb / Town / Village. */
       public Builder setAddressCity(String addressCity) {
         this.addressCity = addressCity;
         return this;
       }
 
+      /** Billing address country, if provided. */
       public Builder setAddressCountry(String addressCountry) {
         this.addressCountry = addressCountry;
         return this;
       }
 
+      /** Address line 1 (Street address / PO Box / Company name). */
       public Builder setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;
         return this;
       }
 
+      /** Address line 2 (Apartment / Suite / Unit / Building). */
       public Builder setAddressLine2(String addressLine2) {
         this.addressLine2 = addressLine2;
         return this;
       }
 
+      /** State / County / Province / Region. */
       public Builder setAddressState(String addressState) {
         this.addressState = addressState;
         return this;
       }
 
+      /** ZIP or postal code. */
       public Builder setAddressZip(String addressZip) {
         this.addressZip = addressZip;
         return this;
       }
 
+      /**
+       * Required in order to add the card to an account; in all other cases, this parameter is not
+       * used. When added to an account, the card (which must be a debit card) can be used as a
+       * transfer destination for funds in this currency.
+       */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
+      /** Card security code. Highly recommended to always include this value. */
       public Builder setCvc(String cvc) {
         this.cvc = cvc;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
       public Builder setExpMonth(String expMonth) {
         this.expMonth = expMonth;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Two- or four-digit number representing the card's expiration
+       * year.
+       */
       public Builder setExpYear(String expYear) {
         this.expYear = expYear;
         return this;
@@ -3733,12 +3778,13 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Cardholder's full name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /** <strong>Required.</strong> The card number, as a string without any separators. */
       public Builder setNumber(String number) {
         this.number = number;
         return this;
