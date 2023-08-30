@@ -8,6 +8,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.AccountSessionCreateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -48,6 +49,9 @@ public class AccountSession extends ApiResource {
    */
   @SerializedName("client_secret")
   String clientSecret;
+
+  @SerializedName("components")
+  Components components;
 
   /** The timestamp at which this AccountSession will expire. */
   @SerializedName("expires_at")
@@ -119,5 +123,132 @@ public class AccountSession extends ApiResource {
             AccountSession.class,
             options,
             ApiMode.V1);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Components extends StripeObject {
+    @SerializedName("account_onboarding")
+    AccountOnboarding accountOnboarding;
+
+    @SerializedName("payment_details")
+    PaymentDetails paymentDetails;
+
+    @SerializedName("payments")
+    Payments payments;
+
+    @SerializedName("payouts")
+    Payouts payouts;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AccountOnboarding extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentDetails extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow capturing and cancelling payment intents. This is {@code true} by
+         * default.
+         */
+        @SerializedName("capture_payments")
+        Boolean capturePayments;
+
+        /**
+         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * disputes. This is {@code true} by default.
+         */
+        @SerializedName("dispute_management")
+        Boolean disputeManagement;
+
+        /** Whether to allow sending refunds. This is {@code true} by default. */
+        @SerializedName("refund_management")
+        Boolean refundManagement;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payments extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow capturing and cancelling payment intents. This is {@code true} by
+         * default.
+         */
+        @SerializedName("capture_payments")
+        Boolean capturePayments;
+
+        /**
+         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * disputes. This is {@code true} by default.
+         */
+        @SerializedName("dispute_management")
+        Boolean disputeManagement;
+
+        /** Whether to allow sending refunds. This is {@code true} by default. */
+        @SerializedName("refund_management")
+        Boolean refundManagement;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payouts extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(components, responseGetter);
   }
 }
