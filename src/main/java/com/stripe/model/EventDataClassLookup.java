@@ -14,6 +14,7 @@ final class EventDataClassLookup {
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
+    classLookup.put("account_session", AccountSession.class);
     classLookup.put("apple_pay_domain", ApplePayDomain.class);
     classLookup.put("application", Application.class);
     classLookup.put("application_fee", ApplicationFee.class);
