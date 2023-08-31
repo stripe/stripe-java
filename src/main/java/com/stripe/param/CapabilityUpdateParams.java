@@ -25,9 +25,13 @@ public class CapabilityUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Passing true requests the capability for the account, if it is not already requested. A
-   * requested capability may not immediately become active. Any requirements to activate the
-   * capability are returned in the {@code requirements} arrays.
+   * To request a new capability for an account, pass true. There can be a delay before the
+   * requested capability becomes active. If the capability has any activation requirements, the
+   * response includes them in the {@code requirements} arrays.
+   *
+   * <p>If a capability isn't permanent, you can remove it from the account by passing false. Most
+   * capabilities are permanent after they've been requested. Attempting to remove a permanent
+   * capability returns an error.
    */
   @SerializedName("requested")
   Boolean requested;
@@ -108,9 +112,13 @@ public class CapabilityUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Passing true requests the capability for the account, if it is not already requested. A
-     * requested capability may not immediately become active. Any requirements to activate the
-     * capability are returned in the {@code requirements} arrays.
+     * To request a new capability for an account, pass true. There can be a delay before the
+     * requested capability becomes active. If the capability has any activation requirements, the
+     * response includes them in the {@code requirements} arrays.
+     *
+     * <p>If a capability isn't permanent, you can remove it from the account by passing false. Most
+     * capabilities are permanent after they've been requested. Attempting to remove a permanent
+     * capability returns an error.
      */
     public Builder setRequested(Boolean requested) {
       this.requested = requested;
