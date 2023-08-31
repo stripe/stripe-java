@@ -148,14 +148,6 @@ public class AccountSession extends ApiResource {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
-
-      @SerializedName("features")
-      Features features;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
     }
 
     @Getter
@@ -165,32 +157,6 @@ public class AccountSession extends ApiResource {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
-
-      @SerializedName("features")
-      Features features;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {
-        /**
-         * Whether to allow capturing and cancelling payment intents. This is {@code true} by
-         * default.
-         */
-        @SerializedName("capture_payments")
-        Boolean capturePayments;
-
-        /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
-         * disputes. This is {@code true} by default.
-         */
-        @SerializedName("dispute_management")
-        Boolean disputeManagement;
-
-        /** Whether to allow sending refunds. This is {@code true} by default. */
-        @SerializedName("refund_management")
-        Boolean refundManagement;
-      }
     }
 
     @Getter
@@ -200,32 +166,6 @@ public class AccountSession extends ApiResource {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
-
-      @SerializedName("features")
-      Features features;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {
-        /**
-         * Whether to allow capturing and cancelling payment intents. This is {@code true} by
-         * default.
-         */
-        @SerializedName("capture_payments")
-        Boolean capturePayments;
-
-        /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
-         * disputes. This is {@code true} by default.
-         */
-        @SerializedName("dispute_management")
-        Boolean disputeManagement;
-
-        /** Whether to allow sending refunds. This is {@code true} by default. */
-        @SerializedName("refund_management")
-        Boolean refundManagement;
-      }
     }
 
     @Getter
@@ -235,14 +175,6 @@ public class AccountSession extends ApiResource {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
-
-      @SerializedName("features")
-      Features features;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
     }
   }
 
