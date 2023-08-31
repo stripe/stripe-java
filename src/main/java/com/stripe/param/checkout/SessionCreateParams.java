@@ -7062,11 +7062,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
-         * allowed to use for funding. Permitted values include: {@code us_bank_account}, {@code
-         * eu_bank_account}, {@code id_bank_account}, {@code gb_bank_account}, {@code
-         * jp_bank_account}, {@code mx_bank_account}, {@code eu_bank_transfer}, {@code
-         * gb_bank_transfer}, {@code id_bank_transfer}, {@code jp_bank_transfer}, {@code
-         * mx_bank_transfer}, or {@code us_bank_transfer}.
+         * allowed to use for funding.
          */
         @SerializedName("type")
         Type type;
@@ -7184,11 +7180,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
-           * allowed to use for funding. Permitted values include: {@code us_bank_account}, {@code
-           * eu_bank_account}, {@code id_bank_account}, {@code gb_bank_account}, {@code
-           * jp_bank_account}, {@code mx_bank_account}, {@code eu_bank_transfer}, {@code
-           * gb_bank_transfer}, {@code id_bank_transfer}, {@code jp_bank_transfer}, {@code
-           * mx_bank_transfer}, or {@code us_bank_transfer}.
+           * allowed to use for funding.
            */
           public Builder setType(
               SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer.Type type) {
