@@ -17,8 +17,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> Each key of the dictionary represents an embedded component, and
-   * each embedded component maps to its configuration (e.g. whether it has been enabled or not, its
-   * corresponding features, etc.).
+   * each embedded component maps to its configuration (e.g. whether it has been enabled or not).
    */
   @SerializedName("components")
   Components components;
@@ -73,8 +72,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Each key of the dictionary represents an embedded component, and
-     * each embedded component maps to its configuration (e.g. whether it has been enabled or not,
-     * its corresponding features, etc.).
+     * each embedded component maps to its configuration (e.g. whether it has been enabled or not).
      */
     public Builder setComponents(AccountSessionCreateParams.Components components) {
       this.components = components;
