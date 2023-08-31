@@ -9,6 +9,13 @@
   * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 * [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
 
+## 23.3.0 - 2023-08-31
+* [#1640](https://github.com/stripe/stripe-java/pull/1640) Update generated code
+  * Add support for new resource `AccountSession`
+  * Add support for `create` method on resource `AccountSession`
+  * Add support for `application` on `PaymentLink`
+  * Add support for new value `obligation` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
+
 ## 23.2.0 - 2023-08-24
 * [#1635](https://github.com/stripe/stripe-java/pull/1635) Update generated code
   * Add support for `retention` on `BillingPortal.Session.flow.subscription_cancel` and `billingportal.SessionCreateParams.flow_data.subscription_cancel`

@@ -8574,6 +8574,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("payouts")
     Payouts payouts;
 
+    /** Settings specific to the account's tax forms. */
+    @SerializedName("tax_forms")
+    TaxForms taxForms;
+
     /** Settings specific to the account's Treasury FinancialAccounts. */
     @SerializedName("treasury")
     Treasury treasury;
@@ -8585,6 +8589,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Payments payments,
         Payouts payouts,
+        TaxForms taxForms,
         Treasury treasury) {
       this.branding = branding;
       this.cardIssuing = cardIssuing;
@@ -8592,6 +8597,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.payments = payments;
       this.payouts = payouts;
+      this.taxForms = taxForms;
       this.treasury = treasury;
     }
 
@@ -8612,6 +8618,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private Payouts payouts;
 
+      private TaxForms taxForms;
+
       private Treasury treasury;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -8623,6 +8631,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.extraParams,
             this.payments,
             this.payouts,
+            this.taxForms,
             this.treasury);
       }
 
@@ -8682,6 +8691,12 @@ public class AccountCreateParams extends ApiRequestParams {
       /** Settings specific to the account's payouts. */
       public Builder setPayouts(AccountCreateParams.Settings.Payouts payouts) {
         this.payouts = payouts;
+        return this;
+      }
+
+      /** Settings specific to the account's tax forms. */
+      public Builder setTaxForms(AccountCreateParams.Settings.TaxForms taxForms) {
+        this.taxForms = taxForms;
         return this;
       }
 
@@ -9790,6 +9805,77 @@ public class AccountCreateParams extends ApiRequestParams {
           WeeklyAnchor(String value) {
             this.value = value;
           }
+        }
+      }
+    }
+
+    @Getter
+    public static class TaxForms {
+      /** Whether the account opted out of receiving their tax forms by postal delivery. */
+      @SerializedName("consented_to_paperless_delivery")
+      Boolean consentedToPaperlessDelivery;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TaxForms(Boolean consentedToPaperlessDelivery, Map<String, Object> extraParams) {
+        this.consentedToPaperlessDelivery = consentedToPaperlessDelivery;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean consentedToPaperlessDelivery;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Settings.TaxForms build() {
+          return new AccountCreateParams.Settings.TaxForms(
+              this.consentedToPaperlessDelivery, this.extraParams);
+        }
+
+        /** Whether the account opted out of receiving their tax forms by postal delivery. */
+        public Builder setConsentedToPaperlessDelivery(Boolean consentedToPaperlessDelivery) {
+          this.consentedToPaperlessDelivery = consentedToPaperlessDelivery;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.TaxForms#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.TaxForms#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
