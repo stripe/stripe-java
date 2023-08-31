@@ -81,8 +81,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   List<String> fullNameAliases;
 
   /**
-   * Information about the upcoming new requirements for this person, including what information
-   * needs to be collected, and by when.
+   * Information about the <a
+   * href="https://stripe.com/docs/connect/custom-accounts/future-requirements">upcoming new
+   * requirements for this person</a>, including what information needs to be collected, and by
+   * when.
    */
   @SerializedName("future_requirements")
   FutureRequirements futureRequirements;

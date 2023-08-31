@@ -93,21 +93,33 @@ public final class CapabilityService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(String account, String capability, CapabilityUpdateParams params)
       throws StripeException {
     return update(account, capability, params, (RequestOptions) null);
   }
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(String account, String capability, RequestOptions options)
       throws StripeException {
     return update(account, capability, (CapabilityUpdateParams) null, options);
   }
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(String account, String capability) throws StripeException {
     return update(account, capability, (CapabilityUpdateParams) null, (RequestOptions) null);
   }
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(
       String account, String capability, CapabilityUpdateParams params, RequestOptions options)
       throws StripeException {

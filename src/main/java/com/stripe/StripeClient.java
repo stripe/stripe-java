@@ -41,6 +41,10 @@ public class StripeClient {
     return new com.stripe.service.AccountLinkService(this.getResponseGetter());
   }
 
+  public com.stripe.service.AccountSessionService accountSessions() {
+    return new com.stripe.service.AccountSessionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.AccountService accounts() {
     return new com.stripe.service.AccountService(this.getResponseGetter());
   }
