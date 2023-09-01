@@ -1,5 +1,11 @@
 # Changelog
 
+## 23.4.0-beta.1 - 2023-08-31
+* [#1639](https://github.com/stripe/stripe-java/pull/1639) Update generated code for beta
+  * Rename `Quote.list_preview_invoices` to `QuotePreviewInvoice.list` and `Quote.list_preview_subscription_schedules` to `QuotePreviewSchedule.list`
+  * Add support for `tax_forms` on `Account.settings`, `AccountCreateParams.settings`, and `AccountUpdateParams.settings`
+  * Add support for `components` on `AccountSessionCreateParams` and `AccountSession`
+
 ## 23.0.0-beta.1 - 2023-08-24
 * [#1630](https://github.com/stripe/stripe-java/pull/1630) Update generated code for beta
   * Add support for new resources `QuotePreviewInvoice` and `QuotePreviewSchedule`
