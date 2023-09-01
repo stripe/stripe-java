@@ -101,7 +101,11 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("id")
   String id;
 
-  /** Whether the person's {@code id_number} was provided. */
+  /**
+   * Whether the person's {@code id_number} was provided. True if either the full ID number was
+   * provided or if only the required part of the ID number was provided (ex. last four of an
+   * individual's SSN for the US indicated by {@code ssn_last_4_provided}).
+   */
   @SerializedName("id_number_provided")
   Boolean idNumberProvided;
 
