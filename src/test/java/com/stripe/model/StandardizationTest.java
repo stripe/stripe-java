@@ -1,115 +1,74 @@
 package com.stripe.model;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.ClassPath;
-import com.google.common.reflect.Invokable;
-import com.google.common.reflect.Parameter;
-import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 /** Simple test to make sure stripe-java provides consistent bindings. */
 public class StandardizationTest {
   @Test
-  public void allNonDeprecatedMethodsTakeOptions() throws IOException, NoSuchMethodException {
+  public void allNonDeprecatedMethodsHaveCorrespondingMethodWithRequestOptions()
+      throws IOException, NoSuchMethodException {
     for (Class<?> model : getAllModels()) {
       for (Method method : model.getMethods()) {
-        // Skip methods not declared on the base class.
-        if (method.getDeclaringClass() != model) {
-          continue;
-        }
-        // Skip equals
-        if (method.getName().equals("equals")) {
-          continue;
-        }
-        // Skip setters
-        if (method.getName().startsWith("set")) {
-          continue;
-        }
-        // Skip getters
-        if (method.getName().startsWith("get")) {
-          continue;
-        }
-        // Skip internal methods
-        if (method.getName().startsWith("_")) {
-          continue;
-        }
-
-        // If more than one method with the same parameter types is declared in a class, and one of
-        // these methods has a return type that is more specific than any of the others, that method
-        // is returned; otherwise one of the methods is chosen arbitrarily.
-        Method mostSpecificMethod =
-            model.getDeclaredMethod(method.getName(), method.getParameterTypes());
-        if (!method.equals(mostSpecificMethod)) {
-          continue;
-        }
-
-        Invokable<?, Object> invokable = Invokable.from(method);
-        // Skip private methods.
-        if (invokable.isPrivate()) {
-          continue;
-        }
-        // Skip deprecated methods - we need to keep them around, but aren't asserting their type.
-        if (invokable.isAnnotationPresent(Deprecated.class)) {
-          continue;
-        }
-        ImmutableList<Parameter> parameters = invokable.getParameters();
-        // Skip empty parameter lists - assume the author is using default values for the
-        // RequestOptions
-        if (parameters.isEmpty()) {
-          continue;
-        }
-        Parameter lastParam = parameters.get(parameters.size() - 1);
-        Class<?> finalParamType = lastParam.getType().getRawType();
-
-        // Skip methods that have exactly one param which is a map.
-        boolean isRequestParamType =
-            ApiRequestParams.class.isAssignableFrom(finalParamType)
-                || Map.class.equals(finalParamType);
-        if (isRequestParamType && parameters.size() == 1) {
-          continue;
-        }
-
-        // Skip `public static Foo retrieve(String id) {...` helper methods
-        if (String.class.equals(finalParamType)
-            && parameters.size() == 1
-            && method.getName().startsWith("retrieve")) {
-          continue;
-        }
-
-        // Skip the `public static Card createCard(String id) {...` helper method on Customer.
-        if (String.class.equals(finalParamType)
-            && parameters.size() == 1
-            && ("createCard".equals(method.getName())
-                || "createBankAccount".equals(method.getName()))) {
-          continue;
-        }
-
-        if (RequestOptions.class.isAssignableFrom(finalParamType)) {
-          continue;
-        }
-        assertTrue(
-            RequestOptions.class.isAssignableFrom(finalParamType),
+        if (methodShouldBeSkipped(method, model)) continue;
+        Class<?>[] methodParameterTypes = method.getParameterTypes();
+        Parameter[] methodParameters = method.getParameters();
+        if (methodParameters.length == 0) continue;
+        if (!methodParameters[methodParameters.length - 1].getName().equals("params")) continue;
+        Class<?>[] extendedMethodParameterTypes =
+            Arrays.copyOf(methodParameterTypes, methodParameterTypes.length + 1);
+        extendedMethodParameterTypes[methodParameterTypes.length] =
+            RequestOptions.class; // Add RequestOptions to the end
+        Method correspondingMethod =
+            getCorrespondingMethodWithRequestOptions(model, method, extendedMethodParameterTypes);
+        assertNotNull(
+            correspondingMethod,
             String.format(
-                "Methods on %ss like %s.%s should take a final "
-                    + "parameter as a %s parameter, but got %s.%n",
+                "Methods on %ss like %s %s should have a corresponding method with RequestOptions as the last argument.%n",
                 ApiResource.class.getSimpleName(),
-                model.getSimpleName(),
                 method.getName(),
-                RequestOptions.class.getSimpleName(),
-                finalParamType.getCanonicalName()));
+                method.getParameterTypes().length > 0
+                    ? "with parameters " + Arrays.toString(method.getParameterTypes())
+                    : ""));
       }
     }
+  }
+
+  private boolean methodShouldBeSkipped(Method method, Class<?> model) {
+    return method.getName().startsWith("set")
+        || method.getName().startsWith("get")
+        || method.getName().startsWith("_")
+        || method.getName().equals("equals")
+        || method.getDeclaringClass() != model
+        || method.getName().equals("hashCode")
+        || method.isAnnotationPresent(Deprecated.class)
+        || getPrivacyStatus(method);
+  }
+
+  private Method getCorrespondingMethodWithRequestOptions(
+      Class<?> model, Method method, Class<?>[] extendedMethodParameterTypes) {
+    try {
+      return model.getMethod(method.getName(), extendedMethodParameterTypes);
+    } catch (NoSuchMethodException e) {
+      return null; // returns null if there is no corresponding method with RequestOptions
+    }
+  }
+
+  private boolean getPrivacyStatus(Method method) {
+    return Modifier.isPrivate(method.getModifiers());
   }
 
   private Collection<Class<?>> getAllModels() throws IOException {

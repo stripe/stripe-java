@@ -1792,6 +1792,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
 
+    @SerializedName("tax_forms")
+    TaxForms taxForms;
+
     @SerializedName("treasury")
     Treasury treasury;
 
@@ -2092,6 +2095,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /** SEPA creditor identifier that identifies the company making the payment. */
       @SerializedName("creditor_id")
       String creditorId;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxForms extends StripeObject {
+      /** Whether the account opted out of receiving their tax forms by postal delivery. */
+      @SerializedName("consented_to_paperless_delivery")
+      Boolean consentedToPaperlessDelivery;
     }
 
     @Getter

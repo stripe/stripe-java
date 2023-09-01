@@ -84,12 +84,18 @@ public class Capability extends ApiResource implements HasId {
     this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -107,12 +113,18 @@ public class Capability extends ApiResource implements HasId {
             ApiMode.V1);
   }
 
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(CapabilityUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates an existing Account Capability. */
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
   public Capability update(CapabilityUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =

@@ -52,6 +52,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
 
+  /** The ID of the Connect application that created the Payment Link. */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account.
@@ -213,6 +219,24 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   /** The public URL that can be shared with customers. */
   @SerializedName("url")
   String url;
+
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code onBehalfOf} object. */
   public String getOnBehalfOf() {
@@ -942,6 +966,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(afterCompletion, responseGetter);
+    trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
     trySetResponseGetter(customText, responseGetter);
