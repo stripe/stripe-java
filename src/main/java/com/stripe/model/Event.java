@@ -179,8 +179,24 @@ public class Event extends ApiResource implements HasId {
    * test_helpers.test_clock.created}, {@code test_helpers.test_clock.deleted}, {@code
    * test_helpers.test_clock.internal_failure}, {@code test_helpers.test_clock.ready}, {@code
    * topup.canceled}, {@code topup.created}, {@code topup.failed}, {@code topup.reversed}, {@code
-   * topup.succeeded}, {@code transfer.created}, {@code transfer.reversed}, or {@code
-   * transfer.updated}.
+   * topup.succeeded}, {@code transfer.created}, {@code transfer.reversed}, {@code
+   * transfer.updated}, {@code treasury.credit_reversal.created}, {@code
+   * treasury.credit_reversal.posted}, {@code treasury.debit_reversal.completed}, {@code
+   * treasury.debit_reversal.created}, {@code treasury.debit_reversal.initial_credit_granted},
+   * {@code treasury.financial_account.closed}, {@code treasury.financial_account.created}, {@code
+   * treasury.financial_account.features_status_updated}, {@code
+   * treasury.inbound_transfer.canceled}, {@code treasury.inbound_transfer.created}, {@code
+   * treasury.inbound_transfer.failed}, {@code treasury.inbound_transfer.succeeded}, {@code
+   * treasury.outbound_payment.canceled}, {@code treasury.outbound_payment.created}, {@code
+   * treasury.outbound_payment.expected_arrival_date_updated}, {@code
+   * treasury.outbound_payment.failed}, {@code treasury.outbound_payment.posted}, {@code
+   * treasury.outbound_payment.returned}, {@code treasury.outbound_transfer.canceled}, {@code
+   * treasury.outbound_transfer.created}, {@code
+   * treasury.outbound_transfer.expected_arrival_date_updated}, {@code
+   * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
+   * treasury.outbound_transfer.returned}, {@code treasury.received_credit.created}, {@code
+   * treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, or {@code
+   * treasury.received_debit.created}.
    */
   @SerializedName("type")
   String type;
