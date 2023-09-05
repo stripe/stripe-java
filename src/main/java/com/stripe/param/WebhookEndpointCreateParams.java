@@ -853,9 +853,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoiceitem.deleted")
     INVOICEITEM__DELETED("invoiceitem.deleted"),
 
-    @SerializedName("invoiceitem.updated")
-    INVOICEITEM__UPDATED("invoiceitem.updated"),
-
     @SerializedName("issuing_authorization.created")
     ISSUING_AUTHORIZATION__CREATED("issuing_authorization.created"),
 
