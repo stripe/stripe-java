@@ -148,8 +148,8 @@ public class Event extends ApiResource implements HasId {
    * invoice.payment_action_required}, {@code invoice.payment_failed}, {@code
    * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
    * invoice.updated}, {@code invoice.voided}, {@code invoiceitem.created}, {@code
-   * invoiceitem.deleted}, {@code invoiceitem.updated}, {@code issuing_authorization.created},
-   * {@code issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
+   * invoiceitem.deleted}, {@code issuing_authorization.created}, {@code
+   * issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
    * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_card_design.activated},
    * {@code issuing_card_design.deactivated}, {@code issuing_card_design.updated}, {@code
    * issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
