@@ -2074,7 +2074,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   public static class CancellationDetails {
     /**
      * Additional comments about why the user canceled the subscription, if the subscription was
-     * cancelled explicitly by the user.
+     * canceled explicitly by the user.
      */
     @SerializedName("comment")
     Object comment;
@@ -2089,7 +2089,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The customer submitted reason for why they cancelled, if the subscription was cancelled
+     * The customer submitted reason for why they canceled, if the subscription was canceled
      * explicitly by the user.
      */
     @SerializedName("feedback")
@@ -2121,7 +2121,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Additional comments about why the user canceled the subscription, if the subscription was
-       * cancelled explicitly by the user.
+       * canceled explicitly by the user.
        */
       public Builder setComment(String comment) {
         this.comment = comment;
@@ -2130,7 +2130,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Additional comments about why the user canceled the subscription, if the subscription was
-       * cancelled explicitly by the user.
+       * canceled explicitly by the user.
        */
       public Builder setComment(EmptyParam comment) {
         this.comment = comment;
@@ -2165,7 +2165,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The customer submitted reason for why they cancelled, if the subscription was cancelled
+       * The customer submitted reason for why they canceled, if the subscription was canceled
        * explicitly by the user.
        */
       public Builder setFeedback(SubscriptionUpdateParams.CancellationDetails.Feedback feedback) {
@@ -2174,7 +2174,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The customer submitted reason for why they cancelled, if the subscription was cancelled
+       * The customer submitted reason for why they canceled, if the subscription was canceled
        * explicitly by the user.
        */
       public Builder setFeedback(EmptyParam feedback) {
