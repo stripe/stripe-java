@@ -1699,8 +1699,8 @@ public class Session extends ApiResource implements HasId {
          * List of address types that should be returned in the financial_addresses response. If not
          * specified, all valid types will be returned.
          *
-         * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
-         * spei}.
+         * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, {@code
+         * spei}, or {@code ca_bank_account_address}.
          */
         @SerializedName("requested_address_types")
         List<String> requestedAddressTypes;
