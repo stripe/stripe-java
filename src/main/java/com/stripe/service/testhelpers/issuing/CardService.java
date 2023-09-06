@@ -14,7 +14,6 @@ import com.stripe.param.issuing.CardDeliverCardParams;
 import com.stripe.param.issuing.CardFailCardParams;
 import com.stripe.param.issuing.CardReturnCardParams;
 import com.stripe.param.issuing.CardShipCardParams;
-import com.stripe.param.issuing.CardSubmitCardParams;
 
 public final class CardService extends ApiService {
   public CardService(StripeResponseGetter responseGetter) {
@@ -155,42 +154,6 @@ public final class CardService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/fail", ApiResource.urlEncodeId(card));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            Card.class,
-            options,
-            ApiMode.V1);
-  }
-  /**
-   * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   */
-  public Card submitCard(String card, CardSubmitCardParams params) throws StripeException {
-    return submitCard(card, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   */
-  public Card submitCard(String card, RequestOptions options) throws StripeException {
-    return submitCard(card, (CardSubmitCardParams) null, options);
-  }
-  /**
-   * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   */
-  public Card submitCard(String card) throws StripeException {
-    return submitCard(card, (CardSubmitCardParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   */
-  public Card submitCard(String card, CardSubmitCardParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/test_helpers/issuing/cards/%s/shipping/submit", ApiResource.urlEncodeId(card));
     return getResponseGetter()
         .request(
             BaseAddress.API,
