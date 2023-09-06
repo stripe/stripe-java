@@ -51,6 +51,7 @@ final class EventDataClassLookup {
     classLookup.put("payment_intent", PaymentIntent.class);
     classLookup.put("payment_link", PaymentLink.class);
     classLookup.put("payment_method", PaymentMethod.class);
+    classLookup.put("payment_method_domain", PaymentMethodDomain.class);
     classLookup.put("payout", Payout.class);
     classLookup.put("person", Person.class);
     classLookup.put("plan", Plan.class);
