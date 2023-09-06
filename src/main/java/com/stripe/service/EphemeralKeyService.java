@@ -12,7 +12,6 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.EphemeralKeyCreateParams;
 import com.stripe.param.EphemeralKeyDeleteParams;
-
 import java.util.Map;
 
 public final class EphemeralKeyService extends ApiService {
@@ -40,14 +39,14 @@ public final class EphemeralKeyService extends ApiService {
 
     if (!paramsMap.containsKey("stripe-version")) {
       throw new IllegalArgumentException(
-              "`stripe-version` must be explicitly specified in "
-                      + "`params` as the stripe version of your mobile client.");
+          "`stripe-version` must be explicitly specified in "
+              + "`params` as the stripe version of your mobile client.");
     }
     try {
       versionOverride = (String) paramsMap.get("stripe-version");
     } catch (ClassCastException e) {
       throw new IllegalArgumentException(
-              "`stripe-version` must be explicitly specified in " + "`params` as a string");
+          "`stripe-version` must be explicitly specified in " + "`params` as a string");
     }
     if (options == null) {
       options = RequestOptions.getDefault();
@@ -55,9 +54,9 @@ public final class EphemeralKeyService extends ApiService {
     // Take "stripe-version" from params and plug it into RequestOptions
     // so it will be sent in the Stripe-Version header
     final RequestOptions overriddenOptions =
-            com.stripe.net.RequestOptions.RequestOptionsBuilder.unsafeSetStripeVersionOverride(
-                            options.toBuilderFullCopy(), versionOverride)
-                    .build();
+        com.stripe.net.RequestOptions.RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                options.toBuilderFullCopy(), versionOverride)
+            .build();
 
     // Remove "stripe-version" from params so that it is not sent in the
     // request body.

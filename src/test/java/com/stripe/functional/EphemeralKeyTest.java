@@ -43,10 +43,10 @@ public class EphemeralKeyTest extends BaseStripeTest {
   @Test
   public void testCreateTypedParamsSuccess() throws StripeException {
     final EphemeralKeyCreateParams params =
-            EphemeralKeyCreateParams.builder()
-                    .setCustomer("cus_123")
-                    .setStripeVersion("foobar")
-                    .build();
+        EphemeralKeyCreateParams.builder()
+            .setCustomer("cus_123")
+            .setStripeVersion("foobar")
+            .build();
 
     final Map<String, Object> expectedParams = new HashMap<>();
     expectedParams.put("customer", "cus_123");
@@ -55,20 +55,20 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
     assertNotNull(key);
     verifyRequest(
-            ApiResource.RequestMethod.POST,
-            "/v1/ephemeral_keys",
-            expectedParams,
-            RequestOptionsBuilder.unsafeSetStripeVersionOverride(RequestOptions.builder(), "foobar")
-                    .build());
+        ApiResource.RequestMethod.POST,
+        "/v1/ephemeral_keys",
+        expectedParams,
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(RequestOptions.builder(), "foobar")
+            .build());
   }
 
   @Test
   public void testCreateTypedParamsServiceSuccess() throws StripeException {
     final EphemeralKeyCreateParams params =
-            EphemeralKeyCreateParams.builder()
-                    .setCustomer("cus_123")
-                    .setStripeVersion("foobar")
-                    .build();
+        EphemeralKeyCreateParams.builder()
+            .setCustomer("cus_123")
+            .setStripeVersion("foobar")
+            .build();
 
     final Map<String, Object> expectedParams = new HashMap<>();
     expectedParams.put("customer", "cus_123");
@@ -77,11 +77,11 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
     assertNotNull(key);
     verifyRequest(
-            ApiResource.RequestMethod.POST,
-            "/v1/ephemeral_keys",
-            expectedParams,
-            RequestOptionsBuilder.unsafeSetStripeVersionOverride(RequestOptions.builder(), "foobar")
-                    .build());
+        ApiResource.RequestMethod.POST,
+        "/v1/ephemeral_keys",
+        expectedParams,
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(RequestOptions.builder(), "foobar")
+            .build());
   }
 
   @Test
@@ -123,38 +123,37 @@ public class EphemeralKeyTest extends BaseStripeTest {
     createParams.put("issuing_card", "card_123");
 
     assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              EphemeralKey.create(createParams);
-            });
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKey.create(createParams);
+        });
 
     assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              EphemeralKey.create(createParams, RequestOptions.builder().build());
-            });
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKey.create(createParams, RequestOptions.builder().build());
+        });
   }
 
   @Test
   public void testThrowExceptionWithBadTypedParamsService() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
     assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              EphemeralKeyCreateParams createParams =
-                    EphemeralKeyCreateParams.builder().build();
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKeyCreateParams createParams = EphemeralKeyCreateParams.builder().build();
 
-              client.ephemeralKeys().create(createParams);
-            });
+          client.ephemeralKeys().create(createParams);
+        });
 
     assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              EphemeralKeyCreateParams createParams =
-                      EphemeralKeyCreateParams.builder().putExtraParam("stripe-version", 5).build();
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKeyCreateParams createParams =
+              EphemeralKeyCreateParams.builder().putExtraParam("stripe-version", 5).build();
 
-              client.ephemeralKeys().create(createParams, RequestOptions.builder().build());
-            });
+          client.ephemeralKeys().create(createParams, RequestOptions.builder().build());
+        });
   }
 
   @Test
