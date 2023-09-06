@@ -12,7 +12,6 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.EphemeralKeyCreateParams;
 import com.stripe.param.EphemeralKeyDeleteParams;
-import java.util.Map;
 
 public final class EphemeralKeyService extends ApiService {
   public EphemeralKeyService(StripeResponseGetter responseGetter) {
@@ -35,7 +34,7 @@ public final class EphemeralKeyService extends ApiService {
   public EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
       throws StripeException {
     String versionOverride;
-    Map<String, Object> paramsMap = ApiRequestParams.paramsToMap(params);
+    java.util.Map<String, Object> paramsMap = ApiRequestParams.paramsToMap(params);
 
     if (!paramsMap.containsKey("stripe-version")) {
       throw new IllegalArgumentException(
@@ -60,7 +59,8 @@ public final class EphemeralKeyService extends ApiService {
 
     // Remove "stripe-version" from params so that it is not sent in the
     // request body.
-    final Map<String, Object> overriddenParams = new java.util.HashMap<String, Object>(paramsMap);
+    final java.util.Map<String, Object> overriddenParams =
+        new java.util.HashMap<String, Object>(paramsMap);
     overriddenParams.remove("stripe-version");
 
     String path = "/v1/ephemeral_keys";
