@@ -1117,13 +1117,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static class CancellationDetails extends StripeObject {
     /**
      * Additional comments about why the user canceled the subscription, if the subscription was
-     * cancelled explicitly by the user.
+     * canceled explicitly by the user.
      */
     @SerializedName("comment")
     String comment;
 
     /**
-     * The customer submitted reason for why they cancelled, if the subscription was cancelled
+     * The customer submitted reason for why they canceled, if the subscription was canceled
      * explicitly by the user.
      *
      * <p>One of {@code customer_service}, {@code low_quality}, {@code missing_features}, {@code
@@ -1134,7 +1134,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     String feedback;
 
     /**
-     * Why this subscription was cancelled.
+     * Why this subscription was canceled.
      *
      * <p>One of {@code cancellation_requested}, {@code payment_disputed}, or {@code
      * payment_failed}.
