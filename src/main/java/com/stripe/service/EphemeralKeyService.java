@@ -13,6 +13,8 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.EphemeralKeyCreateParams;
 import com.stripe.param.EphemeralKeyDeleteParams;
 
+import java.util.Map;
+
 public final class EphemeralKeyService extends ApiService {
   public EphemeralKeyService(StripeResponseGetter responseGetter) {
     super(responseGetter);
@@ -33,15 +35,44 @@ public final class EphemeralKeyService extends ApiService {
   /** Creates a short-lived API key for a given resource. */
   public EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
       throws StripeException {
+    String versionOverride;
+    Map<String, Object> paramsMap = ApiRequestParams.paramsToMap(params);
+
+    if (!paramsMap.containsKey("stripe-version")) {
+      throw new IllegalArgumentException(
+              "`stripe-version` must be explicitly specified in "
+                      + "`params` as the stripe version of your mobile client.");
+    }
+    try {
+      versionOverride = (String) paramsMap.get("stripe-version");
+    } catch (ClassCastException e) {
+      throw new IllegalArgumentException(
+              "`stripe-version` must be explicitly specified in " + "`params` as a string");
+    }
+    if (options == null) {
+      options = RequestOptions.getDefault();
+    }
+    // Take "stripe-version" from params and plug it into RequestOptions
+    // so it will be sent in the Stripe-Version header
+    final RequestOptions overriddenOptions =
+            com.stripe.net.RequestOptions.RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                            options.toBuilderFullCopy(), versionOverride)
+                    .build();
+
+    // Remove "stripe-version" from params so that it is not sent in the
+    // request body.
+    final Map<String, Object> overriddenParams = new java.util.HashMap<String, Object>(paramsMap);
+    overriddenParams.remove("stripe-version");
+
     String path = "/v1/ephemeral_keys";
     return getResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
-            ApiRequestParams.paramsToMap(params),
+            overriddenParams,
             EphemeralKey.class,
-            options,
+            overriddenOptions,
             ApiMode.V1);
   }
   /** Invalidates a short-lived API key for a given resource. */
