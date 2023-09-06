@@ -241,7 +241,10 @@ public class CardDesignListParams extends ApiRequestParams {
     DEFAULT("default"),
 
     @SerializedName("none")
-    NONE("none");
+    NONE("none"),
+
+    @SerializedName("platform_default")
+    PLATFORM_DEFAULT("platform_default");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
