@@ -15,6 +15,15 @@
   * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 * [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
 
+## 23.4.0 - 2023-09-07
+* [#1643](https://github.com/stripe/stripe-java/pull/1643) Update generated code
+  * Add support for new resource `PaymentMethodDomain`
+  * Add support for `create`, `list`, `retrieve`, `update`, and `validate` methods on resource `PaymentMethodDomain`
+  * Add support for new value `n26` on enums `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for `features` on `ProductCreateParams`, `ProductUpdateParams`, and `Product`
+  * Remove support for value `invoiceitem.updated` from enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1646](https://github.com/stripe/stripe-java/pull/1646) Fix EphemeralKeyService.create
+
 ## 23.3.0 - 2023-08-31
 * [#1640](https://github.com/stripe/stripe-java/pull/1640) Update generated code
   * Add support for new resource `AccountSession`
