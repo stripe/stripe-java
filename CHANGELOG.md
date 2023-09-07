@@ -1,5 +1,13 @@
 # Changelog
 
+## 23.5.0-beta.1 - 2023-09-07
+* [#1648](https://github.com/stripe/stripe-java/pull/1648) Update generated code for beta
+  Release specs are identical.
+* [#1644](https://github.com/stripe/stripe-java/pull/1644) Update generated code for beta
+  * Remove support for `submit_card` test helper method on resource `Issuing.Card`
+  * Add support for `card_design` on `issuing.CardUpdateParams`
+  * Add support for new value `platform_default` on enum `issuing.CardDesignListParams.preference`
+
 ## 23.4.0-beta.1 - 2023-08-31
 * [#1639](https://github.com/stripe/stripe-java/pull/1639) Update generated code for beta
   * Rename `Quote.list_preview_invoices` to `QuotePreviewInvoice.list` and `Quote.list_preview_subscription_schedules` to `QuotePreviewSchedule.list`
