@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentRetrieveParams extends ApiRequestParams {
   /**
-   * The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the
-   * source.
+   * The client secret of the PaymentIntent. It's required if you use a publishable key to retrieve
+   * the source.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -55,8 +55,8 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
     }
 
     /**
-     * The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the
-     * source.
+     * The client secret of the PaymentIntent. It's required if you use a publishable key to
+     * retrieve the source.
      */
     public Builder setClientSecret(String clientSecret) {
       this.clientSecret = clientSecret;

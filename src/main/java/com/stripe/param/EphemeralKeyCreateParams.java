@@ -33,8 +33,8 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
   String issuingCard;
 
   /**
-   * Determines the value of the Stripe-Version header. Set this to the API Version of your mobile
-   * client.
+   * <strong>Required.</strong> Determines the value of the Stripe-Version header. Set this to the
+   * API Version of your mobile client.
    */
   @SerializedName("stripe-version")
   String stripeVersion;
@@ -154,20 +154,20 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     }
 
     /**
+     * <strong>Required.</strong> Determines the value of the Stripe-Version header. Set this to the
+     * API Version of your mobile client.
+     */
+    public Builder setStripeVersion(String stripeVersion) {
+      this.stripeVersion = stripeVersion;
+      return this;
+    }
+
+    /**
      * The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral
      * key.
      */
     public Builder setVerificationSession(String verificationSession) {
       this.verificationSession = verificationSession;
-      return this;
-    }
-
-    /**
-     * Determines the value of the Stripe-Version header. Set this to the API Version of your mobile
-     * client.
-     */
-    public Builder setStripeVersion(String stripeVersion) {
-      this.stripeVersion = stripeVersion;
       return this;
     }
   }
