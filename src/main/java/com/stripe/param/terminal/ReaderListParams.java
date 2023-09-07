@@ -48,6 +48,10 @@ public class ReaderListParams extends ApiRequestParams {
   @SerializedName("location")
   String location;
 
+  /** Filters readers by serial number. */
+  @SerializedName("serial_number")
+  String serialNumber;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -68,6 +72,7 @@ public class ReaderListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Long limit,
       String location,
+      String serialNumber,
       String startingAfter,
       Status status) {
     this.deviceType = deviceType;
@@ -76,6 +81,7 @@ public class ReaderListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.location = location;
+    this.serialNumber = serialNumber;
     this.startingAfter = startingAfter;
     this.status = status;
   }
@@ -97,6 +103,8 @@ public class ReaderListParams extends ApiRequestParams {
 
     private String location;
 
+    private String serialNumber;
+
     private String startingAfter;
 
     private Status status;
@@ -110,6 +118,7 @@ public class ReaderListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.location,
+          this.serialNumber,
           this.startingAfter,
           this.status);
     }
@@ -195,6 +204,12 @@ public class ReaderListParams extends ApiRequestParams {
     /** A location ID to filter the response list to only readers at the specific location. */
     public Builder setLocation(String location) {
       this.location = location;
+      return this;
+    }
+
+    /** Filters readers by serial number. */
+    public Builder setSerialNumber(String serialNumber) {
+      this.serialNumber = serialNumber;
       return this;
     }
 
