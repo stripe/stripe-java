@@ -9,7 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A quote line defines a set of changes that will be applied upon quote acceptance. */
+/**
+ * A quote line defines a set of changes, in the order provided, that will be applied upon quote
+ * acceptance.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -72,7 +72,7 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
   /**
    * Whether this card design is used to create cards when one is not specified.
    *
-   * <p>One of {@code default}, or {@code none}.
+   * <p>One of {@code default}, {@code none}, or {@code platform_default}.
    */
   @SerializedName("preference")
   String preference;

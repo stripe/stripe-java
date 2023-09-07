@@ -108,20 +108,25 @@ public class Event extends ApiResource implements HasId {
    * {@code application_fee.refund.updated}, {@code application_fee.refunded}, {@code
    * balance.available}, {@code billing_portal.configuration.created}, {@code
    * billing_portal.configuration.updated}, {@code billing_portal.session.created}, {@code
-   * capability.updated}, {@code cash_balance.funds_available}, {@code charge.captured}, {@code
-   * charge.dispute.closed}, {@code charge.dispute.created}, {@code
-   * charge.dispute.funds_reinstated}, {@code charge.dispute.funds_withdrawn}, {@code
-   * charge.dispute.updated}, {@code charge.expired}, {@code charge.failed}, {@code charge.pending},
-   * {@code charge.refund.updated}, {@code charge.refunded}, {@code charge.succeeded}, {@code
-   * charge.updated}, {@code checkout.session.async_payment_failed}, {@code
-   * checkout.session.async_payment_succeeded}, {@code checkout.session.completed}, {@code
-   * checkout.session.expired}, {@code coupon.created}, {@code coupon.deleted}, {@code
-   * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
-   * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
-   * customer.discount.created}, {@code customer.discount.deleted}, {@code
+   * capability.updated}, {@code capital.financing_offer.accepted}, {@code
+   * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
+   * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
+   * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
+   * capital.financing_offer.replacement_created}, {@code capital.financing_transaction.created},
+   * {@code cash_balance.funds_available}, {@code charge.captured}, {@code charge.dispute.closed},
+   * {@code charge.dispute.created}, {@code charge.dispute.funds_reinstated}, {@code
+   * charge.dispute.funds_withdrawn}, {@code charge.dispute.updated}, {@code charge.expired}, {@code
+   * charge.failed}, {@code charge.pending}, {@code charge.refund.updated}, {@code charge.refunded},
+   * {@code charge.succeeded}, {@code charge.updated}, {@code
+   * checkout.session.async_payment_failed}, {@code checkout.session.async_payment_succeeded},
+   * {@code checkout.session.completed}, {@code checkout.session.expired}, {@code coupon.created},
+   * {@code coupon.deleted}, {@code coupon.updated}, {@code credit_note.created}, {@code
+   * credit_note.updated}, {@code credit_note.voided}, {@code customer.created}, {@code
+   * customer.deleted}, {@code customer.discount.created}, {@code customer.discount.deleted}, {@code
    * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
    * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
-   * customer.subscription.created}, {@code customer.subscription.deleted}, {@code
+   * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
+   * {@code customer.subscription.created}, {@code customer.subscription.deleted}, {@code
    * customer.subscription.paused}, {@code customer.subscription.pending_update_applied}, {@code
    * customer.subscription.pending_update_expired}, {@code customer.subscription.resumed}, {@code
    * customer.subscription.trial_will_end}, {@code customer.subscription.updated}, {@code
@@ -131,18 +136,23 @@ public class Event extends ApiResource implements HasId {
    * financial_connections.account.deactivated}, {@code financial_connections.account.disconnected},
    * {@code financial_connections.account.reactivated}, {@code
    * financial_connections.account.refreshed_balance}, {@code
-   * identity.verification_session.canceled}, {@code identity.verification_session.created}, {@code
-   * identity.verification_session.processing}, {@code identity.verification_session.redacted},
-   * {@code identity.verification_session.requires_input}, {@code
-   * identity.verification_session.verified}, {@code invoice.created}, {@code invoice.deleted},
-   * {@code invoice.finalization_failed}, {@code invoice.finalized}, {@code
-   * invoice.marked_uncollectible}, {@code invoice.paid}, {@code invoice.payment_action_required},
-   * {@code invoice.payment_failed}, {@code invoice.payment_succeeded}, {@code invoice.sent}, {@code
-   * invoice.upcoming}, {@code invoice.updated}, {@code invoice.voided}, {@code
-   * invoiceitem.created}, {@code invoiceitem.deleted}, {@code invoiceitem.updated}, {@code
-   * issuing_authorization.created}, {@code issuing_authorization.request}, {@code
-   * issuing_authorization.updated}, {@code issuing_card.created}, {@code issuing_card.updated},
-   * {@code issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
+   * financial_connections.account.refreshed_inferred_balances}, {@code
+   * financial_connections.account.refreshed_ownership}, {@code
+   * financial_connections.account.refreshed_transactions}, {@code
+   * financial_connections.session.updated}, {@code identity.verification_session.canceled}, {@code
+   * identity.verification_session.created}, {@code identity.verification_session.processing},
+   * {@code identity.verification_session.redacted}, {@code
+   * identity.verification_session.requires_input}, {@code identity.verification_session.verified},
+   * {@code invoice.created}, {@code invoice.deleted}, {@code invoice.finalization_failed}, {@code
+   * invoice.finalized}, {@code invoice.marked_uncollectible}, {@code invoice.paid}, {@code
+   * invoice.payment_action_required}, {@code invoice.payment_failed}, {@code
+   * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
+   * invoice.updated}, {@code invoice.voided}, {@code invoiceitem.created}, {@code
+   * invoiceitem.deleted}, {@code issuing_authorization.created}, {@code
+   * issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
+   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_card_design.activated},
+   * {@code issuing_card_design.deactivated}, {@code issuing_card_design.updated}, {@code
+   * issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
    * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
    * issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
    * issuing_dispute.updated}, {@code issuing_transaction.created}, {@code
@@ -159,28 +169,46 @@ public class Event extends ApiResource implements HasId {
    * plan.created}, {@code plan.deleted}, {@code plan.updated}, {@code price.created}, {@code
    * price.deleted}, {@code price.updated}, {@code product.created}, {@code product.deleted}, {@code
    * product.updated}, {@code promotion_code.created}, {@code promotion_code.updated}, {@code
-   * quote.accepted}, {@code quote.canceled}, {@code quote.created}, {@code quote.finalized}, {@code
-   * radar.early_fraud_warning.created}, {@code radar.early_fraud_warning.updated}, {@code
-   * recipient.created}, {@code recipient.deleted}, {@code recipient.updated}, {@code
-   * refund.created}, {@code refund.updated}, {@code reporting.report_run.failed}, {@code
-   * reporting.report_run.succeeded}, {@code reporting.report_type.updated}, {@code review.closed},
-   * {@code review.opened}, {@code setup_intent.canceled}, {@code setup_intent.created}, {@code
-   * setup_intent.requires_action}, {@code setup_intent.setup_failed}, {@code
-   * setup_intent.succeeded}, {@code sigma.scheduled_query_run.created}, {@code sku.created}, {@code
-   * sku.deleted}, {@code sku.updated}, {@code source.canceled}, {@code source.chargeable}, {@code
-   * source.failed}, {@code source.mandate_notification}, {@code source.refund_attributes_required},
-   * {@code source.transaction.created}, {@code source.transaction.updated}, {@code
+   * quote.accept_failed}, {@code quote.accepted}, {@code quote.accepting}, {@code quote.canceled},
+   * {@code quote.created}, {@code quote.draft}, {@code quote.finalized}, {@code quote.reestimated},
+   * {@code quote.stale}, {@code radar.early_fraud_warning.created}, {@code
+   * radar.early_fraud_warning.updated}, {@code recipient.created}, {@code recipient.deleted},
+   * {@code recipient.updated}, {@code refund.created}, {@code refund.updated}, {@code
+   * reporting.report_run.failed}, {@code reporting.report_run.succeeded}, {@code
+   * reporting.report_type.updated}, {@code review.closed}, {@code review.opened}, {@code
+   * setup_intent.canceled}, {@code setup_intent.created}, {@code setup_intent.requires_action},
+   * {@code setup_intent.setup_failed}, {@code setup_intent.succeeded}, {@code
+   * sigma.scheduled_query_run.created}, {@code sku.created}, {@code sku.deleted}, {@code
+   * sku.updated}, {@code source.canceled}, {@code source.chargeable}, {@code source.failed}, {@code
+   * source.mandate_notification}, {@code source.refund_attributes_required}, {@code
+   * source.transaction.created}, {@code source.transaction.updated}, {@code
    * subscription_schedule.aborted}, {@code subscription_schedule.canceled}, {@code
    * subscription_schedule.completed}, {@code subscription_schedule.created}, {@code
    * subscription_schedule.expiring}, {@code subscription_schedule.released}, {@code
-   * subscription_schedule.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
-   * tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
-   * terminal.reader.action_succeeded}, {@code test_helpers.test_clock.advancing}, {@code
-   * test_helpers.test_clock.created}, {@code test_helpers.test_clock.deleted}, {@code
-   * test_helpers.test_clock.internal_failure}, {@code test_helpers.test_clock.ready}, {@code
-   * topup.canceled}, {@code topup.created}, {@code topup.failed}, {@code topup.reversed}, {@code
-   * topup.succeeded}, {@code transfer.created}, {@code transfer.reversed}, or {@code
-   * transfer.updated}.
+   * subscription_schedule.updated}, {@code tax.form.updated}, {@code tax.settings.updated}, {@code
+   * tax_rate.created}, {@code tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
+   * terminal.reader.action_succeeded}, {@code terminal.reader.action_updated}, {@code
+   * test_helpers.test_clock.advancing}, {@code test_helpers.test_clock.created}, {@code
+   * test_helpers.test_clock.deleted}, {@code test_helpers.test_clock.internal_failure}, {@code
+   * test_helpers.test_clock.ready}, {@code topup.canceled}, {@code topup.created}, {@code
+   * topup.failed}, {@code topup.reversed}, {@code topup.succeeded}, {@code transfer.created},
+   * {@code transfer.reversed}, {@code transfer.updated}, {@code treasury.credit_reversal.created},
+   * {@code treasury.credit_reversal.posted}, {@code treasury.debit_reversal.completed}, {@code
+   * treasury.debit_reversal.created}, {@code treasury.debit_reversal.initial_credit_granted},
+   * {@code treasury.financial_account.closed}, {@code treasury.financial_account.created}, {@code
+   * treasury.financial_account.features_status_updated}, {@code
+   * treasury.inbound_transfer.canceled}, {@code treasury.inbound_transfer.created}, {@code
+   * treasury.inbound_transfer.failed}, {@code treasury.inbound_transfer.succeeded}, {@code
+   * treasury.outbound_payment.canceled}, {@code treasury.outbound_payment.created}, {@code
+   * treasury.outbound_payment.expected_arrival_date_updated}, {@code
+   * treasury.outbound_payment.failed}, {@code treasury.outbound_payment.posted}, {@code
+   * treasury.outbound_payment.returned}, {@code treasury.outbound_transfer.canceled}, {@code
+   * treasury.outbound_transfer.created}, {@code
+   * treasury.outbound_transfer.expected_arrival_date_updated}, {@code
+   * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
+   * treasury.outbound_transfer.returned}, {@code treasury.received_credit.created}, {@code
+   * treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
+   * treasury.received_debit.created}, or {@code invoiceitem.updated}.
    */
   @SerializedName("type")
   String type;

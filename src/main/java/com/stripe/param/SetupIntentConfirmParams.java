@@ -3022,6 +3022,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         @SerializedName("moneyou")
         MONEYOU("moneyou"),
 
+        @SerializedName("n26")
+        N26("n26"),
+
         @SerializedName("rabobank")
         RABOBANK("rabobank"),
 

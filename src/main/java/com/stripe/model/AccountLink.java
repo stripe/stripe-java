@@ -18,7 +18,7 @@ import lombok.Setter;
  * Account Links are the means by which a Connect platform grants a connected account permission to
  * access Stripe-hosted applications, such as Connect Onboarding.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/connect/connect-onboarding">Connect
+ * <p>Related guide: <a href="https://stripe.com/docs/connect/custom/hosted-onboarding">Connect
  * Onboarding</a>
  */
 @Getter

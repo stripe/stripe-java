@@ -10,10 +10,13 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class EphemeralKeyCreateParams extends ApiRequestParams {
-  /** The ID of the Customer you'd like to modify using the resulting ephemeral key. */
-  @SerializedName("customer")
-  String customer;
+public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
+  /**
+   * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
+   * that require a payment method domain will not appear in Elements.
+   */
+  @SerializedName("enabled")
+  Boolean enabled;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -28,37 +31,11 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The ID of the Issuing Card you'd like to access using the resulting ephemeral key. */
-  @SerializedName("issuing_card")
-  String issuingCard;
-
-  /**
-   * <strong>Required.</strong> Determines the value of the Stripe-Version header. Set this to the
-   * API Version of your mobile client.
-   */
-  @SerializedName("stripe-version")
-  String stripeVersion;
-
-  /**
-   * The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral
-   * key.
-   */
-  @SerializedName("verification_session")
-  String verificationSession;
-
-  private EphemeralKeyCreateParams(
-      String customer,
-      List<String> expand,
-      Map<String, Object> extraParams,
-      String issuingCard,
-      String stripeVersion,
-      String verificationSession) {
-    this.customer = customer;
+  private PaymentMethodDomainUpdateParams(
+      Boolean enabled, List<String> expand, Map<String, Object> extraParams) {
+    this.enabled = enabled;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.issuingCard = issuingCard;
-    this.stripeVersion = stripeVersion;
-    this.verificationSession = verificationSession;
   }
 
   public static Builder builder() {
@@ -66,39 +43,30 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
+    private Boolean enabled;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String issuingCard;
-
-    private String stripeVersion;
-
-    private String verificationSession;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public EphemeralKeyCreateParams build() {
-      return new EphemeralKeyCreateParams(
-          this.customer,
-          this.expand,
-          this.extraParams,
-          this.issuingCard,
-          this.stripeVersion,
-          this.verificationSession);
+    public PaymentMethodDomainUpdateParams build() {
+      return new PaymentMethodDomainUpdateParams(this.enabled, this.expand, this.extraParams);
     }
 
-    /** The ID of the Customer you'd like to modify using the resulting ephemeral key. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
+    /**
+     * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
+     * that require a payment method domain will not appear in Elements.
+     */
+    public Builder setEnabled(Boolean enabled) {
+      this.enabled = enabled;
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * EphemeralKeyCreateParams#expand} for the field documentation.
+     * PaymentMethodDomainUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -111,7 +79,7 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * EphemeralKeyCreateParams#expand} for the field documentation.
+     * PaymentMethodDomainUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -124,7 +92,7 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * EphemeralKeyCreateParams#extraParams} for the field documentation.
+     * PaymentMethodDomainUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -137,37 +105,13 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link EphemeralKeyCreateParams#extraParams} for the field documentation.
+     * See {@link PaymentMethodDomainUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** The ID of the Issuing Card you'd like to access using the resulting ephemeral key. */
-    public Builder setIssuingCard(String issuingCard) {
-      this.issuingCard = issuingCard;
-      return this;
-    }
-
-    /**
-     * <strong>Required.</strong> Determines the value of the Stripe-Version header. Set this to the
-     * API Version of your mobile client.
-     */
-    public Builder setStripeVersion(String stripeVersion) {
-      this.stripeVersion = stripeVersion;
-      return this;
-    }
-
-    /**
-     * The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral
-     * key.
-     */
-    public Builder setVerificationSession(String verificationSession) {
-      this.verificationSession = verificationSession;
       return this;
     }
   }

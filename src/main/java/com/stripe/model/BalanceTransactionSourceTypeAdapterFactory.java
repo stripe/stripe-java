@@ -35,6 +35,10 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
     final TypeAdapter<com.stripe.model.ConnectCollectionTransfer> connectCollectionTransferAdapter =
         gson.getDelegateAdapter(
             this, TypeToken.get(com.stripe.model.ConnectCollectionTransfer.class));
+    final TypeAdapter<com.stripe.model.CustomerCashBalanceTransaction>
+        customerCashBalanceTransactionAdapter =
+            gson.getDelegateAdapter(
+                this, TypeToken.get(com.stripe.model.CustomerCashBalanceTransaction.class));
     final TypeAdapter<com.stripe.model.Dispute> disputeAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Dispute.class));
     final TypeAdapter<com.stripe.model.FeeRefund> feeRefundAdapter =
@@ -80,6 +84,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = chargeAdapter.fromJsonTree(object);
             } else if ("connect_collection_transfer".equals(objectType)) {
               objectResult = connectCollectionTransferAdapter.fromJsonTree(object);
+            } else if ("customer_cash_balance_transaction".equals(objectType)) {
+              objectResult = customerCashBalanceTransactionAdapter.fromJsonTree(object);
             } else if ("dispute".equals(objectType)) {
               objectResult = disputeAdapter.fromJsonTree(object);
             } else if ("fee_refund".equals(objectType)) {

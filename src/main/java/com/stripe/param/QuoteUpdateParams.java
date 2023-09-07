@@ -103,8 +103,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
   List<QuoteUpdateParams.LineItem> lineItems;
 
   /**
-   * A list of lines on the quote. These lines describe changes that will be used to create new
-   * subscription schedules or update existing subscription schedules when the quote is accepted.
+   * A list of lines on the quote. These lines describe changes, in the order provided, that will be
+   * used to create new subscription schedules or update existing subscription schedules when the
+   * quote is accepted.
    */
   @SerializedName("lines")
   List<QuoteUpdateParams.Line> lines;

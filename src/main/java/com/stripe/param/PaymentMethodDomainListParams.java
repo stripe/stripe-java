@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.issuing;
+package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,18 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardDesignListParams extends ApiRequestParams {
+public class PaymentMethodDomainListParams extends ApiRequestParams {
+  /** The domain name that this payment method domain object represents. */
+  @SerializedName("domain_name")
+  String domainName;
+
+  /**
+   * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
+   * will not appear in Elements
+   */
+  @SerializedName("enabled")
+  Boolean enabled;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -40,14 +51,6 @@ public class CardDesignListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return card designs with the given lookup keys. */
-  @SerializedName("lookup_keys")
-  List<String> lookupKeys;
-
-  /** Only return card designs with the given preference. */
-  @SerializedName("preference")
-  Preference preference;
-
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -57,27 +60,21 @@ public class CardDesignListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return card designs with the given status. */
-  @SerializedName("status")
-  Status status;
-
-  private CardDesignListParams(
+  private PaymentMethodDomainListParams(
+      String domainName,
+      Boolean enabled,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      List<String> lookupKeys,
-      Preference preference,
-      String startingAfter,
-      Status status) {
+      String startingAfter) {
+    this.domainName = domainName;
+    this.enabled = enabled;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.lookupKeys = lookupKeys;
-    this.preference = preference;
     this.startingAfter = startingAfter;
-    this.status = status;
   }
 
   public static Builder builder() {
@@ -85,6 +82,10 @@ public class CardDesignListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String domainName;
+
+    private Boolean enabled;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -93,25 +94,33 @@ public class CardDesignListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private List<String> lookupKeys;
-
-    private Preference preference;
-
     private String startingAfter;
 
-    private Status status;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public CardDesignListParams build() {
-      return new CardDesignListParams(
+    public PaymentMethodDomainListParams build() {
+      return new PaymentMethodDomainListParams(
+          this.domainName,
+          this.enabled,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.lookupKeys,
-          this.preference,
-          this.startingAfter,
-          this.status);
+          this.startingAfter);
+    }
+
+    /** The domain name that this payment method domain object represents. */
+    public Builder setDomainName(String domainName) {
+      this.domainName = domainName;
+      return this;
+    }
+
+    /**
+     * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
+     * will not appear in Elements
+     */
+    public Builder setEnabled(Boolean enabled) {
+      this.enabled = enabled;
+      return this;
     }
 
     /**
@@ -128,7 +137,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#expand} for the field documentation.
+     * PaymentMethodDomainListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -141,7 +150,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#expand} for the field documentation.
+     * PaymentMethodDomainListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -154,7 +163,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardDesignListParams#extraParams} for the field documentation.
+     * PaymentMethodDomainListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -167,7 +176,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardDesignListParams#extraParams} for the field documentation.
+     * See {@link PaymentMethodDomainListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -187,38 +196,6 @@ public class CardDesignListParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#lookupKeys} for the field documentation.
-     */
-    public Builder addLookupKey(String element) {
-      if (this.lookupKeys == null) {
-        this.lookupKeys = new ArrayList<>();
-      }
-      this.lookupKeys.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#lookupKeys} for the field documentation.
-     */
-    public Builder addAllLookupKey(List<String> elements) {
-      if (this.lookupKeys == null) {
-        this.lookupKeys = new ArrayList<>();
-      }
-      this.lookupKeys.addAll(elements);
-      return this;
-    }
-
-    /** Only return card designs with the given preference. */
-    public Builder setPreference(CardDesignListParams.Preference preference) {
-      this.preference = preference;
-      return this;
-    }
-
-    /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
      * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
@@ -227,51 +204,6 @@ public class CardDesignListParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
-    }
-
-    /** Only return card designs with the given status. */
-    public Builder setStatus(CardDesignListParams.Status status) {
-      this.status = status;
-      return this;
-    }
-  }
-
-  public enum Preference implements ApiRequestParams.EnumParam {
-    @SerializedName("default")
-    DEFAULT("default"),
-
-    @SerializedName("none")
-    NONE("none"),
-
-    @SerializedName("platform_default")
-    PLATFORM_DEFAULT("platform_default");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Preference(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum Status implements ApiRequestParams.EnumParam {
-    @SerializedName("active")
-    ACTIVE("active"),
-
-    @SerializedName("inactive")
-    INACTIVE("inactive"),
-
-    @SerializedName("rejected")
-    REJECTED("rejected"),
-
-    @SerializedName("review")
-    REVIEW("review");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Status(String value) {
-      this.value = value;
     }
   }
 }
