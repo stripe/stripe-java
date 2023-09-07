@@ -16,7 +16,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CustomerCashBalanceTransaction extends StripeObject implements HasId {
+public class CustomerCashBalanceTransaction extends StripeObject
+    implements BalanceTransactionSource {
   @SerializedName("adjusted_for_overdraft")
   AdjustedForOverdraft adjustedForOverdraft;
 

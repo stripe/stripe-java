@@ -432,8 +432,9 @@ public class CalculationCreateParams extends ApiRequestParams {
       Object postalCode;
 
       /**
-       * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-       * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+       * State, county, province, or region. We recommend sending <a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> subdivision code value when
+       * possible.
        */
       @SerializedName("state")
       Object state;
@@ -572,8 +573,9 @@ public class CalculationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-         * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+         * State, county, province, or region. We recommend sending <a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> subdivision code value
+         * when possible.
          */
         public Builder setState(String state) {
           this.state = state;
@@ -581,8 +583,9 @@ public class CalculationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-         * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+         * State, county, province, or region. We recommend sending <a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> subdivision code value
+         * when possible.
          */
         public Builder setState(EmptyParam state) {
           this.state = state;

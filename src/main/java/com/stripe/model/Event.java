@@ -139,12 +139,11 @@ public class Event extends ApiResource implements HasId {
    * invoice.marked_uncollectible}, {@code invoice.paid}, {@code invoice.payment_action_required},
    * {@code invoice.payment_failed}, {@code invoice.payment_succeeded}, {@code invoice.sent}, {@code
    * invoice.upcoming}, {@code invoice.updated}, {@code invoice.voided}, {@code
-   * invoiceitem.created}, {@code invoiceitem.deleted}, {@code invoiceitem.updated}, {@code
-   * issuing_authorization.created}, {@code issuing_authorization.request}, {@code
-   * issuing_authorization.updated}, {@code issuing_card.created}, {@code issuing_card.updated},
-   * {@code issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
-   * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
-   * issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
+   * invoiceitem.created}, {@code invoiceitem.deleted}, {@code issuing_authorization.created},
+   * {@code issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
+   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_cardholder.created}, {@code
+   * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
+   * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
    * issuing_dispute.updated}, {@code issuing_transaction.created}, {@code
    * issuing_transaction.updated}, {@code mandate.updated}, {@code order.created}, {@code
    * payment_intent.amount_capturable_updated}, {@code payment_intent.canceled}, {@code
@@ -179,8 +178,24 @@ public class Event extends ApiResource implements HasId {
    * test_helpers.test_clock.created}, {@code test_helpers.test_clock.deleted}, {@code
    * test_helpers.test_clock.internal_failure}, {@code test_helpers.test_clock.ready}, {@code
    * topup.canceled}, {@code topup.created}, {@code topup.failed}, {@code topup.reversed}, {@code
-   * topup.succeeded}, {@code transfer.created}, {@code transfer.reversed}, or {@code
-   * transfer.updated}.
+   * topup.succeeded}, {@code transfer.created}, {@code transfer.reversed}, {@code
+   * transfer.updated}, {@code treasury.credit_reversal.created}, {@code
+   * treasury.credit_reversal.posted}, {@code treasury.debit_reversal.completed}, {@code
+   * treasury.debit_reversal.created}, {@code treasury.debit_reversal.initial_credit_granted},
+   * {@code treasury.financial_account.closed}, {@code treasury.financial_account.created}, {@code
+   * treasury.financial_account.features_status_updated}, {@code
+   * treasury.inbound_transfer.canceled}, {@code treasury.inbound_transfer.created}, {@code
+   * treasury.inbound_transfer.failed}, {@code treasury.inbound_transfer.succeeded}, {@code
+   * treasury.outbound_payment.canceled}, {@code treasury.outbound_payment.created}, {@code
+   * treasury.outbound_payment.expected_arrival_date_updated}, {@code
+   * treasury.outbound_payment.failed}, {@code treasury.outbound_payment.posted}, {@code
+   * treasury.outbound_payment.returned}, {@code treasury.outbound_transfer.canceled}, {@code
+   * treasury.outbound_transfer.created}, {@code
+   * treasury.outbound_transfer.expected_arrival_date_updated}, {@code
+   * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
+   * treasury.outbound_transfer.returned}, {@code treasury.received_credit.created}, {@code
+   * treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
+   * treasury.received_debit.created}, or {@code invoiceitem.updated}.
    */
   @SerializedName("type")
   String type;
