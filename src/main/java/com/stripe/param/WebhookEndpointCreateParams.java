@@ -922,6 +922,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("issuing_card_design.deactivated")
     ISSUING_CARD_DESIGN__DEACTIVATED("issuing_card_design.deactivated"),
 
+    @SerializedName("issuing_card_design.rejected")
+    ISSUING_CARD_DESIGN__REJECTED("issuing_card_design.rejected"),
+
     @SerializedName("issuing_card_design.updated")
     ISSUING_CARD_DESIGN__UPDATED("issuing_card_design.updated"),
 

@@ -12,6 +12,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.issuing.CardDesignCreateParams;
 import com.stripe.param.issuing.CardDesignListParams;
 import com.stripe.param.issuing.CardDesignRetrieveParams;
 import com.stripe.param.issuing.CardDesignUpdateParams;
@@ -56,6 +57,24 @@ public final class CardDesignService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             new TypeToken<StripeCollection<CardDesign>>() {}.getType(),
+            options,
+            ApiMode.V1);
+  }
+  /** Creates a card design object. */
+  public CardDesign create(CardDesignCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a card design object. */
+  public CardDesign create(CardDesignCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/issuing/card_designs";
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CardDesign.class,
             options,
             ApiMode.V1);
   }

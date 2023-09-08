@@ -4,11 +4,13 @@ package com.stripe.model.issuing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.CardBundleListParams;
 import com.stripe.param.issuing.CardBundleRetrieveParams;
 import java.util.Map;
@@ -24,6 +26,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CardBundle extends ApiResource implements HasId {
+  @SerializedName("features")
+  Features features;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -159,5 +164,32 @@ public class CardBundle extends ApiResource implements HasId {
             CardBundle.class,
             options,
             ApiMode.V1);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Features extends StripeObject {
+    /**
+     * The policy for how to use card logo images in a card design with this card bundle.
+     *
+     * <p>One of {@code optional}, {@code required}, or {@code unsupported}.
+     */
+    @SerializedName("card_logo")
+    String cardLogo;
+
+    /**
+     * The policy for how to use carrier letter text in a card design with this card bundle.
+     *
+     * <p>One of {@code optional}, {@code required}, or {@code unsupported}.
+     */
+    @SerializedName("carrier_text")
+    String carrierText;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(features, responseGetter);
   }
 }
