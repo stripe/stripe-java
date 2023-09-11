@@ -9,11 +9,20 @@ public final class IssuingService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.testhelpers.issuing.AuthorizationService authorizations() {
+    return new com.stripe.service.testhelpers.issuing.AuthorizationService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.testhelpers.issuing.CardDesignService cardDesigns() {
     return new com.stripe.service.testhelpers.issuing.CardDesignService(this.getResponseGetter());
   }
 
   public com.stripe.service.testhelpers.issuing.CardService cards() {
     return new com.stripe.service.testhelpers.issuing.CardService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.testhelpers.issuing.TransactionService transactions() {
+    return new com.stripe.service.testhelpers.issuing.TransactionService(this.getResponseGetter());
   }
 }

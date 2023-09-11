@@ -14,7 +14,10 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.issuing.TransactionCreateForceCaptureParams;
+import com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams;
 import com.stripe.param.issuing.TransactionListParams;
+import com.stripe.param.issuing.TransactionRefundParams;
 import com.stripe.param.issuing.TransactionRetrieveParams;
 import com.stripe.param.issuing.TransactionUpdateParams;
 import java.math.BigDecimal;
@@ -653,6 +656,168 @@ public class Transaction extends ApiResource
      */
     @SerializedName("received_debit")
     String receivedDebit;
+  }
+
+  public TestHelpers getTestHelpers() {
+    return new TestHelpers(this);
+  }
+
+  public static class TestHelpers {
+    private final Transaction resource;
+
+    private TestHelpers(Transaction resource) {
+      this.resource = resource;
+    }
+
+    /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
+    public static Transaction createForceCapture(Map<String, Object> params)
+        throws StripeException {
+      return createForceCapture(params, (RequestOptions) null);
+    }
+
+    /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
+    public static Transaction createForceCapture(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/issuing/transactions/create_force_capture";
+      return resource
+          .getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Transaction.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
+    public static Transaction createForceCapture(TransactionCreateForceCaptureParams params)
+        throws StripeException {
+      return createForceCapture(params, (RequestOptions) null);
+    }
+
+    /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
+    public static Transaction createForceCapture(
+        TransactionCreateForceCaptureParams params, RequestOptions options) throws StripeException {
+      String path = "/v1/test_helpers/issuing/transactions/create_force_capture";
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Transaction.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
+    public static Transaction createUnlinkedRefund(Map<String, Object> params)
+        throws StripeException {
+      return createUnlinkedRefund(params, (RequestOptions) null);
+    }
+
+    /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
+    public static Transaction createUnlinkedRefund(
+        Map<String, Object> params, RequestOptions options) throws StripeException {
+      String path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund";
+      return resource
+          .getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Transaction.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
+    public static Transaction createUnlinkedRefund(TransactionCreateUnlinkedRefundParams params)
+        throws StripeException {
+      return createUnlinkedRefund(params, (RequestOptions) null);
+    }
+
+    /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
+    public static Transaction createUnlinkedRefund(
+        TransactionCreateUnlinkedRefundParams params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund";
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Transaction.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund() throws StripeException {
+      return refund((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(RequestOptions options) throws StripeException {
+      return refund((Map<String, Object>) null, options);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(Map<String, Object> params) throws StripeException {
+      return refund(params, (RequestOptions) null);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/transactions/%s/refund",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Transaction.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(TransactionRefundParams params) throws StripeException {
+      return refund(params, (RequestOptions) null);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(TransactionRefundParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/transactions/%s/refund",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Transaction.class,
+              options,
+              ApiMode.V1);
+    }
   }
 
   @Override
