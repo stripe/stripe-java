@@ -308,6 +308,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     @SerializedName("atm_fee")
     Long atmFee;
 
+    /** The amount of cash requested by the cardholder. */
+    @SerializedName("cashback_amount")
+    Long cashbackAmount;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -317,8 +321,9 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private AmountDetails(Long atmFee, Map<String, Object> extraParams) {
+    private AmountDetails(Long atmFee, Long cashbackAmount, Map<String, Object> extraParams) {
       this.atmFee = atmFee;
+      this.cashbackAmount = cashbackAmount;
       this.extraParams = extraParams;
     }
 
@@ -329,16 +334,25 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     public static class Builder {
       private Long atmFee;
 
+      private Long cashbackAmount;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationCreateParams.AmountDetails build() {
-        return new AuthorizationCreateParams.AmountDetails(this.atmFee, this.extraParams);
+        return new AuthorizationCreateParams.AmountDetails(
+            this.atmFee, this.cashbackAmount, this.extraParams);
       }
 
       /** The ATM withdrawal fee. */
       public Builder setAtmFee(Long atmFee) {
         this.atmFee = atmFee;
+        return this;
+      }
+
+      /** The amount of cash requested by the cardholder. */
+      public Builder setCashbackAmount(Long cashbackAmount) {
+        this.cashbackAmount = cashbackAmount;
         return this;
       }
 
