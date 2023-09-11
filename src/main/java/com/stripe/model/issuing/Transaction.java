@@ -428,6 +428,10 @@ public class Transaction extends ApiResource
     /** The fee charged by the ATM for the cash withdrawal. */
     @SerializedName("atm_fee")
     Long atmFee;
+
+    /** The amount of cash requested by the cardholder. */
+    @SerializedName("cashback_amount")
+    Long cashbackAmount;
   }
 
   @Getter
