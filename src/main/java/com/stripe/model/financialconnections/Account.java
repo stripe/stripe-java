@@ -703,7 +703,7 @@ public class Account extends ApiResource implements HasId {
 
     /**
      * Time at which the next balance refresh can be initiated. This value will be {@code null} when
-     * when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     * {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
      */
     @SerializedName("next_refresh_available_at")
     Long nextRefreshAvailableAt;
@@ -730,7 +730,7 @@ public class Account extends ApiResource implements HasId {
 
     /**
      * Time at which the next inferred balance refresh can be initiated. This value will be {@code
-     * null} when when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     * null} when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
      */
     @SerializedName("next_refresh_available_at")
     Long nextRefreshAvailableAt;
@@ -757,7 +757,7 @@ public class Account extends ApiResource implements HasId {
 
     /**
      * Time at which the next ownership refresh can be initiated. This value will be {@code null}
-     * when when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     * when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
      */
     @SerializedName("next_refresh_available_at")
     Long nextRefreshAvailableAt;
@@ -789,7 +789,7 @@ public class Account extends ApiResource implements HasId {
 
     /**
      * Time at which the next transaction refresh can be initiated. This value will be {@code null}
-     * when when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     * when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
      */
     @SerializedName("next_refresh_available_at")
     Long nextRefreshAvailableAt;
