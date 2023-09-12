@@ -107,22 +107,22 @@ public class TaxId extends ApiResource implements HasId {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Deletes an existing {@code TaxID} object. */
+  /** Deletes an existing {@code tax_id} object. */
   public TaxId delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes an existing {@code TaxID} object. */
+  /** Deletes an existing {@code tax_id} object. */
   public TaxId delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes an existing {@code TaxID} object. */
+  /** Deletes an existing {@code tax_id} object. */
   public TaxId delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes an existing {@code TaxID} object. */
+  /** Deletes an existing {@code tax_id} object. */
   public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
         String.format(
