@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.util.StringUtils;
 import java.util.Map;
 import java.util.Optional;
@@ -59,10 +60,17 @@ public class EventDataObjectDeserializer {
   /** Deserialized {@code StripeObject} set during successful/safe deserialization. */
   private StripeObject object;
 
-  EventDataObjectDeserializer(String apiVersion, String eventType, JsonObject rawJsonObject) {
+  private final StripeResponseGetter responseGetter;
+
+  EventDataObjectDeserializer(
+      String apiVersion,
+      String eventType,
+      JsonObject rawJsonObject,
+      StripeResponseGetter responseGetter) {
     this.apiVersion = apiVersion;
     this.rawJsonObject = rawJsonObject;
     this.eventType = eventType;
+    this.responseGetter = responseGetter;
   }
 
   /**
@@ -114,7 +122,7 @@ public class EventDataObjectDeserializer {
       return true;
     } else {
       try {
-        object = StripeObject.deserializeStripeObject(rawJsonObject);
+        object = StripeObject.deserializeStripeObject(rawJsonObject, this.responseGetter);
         return true;
       } catch (JsonParseException e) {
         // intentionally ignore exception to fulfill simply whether deserialization succeeds
@@ -139,7 +147,7 @@ public class EventDataObjectDeserializer {
    */
   public StripeObject deserializeUnsafe() throws EventDataObjectDeserializationException {
     try {
-      return StripeObject.deserializeStripeObject(rawJsonObject);
+      return StripeObject.deserializeStripeObject(rawJsonObject, this.responseGetter);
     } catch (JsonParseException e) {
       String errorMessage;
       if (!apiVersionMatch()) {
@@ -179,7 +187,8 @@ public class EventDataObjectDeserializer {
    */
   public StripeObject deserializeUnsafeWith(CompatibilityTransformer transformer) {
     return StripeObject.deserializeStripeObject(
-        transformer.transform(rawJsonObject.deepCopy(), apiVersion, eventType));
+        transformer.transform(rawJsonObject.deepCopy(), apiVersion, eventType),
+        this.responseGetter);
   }
 
   private boolean apiVersionMatch() {
