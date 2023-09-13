@@ -11,7 +11,7 @@ public class RefundTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/refunds/re_123");
-    final Refund refund = ApiResource.InternalGSON.fromJson(data, Refund.class);
+    final Refund refund = ApiResource.GSON.fromJson(data, Refund.class);
     assertNotNull(refund);
     assertNotNull(refund.getId());
     assertEquals("refund", refund.getObject());
@@ -27,7 +27,7 @@ public class RefundTest extends BaseStripeTest {
       "transfer_reversal",
     };
     final String data = getFixture("/v1/refunds/re_123", expansions);
-    final Refund refund = ApiResource.InternalGSON.fromJson(data, Refund.class);
+    final Refund refund = ApiResource.GSON.fromJson(data, Refund.class);
     assertNotNull(refund);
     final BalanceTransaction balanceTransaction = refund.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);

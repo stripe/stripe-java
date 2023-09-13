@@ -12,8 +12,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/balance_transactions/txn_123");
-    final BalanceTransaction resource =
-        ApiResource.InternalGSON.fromJson(data, BalanceTransaction.class);
+    final BalanceTransaction resource = ApiResource.GSON.fromJson(data, BalanceTransaction.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }
@@ -22,8 +21,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
   public void testDeserializeExpansions() throws Exception {
     // TODO: Figure out why stripe-mock does not expand source when asked
     final String data = getResourceAsString("/api_fixtures/balance_transaction_expansion.json");
-    final BalanceTransaction resource =
-        ApiResource.InternalGSON.fromJson(data, BalanceTransaction.class);
+    final BalanceTransaction resource = ApiResource.GSON.fromJson(data, BalanceTransaction.class);
     assertNotNull(resource);
     final HasId source = resource.getSourceObject();
     assertNotNull(source);
@@ -36,7 +34,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
         getResourceAsString(
             "/api_fixtures/balance_transaction_collection_with_source_expansion.json");
     final BalanceTransactionCollection btCollection =
-        ApiResource.InternalGSON.fromJson(data, BalanceTransactionCollection.class);
+        ApiResource.GSON.fromJson(data, BalanceTransactionCollection.class);
 
     assertNotNull(btCollection);
     final List<BalanceTransaction> bts = btCollection.getData();

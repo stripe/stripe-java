@@ -10,7 +10,7 @@ public class ExchangeRateTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/exchange_rates/usd");
-    final ExchangeRate resource = ApiResource.InternalGSON.fromJson(data, ExchangeRate.class);
+    final ExchangeRate resource = ApiResource.GSON.fromJson(data, ExchangeRate.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }

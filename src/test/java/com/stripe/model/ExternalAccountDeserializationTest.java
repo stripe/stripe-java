@@ -15,8 +15,7 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
   @Test
   public void testDeserializeBankAccount() throws Exception {
     final String data = getResourceAsString("/api_fixtures/bank_account.json");
-    final ExternalAccount externalAccount =
-        ApiResource.InternalGSON.fromJson(data, ExternalAccount.class);
+    final ExternalAccount externalAccount = ApiResource.GSON.fromJson(data, ExternalAccount.class);
     assertNotNull(externalAccount);
     assertTrue(externalAccount instanceof BankAccount, "External account should be a bank account");
     BankAccount bankAccount = (BankAccount) externalAccount;
@@ -26,8 +25,7 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
   @Test
   public void testDeserializeCard() throws Exception {
     final String data = getResourceAsString("/api_fixtures/card.json");
-    final ExternalAccount externalAccount =
-        ApiResource.InternalGSON.fromJson(data, ExternalAccount.class);
+    final ExternalAccount externalAccount = ApiResource.GSON.fromJson(data, ExternalAccount.class);
     assertNotNull(externalAccount);
     assertTrue(externalAccount instanceof Card, "External account should be a card");
     Card card = (Card) externalAccount;
@@ -37,7 +35,7 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
   @Test
   public void testUnknownSubTypeThrowingUnsupportedOperation() throws StripeException {
     final ExternalAccount externalAccount =
-        ApiResource.InternalGSON.fromJson(
+        ApiResource.GSON.fromJson(
             "    {\n"
                 + "      \"id\": \"bar_123\",\n"
                 + "      \"object\": \"unknown_bar\"\n"
@@ -64,7 +62,7 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
   public void testDeserializeCollection() throws Exception {
     final String data = getResourceAsString("/api_fixtures/external_account_collection.json");
     final ExternalAccountCollection externalAccountCollection =
-        ApiResource.InternalGSON.fromJson(data, ExternalAccountCollection.class);
+        ApiResource.GSON.fromJson(data, ExternalAccountCollection.class);
 
     assertNotNull(externalAccountCollection);
     final List<ExternalAccount> externalAccounts = externalAccountCollection.getData();

@@ -1,10 +1,6 @@
 package com.stripe.net;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.ReflectionAccessFilter;
-import com.google.gson.TypeAdapterFactory;
+import com.google.gson.*;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.*;
 import java.io.UnsupportedEncodingException;
@@ -18,7 +14,7 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
   private static StripeResponseGetter globalResponseGetter = new LiveStripeResponseGetter();
   private transient StripeResponseGetter responseGetter;
 
-  public static final Gson InternalGSON = createGson(false);
+  public static final Gson INTERNAL_GSON = createGson(false);
   public static final Gson GSON = createGson(true);
 
   public static void setStripeResponseGetter(StripeResponseGetter srg) {

@@ -11,7 +11,7 @@ public class QuoteTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/quotes/qt_123");
-    final Quote quote = ApiResource.InternalGSON.fromJson(data, Quote.class);
+    final Quote quote = ApiResource.GSON.fromJson(data, Quote.class);
     assertNotNull(quote);
     assertNotNull(quote.getId());
     assertEquals("quote", quote.getObject());

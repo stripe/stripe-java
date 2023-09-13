@@ -6,7 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.JsonSyntaxException;
 import com.stripe.BaseStripeTest;
+import com.stripe.Stripe;
 import com.stripe.exception.SignatureVerificationException;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Account;
 import com.stripe.model.Event;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -69,6 +72,28 @@ public class WebhookTest extends BaseStripeTest {
     final Event event = Webhook.constructEvent(payload, sigHeader, secret);
 
     assertEquals("evt_test_webhook", event.getId());
+  }
+
+  @Test
+  @SuppressWarnings("deprecation")
+  public void testValidJsonAndHeaderCanMakeRequestsOnDataObject()
+      throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
+    final String payload =
+        "{\"id\": \"evt_test_webhook\",\"api_version\":\""
+            + Stripe.API_VERSION
+            + "\","
+            + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"acct_123\",\"object\": \"account\"}}}";
+
+    final Map<String, Object> options = new HashMap<>();
+    options.put("payload", payload);
+    final String sigHeader = generateSigHeader(options);
+
+    final Event event = Webhook.constructEvent(payload, sigHeader, secret);
+    Account modelViaData = ((Account) event.getData().getObject());
+    modelViaData.delete();
+
+    Account modelViaDOD = ((Account) event.getDataObjectDeserializer().getObject().get());
+    modelViaDOD.delete();
   }
 
   @Test

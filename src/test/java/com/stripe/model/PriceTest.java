@@ -12,7 +12,7 @@ public class PriceTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/prices/price_123");
-    final Price price = ApiResource.InternalGSON.fromJson(data, Price.class);
+    final Price price = ApiResource.GSON.fromJson(data, Price.class);
     assertNotNull(price);
     assertNotNull(price.getId());
     assertEquals("price", price.getObject());
@@ -25,7 +25,7 @@ public class PriceTest extends BaseStripeTest {
       "product",
     };
     final String data = getFixture("/v1/prices/price_123", expansions);
-    final Price price = ApiResource.InternalGSON.fromJson(data, Price.class);
+    final Price price = ApiResource.GSON.fromJson(data, Price.class);
     assertNotNull(price);
     final Product product = price.getProductObject();
     assertNotNull(product);

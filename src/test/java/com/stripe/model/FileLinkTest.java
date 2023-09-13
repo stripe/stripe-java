@@ -12,7 +12,7 @@ public class FileLinkTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/file_links/link_123");
-    final FileLink fileLink = ApiResource.InternalGSON.fromJson(data, FileLink.class);
+    final FileLink fileLink = ApiResource.GSON.fromJson(data, FileLink.class);
     assertNotNull(fileLink);
     assertNotNull(fileLink.getId());
     assertEquals("file_link", fileLink.getObject());
@@ -25,7 +25,7 @@ public class FileLinkTest extends BaseStripeTest {
       "file",
     };
     final String data = getFixture("/v1/file_links/link_123", expansions);
-    final FileLink fileLink = ApiResource.InternalGSON.fromJson(data, FileLink.class);
+    final FileLink fileLink = ApiResource.GSON.fromJson(data, FileLink.class);
     assertNotNull(fileLink);
     final File file = fileLink.getFileObject();
     assertNotNull(file);

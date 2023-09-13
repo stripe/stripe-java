@@ -15,7 +15,7 @@ public class InvoiceItemTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/invoiceitems/ii_123");
-    final InvoiceItem invoiceItem = ApiResource.InternalGSON.fromJson(data, InvoiceItem.class);
+    final InvoiceItem invoiceItem = ApiResource.GSON.fromJson(data, InvoiceItem.class);
     assertNotNull(invoiceItem);
     assertNotNull(invoiceItem.getId());
     assertEquals("invoiceitem", invoiceItem.getObject());
@@ -30,7 +30,7 @@ public class InvoiceItemTest extends BaseStripeTest {
       "customer", "invoice", "subscription",
     };
     final String data = getFixture("/v1/invoiceitems/ii_123", expansions);
-    final InvoiceItem invoiceItem = ApiResource.InternalGSON.fromJson(data, InvoiceItem.class);
+    final InvoiceItem invoiceItem = ApiResource.GSON.fromJson(data, InvoiceItem.class);
     assertNotNull(invoiceItem);
     final Customer customer = invoiceItem.getCustomerObject();
     assertNotNull(customer);
@@ -49,7 +49,7 @@ public class InvoiceItemTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithUnexpandedArrayExpansions() throws Exception {
     final String data = getResourceAsString("/api_fixtures/invoiceitem_with_discount_ids.json");
-    final InvoiceItem invoiceItem = ApiResource.InternalGSON.fromJson(data, InvoiceItem.class);
+    final InvoiceItem invoiceItem = ApiResource.GSON.fromJson(data, InvoiceItem.class);
     assertNotNull(invoiceItem);
     assertEquals("25_5OFF", invoiceItem.getDiscounts().get(0));
     assertNull(invoiceItem.getDiscountObjects().get(0));
@@ -62,20 +62,19 @@ public class InvoiceItemTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithArrayExpansions() throws Exception {
     final InvoiceItem invoiceItem =
-        ApiResource.InternalGSON.fromJson(
+        ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/invoiceitem_with_discount_objects.json"),
             InvoiceItem.class);
 
     assertEquals(
         invoiceItem,
-        ApiResource.InternalGSON.fromJson(
-            ApiResource.InternalGSON.toJson(invoiceItem), InvoiceItem.class));
+        ApiResource.GSON.fromJson(ApiResource.GSON.toJson(invoiceItem), InvoiceItem.class));
   }
 
   @Test
   public void testSetDiscounts() throws Exception {
     final String data = getResourceAsString("/api_fixtures/invoiceitem_with_discount_objects.json");
-    final InvoiceItem invoiceItem = ApiResource.InternalGSON.fromJson(data, InvoiceItem.class);
+    final InvoiceItem invoiceItem = ApiResource.GSON.fromJson(data, InvoiceItem.class);
     List<Discount> discounts = invoiceItem.getDiscountObjects();
     List<String> discountIds = discounts.stream().map(x -> x.getId()).collect(Collectors.toList());
     invoiceItem.setDiscounts(discountIds);

@@ -273,7 +273,7 @@ public class BaseStripeTest {
       String response)
       throws StripeException {
 
-    Mockito.doReturn(ApiResource.InternalGSON.fromJson(response, typeToken))
+    Mockito.doReturn(ApiResource.GSON.fromJson(response, typeToken))
         .when(networkSpy)
         .request(
             Mockito.eq(mode),
@@ -292,7 +292,7 @@ public class BaseStripeTest {
   /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
   public static <T extends StripeObjectInterface> void stubOAuthRequest(
       Class<T> clazz, String response) throws StripeException {
-    Mockito.doReturn(ApiResource.InternalGSON.fromJson(response, clazz))
+    Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy)
         .request(
             Mockito.any(BaseAddress.class),

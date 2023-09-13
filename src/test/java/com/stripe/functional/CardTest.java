@@ -24,7 +24,7 @@ public class CardTest extends BaseStripeTest {
   private Customer getCustomerFixture() throws IOException {
     // We want a mocked version of the customer that has the `sources` sub-list present
     final Customer customer =
-        ApiResource.InternalGSON.fromJson(
+        ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/customer_with_sources_and_tax_ids.json"),
             Customer.class);
     customer.setResponseGetter(networkSpy);
@@ -35,8 +35,7 @@ public class CardTest extends BaseStripeTest {
   private Card getCardFixture(Customer customer) throws IOException {
     // stripe-mock doesn't handle cards very well just yet, so use a local fixture
     final Card card =
-        ApiResource.InternalGSON.fromJson(
-            getResourceAsString("/api_fixtures/card.json"), Card.class);
+        ApiResource.GSON.fromJson(getResourceAsString("/api_fixtures/card.json"), Card.class);
     card.setCustomer(customer.getId());
     card.setResponseGetter(networkSpy);
 

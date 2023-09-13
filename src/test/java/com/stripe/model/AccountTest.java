@@ -11,7 +11,7 @@ public class AccountTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/accounts/acct_123");
-    final Account resource = ApiResource.InternalGSON.fromJson(data, Account.class);
+    final Account resource = ApiResource.GSON.fromJson(data, Account.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }
@@ -23,7 +23,7 @@ public class AccountTest extends BaseStripeTest {
     };
     final String data = getFixture("/v1/accounts/acct_123", expansions);
 
-    final Account resource = ApiResource.InternalGSON.fromJson(data, Account.class);
+    final Account resource = ApiResource.GSON.fromJson(data, Account.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
 

@@ -37,8 +37,7 @@ class ApiResourceTest extends BaseStripeTest {
   @Test
   public void testReflectionFilter() {
     JsonIOException e =
-        assertThrows(
-            JsonIOException.class, () -> ApiResource.InternalGSON.fromJson("{}", MyClass.class));
+        assertThrows(JsonIOException.class, () -> ApiResource.GSON.fromJson("{}", MyClass.class));
 
     // Assert that the error message involves a ReflectionAccessFilter.
     assertTrue(e.getMessage().contains("ReflectionAccessFilter"));
@@ -55,7 +54,7 @@ class ApiResourceTest extends BaseStripeTest {
   @Test
   public void testInternalDeserializeSetsResponseGetter() {
     String json = "{\"id\": \"ch_123\", \"object\": \"charge\"}";
-    Charge charge = ApiResource.InternalGSON.fromJson(json, Charge.class);
+    Charge charge = ApiResource.GSON.fromJson(json, Charge.class);
     IllegalStateException e =
         assertThrows(IllegalStateException.class, () -> charge.update(new HashMap<>()));
     assertTrue(e.getMessage().contains("contact Stripe Support"));

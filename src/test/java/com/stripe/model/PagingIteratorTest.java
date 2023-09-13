@@ -323,7 +323,7 @@ public class PagingIteratorTest extends BaseStripeTest {
 
     final String data = getResourceAsString("/model_fixtures/pageable_model_page_0.json");
     PageableModelCollection collection =
-        ApiResource.InternalGSON.fromJson(data, PageableModelCollection.class);
+        ApiResource.GSON.fromJson(data, PageableModelCollection.class);
 
     collection.setResponseGetter(networkSpy);
 

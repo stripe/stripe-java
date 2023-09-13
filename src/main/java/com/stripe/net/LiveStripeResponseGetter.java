@@ -44,7 +44,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
-  @SuppressWarnings("TypeParameterUnusedInFormals")
+  @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
   public <T extends StripeObjectInterface> T request(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
@@ -69,7 +69,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     T resource = null;
     try {
-      resource = ApiResource.InternalGSON.fromJson(responseBody, typeToken);
+      resource = (T) ApiResource.deserializeStripeObject(responseBody, typeToken, this);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(responseBody, responseCode, requestId, e);
     }
@@ -79,9 +79,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ((StripeCollectionInterface<?>) resource).setRequestParams(params);
     }
 
-    if (resource instanceof StripeActiveObject) {
-      ((StripeActiveObject) resource).setResponseGetter(this);
-    }
     resource.setLastResponse(response);
 
     return resource;
@@ -141,7 +138,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
         e);
   }
 
-  private static void handleError(StripeResponse response, ApiMode apiMode) throws StripeException {
+  private void handleError(StripeResponse response, ApiMode apiMode) throws StripeException {
     if (apiMode == ApiMode.V1) {
       handleApiError(response);
     } else if (apiMode == ApiMode.OAuth) {
@@ -149,15 +146,16 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
-  private static void handleApiError(StripeResponse response) throws StripeException {
+  private void handleApiError(StripeResponse response) throws StripeException {
     StripeError error = null;
     StripeException exception = null;
 
     try {
       JsonObject jsonObject =
-          ApiResource.InternalGSON.fromJson(response.body(), JsonObject.class)
+          ApiResource.INTERNAL_GSON
+              .fromJson(response.body(), JsonObject.class)
               .getAsJsonObject("error");
-      error = ApiResource.InternalGSON.fromJson(jsonObject, StripeError.class);
+      error = ApiResource.deserializeStripeObject(jsonObject.toString(), StripeError.class, this);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }
@@ -229,12 +227,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     throw exception;
   }
 
-  private static void handleOAuthError(StripeResponse response) throws StripeException {
+  private void handleOAuthError(StripeResponse response) throws StripeException {
     OAuthError error = null;
     StripeException exception = null;
 
     try {
-      error = ApiResource.InternalGSON.fromJson(response.body(), OAuthError.class);
+      error = ApiResource.deserializeStripeObject(response.body(), OAuthError.class, this);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }

@@ -161,35 +161,35 @@ class DeserializationTest extends BaseStripeTest {
   @Test
   public void testStubWithIdDirect() throws Exception {
     String input = "{\"some_ref\":{\"id\":\"xyz\"}}";
-    MyResource resource = ApiResource.InternalGSON.fromJson(input, MyResource.class);
+    MyResource resource = ApiResource.GSON.fromJson(input, MyResource.class);
     assertEquals("xyz", resource.getSomeRef().getId());
   }
 
   @Test
   public void testStubWithIdExpanded() throws Exception {
     String input = "{\"some_expandable\":{\"id\":\"xyz\"}}";
-    MyResource resource = ApiResource.InternalGSON.fromJson(input, MyResource.class);
+    MyResource resource = ApiResource.GSON.fromJson(input, MyResource.class);
     assertEquals("xyz", resource.getSomeExpandableObject().getId());
   }
 
   @Test
   public void testStubWithIdArrayExpanded() throws Exception {
     String input = "{\"some_expanded_array\":[{\"id\":\"xyz\"}]}";
-    MyResource resource = ApiResource.InternalGSON.fromJson(input, MyResource.class);
+    MyResource resource = ApiResource.GSON.fromJson(input, MyResource.class);
     assertEquals("xyz", resource.getSomeExpandedArrayObjects().get(0).getId());
   }
 
   @Test
   public void testStubWithIdInArray() throws Exception {
     String input = "{\"some_ref_array\":[{\"id\":\"xyz\"}]}";
-    MyResource resource = ApiResource.InternalGSON.fromJson(input, MyResource.class);
+    MyResource resource = ApiResource.GSON.fromJson(input, MyResource.class);
     assertEquals("xyz", resource.getSomeRefArray().get(0).getId());
   }
 
   @Test
   public void testStubWithIdInListObject() throws Exception {
     String input = "{\"some_list_object\":{\"data\":[{\"id\":\"xyz\"}]}}";
-    MyResource resource = ApiResource.InternalGSON.fromJson(input, MyResource.class);
+    MyResource resource = ApiResource.GSON.fromJson(input, MyResource.class);
     assertEquals("xyz", resource.getSomeListObject().getData().get(0).getId());
   }
 
@@ -199,9 +199,7 @@ class DeserializationTest extends BaseStripeTest {
     assertThrows(
         Exception.class,
         () -> {
-          ApiResource.InternalGSON.fromJson(input, MyResource.class)
-              .getSomeExpandableObject()
-              .getId();
+          ApiResource.GSON.fromJson(input, MyResource.class).getSomeExpandableObject().getId();
         });
   }
 
@@ -211,7 +209,8 @@ class DeserializationTest extends BaseStripeTest {
     assertThrows(
         Exception.class,
         () -> {
-          ApiResource.InternalGSON.fromJson(input, MyResource.class)
+          ApiResource.GSON
+              .fromJson(input, MyResource.class)
               .getSomeExpandedArrayObjects()
               .get(0)
               .getId();

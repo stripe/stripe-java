@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 
-  private static Gson gson = ApiResource.InternalGSON;
+  private static Gson gson = ApiResource.GSON;
 
   private static class TestObject implements HasId {
     String id;

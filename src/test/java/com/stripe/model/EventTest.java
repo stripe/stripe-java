@@ -11,7 +11,7 @@ public class EventTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getResourceAsString("/api_fixtures/event_plan.json");
-    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
     assertNotNull(event);
     assertNotNull(event.getId());
     assertEquals("event", event.getObject());
@@ -25,9 +25,9 @@ public class EventTest extends BaseStripeTest {
   @Test
   public void testReserialize() throws Exception {
     final String data = getResourceAsString("/api_fixtures/event_plan.json");
-    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
-    final Event reserializedEvent = ApiResource.InternalGSON.fromJson(event.toJson(), Event.class);
+    final Event reserializedEvent = ApiResource.GSON.fromJson(event.toJson(), Event.class);
 
     assertEquals(reserializedEvent.getId(), event.getId());
     assertEquals(reserializedEvent.getObject(), event.getObject());

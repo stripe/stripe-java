@@ -197,10 +197,10 @@ public abstract class HttpClient {
     propertyMap.put("lang", "Java");
     propertyMap.put("publisher", "Stripe");
     if (Stripe.getAppInfo() != null) {
-      propertyMap.put("application", ApiResource.InternalGSON.toJson(Stripe.getAppInfo()));
+      propertyMap.put("application", ApiResource.INTERNAL_GSON.toJson(Stripe.getAppInfo()));
     }
 
-    return ApiResource.InternalGSON.toJson(propertyMap);
+    return ApiResource.INTERNAL_GSON.toJson(propertyMap);
   }
 
   private static String formatAppInfo(Map<String, String> info) {

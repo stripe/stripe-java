@@ -11,7 +11,7 @@ public class EventDataDeserializerTest extends BaseStripeTest {
   @Test
   public void testEventAccountApplicationDeauthorized() throws Exception {
     final String data = getResourceAsString("/api_fixtures/account_application_deauthorized.json");
-    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
     assertNotNull(event);
     assertNotNull(event.getId());
     assertNotNull(event.getData());

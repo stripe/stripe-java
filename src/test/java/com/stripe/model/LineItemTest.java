@@ -11,7 +11,7 @@ public class LineItemTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getResourceAsString("/api_fixtures/line_item.json");
-    final LineItem lineItem = ApiResource.InternalGSON.fromJson(data, LineItem.class);
+    final LineItem lineItem = ApiResource.GSON.fromJson(data, LineItem.class);
     assertNotNull(lineItem);
     assertNotNull(lineItem.getId());
     assertEquals("item", lineItem.getObject());

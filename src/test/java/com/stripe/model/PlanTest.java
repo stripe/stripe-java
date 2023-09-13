@@ -12,7 +12,7 @@ public class PlanTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/plans/gold");
-    final Plan plan = ApiResource.InternalGSON.fromJson(data, Plan.class);
+    final Plan plan = ApiResource.GSON.fromJson(data, Plan.class);
     assertNotNull(plan);
     assertNotNull(plan.getId());
     assertEquals("plan", plan.getObject());
@@ -25,7 +25,7 @@ public class PlanTest extends BaseStripeTest {
       "product",
     };
     final String data = getFixture("/v1/plans/gold", expansions);
-    final Plan plan = ApiResource.InternalGSON.fromJson(data, Plan.class);
+    final Plan plan = ApiResource.GSON.fromJson(data, Plan.class);
     assertNotNull(plan);
     final Product product = plan.getProductObject();
     assertNotNull(product);

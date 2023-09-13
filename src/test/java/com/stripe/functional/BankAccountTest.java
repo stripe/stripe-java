@@ -24,7 +24,7 @@ public class BankAccountTest extends BaseStripeTest {
   private Customer getCustomerFixture() throws IOException {
     // We want a mocked version of the customer that has the `sources` sub-list present
     final Customer customer =
-        ApiResource.InternalGSON.fromJson(
+        ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/customer_with_sources_and_tax_ids.json"),
             Customer.class);
     customer.setResponseGetter(networkSpy);
@@ -34,7 +34,7 @@ public class BankAccountTest extends BaseStripeTest {
   private BankAccount getBankAccountFixture(Customer customer) throws IOException, StripeException {
     // stripe-mock doesn't handle bank accounts very well just yet, so use a local fixture
     final BankAccount bankAccount =
-        ApiResource.InternalGSON.fromJson(
+        ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/bank_account.json"), BankAccount.class);
     bankAccount.setCustomer(customer.getId());
     bankAccount.setResponseGetter(networkSpy);
@@ -122,7 +122,7 @@ public class BankAccountTest extends BaseStripeTest {
 
     // stripe-mock doesn't handle this, so we stub the request
     final BankAccount stubbedBankAccount =
-        ApiResource.InternalGSON.fromJson(
+        ApiResource.GSON.fromJson(
             getResourceAsString("/api_fixtures/bank_account.json"), BankAccount.class);
     final PaymentSourceCollection stubbedCollection = new PaymentSourceCollection();
     final List<PaymentSource> stubbedData = new ArrayList<PaymentSource>();

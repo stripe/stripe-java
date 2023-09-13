@@ -11,7 +11,7 @@ public class DisputeTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/issuing/disputes/idp_123");
-    final Dispute dispute = ApiResource.InternalGSON.fromJson(data, Dispute.class);
+    final Dispute dispute = ApiResource.GSON.fromJson(data, Dispute.class);
 
     assertNotNull(dispute);
     assertNotNull(dispute.getId());
@@ -26,7 +26,7 @@ public class DisputeTest extends BaseStripeTest {
       "transaction",
     };
     final String data = getFixture("/v1/issuing/disputes/idp_123", expansions);
-    final Dispute dispute = ApiResource.InternalGSON.fromJson(data, Dispute.class);
+    final Dispute dispute = ApiResource.GSON.fromJson(data, Dispute.class);
     assertNotNull(dispute);
     final Transaction transaction = dispute.getTransactionObject();
     assertNotNull(transaction);

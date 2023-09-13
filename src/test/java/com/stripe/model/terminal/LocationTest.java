@@ -10,7 +10,7 @@ public class LocationTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/terminal/locations/loc_123");
-    final Location location = ApiResource.InternalGSON.fromJson(data, Location.class);
+    final Location location = ApiResource.GSON.fromJson(data, Location.class);
 
     assertNotNull(location);
   }
