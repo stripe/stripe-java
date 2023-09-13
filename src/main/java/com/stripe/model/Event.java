@@ -339,8 +339,6 @@ public class Event extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Data extends StripeObject implements StripeActiveObject {
-    private StripeResponseGetter responseGetter;
-
     /**
      * Object containing the names of the updated attributes and their values prior to the event
      * (only included in events of type {@code *.updated}). If an array attribute has any updated
@@ -356,6 +354,8 @@ public class Event extends ApiResource implements HasId {
      */
     @SerializedName("object")
     JsonObject object;
+
+    private StripeResponseGetter responseGetter;
 
     /**
      * @deprecated Deprecated in favor of getting {@code StripeObject} from {@link
