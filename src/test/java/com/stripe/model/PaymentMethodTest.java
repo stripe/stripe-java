@@ -10,7 +10,7 @@ public class PaymentMethodTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/payment_methods/pm_123");
-    final PaymentMethod resource = ApiResource.GSON.fromJson(data, PaymentMethod.class);
+    final PaymentMethod resource = ApiResource.InternalGSON.fromJson(data, PaymentMethod.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }

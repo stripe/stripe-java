@@ -11,7 +11,7 @@ public class MandateTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/mandates/mandate_123");
-    final Mandate resource = ApiResource.GSON.fromJson(data, Mandate.class);
+    final Mandate resource = ApiResource.InternalGSON.fromJson(data, Mandate.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }
@@ -22,7 +22,7 @@ public class MandateTest extends BaseStripeTest {
 
     final String data = getFixture("/v1/mandates/mandate_123", expansions);
 
-    final Mandate resource = ApiResource.GSON.fromJson(data, Mandate.class);
+    final Mandate resource = ApiResource.InternalGSON.fromJson(data, Mandate.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
 

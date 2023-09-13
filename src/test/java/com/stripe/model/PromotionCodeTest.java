@@ -11,7 +11,7 @@ public class PromotionCodeTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/promotion_codes/co_123");
-    final PromotionCode resource = ApiResource.GSON.fromJson(data, PromotionCode.class);
+    final PromotionCode resource = ApiResource.InternalGSON.fromJson(data, PromotionCode.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }
@@ -22,7 +22,7 @@ public class PromotionCodeTest extends BaseStripeTest {
       "customer",
     };
     final String data = getFixture("/v1/promotion_codes/co_123", expansions);
-    final PromotionCode resource = ApiResource.GSON.fromJson(data, PromotionCode.class);
+    final PromotionCode resource = ApiResource.InternalGSON.fromJson(data, PromotionCode.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
 

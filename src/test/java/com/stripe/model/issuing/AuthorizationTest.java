@@ -11,7 +11,8 @@ public class AuthorizationTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/issuing/authorizations/iauth_123");
-    final Authorization authorization = ApiResource.GSON.fromJson(data, Authorization.class);
+    final Authorization authorization =
+        ApiResource.InternalGSON.fromJson(data, Authorization.class);
 
     assertNotNull(authorization);
     assertNotNull(authorization.getId());
@@ -26,7 +27,8 @@ public class AuthorizationTest extends BaseStripeTest {
       "cardholder",
     };
     final String data = getFixture("/v1/issuing/authorizations/iauth_123", expansions);
-    final Authorization authorization = ApiResource.GSON.fromJson(data, Authorization.class);
+    final Authorization authorization =
+        ApiResource.InternalGSON.fromJson(data, Authorization.class);
 
     assertNotNull(authorization);
     assertNotNull(authorization.getId());

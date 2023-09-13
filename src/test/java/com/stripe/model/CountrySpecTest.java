@@ -10,7 +10,7 @@ public class CountrySpecTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/country_specs/us");
-    final CountrySpec resource = ApiResource.GSON.fromJson(data, CountrySpec.class);
+    final CountrySpec resource = ApiResource.InternalGSON.fromJson(data, CountrySpec.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }

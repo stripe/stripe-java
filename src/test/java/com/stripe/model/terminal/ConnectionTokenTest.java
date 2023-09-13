@@ -10,7 +10,8 @@ public class ConnectionTokenTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getResourceAsString("/api_fixtures/terminal/connection_token.json");
-    final ConnectionToken connectionToken = ApiResource.GSON.fromJson(data, ConnectionToken.class);
+    final ConnectionToken connectionToken =
+        ApiResource.InternalGSON.fromJson(data, ConnectionToken.class);
     assertNotNull(connectionToken);
     assertNotNull(connectionToken.getSecret());
   }

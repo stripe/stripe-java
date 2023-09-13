@@ -69,7 +69,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     T resource = null;
     try {
-      resource = ApiResource.GSON.fromJson(responseBody, typeToken);
+      resource = ApiResource.InternalGSON.fromJson(responseBody, typeToken);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(responseBody, responseCode, requestId, e);
     }
@@ -155,8 +155,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     try {
       JsonObject jsonObject =
-          ApiResource.GSON.fromJson(response.body(), JsonObject.class).getAsJsonObject("error");
-      error = ApiResource.GSON.fromJson(jsonObject, StripeError.class);
+          ApiResource.InternalGSON.fromJson(response.body(), JsonObject.class)
+              .getAsJsonObject("error");
+      error = ApiResource.InternalGSON.fromJson(jsonObject, StripeError.class);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }
@@ -233,7 +234,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     StripeException exception = null;
 
     try {
-      error = ApiResource.GSON.fromJson(response.body(), OAuthError.class);
+      error = ApiResource.InternalGSON.fromJson(response.body(), OAuthError.class);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }

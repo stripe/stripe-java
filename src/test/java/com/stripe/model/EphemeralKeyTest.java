@@ -11,7 +11,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String json = getResourceAsString("/api_fixtures/ephemeral_key.json");
-    final EphemeralKey resource = ApiResource.GSON.fromJson(json, EphemeralKey.class);
+    final EphemeralKey resource = ApiResource.InternalGSON.fromJson(json, EphemeralKey.class);
     assertNotNull(resource);
     assertEquals("ephkey_123", resource.getId());
     assertEquals("ephemeral_key", resource.getObject());
@@ -20,7 +20,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
   @Test
   public void testRawJson() {
     final String jsonString = "{\"foo\":5,\"bar\":[\"baz\",null]}";
-    final EphemeralKey key = ApiResource.GSON.fromJson(jsonString, EphemeralKey.class);
+    final EphemeralKey key = ApiResource.InternalGSON.fromJson(jsonString, EphemeralKey.class);
     assertEquals(jsonString, key.getRawJson());
   }
 }

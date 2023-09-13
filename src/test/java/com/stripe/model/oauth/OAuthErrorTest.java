@@ -11,7 +11,7 @@ public class OAuthErrorTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getResourceAsString("/oauth_fixtures/error_invalid_client.json");
-    final OAuthError error = ApiResource.GSON.fromJson(data, OAuthError.class);
+    final OAuthError error = ApiResource.InternalGSON.fromJson(data, OAuthError.class);
     assertNotNull(error);
     assertEquals("invalid_client", error.getError());
     assertEquals(

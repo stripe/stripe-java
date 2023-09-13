@@ -56,7 +56,7 @@ public abstract class StripeObject implements StripeObjectInterface {
     // Lazily initialize this the first time the getter is called.
     if ((this.rawJsonObject == null) && (this.getLastResponse() != null)) {
       this.rawJsonObject =
-          ApiResource.GSON.fromJson(this.getLastResponse().body(), JsonObject.class);
+          ApiResource.InternalGSON.fromJson(this.getLastResponse().body(), JsonObject.class);
     }
 
     return this.rawJsonObject;
@@ -97,7 +97,7 @@ public abstract class StripeObject implements StripeObjectInterface {
   static StripeObject deserializeStripeObject(JsonObject eventDataObjectJson) {
     String type = eventDataObjectJson.getAsJsonObject().get("object").getAsString();
     Class<? extends StripeObject> cl = EventDataClassLookup.classLookup.get(type);
-    return ApiResource.GSON.fromJson(
+    return ApiResource.InternalGSON.fromJson(
         eventDataObjectJson, cl != null ? cl : StripeRawJsonObject.class);
   }
 }

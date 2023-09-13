@@ -12,7 +12,7 @@ public class FeeRefundTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/application_fees/fee_123/refunds/fr_123");
-    final FeeRefund refund = ApiResource.GSON.fromJson(data, FeeRefund.class);
+    final FeeRefund refund = ApiResource.InternalGSON.fromJson(data, FeeRefund.class);
     assertNotNull(refund);
     assertNotNull(refund.getId());
     assertEquals("fee_refund", refund.getObject());
@@ -26,7 +26,7 @@ public class FeeRefundTest extends BaseStripeTest {
       "balance_transaction", "fee",
     };
     final String data = getFixture("/v1/application_fees/fee_123/refunds/fr_123", expansions);
-    final FeeRefund refund = ApiResource.GSON.fromJson(data, FeeRefund.class);
+    final FeeRefund refund = ApiResource.InternalGSON.fromJson(data, FeeRefund.class);
     assertNotNull(refund);
     final BalanceTransaction balanceTransaction = refund.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);

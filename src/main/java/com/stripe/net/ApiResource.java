@@ -18,7 +18,8 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
   private static StripeResponseGetter globalResponseGetter = new LiveStripeResponseGetter();
   private transient StripeResponseGetter responseGetter;
 
-  public static final Gson GSON = createGson();
+  public static final Gson InternalGSON = createGson(false);
+  public static final Gson GSON = createGson(true);
 
   public static void setStripeResponseGetter(StripeResponseGetter srg) {
     ApiResource.globalResponseGetter = srg;
@@ -34,10 +35,17 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
   }
 
   protected StripeResponseGetter getResponseGetter() {
+    if (this.responseGetter == null) {
+      throw new IllegalStateException(
+          "The StripeResponseGetter has not been set on this resource. "
+              + "This should not happen and is likely a bug in the Stripe Java library. "
+              + "Please open a github issue on https://github.com/stripe/stripe-java or contact "
+              + "Stripe Support at https://support.stripe.com/contact/");
+    }
     return this.responseGetter;
   }
 
-  private static Gson createGson() {
+  private static Gson createGson(boolean shouldSetResponseGetter) {
     GsonBuilder builder =
         new GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -56,6 +64,10 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
                     return ReflectionAccessFilter.FilterResult.BLOCK_ALL;
                   }
                 });
+
+    if (shouldSetResponseGetter) {
+      builder.registerTypeAdapterFactory(new StripeResponseGetterSettingTypeAdapterFactory());
+    }
 
     for (TypeAdapterFactory factory : ApiResourceTypeAdapterFactoryProvider.getAll()) {
       builder.registerTypeAdapterFactory(factory);

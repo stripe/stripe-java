@@ -10,7 +10,7 @@ public class BalanceTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/balance");
-    final Balance resource = ApiResource.GSON.fromJson(data, Balance.class);
+    final Balance resource = ApiResource.InternalGSON.fromJson(data, Balance.class);
     assertNotNull(resource);
   }
 }

@@ -46,7 +46,7 @@ public final class Webhook {
   public static Event constructEvent(
       String payload, String sigHeader, String secret, long tolerance)
       throws SignatureVerificationException {
-    Event event = ApiResource.GSON.fromJson(payload, Event.class);
+    Event event = ApiResource.InternalGSON.fromJson(payload, Event.class);
     Signature.verifyHeader(payload, sigHeader, secret, tolerance);
     return event;
   }

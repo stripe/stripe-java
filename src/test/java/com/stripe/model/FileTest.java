@@ -10,7 +10,7 @@ public class FileTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/files/file_123");
-    final File file = ApiResource.GSON.fromJson(data, File.class);
+    final File file = ApiResource.InternalGSON.fromJson(data, File.class);
     assertNotNull(file);
     assertNotNull(file.getId());
   }

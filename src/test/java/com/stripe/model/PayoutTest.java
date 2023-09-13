@@ -12,7 +12,7 @@ public class PayoutTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/payouts/po_123");
-    final Payout resource = ApiResource.GSON.fromJson(data, Payout.class);
+    final Payout resource = ApiResource.InternalGSON.fromJson(data, Payout.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
   }
@@ -21,7 +21,7 @@ public class PayoutTest extends BaseStripeTest {
   public void testDeserializeWithExpandedDeletedBankAccount() throws IOException {
     final String data =
         getResourceAsString("/api_fixtures/payout_with_del_ext_bank_acct_expansion.json");
-    final Payout resource = ApiResource.GSON.fromJson(data, Payout.class);
+    final Payout resource = ApiResource.InternalGSON.fromJson(data, Payout.class);
     final BankAccount bankAccount = (BankAccount) resource.getDestinationObject();
 
     assertNotNull(bankAccount);

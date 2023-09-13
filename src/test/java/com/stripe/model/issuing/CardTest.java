@@ -11,7 +11,7 @@ public class CardTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/issuing/cards/ic_123");
-    final Card card = ApiResource.GSON.fromJson(data, Card.class);
+    final Card card = ApiResource.InternalGSON.fromJson(data, Card.class);
 
     assertNotNull(card);
     assertNotNull(card.getId());

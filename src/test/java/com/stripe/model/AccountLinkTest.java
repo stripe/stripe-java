@@ -11,7 +11,7 @@ public class AccountLinkTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getResourceAsString("/api_fixtures/account_link.json");
-    final AccountLink resource = ApiResource.GSON.fromJson(data, AccountLink.class);
+    final AccountLink resource = ApiResource.InternalGSON.fromJson(data, AccountLink.class);
     assertNotNull(resource);
     assertEquals("account_link", resource.getObject());
   }

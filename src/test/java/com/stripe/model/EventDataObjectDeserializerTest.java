@@ -42,7 +42,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   @Test
   public void testDeserializeOnApiVersionMatch() throws Exception {
     final String data = getCurrentEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
 
     assertNotNull(event);
     assertNotNull(event.getId());
@@ -58,7 +58,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   @Test
   public void testDeserializeUnsafeOnApiVersionMismatch() throws Exception {
     final String data = getCurrentEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
 
     assertNotNull(event);
     assertNotNull(event.getId());
@@ -80,7 +80,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
       throws IOException, EventDataObjectDeserializationException {
 
     final String data = getCurrentEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
 
     EventDataObjectDeserializer deserializer =
         stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
@@ -96,7 +96,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   @Test
   public void testFailureOnApiVersionMatch() throws Exception {
     final String data = getOldEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
 
     assertEquals(OLD_EVENT_VERSION, event.getApiVersion());
     EventDataObjectDeserializer deserializer =
@@ -124,7 +124,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   @Test
   public void testFailureOnApiVersionMisMatch() throws Exception {
     final String data = getOldEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
 
     assertEquals(OLD_EVENT_VERSION, event.getApiVersion());
     EventDataObjectDeserializer deserializer =
@@ -144,7 +144,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   @Test
   public void testDeserializeUnsafeWith() throws Exception {
     final String data = getOldEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
 
     final EventDataObjectDeserializer deserializer =
         stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
@@ -174,7 +174,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   @Test
   public void testGetRawJson() throws Exception {
     final String data = getCurrentEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.InternalGSON.fromJson(data, Event.class);
 
     EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 

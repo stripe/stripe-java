@@ -12,7 +12,7 @@ public class PaymentIntentTest extends BaseStripeTest {
   public void testDeserialize() throws Exception {
     // Keep the fixture to have `action` deserialize properly
     final PaymentIntent resource =
-        ApiResource.GSON.fromJson(
+        ApiResource.InternalGSON.fromJson(
             getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
@@ -29,7 +29,7 @@ public class PaymentIntentTest extends BaseStripeTest {
   @Test
   public void testDeserializeLastPaymentError() throws Exception {
     final PaymentIntent resource =
-        ApiResource.GSON.fromJson(
+        ApiResource.InternalGSON.fromJson(
             getResourceAsString("/api_fixtures/payment_intent_last_payment_error.json"),
             PaymentIntent.class);
     assertNotNull(resource);
@@ -59,7 +59,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     };
 
     final String data = getFixture("/v1/payment_intents/pi_123", expansions);
-    final PaymentIntent resource = ApiResource.GSON.fromJson(data, PaymentIntent.class);
+    final PaymentIntent resource = ApiResource.InternalGSON.fromJson(data, PaymentIntent.class);
 
     assertNotNull(resource);
     assertNotNull(resource.getId());
