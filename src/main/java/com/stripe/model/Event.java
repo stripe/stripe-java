@@ -332,13 +332,13 @@ public class Event extends ApiResource implements HasId {
    * {@link EventDataObjectDeserializer#deserializeUnsafe()}.
    */
   public EventDataObjectDeserializer getDataObjectDeserializer() {
-    return new EventDataObjectDeserializer(apiVersion, type, data.object);
+    return new EventDataObjectDeserializer(apiVersion, type, data.object, getResponseGetter());
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Data extends StripeObject {
+  public static class Data extends StripeObject implements StripeActiveObject {
     /**
      * Object containing the names of the updated attributes and their values prior to the event
      * (only included in events of type {@code *.updated}). If an array attribute has any updated
@@ -355,6 +355,8 @@ public class Event extends ApiResource implements HasId {
     @SerializedName("object")
     JsonObject object;
 
+    private transient StripeResponseGetter responseGetter;
+
     /**
      * @deprecated Deprecated in favor of getting {@code StripeObject} from {@link
      *     Event#getDataObjectDeserializer()} and {@link EventDataObjectDeserializer#getObject()}.
@@ -364,7 +366,12 @@ public class Event extends ApiResource implements HasId {
      */
     @Deprecated
     public StripeObject getObject() {
-      return StripeObject.deserializeStripeObject(object);
+      return StripeObject.deserializeStripeObject(object, this.responseGetter);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      this.responseGetter = responseGetter;
     }
   }
 
