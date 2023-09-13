@@ -27,6 +27,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   CaptureMethod captureMethod;
 
   /**
+   * ID of the ConfirmationToken used to confirm this PaymentIntent.
+   *
+   * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+   * request, such as {@code payment_method}, then the values in this request will take precedence.
+   */
+  @SerializedName("confirmation_token")
+  String confirmationToken;
+
+  /**
    * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
    * requires_action}. This parameter is intended for simpler integrations that do not handle
    * customer actions, like <a
@@ -149,6 +158,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   private PaymentIntentConfirmParams(
       Object applicationFeeAmount,
       CaptureMethod captureMethod,
+      String confirmationToken,
       Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -167,6 +177,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Boolean useStripeSdk) {
     this.applicationFeeAmount = applicationFeeAmount;
     this.captureMethod = captureMethod;
+    this.confirmationToken = confirmationToken;
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -193,6 +204,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     private Object applicationFeeAmount;
 
     private CaptureMethod captureMethod;
+
+    private String confirmationToken;
 
     private Boolean errorOnRequiresAction;
 
@@ -231,6 +244,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return new PaymentIntentConfirmParams(
           this.applicationFeeAmount,
           this.captureMethod,
+          this.confirmationToken,
           this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
@@ -276,6 +290,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /** Controls when the funds will be captured from the customer's account. */
     public Builder setCaptureMethod(PaymentIntentConfirmParams.CaptureMethod captureMethod) {
       this.captureMethod = captureMethod;
+      return this;
+    }
+
+    /**
+     * ID of the ConfirmationToken used to confirm this PaymentIntent.
+     *
+     * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+     * request, such as {@code payment_method}, then the values in this request will take
+     * precedence.
+     */
+    public Builder setConfirmationToken(String confirmationToken) {
+      this.confirmationToken = confirmationToken;
       return this;
     }
 
