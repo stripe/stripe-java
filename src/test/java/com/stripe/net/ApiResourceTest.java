@@ -54,7 +54,7 @@ class ApiResourceTest extends BaseStripeTest {
   @Test
   public void testInternalDeserializeSetsResponseGetter() {
     String json = "{\"id\": \"ch_123\", \"object\": \"charge\"}";
-    Charge charge = ApiResource.GSON.fromJson(json, Charge.class);
+    Charge charge = ApiResource.INTERNAL_GSON.fromJson(json, Charge.class);
     IllegalStateException e =
         assertThrows(IllegalStateException.class, () -> charge.update(new HashMap<>()));
     assertTrue(e.getMessage().contains("contact Stripe Support"));

@@ -355,7 +355,7 @@ public class Event extends ApiResource implements HasId {
     @SerializedName("object")
     JsonObject object;
 
-    private StripeResponseGetter responseGetter;
+    private transient StripeResponseGetter responseGetter;
 
     /**
      * @deprecated Deprecated in favor of getting {@code StripeObject} from {@link
