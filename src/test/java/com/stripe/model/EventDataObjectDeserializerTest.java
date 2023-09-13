@@ -29,7 +29,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   }
 
   private String getCurrentEventStringFixture() throws IOException {
-    return getResourceAsString("/api_fixtures/account_application_deauthorized.json");
+    return getResourceAsString("/api_fixtures/customer_created.json");
   }
 
   private String getOldEventStringFixture() throws IOException {
