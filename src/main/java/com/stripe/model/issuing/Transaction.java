@@ -683,8 +683,7 @@ public class Transaction extends ApiResource
     public static Transaction createForceCapture(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_force_capture";
-      return resource
-          .getGlobalResponseGetter()
+      return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
@@ -706,8 +705,7 @@ public class Transaction extends ApiResource
         TransactionCreateForceCaptureParams params, RequestOptions options) throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_force_capture";
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getGlobalResponseGetter()
+      return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
@@ -728,8 +726,7 @@ public class Transaction extends ApiResource
     public static Transaction createUnlinkedRefund(
         Map<String, Object> params, RequestOptions options) throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund";
-      return resource
-          .getGlobalResponseGetter()
+      return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
@@ -752,8 +749,7 @@ public class Transaction extends ApiResource
         throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund";
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getGlobalResponseGetter()
+      return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
