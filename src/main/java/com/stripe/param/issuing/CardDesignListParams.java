@@ -44,9 +44,9 @@ public class CardDesignListParams extends ApiRequestParams {
   @SerializedName("lookup_keys")
   List<String> lookupKeys;
 
-  /** Only return card designs with the given preference. */
-  @SerializedName("preference")
-  Preference preference;
+  /** Only return card designs with the given preferences. */
+  @SerializedName("preferences")
+  Preferences preferences;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -67,7 +67,7 @@ public class CardDesignListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Long limit,
       List<String> lookupKeys,
-      Preference preference,
+      Preferences preferences,
       String startingAfter,
       Status status) {
     this.endingBefore = endingBefore;
@@ -75,7 +75,7 @@ public class CardDesignListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.lookupKeys = lookupKeys;
-    this.preference = preference;
+    this.preferences = preferences;
     this.startingAfter = startingAfter;
     this.status = status;
   }
@@ -95,7 +95,7 @@ public class CardDesignListParams extends ApiRequestParams {
 
     private List<String> lookupKeys;
 
-    private Preference preference;
+    private Preferences preferences;
 
     private String startingAfter;
 
@@ -109,7 +109,7 @@ public class CardDesignListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.lookupKeys,
-          this.preference,
+          this.preferences,
           this.startingAfter,
           this.status);
     }
@@ -212,9 +212,9 @@ public class CardDesignListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return card designs with the given preference. */
-    public Builder setPreference(CardDesignListParams.Preference preference) {
-      this.preference = preference;
+    /** Only return card designs with the given preferences. */
+    public Builder setPreferences(CardDesignListParams.Preferences preferences) {
+      this.preferences = preferences;
       return this;
     }
 
@@ -236,21 +236,98 @@ public class CardDesignListParams extends ApiRequestParams {
     }
   }
 
-  public enum Preference implements ApiRequestParams.EnumParam {
-    @SerializedName("default")
-    DEFAULT("default"),
+  @Getter
+  public static class Preferences {
+    /**
+     * Only return the card design that is set as the account default. A connected account will use
+     * the Connect platform's default if no card design is set as the account default.
+     */
+    @SerializedName("account_default")
+    Boolean accountDefault;
 
-    @SerializedName("none")
-    NONE("none"),
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
 
+    /**
+     * Only return the card design that is set as the Connect platform's default. This parameter is
+     * only applicable to connected accounts.
+     */
     @SerializedName("platform_default")
-    PLATFORM_DEFAULT("platform_default");
+    Boolean platformDefault;
 
-    @Getter(onMethod_ = {@Override})
-    private final String value;
+    private Preferences(
+        Boolean accountDefault, Map<String, Object> extraParams, Boolean platformDefault) {
+      this.accountDefault = accountDefault;
+      this.extraParams = extraParams;
+      this.platformDefault = platformDefault;
+    }
 
-    Preference(String value) {
-      this.value = value;
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean accountDefault;
+
+      private Map<String, Object> extraParams;
+
+      private Boolean platformDefault;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CardDesignListParams.Preferences build() {
+        return new CardDesignListParams.Preferences(
+            this.accountDefault, this.extraParams, this.platformDefault);
+      }
+
+      /**
+       * Only return the card design that is set as the account default. A connected account will
+       * use the Connect platform's default if no card design is set as the account default.
+       */
+      public Builder setAccountDefault(Boolean accountDefault) {
+        this.accountDefault = accountDefault;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardDesignListParams.Preferences#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardDesignListParams.Preferences#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Only return the card design that is set as the Connect platform's default. This parameter
+       * is only applicable to connected accounts.
+       */
+      public Builder setPlatformDefault(Boolean platformDefault) {
+        this.platformDefault = platformDefault;
+        return this;
+      }
     }
   }
 

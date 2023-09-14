@@ -84,13 +84,8 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("object")
   String object;
 
-  /**
-   * Whether this card design is used to create cards when one is not specified.
-   *
-   * <p>One of {@code default}, {@code none}, or {@code platform_default}.
-   */
-  @SerializedName("preference")
-  String preference;
+  @SerializedName("preferences")
+  Preferences preferences;
 
   @SerializedName("rejection_reasons")
   RejectionReasons rejectionReasons;
@@ -346,6 +341,26 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Preferences extends StripeObject {
+    /**
+     * Whether this card design is used to create cards when one is not specified. A connected
+     * account will use the Connect platform's default if no card design is set as the account
+     * default.
+     */
+    @SerializedName("account_default")
+    Boolean accountDefault;
+
+    /**
+     * Whether this card design is used to create cards when one is not specified and an account
+     * default for this connected account does not exist.
+     */
+    @SerializedName("platform_default")
+    Boolean platformDefault;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class RejectionReasons extends StripeObject {
     /** The reason(s) the card logo was rejected. */
     @SerializedName("card_logo")
@@ -575,6 +590,7 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
     trySetResponseGetter(cardBundle, responseGetter);
     trySetResponseGetter(cardLogo, responseGetter);
     trySetResponseGetter(carrierText, responseGetter);
+    trySetResponseGetter(preferences, responseGetter);
     trySetResponseGetter(rejectionReasons, responseGetter);
   }
 }
