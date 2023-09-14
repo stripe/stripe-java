@@ -2,15 +2,15 @@
   "created": 1326853478,
   "livemode": false,
   "id": "evt_00000000000000",
-  "type": "account.application.deauthorized",
+  "type": "customer.created",
   "object": "event",
   "request": null,
   "pending_webhooks": 1,
   "api_version": "2017-08-15",
   "data": {
     "object": {
-      "id": "ca_00000000000000",
-      "object": "application",
+      "id": "cus_00000000000000",
+      "object": "customer",
       "name": "Test Platform"
     }
   }

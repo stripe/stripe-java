@@ -10,7 +10,7 @@ public class EventDataDeserializerTest extends BaseStripeTest {
 
   @Test
   public void testEventAccountApplicationDeauthorized() throws Exception {
-    final String data = getResourceAsString("/api_fixtures/account_application_deauthorized.json");
+    final String data = getResourceAsString("/api_fixtures/customer_created.json");
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
     assertNotNull(event);
     assertNotNull(event.getId());
@@ -19,9 +19,8 @@ public class EventDataDeserializerTest extends BaseStripeTest {
     // Using deserializeUnsafe() because the fixture uses an older API version
     assertNotNull(event.getDataObjectDeserializer().deserializeUnsafe());
 
-    final Application application =
-        (Application) event.getDataObjectDeserializer().deserializeUnsafe();
-    assertNotNull(application);
-    assertNotNull(application.getId());
+    final Customer customer = (Customer) event.getDataObjectDeserializer().deserializeUnsafe();
+    assertNotNull(customer);
+    assertNotNull(customer.getId());
   }
 }
