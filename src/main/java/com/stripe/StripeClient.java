@@ -157,6 +157,10 @@ public class StripeClient {
     return new com.stripe.service.PaymentLinkService(this.getResponseGetter());
   }
 
+  public com.stripe.service.PaymentMethodConfigurationService paymentMethodConfigurations() {
+    return new com.stripe.service.PaymentMethodConfigurationService(this.getResponseGetter());
+  }
+
   public com.stripe.service.PaymentMethodDomainService paymentMethodDomains() {
     return new com.stripe.service.PaymentMethodDomainService(this.getResponseGetter());
   }
