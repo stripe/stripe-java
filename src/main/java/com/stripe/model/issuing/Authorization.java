@@ -881,8 +881,7 @@ public class Authorization extends ApiResource
     public static Authorization create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path = "/v1/test_helpers/issuing/authorizations";
-      return resource
-          .getGlobalResponseGetter()
+      return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
@@ -903,8 +902,7 @@ public class Authorization extends ApiResource
         throws StripeException {
       String path = "/v1/test_helpers/issuing/authorizations";
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getGlobalResponseGetter()
+      return getGlobalResponseGetter()
           .request(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
