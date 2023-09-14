@@ -3,7 +3,6 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,14 +10,14 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardDesignUpdateParams extends ApiRequestParams {
-  /** The card bundle object belonging to this card design. */
+public class CardDesignCreateParams extends ApiRequestParams {
+  /** <strong>Required.</strong> The card bundle object belonging to this card design. */
   @SerializedName("card_bundle")
-  Object cardBundle;
+  String cardBundle;
 
   /** The file for the card logo, for use with card bundles that support card logos. */
   @SerializedName("card_logo")
-  Object cardLogo;
+  String cardLogo;
 
   /** Hash containing carrier text, for use with card bundles that support carrier text. */
   @SerializedName("carrier_text")
@@ -42,7 +41,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
    * 200 characters.
    */
   @SerializedName("lookup_key")
-  Object lookupKey;
+  String lookupKey;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -53,9 +52,9 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Friendly display name. Providing an empty string will set the field to null. */
+  /** Friendly display name. */
   @SerializedName("name")
-  Object name;
+  String name;
 
   /** Whether this card design is used to create cards when one is not specified. */
   @SerializedName("preference")
@@ -68,15 +67,15 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   @SerializedName("transfer_lookup_key")
   Boolean transferLookupKey;
 
-  private CardDesignUpdateParams(
-      Object cardBundle,
-      Object cardLogo,
+  private CardDesignCreateParams(
+      String cardBundle,
+      String cardLogo,
       CarrierText carrierText,
       List<String> expand,
       Map<String, Object> extraParams,
-      Object lookupKey,
+      String lookupKey,
       Map<String, String> metadata,
-      Object name,
+      String name,
       Preference preference,
       Boolean transferLookupKey) {
     this.cardBundle = cardBundle;
@@ -96,9 +95,9 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Object cardBundle;
+    private String cardBundle;
 
-    private Object cardLogo;
+    private String cardLogo;
 
     private CarrierText carrierText;
 
@@ -106,19 +105,19 @@ public class CardDesignUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Object lookupKey;
+    private String lookupKey;
 
     private Map<String, String> metadata;
 
-    private Object name;
+    private String name;
 
     private Preference preference;
 
     private Boolean transferLookupKey;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CardDesignUpdateParams build() {
-      return new CardDesignUpdateParams(
+    public CardDesignCreateParams build() {
+      return new CardDesignCreateParams(
           this.cardBundle,
           this.cardLogo,
           this.carrierText,
@@ -131,14 +130,8 @@ public class CardDesignUpdateParams extends ApiRequestParams {
           this.transferLookupKey);
     }
 
-    /** The card bundle object belonging to this card design. */
+    /** <strong>Required.</strong> The card bundle object belonging to this card design. */
     public Builder setCardBundle(String cardBundle) {
-      this.cardBundle = cardBundle;
-      return this;
-    }
-
-    /** The card bundle object belonging to this card design. */
-    public Builder setCardBundle(EmptyParam cardBundle) {
       this.cardBundle = cardBundle;
       return this;
     }
@@ -149,14 +142,8 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The file for the card logo, for use with card bundles that support card logos. */
-    public Builder setCardLogo(EmptyParam cardLogo) {
-      this.cardLogo = cardLogo;
-      return this;
-    }
-
     /** Hash containing carrier text, for use with card bundles that support carrier text. */
-    public Builder setCarrierText(CardDesignUpdateParams.CarrierText carrierText) {
+    public Builder setCarrierText(CardDesignCreateParams.CarrierText carrierText) {
       this.carrierText = carrierText;
       return this;
     }
@@ -164,7 +151,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignUpdateParams#expand} for the field documentation.
+     * CardDesignCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -177,7 +164,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignUpdateParams#expand} for the field documentation.
+     * CardDesignCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -190,7 +177,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardDesignUpdateParams#extraParams} for the field documentation.
+     * CardDesignCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -203,7 +190,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardDesignUpdateParams#extraParams} for the field documentation.
+     * See {@link CardDesignCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -223,18 +210,9 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A lookup key used to retrieve card designs dynamically from a static string. This may be up
-     * to 200 characters.
-     */
-    public Builder setLookupKey(EmptyParam lookupKey) {
-      this.lookupKey = lookupKey;
-      return this;
-    }
-
-    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardDesignUpdateParams#metadata} for the field documentation.
+     * CardDesignCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -247,7 +225,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardDesignUpdateParams#metadata} for the field documentation.
+     * See {@link CardDesignCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -257,20 +235,14 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Friendly display name. Providing an empty string will set the field to null. */
+    /** Friendly display name. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
-    /** Friendly display name. Providing an empty string will set the field to null. */
-    public Builder setName(EmptyParam name) {
-      this.name = name;
-      return this;
-    }
-
     /** Whether this card design is used to create cards when one is not specified. */
-    public Builder setPreference(CardDesignUpdateParams.Preference preference) {
+    public Builder setPreference(CardDesignCreateParams.Preference preference) {
       this.preference = preference;
       return this;
     }
@@ -298,26 +270,26 @@ public class CardDesignUpdateParams extends ApiRequestParams {
 
     /** The footer body text of the carrier letter. */
     @SerializedName("footer_body")
-    Object footerBody;
+    String footerBody;
 
     /** The footer title text of the carrier letter. */
     @SerializedName("footer_title")
-    Object footerTitle;
+    String footerTitle;
 
     /** The header body text of the carrier letter. */
     @SerializedName("header_body")
-    Object headerBody;
+    String headerBody;
 
     /** The header title text of the carrier letter. */
     @SerializedName("header_title")
-    Object headerTitle;
+    String headerTitle;
 
     private CarrierText(
         Map<String, Object> extraParams,
-        Object footerBody,
-        Object footerTitle,
-        Object headerBody,
-        Object headerTitle) {
+        String footerBody,
+        String footerTitle,
+        String headerBody,
+        String headerTitle) {
       this.extraParams = extraParams;
       this.footerBody = footerBody;
       this.footerTitle = footerTitle;
@@ -332,24 +304,24 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private Object footerBody;
+      private String footerBody;
 
-      private Object footerTitle;
+      private String footerTitle;
 
-      private Object headerBody;
+      private String headerBody;
 
-      private Object headerTitle;
+      private String headerTitle;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardDesignUpdateParams.CarrierText build() {
-        return new CardDesignUpdateParams.CarrierText(
+      public CardDesignCreateParams.CarrierText build() {
+        return new CardDesignCreateParams.CarrierText(
             this.extraParams, this.footerBody, this.footerTitle, this.headerBody, this.headerTitle);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardDesignUpdateParams.CarrierText#extraParams} for the field documentation.
+       * CardDesignCreateParams.CarrierText#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -362,7 +334,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardDesignUpdateParams.CarrierText#extraParams} for the field documentation.
+       * See {@link CardDesignCreateParams.CarrierText#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -378,20 +350,8 @@ public class CardDesignUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The footer body text of the carrier letter. */
-      public Builder setFooterBody(EmptyParam footerBody) {
-        this.footerBody = footerBody;
-        return this;
-      }
-
       /** The footer title text of the carrier letter. */
       public Builder setFooterTitle(String footerTitle) {
-        this.footerTitle = footerTitle;
-        return this;
-      }
-
-      /** The footer title text of the carrier letter. */
-      public Builder setFooterTitle(EmptyParam footerTitle) {
         this.footerTitle = footerTitle;
         return this;
       }
@@ -402,20 +362,8 @@ public class CardDesignUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The header body text of the carrier letter. */
-      public Builder setHeaderBody(EmptyParam headerBody) {
-        this.headerBody = headerBody;
-        return this;
-      }
-
       /** The header title text of the carrier letter. */
       public Builder setHeaderTitle(String headerTitle) {
-        this.headerTitle = headerTitle;
-        return this;
-      }
-
-      /** The header title text of the carrier letter. */
-      public Builder setHeaderTitle(EmptyParam headerTitle) {
         this.headerTitle = headerTitle;
         return this;
       }

@@ -35,22 +35,22 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Balance extends ApiResource {
   /**
-   * Funds that are available to be transferred or paid out, whether automatically by Stripe or
-   * explicitly via the <a href="https://stripe.com/docs/api#transfers">Transfers API</a> or <a
-   * href="https://stripe.com/docs/api#payouts">Payouts API</a>. The available balance for each
-   * currency and payment type can be found in the {@code source_types} property.
+   * Available funds that you can transfer or pay out automatically by Stripe or explicitly through
+   * the <a href="https://stripe.com/docs/api#transfers">Transfers API</a> or <a
+   * href="https://stripe.com/docs/api#payouts">Payouts API</a>. You can find the available balance
+   * for each currency and payment type in the {@code source_types} property.
    */
   @SerializedName("available")
   List<Balance.Available> available;
 
   /**
-   * Funds held due to negative balances on connected Custom accounts. The connect reserve balance
-   * for each currency and payment type can be found in the {@code source_types} property.
+   * Funds held due to negative balances on connected Custom accounts. You can find the connect
+   * reserve balance for each currency and payment type in the {@code source_types} property.
    */
   @SerializedName("connect_reserved")
   List<Balance.ConnectReserved> connectReserved;
 
-  /** Funds that can be paid out using Instant Payouts. */
+  /** Funds that you can pay out using Instant Payouts. */
   @SerializedName("instant_available")
   List<Balance.InstantAvailable> instantAvailable;
 
@@ -73,8 +73,8 @@ public class Balance extends ApiResource {
   String object;
 
   /**
-   * Funds that are not yet available in the balance. The pending balance for each currency, and for
-   * each payment type, can be found in the {@code source_types} property.
+   * Funds that aren't available in the balance yet. You can find the pending balance for each
+   * currency and each payment type in the {@code source_types} property.
    */
   @SerializedName("pending")
   List<Balance.Pending> pending;

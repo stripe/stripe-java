@@ -81,12 +81,13 @@ public class StripeError extends StripeObject {
    * setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
    * setup_intent_mandate_invalid}, {@code setup_intent_setup_attempt_expired}, {@code
    * setup_intent_unexpected_state}, {@code shipping_calculation_failed}, {@code sku_inactive},
-   * {@code state_unsupported}, {@code status_transition_invalid}, {@code tax_id_invalid}, {@code
-   * taxes_calculation_failed}, {@code terminal_location_country_unsupported}, {@code
-   * terminal_reader_busy}, {@code terminal_reader_offline}, {@code terminal_reader_timeout}, {@code
-   * testmode_charges_only}, {@code tls_version_unsupported}, {@code token_already_used}, {@code
-   * token_in_use}, {@code transfer_source_balance_parameters_mismatch}, {@code
-   * transfers_not_allowed}, or {@code url_invalid}.
+   * {@code state_unsupported}, {@code status_transition_invalid}, {@code stripe_tax_inactive},
+   * {@code tax_id_invalid}, {@code taxes_calculation_failed}, {@code
+   * terminal_location_country_unsupported}, {@code terminal_reader_busy}, {@code
+   * terminal_reader_offline}, {@code terminal_reader_timeout}, {@code testmode_charges_only},
+   * {@code tls_version_unsupported}, {@code token_already_used}, {@code token_in_use}, {@code
+   * transfer_source_balance_parameters_mismatch}, {@code transfers_not_allowed}, or {@code
+   * url_invalid}.
    */
   @SerializedName("code")
   String code;
