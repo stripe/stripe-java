@@ -13923,4 +13923,950 @@ class GeneratedExamples extends BaseStripeTest {
         params.toMap(),
         null);
   }
+
+  @Test
+  public void testPaymentMethodConfigurationList() throws StripeException {
+    PaymentMethodConfigurationListParams params =
+        PaymentMethodConfigurationListParams.builder().setApplication("foo").build();
+
+    PaymentMethodConfigurationCollection paymentMethodConfigurations =
+        PaymentMethodConfiguration.list(params);
+    assertNotNull(paymentMethodConfigurations);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/payment_method_configurations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testPaymentMethodConfigurationServiceList() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.PaymentMethodConfigurationListParams params =
+        com.stripe.param.PaymentMethodConfigurationListParams.builder()
+            .setApplication("foo")
+            .build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.PaymentMethodConfiguration>
+        stripeCollection = client.paymentMethodConfigurations().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/payment_method_configurations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testPaymentMethodConfigurationCreate() throws StripeException {
+    PaymentMethodConfigurationCreateParams params =
+        PaymentMethodConfigurationCreateParams.builder()
+            .setAcssDebit(
+                PaymentMethodConfigurationCreateParams.AcssDebit.builder()
+                    .setDisplayPreference(
+                        PaymentMethodConfigurationCreateParams.AcssDebit.DisplayPreference.builder()
+                            .setPreference(
+                                PaymentMethodConfigurationCreateParams.AcssDebit.DisplayPreference
+                                    .Preference.NONE)
+                            .build())
+                    .build())
+            .setAffirm(
+                PaymentMethodConfigurationCreateParams.Affirm.builder()
+                    .setDisplayPreference(
+                        PaymentMethodConfigurationCreateParams.Affirm.DisplayPreference.builder()
+                            .setPreference(
+                                PaymentMethodConfigurationCreateParams.Affirm.DisplayPreference
+                                    .Preference.NONE)
+                            .build())
+                    .build())
+            .build();
+
+    PaymentMethodConfiguration paymentMethodConfiguration =
+        PaymentMethodConfiguration.create(params);
+    assertNotNull(paymentMethodConfiguration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/payment_method_configurations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testPaymentMethodConfigurationServiceCreate() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.PaymentMethodConfigurationCreateParams params =
+        com.stripe.param.PaymentMethodConfigurationCreateParams.builder()
+            .setAcssDebit(
+                com.stripe.param.PaymentMethodConfigurationCreateParams.AcssDebit.builder()
+                    .setDisplayPreference(
+                        com.stripe.param.PaymentMethodConfigurationCreateParams.AcssDebit
+                            .DisplayPreference.builder()
+                            .setPreference(
+                                com.stripe.param.PaymentMethodConfigurationCreateParams.AcssDebit
+                                    .DisplayPreference.Preference.NONE)
+                            .build())
+                    .build())
+            .setAffirm(
+                com.stripe.param.PaymentMethodConfigurationCreateParams.Affirm.builder()
+                    .setDisplayPreference(
+                        com.stripe.param.PaymentMethodConfigurationCreateParams.Affirm
+                            .DisplayPreference.builder()
+                            .setPreference(
+                                com.stripe.param.PaymentMethodConfigurationCreateParams.Affirm
+                                    .DisplayPreference.Preference.NONE)
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.PaymentMethodConfiguration paymentMethodConfiguration =
+        client.paymentMethodConfigurations().create(params);
+    assertNotNull(paymentMethodConfiguration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/payment_method_configurations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testPaymentMethodConfigurationRetrieve() throws StripeException {
+    PaymentMethodConfiguration paymentMethodConfiguration =
+        PaymentMethodConfiguration.retrieve("foo");
+    assertNotNull(paymentMethodConfiguration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/payment_method_configurations/foo",
+        null,
+        null);
+  }
+
+  @Test
+  public void testPaymentMethodConfigurationServiceRetrieve() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.PaymentMethodConfigurationRetrieveParams params =
+        com.stripe.param.PaymentMethodConfigurationRetrieveParams.builder().build();
+
+    com.stripe.model.PaymentMethodConfiguration paymentMethodConfiguration =
+        client.paymentMethodConfigurations().retrieve("foo", params);
+    assertNotNull(paymentMethodConfiguration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/payment_method_configurations/foo",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testPaymentMethodConfigurationUpdate() throws StripeException {
+    PaymentMethodConfiguration resource = PaymentMethodConfiguration.retrieve("foo");
+
+    PaymentMethodConfigurationUpdateParams params =
+        PaymentMethodConfigurationUpdateParams.builder()
+            .setAcssDebit(
+                PaymentMethodConfigurationUpdateParams.AcssDebit.builder()
+                    .setDisplayPreference(
+                        PaymentMethodConfigurationUpdateParams.AcssDebit.DisplayPreference.builder()
+                            .setPreference(
+                                PaymentMethodConfigurationUpdateParams.AcssDebit.DisplayPreference
+                                    .Preference.ON)
+                            .build())
+                    .build())
+            .build();
+
+    PaymentMethodConfiguration paymentMethodConfiguration = resource.update(params);
+    assertNotNull(paymentMethodConfiguration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/payment_method_configurations/foo",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testPaymentMethodConfigurationServiceUpdate() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.PaymentMethodConfigurationUpdateParams params =
+        com.stripe.param.PaymentMethodConfigurationUpdateParams.builder()
+            .setAcssDebit(
+                com.stripe.param.PaymentMethodConfigurationUpdateParams.AcssDebit.builder()
+                    .setDisplayPreference(
+                        com.stripe.param.PaymentMethodConfigurationUpdateParams.AcssDebit
+                            .DisplayPreference.builder()
+                            .setPreference(
+                                com.stripe.param.PaymentMethodConfigurationUpdateParams.AcssDebit
+                                    .DisplayPreference.Preference.ON)
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.PaymentMethodConfiguration paymentMethodConfiguration =
+        client.paymentMethodConfigurations().update("foo", params);
+    assertNotNull(paymentMethodConfiguration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/payment_method_configurations/foo",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationCreate() throws StripeException {
+    com.stripe.param.issuing.AuthorizationCreateParams params =
+        com.stripe.param.issuing.AuthorizationCreateParams.builder()
+            .setAmount(100L)
+            .setAmountDetails(
+                com.stripe.param.issuing.AuthorizationCreateParams.AmountDetails.builder()
+                    .setAtmFee(10L)
+                    .setCashbackAmount(5L)
+                    .build())
+            .setAuthorizationMethod(
+                com.stripe.param.issuing.AuthorizationCreateParams.AuthorizationMethod.CHIP)
+            .setCard("foo")
+            .setCurrency("bar")
+            .setIsAmountControllable(true)
+            .setMerchantData(
+                com.stripe.param.issuing.AuthorizationCreateParams.MerchantData.builder()
+                    .setCategory(
+                        com.stripe.param.issuing.AuthorizationCreateParams.MerchantData.Category
+                            .AC_REFRIGERATION_REPAIR)
+                    .setCity("foo")
+                    .setCountry("bar")
+                    .setName("foo")
+                    .setNetworkId("bar")
+                    .setPostalCode("foo")
+                    .setState("bar")
+                    .setTerminalId("foo")
+                    .build())
+            .setNetworkData(
+                com.stripe.param.issuing.AuthorizationCreateParams.NetworkData.builder()
+                    .setAcquiringInstitutionId("foo")
+                    .build())
+            .setVerificationData(
+                com.stripe.param.issuing.AuthorizationCreateParams.VerificationData.builder()
+                    .setAddressLine1Check(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData
+                            .AddressLine1Check.MISMATCH)
+                    .setAddressPostalCodeCheck(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData
+                            .AddressPostalCodeCheck.MATCH)
+                    .setCvcCheck(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData.CvcCheck
+                            .MATCH)
+                    .setExpiryCheck(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData
+                            .ExpiryCheck.MISMATCH)
+                    .build())
+            .setWallet(com.stripe.param.issuing.AuthorizationCreateParams.Wallet.APPLE_PAY)
+            .build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        com.stripe.model.issuing.Authorization.TestHelpers.create(params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationServiceCreate() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.AuthorizationCreateParams params =
+        com.stripe.param.issuing.AuthorizationCreateParams.builder()
+            .setAmount(100L)
+            .setAmountDetails(
+                com.stripe.param.issuing.AuthorizationCreateParams.AmountDetails.builder()
+                    .setAtmFee(10L)
+                    .setCashbackAmount(5L)
+                    .build())
+            .setAuthorizationMethod(
+                com.stripe.param.issuing.AuthorizationCreateParams.AuthorizationMethod.CHIP)
+            .setCard("foo")
+            .setCurrency("bar")
+            .setIsAmountControllable(true)
+            .setMerchantData(
+                com.stripe.param.issuing.AuthorizationCreateParams.MerchantData.builder()
+                    .setCategory(
+                        com.stripe.param.issuing.AuthorizationCreateParams.MerchantData.Category
+                            .AC_REFRIGERATION_REPAIR)
+                    .setCity("foo")
+                    .setCountry("bar")
+                    .setName("foo")
+                    .setNetworkId("bar")
+                    .setPostalCode("foo")
+                    .setState("bar")
+                    .setTerminalId("foo")
+                    .build())
+            .setNetworkData(
+                com.stripe.param.issuing.AuthorizationCreateParams.NetworkData.builder()
+                    .setAcquiringInstitutionId("foo")
+                    .build())
+            .setVerificationData(
+                com.stripe.param.issuing.AuthorizationCreateParams.VerificationData.builder()
+                    .setAddressLine1Check(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData
+                            .AddressLine1Check.MISMATCH)
+                    .setAddressPostalCodeCheck(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData
+                            .AddressPostalCodeCheck.MATCH)
+                    .setCvcCheck(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData.CvcCheck
+                            .MATCH)
+                    .setExpiryCheck(
+                        com.stripe.param.issuing.AuthorizationCreateParams.VerificationData
+                            .ExpiryCheck.MISMATCH)
+                    .build())
+            .setWallet(com.stripe.param.issuing.AuthorizationCreateParams.Wallet.APPLE_PAY)
+            .build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        client.testHelpers().issuing().authorizations().create(params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationCapture() throws StripeException {
+    com.stripe.model.issuing.Authorization resource =
+        com.stripe.model.issuing.Authorization.retrieve("example_authorization");
+
+    com.stripe.param.issuing.AuthorizationCaptureParams params =
+        com.stripe.param.issuing.AuthorizationCaptureParams.builder()
+            .setCaptureAmount(100L)
+            .setCloseAuthorization(true)
+            .setPurchaseDetails(
+                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.builder()
+                    .setFlight(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Flight
+                            .builder()
+                            .setDepartureAt(1633651200L)
+                            .setPassengerName("John Doe")
+                            .setRefundable(true)
+                            .addSegment(
+                                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
+                                    .Flight.Segment.builder()
+                                    .setArrivalAirportCode("SFO")
+                                    .setCarrier("Delta")
+                                    .setDepartureAirportCode("LAX")
+                                    .setFlightNumber("DL100")
+                                    .setServiceClass("Economy")
+                                    .setStopoverAllowed(true)
+                                    .build())
+                            .setTravelAgency("Orbitz")
+                            .build())
+                    .setFuel(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Fuel
+                            .builder()
+                            .setType(
+                                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
+                                    .Fuel.Type.DIESEL)
+                            .setUnit(
+                                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
+                                    .Fuel.Unit.LITER)
+                            .setUnitCostDecimal(new BigDecimal("3.5"))
+                            .setVolumeDecimal(new BigDecimal("10"))
+                            .build())
+                    .setLodging(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Lodging
+                            .builder()
+                            .setCheckInAt(1633651200L)
+                            .setNights(2L)
+                            .build())
+                    .addReceipt(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Receipt
+                            .builder()
+                            .setDescription("Room charge")
+                            .setQuantity(new BigDecimal("1"))
+                            .setTotal(200L)
+                            .setUnitCost(200L)
+                            .build())
+                    .setReference("foo")
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        resource.getTestHelpers().capture(params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/capture",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationServiceCapture() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.AuthorizationCaptureParams params =
+        com.stripe.param.issuing.AuthorizationCaptureParams.builder()
+            .setCaptureAmount(100L)
+            .setCloseAuthorization(true)
+            .setPurchaseDetails(
+                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.builder()
+                    .setFlight(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Flight
+                            .builder()
+                            .setDepartureAt(1633651200L)
+                            .setPassengerName("John Doe")
+                            .setRefundable(true)
+                            .addSegment(
+                                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
+                                    .Flight.Segment.builder()
+                                    .setArrivalAirportCode("SFO")
+                                    .setCarrier("Delta")
+                                    .setDepartureAirportCode("LAX")
+                                    .setFlightNumber("DL100")
+                                    .setServiceClass("Economy")
+                                    .setStopoverAllowed(true)
+                                    .build())
+                            .setTravelAgency("Orbitz")
+                            .build())
+                    .setFuel(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Fuel
+                            .builder()
+                            .setType(
+                                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
+                                    .Fuel.Type.DIESEL)
+                            .setUnit(
+                                com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
+                                    .Fuel.Unit.LITER)
+                            .setUnitCostDecimal(new BigDecimal("3.5"))
+                            .setVolumeDecimal(new BigDecimal("10"))
+                            .build())
+                    .setLodging(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Lodging
+                            .builder()
+                            .setCheckInAt(1633651200L)
+                            .setNights(2L)
+                            .build())
+                    .addReceipt(
+                        com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Receipt
+                            .builder()
+                            .setDescription("Room charge")
+                            .setQuantity(new BigDecimal("1"))
+                            .setTotal(200L)
+                            .setUnitCost(200L)
+                            .build())
+                    .setReference("foo")
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        client.testHelpers().issuing().authorizations().capture("example_authorization", params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/capture",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationExpire() throws StripeException {
+    com.stripe.model.issuing.Authorization resource =
+        com.stripe.model.issuing.Authorization.retrieve("example_authorization");
+
+    com.stripe.param.issuing.AuthorizationExpireParams params =
+        com.stripe.param.issuing.AuthorizationExpireParams.builder().build();
+
+    com.stripe.model.issuing.Authorization authorization = resource.getTestHelpers().expire(params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/expire",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationServiceExpire() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.AuthorizationExpireParams params =
+        com.stripe.param.issuing.AuthorizationExpireParams.builder().build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        client.testHelpers().issuing().authorizations().expire("example_authorization", params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/expire",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationIncrement() throws StripeException {
+    com.stripe.model.issuing.Authorization resource =
+        com.stripe.model.issuing.Authorization.retrieve("example_authorization");
+
+    com.stripe.param.issuing.AuthorizationIncrementParams params =
+        com.stripe.param.issuing.AuthorizationIncrementParams.builder()
+            .setIncrementAmount(50L)
+            .setIsAmountControllable(true)
+            .build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        resource.getTestHelpers().increment(params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/increment",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationServiceIncrement() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.AuthorizationIncrementParams params =
+        com.stripe.param.issuing.AuthorizationIncrementParams.builder()
+            .setIncrementAmount(50L)
+            .setIsAmountControllable(true)
+            .build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        client.testHelpers().issuing().authorizations().increment("example_authorization", params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/increment",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationReverse() throws StripeException {
+    com.stripe.model.issuing.Authorization resource =
+        com.stripe.model.issuing.Authorization.retrieve("example_authorization");
+
+    com.stripe.param.issuing.AuthorizationReverseParams params =
+        com.stripe.param.issuing.AuthorizationReverseParams.builder().setReverseAmount(20L).build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        resource.getTestHelpers().reverse(params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/reverse",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testAuthorizationServiceReverse() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.AuthorizationReverseParams params =
+        com.stripe.param.issuing.AuthorizationReverseParams.builder().setReverseAmount(20L).build();
+
+    com.stripe.model.issuing.Authorization authorization =
+        client.testHelpers().issuing().authorizations().reverse("example_authorization", params);
+    assertNotNull(authorization);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/authorizations/example_authorization/reverse",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTransactionCreateForceCapture() throws StripeException {
+    com.stripe.param.issuing.TransactionCreateForceCaptureParams params =
+        com.stripe.param.issuing.TransactionCreateForceCaptureParams.builder()
+            .setAmount(100L)
+            .setCard("foo")
+            .setCurrency("bar")
+            .setMerchantData(
+                com.stripe.param.issuing.TransactionCreateForceCaptureParams.MerchantData.builder()
+                    .setCategory(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.MerchantData
+                            .Category.AC_REFRIGERATION_REPAIR)
+                    .setCity("foo")
+                    .setCountry("US")
+                    .setName("foo")
+                    .setNetworkId("bar")
+                    .setPostalCode("10001")
+                    .setState("NY")
+                    .setTerminalId("foo")
+                    .build())
+            .setPurchaseDetails(
+                com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                    .builder()
+                    .setFlight(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Flight.builder()
+                            .setDepartureAt(1633651200L)
+                            .setPassengerName("John Doe")
+                            .setRefundable(true)
+                            .addSegment(
+                                com.stripe.param.issuing.TransactionCreateForceCaptureParams
+                                    .PurchaseDetails.Flight.Segment.builder()
+                                    .setArrivalAirportCode("SFO")
+                                    .setCarrier("Delta")
+                                    .setDepartureAirportCode("LAX")
+                                    .setFlightNumber("DL100")
+                                    .setServiceClass("Economy")
+                                    .setStopoverAllowed(true)
+                                    .build())
+                            .setTravelAgency("Orbitz")
+                            .build())
+                    .setFuel(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Fuel.builder()
+                            .setType(
+                                com.stripe.param.issuing.TransactionCreateForceCaptureParams
+                                    .PurchaseDetails.Fuel.Type.DIESEL)
+                            .setUnit(
+                                com.stripe.param.issuing.TransactionCreateForceCaptureParams
+                                    .PurchaseDetails.Fuel.Unit.LITER)
+                            .setUnitCostDecimal(new BigDecimal("3.5"))
+                            .setVolumeDecimal(new BigDecimal("10"))
+                            .build())
+                    .setLodging(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Lodging.builder()
+                            .setCheckInAt(1533651200L)
+                            .setNights(2L)
+                            .build())
+                    .addReceipt(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Receipt.builder()
+                            .setDescription("Room charge")
+                            .setQuantity(new BigDecimal("1"))
+                            .setTotal(200L)
+                            .setUnitCost(200L)
+                            .build())
+                    .setReference("foo")
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.Transaction transaction =
+        com.stripe.model.issuing.Transaction.TestHelpers.createForceCapture(params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/transactions/create_force_capture",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTransactionServiceCreateForceCapture() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.TransactionCreateForceCaptureParams params =
+        com.stripe.param.issuing.TransactionCreateForceCaptureParams.builder()
+            .setAmount(100L)
+            .setCard("foo")
+            .setCurrency("bar")
+            .setMerchantData(
+                com.stripe.param.issuing.TransactionCreateForceCaptureParams.MerchantData.builder()
+                    .setCategory(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.MerchantData
+                            .Category.AC_REFRIGERATION_REPAIR)
+                    .setCity("foo")
+                    .setCountry("US")
+                    .setName("foo")
+                    .setNetworkId("bar")
+                    .setPostalCode("10001")
+                    .setState("NY")
+                    .setTerminalId("foo")
+                    .build())
+            .setPurchaseDetails(
+                com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                    .builder()
+                    .setFlight(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Flight.builder()
+                            .setDepartureAt(1633651200L)
+                            .setPassengerName("John Doe")
+                            .setRefundable(true)
+                            .addSegment(
+                                com.stripe.param.issuing.TransactionCreateForceCaptureParams
+                                    .PurchaseDetails.Flight.Segment.builder()
+                                    .setArrivalAirportCode("SFO")
+                                    .setCarrier("Delta")
+                                    .setDepartureAirportCode("LAX")
+                                    .setFlightNumber("DL100")
+                                    .setServiceClass("Economy")
+                                    .setStopoverAllowed(true)
+                                    .build())
+                            .setTravelAgency("Orbitz")
+                            .build())
+                    .setFuel(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Fuel.builder()
+                            .setType(
+                                com.stripe.param.issuing.TransactionCreateForceCaptureParams
+                                    .PurchaseDetails.Fuel.Type.DIESEL)
+                            .setUnit(
+                                com.stripe.param.issuing.TransactionCreateForceCaptureParams
+                                    .PurchaseDetails.Fuel.Unit.LITER)
+                            .setUnitCostDecimal(new BigDecimal("3.5"))
+                            .setVolumeDecimal(new BigDecimal("10"))
+                            .build())
+                    .setLodging(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Lodging.builder()
+                            .setCheckInAt(1533651200L)
+                            .setNights(2L)
+                            .build())
+                    .addReceipt(
+                        com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
+                            .Receipt.builder()
+                            .setDescription("Room charge")
+                            .setQuantity(new BigDecimal("1"))
+                            .setTotal(200L)
+                            .setUnitCost(200L)
+                            .build())
+                    .setReference("foo")
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.Transaction transaction =
+        client.testHelpers().issuing().transactions().createForceCapture(params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/transactions/create_force_capture",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTransactionCreateUnlinkedRefund() throws StripeException {
+    com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams params =
+        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.builder()
+            .setAmount(100L)
+            .setCard("foo")
+            .setCurrency("bar")
+            .setMerchantData(
+                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.MerchantData
+                    .builder()
+                    .setCategory(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.MerchantData
+                            .Category.AC_REFRIGERATION_REPAIR)
+                    .setCity("foo")
+                    .setCountry("bar")
+                    .setName("foo")
+                    .setNetworkId("bar")
+                    .setPostalCode("foo")
+                    .setState("bar")
+                    .setTerminalId("foo")
+                    .build())
+            .setPurchaseDetails(
+                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.PurchaseDetails
+                    .builder()
+                    .setFlight(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Flight.builder()
+                            .setDepartureAt(1533651200L)
+                            .setPassengerName("John Doe")
+                            .setRefundable(true)
+                            .addSegment(
+                                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                                    .PurchaseDetails.Flight.Segment.builder()
+                                    .setArrivalAirportCode("SFO")
+                                    .setCarrier("Delta")
+                                    .setDepartureAirportCode("LAX")
+                                    .setFlightNumber("DL100")
+                                    .setServiceClass("Economy")
+                                    .setStopoverAllowed(true)
+                                    .build())
+                            .setTravelAgency("Orbitz")
+                            .build())
+                    .setFuel(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Fuel.builder()
+                            .setType(
+                                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                                    .PurchaseDetails.Fuel.Type.DIESEL)
+                            .setUnit(
+                                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                                    .PurchaseDetails.Fuel.Unit.LITER)
+                            .setUnitCostDecimal(new BigDecimal("3.5"))
+                            .setVolumeDecimal(new BigDecimal("10"))
+                            .build())
+                    .setLodging(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Lodging.builder()
+                            .setCheckInAt(1533651200L)
+                            .setNights(2L)
+                            .build())
+                    .addReceipt(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Receipt.builder()
+                            .setDescription("Room charge")
+                            .setQuantity(new BigDecimal("1"))
+                            .setTotal(200L)
+                            .setUnitCost(200L)
+                            .build())
+                    .setReference("foo")
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.Transaction transaction =
+        com.stripe.model.issuing.Transaction.TestHelpers.createUnlinkedRefund(params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/transactions/create_unlinked_refund",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTransactionServiceCreateUnlinkedRefund() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams params =
+        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.builder()
+            .setAmount(100L)
+            .setCard("foo")
+            .setCurrency("bar")
+            .setMerchantData(
+                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.MerchantData
+                    .builder()
+                    .setCategory(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.MerchantData
+                            .Category.AC_REFRIGERATION_REPAIR)
+                    .setCity("foo")
+                    .setCountry("bar")
+                    .setName("foo")
+                    .setNetworkId("bar")
+                    .setPostalCode("foo")
+                    .setState("bar")
+                    .setTerminalId("foo")
+                    .build())
+            .setPurchaseDetails(
+                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.PurchaseDetails
+                    .builder()
+                    .setFlight(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Flight.builder()
+                            .setDepartureAt(1533651200L)
+                            .setPassengerName("John Doe")
+                            .setRefundable(true)
+                            .addSegment(
+                                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                                    .PurchaseDetails.Flight.Segment.builder()
+                                    .setArrivalAirportCode("SFO")
+                                    .setCarrier("Delta")
+                                    .setDepartureAirportCode("LAX")
+                                    .setFlightNumber("DL100")
+                                    .setServiceClass("Economy")
+                                    .setStopoverAllowed(true)
+                                    .build())
+                            .setTravelAgency("Orbitz")
+                            .build())
+                    .setFuel(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Fuel.builder()
+                            .setType(
+                                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                                    .PurchaseDetails.Fuel.Type.DIESEL)
+                            .setUnit(
+                                com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                                    .PurchaseDetails.Fuel.Unit.LITER)
+                            .setUnitCostDecimal(new BigDecimal("3.5"))
+                            .setVolumeDecimal(new BigDecimal("10"))
+                            .build())
+                    .setLodging(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Lodging.builder()
+                            .setCheckInAt(1533651200L)
+                            .setNights(2L)
+                            .build())
+                    .addReceipt(
+                        com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
+                            .PurchaseDetails.Receipt.builder()
+                            .setDescription("Room charge")
+                            .setQuantity(new BigDecimal("1"))
+                            .setTotal(200L)
+                            .setUnitCost(200L)
+                            .build())
+                    .setReference("foo")
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.Transaction transaction =
+        client.testHelpers().issuing().transactions().createUnlinkedRefund(params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/transactions/create_unlinked_refund",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTransactionRefund() throws StripeException {
+    com.stripe.model.issuing.Transaction resource =
+        com.stripe.model.issuing.Transaction.retrieve("example_transaction");
+
+    com.stripe.param.issuing.TransactionRefundParams params =
+        com.stripe.param.issuing.TransactionRefundParams.builder().setRefundAmount(50L).build();
+
+    com.stripe.model.issuing.Transaction transaction = resource.getTestHelpers().refund(params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/transactions/example_transaction/refund",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTransactionServiceRefund() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.TransactionRefundParams params =
+        com.stripe.param.issuing.TransactionRefundParams.builder().setRefundAmount(50L).build();
+
+    com.stripe.model.issuing.Transaction transaction =
+        client.testHelpers().issuing().transactions().refund("example_transaction", params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/transactions/example_transaction/refund",
+        params.toMap(),
+        null);
+  }
 }
