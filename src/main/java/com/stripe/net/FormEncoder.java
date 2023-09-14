@@ -174,7 +174,8 @@ public final class FormEncoder {
       flatParams = flattenParamsCollection(collection, keyPrefix);
 
     } else if (value.getClass().isEnum()) {
-      flatParams = singleParam(keyPrefix, ApiResource.GSON.toJson(value).replaceAll("\"", ""));
+      flatParams =
+          singleParam(keyPrefix, ApiResource.INTERNAL_GSON.toJson(value).replaceAll("\"", ""));
 
     } else {
       flatParams = singleParam(keyPrefix, value.toString());

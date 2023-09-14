@@ -2,6 +2,7 @@ package com.stripe.net;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
+import com.stripe.model.StripeObject;
 import com.stripe.util.StringUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -46,7 +47,9 @@ public final class Webhook {
   public static Event constructEvent(
       String payload, String sigHeader, String secret, long tolerance)
       throws SignatureVerificationException {
-    Event event = ApiResource.GSON.fromJson(payload, Event.class);
+    Event event =
+        StripeObject.deserializeStripeObject(
+            payload, Event.class, ApiResource.getGlobalResponseGetter());
     Signature.verifyHeader(payload, sigHeader, secret, tolerance);
     return event;
   }

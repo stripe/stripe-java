@@ -1,12 +1,6 @@
 package com.stripe.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -16,6 +10,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.EventDataObjectDeserializationException;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
+import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -25,14 +20,16 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   private static final String NO_MATCH_VERSION = "2000-08-15";
 
   private void verifyDeserializedStripeObject(StripeObject stripeObject) {
-    final Application application = (Application) stripeObject;
-    assertNotNull(application);
-    assertNotNull(application.getId());
-    assertNotNull(application.getName());
+    final Customer customer = (Customer) stripeObject;
+    assertNotNull(customer);
+    assertNotNull(customer.getId());
+    assertNotNull(customer.getName());
+
+    assertDoesNotThrow(() -> customer.delete(new HashMap<>()));
   }
 
   private String getCurrentEventStringFixture() throws IOException {
-    return getResourceAsString("/api_fixtures/account_application_deauthorized.json");
+    return getResourceAsString("/api_fixtures/customer_created.json");
   }
 
   private String getOldEventStringFixture() throws IOException {
@@ -188,5 +185,18 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     EventDataObjectDeserializer dataSpy = Mockito.spy(data);
     Mockito.doReturn(stripeVersion).when(dataSpy).getIntegrationApiVersion();
     return dataSpy;
+  }
+
+  @Test
+  public void testDeserializeSetsResponseGetter() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+
+    assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), CURRENT_EVENT_VERSION);
+
+    assertTrue(deserializer.getObject().isPresent());
+    verifyDeserializedStripeObject(deserializer.getObject().get());
   }
 }

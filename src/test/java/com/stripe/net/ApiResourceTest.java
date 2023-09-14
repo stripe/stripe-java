@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.JsonIOException;
+import com.stripe.BaseStripeTest;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.model.Charge;
 import java.net.Proxy;
+import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
-class ApiResourceTest {
+class ApiResourceTest extends BaseStripeTest {
 
   @Test
   public void testUrlEncode() {
@@ -38,5 +41,22 @@ class ApiResourceTest {
 
     // Assert that the error message involves a ReflectionAccessFilter.
     assertTrue(e.getMessage().contains("ReflectionAccessFilter"));
+  }
+
+  @Test
+  public void testExternalDeserializeSetsResponseGetter() throws Exception {
+    String json = "{\"id\": \"ch_123\", \"object\": \"charge\"}";
+    Charge charge = ApiResource.GSON.fromJson(json, Charge.class);
+    assertEquals(charge.getResponseGetter(), ApiResource.getGlobalResponseGetter());
+    charge.update(new HashMap<>());
+  }
+
+  @Test
+  public void testInternalDeserializeSetsResponseGetter() {
+    String json = "{\"id\": \"ch_123\", \"object\": \"charge\"}";
+    Charge charge = ApiResource.INTERNAL_GSON.fromJson(json, Charge.class);
+    IllegalStateException e =
+        assertThrows(IllegalStateException.class, () -> charge.update(new HashMap<>()));
+    assertTrue(e.getMessage().contains("contact Stripe Support"));
   }
 }
