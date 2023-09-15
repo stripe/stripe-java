@@ -15,11 +15,12 @@ import lombok.Setter;
 
 /**
  * You can add one or multiple tax IDs to a <a
- * href="https://stripe.com/docs/api/customers">customer</a>. A customer's tax IDs are displayed on
- * invoices and credit notes issued for the customer.
+ * href="https://stripe.com/docs/api/customers">customer</a> or account. Customer and account tax
+ * IDs get displayed on related invoices and credit notes.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-ids">Customer tax
- * identification numbers</a>
+ * <p>Related guides: <a href="https://stripe.com/docs/billing/taxes/tax-ids">Customer tax
+ * identification numbers</a>, <a
+ * href="https://stripe.com/docs/invoicing/connect#account-tax-ids">Account tax IDs</a>
  */
 @Getter
 @Setter
