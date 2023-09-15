@@ -14134,7 +14134,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setAuthorizationMethod(
                 com.stripe.param.issuing.AuthorizationCreateParams.AuthorizationMethod.CHIP)
             .setCard("foo")
-            .setCurrency("bar")
+            .setCurrency("usd")
             .setIsAmountControllable(true)
             .setMerchantData(
                 com.stripe.param.issuing.AuthorizationCreateParams.MerchantData.builder()
@@ -14197,7 +14197,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setAuthorizationMethod(
                 com.stripe.param.issuing.AuthorizationCreateParams.AuthorizationMethod.CHIP)
             .setCard("foo")
-            .setCurrency("bar")
+            .setCurrency("usd")
             .setIsAmountControllable(true)
             .setMerchantData(
                 com.stripe.param.issuing.AuthorizationCreateParams.MerchantData.builder()
@@ -14506,7 +14506,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.issuing.TransactionCreateForceCaptureParams.builder()
             .setAmount(100L)
             .setCard("foo")
-            .setCurrency("bar")
+            .setCurrency("usd")
             .setMerchantData(
                 com.stripe.param.issuing.TransactionCreateForceCaptureParams.MerchantData.builder()
                     .setCategory(
@@ -14590,7 +14590,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.issuing.TransactionCreateForceCaptureParams.builder()
             .setAmount(100L)
             .setCard("foo")
-            .setCurrency("bar")
+            .setCurrency("usd")
             .setMerchantData(
                 com.stripe.param.issuing.TransactionCreateForceCaptureParams.MerchantData.builder()
                     .setCategory(
@@ -14672,7 +14672,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.builder()
             .setAmount(100L)
             .setCard("foo")
-            .setCurrency("bar")
+            .setCurrency("usd")
             .setMerchantData(
                 com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.MerchantData
                     .builder()
@@ -14757,7 +14757,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.builder()
             .setAmount(100L)
             .setCard("foo")
-            .setCurrency("bar")
+            .setCurrency("usd")
             .setMerchantData(
                 com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams.MerchantData
                     .builder()
