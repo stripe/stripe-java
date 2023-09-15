@@ -21,42 +21,41 @@ import lombok.Setter;
 /**
  * Events are our way of letting you know when something interesting happens in your account. When
  * an interesting event occurs, we create a new {@code Event} object. For example, when a charge
- * succeeds, we create a {@code charge.succeeded} event; and when an invoice payment attempt fails,
- * we create an {@code invoice.payment_failed} event. Note that many API requests may cause multiple
- * events to be created. For example, if you create a new subscription for a customer, you will
- * receive both a {@code customer.subscription.created} event and a {@code charge.succeeded} event.
+ * succeeds, we create a {@code charge.succeeded} event, and when an invoice payment attempt fails,
+ * we create an {@code invoice.payment_failed} event. Certain API requests might create multiple
+ * events. For example, if you create a new subscription for a customer, you receive both a {@code
+ * customer.subscription.created} event and a {@code charge.succeeded} event.
  *
- * <p>Events occur when the state of another API resource changes. The state of that resource at the
- * time of the change is embedded in the event's data field. For example, a {@code charge.succeeded}
- * event will contain a charge, and an {@code invoice.payment_failed} event will contain an invoice.
+ * <p>Events occur when the state of another API resource changes. The event's data field embeds the
+ * resource's state at the time of the change. For example, a {@code charge.succeeded} event
+ * contains a charge, and an {@code invoice.payment_failed} event contains an invoice.
  *
  * <p>As with other API resources, you can use endpoints to retrieve an <a
  * href="https://stripe.com/docs/api#retrieve_event">individual event</a> or a <a
  * href="https://stripe.com/docs/api#list_events">list of events</a> from the API. We also have a
  * separate <a href="http://en.wikipedia.org/wiki/Webhook">webhooks</a> system for sending the
- * {@code Event} objects directly to an endpoint on your server. Webhooks are managed in your <a
- * href="https://dashboard.stripe.com/account/webhooks">account settings</a>, and our <a
- * href="https://stripe.com/docs/webhooks">Using Webhooks</a> guide will help you get set up.
+ * {@code Event} objects directly to an endpoint on your server. You can manage webhooks in your <a
+ * href="https://dashboard.stripe.com/account/webhooks">account settings</a>. Learn how to [listen
+ * for events] (/docs/webhooks) so that your integration can automatically trigger reactions.
  *
- * <p>When using <a href="https://stripe.com/docs/connect">Connect</a>, you can also receive
- * notifications of events that occur in connected accounts. For these events, there will be an
- * additional {@code account} attribute in the received {@code Event} object.
+ * <p>When using <a href="https://stripe.com/docs/connect">Connect</a>, you can also receive event
+ * notifications that occur in connected accounts. For these events, there's an additional {@code
+ * account} attribute in the received {@code Event} object.
  *
- * <p><strong>NOTE:</strong> Right now, access to events through the <a
- * href="https://stripe.com/docs/api#retrieve_event">Retrieve Event API</a> is guaranteed only for
- * 30 days.
+ * <p>We only guarantee access to events through the <a
+ * href="https://stripe.com/docs/api#retrieve_event">Retrieve Event API</a> for 30 days.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Event extends ApiResource implements HasId {
-  /** The connected account that originated the event. */
+  /** The connected account that originates the event. */
   @SerializedName("account")
   String account;
 
   /**
-   * The Stripe API version used to render {@code data}. <em>Note: This property is populated only
-   * for events on or after October 31, 2014</em>.
+   * The Stripe API version used to render {@code data}. This property is populated only for events
+   * on or after October 31, 2014.
    */
   @SerializedName("api_version")
   String apiVersion;
@@ -89,18 +88,18 @@ public class Event extends ApiResource implements HasId {
   String object;
 
   /**
-   * Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response)
-   * to the URLs you've specified.
+   * Number of webhooks that haven't been successfully delivered (for example, to return a 20x
+   * response) to the URLs you specify.
    */
   @SerializedName("pending_webhooks")
   Long pendingWebhooks;
 
-  /** Information on the API request that instigated the event. */
+  /** Information on the API request that triggers the event. */
   @SerializedName("request")
   Request request;
 
   /**
-   * Description of the event (e.g., {@code invoice.created} or {@code charge.refunded}).
+   * Description of the event (for example, {@code invoice.created} or {@code charge.refunded}).
    *
    * <p>One of {@code account.application.authorized}, {@code account.application.deauthorized},
    * {@code account.external_account.created}, {@code account.external_account.deleted}, {@code
@@ -151,10 +150,10 @@ public class Event extends ApiResource implements HasId {
    * invoiceitem.deleted}, {@code issuing_authorization.created}, {@code
    * issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
    * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_card_design.activated},
-   * {@code issuing_card_design.deactivated}, {@code issuing_card_design.updated}, {@code
-   * issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
-   * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
-   * issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
+   * {@code issuing_card_design.deactivated}, {@code issuing_card_design.rejected}, {@code
+   * issuing_card_design.updated}, {@code issuing_cardholder.created}, {@code
+   * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
+   * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
    * issuing_dispute.updated}, {@code issuing_transaction.created}, {@code
    * issuing_transaction.updated}, {@code mandate.updated}, {@code order.created}, {@code
    * payment_intent.amount_capturable_updated}, {@code payment_intent.canceled}, {@code

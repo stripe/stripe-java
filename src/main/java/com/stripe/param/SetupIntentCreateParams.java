@@ -38,6 +38,15 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   Boolean confirm;
 
   /**
+   * ID of the ConfirmationToken used to confirm this SetupIntent.
+   *
+   * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+   * request, such as {@code payment_method}, then the values in this request will take precedence.
+   */
+  @SerializedName("confirmation_token")
+  String confirmationToken;
+
+  /**
    * ID of the Customer this SetupIntent belongs to, if one exists.
    *
    * <p>If present, the SetupIntent's payment method will be attached to the Customer on successful
@@ -157,6 +166,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       Boolean attachToSelf,
       AutomaticPaymentMethods automaticPaymentMethods,
       Boolean confirm,
+      String confirmationToken,
       String customer,
       String description,
       List<String> expand,
@@ -177,6 +187,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     this.attachToSelf = attachToSelf;
     this.automaticPaymentMethods = automaticPaymentMethods;
     this.confirm = confirm;
+    this.confirmationToken = confirmationToken;
     this.customer = customer;
     this.description = description;
     this.expand = expand;
@@ -206,6 +217,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     private AutomaticPaymentMethods automaticPaymentMethods;
 
     private Boolean confirm;
+
+    private String confirmationToken;
 
     private String customer;
 
@@ -247,6 +260,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.attachToSelf,
           this.automaticPaymentMethods,
           this.confirm,
+          this.confirmationToken,
           this.customer,
           this.description,
           this.expand,
@@ -297,6 +311,18 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
+      return this;
+    }
+
+    /**
+     * ID of the ConfirmationToken used to confirm this SetupIntent.
+     *
+     * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+     * request, such as {@code payment_method}, then the values in this request will take
+     * precedence.
+     */
+    public Builder setConfirmationToken(String confirmationToken) {
+      this.confirmationToken = confirmationToken;
       return this;
     }
 

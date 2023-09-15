@@ -3633,10 +3633,9 @@ public class OrderUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Order identifier shown to the customer in Afterpay’s online portal. We recommend using
-           * a value that helps you answer any questions a customer might have about the payment.
-           * The identifier is limited to 128 characters and may contain only letters, digits,
-           * underscores, backslashes and dashes.
+           * An internal identifier or reference this payment corresponds to. The identifier is
+           * limited to 128 characters and may contain only letters, digits, underscores,
+           * backslashes and dashes.
            */
           @SerializedName("reference")
           Object reference;
@@ -3743,10 +3742,9 @@ public class OrderUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Order identifier shown to the customer in Afterpay’s online portal. We recommend
-             * using a value that helps you answer any questions a customer might have about the
-             * payment. The identifier is limited to 128 characters and may contain only letters,
-             * digits, underscores, backslashes and dashes.
+             * An internal identifier or reference this payment corresponds to. The identifier is
+             * limited to 128 characters and may contain only letters, digits, underscores,
+             * backslashes and dashes.
              */
             public Builder setReference(String reference) {
               this.reference = reference;
@@ -3754,10 +3752,9 @@ public class OrderUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Order identifier shown to the customer in Afterpay’s online portal. We recommend
-             * using a value that helps you answer any questions a customer might have about the
-             * payment. The identifier is limited to 128 characters and may contain only letters,
-             * digits, underscores, backslashes and dashes.
+             * An internal identifier or reference this payment corresponds to. The identifier is
+             * limited to 128 characters and may contain only letters, digits, underscores,
+             * backslashes and dashes.
              */
             public Builder setReference(EmptyParam reference) {
               this.reference = reference;

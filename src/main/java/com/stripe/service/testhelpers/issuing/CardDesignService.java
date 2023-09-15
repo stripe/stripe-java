@@ -12,6 +12,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.CardDesignActivateTestmodeParams;
 import com.stripe.param.issuing.CardDesignDeactivateTestmodeParams;
+import com.stripe.param.issuing.CardDesignRejectTestmodeParams;
 
 public final class CardDesignService extends ApiService {
   public CardDesignService(StripeResponseGetter responseGetter) {
@@ -81,6 +82,33 @@ public final class CardDesignService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/card_designs/%s/status/deactivate",
+            ApiResource.urlEncodeId(cardDesign));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            CardDesign.class,
+            options,
+            ApiMode.V1);
+  }
+  /**
+   * Updates the {@code status} of the specified testmode card design object to {@code rejected}.
+   */
+  public CardDesign rejectTestmode(String cardDesign, CardDesignRejectTestmodeParams params)
+      throws StripeException {
+    return rejectTestmode(cardDesign, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the {@code status} of the specified testmode card design object to {@code rejected}.
+   */
+  public CardDesign rejectTestmode(
+      String cardDesign, CardDesignRejectTestmodeParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/issuing/card_designs/%s/status/reject",
             ApiResource.urlEncodeId(cardDesign));
     return getResponseGetter()
         .request(

@@ -15,9 +15,14 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.AuthorizationApproveParams;
+import com.stripe.param.issuing.AuthorizationCaptureParams;
+import com.stripe.param.issuing.AuthorizationCreateParams;
 import com.stripe.param.issuing.AuthorizationDeclineParams;
+import com.stripe.param.issuing.AuthorizationExpireParams;
+import com.stripe.param.issuing.AuthorizationIncrementParams;
 import com.stripe.param.issuing.AuthorizationListParams;
 import com.stripe.param.issuing.AuthorizationRetrieveParams;
+import com.stripe.param.issuing.AuthorizationReverseParams;
 import com.stripe.param.issuing.AuthorizationUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -572,6 +577,10 @@ public class Authorization extends ApiResource
     /** The fee charged by the ATM for the cash withdrawal. */
     @SerializedName("atm_fee")
     Long atmFee;
+
+    /** The amount of cash requested by the cardholder. */
+    @SerializedName("cashback_amount")
+    Long cashbackAmount;
   }
 
   @Getter
@@ -694,6 +703,10 @@ public class Authorization extends ApiResource
       /** The fee charged by the ATM for the cash withdrawal. */
       @SerializedName("atm_fee")
       Long atmFee;
+
+      /** The amount of cash requested by the cardholder. */
+      @SerializedName("cashback_amount")
+      Long cashbackAmount;
     }
   }
 
@@ -778,6 +791,10 @@ public class Authorization extends ApiResource
       /** The fee charged by the ATM for the cash withdrawal. */
       @SerializedName("atm_fee")
       Long atmFee;
+
+      /** The amount of cash requested by the cardholder. */
+      @SerializedName("cashback_amount")
+      Long cashbackAmount;
     }
   }
 
@@ -863,6 +880,285 @@ public class Authorization extends ApiResource
        */
       @SerializedName("result")
       String result;
+    }
+  }
+
+  public TestHelpers getTestHelpers() {
+    return new TestHelpers(this);
+  }
+
+  public static class TestHelpers {
+    private final Authorization resource;
+
+    private TestHelpers(Authorization resource) {
+      this.resource = resource;
+    }
+
+    /** Create a test-mode authorization. */
+    public static Authorization create(Map<String, Object> params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Create a test-mode authorization. */
+    public static Authorization create(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/issuing/authorizations";
+      return getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Create a test-mode authorization. */
+    public static Authorization create(AuthorizationCreateParams params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Create a test-mode authorization. */
+    public static Authorization create(AuthorizationCreateParams params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/issuing/authorizations";
+      ApiResource.checkNullTypedParams(path, params);
+      return getGlobalResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Increment a test-mode Authorization. */
+    public Authorization increment(Map<String, Object> params) throws StripeException {
+      return increment(params, (RequestOptions) null);
+    }
+
+    /** Increment a test-mode Authorization. */
+    public Authorization increment(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/increment",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Increment a test-mode Authorization. */
+    public Authorization increment(AuthorizationIncrementParams params) throws StripeException {
+      return increment(params, (RequestOptions) null);
+    }
+
+    /** Increment a test-mode Authorization. */
+    public Authorization increment(AuthorizationIncrementParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/increment",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Reverse a test-mode Authorization. */
+    public Authorization reverse() throws StripeException {
+      return reverse((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /** Reverse a test-mode Authorization. */
+    public Authorization reverse(RequestOptions options) throws StripeException {
+      return reverse((Map<String, Object>) null, options);
+    }
+
+    /** Reverse a test-mode Authorization. */
+    public Authorization reverse(Map<String, Object> params) throws StripeException {
+      return reverse(params, (RequestOptions) null);
+    }
+
+    /** Reverse a test-mode Authorization. */
+    public Authorization reverse(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/reverse",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Reverse a test-mode Authorization. */
+    public Authorization reverse(AuthorizationReverseParams params) throws StripeException {
+      return reverse(params, (RequestOptions) null);
+    }
+
+    /** Reverse a test-mode Authorization. */
+    public Authorization reverse(AuthorizationReverseParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/reverse",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Expire a test-mode Authorization. */
+    public Authorization expire() throws StripeException {
+      return expire((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /** Expire a test-mode Authorization. */
+    public Authorization expire(RequestOptions options) throws StripeException {
+      return expire((Map<String, Object>) null, options);
+    }
+
+    /** Expire a test-mode Authorization. */
+    public Authorization expire(Map<String, Object> params) throws StripeException {
+      return expire(params, (RequestOptions) null);
+    }
+
+    /** Expire a test-mode Authorization. */
+    public Authorization expire(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/expire",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Expire a test-mode Authorization. */
+    public Authorization expire(AuthorizationExpireParams params) throws StripeException {
+      return expire(params, (RequestOptions) null);
+    }
+
+    /** Expire a test-mode Authorization. */
+    public Authorization expire(AuthorizationExpireParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/expire",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Capture a test-mode authorization. */
+    public Authorization capture() throws StripeException {
+      return capture((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /** Capture a test-mode authorization. */
+    public Authorization capture(RequestOptions options) throws StripeException {
+      return capture((Map<String, Object>) null, options);
+    }
+
+    /** Capture a test-mode authorization. */
+    public Authorization capture(Map<String, Object> params) throws StripeException {
+      return capture(params, (RequestOptions) null);
+    }
+
+    /** Capture a test-mode authorization. */
+    public Authorization capture(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/capture",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              params,
+              Authorization.class,
+              options,
+              ApiMode.V1);
+    }
+
+    /** Capture a test-mode authorization. */
+    public Authorization capture(AuthorizationCaptureParams params) throws StripeException {
+      return capture(params, (RequestOptions) null);
+    }
+
+    /** Capture a test-mode authorization. */
+    public Authorization capture(AuthorizationCaptureParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/capture",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      return resource
+          .getResponseGetter()
+          .request(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              Authorization.class,
+              options,
+              ApiMode.V1);
     }
   }
 

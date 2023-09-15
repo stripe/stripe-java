@@ -33,6 +33,13 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
   String issuingCard;
 
   /**
+   * A single-use token, created by Stripe.js, used for creating ephemeral keys for Issuing Cards
+   * without exchanging sensitive information.
+   */
+  @SerializedName("nonce")
+  String nonce;
+
+  /**
    * <strong>Required.</strong> Determines the value of the Stripe-Version header. Set this to the
    * API Version of your mobile client.
    */
@@ -51,12 +58,14 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String issuingCard,
+      String nonce,
       String stripeVersion,
       String verificationSession) {
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
     this.issuingCard = issuingCard;
+    this.nonce = nonce;
     this.stripeVersion = stripeVersion;
     this.verificationSession = verificationSession;
   }
@@ -74,6 +83,8 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
 
     private String issuingCard;
 
+    private String nonce;
+
     private String stripeVersion;
 
     private String verificationSession;
@@ -85,6 +96,7 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.issuingCard,
+          this.nonce,
           this.stripeVersion,
           this.verificationSession);
     }
@@ -150,6 +162,15 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /** The ID of the Issuing Card you'd like to access using the resulting ephemeral key. */
     public Builder setIssuingCard(String issuingCard) {
       this.issuingCard = issuingCard;
+      return this;
+    }
+
+    /**
+     * A single-use token, created by Stripe.js, used for creating ephemeral keys for Issuing Cards
+     * without exchanging sensitive information.
+     */
+    public Builder setNonce(String nonce) {
+      this.nonce = nonce;
       return this;
     }
 
