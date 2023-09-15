@@ -19,8 +19,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Balance transactions represent funds moving through your Stripe account. They're created for
- * every type of transaction that comes into or flows out of your Stripe account balance.
+ * Balance transactions represent funds moving through your Stripe account. Stripe creates them for
+ * every type of transaction that enters or leaves your Stripe account balance.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/reports/balance-transaction-types">Balance
  * transaction types</a>
@@ -29,11 +29,11 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class BalanceTransaction extends ApiResource implements HasId {
-  /** Gross amount of the transaction, in cents (or local equivalent). */
+  /** Gross amount of the transaction (in cents (or local equivalent)). */
   @SerializedName("amount")
   Long amount;
 
-  /** The date the transaction's net funds will become available in the Stripe balance. */
+  /** The date that the transaction's net funds become available in the Stripe balance. */
   @SerializedName("available_on")
   Long availableOn;
 
@@ -53,13 +53,12 @@ public class BalanceTransaction extends ApiResource implements HasId {
   String description;
 
   /**
-   * The exchange rate used, if applicable, for this transaction. Specifically, if money was
-   * converted from currency A to currency B, then the {@code amount} in currency A, times {@code
-   * exchange_rate}, would be the {@code amount} in currency B. For example, suppose you charged a
-   * customer 10.00 EUR. Then the PaymentIntent's {@code amount} would be {@code 1000} and {@code
-   * currency} would be {@code eur}. Suppose this was converted into 12.34 USD in your Stripe
-   * account. Then the BalanceTransaction's {@code amount} would be {@code 1234}, {@code currency}
-   * would be {@code usd}, and {@code exchange_rate} would be {@code 1.234}.
+   * If applicable, this transaction uses an exchange rate. If money converts from currency A to
+   * currency B, then the {@code amount} in currency A, multipled by the {@code exchange_rate},
+   * equals the {@code amount} in currency B. For example, if you charge a customer 10.00 EUR, the
+   * PaymentIntent's {@code amount} is {@code 1000} and {@code currency} is {@code eur}. If this
+   * converts to 12.34 USD in your Stripe account, the BalanceTransaction's {@code amount} is {@code
+   * 1234}, its {@code currency} is {@code usd}, and the {@code exchange_rate} is {@code 1.234}.
    */
   @SerializedName("exchange_rate")
   BigDecimal exchangeRate;
@@ -77,7 +76,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
-  /** Net amount of the transaction, in cents (or local equivalent). */
+  /** Net amount of the transaction (in cents (or local equivalent)). */
   @SerializedName("net")
   Long net;
 
@@ -90,22 +89,22 @@ public class BalanceTransaction extends ApiResource implements HasId {
   String object;
 
   /**
-   * <a href="https://stripe.com/docs/reports/reporting-categories">Learn more</a> about how
-   * reporting categories can help you understand balance transactions from an accounting
-   * perspective.
+   * Learn more about how [reporting categories]
+   * (https://stripe.com/docs/reports/reporting-categories) can help you understand balance
+   * transactions from an accounting perspective.
    */
   @SerializedName("reporting_category")
   String reportingCategory;
 
-  /** The Stripe object to which this transaction is related. */
+  /** This transaction relates to the Stripe object. */
   @SerializedName("source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransactionSource> source;
 
   /**
-   * If the transaction's net funds are available in the Stripe balance yet. Either {@code
-   * available} or {@code pending}.
+   * The transaction's net funds status in the Stripe balance, which are either {@code available} or
+   * {@code pending}.
    */
   @SerializedName("status")
   String status;
@@ -122,10 +121,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * payout_failure}, {@code refund}, {@code refund_failure}, {@code reserve_transaction}, {@code
    * reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup},
    * {@code topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or
-   * {@code transfer_refund}. <a
-   * href="https://stripe.com/docs/reports/balance-transaction-types">Learn more</a> about balance
-   * transaction types and what they represent. If you are looking to classify transactions for
-   * accounting purposes, you might want to consider {@code reporting_category} instead.
+   * {@code transfer_refund}. Learn more about <a
+   * href="https://stripe.com/docs/reports/balance-transaction-types">balance transaction types and
+   * what they represent</a>. To classify transactions for accounting purposes, consider {@code
+   * reporting_category} instead.
    *
    * <p>One of {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
    * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code

@@ -21,9 +21,8 @@ import lombok.Setter;
 
 /**
  * A dispute occurs when a customer questions your charge with their card issuer. When this happens,
- * you're given the opportunity to respond to the dispute with evidence that shows that the charge
- * is legitimate. You can find more information about the dispute process in our <a
- * href="https://stripe.com/docs/disputes">Disputes and Fraud</a> documentation.
+ * you have the opportunity to respond to the dispute with evidence that shows that the charge is
+ * legitimate.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/disputes">Disputes and fraud</a>
  */
@@ -33,8 +32,8 @@ import lombok.Setter;
 public class Dispute extends ApiResource
     implements MetadataStore<Dispute>, BalanceTransactionSource {
   /**
-   * Disputed amount. Usually the amount of the charge, but can differ (usually because of currency
-   * fluctuation or because only part of the order is disputed).
+   * Disputed amount. Usually the amount of the charge, but it can differ (usually because of
+   * currency fluctuation or because only part of the order is disputed).
    */
   @SerializedName("amount")
   Long amount;
@@ -46,7 +45,7 @@ public class Dispute extends ApiResource
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
 
-  /** ID of the charge that was disputed. */
+  /** ID of the charge that's disputed. */
   @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -75,9 +74,8 @@ public class Dispute extends ApiResource
   String id;
 
   /**
-   * If true, it is still possible to refund the disputed payment. Once the payment has been fully
-   * refunded, no further funds will be withdrawn from your Stripe account as a result of this
-   * dispute.
+   * If true, it's still possible to refund the disputed payment. After the payment has been fully
+   * refunded, no further funds are withdrawn from your Stripe account as a result of this dispute.
    */
   @SerializedName("is_charge_refundable")
   Boolean isChargeRefundable;
@@ -110,7 +108,7 @@ public class Dispute extends ApiResource
   @SerializedName("object")
   String object;
 
-  /** ID of the PaymentIntent that was disputed. */
+  /** ID of the PaymentIntent that's disputed. */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -124,7 +122,7 @@ public class Dispute extends ApiResource
    * check_returned}, {@code credit_not_processed}, {@code customer_initiated}, {@code
    * debit_not_authorized}, {@code duplicate}, {@code fraudulent}, {@code general}, {@code
    * incorrect_account_details}, {@code insufficient_funds}, {@code product_not_received}, {@code
-   * product_unacceptable}, {@code subscription_canceled}, or {@code unrecognized}. Read more about
+   * product_unacceptable}, {@code subscription_canceled}, or {@code unrecognized}. Learn more about
    * <a href="https://stripe.com/docs/disputes/categories">dispute reasons</a>.
    */
   @SerializedName("reason")
