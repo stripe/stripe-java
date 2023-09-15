@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +11,10 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentIntentRetrieveParams extends ApiRequestParams {
-  /**
-   * The client secret of the PaymentIntent. It's required if you use a publishable key to retrieve
-   * the source.
-   */
-  @SerializedName("client_secret")
-  String clientSecret;
+public class PaymentMethodConfigurationListParams extends ApiRequestParams {
+  /** The Connect application to filter by. */
+  @SerializedName("application")
+  Object application;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -31,9 +29,9 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private PaymentIntentRetrieveParams(
-      String clientSecret, List<String> expand, Map<String, Object> extraParams) {
-    this.clientSecret = clientSecret;
+  private PaymentMethodConfigurationListParams(
+      Object application, List<String> expand, Map<String, Object> extraParams) {
+    this.application = application;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -43,30 +41,34 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String clientSecret;
+    private Object application;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentIntentRetrieveParams build() {
-      return new PaymentIntentRetrieveParams(this.clientSecret, this.expand, this.extraParams);
+    public PaymentMethodConfigurationListParams build() {
+      return new PaymentMethodConfigurationListParams(
+          this.application, this.expand, this.extraParams);
     }
 
-    /**
-     * The client secret of the PaymentIntent. It's required if you use a publishable key to
-     * retrieve the source.
-     */
-    public Builder setClientSecret(String clientSecret) {
-      this.clientSecret = clientSecret;
+    /** The Connect application to filter by. */
+    public Builder setApplication(String application) {
+      this.application = application;
+      return this;
+    }
+
+    /** The Connect application to filter by. */
+    public Builder setApplication(EmptyParam application) {
+      this.application = application;
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentRetrieveParams#expand} for the field documentation.
+     * PaymentMethodConfigurationListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -79,7 +81,7 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentRetrieveParams#expand} for the field documentation.
+     * PaymentMethodConfigurationListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -92,7 +94,7 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentIntentRetrieveParams#extraParams} for the field documentation.
+     * PaymentMethodConfigurationListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -105,7 +107,7 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentIntentRetrieveParams#extraParams} for the field documentation.
+     * See {@link PaymentMethodConfigurationListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

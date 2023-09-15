@@ -894,7 +894,7 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Enables US domestic wire tranfers via the OutboundPayments API. */
+      /** Enables US domestic wire transfers via the OutboundPayments API. */
       @SerializedName("us_domestic_wire")
       UsDomesticWire usDomesticWire;
 
@@ -956,7 +956,7 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Enables US domestic wire tranfers via the OutboundPayments API. */
+        /** Enables US domestic wire transfers via the OutboundPayments API. */
         public Builder setUsDomesticWire(
             FinancialAccountUpdateParams.Features.OutboundPayments.UsDomesticWire usDomesticWire) {
           this.usDomesticWire = usDomesticWire;
@@ -1126,7 +1126,7 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Enables US domestic wire tranfers via the OutboundTransfers API. */
+      /** Enables US domestic wire transfers via the OutboundTransfers API. */
       @SerializedName("us_domestic_wire")
       UsDomesticWire usDomesticWire;
 
@@ -1188,7 +1188,7 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Enables US domestic wire tranfers via the OutboundTransfers API. */
+        /** Enables US domestic wire transfers via the OutboundTransfers API. */
         public Builder setUsDomesticWire(
             FinancialAccountUpdateParams.Features.OutboundTransfers.UsDomesticWire usDomesticWire) {
           this.usDomesticWire = usDomesticWire;

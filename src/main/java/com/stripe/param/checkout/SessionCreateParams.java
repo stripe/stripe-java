@@ -219,6 +219,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_collection")
   PaymentMethodCollection paymentMethodCollection;
 
+  /** The ID of the payment method configuration to use with this Checkout session. */
+  @SerializedName("payment_method_configuration")
+  String paymentMethodConfiguration;
+
   /** Payment-method-specific configuration. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
@@ -324,6 +328,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Mode mode,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
+      String paymentMethodConfiguration,
       PaymentMethodOptions paymentMethodOptions,
       List<SessionCreateParams.PaymentMethodType> paymentMethodTypes,
       PhoneNumberCollection phoneNumberCollection,
@@ -359,6 +364,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.mode = mode;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
+    this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.phoneNumberCollection = phoneNumberCollection;
@@ -426,6 +432,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentMethodCollection paymentMethodCollection;
 
+    private String paymentMethodConfiguration;
+
     private PaymentMethodOptions paymentMethodOptions;
 
     private List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
@@ -474,6 +482,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.mode,
           this.paymentIntentData,
           this.paymentMethodCollection,
+          this.paymentMethodConfiguration,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.phoneNumberCollection,
@@ -836,6 +845,12 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setPaymentMethodCollection(
         SessionCreateParams.PaymentMethodCollection paymentMethodCollection) {
       this.paymentMethodCollection = paymentMethodCollection;
+      return this;
+    }
+
+    /** The ID of the payment method configuration to use with this Checkout session. */
+    public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
+      this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
     }
 

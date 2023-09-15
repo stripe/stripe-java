@@ -258,6 +258,13 @@ public class Session extends ApiResource implements HasId {
   String paymentMethodCollection;
 
   /**
+   * Information about the payment method configuration used for this Checkout session if using
+   * dynamic payment methods.
+   */
+  @SerializedName("payment_method_configuration_details")
+  PaymentMethodConfigurationDetails paymentMethodConfigurationDetails;
+
+  /**
    * Payment-method-specific configuration for the PaymentIntent or SetupIntent of this
    * CheckoutSession.
    */
@@ -1199,6 +1206,20 @@ public class Session extends ApiResource implements HasId {
         String amountTaxDisplay;
       }
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodConfigurationDetails extends StripeObject implements HasId {
+    /** ID of the payment method configuration used. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /** ID of the parent payment method configuration used. */
+    @SerializedName("parent")
+    String parent;
   }
 
   @Getter
@@ -2380,6 +2401,7 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentLink, responseGetter);
+    trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);

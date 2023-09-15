@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,14 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentIntentRetrieveParams extends ApiRequestParams {
-  /**
-   * The client secret of the PaymentIntent. It's required if you use a publishable key to retrieve
-   * the source.
-   */
-  @SerializedName("client_secret")
-  String clientSecret;
-
+public class TransactionRefundParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -31,11 +24,19 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private PaymentIntentRetrieveParams(
-      String clientSecret, List<String> expand, Map<String, Object> extraParams) {
-    this.clientSecret = clientSecret;
+  /**
+   * The total amount to attempt to refund. This amount is in the provided currency, or defaults to
+   * the cards currency, and in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
+  @SerializedName("refund_amount")
+  Long refundAmount;
+
+  private TransactionRefundParams(
+      List<String> expand, Map<String, Object> extraParams, Long refundAmount) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.refundAmount = refundAmount;
   }
 
   public static Builder builder() {
@@ -43,30 +44,21 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String clientSecret;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    /** Finalize and obtain parameter instance from this builder. */
-    public PaymentIntentRetrieveParams build() {
-      return new PaymentIntentRetrieveParams(this.clientSecret, this.expand, this.extraParams);
-    }
+    private Long refundAmount;
 
-    /**
-     * The client secret of the PaymentIntent. It's required if you use a publishable key to
-     * retrieve the source.
-     */
-    public Builder setClientSecret(String clientSecret) {
-      this.clientSecret = clientSecret;
-      return this;
+    /** Finalize and obtain parameter instance from this builder. */
+    public TransactionRefundParams build() {
+      return new TransactionRefundParams(this.expand, this.extraParams, this.refundAmount);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentRetrieveParams#expand} for the field documentation.
+     * TransactionRefundParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -79,7 +71,7 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentRetrieveParams#expand} for the field documentation.
+     * TransactionRefundParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -92,7 +84,7 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentIntentRetrieveParams#extraParams} for the field documentation.
+     * TransactionRefundParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -105,13 +97,23 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentIntentRetrieveParams#extraParams} for the field documentation.
+     * See {@link TransactionRefundParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The total amount to attempt to refund. This amount is in the provided currency, or defaults
+     * to the cards currency, and in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
+    public Builder setRefundAmount(Long refundAmount) {
+      this.refundAmount = refundAmount;
       return this;
     }
   }

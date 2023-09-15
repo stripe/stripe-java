@@ -13,12 +13,12 @@ import com.stripe.param.TaxIdCollectionRetrieveParams;
 import java.util.Map;
 
 public class TaxIdCollection extends StripeCollection<TaxId> {
-  /** Creates a new {@code TaxID} object for a customer. */
+  /** Creates a new {@code tax_id} object for a customer. */
   public TaxId create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new {@code TaxID} object for a customer. */
+  /** Creates a new {@code tax_id} object for a customer. */
   public TaxId create(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     return getResponseGetter()
@@ -32,12 +32,12 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
             ApiMode.V1);
   }
 
-  /** Creates a new {@code TaxID} object for a customer. */
+  /** Creates a new {@code tax_id} object for a customer. */
   public TaxId create(TaxIdCollectionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new {@code TaxID} object for a customer. */
+  /** Creates a new {@code tax_id} object for a customer. */
   public TaxId create(TaxIdCollectionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
@@ -94,17 +94,17 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
             ApiMode.V1);
   }
 
-  /** Retrieves the {@code TaxID} object with the given identifier. */
+  /** Retrieves the {@code tax_id} object with the given identifier. */
   public TaxId retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the {@code TaxID} object with the given identifier. */
+  /** Retrieves the {@code tax_id} object with the given identifier. */
   public TaxId retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the {@code TaxID} object with the given identifier. */
+  /** Retrieves the {@code tax_id} object with the given identifier. */
   public TaxId retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
@@ -119,7 +119,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
             ApiMode.V1);
   }
 
-  /** Retrieves the {@code TaxID} object with the given identifier. */
+  /** Retrieves the {@code tax_id} object with the given identifier. */
   public TaxId retrieve(String id, TaxIdCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
