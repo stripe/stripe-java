@@ -465,8 +465,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String name;
 
     /**
-     * The phone number of the receiver of the bulk shipment. This phone number will be provided to
-     * the shipping company, who might use it to contact the receiver in case of delivery issues.
+     * The phone number of the receiver of the shipment. Our courier partners will use this number
+     * to contact you in the event of card delivery issues. For individual shipments to the EU/UK,
+     * if this field is empty, we will provide them with the phone number provided when the
+     * cardholder was initially created.
      */
     @SerializedName("phone_number")
     String phoneNumber;
