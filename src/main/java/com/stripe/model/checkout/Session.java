@@ -1005,6 +1005,12 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("submit")
     Submit submit;
 
+    /**
+     * Custom text that should be displayed in place of the default terms of service agreement text.
+     */
+    @SerializedName("terms_of_service_acceptance")
+    TermsOfServiceAcceptance termsOfServiceAcceptance;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1018,6 +1024,15 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Submit extends StripeObject {
+      /** Text may be up to 1000 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TermsOfServiceAcceptance extends StripeObject {
       /** Text may be up to 1000 characters in length. */
       @SerializedName("message")
       String message;

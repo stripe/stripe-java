@@ -76,8 +76,8 @@ public class PersonCreateParams extends ApiRequestParams {
   /**
    * The person's ID number, as appropriate for their country. For example, a social security number
    * in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also
-   * provide a <a href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token
-   * provided by Stripe.js</a>.
+   * provide a <a href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token provided
+   * by Stripe.js</a>.
    */
   @SerializedName("id_number")
   String idNumber;
@@ -86,7 +86,7 @@ public class PersonCreateParams extends ApiRequestParams {
    * The person's secondary ID number, as appropriate for their country, will be used for enhanced
    * verification checks. In Thailand, this would be the laser code found on the back of an ID card.
    * Instead of the number itself, you can also provide a <a
-   * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided by
+   * href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token provided by
    * Stripe.js</a>.
    */
   @SerializedName("id_number_secondary")
@@ -477,9 +477,8 @@ public class PersonCreateParams extends ApiRequestParams {
     /**
      * The person's ID number, as appropriate for their country. For example, a social security
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
-     * can also provide a <a
-     * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided by
-     * Stripe.js</a>.
+     * can also provide a <a href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII
+     * token provided by Stripe.js</a>.
      */
     public Builder setIdNumber(String idNumber) {
       this.idNumber = idNumber;
@@ -490,7 +489,7 @@ public class PersonCreateParams extends ApiRequestParams {
      * The person's secondary ID number, as appropriate for their country, will be used for enhanced
      * verification checks. In Thailand, this would be the laser code found on the back of an ID
      * card. Instead of the number itself, you can also provide a <a
-     * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided by
+     * href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token provided by
      * Stripe.js</a>.
      */
     public Builder setIdNumberSecondary(String idNumberSecondary) {

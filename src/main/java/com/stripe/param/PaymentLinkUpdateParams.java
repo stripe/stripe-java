@@ -1576,10 +1576,21 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("submit")
     Object submit;
 
-    private CustomText(Map<String, Object> extraParams, Object shippingAddress, Object submit) {
+    /**
+     * Custom text that should be displayed in place of the default terms of service agreement text.
+     */
+    @SerializedName("terms_of_service_acceptance")
+    Object termsOfServiceAcceptance;
+
+    private CustomText(
+        Map<String, Object> extraParams,
+        Object shippingAddress,
+        Object submit,
+        Object termsOfServiceAcceptance) {
       this.extraParams = extraParams;
       this.shippingAddress = shippingAddress;
       this.submit = submit;
+      this.termsOfServiceAcceptance = termsOfServiceAcceptance;
     }
 
     public static Builder builder() {
@@ -1593,10 +1604,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Object submit;
 
+      private Object termsOfServiceAcceptance;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.CustomText build() {
         return new PaymentLinkUpdateParams.CustomText(
-            this.extraParams, this.shippingAddress, this.submit);
+            this.extraParams, this.shippingAddress, this.submit, this.termsOfServiceAcceptance);
       }
 
       /**
@@ -1647,6 +1660,25 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       /** Custom text that should be displayed alongside the payment confirmation button. */
       public Builder setSubmit(EmptyParam submit) {
         this.submit = submit;
+        return this;
+      }
+
+      /**
+       * Custom text that should be displayed in place of the default terms of service agreement
+       * text.
+       */
+      public Builder setTermsOfServiceAcceptance(
+          PaymentLinkUpdateParams.CustomText.TermsOfServiceAcceptance termsOfServiceAcceptance) {
+        this.termsOfServiceAcceptance = termsOfServiceAcceptance;
+        return this;
+      }
+
+      /**
+       * Custom text that should be displayed in place of the default terms of service agreement
+       * text.
+       */
+      public Builder setTermsOfServiceAcceptance(EmptyParam termsOfServiceAcceptance) {
+        this.termsOfServiceAcceptance = termsOfServiceAcceptance;
         return this;
       }
     }
@@ -1781,6 +1813,83 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentLinkUpdateParams.CustomText.Submit#extraParams} for the field
          * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+        public Builder setMessage(String message) {
+          this.message = message;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+        public Builder setMessage(EmptyParam message) {
+          this.message = message;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TermsOfServiceAcceptance {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+      @SerializedName("message")
+      Object message;
+
+      private TermsOfServiceAcceptance(Map<String, Object> extraParams, Object message) {
+        this.extraParams = extraParams;
+        this.message = message;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object message;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.CustomText.TermsOfServiceAcceptance build() {
+          return new PaymentLinkUpdateParams.CustomText.TermsOfServiceAcceptance(
+              this.extraParams, this.message);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomText.TermsOfServiceAcceptance#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomText.TermsOfServiceAcceptance#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
