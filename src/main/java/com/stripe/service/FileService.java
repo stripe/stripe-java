@@ -22,29 +22,29 @@ public final class FileService extends ApiService {
   }
 
   /**
-   * Returns a list of the files that your account has access to. The files are returned sorted by
-   * creation date, with the most recently created files appearing first.
+   * Returns a list of the files that your account has access to. Stripe sorts and returns the files
+   * by their creation dates, placing the most recently created files at the top.
    */
   public StripeCollection<File> list(FileListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of the files that your account has access to. The files are returned sorted by
-   * creation date, with the most recently created files appearing first.
+   * Returns a list of the files that your account has access to. Stripe sorts and returns the files
+   * by their creation dates, placing the most recently created files at the top.
    */
   public StripeCollection<File> list(RequestOptions options) throws StripeException {
     return list((FileListParams) null, options);
   }
   /**
-   * Returns a list of the files that your account has access to. The files are returned sorted by
-   * creation date, with the most recently created files appearing first.
+   * Returns a list of the files that your account has access to. Stripe sorts and returns the files
+   * by their creation dates, placing the most recently created files at the top.
    */
   public StripeCollection<File> list() throws StripeException {
     return list((FileListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of the files that your account has access to. The files are returned sorted by
-   * creation date, with the most recently created files appearing first.
+   * Returns a list of the files that your account has access to. Stripe sorts and returns the files
+   * by their creation dates, placing the most recently created files at the top.
    */
   public StripeCollection<File> list(FileListParams params, RequestOptions options)
       throws StripeException {
@@ -60,22 +60,20 @@ public final class FileService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
-   * The request should contain the file you would like to upload, as well as the parameters for
-   * creating a file.
+   * To upload a file to Stripe, you need to send a request of type {@code multipart/form-data}.
+   * Include the file you want to upload in the request, and the parameters for creating a file.
    *
-   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * <p>All of Stripe’s officially supported Client libraries support sending {@code
    * multipart/form-data}.
    */
   public File create(FileCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
-   * The request should contain the file you would like to upload, as well as the parameters for
-   * creating a file.
+   * To upload a file to Stripe, you need to send a request of type {@code multipart/form-data}.
+   * Include the file you want to upload in the request, and the parameters for creating a file.
    *
-   * <p>All of Stripe’s officially supported Client libraries should have support for sending {@code
+   * <p>All of Stripe’s officially supported Client libraries support sending {@code
    * multipart/form-data}.
    */
   public File create(FileCreateParams params, RequestOptions options) throws StripeException {
@@ -91,33 +89,33 @@ public final class FileService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
-   * Stripe will return the corresponding file object. To access file contents, see the <a
-   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
+   * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
+   * returns the corresponding file object. Learn how to <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
   public File retrieve(String file, FileRetrieveParams params) throws StripeException {
     return retrieve(file, params, (RequestOptions) null);
   }
   /**
-   * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
-   * Stripe will return the corresponding file object. To access file contents, see the <a
-   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
+   * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
+   * returns the corresponding file object. Learn how to <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
   public File retrieve(String file, RequestOptions options) throws StripeException {
     return retrieve(file, (FileRetrieveParams) null, options);
   }
   /**
-   * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
-   * Stripe will return the corresponding file object. To access file contents, see the <a
-   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
+   * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
+   * returns the corresponding file object. Learn how to <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
   public File retrieve(String file) throws StripeException {
     return retrieve(file, (FileRetrieveParams) null, (RequestOptions) null);
   }
   /**
-   * Retrieves the details of an existing file object. Supply the unique file ID from a file, and
-   * Stripe will return the corresponding file object. To access file contents, see the <a
-   * href="https://stripe.com/docs/file-upload#download-file-contents">File Upload Guide</a>.
+   * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
+   * returns the corresponding file object. Learn how to <a
+   * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
   public File retrieve(String file, FileRetrieveParams params, RequestOptions options)
       throws StripeException {

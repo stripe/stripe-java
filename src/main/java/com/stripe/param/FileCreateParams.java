@@ -28,14 +28,14 @@ public class FileCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> A file to upload. The file should follow the specifications of RFC
-   * 2388 (which defines file transfers for the {@code multipart/form-data} protocol).
+   * <strong>Required.</strong> A file to upload. Make sure that the specifications follow RFC 2388,
+   * which defines file transfers for the {@code multipart/form-data} protocol.
    */
   @SerializedName("file")
   transient Object file;
 
   /**
-   * Optional parameters to automatically create a <a
+   * Optional parameters that automatically create a <a
    * href="https://stripe.com/docs/api#file_links">file link</a> for the newly created file.
    */
   @SerializedName("file_link_data")
@@ -135,8 +135,8 @@ public class FileCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A file to upload. The file should follow the specifications of RFC
-     * 2388 (which defines file transfers for the {@code multipart/form-data} protocol).
+     * <strong>Required.</strong> A file to upload. Make sure that the specifications follow RFC
+     * 2388, which defines file transfers for the {@code multipart/form-data} protocol.
      */
     public Builder setFile(InputStream file) {
       this.file = file;
@@ -144,8 +144,8 @@ public class FileCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A file to upload. The file should follow the specifications of RFC
-     * 2388 (which defines file transfers for the {@code multipart/form-data} protocol).
+     * <strong>Required.</strong> A file to upload. Make sure that the specifications follow RFC
+     * 2388, which defines file transfers for the {@code multipart/form-data} protocol.
      */
     public Builder setFile(File file) {
       this.file = file;
@@ -153,7 +153,7 @@ public class FileCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Optional parameters to automatically create a <a
+     * Optional parameters that automatically create a <a
      * href="https://stripe.com/docs/api#file_links">file link</a> for the newly created file.
      */
     public Builder setFileLinkData(FileCreateParams.FileLinkData fileLinkData) {
@@ -183,7 +183,7 @@ public class FileCreateParams extends ApiRequestParams {
     @SerializedName("create")
     Boolean create;
 
-    /** A future timestamp after which the link will no longer be usable. */
+    /** The link isn't available after this future timestamp. */
     @SerializedName("expires_at")
     Long expiresAt;
 
@@ -244,7 +244,7 @@ public class FileCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A future timestamp after which the link will no longer be usable. */
+      /** The link isn't available after this future timestamp. */
       public Builder setExpiresAt(Long expiresAt) {
         this.expiresAt = expiresAt;
         return this;
