@@ -220,48 +220,48 @@ public class Authorization extends ApiResource
   }
 
   /**
-   * Approves a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
-   * authorization</a> flow. You can also respond directly to the webhook request to approve an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to approve an authorization</a>.
    */
   public Authorization approve() throws StripeException {
     return approve((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Approves a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
-   * authorization</a> flow. You can also respond directly to the webhook request to approve an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to approve an authorization</a>.
    */
   public Authorization approve(RequestOptions options) throws StripeException {
     return approve((Map<String, Object>) null, options);
   }
 
   /**
-   * Approves a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
-   * authorization</a> flow. You can also respond directly to the webhook request to approve an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to approve an authorization</a>.
    */
   public Authorization approve(Map<String, Object> params) throws StripeException {
     return approve(params, (RequestOptions) null);
   }
 
   /**
-   * Approves a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
-   * authorization</a> flow. You can also respond directly to the webhook request to approve an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to approve an authorization</a>.
    */
   public Authorization approve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -280,24 +280,24 @@ public class Authorization extends ApiResource
   }
 
   /**
-   * Approves a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
-   * authorization</a> flow. You can also respond directly to the webhook request to approve an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to approve an authorization</a>.
    */
   public Authorization approve(AuthorizationApproveParams params) throws StripeException {
     return approve(params, (RequestOptions) null);
   }
 
   /**
-   * Approves a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
-   * authorization</a> flow. You can also respond directly to the webhook request to approve an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to approve an authorization</a>.
    */
   public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
@@ -317,48 +317,48 @@ public class Authorization extends ApiResource
   }
 
   /**
-   * Declines a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
-   * authorization</a> flow. You can also respond directly to the webhook request to decline an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to decline an authorization</a>.
    */
   public Authorization decline() throws StripeException {
     return decline((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Declines a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
-   * authorization</a> flow. You can also respond directly to the webhook request to decline an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to decline an authorization</a>.
    */
   public Authorization decline(RequestOptions options) throws StripeException {
     return decline((Map<String, Object>) null, options);
   }
 
   /**
-   * Declines a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
-   * authorization</a> flow. You can also respond directly to the webhook request to decline an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to decline an authorization</a>.
    */
   public Authorization decline(Map<String, Object> params) throws StripeException {
     return decline(params, (RequestOptions) null);
   }
 
   /**
-   * Declines a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
-   * authorization</a> flow. You can also respond directly to the webhook request to decline an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to decline an authorization</a>.
    */
   public Authorization decline(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -377,24 +377,24 @@ public class Authorization extends ApiResource
   }
 
   /**
-   * Declines a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
-   * authorization</a> flow. You can also respond directly to the webhook request to decline an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to decline an authorization</a>.
    */
   public Authorization decline(AuthorizationDeclineParams params) throws StripeException {
     return decline(params, (RequestOptions) null);
   }
 
   /**
-   * Declines a pending Issuing {@code Authorization} object. This request should be made within the
-   * timeout window of the <a
+   * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
+   * made within the timeout window of the <a
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
-   * authorization</a> flow. You can also respond directly to the webhook request to decline an
-   * authorization (preferred). More details can be found <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">here</a>.
+   * authorization</a> flow. This method is deprecated. Instead, <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
+   * directly to the webhook request to decline an authorization</a>.
    */
   public Authorization decline(AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
