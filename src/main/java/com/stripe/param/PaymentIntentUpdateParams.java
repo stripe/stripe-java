@@ -118,8 +118,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use
-   * automatic_payment_methods to manage payment methods from the <a
+   * The list of payment method types (for example, card) that this PaymentIntent can use. Use
+   * {@code automatic_payment_methods} to manage payment methods from the <a
    * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
    */
   @SerializedName("payment_method_types")
@@ -173,18 +173,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   Object statementDescriptorSuffix;
 
   /**
-   * The parameters used to automatically create a Transfer when the payment succeeds. For more
-   * information, see the PaymentIntents <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
+   * Use this parameter to automatically create a Transfer when the payment succeeds. Learn more
+   * about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+   * accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
-   * A string that identifies the resulting payment as part of a group. {@code transfer_group} may
-   * only be provided if it has not been set. See the PaymentIntents <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>
-   * for details.
+   * A string that identifies the resulting payment as part of a group. You can only provide {@code
+   * transfer_group} if it hasn't been set. Learn more about the <a
+   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("transfer_group")
   Object transferGroup;
@@ -740,10 +739,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The parameters used to automatically create a Transfer when the payment succeeds. For more
-     * information, see the PaymentIntents <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-     * accounts</a>.
+     * Use this parameter to automatically create a Transfer when the payment succeeds. Learn more
+     * about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+     * connected accounts</a>.
      */
     public Builder setTransferData(PaymentIntentUpdateParams.TransferData transferData) {
       this.transferData = transferData;
@@ -751,10 +749,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A string that identifies the resulting payment as part of a group. {@code transfer_group} may
-     * only be provided if it has not been set. See the PaymentIntents <a
+     * A string that identifies the resulting payment as part of a group. You can only provide
+     * {@code transfer_group} if it hasn't been set. Learn more about the <a
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-     * accounts</a> for details.
+     * accounts</a>.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
@@ -762,10 +760,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A string that identifies the resulting payment as part of a group. {@code transfer_group} may
-     * only be provided if it has not been set. See the PaymentIntents <a
+     * A string that identifies the resulting payment as part of a group. You can only provide
+     * {@code transfer_group} if it hasn't been set. Learn more about the <a
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-     * accounts</a> for details.
+     * accounts</a>.
      */
     public Builder setTransferGroup(EmptyParam transferGroup) {
       this.transferGroup = transferGroup;
