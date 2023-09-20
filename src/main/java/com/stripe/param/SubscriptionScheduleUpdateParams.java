@@ -657,9 +657,18 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private AutomaticTax(Boolean enabled, Map<String, Object> extraParams) {
+      /**
+       * The account that's liable for tax. If set, the business address and tax registrations
+       * required to perform the tax calculation are loaded from this account. The tax transaction
+       * is returned in the report of the connected account.
+       */
+      @SerializedName("liability")
+      Liability liability;
+
+      private AutomaticTax(Boolean enabled, Map<String, Object> extraParams, Liability liability) {
         this.enabled = enabled;
         this.extraParams = extraParams;
+        this.liability = liability;
       }
 
       public static Builder builder() {
@@ -671,10 +680,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Liability liability;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax build() {
           return new SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax(
-              this.enabled, this.extraParams);
+              this.enabled, this.extraParams, this.liability);
         }
 
         /**
@@ -714,6 +725,126 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * The account that's liable for tax. If set, the business address and tax registrations
+         * required to perform the tax calculation are loaded from this account. The tax transaction
+         * is returned in the report of the connected account.
+         */
+        public Builder setLiability(
+            SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax.Liability liability) {
+          this.liability = liability;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Liability {
+        /** The connected account being referenced when {@code type} is {@code account}. */
+        @SerializedName("account")
+        Object account;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Type of the account referenced in the request. */
+        @SerializedName("type")
+        Type type;
+
+        private Liability(Object account, Map<String, Object> extraParams, Type type) {
+          this.account = account;
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object account;
+
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax.Liability build() {
+            return new SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax.Liability(
+                this.account, this.extraParams, this.type);
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(String account) {
+            this.account = account;
+            return this;
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(EmptyParam account) {
+            this.account = account;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax.Liability#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax.Liability#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Type of the account referenced in the request. */
+          public Builder setType(
+              SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax.Liability.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("account")
+          ACCOUNT("account"),
+
+          @SerializedName("self")
+          SELF("self");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
@@ -832,9 +963,17 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private InvoiceSettings(Long daysUntilDue, Map<String, Object> extraParams) {
+      /**
+       * The connected account that issues the invoice. The invoice is presented with the branding
+       * and support information of the specified account.
+       */
+      @SerializedName("issuer")
+      Issuer issuer;
+
+      private InvoiceSettings(Long daysUntilDue, Map<String, Object> extraParams, Issuer issuer) {
         this.daysUntilDue = daysUntilDue;
         this.extraParams = extraParams;
+        this.issuer = issuer;
       }
 
       public static Builder builder() {
@@ -846,10 +985,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Issuer issuer;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings build() {
           return new SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings(
-              this.daysUntilDue, this.extraParams);
+              this.daysUntilDue, this.extraParams, this.issuer);
         }
 
         /**
@@ -890,6 +1031,125 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * The connected account that issues the invoice. The invoice is presented with the branding
+         * and support information of the specified account.
+         */
+        public Builder setIssuer(
+            SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Issuer issuer) {
+          this.issuer = issuer;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Issuer {
+        /** The connected account being referenced when {@code type} is {@code account}. */
+        @SerializedName("account")
+        Object account;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Type of the account referenced in the request. */
+        @SerializedName("type")
+        Type type;
+
+        private Issuer(Object account, Map<String, Object> extraParams, Type type) {
+          this.account = account;
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object account;
+
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Issuer build() {
+            return new SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Issuer(
+                this.account, this.extraParams, this.type);
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(String account) {
+            this.account = account;
+            return this;
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(EmptyParam account) {
+            this.account = account;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Issuer#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Issuer#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Type of the account referenced in the request. */
+          public Builder setType(
+              SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Issuer.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("account")
+          ACCOUNT("account"),
+
+          @SerializedName("self")
+          SELF("self");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
@@ -2693,9 +2953,18 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private AutomaticTax(Boolean enabled, Map<String, Object> extraParams) {
+      /**
+       * The account that's liable for tax. If set, the business address and tax registrations
+       * required to perform the tax calculation are loaded from this account. The tax transaction
+       * is returned in the report of the connected account.
+       */
+      @SerializedName("liability")
+      Liability liability;
+
+      private AutomaticTax(Boolean enabled, Map<String, Object> extraParams, Liability liability) {
         this.enabled = enabled;
         this.extraParams = extraParams;
+        this.liability = liability;
       }
 
       public static Builder builder() {
@@ -2707,10 +2976,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Liability liability;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleUpdateParams.Phase.AutomaticTax build() {
           return new SubscriptionScheduleUpdateParams.Phase.AutomaticTax(
-              this.enabled, this.extraParams);
+              this.enabled, this.extraParams, this.liability);
         }
 
         /**
@@ -2748,6 +3019,126 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * The account that's liable for tax. If set, the business address and tax registrations
+         * required to perform the tax calculation are loaded from this account. The tax transaction
+         * is returned in the report of the connected account.
+         */
+        public Builder setLiability(
+            SubscriptionScheduleUpdateParams.Phase.AutomaticTax.Liability liability) {
+          this.liability = liability;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Liability {
+        /** The connected account being referenced when {@code type} is {@code account}. */
+        @SerializedName("account")
+        Object account;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Type of the account referenced in the request. */
+        @SerializedName("type")
+        Type type;
+
+        private Liability(Object account, Map<String, Object> extraParams, Type type) {
+          this.account = account;
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object account;
+
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleUpdateParams.Phase.AutomaticTax.Liability build() {
+            return new SubscriptionScheduleUpdateParams.Phase.AutomaticTax.Liability(
+                this.account, this.extraParams, this.type);
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(String account) {
+            this.account = account;
+            return this;
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(EmptyParam account) {
+            this.account = account;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.Phase.AutomaticTax.Liability#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.Phase.AutomaticTax.Liability#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Type of the account referenced in the request. */
+          public Builder setType(
+              SubscriptionScheduleUpdateParams.Phase.AutomaticTax.Liability.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("account")
+          ACCOUNT("account"),
+
+          @SerializedName("self")
+          SELF("self");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
@@ -3224,9 +3615,17 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private InvoiceSettings(Long daysUntilDue, Map<String, Object> extraParams) {
+      /**
+       * The connected account that issues the invoice. The invoice is presented with the branding
+       * and support information of the specified account.
+       */
+      @SerializedName("issuer")
+      Issuer issuer;
+
+      private InvoiceSettings(Long daysUntilDue, Map<String, Object> extraParams, Issuer issuer) {
         this.daysUntilDue = daysUntilDue;
         this.extraParams = extraParams;
+        this.issuer = issuer;
       }
 
       public static Builder builder() {
@@ -3238,10 +3637,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Issuer issuer;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleUpdateParams.Phase.InvoiceSettings build() {
           return new SubscriptionScheduleUpdateParams.Phase.InvoiceSettings(
-              this.daysUntilDue, this.extraParams);
+              this.daysUntilDue, this.extraParams, this.issuer);
         }
 
         /**
@@ -3280,6 +3681,125 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * The connected account that issues the invoice. The invoice is presented with the branding
+         * and support information of the specified account.
+         */
+        public Builder setIssuer(
+            SubscriptionScheduleUpdateParams.Phase.InvoiceSettings.Issuer issuer) {
+          this.issuer = issuer;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Issuer {
+        /** The connected account being referenced when {@code type} is {@code account}. */
+        @SerializedName("account")
+        Object account;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Type of the account referenced in the request. */
+        @SerializedName("type")
+        Type type;
+
+        private Issuer(Object account, Map<String, Object> extraParams, Type type) {
+          this.account = account;
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object account;
+
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleUpdateParams.Phase.InvoiceSettings.Issuer build() {
+            return new SubscriptionScheduleUpdateParams.Phase.InvoiceSettings.Issuer(
+                this.account, this.extraParams, this.type);
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(String account) {
+            this.account = account;
+            return this;
+          }
+
+          /** The connected account being referenced when {@code type} is {@code account}. */
+          public Builder setAccount(EmptyParam account) {
+            this.account = account;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.Phase.InvoiceSettings.Issuer#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.Phase.InvoiceSettings.Issuer#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Type of the account referenced in the request. */
+          public Builder setType(
+              SubscriptionScheduleUpdateParams.Phase.InvoiceSettings.Issuer.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("account")
+          ACCOUNT("account"),
+
+          @SerializedName("self")
+          SELF("self");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
