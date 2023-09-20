@@ -29,10 +29,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @SerializedName("created")
   Long created;
 
-  /** ID of the Customer this ConfirmationToken belongs to. */
-  @SerializedName("customer")
-  String customer;
-
   /**
    * Time at which this ConfirmationToken expires and can no longer be used to confirm a
    * PaymentIntent or SetupIntent. This is set to null once this ConfirmationToken has been used.
