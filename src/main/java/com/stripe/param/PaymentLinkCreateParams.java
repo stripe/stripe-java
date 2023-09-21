@@ -1975,7 +1975,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2027,7 +2027,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2046,7 +2046,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2097,7 +2097,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2116,7 +2116,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2168,7 +2168,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
