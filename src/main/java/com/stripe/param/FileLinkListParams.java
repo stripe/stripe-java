@@ -27,7 +27,7 @@ public class FileLinkListParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** Filter links by their expiration status. By default, all links are returned. */
+  /** Filter links by their expiration status. By default, Stripe returns all links. */
   @SerializedName("expired")
   Boolean expired;
 
@@ -160,7 +160,7 @@ public class FileLinkListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filter links by their expiration status. By default, all links are returned. */
+    /** Filter links by their expiration status. By default, Stripe returns all links. */
     public Builder setExpired(Boolean expired) {
       this.expired = expired;
       return this;
