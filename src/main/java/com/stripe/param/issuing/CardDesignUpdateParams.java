@@ -22,7 +22,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
 
   /** Hash containing carrier text, for use with card bundles that support carrier text. */
   @SerializedName("carrier_text")
-  CarrierText carrierText;
+  Object carrierText;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -71,7 +71,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   private CardDesignUpdateParams(
       Object cardBundle,
       Object cardLogo,
-      CarrierText carrierText,
+      Object carrierText,
       List<String> expand,
       Map<String, Object> extraParams,
       Object lookupKey,
@@ -100,7 +100,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
 
     private Object cardLogo;
 
-    private CarrierText carrierText;
+    private Object carrierText;
 
     private List<String> expand;
 
@@ -157,6 +157,12 @@ public class CardDesignUpdateParams extends ApiRequestParams {
 
     /** Hash containing carrier text, for use with card bundles that support carrier text. */
     public Builder setCarrierText(CardDesignUpdateParams.CarrierText carrierText) {
+      this.carrierText = carrierText;
+      return this;
+    }
+
+    /** Hash containing carrier text, for use with card bundles that support carrier text. */
+    public Builder setCarrierText(EmptyParam carrierText) {
       this.carrierText = carrierText;
       return this;
     }

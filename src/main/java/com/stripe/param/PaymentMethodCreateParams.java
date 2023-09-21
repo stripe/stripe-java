@@ -3631,7 +3631,11 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> For backwards compatibility, you can alternatively provide a
+     * Stripe token (e.g., for Apple Pay, Amex Express Checkout, or legacy Checkout) into the card
+     * hash with format card: {token: &quot;tok_visa&quot;}.
+     */
     @SerializedName("token")
     String token;
 
@@ -3680,7 +3684,11 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> For backwards compatibility, you can alternatively provide a
+       * Stripe token (e.g., for Apple Pay, Amex Express Checkout, or legacy Checkout) into the card
+       * hash with format card: {token: &quot;tok_visa&quot;}.
+       */
       public Builder setToken(String token) {
         this.token = token;
         return this;

@@ -44,8 +44,8 @@ public class FileListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * The file purpose to filter queries by. If none is provided, files will not be filtered by
-   * purpose.
+   * Filter queries by the file purpose. If you don't provide a purpose, the queries return
+   * unfiltered files.
    */
   @SerializedName("purpose")
   Purpose purpose;
@@ -190,8 +190,8 @@ public class FileListParams extends ApiRequestParams {
     }
 
     /**
-     * The file purpose to filter queries by. If none is provided, files will not be filtered by
-     * purpose.
+     * Filter queries by the file purpose. If you don't provide a purpose, the queries return
+     * unfiltered files.
      */
     public Builder setPurpose(FileListParams.Purpose purpose) {
       this.purpose = purpose;

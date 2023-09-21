@@ -16,7 +16,7 @@ public class FileLinkCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** A future timestamp after which the link will no longer be usable. */
+  /** The link isn't usable after this future timestamp. */
   @SerializedName("expires_at")
   Long expiresAt;
 
@@ -108,7 +108,7 @@ public class FileLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A future timestamp after which the link will no longer be usable. */
+    /** The link isn't usable after this future timestamp. */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
       return this;

@@ -317,6 +317,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   String id;
 
   /**
+   * The connected account that issues the invoice. The invoice is presented with the branding and
+   * support information of the specified account.
+   */
+  @SerializedName("issuer")
+  Issuer issuer;
+
+  /**
    * The error encountered during the previous attempt to finalize the invoice. This field is
    * cleared when the invoice is successfully finalized.
    */
@@ -890,12 +897,57 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     Boolean enabled;
 
     /**
+     * The connected account that's liable for tax. If set, the business address and tax
+     * registrations required to perform the tax calculation are loaded from this account. The tax
+     * transaction is returned in the report of the connected account.
+     */
+    @SerializedName("liability")
+    Liability liability;
+
+    /**
      * The status of the most recent automated tax calculation for this invoice.
      *
      * <p>One of {@code complete}, {@code failed}, or {@code requires_location_inputs}.
      */
     @SerializedName("status")
     String status;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Liability extends StripeObject {
+      /** The connected account being referenced when {@code type} is {@code account}. */
+      @SerializedName("account")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Account> account;
+
+      /**
+       * Type of the account referenced.
+       *
+       * <p>One of {@code account}, or {@code self}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code account} object. */
+      public String getAccount() {
+        return (this.account != null) ? this.account.getId() : null;
+      }
+
+      public void setAccount(String id) {
+        this.account = ApiResource.setExpandableFieldId(id, this.account);
+      }
+
+      /** Get expanded {@code account}. */
+      public Account getAccountObject() {
+        return (this.account != null) ? this.account.getExpanded() : null;
+      }
+
+      public void setAccountObject(Account expandableObject) {
+        this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+      }
+    }
   }
 
   @Getter
@@ -968,6 +1020,43 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
 
     public void setInvoiceObject(Invoice expandableObject) {
       this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Issuer extends StripeObject {
+    /** The connected account being referenced when {@code type} is {@code account}. */
+    @SerializedName("account")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> account;
+
+    /**
+     * Type of the account referenced.
+     *
+     * <p>One of {@code account}, or {@code self}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code account} object. */
+    public String getAccount() {
+      return (this.account != null) ? this.account.getId() : null;
+    }
+
+    public void setAccount(String id) {
+      this.account = ApiResource.setExpandableFieldId(id, this.account);
+    }
+
+    /** Get expanded {@code account}. */
+    public Account getAccountObject() {
+      return (this.account != null) ? this.account.getExpanded() : null;
+    }
+
+    public void setAccountObject(Account expandableObject) {
+      this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
   }
 
@@ -1515,6 +1604,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(defaultSource, responseGetter);
     trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(fromInvoice, responseGetter);
+    trySetResponseGetter(issuer, responseGetter);
     trySetResponseGetter(lastFinalizationError, responseGetter);
     trySetResponseGetter(latestRevision, responseGetter);
     trySetResponseGetter(lines, responseGetter);

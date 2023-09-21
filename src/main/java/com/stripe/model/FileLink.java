@@ -20,7 +20,7 @@ import lombok.Setter;
 
 /**
  * To share the contents of a {@code File} object with non-Stripe users, you can create a {@code
- * FileLink}. {@code FileLink}s contain a URL that can be used to retrieve the contents of the file
+ * FileLink}. {@code FileLink}s contain a URL that you can use to retrieve the contents of the file
  * without authentication.
  */
 @Getter
@@ -31,11 +31,11 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   @SerializedName("created")
   Long created;
 
-  /** Whether this link is already expired. */
+  /** Returns if the link is already expired. */
   @SerializedName("expired")
   Boolean expired;
 
-  /** Time at which the link expires. */
+  /** Time that the link expires. */
   @SerializedName("expires_at")
   Long expiresAt;
 
