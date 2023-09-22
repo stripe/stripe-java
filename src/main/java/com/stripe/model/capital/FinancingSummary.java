@@ -109,7 +109,7 @@ public class FinancingSummary extends ApiResource {
      * in milliseconds since unix epoch.
      */
     @SerializedName("advance_paid_out_at")
-    BigDecimal advancePaidOutAt;
+    Long advancePaidOutAt;
 
     /** Currency that the financing offer is transacted in. For example, {@code usd}. */
     @SerializedName("currency")
@@ -136,7 +136,7 @@ public class FinancingSummary extends ApiResource {
      * epoch.
      */
     @SerializedName("repayments_begin_at")
-    BigDecimal repaymentsBeginAt;
+    Long repaymentsBeginAt;
 
     /** Per-transaction rate at which Stripe will withhold funds to repay the financing. */
     @SerializedName("withhold_rate")
@@ -153,7 +153,7 @@ public class FinancingSummary extends ApiResource {
        * epoch.
        */
       @SerializedName("due_at")
-      BigDecimal dueAt;
+      Long dueAt;
 
       /** The amount that has already been paid in the current repayment interval. */
       @SerializedName("paid_amount")
