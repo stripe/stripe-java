@@ -192,7 +192,9 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
    * treasury.outbound_transfer.returned}, {@code treasury.received_credit.created}, {@code
    * treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
-   * treasury.received_debit.created}, or {@code invoiceitem.updated}.
+   * treasury.received_debit.created}, {@code invoiceitem.updated}, {@code order.created}, {@code
+   * recipient.created}, {@code recipient.deleted}, {@code recipient.updated}, {@code sku.created},
+   * {@code sku.deleted}, or {@code sku.updated}.
    */
   @SerializedName("type")
   String type;
