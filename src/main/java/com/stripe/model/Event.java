@@ -155,7 +155,7 @@ public class Event extends ApiResource implements HasId {
    * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
    * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
    * issuing_dispute.updated}, {@code issuing_transaction.created}, {@code
-   * issuing_transaction.updated}, {@code mandate.updated}, {@code order.created}, {@code
+   * issuing_transaction.updated}, {@code mandate.updated}, {@code
    * payment_intent.amount_capturable_updated}, {@code payment_intent.canceled}, {@code
    * payment_intent.created}, {@code payment_intent.partially_funded}, {@code
    * payment_intent.payment_failed}, {@code payment_intent.processing}, {@code
@@ -171,16 +171,14 @@ public class Event extends ApiResource implements HasId {
    * quote.accept_failed}, {@code quote.accepted}, {@code quote.accepting}, {@code quote.canceled},
    * {@code quote.created}, {@code quote.draft}, {@code quote.finalized}, {@code quote.reestimated},
    * {@code quote.stale}, {@code radar.early_fraud_warning.created}, {@code
-   * radar.early_fraud_warning.updated}, {@code recipient.created}, {@code recipient.deleted},
-   * {@code recipient.updated}, {@code refund.created}, {@code refund.updated}, {@code
+   * radar.early_fraud_warning.updated}, {@code refund.created}, {@code refund.updated}, {@code
    * reporting.report_run.failed}, {@code reporting.report_run.succeeded}, {@code
    * reporting.report_type.updated}, {@code review.closed}, {@code review.opened}, {@code
    * setup_intent.canceled}, {@code setup_intent.created}, {@code setup_intent.requires_action},
    * {@code setup_intent.setup_failed}, {@code setup_intent.succeeded}, {@code
-   * sigma.scheduled_query_run.created}, {@code sku.created}, {@code sku.deleted}, {@code
-   * sku.updated}, {@code source.canceled}, {@code source.chargeable}, {@code source.failed}, {@code
-   * source.mandate_notification}, {@code source.refund_attributes_required}, {@code
-   * source.transaction.created}, {@code source.transaction.updated}, {@code
+   * sigma.scheduled_query_run.created}, {@code source.canceled}, {@code source.chargeable}, {@code
+   * source.failed}, {@code source.mandate_notification}, {@code source.refund_attributes_required},
+   * {@code source.transaction.created}, {@code source.transaction.updated}, {@code
    * subscription_schedule.aborted}, {@code subscription_schedule.canceled}, {@code
    * subscription_schedule.completed}, {@code subscription_schedule.created}, {@code
    * subscription_schedule.expiring}, {@code subscription_schedule.released}, {@code
