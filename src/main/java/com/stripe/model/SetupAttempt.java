@@ -18,8 +18,8 @@ import lombok.Setter;
 
 /**
  * A SetupAttempt describes one attempted confirmation of a SetupIntent, whether that confirmation
- * was successful or unsuccessful. You can use SetupAttempts to inspect details of a specific
- * attempt at setting up a payment method using a SetupIntent.
+ * is successful or unsuccessful. You can use SetupAttempts to inspect details of a specific attempt
+ * at setting up a payment method using a SetupIntent.
  */
 @Getter
 @Setter
@@ -226,12 +226,12 @@ public class SetupAttempt extends ApiResource implements HasId {
     this.setupIntent = new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
   }
 
-  /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
+  /** Returns a list of SetupAttempts that associate with a provided SetupIntent. */
   public static SetupAttemptCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
+  /** Returns a list of SetupAttempts that associate with a provided SetupIntent. */
   public static SetupAttemptCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/setup_attempts";
@@ -246,12 +246,12 @@ public class SetupAttempt extends ApiResource implements HasId {
             ApiMode.V1);
   }
 
-  /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
+  /** Returns a list of SetupAttempts that associate with a provided SetupIntent. */
   public static SetupAttemptCollection list(SetupAttemptListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
+  /** Returns a list of SetupAttempts that associate with a provided SetupIntent. */
   public static SetupAttemptCollection list(SetupAttemptListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/setup_attempts";
