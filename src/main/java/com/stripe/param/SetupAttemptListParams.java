@@ -13,7 +13,7 @@ import lombok.Getter;
 public class SetupAttemptListParams extends ApiRequestParams {
   /**
    * A filter on the list, based on the object {@code created} field. The value can be a string with
-   * an integer Unix timestamp, or it can be a dictionary with a number of different query options.
+   * an integer Unix timestamp or a dictionary with a number of different query options.
    */
   @SerializedName("created")
   Object created;
@@ -113,8 +113,7 @@ public class SetupAttemptListParams extends ApiRequestParams {
 
     /**
      * A filter on the list, based on the object {@code created} field. The value can be a string
-     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
-     * options.
+     * with an integer Unix timestamp or a dictionary with a number of different query options.
      */
     public Builder setCreated(SetupAttemptListParams.Created created) {
       this.created = created;
@@ -123,8 +122,7 @@ public class SetupAttemptListParams extends ApiRequestParams {
 
     /**
      * A filter on the list, based on the object {@code created} field. The value can be a string
-     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
-     * options.
+     * with an integer Unix timestamp or a dictionary with a number of different query options.
      */
     public Builder setCreated(Long created) {
       this.created = created;
