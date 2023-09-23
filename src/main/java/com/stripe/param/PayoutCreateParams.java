@@ -28,8 +28,8 @@ public class PayoutCreateParams extends ApiRequestParams {
   String description;
 
   /**
-   * The ID of a bank account or a card to send the payout to. If no destination is supplied, the
-   * default external account for the specified currency will be used.
+   * The ID of a bank account or a card to send the payout to. If you don't provide a destination,
+   * we use the default external account for the specified currency.
    */
   @SerializedName("destination")
   String destination;
@@ -57,27 +57,27 @@ public class PayoutCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * The method used to send this payout, which can be {@code standard} or {@code instant}. {@code
-   * instant} is supported for payouts to debit cards and bank accounts in certain countries. (See
-   * <a href="https://stripe.com/docs/payouts/instant-payouts-banks">Bank support for Instant
-   * Payouts</a> for more information.)
+   * The method used to send this payout, which is {@code standard} or {@code instant}. We support
+   * {@code instant} for payouts to debit cards and bank accounts in certain countries. Learn more
+   * about <a href="https://stripe.com/docs/payouts/instant-payouts-banks">bank support for Instant
+   * Payouts</a>.
    */
   @SerializedName("method")
   Method method;
 
   /**
    * The balance type of your Stripe balance to draw this payout from. Balances for different
-   * payment sources are kept separately. You can find the amounts with the balances API. One of
+   * payment sources are kept separately. You can find the amounts with the Balances API. One of
    * {@code bank_account}, {@code card}, or {@code fpx}.
    */
   @SerializedName("source_type")
   SourceType sourceType;
 
   /**
-   * A string to be displayed on the recipient's bank or card statement. This may be at most 22
-   * characters. Attempting to use a {@code statement_descriptor} longer than 22 characters will
-   * return an error. Note: Most banks will truncate this information and/or display it
-   * inconsistently. Some may not display it at all.
+   * A string that displays on the recipient's bank or card statement (up to 22 characters). A
+   * {@code statement_descriptor} that's longer than 22 characters return an error. Most banks
+   * truncate this information and display it inconsistently. Some banks might not display it at
+   * all.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -168,8 +168,8 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of a bank account or a card to send the payout to. If no destination is supplied, the
-     * default external account for the specified currency will be used.
+     * The ID of a bank account or a card to send the payout to. If you don't provide a destination,
+     * we use the default external account for the specified currency.
      */
     public Builder setDestination(String destination) {
       this.destination = destination;
@@ -255,10 +255,10 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The method used to send this payout, which can be {@code standard} or {@code instant}. {@code
-     * instant} is supported for payouts to debit cards and bank accounts in certain countries. (See
-     * <a href="https://stripe.com/docs/payouts/instant-payouts-banks">Bank support for Instant
-     * Payouts</a> for more information.)
+     * The method used to send this payout, which is {@code standard} or {@code instant}. We support
+     * {@code instant} for payouts to debit cards and bank accounts in certain countries. Learn more
+     * about <a href="https://stripe.com/docs/payouts/instant-payouts-banks">bank support for
+     * Instant Payouts</a>.
      */
     public Builder setMethod(PayoutCreateParams.Method method) {
       this.method = method;
@@ -267,7 +267,7 @@ public class PayoutCreateParams extends ApiRequestParams {
 
     /**
      * The balance type of your Stripe balance to draw this payout from. Balances for different
-     * payment sources are kept separately. You can find the amounts with the balances API. One of
+     * payment sources are kept separately. You can find the amounts with the Balances API. One of
      * {@code bank_account}, {@code card}, or {@code fpx}.
      */
     public Builder setSourceType(PayoutCreateParams.SourceType sourceType) {
@@ -276,10 +276,10 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A string to be displayed on the recipient's bank or card statement. This may be at most 22
-     * characters. Attempting to use a {@code statement_descriptor} longer than 22 characters will
-     * return an error. Note: Most banks will truncate this information and/or display it
-     * inconsistently. Some may not display it at all.
+     * A string that displays on the recipient's bank or card statement (up to 22 characters). A
+     * {@code statement_descriptor} that's longer than 22 characters return an error. Most banks
+     * truncate this information and display it inconsistently. Some banks might not display it at
+     * all.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
