@@ -24,7 +24,7 @@ import lombok.Setter;
  * A {@code Payout} object is created when you receive funds from Stripe, or when you initiate a
  * payout to either a bank account or debit card of a <a
  * href="https://stripe.com/docs/connect/bank-debit-card-payouts">connected Stripe account</a>. You
- * can retrieve individual payouts, as well as list all payouts. Payouts are made on <a
+ * can retrieve individual payouts, and list all payouts. Payouts are made on <a
  * href="https://stripe.com/docs/connect/manage-payout-schedule">varying schedules</a>, depending on
  * your country and industry.
  *
@@ -35,23 +35,22 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Payout extends ApiResource implements MetadataStore<Payout>, BalanceTransactionSource {
   /**
-   * Amount (in cents (or local equivalent)) to be transferred to your bank account or debit card.
+   * The amount (in cents (or local equivalent)) that transfers to your bank account or debit card.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Date the payout is expected to arrive in the bank. This factors in delays like weekends or bank
-   * holidays.
+   * Date that you can expect the payout to arrive in the bank. This factors in delays to account
+   * for weekends or bank holidays.
    */
   @SerializedName("arrival_date")
   Long arrivalDate;
 
   /**
-   * Returns {@code true} if the payout was created by an <a
-   * href="https://stripe.com/docs/payouts#payout-schedule">automated payout schedule</a>, and
-   * {@code false} if it was <a href="https://stripe.com/docs/payouts#manual-payouts">requested
-   * manually</a>.
+   * Returns {@code true} if the payout is created by an <a
+   * href="https://stripe.com/docs/payouts#payout-schedule">automated payout schedule</a> and {@code
+   * false} if it's <a href="https://stripe.com/docs/payouts#manual-payouts">requested manually</a>.
    */
   @SerializedName("automatic")
   Boolean automatic;
@@ -79,16 +78,15 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @SerializedName("description")
   String description;
 
-  /** ID of the bank account or card the payout was sent to. */
+  /** ID of the bank account or card the payout is sent to. */
   @SerializedName("destination")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<ExternalAccount> destination;
 
   /**
-   * If the payout failed or was canceled, this will be the ID of the balance transaction that
-   * reversed the initial balance transaction, and puts the funds from the failed payout back in
-   * your balance.
+   * If the payout fails or cancels, this is the ID of the balance transaction that reverses the
+   * initial balance transaction and returns the funds from the failed payout back in your balance.
    */
   @SerializedName("failure_balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
@@ -96,14 +94,13 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   ExpandableField<BalanceTransaction> failureBalanceTransaction;
 
   /**
-   * Error code explaining reason for payout failure if available. See <a
-   * href="https://stripe.com/docs/api#payout_failures">Types of payout failures</a> for a list of
-   * failure codes.
+   * Error code that provides a reason for a payout failure, if available. View our <a
+   * href="https://stripe.com/docs/api#payout_failures">list of failure codes</a>.
    */
   @SerializedName("failure_code")
   String failureCode;
 
-  /** Message to user further explaining reason for payout failure if available. */
+  /** Message that provides the reason for a payout failure, if available. */
   @SerializedName("failure_message")
   String failureMessage;
 
@@ -130,9 +127,9 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * The method used to send this payout, which can be {@code standard} or {@code instant}. {@code
-   * instant} is supported for payouts to debit cards and bank accounts in certain countries. (See
-   * <a href="https://stripe.com/docs/payouts/instant-payouts-banks">Bank support for Instant
-   * Payouts</a> for more information.)
+   * instant} is supported for payouts to debit cards and bank accounts in certain countries. Learn
+   * more about <a href="https://stripe.com/docs/payouts/instant-payouts-banks">bank support for
+   * Instant Payouts</a>.
    */
   @SerializedName("method")
   String method;
@@ -152,39 +149,38 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   ExpandableField<Payout> originalPayout;
 
   /**
-   * If {@code completed}, the <a
+   * If {@code completed}, you can use the <a
    * href="https://stripe.com/docs/api/balance_transactions/list#balance_transaction_list-payout">Balance
-   * Transactions API</a> may be used to list all Balance Transactions that were paid out in this
-   * payout.
+   * Transactions API</a> to list all balance transactions that are paid out in this payout.
    *
    * <p>One of {@code completed}, {@code in_progress}, or {@code not_applicable}.
    */
   @SerializedName("reconciliation_status")
   String reconciliationStatus;
 
-  /** If the payout was reversed, this is the ID of the payout that reverses this payout. */
+  /** If the payout reverses, this is the ID of the payout that reverses this payout. */
   @SerializedName("reversed_by")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Payout> reversedBy;
 
   /**
-   * The source balance this payout came from. One of {@code card}, {@code fpx}, or {@code
-   * bank_account}.
+   * The source balance this payout came from, which can be one of the following: {@code card},
+   * {@code fpx}, or {@code bank_account}.
    */
   @SerializedName("source_type")
   String sourceType;
 
-  /** Extra information about a payout to be displayed on the user's bank statement. */
+  /** Extra information about a payout that displays on the user's bank statement. */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
    * Current status of the payout: {@code paid}, {@code pending}, {@code in_transit}, {@code
-   * canceled} or {@code failed}. A payout is {@code pending} until it is submitted to the bank,
-   * when it becomes {@code in_transit}. The status then changes to {@code paid} if the transaction
-   * goes through, or to {@code failed} or {@code canceled} (within 5 business days). Some failed
-   * payouts may initially show as {@code paid} but then change to {@code failed}.
+   * canceled} or {@code failed}. A payout is {@code pending} until it's submitted to the bank, when
+   * it becomes {@code in_transit}. The status changes to {@code paid} if the transaction succeeds,
+   * or to {@code failed} or {@code canceled} (within 5 business days). Some payouts that fail might
+   * initially show as {@code paid}, then change to {@code failed}.
    */
   @SerializedName("status")
   String status;
@@ -290,32 +286,32 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
   }
 
   /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId()));
@@ -331,16 +327,16 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(PayoutCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(PayoutCancelParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId()));
@@ -357,15 +353,15 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
-   * amount, or you’ll receive an “Insufficient Funds” error.
+   * To send funds to your own bank account, create a new payout object. Your <a
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must cover the payout amount. If
+   * it doesn’t, you receive an “Insufficient Funds” error.
    *
-   * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
-   * occur as if in live mode.
+   * <p>If your API key is in test mode, money won’t actually be sent, though every other action
+   * occurs as if you’re in live mode.
    *
-   * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
-   * types, you’ll need to specify the source type balance that the payout should draw from. The <a
+   * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
+   * you need to specify the source type balance that the payout draws from. The <a
    * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
    * pending amounts by source type.
    */
@@ -374,15 +370,15 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
-   * amount, or you’ll receive an “Insufficient Funds” error.
+   * To send funds to your own bank account, create a new payout object. Your <a
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must cover the payout amount. If
+   * it doesn’t, you receive an “Insufficient Funds” error.
    *
-   * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
-   * occur as if in live mode.
+   * <p>If your API key is in test mode, money won’t actually be sent, though every other action
+   * occurs as if you’re in live mode.
    *
-   * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
-   * types, you’ll need to specify the source type balance that the payout should draw from. The <a
+   * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
+   * you need to specify the source type balance that the payout draws from. The <a
    * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
    * pending amounts by source type.
    */
@@ -401,15 +397,15 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
-   * amount, or you’ll receive an “Insufficient Funds” error.
+   * To send funds to your own bank account, create a new payout object. Your <a
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must cover the payout amount. If
+   * it doesn’t, you receive an “Insufficient Funds” error.
    *
-   * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
-   * occur as if in live mode.
+   * <p>If your API key is in test mode, money won’t actually be sent, though every other action
+   * occurs as if you’re in live mode.
    *
-   * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
-   * types, you’ll need to specify the source type balance that the payout should draw from. The <a
+   * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
+   * you need to specify the source type balance that the payout draws from. The <a
    * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
    * pending amounts by source type.
    */
@@ -418,15 +414,15 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
-   * amount, or you’ll receive an “Insufficient Funds” error.
+   * To send funds to your own bank account, create a new payout object. Your <a
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must cover the payout amount. If
+   * it doesn’t, you receive an “Insufficient Funds” error.
    *
-   * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
-   * occur as if in live mode.
+   * <p>If your API key is in test mode, money won’t actually be sent, though every other action
+   * occurs as if you’re in live mode.
    *
-   * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
-   * types, you’ll need to specify the source type balance that the payout should draw from. The <a
+   * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
+   * you need to specify the source type balance that the payout draws from. The <a
    * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
    * pending amounts by source type.
    */
@@ -446,18 +442,18 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
+   * Returns a list of existing payouts sent to third-party bank accounts or payouts that Stripe
+   * sent to you. The payouts return in sorted order, with the most recently created payouts
+   * appearing first.
    */
   public static PayoutCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
+   * Returns a list of existing payouts sent to third-party bank accounts or payouts that Stripe
+   * sent to you. The payouts return in sorted order, with the most recently created payouts
+   * appearing first.
    */
   public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -474,18 +470,18 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
+   * Returns a list of existing payouts sent to third-party bank accounts or payouts that Stripe
+   * sent to you. The payouts return in sorted order, with the most recently created payouts
+   * appearing first.
    */
   public static PayoutCollection list(PayoutListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
+   * Returns a list of existing payouts sent to third-party bank accounts or payouts that Stripe
+   * sent to you. The payouts return in sorted order, with the most recently created payouts
+   * appearing first.
    */
   public static PayoutCollection list(PayoutListParams params, RequestOptions options)
       throws StripeException {
@@ -504,8 +500,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * creation request or the payout list. Stripe returns the corresponding payout information.
    */
   public static Payout retrieve(String payout) throws StripeException {
     return retrieve(payout, (Map<String, Object>) null, (RequestOptions) null);
@@ -513,8 +508,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * creation request or the payout list. Stripe returns the corresponding payout information.
    */
   public static Payout retrieve(String payout, RequestOptions options) throws StripeException {
     return retrieve(payout, (Map<String, Object>) null, options);
@@ -522,8 +516,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * creation request or the payout list. Stripe returns the corresponding payout information.
    */
   public static Payout retrieve(String payout, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -541,8 +534,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * creation request or the payout list. Stripe returns the corresponding payout information.
    */
   public static Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -560,52 +552,52 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
-   * to US bank accounts may be reversed at this time. If the payout is in the {@code pending}
-   * status, {@code /v1/payouts/:id/cancel} should be used instead.
+   * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
+   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
+   * status, use {@code /v1/payouts/:id/cancel} instead.
    *
-   * <p>By requesting a reversal via {@code /v1/payouts/:id/reverse}, you confirm that the
-   * authorized signatory of the selected bank account has authorized the debit on the bank account
-   * and that no other authorization is required.
+   * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
+   * authorized signatory of the selected bank account authorizes the debit on the bank account and
+   * that no other authorization is required.
    */
   public Payout reverse() throws StripeException {
     return reverse((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
-   * to US bank accounts may be reversed at this time. If the payout is in the {@code pending}
-   * status, {@code /v1/payouts/:id/cancel} should be used instead.
+   * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
+   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
+   * status, use {@code /v1/payouts/:id/cancel} instead.
    *
-   * <p>By requesting a reversal via {@code /v1/payouts/:id/reverse}, you confirm that the
-   * authorized signatory of the selected bank account has authorized the debit on the bank account
-   * and that no other authorization is required.
+   * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
+   * authorized signatory of the selected bank account authorizes the debit on the bank account and
+   * that no other authorization is required.
    */
   public Payout reverse(RequestOptions options) throws StripeException {
     return reverse((Map<String, Object>) null, options);
   }
 
   /**
-   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
-   * to US bank accounts may be reversed at this time. If the payout is in the {@code pending}
-   * status, {@code /v1/payouts/:id/cancel} should be used instead.
+   * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
+   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
+   * status, use {@code /v1/payouts/:id/cancel} instead.
    *
-   * <p>By requesting a reversal via {@code /v1/payouts/:id/reverse}, you confirm that the
-   * authorized signatory of the selected bank account has authorized the debit on the bank account
-   * and that no other authorization is required.
+   * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
+   * authorized signatory of the selected bank account authorizes the debit on the bank account and
+   * that no other authorization is required.
    */
   public Payout reverse(Map<String, Object> params) throws StripeException {
     return reverse(params, (RequestOptions) null);
   }
 
   /**
-   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
-   * to US bank accounts may be reversed at this time. If the payout is in the {@code pending}
-   * status, {@code /v1/payouts/:id/cancel} should be used instead.
+   * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
+   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
+   * status, use {@code /v1/payouts/:id/cancel} instead.
    *
-   * <p>By requesting a reversal via {@code /v1/payouts/:id/reverse}, you confirm that the
-   * authorized signatory of the selected bank account has authorized the debit on the bank account
-   * and that no other authorization is required.
+   * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
+   * authorized signatory of the selected bank account authorizes the debit on the bank account and
+   * that no other authorization is required.
    */
   public Payout reverse(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(this.getId()));
@@ -621,26 +613,26 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
-   * to US bank accounts may be reversed at this time. If the payout is in the {@code pending}
-   * status, {@code /v1/payouts/:id/cancel} should be used instead.
+   * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
+   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
+   * status, use {@code /v1/payouts/:id/cancel} instead.
    *
-   * <p>By requesting a reversal via {@code /v1/payouts/:id/reverse}, you confirm that the
-   * authorized signatory of the selected bank account has authorized the debit on the bank account
-   * and that no other authorization is required.
+   * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
+   * authorized signatory of the selected bank account authorizes the debit on the bank account and
+   * that no other authorization is required.
    */
   public Payout reverse(PayoutReverseParams params) throws StripeException {
     return reverse(params, (RequestOptions) null);
   }
 
   /**
-   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
-   * to US bank accounts may be reversed at this time. If the payout is in the {@code pending}
-   * status, {@code /v1/payouts/:id/cancel} should be used instead.
+   * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
+   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
+   * status, use {@code /v1/payouts/:id/cancel} instead.
    *
-   * <p>By requesting a reversal via {@code /v1/payouts/:id/reverse}, you confirm that the
-   * authorized signatory of the selected bank account has authorized the debit on the bank account
-   * and that no other authorization is required.
+   * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
+   * authorized signatory of the selected bank account authorizes the debit on the bank account and
+   * that no other authorization is required.
    */
   public Payout reverse(PayoutReverseParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(this.getId()));
@@ -657,8 +649,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
   @Override
   public Payout update(Map<String, Object> params) throws StripeException {
@@ -666,8 +658,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
   @Override
   public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -684,16 +676,16 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
   public Payout update(PayoutUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
   public Payout update(PayoutUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId()));
