@@ -15,7 +15,10 @@ public class CardDesignCreateParams extends ApiRequestParams {
   @SerializedName("card_bundle")
   String cardBundle;
 
-  /** The file for the card logo, for use with card bundles that support card logos. */
+  /**
+   * The file for the card logo, for use with card bundles that support card logos. Must have {@code
+   * purpose} value of {@code issuing_logo}.
+   */
   @SerializedName("card_logo")
   String cardLogo;
 
@@ -136,7 +139,10 @@ public class CardDesignCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The file for the card logo, for use with card bundles that support card logos. */
+    /**
+     * The file for the card logo, for use with card bundles that support card logos. Must have
+     * {@code purpose} value of {@code issuing_logo}.
+     */
     public Builder setCardLogo(String cardLogo) {
       this.cardLogo = cardLogo;
       return this;
