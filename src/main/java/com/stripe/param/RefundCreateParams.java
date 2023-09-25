@@ -12,10 +12,10 @@ import lombok.Getter;
 
 @Getter
 public class RefundCreateParams extends ApiRequestParams {
-  /** A positive integer representing how much to refund. */
   @SerializedName("amount")
   Long amount;
 
+  /** The identifier of the charge to refund. */
   @SerializedName("charge")
   String charge;
 
@@ -63,15 +63,36 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName("origin")
   Origin origin;
 
+  /** The identifier of the PaymentIntent to refund. */
   @SerializedName("payment_intent")
   String paymentIntent;
 
+  /**
+   * String indicating the reason for the refund. If set, possible values are {@code duplicate},
+   * {@code fraudulent}, and {@code requested_by_customer}. If you believe the charge to be
+   * fraudulent, specifying {@code fraudulent} as the reason will add the associated card and email
+   * to your <a href="https://stripe.com/docs/radar/lists">block lists</a>, and will also help us
+   * improve our fraud detection algorithms.
+   */
   @SerializedName("reason")
   Reason reason;
 
+  /**
+   * Boolean indicating whether the application fee should be refunded when refunding this charge.
+   * If a full charge refund is given, the full application fee will be refunded. Otherwise, the
+   * application fee will be refunded in an amount proportional to the amount of the charge
+   * refunded. An application fee can be refunded only by the application that created the charge.
+   */
   @SerializedName("refund_application_fee")
   Boolean refundApplicationFee;
 
+  /**
+   * Boolean indicating whether the transfer should be reversed when refunding this charge. The
+   * transfer will be reversed proportionally to the amount being refunded (either the entire or
+   * partial amount).<br>
+   * <br>
+   * A transfer can be reversed only by the application that created the charge.
+   */
   @SerializedName("reverse_transfer")
   Boolean reverseTransfer;
 
@@ -153,12 +174,12 @@ public class RefundCreateParams extends ApiRequestParams {
           this.reverseTransfer);
     }
 
-    /** A positive integer representing how much to refund. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
+    /** The identifier of the charge to refund. */
     public Builder setCharge(String charge) {
       this.charge = charge;
       return this;
@@ -297,21 +318,42 @@ public class RefundCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The identifier of the PaymentIntent to refund. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
     }
 
+    /**
+     * String indicating the reason for the refund. If set, possible values are {@code duplicate},
+     * {@code fraudulent}, and {@code requested_by_customer}. If you believe the charge to be
+     * fraudulent, specifying {@code fraudulent} as the reason will add the associated card and
+     * email to your <a href="https://stripe.com/docs/radar/lists">block lists</a>, and will also
+     * help us improve our fraud detection algorithms.
+     */
     public Builder setReason(RefundCreateParams.Reason reason) {
       this.reason = reason;
       return this;
     }
 
+    /**
+     * Boolean indicating whether the application fee should be refunded when refunding this charge.
+     * If a full charge refund is given, the full application fee will be refunded. Otherwise, the
+     * application fee will be refunded in an amount proportional to the amount of the charge
+     * refunded. An application fee can be refunded only by the application that created the charge.
+     */
     public Builder setRefundApplicationFee(Boolean refundApplicationFee) {
       this.refundApplicationFee = refundApplicationFee;
       return this;
     }
 
+    /**
+     * Boolean indicating whether the transfer should be reversed when refunding this charge. The
+     * transfer will be reversed proportionally to the amount being refunded (either the entire or
+     * partial amount).<br>
+     * <br>
+     * A transfer can be reversed only by the application that created the charge.
+     */
     public Builder setReverseTransfer(Boolean reverseTransfer) {
       this.reverseTransfer = reverseTransfer;
       return this;
