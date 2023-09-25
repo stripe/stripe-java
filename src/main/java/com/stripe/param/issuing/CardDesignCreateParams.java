@@ -3,6 +3,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -278,26 +279,26 @@ public class CardDesignCreateParams extends ApiRequestParams {
 
     /** The footer body text of the carrier letter. */
     @SerializedName("footer_body")
-    String footerBody;
+    Object footerBody;
 
     /** The footer title text of the carrier letter. */
     @SerializedName("footer_title")
-    String footerTitle;
+    Object footerTitle;
 
     /** The header body text of the carrier letter. */
     @SerializedName("header_body")
-    String headerBody;
+    Object headerBody;
 
     /** The header title text of the carrier letter. */
     @SerializedName("header_title")
-    String headerTitle;
+    Object headerTitle;
 
     private CarrierText(
         Map<String, Object> extraParams,
-        String footerBody,
-        String footerTitle,
-        String headerBody,
-        String headerTitle) {
+        Object footerBody,
+        Object footerTitle,
+        Object headerBody,
+        Object headerTitle) {
       this.extraParams = extraParams;
       this.footerBody = footerBody;
       this.footerTitle = footerTitle;
@@ -312,13 +313,13 @@ public class CardDesignCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private String footerBody;
+      private Object footerBody;
 
-      private String footerTitle;
+      private Object footerTitle;
 
-      private String headerBody;
+      private Object headerBody;
 
-      private String headerTitle;
+      private Object headerTitle;
 
       /** Finalize and obtain parameter instance from this builder. */
       public CardDesignCreateParams.CarrierText build() {
@@ -358,8 +359,20 @@ public class CardDesignCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The footer body text of the carrier letter. */
+      public Builder setFooterBody(EmptyParam footerBody) {
+        this.footerBody = footerBody;
+        return this;
+      }
+
       /** The footer title text of the carrier letter. */
       public Builder setFooterTitle(String footerTitle) {
+        this.footerTitle = footerTitle;
+        return this;
+      }
+
+      /** The footer title text of the carrier letter. */
+      public Builder setFooterTitle(EmptyParam footerTitle) {
         this.footerTitle = footerTitle;
         return this;
       }
@@ -370,8 +383,20 @@ public class CardDesignCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The header body text of the carrier letter. */
+      public Builder setHeaderBody(EmptyParam headerBody) {
+        this.headerBody = headerBody;
+        return this;
+      }
+
       /** The header title text of the carrier letter. */
       public Builder setHeaderTitle(String headerTitle) {
+        this.headerTitle = headerTitle;
+        return this;
+      }
+
+      /** The header title text of the carrier letter. */
+      public Builder setHeaderTitle(EmptyParam headerTitle) {
         this.headerTitle = headerTitle;
         return this;
       }
