@@ -357,12 +357,38 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             ApiMode.V1);
   }
 
-  /** Create a refund. */
+  /**
+   * When you create a new refund, you must specify a Charge or a PaymentIntent object on which to
+   * create it.
+   *
+   * <p>Creating a new refund will refund a charge that has previously been created but not yet
+   * refunded. Funds will be refunded to the credit or debit card that was originally charged.
+   *
+   * <p>You can optionally refund only part of a charge. You can do so multiple times, until the
+   * entire charge has been refunded.
+   *
+   * <p>Once entirely refunded, a charge can’t be refunded again. This method will raise an error
+   * when called on an already-refunded charge, or when trying to refund more money than is left on
+   * a charge.
+   */
   public static Refund create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create a refund. */
+  /**
+   * When you create a new refund, you must specify a Charge or a PaymentIntent object on which to
+   * create it.
+   *
+   * <p>Creating a new refund will refund a charge that has previously been created but not yet
+   * refunded. Funds will be refunded to the credit or debit card that was originally charged.
+   *
+   * <p>You can optionally refund only part of a charge. You can do so multiple times, until the
+   * entire charge has been refunded.
+   *
+   * <p>Once entirely refunded, a charge can’t be refunded again. This method will raise an error
+   * when called on an already-refunded charge, or when trying to refund more money than is left on
+   * a charge.
+   */
   public static Refund create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/refunds";
@@ -377,12 +403,38 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             ApiMode.V1);
   }
 
-  /** Create a refund. */
+  /**
+   * When you create a new refund, you must specify a Charge or a PaymentIntent object on which to
+   * create it.
+   *
+   * <p>Creating a new refund will refund a charge that has previously been created but not yet
+   * refunded. Funds will be refunded to the credit or debit card that was originally charged.
+   *
+   * <p>You can optionally refund only part of a charge. You can do so multiple times, until the
+   * entire charge has been refunded.
+   *
+   * <p>Once entirely refunded, a charge can’t be refunded again. This method will raise an error
+   * when called on an already-refunded charge, or when trying to refund more money than is left on
+   * a charge.
+   */
   public static Refund create(RefundCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create a refund. */
+  /**
+   * When you create a new refund, you must specify a Charge or a PaymentIntent object on which to
+   * create it.
+   *
+   * <p>Creating a new refund will refund a charge that has previously been created but not yet
+   * refunded. Funds will be refunded to the credit or debit card that was originally charged.
+   *
+   * <p>You can optionally refund only part of a charge. You can do so multiple times, until the
+   * entire charge has been refunded.
+   *
+   * <p>Once entirely refunded, a charge can’t be refunded again. This method will raise an error
+   * when called on an already-refunded charge, or when trying to refund more money than is left on
+   * a charge.
+   */
   public static Refund create(RefundCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/refunds";
