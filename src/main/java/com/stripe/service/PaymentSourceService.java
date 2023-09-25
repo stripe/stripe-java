@@ -3,6 +3,7 @@ package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.BankAccount;
 import com.stripe.model.PaymentSource;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
@@ -17,6 +18,7 @@ import com.stripe.param.PaymentSourceDeleteParams;
 import com.stripe.param.PaymentSourceListParams;
 import com.stripe.param.PaymentSourceRetrieveParams;
 import com.stripe.param.PaymentSourceUpdateParams;
+import com.stripe.param.PaymentSourceVerifyParams;
 
 public final class PaymentSourceService extends ApiService {
   public PaymentSourceService(StripeResponseGetter responseGetter) {
@@ -181,6 +183,38 @@ public final class PaymentSourceService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             PaymentSource.class,
+            options,
+            ApiMode.V1);
+  }
+  /** Verify a specified bank account for a given customer. */
+  public BankAccount verify(String customer, String id, PaymentSourceVerifyParams params)
+      throws StripeException {
+    return verify(customer, id, params, (RequestOptions) null);
+  }
+  /** Verify a specified bank account for a given customer. */
+  public BankAccount verify(String customer, String id, RequestOptions options)
+      throws StripeException {
+    return verify(customer, id, (PaymentSourceVerifyParams) null, options);
+  }
+  /** Verify a specified bank account for a given customer. */
+  public BankAccount verify(String customer, String id) throws StripeException {
+    return verify(customer, id, (PaymentSourceVerifyParams) null, (RequestOptions) null);
+  }
+  /** Verify a specified bank account for a given customer. */
+  public BankAccount verify(
+      String customer, String id, PaymentSourceVerifyParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/sources/%s/verify",
+            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            BankAccount.class,
             options,
             ApiMode.V1);
   }

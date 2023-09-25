@@ -4651,14 +4651,14 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testBankAccountServiceVerify() throws StripeException {
+  public void testPaymentSourceServiceVerify() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.BankAccountVerifyParams params =
-        com.stripe.param.BankAccountVerifyParams.builder().addAmount(32L).addAmount(45L).build();
+    com.stripe.param.PaymentSourceVerifyParams params =
+        com.stripe.param.PaymentSourceVerifyParams.builder().addAmount(32L).addAmount(45L).build();
 
     com.stripe.model.BankAccount bankAccount =
-        client.bankAccounts().verify("cus_xxxxxxxxxxxxx", "ba_xxxxxxxxxxxxx", params);
+        client.customers().paymentSources().verify("cus_xxxxxxxxxxxxx", "ba_xxxxxxxxxxxxx", params);
     assertNotNull(bankAccount);
     verifyRequest(
         BaseAddress.API,
