@@ -369,16 +369,16 @@ public final class PaymentIntentService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -387,16 +387,16 @@ public final class PaymentIntentService extends ApiService {
     return cancel(intent, params, (RequestOptions) null);
   }
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -404,16 +404,16 @@ public final class PaymentIntentService extends ApiService {
     return cancel(intent, (PaymentIntentCancelParams) null, options);
   }
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -421,16 +421,16 @@ public final class PaymentIntentService extends ApiService {
     return cancel(intent, (PaymentIntentCancelParams) null, (RequestOptions) null);
   }
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -452,8 +452,8 @@ public final class PaymentIntentService extends ApiService {
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -466,8 +466,8 @@ public final class PaymentIntentService extends ApiService {
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -479,8 +479,8 @@ public final class PaymentIntentService extends ApiService {
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -492,8 +492,8 @@ public final class PaymentIntentService extends ApiService {
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
