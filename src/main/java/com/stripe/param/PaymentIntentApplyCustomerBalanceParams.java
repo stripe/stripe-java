@@ -12,15 +12,16 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
   /**
-   * Amount intended to be applied to this PaymentIntent from the customer’s cash balance.
+   * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance.
    *
    * <p>A positive integer representing how much to charge in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
-   * cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for example,
+   * 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency).
    *
    * <p>The maximum amount is the amount of the PaymentIntent.
    *
-   * <p>When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
+   * <p>When you omit the amount, it defaults to the remaining amount requested on the
+   * PaymentIntent.
    */
   @SerializedName("amount")
   Long amount;
@@ -73,15 +74,16 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
     }
 
     /**
-     * Amount intended to be applied to this PaymentIntent from the customer’s cash balance.
+     * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance.
      *
      * <p>A positive integer representing how much to charge in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
-     * cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for
+     * example, 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency).
      *
      * <p>The maximum amount is the amount of the PaymentIntent.
      *
-     * <p>When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
+     * <p>When you omit the amount, it defaults to the remaining amount requested on the
+     * PaymentIntent.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
