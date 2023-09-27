@@ -14903,4 +14903,32 @@ class GeneratedExamples extends BaseStripeTest {
         params.toMap(),
         null);
   }
+
+  @Test
+  public void testSubscriptionDeleteDiscount() throws StripeException {
+    Subscription resource = Subscription.retrieve("sub_xyz");
+
+    Discount discount = resource.deleteDiscount();
+    assertNotNull(discount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        "/v1/subscriptions/sub_xyz/discount",
+        null,
+        null);
+  }
+
+  @Test
+  public void testSubscriptionServiceDeleteDiscount() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.Discount discount = client.subscriptions().deleteDiscount("sub_xyz");
+    assertNotNull(discount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        "/v1/subscriptions/sub_xyz/discount",
+        null,
+        null);
+  }
 }
