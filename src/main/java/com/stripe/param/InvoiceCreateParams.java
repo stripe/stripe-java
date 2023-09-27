@@ -191,7 +191,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("rendering")
   Rendering rendering;
 
-  /** Options for invoice PDF rendering. */
+  /**
+   * This is a legacy field that will be removed soon. For details about {@code rendering_options},
+   * refer to {@code rendering} instead. Options for invoice PDF rendering.
+   */
   @SerializedName("rendering_options")
   Object renderingOptions;
 
@@ -839,13 +842,19 @@ public class InvoiceCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Options for invoice PDF rendering. */
+    /**
+     * This is a legacy field that will be removed soon. For details about {@code
+     * rendering_options}, refer to {@code rendering} instead. Options for invoice PDF rendering.
+     */
     public Builder setRenderingOptions(InvoiceCreateParams.RenderingOptions renderingOptions) {
       this.renderingOptions = renderingOptions;
       return this;
     }
 
-    /** Options for invoice PDF rendering. */
+    /**
+     * This is a legacy field that will be removed soon. For details about {@code
+     * rendering_options}, refer to {@code rendering} instead. Options for invoice PDF rendering.
+     */
     public Builder setRenderingOptions(EmptyParam renderingOptions) {
       this.renderingOptions = renderingOptions;
       return this;

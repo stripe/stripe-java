@@ -501,7 +501,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("rendering")
   Rendering rendering;
 
-  /** Options for invoice PDF rendering. */
+  /**
+   * This is a legacy field that will be removed soon. For details about {@code rendering_options},
+   * refer to {@code rendering} instead. Options for invoice PDF rendering.
+   */
   @SerializedName("rendering_options")
   RenderingOptions renderingOptions;
 
