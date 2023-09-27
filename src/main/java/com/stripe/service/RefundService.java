@@ -24,33 +24,33 @@ public final class RefundService extends ApiService {
   }
 
   /**
-   * Returns a list of all refunds you’ve previously created. The refunds are returned in sorted
-   * order, with the most recent refunds appearing first. For convenience, the 10 most recent
-   * refunds are always available by default on the charge object.
+   * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
+   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * the Charge object.
    */
   public StripeCollection<Refund> list(RefundListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of all refunds you’ve previously created. The refunds are returned in sorted
-   * order, with the most recent refunds appearing first. For convenience, the 10 most recent
-   * refunds are always available by default on the charge object.
+   * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
+   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * the Charge object.
    */
   public StripeCollection<Refund> list(RequestOptions options) throws StripeException {
     return list((RefundListParams) null, options);
   }
   /**
-   * Returns a list of all refunds you’ve previously created. The refunds are returned in sorted
-   * order, with the most recent refunds appearing first. For convenience, the 10 most recent
-   * refunds are always available by default on the charge object.
+   * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
+   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * the Charge object.
    */
   public StripeCollection<Refund> list() throws StripeException {
     return list((RefundListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of all refunds you’ve previously created. The refunds are returned in sorted
-   * order, with the most recent refunds appearing first. For convenience, the 10 most recent
-   * refunds are always available by default on the charge object.
+   * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
+   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * the Charge object.
    */
   public StripeCollection<Refund> list(RefundListParams params, RequestOptions options)
       throws StripeException {
@@ -169,8 +169,8 @@ public final class RefundService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * Updates the specified refund by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * Updates the refund that you specify by setting the values of the passed parameters. Any
+   * parameters that you don’t provide remain unchanged.
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
@@ -178,8 +178,8 @@ public final class RefundService extends ApiService {
     return update(refund, params, (RequestOptions) null);
   }
   /**
-   * Updates the specified refund by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * Updates the refund that you specify by setting the values of the passed parameters. Any
+   * parameters that you don’t provide remain unchanged.
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
@@ -187,8 +187,8 @@ public final class RefundService extends ApiService {
     return update(refund, (RefundUpdateParams) null, options);
   }
   /**
-   * Updates the specified refund by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * Updates the refund that you specify by setting the values of the passed parameters. Any
+   * parameters that you don’t provide remain unchanged.
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
@@ -196,8 +196,8 @@ public final class RefundService extends ApiService {
     return update(refund, (RefundUpdateParams) null, (RequestOptions) null);
   }
   /**
-   * Updates the specified refund by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * Updates the refund that you specify by setting the values of the passed parameters. Any
+   * parameters that you don’t provide remain unchanged.
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
@@ -217,8 +217,8 @@ public final class RefundService extends ApiService {
   /**
    * Cancels a refund with a status of {@code requires_action}.
    *
-   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the {@code requires_action} state.
+   * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
+   * customer action can enter the {@code requires_action} state.
    */
   public Refund cancel(String refund, RefundCancelParams params) throws StripeException {
     return cancel(refund, params, (RequestOptions) null);
@@ -226,8 +226,8 @@ public final class RefundService extends ApiService {
   /**
    * Cancels a refund with a status of {@code requires_action}.
    *
-   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the {@code requires_action} state.
+   * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
+   * customer action can enter the {@code requires_action} state.
    */
   public Refund cancel(String refund, RequestOptions options) throws StripeException {
     return cancel(refund, (RefundCancelParams) null, options);
@@ -235,8 +235,8 @@ public final class RefundService extends ApiService {
   /**
    * Cancels a refund with a status of {@code requires_action}.
    *
-   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the {@code requires_action} state.
+   * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
+   * customer action can enter the {@code requires_action} state.
    */
   public Refund cancel(String refund) throws StripeException {
     return cancel(refund, (RefundCancelParams) null, (RequestOptions) null);
@@ -244,8 +244,8 @@ public final class RefundService extends ApiService {
   /**
    * Cancels a refund with a status of {@code requires_action}.
    *
-   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the {@code requires_action} state.
+   * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
+   * customer action can enter the {@code requires_action} state.
    */
   public Refund cancel(String refund, RefundCancelParams params, RequestOptions options)
       throws StripeException {
