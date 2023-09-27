@@ -68,13 +68,13 @@ public final class PaymentIntentService extends ApiService {
    *
    * <p>After the PaymentIntent is created, attach a payment method and <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   * Learn more about <a href="https://stripe.com/docs/payments/payment-intents">the available
+   * payment flows with the Payment Intents API</a>.
    *
-   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
-   * confirm=true} is supplied.
+   * <p>When you use {@code confirm=true} during creation, it’s equivalent to creating and
+   * confirming the PaymentIntent in the same call. You can use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when you supply
+   * {@code confirm=true}.
    */
   public PaymentIntent create(PaymentIntentCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -84,13 +84,13 @@ public final class PaymentIntentService extends ApiService {
    *
    * <p>After the PaymentIntent is created, attach a payment method and <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   * Learn more about <a href="https://stripe.com/docs/payments/payment-intents">the available
+   * payment flows with the Payment Intents API</a>.
    *
-   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
-   * confirm=true} is supplied.
+   * <p>When you use {@code confirm=true} during creation, it’s equivalent to creating and
+   * confirming the PaymentIntent in the same call. You can use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when you supply
+   * {@code confirm=true}.
    */
   public PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
       throws StripeException {
@@ -520,20 +520,20 @@ public final class PaymentIntentService extends ApiService {
    * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
-   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * to the new, higher {@code amount} provided. Similar to the initial authorization, incremental
+   * authorizations can be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
-   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
-   * updated <a
+   * <p>If the incremental authorization succeeds, the PaymentIntent object returns with the updated
+   * <a
    * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
    * If the incremental authorization fails, a <a
-   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
-   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error returns, and
+   * no other fields on the PaymentIntent or Charge update. The PaymentIntent object remains
    * capturable for the previously authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
-   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
    * <p>Learn more about <a
    * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
@@ -551,20 +551,20 @@ public final class PaymentIntentService extends ApiService {
    * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
-   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * to the new, higher {@code amount} provided. Similar to the initial authorization, incremental
+   * authorizations can be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
-   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
-   * updated <a
+   * <p>If the incremental authorization succeeds, the PaymentIntent object returns with the updated
+   * <a
    * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
    * If the incremental authorization fails, a <a
-   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
-   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error returns, and
+   * no other fields on the PaymentIntent or Charge update. The PaymentIntent object remains
    * capturable for the previously authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
-   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
    * <p>Learn more about <a
    * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
@@ -618,22 +618,22 @@ public final class PaymentIntentService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
       String intent, PaymentIntentApplyCustomerBalanceParams params) throws StripeException {
     return applyCustomerBalance(intent, params, (RequestOptions) null);
   }
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(String intent, RequestOptions options)
       throws StripeException {
     return applyCustomerBalance(intent, (PaymentIntentApplyCustomerBalanceParams) null, options);
   }
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(String intent) throws StripeException {
     return applyCustomerBalance(
         intent, (PaymentIntentApplyCustomerBalanceParams) null, (RequestOptions) null);
   }
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
       String intent, PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
       throws StripeException {
