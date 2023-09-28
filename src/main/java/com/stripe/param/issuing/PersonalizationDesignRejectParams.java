@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardDesignRejectTestmodeParams extends ApiRequestParams {
+public class PersonalizationDesignRejectParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,11 +24,11 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The reason(s) the card design was rejected. */
+  /** <strong>Required.</strong> The reason(s) the personalization design was rejected. */
   @SerializedName("rejection_reasons")
   RejectionReasons rejectionReasons;
 
-  private CardDesignRejectTestmodeParams(
+  private PersonalizationDesignRejectParams(
       List<String> expand, Map<String, Object> extraParams, RejectionReasons rejectionReasons) {
     this.expand = expand;
     this.extraParams = extraParams;
@@ -47,15 +47,15 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
     private RejectionReasons rejectionReasons;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CardDesignRejectTestmodeParams build() {
-      return new CardDesignRejectTestmodeParams(
+    public PersonalizationDesignRejectParams build() {
+      return new PersonalizationDesignRejectParams(
           this.expand, this.extraParams, this.rejectionReasons);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignRejectTestmodeParams#expand} for the field documentation.
+     * PersonalizationDesignRejectParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -68,7 +68,7 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignRejectTestmodeParams#expand} for the field documentation.
+     * PersonalizationDesignRejectParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -81,7 +81,7 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardDesignRejectTestmodeParams#extraParams} for the field documentation.
+     * PersonalizationDesignRejectParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -94,7 +94,7 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardDesignRejectTestmodeParams#extraParams} for the field documentation.
+     * See {@link PersonalizationDesignRejectParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -104,9 +104,9 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The reason(s) the card design was rejected. */
+    /** <strong>Required.</strong> The reason(s) the personalization design was rejected. */
     public Builder setRejectionReasons(
-        CardDesignRejectTestmodeParams.RejectionReasons rejectionReasons) {
+        PersonalizationDesignRejectParams.RejectionReasons rejectionReasons) {
       this.rejectionReasons = rejectionReasons;
       return this;
     }
@@ -116,11 +116,11 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
   public static class RejectionReasons {
     /** The reason(s) the card logo was rejected. */
     @SerializedName("card_logo")
-    List<CardDesignRejectTestmodeParams.RejectionReasons.CardLogo> cardLogo;
+    List<PersonalizationDesignRejectParams.RejectionReasons.CardLogo> cardLogo;
 
     /** The reason(s) the carrier text was rejected. */
     @SerializedName("carrier_text")
-    List<CardDesignRejectTestmodeParams.RejectionReasons.CarrierText> carrierText;
+    List<PersonalizationDesignRejectParams.RejectionReasons.CarrierText> carrierText;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -132,8 +132,8 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     private RejectionReasons(
-        List<CardDesignRejectTestmodeParams.RejectionReasons.CardLogo> cardLogo,
-        List<CardDesignRejectTestmodeParams.RejectionReasons.CarrierText> carrierText,
+        List<PersonalizationDesignRejectParams.RejectionReasons.CardLogo> cardLogo,
+        List<PersonalizationDesignRejectParams.RejectionReasons.CarrierText> carrierText,
         Map<String, Object> extraParams) {
       this.cardLogo = cardLogo;
       this.carrierText = carrierText;
@@ -145,24 +145,25 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<CardDesignRejectTestmodeParams.RejectionReasons.CardLogo> cardLogo;
+      private List<PersonalizationDesignRejectParams.RejectionReasons.CardLogo> cardLogo;
 
-      private List<CardDesignRejectTestmodeParams.RejectionReasons.CarrierText> carrierText;
+      private List<PersonalizationDesignRejectParams.RejectionReasons.CarrierText> carrierText;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardDesignRejectTestmodeParams.RejectionReasons build() {
-        return new CardDesignRejectTestmodeParams.RejectionReasons(
+      public PersonalizationDesignRejectParams.RejectionReasons build() {
+        return new PersonalizationDesignRejectParams.RejectionReasons(
             this.cardLogo, this.carrierText, this.extraParams);
       }
 
       /**
        * Add an element to `cardLogo` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * CardDesignRejectTestmodeParams.RejectionReasons#cardLogo} for the field documentation.
+       * PersonalizationDesignRejectParams.RejectionReasons#cardLogo} for the field documentation.
        */
-      public Builder addCardLogo(CardDesignRejectTestmodeParams.RejectionReasons.CardLogo element) {
+      public Builder addCardLogo(
+          PersonalizationDesignRejectParams.RejectionReasons.CardLogo element) {
         if (this.cardLogo == null) {
           this.cardLogo = new ArrayList<>();
         }
@@ -173,10 +174,10 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
       /**
        * Add all elements to `cardLogo` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * CardDesignRejectTestmodeParams.RejectionReasons#cardLogo} for the field documentation.
+       * PersonalizationDesignRejectParams.RejectionReasons#cardLogo} for the field documentation.
        */
       public Builder addAllCardLogo(
-          List<CardDesignRejectTestmodeParams.RejectionReasons.CardLogo> elements) {
+          List<PersonalizationDesignRejectParams.RejectionReasons.CardLogo> elements) {
         if (this.cardLogo == null) {
           this.cardLogo = new ArrayList<>();
         }
@@ -187,10 +188,11 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
       /**
        * Add an element to `carrierText` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * CardDesignRejectTestmodeParams.RejectionReasons#carrierText} for the field documentation.
+       * PersonalizationDesignRejectParams.RejectionReasons#carrierText} for the field
+       * documentation.
        */
       public Builder addCarrierText(
-          CardDesignRejectTestmodeParams.RejectionReasons.CarrierText element) {
+          PersonalizationDesignRejectParams.RejectionReasons.CarrierText element) {
         if (this.carrierText == null) {
           this.carrierText = new ArrayList<>();
         }
@@ -201,10 +203,11 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
       /**
        * Add all elements to `carrierText` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * CardDesignRejectTestmodeParams.RejectionReasons#carrierText} for the field documentation.
+       * PersonalizationDesignRejectParams.RejectionReasons#carrierText} for the field
+       * documentation.
        */
       public Builder addAllCarrierText(
-          List<CardDesignRejectTestmodeParams.RejectionReasons.CarrierText> elements) {
+          List<PersonalizationDesignRejectParams.RejectionReasons.CarrierText> elements) {
         if (this.carrierText == null) {
           this.carrierText = new ArrayList<>();
         }
@@ -215,7 +218,8 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardDesignRejectTestmodeParams.RejectionReasons#extraParams} for the field documentation.
+       * PersonalizationDesignRejectParams.RejectionReasons#extraParams} for the field
+       * documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -228,7 +232,7 @@ public class CardDesignRejectTestmodeParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardDesignRejectTestmodeParams.RejectionReasons#extraParams} for the field
+       * See {@link PersonalizationDesignRejectParams.RejectionReasons#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {

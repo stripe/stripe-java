@@ -441,6 +441,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("customer.subscription.created")
     CUSTOMER__SUBSCRIPTION__CREATED("customer.subscription.created"),
 
+    @SerializedName("customer.subscription.custom_event")
+    CUSTOMER__SUBSCRIPTION__CUSTOM_EVENT("customer.subscription.custom_event"),
+
     @SerializedName("customer.subscription.deleted")
     CUSTOMER__SUBSCRIPTION__DELETED("customer.subscription.deleted"),
 
@@ -589,18 +592,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("issuing_card.updated")
     ISSUING_CARD__UPDATED("issuing_card.updated"),
 
-    @SerializedName("issuing_card_design.activated")
-    ISSUING_CARD_DESIGN__ACTIVATED("issuing_card_design.activated"),
-
-    @SerializedName("issuing_card_design.deactivated")
-    ISSUING_CARD_DESIGN__DEACTIVATED("issuing_card_design.deactivated"),
-
-    @SerializedName("issuing_card_design.rejected")
-    ISSUING_CARD_DESIGN__REJECTED("issuing_card_design.rejected"),
-
-    @SerializedName("issuing_card_design.updated")
-    ISSUING_CARD_DESIGN__UPDATED("issuing_card_design.updated"),
-
     @SerializedName("issuing_cardholder.created")
     ISSUING_CARDHOLDER__CREATED("issuing_cardholder.created"),
 
@@ -621,6 +612,18 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("issuing_dispute.updated")
     ISSUING_DISPUTE__UPDATED("issuing_dispute.updated"),
+
+    @SerializedName("issuing_personalization_design.activated")
+    ISSUING_PERSONALIZATION_DESIGN__ACTIVATED("issuing_personalization_design.activated"),
+
+    @SerializedName("issuing_personalization_design.deactivated")
+    ISSUING_PERSONALIZATION_DESIGN__DEACTIVATED("issuing_personalization_design.deactivated"),
+
+    @SerializedName("issuing_personalization_design.rejected")
+    ISSUING_PERSONALIZATION_DESIGN__REJECTED("issuing_personalization_design.rejected"),
+
+    @SerializedName("issuing_personalization_design.updated")
+    ISSUING_PERSONALIZATION_DESIGN__UPDATED("issuing_personalization_design.updated"),
 
     @SerializedName("issuing_transaction.created")
     ISSUING_TRANSACTION__CREATED("issuing_transaction.created"),

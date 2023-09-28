@@ -61,6 +61,10 @@
   * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 * [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
 
+## 23.7.0 - 2023-09-28
+* [#1657](https://github.com/stripe/stripe-java/pull/1657) Update generated code
+  * Add support for `rendering` on `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`
+
 ## 23.6.0 - 2023-09-21
 * [#1654](https://github.com/stripe/stripe-java/pull/1654) Update generated code
   * Add support for `terms_of_service_acceptance` on `Checkout.Session.custom_text`, `PaymentLink.custom_text`, `PaymentLinkCreateParams.custom_text`, `PaymentLinkUpdateParams.custom_text`, and `checkout.SessionCreateParams.custom_text`

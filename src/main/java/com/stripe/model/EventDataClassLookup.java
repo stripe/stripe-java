@@ -132,10 +132,11 @@ final class EventDataClassLookup {
 
     classLookup.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
     classLookup.put("issuing.card", com.stripe.model.issuing.Card.class);
-    classLookup.put("issuing.card_bundle", com.stripe.model.issuing.CardBundle.class);
-    classLookup.put("issuing.card_design", com.stripe.model.issuing.CardDesign.class);
     classLookup.put("issuing.cardholder", com.stripe.model.issuing.Cardholder.class);
     classLookup.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
+    classLookup.put(
+        "issuing.personalization_design", com.stripe.model.issuing.PersonalizationDesign.class);
+    classLookup.put("issuing.physical_bundle", com.stripe.model.issuing.PhysicalBundle.class);
     classLookup.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
 
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);

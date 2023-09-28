@@ -13,14 +13,6 @@ public final class IssuingService extends ApiService {
     return new com.stripe.service.issuing.AuthorizationService(this.getResponseGetter());
   }
 
-  public com.stripe.service.issuing.CardBundleService cardBundles() {
-    return new com.stripe.service.issuing.CardBundleService(this.getResponseGetter());
-  }
-
-  public com.stripe.service.issuing.CardDesignService cardDesigns() {
-    return new com.stripe.service.issuing.CardDesignService(this.getResponseGetter());
-  }
-
   public com.stripe.service.issuing.CardholderService cardholders() {
     return new com.stripe.service.issuing.CardholderService(this.getResponseGetter());
   }
@@ -31,6 +23,14 @@ public final class IssuingService extends ApiService {
 
   public com.stripe.service.issuing.DisputeService disputes() {
     return new com.stripe.service.issuing.DisputeService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.issuing.PersonalizationDesignService personalizationDesigns() {
+    return new com.stripe.service.issuing.PersonalizationDesignService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.issuing.PhysicalBundleService physicalBundles() {
+    return new com.stripe.service.issuing.PhysicalBundleService(this.getResponseGetter());
   }
 
   public com.stripe.service.issuing.TransactionService transactions() {
