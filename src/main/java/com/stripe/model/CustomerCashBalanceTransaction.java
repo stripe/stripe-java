@@ -122,8 +122,8 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @EqualsAndHashCode(callSuper = false)
   public static class AdjustedForOverdraft extends StripeObject {
     /**
-     * The <a href="docs/api/balance_transactions/object">Balance Transaction</a> that corresponds
-     * to funds taken out of your Stripe balance.
+     * The <a href="https://stripe.com/docs/api/balance_transactions/object">Balance Transaction</a>
+     * that corresponds to funds taken out of your Stripe balance.
      */
     @SerializedName("balance_transaction")
     @Getter(lombok.AccessLevel.NONE)
