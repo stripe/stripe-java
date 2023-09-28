@@ -10,28 +10,13 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
+public class PaymentSourceVerifyParams extends ApiRequestParams {
   /**
-   * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance.
-   *
-   * <p>A positive integer representing how much to charge in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for example,
-   * 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency).
-   *
-   * <p>The maximum amount is the amount of the PaymentIntent.
-   *
-   * <p>When you omit the amount, it defaults to the remaining amount requested on the
-   * PaymentIntent.
+   * Two positive integers, in <em>cents</em>, equal to the values of the microdeposits sent to the
+   * bank account.
    */
-  @SerializedName("amount")
-  Long amount;
-
-  /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-   */
-  @SerializedName("currency")
-  String currency;
+  @SerializedName("amounts")
+  List<Long> amounts;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -46,10 +31,9 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private PaymentIntentApplyCustomerBalanceParams(
-      Long amount, String currency, List<String> expand, Map<String, Object> extraParams) {
-    this.amount = amount;
-    this.currency = currency;
+  private PaymentSourceVerifyParams(
+      List<Long> amounts, List<String> expand, Map<String, Object> extraParams) {
+    this.amounts = amounts;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -59,51 +43,47 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Long amount;
-
-    private String currency;
+    private List<Long> amounts;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentIntentApplyCustomerBalanceParams build() {
-      return new PaymentIntentApplyCustomerBalanceParams(
-          this.amount, this.currency, this.expand, this.extraParams);
+    public PaymentSourceVerifyParams build() {
+      return new PaymentSourceVerifyParams(this.amounts, this.expand, this.extraParams);
     }
 
     /**
-     * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance.
-     *
-     * <p>A positive integer representing how much to charge in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for
-     * example, 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency).
-     *
-     * <p>The maximum amount is the amount of the PaymentIntent.
-     *
-     * <p>When you omit the amount, it defaults to the remaining amount requested on the
-     * PaymentIntent.
+     * Add an element to `amounts` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentSourceVerifyParams#amounts} for the field documentation.
      */
-    public Builder setAmount(Long amount) {
-      this.amount = amount;
+    public Builder addAmount(Long element) {
+      if (this.amounts == null) {
+        this.amounts = new ArrayList<>();
+      }
+      this.amounts.add(element);
       return this;
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * Add all elements to `amounts` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentSourceVerifyParams#amounts} for the field documentation.
      */
-    public Builder setCurrency(String currency) {
-      this.currency = currency;
+    public Builder addAllAmount(List<Long> elements) {
+      if (this.amounts == null) {
+        this.amounts = new ArrayList<>();
+      }
+      this.amounts.addAll(elements);
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentApplyCustomerBalanceParams#expand} for the field documentation.
+     * PaymentSourceVerifyParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -116,7 +96,7 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentApplyCustomerBalanceParams#expand} for the field documentation.
+     * PaymentSourceVerifyParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -129,7 +109,7 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentIntentApplyCustomerBalanceParams#extraParams} for the field documentation.
+     * PaymentSourceVerifyParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -142,7 +122,7 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentIntentApplyCustomerBalanceParams#extraParams} for the field documentation.
+     * See {@link PaymentSourceVerifyParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

@@ -4651,14 +4651,14 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testBankAccountServiceVerify() throws StripeException {
+  public void testPaymentSourceServiceVerify() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.BankAccountVerifyParams params =
-        com.stripe.param.BankAccountVerifyParams.builder().addAmount(32L).addAmount(45L).build();
+    com.stripe.param.PaymentSourceVerifyParams params =
+        com.stripe.param.PaymentSourceVerifyParams.builder().addAmount(32L).addAmount(45L).build();
 
     com.stripe.model.BankAccount bankAccount =
-        client.bankAccounts().verify("cus_xxxxxxxxxxxxx", "ba_xxxxxxxxxxxxx", params);
+        client.customers().paymentSources().verify("cus_xxxxxxxxxxxxx", "ba_xxxxxxxxxxxxx", params);
     assertNotNull(bankAccount);
     verifyRequest(
         BaseAddress.API,
@@ -14867,6 +14867,34 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/test_helpers/issuing/transactions/example_transaction/refund",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testSubscriptionDeleteDiscount() throws StripeException {
+    Subscription resource = Subscription.retrieve("sub_xyz");
+
+    Discount discount = resource.deleteDiscount();
+    assertNotNull(discount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        "/v1/subscriptions/sub_xyz/discount",
+        null,
+        null);
+  }
+
+  @Test
+  public void testSubscriptionServiceDeleteDiscount() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.Discount discount = client.subscriptions().deleteDiscount("sub_xyz");
+    assertNotNull(discount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        "/v1/subscriptions/sub_xyz/discount",
+        null,
         null);
   }
 }

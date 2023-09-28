@@ -17,7 +17,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A Mandate is a record of the permission a customer has given you to debit their payment method.
+ * A Mandate is a record of the permission that your customer gives you to debit their payment
+ * method.
  */
 @Getter
 @Setter
@@ -49,7 +50,7 @@ public class Mandate extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The account (if any) for which the mandate is intended. */
+  /** The account (if any) that the mandate is intended for. */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
@@ -66,7 +67,7 @@ public class Mandate extends ApiResource implements HasId {
   SingleUse singleUse;
 
   /**
-   * The status of the mandate, which indicates whether it can be used to initiate a payment.
+   * The mandate status indicates whether or not you can use it to initiate a payment.
    *
    * <p>One of {@code active}, {@code inactive}, or {@code pending}.
    */
@@ -145,7 +146,7 @@ public class Mandate extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerAcceptance extends StripeObject {
-    /** The time at which the customer accepted the Mandate. */
+    /** The time that the customer accepts the mandate. */
     @SerializedName("accepted_at")
     Long acceptedAt;
 
@@ -156,8 +157,10 @@ public class Mandate extends ApiResource implements HasId {
     Online online;
 
     /**
-     * The type of customer acceptance information included with the Mandate. One of {@code online}
-     * or {@code offline}.
+     * The mandate includes the type of customer acceptance information, such as: {@code online} or
+     * {@code offline}.
+     *
+     * <p>One of {@code offline}, or {@code online}.
      */
     @SerializedName("type")
     String type;
@@ -171,11 +174,11 @@ public class Mandate extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Online extends StripeObject {
-      /** The IP address from which the Mandate was accepted by the customer. */
+      /** The customer accepts the mandate from this IP address. */
       @SerializedName("ip_address")
       String ipAddress;
 
-      /** The user agent of the browser from which the Mandate was accepted by the customer. */
+      /** The customer accepts the mandate using the user agent of the browser. */
       @SerializedName("user_agent")
       String userAgent;
     }
@@ -215,9 +218,9 @@ public class Mandate extends ApiResource implements HasId {
     SepaDebit sepaDebit;
 
     /**
-     * The type of the payment method associated with this mandate. An additional hash is included
-     * on {@code payment_method_details} with a name matching this value. It contains mandate
-     * information specific to the payment method.
+     * This mandate corresponds with a specific payment method type. The {@code
+     * payment_method_details} includes an additional hash with the same name and contains mandate
+     * information that's specific to that payment method.
      */
     @SerializedName("type")
     String type;
@@ -346,11 +349,11 @@ public class Mandate extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SingleUse extends StripeObject {
-    /** On a single use mandate, the amount of the payment. */
+    /** The amount of the payment on a single use mandate. */
     @SerializedName("amount")
     Long amount;
 
-    /** On a single use mandate, the currency of the payment. */
+    /** The currency of the payment on a single use mandate. */
     @SerializedName("currency")
     String currency;
   }

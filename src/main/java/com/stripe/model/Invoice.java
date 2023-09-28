@@ -487,7 +487,17 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("receipt_number")
   String receiptNumber;
 
-  /** Options for invoice PDF rendering. */
+  /**
+   * The rendering-related settings that control how the invoice is displayed on customer-facing
+   * surfaces such as PDF and Hosted Invoice Page.
+   */
+  @SerializedName("rendering")
+  Rendering rendering;
+
+  /**
+   * This is a legacy field that will be removed soon. For details about {@code rendering_options},
+   * refer to {@code rendering} instead. Options for invoice PDF rendering.
+   */
   @SerializedName("rendering_options")
   RenderingOptions renderingOptions;
 
@@ -2185,6 +2195,33 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Rendering extends StripeObject {
+    /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+    @SerializedName("amount_tax_display")
+    String amountTaxDisplay;
+
+    /** Invoice pdf rendering options. */
+    @SerializedName("pdf")
+    Pdf pdf;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pdf extends StripeObject {
+      /**
+       * Page size of invoice pdf. Options include a4, letter, and auto. If set to auto, page size
+       * will be switched to a4 or letter based on customer locale.
+       *
+       * <p>One of {@code a4}, {@code auto}, or {@code letter}.
+       */
+      @SerializedName("page_size")
+      String pageSize;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class RenderingOptions extends StripeObject {
     /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
     @SerializedName("amount_tax_display")
@@ -2478,6 +2515,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(quote, responseGetter);
+    trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(renderingOptions, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);

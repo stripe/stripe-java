@@ -36,8 +36,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Long applicationFeeAmount;
 
   /**
-   * When enabled, this PaymentIntent will accept payment methods that you have enabled in the
-   * Dashboard and are compatible with this PaymentIntent's other parameters.
+   * When you enable this parameter, this PaymentIntent accepts payment methods that you enable in
+   * the Dashboard and that are compatible with this PaymentIntent's other parameters.
    */
   @SerializedName("automatic_payment_methods")
   AutomaticPaymentMethods automaticPaymentMethods;
@@ -48,11 +48,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * Set to {@code true} to attempt to <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent
-   * immediately. This parameter defaults to {@code false}. When creating and confirming a
-   * PaymentIntent at the same time, parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> API may also be
-   * provided.
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm this PaymentIntent</a> this
+   * PaymentIntent immediately. This parameter defaults to {@code false}. When creating and
+   * confirming a PaymentIntent at the same time, you can also provide the parameters available in
+   * the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
    */
   @SerializedName("confirm")
   Boolean confirm;
@@ -87,8 +86,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
-   * requires_action}. This parameter is intended for simpler integrations that do not handle
-   * customer actions, like <a
+   * requires_action}. Use this parameter for simpler integrations that don't handle customer
+   * actions, such as <a
    * href="https://stripe.com/docs/payments/save-card-without-authentication">saving cards without
    * authentication</a>. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
@@ -111,7 +110,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * ID of the mandate to be used for this payment. This parameter can only be used with <a
+   * ID of the mandate that's used for this payment. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
    */
@@ -136,11 +135,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * Set to {@code true} to indicate that the customer is not in your checkout flow during this
-   * payment attempt, and therefore is unable to authenticate. This parameter is intended for
-   * scenarios where you collect card details and <a
-   * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>. This
-   * parameter can only be used with <a
+   * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
+   * payment attempt and can't authenticate. Use this parameter in scenarios where you collect card
+   * details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them
+   * later</a>. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
    */
@@ -148,9 +146,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Object offSession;
 
   /**
-   * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-   * <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-   * accounts</a>.
+   * The Stripe account ID that these funds are intended for. Learn more about the <a
+   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
@@ -160,10 +157,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
    * object) to attach to this PaymentIntent.
    *
-   * <p>If neither the {@code payment_method} parameter nor the {@code source} parameter are
-   * provided with {@code confirm=true}, {@code source} will be automatically populated with {@code
-   * customer.default_source} to improve the migration experience for users of the Charges API. We
-   * recommend that you explicitly provide the {@code payment_method} going forward.
+   * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
+   * with {@code confirm=true}, {@code source} automatically populates with {@code
+   * customer.default_source} to improve migration for users of the Charges API. We recommend that
+   * you explicitly provide the {@code payment_method} moving forward.
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -181,30 +178,30 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
 
-  /** Payment-method-specific configuration for this PaymentIntent. */
+  /** Payment method-specific configuration for this PaymentIntent. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this
-   * is not provided, defaults to [&quot;card&quot;]. Use automatic_payment_methods to manage
-   * payment methods from the <a href="https://dashboard.stripe.com/settings/payment_methods">Stripe
-   * Dashboard</a>.
+   * The list of payment method types (for example, a card) that this PaymentIntent can use. If you
+   * don't provide this, it defaults to [&quot;card&quot;]. Use {@code automatic_payment_methods} to
+   * manage payment methods from the <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
   /**
-   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
-   * Session</a> for more information.
+   * Options to configure Radar. Learn more about <a
+   * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
    */
   @SerializedName("radar_options")
   RadarOptions radarOptions;
 
   /**
-   * Email address that the receipt for the resulting payment will be sent to. If {@code
-   * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
-   * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>.
+   * Email address to send the receipt to. If you specify {@code receipt_email} for a payment in
+   * live mode, you send a receipt regardless of your <a
+   * href="https://dashboard.stripe.com/account/emails">email settings</a>.
    */
   @SerializedName("receipt_email")
   String receiptEmail;
@@ -242,7 +239,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * For non-card charges, you can use this value as the complete description that appears on your
-   * customers’ statements. Must contain at least one letter, maximum 22 characters.
+   * customers’ statements. It must contain at least one letter and be 1–22 characters long.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -250,23 +247,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * Provides information about a card payment that customers see on their statements. Concatenated
    * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
-   * form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   * form the complete statement descriptor. The concatenated descriptor must contain 1-22
+   * characters.
    */
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
 
   /**
-   * The parameters used to automatically create a Transfer when the payment succeeds. For more
-   * information, see the PaymentIntents <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
+   * The parameters that you can use to automatically create a Transfer after the payment succeeds.
+   * Learn more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * connected accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
-   * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+   * A string that identifies the resulting payment as part of a group. Learn more about the <a
    * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
-   * accounts</a> for details.
+   * accounts</a>.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -479,8 +477,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * When enabled, this PaymentIntent will accept payment methods that you have enabled in the
-     * Dashboard and are compatible with this PaymentIntent's other parameters.
+     * When you enable this parameter, this PaymentIntent accepts payment methods that you enable in
+     * the Dashboard and that are compatible with this PaymentIntent's other parameters.
      */
     public Builder setAutomaticPaymentMethods(
         PaymentIntentCreateParams.AutomaticPaymentMethods automaticPaymentMethods) {
@@ -496,11 +494,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * Set to {@code true} to attempt to <a
-     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent
-     * immediately. This parameter defaults to {@code false}. When creating and confirming a
-     * PaymentIntent at the same time, parameters available in the <a
-     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> API may also be
-     * provided.
+     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm this PaymentIntent</a>
+     * this PaymentIntent immediately. This parameter defaults to {@code false}. When creating and
+     * confirming a PaymentIntent at the same time, you can also provide the parameters available in
+     * the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
@@ -546,8 +543,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
-     * requires_action}. This parameter is intended for simpler integrations that do not handle
-     * customer actions, like <a
+     * requires_action}. Use this parameter for simpler integrations that don't handle customer
+     * actions, such as <a
      * href="https://stripe.com/docs/payments/save-card-without-authentication">saving cards without
      * authentication</a>. This parameter can only be used with <a
      * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
@@ -611,7 +608,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the mandate to be used for this payment. This parameter can only be used with <a
+     * ID of the mandate that's used for this payment. This parameter can only be used with <a
      * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
@@ -669,11 +666,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set to {@code true} to indicate that the customer is not in your checkout flow during this
-     * payment attempt, and therefore is unable to authenticate. This parameter is intended for
-     * scenarios where you collect card details and <a
-     * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
-     * This parameter can only be used with <a
+     * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
+     * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
+     * card details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge
+     * them later</a>. This parameter can only be used with <a
      * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
@@ -683,11 +679,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set to {@code true} to indicate that the customer is not in your checkout flow during this
-     * payment attempt, and therefore is unable to authenticate. This parameter is intended for
-     * scenarios where you collect card details and <a
-     * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
-     * This parameter can only be used with <a
+     * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
+     * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
+     * card details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge
+     * them later</a>. This parameter can only be used with <a
      * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
@@ -697,8 +692,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * The Stripe account ID that these funds are intended for. Learn more about the <a
+     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
@@ -711,10 +706,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
      * object) to attach to this PaymentIntent.
      *
-     * <p>If neither the {@code payment_method} parameter nor the {@code source} parameter are
-     * provided with {@code confirm=true}, {@code source} will be automatically populated with
-     * {@code customer.default_source} to improve the migration experience for users of the Charges
-     * API. We recommend that you explicitly provide the {@code payment_method} going forward.
+     * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
+     * with {@code confirm=true}, {@code source} automatically populates with {@code
+     * customer.default_source} to improve migration for users of the Charges API. We recommend that
+     * you explicitly provide the {@code payment_method} moving forward.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -739,7 +734,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Payment-method-specific configuration for this PaymentIntent. */
+    /** Payment method-specific configuration for this PaymentIntent. */
     public Builder setPaymentMethodOptions(
         PaymentIntentCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
@@ -773,8 +768,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
-     * Session</a> for more information.
+     * Options to configure Radar. Learn more about <a
+     * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
      */
     public Builder setRadarOptions(PaymentIntentCreateParams.RadarOptions radarOptions) {
       this.radarOptions = radarOptions;
@@ -782,9 +777,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Email address that the receipt for the resulting payment will be sent to. If {@code
-     * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
-     * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>.
+     * Email address to send the receipt to. If you specify {@code receipt_email} for a payment in
+     * live mode, you send a receipt regardless of your <a
+     * href="https://dashboard.stripe.com/account/emails">email settings</a>.
      */
     public Builder setReceiptEmail(String receiptEmail) {
       this.receiptEmail = receiptEmail;
@@ -831,7 +826,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * For non-card charges, you can use this value as the complete description that appears on your
-     * customers’ statements. Must contain at least one letter, maximum 22 characters.
+     * customers’ statements. It must contain at least one letter and be 1–22 characters long.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -841,8 +836,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * Provides information about a card payment that customers see on their statements.
      * Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the
-     * account to form the complete statement descriptor. Maximum 22 characters for the concatenated
-     * descriptor.
+     * account to form the complete statement descriptor. The concatenated descriptor must contain
+     * 1-22 characters.
      */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;
@@ -850,8 +845,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The parameters used to automatically create a Transfer when the payment succeeds. For more
-     * information, see the PaymentIntents <a
+     * The parameters that you can use to automatically create a Transfer after the payment
+     * succeeds. Learn more about the <a
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
@@ -861,9 +856,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+     * A string that identifies the resulting payment as part of a group. Learn more about the <a
      * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
-     * accounts</a> for details.
+     * accounts</a>.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
@@ -6903,10 +6898,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
-       * value that helps you answer any questions a customer might have about the payment. The
-       * identifier is limited to 128 characters and may contain only letters, digits, underscores,
-       * backslashes and dashes.
+       * An internal identifier or reference that this payment corresponds to. You must limit the
+       * identifier to 128 characters, and it can only contain letters, numbers, underscores,
+       * backslashes, and dashes. This field differs from the statement descriptor and item name.
        */
       @SerializedName("reference")
       String reference;
@@ -7024,10 +7018,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
-         * value that helps you answer any questions a customer might have about the payment. The
-         * identifier is limited to 128 characters and may contain only letters, digits,
-         * underscores, backslashes and dashes.
+         * An internal identifier or reference that this payment corresponds to. You must limit the
+         * identifier to 128 characters, and it can only contain letters, numbers, underscores,
+         * backslashes, and dashes. This field differs from the statement descriptor and item name.
          */
         public Builder setReference(String reference) {
           this.reference = reference;

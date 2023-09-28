@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentCancelParams extends ApiRequestParams {
   /**
-   * Reason for canceling this PaymentIntent. Possible values are {@code duplicate}, {@code
+   * Reason for canceling this PaymentIntent. Possible values are: {@code duplicate}, {@code
    * fraudulent}, {@code requested_by_customer}, or {@code abandoned}
    */
   @SerializedName("cancellation_reason")
@@ -55,7 +55,7 @@ public class PaymentIntentCancelParams extends ApiRequestParams {
     }
 
     /**
-     * Reason for canceling this PaymentIntent. Possible values are {@code duplicate}, {@code
+     * Reason for canceling this PaymentIntent. Possible values are: {@code duplicate}, {@code
      * fraudulent}, {@code requested_by_customer}, or {@code abandoned}
      */
     public Builder setCancellationReason(

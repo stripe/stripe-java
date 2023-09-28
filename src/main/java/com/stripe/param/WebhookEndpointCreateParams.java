@@ -898,9 +898,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("mandate.updated")
     MANDATE__UPDATED("mandate.updated"),
 
-    @SerializedName("order.created")
-    ORDER__CREATED("order.created"),
-
     @SerializedName("payment_intent.amount_capturable_updated")
     PAYMENT_INTENT__AMOUNT_CAPTURABLE_UPDATED("payment_intent.amount_capturable_updated"),
 
@@ -1021,15 +1018,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("radar.early_fraud_warning.updated")
     RADAR__EARLY_FRAUD_WARNING__UPDATED("radar.early_fraud_warning.updated"),
 
-    @SerializedName("recipient.created")
-    RECIPIENT__CREATED("recipient.created"),
-
-    @SerializedName("recipient.deleted")
-    RECIPIENT__DELETED("recipient.deleted"),
-
-    @SerializedName("recipient.updated")
-    RECIPIENT__UPDATED("recipient.updated"),
-
     @SerializedName("refund.created")
     REFUND__CREATED("refund.created"),
 
@@ -1068,15 +1056,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("sigma.scheduled_query_run.created")
     SIGMA__SCHEDULED_QUERY_RUN__CREATED("sigma.scheduled_query_run.created"),
-
-    @SerializedName("sku.created")
-    SKU__CREATED("sku.created"),
-
-    @SerializedName("sku.deleted")
-    SKU__DELETED("sku.deleted"),
-
-    @SerializedName("sku.updated")
-    SKU__UPDATED("sku.updated"),
 
     @SerializedName("source.canceled")
     SOURCE__CANCELED("source.canceled"),
@@ -1263,7 +1242,28 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
 
     @SerializedName("invoiceitem.updated")
-    INVOICEITEM__UPDATED("invoiceitem.updated");
+    INVOICEITEM__UPDATED("invoiceitem.updated"),
+
+    @SerializedName("order.created")
+    ORDER__CREATED("order.created"),
+
+    @SerializedName("recipient.created")
+    RECIPIENT__CREATED("recipient.created"),
+
+    @SerializedName("recipient.deleted")
+    RECIPIENT__DELETED("recipient.deleted"),
+
+    @SerializedName("recipient.updated")
+    RECIPIENT__UPDATED("recipient.updated"),
+
+    @SerializedName("sku.created")
+    SKU__CREATED("sku.created"),
+
+    @SerializedName("sku.deleted")
+    SKU__DELETED("sku.deleted"),
+
+    @SerializedName("sku.updated")
+    SKU__UPDATED("sku.updated");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
