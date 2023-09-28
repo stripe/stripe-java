@@ -347,7 +347,7 @@ public class Session extends ApiResource implements HasId {
         /**
          * The price the customer should subscribe to through this flow. The price must also be
          * included in the configuration's <a
-         * href="docs/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
+         * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
          * features.subscription_update.products}</a>.
          */
         @SerializedName("price")
