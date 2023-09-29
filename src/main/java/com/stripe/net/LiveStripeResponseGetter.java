@@ -77,6 +77,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     if (resource instanceof StripeCollectionInterface<?>) {
       ((StripeCollectionInterface<?>) resource).setRequestOptions(options);
       ((StripeCollectionInterface<?>) resource).setRequestParams(params);
+      ((StripeCollectionInterface<?>) resource).setTypeToken(typeToken);
     }
 
     resource.setLastResponse(response);

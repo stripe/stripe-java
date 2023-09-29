@@ -3,6 +3,7 @@ package com.stripe.model;
 import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
+import java.lang.reflect.Type;
 
 public interface StripeCollectionInterface<T> extends StripeObjectInterface {
   List<T> getData();
@@ -34,4 +35,10 @@ public interface StripeCollectionInterface<T> extends StripeObjectInterface {
    * pagination.
    */
   void setRequestParams(Map<String, Object> requestParams);
+
+  // TODO (major) remove the default implementation and make this required
+  default void setTypeToken(Type type) {};
+  default Type getTypeToken() {
+    return this.getClass();
+  };
 }

@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.lang.reflect.Type;
 
 public class PagingIterator<T extends HasId> extends ApiResource implements Iterator<T> {
   private final String url;
 
-  @SuppressWarnings("rawtypes")
-  private final Class<? extends StripeCollectionInterface> collectionType;
+  private final Type collectionType;
 
   private StripeCollectionInterface<T> currentCollection;
   private Iterator<T> currentDataIterator;
@@ -21,7 +21,7 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
       final StripeCollectionInterface<T> stripeCollection, StripeResponseGetter responseGetter) {
     this.url = stripeCollection.getUrl();
 
-    this.collectionType = stripeCollection.getClass();
+    this.collectionType = stripeCollection.getTypeToken();
 
     this.currentCollection = stripeCollection;
     this.currentDataIterator = stripeCollection.getData().iterator();
