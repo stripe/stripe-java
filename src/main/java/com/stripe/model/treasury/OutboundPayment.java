@@ -489,8 +489,8 @@ public class OutboundPayment extends ApiResource implements HasId {
     String ipAddress;
 
     /**
-     * {@code true`` if the OutboundPayment creation request is being made on behalf of an end user
-     * by a platform. Otherwise, }false`.
+     * {@code true} if the OutboundPayment creation request is being made on behalf of an end user
+     * by a platform. Otherwise, {@code false}.
      */
     @SerializedName("present")
     Boolean present;
