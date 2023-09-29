@@ -184,7 +184,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("pending_invoice_items_behavior")
   PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
 
-  /** Options for invoice PDF rendering. */
+  /**
+   * The rendering-related settings that control how the invoice is displayed on customer-facing
+   * surfaces such as PDF and Hosted Invoice Page.
+   */
+  @SerializedName("rendering")
+  Rendering rendering;
+
+  /**
+   * This is a legacy field that will be removed soon. For details about {@code rendering_options},
+   * refer to {@code rendering} instead. Options for invoice PDF rendering.
+   */
   @SerializedName("rendering_options")
   Object renderingOptions;
 
@@ -249,6 +259,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       String onBehalfOf,
       PaymentSettings paymentSettings,
       PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior,
+      Rendering rendering,
       Object renderingOptions,
       ShippingCost shippingCost,
       ShippingDetails shippingDetails,
@@ -280,6 +291,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.onBehalfOf = onBehalfOf;
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
+    this.rendering = rendering;
     this.renderingOptions = renderingOptions;
     this.shippingCost = shippingCost;
     this.shippingDetails = shippingDetails;
@@ -343,6 +355,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
 
+    private Rendering rendering;
+
     private Object renderingOptions;
 
     private ShippingCost shippingCost;
@@ -383,6 +397,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.onBehalfOf,
           this.paymentSettings,
           this.pendingInvoiceItemsBehavior,
+          this.rendering,
           this.renderingOptions,
           this.shippingCost,
           this.shippingDetails,
@@ -818,13 +833,28 @@ public class InvoiceCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Options for invoice PDF rendering. */
+    /**
+     * The rendering-related settings that control how the invoice is displayed on customer-facing
+     * surfaces such as PDF and Hosted Invoice Page.
+     */
+    public Builder setRendering(InvoiceCreateParams.Rendering rendering) {
+      this.rendering = rendering;
+      return this;
+    }
+
+    /**
+     * This is a legacy field that will be removed soon. For details about {@code
+     * rendering_options}, refer to {@code rendering} instead. Options for invoice PDF rendering.
+     */
     public Builder setRenderingOptions(InvoiceCreateParams.RenderingOptions renderingOptions) {
       this.renderingOptions = renderingOptions;
       return this;
     }
 
-    /** Options for invoice PDF rendering. */
+    /**
+     * This is a legacy field that will be removed soon. For details about {@code
+     * rendering_options}, refer to {@code rendering} instead. Options for invoice PDF rendering.
+     */
     public Builder setRenderingOptions(EmptyParam renderingOptions) {
       this.renderingOptions = renderingOptions;
       return this;
@@ -3564,6 +3594,219 @@ public class InvoiceCreateParams extends ApiRequestParams {
       private final String value;
 
       PaymentMethodType(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Rendering {
+    /**
+     * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
+     * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
+     * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code exclude_tax}
+     * will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+     */
+    @SerializedName("amount_tax_display")
+    ApiRequestParams.EnumParam amountTaxDisplay;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Invoice pdf rendering options. */
+    @SerializedName("pdf")
+    Pdf pdf;
+
+    private Rendering(
+        ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams, Pdf pdf) {
+      this.amountTaxDisplay = amountTaxDisplay;
+      this.extraParams = extraParams;
+      this.pdf = pdf;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private ApiRequestParams.EnumParam amountTaxDisplay;
+
+      private Map<String, Object> extraParams;
+
+      private Pdf pdf;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceCreateParams.Rendering build() {
+        return new InvoiceCreateParams.Rendering(this.amountTaxDisplay, this.extraParams, this.pdf);
+      }
+
+      /**
+       * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
+       * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
+       * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
+       * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+       */
+      public Builder setAmountTaxDisplay(
+          InvoiceCreateParams.Rendering.AmountTaxDisplay amountTaxDisplay) {
+        this.amountTaxDisplay = amountTaxDisplay;
+        return this;
+      }
+
+      /**
+       * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
+       * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
+       * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
+       * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+       */
+      public Builder setAmountTaxDisplay(EmptyParam amountTaxDisplay) {
+        this.amountTaxDisplay = amountTaxDisplay;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreateParams.Rendering#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreateParams.Rendering#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Invoice pdf rendering options. */
+      public Builder setPdf(InvoiceCreateParams.Rendering.Pdf pdf) {
+        this.pdf = pdf;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Pdf {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Page size for invoice PDF. Can be set to a4, letter, or auto. If set to auto, page size
+       * will be switched to a4 or letter based on customer locale.
+       */
+      @SerializedName("page_size")
+      PageSize pageSize;
+
+      private Pdf(Map<String, Object> extraParams, PageSize pageSize) {
+        this.extraParams = extraParams;
+        this.pageSize = pageSize;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private PageSize pageSize;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreateParams.Rendering.Pdf build() {
+          return new InvoiceCreateParams.Rendering.Pdf(this.extraParams, this.pageSize);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.Rendering.Pdf#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.Rendering.Pdf#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Page size for invoice PDF. Can be set to a4, letter, or auto. If set to auto, page size
+         * will be switched to a4 or letter based on customer locale.
+         */
+        public Builder setPageSize(InvoiceCreateParams.Rendering.Pdf.PageSize pageSize) {
+          this.pageSize = pageSize;
+          return this;
+        }
+      }
+
+      public enum PageSize implements ApiRequestParams.EnumParam {
+        @SerializedName("a4")
+        A4("a4"),
+
+        @SerializedName("auto")
+        AUTO("auto"),
+
+        @SerializedName("letter")
+        LETTER("letter");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PageSize(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
+      @SerializedName("exclude_tax")
+      EXCLUDE_TAX("exclude_tax"),
+
+      @SerializedName("include_inclusive_tax")
+      INCLUDE_INCLUSIVE_TAX("include_inclusive_tax");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AmountTaxDisplay(String value) {
         this.value = value;
       }
     }

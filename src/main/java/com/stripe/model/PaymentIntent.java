@@ -63,7 +63,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("amount_details")
   AmountDetails amountDetails;
 
-  /** Amount that was collected by this PaymentIntent. */
+  /** Amount that this PaymentIntent collects. */
   @SerializedName("amount_received")
   Long amountReceived;
 
@@ -182,7 +182,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
 
-  /** The latest charge created by this payment intent. */
+  /** The latest charge created by this PaymentIntent. */
   @SerializedName("latest_charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -198,8 +198,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
-   * structured format. For more information, see the <a
-   * href="https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata">documentation</a>.
+   * structured format. Learn more about <a
+   * href="https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata">storing
+   * information in metadata</a>.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
@@ -335,17 +336,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   String status;
 
   /**
-   * The data with which to automatically create a Transfer when the payment is finalized. See the
-   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
-   * connected accounts</a> for details.
+   * The data that automatically creates a Transfer after the payment finalizes. Learn more about
+   * the <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+   * accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
-   * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+   * A string that identifies the resulting payment as part of a group. Learn more about the <a
    * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
-   * accounts</a> for details.
+   * accounts</a>.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -495,22 +496,22 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     this.source = new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
   }
 
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance() throws StripeException {
     return applyCustomerBalance((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(RequestOptions options) throws StripeException {
     return applyCustomerBalance((Map<String, Object>) null, options);
   }
 
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(Map<String, Object> params) throws StripeException {
     return applyCustomerBalance(params, (RequestOptions) null);
   }
 
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -527,13 +528,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiMode.V1);
   }
 
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(PaymentIntentApplyCustomerBalanceParams params)
       throws StripeException {
     return applyCustomerBalance(params, (RequestOptions) null);
   }
 
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
       PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
       throws StripeException {
@@ -553,16 +554,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -571,16 +572,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -589,16 +590,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -607,16 +608,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -636,16 +637,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -654,16 +655,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
    * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
    * {@code processing}.
    *
-   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} will automatically be refunded.
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
@@ -687,8 +688,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -701,8 +702,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -715,8 +716,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -729,8 +730,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -754,8 +755,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -768,8 +769,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
    * requires_capture}.
    *
-   * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
-   * default).
+   * <p>Uncaptured PaymentIntents are cancelled a set number of days (7 by default) after their
+   * creation.
    *
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
@@ -974,13 +975,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>After the PaymentIntent is created, attach a payment method and <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   * Learn more about <a href="https://stripe.com/docs/payments/payment-intents">the available
+   * payment flows with the Payment Intents API</a>.
    *
-   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
-   * confirm=true} is supplied.
+   * <p>When you use {@code confirm=true} during creation, it’s equivalent to creating and
+   * confirming the PaymentIntent in the same call. You can use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when you supply
+   * {@code confirm=true}.
    */
   public static PaymentIntent create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -991,13 +992,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>After the PaymentIntent is created, attach a payment method and <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   * Learn more about <a href="https://stripe.com/docs/payments/payment-intents">the available
+   * payment flows with the Payment Intents API</a>.
    *
-   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
-   * confirm=true} is supplied.
+   * <p>When you use {@code confirm=true} during creation, it’s equivalent to creating and
+   * confirming the PaymentIntent in the same call. You can use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when you supply
+   * {@code confirm=true}.
    */
   public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1018,13 +1019,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>After the PaymentIntent is created, attach a payment method and <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   * Learn more about <a href="https://stripe.com/docs/payments/payment-intents">the available
+   * payment flows with the Payment Intents API</a>.
    *
-   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
-   * confirm=true} is supplied.
+   * <p>When you use {@code confirm=true} during creation, it’s equivalent to creating and
+   * confirming the PaymentIntent in the same call. You can use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when you supply
+   * {@code confirm=true}.
    */
   public static PaymentIntent create(PaymentIntentCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -1035,13 +1036,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>After the PaymentIntent is created, attach a payment method and <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   * Learn more about <a href="https://stripe.com/docs/payments/payment-intents">the available
+   * payment flows with the Payment Intents API</a>.
    *
-   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
-   * confirm=true} is supplied.
+   * <p>When you use {@code confirm=true} during creation, it’s equivalent to creating and
+   * confirming the PaymentIntent in the same call. You can use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when you supply
+   * {@code confirm=true}.
    */
   public static PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
       throws StripeException {
@@ -1066,20 +1067,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
-   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * to the new, higher {@code amount} provided. Similar to the initial authorization, incremental
+   * authorizations can be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
-   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
-   * updated <a
+   * <p>If the incremental authorization succeeds, the PaymentIntent object returns with the updated
+   * <a
    * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
    * If the incremental authorization fails, a <a
-   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
-   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error returns, and
+   * no other fields on the PaymentIntent or Charge update. The PaymentIntent object remains
    * capturable for the previously authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
-   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
    * <p>Learn more about <a
    * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
@@ -1097,20 +1098,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
-   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * to the new, higher {@code amount} provided. Similar to the initial authorization, incremental
+   * authorizations can be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
-   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
-   * updated <a
+   * <p>If the incremental authorization succeeds, the PaymentIntent object returns with the updated
+   * <a
    * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
    * If the incremental authorization fails, a <a
-   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
-   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error returns, and
+   * no other fields on the PaymentIntent or Charge update. The PaymentIntent object remains
    * capturable for the previously authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
-   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
    * <p>Learn more about <a
    * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
@@ -1141,20 +1142,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
-   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * to the new, higher {@code amount} provided. Similar to the initial authorization, incremental
+   * authorizations can be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
-   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
-   * updated <a
+   * <p>If the incremental authorization succeeds, the PaymentIntent object returns with the updated
+   * <a
    * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
    * If the incremental authorization fails, a <a
-   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
-   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error returns, and
+   * no other fields on the PaymentIntent or Charge update. The PaymentIntent object remains
    * capturable for the previously authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
-   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
    * <p>Learn more about <a
    * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
@@ -1173,20 +1174,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
-   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * to the new, higher {@code amount} provided. Similar to the initial authorization, incremental
+   * authorizations can be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
-   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
-   * updated <a
+   * <p>If the incremental authorization succeeds, the PaymentIntent object returns with the updated
+   * <a
    * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
    * If the incremental authorization fails, a <a
-   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
-   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error returns, and
+   * no other fields on the PaymentIntent or Charge update. The PaymentIntent object remains
    * capturable for the previously authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
-   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
    * <p>Learn more about <a
    * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
@@ -2556,10 +2557,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String captureMethod;
 
       /**
-       * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
-       * value that helps you answer any questions a customer might have about the payment. The
-       * identifier is limited to 128 characters and may contain only letters, digits, underscores,
-       * backslashes and dashes.
+       * An internal identifier or reference that this payment corresponds to. You must limit the
+       * identifier to 128 characters, and it can only contain letters, numbers, underscores,
+       * backslashes, and dashes. This field differs from the statement descriptor and item name.
        */
       @SerializedName("reference")
       String reference;
@@ -3852,8 +3852,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     Long amount;
 
     /**
-     * The account (if any) the payment will be attributed to for tax reporting, and where funds
-     * from the payment will be transferred to upon payment success.
+     * The account (if any) that the payment is attributed to for tax reporting, and where funds
+     * from the payment are transferred to after payment success.
      */
     @SerializedName("destination")
     @Getter(lombok.AccessLevel.NONE)

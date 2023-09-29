@@ -58,19 +58,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** ID of the mandate to be used for this payment. */
+  /** ID of the mandate that's used for this payment. */
   @SerializedName("mandate")
   String mandate;
 
-  /** This hash contains details about the Mandate to create. */
   @SerializedName("mandate_data")
   Object mandateData;
 
   /**
-   * Set to {@code true} to indicate that the customer is not in your checkout flow during this
-   * payment attempt, and therefore is unable to authenticate. This parameter is intended for
-   * scenarios where you collect card details and <a
-   * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+   * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
+   * payment attempt and can't authenticate. Use this parameter in scenarios where you collect card
+   * details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them
+   * later</a>.
    */
   @SerializedName("off_session")
   Object offSession;
@@ -96,13 +95,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
 
-  /** Payment-method-specific configuration for this PaymentIntent. */
+  /** Payment method-specific configuration for this PaymentIntent. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
-   * Session</a> for more information.
+   * Options to configure Radar. Learn more about <a
+   * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
    */
   @SerializedName("radar_options")
   RadarOptions radarOptions;
@@ -369,29 +368,27 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the mandate to be used for this payment. */
+    /** ID of the mandate that's used for this payment. */
     public Builder setMandate(String mandate) {
       this.mandate = mandate;
       return this;
     }
 
-    /** This hash contains details about the Mandate to create. */
     public Builder setMandateData(PaymentIntentConfirmParams.MandateData mandateData) {
       this.mandateData = mandateData;
       return this;
     }
 
-    /** This hash contains details about the Mandate to create. */
     public Builder setMandateData(EmptyParam mandateData) {
       this.mandateData = mandateData;
       return this;
     }
 
     /**
-     * Set to {@code true} to indicate that the customer is not in your checkout flow during this
-     * payment attempt, and therefore is unable to authenticate. This parameter is intended for
-     * scenarios where you collect card details and <a
-     * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+     * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
+     * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
+     * card details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge
+     * them later</a>.
      */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
@@ -399,10 +396,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to {@code true} to indicate that the customer is not in your checkout flow during this
-     * payment attempt, and therefore is unable to authenticate. This parameter is intended for
-     * scenarios where you collect card details and <a
-     * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+     * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
+     * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
+     * card details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge
+     * them later</a>.
      */
     public Builder setOffSession(PaymentIntentConfirmParams.OffSession offSession) {
       this.offSession = offSession;
@@ -443,7 +440,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
-    /** Payment-method-specific configuration for this PaymentIntent. */
+    /** Payment method-specific configuration for this PaymentIntent. */
     public Builder setPaymentMethodOptions(
         PaymentIntentConfirmParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
@@ -451,8 +448,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
-     * Session</a> for more information.
+     * Options to configure Radar. Learn more about <a
+     * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
      */
     public Builder setRadarOptions(PaymentIntentConfirmParams.RadarOptions radarOptions) {
       this.radarOptions = radarOptions;
@@ -8200,10 +8197,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
-       * value that helps you answer any questions a customer might have about the payment. The
-       * identifier is limited to 128 characters and may contain only letters, digits, underscores,
-       * backslashes and dashes.
+       * An internal identifier or reference that this payment corresponds to. You must limit the
+       * identifier to 128 characters, and it can only contain letters, numbers, underscores,
+       * backslashes, and dashes. This field differs from the statement descriptor and item name.
        */
       @SerializedName("reference")
       String reference;
@@ -8321,10 +8317,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
-         * value that helps you answer any questions a customer might have about the payment. The
-         * identifier is limited to 128 characters and may contain only letters, digits,
-         * underscores, backslashes and dashes.
+         * An internal identifier or reference that this payment corresponds to. You must limit the
+         * identifier to 128 characters, and it can only contain letters, numbers, underscores,
+         * backslashes, and dashes. This field differs from the statement descriptor and item name.
          */
         public Builder setReference(String reference) {
           this.reference = reference;

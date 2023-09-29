@@ -16,9 +16,6 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("cancellation_reason")
   CancellationReason cancellationReason;
 
-  @SerializedName("card_design")
-  Object cardDesign;
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -40,6 +37,9 @@ public class CardUpdateParams extends ApiRequestParams {
    */
   @SerializedName("metadata")
   Object metadata;
+
+  @SerializedName("personalization_design")
+  Object personalizationDesign;
 
   /** The desired new PIN for this card. */
   @SerializedName("pin")
@@ -68,19 +68,19 @@ public class CardUpdateParams extends ApiRequestParams {
 
   private CardUpdateParams(
       CancellationReason cancellationReason,
-      Object cardDesign,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
+      Object personalizationDesign,
       Pin pin,
       Shipping shipping,
       SpendingControls spendingControls,
       Status status) {
     this.cancellationReason = cancellationReason;
-    this.cardDesign = cardDesign;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.personalizationDesign = personalizationDesign;
     this.pin = pin;
     this.shipping = shipping;
     this.spendingControls = spendingControls;
@@ -94,13 +94,13 @@ public class CardUpdateParams extends ApiRequestParams {
   public static class Builder {
     private CancellationReason cancellationReason;
 
-    private Object cardDesign;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     private Object metadata;
+
+    private Object personalizationDesign;
 
     private Pin pin;
 
@@ -114,10 +114,10 @@ public class CardUpdateParams extends ApiRequestParams {
     public CardUpdateParams build() {
       return new CardUpdateParams(
           this.cancellationReason,
-          this.cardDesign,
           this.expand,
           this.extraParams,
           this.metadata,
+          this.personalizationDesign,
           this.pin,
           this.shipping,
           this.spendingControls,
@@ -127,16 +127,6 @@ public class CardUpdateParams extends ApiRequestParams {
     /** Reason why the {@code status} of this card is {@code canceled}. */
     public Builder setCancellationReason(CardUpdateParams.CancellationReason cancellationReason) {
       this.cancellationReason = cancellationReason;
-      return this;
-    }
-
-    public Builder setCardDesign(String cardDesign) {
-      this.cardDesign = cardDesign;
-      return this;
-    }
-
-    public Builder setCardDesign(EmptyParam cardDesign) {
-      this.cardDesign = cardDesign;
       return this;
     }
 
@@ -239,6 +229,16 @@ public class CardUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    public Builder setPersonalizationDesign(String personalizationDesign) {
+      this.personalizationDesign = personalizationDesign;
+      return this;
+    }
+
+    public Builder setPersonalizationDesign(EmptyParam personalizationDesign) {
+      this.personalizationDesign = personalizationDesign;
       return this;
     }
 

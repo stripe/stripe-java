@@ -11,10 +11,6 @@ import lombok.Getter;
 
 @Getter
 public class CardCreateParams extends ApiRequestParams {
-  /** The card design object belonging to this card. */
-  @SerializedName("card_design")
-  String cardDesign;
-
   /**
    * The <a href="https://stripe.com/docs/api#issuing_cardholder_object">Cardholder</a> object with
    * which the card will be associated.
@@ -50,6 +46,10 @@ public class CardCreateParams extends ApiRequestParams {
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /** The personalization design object belonging to this card. */
+  @SerializedName("personalization_design")
+  String personalizationDesign;
 
   /** The card this is meant to be a replacement for (if any). */
   @SerializedName("replacement_for")
@@ -88,26 +88,26 @@ public class CardCreateParams extends ApiRequestParams {
   Type type;
 
   private CardCreateParams(
-      String cardDesign,
       String cardholder,
       String currency,
       List<String> expand,
       Map<String, Object> extraParams,
       String financialAccount,
       Map<String, String> metadata,
+      String personalizationDesign,
       String replacementFor,
       ReplacementReason replacementReason,
       Shipping shipping,
       SpendingControls spendingControls,
       Status status,
       Type type) {
-    this.cardDesign = cardDesign;
     this.cardholder = cardholder;
     this.currency = currency;
     this.expand = expand;
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.metadata = metadata;
+    this.personalizationDesign = personalizationDesign;
     this.replacementFor = replacementFor;
     this.replacementReason = replacementReason;
     this.shipping = shipping;
@@ -121,8 +121,6 @@ public class CardCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String cardDesign;
-
     private String cardholder;
 
     private String currency;
@@ -134,6 +132,8 @@ public class CardCreateParams extends ApiRequestParams {
     private String financialAccount;
 
     private Map<String, String> metadata;
+
+    private String personalizationDesign;
 
     private String replacementFor;
 
@@ -150,25 +150,19 @@ public class CardCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CardCreateParams build() {
       return new CardCreateParams(
-          this.cardDesign,
           this.cardholder,
           this.currency,
           this.expand,
           this.extraParams,
           this.financialAccount,
           this.metadata,
+          this.personalizationDesign,
           this.replacementFor,
           this.replacementReason,
           this.shipping,
           this.spendingControls,
           this.status,
           this.type);
-    }
-
-    /** The card design object belonging to this card. */
-    public Builder setCardDesign(String cardDesign) {
-      this.cardDesign = cardDesign;
-      return this;
     }
 
     /**
@@ -266,6 +260,12 @@ public class CardCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The personalization design object belonging to this card. */
+    public Builder setPersonalizationDesign(String personalizationDesign) {
+      this.personalizationDesign = personalizationDesign;
       return this;
     }
 

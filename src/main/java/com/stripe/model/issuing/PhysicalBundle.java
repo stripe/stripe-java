@@ -11,21 +11,21 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.issuing.CardBundleListParams;
-import com.stripe.param.issuing.CardBundleRetrieveParams;
+import com.stripe.param.issuing.PhysicalBundleListParams;
+import com.stripe.param.issuing.PhysicalBundleRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A Card Bundle represents the bundle of physical items - card stock, carrier letter, and envelope
- * - that is shipped to a cardholder when you create a physical card.
+ * A Physical Bundle represents the bundle of physical items - card stock, carrier letter, and
+ * envelope - that is shipped to a cardholder when you create a physical card.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CardBundle extends ApiResource implements HasId {
+public class PhysicalBundle extends ApiResource implements HasId {
   @SerializedName("features")
   Features features;
 
@@ -48,13 +48,13 @@ public class CardBundle extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to {@code issuing.card_bundle}.
+   * <p>Equal to {@code issuing.physical_bundle}.
    */
   @SerializedName("object")
   String object;
 
   /**
-   * Whether this card bundle can be used to create cards.
+   * Whether this physical bundle can be used to create cards.
    *
    * <p>One of {@code active}, {@code inactive}, or {@code review}.
    */
@@ -62,7 +62,7 @@ public class CardBundle extends ApiResource implements HasId {
   String status;
 
   /**
-   * Whether this card bundle is a standard Stripe offering or custom-made for you.
+   * Whether this physical bundle is a standard Stripe offering or custom-made for you.
    *
    * <p>One of {@code custom}, or {@code standard}.
    */
@@ -70,46 +70,47 @@ public class CardBundle extends ApiResource implements HasId {
   String type;
 
   /**
-   * Returns a list of card bundle objects. The objects are sorted in descending order by creation
-   * date, with the most recently created object appearing first.
+   * Returns a list of physical bundle objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
-  public static CardBundleCollection list(Map<String, Object> params) throws StripeException {
+  public static PhysicalBundleCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of card bundle objects. The objects are sorted in descending order by creation
-   * date, with the most recently created object appearing first.
+   * Returns a list of physical bundle objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
-  public static CardBundleCollection list(Map<String, Object> params, RequestOptions options)
+  public static PhysicalBundleCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = "/v1/issuing/card_bundles";
+    String path = "/v1/issuing/physical_bundles";
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             params,
-            CardBundleCollection.class,
+            PhysicalBundleCollection.class,
             options,
             ApiMode.V1);
   }
 
   /**
-   * Returns a list of card bundle objects. The objects are sorted in descending order by creation
-   * date, with the most recently created object appearing first.
+   * Returns a list of physical bundle objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
-  public static CardBundleCollection list(CardBundleListParams params) throws StripeException {
+  public static PhysicalBundleCollection list(PhysicalBundleListParams params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of card bundle objects. The objects are sorted in descending order by creation
-   * date, with the most recently created object appearing first.
+   * Returns a list of physical bundle objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
-  public static CardBundleCollection list(CardBundleListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/issuing/card_bundles";
+  public static PhysicalBundleCollection list(
+      PhysicalBundleListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/issuing/physical_bundles";
     ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
@@ -117,43 +118,45 @@ public class CardBundle extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CardBundleCollection.class,
+            PhysicalBundleCollection.class,
             options,
             ApiMode.V1);
   }
 
-  /** Retrieves a card bundle object. */
-  public static CardBundle retrieve(String cardBundle) throws StripeException {
-    return retrieve(cardBundle, (Map<String, Object>) null, (RequestOptions) null);
+  /** Retrieves a physical bundle object. */
+  public static PhysicalBundle retrieve(String physicalBundle) throws StripeException {
+    return retrieve(physicalBundle, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a card bundle object. */
-  public static CardBundle retrieve(String cardBundle, RequestOptions options)
+  /** Retrieves a physical bundle object. */
+  public static PhysicalBundle retrieve(String physicalBundle, RequestOptions options)
       throws StripeException {
-    return retrieve(cardBundle, (Map<String, Object>) null, options);
+    return retrieve(physicalBundle, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a card bundle object. */
-  public static CardBundle retrieve(
-      String cardBundle, Map<String, Object> params, RequestOptions options)
+  /** Retrieves a physical bundle object. */
+  public static PhysicalBundle retrieve(
+      String physicalBundle, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/card_bundles/%s", ApiResource.urlEncodeId(cardBundle));
+    String path =
+        String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
     return getGlobalResponseGetter()
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             params,
-            CardBundle.class,
+            PhysicalBundle.class,
             options,
             ApiMode.V1);
   }
 
-  /** Retrieves a card bundle object. */
-  public static CardBundle retrieve(
-      String cardBundle, CardBundleRetrieveParams params, RequestOptions options)
+  /** Retrieves a physical bundle object. */
+  public static PhysicalBundle retrieve(
+      String physicalBundle, PhysicalBundleRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/card_bundles/%s", ApiResource.urlEncodeId(cardBundle));
+    String path =
+        String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
     ApiResource.checkNullTypedParams(path, params);
     return getGlobalResponseGetter()
         .request(
@@ -161,7 +164,7 @@ public class CardBundle extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CardBundle.class,
+            PhysicalBundle.class,
             options,
             ApiMode.V1);
   }
@@ -171,7 +174,7 @@ public class CardBundle extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Features extends StripeObject {
     /**
-     * The policy for how to use card logo images in a card design with this card bundle.
+     * The policy for how to use card logo images in a card design with this physical bundle.
      *
      * <p>One of {@code optional}, {@code required}, or {@code unsupported}.
      */
@@ -179,7 +182,7 @@ public class CardBundle extends ApiResource implements HasId {
     String cardLogo;
 
     /**
-     * The policy for how to use carrier letter text in a card design with this card bundle.
+     * The policy for how to use carrier letter text in a card design with this physical bundle.
      *
      * <p>One of {@code optional}, {@code required}, or {@code unsupported}.
      */

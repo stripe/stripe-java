@@ -807,9 +807,9 @@ public class SubscriptionSchedule extends ApiResource
       Boolean enabled;
 
       /**
-       * The connected account that's liable for tax. If set, the business address and tax
-       * registrations required to perform the tax calculation are loaded from this account. The tax
-       * transaction is returned in the report of the connected account.
+       * The account that's liable for tax. If set, the business address and tax registrations
+       * required to perform the tax calculation are loaded from this account. The tax transaction
+       * is returned in the report of the connected account.
        */
       @SerializedName("liability")
       Liability liability;
@@ -1329,9 +1329,9 @@ public class SubscriptionSchedule extends ApiResource
       Boolean enabled;
 
       /**
-       * The connected account that's liable for tax. If set, the business address and tax
-       * registrations required to perform the tax calculation are loaded from this account. The tax
-       * transaction is returned in the report of the connected account.
+       * The account that's liable for tax. If set, the business address and tax registrations
+       * required to perform the tax calculation are loaded from this account. The tax transaction
+       * is returned in the report of the connected account.
        */
       @SerializedName("liability")
       Liability liability;

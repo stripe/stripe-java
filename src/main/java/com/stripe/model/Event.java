@@ -94,6 +94,14 @@ public class Event extends ApiResource implements HasId {
   @SerializedName("pending_webhooks")
   Long pendingWebhooks;
 
+  /**
+   * Information about the action that causes the event. Only present when the event is triggered by
+   * an API request or an <a
+   * href="https://stripe.com/docs/billing/revenue-recovery/automations">Automation</a> action.
+   */
+  @SerializedName("reason")
+  Reason reason;
+
   /** Information on the API request that triggers the event. */
   @SerializedName("request")
   Request request;
@@ -125,8 +133,9 @@ public class Event extends ApiResource implements HasId {
    * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
    * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
    * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
-   * {@code customer.subscription.created}, {@code customer.subscription.deleted}, {@code
-   * customer.subscription.paused}, {@code customer.subscription.pending_update_applied}, {@code
+   * {@code customer.subscription.created}, {@code customer.subscription.custom_event}, {@code
+   * customer.subscription.deleted}, {@code customer.subscription.paused}, {@code
+   * customer.subscription.pending_update_applied}, {@code
    * customer.subscription.pending_update_expired}, {@code customer.subscription.resumed}, {@code
    * customer.subscription.trial_will_end}, {@code customer.subscription.updated}, {@code
    * customer.tax_id.created}, {@code customer.tax_id.deleted}, {@code customer.tax_id.updated},
@@ -149,13 +158,13 @@ public class Event extends ApiResource implements HasId {
    * invoice.updated}, {@code invoice.voided}, {@code invoiceitem.created}, {@code
    * invoiceitem.deleted}, {@code issuing_authorization.created}, {@code
    * issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
-   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_card_design.activated},
-   * {@code issuing_card_design.deactivated}, {@code issuing_card_design.rejected}, {@code
-   * issuing_card_design.updated}, {@code issuing_cardholder.created}, {@code
+   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_cardholder.created}, {@code
    * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
    * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
-   * issuing_dispute.updated}, {@code issuing_transaction.created}, {@code
-   * issuing_transaction.updated}, {@code mandate.updated}, {@code order.created}, {@code
+   * issuing_dispute.updated}, {@code issuing_personalization_design.activated}, {@code
+   * issuing_personalization_design.deactivated}, {@code issuing_personalization_design.rejected},
+   * {@code issuing_personalization_design.updated}, {@code issuing_transaction.created}, {@code
+   * issuing_transaction.updated}, {@code mandate.updated}, {@code
    * payment_intent.amount_capturable_updated}, {@code payment_intent.canceled}, {@code
    * payment_intent.created}, {@code payment_intent.partially_funded}, {@code
    * payment_intent.payment_failed}, {@code payment_intent.processing}, {@code
@@ -171,16 +180,14 @@ public class Event extends ApiResource implements HasId {
    * quote.accept_failed}, {@code quote.accepted}, {@code quote.accepting}, {@code quote.canceled},
    * {@code quote.created}, {@code quote.draft}, {@code quote.finalized}, {@code quote.reestimated},
    * {@code quote.stale}, {@code radar.early_fraud_warning.created}, {@code
-   * radar.early_fraud_warning.updated}, {@code recipient.created}, {@code recipient.deleted},
-   * {@code recipient.updated}, {@code refund.created}, {@code refund.updated}, {@code
+   * radar.early_fraud_warning.updated}, {@code refund.created}, {@code refund.updated}, {@code
    * reporting.report_run.failed}, {@code reporting.report_run.succeeded}, {@code
    * reporting.report_type.updated}, {@code review.closed}, {@code review.opened}, {@code
    * setup_intent.canceled}, {@code setup_intent.created}, {@code setup_intent.requires_action},
    * {@code setup_intent.setup_failed}, {@code setup_intent.succeeded}, {@code
-   * sigma.scheduled_query_run.created}, {@code sku.created}, {@code sku.deleted}, {@code
-   * sku.updated}, {@code source.canceled}, {@code source.chargeable}, {@code source.failed}, {@code
-   * source.mandate_notification}, {@code source.refund_attributes_required}, {@code
-   * source.transaction.created}, {@code source.transaction.updated}, {@code
+   * sigma.scheduled_query_run.created}, {@code source.canceled}, {@code source.chargeable}, {@code
+   * source.failed}, {@code source.mandate_notification}, {@code source.refund_attributes_required},
+   * {@code source.transaction.created}, {@code source.transaction.updated}, {@code
    * subscription_schedule.aborted}, {@code subscription_schedule.canceled}, {@code
    * subscription_schedule.completed}, {@code subscription_schedule.created}, {@code
    * subscription_schedule.expiring}, {@code subscription_schedule.released}, {@code
@@ -207,7 +214,9 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
    * treasury.outbound_transfer.returned}, {@code treasury.received_credit.created}, {@code
    * treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
-   * treasury.received_debit.created}, or {@code invoiceitem.updated}.
+   * treasury.received_debit.created}, {@code invoiceitem.updated}, {@code order.created}, {@code
+   * recipient.created}, {@code recipient.deleted}, {@code recipient.updated}, {@code sku.created},
+   * {@code sku.deleted}, or {@code sku.updated}.
    */
   @SerializedName("type")
   String type;
@@ -390,6 +399,79 @@ public class Event extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Reason extends StripeObject {
+    @SerializedName("automation_action")
+    AutomationAction automationAction;
+
+    @SerializedName("request")
+    Request request;
+
+    /**
+     * The type of the reason for the event.
+     *
+     * <p>One of {@code automation_action}, or {@code request}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AutomationAction extends StripeObject {
+      @SerializedName("stripe_send_webhook_custom_event")
+      StripeSendWebhookCustomEvent stripeSendWebhookCustomEvent;
+
+      /**
+       * The trigger name of the automation that triggered this action. Please visit <a
+       * href="https://stripe.com/docs/billing/revenue-recovery/automations#choose-a-trigger">Revenue
+       * and retention automations</a> for all possible trigger names.
+       */
+      @SerializedName("trigger")
+      String trigger;
+
+      /**
+       * The type of the {@code automation_action}.
+       *
+       * <p>Equal to {@code stripe_send_webhook_custom_event}.
+       */
+      @SerializedName("type")
+      String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StripeSendWebhookCustomEvent extends StripeObject {
+        /** Set of key-value pairs attached to the action when creating an Automation. */
+        @SerializedName("custom_data")
+        Map<String, String> customData;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Request extends StripeObject implements HasId {
+      /**
+       * ID of the API request that caused the event. If null, the event was automatic (e.g.,
+       * Stripe's automatic subscription handling). Request logs are available in the <a
+       * href="https://dashboard.stripe.com/logs">dashboard</a>, but currently not in the API.
+       */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /**
+       * The idempotency key transmitted during the request, if any. <em>Note: This property is
+       * populated only for events on or after May 23, 2017</em>.
+       */
+      @SerializedName("idempotency_key")
+      String idempotencyKey;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Request extends StripeObject implements HasId {
     /**
      * ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's
@@ -412,6 +494,7 @@ public class Event extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(data, responseGetter);
+    trySetResponseGetter(reason, responseGetter);
     trySetResponseGetter(request, responseGetter);
   }
 }

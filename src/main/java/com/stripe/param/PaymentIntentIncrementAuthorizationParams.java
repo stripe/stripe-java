@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> The updated total amount you intend to collect from the cardholder.
-   * This amount must be greater than the currently authorized amount.
+   * <strong>Required.</strong> The updated total amount that you intend to collect from the
+   * cardholder. This amount must be greater than the currently authorized amount.
    */
   @SerializedName("amount")
   Long amount;
@@ -62,9 +62,9 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   String statementDescriptor;
 
   /**
-   * The parameters used to automatically create a Transfer when the payment is captured. For more
-   * information, see the PaymentIntents <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
+   * The parameters used to automatically create a transfer after the payment is captured. Learn
+   * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * connected accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -123,7 +123,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     }
 
     /**
-     * <strong>Required.</strong> The updated total amount you intend to collect from the
+     * <strong>Required.</strong> The updated total amount that you intend to collect from the
      * cardholder. This amount must be greater than the currently authorized amount.
      */
     public Builder setAmount(Long amount) {
@@ -238,10 +238,9 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     }
 
     /**
-     * The parameters used to automatically create a Transfer when the payment is captured. For more
-     * information, see the PaymentIntents <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-     * accounts</a>.
+     * The parameters used to automatically create a transfer after the payment is captured. Learn
+     * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+     * connected accounts</a>.
      */
     public Builder setTransferData(
         PaymentIntentIncrementAuthorizationParams.TransferData transferData) {

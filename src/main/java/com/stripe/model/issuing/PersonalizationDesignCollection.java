@@ -3,4 +3,4 @@ package com.stripe.model.issuing;
 
 import com.stripe.model.StripeCollection;
 
-public class CardDesignCollection extends StripeCollection<CardDesign> {}
+public class PersonalizationDesignCollection extends StripeCollection<PersonalizationDesign> {}

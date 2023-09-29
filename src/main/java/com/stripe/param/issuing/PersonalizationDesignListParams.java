@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardDesignListParams extends ApiRequestParams {
+public class PersonalizationDesignListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -40,11 +40,11 @@ public class CardDesignListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return card designs with the given lookup keys. */
+  /** Only return personalization designs with the given lookup keys. */
   @SerializedName("lookup_keys")
   List<String> lookupKeys;
 
-  /** Only return card designs with the given preferences. */
+  /** Only return personalization designs with the given preferences. */
   @SerializedName("preferences")
   Preferences preferences;
 
@@ -57,11 +57,11 @@ public class CardDesignListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return card designs with the given status. */
+  /** Only return personalization designs with the given status. */
   @SerializedName("status")
   Status status;
 
-  private CardDesignListParams(
+  private PersonalizationDesignListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -102,8 +102,8 @@ public class CardDesignListParams extends ApiRequestParams {
     private Status status;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CardDesignListParams build() {
-      return new CardDesignListParams(
+    public PersonalizationDesignListParams build() {
+      return new PersonalizationDesignListParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -128,7 +128,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#expand} for the field documentation.
+     * PersonalizationDesignListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -141,7 +141,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#expand} for the field documentation.
+     * PersonalizationDesignListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -154,7 +154,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardDesignListParams#extraParams} for the field documentation.
+     * PersonalizationDesignListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -167,7 +167,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardDesignListParams#extraParams} for the field documentation.
+     * See {@link PersonalizationDesignListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -189,7 +189,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add an element to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#lookupKeys} for the field documentation.
+     * PersonalizationDesignListParams#lookupKeys} for the field documentation.
      */
     public Builder addLookupKey(String element) {
       if (this.lookupKeys == null) {
@@ -202,7 +202,7 @@ public class CardDesignListParams extends ApiRequestParams {
     /**
      * Add all elements to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignListParams#lookupKeys} for the field documentation.
+     * PersonalizationDesignListParams#lookupKeys} for the field documentation.
      */
     public Builder addAllLookupKey(List<String> elements) {
       if (this.lookupKeys == null) {
@@ -212,8 +212,8 @@ public class CardDesignListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return card designs with the given preferences. */
-    public Builder setPreferences(CardDesignListParams.Preferences preferences) {
+    /** Only return personalization designs with the given preferences. */
+    public Builder setPreferences(PersonalizationDesignListParams.Preferences preferences) {
       this.preferences = preferences;
       return this;
     }
@@ -229,8 +229,8 @@ public class CardDesignListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return card designs with the given status. */
-    public Builder setStatus(CardDesignListParams.Status status) {
+    /** Only return personalization designs with the given status. */
+    public Builder setStatus(PersonalizationDesignListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -239,8 +239,9 @@ public class CardDesignListParams extends ApiRequestParams {
   @Getter
   public static class Preferences {
     /**
-     * Only return the card design that is set as the account default. A connected account will use
-     * the Connect platform's default if no card design is set as the account default.
+     * Only return the personalization design that is set as the account default. A connected
+     * account will use the Connect platform's default if no personalization design is set as the
+     * account default.
      */
     @SerializedName("account_default")
     Boolean accountDefault;
@@ -255,8 +256,8 @@ public class CardDesignListParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Only return the card design that is set as the Connect platform's default. This parameter is
-     * only applicable to connected accounts.
+     * Only return the personalization design that is set as the Connect platform's default. This
+     * parameter is only applicable to connected accounts.
      */
     @SerializedName("platform_default")
     Boolean platformDefault;
@@ -280,14 +281,15 @@ public class CardDesignListParams extends ApiRequestParams {
       private Boolean platformDefault;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardDesignListParams.Preferences build() {
-        return new CardDesignListParams.Preferences(
+      public PersonalizationDesignListParams.Preferences build() {
+        return new PersonalizationDesignListParams.Preferences(
             this.accountDefault, this.extraParams, this.platformDefault);
       }
 
       /**
-       * Only return the card design that is set as the account default. A connected account will
-       * use the Connect platform's default if no card design is set as the account default.
+       * Only return the personalization design that is set as the account default. A connected
+       * account will use the Connect platform's default if no personalization design is set as the
+       * account default.
        */
       public Builder setAccountDefault(Boolean accountDefault) {
         this.accountDefault = accountDefault;
@@ -297,7 +299,7 @@ public class CardDesignListParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardDesignListParams.Preferences#extraParams} for the field documentation.
+       * PersonalizationDesignListParams.Preferences#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -310,7 +312,8 @@ public class CardDesignListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardDesignListParams.Preferences#extraParams} for the field documentation.
+       * See {@link PersonalizationDesignListParams.Preferences#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -321,8 +324,8 @@ public class CardDesignListParams extends ApiRequestParams {
       }
 
       /**
-       * Only return the card design that is set as the Connect platform's default. This parameter
-       * is only applicable to connected accounts.
+       * Only return the personalization design that is set as the Connect platform's default. This
+       * parameter is only applicable to connected accounts.
        */
       public Builder setPlatformDefault(Boolean platformDefault) {
         this.platformDefault = platformDefault;

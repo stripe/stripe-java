@@ -19,11 +19,11 @@ public final class SetupAttemptService extends ApiService {
     super(responseGetter);
   }
 
-  /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
+  /** Returns a list of SetupAttempts that associate with a provided SetupIntent. */
   public StripeCollection<SetupAttempt> list(SetupAttemptListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
+  /** Returns a list of SetupAttempts that associate with a provided SetupIntent. */
   public StripeCollection<SetupAttempt> list(SetupAttemptListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/setup_attempts";

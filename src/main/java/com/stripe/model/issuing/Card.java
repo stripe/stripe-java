@@ -48,12 +48,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("cancellation_reason")
   String cancellationReason;
 
-  /** The card design object belonging to this card. */
-  @SerializedName("card_design")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<CardDesign> cardDesign;
-
   /**
    * An Issuing {@code Cardholder} object represents an individual or business entity who is <a
    * href="https://stripe.com/docs/issuing">issued</a> cards.
@@ -143,6 +137,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("object")
   String object;
 
+  /** The personalization design object belonging to this card. */
+  @SerializedName("personalization_design")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PersonalizationDesign> personalizationDesign;
+
   /** The latest card that replaces this card, if any. */
   @SerializedName("replaced_by")
   @Getter(lombok.AccessLevel.NONE)
@@ -191,22 +191,23 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("wallets")
   Wallets wallets;
 
-  /** Get ID of expandable {@code cardDesign} object. */
-  public String getCardDesign() {
-    return (this.cardDesign != null) ? this.cardDesign.getId() : null;
+  /** Get ID of expandable {@code personalizationDesign} object. */
+  public String getPersonalizationDesign() {
+    return (this.personalizationDesign != null) ? this.personalizationDesign.getId() : null;
   }
 
-  public void setCardDesign(String id) {
-    this.cardDesign = ApiResource.setExpandableFieldId(id, this.cardDesign);
+  public void setPersonalizationDesign(String id) {
+    this.personalizationDesign = ApiResource.setExpandableFieldId(id, this.personalizationDesign);
   }
 
-  /** Get expanded {@code cardDesign}. */
-  public CardDesign getCardDesignObject() {
-    return (this.cardDesign != null) ? this.cardDesign.getExpanded() : null;
+  /** Get expanded {@code personalizationDesign}. */
+  public PersonalizationDesign getPersonalizationDesignObject() {
+    return (this.personalizationDesign != null) ? this.personalizationDesign.getExpanded() : null;
   }
 
-  public void setCardDesignObject(CardDesign expandableObject) {
-    this.cardDesign = new ExpandableField<CardDesign>(expandableObject.getId(), expandableObject);
+  public void setPersonalizationDesignObject(PersonalizationDesign expandableObject) {
+    this.personalizationDesign =
+        new ExpandableField<PersonalizationDesign>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code replacedBy} object. */
@@ -980,8 +981,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(cardDesign, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
+    trySetResponseGetter(personalizationDesign, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);
     trySetResponseGetter(shipping, responseGetter);

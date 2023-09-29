@@ -11,18 +11,17 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardDesignUpdateParams extends ApiRequestParams {
-  /** The card bundle object belonging to this card design. */
-  @SerializedName("card_bundle")
-  Object cardBundle;
-
-  /** The file for the card logo, for use with card bundles that support card logos. */
+public class PersonalizationDesignCreateParams extends ApiRequestParams {
+  /**
+   * The file for the card logo, for use with physical bundles that support card logos. Must have
+   * {@code purpose} value of {@code issuing_logo}.
+   */
   @SerializedName("card_logo")
-  Object cardLogo;
+  String cardLogo;
 
-  /** Hash containing carrier text, for use with card bundles that support carrier text. */
+  /** Hash containing carrier text, for use with physical bundles that support carrier text. */
   @SerializedName("carrier_text")
-  Object carrierText;
+  CarrierText carrierText;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -38,11 +37,11 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A lookup key used to retrieve card designs dynamically from a static string. This may be up to
-   * 200 characters.
+   * A lookup key used to retrieve personalization designs dynamically from a static string. This
+   * may be up to 200 characters.
    */
   @SerializedName("lookup_key")
-  Object lookupKey;
+  String lookupKey;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -53,33 +52,41 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Friendly display name. Providing an empty string will set the field to null. */
+  /** Friendly display name. */
   @SerializedName("name")
-  Object name;
+  String name;
 
-  /** Information on whether this card design is used to create cards when one is not specified. */
+  /**
+   * <strong>Required.</strong> The physical bundle object belonging to this personalization design.
+   */
+  @SerializedName("physical_bundle")
+  String physicalBundle;
+
+  /**
+   * Information on whether this personalization design is used to create cards when one is not
+   * specified.
+   */
   @SerializedName("preferences")
   Preferences preferences;
 
   /**
-   * If set to true, will atomically remove the lookup key from the existing card design, and assign
-   * it to this card design.
+   * If set to true, will atomically remove the lookup key from the existing personalization design,
+   * and assign it to this personalization design.
    */
   @SerializedName("transfer_lookup_key")
   Boolean transferLookupKey;
 
-  private CardDesignUpdateParams(
-      Object cardBundle,
-      Object cardLogo,
-      Object carrierText,
+  private PersonalizationDesignCreateParams(
+      String cardLogo,
+      CarrierText carrierText,
       List<String> expand,
       Map<String, Object> extraParams,
-      Object lookupKey,
+      String lookupKey,
       Map<String, String> metadata,
-      Object name,
+      String name,
+      String physicalBundle,
       Preferences preferences,
       Boolean transferLookupKey) {
-    this.cardBundle = cardBundle;
     this.cardLogo = cardLogo;
     this.carrierText = carrierText;
     this.expand = expand;
@@ -87,6 +94,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     this.lookupKey = lookupKey;
     this.metadata = metadata;
     this.name = name;
+    this.physicalBundle = physicalBundle;
     this.preferences = preferences;
     this.transferLookupKey = transferLookupKey;
   }
@@ -96,30 +104,29 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Object cardBundle;
+    private String cardLogo;
 
-    private Object cardLogo;
-
-    private Object carrierText;
+    private CarrierText carrierText;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private Object lookupKey;
+    private String lookupKey;
 
     private Map<String, String> metadata;
 
-    private Object name;
+    private String name;
+
+    private String physicalBundle;
 
     private Preferences preferences;
 
     private Boolean transferLookupKey;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CardDesignUpdateParams build() {
-      return new CardDesignUpdateParams(
-          this.cardBundle,
+    public PersonalizationDesignCreateParams build() {
+      return new PersonalizationDesignCreateParams(
           this.cardLogo,
           this.carrierText,
           this.expand,
@@ -127,42 +134,22 @@ public class CardDesignUpdateParams extends ApiRequestParams {
           this.lookupKey,
           this.metadata,
           this.name,
+          this.physicalBundle,
           this.preferences,
           this.transferLookupKey);
     }
 
-    /** The card bundle object belonging to this card design. */
-    public Builder setCardBundle(String cardBundle) {
-      this.cardBundle = cardBundle;
-      return this;
-    }
-
-    /** The card bundle object belonging to this card design. */
-    public Builder setCardBundle(EmptyParam cardBundle) {
-      this.cardBundle = cardBundle;
-      return this;
-    }
-
-    /** The file for the card logo, for use with card bundles that support card logos. */
+    /**
+     * The file for the card logo, for use with physical bundles that support card logos. Must have
+     * {@code purpose} value of {@code issuing_logo}.
+     */
     public Builder setCardLogo(String cardLogo) {
       this.cardLogo = cardLogo;
       return this;
     }
 
-    /** The file for the card logo, for use with card bundles that support card logos. */
-    public Builder setCardLogo(EmptyParam cardLogo) {
-      this.cardLogo = cardLogo;
-      return this;
-    }
-
-    /** Hash containing carrier text, for use with card bundles that support carrier text. */
-    public Builder setCarrierText(CardDesignUpdateParams.CarrierText carrierText) {
-      this.carrierText = carrierText;
-      return this;
-    }
-
-    /** Hash containing carrier text, for use with card bundles that support carrier text. */
-    public Builder setCarrierText(EmptyParam carrierText) {
+    /** Hash containing carrier text, for use with physical bundles that support carrier text. */
+    public Builder setCarrierText(PersonalizationDesignCreateParams.CarrierText carrierText) {
       this.carrierText = carrierText;
       return this;
     }
@@ -170,7 +157,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignUpdateParams#expand} for the field documentation.
+     * PersonalizationDesignCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -183,7 +170,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardDesignUpdateParams#expand} for the field documentation.
+     * PersonalizationDesignCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -196,7 +183,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardDesignUpdateParams#extraParams} for the field documentation.
+     * PersonalizationDesignCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -209,7 +196,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardDesignUpdateParams#extraParams} for the field documentation.
+     * See {@link PersonalizationDesignCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -220,8 +207,8 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A lookup key used to retrieve card designs dynamically from a static string. This may be up
-     * to 200 characters.
+     * A lookup key used to retrieve personalization designs dynamically from a static string. This
+     * may be up to 200 characters.
      */
     public Builder setLookupKey(String lookupKey) {
       this.lookupKey = lookupKey;
@@ -229,18 +216,9 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A lookup key used to retrieve card designs dynamically from a static string. This may be up
-     * to 200 characters.
-     */
-    public Builder setLookupKey(EmptyParam lookupKey) {
-      this.lookupKey = lookupKey;
-      return this;
-    }
-
-    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardDesignUpdateParams#metadata} for the field documentation.
+     * PersonalizationDesignCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -253,7 +231,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardDesignUpdateParams#metadata} for the field documentation.
+     * See {@link PersonalizationDesignCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -263,29 +241,33 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Friendly display name. Providing an empty string will set the field to null. */
+    /** Friendly display name. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
-    /** Friendly display name. Providing an empty string will set the field to null. */
-    public Builder setName(EmptyParam name) {
-      this.name = name;
+    /**
+     * <strong>Required.</strong> The physical bundle object belonging to this personalization
+     * design.
+     */
+    public Builder setPhysicalBundle(String physicalBundle) {
+      this.physicalBundle = physicalBundle;
       return this;
     }
 
     /**
-     * Information on whether this card design is used to create cards when one is not specified.
+     * Information on whether this personalization design is used to create cards when one is not
+     * specified.
      */
-    public Builder setPreferences(CardDesignUpdateParams.Preferences preferences) {
+    public Builder setPreferences(PersonalizationDesignCreateParams.Preferences preferences) {
       this.preferences = preferences;
       return this;
     }
 
     /**
-     * If set to true, will atomically remove the lookup key from the existing card design, and
-     * assign it to this card design.
+     * If set to true, will atomically remove the lookup key from the existing personalization
+     * design, and assign it to this personalization design.
      */
     public Builder setTransferLookupKey(Boolean transferLookupKey) {
       this.transferLookupKey = transferLookupKey;
@@ -349,15 +331,15 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       private Object headerTitle;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardDesignUpdateParams.CarrierText build() {
-        return new CardDesignUpdateParams.CarrierText(
+      public PersonalizationDesignCreateParams.CarrierText build() {
+        return new PersonalizationDesignCreateParams.CarrierText(
             this.extraParams, this.footerBody, this.footerTitle, this.headerBody, this.headerTitle);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardDesignUpdateParams.CarrierText#extraParams} for the field documentation.
+       * PersonalizationDesignCreateParams.CarrierText#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -370,7 +352,8 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardDesignUpdateParams.CarrierText#extraParams} for the field documentation.
+       * See {@link PersonalizationDesignCreateParams.CarrierText#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -433,9 +416,9 @@ public class CardDesignUpdateParams extends ApiRequestParams {
   @Getter
   public static class Preferences {
     /**
-     * <strong>Required.</strong> Whether this card design is used to create cards when one is not
-     * specified. A connected account will use the Connect platform's default if no card design is
-     * set as the account default.
+     * <strong>Required.</strong> Whether this personalization design is used to create cards when
+     * one is not specified. A connected account will use the Connect platform's default if no
+     * personalization design is set as the account default.
      */
     @SerializedName("account_default")
     Boolean accountDefault;
@@ -464,14 +447,15 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardDesignUpdateParams.Preferences build() {
-        return new CardDesignUpdateParams.Preferences(this.accountDefault, this.extraParams);
+      public PersonalizationDesignCreateParams.Preferences build() {
+        return new PersonalizationDesignCreateParams.Preferences(
+            this.accountDefault, this.extraParams);
       }
 
       /**
-       * <strong>Required.</strong> Whether this card design is used to create cards when one is not
-       * specified. A connected account will use the Connect platform's default if no card design is
-       * set as the account default.
+       * <strong>Required.</strong> Whether this personalization design is used to create cards when
+       * one is not specified. A connected account will use the Connect platform's default if no
+       * personalization design is set as the account default.
        */
       public Builder setAccountDefault(Boolean accountDefault) {
         this.accountDefault = accountDefault;
@@ -481,7 +465,7 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardDesignUpdateParams.Preferences#extraParams} for the field documentation.
+       * PersonalizationDesignCreateParams.Preferences#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -494,7 +478,8 @@ public class CardDesignUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardDesignUpdateParams.Preferences#extraParams} for the field documentation.
+       * See {@link PersonalizationDesignCreateParams.Preferences#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
