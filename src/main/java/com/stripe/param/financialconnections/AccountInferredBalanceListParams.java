@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class InferredBalanceListParams extends ApiRequestParams {
+public class AccountInferredBalanceListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -49,7 +49,7 @@ public class InferredBalanceListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private InferredBalanceListParams(
+  private AccountInferredBalanceListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -78,8 +78,8 @@ public class InferredBalanceListParams extends ApiRequestParams {
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public InferredBalanceListParams build() {
-      return new InferredBalanceListParams(
+    public AccountInferredBalanceListParams build() {
+      return new AccountInferredBalanceListParams(
           this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
     }
 
@@ -97,7 +97,7 @@ public class InferredBalanceListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InferredBalanceListParams#expand} for the field documentation.
+     * AccountInferredBalanceListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -110,7 +110,7 @@ public class InferredBalanceListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InferredBalanceListParams#expand} for the field documentation.
+     * AccountInferredBalanceListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -123,7 +123,7 @@ public class InferredBalanceListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InferredBalanceListParams#extraParams} for the field documentation.
+     * AccountInferredBalanceListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -136,7 +136,7 @@ public class InferredBalanceListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InferredBalanceListParams#extraParams} for the field documentation.
+     * See {@link AccountInferredBalanceListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

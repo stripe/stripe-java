@@ -192,8 +192,8 @@ public final class AccountService extends ApiService {
             ApiMode.V1);
   }
 
-  public com.stripe.service.financialconnections.InferredBalanceService inferredBalances() {
-    return new com.stripe.service.financialconnections.InferredBalanceService(
+  public com.stripe.service.financialconnections.AccountInferredBalanceService inferredBalances() {
+    return new com.stripe.service.financialconnections.AccountInferredBalanceService(
         this.getResponseGetter());
   }
 

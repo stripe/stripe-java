@@ -9,7 +9,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.financialconnections.InferredBalanceListParams;
+import com.stripe.param.financialconnections.AccountInferredBalanceListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InferredBalance extends ApiResource implements HasId {
+public class AccountInferredBalance extends ApiResource implements HasId {
   /**
    * The time for which this balance was calculated, measured in seconds since the Unix epoch. If
    * the balance was computed by Stripe and not provided directly by a financial institution, it
@@ -57,13 +57,13 @@ public class InferredBalance extends ApiResource implements HasId {
   String object;
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
-  public static InferredBalanceCollection list(String account, Map<String, Object> params)
+  public static AccountInferredBalanceCollection list(String account, Map<String, Object> params)
       throws StripeException {
     return list(account, params, (RequestOptions) null);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
-  public static InferredBalanceCollection list(
+  public static AccountInferredBalanceCollection list(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
         String.format(
@@ -75,20 +75,20 @@ public class InferredBalance extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             params,
-            InferredBalanceCollection.class,
+            AccountInferredBalanceCollection.class,
             options,
             ApiMode.V1);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
-  public static InferredBalanceCollection list(String account, InferredBalanceListParams params)
-      throws StripeException {
+  public static AccountInferredBalanceCollection list(
+      String account, AccountInferredBalanceListParams params) throws StripeException {
     return list(account, params, (RequestOptions) null);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
-  public static InferredBalanceCollection list(
-      String account, InferredBalanceListParams params, RequestOptions options)
+  public static AccountInferredBalanceCollection list(
+      String account, AccountInferredBalanceListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -101,7 +101,7 @@ public class InferredBalance extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InferredBalanceCollection.class,
+            AccountInferredBalanceCollection.class,
             options,
             ApiMode.V1);
   }

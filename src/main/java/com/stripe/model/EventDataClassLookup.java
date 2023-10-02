@@ -109,7 +109,7 @@ final class EventDataClassLookup {
         "financial_connections.account", com.stripe.model.financialconnections.Account.class);
     classLookup.put(
         "financial_connections.account_inferred_balance",
-        com.stripe.model.financialconnections.InferredBalance.class);
+        com.stripe.model.financialconnections.AccountInferredBalance.class);
     classLookup.put(
         "financial_connections.account_owner",
         com.stripe.model.financialconnections.AccountOwner.class);
