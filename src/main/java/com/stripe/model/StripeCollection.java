@@ -2,12 +2,12 @@ package com.stripe.model;
 
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import java.lang.reflect.Type;
 
 /**
  * Provides a representation of a single page worth of data from the Stripe API.

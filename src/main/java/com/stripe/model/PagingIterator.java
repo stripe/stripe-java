@@ -1,11 +1,11 @@
 package com.stripe.model;
 
 import com.stripe.net.*;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.lang.reflect.Type;
 
 public class PagingIterator<T extends HasId> extends ApiResource implements Iterator<T> {
   private final String url;
