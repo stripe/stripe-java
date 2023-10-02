@@ -59,9 +59,16 @@ public class StripeCollection<T extends HasId> extends StripeObject
   @Setter(onMethod = @__({@Override}))
   private Map<String, Object> requestParams;
 
-  @Getter(onMethod_ = {@Override})
   @Setter(onMethod = @__({@Override}))
   private transient Type typeToken;
+
+  @Override
+  public Type getTypeToken() {
+    if (typeToken != null) {
+      return typeToken;
+    }
+    return this.getClass();
+  }
 
   public Iterable<T> autoPagingIterable() {
     this.responseGetter.validateRequestOptions(this.requestOptions);
