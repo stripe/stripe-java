@@ -40,6 +40,10 @@ public class ExternalAccountListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** Filter external accounts according to a particular object type. */
+  @SerializedName("object")
+  Object object;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -54,11 +58,13 @@ public class ExternalAccountListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      Object object,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.object = object;
     this.startingAfter = startingAfter;
   }
 
@@ -75,12 +81,19 @@ public class ExternalAccountListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private Object object;
+
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ExternalAccountListParams build() {
       return new ExternalAccountListParams(
-          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.object,
+          this.startingAfter);
     }
 
     /**
@@ -155,6 +168,12 @@ public class ExternalAccountListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Filter external accounts according to a particular object type. */
+    public Builder setObject(ExternalAccountListParams.Object object) {
+      this.object = object;
+      return this;
+    }
+
     /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
@@ -164,6 +183,21 @@ public class ExternalAccountListParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
+    }
+  }
+
+  public enum Object implements ApiRequestParams.EnumParam {
+    @SerializedName("bank_account")
+    BANK_ACCOUNT("bank_account"),
+
+    @SerializedName("card")
+    CARD("card");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Object(String value) {
+      this.value = value;
     }
   }
 }
