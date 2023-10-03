@@ -50,6 +50,7 @@ final class EventDataClassLookup {
     classLookup.put("line_item", InvoiceLineItem.class);
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("mandate", Mandate.class);
+    classLookup.put("margin", Margin.class);
     classLookup.put("order", Order.class);
     classLookup.put("payment_intent", PaymentIntent.class);
     classLookup.put("payment_link", PaymentLink.class);
@@ -67,7 +68,7 @@ final class EventDataClassLookup {
     classLookup.put("quote_line", QuoteLine.class);
     classLookup.put("quote_phase", QuotePhase.class);
     classLookup.put("quote_preview_invoice", QuotePreviewInvoice.class);
-    classLookup.put("quote_preview_schedule", QuotePreviewSchedule.class);
+    classLookup.put("quote_preview_subscription_schedule", QuotePreviewSubscriptionSchedule.class);
     classLookup.put("refund", Refund.class);
     classLookup.put("reserve_transaction", ReserveTransaction.class);
     classLookup.put("review", Review.class);
@@ -137,6 +138,7 @@ final class EventDataClassLookup {
     classLookup.put(
         "issuing.personalization_design", com.stripe.model.issuing.PersonalizationDesign.class);
     classLookup.put("issuing.physical_bundle", com.stripe.model.issuing.PhysicalBundle.class);
+    classLookup.put("issuing.token", com.stripe.model.issuing.Token.class);
     classLookup.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
 
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);

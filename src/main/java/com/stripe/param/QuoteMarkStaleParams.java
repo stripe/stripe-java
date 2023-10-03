@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class QuoteDraftQuoteParams extends ApiRequestParams {
+public class QuoteMarkStaleParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,9 +24,15 @@ public class QuoteDraftQuoteParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private QuoteDraftQuoteParams(List<String> expand, Map<String, Object> extraParams) {
+  /** Reason the Quote is being marked stale. */
+  @SerializedName("reason")
+  String reason;
+
+  private QuoteMarkStaleParams(
+      List<String> expand, Map<String, Object> extraParams, String reason) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.reason = reason;
   }
 
   public static Builder builder() {
@@ -38,15 +44,17 @@ public class QuoteDraftQuoteParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String reason;
+
     /** Finalize and obtain parameter instance from this builder. */
-    public QuoteDraftQuoteParams build() {
-      return new QuoteDraftQuoteParams(this.expand, this.extraParams);
+    public QuoteMarkStaleParams build() {
+      return new QuoteMarkStaleParams(this.expand, this.extraParams, this.reason);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteDraftQuoteParams#expand} for the field documentation.
+     * QuoteMarkStaleParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -59,7 +67,7 @@ public class QuoteDraftQuoteParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteDraftQuoteParams#expand} for the field documentation.
+     * QuoteMarkStaleParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -72,7 +80,7 @@ public class QuoteDraftQuoteParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuoteDraftQuoteParams#extraParams} for the field documentation.
+     * QuoteMarkStaleParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -85,13 +93,19 @@ public class QuoteDraftQuoteParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuoteDraftQuoteParams#extraParams} for the field documentation.
+     * See {@link QuoteMarkStaleParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Reason the Quote is being marked stale. */
+    public Builder setReason(String reason) {
+      this.reason = reason;
       return this;
     }
   }

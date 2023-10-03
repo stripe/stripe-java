@@ -152,6 +152,15 @@ public class Transaction extends ApiResource
   PurchaseDetails purchaseDetails;
 
   /**
+   * <a href="https://stripe.com/docs/api/issuing/tokens/object">Token</a> object used for this
+   * transaction. If a network token was not used for this transaction, this field will be null.
+   */
+  @SerializedName("token")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Token> token;
+
+  /**
    * <a href="https://stripe.com/docs/api/treasury">Treasury</a> details related to this transaction
    * if it was created on a [FinancialAccount](/docs/api/treasury/financial_accounts
    */
@@ -263,6 +272,24 @@ public class Transaction extends ApiResource
 
   public void setDisputeObject(Dispute expandableObject) {
     this.dispute = new ExpandableField<Dispute>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code token} object. */
+  public String getToken() {
+    return (this.token != null) ? this.token.getId() : null;
+  }
+
+  public void setToken(String id) {
+    this.token = ApiResource.setExpandableFieldId(id, this.token);
+  }
+
+  /** Get expanded {@code token}. */
+  public Token getTokenObject() {
+    return (this.token != null) ? this.token.getExpanded() : null;
+  }
+
+  public void setTokenObject(Token expandableObject) {
+    this.token = new ExpandableField<Token>(expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -832,6 +859,7 @@ public class Transaction extends ApiResource
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(purchaseDetails, responseGetter);
+    trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
   }
 }

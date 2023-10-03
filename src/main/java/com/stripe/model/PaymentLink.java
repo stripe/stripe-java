@@ -848,6 +848,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     String captureMethod;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * metadata on [Payment Intents] (/docs/api/payment_intents) generated from this payment link.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * Indicates that you intend to make future payments with the payment method collected during
      * checkout.
      *
@@ -923,6 +930,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("description")
     String description;
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * metadata on [Subscriptions] (/docs/api/subscriptions) generated from this payment link.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
 
     /**
      * Integer representing the number of trial period days before the customer is charged for the

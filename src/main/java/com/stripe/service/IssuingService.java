@@ -33,6 +33,10 @@ public final class IssuingService extends ApiService {
     return new com.stripe.service.issuing.PhysicalBundleService(this.getResponseGetter());
   }
 
+  public com.stripe.service.issuing.TokenService tokens() {
+    return new com.stripe.service.issuing.TokenService(this.getResponseGetter());
+  }
+
   public com.stripe.service.issuing.TransactionService transactions() {
     return new com.stripe.service.issuing.TransactionService(this.getResponseGetter());
   }
