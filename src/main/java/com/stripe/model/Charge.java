@@ -1564,6 +1564,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      /** The authorized amount. */
+      @SerializedName("amount_authorized")
+      Long amountAuthorized;
+
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
        * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
@@ -1597,6 +1601,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("exp_year")
       Long expYear;
 
+      @SerializedName("extended_authorization")
+      ExtendedAuthorization extendedAuthorization;
+
       /**
        * Uniquely identifies this particular card number. You can use this attribute to check
        * whether two customers who’ve signed up with you are using the same card number, for
@@ -1622,6 +1629,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("iin")
       String iin;
+
+      @SerializedName("incremental_authorization")
+      IncrementalAuthorization incrementalAuthorization;
 
       /**
        * Installment details for this payment (Mexico only).
@@ -1651,6 +1661,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("moto")
       Boolean moto;
 
+      @SerializedName("multicapture")
+      Multicapture multicapture;
+
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
@@ -1665,6 +1678,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("network_token")
       NetworkToken networkToken;
+
+      @SerializedName("overcapture")
+      Overcapture overcapture;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
@@ -1703,6 +1719,33 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
+      public static class ExtendedAuthorization extends StripeObject {
+        /**
+         * Indicates whether or not the capture window is extended beyond the standard
+         * authorization.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class IncrementalAuthorization extends StripeObject {
+        /**
+         * Indicates whether or not the incremental authorization feature is supported.
+         *
+         * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
       public static class Installments extends StripeObject {
         /** Installment plan selected for the payment. */
         @SerializedName("plan")
@@ -1735,6 +1778,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
+      public static class Multicapture extends StripeObject {
+        /**
+         * Indicates whether or not multiple captures are supported.
+         *
+         * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
       public static class NetworkToken extends StripeObject {
         /**
          * Indicates if Stripe used a network token, either user provided or Stripe managed when
@@ -1742,6 +1798,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("used")
         Boolean used;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Overcapture extends StripeObject {
+        /** The maximum amount that can be captured. */
+        @SerializedName("maximum_amount_capturable")
+        Long maximumAmountCapturable;
+
+        /**
+         * Indicates whether or not the authorized amount can be over-captured.
+         *
+         * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
       }
 
       @Getter

@@ -90,6 +90,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  @SerializedName("payment_intent_data")
+  PaymentIntentData paymentIntentData;
+
   /**
    * Specify whether Checkout should collect a payment method. When set to {@code if_required},
    * Checkout will not collect a payment method when the total due for the session is 0.This may
@@ -116,6 +119,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("shipping_address_collection")
   Object shippingAddressCollection;
 
+  /**
+   * When creating a subscription, the specified configuration data will be used. There must be at
+   * least one line item with a recurring price to use {@code subscription_data}.
+   */
+  @SerializedName("subscription_data")
+  SubscriptionData subscriptionData;
+
   private PaymentLinkUpdateParams(
       Boolean active,
       AfterCompletion afterCompletion,
@@ -130,9 +140,11 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       InvoiceCreation invoiceCreation,
       List<PaymentLinkUpdateParams.LineItem> lineItems,
       Map<String, String> metadata,
+      PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       Object paymentMethodTypes,
-      Object shippingAddressCollection) {
+      Object shippingAddressCollection,
+      SubscriptionData subscriptionData) {
     this.active = active;
     this.afterCompletion = afterCompletion;
     this.allowPromotionCodes = allowPromotionCodes;
@@ -146,9 +158,11 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.metadata = metadata;
+    this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
     this.shippingAddressCollection = shippingAddressCollection;
+    this.subscriptionData = subscriptionData;
   }
 
   public static Builder builder() {
@@ -182,11 +196,15 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private PaymentIntentData paymentIntentData;
+
     private PaymentMethodCollection paymentMethodCollection;
 
     private Object paymentMethodTypes;
 
     private Object shippingAddressCollection;
+
+    private SubscriptionData subscriptionData;
 
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentLinkUpdateParams build() {
@@ -204,9 +222,11 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.invoiceCreation,
           this.lineItems,
           this.metadata,
+          this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodTypes,
-          this.shippingAddressCollection);
+          this.shippingAddressCollection,
+          this.subscriptionData);
     }
 
     /**
@@ -415,6 +435,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    public Builder setPaymentIntentData(
+        PaymentLinkUpdateParams.PaymentIntentData paymentIntentData) {
+      this.paymentIntentData = paymentIntentData;
+      return this;
+    }
+
     /**
      * Specify whether Checkout should collect a payment method. When set to {@code if_required},
      * Checkout will not collect a payment method when the total due for the session is 0.This may
@@ -492,6 +518,15 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     /** Configuration for collecting the customer's shipping address. */
     public Builder setShippingAddressCollection(EmptyParam shippingAddressCollection) {
       this.shippingAddressCollection = shippingAddressCollection;
+      return this;
+    }
+
+    /**
+     * When creating a subscription, the specified configuration data will be used. There must be at
+     * least one line item with a recurring price to use {@code subscription_data}.
+     */
+    public Builder setSubscriptionData(PaymentLinkUpdateParams.SubscriptionData subscriptionData) {
+      this.subscriptionData = subscriptionData;
       return this;
     }
   }
@@ -2760,6 +2795,124 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class PaymentIntentData {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+     * declaratively set metadata on [Payment Intents] (/docs/api/payment_intents) generated from
+     * this payment link. Unlike object-level metadata, this field is declarative. Updates will
+     * clear prior values.
+     */
+    @SerializedName("metadata")
+    Object metadata;
+
+    private PaymentIntentData(Map<String, Object> extraParams, Object metadata) {
+      this.extraParams = extraParams;
+      this.metadata = metadata;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object metadata;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.PaymentIntentData build() {
+        return new PaymentLinkUpdateParams.PaymentIntentData(this.extraParams, this.metadata);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.PaymentIntentData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.PaymentIntentData#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.PaymentIntentData#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.PaymentIntentData#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+       * declaratively set metadata on [Payment Intents] (/docs/api/payment_intents) generated from
+       * this payment link. Unlike object-level metadata, this field is declarative. Updates will
+       * clear prior values.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+       * declaratively set metadata on [Payment Intents] (/docs/api/payment_intents) generated from
+       * this payment link. Unlike object-level metadata, this field is declarative. Updates will
+       * clear prior values.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class ShippingAddressCollection {
     /**
      * <strong>Required.</strong> An array of two-letter ISO country codes representing which
@@ -3576,6 +3729,124 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       AllowedCountry(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class SubscriptionData {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+     * declaratively set metadata on [Subscriptions] (/docs/api/subscriptions) generated from this
+     * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
+     * prior values.
+     */
+    @SerializedName("metadata")
+    Object metadata;
+
+    private SubscriptionData(Map<String, Object> extraParams, Object metadata) {
+      this.extraParams = extraParams;
+      this.metadata = metadata;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object metadata;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.SubscriptionData build() {
+        return new PaymentLinkUpdateParams.SubscriptionData(this.extraParams, this.metadata);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.SubscriptionData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.SubscriptionData#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+       * declaratively set metadata on [Subscriptions] (/docs/api/subscriptions) generated from this
+       * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
+       * prior values.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+       * declaratively set metadata on [Subscriptions] (/docs/api/subscriptions) generated from this
+       * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
+       * prior values.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
       }
     }
   }
