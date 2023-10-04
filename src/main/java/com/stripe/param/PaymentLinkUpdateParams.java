@@ -90,6 +90,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /**
+   * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
+   * payment} mode.
+   */
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
@@ -435,6 +439,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
+     * payment} mode.
+     */
     public Builder setPaymentIntentData(
         PaymentLinkUpdateParams.PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;

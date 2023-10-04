@@ -14,6 +14,13 @@ import lombok.Getter;
 @Getter
 public class QuoteCreateParams extends ApiRequestParams {
   /**
+   * Set to true to allow quote lines to have {@code starts_at} in the past if collection is paused
+   * between {@code starts_at} and now.
+   */
+  @SerializedName("allow_backdated_lines")
+  Boolean allowBackdatedLines;
+
+  /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. There cannot be any line items with
    * recurring prices when using this field.
@@ -177,6 +184,7 @@ public class QuoteCreateParams extends ApiRequestParams {
   Object transferData;
 
   private QuoteCreateParams(
+      Boolean allowBackdatedLines,
       Object applicationFeeAmount,
       Object applicationFeePercent,
       AutomaticTax automaticTax,
@@ -201,6 +209,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       List<QuoteCreateParams.SubscriptionDataOverride> subscriptionDataOverrides,
       String testClock,
       Object transferData) {
+    this.allowBackdatedLines = allowBackdatedLines;
     this.applicationFeeAmount = applicationFeeAmount;
     this.applicationFeePercent = applicationFeePercent;
     this.automaticTax = automaticTax;
@@ -232,6 +241,8 @@ public class QuoteCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean allowBackdatedLines;
+
     private Object applicationFeeAmount;
 
     private Object applicationFeePercent;
@@ -283,6 +294,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public QuoteCreateParams build() {
       return new QuoteCreateParams(
+          this.allowBackdatedLines,
           this.applicationFeeAmount,
           this.applicationFeePercent,
           this.automaticTax,
@@ -307,6 +319,15 @@ public class QuoteCreateParams extends ApiRequestParams {
           this.subscriptionDataOverrides,
           this.testClock,
           this.transferData);
+    }
+
+    /**
+     * Set to true to allow quote lines to have {@code starts_at} in the past if collection is
+     * paused between {@code starts_at} and now.
+     */
+    public Builder setAllowBackdatedLines(Boolean allowBackdatedLines) {
+      this.allowBackdatedLines = allowBackdatedLines;
+      return this;
     }
 
     /**

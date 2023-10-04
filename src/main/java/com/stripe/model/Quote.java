@@ -41,6 +41,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
+  /**
+   * Allow quote lines to have {@code starts_at} in the past if collection is paused between {@code
+   * starts_at} and now.
+   */
+  @SerializedName("allow_backdated_lines")
+  Boolean allowBackdatedLines;
+
   /** Total before any discounts or taxes are applied. */
   @SerializedName("amount_subtotal")
   Long amountSubtotal;
