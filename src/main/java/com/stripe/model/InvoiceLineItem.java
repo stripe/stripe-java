@@ -74,13 +74,6 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * The margins applied to the line item. When set, the {@code default_margins} on the invoice do
-   * not apply to the line item. Use {@code expand[]=margins} to expand each margin.
-   */
-  @SerializedName("margins")
-  List<ExpandableField<Margin>> margins;
-
-  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Note that for line items with {@code type=subscription} this will reflect
@@ -252,47 +245,6 @@ public class InvoiceLineItem extends StripeObject implements HasId {
         objs != null
             ? objs.stream()
                 .map(x -> new ExpandableField<Discount>(x.getId(), x))
-                .collect(Collectors.toList())
-            : null;
-  }
-
-  /** Get IDs of expandable {@code margins} object list. */
-  public List<String> getMargins() {
-    return (this.margins != null)
-        ? this.margins.stream().map(x -> x.getId()).collect(Collectors.toList())
-        : null;
-  }
-
-  public void setMargins(List<String> ids) {
-    if (ids == null) {
-      this.margins = null;
-      return;
-    }
-    if (this.margins != null
-        && this.margins.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
-      // noop if the ids are equal to what are already present
-      return;
-    }
-    this.margins =
-        (ids != null)
-            ? ids.stream()
-                .map(id -> new ExpandableField<Margin>(id, null))
-                .collect(Collectors.toList())
-            : null;
-  }
-
-  /** Get expanded {@code margins}. */
-  public List<Margin> getMarginObjects() {
-    return (this.margins != null)
-        ? this.margins.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
-        : null;
-  }
-
-  public void setMarginObjects(List<Margin> objs) {
-    this.margins =
-        objs != null
-            ? objs.stream()
-                .map(x -> new ExpandableField<Margin>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
   }
