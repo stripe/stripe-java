@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class SetupIntentRetrieveParams extends ApiRequestParams {
   /**
-   * The client secret of the SetupIntent. Required if a publishable key is used to retrieve the
-   * SetupIntent.
+   * The client secret of the SetupIntent. We require this string if you use a publishable key to
+   * retrieve the SetupIntent.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -55,8 +55,8 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
     }
 
     /**
-     * The client secret of the SetupIntent. Required if a publishable key is used to retrieve the
-     * SetupIntent.
+     * The client secret of the SetupIntent. We require this string if you use a publishable key to
+     * retrieve the SetupIntent.
      */
     public Builder setClientSecret(String clientSecret) {
       this.clientSecret = clientSecret;
