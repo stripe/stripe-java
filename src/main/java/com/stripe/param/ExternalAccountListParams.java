@@ -42,7 +42,7 @@ public class ExternalAccountListParams extends ApiRequestParams {
 
   /** Filter external accounts according to a particular object type. */
   @SerializedName("object")
-  Object object;
+  String object;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -58,7 +58,7 @@ public class ExternalAccountListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      Object object,
+      String object,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -81,7 +81,7 @@ public class ExternalAccountListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private Object object;
+    private String object;
 
     private String startingAfter;
 
@@ -169,7 +169,7 @@ public class ExternalAccountListParams extends ApiRequestParams {
     }
 
     /** Filter external accounts according to a particular object type. */
-    public Builder setObject(ExternalAccountListParams.Object object) {
+    public Builder setObject(String object) {
       this.object = object;
       return this;
     }
@@ -183,21 +183,6 @@ public class ExternalAccountListParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
-    }
-  }
-
-  public enum Object implements ApiRequestParams.EnumParam {
-    @SerializedName("bank_account")
-    BANK_ACCOUNT("bank_account"),
-
-    @SerializedName("card")
-    CARD("card");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Object(String value) {
-      this.value = value;
     }
   }
 }
