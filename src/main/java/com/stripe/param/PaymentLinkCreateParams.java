@@ -3042,15 +3042,35 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("setup_future_usage")
     SetupFutureUsage setupFutureUsage;
 
+    /**
+     * Extra information about the payment. This will appear on your customer's statement when this
+     * payment succeeds in creating a charge.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /**
+     * Provides information about the charge that customers see on their statements. Concatenated
+     * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+     * form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    @SerializedName("statement_descriptor_suffix")
+    String statementDescriptorSuffix;
+
     private PaymentIntentData(
         CaptureMethod captureMethod,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
-        SetupFutureUsage setupFutureUsage) {
+        SetupFutureUsage setupFutureUsage,
+        String statementDescriptor,
+        String statementDescriptorSuffix) {
       this.captureMethod = captureMethod;
       this.extraParams = extraParams;
       this.metadata = metadata;
       this.setupFutureUsage = setupFutureUsage;
+      this.statementDescriptor = statementDescriptor;
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
     }
 
     public static Builder builder() {
@@ -3066,10 +3086,19 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       private SetupFutureUsage setupFutureUsage;
 
+      private String statementDescriptor;
+
+      private String statementDescriptorSuffix;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkCreateParams.PaymentIntentData build() {
         return new PaymentLinkCreateParams.PaymentIntentData(
-            this.captureMethod, this.extraParams, this.metadata, this.setupFutureUsage);
+            this.captureMethod,
+            this.extraParams,
+            this.metadata,
+            this.setupFutureUsage,
+            this.statementDescriptor,
+            this.statementDescriptorSuffix);
       }
 
       /** Controls when the funds will be captured from the customer's account. */
@@ -3157,6 +3186,26 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       public Builder setSetupFutureUsage(
           PaymentLinkCreateParams.PaymentIntentData.SetupFutureUsage setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;
+        return this;
+      }
+
+      /**
+       * Extra information about the payment. This will appear on your customer's statement when
+       * this payment succeeds in creating a charge.
+       */
+      public Builder setStatementDescriptor(String statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /**
+       * Provides information about the charge that customers see on their statements. Concatenated
+       * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+       * form the complete statement descriptor. Maximum 22 characters for the concatenated
+       * descriptor.
+       */
+      public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+        this.statementDescriptorSuffix = statementDescriptorSuffix;
         return this;
       }
     }

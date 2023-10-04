@@ -2822,9 +2822,31 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Object metadata;
 
-    private PaymentIntentData(Map<String, Object> extraParams, Object metadata) {
+    /**
+     * Extra information about the payment. This will appear on your customer's statement when this
+     * payment succeeds in creating a charge.
+     */
+    @SerializedName("statement_descriptor")
+    Object statementDescriptor;
+
+    /**
+     * Provides information about the charge that customers see on their statements. Concatenated
+     * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+     * form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    @SerializedName("statement_descriptor_suffix")
+    Object statementDescriptorSuffix;
+
+    private PaymentIntentData(
+        Map<String, Object> extraParams,
+        Object metadata,
+        Object statementDescriptor,
+        Object statementDescriptorSuffix) {
       this.extraParams = extraParams;
       this.metadata = metadata;
+      this.statementDescriptor = statementDescriptor;
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
     }
 
     public static Builder builder() {
@@ -2836,9 +2858,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Object metadata;
 
+      private Object statementDescriptor;
+
+      private Object statementDescriptorSuffix;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.PaymentIntentData build() {
-        return new PaymentLinkUpdateParams.PaymentIntentData(this.extraParams, this.metadata);
+        return new PaymentLinkUpdateParams.PaymentIntentData(
+            this.extraParams,
+            this.metadata,
+            this.statementDescriptor,
+            this.statementDescriptorSuffix);
       }
 
       /**
@@ -2915,6 +2945,46 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
        */
       public Builder setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Extra information about the payment. This will appear on your customer's statement when
+       * this payment succeeds in creating a charge.
+       */
+      public Builder setStatementDescriptor(String statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /**
+       * Extra information about the payment. This will appear on your customer's statement when
+       * this payment succeeds in creating a charge.
+       */
+      public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /**
+       * Provides information about the charge that customers see on their statements. Concatenated
+       * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+       * form the complete statement descriptor. Maximum 22 characters for the concatenated
+       * descriptor.
+       */
+      public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+        this.statementDescriptorSuffix = statementDescriptorSuffix;
+        return this;
+      }
+
+      /**
+       * Provides information about the charge that customers see on their statements. Concatenated
+       * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+       * form the complete statement descriptor. Maximum 22 characters for the concatenated
+       * descriptor.
+       */
+      public Builder setStatementDescriptorSuffix(EmptyParam statementDescriptorSuffix) {
+        this.statementDescriptorSuffix = statementDescriptorSuffix;
         return this;
       }
     }

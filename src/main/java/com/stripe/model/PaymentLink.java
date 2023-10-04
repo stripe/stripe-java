@@ -862,6 +862,22 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("setup_future_usage")
     String setupFutureUsage;
+
+    /**
+     * Extra information about the payment. This will appear on your customer's statement when this
+     * payment succeeds in creating a charge.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /**
+     * Provides information about the charge that customers see on their statements. Concatenated
+     * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+     * form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    @SerializedName("statement_descriptor_suffix")
+    String statementDescriptorSuffix;
   }
 
   @Getter
