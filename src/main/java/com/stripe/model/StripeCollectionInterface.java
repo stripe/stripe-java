@@ -38,8 +38,4 @@ public interface StripeCollectionInterface<T> extends StripeObjectInterface {
 
   // TODO (major) remove the default implementation and make this required
   default void setPageTypeToken(Type type) {};
-
-  default Type getPageTypeToken() {
-    return this.getClass();
-  };
 }

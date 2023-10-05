@@ -60,7 +60,6 @@ public class StripeCollection<T extends HasId> extends StripeObject
   private Map<String, Object> requestParams;
 
   @Setter(onMethod = @__({@Override}))
-  @Getter(onMethod = @__({@Override}))
   private transient Type pageTypeToken;
 
   public Iterable<T> autoPagingIterable() {
