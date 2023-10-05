@@ -29,7 +29,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class BalanceTransaction extends ApiResource implements HasId {
-  /** Gross amount of the transaction (in cents (or local equivalent)). */
+  /**
+   * Gross amount of this transaction (in cents (or local equivalent)). A positive value represents
+   * funds charged to another party, and a negative value represents funds sent to another party.
+   */
   @SerializedName("amount")
   Long amount;
 
@@ -63,7 +66,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("exchange_rate")
   BigDecimal exchangeRate;
 
-  /** Fees (in cents (or local equivalent)) paid for this transaction. */
+  /**
+   * Fees (in cents (or local equivalent)) paid for this transaction. Represented as a positive
+   * integer when assessed.
+   */
   @SerializedName("fee")
   Long fee;
 
@@ -76,7 +82,11 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
-  /** Net amount of the transaction (in cents (or local equivalent)). */
+  /**
+   * Net impact to a Stripe balance (in cents (or local equivalent)). A positive value represents
+   * incrementing a Stripe balance, and a negative value decrementing a Stripe balance. You can
+   * calculate the net impact of a transaction on a balance by {@code amount} - {@code fee}
+   */
   @SerializedName("net")
   Long net;
 

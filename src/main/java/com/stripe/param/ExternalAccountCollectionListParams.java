@@ -40,6 +40,10 @@ public class ExternalAccountCollectionListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** Filter external accounts according to a particular object type. */
+  @SerializedName("object")
+  String object;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -54,11 +58,13 @@ public class ExternalAccountCollectionListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String object,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.object = object;
     this.startingAfter = startingAfter;
   }
 
@@ -75,12 +81,19 @@ public class ExternalAccountCollectionListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String object;
+
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ExternalAccountCollectionListParams build() {
       return new ExternalAccountCollectionListParams(
-          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.object,
+          this.startingAfter);
     }
 
     /**
@@ -152,6 +165,12 @@ public class ExternalAccountCollectionListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /** Filter external accounts according to a particular object type. */
+    public Builder setObject(String object) {
+      this.object = object;
       return this;
     }
 

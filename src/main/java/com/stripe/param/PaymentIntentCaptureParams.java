@@ -44,6 +44,16 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * Defaults to {@code true}. When capturing a PaymentIntent, setting {@code final_capture} to
+   * {@code false} notifies Stripe to not release the remaining uncaptured funds to make sure that
+   * they're captured in future requests. You can only use this setting when <a
+   * href="https://stripe.com/docs/payments/multicapture">multicapture</a> is available for
+   * PaymentIntents.
+   */
+  @SerializedName("final_capture")
+  Boolean finalCapture;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -85,6 +95,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       Long applicationFeeAmount,
       List<String> expand,
       Map<String, Object> extraParams,
+      Boolean finalCapture,
       Object metadata,
       Object paymentDetails,
       String statementDescriptor,
@@ -94,6 +105,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     this.applicationFeeAmount = applicationFeeAmount;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.finalCapture = finalCapture;
     this.metadata = metadata;
     this.paymentDetails = paymentDetails;
     this.statementDescriptor = statementDescriptor;
@@ -114,6 +126,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Boolean finalCapture;
+
     private Object metadata;
 
     private Object paymentDetails;
@@ -131,6 +145,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           this.applicationFeeAmount,
           this.expand,
           this.extraParams,
+          this.finalCapture,
           this.metadata,
           this.paymentDetails,
           this.statementDescriptor,
@@ -209,6 +224,18 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Defaults to {@code true}. When capturing a PaymentIntent, setting {@code final_capture} to
+     * {@code false} notifies Stripe to not release the remaining uncaptured funds to make sure that
+     * they're captured in future requests. You can only use this setting when <a
+     * href="https://stripe.com/docs/payments/multicapture">multicapture</a> is available for
+     * PaymentIntents.
+     */
+    public Builder setFinalCapture(Boolean finalCapture) {
+      this.finalCapture = finalCapture;
       return this;
     }
 

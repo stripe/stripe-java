@@ -16,11 +16,11 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.QuoteAcceptParams;
 import com.stripe.param.QuoteCancelParams;
 import com.stripe.param.QuoteCreateParams;
-import com.stripe.param.QuoteDraftQuoteParams;
 import com.stripe.param.QuoteFinalizeQuoteParams;
 import com.stripe.param.QuoteListParams;
 import com.stripe.param.QuoteListPreviewInvoiceLinesParams;
-import com.stripe.param.QuoteMarkStaleQuoteParams;
+import com.stripe.param.QuoteMarkDraftParams;
+import com.stripe.param.QuoteMarkStaleParams;
 import com.stripe.param.QuotePdfParams;
 import com.stripe.param.QuoteReestimateParams;
 import com.stripe.param.QuoteRetrieveParams;
@@ -256,19 +256,19 @@ public final class QuoteService extends ApiService {
             ApiMode.V1);
   }
   /** Converts a stale quote to draft. */
-  public Quote draftQuote(String quote, QuoteDraftQuoteParams params) throws StripeException {
-    return draftQuote(quote, params, (RequestOptions) null);
+  public Quote markDraft(String quote, QuoteMarkDraftParams params) throws StripeException {
+    return markDraft(quote, params, (RequestOptions) null);
   }
   /** Converts a stale quote to draft. */
-  public Quote draftQuote(String quote, RequestOptions options) throws StripeException {
-    return draftQuote(quote, (QuoteDraftQuoteParams) null, options);
+  public Quote markDraft(String quote, RequestOptions options) throws StripeException {
+    return markDraft(quote, (QuoteMarkDraftParams) null, options);
   }
   /** Converts a stale quote to draft. */
-  public Quote draftQuote(String quote) throws StripeException {
-    return draftQuote(quote, (QuoteDraftQuoteParams) null, (RequestOptions) null);
+  public Quote markDraft(String quote) throws StripeException {
+    return markDraft(quote, (QuoteMarkDraftParams) null, (RequestOptions) null);
   }
   /** Converts a stale quote to draft. */
-  public Quote draftQuote(String quote, QuoteDraftQuoteParams params, RequestOptions options)
+  public Quote markDraft(String quote, QuoteMarkDraftParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/mark_draft", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
@@ -282,21 +282,19 @@ public final class QuoteService extends ApiService {
             ApiMode.V1);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStaleQuote(String quote, QuoteMarkStaleQuoteParams params)
-      throws StripeException {
-    return markStaleQuote(quote, params, (RequestOptions) null);
+  public Quote markStale(String quote, QuoteMarkStaleParams params) throws StripeException {
+    return markStale(quote, params, (RequestOptions) null);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStaleQuote(String quote, RequestOptions options) throws StripeException {
-    return markStaleQuote(quote, (QuoteMarkStaleQuoteParams) null, options);
+  public Quote markStale(String quote, RequestOptions options) throws StripeException {
+    return markStale(quote, (QuoteMarkStaleParams) null, options);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStaleQuote(String quote) throws StripeException {
-    return markStaleQuote(quote, (QuoteMarkStaleQuoteParams) null, (RequestOptions) null);
+  public Quote markStale(String quote) throws StripeException {
+    return markStale(quote, (QuoteMarkStaleParams) null, (RequestOptions) null);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStaleQuote(
-      String quote, QuoteMarkStaleQuoteParams params, RequestOptions options)
+  public Quote markStale(String quote, QuoteMarkStaleParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/mark_stale", ApiResource.urlEncodeId(quote));
     return getResponseGetter()
@@ -306,6 +304,31 @@ public final class QuoteService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             Quote.class,
+            options,
+            ApiMode.V1);
+  }
+  /** Download the PDF for a finalized quote. */
+  public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
+    return pdf(quote, params, (RequestOptions) null);
+  }
+  /** Download the PDF for a finalized quote. */
+  public InputStream pdf(String quote, RequestOptions options) throws StripeException {
+    return pdf(quote, (QuotePdfParams) null, options);
+  }
+  /** Download the PDF for a finalized quote. */
+  public InputStream pdf(String quote) throws StripeException {
+    return pdf(quote, (QuotePdfParams) null, (RequestOptions) null);
+  }
+  /** Download the PDF for a finalized quote. */
+  public InputStream pdf(String quote, QuotePdfParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(quote));
+    return getResponseGetter()
+        .requestStream(
+            BaseAddress.FILES,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
   }
@@ -348,31 +371,6 @@ public final class QuoteService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** Download the PDF for a finalized quote. */
-  public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
-    return pdf(quote, params, (RequestOptions) null);
-  }
-  /** Download the PDF for a finalized quote. */
-  public InputStream pdf(String quote, RequestOptions options) throws StripeException {
-    return pdf(quote, (QuotePdfParams) null, options);
-  }
-  /** Download the PDF for a finalized quote. */
-  public InputStream pdf(String quote) throws StripeException {
-    return pdf(quote, (QuotePdfParams) null, (RequestOptions) null);
-  }
-  /** Download the PDF for a finalized quote. */
-  public InputStream pdf(String quote, QuotePdfParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(quote));
-    return getResponseGetter()
-        .requestStream(
-            BaseAddress.FILES,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-  }
 
   public com.stripe.service.QuoteComputedUpfrontLineItemsService computedUpfrontLineItems() {
     return new com.stripe.service.QuoteComputedUpfrontLineItemsService(this.getResponseGetter());
@@ -390,7 +388,7 @@ public final class QuoteService extends ApiService {
     return new com.stripe.service.QuotePreviewInvoiceService(this.getResponseGetter());
   }
 
-  public com.stripe.service.QuotePreviewScheduleService previewSchedules() {
-    return new com.stripe.service.QuotePreviewScheduleService(this.getResponseGetter());
+  public com.stripe.service.QuotePreviewSubscriptionScheduleService previewSubscriptionSchedules() {
+    return new com.stripe.service.QuotePreviewSubscriptionScheduleService(this.getResponseGetter());
   }
 }

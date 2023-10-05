@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,14 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class SetupIntentRetrieveParams extends ApiRequestParams {
-  /**
-   * The client secret of the SetupIntent. We require this string if you use a publishable key to
-   * retrieve the SetupIntent.
-   */
-  @SerializedName("client_secret")
-  String clientSecret;
-
+public class TokenUpdateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -31,11 +24,14 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private SetupIntentRetrieveParams(
-      String clientSecret, List<String> expand, Map<String, Object> extraParams) {
-    this.clientSecret = clientSecret;
+  /** <strong>Required.</strong> Specifies which status the token should be updated to. */
+  @SerializedName("status")
+  Status status;
+
+  private TokenUpdateParams(List<String> expand, Map<String, Object> extraParams, Status status) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -43,30 +39,21 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String clientSecret;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    /** Finalize and obtain parameter instance from this builder. */
-    public SetupIntentRetrieveParams build() {
-      return new SetupIntentRetrieveParams(this.clientSecret, this.expand, this.extraParams);
-    }
+    private Status status;
 
-    /**
-     * The client secret of the SetupIntent. We require this string if you use a publishable key to
-     * retrieve the SetupIntent.
-     */
-    public Builder setClientSecret(String clientSecret) {
-      this.clientSecret = clientSecret;
-      return this;
+    /** Finalize and obtain parameter instance from this builder. */
+    public TokenUpdateParams build() {
+      return new TokenUpdateParams(this.expand, this.extraParams, this.status);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SetupIntentRetrieveParams#expand} for the field documentation.
+     * TokenUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -79,7 +66,7 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SetupIntentRetrieveParams#expand} for the field documentation.
+     * TokenUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -92,7 +79,7 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SetupIntentRetrieveParams#extraParams} for the field documentation.
+     * TokenUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -105,7 +92,7 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SetupIntentRetrieveParams#extraParams} for the field documentation.
+     * See {@link TokenUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -113,6 +100,30 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
       }
       this.extraParams.putAll(map);
       return this;
+    }
+
+    /** <strong>Required.</strong> Specifies which status the token should be updated to. */
+    public Builder setStatus(TokenUpdateParams.Status status) {
+      this.status = status;
+      return this;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("active")
+    ACTIVE("active"),
+
+    @SerializedName("deleted")
+    DELETED("deleted"),
+
+    @SerializedName("suspended")
+    SUSPENDED("suspended");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 }

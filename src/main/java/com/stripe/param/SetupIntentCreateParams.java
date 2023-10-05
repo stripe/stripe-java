@@ -23,16 +23,16 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   Boolean attachToSelf;
 
   /**
-   * When enabled, this SetupIntent will accept payment methods that you have enabled in the
-   * Dashboard and are compatible with this SetupIntent's other parameters.
+   * When you enable this parameter, this SetupIntent accepts payment methods that you enable in the
+   * Dashboard and that are compatible with its other parameters.
    */
   @SerializedName("automatic_payment_methods")
   AutomaticPaymentMethods automaticPaymentMethods;
 
   /**
    * Set to {@code true} to attempt to confirm this SetupIntent immediately. This parameter defaults
-   * to {@code false}. If the payment method attached is a card, a return_url may be provided in
-   * case additional authentication is required.
+   * to {@code false}. If a card is the attached payment method, you can provide a {@code
+   * return_url} in case further authentication is necessary.
    */
   @SerializedName("confirm")
   Boolean confirm;
@@ -84,7 +84,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   List<SetupIntentCreateParams.FlowDirection> flowDirections;
 
   /**
-   * This hash contains details about the Mandate to create. This parameter can only be used with <a
+   * This hash contains details about the mandate to create. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
    * confirm=true}</a>.
    */
@@ -100,7 +100,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The Stripe account ID for which this SetupIntent is created. */
+  /** The Stripe account ID created for this SetupIntent. */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
@@ -111,7 +111,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   String paymentMethod;
 
-  /** The ID of the payment method configuration to use with this Setup Intent. */
+  /** The ID of the payment method configuration to use with this SetupIntent. */
   @SerializedName("payment_method_configuration")
   String paymentMethodConfiguration;
 
@@ -123,28 +123,31 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
 
-  /** Payment-method-specific configuration for this SetupIntent. */
+  /** Payment method-specific configuration for this SetupIntent. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (e.g. card) that this SetupIntent is allowed to use. If this
-   * is not provided, defaults to [&quot;card&quot;].
+   * The list of payment method types (for example, card) that this SetupIntent can use. If you
+   * don't provide this, it defaults to [&quot;card&quot;].
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
   /**
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
-   * the payment method's app or site. If you'd prefer to redirect to a mobile application, you can
-   * alternatively supply an application URI scheme. This parameter can only be used with <a
+   * the payment method's app or site. To redirect to a mobile application, you can alternatively
+   * supply an application URI scheme. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("return_url")
   String returnUrl;
 
-  /** If this hash is populated, this SetupIntent will generate a single_use Mandate on success. */
+  /**
+   * If you populate this hash, this SetupIntent generates a {@code single_use} mandate after
+   * successful completion.
+   */
   @SerializedName("single_use")
   SingleUse singleUse;
 
@@ -295,8 +298,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * When enabled, this SetupIntent will accept payment methods that you have enabled in the
-     * Dashboard and are compatible with this SetupIntent's other parameters.
+     * When you enable this parameter, this SetupIntent accepts payment methods that you enable in
+     * the Dashboard and that are compatible with its other parameters.
      */
     public Builder setAutomaticPaymentMethods(
         SetupIntentCreateParams.AutomaticPaymentMethods automaticPaymentMethods) {
@@ -306,8 +309,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     /**
      * Set to {@code true} to attempt to confirm this SetupIntent immediately. This parameter
-     * defaults to {@code false}. If the payment method attached is a card, a return_url may be
-     * provided in case additional authentication is required.
+     * defaults to {@code false}. If a card is the attached payment method, you can provide a {@code
+     * return_url} in case further authentication is necessary.
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
@@ -423,7 +426,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * This hash contains details about the Mandate to create. This parameter can only be used with
+     * This hash contains details about the mandate to create. This parameter can only be used with
      * <a href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
      * confirm=true}</a>.
      */
@@ -433,7 +436,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * This hash contains details about the Mandate to create. This parameter can only be used with
+     * This hash contains details about the mandate to create. This parameter can only be used with
      * <a href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
      * confirm=true}</a>.
      */
@@ -468,7 +471,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The Stripe account ID for which this SetupIntent is created. */
+    /** The Stripe account ID created for this SetupIntent. */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
       return this;
@@ -483,7 +486,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the payment method configuration to use with this Setup Intent. */
+    /** The ID of the payment method configuration to use with this SetupIntent. */
     public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
       this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
@@ -500,7 +503,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Payment-method-specific configuration for this SetupIntent. */
+    /** Payment method-specific configuration for this SetupIntent. */
     public Builder setPaymentMethodOptions(
         SetupIntentCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
@@ -535,8 +538,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     /**
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
-     * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
-     * can alternatively supply an application URI scheme. This parameter can only be used with <a
+     * the payment method's app or site. To redirect to a mobile application, you can alternatively
+     * supply an application URI scheme. This parameter can only be used with <a
      * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
      * confirm=true}</a>.
      */
@@ -546,7 +549,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this hash is populated, this SetupIntent will generate a single_use Mandate on success.
+     * If you populate this hash, this SetupIntent generates a {@code single_use} mandate after
+     * successful completion.
      */
     public Builder setSingleUse(SetupIntentCreateParams.SingleUse singleUse) {
       this.singleUse = singleUse;

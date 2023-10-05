@@ -9830,6 +9830,36 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Network network;
 
       /**
+       * Request ability to <a
+       * href="https://stripe.com/docs/payments/extended-authorization">capture beyond the standard
+       * authorization validity window</a> for this PaymentIntent.
+       */
+      @SerializedName("request_extended_authorization")
+      RequestExtendedAuthorization requestExtendedAuthorization;
+
+      /**
+       * Request ability to <a
+       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
+       * PaymentIntent.
+       */
+      @SerializedName("request_incremental_authorization")
+      RequestIncrementalAuthorization requestIncrementalAuthorization;
+
+      /**
+       * Request ability to make <a href="https://stripe.com/docs/payments/multicapture">multiple
+       * captures</a> for this PaymentIntent.
+       */
+      @SerializedName("request_multicapture")
+      RequestMulticapture requestMulticapture;
+
+      /**
+       * Request ability to <a href="https://stripe.com/docs/payments/overcapture">overcapture</a>
+       * for this PaymentIntent.
+       */
+      @SerializedName("request_overcapture")
+      RequestOvercapture requestOvercapture;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -9900,6 +9930,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           MandateOptions mandateOptions,
           Boolean moto,
           Network network,
+          RequestExtendedAuthorization requestExtendedAuthorization,
+          RequestIncrementalAuthorization requestIncrementalAuthorization,
+          RequestMulticapture requestMulticapture,
+          RequestOvercapture requestOvercapture,
           RequestThreeDSecure requestThreeDSecure,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
@@ -9912,6 +9946,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.mandateOptions = mandateOptions;
         this.moto = moto;
         this.network = network;
+        this.requestExtendedAuthorization = requestExtendedAuthorization;
+        this.requestIncrementalAuthorization = requestIncrementalAuthorization;
+        this.requestMulticapture = requestMulticapture;
+        this.requestOvercapture = requestOvercapture;
         this.requestThreeDSecure = requestThreeDSecure;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
@@ -9938,6 +9976,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Network network;
 
+        private RequestExtendedAuthorization requestExtendedAuthorization;
+
+        private RequestIncrementalAuthorization requestIncrementalAuthorization;
+
+        private RequestMulticapture requestMulticapture;
+
+        private RequestOvercapture requestOvercapture;
+
         private RequestThreeDSecure requestThreeDSecure;
 
         private ApiRequestParams.EnumParam setupFutureUsage;
@@ -9958,6 +10004,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.mandateOptions,
               this.moto,
               this.network,
+              this.requestExtendedAuthorization,
+              this.requestIncrementalAuthorization,
+              this.requestMulticapture,
+              this.requestOvercapture,
               this.requestThreeDSecure,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
@@ -10068,6 +10118,52 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public Builder setNetwork(
             PaymentIntentCreateParams.PaymentMethodOptions.Card.Network network) {
           this.network = network;
+          return this;
+        }
+
+        /**
+         * Request ability to <a
+         * href="https://stripe.com/docs/payments/extended-authorization">capture beyond the
+         * standard authorization validity window</a> for this PaymentIntent.
+         */
+        public Builder setRequestExtendedAuthorization(
+            PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestExtendedAuthorization
+                requestExtendedAuthorization) {
+          this.requestExtendedAuthorization = requestExtendedAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to <a
+         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
+         * PaymentIntent.
+         */
+        public Builder setRequestIncrementalAuthorization(
+            PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestIncrementalAuthorization
+                requestIncrementalAuthorization) {
+          this.requestIncrementalAuthorization = requestIncrementalAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to make <a href="https://stripe.com/docs/payments/multicapture">multiple
+         * captures</a> for this PaymentIntent.
+         */
+        public Builder setRequestMulticapture(
+            PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestMulticapture
+                requestMulticapture) {
+          this.requestMulticapture = requestMulticapture;
+          return this;
+        }
+
+        /**
+         * Request ability to <a href="https://stripe.com/docs/payments/overcapture">overcapture</a>
+         * for this PaymentIntent.
+         */
+        public Builder setRequestOvercapture(
+            PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestOvercapture
+                requestOvercapture) {
+          this.requestOvercapture = requestOvercapture;
           return this;
         }
 
@@ -11092,6 +11188,66 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
       }
 
+      public enum RequestExtendedAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestExtendedAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestIncrementalAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestIncrementalAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestMulticapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestMulticapture(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestOvercapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestOvercapture(String value) {
+          this.value = value;
+        }
+      }
+
       public enum RequestThreeDSecure implements ApiRequestParams.EnumParam {
         @SerializedName("any")
         ANY("any"),
@@ -11147,6 +11303,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
+       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
+       * PaymentIntent.
+       */
+      @SerializedName("request_incremental_authorization")
+      RequestIncrementalAuthorization requestIncrementalAuthorization;
+
+      /**
+       * Request ability to <a
        * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
        * this PaymentIntent if the combination of MCC and card brand is eligible. Check <a
        * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
@@ -11159,9 +11323,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private CardPresent(
           Map<String, Object> extraParams,
           Boolean requestExtendedAuthorization,
+          RequestIncrementalAuthorization requestIncrementalAuthorization,
           Boolean requestIncrementalAuthorizationSupport) {
         this.extraParams = extraParams;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
+        this.requestIncrementalAuthorization = requestIncrementalAuthorization;
         this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
       }
 
@@ -11174,6 +11340,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Boolean requestExtendedAuthorization;
 
+        private RequestIncrementalAuthorization requestIncrementalAuthorization;
+
         private Boolean requestIncrementalAuthorizationSupport;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -11181,6 +11349,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent(
               this.extraParams,
               this.requestExtendedAuthorization,
+              this.requestIncrementalAuthorization,
               this.requestIncrementalAuthorizationSupport);
         }
 
@@ -11224,6 +11393,19 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * Request ability to <a
+         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
+         * PaymentIntent.
+         */
+        public Builder setRequestIncrementalAuthorization(
+            PaymentIntentCreateParams.PaymentMethodOptions.CardPresent
+                    .RequestIncrementalAuthorization
+                requestIncrementalAuthorization) {
+          this.requestIncrementalAuthorization = requestIncrementalAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to <a
          * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
          * this PaymentIntent if the combination of MCC and card brand is eligible. Check <a
          * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
@@ -11234,6 +11416,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             Boolean requestIncrementalAuthorizationSupport) {
           this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
           return this;
+        }
+      }
+
+      public enum RequestIncrementalAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestIncrementalAuthorization(String value) {
+          this.value = value;
         }
       }
     }

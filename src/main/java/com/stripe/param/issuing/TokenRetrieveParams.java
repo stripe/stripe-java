@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
+public class TokenRetrieveParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,15 +24,9 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Reason the Quote is being marked stale. */
-  @SerializedName("reason")
-  String reason;
-
-  private QuoteMarkStaleQuoteParams(
-      List<String> expand, Map<String, Object> extraParams, String reason) {
+  private TokenRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.reason = reason;
   }
 
   public static Builder builder() {
@@ -44,17 +38,15 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String reason;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public QuoteMarkStaleQuoteParams build() {
-      return new QuoteMarkStaleQuoteParams(this.expand, this.extraParams, this.reason);
+    public TokenRetrieveParams build() {
+      return new TokenRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteMarkStaleQuoteParams#expand} for the field documentation.
+     * TokenRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -67,7 +59,7 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteMarkStaleQuoteParams#expand} for the field documentation.
+     * TokenRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -80,7 +72,7 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuoteMarkStaleQuoteParams#extraParams} for the field documentation.
+     * TokenRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -93,19 +85,13 @@ public class QuoteMarkStaleQuoteParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuoteMarkStaleQuoteParams#extraParams} for the field documentation.
+     * See {@link TokenRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** Reason the Quote is being marked stale. */
-    public Builder setReason(String reason) {
-      this.reason = reason;
       return this;
     }
   }

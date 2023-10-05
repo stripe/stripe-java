@@ -3,4 +3,4 @@ package com.stripe.model.financialconnections;
 
 import com.stripe.model.StripeCollection;
 
-public class InferredBalanceCollection extends StripeCollection<InferredBalance> {}
+public class AccountInferredBalanceCollection extends StripeCollection<AccountInferredBalance> {}

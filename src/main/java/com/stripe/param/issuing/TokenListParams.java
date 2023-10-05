@@ -10,12 +10,12 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardListParams extends ApiRequestParams {
-  /** Only return cards belonging to the Cardholder with the provided ID. */
-  @SerializedName("cardholder")
-  String cardholder;
+public class TokenListParams extends ApiRequestParams {
+  /** <strong>Required.</strong> The Issuing card identifier to list tokens for. */
+  @SerializedName("card")
+  String card;
 
-  /** Only return cards that were issued during the given date interval. */
+  /** Select Issuing tokens that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -27,14 +27,6 @@ public class CardListParams extends ApiRequestParams {
    */
   @SerializedName("ending_before")
   String endingBefore;
-
-  /** Only return cards that have the given expiration month. */
-  @SerializedName("exp_month")
-  Long expMonth;
-
-  /** Only return cards that have the given expiration year. */
-  @SerializedName("exp_year")
-  Long expYear;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -49,19 +41,12 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Only return cards that have the given last four digits. */
-  @SerializedName("last4")
-  String last4;
-
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
    */
   @SerializedName("limit")
   Long limit;
-
-  @SerializedName("personalization_design")
-  String personalizationDesign;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -72,44 +57,27 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /**
-   * Only return cards that have the given status. One of {@code active}, {@code inactive}, or
-   * {@code canceled}.
-   */
+  /** Select Issuing tokens with the given status. */
   @SerializedName("status")
   Status status;
 
-  /** Only return cards that have the given type. One of {@code virtual} or {@code physical}. */
-  @SerializedName("type")
-  Type type;
-
-  private CardListParams(
-      String cardholder,
+  private TokenListParams(
+      String card,
       Object created,
       String endingBefore,
-      Long expMonth,
-      Long expYear,
       List<String> expand,
       Map<String, Object> extraParams,
-      String last4,
       Long limit,
-      String personalizationDesign,
       String startingAfter,
-      Status status,
-      Type type) {
-    this.cardholder = cardholder;
+      Status status) {
+    this.card = card;
     this.created = created;
     this.endingBefore = endingBefore;
-    this.expMonth = expMonth;
-    this.expYear = expYear;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.last4 = last4;
     this.limit = limit;
-    this.personalizationDesign = personalizationDesign;
     this.startingAfter = startingAfter;
     this.status = status;
-    this.type = type;
   }
 
   public static Builder builder() {
@@ -117,63 +85,48 @@ public class CardListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String cardholder;
+    private String card;
 
     private Object created;
 
     private String endingBefore;
 
-    private Long expMonth;
-
-    private Long expYear;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String last4;
-
     private Long limit;
-
-    private String personalizationDesign;
 
     private String startingAfter;
 
     private Status status;
 
-    private Type type;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public CardListParams build() {
-      return new CardListParams(
-          this.cardholder,
+    public TokenListParams build() {
+      return new TokenListParams(
+          this.card,
           this.created,
           this.endingBefore,
-          this.expMonth,
-          this.expYear,
           this.expand,
           this.extraParams,
-          this.last4,
           this.limit,
-          this.personalizationDesign,
           this.startingAfter,
-          this.status,
-          this.type);
+          this.status);
     }
 
-    /** Only return cards belonging to the Cardholder with the provided ID. */
-    public Builder setCardholder(String cardholder) {
-      this.cardholder = cardholder;
+    /** <strong>Required.</strong> The Issuing card identifier to list tokens for. */
+    public Builder setCard(String card) {
+      this.card = card;
       return this;
     }
 
-    /** Only return cards that were issued during the given date interval. */
-    public Builder setCreated(CardListParams.Created created) {
+    /** Select Issuing tokens that were created during the given date interval. */
+    public Builder setCreated(TokenListParams.Created created) {
       this.created = created;
       return this;
     }
 
-    /** Only return cards that were issued during the given date interval. */
+    /** Select Issuing tokens that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
@@ -190,22 +143,10 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return cards that have the given expiration month. */
-    public Builder setExpMonth(Long expMonth) {
-      this.expMonth = expMonth;
-      return this;
-    }
-
-    /** Only return cards that have the given expiration year. */
-    public Builder setExpYear(Long expYear) {
-      this.expYear = expYear;
-      return this;
-    }
-
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardListParams#expand} for the field documentation.
+     * TokenListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -218,7 +159,7 @@ public class CardListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardListParams#expand} for the field documentation.
+     * TokenListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -231,7 +172,7 @@ public class CardListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardListParams#extraParams} for the field documentation.
+     * TokenListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -244,7 +185,7 @@ public class CardListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardListParams#extraParams} for the field documentation.
+     * See {@link TokenListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -254,23 +195,12 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return cards that have the given last four digits. */
-    public Builder setLast4(String last4) {
-      this.last4 = last4;
-      return this;
-    }
-
     /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
      * default is 10.
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
-      return this;
-    }
-
-    public Builder setPersonalizationDesign(String personalizationDesign) {
-      this.personalizationDesign = personalizationDesign;
       return this;
     }
 
@@ -285,18 +215,9 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Only return cards that have the given status. One of {@code active}, {@code inactive}, or
-     * {@code canceled}.
-     */
-    public Builder setStatus(CardListParams.Status status) {
+    /** Select Issuing tokens with the given status. */
+    public Builder setStatus(TokenListParams.Status status) {
       this.status = status;
-      return this;
-    }
-
-    /** Only return cards that have the given type. One of {@code virtual} or {@code physical}. */
-    public Builder setType(CardListParams.Type type) {
-      this.type = type;
       return this;
     }
   }
@@ -352,14 +273,14 @@ public class CardListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardListParams.Created build() {
-        return new CardListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TokenListParams.Created build() {
+        return new TokenListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardListParams.Created#extraParams} for the field documentation.
+       * TokenListParams.Created#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -372,7 +293,7 @@ public class CardListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardListParams.Created#extraParams} for the field documentation.
+       * See {@link TokenListParams.Created#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -412,31 +333,19 @@ public class CardListParams extends ApiRequestParams {
     @SerializedName("active")
     ACTIVE("active"),
 
-    @SerializedName("canceled")
-    CANCELED("canceled"),
+    @SerializedName("deleted")
+    DELETED("deleted"),
 
-    @SerializedName("inactive")
-    INACTIVE("inactive");
+    @SerializedName("requested")
+    REQUESTED("requested"),
+
+    @SerializedName("suspended")
+    SUSPENDED("suspended");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
     Status(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("physical")
-    PHYSICAL("physical"),
-
-    @SerializedName("virtual")
-    VIRTUAL("virtual");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Type(String value) {
       this.value = value;
     }
   }

@@ -13,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 public class TokenCreateParams extends ApiRequestParams {
-  /** Information for the account this token will represent. */
+  /** Information for the account this token represents. */
   @SerializedName("account")
   Account account;
 
@@ -30,16 +30,16 @@ public class TokenCreateParams extends ApiRequestParams {
   Object card;
 
   /**
-   * The customer (owned by the application's account) for which to create a token. This can be used
-   * only with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access token</a>
-   * or <a href="https://stripe.com/docs/connect/authentication">Stripe-Account header</a>. For more
-   * details, see <a href="https://stripe.com/docs/connect/cloning-saved-payment-methods">Cloning
-   * Saved Payment Methods</a>.
+   * Create a token for the customer, which is owned by the application's account. You can only use
+   * this with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access token</a>
+   * or <a href="https://stripe.com/docs/connect/authentication">Stripe-Account header</a>. Learn
+   * more about <a href="https://stripe.com/docs/connect/cloning-saved-payment-methods">cloning
+   * saved payment methods</a>.
    */
   @SerializedName("customer")
   String customer;
 
-  /** The updated CVC value this token will represent. */
+  /** The updated CVC value this token represents. */
   @SerializedName("cvc_update")
   CvcUpdate cvcUpdate;
 
@@ -56,11 +56,11 @@ public class TokenCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Information for the person this token will represent. */
+  /** Information for the person this token represents. */
   @SerializedName("person")
   Person person;
 
-  /** The PII this token will represent. */
+  /** The PII this token represents. */
   @SerializedName("pii")
   Pii pii;
 
@@ -122,7 +122,7 @@ public class TokenCreateParams extends ApiRequestParams {
           this.pii);
     }
 
-    /** Information for the account this token will represent. */
+    /** Information for the account this token represents. */
     public Builder setAccount(TokenCreateParams.Account account) {
       this.account = account;
       return this;
@@ -155,19 +155,19 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The customer (owned by the application's account) for which to create a token. This can be
-     * used only with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access
+     * Create a token for the customer, which is owned by the application's account. You can only
+     * use this with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access
      * token</a> or <a href="https://stripe.com/docs/connect/authentication">Stripe-Account
-     * header</a>. For more details, see <a
-     * href="https://stripe.com/docs/connect/cloning-saved-payment-methods">Cloning Saved Payment
-     * Methods</a>.
+     * header</a>. Learn more about <a
+     * href="https://stripe.com/docs/connect/cloning-saved-payment-methods">cloning saved payment
+     * methods</a>.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /** The updated CVC value this token will represent. */
+    /** The updated CVC value this token represents. */
     public Builder setCvcUpdate(TokenCreateParams.CvcUpdate cvcUpdate) {
       this.cvcUpdate = cvcUpdate;
       return this;
@@ -225,13 +225,13 @@ public class TokenCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Information for the person this token will represent. */
+    /** Information for the person this token represents. */
     public Builder setPerson(TokenCreateParams.Person person) {
       this.person = person;
       return this;
     }
 
-    /** The PII this token will represent. */
+    /** The PII this token represents. */
     public Builder setPii(TokenCreateParams.Pii pii) {
       this.pii = pii;
       return this;
