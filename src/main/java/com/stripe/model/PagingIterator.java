@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import com.stripe.net.*;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -9,8 +10,7 @@ import java.util.NoSuchElementException;
 public class PagingIterator<T extends HasId> extends ApiResource implements Iterator<T> {
   private final String url;
 
-  @SuppressWarnings("rawtypes")
-  private final Class<? extends StripeCollectionInterface> collectionType;
+  private final Type pageType;
 
   private StripeCollectionInterface<T> currentCollection;
   private Iterator<T> currentDataIterator;
@@ -18,10 +18,12 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
   private String lastId;
 
   PagingIterator(
-      final StripeCollectionInterface<T> stripeCollection, StripeResponseGetter responseGetter) {
+      final StripeCollectionInterface<T> stripeCollection,
+      StripeResponseGetter responseGetter,
+      Type pageType) {
     this.url = stripeCollection.getUrl();
 
-    this.collectionType = stripeCollection.getClass();
+    this.pageType = pageType;
 
     this.currentCollection = stripeCollection;
     this.currentDataIterator = stripeCollection.getData().iterator();
@@ -76,7 +78,6 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
   private StripeCollectionInterface<T> list(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
     return getResponseGetter()
-        .request(
-            BaseAddress.API, RequestMethod.GET, url, params, collectionType, options, ApiMode.V1);
+        .request(BaseAddress.API, RequestMethod.GET, url, params, pageType, options, ApiMode.V1);
   }
 }

@@ -2,6 +2,7 @@ package com.stripe.model;
 
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -58,16 +59,19 @@ public class StripeCollection<T extends HasId> extends StripeObject
   @Setter(onMethod = @__({@Override}))
   private Map<String, Object> requestParams;
 
+  @Setter(onMethod = @__({@Override}))
+  private transient Type pageTypeToken;
+
   public Iterable<T> autoPagingIterable() {
     this.responseGetter.validateRequestOptions(this.requestOptions);
-    return new PagingIterable<>(this, responseGetter);
+    return new PagingIterable<>(this, responseGetter, pageTypeToken);
   }
 
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
     this.responseGetter.validateRequestOptions(this.requestOptions);
 
     this.setRequestParams(params);
-    return new PagingIterable<>(this, responseGetter);
+    return new PagingIterable<>(this, responseGetter, pageTypeToken);
   }
 
   /**
@@ -82,7 +86,7 @@ public class StripeCollection<T extends HasId> extends StripeObject
     this.responseGetter.validateRequestOptions(options);
     this.setRequestOptions(options);
     this.setRequestParams(params);
-    return new PagingIterable<>(this, responseGetter);
+    return new PagingIterable<>(this, responseGetter, pageTypeToken);
   }
 
   @Override

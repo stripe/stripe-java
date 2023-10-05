@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import com.stripe.net.*;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -9,8 +10,7 @@ import java.util.NoSuchElementException;
 public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> {
   private final String url;
 
-  @SuppressWarnings("rawtypes")
-  private final Class<? extends StripeSearchResultInterface> collectionType;
+  private final Type pageType;
 
   private StripeSearchResultInterface<T> currentSearchResult;
   private Iterator<T> currentDataIterator;
@@ -19,14 +19,14 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
 
   SearchPagingIterator(
       final StripeSearchResultInterface<T> stripeSearchResult,
-      StripeResponseGetter responseGetter) {
+      StripeResponseGetter responseGetter,
+      Type pageType) {
     this.url = stripeSearchResult.getUrl();
     this.nextPage = stripeSearchResult.getNextPage();
 
-    this.collectionType = stripeSearchResult.getClass();
-
     this.currentSearchResult = stripeSearchResult;
     this.currentDataIterator = stripeSearchResult.getData().iterator();
+    this.pageType = pageType;
     setResponseGetter(responseGetter);
   }
 
@@ -74,11 +74,9 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
     throw new UnsupportedOperationException();
   }
 
-  @SuppressWarnings("unchecked")
   private StripeSearchResultInterface<T> search(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
     return getResponseGetter()
-        .request(
-            BaseAddress.API, RequestMethod.GET, url, params, collectionType, options, ApiMode.V1);
+        .request(BaseAddress.API, RequestMethod.GET, url, params, pageType, options, ApiMode.V1);
   }
 }

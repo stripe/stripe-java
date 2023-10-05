@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -13,6 +14,7 @@ import com.stripe.net.ApiMode;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -360,5 +362,38 @@ public class PagingIteratorTest extends BaseStripeTest {
     assertEquals("pm_125", models.get(2).getId());
     assertEquals("pm_126", models.get(3).getId());
     assertEquals("pm_127", models.get(4).getId());
+  }
+
+  @Test
+  public void testPaginationWithStripeClient() throws StripeException {
+    StripeResponse firstResponse =
+        new StripeResponse(
+            200,
+            HttpHeaders.of(Collections.emptyMap()),
+            "{\"object\": \"list\", \"url\": \"/v1/subscriptions\", \"data\": [{\"object\": \"subscription\", \"id\": \"1\"}], \"has_more\": true}");
+    StripeResponse secondResponse =
+        new StripeResponse(
+            200,
+            HttpHeaders.of(Collections.emptyMap()),
+            "{\"object\": \"list\", \"url\": \"/v1/subscriptions\", \"data\": [{\"object\": \"subscription\", \"id\": \"2\"}], \"has_more\": false}");
+
+    AtomicInteger count = new AtomicInteger(0);
+    Mockito.doAnswer(
+            new Answer<StripeResponse>() {
+              public StripeResponse answer(InvocationOnMock invocation) {
+                if (count.getAndIncrement() == 0) {
+                  return firstResponse;
+                }
+                return secondResponse;
+              }
+            })
+        .when(httpClientSpy)
+        .requestWithRetries(Mockito.<StripeRequest>any());
+    List<String> seen = new ArrayList<String>();
+    for (final Subscription sub : mockClient.subscriptions().list().autoPagingIterable()) {
+      assertInstanceOf(Subscription.class, sub);
+      seen.add(sub.getId());
+    }
+    assertEquals(2, seen.size());
   }
 }

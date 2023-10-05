@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -10,8 +11,10 @@ import com.stripe.exception.ApiKeyMissingException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.*;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
+import com.stripe.param.SubscriptionSearchParams;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -250,5 +253,43 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     assertEquals("pm_125", models.get(2).getId());
     assertEquals("pm_126", models.get(3).getId());
     assertEquals("pm_127", models.get(4).getId());
+  }
+
+  @Test
+  public void testPaginationWithStripeClient() throws StripeException {
+    StripeResponse firstResponse =
+        new StripeResponse(
+            200,
+            HttpHeaders.of(Collections.emptyMap()),
+            "{\"object\": \"search_result\", \"url\": \"/v1/subscriptions/search\", \"data\": [{\"object\": \"subscription\", \"id\": \"1\"}], \"has_more\": true, \"next_page\": "
+                + "\"/v1/subscriptions/search?page=2\"}");
+    StripeResponse secondResponse =
+        new StripeResponse(
+            200,
+            HttpHeaders.of(Collections.emptyMap()),
+            "{\"object\": \"search_result\", \"url\": \"/v1/subscriptions\", \"data\": [{\"object\": \"subscription\", \"id\": \"2\"}], \"has_more\": false}");
+
+    AtomicInteger count = new AtomicInteger(0);
+    Mockito.doAnswer(
+            new Answer<StripeResponse>() {
+              public StripeResponse answer(InvocationOnMock invocation) {
+                if (count.getAndIncrement() == 0) {
+                  return firstResponse;
+                }
+                return secondResponse;
+              }
+            })
+        .when(httpClientSpy)
+        .requestWithRetries(Mockito.<StripeRequest>any());
+    List<String> seen = new ArrayList<String>();
+    for (final Subscription sub :
+        mockClient
+            .subscriptions()
+            .search(SubscriptionSearchParams.builder().build())
+            .autoPagingIterable()) {
+      assertInstanceOf(Subscription.class, sub);
+      seen.add(sub.getId());
+    }
+    assertEquals(2, seen.size());
   }
 }
