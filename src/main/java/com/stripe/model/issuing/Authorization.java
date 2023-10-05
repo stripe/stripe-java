@@ -177,6 +177,15 @@ public class Authorization extends ApiResource
   String status;
 
   /**
+   * <a href="https://stripe.com/docs/api/issuing/tokens/object">Token</a> object used for this
+   * authorization. If a network token was not used for this authorization, this field will be null.
+   */
+  @SerializedName("token")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Token> token;
+
+  /**
    * List of <a href="https://stripe.com/docs/api/issuing/transactions">transactions</a> associated
    * with this authorization.
    */
@@ -217,6 +226,24 @@ public class Authorization extends ApiResource
 
   public void setCardholderObject(Cardholder expandableObject) {
     this.cardholder = new ExpandableField<Cardholder>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code token} object. */
+  public String getToken() {
+    return (this.token != null) ? this.token.getId() : null;
+  }
+
+  public void setToken(String id) {
+    this.token = ApiResource.setExpandableFieldId(id, this.token);
+  }
+
+  /** Get expanded {@code token}. */
+  public Token getTokenObject() {
+    return (this.token != null) ? this.token.getExpanded() : null;
+  }
+
+  public void setTokenObject(Token expandableObject) {
+    this.token = new ExpandableField<Token>(expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -731,6 +758,16 @@ public class Authorization extends ApiResource
     @SerializedName("approved")
     Boolean approved;
 
+    /**
+     * A code created by Stripe which is shared with the merchant to validate the authorization.
+     * This field will be populated if the authorization message was approved. The code typically
+     * starts with the letter &quot;S&quot;, followed by a six-digit number. For example,
+     * &quot;S498162&quot;. Please note that the code is not guaranteed to be unique across
+     * authorizations.
+     */
+    @SerializedName("authorization_code")
+    String authorizationCode;
+
     /** Time at which the object was created. Measured in seconds since the Unix epoch. */
     @SerializedName("created")
     Long created;
@@ -1149,6 +1186,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);
+    trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
     trySetResponseGetter(verificationData, responseGetter);
   }

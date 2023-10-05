@@ -3010,6 +3010,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+     * declaratively set metadata on [Payment Intents] (/docs/api/payment_intents) generated from
+     * this payment link. Unlike object-level metadata, this field is declarative. Updates will
+     * clear prior values.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * Indicates that you intend to <a
      * href="https://stripe.com/docs/payments/payment-intents#future-usage">make future payments</a>
      * with the payment method collected by this Checkout Session.
@@ -3033,13 +3042,35 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("setup_future_usage")
     SetupFutureUsage setupFutureUsage;
 
+    /**
+     * Extra information about the payment. This will appear on your customer's statement when this
+     * payment succeeds in creating a charge.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /**
+     * Provides information about the charge that customers see on their statements. Concatenated
+     * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+     * form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    @SerializedName("statement_descriptor_suffix")
+    String statementDescriptorSuffix;
+
     private PaymentIntentData(
         CaptureMethod captureMethod,
         Map<String, Object> extraParams,
-        SetupFutureUsage setupFutureUsage) {
+        Map<String, String> metadata,
+        SetupFutureUsage setupFutureUsage,
+        String statementDescriptor,
+        String statementDescriptorSuffix) {
       this.captureMethod = captureMethod;
       this.extraParams = extraParams;
+      this.metadata = metadata;
       this.setupFutureUsage = setupFutureUsage;
+      this.statementDescriptor = statementDescriptor;
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
     }
 
     public static Builder builder() {
@@ -3051,12 +3082,23 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Map<String, String> metadata;
+
       private SetupFutureUsage setupFutureUsage;
+
+      private String statementDescriptor;
+
+      private String statementDescriptorSuffix;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkCreateParams.PaymentIntentData build() {
         return new PaymentLinkCreateParams.PaymentIntentData(
-            this.captureMethod, this.extraParams, this.setupFutureUsage);
+            this.captureMethod,
+            this.extraParams,
+            this.metadata,
+            this.setupFutureUsage,
+            this.statementDescriptor,
+            this.statementDescriptorSuffix);
       }
 
       /** Controls when the funds will be captured from the customer's account. */
@@ -3094,6 +3136,32 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.PaymentIntentData#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.PaymentIntentData#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
        * Indicates that you intend to <a
        * href="https://stripe.com/docs/payments/payment-intents#future-usage">make future
        * payments</a> with the payment method collected by this Checkout Session.
@@ -3118,6 +3186,26 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       public Builder setSetupFutureUsage(
           PaymentLinkCreateParams.PaymentIntentData.SetupFutureUsage setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;
+        return this;
+      }
+
+      /**
+       * Extra information about the payment. This will appear on your customer's statement when
+       * this payment succeeds in creating a charge.
+       */
+      public Builder setStatementDescriptor(String statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /**
+       * Provides information about the charge that customers see on their statements. Concatenated
+       * with the prefix (shortened descriptor) or statement descriptor that's set on the account to
+       * form the complete statement descriptor. Maximum 22 characters for the concatenated
+       * descriptor.
+       */
+      public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+        this.statementDescriptorSuffix = statementDescriptorSuffix;
         return this;
       }
     }
@@ -4133,6 +4221,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+     * declaratively set metadata on [Subscriptions] (/docs/api/subscriptions) generated from this
+     * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
+     * prior values.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time. Has to be at least 1.
      */
@@ -4140,9 +4237,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     Long trialPeriodDays;
 
     private SubscriptionData(
-        String description, Map<String, Object> extraParams, Long trialPeriodDays) {
+        String description,
+        Map<String, Object> extraParams,
+        Map<String, String> metadata,
+        Long trialPeriodDays) {
       this.description = description;
       this.extraParams = extraParams;
+      this.metadata = metadata;
       this.trialPeriodDays = trialPeriodDays;
     }
 
@@ -4155,12 +4256,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Map<String, String> metadata;
+
       private Long trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkCreateParams.SubscriptionData build() {
         return new PaymentLinkCreateParams.SubscriptionData(
-            this.description, this.extraParams, this.trialPeriodDays);
+            this.description, this.extraParams, this.metadata, this.trialPeriodDays);
       }
 
       /**
@@ -4196,6 +4299,32 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

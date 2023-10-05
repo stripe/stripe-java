@@ -87,13 +87,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
 
-  /** Payment-method-specific configuration for this SetupIntent. */
+  /** Payment method-specific configuration for this SetupIntent. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If
-   * this is not provided, defaults to [&quot;card&quot;].
+   * The list of payment method types (for example, card) that this SetupIntent can set up. If you
+   * don't provide this array, it defaults to [&quot;card&quot;].
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -390,7 +390,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Payment-method-specific configuration for this SetupIntent. */
+    /** Payment method-specific configuration for this SetupIntent. */
     public Builder setPaymentMethodOptions(
         SetupIntentUpdateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;

@@ -28,8 +28,8 @@ public final class SetupIntentService extends ApiService {
   /**
    * Creates a SetupIntent object.
    *
-   * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * <p>After you create the SetupIntent, attach a payment method and <a
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> it to collect any required
    * permissions to charge the payment method later.
    */
   public SetupIntent create(SetupIntentCreateParams params) throws StripeException {
@@ -38,8 +38,8 @@ public final class SetupIntentService extends ApiService {
   /**
    * Creates a SetupIntent object.
    *
-   * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * <p>After you create the SetupIntent, attach a payment method and <a
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> it to collect any required
    * permissions to charge the payment method later.
    */
   public SetupIntent create(RequestOptions options) throws StripeException {
@@ -48,8 +48,8 @@ public final class SetupIntentService extends ApiService {
   /**
    * Creates a SetupIntent object.
    *
-   * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * <p>After you create the SetupIntent, attach a payment method and <a
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> it to collect any required
    * permissions to charge the payment method later.
    */
   public SetupIntent create() throws StripeException {
@@ -58,8 +58,8 @@ public final class SetupIntentService extends ApiService {
   /**
    * Creates a SetupIntent object.
    *
-   * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * <p>After you create the SetupIntent, attach a payment method and <a
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> it to collect any required
    * permissions to charge the payment method later.
    */
   public SetupIntent create(SetupIntentCreateParams params, RequestOptions options)
