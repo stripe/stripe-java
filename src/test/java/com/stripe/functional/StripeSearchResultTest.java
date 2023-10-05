@@ -14,6 +14,7 @@ import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.StripeRequest;
 import com.stripe.net.StripeResponse;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.SubscriptionSearchParams;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,7 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-public class StripeCollectionTest extends BaseStripeTest {
+public class StripeSearchResultTest extends BaseStripeTest {
   @Test
   public void testPaginationWithStripeClient() throws StripeException {
     HttpClient spy = Mockito.spy(new HttpURLConnectionClient());
@@ -33,12 +34,13 @@ public class StripeCollectionTest extends BaseStripeTest {
         new StripeResponse(
             200,
             HttpHeaders.of(Collections.emptyMap()),
-            "{\"object\": \"list\", \"url\": \"/v1/subscriptions\", \"data\": [{\"object\": \"subscription\", \"id\": \"1\"}], \"has_more\": true}");
+            "{\"object\": \"search_result\", \"url\": \"/v1/subscriptions/search\", \"data\": [{\"object\": \"subscription\", \"id\": \"1\"}], \"has_more\": true, \"next_page\": "
+                + "\"/v1/subscriptions/search?page=2\"}");
     StripeResponse secondResponse =
         new StripeResponse(
             200,
             HttpHeaders.of(Collections.emptyMap()),
-            "{\"object\": \"list\", \"url\": \"/v1/subscriptions\", \"data\": [{\"object\": \"subscription\", \"id\": \"2\"}], \"has_more\": false}");
+            "{\"object\": \"search_result\", \"url\": \"/v1/subscriptions\", \"data\": [{\"object\": \"subscription\", \"id\": \"2\"}], \"has_more\": false}");
 
     AtomicInteger count = new AtomicInteger(0);
     Mockito.doAnswer(
@@ -53,7 +55,11 @@ public class StripeCollectionTest extends BaseStripeTest {
         .when(spy)
         .requestWithRetries(Mockito.<StripeRequest>any());
     List<String> seen = new ArrayList<String>();
-    for (final Subscription sub : client.subscriptions().list().autoPagingIterable()) {
+    for (final Subscription sub :
+        client
+            .subscriptions()
+            .search(SubscriptionSearchParams.builder().build())
+            .autoPagingIterable()) {
       assertInstanceOf(Subscription.class, sub);
       seen.add(sub.getId());
     }
