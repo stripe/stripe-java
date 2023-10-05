@@ -12,11 +12,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.*;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import com.stripe.param.SubscriptionSearchParams;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -256,6 +254,7 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     assertEquals("pm_126", models.get(3).getId());
     assertEquals("pm_127", models.get(4).getId());
   }
+
   @Test
   public void testPaginationWithStripeClient() throws StripeException {
     StripeResponse firstResponse =
