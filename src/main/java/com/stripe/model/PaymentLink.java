@@ -849,7 +849,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
-     * metadata on [Payment Intents] (/docs/api/payment_intents) generated from this payment link.
+     * metadata on <a href="https://stripe.com/docs/api/payment_intents">Payment Intents</a>
+     * generated from this payment link.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
@@ -949,7 +950,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
-     * metadata on [Subscriptions] (/docs/api/subscriptions) generated from this payment link.
+     * metadata on <a href="https://stripe.com/docs/api/subscriptions">Subscriptions</a> generated
+     * from this payment link.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
