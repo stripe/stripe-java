@@ -901,6 +901,10 @@ public class Authorization extends ApiResource
     @SerializedName("expiry_check")
     String expiryCheck;
 
+    /** The postal code submitted as part of the authorization used for postal code verification. */
+    @SerializedName("postal_code")
+    String postalCode;
+
     /** 3D Secure details. */
     @SerializedName("three_d_secure")
     ThreeDSecure threeDSecure;
