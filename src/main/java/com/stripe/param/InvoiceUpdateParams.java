@@ -3189,8 +3189,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Page size for invoice PDF. Can be set to a4, letter, or auto. If set to auto, page size
-       * will be switched to a4 or letter based on customer locale.
+       * Page size for invoice PDF. Can be set to {@code a4}, {@code letter}, or {@code auto}. If
+       * set to {@code auto}, invoice PDF page size defaults to {@code a4} for customers with
+       * Japanese locale and {@code letter} for customers with other locales.
        */
       @SerializedName("page_size")
       PageSize pageSize;
@@ -3243,8 +3244,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Page size for invoice PDF. Can be set to a4, letter, or auto. If set to auto, page size
-         * will be switched to a4 or letter based on customer locale.
+         * Page size for invoice PDF. Can be set to {@code a4}, {@code letter}, or {@code auto}. If
+         * set to {@code auto}, invoice PDF page size defaults to {@code a4} for customers with
+         * Japanese locale and {@code letter} for customers with other locales.
          */
         public Builder setPageSize(InvoiceUpdateParams.Rendering.Pdf.PageSize pageSize) {
           this.pageSize = pageSize;
