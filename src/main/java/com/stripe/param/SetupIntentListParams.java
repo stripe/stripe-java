@@ -61,7 +61,7 @@ public class SetupIntentListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return SetupIntents associated with the specified payment method. */
+  /** Only return SetupIntents that associate with the specified payment method. */
   @SerializedName("payment_method")
   String paymentMethod;
 
@@ -244,7 +244,7 @@ public class SetupIntentListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return SetupIntents associated with the specified payment method. */
+    /** Only return SetupIntents that associate with the specified payment method. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;
