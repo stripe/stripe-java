@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 public class SetupIntentCancelParams extends ApiRequestParams {
   /**
-   * Reason for canceling this SetupIntent. Possible values are {@code abandoned}, {@code
+   * Reason for canceling this SetupIntent. Possible values are: {@code abandoned}, {@code
    * requested_by_customer}, or {@code duplicate}
    */
   @SerializedName("cancellation_reason")
@@ -55,7 +55,7 @@ public class SetupIntentCancelParams extends ApiRequestParams {
     }
 
     /**
-     * Reason for canceling this SetupIntent. Possible values are {@code abandoned}, {@code
+     * Reason for canceling this SetupIntent. Possible values are: {@code abandoned}, {@code
      * requested_by_customer}, or {@code duplicate}
      */
     public Builder setCancellationReason(

@@ -354,10 +354,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel() throws StripeException {
@@ -365,10 +365,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(RequestOptions options) throws StripeException {
@@ -376,10 +376,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(Map<String, Object> params) throws StripeException {
@@ -387,10 +387,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(Map<String, Object> params, RequestOptions options)
@@ -409,10 +409,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(SetupIntentCancelParams params) throws StripeException {
@@ -420,10 +420,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(SetupIntentCancelParams params, RequestOptions options)
