@@ -27,14 +27,6 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   @SerializedName("decision")
   Decision decision;
 
-  /**
-   * If an exception to the usual underwriting criteria was made for this decision, details about
-   * the exception must be provided. Exceptions should only be granted in rare circumstances, in
-   * consultation with Stripe Compliance.
-   */
-  @SerializedName("exception")
-  Exception exception;
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -62,7 +54,6 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
       CreditUser creditUser,
       Long decidedAt,
       Decision decision,
-      Exception exception,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata) {
@@ -70,7 +61,6 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     this.creditUser = creditUser;
     this.decidedAt = decidedAt;
     this.decision = decision;
-    this.exception = exception;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -89,8 +79,6 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
     private Decision decision;
 
-    private Exception exception;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -104,7 +92,6 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
           this.creditUser,
           this.decidedAt,
           this.decision,
-          this.exception,
           this.expand,
           this.extraParams,
           this.metadata);
@@ -131,16 +118,6 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     /** Details about the decision. */
     public Builder setDecision(CreditUnderwritingRecordCorrectParams.Decision decision) {
       this.decision = decision;
-      return this;
-    }
-
-    /**
-     * If an exception to the usual underwriting criteria was made for this decision, details about
-     * the exception must be provided. Exceptions should only be granted in rare circumstances, in
-     * consultation with Stripe Compliance.
-     */
-    public Builder setException(CreditUnderwritingRecordCorrectParams.Exception exception) {
-      this.exception = exception;
       return this;
     }
 
@@ -1671,122 +1648,6 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
       private final String value;
 
       Type(String value) {
-        this.value = value;
-      }
-    }
-  }
-
-  @Getter
-  public static class Exception {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** <strong>Required.</strong> The decision before the exception was applied. */
-    @SerializedName("original_decision_type")
-    OriginalDecisionType originalDecisionType;
-
-    /** <strong>Required.</strong> Written explanation for the exception. */
-    @SerializedName("reason")
-    String reason;
-
-    private Exception(
-        Map<String, Object> extraParams, OriginalDecisionType originalDecisionType, String reason) {
-      this.extraParams = extraParams;
-      this.originalDecisionType = originalDecisionType;
-      this.reason = reason;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private OriginalDecisionType originalDecisionType;
-
-      private String reason;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public CreditUnderwritingRecordCorrectParams.Exception build() {
-        return new CreditUnderwritingRecordCorrectParams.Exception(
-            this.extraParams, this.originalDecisionType, this.reason);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CreditUnderwritingRecordCorrectParams.Exception#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CreditUnderwritingRecordCorrectParams.Exception#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** <strong>Required.</strong> The decision before the exception was applied. */
-      public Builder setOriginalDecisionType(
-          CreditUnderwritingRecordCorrectParams.Exception.OriginalDecisionType
-              originalDecisionType) {
-        this.originalDecisionType = originalDecisionType;
-        return this;
-      }
-
-      /** <strong>Required.</strong> Written explanation for the exception. */
-      public Builder setReason(String reason) {
-        this.reason = reason;
-        return this;
-      }
-    }
-
-    public enum OriginalDecisionType implements ApiRequestParams.EnumParam {
-      @SerializedName("additional_information_requested")
-      ADDITIONAL_INFORMATION_REQUESTED("additional_information_requested"),
-
-      @SerializedName("application_rejected")
-      APPLICATION_REJECTED("application_rejected"),
-
-      @SerializedName("credit_limit_approved")
-      CREDIT_LIMIT_APPROVED("credit_limit_approved"),
-
-      @SerializedName("credit_limit_decreased")
-      CREDIT_LIMIT_DECREASED("credit_limit_decreased"),
-
-      @SerializedName("credit_line_closed")
-      CREDIT_LINE_CLOSED("credit_line_closed"),
-
-      @SerializedName("no_changes")
-      NO_CHANGES("no_changes"),
-
-      @SerializedName("withdrawn_by_applicant")
-      WITHDRAWN_BY_APPLICANT("withdrawn_by_applicant");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      OriginalDecisionType(String value) {
         this.value = value;
       }
     }
