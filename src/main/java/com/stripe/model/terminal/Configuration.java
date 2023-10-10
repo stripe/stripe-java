@@ -59,6 +59,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  @SerializedName("offline")
+  Offline offline;
+
   @SerializedName("tipping")
   Tipping tipping;
 
@@ -295,6 +298,18 @@ public class Configuration extends ApiResource implements HasId {
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Offline extends StripeObject {
+    /**
+     * Determines whether to allow transactions to be collected while reader is offline. Defaults to
+     * false.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   @Getter
@@ -657,6 +672,7 @@ public class Configuration extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
+    trySetResponseGetter(offline, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
   }
