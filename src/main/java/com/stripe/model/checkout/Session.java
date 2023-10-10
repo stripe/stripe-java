@@ -900,7 +900,6 @@ public class Session extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomField extends StripeObject {
-    /** Configuration for {@code type=dropdown} fields. */
     @SerializedName("dropdown")
     Dropdown dropdown;
 
@@ -914,7 +913,6 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("label")
     Label label;
 
-    /** Configuration for {@code type=numeric} fields. */
     @SerializedName("numeric")
     Numeric numeric;
 
@@ -925,7 +923,6 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("optional")
     Boolean optional;
 
-    /** Configuration for {@code type=text} fields. */
     @SerializedName("text")
     Text text;
 
