@@ -1,6 +1,14 @@
 # Changelog
 
 
+## 23.9.0 - 2023-10-11
+* [#1668](https://github.com/stripe/stripe-java/pull/1668) Update generated code
+  * Add support for `redirect_on_completion`, `return_url`, and `ui_mode` on `Checkout.Session` and `checkout.SessionCreateParams`
+  * Change `checkout.SessionCreateParams.success_url` to be optional
+  * Add support for `client_secret` on `Checkout.Session`
+  * Add support for `postal_code` on `Issuing.Authorization.verification_data`
+  * Add support for `offline` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
+
 ## 23.8.0 - 2023-10-05
 * [#1663](https://github.com/stripe/stripe-java/pull/1663) Flow type information further into autopagination requests
 * [#1662](https://github.com/stripe/stripe-java/pull/1662) Update generated code
