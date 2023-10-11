@@ -48,19 +48,29 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /**
+   * If an exception to the usual underwriting criteria was made for this decision, details about
+   * the exception must be provided. Exceptions should only be granted in rare circumstances, in
+   * consultation with Stripe Compliance.
+   */
+  @SerializedName("underwriting_exception")
+  UnderwritingException underwritingException;
+
   private CreditUnderwritingRecordCreateFromProactiveReviewParams(
       CreditUser creditUser,
       Long decidedAt,
       Decision decision,
       List<String> expand,
       Map<String, Object> extraParams,
-      Map<String, String> metadata) {
+      Map<String, String> metadata,
+      UnderwritingException underwritingException) {
     this.creditUser = creditUser;
     this.decidedAt = decidedAt;
     this.decision = decision;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.underwritingException = underwritingException;
   }
 
   public static Builder builder() {
@@ -80,6 +90,8 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
 
     private Map<String, String> metadata;
 
+    private UnderwritingException underwritingException;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CreditUnderwritingRecordCreateFromProactiveReviewParams build() {
       return new CreditUnderwritingRecordCreateFromProactiveReviewParams(
@@ -88,7 +100,8 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
           this.decision,
           this.expand,
           this.extraParams,
-          this.metadata);
+          this.metadata,
+          this.underwritingException);
     }
 
     /**
@@ -193,6 +206,18 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * If an exception to the usual underwriting criteria was made for this decision, details about
+     * the exception must be provided. Exceptions should only be granted in rare circumstances, in
+     * consultation with Stripe Compliance.
+     */
+    public Builder setUnderwritingException(
+        CreditUnderwritingRecordCreateFromProactiveReviewParams.UnderwritingException
+            underwritingException) {
+      this.underwritingException = underwritingException;
       return this;
     }
   }
@@ -1200,6 +1225,127 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
       private final String value;
 
       Type(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class UnderwritingException {
+    /** <strong>Required.</strong> Written explanation for the exception. */
+    @SerializedName("explanation")
+    String explanation;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The decision before the exception was applied. */
+    @SerializedName("original_decision_type")
+    OriginalDecisionType originalDecisionType;
+
+    private UnderwritingException(
+        String explanation,
+        Map<String, Object> extraParams,
+        OriginalDecisionType originalDecisionType) {
+      this.explanation = explanation;
+      this.extraParams = extraParams;
+      this.originalDecisionType = originalDecisionType;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String explanation;
+
+      private Map<String, Object> extraParams;
+
+      private OriginalDecisionType originalDecisionType;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CreditUnderwritingRecordCreateFromProactiveReviewParams.UnderwritingException build() {
+        return new CreditUnderwritingRecordCreateFromProactiveReviewParams.UnderwritingException(
+            this.explanation, this.extraParams, this.originalDecisionType);
+      }
+
+      /** <strong>Required.</strong> Written explanation for the exception. */
+      public Builder setExplanation(String explanation) {
+        this.explanation = explanation;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CreditUnderwritingRecordCreateFromProactiveReviewParams.UnderwritingException#extraParams}
+       * for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link
+       * CreditUnderwritingRecordCreateFromProactiveReviewParams.UnderwritingException#extraParams}
+       * for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The decision before the exception was applied. */
+      public Builder setOriginalDecisionType(
+          CreditUnderwritingRecordCreateFromProactiveReviewParams.UnderwritingException
+                  .OriginalDecisionType
+              originalDecisionType) {
+        this.originalDecisionType = originalDecisionType;
+        return this;
+      }
+    }
+
+    public enum OriginalDecisionType implements ApiRequestParams.EnumParam {
+      @SerializedName("additional_information_requested")
+      ADDITIONAL_INFORMATION_REQUESTED("additional_information_requested"),
+
+      @SerializedName("application_rejected")
+      APPLICATION_REJECTED("application_rejected"),
+
+      @SerializedName("credit_limit_approved")
+      CREDIT_LIMIT_APPROVED("credit_limit_approved"),
+
+      @SerializedName("credit_limit_decreased")
+      CREDIT_LIMIT_DECREASED("credit_limit_decreased"),
+
+      @SerializedName("credit_line_closed")
+      CREDIT_LINE_CLOSED("credit_line_closed"),
+
+      @SerializedName("no_changes")
+      NO_CHANGES("no_changes"),
+
+      @SerializedName("withdrawn_by_applicant")
+      WITHDRAWN_BY_APPLICANT("withdrawn_by_applicant");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      OriginalDecisionType(String value) {
         this.value = value;
       }
     }

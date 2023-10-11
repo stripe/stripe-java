@@ -69,14 +69,6 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   @SerializedName("decision_deadline")
   Long decisionDeadline;
 
-  /**
-   * If an exception to the usual underwriting criteria was made for this application, details about
-   * the exception must be provided. Exceptions should only be granted in rare circumstances, in
-   * consultation with Stripe Compliance.
-   */
-  @SerializedName("exception")
-  Exception exception;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -104,6 +96,14 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /**
+   * If an exception to the usual underwriting criteria was made for this application, details about
+   * the exception must be provided. Exceptions should only be granted in rare circumstances, in
+   * consultation with Stripe Compliance.
+   */
+  @SerializedName("underwriting_exception")
+  UnderwritingException underwritingException;
 
   /** Update a {@code CreditUnderwritingRecord} object to correct mistakes. */
   public CreditUnderwritingRecord correct() throws StripeException {
@@ -596,7 +596,11 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Exception extends StripeObject {
+  public static class UnderwritingException extends StripeObject {
+    /** Written explanation for the exception. */
+    @SerializedName("explanation")
+    String explanation;
+
     /**
      * The decision before the exception was applied.
      *
@@ -606,10 +610,6 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
      */
     @SerializedName("original_decision_type")
     String originalDecisionType;
-
-    /** Written explanation for the exception. */
-    @SerializedName("reason")
-    String reason;
   }
 
   @Override
@@ -618,6 +618,6 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(creditUser, responseGetter);
     trySetResponseGetter(decision, responseGetter);
-    trySetResponseGetter(exception, responseGetter);
+    trySetResponseGetter(underwritingException, responseGetter);
   }
 }
