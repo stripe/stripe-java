@@ -29,6 +29,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Configurations for collecting transactions offline. */
+  @SerializedName("offline")
+  Object offline;
+
   /** Tipping configurations for readers supporting on-reader tips. */
   @SerializedName("tipping")
   Object tipping;
@@ -41,11 +45,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       Object bbposWiseposE,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object offline,
       Object tipping,
       Object verifoneP400) {
     this.bbposWiseposE = bbposWiseposE;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.offline = offline;
     this.tipping = tipping;
     this.verifoneP400 = verifoneP400;
   }
@@ -61,6 +67,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Object offline;
+
     private Object tipping;
 
     private Object verifoneP400;
@@ -68,7 +76,12 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ConfigurationUpdateParams build() {
       return new ConfigurationUpdateParams(
-          this.bbposWiseposE, this.expand, this.extraParams, this.tipping, this.verifoneP400);
+          this.bbposWiseposE,
+          this.expand,
+          this.extraParams,
+          this.offline,
+          this.tipping,
+          this.verifoneP400);
     }
 
     /** An object containing device type specific settings for BBPOS WisePOS E readers. */
@@ -132,6 +145,18 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Configurations for collecting transactions offline. */
+    public Builder setOffline(ConfigurationUpdateParams.Offline offline) {
+      this.offline = offline;
+      return this;
+    }
+
+    /** Configurations for collecting transactions offline. */
+    public Builder setOffline(EmptyParam offline) {
+      this.offline = offline;
       return this;
     }
 
@@ -230,6 +255,80 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       /** A File ID representing an image you would like displayed on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Offline {
+    /**
+     * <strong>Required.</strong> Determines whether to allow transactions to be collected while
+     * reader is offline. Defaults to false.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Offline(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationUpdateParams.Offline build() {
+        return new ConfigurationUpdateParams.Offline(this.enabled, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> Determines whether to allow transactions to be collected while
+       * reader is offline. Defaults to false.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationUpdateParams.Offline#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationUpdateParams.Offline#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }

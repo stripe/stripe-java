@@ -53,6 +53,14 @@ public final class SessionService extends ApiService {
     return create(params, (RequestOptions) null);
   }
   /** Creates a Session object. */
+  public Session create(RequestOptions options) throws StripeException {
+    return create((SessionCreateParams) null, options);
+  }
+  /** Creates a Session object. */
+  public Session create() throws StripeException {
+    return create((SessionCreateParams) null, (RequestOptions) null);
+  }
+  /** Creates a Session object. */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/checkout/sessions";
     return getResponseGetter()

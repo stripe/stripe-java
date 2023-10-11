@@ -21,6 +21,10 @@ public final class IssuingService extends ApiService {
     return new com.stripe.service.issuing.CardService(this.getResponseGetter());
   }
 
+  public com.stripe.service.issuing.CreditUnderwritingRecordService creditUnderwritingRecords() {
+    return new com.stripe.service.issuing.CreditUnderwritingRecordService(this.getResponseGetter());
+  }
+
   public com.stripe.service.issuing.DisputeService disputes() {
     return new com.stripe.service.issuing.DisputeService(this.getResponseGetter());
   }

@@ -609,6 +609,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("account.updated")
     ACCOUNT__UPDATED("account.updated"),
 
+    @SerializedName("account_notice.created")
+    ACCOUNT_NOTICE__CREATED("account_notice.created"),
+
+    @SerializedName("account_notice.updated")
+    ACCOUNT_NOTICE__UPDATED("account_notice.updated"),
+
     @SerializedName("application_fee.created")
     APPLICATION_FEE__CREATED("application_fee.created"),
 

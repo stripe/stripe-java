@@ -256,6 +256,23 @@ public class SessionCreateParams extends ApiRequestParams {
   PhoneNumberCollection phoneNumberCollection;
 
   /**
+   * This parameter applies to {@code ui_mode: embedded}. By default, Stripe will always redirect to
+   * your return_url after a successful confirmation. If you set {@code redirect_on_completion:
+   * 'if_required'}, then we will only redirect if your user chooses a redirect-based payment
+   * method.
+   */
+  @SerializedName("redirect_on_completion")
+  RedirectOnCompletion redirectOnCompletion;
+
+  /**
+   * The URL to redirect your customer back to after they authenticate or cancel their payment on
+   * the payment method's app or site. This parameter is required if ui_mode is {@code embedded} and
+   * redirect-based payment methods are enabled on the session.
+   */
+  @SerializedName("return_url")
+  String returnUrl;
+
+  /**
    * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in {@code
    * setup} mode.
    */
@@ -289,9 +306,8 @@ public class SessionCreateParams extends ApiRequestParams {
   SubscriptionData subscriptionData;
 
   /**
-   * <strong>Required.</strong> The URL to which Stripe should send customers when payment or setup
-   * is complete. If you’d like to use information from the successful Checkout Session on your
-   * page, read the guide on <a
+   * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
+   * to use information from the successful Checkout Session on your page, read the guide on <a
    * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
    * page</a>.
    */
@@ -301,6 +317,10 @@ public class SessionCreateParams extends ApiRequestParams {
   /** Controls tax ID collection settings for the session. */
   @SerializedName("tax_id_collection")
   TaxIdCollection taxIdCollection;
+
+  /** {@code ui_mode} can be {@code hosted} or {@code embedded}. The default is {@code hosted}. */
+  @SerializedName("ui_mode")
+  UiMode uiMode;
 
   private SessionCreateParams(
       AfterExpiration afterExpiration,
@@ -332,13 +352,16 @@ public class SessionCreateParams extends ApiRequestParams {
       PaymentMethodOptions paymentMethodOptions,
       List<SessionCreateParams.PaymentMethodType> paymentMethodTypes,
       PhoneNumberCollection phoneNumberCollection,
+      RedirectOnCompletion redirectOnCompletion,
+      String returnUrl,
       SetupIntentData setupIntentData,
       ShippingAddressCollection shippingAddressCollection,
       List<SessionCreateParams.ShippingOption> shippingOptions,
       SubmitType submitType,
       SubscriptionData subscriptionData,
       String successUrl,
-      TaxIdCollection taxIdCollection) {
+      TaxIdCollection taxIdCollection,
+      UiMode uiMode) {
     this.afterExpiration = afterExpiration;
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
@@ -368,6 +391,8 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.phoneNumberCollection = phoneNumberCollection;
+    this.redirectOnCompletion = redirectOnCompletion;
+    this.returnUrl = returnUrl;
     this.setupIntentData = setupIntentData;
     this.shippingAddressCollection = shippingAddressCollection;
     this.shippingOptions = shippingOptions;
@@ -375,6 +400,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
     this.taxIdCollection = taxIdCollection;
+    this.uiMode = uiMode;
   }
 
   public static Builder builder() {
@@ -440,6 +466,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PhoneNumberCollection phoneNumberCollection;
 
+    private RedirectOnCompletion redirectOnCompletion;
+
+    private String returnUrl;
+
     private SetupIntentData setupIntentData;
 
     private ShippingAddressCollection shippingAddressCollection;
@@ -453,6 +483,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private String successUrl;
 
     private TaxIdCollection taxIdCollection;
+
+    private UiMode uiMode;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
@@ -486,13 +518,16 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.phoneNumberCollection,
+          this.redirectOnCompletion,
+          this.returnUrl,
           this.setupIntentData,
           this.shippingAddressCollection,
           this.shippingOptions,
           this.submitType,
           this.subscriptionData,
           this.successUrl,
-          this.taxIdCollection);
+          this.taxIdCollection,
+          this.uiMode);
     }
 
     /** Configure actions after a Checkout Session has expired. */
@@ -902,6 +937,28 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
+     * This parameter applies to {@code ui_mode: embedded}. By default, Stripe will always redirect
+     * to your return_url after a successful confirmation. If you set {@code redirect_on_completion:
+     * 'if_required'}, then we will only redirect if your user chooses a redirect-based payment
+     * method.
+     */
+    public Builder setRedirectOnCompletion(
+        SessionCreateParams.RedirectOnCompletion redirectOnCompletion) {
+      this.redirectOnCompletion = redirectOnCompletion;
+      return this;
+    }
+
+    /**
+     * The URL to redirect your customer back to after they authenticate or cancel their payment on
+     * the payment method's app or site. This parameter is required if ui_mode is {@code embedded}
+     * and redirect-based payment methods are enabled on the session.
+     */
+    public Builder setReturnUrl(String returnUrl) {
+      this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /**
      * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in {@code
      * setup} mode.
      */
@@ -966,11 +1023,10 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The URL to which Stripe should send customers when payment or
-     * setup is complete. If you’d like to use information from the successful Checkout Session on
-     * your page, read the guide on <a
-     * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
-     * page</a>.
+     * The URL to which Stripe should send customers when payment or setup is complete. If you’d
+     * like to use information from the successful Checkout Session on your page, read the guide on
+     * <a href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your
+     * success page</a>.
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
@@ -980,6 +1036,12 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Controls tax ID collection settings for the session. */
     public Builder setTaxIdCollection(SessionCreateParams.TaxIdCollection taxIdCollection) {
       this.taxIdCollection = taxIdCollection;
+      return this;
+    }
+
+    /** {@code ui_mode} can be {@code hosted} or {@code embedded}. The default is {@code hosted}. */
+    public Builder setUiMode(SessionCreateParams.UiMode uiMode) {
+      this.uiMode = uiMode;
       return this;
     }
   }
@@ -13339,6 +13401,24 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  public enum RedirectOnCompletion implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("if_required")
+    IF_REQUIRED("if_required"),
+
+    @SerializedName("never")
+    NEVER("never");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    RedirectOnCompletion(String value) {
+      this.value = value;
+    }
+  }
+
   public enum SubmitType implements ApiRequestParams.EnumParam {
     @SerializedName("auto")
     AUTO("auto"),
@@ -13356,6 +13436,21 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     SubmitType(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum UiMode implements ApiRequestParams.EnumParam {
+    @SerializedName("embedded")
+    EMBEDDED("embedded"),
+
+    @SerializedName("hosted")
+    HOSTED("hosted");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    UiMode(String value) {
       this.value = value;
     }
   }

@@ -10,14 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class SetupIntentCancelParams extends ApiRequestParams {
-  /**
-   * Reason for canceling this SetupIntent. Possible values are: {@code abandoned}, {@code
-   * requested_by_customer}, or {@code duplicate}
-   */
-  @SerializedName("cancellation_reason")
-  CancellationReason cancellationReason;
-
+public class AccountNoticeRetrieveParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -31,9 +24,7 @@ public class SetupIntentCancelParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private SetupIntentCancelParams(
-      CancellationReason cancellationReason, List<String> expand, Map<String, Object> extraParams) {
-    this.cancellationReason = cancellationReason;
+  private AccountNoticeRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -43,31 +34,19 @@ public class SetupIntentCancelParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private CancellationReason cancellationReason;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public SetupIntentCancelParams build() {
-      return new SetupIntentCancelParams(this.cancellationReason, this.expand, this.extraParams);
-    }
-
-    /**
-     * Reason for canceling this SetupIntent. Possible values are: {@code abandoned}, {@code
-     * requested_by_customer}, or {@code duplicate}
-     */
-    public Builder setCancellationReason(
-        SetupIntentCancelParams.CancellationReason cancellationReason) {
-      this.cancellationReason = cancellationReason;
-      return this;
+    public AccountNoticeRetrieveParams build() {
+      return new AccountNoticeRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SetupIntentCancelParams#expand} for the field documentation.
+     * AccountNoticeRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -80,7 +59,7 @@ public class SetupIntentCancelParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SetupIntentCancelParams#expand} for the field documentation.
+     * AccountNoticeRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -93,7 +72,7 @@ public class SetupIntentCancelParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SetupIntentCancelParams#extraParams} for the field documentation.
+     * AccountNoticeRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -106,7 +85,7 @@ public class SetupIntentCancelParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SetupIntentCancelParams#extraParams} for the field documentation.
+     * See {@link AccountNoticeRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -114,24 +93,6 @@ public class SetupIntentCancelParams extends ApiRequestParams {
       }
       this.extraParams.putAll(map);
       return this;
-    }
-  }
-
-  public enum CancellationReason implements ApiRequestParams.EnumParam {
-    @SerializedName("abandoned")
-    ABANDONED("abandoned"),
-
-    @SerializedName("duplicate")
-    DUPLICATE("duplicate"),
-
-    @SerializedName("requested_by_customer")
-    REQUESTED_BY_CUSTOMER("requested_by_customer");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    CancellationReason(String value) {
-      this.value = value;
     }
   }
 }

@@ -14,6 +14,7 @@ final class EventDataClassLookup {
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
+    classLookup.put("account_notice", AccountNotice.class);
     classLookup.put("account_session", AccountSession.class);
     classLookup.put("apple_pay_domain", ApplePayDomain.class);
     classLookup.put("application", Application.class);
@@ -133,6 +134,9 @@ final class EventDataClassLookup {
     classLookup.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
     classLookup.put("issuing.card", com.stripe.model.issuing.Card.class);
     classLookup.put("issuing.cardholder", com.stripe.model.issuing.Cardholder.class);
+    classLookup.put(
+        "issuing.credit_underwriting_record",
+        com.stripe.model.issuing.CreditUnderwritingRecord.class);
     classLookup.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
     classLookup.put(
         "issuing.personalization_design", com.stripe.model.issuing.PersonalizationDesign.class);

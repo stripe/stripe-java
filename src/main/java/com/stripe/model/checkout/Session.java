@@ -99,6 +99,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("client_reference_id")
   String clientReferenceId;
 
+  /** Client secret to be used when initializing Stripe.js embedded checkout. */
+  @SerializedName("client_secret")
+  String clientSecret;
+
   /** Results of {@code consent_collection} for this session. */
   @SerializedName("consent")
   Consent consent;
@@ -292,6 +296,24 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("recovered_from")
   String recoveredFrom;
 
+  /**
+   * Applies to Checkout Sessions with {@code ui_mode: embedded}. By default, Stripe will always
+   * redirect to your return_url after a successful confirmation. If you set {@code
+   * redirect_on_completion: 'if_required'}, then we will only redirect if your user chooses a
+   * redirect-based payment method.
+   *
+   * <p>One of {@code always}, {@code if_required}, or {@code never}.
+   */
+  @SerializedName("redirect_on_completion")
+  String redirectOnCompletion;
+
+  /**
+   * Applies to Checkout Sessions with {@code ui_mode: embedded}. The URL to redirect your customer
+   * back to after they authenticate or cancel their payment on the payment method's app or site.
+   */
+  @SerializedName("return_url")
+  String returnUrl;
+
   /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
@@ -352,6 +374,10 @@ public class Session extends ApiResource implements HasId {
   /** Tax and discount details for the computed total amount. */
   @SerializedName("total_details")
   TotalDetails totalDetails;
+
+  /** The UI mode of the Session. Can be {@code hosted} (default) or {@code embedded}. */
+  @SerializedName("ui_mode")
+  String uiMode;
 
   /**
    * The URL to the Checkout Session. Redirect customers to this URL to take them to Checkout. If
@@ -920,7 +946,6 @@ public class Session extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomField extends StripeObject {
-    /** Configuration for {@code type=dropdown} fields. */
     @SerializedName("dropdown")
     Dropdown dropdown;
 
@@ -934,7 +959,6 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("label")
     Label label;
 
-    /** Configuration for {@code type=numeric} fields. */
     @SerializedName("numeric")
     Numeric numeric;
 
@@ -945,7 +969,6 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("optional")
     Boolean optional;
 
-    /** Configuration for {@code type=text} fields. */
     @SerializedName("text")
     Text text;
 
