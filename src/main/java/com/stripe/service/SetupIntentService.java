@@ -267,40 +267,40 @@ public final class SetupIntentService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(String intent, SetupIntentCancelParams params) throws StripeException {
     return cancel(intent, params, (RequestOptions) null);
   }
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(String intent, RequestOptions options) throws StripeException {
     return cancel(intent, (SetupIntentCancelParams) null, options);
   }
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(String intent) throws StripeException {
     return cancel(intent, (SetupIntentCancelParams) null, (RequestOptions) null);
   }
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
    * error.
    */
   public SetupIntent cancel(String intent, SetupIntentCancelParams params, RequestOptions options)

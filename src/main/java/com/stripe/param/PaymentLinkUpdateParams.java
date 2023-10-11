@@ -2815,9 +2815,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
-     * declaratively set metadata on [Payment Intents] (/docs/api/payment_intents) generated from
-     * this payment link. Unlike object-level metadata, this field is declarative. Updates will
-     * clear prior values.
+     * declaratively set metadata on <a href="https://stripe.com/docs/api/payment_intents">Payment
+     * Intents</a> generated from this payment link. Unlike object-level metadata, this field is
+     * declarative. Updates will clear prior values.
      */
     @SerializedName("metadata")
     Object metadata;
@@ -2928,9 +2928,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
-       * declaratively set metadata on [Payment Intents] (/docs/api/payment_intents) generated from
-       * this payment link. Unlike object-level metadata, this field is declarative. Updates will
-       * clear prior values.
+       * declaratively set metadata on <a href="https://stripe.com/docs/api/payment_intents">Payment
+       * Intents</a> generated from this payment link. Unlike object-level metadata, this field is
+       * declarative. Updates will clear prior values.
        */
       public Builder setMetadata(EmptyParam metadata) {
         this.metadata = metadata;
@@ -2939,9 +2939,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
-       * declaratively set metadata on [Payment Intents] (/docs/api/payment_intents) generated from
-       * this payment link. Unlike object-level metadata, this field is declarative. Updates will
-       * clear prior values.
+       * declaratively set metadata on <a href="https://stripe.com/docs/api/payment_intents">Payment
+       * Intents</a> generated from this payment link. Unlike object-level metadata, this field is
+       * declarative. Updates will clear prior values.
        */
       public Builder setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
@@ -3824,7 +3824,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
-     * declaratively set metadata on [Subscriptions] (/docs/api/subscriptions) generated from this
+     * declaratively set metadata on <a
+     * href="https://stripe.com/docs/api/subscriptions">Subscriptions</a> generated from this
      * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
      * prior values.
      */
@@ -3907,7 +3908,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
-       * declaratively set metadata on [Subscriptions] (/docs/api/subscriptions) generated from this
+       * declaratively set metadata on <a
+       * href="https://stripe.com/docs/api/subscriptions">Subscriptions</a> generated from this
        * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
        * prior values.
        */
@@ -3918,7 +3920,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
-       * declaratively set metadata on [Subscriptions] (/docs/api/subscriptions) generated from this
+       * declaratively set metadata on <a
+       * href="https://stripe.com/docs/api/subscriptions">Subscriptions</a> generated from this
        * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
        * prior values.
        */

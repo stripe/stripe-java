@@ -25,7 +25,6 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** This hash contains details about the Mandate to create. */
   @SerializedName("mandate_data")
   Object mandateData;
 
@@ -44,7 +43,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
 
-  /** Payment-method-specific configuration for this SetupIntent. */
+  /** Payment method-specific configuration for this SetupIntent. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
@@ -169,13 +168,11 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
-    /** This hash contains details about the Mandate to create. */
     public Builder setMandateData(SetupIntentConfirmParams.MandateData mandateData) {
       this.mandateData = mandateData;
       return this;
     }
 
-    /** This hash contains details about the Mandate to create. */
     public Builder setMandateData(EmptyParam mandateData) {
       this.mandateData = mandateData;
       return this;
@@ -201,7 +198,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
-    /** Payment-method-specific configuration for this SetupIntent. */
+    /** Payment method-specific configuration for this SetupIntent. */
     public Builder setPaymentMethodOptions(
         SetupIntentConfirmParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;

@@ -99,9 +99,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
   String object;
 
   /**
-   * Learn more about how [reporting categories]
-   * (https://stripe.com/docs/reports/reporting-categories) can help you understand balance
-   * transactions from an accounting perspective.
+   * Learn more about how <a href="https://stripe.com/docs/reports/reporting-categories">reporting
+   * categories</a> can help you understand balance transactions from an accounting perspective.
    */
   @SerializedName("reporting_category")
   String reportingCategory;
