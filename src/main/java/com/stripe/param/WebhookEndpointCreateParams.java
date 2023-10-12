@@ -889,6 +889,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("issuing_dispute.updated")
     ISSUING_DISPUTE__UPDATED("issuing_dispute.updated"),
 
+    @SerializedName("issuing_token.created")
+    ISSUING_TOKEN__CREATED("issuing_token.created"),
+
+    @SerializedName("issuing_token.updated")
+    ISSUING_TOKEN__UPDATED("issuing_token.updated"),
+
     @SerializedName("issuing_transaction.created")
     ISSUING_TRANSACTION__CREATED("issuing_transaction.created"),
 
