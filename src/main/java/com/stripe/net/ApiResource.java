@@ -32,12 +32,11 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
 
   protected StripeResponseGetter getResponseGetter() {
     if (this.responseGetter == null) {
-      if (isGlobalFallbackDisallowed())
-      {
+      if (isGlobalFallbackDisallowed()) {
         throw new IllegalStateException(
-                "The resource you're trying to use was deserialized without the use of ApiResource.GSON.\n"
-                        + "ApiResource.GSON contains type adapters that are important for correct deserialization and functioning of the resource.\n"
-                        + "To deserialize Events use Webhook.constructEvent, for other resources use ApiResource.GSON.fromJson(...)`");
+            "The resource you're trying to use was deserialized without the use of ApiResource.GSON.\n"
+                + "ApiResource.GSON contains type adapters that are important for correct deserialization and functioning of the resource.\n"
+                + "To deserialize Events use Webhook.constructEvent, for other resources use ApiResource.GSON.fromJson(...)`");
       }
       return getGlobalResponseGetter();
     }
@@ -150,6 +149,7 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
   }
 
   private static boolean isGlobalFallbackDisallowed() {
-    return !Objects.equals(System.getProperty("stripe.disallowGlobalResponseGetterFallback"), "true");
+    return Objects.equals(
+        System.getProperty("stripe.disallowGlobalResponseGetterFallback"), "true");
   }
 }

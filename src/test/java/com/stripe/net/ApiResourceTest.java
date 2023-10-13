@@ -57,6 +57,6 @@ class ApiResourceTest extends BaseStripeTest {
     Charge charge = ApiResource.INTERNAL_GSON.fromJson(json, Charge.class);
     IllegalStateException e =
         assertThrows(IllegalStateException.class, () -> charge.update(new HashMap<>()));
-    assertTrue(e.getMessage().contains("contact Stripe Support"));
+    assertTrue(e.getMessage().contains("The resource you're trying to use was deserialized without the use of ApiResource.GSON"));
   }
 }
