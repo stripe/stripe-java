@@ -33,10 +33,9 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
   protected StripeResponseGetter getResponseGetter() {
     if (this.responseGetter == null) {
       throw new IllegalStateException(
-          "The StripeResponseGetter has not been set on this resource. "
-              + "This should not happen and is likely a bug in the Stripe Java library. "
-              + "Please open a github issue on https://github.com/stripe/stripe-java or contact "
-              + "Stripe Support at https://support.stripe.com/contact/");
+          "The resource you're trying to use was deserialized without the use of ApiResource.GSON.\n"
+          + "ApiResource.GSON contains type adapters that are important for correct deserialization and functioning of the resource.\n"
+          + "To deserialize Events use Webhook.constructEvent, for other resources use ApiResource.GSON.fromJson(...)`");
     }
     return this.responseGetter;
   }
