@@ -119,6 +119,8 @@ test {
         events "passed", "skipped", "failed"
         exceptionFormat "full"
     }
+
+    systemProperty "stripe.disallowGlobalResponseGetterFallback", "true"
 }
 
 spotless {
