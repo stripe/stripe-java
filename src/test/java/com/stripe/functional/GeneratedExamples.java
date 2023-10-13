@@ -2467,6 +2467,45 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testExternalAccountServiceList2() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.ExternalAccountListParams params =
+        com.stripe.param.ExternalAccountListParams.builder()
+            .setObject("bank_account")
+            .setLimit(3L)
+            .build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.ExternalAccount> stripeCollection =
+        client.accounts().externalAccounts().list("acct_xxxxxxxxxxxxx", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/external_accounts",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testExternalAccountServiceList3() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.ExternalAccountListParams params =
+        com.stripe.param.ExternalAccountListParams.builder().setObject("card").setLimit(3L).build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.ExternalAccount> stripeCollection =
+        client.accounts().externalAccounts().list("acct_xxxxxxxxxxxxx", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/external_accounts",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testExternalAccountServiceCreate() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
