@@ -143,9 +143,9 @@ public class Event extends ApiResource implements HasId {
    * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_cardholder.created}, {@code
    * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
    * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
-   * issuing_dispute.updated}, {@code issuing_transaction.created}, {@code
-   * issuing_transaction.updated}, {@code mandate.updated}, {@code
-   * payment_intent.amount_capturable_updated}, {@code payment_intent.canceled}, {@code
+   * issuing_dispute.updated}, {@code issuing_token.created}, {@code issuing_token.updated}, {@code
+   * issuing_transaction.created}, {@code issuing_transaction.updated}, {@code mandate.updated},
+   * {@code payment_intent.amount_capturable_updated}, {@code payment_intent.canceled}, {@code
    * payment_intent.created}, {@code payment_intent.partially_funded}, {@code
    * payment_intent.payment_failed}, {@code payment_intent.processing}, {@code
    * payment_intent.requires_action}, {@code payment_intent.succeeded}, {@code

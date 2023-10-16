@@ -88,13 +88,18 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   Boolean deleted;
 
   /**
-   * If Stripe bills the customer's latest invoice by automatically charging and the latest charge
-   * fails, it sets {@code delinquent`` to }true{@code . If Stripe bills the invoice by sending it,
-   * and the invoice isn't paid by the due date, it also sets `delinquent} to {@code true}.
+   * Tracks the most recent state change on any invoice belonging to the customer. Paying an invoice
+   * or marking it uncollectible via the API will set this field to false. An automatic payment
+   * failure or passing the {@code invoice.due_date} will set this field to {@code true}.
    *
    * <p>If an invoice becomes uncollectible by <a
    * href="https://stripe.com/docs/billing/automatic-collection">dunning</a>, {@code delinquent}
    * doesn't reset to {@code false}.
+   *
+   * <p>If you care whether the customer has paid their most recent subscription invoice, use {@code
+   * subscription.status} instead. Paying or marking uncollectible any customer invoice regardless
+   * of whether it is the latest invoice for a subscription will always set this field to {@code
+   * false}.
    */
   @SerializedName("delinquent")
   Boolean delinquent;
