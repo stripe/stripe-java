@@ -23,7 +23,8 @@ import lombok.Setter;
 
 /**
  * An issuing token object is created when an issued card is added to a digital wallet. As a <a
- * href="https://stripe.com/docs/issuing">card issuer</a>, you can view and manage these tokens
+ * href="https://stripe.com/docs/issuing">card issuer</a>, you can <a
+ * href="https://stripe.com/docs/issuing/controls/token-management">view and manage these tokens</a>
  * through Stripe.
  */
 @Getter
