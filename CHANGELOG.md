@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 24.0.0 - 2023-10-16
+* This release changes the pinned API version to `2023-10-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
+* [#1672](https://github.com/stripe/stripe-java/pull/1672) Update generated code
+  * Add support for `legal_guardian` on `AccountPersonsParams.relationship` and `TokenCreateParams.person.relationship`
+  * Add support for `additional_tos_acceptances` on `TokenCreateParams.person`
+  * Add support for new value `2023-10-16` on enum `WebhookEndpointCreateParams.api_version`
+
 ## 23.10.0 - 2023-10-16
 * [#1670](https://github.com/stripe/stripe-java/pull/1670) Update generated code
   * Add support for new values `issuing_token.created` and `issuing_token.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
