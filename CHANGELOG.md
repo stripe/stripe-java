@@ -1,5 +1,9 @@
 # Changelog
 
+## 23.11.0-beta.1 - 2023-10-16
+* [#1669](https://github.com/stripe/stripe-java/pull/1669) Update generated code for beta
+
+
 ## 23.10.0-beta.1 - 2023-10-11
 * [#1667](https://github.com/stripe/stripe-java/pull/1667) Update generated code for beta
   * Add support for new resources `AccountNotice` and `Issuing.CreditUnderwritingRecord`
