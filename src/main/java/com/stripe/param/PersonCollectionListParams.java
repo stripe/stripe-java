@@ -218,6 +218,13 @@ public class PersonCollectionListParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * A filter on the list of people returned based on whether these people are legal guardians of
+     * the account's representative.
+     */
+    @SerializedName("legal_guardian")
+    Boolean legalGuardian;
+
+    /**
      * A filter on the list of people returned based on whether these people are owners of the
      * account's company.
      */
@@ -235,11 +242,13 @@ public class PersonCollectionListParams extends ApiRequestParams {
         Boolean director,
         Boolean executive,
         Map<String, Object> extraParams,
+        Boolean legalGuardian,
         Boolean owner,
         Boolean representative) {
       this.director = director;
       this.executive = executive;
       this.extraParams = extraParams;
+      this.legalGuardian = legalGuardian;
       this.owner = owner;
       this.representative = representative;
     }
@@ -255,6 +264,8 @@ public class PersonCollectionListParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Boolean legalGuardian;
+
       private Boolean owner;
 
       private Boolean representative;
@@ -262,7 +273,12 @@ public class PersonCollectionListParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PersonCollectionListParams.Relationship build() {
         return new PersonCollectionListParams.Relationship(
-            this.director, this.executive, this.extraParams, this.owner, this.representative);
+            this.director,
+            this.executive,
+            this.extraParams,
+            this.legalGuardian,
+            this.owner,
+            this.representative);
       }
 
       /**
@@ -307,6 +323,15 @@ public class PersonCollectionListParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * A filter on the list of people returned based on whether these people are legal guardians
+       * of the account's representative.
+       */
+      public Builder setLegalGuardian(Boolean legalGuardian) {
+        this.legalGuardian = legalGuardian;
         return this;
       }
 
