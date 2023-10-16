@@ -89,6 +89,11 @@
   * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 * [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
 
+## 23.10.0 - 2023-10-16
+* [#1670](https://github.com/stripe/stripe-java/pull/1670) Update generated code
+  * Add support for new values `issuing_token.created` and `issuing_token.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1671](https://github.com/stripe/stripe-java/pull/1671) Disallow falback to global response getter only in tests
+
 ## 23.9.0 - 2023-10-11
 * [#1668](https://github.com/stripe/stripe-java/pull/1668) Update generated code
   * Add support for `redirect_on_completion`, `return_url`, and `ui_mode` on `Checkout.Session` and `checkout.SessionCreateParams`
