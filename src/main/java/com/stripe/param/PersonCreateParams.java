@@ -13,6 +13,10 @@ import lombok.Getter;
 
 @Getter
 public class PersonCreateParams extends ApiRequestParams {
+  /** Details on the legal guardian's acceptance of the required Stripe agreements. */
+  @SerializedName("additional_tos_acceptances")
+  AdditionalTosAcceptances additionalTosAcceptances;
+
   /** The person's address. */
   @SerializedName("address")
   Address address;
@@ -161,6 +165,7 @@ public class PersonCreateParams extends ApiRequestParams {
   Verification verification;
 
   private PersonCreateParams(
+      AdditionalTosAcceptances additionalTosAcceptances,
       Address address,
       AddressKana addressKana,
       AddressKanji addressKanji,
@@ -189,6 +194,7 @@ public class PersonCreateParams extends ApiRequestParams {
       Relationship relationship,
       String ssnLast4,
       Verification verification) {
+    this.additionalTosAcceptances = additionalTosAcceptances;
     this.address = address;
     this.addressKana = addressKana;
     this.addressKanji = addressKanji;
@@ -224,6 +230,8 @@ public class PersonCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AdditionalTosAcceptances additionalTosAcceptances;
+
     private Address address;
 
     private AddressKana addressKana;
@@ -283,6 +291,7 @@ public class PersonCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PersonCreateParams build() {
       return new PersonCreateParams(
+          this.additionalTosAcceptances,
           this.address,
           this.addressKana,
           this.addressKanji,
@@ -311,6 +320,13 @@ public class PersonCreateParams extends ApiRequestParams {
           this.relationship,
           this.ssnLast4,
           this.verification);
+    }
+
+    /** Details on the legal guardian's acceptance of the required Stripe agreements. */
+    public Builder setAdditionalTosAcceptances(
+        PersonCreateParams.AdditionalTosAcceptances additionalTosAcceptances) {
+      this.additionalTosAcceptances = additionalTosAcceptances;
+      return this;
     }
 
     /** The person's address. */
@@ -628,6 +644,192 @@ public class PersonCreateParams extends ApiRequestParams {
     public Builder setVerification(PersonCreateParams.Verification verification) {
       this.verification = verification;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AdditionalTosAcceptances {
+    /** Details on the legal guardian's acceptance of the main Stripe service agreement. */
+    @SerializedName("account")
+    Account account;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AdditionalTosAcceptances(Account account, Map<String, Object> extraParams) {
+      this.account = account;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Account account;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PersonCreateParams.AdditionalTosAcceptances build() {
+        return new PersonCreateParams.AdditionalTosAcceptances(this.account, this.extraParams);
+      }
+
+      /** Details on the legal guardian's acceptance of the main Stripe service agreement. */
+      public Builder setAccount(PersonCreateParams.AdditionalTosAcceptances.Account account) {
+        this.account = account;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PersonCreateParams.AdditionalTosAcceptances#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PersonCreateParams.AdditionalTosAcceptances#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Account {
+      /**
+       * The Unix timestamp marking when the account representative accepted the service agreement.
+       */
+      @SerializedName("date")
+      Long date;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The IP address from which the account representative accepted the service agreement. */
+      @SerializedName("ip")
+      String ip;
+
+      /**
+       * The user agent of the browser from which the account representative accepted the service
+       * agreement.
+       */
+      @SerializedName("user_agent")
+      Object userAgent;
+
+      private Account(Long date, Map<String, Object> extraParams, String ip, Object userAgent) {
+        this.date = date;
+        this.extraParams = extraParams;
+        this.ip = ip;
+        this.userAgent = userAgent;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long date;
+
+        private Map<String, Object> extraParams;
+
+        private String ip;
+
+        private Object userAgent;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PersonCreateParams.AdditionalTosAcceptances.Account build() {
+          return new PersonCreateParams.AdditionalTosAcceptances.Account(
+              this.date, this.extraParams, this.ip, this.userAgent);
+        }
+
+        /**
+         * The Unix timestamp marking when the account representative accepted the service
+         * agreement.
+         */
+        public Builder setDate(Long date) {
+          this.date = date;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PersonCreateParams.AdditionalTosAcceptances.Account#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PersonCreateParams.AdditionalTosAcceptances.Account#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The IP address from which the account representative accepted the service agreement. */
+        public Builder setIp(String ip) {
+          this.ip = ip;
+          return this;
+        }
+
+        /**
+         * The user agent of the browser from which the account representative accepted the service
+         * agreement.
+         */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
+
+        /**
+         * The user agent of the browser from which the account representative accepted the service
+         * agreement.
+         */
+        public Builder setUserAgent(EmptyParam userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
+      }
     }
   }
 
@@ -1788,6 +1990,10 @@ public class PersonCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Whether the person is the legal guardian of the account's representative. */
+    @SerializedName("legal_guardian")
+    Boolean legalGuardian;
+
     /** Whether the person is an owner of the account’s legal entity. */
     @SerializedName("owner")
     Boolean owner;
@@ -1814,6 +2020,7 @@ public class PersonCreateParams extends ApiRequestParams {
         Boolean director,
         Boolean executive,
         Map<String, Object> extraParams,
+        Boolean legalGuardian,
         Boolean owner,
         Object percentOwnership,
         Boolean representative,
@@ -1821,6 +2028,7 @@ public class PersonCreateParams extends ApiRequestParams {
       this.director = director;
       this.executive = executive;
       this.extraParams = extraParams;
+      this.legalGuardian = legalGuardian;
       this.owner = owner;
       this.percentOwnership = percentOwnership;
       this.representative = representative;
@@ -1838,6 +2046,8 @@ public class PersonCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Boolean legalGuardian;
+
       private Boolean owner;
 
       private Object percentOwnership;
@@ -1852,6 +2062,7 @@ public class PersonCreateParams extends ApiRequestParams {
             this.director,
             this.executive,
             this.extraParams,
+            this.legalGuardian,
             this.owner,
             this.percentOwnership,
             this.representative,
@@ -1900,6 +2111,12 @@ public class PersonCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Whether the person is the legal guardian of the account's representative. */
+      public Builder setLegalGuardian(Boolean legalGuardian) {
+        this.legalGuardian = legalGuardian;
         return this;
       }
 
