@@ -1,8 +1,23 @@
 # Changelog
 
+## 24.1.0-beta.1 - 2023-10-17
+* [#1673](https://github.com/stripe/stripe-java/pull/1673) Update generated code for beta
+  - Update pinned API version to `2023-10-16`
+
+## 24.0.0 - 2023-10-16
+* This release changes the pinned API version to `2023-10-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
+* [#1672](https://github.com/stripe/stripe-java/pull/1672) Update generated code
+  * Add support for `legal_guardian` on `AccountPersonsParams.relationship` and `TokenCreateParams.person.relationship`
+  * Add support for `additional_tos_acceptances` on `TokenCreateParams.person`
+  * Add support for new value `2023-10-16` on enum `WebhookEndpointCreateParams.api_version`
+
 ## 23.11.0-beta.1 - 2023-10-16
 * [#1669](https://github.com/stripe/stripe-java/pull/1669) Update generated code for beta
 
+## 23.10.0 - 2023-10-16
+* [#1670](https://github.com/stripe/stripe-java/pull/1670) Update generated code
+  * Add support for new values `issuing_token.created` and `issuing_token.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1671](https://github.com/stripe/stripe-java/pull/1671) Disallow falback to global response getter only in tests
 
 ## 23.10.0-beta.1 - 2023-10-11
 * [#1667](https://github.com/stripe/stripe-java/pull/1667) Update generated code for beta
@@ -11,6 +26,14 @@
   * Add support for `correct`, `create_from_application`, `create_from_proactive_review`, `list`, `report_decision`, and `retrieve` methods on resource `CreditUnderwritingRecord`
   * Add support for new values `local_amusement_tax` and `state_communications_tax` on enum `tax.RegistrationCreateParams.country_options.us.type`
   * Add support for new values `account_notice.created` and `account_notice.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
+## 23.9.0 - 2023-10-11
+* [#1668](https://github.com/stripe/stripe-java/pull/1668) Update generated code
+  * Add support for `redirect_on_completion`, `return_url`, and `ui_mode` on `Checkout.Session` and `checkout.SessionCreateParams`
+  * Change `checkout.SessionCreateParams.success_url` to be optional
+  * Add support for `client_secret` on `Checkout.Session`
+  * Add support for `postal_code` on `Issuing.Authorization.verification_data`
+  * Add support for `offline` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
 
 ## 23.9.0-beta.1 - 2023-10-05
 * [#1666](https://github.com/stripe/stripe-java/pull/1666) Update generated code for beta
@@ -24,6 +47,21 @@
   * Add support for `personalization_design` on `issuing.CardListParams`
   * Add support for `allow_backdated_lines` on `QuoteCreateParams`, `QuoteUpdateParams`, and `Quote`
   * Rename `previewInvoiceLines` to `listPreviewInvoiceLines ` on resource `Quote`
+
+## 23.8.0 - 2023-10-05
+* [#1663](https://github.com/stripe/stripe-java/pull/1663) Flow type information further into autopagination requests
+* [#1662](https://github.com/stripe/stripe-java/pull/1662) Update generated code
+  * Add support for new resource `Issuing.Token`
+  * Add support for `list`, `retrieve`, and `update` methods on resource `Token`
+  * Add support for `amount_authorized`, `extended_authorization`, `incremental_authorization`, `multicapture`, and `overcapture` on `Charge.payment_method_details.card`
+  * Add support for `token` on `Issuing.Authorization` and `Issuing.Transaction`
+  * Add support for `authorization_code` on `Issuing.Authorization.request_history[]`
+  * Add support for `request_extended_authorization`, `request_multicapture`, and `request_overcapture` on `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, and `PaymentIntentUpdateParams.payment_method_options.card`
+  * Add support for `request_incremental_authorization` on `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card`
+  * Add support for `final_capture` on `PaymentIntentCaptureParams`
+  * Add support for `metadata` on `PaymentLink.payment_intent_data`, `PaymentLink.subscription_data`, `PaymentLinkCreateParams.payment_intent_data`, and `PaymentLinkCreateParams.subscription_data`
+  * Add support for `statement_descriptor_suffix` and `statement_descriptor` on `PaymentLink.payment_intent_data` and `PaymentLinkCreateParams.payment_intent_data`
+  * Add support for `payment_intent_data` and `subscription_data` on `PaymentLinkUpdateParams`
 
 ## 23.8.0-beta.1 - 2023-09-28
 * [#1656](https://github.com/stripe/stripe-java/pull/1656) Update generated code for beta
@@ -92,41 +130,6 @@
   * Remove support for `hk` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
   * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 * [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
-
-## 24.0.0 - 2023-10-16
-* This release changes the pinned API version to `2023-10-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
-* [#1672](https://github.com/stripe/stripe-java/pull/1672) Update generated code
-  * Add support for `legal_guardian` on `AccountPersonsParams.relationship` and `TokenCreateParams.person.relationship`
-  * Add support for `additional_tos_acceptances` on `TokenCreateParams.person`
-  * Add support for new value `2023-10-16` on enum `WebhookEndpointCreateParams.api_version`
-
-## 23.10.0 - 2023-10-16
-* [#1670](https://github.com/stripe/stripe-java/pull/1670) Update generated code
-  * Add support for new values `issuing_token.created` and `issuing_token.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-* [#1671](https://github.com/stripe/stripe-java/pull/1671) Disallow falback to global response getter only in tests
-
-## 23.9.0 - 2023-10-11
-* [#1668](https://github.com/stripe/stripe-java/pull/1668) Update generated code
-  * Add support for `redirect_on_completion`, `return_url`, and `ui_mode` on `Checkout.Session` and `checkout.SessionCreateParams`
-  * Change `checkout.SessionCreateParams.success_url` to be optional
-  * Add support for `client_secret` on `Checkout.Session`
-  * Add support for `postal_code` on `Issuing.Authorization.verification_data`
-  * Add support for `offline` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
-
-## 23.8.0 - 2023-10-05
-* [#1663](https://github.com/stripe/stripe-java/pull/1663) Flow type information further into autopagination requests
-* [#1662](https://github.com/stripe/stripe-java/pull/1662) Update generated code
-  * Add support for new resource `Issuing.Token`
-  * Add support for `list`, `retrieve`, and `update` methods on resource `Token`
-  * Add support for `amount_authorized`, `extended_authorization`, `incremental_authorization`, `multicapture`, and `overcapture` on `Charge.payment_method_details.card`
-  * Add support for `token` on `Issuing.Authorization` and `Issuing.Transaction`
-  * Add support for `authorization_code` on `Issuing.Authorization.request_history[]`
-  * Add support for `request_extended_authorization`, `request_multicapture`, and `request_overcapture` on `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, and `PaymentIntentUpdateParams.payment_method_options.card`
-  * Add support for `request_incremental_authorization` on `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card`
-  * Add support for `final_capture` on `PaymentIntentCaptureParams`
-  * Add support for `metadata` on `PaymentLink.payment_intent_data`, `PaymentLink.subscription_data`, `PaymentLinkCreateParams.payment_intent_data`, and `PaymentLinkCreateParams.subscription_data`
-  * Add support for `statement_descriptor_suffix` and `statement_descriptor` on `PaymentLink.payment_intent_data` and `PaymentLinkCreateParams.payment_intent_data`
-  * Add support for `payment_intent_data` and `subscription_data` on `PaymentLinkUpdateParams`
 
 ## 23.7.0 - 2023-09-28
 * [#1657](https://github.com/stripe/stripe-java/pull/1657) Update generated code
