@@ -13634,6 +13634,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       ApiRequestParams.EnumParam setupFutureUsage;
 
+      /**
+       * The Stripe connected account IDs of the sellers on the platform for this transaction
+       * (optional). Only allowed when <a
+       * href="https://stripe.com/docs/connect/separate-charges-and-transfers">separate charges and
+       * transfers</a> are used.
+       */
+      @SerializedName("subsellers")
+      List<String> subsellers;
+
       private Paypal(
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
@@ -13641,7 +13650,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           String reference,
           String referenceId,
           String riskCorrelationId,
-          ApiRequestParams.EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam setupFutureUsage,
+          List<String> subsellers) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.preferredLocale = preferredLocale;
@@ -13649,6 +13659,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.referenceId = referenceId;
         this.riskCorrelationId = riskCorrelationId;
         this.setupFutureUsage = setupFutureUsage;
+        this.subsellers = subsellers;
       }
 
       public static Builder builder() {
@@ -13670,6 +13681,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private ApiRequestParams.EnumParam setupFutureUsage;
 
+        private List<String> subsellers;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Paypal build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Paypal(
@@ -13679,7 +13692,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.reference,
               this.referenceId,
               this.riskCorrelationId,
-              this.setupFutureUsage);
+              this.setupFutureUsage,
+              this.subsellers);
         }
 
         /** Controls when the funds will be captured from the customer's account. */
@@ -13811,6 +13825,34 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Add an element to `subsellers` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentIntentConfirmParams.PaymentMethodOptions.Paypal#subsellers} for the field
+         * documentation.
+         */
+        public Builder addSubseller(String element) {
+          if (this.subsellers == null) {
+            this.subsellers = new ArrayList<>();
+          }
+          this.subsellers.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `subsellers` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentIntentConfirmParams.PaymentMethodOptions.Paypal#subsellers} for the field
+         * documentation.
+         */
+        public Builder addAllSubseller(List<String> elements) {
+          if (this.subsellers == null) {
+            this.subsellers = new ArrayList<>();
+          }
+          this.subsellers.addAll(elements);
           return this;
         }
       }

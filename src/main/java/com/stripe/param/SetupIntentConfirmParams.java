@@ -5724,10 +5724,24 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Paypal(String billingAgreementId, String currency, Map<String, Object> extraParams) {
+      /**
+       * The Stripe connected account IDs of the sellers on the platform for this transaction
+       * (optional). Only allowed when <a
+       * href="https://stripe.com/docs/connect/separate-charges-and-transfers">separate charges and
+       * transfers</a> are used.
+       */
+      @SerializedName("subsellers")
+      List<String> subsellers;
+
+      private Paypal(
+          String billingAgreementId,
+          String currency,
+          Map<String, Object> extraParams,
+          List<String> subsellers) {
         this.billingAgreementId = billingAgreementId;
         this.currency = currency;
         this.extraParams = extraParams;
+        this.subsellers = subsellers;
       }
 
       public static Builder builder() {
@@ -5741,10 +5755,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private List<String> subsellers;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentConfirmParams.PaymentMethodOptions.Paypal build() {
           return new SetupIntentConfirmParams.PaymentMethodOptions.Paypal(
-              this.billingAgreementId, this.currency, this.extraParams);
+              this.billingAgreementId, this.currency, this.extraParams, this.subsellers);
         }
 
         /**
@@ -5786,6 +5802,34 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `subsellers` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SetupIntentConfirmParams.PaymentMethodOptions.Paypal#subsellers} for the field
+         * documentation.
+         */
+        public Builder addSubseller(String element) {
+          if (this.subsellers == null) {
+            this.subsellers = new ArrayList<>();
+          }
+          this.subsellers.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `subsellers` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SetupIntentConfirmParams.PaymentMethodOptions.Paypal#subsellers} for the field
+         * documentation.
+         */
+        public Builder addAllSubseller(List<String> elements) {
+          if (this.subsellers == null) {
+            this.subsellers = new ArrayList<>();
+          }
+          this.subsellers.addAll(elements);
           return this;
         }
       }
