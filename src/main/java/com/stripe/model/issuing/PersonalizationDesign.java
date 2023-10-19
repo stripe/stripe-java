@@ -364,15 +364,15 @@ public class PersonalizationDesign extends ApiResource
      * connected account will use the Connect platform's default if no personalization design is set
      * as the account default.
      */
-    @SerializedName("account_default")
-    Boolean accountDefault;
+    @SerializedName("is_default")
+    Boolean isDefault;
 
     /**
-     * Whether this personalization design is used to create cards when one is not specified and an
-     * account default for this connected account does not exist.
+     * Whether this personalization design is used to create cards when one is not specified and a
+     * default for this connected account does not exist.
      */
-    @SerializedName("platform_default")
-    Boolean platformDefault;
+    @SerializedName("is_platform_default")
+    Boolean isPlatformDefault;
   }
 
   @Getter
