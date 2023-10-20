@@ -13,8 +13,8 @@ import lombok.Getter;
 public class RegistrationCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Time at which the Tax Registration becomes active. It can be either
-   * {@code now} to indicate the current time, or a timestamp measured in seconds since the Unix
-   * epoch.
+   * {@code now} to indicate the current time, or a future timestamp measured in seconds since the
+   * Unix epoch.
    */
   @SerializedName("active_from")
   Object activeFrom;
@@ -98,8 +98,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Time at which the Tax Registration becomes active. It can be
-     * either {@code now} to indicate the current time, or a timestamp measured in seconds since the
-     * Unix epoch.
+     * either {@code now} to indicate the current time, or a future timestamp measured in seconds
+     * since the Unix epoch.
      */
     public Builder setActiveFrom(Long activeFrom) {
       this.activeFrom = activeFrom;
@@ -108,8 +108,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Time at which the Tax Registration becomes active. It can be
-     * either {@code now} to indicate the current time, or a timestamp measured in seconds since the
-     * Unix epoch.
+     * either {@code now} to indicate the current time, or a future timestamp measured in seconds
+     * since the Unix epoch.
      */
     public Builder setActiveFrom(RegistrationCreateParams.ActiveFrom activeFrom) {
       this.activeFrom = activeFrom;
