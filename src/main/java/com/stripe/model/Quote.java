@@ -1763,10 +1763,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         /**
          * The reason the quote was marked as stale.
          *
-         * <p>One of {@code bill_on_acceptance_invalid}, {@code line_invalid}, {@code marked_stale},
-         * {@code subscription_canceled}, {@code subscription_changed}, {@code
-         * subscription_expired}, {@code subscription_schedule_canceled}, {@code
-         * subscription_schedule_changed}, or {@code subscription_schedule_released}.
+         * <p>One of {@code accept_failed_validations}, {@code bill_on_acceptance_invalid}, {@code
+         * line_invalid}, {@code marked_stale}, {@code subscription_canceled}, {@code
+         * subscription_changed}, {@code subscription_expired}, {@code
+         * subscription_schedule_canceled}, {@code subscription_schedule_changed}, or {@code
+         * subscription_schedule_released}.
          */
         @SerializedName("type")
         String type;
