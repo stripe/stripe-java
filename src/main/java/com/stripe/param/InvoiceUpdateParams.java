@@ -62,6 +62,12 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Long daysUntilDue;
 
   /**
+   * The ids of the margins to apply to the invoice. Can be overridden by line item {@code margins}.
+   */
+  @SerializedName("default_margins")
+  Object defaultMargins;
+
+  /**
    * ID of the default payment method for the invoice. It must belong to the customer associated
    * with the invoice. If not set, defaults to the subscription's default payment method, if any, or
    * to the default payment method in the customer's invoice settings.
@@ -211,6 +217,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       CollectionMethod collectionMethod,
       Object customFields,
       Long daysUntilDue,
+      Object defaultMargins,
       Object defaultPaymentMethod,
       Object defaultSource,
       Object defaultTaxRates,
@@ -238,6 +245,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.collectionMethod = collectionMethod;
     this.customFields = customFields;
     this.daysUntilDue = daysUntilDue;
+    this.defaultMargins = defaultMargins;
     this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
     this.defaultTaxRates = defaultTaxRates;
@@ -278,6 +286,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     private Object customFields;
 
     private Long daysUntilDue;
+
+    private Object defaultMargins;
 
     private Object defaultPaymentMethod;
 
@@ -329,6 +339,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.collectionMethod,
           this.customFields,
           this.daysUntilDue,
+          this.defaultMargins,
           this.defaultPaymentMethod,
           this.defaultSource,
           this.defaultTaxRates,
@@ -487,6 +498,52 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      */
     public Builder setDaysUntilDue(Long daysUntilDue) {
       this.daysUntilDue = daysUntilDue;
+      return this;
+    }
+
+    /**
+     * Add an element to `defaultMargins` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#defaultMargins} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addDefaultMargin(String element) {
+      if (this.defaultMargins == null || this.defaultMargins instanceof EmptyParam) {
+        this.defaultMargins = new ArrayList<String>();
+      }
+      ((List<String>) this.defaultMargins).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `defaultMargins` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#defaultMargins} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllDefaultMargin(List<String> elements) {
+      if (this.defaultMargins == null || this.defaultMargins instanceof EmptyParam) {
+        this.defaultMargins = new ArrayList<String>();
+      }
+      ((List<String>) this.defaultMargins).addAll(elements);
+      return this;
+    }
+
+    /**
+     * The ids of the margins to apply to the invoice. Can be overridden by line item {@code
+     * margins}.
+     */
+    public Builder setDefaultMargins(EmptyParam defaultMargins) {
+      this.defaultMargins = defaultMargins;
+      return this;
+    }
+
+    /**
+     * The ids of the margins to apply to the invoice. Can be overridden by line item {@code
+     * margins}.
+     */
+    public Builder setDefaultMargins(List<String> defaultMargins) {
+      this.defaultMargins = defaultMargins;
       return this;
     }
 

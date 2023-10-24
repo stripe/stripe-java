@@ -169,6 +169,10 @@ public class StripeClient {
     return new com.stripe.service.MandateService(this.getResponseGetter());
   }
 
+  public com.stripe.service.MarginService margins() {
+    return new com.stripe.service.MarginService(this.getResponseGetter());
+  }
+
   public com.stripe.service.OrderService orders() {
     return new com.stripe.service.OrderService(this.getResponseGetter());
   }
