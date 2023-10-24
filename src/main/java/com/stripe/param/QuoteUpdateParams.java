@@ -148,7 +148,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
   SubscriptionData subscriptionData;
 
   /**
-   * List representing overrides for {@code subscription_data} configurations for specific groups.
+   * List representing overrides for {@code subscription_data} configurations for specific
+   * subscription schedules.
    */
   @SerializedName("subscription_data_overrides")
   Object subscriptionDataOverrides;
@@ -721,7 +722,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * List representing overrides for {@code subscription_data} configurations for specific groups.
+     * List representing overrides for {@code subscription_data} configurations for specific
+     * subscription schedules.
      */
     public Builder setSubscriptionDataOverrides(EmptyParam subscriptionDataOverrides) {
       this.subscriptionDataOverrides = subscriptionDataOverrides;
@@ -729,7 +731,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * List representing overrides for {@code subscription_data} configurations for specific groups.
+     * List representing overrides for {@code subscription_data} configurations for specific
+     * subscription schedules.
      */
     public Builder setSubscriptionDataOverrides(
         List<QuoteUpdateParams.SubscriptionDataOverride> subscriptionDataOverrides) {

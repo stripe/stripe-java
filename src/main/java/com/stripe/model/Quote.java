@@ -245,6 +245,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
 
+  /**
+   * List representing overrides for {@code subscription_data} configurations for specific
+   * subscription schedules.
+   */
   @SerializedName("subscription_data_overrides")
   List<Quote.SubscriptionDataOverride> subscriptionDataOverrides;
 

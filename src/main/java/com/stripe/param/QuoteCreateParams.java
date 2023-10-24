@@ -170,7 +170,8 @@ public class QuoteCreateParams extends ApiRequestParams {
   SubscriptionData subscriptionData;
 
   /**
-   * List representing overrides for {@code subscription_data} configurations for specific groups.
+   * List representing overrides for {@code subscription_data} configurations for specific
+   * subscription schedules.
    */
   @SerializedName("subscription_data_overrides")
   List<QuoteCreateParams.SubscriptionDataOverride> subscriptionDataOverrides;
