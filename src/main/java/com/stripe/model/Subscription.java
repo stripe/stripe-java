@@ -175,7 +175,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * The subscription's description, meant to be displayable to the customer. Use this field to
-   * optionally store an explanation of the subscription for rendering in Stripe surfaces.
+   * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+   * certain local payment methods UIs.
    */
   @SerializedName("description")
   String description;

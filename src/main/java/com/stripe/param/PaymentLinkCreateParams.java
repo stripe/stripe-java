@@ -4450,7 +4450,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   public static class SubscriptionData {
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     String description;
@@ -4525,7 +4526,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * The subscription's description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(String description) {
         this.description = description;
