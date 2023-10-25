@@ -1414,7 +1414,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TrialSettings extends StripeObject {
-      /** Defines how the subscription should behaves when a trial ensd. */
+      /** Defines how the subscription should behave when a trial ends. */
       @SerializedName("end_behavior")
       EndBehavior endBehavior;
 
