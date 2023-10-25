@@ -24,12 +24,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Every time an applicant submits an application for a Charge Card product your Platform offers, or
- * every time your Platform takes a proactive credit decision on an existing account, you must
- * record the decision by creating a new CreditUnderwritingRecord object on a Connected account.
+ * Every time an applicant submits an application for a Charge Card product your platform offers, or
+ * every time your platform takes a proactive credit decision on an existing account, you must
+ * record the decision by creating a new {@code CreditUnderwritingRecord} object on a connected
+ * account.
  *
- * <p><a href="https://stripe.com/docs/issuing/coming_soon">Follow the guide</a> to learn about your
- * requirements as a Platform.
+ * <p><a
+ * href="https://stripe.com/docs/issuing/credit/report-credit-decisions-and-manage-aans">Follow the
+ * guide</a> to learn about your requirements as a platform.
  */
 @Getter
 @Setter
@@ -331,7 +333,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   }
 
   /**
-   * Update a {@code CreditUnderwritingRecord} object from an decision made on a credit application.
+   * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(Map<String, Object> params)
       throws StripeException {
@@ -339,7 +341,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   }
 
   /**
-   * Update a {@code CreditUnderwritingRecord} object from an decision made on a credit application.
+   * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -359,7 +361,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   }
 
   /**
-   * Update a {@code CreditUnderwritingRecord} object from an decision made on a credit application.
+   * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(
       CreditUnderwritingRecordReportDecisionParams params) throws StripeException {
@@ -367,7 +369,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   }
 
   /**
-   * Update a {@code CreditUnderwritingRecord} object from an decision made on a credit application.
+   * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(
       CreditUnderwritingRecordReportDecisionParams params, RequestOptions options)

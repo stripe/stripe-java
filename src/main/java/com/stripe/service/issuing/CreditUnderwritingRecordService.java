@@ -156,7 +156,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * Update a {@code CreditUnderwritingRecord} object from an decision made on a credit application.
+   * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(
       String creditUnderwritingRecord, CreditUnderwritingRecordReportDecisionParams params)
@@ -164,7 +164,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
     return reportDecision(creditUnderwritingRecord, params, (RequestOptions) null);
   }
   /**
-   * Update a {@code CreditUnderwritingRecord} object from an decision made on a credit application.
+   * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(
       String creditUnderwritingRecord,
