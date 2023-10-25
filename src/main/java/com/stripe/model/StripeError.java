@@ -23,9 +23,10 @@ public class StripeError extends StripeObject {
    * {@code account_invalid}, {@code account_number_invalid}, {@code acss_debit_session_incomplete},
    * {@code alipay_upgrade_required}, {@code amount_too_large}, {@code amount_too_small}, {@code
    * api_key_expired}, {@code application_fees_not_allowed}, {@code authentication_required}, {@code
-   * balance_insufficient}, {@code bank_account_bad_routing_numbers}, {@code bank_account_declined},
-   * {@code bank_account_exists}, {@code bank_account_restricted}, {@code bank_account_unusable},
-   * {@code bank_account_unverified}, {@code bank_account_verification_failed}, {@code
+   * balance_insufficient}, {@code balance_invalid_parameter}, {@code
+   * bank_account_bad_routing_numbers}, {@code bank_account_declined}, {@code bank_account_exists},
+   * {@code bank_account_restricted}, {@code bank_account_unusable}, {@code
+   * bank_account_unverified}, {@code bank_account_verification_failed}, {@code
    * billing_invalid_mandate}, {@code bitcoin_upgrade_required}, {@code
    * capture_charge_authorization_expired}, {@code capture_unauthorized_payment}, {@code
    * card_decline_rate_limit_exceeded}, {@code card_declined}, {@code
