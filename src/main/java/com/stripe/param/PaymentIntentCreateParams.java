@@ -274,9 +274,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   String statementDescriptorSuffix;
 
   /**
-   * The parameters that you can use to automatically create a Transfer after the payment succeeds.
-   * Learn more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
-   * connected accounts</a>.
+   * The parameters that you can use to automatically create a Transfer. Learn more about the <a
+   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -908,8 +907,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The parameters that you can use to automatically create a Transfer after the payment
-     * succeeds. Learn more about the <a
+     * The parameters that you can use to automatically create a Transfer. Learn more about the <a
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
@@ -11301,11 +11299,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("request_extended_authorization")
       Boolean requestExtendedAuthorization;
 
-      /**
-       * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-       * PaymentIntent.
-       */
+      /** This field was released by mistake and will be removed in the next major version. */
       @SerializedName("request_incremental_authorization")
       RequestIncrementalAuthorization requestIncrementalAuthorization;
 
@@ -11391,11 +11385,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * Request ability to <a
-         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-         * PaymentIntent.
-         */
+        /** This field was released by mistake and will be removed in the next major version. */
         public Builder setRequestIncrementalAuthorization(
             PaymentIntentCreateParams.PaymentMethodOptions.CardPresent
                     .RequestIncrementalAuthorization
@@ -14112,6 +14102,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       ApiRequestParams.EnumParam setupFutureUsage;
 
+      /**
+       * The Stripe connected account IDs of the sellers on the platform for this transaction
+       * (optional). Only allowed when <a
+       * href="https://stripe.com/docs/connect/separate-charges-and-transfers">separate charges and
+       * transfers</a> are used.
+       */
+      @SerializedName("subsellers")
+      List<String> subsellers;
+
       private Paypal(
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
@@ -14119,7 +14118,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           String reference,
           String referenceId,
           String riskCorrelationId,
-          ApiRequestParams.EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam setupFutureUsage,
+          List<String> subsellers) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.preferredLocale = preferredLocale;
@@ -14127,6 +14127,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.referenceId = referenceId;
         this.riskCorrelationId = riskCorrelationId;
         this.setupFutureUsage = setupFutureUsage;
+        this.subsellers = subsellers;
       }
 
       public static Builder builder() {
@@ -14148,6 +14149,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private ApiRequestParams.EnumParam setupFutureUsage;
 
+        private List<String> subsellers;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.Paypal build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.Paypal(
@@ -14157,7 +14160,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.reference,
               this.referenceId,
               this.riskCorrelationId,
-              this.setupFutureUsage);
+              this.setupFutureUsage,
+              this.subsellers);
         }
 
         /** Controls when the funds will be captured from the customer's account. */
@@ -14288,6 +14292,34 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Add an element to `subsellers` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentIntentCreateParams.PaymentMethodOptions.Paypal#subsellers} for the field
+         * documentation.
+         */
+        public Builder addSubseller(String element) {
+          if (this.subsellers == null) {
+            this.subsellers = new ArrayList<>();
+          }
+          this.subsellers.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `subsellers` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentIntentCreateParams.PaymentMethodOptions.Paypal#subsellers} for the field
+         * documentation.
+         */
+        public Builder addAllSubseller(List<String> elements) {
+          if (this.subsellers == null) {
+            this.subsellers = new ArrayList<>();
+          }
+          this.subsellers.addAll(elements);
           return this;
         }
       }

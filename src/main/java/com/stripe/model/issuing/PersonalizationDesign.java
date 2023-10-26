@@ -36,7 +36,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class PersonalizationDesign extends ApiResource
     implements HasId, MetadataStore<PersonalizationDesign> {
-  /** The file for the card logo, for use with physical bundles that support card logos. */
+  /**
+   * The file for the card logo to use with physical bundles that support card logos. Must have a
+   * {@code purpose} value of {@code issuing_logo}.
+   */
   @SerializedName("card_logo")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -360,19 +363,19 @@ public class PersonalizationDesign extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class Preferences extends StripeObject {
     /**
-     * Whether this personalization design is used to create cards when one is not specified. A
-     * connected account will use the Connect platform's default if no personalization design is set
-     * as the account default.
+     * Whether we use this personalization design to create cards when one isn't specified. A
+     * connected account uses the Connect platform's default design if no personalization design is
+     * set as the default design.
      */
-    @SerializedName("account_default")
-    Boolean accountDefault;
+    @SerializedName("is_default")
+    Boolean isDefault;
 
     /**
-     * Whether this personalization design is used to create cards when one is not specified and an
-     * account default for this connected account does not exist.
+     * Whether this personalization design is used to create cards when one is not specified and a
+     * default for this connected account does not exist.
      */
-    @SerializedName("platform_default")
-    Boolean platformDefault;
+    @SerializedName("is_platform_default")
+    Boolean isPlatformDefault;
   }
 
   @Getter

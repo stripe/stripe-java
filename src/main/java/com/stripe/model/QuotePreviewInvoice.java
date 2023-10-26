@@ -228,6 +228,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   List<QuotePreviewInvoice.CustomerTaxId> customerTaxIds;
 
   /**
+   * The margins applied to the invoice. Can be overridden by line item {@code margins}. Use {@code
+   * expand[]=default_margins} to expand each margin.
+   */
+  @SerializedName("default_margins")
+  List<ExpandableField<Margin>> defaultMargins;
+
+  /**
    * ID of the default payment method for the invoice. It must belong to the customer associated
    * with the invoice. If not set, defaults to the subscription's default payment method, if any, or
    * to the default payment method in the customer's invoice settings.
@@ -552,6 +559,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("total_excluding_tax")
   Long totalExcludingTax;
 
+  /** The aggregate amounts calculated per margin across all line items. */
+  @SerializedName("total_margin_amounts")
+  List<QuotePreviewInvoice.TotalMarginAmount> totalMarginAmounts;
+
   /** The aggregate amounts calculated per tax rate for all line items. */
   @SerializedName("total_tax_amounts")
   List<QuotePreviewInvoice.TotalTaxAmount> totalTaxAmounts;
@@ -779,6 +790,50 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
         objs != null
             ? objs.stream()
                 .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get IDs of expandable {@code defaultMargins} object list. */
+  public List<String> getDefaultMargins() {
+    return (this.defaultMargins != null)
+        ? this.defaultMargins.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDefaultMargins(List<String> ids) {
+    if (ids == null) {
+      this.defaultMargins = null;
+      return;
+    }
+    if (this.defaultMargins != null
+        && this.defaultMargins.stream()
+            .map(x -> x.getId())
+            .collect(Collectors.toList())
+            .equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.defaultMargins =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Margin>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code defaultMargins}. */
+  public List<Margin> getDefaultMarginObjects() {
+    return (this.defaultMargins != null)
+        ? this.defaultMargins.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDefaultMarginObjects(List<Margin> objs) {
+    this.defaultMargins =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Margin>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
   }
@@ -1536,6 +1591,39 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TotalMarginAmount extends StripeObject {
+    /** The amount, in cents (or local equivalent), of the reduction in line item amount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The margin that was applied to get this margin amount. */
+    @SerializedName("margin")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Margin> margin;
+
+    /** Get ID of expandable {@code margin} object. */
+    public String getMargin() {
+      return (this.margin != null) ? this.margin.getId() : null;
+    }
+
+    public void setMargin(String id) {
+      this.margin = ApiResource.setExpandableFieldId(id, this.margin);
+    }
+
+    /** Get expanded {@code margin}. */
+    public Margin getMarginObject() {
+      return (this.margin != null) ? this.margin.getExpanded() : null;
+    }
+
+    public void setMarginObject(Margin expandableObject) {
+      this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
   }
 

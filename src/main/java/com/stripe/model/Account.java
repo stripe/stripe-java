@@ -1515,11 +1515,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
-    /**
-     * This is typed as a string for consistency with {@code requirements.disabled_reason}, but it
-     * safe to assume {@code future_requirements.disabled_reason} is empty because fields in {@code
-     * future_requirements} will never disable the account.
-     */
+    /** This is typed as a string for consistency with {@code requirements.disabled_reason}. */
     @SerializedName("disabled_reason")
     String disabledReason;
 
@@ -1677,10 +1673,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> currentlyDue;
 
     /**
-     * If the account is disabled, this string describes why. Can be {@code requirements.past_due},
-     * {@code requirements.pending_verification}, {@code listed}, {@code platform_paused}, {@code
-     * rejected.fraud}, {@code rejected.listed}, {@code rejected.terms_of_service}, {@code
-     * rejected.other}, {@code under_review}, or {@code other}.
+     * If the account is disabled, this string describes why. <a
+     * href="https://stripe.com/docs/connect/handling-api-verification">Learn more about handling
+     * verification issues</a>. Can be {@code action_required.requested_capabilities}, {@code
+     * requirements.past_due}, {@code requirements.pending_verification}, {@code listed}, {@code
+     * platform_paused}, {@code rejected.fraud}, {@code rejected.incomplete_verification}, {@code
+     * rejected.listed}, {@code rejected.other}, {@code rejected.terms_of_service}, {@code
+     * under_review}, or {@code other}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;

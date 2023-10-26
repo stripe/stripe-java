@@ -245,6 +245,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
 
+  /**
+   * List representing overrides for {@code subscription_data} configurations for specific
+   * subscription schedules.
+   */
   @SerializedName("subscription_data_overrides")
   List<Quote.SubscriptionDataOverride> subscriptionDataOverrides;
 
@@ -1763,10 +1767,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         /**
          * The reason the quote was marked as stale.
          *
-         * <p>One of {@code bill_on_acceptance_invalid}, {@code line_invalid}, {@code marked_stale},
-         * {@code subscription_canceled}, {@code subscription_changed}, {@code
-         * subscription_expired}, {@code subscription_schedule_canceled}, {@code
-         * subscription_schedule_changed}, or {@code subscription_schedule_released}.
+         * <p>One of {@code accept_failed_validations}, {@code bill_on_acceptance_invalid}, {@code
+         * line_invalid}, {@code marked_stale}, {@code subscription_canceled}, {@code
+         * subscription_changed}, {@code subscription_expired}, {@code
+         * subscription_schedule_canceled}, {@code subscription_schedule_changed}, or {@code
+         * subscription_schedule_released}.
          */
         @SerializedName("type")
         String type;
@@ -1839,7 +1844,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     String description;
@@ -2086,7 +2092,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     String description;

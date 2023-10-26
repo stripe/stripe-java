@@ -372,7 +372,8 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
 
     /**
      * Subscription description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     String description;
@@ -692,7 +693,8 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
 
     /**
      * Subscription description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     String description;
@@ -1412,7 +1414,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TrialSettings extends StripeObject {
-      /** Defines how the subscription should behaves when a trial ensd. */
+      /** Defines how the subscription should behave when a trial ends. */
       @SerializedName("end_behavior")
       EndBehavior endBehavior;
 

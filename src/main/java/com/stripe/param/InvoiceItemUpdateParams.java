@@ -57,6 +57,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * The ids of the margins to apply to the invoice item. When set, the {@code default_margins} on
+   * the invoice do not apply to this invoice item.
+   */
+  @SerializedName("margins")
+  Object margins;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -137,6 +144,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object margins,
       Object metadata,
       Period period,
       Object price,
@@ -153,6 +161,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.margins = margins;
     this.metadata = metadata;
     this.period = period;
     this.price = price;
@@ -181,6 +190,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Object margins;
 
     private Object metadata;
 
@@ -211,6 +222,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
           this.discounts,
           this.expand,
           this.extraParams,
+          this.margins,
           this.metadata,
           this.period,
           this.price,
@@ -357,6 +369,52 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `margins` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemUpdateParams#margins} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addMargin(String element) {
+      if (this.margins == null || this.margins instanceof EmptyParam) {
+        this.margins = new ArrayList<String>();
+      }
+      ((List<String>) this.margins).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `margins` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemUpdateParams#margins} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllMargin(List<String> elements) {
+      if (this.margins == null || this.margins instanceof EmptyParam) {
+        this.margins = new ArrayList<String>();
+      }
+      ((List<String>) this.margins).addAll(elements);
+      return this;
+    }
+
+    /**
+     * The ids of the margins to apply to the invoice item. When set, the {@code default_margins} on
+     * the invoice do not apply to this invoice item.
+     */
+    public Builder setMargins(EmptyParam margins) {
+      this.margins = margins;
+      return this;
+    }
+
+    /**
+     * The ids of the margins to apply to the invoice item. When set, the {@code default_margins} on
+     * the invoice do not apply to this invoice item.
+     */
+    public Builder setMargins(List<String> margins) {
+      this.margins = margins;
       return this;
     }
 

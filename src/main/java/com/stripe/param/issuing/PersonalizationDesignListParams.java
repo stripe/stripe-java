@@ -239,14 +239,6 @@ public class PersonalizationDesignListParams extends ApiRequestParams {
   @Getter
   public static class Preferences {
     /**
-     * Only return the personalization design that is set as the account default. A connected
-     * account will use the Connect platform's default if no personalization design is set as the
-     * account default.
-     */
-    @SerializedName("account_default")
-    Boolean accountDefault;
-
-    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -256,17 +248,24 @@ public class PersonalizationDesignListParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Only return the personalization design that's set as the default. A connected account uses
+     * the Connect platform's default design if no personalization design is set as the default.
+     */
+    @SerializedName("is_default")
+    Boolean isDefault;
+
+    /**
      * Only return the personalization design that is set as the Connect platform's default. This
      * parameter is only applicable to connected accounts.
      */
-    @SerializedName("platform_default")
-    Boolean platformDefault;
+    @SerializedName("is_platform_default")
+    Boolean isPlatformDefault;
 
     private Preferences(
-        Boolean accountDefault, Map<String, Object> extraParams, Boolean platformDefault) {
-      this.accountDefault = accountDefault;
+        Map<String, Object> extraParams, Boolean isDefault, Boolean isPlatformDefault) {
       this.extraParams = extraParams;
-      this.platformDefault = platformDefault;
+      this.isDefault = isDefault;
+      this.isPlatformDefault = isPlatformDefault;
     }
 
     public static Builder builder() {
@@ -274,26 +273,16 @@ public class PersonalizationDesignListParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Boolean accountDefault;
-
       private Map<String, Object> extraParams;
 
-      private Boolean platformDefault;
+      private Boolean isDefault;
+
+      private Boolean isPlatformDefault;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PersonalizationDesignListParams.Preferences build() {
         return new PersonalizationDesignListParams.Preferences(
-            this.accountDefault, this.extraParams, this.platformDefault);
-      }
-
-      /**
-       * Only return the personalization design that is set as the account default. A connected
-       * account will use the Connect platform's default if no personalization design is set as the
-       * account default.
-       */
-      public Builder setAccountDefault(Boolean accountDefault) {
-        this.accountDefault = accountDefault;
-        return this;
+            this.extraParams, this.isDefault, this.isPlatformDefault);
       }
 
       /**
@@ -324,11 +313,20 @@ public class PersonalizationDesignListParams extends ApiRequestParams {
       }
 
       /**
+       * Only return the personalization design that's set as the default. A connected account uses
+       * the Connect platform's default design if no personalization design is set as the default.
+       */
+      public Builder setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+        return this;
+      }
+
+      /**
        * Only return the personalization design that is set as the Connect platform's default. This
        * parameter is only applicable to connected accounts.
        */
-      public Builder setPlatformDefault(Boolean platformDefault) {
-        this.platformDefault = platformDefault;
+      public Builder setIsPlatformDefault(Boolean isPlatformDefault) {
+        this.isPlatformDefault = isPlatformDefault;
         return this;
       }
     }

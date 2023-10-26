@@ -148,7 +148,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
   SubscriptionData subscriptionData;
 
   /**
-   * List representing overrides for {@code subscription_data} configurations for specific groups.
+   * List representing overrides for {@code subscription_data} configurations for specific
+   * subscription schedules.
    */
   @SerializedName("subscription_data_overrides")
   Object subscriptionDataOverrides;
@@ -721,7 +722,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * List representing overrides for {@code subscription_data} configurations for specific groups.
+     * List representing overrides for {@code subscription_data} configurations for specific
+     * subscription schedules.
      */
     public Builder setSubscriptionDataOverrides(EmptyParam subscriptionDataOverrides) {
       this.subscriptionDataOverrides = subscriptionDataOverrides;
@@ -729,7 +731,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * List representing overrides for {@code subscription_data} configurations for specific groups.
+     * List representing overrides for {@code subscription_data} configurations for specific
+     * subscription schedules.
      */
     public Builder setSubscriptionDataOverrides(
         List<QuoteUpdateParams.SubscriptionDataOverride> subscriptionDataOverrides) {
@@ -8093,7 +8096,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     Object description;
@@ -8264,7 +8268,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * The subscription's description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(String description) {
         this.description = description;
@@ -8273,7 +8278,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * The subscription's description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(EmptyParam description) {
         this.description = description;
@@ -9280,7 +9286,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     Object description;
@@ -9419,7 +9426,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * The subscription's description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(String description) {
         this.description = description;
@@ -9428,7 +9436,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * The subscription's description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(EmptyParam description) {
         this.description = description;
