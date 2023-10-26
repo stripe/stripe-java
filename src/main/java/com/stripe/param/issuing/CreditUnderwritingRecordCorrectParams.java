@@ -713,6 +713,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
       }
 
       public enum Reason implements ApiRequestParams.EnumParam {
+        @SerializedName("applicant_is_not_beneficial_owner")
+        APPLICANT_IS_NOT_BENEFICIAL_OWNER("applicant_is_not_beneficial_owner"),
+
         @SerializedName("applicant_too_young")
         APPLICANT_TOO_YOUNG("applicant_too_young"),
 
@@ -725,8 +728,14 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("business_size_too_small")
         BUSINESS_SIZE_TOO_SMALL("business_size_too_small"),
 
+        @SerializedName("current_account_tier_ineligible")
+        CURRENT_ACCOUNT_TIER_INELIGIBLE("current_account_tier_ineligible"),
+
         @SerializedName("customer_already_exists")
         CUSTOMER_ALREADY_EXISTS("customer_already_exists"),
+
+        @SerializedName("customer_requested_account_closure")
+        CUSTOMER_REQUESTED_ACCOUNT_CLOSURE("customer_requested_account_closure"),
 
         @SerializedName("debt_to_cash_balance_ratio_too_high")
         DEBT_TO_CASH_BALANCE_RATIO_TOO_HIGH("debt_to_cash_balance_ratio_too_high"),
@@ -736,6 +745,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("delinquent_credit_obligations")
         DELINQUENT_CREDIT_OBLIGATIONS("delinquent_credit_obligations"),
+
+        @SerializedName("dispute_rate_too_high")
+        DISPUTE_RATE_TOO_HIGH("dispute_rate_too_high"),
 
         @SerializedName("duration_of_residence")
         DURATION_OF_RESIDENCE("duration_of_residence"),
@@ -766,6 +778,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("inconsistent_monthly_revenues")
         INCONSISTENT_MONTHLY_REVENUES("inconsistent_monthly_revenues"),
+
+        @SerializedName("insufficient_account_history_with_platform")
+        INSUFFICIENT_ACCOUNT_HISTORY_WITH_PLATFORM("insufficient_account_history_with_platform"),
 
         @SerializedName("insufficient_bank_account_history")
         INSUFFICIENT_BANK_ACCOUNT_HISTORY("insufficient_bank_account_history"),
@@ -799,6 +814,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("insufficient_trade_credit_insurance")
         INSUFFICIENT_TRADE_CREDIT_INSURANCE("insufficient_trade_credit_insurance"),
+
+        @SerializedName("invalid_business_license")
+        INVALID_BUSINESS_LICENSE("invalid_business_license"),
 
         @SerializedName("late_payment_history_reported_to_bureau")
         LATE_PAYMENT_HISTORY_REPORTED_TO_BUREAU("late_payment_history_reported_to_bureau"),
@@ -1121,6 +1139,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
       }
 
       public enum Reason implements ApiRequestParams.EnumParam {
+        @SerializedName("applicant_is_not_beneficial_owner")
+        APPLICANT_IS_NOT_BENEFICIAL_OWNER("applicant_is_not_beneficial_owner"),
+
         @SerializedName("applicant_too_young")
         APPLICANT_TOO_YOUNG("applicant_too_young"),
 
@@ -1139,8 +1160,14 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("change_in_utilization_of_credit_line")
         CHANGE_IN_UTILIZATION_OF_CREDIT_LINE("change_in_utilization_of_credit_line"),
 
+        @SerializedName("current_account_tier_ineligible")
+        CURRENT_ACCOUNT_TIER_INELIGIBLE("current_account_tier_ineligible"),
+
         @SerializedName("customer_already_exists")
         CUSTOMER_ALREADY_EXISTS("customer_already_exists"),
+
+        @SerializedName("customer_requested_account_closure")
+        CUSTOMER_REQUESTED_ACCOUNT_CLOSURE("customer_requested_account_closure"),
 
         @SerializedName("debt_to_cash_balance_ratio_too_high")
         DEBT_TO_CASH_BALANCE_RATIO_TOO_HIGH("debt_to_cash_balance_ratio_too_high"),
@@ -1156,6 +1183,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("delinquent_credit_obligations")
         DELINQUENT_CREDIT_OBLIGATIONS("delinquent_credit_obligations"),
+
+        @SerializedName("dispute_rate_too_high")
+        DISPUTE_RATE_TOO_HIGH("dispute_rate_too_high"),
 
         @SerializedName("duration_of_residence")
         DURATION_OF_RESIDENCE("duration_of_residence"),
@@ -1234,6 +1264,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("insufficient_usage_as_qualified_expenses")
         INSUFFICIENT_USAGE_AS_QUALIFIED_EXPENSES("insufficient_usage_as_qualified_expenses"),
+
+        @SerializedName("invalid_business_license")
+        INVALID_BUSINESS_LICENSE("invalid_business_license"),
 
         @SerializedName("late_payment_history_reported_to_bureau")
         LATE_PAYMENT_HISTORY_REPORTED_TO_BUREAU("late_payment_history_reported_to_bureau"),
@@ -1427,6 +1460,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
       }
 
       public enum Reason implements ApiRequestParams.EnumParam {
+        @SerializedName("applicant_is_not_beneficial_owner")
+        APPLICANT_IS_NOT_BENEFICIAL_OWNER("applicant_is_not_beneficial_owner"),
+
         @SerializedName("applicant_too_young")
         APPLICANT_TOO_YOUNG("applicant_too_young"),
 
@@ -1445,8 +1481,14 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("change_in_utilization_of_credit_line")
         CHANGE_IN_UTILIZATION_OF_CREDIT_LINE("change_in_utilization_of_credit_line"),
 
+        @SerializedName("current_account_tier_ineligible")
+        CURRENT_ACCOUNT_TIER_INELIGIBLE("current_account_tier_ineligible"),
+
         @SerializedName("customer_already_exists")
         CUSTOMER_ALREADY_EXISTS("customer_already_exists"),
+
+        @SerializedName("customer_requested_account_closure")
+        CUSTOMER_REQUESTED_ACCOUNT_CLOSURE("customer_requested_account_closure"),
 
         @SerializedName("debt_to_cash_balance_ratio_too_high")
         DEBT_TO_CASH_BALANCE_RATIO_TOO_HIGH("debt_to_cash_balance_ratio_too_high"),
@@ -1462,6 +1504,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("delinquent_credit_obligations")
         DELINQUENT_CREDIT_OBLIGATIONS("delinquent_credit_obligations"),
+
+        @SerializedName("dispute_rate_too_high")
+        DISPUTE_RATE_TOO_HIGH("dispute_rate_too_high"),
 
         @SerializedName("duration_of_residence")
         DURATION_OF_RESIDENCE("duration_of_residence"),
@@ -1540,6 +1585,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("insufficient_usage_as_qualified_expenses")
         INSUFFICIENT_USAGE_AS_QUALIFIED_EXPENSES("insufficient_usage_as_qualified_expenses"),
+
+        @SerializedName("invalid_business_license")
+        INVALID_BUSINESS_LICENSE("invalid_business_license"),
 
         @SerializedName("late_payment_history_reported_to_bureau")
         LATE_PAYMENT_HISTORY_REPORTED_TO_BUREAU("late_payment_history_reported_to_bureau"),
