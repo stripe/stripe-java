@@ -254,9 +254,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   String statementDescriptorSuffix;
 
   /**
-   * The parameters that you can use to automatically create a Transfer after the payment succeeds.
-   * Learn more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
-   * connected accounts</a>.
+   * The parameters that you can use to automatically create a Transfer. Learn more about the <a
+   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -845,8 +844,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The parameters that you can use to automatically create a Transfer after the payment
-     * succeeds. Learn more about the <a
+     * The parameters that you can use to automatically create a Transfer. Learn more about the <a
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
@@ -9237,11 +9235,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("request_extended_authorization")
       Boolean requestExtendedAuthorization;
 
-      /**
-       * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-       * PaymentIntent.
-       */
+      /** This field was released by mistake and will be removed in the next major version. */
       @SerializedName("request_incremental_authorization")
       RequestIncrementalAuthorization requestIncrementalAuthorization;
 
@@ -9327,11 +9321,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * Request ability to <a
-         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-         * PaymentIntent.
-         */
+        /** This field was released by mistake and will be removed in the next major version. */
         public Builder setRequestIncrementalAuthorization(
             PaymentIntentCreateParams.PaymentMethodOptions.CardPresent
                     .RequestIncrementalAuthorization

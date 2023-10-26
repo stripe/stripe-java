@@ -375,7 +375,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     /**
      * Subscription description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     Object description;
@@ -550,7 +551,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * Subscription description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(String description) {
         this.description = description;
@@ -559,7 +561,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * Subscription description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(EmptyParam description) {
         this.description = description;
@@ -1102,7 +1105,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     /**
      * Subscription description, meant to be displayable to the customer. Use this field to
-     * optionally store an explanation of the subscription.
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+     * certain local payment methods UIs.
      */
     @SerializedName("description")
     Object description;
@@ -1492,7 +1496,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * Subscription description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(String description) {
         this.description = description;
@@ -1501,7 +1506,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * Subscription description, meant to be displayable to the customer. Use this field to
-       * optionally store an explanation of the subscription.
+       * optionally store an explanation of the subscription for rendering in Stripe surfaces and
+       * certain local payment methods UIs.
        */
       public Builder setDescription(EmptyParam description) {
         this.description = description;

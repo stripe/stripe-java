@@ -8731,11 +8731,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("request_extended_authorization")
       Boolean requestExtendedAuthorization;
 
-      /**
-       * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-       * PaymentIntent.
-       */
+      /** This field was released by mistake and will be removed in the next major version. */
       @SerializedName("request_incremental_authorization")
       RequestIncrementalAuthorization requestIncrementalAuthorization;
 
@@ -8821,11 +8817,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * Request ability to <a
-         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-         * PaymentIntent.
-         */
+        /** This field was released by mistake and will be removed in the next major version. */
         public Builder setRequestIncrementalAuthorization(
             PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent
                     .RequestIncrementalAuthorization
