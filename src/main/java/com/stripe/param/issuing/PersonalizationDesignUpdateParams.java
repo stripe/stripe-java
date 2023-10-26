@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 public class PersonalizationDesignUpdateParams extends ApiRequestParams {
   /**
-   * The file for the card logo, for use with physical bundles that support card logos. Must have
+   * The file for the card logo, for use with physical bundles that support card logos. Must have a
    * {@code purpose} value of {@code issuing_logo}.
    */
   @SerializedName("card_logo")
@@ -139,7 +139,7 @@ public class PersonalizationDesignUpdateParams extends ApiRequestParams {
 
     /**
      * The file for the card logo, for use with physical bundles that support card logos. Must have
-     * {@code purpose} value of {@code issuing_logo}.
+     * a {@code purpose} value of {@code issuing_logo}.
      */
     public Builder setCardLogo(String cardLogo) {
       this.cardLogo = cardLogo;
@@ -148,7 +148,7 @@ public class PersonalizationDesignUpdateParams extends ApiRequestParams {
 
     /**
      * The file for the card logo, for use with physical bundles that support card logos. Must have
-     * {@code purpose} value of {@code issuing_logo}.
+     * a {@code purpose} value of {@code issuing_logo}.
      */
     public Builder setCardLogo(EmptyParam cardLogo) {
       this.cardLogo = cardLogo;
@@ -456,9 +456,9 @@ public class PersonalizationDesignUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> Whether this personalization design is used to create cards when
-     * one is not specified. A connected account will use the Connect platform's default if no
-     * personalization design is set as default.
+     * <strong>Required.</strong> Whether we use this personalization design to create cards when
+     * one isn't specified. A connected account uses the Connect platform's default design if no
+     * personalization design is set as the default design.
      */
     @SerializedName("is_default")
     Boolean isDefault;
@@ -510,9 +510,9 @@ public class PersonalizationDesignUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Whether this personalization design is used to create cards when
-       * one is not specified. A connected account will use the Connect platform's default if no
-       * personalization design is set as default.
+       * <strong>Required.</strong> Whether we use this personalization design to create cards when
+       * one isn't specified. A connected account uses the Connect platform's default design if no
+       * personalization design is set as the default design.
        */
       public Builder setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;

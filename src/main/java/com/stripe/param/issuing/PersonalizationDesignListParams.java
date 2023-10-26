@@ -248,8 +248,8 @@ public class PersonalizationDesignListParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Only return the personalization design that is set as default. A connected account will use
-     * the Connect platform's default if no personalization design is set as default.
+     * Only return the personalization design that's set as the default. A connected account uses
+     * the Connect platform's default design if no personalization design is set as the default.
      */
     @SerializedName("is_default")
     Boolean isDefault;
@@ -313,8 +313,8 @@ public class PersonalizationDesignListParams extends ApiRequestParams {
       }
 
       /**
-       * Only return the personalization design that is set as default. A connected account will use
-       * the Connect platform's default if no personalization design is set as default.
+       * Only return the personalization design that's set as the default. A connected account uses
+       * the Connect platform's default design if no personalization design is set as the default.
        */
       public Builder setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
