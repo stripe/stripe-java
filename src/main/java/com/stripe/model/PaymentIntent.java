@@ -1784,6 +1784,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FinancialAddress extends StripeObject {
+        /** ABA Records contain U.S. bank account details per the ABA format. */
+        @SerializedName("aba")
+        Aba aba;
+
         /** Iban Records contain E.U. bank account details per the SEPA format. */
         @SerializedName("iban")
         Iban iban;
@@ -1800,10 +1804,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("supported_networks")
         List<String> supportedNetworks;
 
+        /** SWIFT Records contain U.S. bank account details per the SWIFT format. */
+        @SerializedName("swift")
+        Swift swift;
+
         /**
          * The type of financial address
          *
-         * <p>One of {@code iban}, {@code sort_code}, {@code spei}, or {@code zengin}.
+         * <p>One of {@code aba}, {@code iban}, {@code sort_code}, {@code spei}, {@code swift}, or
+         * {@code zengin}.
          */
         @SerializedName("type")
         String type;
@@ -1811,6 +1820,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         /** Zengin Records contain Japan bank account details per the Zengin format. */
         @SerializedName("zengin")
         Zengin zengin;
+
+        /** ABA Records contain U.S. bank account details per the ABA format. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Aba extends StripeObject {
+          /** The ABA account number. */
+          @SerializedName("account_number")
+          String accountNumber;
+
+          /** The bank name. */
+          @SerializedName("bank_name")
+          String bankName;
+
+          /** The ABA routing number. */
+          @SerializedName("routing_number")
+          String routingNumber;
+        }
 
         /** Iban Records contain E.U. bank account details per the SEPA format. */
         @Getter
@@ -1871,6 +1898,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           /** The CLABE number. */
           @SerializedName("clabe")
           String clabe;
+        }
+
+        /** SWIFT Records contain U.S. bank account details per the SWIFT format. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Swift extends StripeObject {
+          /** The account number. */
+          @SerializedName("account_number")
+          String accountNumber;
+
+          /** The bank name. */
+          @SerializedName("bank_name")
+          String bankName;
+
+          /** The SWIFT code. */
+          @SerializedName("swift_code")
+          String swiftCode;
         }
 
         /** Zengin Records contain Japan bank account details per the Zengin format. */
