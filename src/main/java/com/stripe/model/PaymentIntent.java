@@ -2375,6 +2375,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("revolut_pay")
+    RevolutPay revolutPay;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -3515,6 +3518,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RevolutPay extends StripeObject {}
 
     @Getter
     @Setter
