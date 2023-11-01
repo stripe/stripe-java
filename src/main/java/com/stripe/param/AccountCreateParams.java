@@ -1091,6 +1091,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("promptpay_payments")
     PromptpayPayments promptpayPayments;
 
+    /** The revolut_pay_payments capability. */
+    @SerializedName("revolut_pay_payments")
+    RevolutPayPayments revolutPayPayments;
+
     /** The sepa_debit_payments capability. */
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
@@ -1154,6 +1158,7 @@ public class AccountCreateParams extends ApiRequestParams {
         PaynowPayments paynowPayments,
         PaypalPayments paypalPayments,
         PromptpayPayments promptpayPayments,
+        RevolutPayPayments revolutPayPayments,
         SepaDebitPayments sepaDebitPayments,
         SofortPayments sofortPayments,
         TaxReportingUs1099K taxReportingUs1099K,
@@ -1192,6 +1197,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.paynowPayments = paynowPayments;
       this.paypalPayments = paypalPayments;
       this.promptpayPayments = promptpayPayments;
+      this.revolutPayPayments = revolutPayPayments;
       this.sepaDebitPayments = sepaDebitPayments;
       this.sofortPayments = sofortPayments;
       this.taxReportingUs1099K = taxReportingUs1099K;
@@ -1267,6 +1273,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private PromptpayPayments promptpayPayments;
 
+      private RevolutPayPayments revolutPayPayments;
+
       private SepaDebitPayments sepaDebitPayments;
 
       private SofortPayments sofortPayments;
@@ -1316,6 +1324,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.paynowPayments,
             this.paypalPayments,
             this.promptpayPayments,
+            this.revolutPayPayments,
             this.sepaDebitPayments,
             this.sofortPayments,
             this.taxReportingUs1099K,
@@ -1543,6 +1552,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setPromptpayPayments(
           AccountCreateParams.Capabilities.PromptpayPayments promptpayPayments) {
         this.promptpayPayments = promptpayPayments;
+        return this;
+      }
+
+      /** The revolut_pay_payments capability. */
+      public Builder setRevolutPayPayments(
+          AccountCreateParams.Capabilities.RevolutPayPayments revolutPayPayments) {
+        this.revolutPayPayments = revolutPayPayments;
         return this;
       }
 
@@ -3864,6 +3880,85 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.PromptpayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class RevolutPayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private RevolutPayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.RevolutPayPayments build() {
+          return new AccountCreateParams.Capabilities.RevolutPayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.RevolutPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.RevolutPayPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

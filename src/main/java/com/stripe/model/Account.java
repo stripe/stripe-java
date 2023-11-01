@@ -1063,6 +1063,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String promptpayPayments;
 
     /**
+     * The status of the RevolutPay capability of the account, or whether the account can directly
+     * process RevolutPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("revolut_pay_payments")
+    String revolutPayPayments;
+
+    /**
      * The status of the SEPA Direct Debits payments capability of the account, or whether the
      * account can directly process SEPA Direct Debits charges.
      *
