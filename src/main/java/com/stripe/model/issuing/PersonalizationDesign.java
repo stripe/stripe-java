@@ -49,6 +49,10 @@ public class PersonalizationDesign extends ApiResource
   @SerializedName("carrier_text")
   CarrierText carrierText;
 
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
+  Long created;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
