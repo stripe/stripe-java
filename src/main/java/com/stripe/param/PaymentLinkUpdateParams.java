@@ -3060,6 +3060,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class PaymentIntentData {
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    Object description;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -3095,10 +3099,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     Object statementDescriptorSuffix;
 
     private PaymentIntentData(
+        Object description,
         Map<String, Object> extraParams,
         Object metadata,
         Object statementDescriptor,
         Object statementDescriptorSuffix) {
+      this.description = description;
       this.extraParams = extraParams;
       this.metadata = metadata;
       this.statementDescriptor = statementDescriptor;
@@ -3110,6 +3116,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object description;
+
       private Map<String, Object> extraParams;
 
       private Object metadata;
@@ -3121,10 +3129,23 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.PaymentIntentData build() {
         return new PaymentLinkUpdateParams.PaymentIntentData(
+            this.description,
             this.extraParams,
             this.metadata,
             this.statementDescriptor,
             this.statementDescriptorSuffix);
+      }
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      public Builder setDescription(EmptyParam description) {
+        this.description = description;
+        return this;
       }
 
       /**
