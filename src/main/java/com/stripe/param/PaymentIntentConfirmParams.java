@@ -558,10 +558,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   @Getter
   public static class MandateData {
-    /**
-     * <strong>Required.</strong> This hash contains details about the customer acceptance of the
-     * Mandate.
-     */
+    /** This hash contains details about the customer acceptance of the Mandate. */
     @SerializedName("customer_acceptance")
     CustomerAcceptance customerAcceptance;
 
@@ -594,10 +591,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.customerAcceptance, this.extraParams);
       }
 
-      /**
-       * <strong>Required.</strong> This hash contains details about the customer acceptance of the
-       * Mandate.
-       */
+      /** This hash contains details about the customer acceptance of the Mandate. */
       public Builder setCustomerAcceptance(
           PaymentIntentConfirmParams.MandateData.CustomerAcceptance customerAcceptance) {
         this.customerAcceptance = customerAcceptance;
@@ -839,17 +833,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * <strong>Required.</strong> The IP address from which the Mandate was accepted by the
-         * customer.
-         */
+        /** The IP address from which the Mandate was accepted by the customer. */
         @SerializedName("ip_address")
         String ipAddress;
 
-        /**
-         * <strong>Required.</strong> The user agent of the browser from which the Mandate was
-         * accepted by the customer.
-         */
+        /** The user agent of the browser from which the Mandate was accepted by the customer. */
         @SerializedName("user_agent")
         String userAgent;
 
@@ -906,19 +894,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * <strong>Required.</strong> The IP address from which the Mandate was accepted by the
-           * customer.
-           */
+          /** The IP address from which the Mandate was accepted by the customer. */
           public Builder setIpAddress(String ipAddress) {
             this.ipAddress = ipAddress;
             return this;
           }
 
-          /**
-           * <strong>Required.</strong> The user agent of the browser from which the Mandate was
-           * accepted by the customer.
-           */
+          /** The user agent of the browser from which the Mandate was accepted by the customer. */
           public Builder setUserAgent(String userAgent) {
             this.userAgent = userAgent;
             return this;
