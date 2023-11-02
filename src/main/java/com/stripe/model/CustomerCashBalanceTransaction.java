@@ -91,7 +91,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
    *
    * <p>One of {@code adjusted_for_overdraft}, {@code applied_to_payment}, {@code funded}, {@code
    * funding_reversed}, {@code refunded_from_payment}, {@code return_canceled}, {@code
-   * return_initiated}, or {@code unapplied_from_payment}.
+   * return_initiated}, {@code transferred_to_balance}, or {@code unapplied_from_payment}.
    */
   @SerializedName("type")
   String type;

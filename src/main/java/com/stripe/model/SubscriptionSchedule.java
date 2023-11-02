@@ -1714,6 +1714,11 @@ public class SubscriptionSchedule extends ApiResource
         @SerializedName("converts_to")
         List<String> convertsTo;
 
+        /**
+         * Determines the type of trial for this item.
+         *
+         * <p>One of {@code free}, or {@code paid}.
+         */
         @SerializedName("type")
         String type;
       }

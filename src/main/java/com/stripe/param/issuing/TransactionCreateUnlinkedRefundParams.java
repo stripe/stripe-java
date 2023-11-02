@@ -251,6 +251,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     @SerializedName("terminal_id")
     String terminalId;
 
+    /** URL provided by the merchant on a 3DS request. */
     @SerializedName("url")
     String url;
 
@@ -401,6 +402,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         return this;
       }
 
+      /** URL provided by the merchant on a 3DS request. */
       public Builder setUrl(String url) {
         this.url = url;
         return this;

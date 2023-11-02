@@ -215,9 +215,10 @@ public class Card extends ApiResource
   String object;
 
   /**
-   * For external accounts, possible values are {@code new} and {@code errored}. If a transfer
-   * fails, the status is set to {@code errored} and transfers are stopped until account details are
-   * updated.
+   * For external accounts that are cards, possible values are {@code new} and {@code errored}. If a
+   * payout fails, the status is set to {@code errored} and <a
+   * href="https://stripe.com/docs/payouts#payout-schedule">scheduled payouts</a> are stopped until
+   * account details are updated.
    */
   @SerializedName("status")
   String status;

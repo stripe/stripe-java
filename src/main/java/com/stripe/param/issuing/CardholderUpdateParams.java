@@ -52,10 +52,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
   /**
    * The cardholder's phone number. This is required for all cardholders who will be creating EU
-   * cards. While phone number is optional if the cardholder will not be creating EU cards, note
-   * that this cardholder will not be eligible for 3DS without a phone number. See the <a
-   * href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
-   * documentation</a> for more details.
+   * cards. See the <a href="https://stripe.com/docs/issuing/3d-secure">3D Secure documentation</a>
+   * for more details.
    */
   @SerializedName("phone_number")
   Object phoneNumber;
@@ -259,9 +257,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     /**
      * The cardholder's phone number. This is required for all cardholders who will be creating EU
-     * cards. While phone number is optional if the cardholder will not be creating EU cards, note
-     * that this cardholder will not be eligible for 3DS without a phone number. See the <a
-     * href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
+     * cards. See the <a href="https://stripe.com/docs/issuing/3d-secure">3D Secure
      * documentation</a> for more details.
      */
     public Builder setPhoneNumber(String phoneNumber) {
@@ -271,9 +267,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     /**
      * The cardholder's phone number. This is required for all cardholders who will be creating EU
-     * cards. While phone number is optional if the cardholder will not be creating EU cards, note
-     * that this cardholder will not be eligible for 3DS without a phone number. See the <a
-     * href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
+     * cards. See the <a href="https://stripe.com/docs/issuing/3d-secure">3D Secure
      * documentation</a> for more details.
      */
     public Builder setPhoneNumber(EmptyParam phoneNumber) {

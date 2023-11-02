@@ -156,12 +156,14 @@ public class BankAccount extends ApiResource
    * for smaller credit unions), and the validation is not always run. If customer bank account
    * verification has succeeded, the bank account status will be {@code verified}. If the
    * verification failed for any reason, such as microdeposit failure, the status will be {@code
-   * verification_failed}. If a transfer sent to this bank account fails, we'll set the status to
-   * {@code errored} and will not continue to send transfers until the bank details are updated.
+   * verification_failed}. If a payout sent to this bank account fails, we'll set the status to
+   * {@code errored} and will not continue to send <a
+   * href="https://stripe.com/docs/payouts#payout-schedule">scheduled payouts</a> until the bank
+   * details are updated.
    *
    * <p>For external accounts, possible values are {@code new}, {@code errored} and {@code
-   * verification_failed}. If a transfer fails, the status is set to {@code errored} and transfers
-   * are stopped until account details are updated. In India, if we can't <a
+   * verification_failed}. If a payouts fails, the status is set to {@code errored} and scheduled
+   * payouts are stopped until account details are updated. In India, if we can't <a
    * href="https://support.stripe.com/questions/bank-account-ownership-verification">verify the
    * owner of the bank account</a>, we'll set the status to {@code verification_failed}. Other
    * validations aren't run against external accounts because they're only used for payouts. This

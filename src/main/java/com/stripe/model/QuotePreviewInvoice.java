@@ -96,6 +96,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("amount_shipping")
   Long amountShipping;
 
+  /**
+   * List of expected payments and corresponding due dates. This value will be null for invoices
+   * where collection_method=charge_automatically.
+   */
+  @SerializedName("amounts_due")
+  List<QuotePreviewInvoice.AmountsDue> amountsDue;
+
   /** ID of the Connect Application that created the invoice. */
   @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)
@@ -426,6 +433,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
 
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
+
+  /** Payments for this invoice. */
+  @SerializedName("payments")
+  InvoicePaymentCollection payments;
 
   /** End of the usage period during which invoice items were added to this invoice. */
   @SerializedName("period_end")
@@ -921,6 +932,45 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
             QuotePreviewInvoiceCollection.class,
             options,
             ApiMode.V1);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountsDue extends StripeObject {
+    /** Incremental amount due for this payment in cents (or local equivalent). */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The amount in cents (or local equivalent) that was paid for this payment. */
+    @SerializedName("amount_paid")
+    Long amountPaid;
+
+    /**
+     * The difference between the payment’s amount and amount_paid, in cents (or local equivalent).
+     */
+    @SerializedName("amount_remaining")
+    Long amountRemaining;
+
+    /** Number of days from when invoice is finalized until the payment is due. */
+    @SerializedName("days_until_due")
+    Long daysUntilDue;
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
+    /** Date on which a payment plan’s payment is due. */
+    @SerializedName("due_date")
+    Long dueDate;
+
+    /** Timestamp when the payment was paid. */
+    @SerializedName("paid_at")
+    Long paidAt;
+
+    /** The status of the payment, one of {@code open}, {@code paid}, or {@code past_due}. */
+    @SerializedName("status")
+    String status;
   }
 
   @Getter
@@ -1736,6 +1786,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
+    trySetResponseGetter(payments, responseGetter);
     trySetResponseGetter(quote, responseGetter);
     trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(renderingOptions, responseGetter);

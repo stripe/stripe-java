@@ -101,7 +101,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
      * either {@code now} to indicate the current time, or a future timestamp measured in seconds
      * since the Unix epoch.
      */
-    public Builder setActiveFrom(Long activeFrom) {
+    public Builder setActiveFrom(RegistrationCreateParams.ActiveFrom activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }
@@ -111,7 +111,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
      * either {@code now} to indicate the current time, or a future timestamp measured in seconds
      * since the Unix epoch.
      */
-    public Builder setActiveFrom(RegistrationCreateParams.ActiveFrom activeFrom) {
+    public Builder setActiveFrom(Long activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }

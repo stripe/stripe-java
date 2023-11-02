@@ -142,6 +142,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("pdf")
   String pdf;
 
+  @SerializedName("post_payment_amount")
+  Long postPaymentAmount;
+
+  @SerializedName("pre_payment_amount")
+  Long prePaymentAmount;
+
   /**
    * Reason for issuing this credit note, one of {@code duplicate}, {@code fraudulent}, {@code
    * order_change}, or {@code product_unsatisfactory}.
@@ -153,7 +159,11 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("refund")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Refund> refund;
+  ExpandableField<com.stripe.model.Refund> refund;
+
+  /** Refunds related to this credit note. */
+  @SerializedName("refunds")
+  List<CreditNote.Refund> refunds;
 
   /** The details of the cost of shipping, including the ShippingRate applied to the invoice. */
   @SerializedName("shipping_cost")
@@ -280,12 +290,13 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   }
 
   /** Get expanded {@code refund}. */
-  public Refund getRefundObject() {
+  public com.stripe.model.Refund getRefundObject() {
     return (this.refund != null) ? this.refund.getExpanded() : null;
   }
 
-  public void setRefundObject(Refund expandableObject) {
-    this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
+  public void setRefundObject(com.stripe.model.Refund expandableObject) {
+    this.refund =
+        new ExpandableField<com.stripe.model.Refund>(expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -686,6 +697,40 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Refund extends StripeObject {
+    /** Amount of the refund that applies to this credit note, in cents (or local equivalent). */
+    @SerializedName("amount_refunded")
+    Long amountRefunded;
+
+    /** ID of the refund. */
+    @SerializedName("refund")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<com.stripe.model.Refund> refund;
+
+    /** Get ID of expandable {@code refund} object. */
+    public String getRefund() {
+      return (this.refund != null) ? this.refund.getId() : null;
+    }
+
+    public void setRefund(String id) {
+      this.refund = ApiResource.setExpandableFieldId(id, this.refund);
+    }
+
+    /** Get expanded {@code refund}. */
+    public com.stripe.model.Refund getRefundObject() {
+      return (this.refund != null) ? this.refund.getExpanded() : null;
+    }
+
+    public void setRefundObject(com.stripe.model.Refund expandableObject) {
+      this.refund =
+          new ExpandableField<com.stripe.model.Refund>(expandableObject.getId(), expandableObject);
     }
   }
 

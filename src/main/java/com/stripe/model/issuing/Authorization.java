@@ -885,6 +885,10 @@ public class Authorization extends ApiResource
     @SerializedName("address_postal_code_check")
     String addressPostalCodeCheck;
 
+    /** The exemption applied to this authorization. */
+    @SerializedName("authentication_exemption")
+    AuthenticationExemption authenticationExemption;
+
     /**
      * Whether the cardholder provided a CVC and if it matched Stripe’s record.
      *
@@ -908,6 +912,27 @@ public class Authorization extends ApiResource
     /** 3D Secure details. */
     @SerializedName("three_d_secure")
     ThreeDSecure threeDSecure;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuthenticationExemption extends StripeObject {
+      /**
+       * The entity that requested the exemption, either the acquiring merchant or the Issuing user.
+       *
+       * <p>One of {@code acquirer}, or {@code issuer}.
+       */
+      @SerializedName("claimed_by")
+      String claimedBy;
+
+      /**
+       * The specific exemption claimed for this authorization.
+       *
+       * <p>One of {@code low_value_transaction}, or {@code transaction_risk_analysis}.
+       */
+      @SerializedName("type")
+      String type;
+    }
 
     @Getter
     @Setter

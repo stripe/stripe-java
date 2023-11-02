@@ -556,6 +556,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),
 
+    @SerializedName("invoice.payment.overpaid")
+    INVOICE__PAYMENT__OVERPAID("invoice.payment.overpaid"),
+
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
 

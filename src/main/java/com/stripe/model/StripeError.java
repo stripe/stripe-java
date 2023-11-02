@@ -86,7 +86,8 @@ public class StripeError extends StripeObject {
    * {@code tax_id_invalid}, {@code taxes_calculation_failed}, {@code
    * terminal_location_country_unsupported}, {@code terminal_reader_busy}, {@code
    * terminal_reader_offline}, {@code terminal_reader_timeout}, {@code testmode_charges_only},
-   * {@code tls_version_unsupported}, {@code token_already_used}, {@code token_in_use}, {@code
+   * {@code tls_version_unsupported}, {@code token_already_used}, {@code
+   * token_card_network_invalid}, {@code token_in_use}, {@code
    * transfer_source_balance_parameters_mismatch}, {@code transfers_not_allowed}, or {@code
    * url_invalid}.
    */

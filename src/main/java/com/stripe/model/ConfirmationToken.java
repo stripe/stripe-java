@@ -306,6 +306,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("revolut_pay")
+    RevolutPay revolutPay;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -322,8 +325,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps},
      * {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code
      * klarna}, {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code
-     * paypal}, {@code pix}, {@code promptpay}, {@code sepa_debit}, {@code sofort}, {@code
-     * us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * paypal}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code
+     * sofort}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1153,6 +1156,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Promptpay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RevolutPay extends StripeObject {}
 
     @Getter
     @Setter

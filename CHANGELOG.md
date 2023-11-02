@@ -23,6 +23,16 @@
 * [#1673](https://github.com/stripe/stripe-java/pull/1673) Update generated code for beta
   - Update pinned API version to `2023-10-16`
 
+## 24.1.0 - 2023-11-02
+* [#1677](https://github.com/stripe/stripe-java/pull/1677) Update generated code
+  * Add support for new resource `Tax.Registration`
+  * Add support for `revolut_pay` throughout the API.
+  * Add support for `aba` and `swift` on `FundingInstructions.bank_transfer.financial_addresses[]` and `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[]`
+  * Add support for `url` on `Issuing.Authorization.merchant_data`, `Issuing.Transaction.merchant_data`, `issuing.AuthorizationCreateParams.merchant_data`, `issuing.TransactionCreateForceCaptureParams.merchant_data`, and `issuing.TransactionCreateUnlinkedRefundParams.merchant_data`
+  * Add support for `authentication_exemption` and `three_d_secure` on `Issuing.Authorization.verification_data` and `issuing.AuthorizationCreateParams.verification_data`
+  * Add support for `description` on `PaymentLink.payment_intent_data`, `PaymentLinkCreateParams.payment_intent_data`, and `PaymentLinkUpdateParams.payment_intent_data`
+  * Add support for new value `unreconciled_customer_funds` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
+
 ## 24.0.0 - 2023-10-16
 * This release changes the pinned API version to `2023-10-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
 * [#1672](https://github.com/stripe/stripe-java/pull/1672) Update generated code

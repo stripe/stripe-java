@@ -71,7 +71,7 @@ public class RegistrationUpdateParams extends ApiRequestParams {
      * Time at which the registration becomes active. It can be either {@code now} to indicate the
      * current time, or a timestamp measured in seconds since the Unix epoch.
      */
-    public Builder setActiveFrom(Long activeFrom) {
+    public Builder setActiveFrom(RegistrationUpdateParams.ActiveFrom activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }
@@ -80,7 +80,7 @@ public class RegistrationUpdateParams extends ApiRequestParams {
      * Time at which the registration becomes active. It can be either {@code now} to indicate the
      * current time, or a timestamp measured in seconds since the Unix epoch.
      */
-    public Builder setActiveFrom(RegistrationUpdateParams.ActiveFrom activeFrom) {
+    public Builder setActiveFrom(Long activeFrom) {
       this.activeFrom = activeFrom;
       return this;
     }
@@ -116,7 +116,7 @@ public class RegistrationUpdateParams extends ApiRequestParams {
      * be active indefinitely. It can be either {@code now} to indicate the current time, or a
      * timestamp measured in seconds since the Unix epoch.
      */
-    public Builder setExpiresAt(Long expiresAt) {
+    public Builder setExpiresAt(RegistrationUpdateParams.ExpiresAt expiresAt) {
       this.expiresAt = expiresAt;
       return this;
     }
@@ -126,7 +126,7 @@ public class RegistrationUpdateParams extends ApiRequestParams {
      * be active indefinitely. It can be either {@code now} to indicate the current time, or a
      * timestamp measured in seconds since the Unix epoch.
      */
-    public Builder setExpiresAt(RegistrationUpdateParams.ExpiresAt expiresAt) {
+    public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
       return this;
     }
