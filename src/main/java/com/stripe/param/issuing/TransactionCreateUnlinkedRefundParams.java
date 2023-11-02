@@ -251,6 +251,10 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     @SerializedName("terminal_id")
     String terminalId;
 
+    /** URL provided by the merchant on a 3DS request. */
+    @SerializedName("url")
+    String url;
+
     private MerchantData(
         Category category,
         String city,
@@ -260,7 +264,8 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         String networkId,
         String postalCode,
         String state,
-        String terminalId) {
+        String terminalId,
+        String url) {
       this.category = category;
       this.city = city;
       this.country = country;
@@ -270,6 +275,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       this.postalCode = postalCode;
       this.state = state;
       this.terminalId = terminalId;
+      this.url = url;
     }
 
     public static Builder builder() {
@@ -295,6 +301,8 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
 
       private String terminalId;
 
+      private String url;
+
       /** Finalize and obtain parameter instance from this builder. */
       public TransactionCreateUnlinkedRefundParams.MerchantData build() {
         return new TransactionCreateUnlinkedRefundParams.MerchantData(
@@ -306,7 +314,8 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
             this.networkId,
             this.postalCode,
             this.state,
-            this.terminalId);
+            this.terminalId,
+            this.url);
       }
 
       /**
@@ -390,6 +399,12 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       /** An ID assigned by the seller to the location of the sale. */
       public Builder setTerminalId(String terminalId) {
         this.terminalId = terminalId;
+        return this;
+      }
+
+      /** URL provided by the merchant on a 3DS request. */
+      public Builder setUrl(String url) {
+        this.url = url;
         return this;
       }
     }
