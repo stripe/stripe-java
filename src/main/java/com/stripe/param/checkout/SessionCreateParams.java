@@ -69,11 +69,11 @@ public class SessionCreateParams extends ApiRequestParams {
   CustomText customText;
 
   /**
-   * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most recent
-   * card payment method will be used to prefill the email, name, card details, and billing address
-   * on the Checkout page. In {@code subscription} mode, the customer’s <a
+   * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most
+   * recently saved card payment method will be used to prefill the email, name, card details, and
+   * billing address on the Checkout page. In {@code subscription} mode, the customer’s <a
    * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
-   * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
+   * payment method</a> will be used if it’s a card, otherwise the most recently saved card will be
    * used. A valid billing address, billing name and billing email are required on the payment
    * method for Checkout to prefill the customer's card details.
    *
@@ -626,11 +626,11 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most
-     * recent card payment method will be used to prefill the email, name, card details, and billing
-     * address on the Checkout page. In {@code subscription} mode, the customer’s <a
+     * recently saved card payment method will be used to prefill the email, name, card details, and
+     * billing address on the Checkout page. In {@code subscription} mode, the customer’s <a
      * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
-     * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
-     * used. A valid billing address, billing name and billing email are required on the payment
+     * payment method</a> will be used if it’s a card, otherwise the most recently saved card will
+     * be used. A valid billing address, billing name and billing email are required on the payment
      * method for Checkout to prefill the customer's card details.
      *
      * <p>If the Customer already has a valid <a
