@@ -17,6 +17,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Object accountTaxIds;
 
   /**
+   * List of expected payments and corresponding due dates. Valid only for invoices where {@code
+   * collection_method=send_invoice}.
+   */
+  @SerializedName("amounts_due")
+  Object amountsDue;
+
+  /**
    * A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the
    * application owner's Stripe account. The request must be made with an OAuth key or the
    * Stripe-Account header in order to take an application fee. For more information, see the
@@ -241,6 +248,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   private InvoiceCreateParams(
       Object accountTaxIds,
+      Object amountsDue,
       Long applicationFeeAmount,
       Boolean autoAdvance,
       AutomaticTax automaticTax,
@@ -274,6 +282,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       String subscription,
       TransferData transferData) {
     this.accountTaxIds = accountTaxIds;
+    this.amountsDue = amountsDue;
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
     this.automaticTax = automaticTax;
@@ -314,6 +323,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Object accountTaxIds;
+
+    private Object amountsDue;
 
     private Long applicationFeeAmount;
 
@@ -383,6 +394,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     public InvoiceCreateParams build() {
       return new InvoiceCreateParams(
           this.accountTaxIds,
+          this.amountsDue,
           this.applicationFeeAmount,
           this.autoAdvance,
           this.automaticTax,
@@ -458,6 +470,52 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setAccountTaxIds(List<String> accountTaxIds) {
       this.accountTaxIds = accountTaxIds;
+      return this;
+    }
+
+    /**
+     * Add an element to `amountsDue` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceCreateParams#amountsDue} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAmountsDue(InvoiceCreateParams.AmountsDue element) {
+      if (this.amountsDue == null || this.amountsDue instanceof EmptyParam) {
+        this.amountsDue = new ArrayList<InvoiceCreateParams.AmountsDue>();
+      }
+      ((List<InvoiceCreateParams.AmountsDue>) this.amountsDue).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `amountsDue` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceCreateParams#amountsDue} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllAmountsDue(List<InvoiceCreateParams.AmountsDue> elements) {
+      if (this.amountsDue == null || this.amountsDue instanceof EmptyParam) {
+        this.amountsDue = new ArrayList<InvoiceCreateParams.AmountsDue>();
+      }
+      ((List<InvoiceCreateParams.AmountsDue>) this.amountsDue).addAll(elements);
+      return this;
+    }
+
+    /**
+     * List of expected payments and corresponding due dates. Valid only for invoices where {@code
+     * collection_method=send_invoice}.
+     */
+    public Builder setAmountsDue(EmptyParam amountsDue) {
+      this.amountsDue = amountsDue;
+      return this;
+    }
+
+    /**
+     * List of expected payments and corresponding due dates. Valid only for invoices where {@code
+     * collection_method=send_invoice}.
+     */
+    public Builder setAmountsDue(List<InvoiceCreateParams.AmountsDue> amountsDue) {
+      this.amountsDue = amountsDue;
       return this;
     }
 
@@ -940,6 +998,125 @@ public class InvoiceCreateParams extends ApiRequestParams {
     public Builder setTransferData(InvoiceCreateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AmountsDue {
+    /** <strong>Required.</strong> The amount in cents (or local equivalent). */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Number of days from when invoice is finalized until the payment is due. */
+    @SerializedName("days_until_due")
+    Long daysUntilDue;
+
+    /**
+     * <strong>Required.</strong> An arbitrary string attached to the object. Often useful for
+     * displaying to users.
+     */
+    @SerializedName("description")
+    String description;
+
+    /** Date on which a payment plan’s payment is due. */
+    @SerializedName("due_date")
+    Long dueDate;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AmountsDue(
+        Long amount,
+        Long daysUntilDue,
+        String description,
+        Long dueDate,
+        Map<String, Object> extraParams) {
+      this.amount = amount;
+      this.daysUntilDue = daysUntilDue;
+      this.description = description;
+      this.dueDate = dueDate;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private Long daysUntilDue;
+
+      private String description;
+
+      private Long dueDate;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceCreateParams.AmountsDue build() {
+        return new InvoiceCreateParams.AmountsDue(
+            this.amount, this.daysUntilDue, this.description, this.dueDate, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> The amount in cents (or local equivalent). */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** Number of days from when invoice is finalized until the payment is due. */
+      public Builder setDaysUntilDue(Long daysUntilDue) {
+        this.daysUntilDue = daysUntilDue;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> An arbitrary string attached to the object. Often useful for
+       * displaying to users.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /** Date on which a payment plan’s payment is due. */
+      public Builder setDueDate(Long dueDate) {
+        this.dueDate = dueDate;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreateParams.AmountsDue#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreateParams.AmountsDue#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 

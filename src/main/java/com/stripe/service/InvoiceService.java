@@ -13,6 +13,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.InvoiceAttachPaymentIntentParams;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
@@ -601,9 +602,56 @@ public final class InvoiceService extends ApiService {
             options,
             ApiMode.V1);
   }
+  /**
+   * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
+   * PaymentIntent’s status changes to {@code succeeded}, the payment is credited to the invoice,
+   * increasing its {@code amount_paid}. When the invoice is fully paid, the invoice’s status
+   * becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it is attached, it is
+   * credited to the invoice immediately.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a>
+   */
+  public Invoice attachPaymentIntent(String invoice, InvoiceAttachPaymentIntentParams params)
+      throws StripeException {
+    return attachPaymentIntent(invoice, params, (RequestOptions) null);
+  }
+  /**
+   * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
+   * PaymentIntent’s status changes to {@code succeeded}, the payment is credited to the invoice,
+   * increasing its {@code amount_paid}. When the invoice is fully paid, the invoice’s status
+   * becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it is attached, it is
+   * credited to the invoice immediately.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a>
+   */
+  public Invoice attachPaymentIntent(
+      String invoice, InvoiceAttachPaymentIntentParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(invoice));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Invoice.class,
+            options,
+            ApiMode.V1);
+  }
 
   public com.stripe.service.InvoiceLineItemService lineItems() {
     return new com.stripe.service.InvoiceLineItemService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.InvoicePaymentService payments() {
+    return new com.stripe.service.InvoicePaymentService(this.getResponseGetter());
   }
 
   public com.stripe.service.InvoiceUpcomingLinesService upcomingLines() {

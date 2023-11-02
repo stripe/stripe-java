@@ -10,6 +10,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.InvoiceAttachPaymentIntentParams;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
@@ -106,6 +107,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** This is the sum of all the shipping amounts. */
   @SerializedName("amount_shipping")
   Long amountShipping;
+
+  /**
+   * List of expected payments and corresponding due dates. This value will be null for invoices
+   * where collection_method=charge_automatically.
+   */
+  @SerializedName("amounts_due")
+  List<Invoice.AmountsDue> amountsDue;
 
   /** ID of the Connect Application that created the invoice. */
   @SerializedName("application")
@@ -474,6 +482,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
+
+  /** Payments for this invoice. */
+  @SerializedName("payments")
+  InvoicePaymentCollection payments;
 
   /** End of the usage period during which invoice items were added to this invoice. */
   @SerializedName("period_end")
@@ -961,6 +973,96 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
                 .map(x -> new ExpandableField<Discount>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
+  }
+
+  /**
+   * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
+   * PaymentIntent’s status changes to {@code succeeded}, the payment is credited to the invoice,
+   * increasing its {@code amount_paid}. When the invoice is fully paid, the invoice’s status
+   * becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it is attached, it is
+   * credited to the invoice immediately.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a>
+   */
+  public Invoice attachPaymentIntent(Map<String, Object> params) throws StripeException {
+    return attachPaymentIntent(params, (RequestOptions) null);
+  }
+
+  /**
+   * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
+   * PaymentIntent’s status changes to {@code succeeded}, the payment is credited to the invoice,
+   * increasing its {@code amount_paid}. When the invoice is fully paid, the invoice’s status
+   * becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it is attached, it is
+   * credited to the invoice immediately.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a>
+   */
+  public Invoice attachPaymentIntent(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            Invoice.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /**
+   * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
+   * PaymentIntent’s status changes to {@code succeeded}, the payment is credited to the invoice,
+   * increasing its {@code amount_paid}. When the invoice is fully paid, the invoice’s status
+   * becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it is attached, it is
+   * credited to the invoice immediately.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a>
+   */
+  public Invoice attachPaymentIntent(InvoiceAttachPaymentIntentParams params)
+      throws StripeException {
+    return attachPaymentIntent(params, (RequestOptions) null);
+  }
+
+  /**
+   * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
+   * PaymentIntent’s status changes to {@code succeeded}, the payment is credited to the invoice,
+   * increasing its {@code amount_paid}. When the invoice is fully paid, the invoice’s status
+   * becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it is attached, it is
+   * credited to the invoice immediately.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a>
+   */
+  public Invoice attachPaymentIntent(
+      InvoiceAttachPaymentIntentParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Invoice.class,
+            options,
+            ApiMode.V1);
   }
 
   /**
@@ -1930,6 +2032,45 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AmountsDue extends StripeObject {
+    /** Incremental amount due for this payment in cents (or local equivalent). */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The amount in cents (or local equivalent) that was paid for this payment. */
+    @SerializedName("amount_paid")
+    Long amountPaid;
+
+    /**
+     * The difference between the payment’s amount and amount_paid, in cents (or local equivalent).
+     */
+    @SerializedName("amount_remaining")
+    Long amountRemaining;
+
+    /** Number of days from when invoice is finalized until the payment is due. */
+    @SerializedName("days_until_due")
+    Long daysUntilDue;
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
+    /** Date on which a payment plan’s payment is due. */
+    @SerializedName("due_date")
+    Long dueDate;
+
+    /** Timestamp when the payment was paid. */
+    @SerializedName("paid_at")
+    Long paidAt;
+
+    /** The status of the payment, one of {@code open}, {@code paid}, or {@code past_due}. */
+    @SerializedName("status")
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax extends StripeObject {
     /**
      * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
@@ -2716,6 +2857,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
+    trySetResponseGetter(payments, responseGetter);
     trySetResponseGetter(quote, responseGetter);
     trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(renderingOptions, responseGetter);
