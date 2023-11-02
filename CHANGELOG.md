@@ -1,5 +1,30 @@
 # Changelog
 
+## 24.2.0-beta.1 - 2023-11-02
+* [#1678](https://github.com/stripe/stripe-java/pull/1678) Update generated code for beta
+  * Add support for `attach_payment_intent` method on resource `Invoice`
+  * Add support for `revolut_pay` on `ConfirmationToken.payment_method_preview`
+  * Add support for `refunds` on `CreditNoteCreateParams`, `CreditNotePreviewLinesParams`, `CreditNotePreviewParams`, and `CreditNote`
+  * Add support for `post_payment_amount` and `pre_payment_amount` on `CreditNote`
+  * Add support for `schedule_details` on `InvoiceUpcomingLinesParams` and `InvoiceUpcomingParams`
+  * Add support for `amounts_due` on `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`
+  * Add support for `payments` on `Invoice`
+  * Add support for `created` on `Issuing.PersonalizationDesign`
+  * Add support for `ending_before`, `limit`, and `starting_after` on `tax.RegistrationListParams`
+  * Change type of `tax.RegistrationCreateParams.active_from` to `DateTime | 'now'`
+  * Add support for new value `invoice.payment.overpaid` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
+## 24.1.0 - 2023-11-02
+* [#1677](https://github.com/stripe/stripe-java/pull/1677) Update generated code
+  * Add support for new resource `Tax.Registration`
+  * Add support for `revolut_pay` throughout the API.
+  * Add support for `aba` and `swift` on `FundingInstructions.bank_transfer.financial_addresses[]` and `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[]`
+  * Add support for `url` on `Issuing.Authorization.merchant_data`, `Issuing.Transaction.merchant_data`, `issuing.AuthorizationCreateParams.merchant_data`, `issuing.TransactionCreateForceCaptureParams.merchant_data`, and `issuing.TransactionCreateUnlinkedRefundParams.merchant_data`
+  * Add support for `authentication_exemption` and `three_d_secure` on `Issuing.Authorization.verification_data` and `issuing.AuthorizationCreateParams.verification_data`
+  * Add support for `description` on `PaymentLink.payment_intent_data`, `PaymentLinkCreateParams.payment_intent_data`, and `PaymentLinkUpdateParams.payment_intent_data`
+  * Add support for new value `unreconciled_customer_funds` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
+
+
 ## 24.1.0-beta.2 - 2023-10-26
 * [#1675](https://github.com/stripe/stripe-java/pull/1675) Update generated code for beta
   * Add support for new resource `Margin`
@@ -22,16 +47,6 @@
 ## 24.1.0-beta.1 - 2023-10-17
 * [#1673](https://github.com/stripe/stripe-java/pull/1673) Update generated code for beta
   - Update pinned API version to `2023-10-16`
-
-## 24.1.0 - 2023-11-02
-* [#1677](https://github.com/stripe/stripe-java/pull/1677) Update generated code
-  * Add support for new resource `Tax.Registration`
-  * Add support for `revolut_pay` throughout the API.
-  * Add support for `aba` and `swift` on `FundingInstructions.bank_transfer.financial_addresses[]` and `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[]`
-  * Add support for `url` on `Issuing.Authorization.merchant_data`, `Issuing.Transaction.merchant_data`, `issuing.AuthorizationCreateParams.merchant_data`, `issuing.TransactionCreateForceCaptureParams.merchant_data`, and `issuing.TransactionCreateUnlinkedRefundParams.merchant_data`
-  * Add support for `authentication_exemption` and `three_d_secure` on `Issuing.Authorization.verification_data` and `issuing.AuthorizationCreateParams.verification_data`
-  * Add support for `description` on `PaymentLink.payment_intent_data`, `PaymentLinkCreateParams.payment_intent_data`, and `PaymentLinkUpdateParams.payment_intent_data`
-  * Add support for new value `unreconciled_customer_funds` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
 
 ## 24.0.0 - 2023-10-16
 * This release changes the pinned API version to `2023-10-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
