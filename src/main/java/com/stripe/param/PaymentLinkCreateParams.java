@@ -3000,6 +3000,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("capture_method")
     CaptureMethod captureMethod;
 
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -3060,12 +3064,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private PaymentIntentData(
         CaptureMethod captureMethod,
+        String description,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
         SetupFutureUsage setupFutureUsage,
         String statementDescriptor,
         String statementDescriptorSuffix) {
       this.captureMethod = captureMethod;
+      this.description = description;
       this.extraParams = extraParams;
       this.metadata = metadata;
       this.setupFutureUsage = setupFutureUsage;
@@ -3079,6 +3085,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private CaptureMethod captureMethod;
+
+      private String description;
 
       private Map<String, Object> extraParams;
 
@@ -3094,6 +3102,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       public PaymentLinkCreateParams.PaymentIntentData build() {
         return new PaymentLinkCreateParams.PaymentIntentData(
             this.captureMethod,
+            this.description,
             this.extraParams,
             this.metadata,
             this.setupFutureUsage,
@@ -3105,6 +3114,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       public Builder setCaptureMethod(
           PaymentLinkCreateParams.PaymentIntentData.CaptureMethod captureMethod) {
         this.captureMethod = captureMethod;
+        return this;
+      }
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      public Builder setDescription(String description) {
+        this.description = description;
         return this;
       }
 

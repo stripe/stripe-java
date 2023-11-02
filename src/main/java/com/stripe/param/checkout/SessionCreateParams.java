@@ -69,11 +69,11 @@ public class SessionCreateParams extends ApiRequestParams {
   CustomText customText;
 
   /**
-   * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most recent
-   * card payment method will be used to prefill the email, name, card details, and billing address
-   * on the Checkout page. In {@code subscription} mode, the customer’s <a
+   * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most
+   * recently saved card payment method will be used to prefill the email, name, card details, and
+   * billing address on the Checkout page. In {@code subscription} mode, the customer’s <a
    * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
-   * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
+   * payment method</a> will be used if it’s a card, otherwise the most recently saved card will be
    * used. A valid billing address, billing name and billing email are required on the payment
    * method for Checkout to prefill the customer's card details.
    *
@@ -626,11 +626,11 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most
-     * recent card payment method will be used to prefill the email, name, card details, and billing
-     * address on the Checkout page. In {@code subscription} mode, the customer’s <a
+     * recently saved card payment method will be used to prefill the email, name, card details, and
+     * billing address on the Checkout page. In {@code subscription} mode, the customer’s <a
      * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
-     * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
-     * used. A valid billing address, billing name and billing email are required on the payment
+     * payment method</a> will be used if it’s a card, otherwise the most recently saved card will
+     * be used. A valid billing address, billing name and billing email are required on the payment
      * method for Checkout to prefill the customer's card details.
      *
      * <p>If the Customer already has a valid <a
@@ -5002,6 +5002,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("pix")
     Pix pix;
 
+    /** contains details about the RevolutPay payment method options. */
+    @SerializedName("revolut_pay")
+    RevolutPay revolutPay;
+
     /** contains details about the Sepa Debit payment method options. */
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -5044,6 +5048,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Paynow paynow,
         Paypal paypal,
         Pix pix,
+        RevolutPay revolutPay,
         SepaDebit sepaDebit,
         Sofort sofort,
         UsBankAccount usBankAccount,
@@ -5073,6 +5078,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.paynow = paynow;
       this.paypal = paypal;
       this.pix = pix;
+      this.revolutPay = revolutPay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.usBankAccount = usBankAccount;
@@ -5134,6 +5140,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Pix pix;
 
+      private RevolutPay revolutPay;
+
       private SepaDebit sepaDebit;
 
       private Sofort sofort;
@@ -5170,6 +5178,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.paynow,
             this.paypal,
             this.pix,
+            this.revolutPay,
             this.sepaDebit,
             this.sofort,
             this.usBankAccount,
@@ -5347,6 +5356,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Pix payment method options. */
       public Builder setPix(SessionCreateParams.PaymentMethodOptions.Pix pix) {
         this.pix = pix;
+        return this;
+      }
+
+      /** contains details about the RevolutPay payment method options. */
+      public Builder setRevolutPay(SessionCreateParams.PaymentMethodOptions.RevolutPay revolutPay) {
+        this.revolutPay = revolutPay;
         return this;
       }
 
@@ -9228,6 +9243,122 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class RevolutPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private RevolutPay(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.RevolutPay build() {
+          return new SessionCreateParams.PaymentMethodOptions.RevolutPay(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.RevolutPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.RevolutPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.RevolutPay.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12907,6 +13038,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
+
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

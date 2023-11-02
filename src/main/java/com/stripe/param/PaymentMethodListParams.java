@@ -289,6 +289,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
 
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
+
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 

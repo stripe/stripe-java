@@ -656,6 +656,10 @@ public class Authorization extends ApiResource
     /** An ID assigned by the seller to the location of the sale. */
     @SerializedName("terminal_id")
     String terminalId;
+
+    /** URL provided by the merchant on a 3DS request. */
+    @SerializedName("url")
+    String url;
   }
 
   @Getter
@@ -881,6 +885,10 @@ public class Authorization extends ApiResource
     @SerializedName("address_postal_code_check")
     String addressPostalCodeCheck;
 
+    /** The exemption applied to this authorization. */
+    @SerializedName("authentication_exemption")
+    AuthenticationExemption authenticationExemption;
+
     /**
      * Whether the cardholder provided a CVC and if it matched Stripe’s record.
      *
@@ -900,6 +908,45 @@ public class Authorization extends ApiResource
     /** The postal code submitted as part of the authorization used for postal code verification. */
     @SerializedName("postal_code")
     String postalCode;
+
+    /** 3D Secure details. */
+    @SerializedName("three_d_secure")
+    ThreeDSecure threeDSecure;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuthenticationExemption extends StripeObject {
+      /**
+       * The entity that requested the exemption, either the acquiring merchant or the Issuing user.
+       *
+       * <p>One of {@code acquirer}, or {@code issuer}.
+       */
+      @SerializedName("claimed_by")
+      String claimedBy;
+
+      /**
+       * The specific exemption claimed for this authorization.
+       *
+       * <p>One of {@code low_value_transaction}, or {@code transaction_risk_analysis}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ThreeDSecure extends StripeObject {
+      /**
+       * The outcome of the 3D Secure authentication request.
+       *
+       * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code failed}, or {@code
+       * required}.
+       */
+      @SerializedName("result")
+      String result;
+    }
   }
 
   public TestHelpers getTestHelpers() {

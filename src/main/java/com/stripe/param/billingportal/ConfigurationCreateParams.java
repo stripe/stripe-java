@@ -1243,7 +1243,9 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The list of products that support subscription updates. */
+      /**
+       * <strong>Required.</strong> The list of up to 10 products that support subscription updates.
+       */
       @SerializedName("products")
       Object products;
 
@@ -1425,13 +1427,19 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The list of products that support subscription updates. */
+        /**
+         * <strong>Required.</strong> The list of up to 10 products that support subscription
+         * updates.
+         */
         public Builder setProducts(EmptyParam products) {
           this.products = products;
           return this;
         }
 
-        /** <strong>Required.</strong> The list of products that support subscription updates. */
+        /**
+         * <strong>Required.</strong> The list of up to 10 products that support subscription
+         * updates.
+         */
         public Builder setProducts(
             List<ConfigurationCreateParams.Features.SubscriptionUpdate.Product> products) {
           this.products = products;

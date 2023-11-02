@@ -169,6 +169,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("radar_options")
   RadarOptions radarOptions;
 
+  @SerializedName("revolut_pay")
+  RevolutPay revolutPay;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -184,8 +187,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps}, {@code
    * fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code klarna},
    * {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
-   * {@code pix}, {@code promptpay}, {@code sepa_debit}, {@code sofort}, {@code us_bank_account},
-   * {@code wechat_pay}, or {@code zip}.
+   * {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code
+   * us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -1461,6 +1464,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class RevolutPay extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class SepaDebit extends StripeObject {
     /** Bank code of bank associated with the bank account. */
     @SerializedName("bank_code")
@@ -1694,6 +1702,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(pix, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);
+    trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);

@@ -436,7 +436,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @SerializedName("enabled")
       Boolean enabled;
 
-      /** The list of products that support subscription updates. */
+      /** The list of up to 10 products that support subscription updates. */
       @SerializedName("products")
       List<Configuration.Features.SubscriptionUpdate.Product> products;
 

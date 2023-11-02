@@ -435,6 +435,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     @SerializedName("terminal_id")
     String terminalId;
 
+    /** URL provided by the merchant on a 3DS request. */
+    @SerializedName("url")
+    String url;
+
     private MerchantData(
         Category category,
         String city,
@@ -444,7 +448,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
         String networkId,
         String postalCode,
         String state,
-        String terminalId) {
+        String terminalId,
+        String url) {
       this.category = category;
       this.city = city;
       this.country = country;
@@ -454,6 +459,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       this.postalCode = postalCode;
       this.state = state;
       this.terminalId = terminalId;
+      this.url = url;
     }
 
     public static Builder builder() {
@@ -479,6 +485,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
       private String terminalId;
 
+      private String url;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationCreateParams.MerchantData build() {
         return new AuthorizationCreateParams.MerchantData(
@@ -490,7 +498,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
             this.networkId,
             this.postalCode,
             this.state,
-            this.terminalId);
+            this.terminalId,
+            this.url);
       }
 
       /**
@@ -571,6 +580,12 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       /** An ID assigned by the seller to the location of the sale. */
       public Builder setTerminalId(String terminalId) {
         this.terminalId = terminalId;
+        return this;
+      }
+
+      /** URL provided by the merchant on a 3DS request. */
+      public Builder setUrl(String url) {
+        this.url = url;
         return this;
       }
     }
@@ -1574,6 +1589,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     @SerializedName("address_postal_code_check")
     AddressPostalCodeCheck addressPostalCodeCheck;
 
+    /** The exemption applied to this authorization. */
+    @SerializedName("authentication_exemption")
+    AuthenticationExemption authenticationExemption;
+
     /** Whether the cardholder provided a CVC and if it matched Stripe’s record. */
     @SerializedName("cvc_check")
     CvcCheck cvcCheck;
@@ -1591,17 +1610,25 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** 3D Secure details. */
+    @SerializedName("three_d_secure")
+    ThreeDSecure threeDSecure;
+
     private VerificationData(
         AddressLine1Check addressLine1Check,
         AddressPostalCodeCheck addressPostalCodeCheck,
+        AuthenticationExemption authenticationExemption,
         CvcCheck cvcCheck,
         ExpiryCheck expiryCheck,
-        Map<String, Object> extraParams) {
+        Map<String, Object> extraParams,
+        ThreeDSecure threeDSecure) {
       this.addressLine1Check = addressLine1Check;
       this.addressPostalCodeCheck = addressPostalCodeCheck;
+      this.authenticationExemption = authenticationExemption;
       this.cvcCheck = cvcCheck;
       this.expiryCheck = expiryCheck;
       this.extraParams = extraParams;
+      this.threeDSecure = threeDSecure;
     }
 
     public static Builder builder() {
@@ -1613,20 +1640,26 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
       private AddressPostalCodeCheck addressPostalCodeCheck;
 
+      private AuthenticationExemption authenticationExemption;
+
       private CvcCheck cvcCheck;
 
       private ExpiryCheck expiryCheck;
 
       private Map<String, Object> extraParams;
 
+      private ThreeDSecure threeDSecure;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationCreateParams.VerificationData build() {
         return new AuthorizationCreateParams.VerificationData(
             this.addressLine1Check,
             this.addressPostalCodeCheck,
+            this.authenticationExemption,
             this.cvcCheck,
             this.expiryCheck,
-            this.extraParams);
+            this.extraParams,
+            this.threeDSecure);
       }
 
       /**
@@ -1647,6 +1680,14 @@ public class AuthorizationCreateParams extends ApiRequestParams {
           AuthorizationCreateParams.VerificationData.AddressPostalCodeCheck
               addressPostalCodeCheck) {
         this.addressPostalCodeCheck = addressPostalCodeCheck;
+        return this;
+      }
+
+      /** The exemption applied to this authorization. */
+      public Builder setAuthenticationExemption(
+          AuthorizationCreateParams.VerificationData.AuthenticationExemption
+              authenticationExemption) {
+        this.authenticationExemption = authenticationExemption;
         return this;
       }
 
@@ -1688,6 +1729,232 @@ public class AuthorizationCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+
+      /** 3D Secure details. */
+      public Builder setThreeDSecure(
+          AuthorizationCreateParams.VerificationData.ThreeDSecure threeDSecure) {
+        this.threeDSecure = threeDSecure;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class AuthenticationExemption {
+      /**
+       * <strong>Required.</strong> The entity that requested the exemption, either the acquiring
+       * merchant or the Issuing user.
+       */
+      @SerializedName("claimed_by")
+      ClaimedBy claimedBy;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The specific exemption claimed for this authorization. */
+      @SerializedName("type")
+      Type type;
+
+      private AuthenticationExemption(
+          ClaimedBy claimedBy, Map<String, Object> extraParams, Type type) {
+        this.claimedBy = claimedBy;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ClaimedBy claimedBy;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AuthorizationCreateParams.VerificationData.AuthenticationExemption build() {
+          return new AuthorizationCreateParams.VerificationData.AuthenticationExemption(
+              this.claimedBy, this.extraParams, this.type);
+        }
+
+        /**
+         * <strong>Required.</strong> The entity that requested the exemption, either the acquiring
+         * merchant or the Issuing user.
+         */
+        public Builder setClaimedBy(
+            AuthorizationCreateParams.VerificationData.AuthenticationExemption.ClaimedBy
+                claimedBy) {
+          this.claimedBy = claimedBy;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AuthorizationCreateParams.VerificationData.AuthenticationExemption#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AuthorizationCreateParams.VerificationData.AuthenticationExemption#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The specific exemption claimed for this authorization. */
+        public Builder setType(
+            AuthorizationCreateParams.VerificationData.AuthenticationExemption.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum ClaimedBy implements ApiRequestParams.EnumParam {
+        @SerializedName("acquirer")
+        ACQUIRER("acquirer"),
+
+        @SerializedName("issuer")
+        ISSUER("issuer");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        ClaimedBy(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("low_value_transaction")
+        LOW_VALUE_TRANSACTION("low_value_transaction"),
+
+        @SerializedName("transaction_risk_analysis")
+        TRANSACTION_RISK_ANALYSIS("transaction_risk_analysis");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class ThreeDSecure {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The outcome of the 3D Secure authentication request. */
+      @SerializedName("result")
+      Result result;
+
+      private ThreeDSecure(Map<String, Object> extraParams, Result result) {
+        this.extraParams = extraParams;
+        this.result = result;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Result result;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AuthorizationCreateParams.VerificationData.ThreeDSecure build() {
+          return new AuthorizationCreateParams.VerificationData.ThreeDSecure(
+              this.extraParams, this.result);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AuthorizationCreateParams.VerificationData.ThreeDSecure#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AuthorizationCreateParams.VerificationData.ThreeDSecure#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The outcome of the 3D Secure authentication request. */
+        public Builder setResult(
+            AuthorizationCreateParams.VerificationData.ThreeDSecure.Result result) {
+          this.result = result;
+          return this;
+        }
+      }
+
+      public enum Result implements ApiRequestParams.EnumParam {
+        @SerializedName("attempt_acknowledged")
+        ATTEMPT_ACKNOWLEDGED("attempt_acknowledged"),
+
+        @SerializedName("authenticated")
+        AUTHENTICATED("authenticated"),
+
+        @SerializedName("failed")
+        FAILED("failed"),
+
+        @SerializedName("required")
+        REQUIRED("required");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Result(String value) {
+          this.value = value;
+        }
       }
     }
 

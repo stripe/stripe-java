@@ -1333,6 +1333,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("pix")
     Pix pix;
 
+    @SerializedName("revolut_pay")
+    RevolutPay revolutPay;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -2070,6 +2073,11 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RevolutPay extends StripeObject {}
 
     @Getter
     @Setter

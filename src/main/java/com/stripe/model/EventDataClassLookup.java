@@ -127,6 +127,7 @@ final class EventDataClassLookup {
 
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
     classLookup.put("tax.calculation_line_item", com.stripe.model.tax.CalculationLineItem.class);
+    classLookup.put("tax.registration", com.stripe.model.tax.Registration.class);
     classLookup.put("tax.settings", com.stripe.model.tax.Settings.class);
     classLookup.put("tax.transaction", com.stripe.model.tax.Transaction.class);
     classLookup.put("tax.transaction_line_item", com.stripe.model.tax.TransactionLineItem.class);

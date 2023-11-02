@@ -844,6 +844,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("capture_method")
     String captureMethod;
 
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
      * metadata on <a href="https://stripe.com/docs/api/payment_intents">Payment Intents</a>
