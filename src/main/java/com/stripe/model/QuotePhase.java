@@ -93,6 +93,13 @@ public class QuotePhase extends ApiResource implements HasId {
   LineItemCollection lineItems;
 
   /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+   * declaratively set metadata on the subscription schedule's phases when the quote is accepted.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code quote_phase}.
