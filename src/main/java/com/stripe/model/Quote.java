@@ -1329,6 +1329,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     Long effectiveDate;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * metadata on the subscription or subscription schedule when the quote is finalized. If a
+     * recurring price is included in {@code line_items}, this field will be passed to the resulting
+     * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,
+     * this field will be passed to the resulting subscription schedule's {@code phases.metadata}
+     * field. Unlike object-level metadata, this field is declarative. Updates will clear prior
+     * values.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time.
      */
