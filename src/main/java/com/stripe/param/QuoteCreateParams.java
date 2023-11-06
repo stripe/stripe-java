@@ -8012,7 +8012,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
-     * metadata on the subscription or subscription schedule when the quote is finalized. If a
+     * metadata on the subscription or subscription schedule when the quote is accepted. If a
      * recurring price is included in {@code line_items}, this field will be passed to the resulting
      * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,
      * this field will be passed to the resulting subscription schedule's {@code phases.metadata}
