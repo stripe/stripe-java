@@ -306,8 +306,9 @@ public class SessionCreateParams extends ApiRequestParams {
   SubscriptionData subscriptionData;
 
   /**
-   * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
-   * to use information from the successful Checkout Session on your page, read the guide on <a
+   * The URL to which Stripe should send customers when payment or setup is complete. This parameter
+   * is not allowed if ui_mode is {@code embedded}. If you’d like to use information from the
+   * successful Checkout Session on your page, read the guide on <a
    * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
    * page</a>.
    */
@@ -1023,10 +1024,11 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The URL to which Stripe should send customers when payment or setup is complete. If you’d
-     * like to use information from the successful Checkout Session on your page, read the guide on
-     * <a href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your
-     * success page</a>.
+     * The URL to which Stripe should send customers when payment or setup is complete. This
+     * parameter is not allowed if ui_mode is {@code embedded}. If you’d like to use information
+     * from the successful Checkout Session on your page, read the guide on <a
+     * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
+     * page</a>.
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
