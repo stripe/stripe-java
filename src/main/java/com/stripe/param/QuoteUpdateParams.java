@@ -1403,6 +1403,18 @@ public class QuoteUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * metadata on the subscription or subscription schedule when the quote is accepted. If a
+     * recurring price is included in {@code line_items}, this field will be passed to the resulting
+     * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,
+     * this field will be passed to the resulting subscription schedule's {@code phases.metadata}
+     * field. Unlike object-level metadata, this field is declarative. Updates will clear prior
+     * values.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time.
      */
@@ -1413,10 +1425,12 @@ public class QuoteUpdateParams extends ApiRequestParams {
         Object description,
         Object effectiveDate,
         Map<String, Object> extraParams,
+        Map<String, String> metadata,
         Object trialPeriodDays) {
       this.description = description;
       this.effectiveDate = effectiveDate;
       this.extraParams = extraParams;
+      this.metadata = metadata;
       this.trialPeriodDays = trialPeriodDays;
     }
 
@@ -1431,12 +1445,18 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Map<String, String> metadata;
+
       private Object trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
       public QuoteUpdateParams.SubscriptionData build() {
         return new QuoteUpdateParams.SubscriptionData(
-            this.description, this.effectiveDate, this.extraParams, this.trialPeriodDays);
+            this.description,
+            this.effectiveDate,
+            this.extraParams,
+            this.metadata,
+            this.trialPeriodDays);
       }
 
       /**
@@ -1522,6 +1542,32 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * QuoteUpdateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link QuoteUpdateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

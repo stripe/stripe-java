@@ -1858,11 +1858,11 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("cvc")
     String cvc;
 
-    /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
+    /** Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")
     Long expMonth;
 
-    /** <strong>Required.</strong> Four-digit number representing the card's expiration year. */
+    /** Four-digit number representing the card's expiration year. */
     @SerializedName("exp_year")
     Long expYear;
 
@@ -1875,7 +1875,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The card number, as a string without any separators. */
+    /** The card number, as a string without any separators. */
     @SerializedName("number")
     String number;
 
@@ -1915,13 +1915,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
+      /** Two-digit number representing the card's expiration month. */
       public Builder setExpMonth(Long expMonth) {
         this.expMonth = expMonth;
         return this;
       }
 
-      /** <strong>Required.</strong> Four-digit number representing the card's expiration year. */
+      /** Four-digit number representing the card's expiration year. */
       public Builder setExpYear(Long expYear) {
         this.expYear = expYear;
         return this;
@@ -1953,7 +1953,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The card number, as a string without any separators. */
+      /** The card number, as a string without any separators. */
       public Builder setNumber(String number) {
         this.number = number;
         return this;
@@ -3708,9 +3708,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> For backwards compatibility, you can alternatively provide a
-     * Stripe token (e.g., for Apple Pay, Amex Express Checkout, or legacy Checkout) into the card
-     * hash with format card: {token: &quot;tok_visa&quot;}.
+     * For backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple
+     * Pay, Amex Express Checkout, or legacy Checkout) into the card hash with format card: {token:
+     * &quot;tok_visa&quot;}.
      */
     @SerializedName("token")
     String token;
@@ -3761,9 +3761,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> For backwards compatibility, you can alternatively provide a
-       * Stripe token (e.g., for Apple Pay, Amex Express Checkout, or legacy Checkout) into the card
-       * hash with format card: {token: &quot;tok_visa&quot;}.
+       * For backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple
+       * Pay, Amex Express Checkout, or legacy Checkout) into the card hash with format card:
+       * {token: &quot;tok_visa&quot;}.
        */
       public Builder setToken(String token) {
         this.token = token;
