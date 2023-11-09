@@ -1,6 +1,10 @@
 # Changelog
 
 
+## 24.2.0 - 2023-11-09
+* [#1679](https://github.com/stripe/stripe-java/pull/1679) Update generated code
+  * Add support for `metadata` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, and `QuoteUpdateParams.subscription_data`
+
 ## 24.1.0 - 2023-11-02
 * [#1677](https://github.com/stripe/stripe-java/pull/1677) Update generated code
   * Add support for new resource `Tax.Registration`
