@@ -1,5 +1,11 @@
 # Changelog
 
+## 24.3.0-beta.1 - 2023-11-10
+* [#1681](https://github.com/stripe/stripe-java/pull/1681) Update generated code for beta
+  * Add support for `metadata` on `QuoteCreateParams.phases[]`, `QuotePhase`, and `QuoteUpdateParams.phases[]`
+  * Add support for `last_reestimation_details` on `Quote.computed`
+  * Add support for new value `quote.reestimate_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 24.2.0-beta.1 - 2023-11-02
 * [#1678](https://github.com/stripe/stripe-java/pull/1678) Update generated code for beta
   * Add support for `attach_payment_intent` method on resource `Invoice`
