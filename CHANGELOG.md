@@ -14,6 +14,10 @@
   * Change type of `tax.RegistrationCreateParams.active_from` to `DateTime | 'now'`
   * Add support for new value `invoice.payment.overpaid` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
+## 24.2.0 - 2023-11-09
+* [#1679](https://github.com/stripe/stripe-java/pull/1679) Update generated code
+  * Add support for `metadata` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, and `QuoteUpdateParams.subscription_data`
+
 ## 24.1.0 - 2023-11-02
 * [#1677](https://github.com/stripe/stripe-java/pull/1677) Update generated code
   * Add support for new resource `Tax.Registration`
