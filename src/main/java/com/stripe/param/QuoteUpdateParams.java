@@ -6320,6 +6320,16 @@ public class QuoteUpdateParams extends ApiRequestParams {
     List<QuoteUpdateParams.Phase.LineItem> lineItems;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+     * declaratively set metadata on the subscription schedule's phases when the quote is accepted.
+     * After a quote has been finalized, this field can be updated by specifying an identical set of
+     * quote phases to what was on the quote originally, excluding changes in metadata and phases
+     * that are now in the past.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * If the update changes the current phase, indicates whether the changes should be prorated.
      * The default value is {@code create_prorations}.
      */
@@ -6350,6 +6360,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         InvoiceSettings invoiceSettings,
         Long iterations,
         List<QuoteUpdateParams.Phase.LineItem> lineItems,
+        Map<String, String> metadata,
         ProrationBehavior prorationBehavior,
         Boolean trial,
         Long trialEnd) {
@@ -6362,6 +6373,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       this.invoiceSettings = invoiceSettings;
       this.iterations = iterations;
       this.lineItems = lineItems;
+      this.metadata = metadata;
       this.prorationBehavior = prorationBehavior;
       this.trial = trial;
       this.trialEnd = trialEnd;
@@ -6390,6 +6402,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       private List<QuoteUpdateParams.Phase.LineItem> lineItems;
 
+      private Map<String, String> metadata;
+
       private ProrationBehavior prorationBehavior;
 
       private Boolean trial;
@@ -6408,6 +6422,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
             this.invoiceSettings,
             this.iterations,
             this.lineItems,
+            this.metadata,
             this.prorationBehavior,
             this.trial,
             this.trialEnd);
@@ -6612,6 +6627,32 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.lineItems = new ArrayList<>();
         }
         this.lineItems.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * QuoteUpdateParams.Phase#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link QuoteUpdateParams.Phase#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 
@@ -8126,6 +8167,18 @@ public class QuoteUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * metadata on the subscription or subscription schedule when the quote is accepted. If a
+     * recurring price is included in {@code line_items}, this field will be passed to the resulting
+     * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,
+     * this field will be passed to the resulting subscription schedule's {@code phases.metadata}
+     * field. Unlike object-level metadata, this field is declarative. Updates will clear prior
+     * values.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * If specified, the invoicing for the given billing cycle iterations will be processed when the
      * quote is accepted. Cannot be used with {@code effective_date}.
      */
@@ -8166,6 +8219,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         Object effectiveDate,
         EndBehavior endBehavior,
         Map<String, Object> extraParams,
+        Map<String, String> metadata,
         Object prebilling,
         ProrationBehavior prorationBehavior,
         Object trialPeriodDays) {
@@ -8176,6 +8230,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       this.effectiveDate = effectiveDate;
       this.endBehavior = endBehavior;
       this.extraParams = extraParams;
+      this.metadata = metadata;
       this.prebilling = prebilling;
       this.prorationBehavior = prorationBehavior;
       this.trialPeriodDays = trialPeriodDays;
@@ -8200,6 +8255,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Map<String, String> metadata;
+
       private Object prebilling;
 
       private ProrationBehavior prorationBehavior;
@@ -8216,6 +8273,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
             this.effectiveDate,
             this.endBehavior,
             this.extraParams,
+            this.metadata,
             this.prebilling,
             this.prorationBehavior,
             this.trialPeriodDays);
@@ -8355,6 +8413,32 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * QuoteUpdateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link QuoteUpdateParams.SubscriptionData#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

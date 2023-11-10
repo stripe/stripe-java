@@ -1329,6 +1329,13 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @EqualsAndHashCode(callSuper = false)
   public static class Computed extends StripeObject {
     /**
+     * Details of the most recent reestimate of the quote's preview schedules and upcoming invoices,
+     * including the status of Stripe's calculation.
+     */
+    @SerializedName("last_reestimation_details")
+    LastReestimationDetails lastReestimationDetails;
+
+    /**
      * The definitive totals and line items the customer will be charged on a recurring basis. Takes
      * into account the line items with recurring prices and discounts with {@code duration=forever}
      * coupons only. Defaults to {@code null} if no inputted line items with recurring prices.
@@ -1342,6 +1349,57 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     @SerializedName("upfront")
     Upfront upfront;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LastReestimationDetails extends StripeObject {
+      /**
+       * When {@code status} is {@code failed}, provides details about the quote reestimation
+       * failure.
+       */
+      @SerializedName("failed")
+      Failed failed;
+
+      /**
+       * Latest status of the reestimation.
+       *
+       * <p>One of {@code failed}, {@code in_progress}, or {@code succeeded}.
+       */
+      @SerializedName("status")
+      String status;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Failed extends StripeObject {
+        /**
+         * The failure {@code code} is more granular than the {@code reason} provided and may
+         * correspond to a Stripe error code. For automation errors, this field is one of: {@code
+         * reverse_api_failure}, {@code reverse_api_deadline_exceeeded}, or {@code
+         * reverse_api_response_validation_error}, which are Stripe error codes and map to the error
+         * {@code message} field.
+         */
+        @SerializedName("failure_code")
+        String failureCode;
+
+        /**
+         * Information derived from the {@code failure_code} or a freeform message that explains the
+         * error as a human-readable English string. For example, &quot;margin ID is not a valid
+         * ID&quot;.
+         */
+        @SerializedName("message")
+        String message;
+
+        /**
+         * The reason the reestimation failed.
+         *
+         * <p>One of {@code automation_failure}, or {@code internal_error}.
+         */
+        @SerializedName("reason")
+        String reason;
+      }
+    }
 
     @Getter
     @Setter
@@ -1877,6 +1935,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Subscription> fromSubscription;
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * metadata on the subscription or subscription schedule when the quote is accepted. If a
+     * recurring price is included in {@code line_items}, this field will be passed to the resulting
+     * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,
+     * this field will be passed to the resulting subscription schedule's {@code phases.metadata}
+     * field. Unlike object-level metadata, this field is declarative. Updates will clear prior
+     * values.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
 
     /**
      * If specified, the invoicing for the given billing cycle iterations will be processed when the

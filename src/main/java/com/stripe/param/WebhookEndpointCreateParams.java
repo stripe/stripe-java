@@ -1102,6 +1102,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("quote.finalized")
     QUOTE__FINALIZED("quote.finalized"),
 
+    @SerializedName("quote.reestimate_failed")
+    QUOTE__REESTIMATE_FAILED("quote.reestimate_failed"),
+
     @SerializedName("quote.reestimated")
     QUOTE__REESTIMATED("quote.reestimated"),
 

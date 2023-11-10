@@ -180,21 +180,22 @@ public class Event extends ApiResource implements HasId {
    * price.deleted}, {@code price.updated}, {@code product.created}, {@code product.deleted}, {@code
    * product.updated}, {@code promotion_code.created}, {@code promotion_code.updated}, {@code
    * quote.accept_failed}, {@code quote.accepted}, {@code quote.accepting}, {@code quote.canceled},
-   * {@code quote.created}, {@code quote.draft}, {@code quote.finalized}, {@code quote.reestimated},
-   * {@code quote.stale}, {@code radar.early_fraud_warning.created}, {@code
-   * radar.early_fraud_warning.updated}, {@code refund.created}, {@code refund.updated}, {@code
-   * reporting.report_run.failed}, {@code reporting.report_run.succeeded}, {@code
-   * reporting.report_type.updated}, {@code review.closed}, {@code review.opened}, {@code
-   * setup_intent.canceled}, {@code setup_intent.created}, {@code setup_intent.requires_action},
-   * {@code setup_intent.setup_failed}, {@code setup_intent.succeeded}, {@code
-   * sigma.scheduled_query_run.created}, {@code source.canceled}, {@code source.chargeable}, {@code
-   * source.failed}, {@code source.mandate_notification}, {@code source.refund_attributes_required},
-   * {@code source.transaction.created}, {@code source.transaction.updated}, {@code
-   * subscription_schedule.aborted}, {@code subscription_schedule.canceled}, {@code
-   * subscription_schedule.completed}, {@code subscription_schedule.created}, {@code
-   * subscription_schedule.expiring}, {@code subscription_schedule.released}, {@code
-   * subscription_schedule.updated}, {@code tax.form.updated}, {@code tax.settings.updated}, {@code
-   * tax_rate.created}, {@code tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
+   * {@code quote.created}, {@code quote.draft}, {@code quote.finalized}, {@code
+   * quote.reestimate_failed}, {@code quote.reestimated}, {@code quote.stale}, {@code
+   * radar.early_fraud_warning.created}, {@code radar.early_fraud_warning.updated}, {@code
+   * refund.created}, {@code refund.updated}, {@code reporting.report_run.failed}, {@code
+   * reporting.report_run.succeeded}, {@code reporting.report_type.updated}, {@code review.closed},
+   * {@code review.opened}, {@code setup_intent.canceled}, {@code setup_intent.created}, {@code
+   * setup_intent.requires_action}, {@code setup_intent.setup_failed}, {@code
+   * setup_intent.succeeded}, {@code sigma.scheduled_query_run.created}, {@code source.canceled},
+   * {@code source.chargeable}, {@code source.failed}, {@code source.mandate_notification}, {@code
+   * source.refund_attributes_required}, {@code source.transaction.created}, {@code
+   * source.transaction.updated}, {@code subscription_schedule.aborted}, {@code
+   * subscription_schedule.canceled}, {@code subscription_schedule.completed}, {@code
+   * subscription_schedule.created}, {@code subscription_schedule.expiring}, {@code
+   * subscription_schedule.released}, {@code subscription_schedule.updated}, {@code
+   * tax.form.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
+   * tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
    * terminal.reader.action_succeeded}, {@code terminal.reader.action_updated}, {@code
    * test_helpers.test_clock.advancing}, {@code test_helpers.test_clock.created}, {@code
    * test_helpers.test_clock.deleted}, {@code test_helpers.test_clock.internal_failure}, {@code
