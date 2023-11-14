@@ -105,11 +105,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   @SerializedName("object")
   String object;
 
-  /**
-   * For most Stripe users, the source of every top-up is a bank account. This hash is then the <a
-   * href="https://stripe.com/docs/api#source_object">source object</a> describing that bank
-   * account.
-   */
+  /** The source field is deprecated. It might not always be present in the API response. */
   @SerializedName("source")
   Source source;
 
