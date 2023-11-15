@@ -513,8 +513,15 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
     Long quantity;
 
     /**
+     * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
+     * tax_rates}.
+     */
+    @SerializedName("tax_amounts")
+    Object taxAmounts;
+
+    /**
      * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-     * {@code custom_line_item}.
+     * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
      */
     @SerializedName("tax_rates")
     Object taxRates;
@@ -548,6 +555,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String invoiceLineItem,
         Long quantity,
+        Object taxAmounts,
         Object taxRates,
         Type type,
         Long unitAmount,
@@ -557,6 +565,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.invoiceLineItem = invoiceLineItem;
       this.quantity = quantity;
+      this.taxAmounts = taxAmounts;
       this.taxRates = taxRates;
       this.type = type;
       this.unitAmount = unitAmount;
@@ -578,6 +587,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private Object taxAmounts;
+
       private Object taxRates;
 
       private Type type;
@@ -594,6 +605,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
             this.extraParams,
             this.invoiceLineItem,
             this.quantity,
+            this.taxAmounts,
             this.taxRates,
             this.type,
             this.unitAmount,
@@ -659,6 +671,54 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       }
 
       /**
+       * Add an element to `taxAmounts` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * CreditNotePreviewLinesListParams.Line#taxAmounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addTaxAmount(CreditNotePreviewLinesListParams.Line.TaxAmount element) {
+        if (this.taxAmounts == null || this.taxAmounts instanceof EmptyParam) {
+          this.taxAmounts = new ArrayList<CreditNotePreviewLinesListParams.Line.TaxAmount>();
+        }
+        ((List<CreditNotePreviewLinesListParams.Line.TaxAmount>) this.taxAmounts).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxAmounts` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * CreditNotePreviewLinesListParams.Line#taxAmounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllTaxAmount(
+          List<CreditNotePreviewLinesListParams.Line.TaxAmount> elements) {
+        if (this.taxAmounts == null || this.taxAmounts instanceof EmptyParam) {
+          this.taxAmounts = new ArrayList<CreditNotePreviewLinesListParams.Line.TaxAmount>();
+        }
+        ((List<CreditNotePreviewLinesListParams.Line.TaxAmount>) this.taxAmounts).addAll(elements);
+        return this;
+      }
+
+      /**
+       * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
+       * tax_rates}.
+       */
+      public Builder setTaxAmounts(EmptyParam taxAmounts) {
+        this.taxAmounts = taxAmounts;
+        return this;
+      }
+
+      /**
+       * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
+       * tax_rates}.
+       */
+      public Builder setTaxAmounts(
+          List<CreditNotePreviewLinesListParams.Line.TaxAmount> taxAmounts) {
+        this.taxAmounts = taxAmounts;
+        return this;
+      }
+
+      /**
        * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
        * CreditNotePreviewLinesListParams.Line#taxRates} for the field documentation.
@@ -688,7 +748,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       /**
        * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-       * {@code custom_line_item}.
+       * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
@@ -697,7 +757,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       /**
        * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-       * {@code custom_line_item}.
+       * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
        */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
@@ -731,6 +791,116 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
         return this;
+      }
+    }
+
+    @Getter
+    public static class TaxAmount {
+      /** <strong>Required.</strong> The amount, in cents (or local equivalent), of the tax. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The id of the tax rate for this tax amount. The tax rate must
+       * have been automatically created by Stripe.
+       */
+      @SerializedName("tax_rate")
+      String taxRate;
+
+      /**
+       * <strong>Required.</strong> The amount on which tax is calculated, in cents (or local
+       * equivalent).
+       */
+      @SerializedName("taxable_amount")
+      Long taxableAmount;
+
+      private TaxAmount(
+          Long amount, Map<String, Object> extraParams, String taxRate, Long taxableAmount) {
+        this.amount = amount;
+        this.extraParams = extraParams;
+        this.taxRate = taxRate;
+        this.taxableAmount = taxableAmount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amount;
+
+        private Map<String, Object> extraParams;
+
+        private String taxRate;
+
+        private Long taxableAmount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CreditNotePreviewLinesListParams.Line.TaxAmount build() {
+          return new CreditNotePreviewLinesListParams.Line.TaxAmount(
+              this.amount, this.extraParams, this.taxRate, this.taxableAmount);
+        }
+
+        /** <strong>Required.</strong> The amount, in cents (or local equivalent), of the tax. */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CreditNotePreviewLinesListParams.Line.TaxAmount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CreditNotePreviewLinesListParams.Line.TaxAmount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The id of the tax rate for this tax amount. The tax rate must
+         * have been automatically created by Stripe.
+         */
+        public Builder setTaxRate(String taxRate) {
+          this.taxRate = taxRate;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The amount on which tax is calculated, in cents (or local
+         * equivalent).
+         */
+        public Builder setTaxableAmount(Long taxableAmount) {
+          this.taxableAmount = taxableAmount;
+          return this;
+        }
       }
     }
 
