@@ -34,6 +34,10 @@ public class CustomerSession extends ApiResource {
   @SerializedName("client_secret")
   String clientSecret;
 
+  /** Configuration for the components supported by this customer session. */
+  @SerializedName("components")
+  Components components;
+
   /** The customer the customer session was created for. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -130,9 +134,78 @@ public class CustomerSession extends ApiResource {
             ApiMode.V1);
   }
 
+  /** Configuration for the components supported by this customer session. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Components extends StripeObject {
+    /** This hash contains whether the payment element is enabled and the features it supports. */
+    @SerializedName("payment_element")
+    PaymentElement paymentElement;
+
+    /** This hash contains whether the pricing table is enabled. */
+    @SerializedName("pricing_table")
+    PricingTable pricingTable;
+
+    /** This hash contains whether the payment element is enabled and the features it supports. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentElement extends StripeObject {
+      /** Whether the payment element is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /** This hash contains the features the Payment Element supports. */
+      @SerializedName("features")
+      Features features;
+
+      /** This hash contains the features the Payment Element supports. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether the payment element supports detaching payment methods.
+         *
+         * <p>One of {@code auto}, or {@code never}.
+         */
+        @SerializedName("payment_method_detach")
+        String paymentMethodDetach;
+
+        /**
+         * Whether the payment element supports setting payment methods as the customer's default.
+         *
+         * <p>One of {@code auto}, or {@code never}.
+         */
+        @SerializedName("payment_method_set_as_customer_default")
+        String paymentMethodSetAsCustomerDefault;
+
+        /**
+         * Whether the payment element supports updating payment methods.
+         *
+         * <p>One of {@code auto}, or {@code never}.
+         */
+        @SerializedName("payment_method_update")
+        String paymentMethodUpdate;
+      }
+    }
+
+    /** This hash contains whether the pricing table is enabled. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PricingTable extends StripeObject {
+      /** Whether the pricing table is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(components, responseGetter);
     trySetResponseGetter(customer, responseGetter);
   }
 }
