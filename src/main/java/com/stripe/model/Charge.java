@@ -1578,6 +1578,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("brand")
       String brand;
 
+      /**
+       * When using manual capture, a future timestamp at which the charge will be automatically
+       * refunded if uncaptured.
+       */
+      @SerializedName("capture_before")
+      Long captureBefore;
+
       /** Check results by Card networks on Card address and CVC at time of payment. */
       @SerializedName("checks")
       Checks checks;
