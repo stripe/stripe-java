@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore<InvoiceLineItem> {
+public class InvoiceLineItem extends ApiResource implements HasId {
   /** The amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
@@ -86,7 +86,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    * structured format. Note that for line items with {@code type=subscription} this will reflect
    * the metadata of the subscription that caused the line item to be created.
    */
-  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
