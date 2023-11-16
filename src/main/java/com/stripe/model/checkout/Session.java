@@ -1330,6 +1330,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("paynow")
     Paynow paynow;
 
+    @SerializedName("paypal")
+    Paypal paypal;
+
     @SerializedName("pix")
     Pix pix;
 
@@ -2060,6 +2063,51 @@ public class Session extends ApiResource implements HasId {
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypal extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /** Preferred locale of the PayPal checkout page that the customer is redirected to. */
+      @SerializedName("preferred_locale")
+      String preferredLocale;
+
+      /**
+       * A reference of the PayPal transaction visible to customer which is mapped to PayPal's
+       * invoice ID. This must be a globally unique ID if you have configured in your PayPal
+       * settings to block multiple payments per invoice ID.
+       */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;

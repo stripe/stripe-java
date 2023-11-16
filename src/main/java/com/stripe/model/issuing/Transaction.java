@@ -135,6 +135,10 @@ public class Transaction extends ApiResource
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Details about the transaction, such as processing dates, set by the card network. */
+  @SerializedName("network_data")
+  NetworkData networkData;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -512,6 +516,19 @@ public class Transaction extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NetworkData extends StripeObject {
+    /**
+     * The date the transaction was processed by the card network. This can be different from the
+     * date the seller recorded the transaction depending on when the acquirer submits the
+     * transaction to the network.
+     */
+    @SerializedName("processing_date")
+    String processingDate;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class PurchaseDetails extends StripeObject {
     /** Information about the flight that was purchased with this transaction. */
     @SerializedName("flight")
@@ -840,6 +857,7 @@ public class Transaction extends ApiResource
     trySetResponseGetter(cardholder, responseGetter);
     trySetResponseGetter(dispute, responseGetter);
     trySetResponseGetter(merchantData, responseGetter);
+    trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(purchaseDetails, responseGetter);
     trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
