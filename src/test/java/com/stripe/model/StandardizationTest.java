@@ -95,6 +95,14 @@ public class StandardizationTest {
           continue;
         }
 
+        // Skip the `public InvoiceLineItem update(String invoice, ... params) {...` overloads
+        // on InvoiceLineItem.
+        if (String.class.equals(parameters.get(0).getType().getRawType())
+            && parameters.size() == 2
+            && "update".equals(method.getName())) {
+          continue;
+        }
+
         if (RequestOptions.class.isAssignableFrom(finalParamType)) {
           continue;
         }
