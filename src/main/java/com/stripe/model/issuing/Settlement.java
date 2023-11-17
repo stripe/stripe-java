@@ -3,16 +3,18 @@
 package com.stripe.model.issuing;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Map;
 
 @Getter
 @Setter
@@ -107,8 +109,16 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
    */
   public static SettlementCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/settlements");
-    return requestCollection(url, params, SettlementCollection.class, options);
+    String path = "/v1/issuing/settlements";
+    return getGlobalResponseGetter()
+      .request(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        path,
+        params,
+        SettlementCollection.class,
+        options,
+        ApiMode.V1);
   }
 
   /** Retrieves an Issuing <code>Settlement</code> object. */
@@ -126,10 +136,17 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
   public static Settlement retrieve(
       String settlement, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/settlements/%s", settlement));
-    return request(ApiResource.RequestMethod.GET, url, params, Settlement.class, options);
+    String path = String.format("/v1/issuing/settlements/%s", ApiResource.urlEncodeId(settlement));
+    return getGlobalResponseGetter()
+      .request(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        path,
+        params,
+        Settlement.class,
+        options,
+        ApiMode.V1);
+
   }
 
   /**
@@ -148,9 +165,15 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
   @Override
   public Settlement update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url =
-        String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/settlements/%s", this.getId()));
-    return request(ApiResource.RequestMethod.POST, url, params, Settlement.class, options);
+    String path = String.format("/v1/issuing/settlements/%s", ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+      .request(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        path,
+        params,
+        Settlement.class,
+        options,
+        ApiMode.V1);
   }
 }
