@@ -815,8 +815,9 @@ public class Authorization extends ApiResource
     String reason;
 
     /**
-     * If approve/decline decision is directly responsed to the webhook with json payload and if the
-     * response is invalid (e.g., parsing errors), we surface the detailed message via this field.
+     * If the {@code request_history.reason} is {@code webhook_error} because the direct webhook
+     * response is invalid (for example, parsing errors or missing parameters), we surface a more
+     * detailed error message via this field.
      */
     @SerializedName("reason_message")
     String reasonMessage;
