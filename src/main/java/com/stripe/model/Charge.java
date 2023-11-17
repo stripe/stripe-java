@@ -2123,6 +2123,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("network")
       String network;
 
+      /** Details about payments collected offline. */
+      @SerializedName("offline")
+      Offline offline;
+
       /** Defines whether the authorized amount can be over-captured or not. */
       @SerializedName("overcapture_supported")
       Boolean overcaptureSupported;
@@ -2142,6 +2146,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("receipt")
       Receipt receipt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Offline extends StripeObject {
+        /** Time at which the payment was collected while offline. */
+        @SerializedName("stored_at")
+        Long storedAt;
+      }
 
       @Getter
       @Setter
