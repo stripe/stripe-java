@@ -34,6 +34,10 @@ public class CustomerSession extends ApiResource {
   @SerializedName("client_secret")
   String clientSecret;
 
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
+  Long created;
+
   /** The customer the customer session was created for. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)

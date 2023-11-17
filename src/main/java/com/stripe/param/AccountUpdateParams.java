@@ -8965,6 +8965,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Settings {
+    /** Settings specific to Bacs Direct Debit payments. */
+    @SerializedName("bacs_debit_payments")
+    BacsDebitPayments bacsDebitPayments;
+
     /**
      * Settings used to apply the account's branding to email receipts, invoices, Checkout, and
      * other products.
@@ -9006,6 +9010,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     Treasury treasury;
 
     private Settings(
+        BacsDebitPayments bacsDebitPayments,
         Branding branding,
         CardIssuing cardIssuing,
         CardPayments cardPayments,
@@ -9014,6 +9019,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Payouts payouts,
         TaxForms taxForms,
         Treasury treasury) {
+      this.bacsDebitPayments = bacsDebitPayments;
       this.branding = branding;
       this.cardIssuing = cardIssuing;
       this.cardPayments = cardPayments;
@@ -9029,6 +9035,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BacsDebitPayments bacsDebitPayments;
+
       private Branding branding;
 
       private CardIssuing cardIssuing;
@@ -9048,6 +9056,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountUpdateParams.Settings build() {
         return new AccountUpdateParams.Settings(
+            this.bacsDebitPayments,
             this.branding,
             this.cardIssuing,
             this.cardPayments,
@@ -9056,6 +9065,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.payouts,
             this.taxForms,
             this.treasury);
+      }
+
+      /** Settings specific to Bacs Direct Debit payments. */
+      public Builder setBacsDebitPayments(
+          AccountUpdateParams.Settings.BacsDebitPayments bacsDebitPayments) {
+        this.bacsDebitPayments = bacsDebitPayments;
+        return this;
       }
 
       /**
@@ -9127,6 +9143,107 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setTreasury(AccountUpdateParams.Settings.Treasury treasury) {
         this.treasury = treasury;
         return this;
+      }
+    }
+
+    @Getter
+    public static class BacsDebitPayments {
+      /**
+       * The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct
+       * Debit, this name appears on the mandate as the statement descriptor. Mobile banking apps
+       * display it as the name of the business. To use custom branding, set the Bacs Direct Debit
+       * Display Name during or right after creation. Custom branding incurs an additional monthly
+       * fee for the platform. If you don't set the display name before requesting Bacs capability,
+       * it's automatically set as &quot;Stripe&quot; and the account is onboarded to Stripe
+       * branding, which is free.
+       */
+      @SerializedName("display_name")
+      Object displayName;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private BacsDebitPayments(Object displayName, Map<String, Object> extraParams) {
+        this.displayName = displayName;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object displayName;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Settings.BacsDebitPayments build() {
+          return new AccountUpdateParams.Settings.BacsDebitPayments(
+              this.displayName, this.extraParams);
+        }
+
+        /**
+         * The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct
+         * Debit, this name appears on the mandate as the statement descriptor. Mobile banking apps
+         * display it as the name of the business. To use custom branding, set the Bacs Direct Debit
+         * Display Name during or right after creation. Custom branding incurs an additional monthly
+         * fee for the platform. If you don't set the display name before requesting Bacs
+         * capability, it's automatically set as &quot;Stripe&quot; and the account is onboarded to
+         * Stripe branding, which is free.
+         */
+        public Builder setDisplayName(String displayName) {
+          this.displayName = displayName;
+          return this;
+        }
+
+        /**
+         * The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct
+         * Debit, this name appears on the mandate as the statement descriptor. Mobile banking apps
+         * display it as the name of the business. To use custom branding, set the Bacs Direct Debit
+         * Display Name during or right after creation. Custom branding incurs an additional monthly
+         * fee for the platform. If you don't set the display name before requesting Bacs
+         * capability, it's automatically set as &quot;Stripe&quot; and the account is onboarded to
+         * Stripe branding, which is free.
+         */
+        public Builder setDisplayName(EmptyParam displayName) {
+          this.displayName = displayName;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.BacsDebitPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.BacsDebitPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 

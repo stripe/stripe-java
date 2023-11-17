@@ -56,19 +56,31 @@ public final class PriceService extends ApiService {
             options,
             ApiMode.V1);
   }
-  /** Returns a list of your prices. */
+  /**
+   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
+   * false.
+   */
   public StripeCollection<Price> list(PriceListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Returns a list of your prices. */
+  /**
+   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
+   * false.
+   */
   public StripeCollection<Price> list(RequestOptions options) throws StripeException {
     return list((PriceListParams) null, options);
   }
-  /** Returns a list of your prices. */
+  /**
+   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
+   * false.
+   */
   public StripeCollection<Price> list() throws StripeException {
     return list((PriceListParams) null, (RequestOptions) null);
   }
-  /** Returns a list of your prices. */
+  /**
+   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
+   * false.
+   */
   public StripeCollection<Price> list(PriceListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/prices";

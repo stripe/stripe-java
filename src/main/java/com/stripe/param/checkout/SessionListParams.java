@@ -65,6 +65,10 @@ public class SessionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /** Only return the Checkout Sessions matching the given status. */
+  @SerializedName("status")
+  Status status;
+
   /** Only return the Checkout Session for the subscription specified. */
   @SerializedName("subscription")
   String subscription;
@@ -79,6 +83,7 @@ public class SessionListParams extends ApiRequestParams {
       String paymentIntent,
       String paymentLink,
       String startingAfter,
+      Status status,
       String subscription) {
     this.customer = customer;
     this.customerDetails = customerDetails;
@@ -89,6 +94,7 @@ public class SessionListParams extends ApiRequestParams {
     this.paymentIntent = paymentIntent;
     this.paymentLink = paymentLink;
     this.startingAfter = startingAfter;
+    this.status = status;
     this.subscription = subscription;
   }
 
@@ -115,6 +121,8 @@ public class SessionListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private Status status;
+
     private String subscription;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -129,6 +137,7 @@ public class SessionListParams extends ApiRequestParams {
           this.paymentIntent,
           this.paymentLink,
           this.startingAfter,
+          this.status,
           this.subscription);
     }
 
@@ -239,6 +248,12 @@ public class SessionListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return the Checkout Sessions matching the given status. */
+    public Builder setStatus(SessionListParams.Status status) {
+      this.status = status;
+      return this;
+    }
+
     /** Only return the Checkout Session for the subscription specified. */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
@@ -311,6 +326,24 @@ public class SessionListParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("complete")
+    COMPLETE("complete"),
+
+    @SerializedName("expired")
+    EXPIRED("expired"),
+
+    @SerializedName("open")
+    OPEN("open");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 }
