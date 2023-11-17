@@ -1,6 +1,17 @@
 # Changelog
 
 
+## 24.3.0 - 2023-11-16
+* [#1685](https://github.com/stripe/stripe-java/pull/1685) Update generated code
+  * Add support for `status` on `checkout.SessionListParams`
+* [#1683](https://github.com/stripe/stripe-java/pull/1683) Update generated code
+  * Add support for `bacs_debit_payments` on `AccountCreateParams.settings` and `AccountUpdateParams.settings`
+  * Add support for `service_user_number` on `Account.settings.bacs_debit_payments`
+  * Add support for `capture_before` on `Charge.payment_method_details.card`
+  * Add support for `paypal` on `Checkout.Session.payment_method_options`
+  * Add support for `tax_amounts` on `CreditNoteCreateParams.lines[]`, `CreditNotePreviewLinesParams.lines[]`, and `CreditNotePreviewParams.lines[]`
+  * Add support for `network_data` on `Issuing.Transaction`
+
 ## 24.2.0 - 2023-11-09
 * [#1679](https://github.com/stripe/stripe-java/pull/1679) Update generated code
   * Add support for `metadata` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, and `QuoteUpdateParams.subscription_data`
