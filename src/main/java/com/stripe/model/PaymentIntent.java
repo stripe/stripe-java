@@ -2292,10 +2292,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("car_rental")
     CarRental carRental;
 
+    @SerializedName("event_details")
+    EventDetails eventDetails;
+
+    @SerializedName("subscription")
+    Subscription subscription;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CarRental extends StripeObject {
+      @SerializedName("affiliate")
+      Affiliate affiliate;
+
       /** The booking number associated with the car rental. */
       @SerializedName("booking_number")
       String bookingNumber;
@@ -2323,6 +2332,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Number of days the car is being rented. */
       @SerializedName("days_rented")
       Long daysRented;
+
+      @SerializedName("delivery")
+      Delivery delivery;
+
+      /** The details of the drivers associated with the trip. */
+      @SerializedName("drivers")
+      List<PaymentIntent.PaymentDetails.CarRental.Driver> drivers;
 
       /** List of additional charges being billed. */
       @SerializedName("extra_charges")
@@ -2364,6 +2380,194 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
       @SerializedName("tax_exempt")
       Boolean taxExempt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Affiliate extends StripeObject {
+        /** The name of the affiliate that originated the purchase. */
+        @SerializedName("name")
+        String name;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Delivery extends StripeObject {
+        /**
+         * The delivery method for the payment
+         *
+         * <p>One of {@code email}, {@code phone}, {@code pickup}, or {@code post}.
+         */
+        @SerializedName("mode")
+        String mode;
+
+        @SerializedName("receipient")
+        Receipient receipient;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Receipient extends StripeObject {
+          /** The email of the recipient the ticket is delivered to. */
+          @SerializedName("email")
+          String email;
+
+          /** The name of the recipient the ticket is delivered to. */
+          @SerializedName("name")
+          String name;
+
+          /** The phone number of the recipient the ticket is delivered to. */
+          @SerializedName("phone")
+          String phone;
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Driver extends StripeObject {
+        /** Full name of the driver on the reservation. */
+        @SerializedName("name")
+        String name;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EventDetails extends StripeObject {
+      /** Indicates if the tickets are digitally checked when entering the venue. */
+      @SerializedName("access_controlled_venue")
+      Boolean accessControlledVenue;
+
+      @SerializedName("address")
+      com.stripe.model.Address address;
+
+      @SerializedName("affiliate")
+      Affiliate affiliate;
+
+      /** The name of the company. */
+      @SerializedName("company")
+      String company;
+
+      @SerializedName("delivery")
+      Delivery delivery;
+
+      /** Event end time. Measured in seconds since the Unix epoch. */
+      @SerializedName("ends_at")
+      Long endsAt;
+
+      /** Type of the event entertainment (concert, sports event etc). */
+      @SerializedName("genre")
+      String genre;
+
+      /** The name of the event. */
+      @SerializedName("name")
+      String name;
+
+      /** Event start time. Measured in seconds since the Unix epoch. */
+      @SerializedName("starts_at")
+      Long startsAt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Affiliate extends StripeObject {
+        /** The name of the affiliate that originated the purchase. */
+        @SerializedName("name")
+        String name;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Delivery extends StripeObject {
+        /**
+         * The delivery method for the payment
+         *
+         * <p>One of {@code email}, {@code phone}, {@code pickup}, or {@code post}.
+         */
+        @SerializedName("mode")
+        String mode;
+
+        @SerializedName("receipient")
+        Receipient receipient;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Receipient extends StripeObject {
+          /** The email of the recipient the ticket is delivered to. */
+          @SerializedName("email")
+          String email;
+
+          /** The name of the recipient the ticket is delivered to. */
+          @SerializedName("name")
+          String name;
+
+          /** The phone number of the recipient the ticket is delivered to. */
+          @SerializedName("phone")
+          String phone;
+        }
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Subscription extends StripeObject {
+      @SerializedName("affiliate")
+      Affiliate affiliate;
+
+      /** Info whether the subscription will be auto renewed upon expiry. */
+      @SerializedName("auto_renewal")
+      Boolean autoRenewal;
+
+      @SerializedName("billing_interval")
+      BillingInterval billingInterval;
+
+      /** Subscription end time. Measured in seconds since the Unix epoch. */
+      @SerializedName("ends_at")
+      Long endsAt;
+
+      /** Name of the product on subscription. e.g. Apple Music Subscription. */
+      @SerializedName("name")
+      String name;
+
+      /** Subscription start time. Measured in seconds since the Unix epoch. */
+      @SerializedName("starts_at")
+      Long startsAt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Affiliate extends StripeObject {
+        /** The name of the affiliate that originated the purchase. */
+        @SerializedName("name")
+        String name;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillingInterval extends StripeObject {
+        /**
+         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
+         * interval type to get the overall duration.
+         */
+        @SerializedName("count")
+        Long count;
+
+        /**
+         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+         * {@code year}.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+      }
     }
   }
 
