@@ -680,6 +680,20 @@ public class Authorization extends ApiResource
      */
     @SerializedName("acquiring_institution_id")
     String acquiringInstitutionId;
+
+    /**
+     * The System Trace Audit Number (STAN) is a 6-digit identifier assigned by the acquirer. Prefer
+     * {@code network_data.transaction_id} if present, unless you have special requirements.
+     */
+    @SerializedName("system_trace_audit_number")
+    String systemTraceAuditNumber;
+
+    /**
+     * Unique identifier for the authorization assigned by the card network used to match subsequent
+     * messages, disputes, and transactions.
+     */
+    @SerializedName("transaction_id")
+    String transactionId;
   }
 
   @Getter
@@ -730,6 +744,13 @@ public class Authorization extends ApiResource
     /** The local currency the merchant is requesting to authorize. */
     @SerializedName("merchant_currency")
     String merchantCurrency;
+
+    /**
+     * The card network's estimate of the likelihood that an authorization is fraudulent. Takes on
+     * values between 1 and 99.
+     */
+    @SerializedName("network_risk_score")
+    Long networkRiskScore;
 
     @Getter
     @Setter
@@ -810,6 +831,13 @@ public class Authorization extends ApiResource
     String merchantCurrency;
 
     /**
+     * The card network's estimate of the likelihood that an authorization is fraudulent. Takes on
+     * values between 1 and 99.
+     */
+    @SerializedName("network_risk_score")
+    Long networkRiskScore;
+
+    /**
      * When an authorization is approved or declined by you or by Stripe, this field provides
      * additional detail on the reason for the outcome.
      *
@@ -829,6 +857,13 @@ public class Authorization extends ApiResource
      */
     @SerializedName("reason_message")
     String reasonMessage;
+
+    /**
+     * Time when the card network received an authorization request from the acquirer in UTC.
+     * Referred to by networks as transmission time.
+     */
+    @SerializedName("requested_at")
+    Long requestedAt;
 
     @Getter
     @Setter
