@@ -67,7 +67,7 @@ public abstract class HttpClient {
 
     stopwatch.stop();
 
-    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed());
+    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed(), request.usage());
 
     return response;
   }

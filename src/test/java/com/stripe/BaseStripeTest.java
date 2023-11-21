@@ -125,6 +125,9 @@ public class BaseStripeTest {
     httpClientSpy = Mockito.spy(new HttpURLConnectionClient());
     networkSpy = Mockito.spy(new LiveStripeResponseGetter(null, httpClientSpy));
     mockClient = new StripeClient(networkSpy);
+    // The StripeClient constructor calls .setUsage on networkSpy, let's reset that so
+    // in the test cases we can just verify the calls we care about.
+    Mockito.reset(networkSpy);
     ApiResource.setStripeResponseGetter(networkSpy);
     OAuth.setGlobalResponseGetter(networkSpy);
   }

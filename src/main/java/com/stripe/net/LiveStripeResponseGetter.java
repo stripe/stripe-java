@@ -50,7 +50,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
         apiRequest.getMethod(),
         fullUrl,
         apiRequest.getParams(),
-        RequestOptions.merge(this.options, apiRequest.getOptions()));
+        RequestOptions.merge(this.options, apiRequest.getOptions()),
+        apiRequest.getUsage());
   }
 
   @Override

@@ -14,6 +14,11 @@ class BaseApiRequest {
 
   @Setter private List<String> usage;
 
+  /** Internal method. Adds a record of a tracked behavior identified by "used" to the request. */
+  public void addUsage(String used) {
+    this.usage.add(used);
+  }
+
   public BaseApiRequest(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
