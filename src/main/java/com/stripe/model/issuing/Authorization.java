@@ -45,8 +45,10 @@ import lombok.Setter;
 public class Authorization extends ApiResource
     implements MetadataStore<Authorization>, BalanceTransactionSource {
   /**
-   * The total amount that was authorized or rejected. This amount is in the card's currency and in
-   * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * The total amount that was authorized or rejected. This amount is in {@code currency} and in the
+   * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. {@code
+   * amount} should be the same as {@code merchant_amount}, unless {@code currency} and {@code
+   * merchant_currency} are different.
    */
   @SerializedName("amount")
   Long amount;
@@ -93,8 +95,10 @@ public class Authorization extends ApiResource
   Long created;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * The currency of the cardholder. This currency can be different from the currency presented at
+   * authorization and the {@code merchant_currency} field on this authorization. Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -114,15 +118,19 @@ public class Authorization extends ApiResource
   /**
    * The total amount that was authorized or rejected. This amount is in the {@code
    * merchant_currency} and in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. {@code
+   * merchant_amount} should be the same as {@code amount}, unless {@code merchant_currency} and
+   * {@code currency} are different.
    */
   @SerializedName("merchant_amount")
   Long merchantAmount;
 
   /**
-   * The currency that was presented to the cardholder for the authorization. Three-letter <a
-   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
-   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * The local currency that was presented to the cardholder for the authorization. This currency
+   * can be different from the cardholder currency and the {@code currency} field on this
+   * authorization. Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
+   * currency code</a>, in lowercase. Must be a <a
+   * href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("merchant_currency")
   String merchantCurrency;
@@ -672,6 +680,20 @@ public class Authorization extends ApiResource
      */
     @SerializedName("acquiring_institution_id")
     String acquiringInstitutionId;
+
+    /**
+     * The System Trace Audit Number (STAN) is a 6-digit identifier assigned by the acquirer. Prefer
+     * {@code network_data.transaction_id} if present, unless you have special requirements.
+     */
+    @SerializedName("system_trace_audit_number")
+    String systemTraceAuditNumber;
+
+    /**
+     * Unique identifier for the authorization assigned by the card network used to match subsequent
+     * messages, disputes, and transactions.
+     */
+    @SerializedName("transaction_id")
+    String transactionId;
   }
 
   @Getter
@@ -722,6 +744,13 @@ public class Authorization extends ApiResource
     /** The local currency the merchant is requesting to authorize. */
     @SerializedName("merchant_currency")
     String merchantCurrency;
+
+    /**
+     * The card network's estimate of the likelihood that an authorization is fraudulent. Takes on
+     * values between 1 and 99.
+     */
+    @SerializedName("network_risk_score")
+    Long networkRiskScore;
 
     @Getter
     @Setter
@@ -802,6 +831,13 @@ public class Authorization extends ApiResource
     String merchantCurrency;
 
     /**
+     * The card network's estimate of the likelihood that an authorization is fraudulent. Takes on
+     * values between 1 and 99.
+     */
+    @SerializedName("network_risk_score")
+    Long networkRiskScore;
+
+    /**
      * When an authorization is approved or declined by you or by Stripe, this field provides
      * additional detail on the reason for the outcome.
      *
@@ -815,11 +851,19 @@ public class Authorization extends ApiResource
     String reason;
 
     /**
-     * If approve/decline decision is directly responsed to the webhook with json payload and if the
-     * response is invalid (e.g., parsing errors), we surface the detailed message via this field.
+     * If the {@code request_history.reason} is {@code webhook_error} because the direct webhook
+     * response is invalid (for example, parsing errors or missing parameters), we surface a more
+     * detailed error message via this field.
      */
     @SerializedName("reason_message")
     String reasonMessage;
+
+    /**
+     * Time when the card network received an authorization request from the acquirer in UTC.
+     * Referred to by networks as transmission time.
+     */
+    @SerializedName("requested_at")
+    Long requestedAt;
 
     @Getter
     @Setter
