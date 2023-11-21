@@ -2,14 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
-import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
-import com.stripe.net.BaseAddress;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.InvoiceLineItemUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore<InvoiceLineItem> {
+public class InvoiceLineItem extends StripeObject implements HasId {
   /** The amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
@@ -86,7 +79,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    * structured format. Note that for line items with {@code type=subscription} this will reflect
    * the metadata of the subscription that caused the line item to be created.
    */
-  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -257,79 +249,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
             : null;
   }
 
-  /**
-   * Updates an invoice’s line item. Some fields, such as {@code tax_amounts}, only live on the
-   * invoice line item, so they can only be updated through this endpoint. Other fields, such as
-   * {@code amount}, live on both the invoice item and the invoice line item, so updates on this
-   * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
-   * possible before the invoice is finalized.
-   */
-  public InvoiceLineItem update(String invoice, Map<String, Object> params) throws StripeException {
-    return update(invoice, params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates an invoice’s line item. Some fields, such as {@code tax_amounts}, only live on the
-   * invoice line item, so they can only be updated through this endpoint. Other fields, such as
-   * {@code amount}, live on both the invoice item and the invoice line item, so updates on this
-   * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
-   * possible before the invoice is finalized.
-   */
-  public InvoiceLineItem update(String invoice, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/invoices/%s/lines/%s",
-            ApiResource.urlEncodeId(invoice), ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            InvoiceLineItem.class,
-            options,
-            ApiMode.V1);
-  }
-
-  /**
-   * Updates an invoice’s line item. Some fields, such as {@code tax_amounts}, only live on the
-   * invoice line item, so they can only be updated through this endpoint. Other fields, such as
-   * {@code amount}, live on both the invoice item and the invoice line item, so updates on this
-   * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
-   * possible before the invoice is finalized.
-   */
-  public InvoiceLineItem update(String invoice, InvoiceLineItemUpdateParams params)
-      throws StripeException {
-    return update(invoice, params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates an invoice’s line item. Some fields, such as {@code tax_amounts}, only live on the
-   * invoice line item, so they can only be updated through this endpoint. Other fields, such as
-   * {@code amount}, live on both the invoice item and the invoice line item, so updates on this
-   * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
-   * possible before the invoice is finalized.
-   */
-  public InvoiceLineItem update(
-      String invoice, InvoiceLineItemUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/invoices/%s/lines/%s",
-            ApiResource.urlEncodeId(invoice), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            InvoiceLineItem.class,
-            options,
-            ApiMode.V1);
-  }
-
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -456,17 +375,5 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     public void setTaxRateObject(TaxRate expandableObject) {
       this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(invoiceItem, responseGetter);
-    trySetResponseGetter(period, responseGetter);
-    trySetResponseGetter(plan, responseGetter);
-    trySetResponseGetter(price, responseGetter);
-    trySetResponseGetter(prorationDetails, responseGetter);
-    trySetResponseGetter(subscription, responseGetter);
-    trySetResponseGetter(subscriptionItem, responseGetter);
   }
 }
