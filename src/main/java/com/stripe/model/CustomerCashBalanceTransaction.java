@@ -84,6 +84,9 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @SerializedName("refunded_from_payment")
   RefundedFromPayment refundedFromPayment;
 
+  @SerializedName("transferred_to_balance")
+  TransferredToBalance transferredToBalance;
+
   /**
    * The type of the cash balance transaction. New types may be added in future. See <a
    * href="https://stripe.com/docs/payments/customer-balance#types">Customer Balance</a> to learn
@@ -349,6 +352,39 @@ public class CustomerCashBalanceTransaction extends StripeObject
 
     public void setRefundObject(Refund expandableObject) {
       this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferredToBalance extends StripeObject {
+    /**
+     * The <a href="https://stripe.com/docs/api/balance_transactions/object">Balance Transaction</a>
+     * that corresponds to funds transferred to your Stripe balance.
+     */
+    @SerializedName("balance_transaction")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<BalanceTransaction> balanceTransaction;
+
+    /** Get ID of expandable {@code balanceTransaction} object. */
+    public String getBalanceTransaction() {
+      return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
+    }
+
+    public void setBalanceTransaction(String id) {
+      this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
+    }
+
+    /** Get expanded {@code balanceTransaction}. */
+    public BalanceTransaction getBalanceTransactionObject() {
+      return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
+    }
+
+    public void setBalanceTransactionObject(BalanceTransaction expandableObject) {
+      this.balanceTransaction =
+          new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
     }
   }
 

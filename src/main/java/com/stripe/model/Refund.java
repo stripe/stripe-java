@@ -144,9 +144,8 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   ExpandableField<TransferReversal> sourceTransferReversal;
 
   /**
-   * Status of the refund. For credit card refunds, this can be {@code pending}, {@code succeeded},
-   * or {@code failed}. For other types of refunds, it can be {@code pending}, {@code
-   * requires_action}, {@code succeeded}, {@code failed}, or {@code canceled}. Learn more about <a
+   * Status of the refund. This can be {@code pending}, {@code requires_action}, {@code succeeded},
+   * {@code failed}, or {@code canceled}. Learn more about <a
    * href="https://stripe.com/docs/refunds#failed-refunds">failed refunds</a>.
    */
   @SerializedName("status")

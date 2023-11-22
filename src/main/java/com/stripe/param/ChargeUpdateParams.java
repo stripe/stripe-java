@@ -1124,13 +1124,13 @@ public class ChargeUpdateParams extends ApiRequestParams {
         Mode mode;
 
         /** Details of the recipient. */
-        @SerializedName("receipient")
-        Receipient receipient;
+        @SerializedName("recipient")
+        Recipient recipient;
 
-        private Delivery(Map<String, Object> extraParams, Mode mode, Receipient receipient) {
+        private Delivery(Map<String, Object> extraParams, Mode mode, Recipient recipient) {
           this.extraParams = extraParams;
           this.mode = mode;
-          this.receipient = receipient;
+          this.recipient = recipient;
         }
 
         public static Builder builder() {
@@ -1142,12 +1142,12 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
           private Mode mode;
 
-          private Receipient receipient;
+          private Recipient recipient;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ChargeUpdateParams.PaymentDetails.CarRental.Delivery build() {
             return new ChargeUpdateParams.PaymentDetails.CarRental.Delivery(
-                this.extraParams, this.mode, this.receipient);
+                this.extraParams, this.mode, this.recipient);
           }
 
           /**
@@ -1185,15 +1185,15 @@ public class ChargeUpdateParams extends ApiRequestParams {
           }
 
           /** Details of the recipient. */
-          public Builder setReceipient(
-              ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Receipient receipient) {
-            this.receipient = receipient;
+          public Builder setRecipient(
+              ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Recipient recipient) {
+            this.recipient = recipient;
             return this;
           }
         }
 
         @Getter
-        public static class Receipient {
+        public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
           Object email;
@@ -1216,7 +1216,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
           @SerializedName("phone")
           Object phone;
 
-          private Receipient(
+          private Recipient(
               Object email, Map<String, Object> extraParams, Object name, Object phone) {
             this.email = email;
             this.extraParams = extraParams;
@@ -1238,8 +1238,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
             private Object phone;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Receipient build() {
-              return new ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Receipient(
+            public ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Recipient build() {
+              return new ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Recipient(
                   this.email, this.extraParams, this.name, this.phone);
             }
 
@@ -1259,7 +1259,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Receipient#extraParams} for the
+             * ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Recipient#extraParams} for the
              * field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -1274,7 +1274,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Receipient#extraParams} for the
+             * ChargeUpdateParams.PaymentDetails.CarRental.Delivery.Recipient#extraParams} for the
              * field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2351,13 +2351,13 @@ public class ChargeUpdateParams extends ApiRequestParams {
         Mode mode;
 
         /** Details of the recipient. */
-        @SerializedName("receipient")
-        Receipient receipient;
+        @SerializedName("recipient")
+        Recipient recipient;
 
-        private Delivery(Map<String, Object> extraParams, Mode mode, Receipient receipient) {
+        private Delivery(Map<String, Object> extraParams, Mode mode, Recipient recipient) {
           this.extraParams = extraParams;
           this.mode = mode;
-          this.receipient = receipient;
+          this.recipient = recipient;
         }
 
         public static Builder builder() {
@@ -2369,12 +2369,12 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
           private Mode mode;
 
-          private Receipient receipient;
+          private Recipient recipient;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ChargeUpdateParams.PaymentDetails.EventDetails.Delivery build() {
             return new ChargeUpdateParams.PaymentDetails.EventDetails.Delivery(
-                this.extraParams, this.mode, this.receipient);
+                this.extraParams, this.mode, this.recipient);
           }
 
           /**
@@ -2413,15 +2413,15 @@ public class ChargeUpdateParams extends ApiRequestParams {
           }
 
           /** Details of the recipient. */
-          public Builder setReceipient(
-              ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Receipient receipient) {
-            this.receipient = receipient;
+          public Builder setRecipient(
+              ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Recipient recipient) {
+            this.recipient = recipient;
             return this;
           }
         }
 
         @Getter
-        public static class Receipient {
+        public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
           Object email;
@@ -2444,7 +2444,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
           @SerializedName("phone")
           Object phone;
 
-          private Receipient(
+          private Recipient(
               Object email, Map<String, Object> extraParams, Object name, Object phone) {
             this.email = email;
             this.extraParams = extraParams;
@@ -2466,8 +2466,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
             private Object phone;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Receipient build() {
-              return new ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Receipient(
+            public ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Recipient build() {
+              return new ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Recipient(
                   this.email, this.extraParams, this.name, this.phone);
             }
 
@@ -2487,7 +2487,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Receipient#extraParams} for
+             * ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Recipient#extraParams} for
              * the field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -2502,7 +2502,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Receipient#extraParams} for
+             * ChargeUpdateParams.PaymentDetails.EventDetails.Delivery.Recipient#extraParams} for
              * the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2919,13 +2919,13 @@ public class ChargeUpdateParams extends ApiRequestParams {
         Mode mode;
 
         /** Details of the recipient. */
-        @SerializedName("receipient")
-        Receipient receipient;
+        @SerializedName("recipient")
+        Recipient recipient;
 
-        private Delivery(Map<String, Object> extraParams, Mode mode, Receipient receipient) {
+        private Delivery(Map<String, Object> extraParams, Mode mode, Recipient recipient) {
           this.extraParams = extraParams;
           this.mode = mode;
-          this.receipient = receipient;
+          this.recipient = recipient;
         }
 
         public static Builder builder() {
@@ -2937,12 +2937,12 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
           private Mode mode;
 
-          private Receipient receipient;
+          private Recipient recipient;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ChargeUpdateParams.PaymentDetails.Flight.Delivery build() {
             return new ChargeUpdateParams.PaymentDetails.Flight.Delivery(
-                this.extraParams, this.mode, this.receipient);
+                this.extraParams, this.mode, this.recipient);
           }
 
           /**
@@ -2980,15 +2980,15 @@ public class ChargeUpdateParams extends ApiRequestParams {
           }
 
           /** Details of the recipient. */
-          public Builder setReceipient(
-              ChargeUpdateParams.PaymentDetails.Flight.Delivery.Receipient receipient) {
-            this.receipient = receipient;
+          public Builder setRecipient(
+              ChargeUpdateParams.PaymentDetails.Flight.Delivery.Recipient recipient) {
+            this.recipient = recipient;
             return this;
           }
         }
 
         @Getter
-        public static class Receipient {
+        public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
           Object email;
@@ -3011,7 +3011,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
           @SerializedName("phone")
           Object phone;
 
-          private Receipient(
+          private Recipient(
               Object email, Map<String, Object> extraParams, Object name, Object phone) {
             this.email = email;
             this.extraParams = extraParams;
@@ -3033,8 +3033,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
             private Object phone;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public ChargeUpdateParams.PaymentDetails.Flight.Delivery.Receipient build() {
-              return new ChargeUpdateParams.PaymentDetails.Flight.Delivery.Receipient(
+            public ChargeUpdateParams.PaymentDetails.Flight.Delivery.Recipient build() {
+              return new ChargeUpdateParams.PaymentDetails.Flight.Delivery.Recipient(
                   this.email, this.extraParams, this.name, this.phone);
             }
 
@@ -3054,7 +3054,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.Flight.Delivery.Receipient#extraParams} for the
+             * ChargeUpdateParams.PaymentDetails.Flight.Delivery.Recipient#extraParams} for the
              * field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -3069,7 +3069,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.Flight.Delivery.Receipient#extraParams} for the
+             * ChargeUpdateParams.PaymentDetails.Flight.Delivery.Recipient#extraParams} for the
              * field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
@@ -4173,13 +4173,13 @@ public class ChargeUpdateParams extends ApiRequestParams {
         Mode mode;
 
         /** Details of the recipient. */
-        @SerializedName("receipient")
-        Receipient receipient;
+        @SerializedName("recipient")
+        Recipient recipient;
 
-        private Delivery(Map<String, Object> extraParams, Mode mode, Receipient receipient) {
+        private Delivery(Map<String, Object> extraParams, Mode mode, Recipient recipient) {
           this.extraParams = extraParams;
           this.mode = mode;
-          this.receipient = receipient;
+          this.recipient = recipient;
         }
 
         public static Builder builder() {
@@ -4191,12 +4191,12 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
           private Mode mode;
 
-          private Receipient receipient;
+          private Recipient recipient;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ChargeUpdateParams.PaymentDetails.Lodging.Delivery build() {
             return new ChargeUpdateParams.PaymentDetails.Lodging.Delivery(
-                this.extraParams, this.mode, this.receipient);
+                this.extraParams, this.mode, this.recipient);
           }
 
           /**
@@ -4234,15 +4234,15 @@ public class ChargeUpdateParams extends ApiRequestParams {
           }
 
           /** Details of the recipient. */
-          public Builder setReceipient(
-              ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Receipient receipient) {
-            this.receipient = receipient;
+          public Builder setRecipient(
+              ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Recipient recipient) {
+            this.recipient = recipient;
             return this;
           }
         }
 
         @Getter
-        public static class Receipient {
+        public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
           Object email;
@@ -4265,7 +4265,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
           @SerializedName("phone")
           Object phone;
 
-          private Receipient(
+          private Recipient(
               Object email, Map<String, Object> extraParams, Object name, Object phone) {
             this.email = email;
             this.extraParams = extraParams;
@@ -4287,8 +4287,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
             private Object phone;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Receipient build() {
-              return new ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Receipient(
+            public ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Recipient build() {
+              return new ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Recipient(
                   this.email, this.extraParams, this.name, this.phone);
             }
 
@@ -4308,7 +4308,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Receipient#extraParams} for the
+             * ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Recipient#extraParams} for the
              * field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -4323,7 +4323,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Receipient#extraParams} for the
+             * ChargeUpdateParams.PaymentDetails.Lodging.Delivery.Recipient#extraParams} for the
              * field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
