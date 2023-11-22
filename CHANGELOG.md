@@ -1,5 +1,20 @@
 # Changelog
 
+## 24.5.0 - 2023-11-21
+* [#1693](https://github.com/stripe/stripe-java/pull/1693) Update generated code
+  * Add support for `electronic_commerce_indicator` and `transaction_id` on `Charge.payment_method_details.card.three_d_secure` and `SetupAttempt.payment_method_details.card.three_d_secure`
+  * Add support for `exemption_indicator_applied` and `exemption_indicator` on `Charge.payment_method_details.card.three_d_secure`
+  * Add support for `three_d_secure` on `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card`, `SetupIntentConfirmParams.payment_method_options.card`, `SetupIntentCreateParams.payment_method_options.card`, and `SetupIntentUpdateParams.payment_method_options.card`
+
+## 24.4.0 - 2023-11-21
+* [#1690](https://github.com/stripe/stripe-java/pull/1690) Update generated code
+  * Add support for `offline` on `Charge.payment_method_details.card_present`
+  * Add support for `system_trace_audit_number` on `Issuing.Authorization.network_data`
+  * Add support for `transaction_id` on `Issuing.Authorization.network_data` and `Issuing.Transaction.network_data`
+  * Add support for `network_risk_score` on `Issuing.Authorization.pending_request` and `Issuing.Authorization.request_history[]`
+  * Add support for `requested_at` on `Issuing.Authorization.request_history[]`
+  * Add support for `authorization_code` on `Issuing.Transaction.network_data`
+
 ## 24.4.0-beta.1 - 2023-11-16
 * [#1682](https://github.com/stripe/stripe-java/pull/1682) Update generated code for beta
   * Add support for `issuing_card` and `issuing_cards_list` on `AccountSessionCreateParams.components`
@@ -9,11 +24,26 @@
   * Add support for `passengers` on `ChargeCaptureParams.payment_details.flight`, `ChargeCaptureParams.payment_details.lodging`, `ChargeUpdateParams.payment_details.flight`, `ChargeUpdateParams.payment_details.lodging`, `PaymentIntentCaptureParams.payment_details.flight`, `PaymentIntentCaptureParams.payment_details.lodging`, `PaymentIntentConfirmParams.payment_details.flight`, `PaymentIntentConfirmParams.payment_details.lodging`, `PaymentIntentCreateParams.payment_details.flight`, `PaymentIntentCreateParams.payment_details.lodging`, `PaymentIntentUpdateParams.payment_details.flight`, and `PaymentIntentUpdateParams.payment_details.lodging`
   * Add support for `created` on `CustomerSession`
 
+## 24.3.0 - 2023-11-16
+* [#1685](https://github.com/stripe/stripe-java/pull/1685) Update generated code
+  * Add support for `status` on `checkout.SessionListParams`
+* [#1683](https://github.com/stripe/stripe-java/pull/1683) Update generated code
+  * Add support for `bacs_debit_payments` on `AccountCreateParams.settings` and `AccountUpdateParams.settings`
+  * Add support for `service_user_number` on `Account.settings.bacs_debit_payments`
+  * Add support for `capture_before` on `Charge.payment_method_details.card`
+  * Add support for `paypal` on `Checkout.Session.payment_method_options`
+  * Add support for `tax_amounts` on `CreditNoteCreateParams.lines[]`, `CreditNotePreviewLinesParams.lines[]`, and `CreditNotePreviewParams.lines[]`
+  * Add support for `network_data` on `Issuing.Transaction`
+
 ## 24.3.0-beta.1 - 2023-11-10
 * [#1681](https://github.com/stripe/stripe-java/pull/1681) Update generated code for beta
   * Add support for `metadata` on `QuoteCreateParams.phases[]`, `QuotePhase`, and `QuoteUpdateParams.phases[]`
   * Add support for `last_reestimation_details` on `Quote.computed`
   * Add support for new value `quote.reestimate_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
+## 24.2.0 - 2023-11-09
+* [#1679](https://github.com/stripe/stripe-java/pull/1679) Update generated code
+  * Add support for `metadata` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, and `QuoteUpdateParams.subscription_data`
 
 ## 24.2.0-beta.1 - 2023-11-02
 * [#1678](https://github.com/stripe/stripe-java/pull/1678) Update generated code for beta
@@ -29,30 +59,6 @@
   * Change type of `tax.RegistrationCreateParams.active_from` to `DateTime | 'now'`
   * Add support for new value `invoice.payment.overpaid` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
-## 24.4.0 - 2023-11-21
-* [#1690](https://github.com/stripe/stripe-java/pull/1690) Update generated code
-  * Add support for `offline` on `Charge.payment_method_details.card_present`
-  * Add support for `system_trace_audit_number` on `Issuing.Authorization.network_data`
-  * Add support for `transaction_id` on `Issuing.Authorization.network_data` and `Issuing.Transaction.network_data`
-  * Add support for `network_risk_score` on `Issuing.Authorization.pending_request` and `Issuing.Authorization.request_history[]`
-  * Add support for `requested_at` on `Issuing.Authorization.request_history[]`
-  * Add support for `authorization_code` on `Issuing.Transaction.network_data`
-
-## 24.3.0 - 2023-11-16
-* [#1685](https://github.com/stripe/stripe-java/pull/1685) Update generated code
-  * Add support for `status` on `checkout.SessionListParams`
-* [#1683](https://github.com/stripe/stripe-java/pull/1683) Update generated code
-  * Add support for `bacs_debit_payments` on `AccountCreateParams.settings` and `AccountUpdateParams.settings`
-  * Add support for `service_user_number` on `Account.settings.bacs_debit_payments`
-  * Add support for `capture_before` on `Charge.payment_method_details.card`
-  * Add support for `paypal` on `Checkout.Session.payment_method_options`
-  * Add support for `tax_amounts` on `CreditNoteCreateParams.lines[]`, `CreditNotePreviewLinesParams.lines[]`, and `CreditNotePreviewParams.lines[]`
-  * Add support for `network_data` on `Issuing.Transaction`
-
-## 24.2.0 - 2023-11-09
-* [#1679](https://github.com/stripe/stripe-java/pull/1679) Update generated code
-  * Add support for `metadata` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, and `QuoteUpdateParams.subscription_data`
-
 ## 24.1.0 - 2023-11-02
 * [#1677](https://github.com/stripe/stripe-java/pull/1677) Update generated code
   * Add support for new resource `Tax.Registration`
@@ -62,7 +68,6 @@
   * Add support for `authentication_exemption` and `three_d_secure` on `Issuing.Authorization.verification_data` and `issuing.AuthorizationCreateParams.verification_data`
   * Add support for `description` on `PaymentLink.payment_intent_data`, `PaymentLinkCreateParams.payment_intent_data`, and `PaymentLinkUpdateParams.payment_intent_data`
   * Add support for new value `unreconciled_customer_funds` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
-
 
 ## 24.1.0-beta.2 - 2023-10-26
 * [#1675](https://github.com/stripe/stripe-java/pull/1675) Update generated code for beta
