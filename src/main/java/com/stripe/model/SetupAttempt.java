@@ -566,6 +566,15 @@ public class SetupAttempt extends ApiResource implements HasId {
         String authenticationFlow;
 
         /**
+         * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of
+         * authentication was performed.
+         *
+         * <p>One of {@code 01}, {@code 02}, {@code 05}, {@code 06}, or {@code 07}.
+         */
+        @SerializedName("electronic_commerce_indicator")
+        String electronicCommerceIndicator;
+
+        /**
          * Indicates the outcome of 3D Secure authentication.
          *
          * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
@@ -584,6 +593,13 @@ public class SetupAttempt extends ApiResource implements HasId {
          */
         @SerializedName("result_reason")
         String resultReason;
+
+        /**
+         * The 3D Secure 1 XID or 3D Secure 2 Directory Server Transaction ID (dsTransId) for this
+         * payment.
+         */
+        @SerializedName("transaction_id")
+        String transactionId;
 
         /**
          * The version of 3D Secure that was used.

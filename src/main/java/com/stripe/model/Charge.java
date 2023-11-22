@@ -1840,6 +1840,30 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String authenticationFlow;
 
         /**
+         * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of
+         * authentication was performed.
+         *
+         * <p>One of {@code 01}, {@code 02}, {@code 05}, {@code 06}, or {@code 07}.
+         */
+        @SerializedName("electronic_commerce_indicator")
+        String electronicCommerceIndicator;
+
+        /**
+         * The exemption requested via 3DS and accepted by the issuer at authentication time.
+         *
+         * <p>One of {@code low_risk}, or {@code none}.
+         */
+        @SerializedName("exemption_indicator")
+        String exemptionIndicator;
+
+        /**
+         * Whether Stripe requested the value of {@code exemption_indicator} in the transaction.
+         * This will depend on the outcome of Stripe's internal risk assessment.
+         */
+        @SerializedName("exemption_indicator_applied")
+        Boolean exemptionIndicatorApplied;
+
+        /**
          * Indicates the outcome of 3D Secure authentication.
          *
          * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
@@ -1858,6 +1882,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("result_reason")
         String resultReason;
+
+        /**
+         * The 3D Secure 1 XID or 3D Secure 2 Directory Server Transaction ID (dsTransId) for this
+         * payment.
+         */
+        @SerializedName("transaction_id")
+        String transactionId;
 
         /**
          * The version of 3D Secure that was used.
@@ -2123,6 +2154,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("network")
       String network;
 
+      /** Details about payments collected offline. */
+      @SerializedName("offline")
+      Offline offline;
+
       /** Defines whether the authorized amount can be over-captured or not. */
       @SerializedName("overcapture_supported")
       Boolean overcaptureSupported;
@@ -2142,6 +2177,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("receipt")
       Receipt receipt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Offline extends StripeObject {
+        /** Time at which the payment was collected while offline. */
+        @SerializedName("stored_at")
+        Long storedAt;
+      }
 
       @Getter
       @Setter

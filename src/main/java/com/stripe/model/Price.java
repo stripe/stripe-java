@@ -259,16 +259,18 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   }
 
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public static PriceCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public static PriceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -285,16 +287,18 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   }
 
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public static PriceCollection list(PriceListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public static PriceCollection list(PriceListParams params, RequestOptions options)
       throws StripeException {

@@ -57,29 +57,33 @@ public final class PriceService extends ApiService {
             ApiMode.V1);
   }
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public StripeCollection<Price> list(PriceListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public StripeCollection<Price> list(RequestOptions options) throws StripeException {
     return list((PriceListParams) null, options);
   }
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public StripeCollection<Price> list() throws StripeException {
     return list((PriceListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of your active prices. For the list of inactive prices, set {@code active} to
-   * false.
+   * Returns a list of your active prices, excluding <a
+   * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+   * For the list of inactive prices, set {@code active} to false.
    */
   public StripeCollection<Price> list(PriceListParams params, RequestOptions options)
       throws StripeException {

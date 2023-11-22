@@ -2402,13 +2402,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("mode")
         String mode;
 
-        @SerializedName("receipient")
-        Receipient receipient;
+        @SerializedName("recipient")
+        Recipient recipient;
 
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Receipient extends StripeObject {
+        public static class Recipient extends StripeObject {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
           String email;
@@ -2491,13 +2491,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("mode")
         String mode;
 
-        @SerializedName("receipient")
-        Receipient receipient;
+        @SerializedName("recipient")
+        Recipient recipient;
 
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Receipient extends StripeObject {
+        public static class Recipient extends StripeObject {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
           String email;
