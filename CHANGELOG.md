@@ -1,5 +1,10 @@
 # Changelog
 
+## 24.6.0-beta.1 - 2023-11-21
+* [#1691](https://github.com/stripe/stripe-java/pull/1691) Update generated code for beta
+  * Rename `receipient` to `recipient` beneath `PaymentDetails` on `Charge` and `PaymentIntent` APIs.
+  * Add support for `components` on `CustomerSessionCreateParams` and `CustomerSession`
+
 ## 24.5.0 - 2023-11-21
 * [#1693](https://github.com/stripe/stripe-java/pull/1693) Update generated code
   * Add support for `electronic_commerce_indicator` and `transaction_id` on `Charge.payment_method_details.card.three_d_secure` and `SetupAttempt.payment_method_details.card.three_d_secure`
