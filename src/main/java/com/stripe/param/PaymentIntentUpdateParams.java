@@ -7763,6 +7763,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("statement_descriptor_suffix_kanji")
       Object statementDescriptorSuffixKanji;
 
+      /**
+       * If 3D Secure authentication was performed with a third-party provider, the authentication
+       * details to use for this payment.
+       */
+      @SerializedName("three_d_secure")
+      ThreeDSecure threeDSecure;
+
       private Card(
           ApiRequestParams.EnumParam captureMethod,
           Object cvcToken,
@@ -7778,7 +7785,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           RequestThreeDSecure requestThreeDSecure,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
-          Object statementDescriptorSuffixKanji) {
+          Object statementDescriptorSuffixKanji,
+          ThreeDSecure threeDSecure) {
         this.captureMethod = captureMethod;
         this.cvcToken = cvcToken;
         this.extraParams = extraParams;
@@ -7794,6 +7802,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
+        this.threeDSecure = threeDSecure;
       }
 
       public static Builder builder() {
@@ -7831,6 +7840,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Object statementDescriptorSuffixKanji;
 
+        private ThreeDSecure threeDSecure;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Card build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.Card(
@@ -7848,7 +7859,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.requestThreeDSecure,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
-              this.statementDescriptorSuffixKanji);
+              this.statementDescriptorSuffixKanji,
+              this.threeDSecure);
         }
 
         /**
@@ -8128,6 +8140,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setStatementDescriptorSuffixKanji(
             EmptyParam statementDescriptorSuffixKanji) {
           this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
+          return this;
+        }
+
+        /**
+         * If 3D Secure authentication was performed with a third-party provider, the authentication
+         * details to use for this payment.
+         */
+        public Builder setThreeDSecure(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure threeDSecure) {
+          this.threeDSecure = threeDSecure;
           return this;
         }
       }
@@ -8722,6 +8744,597 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           private final String value;
 
           SupportedType(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      public static class ThreeDSecure {
+        /** The {@code transStatus} returned from the card Issuer’s ACS in the ARes. */
+        @SerializedName("ares_trans_status")
+        AresTransStatus aresTransStatus;
+
+        /**
+         * <strong>Required.</strong> The cryptogram, also known as the &quot;authentication
+         * value&quot; (AAV, CAVV or AEVV). This value is 20 bytes, base64-encoded into a
+         * 28-character string. (Most 3D Secure providers will return the base64-encoded version,
+         * which is what you should specify here.)
+         */
+        @SerializedName("cryptogram")
+        Object cryptogram;
+
+        /**
+         * The Electronic Commerce Indicator (ECI) is returned by your 3D Secure provider and
+         * indicates what degree of authentication was performed.
+         */
+        @SerializedName("electronic_commerce_indicator")
+        ElectronicCommerceIndicator electronicCommerceIndicator;
+
+        /** The exemption requested via 3DS and accepted by the issuer at authentication time. */
+        @SerializedName("exemption_indicator")
+        ExemptionIndicator exemptionIndicator;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Network specific 3DS fields. Network specific arguments require an explicit card brand
+         * choice. The parameter `payment_method_options.card.network`` must be populated
+         * accordingly
+         */
+        @SerializedName("network_options")
+        NetworkOptions networkOptions;
+
+        /**
+         * The challenge indicator ({@code threeDSRequestorChallengeInd}) which was requested in the
+         * AReq sent to the card Issuer's ACS. A string containing 2 digits from 01-99.
+         */
+        @SerializedName("requestor_challenge_indicator")
+        Object requestorChallengeIndicator;
+
+        /**
+         * <strong>Required.</strong> For 3D Secure 1, the XID. For 3D Secure 2, the Directory
+         * Server Transaction ID (dsTransID).
+         */
+        @SerializedName("transaction_id")
+        Object transactionId;
+
+        /** <strong>Required.</strong> The version of 3D Secure that was performed. */
+        @SerializedName("version")
+        Version version;
+
+        private ThreeDSecure(
+            AresTransStatus aresTransStatus,
+            Object cryptogram,
+            ElectronicCommerceIndicator electronicCommerceIndicator,
+            ExemptionIndicator exemptionIndicator,
+            Map<String, Object> extraParams,
+            NetworkOptions networkOptions,
+            Object requestorChallengeIndicator,
+            Object transactionId,
+            Version version) {
+          this.aresTransStatus = aresTransStatus;
+          this.cryptogram = cryptogram;
+          this.electronicCommerceIndicator = electronicCommerceIndicator;
+          this.exemptionIndicator = exemptionIndicator;
+          this.extraParams = extraParams;
+          this.networkOptions = networkOptions;
+          this.requestorChallengeIndicator = requestorChallengeIndicator;
+          this.transactionId = transactionId;
+          this.version = version;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AresTransStatus aresTransStatus;
+
+          private Object cryptogram;
+
+          private ElectronicCommerceIndicator electronicCommerceIndicator;
+
+          private ExemptionIndicator exemptionIndicator;
+
+          private Map<String, Object> extraParams;
+
+          private NetworkOptions networkOptions;
+
+          private Object requestorChallengeIndicator;
+
+          private Object transactionId;
+
+          private Version version;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure(
+                this.aresTransStatus,
+                this.cryptogram,
+                this.electronicCommerceIndicator,
+                this.exemptionIndicator,
+                this.extraParams,
+                this.networkOptions,
+                this.requestorChallengeIndicator,
+                this.transactionId,
+                this.version);
+          }
+
+          /** The {@code transStatus} returned from the card Issuer’s ACS in the ARes. */
+          public Builder setAresTransStatus(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.AresTransStatus
+                  aresTransStatus) {
+            this.aresTransStatus = aresTransStatus;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The cryptogram, also known as the &quot;authentication
+           * value&quot; (AAV, CAVV or AEVV). This value is 20 bytes, base64-encoded into a
+           * 28-character string. (Most 3D Secure providers will return the base64-encoded version,
+           * which is what you should specify here.)
+           */
+          public Builder setCryptogram(String cryptogram) {
+            this.cryptogram = cryptogram;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The cryptogram, also known as the &quot;authentication
+           * value&quot; (AAV, CAVV or AEVV). This value is 20 bytes, base64-encoded into a
+           * 28-character string. (Most 3D Secure providers will return the base64-encoded version,
+           * which is what you should specify here.)
+           */
+          public Builder setCryptogram(EmptyParam cryptogram) {
+            this.cryptogram = cryptogram;
+            return this;
+          }
+
+          /**
+           * The Electronic Commerce Indicator (ECI) is returned by your 3D Secure provider and
+           * indicates what degree of authentication was performed.
+           */
+          public Builder setElectronicCommerceIndicator(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure
+                      .ElectronicCommerceIndicator
+                  electronicCommerceIndicator) {
+            this.electronicCommerceIndicator = electronicCommerceIndicator;
+            return this;
+          }
+
+          /** The exemption requested via 3DS and accepted by the issuer at authentication time. */
+          public Builder setExemptionIndicator(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.ExemptionIndicator
+                  exemptionIndicator) {
+            this.exemptionIndicator = exemptionIndicator;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Network specific 3DS fields. Network specific arguments require an explicit card brand
+           * choice. The parameter `payment_method_options.card.network`` must be populated
+           * accordingly
+           */
+          public Builder setNetworkOptions(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions
+                  networkOptions) {
+            this.networkOptions = networkOptions;
+            return this;
+          }
+
+          /**
+           * The challenge indicator ({@code threeDSRequestorChallengeInd}) which was requested in
+           * the AReq sent to the card Issuer's ACS. A string containing 2 digits from 01-99.
+           */
+          public Builder setRequestorChallengeIndicator(String requestorChallengeIndicator) {
+            this.requestorChallengeIndicator = requestorChallengeIndicator;
+            return this;
+          }
+
+          /**
+           * The challenge indicator ({@code threeDSRequestorChallengeInd}) which was requested in
+           * the AReq sent to the card Issuer's ACS. A string containing 2 digits from 01-99.
+           */
+          public Builder setRequestorChallengeIndicator(EmptyParam requestorChallengeIndicator) {
+            this.requestorChallengeIndicator = requestorChallengeIndicator;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> For 3D Secure 1, the XID. For 3D Secure 2, the Directory
+           * Server Transaction ID (dsTransID).
+           */
+          public Builder setTransactionId(String transactionId) {
+            this.transactionId = transactionId;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> For 3D Secure 1, the XID. For 3D Secure 2, the Directory
+           * Server Transaction ID (dsTransID).
+           */
+          public Builder setTransactionId(EmptyParam transactionId) {
+            this.transactionId = transactionId;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The version of 3D Secure that was performed. */
+          public Builder setVersion(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.Version version) {
+            this.version = version;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class NetworkOptions {
+          /** Cartes Bancaires-specific 3DS fields. */
+          @SerializedName("cartes_bancaires")
+          CartesBancaires cartesBancaires;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private NetworkOptions(CartesBancaires cartesBancaires, Map<String, Object> extraParams) {
+            this.cartesBancaires = cartesBancaires;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private CartesBancaires cartesBancaires;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions
+                build() {
+              return new PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure
+                  .NetworkOptions(this.cartesBancaires, this.extraParams);
+            }
+
+            /** Cartes Bancaires-specific 3DS fields. */
+            public Builder setCartesBancaires(
+                PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions
+                        .CartesBancaires
+                    cartesBancaires) {
+              this.cartesBancaires = cartesBancaires;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          @Getter
+          public static class CartesBancaires {
+            /**
+             * <strong>Required.</strong> The cryptogram calculation algorithm used by the card
+             * Issuer's ACS to calculate the Authentication cryptogram. Also known as {@code
+             * cavvAlgorithm}. messageExtension: CB-AVALGO
+             */
+            @SerializedName("cb_avalgo")
+            CbAvalgo cbAvalgo;
+
+            /**
+             * The exemption indicator returned from Cartes Bancaires in the ARes. message
+             * extension: CB-EXEMPTION; string (4 characters) This is a 3 byte bitmap (low
+             * significant byte first and most significant bit first) that has been Base64 encoded
+             */
+            @SerializedName("cb_exemption")
+            Object cbExemption;
+
+            /**
+             * The risk score returned from Cartes Bancaires in the ARes. message extension:
+             * CB-SCORE; numeric value 0-99
+             */
+            @SerializedName("cb_score")
+            Long cbScore;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private CartesBancaires(
+                CbAvalgo cbAvalgo,
+                Object cbExemption,
+                Long cbScore,
+                Map<String, Object> extraParams) {
+              this.cbAvalgo = cbAvalgo;
+              this.cbExemption = cbExemption;
+              this.cbScore = cbScore;
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private CbAvalgo cbAvalgo;
+
+              private Object cbExemption;
+
+              private Long cbScore;
+
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions
+                      .CartesBancaires
+                  build() {
+                return new PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure
+                    .NetworkOptions.CartesBancaires(
+                    this.cbAvalgo, this.cbExemption, this.cbScore, this.extraParams);
+              }
+
+              /**
+               * <strong>Required.</strong> The cryptogram calculation algorithm used by the card
+               * Issuer's ACS to calculate the Authentication cryptogram. Also known as {@code
+               * cavvAlgorithm}. messageExtension: CB-AVALGO
+               */
+              public Builder setCbAvalgo(
+                  PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions
+                          .CartesBancaires.CbAvalgo
+                      cbAvalgo) {
+                this.cbAvalgo = cbAvalgo;
+                return this;
+              }
+
+              /**
+               * The exemption indicator returned from Cartes Bancaires in the ARes. message
+               * extension: CB-EXEMPTION; string (4 characters) This is a 3 byte bitmap (low
+               * significant byte first and most significant bit first) that has been Base64 encoded
+               */
+              public Builder setCbExemption(String cbExemption) {
+                this.cbExemption = cbExemption;
+                return this;
+              }
+
+              /**
+               * The exemption indicator returned from Cartes Bancaires in the ARes. message
+               * extension: CB-EXEMPTION; string (4 characters) This is a 3 byte bitmap (low
+               * significant byte first and most significant bit first) that has been Base64 encoded
+               */
+              public Builder setCbExemption(EmptyParam cbExemption) {
+                this.cbExemption = cbExemption;
+                return this;
+              }
+
+              /**
+               * The risk score returned from Cartes Bancaires in the ARes. message extension:
+               * CB-SCORE; numeric value 0-99
+               */
+              public Builder setCbScore(Long cbScore) {
+                this.cbScore = cbScore;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions.CartesBancaires#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure.NetworkOptions.CartesBancaires#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
+
+            public enum CbAvalgo implements ApiRequestParams.EnumParam {
+              @SerializedName("0")
+              N0("0"),
+
+              @SerializedName("1")
+              N1("1"),
+
+              @SerializedName("2")
+              N2("2"),
+
+              @SerializedName("3")
+              N3("3"),
+
+              @SerializedName("4")
+              N4("4"),
+
+              @SerializedName("A")
+              A("A");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              CbAvalgo(String value) {
+                this.value = value;
+              }
+            }
+          }
+        }
+
+        public enum AresTransStatus implements ApiRequestParams.EnumParam {
+          @SerializedName("A")
+          A("A"),
+
+          @SerializedName("C")
+          C("C"),
+
+          @SerializedName("I")
+          I("I"),
+
+          @SerializedName("N")
+          N("N"),
+
+          @SerializedName("R")
+          R("R"),
+
+          @SerializedName("U")
+          U("U"),
+
+          @SerializedName("Y")
+          Y("Y");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AresTransStatus(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum ElectronicCommerceIndicator implements ApiRequestParams.EnumParam {
+          @SerializedName("01")
+          N01("01"),
+
+          @SerializedName("02")
+          N02("02"),
+
+          @SerializedName("05")
+          N05("05"),
+
+          @SerializedName("06")
+          N06("06"),
+
+          @SerializedName("07")
+          N07("07");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ElectronicCommerceIndicator(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum ExemptionIndicator implements ApiRequestParams.EnumParam {
+          @SerializedName("low_risk")
+          LOW_RISK("low_risk"),
+
+          @SerializedName("none")
+          NONE("none");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ExemptionIndicator(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Version implements ApiRequestParams.EnumParam {
+          @SerializedName("1.0.2")
+          N1__0__2("1.0.2"),
+
+          @SerializedName("2.1.0")
+          N2__1__0("2.1.0"),
+
+          @SerializedName("2.2.0")
+          N2__2__0("2.2.0");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Version(String value) {
             this.value = value;
           }
         }
