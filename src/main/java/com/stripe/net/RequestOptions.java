@@ -364,6 +364,7 @@ public class RequestOptions {
   }
 
   private static String normalizeIdempotencyKey(String idempotencyKey) {
+    int maxLength = 255;
     if (idempotencyKey == null) {
       return null;
     }
@@ -371,11 +372,11 @@ public class RequestOptions {
     if (normalized.isEmpty()) {
       throw new InvalidRequestOptionsException("Empty Idempotency Key Specified!");
     }
-    if (normalized.length() > 255) {
+    if (normalized.length() > maxLength) {
       throw new InvalidRequestOptionsException(
           String.format(
-              "Idempotency Key length was %d, which is larger than the 255 character " + "maximum!",
-              normalized.length()));
+              "Idempotency Key length was %d, which is larger than the %d character maximum!",
+              normalized.length(), maxLength));
     }
     return normalized;
   }
