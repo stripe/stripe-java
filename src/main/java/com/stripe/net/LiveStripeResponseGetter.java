@@ -147,84 +147,82 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private void handleApiError(StripeResponse response) throws StripeException {
-    StripeError error = null;
-    StripeException exception = null;
+    StripeError error = checkJSONError(response);
+    handleStripeException(error, response);
+  }
 
+  private StripeError checkJSONError(StripeResponse response) throws StripeException {
+    StripeError error = null;
     try {
       JsonObject jsonObject =
-          ApiResource.INTERNAL_GSON
-              .fromJson(response.body(), JsonObject.class)
-              .getAsJsonObject("error");
+        ApiResource.INTERNAL_GSON
+          .fromJson(response.body(), JsonObject.class)
+          .getAsJsonObject("error");
       error = ApiResource.deserializeStripeObject(jsonObject.toString(), StripeError.class, this);
+      if (error == null) {
+        raiseMalformedJsonError(response.body(), response.code(), response.requestId(), null);
+      }
+      error.setLastResponse(response);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }
-    if (error == null) {
-      raiseMalformedJsonError(response.body(), response.code(), response.requestId(), null);
-    }
+    return error;
+  }
 
-    error.setLastResponse(response);
+  private void handleStripeException(StripeError error, StripeResponse response) throws StripeException {
+    StripeException exception = createStripeException(error, response);
+    exception.setStripeError(error);
+    throw exception;
+  }
 
+  private StripeException createStripeException(StripeError error, StripeResponse response) {
     switch (response.code()) {
       case 400:
       case 404:
-        if ("idempotency_error".equals(error.getType())) {
-          exception =
-              new IdempotencyException(
-                  error.getMessage(), response.requestId(), error.getCode(), response.code());
-        } else {
-          exception =
-              new InvalidRequestException(
-                  error.getMessage(),
-                  error.getParam(),
-                  response.requestId(),
-                  error.getCode(),
-                  response.code(),
-                  null);
-        }
-        break;
+        return createBadRequestException(error, response);
       case 401:
-        exception =
-            new AuthenticationException(
-                error.getMessage(), response.requestId(), error.getCode(), response.code());
-        break;
+        return new AuthenticationException(
+          error.getMessage(), response.requestId(), error.getCode(), response.code());
       case 402:
-        exception =
-            new CardException(
-                error.getMessage(),
-                response.requestId(),
-                error.getCode(),
-                error.getParam(),
-                error.getDeclineCode(),
-                error.getCharge(),
-                response.code(),
-                null);
-        break;
+        return new CardException(
+          error.getMessage(),
+          response.requestId(),
+          error.getCode(),
+          error.getParam(),
+          error.getDeclineCode(),
+          error.getCharge(),
+          response.code(),
+          null);
       case 403:
-        exception =
-            new PermissionException(
-                error.getMessage(), response.requestId(), error.getCode(), response.code());
-        break;
+        return new PermissionException(
+          error.getMessage(), response.requestId(), error.getCode(), response.code());
       case 429:
-        exception =
-            new RateLimitException(
-                error.getMessage(),
-                error.getParam(),
-                response.requestId(),
-                error.getCode(),
-                response.code(),
-                null);
-        break;
+        return new RateLimitException(
+          error.getMessage(),
+          error.getParam(),
+          response.requestId(),
+          error.getCode(),
+          response.code(),
+          null);
       default:
-        exception =
-            new ApiException(
-                error.getMessage(), response.requestId(), error.getCode(), response.code(), null);
-        break;
+        return new ApiException(
+          error.getMessage(), response.requestId(), error.getCode(), response.code(), null);
     }
+  }
 
-    exception.setStripeError(error);
-
-    throw exception;
+  private StripeException createBadRequestException(StripeError error, StripeResponse response) {
+    if ("idempotency_error".equals(error.getType())) {
+      return new IdempotencyException(
+        error.getMessage(), response.requestId(), error.getCode(), response.code());
+    } else {
+      return new InvalidRequestException(
+        error.getMessage(),
+        error.getParam(),
+        response.requestId(),
+        error.getCode(),
+        response.code(),
+        null);
+    }
   }
 
   private void handleOAuthError(StripeResponse response) throws StripeException {
