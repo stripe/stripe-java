@@ -225,10 +225,7 @@ public abstract class HttpClient {
     }
 
     // Retry on connection error.
-    if ((exception != null)
-        && (exception.getCause() != null)
-        && (exception.getCause() instanceof ConnectException
-            || exception.getCause() instanceof SocketTimeoutException)) {
+    if (isConnectionError(exception)) {
       return true;
     }
 
@@ -261,6 +258,13 @@ public abstract class HttpClient {
     }
 
     return false;
+  }
+
+  private boolean isConnectionError(StripeException exception) {
+    return (exception != null)
+      && (exception.getCause() != null)
+      && (exception.getCause() instanceof ConnectException
+      || exception.getCause() instanceof SocketTimeoutException);
   }
 
   private Duration sleepTime(int numRetries) {
