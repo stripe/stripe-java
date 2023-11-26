@@ -48,28 +48,9 @@ public abstract class HttpClient {
     throw new UnsupportedOperationException("requestStream is unimplemented for this HttpClient");
   }
 
-  @FunctionalInterface
-  private interface RequestSendFunction<R> {
-    R apply(StripeRequest request) throws StripeException;
-  }
-
-  private <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
-      StripeRequest request, RequestSendFunction<T> send) throws StripeException {
-    Optional<String> telemetryHeaderValue = requestTelemetry.getHeaderValue(request.headers());
-    if (telemetryHeaderValue.isPresent()) {
-      request =
-          request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
-    }
-
-    Stopwatch stopwatch = Stopwatch.startNew();
-
-    T response = send.apply(request);
-
-    stopwatch.stop();
-
-    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed());
-
-    return response;
+  private <T extends AbstractStripeResponse<?>> T sendRequest(
+    StripeRequest request, RequestSendFunction<T> send) throws StripeException {
+    return requestTelemetry.sendWithTelemetry(request, send);
   }
 
   /**
@@ -80,7 +61,7 @@ public abstract class HttpClient {
    * @throws StripeException If the request fails for any reason
    */
   public StripeResponse requestWithTelemetry(StripeRequest request) throws StripeException {
-    return sendWithTelemetry(request, this::request);
+    return sendRequest(request, this::request);
   }
 
   /**
@@ -93,7 +74,7 @@ public abstract class HttpClient {
    */
   public StripeResponseStream requestStreamWithTelemetry(StripeRequest request)
       throws StripeException {
-    return sendWithTelemetry(request, this::requestStream);
+    return sendRequest(request, this::requestStream);
   }
 
   public <T extends AbstractStripeResponse<?>> T sendWithRetries(

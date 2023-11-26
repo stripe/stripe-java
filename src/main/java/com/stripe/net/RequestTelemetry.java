@@ -6,6 +6,10 @@ import com.stripe.Stripe;
 import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.function.Function;
+
+import com.stripe.exception.StripeException;
+import com.stripe.util.Stopwatch;
 import lombok.Data;
 
 /** Helper class used by {@link LiveStripeResponseGetter} to manage request telemetry. */
@@ -43,6 +47,25 @@ class RequestTelemetry {
 
     ClientTelemetryPayload payload = new ClientTelemetryPayload(requestMetrics);
     return Optional.of(gson.toJson(payload));
+  }
+
+  public <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
+    StripeRequest request, RequestSendFunction<T> send) throws StripeException {
+    Optional<String> telemetryHeaderValue = getHeaderValue(request.headers());
+    if (telemetryHeaderValue.isPresent()) {
+      request =
+        request.withAdditionalHeader(HEADER_NAME, telemetryHeaderValue.get());
+    }
+
+    Stopwatch stopwatch = Stopwatch.startNew();
+
+    T response = send.apply(request);
+
+    stopwatch.stop();
+
+    maybeEnqueueMetrics(response, stopwatch.getElapsed());
+
+    return response;
   }
 
   /**
