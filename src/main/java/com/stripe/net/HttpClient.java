@@ -48,6 +48,15 @@ public abstract class HttpClient {
     throw new UnsupportedOperationException("requestStream is unimplemented for this HttpClient");
   }
 
+  /**
+   * Sends a Stripe request with the help of RequestTelemetry
+   *
+   * @param <T> The type of the response expected, extending AbstractStripeResponse.
+   * @param request The StripeRequest to be sent.
+   * @param send The function used to send the request and receive the response.
+   * @return The response received from sending the request, of type T.
+   * @throws StripeException If there is an issue in sending the request or processing the response.
+   */
   private <T extends AbstractStripeResponse<?>> T sendRequest(
     StripeRequest request, RequestSendFunction<T> send) throws StripeException {
     return requestTelemetry.sendWithTelemetry(request, send);
@@ -241,6 +250,13 @@ public abstract class HttpClient {
     return false;
   }
 
+  /**
+   * Checks if a given StripeException is caused by a connection error.
+   *
+   * @param exception The StripeException to be evaluated.
+   * @return true if the exception is caused by a connection error (ConnectException or SocketTimeoutException),
+   *         false otherwise.
+   */
   private boolean isConnectionError(StripeException exception) {
     return (exception != null)
       && (exception.getCause() != null)

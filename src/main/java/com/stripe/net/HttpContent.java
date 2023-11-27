@@ -31,6 +31,15 @@ public class HttpContent {
     this.contentType = contentType;
   }
 
+  /**
+   * Builds a new HttpContent for name/value tuples encoded using {@code
+   * application/x-www-form-urlencoded} MIME type.
+   *
+   * @param nameValueCollection the collection of name/value tuples to encode
+   * @param encoder The Encoder used to perform the form URL-encoding.
+   * @return the encoded HttpContent instance
+   * @throws IllegalArgumentException if nameValueCollection is null
+   */
   public static HttpContent buildFormURLEncodedContent(Collection<KeyValuePair<String, String>> nameValueCollection, Encoder encoder) throws IOException {
     requireNonNull(nameValueCollection);
     return encoder.encodeFormURLEncodedContent(nameValueCollection);
@@ -41,18 +50,40 @@ public class HttpContent {
     return new String(this.byteArrayContent, ApiResource.CHARSET);
   }
 
+  /**
+   * Builds a new HttpContent for name/value tuples encoded using {@code multipart/form-data} MIME
+   * type.
+   *
+   * @param nameValueCollection the collection of name/value tuples to encode
+   * @param encoder The Encoder used to perform the multipart/form-data encoding.
+   * @return the encoded HttpContent instance
+   * @throws IllegalArgumentException if nameValueCollection is null
+   */
   public static HttpContent buildMultipartFormDataContent(Collection<KeyValuePair<String, Object>> nameValueCollection, Encoder encoder) throws IOException {
     requireNonNull(nameValueCollection);
     String boundary = UUID.randomUUID().toString();
     return encoder.encodeMultipartFormDataContent(nameValueCollection, boundary);
   }
 
+  /**
+   * Creates an HttpContent object with content from a URL-encoded string.
+   *
+   * @param encodedString The URL-encoded string to be used as the content.
+   * @return An HttpContent object containing the URL-encoded content.
+   */
   public static HttpContent createFromFormURLEncoded(String encodedString) {
     byte[] byteArray = encodedString.getBytes(ApiResource.CHARSET);
     String contentType = String.format("application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET);
     return new HttpContent(byteArray, contentType);
   }
 
+  /**
+   * Creates an HttpContent object with content from a multipart/form-data stream.
+   *
+   * @param baos The ByteArrayOutputStream containing the multipart/form-data content.
+   * @param boundary The boundary string used to separate parts in the content.
+   * @return An HttpContent object containing the multipart/form-data content.
+   */
   public static HttpContent createFromMultipartFormData(ByteArrayOutputStream baos, String boundary) {
     byte[] byteArray = baos.toByteArray();
     String contentType = String.format("multipart/form-data; boundary=%s", boundary);

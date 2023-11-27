@@ -49,6 +49,15 @@ class RequestTelemetry {
     return Optional.of(gson.toJson(payload));
   }
 
+  /**
+   * Sends a Stripe request with telemetry data and returns the response.
+   *
+   * @param <T> The type of the response expected, extending AbstractStripeResponse.
+   * @param request The StripeRequest to be sent, potentially with additional telemetry headers.
+   * @param send The function used to send the request and receive the response.
+   * @return The response received from sending the request, of type T.
+   * @throws StripeException If an error potentially occurs in the implementation during request processing or response handling.
+   */
   public <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
     StripeRequest request, RequestSendFunction<T> send) throws StripeException {
     Optional<String> telemetryHeaderValue = getHeaderValue(request.headers());

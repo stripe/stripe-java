@@ -151,6 +151,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     handleStripeException(error, response);
   }
 
+  /**
+   * Parses a StripeResponse to extract a StripeError, handling JSON parsing exceptions.
+   *
+   * @param response The StripeResponse to be evaluated for an error.
+   * @return A StripeError object if found, null otherwise.
+   * @throws StripeException if JSON parsing fails or if the error object is malformed.
+   */
   private StripeError checkJSONError(StripeResponse response) throws StripeException {
     StripeError error = null;
     try {
@@ -169,12 +176,28 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return error;
   }
 
+  /**
+   * Creates and throws a StripeException based on the given error and response.
+   * This method constructs a StripeException using the provided StripeError and StripeResponse,
+   * and then throws it. The StripeError is set on the exception before throwing.
+   *
+   * @param error The StripeError to be used in creating the StripeException.
+   * @param response The StripeResponse associated with the error.
+   * @throws StripeException The constructed exception based on the given error and response.
+   */
   private void handleStripeException(StripeError error, StripeResponse response) throws StripeException {
     StripeException exception = createStripeException(error, response);
     exception.setStripeError(error);
     throw exception;
   }
 
+  /**
+   * Creates a specific StripeException based on the error code in the response.
+   *
+   * @param error The StripeError containing error details from the Stripe API response.
+   * @param response The StripeResponse from which the HTTP status code is extracted.
+   * @return A StripeException specific to the type of error encountered.
+   */
   private StripeException createStripeException(StripeError error, StripeResponse response) {
     switch (response.code()) {
       case 400:
@@ -210,6 +233,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
+  /**
+   * Creates an exception for bad request errors, either IdempotencyException or InvalidRequestException.
+   *
+   * @param error The StripeError containing details about the bad request error.
+   * @param response The StripeResponse related to the error.
+   * @return A StripeException specific to the bad request error encountered.
+   */
   private StripeException createBadRequestException(StripeError error, StripeResponse response) {
     if ("idempotency_error".equals(error.getType())) {
       return new IdempotencyException(

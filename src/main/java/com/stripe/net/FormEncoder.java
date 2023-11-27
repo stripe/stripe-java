@@ -16,6 +16,12 @@ import static java.util.Objects.requireNonNull;
 
 public final class FormEncoder implements Encoder {
 
+  /**
+   * Encodes a collection of key-value pairs into a query string.
+   *
+   * @param nameValueCollection The collection of KeyValuePair objects to be encoded.
+   * @return A URL-encoded query string constructed from the key-value pairs.
+   */
   @Override
   public String encodeQueryString(Collection<KeyValuePair<String, String>> nameValueCollection){
     if (nameValueCollection == null) {
@@ -27,6 +33,13 @@ public final class FormEncoder implements Encoder {
       .collect(Collectors.joining("&"));
   }
 
+  /**
+   * Encodes a collection of key-value pairs as form URL-encoded content.
+   *
+   * @param nameValueCollection The collection of KeyValuePair objects to be encoded.
+   * @return An HttpContent object containing the form URL-encoded content.
+   * @throws IOException If an IO exception occurs during the encoding process.
+   */
   @Override
   public HttpContent encodeFormURLEncodedContent(Collection<KeyValuePair<String, String>> nameValueCollection) throws IOException {
     requireNonNull(nameValueCollection);
@@ -34,6 +47,14 @@ public final class FormEncoder implements Encoder {
     return HttpContent.createFromFormURLEncoded(encodedString);
   }
 
+  /**
+   * Encodes a collection of key-value pairs as multipart/form-data content.
+   *
+   * @param nameValueCollection The collection of KeyValuePair objects to be encoded.
+   * @param boundary The boundary string to be used for separating parts in the encoded data.
+   * @return An HttpContent object containing the multipart/form-data encoded content.
+   * @throws IOException If an I/O error occurs during encoding or processing the data.
+   */
   @Override
   public HttpContent encodeMultipartFormDataContent(Collection<KeyValuePair<String, Object>> nameValueCollection, String boundary) throws IOException {
     requireNonNull(nameValueCollection);
