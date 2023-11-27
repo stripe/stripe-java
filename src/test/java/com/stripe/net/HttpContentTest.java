@@ -12,26 +12,27 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class HttpContentTest extends BaseStripeTest {
+  private final Encoder encoder = new FormEncoder();
   @Test
   public void testBuildFormURLEncodedContentNull() throws IOException {
     assertThrows(
         NullPointerException.class,
         () -> {
-          HttpContent.buildFormURLEncodedContent(null);
+          HttpContent.buildFormURLEncodedContent(null, encoder);
         });
   }
 
   @Test
   public void testBuildFormURLEncodedContentEmptySourceSuccess() throws IOException {
     HttpContent content =
-        HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
+        HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>(), encoder);
     assertEquals(0, content.byteArrayContent().length);
   }
 
   @Test
   public void testBuildFormURLEncodedContentEmptySourceCorrectContentType() throws IOException {
     HttpContent content =
-        HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
+        HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>(), encoder);
     assertEquals("application/x-www-form-urlencoded;charset=UTF-8", content.contentType());
   }
 
@@ -40,7 +41,7 @@ public class HttpContentTest extends BaseStripeTest {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key", "value"));
 
-    HttpContent content = HttpContent.buildFormURLEncodedContent(data);
+    HttpContent content = HttpContent.buildFormURLEncodedContent(data, encoder);
     assertEquals(9, content.byteArrayContent().length);
     assertEquals("key=value", new String(content.byteArrayContent(), StandardCharsets.UTF_8));
   }
@@ -50,7 +51,7 @@ public class HttpContentTest extends BaseStripeTest {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key", "valueク"));
 
-    HttpContent content = HttpContent.buildFormURLEncodedContent(data);
+    HttpContent content = HttpContent.buildFormURLEncodedContent(data, encoder);
     assertEquals(18, content.byteArrayContent().length);
     assertEquals(
         "key=value%E3%82%AF", new String(content.byteArrayContent(), StandardCharsets.UTF_8));
@@ -62,7 +63,7 @@ public class HttpContentTest extends BaseStripeTest {
     data.add(new KeyValuePair<String, String>("key1", "value1"));
     data.add(new KeyValuePair<String, String>("key2", "value2"));
 
-    HttpContent content = HttpContent.buildFormURLEncodedContent(data);
+    HttpContent content = HttpContent.buildFormURLEncodedContent(data, encoder);
     assertEquals(23, content.byteArrayContent().length);
     assertEquals(
         "key1=value1&key2=value2", new String(content.byteArrayContent(), StandardCharsets.UTF_8));
@@ -74,7 +75,7 @@ public class HttpContentTest extends BaseStripeTest {
     data.add(new KeyValuePair<String, String>("key 1", "val%20ue 1"));
     data.add(new KeyValuePair<String, String>("key 2", "val%ue 2"));
 
-    HttpContent content = HttpContent.buildFormURLEncodedContent(data);
+    HttpContent content = HttpContent.buildFormURLEncodedContent(data, encoder);
     assertEquals(35, content.byteArrayContent().length);
     assertEquals(
         "key+1=val%2520ue+1&key+2=val%25ue+2",
@@ -86,7 +87,7 @@ public class HttpContentTest extends BaseStripeTest {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key[subkey]", "[#value]"));
 
-    HttpContent content = HttpContent.buildFormURLEncodedContent(data);
+    HttpContent content = HttpContent.buildFormURLEncodedContent(data, encoder);
     assertEquals(22, content.byteArrayContent().length);
     assertEquals(
         "key[subkey]=[%23value]", new String(content.byteArrayContent(), StandardCharsets.UTF_8));
@@ -97,7 +98,7 @@ public class HttpContentTest extends BaseStripeTest {
     assertThrows(
         NullPointerException.class,
         () -> {
-          HttpContent.buildMultipartFormDataContent(null);
+          HttpContent.buildMultipartFormDataContent(null, encoder);
         });
   }
 
@@ -172,7 +173,7 @@ public class HttpContentTest extends BaseStripeTest {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key", "value"));
 
-    HttpContent content = HttpContent.buildFormURLEncodedContent(data);
+    HttpContent content = HttpContent.buildFormURLEncodedContent(data, encoder);
     String stringContent = content.stringContent();
     assertEquals(9, stringContent.length());
     assertEquals("key=value", stringContent);

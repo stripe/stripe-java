@@ -1,12 +1,10 @@
 package com.stripe.net;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,12 +12,65 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public final class FormEncoder {
+import static java.util.Objects.requireNonNull;
+
+public final class FormEncoder implements Encoder {
+
+  @Override
+  public String encodeQueryString(Collection<KeyValuePair<String, String>> nameValueCollection){
+    if (nameValueCollection == null) {
+      return "";
+    }
+
+    return nameValueCollection.stream()
+      .map(kvp -> String.format("%s=%s", urlEncode(kvp.getKey()), urlEncode(kvp.getValue())))
+      .collect(Collectors.joining("&"));
+  }
+
+  @Override
+  public HttpContent encodeFormURLEncodedContent(Collection<KeyValuePair<String, String>> nameValueCollection) throws IOException {
+    requireNonNull(nameValueCollection);
+    String encodedString = encodeQueryString(nameValueCollection);
+    return HttpContent.createFromFormURLEncoded(encodedString);
+  }
+
+  @Override
+  public HttpContent encodeMultipartFormDataContent(Collection<KeyValuePair<String, Object>> nameValueCollection, String boundary) throws IOException {
+    requireNonNull(nameValueCollection);
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    MultipartProcessor multipartProcessor = null;
+    try {
+      multipartProcessor = new MultipartProcessor(baos, boundary, ApiResource.CHARSET);
+
+      for (KeyValuePair<String, Object> entry : nameValueCollection) {
+        String key = entry.getKey();
+        Object value = entry.getValue();
+
+        if (value instanceof File) {
+          File file = (File) value;
+          multipartProcessor.addFileField(key, file.getName(), Files.newInputStream(file.toPath()));
+        } else if (value instanceof InputStream) {
+          multipartProcessor.addFileField(key, "blob", (InputStream) value);
+        } else {
+          multipartProcessor.addFormField(key, value.toString());
+        }
+      }
+    } finally {
+      if (multipartProcessor != null) {
+        multipartProcessor.finish();
+      }
+    }
+
+    return HttpContent.createFromMultipartFormData(baos, boundary);
+  }
+
+
   public static HttpContent createHttpContent(Map<String, Object> params) throws IOException {
     // If params is null, we create an empty HttpContent because we still want to send the
     // Content-Type header.
+    Encoder encoder = new FormEncoder();
     if (params == null) {
-      return HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
+      return HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>(), encoder);
     }
 
     Collection<KeyValuePair<String, Object>> flatParams = flattenParams(params);
@@ -33,9 +84,9 @@ public final class FormEncoder {
               .filter(kvp -> kvp.getValue() instanceof String)
               .map(kvp -> new KeyValuePair<String, String>(kvp.getKey(), (String) kvp.getValue()))
               .collect(Collectors.toList());
-      return HttpContent.buildFormURLEncodedContent(flatParamsString);
+      return HttpContent.buildFormURLEncodedContent(flatParamsString, encoder);
     } else {
-      return HttpContent.buildMultipartFormDataContent(flatParams);
+      return HttpContent.buildMultipartFormDataContent(flatParams, encoder);
     }
   }
 
