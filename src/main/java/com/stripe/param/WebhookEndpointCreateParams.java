@@ -690,6 +690,27 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("checkout.session.expired")
     CHECKOUT__SESSION__EXPIRED("checkout.session.expired"),
 
+    @SerializedName("climate.order.canceled")
+    CLIMATE__ORDER__CANCELED("climate.order.canceled"),
+
+    @SerializedName("climate.order.created")
+    CLIMATE__ORDER__CREATED("climate.order.created"),
+
+    @SerializedName("climate.order.delayed")
+    CLIMATE__ORDER__DELAYED("climate.order.delayed"),
+
+    @SerializedName("climate.order.delivered")
+    CLIMATE__ORDER__DELIVERED("climate.order.delivered"),
+
+    @SerializedName("climate.order.product_substituted")
+    CLIMATE__ORDER__PRODUCT_SUBSTITUTED("climate.order.product_substituted"),
+
+    @SerializedName("climate.product.created")
+    CLIMATE__PRODUCT__CREATED("climate.product.created"),
+
+    @SerializedName("climate.product.pricing_updated")
+    CLIMATE__PRODUCT__PRICING_UPDATED("climate.product.pricing_updated"),
+
     @SerializedName("coupon.created")
     COUPON__CREATED("coupon.created"),
 
