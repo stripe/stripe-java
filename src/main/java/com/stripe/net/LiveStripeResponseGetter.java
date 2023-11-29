@@ -15,14 +15,15 @@ import com.stripe.model.oauth.OAuthError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import lombok.Setter;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
-  private final List<String> usage;
+
+  @Setter private List<String> usage;
 
   /**
    * Initializes a new instance of the {@link LiveStripeResponseGetter} class with default
@@ -38,18 +39,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    * @param httpClient the HTTP client to use
    */
   public LiveStripeResponseGetter(HttpClient httpClient) {
-    this(null, null, httpClient);
+    this(null, httpClient);
   }
 
   public LiveStripeResponseGetter(StripeResponseGetterOptions options, HttpClient httpClient) {
-    this(null, options, httpClient);
-  }
-
-  public LiveStripeResponseGetter(
-      List<String> usage, StripeResponseGetterOptions options, HttpClient httpClient) {
     this.options = options != null ? options : GlobalStripeResponseGetterOptions.INSTANCE;
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
-    this.usage = usage != null ? usage : Collections.emptyList();
   }
 
   @Override

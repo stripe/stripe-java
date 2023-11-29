@@ -14,28 +14,40 @@ import lombok.Getter;
 public class StripeClient {
   private final StripeResponseGetter responseGetter;
 
-
-  private static StripeResponseGetter responseGetterFromOptions(StripeResponseGetterOptions options) {
-        return new LiveStripeResponseGetter(
-            Arrays.asList("stripe_client"), options, null);
-  }
   /**
    * Constructs a StripeClient with default settings, using the provided API key. Use the builder
    * instead if you require more complex configuration.
    */
   public StripeClient(String apiKey) {
-    this.responseGetter = responseGetterFromOptions(builder().setApiKey(apiKey).buildOptions());
+    this(new LiveStripeResponseGetter(builder().setApiKey(apiKey).buildOptions(), null));
   }
-
 
   /**
    * Constructs a StripeClient with a custom StripeResponseGetter.
    *
    * <p>Use this for testing, or advanced use cases where you need to make fundamental changes to
    * how the StripeClient makes requests.
+   *
+   * <p>responseGetter should not be re-used across StripeClient and
+   * ApiResource.setStripeResponseGetter
    */
   public StripeClient(StripeResponseGetter responseGetter) {
     this.responseGetter = responseGetter;
+
+    if (this.responseGetter instanceof LiveStripeResponseGetter) {
+      // Setting usage via mutation instead of making a copy is necessary if we want to support
+      // users to create their own subclasses of LiveStripeResponseGetter to use here.
+      //
+      // Unfortunately, mutation could technically cause some non-obvious behavior in the case
+      // of re-use; e.g.
+      //
+      // var lsrg = new LiveStripeResponseGetter();
+      // ApiResource.setStripeResponseGetter(lsrg);
+      // new StripeClient(lsrg);
+      //
+      // would cause e.g. Customer.create(...) to erroneously report "stripe_client" in usage
+      ((LiveStripeResponseGetter) this.responseGetter).setUsage(Arrays.asList("stripe_client"));
+    }
   }
 
   protected StripeResponseGetter getResponseGetter() {
@@ -523,7 +535,7 @@ public class StripeClient {
 
     /** Constructs a {@link StripeClient} with the specified configuration. */
     public StripeClient build() {
-      return new StripeClient(responseGetterFromOptions(buildOptions()));
+      return new StripeClient(new LiveStripeResponseGetter(buildOptions(), null));
     }
 
     StripeResponseGetterOptions buildOptions() {
