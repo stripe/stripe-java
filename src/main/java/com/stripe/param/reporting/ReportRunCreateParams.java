@@ -370,6 +370,12 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("charge_failure")
       CHARGE_FAILURE("charge_failure"),
 
+      @SerializedName("climate_order_purchase")
+      CLIMATE_ORDER_PURCHASE("climate_order_purchase"),
+
+      @SerializedName("climate_order_refund")
+      CLIMATE_ORDER_REFUND("climate_order_refund"),
+
       @SerializedName("connect_collection_transfer")
       CONNECT_COLLECTION_TRANSFER("connect_collection_transfer"),
 
