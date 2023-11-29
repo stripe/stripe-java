@@ -3,6 +3,7 @@ package com.stripe;
 import com.stripe.net.*;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
+import java.util.Arrays;
 import lombok.Getter;
 
 /**
@@ -13,14 +14,19 @@ import lombok.Getter;
 public class StripeClient {
   private final StripeResponseGetter responseGetter;
 
+
+  private static StripeResponseGetter responseGetterFromOptions(StripeResponseGetterOptions options) {
+        return new LiveStripeResponseGetter(
+            Arrays.asList("stripe_client"), options, null);
+  }
   /**
    * Constructs a StripeClient with default settings, using the provided API key. Use the builder
    * instead if you require more complex configuration.
    */
   public StripeClient(String apiKey) {
-    this.responseGetter =
-        new LiveStripeResponseGetter(builder().setApiKey(apiKey).buildOptions(), null);
+    this.responseGetter = responseGetterFromOptions(builder().setApiKey(apiKey).buildOptions());
   }
+
 
   /**
    * Constructs a StripeClient with a custom StripeResponseGetter.
@@ -287,7 +293,7 @@ public class StripeClient {
 
   // The end of the section generated from our OpenAPI spec
   static class ClientStripeResponseGetterOptions extends StripeResponseGetterOptions {
-    // When adding setting here keep them in sync with settings in RequestOptions and
+    // When adding settings here, keep them in sync with settings in RequestOptions and
     // in the RequestOptions.merge method
     @Getter(onMethod_ = {@Override})
     private final String apiKey;
@@ -517,7 +523,7 @@ public class StripeClient {
 
     /** Constructs a {@link StripeClient} with the specified configuration. */
     public StripeClient build() {
-      return new StripeClient(new LiveStripeResponseGetter(buildOptions(), null));
+      return new StripeClient(responseGetterFromOptions(buildOptions()));
     }
 
     StripeResponseGetterOptions buildOptions() {

@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -51,6 +52,9 @@ public class StripeRequest {
   /** The special modifiers of the request. */
   RequestOptions options;
 
+  /** List of tracked behaviors associated with this request. */
+  List<String> usage;
+
   /**
    * Initializes a new instance of the {@link StripeRequest} class.
    *
@@ -58,13 +62,15 @@ public class StripeRequest {
    * @param url the URL of the request
    * @param params the parameters of the request
    * @param options the special modifiers of the request
+   * @param usage list of tracked behaviors associated with this request
    * @throws StripeException if the request cannot be initialized for any reason
    */
   public StripeRequest(
       ApiResource.RequestMethod method,
       String url,
       Map<String, Object> params,
-      RequestOptions options)
+      RequestOptions options,
+      List<String> usage)
       throws StripeException {
     try {
       this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
@@ -73,6 +79,7 @@ public class StripeRequest {
       this.url = buildURL(method, url, params);
       this.content = buildContent(method, params);
       this.headers = buildHeaders(method, this.options);
+      this.usage = usage;
     } catch (IOException e) {
       throw new ApiConnectionException(
           String.format(
@@ -83,6 +90,15 @@ public class StripeRequest {
               Stripe.getApiBase(), e.getMessage()),
           e);
     }
+  }
+
+  public StripeRequest(
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws StripeException {
+    this(method, url, params, options, new ArrayList<String>());
   }
 
   /**
@@ -99,7 +115,8 @@ public class StripeRequest {
         this.content,
         this.headers.withAdditionalHeader(name, value),
         this.params,
-        this.options);
+        this.options,
+        this.usage);
   }
 
   private static URL buildURL(

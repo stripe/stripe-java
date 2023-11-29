@@ -50,6 +50,10 @@ tasks.withType(JavaCompile) {
       // com.stripe.param.AccountUpdateParams.Individual.Address] within this file.)
       // We should fix this by having autogen use the fully-qualified class to eliminate ambiguity.
       check("SameNameButDifferent", net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+
+      // InlineMe (https://errorprone.info/docs/inlineme) seems neat, but in order to add these annotations
+      // we would be imposing another dependency on `errorprone` to our users, not worth it.
+      check("InlineMeSuggester", net.ltgt.gradle.errorprone.CheckSeverity.OFF)
     }
 }
 
