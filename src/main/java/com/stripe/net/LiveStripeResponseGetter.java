@@ -15,6 +15,7 @@ import com.stripe.model.oauth.OAuthError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lombok.Setter;
@@ -45,6 +46,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   public LiveStripeResponseGetter(StripeResponseGetterOptions options, HttpClient httpClient) {
     this.options = options != null ? options : GlobalStripeResponseGetterOptions.INSTANCE;
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
+    this.usage = Arrays.asList();
   }
 
   @Override
