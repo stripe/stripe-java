@@ -238,8 +238,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Shipping shipping;
 
   /**
-   * For non-card charges, you can use this value as the complete description that appears on your
-   * customers’ statements. It must contain at least one letter and be 1–22 characters long.
+   * For card charges, use <a
+   * href="https://stripe.com/docs/payments/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>.
+   * Otherwise, you can use this value as the complete description of a charge on your customers'
+   * statements. It must contain at least one letter and be 1–22 characters long.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -824,8 +826,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * For non-card charges, you can use this value as the complete description that appears on your
-     * customers’ statements. It must contain at least one letter and be 1–22 characters long.
+     * For card charges, use <a
+     * href="https://stripe.com/docs/payments/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>.
+     * Otherwise, you can use this value as the complete description of a charge on your customers'
+     * statements. It must contain at least one letter and be 1–22 characters long.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
