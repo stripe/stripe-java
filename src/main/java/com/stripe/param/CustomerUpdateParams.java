@@ -1715,9 +1715,18 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("ip_address")
     Object ipAddress;
 
-    private Tax(Map<String, Object> extraParams, Object ipAddress) {
+    /**
+     * A flag that indicates when Stripe should validate the customer tax location. Defaults to
+     * {@code deferred}.
+     */
+    @SerializedName("validate_location")
+    ValidateLocation validateLocation;
+
+    private Tax(
+        Map<String, Object> extraParams, Object ipAddress, ValidateLocation validateLocation) {
       this.extraParams = extraParams;
       this.ipAddress = ipAddress;
+      this.validateLocation = validateLocation;
     }
 
     public static Builder builder() {
@@ -1729,9 +1738,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       private Object ipAddress;
 
+      private ValidateLocation validateLocation;
+
       /** Finalize and obtain parameter instance from this builder. */
       public CustomerUpdateParams.Tax build() {
-        return new CustomerUpdateParams.Tax(this.extraParams, this.ipAddress);
+        return new CustomerUpdateParams.Tax(
+            this.extraParams, this.ipAddress, this.validateLocation);
       }
 
       /**
@@ -1780,6 +1792,31 @@ public class CustomerUpdateParams extends ApiRequestParams {
       public Builder setIpAddress(EmptyParam ipAddress) {
         this.ipAddress = ipAddress;
         return this;
+      }
+
+      /**
+       * A flag that indicates when Stripe should validate the customer tax location. Defaults to
+       * {@code deferred}.
+       */
+      public Builder setValidateLocation(
+          CustomerUpdateParams.Tax.ValidateLocation validateLocation) {
+        this.validateLocation = validateLocation;
+        return this;
+      }
+    }
+
+    public enum ValidateLocation implements ApiRequestParams.EnumParam {
+      @SerializedName("deferred")
+      DEFERRED("deferred"),
+
+      @SerializedName("immediately")
+      IMMEDIATELY("immediately");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ValidateLocation(String value) {
+        this.value = value;
       }
     }
   }

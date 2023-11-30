@@ -128,7 +128,10 @@ public class Event extends ApiResource implements HasId {
    * {@code charge.refund.updated}, {@code charge.refunded}, {@code charge.succeeded}, {@code
    * charge.updated}, {@code checkout.session.async_payment_failed}, {@code
    * checkout.session.async_payment_succeeded}, {@code checkout.session.completed}, {@code
-   * checkout.session.expired}, {@code coupon.created}, {@code coupon.deleted}, {@code
+   * checkout.session.expired}, {@code climate.order.canceled}, {@code climate.order.created},
+   * {@code climate.order.delayed}, {@code climate.order.delivered}, {@code
+   * climate.order.product_substituted}, {@code climate.product.created}, {@code
+   * climate.product.pricing_updated}, {@code coupon.created}, {@code coupon.deleted}, {@code
    * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
    * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
    * customer.discount.created}, {@code customer.discount.deleted}, {@code

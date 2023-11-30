@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.climate;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,27 +11,28 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams {
+public class OrderCreateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> The updated total amount that you intend to collect from the
-   * cardholder. This amount must be greater than the currently authorized amount.
+   * Requested amount of carbon removal units. Either this or {@code metric_tons} must be specified.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * The amount of the application fee (if any) that will be requested to be applied to the payment
-   * and transferred to the application owner's Stripe account. The amount of the application fee
-   * collected will be capped at the total payment amount. For more information, see the
-   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
-   * connected accounts</a>.
+   * Publicly sharable reference for the end beneficiary of carbon removal. Assumed to be the Stripe
+   * account if not set.
    */
-  @SerializedName("application_fee_amount")
-  Long applicationFeeAmount;
+  @SerializedName("beneficiary")
+  Beneficiary beneficiary;
 
-  /** An arbitrary string attached to the object. Often useful for displaying to users. */
-  @SerializedName("description")
-  String description;
+  /**
+   * Request currency for the order as a three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a supported <a href="https://stripe.com/docs/currencies">settlement currency for your
+   * account</a>. If omitted, the account's default currency will be used.
+   */
+  @SerializedName("currency")
+  String currency;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -54,40 +56,31 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * For card charges, use <a
-   * href="https://stripe.com/docs/payments/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>.
-   * Otherwise, you can use this value as the complete description of a charge on your customers'
-   * statements. It must contain at least one letter and be 1–22 characters long.
-   */
-  @SerializedName("statement_descriptor")
-  String statementDescriptor;
+  /** Requested number of tons for the order. Either this or {@code amount} must be specified. */
+  @SerializedName("metric_tons")
+  BigDecimal metricTons;
 
-  /**
-   * The parameters used to automatically create a transfer after the payment is captured. Learn
-   * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
-   * connected accounts</a>.
-   */
-  @SerializedName("transfer_data")
-  TransferData transferData;
+  /** <strong>Required.</strong> Unique identifier of the Climate product. */
+  @SerializedName("product")
+  String product;
 
-  private PaymentIntentIncrementAuthorizationParams(
+  private OrderCreateParams(
       Long amount,
-      Long applicationFeeAmount,
-      String description,
+      Beneficiary beneficiary,
+      String currency,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String statementDescriptor,
-      TransferData transferData) {
+      BigDecimal metricTons,
+      String product) {
     this.amount = amount;
-    this.applicationFeeAmount = applicationFeeAmount;
-    this.description = description;
+    this.beneficiary = beneficiary;
+    this.currency = currency;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
-    this.statementDescriptor = statementDescriptor;
-    this.transferData = transferData;
+    this.metricTons = metricTons;
+    this.product = product;
   }
 
   public static Builder builder() {
@@ -97,9 +90,9 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   public static class Builder {
     private Long amount;
 
-    private Long applicationFeeAmount;
+    private Beneficiary beneficiary;
 
-    private String description;
+    private String currency;
 
     private List<String> expand;
 
@@ -107,26 +100,26 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
     private Map<String, String> metadata;
 
-    private String statementDescriptor;
+    private BigDecimal metricTons;
 
-    private TransferData transferData;
+    private String product;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentIntentIncrementAuthorizationParams build() {
-      return new PaymentIntentIncrementAuthorizationParams(
+    public OrderCreateParams build() {
+      return new OrderCreateParams(
           this.amount,
-          this.applicationFeeAmount,
-          this.description,
+          this.beneficiary,
+          this.currency,
           this.expand,
           this.extraParams,
           this.metadata,
-          this.statementDescriptor,
-          this.transferData);
+          this.metricTons,
+          this.product);
     }
 
     /**
-     * <strong>Required.</strong> The updated total amount that you intend to collect from the
-     * cardholder. This amount must be greater than the currently authorized amount.
+     * Requested amount of carbon removal units. Either this or {@code metric_tons} must be
+     * specified.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -134,27 +127,29 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     }
 
     /**
-     * The amount of the application fee (if any) that will be requested to be applied to the
-     * payment and transferred to the application owner's Stripe account. The amount of the
-     * application fee collected will be capped at the total payment amount. For more information,
-     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
-     * for connected accounts</a>.
+     * Publicly sharable reference for the end beneficiary of carbon removal. Assumed to be the
+     * Stripe account if not set.
      */
-    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
-      this.applicationFeeAmount = applicationFeeAmount;
+    public Builder setBeneficiary(OrderCreateParams.Beneficiary beneficiary) {
+      this.beneficiary = beneficiary;
       return this;
     }
 
-    /** An arbitrary string attached to the object. Often useful for displaying to users. */
-    public Builder setDescription(String description) {
-      this.description = description;
+    /**
+     * Request currency for the order as a three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a supported <a href="https://stripe.com/docs/currencies">settlement currency for your
+     * account</a>. If omitted, the account's default currency will be used.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentIncrementAuthorizationParams#expand} for the field documentation.
+     * OrderCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -167,7 +162,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentIncrementAuthorizationParams#expand} for the field documentation.
+     * OrderCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -180,7 +175,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentIntentIncrementAuthorizationParams#extraParams} for the field documentation.
+     * OrderCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -193,8 +188,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentIntentIncrementAuthorizationParams#extraParams} for the field
-     * documentation.
+     * See {@link OrderCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -207,7 +201,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentIntentIncrementAuthorizationParams#metadata} for the field documentation.
+     * OrderCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -220,7 +214,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentIntentIncrementAuthorizationParams#metadata} for the field documentation.
+     * See {@link OrderCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -230,35 +224,21 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       return this;
     }
 
-    /**
-     * For card charges, use <a
-     * href="https://stripe.com/docs/payments/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>.
-     * Otherwise, you can use this value as the complete description of a charge on your customers'
-     * statements. It must contain at least one letter and be 1–22 characters long.
-     */
-    public Builder setStatementDescriptor(String statementDescriptor) {
-      this.statementDescriptor = statementDescriptor;
+    /** Requested number of tons for the order. Either this or {@code amount} must be specified. */
+    public Builder setMetricTons(BigDecimal metricTons) {
+      this.metricTons = metricTons;
       return this;
     }
 
-    /**
-     * The parameters used to automatically create a transfer after the payment is captured. Learn
-     * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
-     * connected accounts</a>.
-     */
-    public Builder setTransferData(
-        PaymentIntentIncrementAuthorizationParams.TransferData transferData) {
-      this.transferData = transferData;
+    /** <strong>Required.</strong> Unique identifier of the Climate product. */
+    public Builder setProduct(String product) {
+      this.product = product;
       return this;
     }
   }
 
   @Getter
-  public static class TransferData {
-    /** The amount that will be transferred automatically when a charge succeeds. */
-    @SerializedName("amount")
-    Long amount;
-
+  public static class Beneficiary {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -268,9 +248,16 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(Long amount, Map<String, Object> extraParams) {
-      this.amount = amount;
+    /**
+     * <strong>Required.</strong> Publicly displayable name for the end beneficiary of carbon
+     * removal.
+     */
+    @SerializedName("public_name")
+    String publicName;
+
+    private Beneficiary(Map<String, Object> extraParams, String publicName) {
       this.extraParams = extraParams;
+      this.publicName = publicName;
     }
 
     public static Builder builder() {
@@ -278,27 +265,19 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     }
 
     public static class Builder {
-      private Long amount;
-
       private Map<String, Object> extraParams;
 
-      /** Finalize and obtain parameter instance from this builder. */
-      public PaymentIntentIncrementAuthorizationParams.TransferData build() {
-        return new PaymentIntentIncrementAuthorizationParams.TransferData(
-            this.amount, this.extraParams);
-      }
+      private String publicName;
 
-      /** The amount that will be transferred automatically when a charge succeeds. */
-      public Builder setAmount(Long amount) {
-        this.amount = amount;
-        return this;
+      /** Finalize and obtain parameter instance from this builder. */
+      public OrderCreateParams.Beneficiary build() {
+        return new OrderCreateParams.Beneficiary(this.extraParams, this.publicName);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentIntentIncrementAuthorizationParams.TransferData#extraParams} for the field
-       * documentation.
+       * OrderCreateParams.Beneficiary#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -311,14 +290,22 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentIntentIncrementAuthorizationParams.TransferData#extraParams} for the
-       * field documentation.
+       * See {@link OrderCreateParams.Beneficiary#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Publicly displayable name for the end beneficiary of carbon
+       * removal.
+       */
+      public Builder setPublicName(String publicName) {
+        this.publicName = publicName;
         return this;
       }
     }
