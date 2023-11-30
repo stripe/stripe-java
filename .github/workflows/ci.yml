@@ -177,7 +177,7 @@ jobs:
           architecture: x64
 
       - name: Build HEAD JAR file
-        run: ./gradlew -p stripe-java jar
+        run: ./gradlew jar
 
       - name: Checkout base branch
         uses: actions/checkout@v2
@@ -185,7 +185,7 @@ jobs:
           ref: ${{ github.event.pull_request.base.sha }}
 
       - name: Build Base JAR file
-        run: ./gradlew -p stripe-java jar
+        run: ./gradlew jar
 
       - name: Clone japi-compliance-checker
         run: |
