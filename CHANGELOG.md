@@ -1,5 +1,8 @@
 # Changelog
 
+## 24.7.0-beta.1 - 2023-11-30
+* [#1695](https://github.com/stripe/stripe-java/pull/1695) Update generated code for beta
+
 ## 24.6.0-beta.1 - 2023-11-21
 * [#1691](https://github.com/stripe/stripe-java/pull/1691) Update generated code for beta
   * Rename `receipient` to `recipient` beneath `PaymentDetails` on `Charge` and `PaymentIntent` APIs.
