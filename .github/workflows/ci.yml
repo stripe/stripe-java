@@ -176,6 +176,9 @@ jobs:
           java-version: "17" # always use 17 TLS for building
           architecture: x64
 
+      - name: Set Test Java Runtime Environment variable
+        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
+
       - name: Build HEAD JAR file
         run: ./gradlew jar
 
