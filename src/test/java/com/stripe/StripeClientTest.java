@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.*;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -42,5 +43,15 @@ public class StripeClientTest {
     assertEquals(Stripe.CONNECT_API_BASE, options.getConnectBase());
     assertEquals(Stripe.UPLOAD_API_BASE, options.getFilesBase());
     assertEquals(0, options.getMaxNetworkRetries());
+  }
+
+  @Test
+  public void setsUsageOnResponseGetter() throws Exception {
+    StripeResponseGetter responseGetter = new LiveStripeResponseGetter();
+    new StripeClient(responseGetter);
+    Object usage = responseGetter.getClass().getDeclaredField("usage").get(responseGetter);
+    assertTrue(usage instanceof List);
+    assertEquals(1, ((List<?>) usage).size());
+    assertEquals("stripe_client", ((List<?>) usage).get(0));
   }
 }
