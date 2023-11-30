@@ -161,3 +161,45 @@ jobs:
         env:
           GRGIT_USER: ${{ github.actor }}
           GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+
+  compat:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+
+      - name: Build HEAD JAR file
+        run: ./gradlew -p stripe-java jar
+
+      - name: Checkout base branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - name: Build Base JAR file
+        run: ./gradlew -p stripe-java jar
+
+      - name: Clone japi-compliance-checker
+        run: |
+          git clone https://github.com/lvc/japi-compliance-checker
+
+      - name: Copy JAR files to japi-compliance-checker
+        run: |
+          cp stripe-java/build/libs/*.jar japi-compliance-checker
+
+      - name: Run JAPI Compliance Checker
+        run: |
+          cd japi-compliance-checker
+          ./japi-compliance-checker.pl -old old.jar -new new.jar -report report.html
+
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: JAPI Compliance Report
+          path: japi-compliance-checker/report.html
