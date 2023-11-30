@@ -1544,7 +1544,10 @@ public class CustomerCreateParams extends ApiRequestParams {
     @SerializedName("ip_address")
     Object ipAddress;
 
-    /** A flag that indicates whether Stripe should validate the customer tax location. */
+    /**
+     * A flag that indicates when Stripe should validate the customer tax location. Defaults to
+     * {@code deferred}.
+     */
     @SerializedName("validate_location")
     ValidateLocation validateLocation;
 
@@ -1620,7 +1623,10 @@ public class CustomerCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A flag that indicates whether Stripe should validate the customer tax location. */
+      /**
+       * A flag that indicates when Stripe should validate the customer tax location. Defaults to
+       * {@code deferred}.
+       */
       public Builder setValidateLocation(
           CustomerCreateParams.Tax.ValidateLocation validateLocation) {
         this.validateLocation = validateLocation;
