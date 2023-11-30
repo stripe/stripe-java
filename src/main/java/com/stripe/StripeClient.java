@@ -85,6 +85,10 @@ public class StripeClient {
     return new com.stripe.service.CheckoutService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ClimateService climate() {
+    return new com.stripe.service.ClimateService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CountrySpecService countrySpecs() {
     return new com.stripe.service.CountrySpecService(this.getResponseGetter());
   }

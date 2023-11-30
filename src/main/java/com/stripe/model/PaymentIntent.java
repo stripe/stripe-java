@@ -300,8 +300,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<PaymentSource> source;
 
   /**
-   * For non-card charges, you can use this value as the complete description that appears on your
-   * customers’ statements. Must contain at least one letter, maximum 22 characters.
+   * For card charges, use <a
+   * href="https://stripe.com/docs/payments/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>.
+   * Otherwise, you can use this value as the complete description of a charge on your customers'
+   * statements. It must contain at least one letter and be 1–22 characters long.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -2766,7 +2768,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * Secure</a> for more information on how this configuration interacts with Radar and our SCA
        * Engine.
        *
-       * <p>One of {@code any}, {@code automatic}, or {@code challenge_only}.
+       * <p>One of {@code any}, {@code automatic}, {@code challenge}, or {@code challenge_only}.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;

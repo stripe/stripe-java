@@ -93,6 +93,10 @@ final class EventDataClassLookup {
 
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
 
+    classLookup.put("climate.order", com.stripe.model.climate.Order.class);
+    classLookup.put("climate.product", com.stripe.model.climate.Product.class);
+    classLookup.put("climate.supplier", com.stripe.model.climate.Supplier.class);
+
     classLookup.put(
         "financial_connections.account", com.stripe.model.financialconnections.Account.class);
     classLookup.put(
