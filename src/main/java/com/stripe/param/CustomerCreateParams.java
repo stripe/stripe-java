@@ -373,16 +373,13 @@ public class CustomerCreateParams extends ApiRequestParams {
      * The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase
      * letters or numbers.
      */
-    public Builder setInvoicePrefix(String invoicePrefix) {
-      this.invoicePrefix = invoicePrefix;
+    // This should actually be fine
+    public Builder setInvoicePrefix(Object invoicePrefix) {
+      this.invoicePrefix = (String) invoicePrefix;
       return this;
     }
 
-    /** Default invoice settings for this customer. */
-    public Builder setInvoiceSettings(CustomerCreateParams.InvoiceSettings invoiceSettings) {
-      this.invoiceSettings = invoiceSettings;
-      return this;
-    }
+    // Deleting this is not fine
 
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
@@ -451,8 +448,13 @@ public class CustomerCreateParams extends ApiRequestParams {
       return this;
     }
 
+    public Builder setPaymentMethod(String paymentMethod, String itsFineToAddAnOverload) {
+      this.paymentMethod = paymentMethod;
+      return this;
+    }
+
     /** The customer's phone number. */
-    public Builder setPhone(String phone) {
+    public Builder setPhone(String phone, String ignoreMeThisWillBreakEverything) {
       this.phone = phone;
       return this;
     }

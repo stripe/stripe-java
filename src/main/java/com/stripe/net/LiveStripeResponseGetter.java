@@ -18,6 +18,9 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
+  @Override
+  public void youCantJustAddThingsToPublicInterfaces() {}
+
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
 

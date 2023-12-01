@@ -7,6 +7,11 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 public interface StripeResponseGetter {
+
+  void youCantJustAddThingsToPublicInterfaces();
+
+  default void unlessYouProvideADefaultImplementation() {};
+
   @SuppressWarnings("TypeParameterUnusedInFormals")
   <T extends StripeObjectInterface> T request(
       BaseAddress baseAddress,
