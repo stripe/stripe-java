@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.*;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -49,7 +51,9 @@ public class StripeClientTest {
   public void setsUsageOnResponseGetter() throws Exception {
     StripeResponseGetter responseGetter = new LiveStripeResponseGetter();
     new StripeClient(responseGetter);
-    Object usage = responseGetter.getClass().getDeclaredField("usage").get(responseGetter);
+    Field field = responseGetter.getClass().getDeclaredField("usage");
+    field.setAccessible(true);
+    Object usage = field.get(responseGetter);
     assertTrue(usage instanceof List);
     assertEquals(1, ((List<?>) usage).size());
     assertEquals("stripe_client", ((List<?>) usage).get(0));
