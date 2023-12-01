@@ -179,8 +179,16 @@ jobs:
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
 
+      - name: Clone japi-compliance-checker
+        run: |
+          git clone https://github.com/lvc/japi-compliance-checker
+
       - name: Build HEAD JAR file
         run: ./gradlew jar
+
+      - name: Copy JAR to japi-compliance-checker
+        run: |
+          mv build/libs/*.jar japi-compliance-checker/new.jar
 
       - name: Checkout base branch
         uses: actions/checkout@v2
@@ -190,18 +198,14 @@ jobs:
       - name: Build Base JAR file
         run: ./gradlew jar
 
-      - name: Clone japi-compliance-checker
+      - name: Copy JAR to japi-compliance-checker
         run: |
-          git clone https://github.com/lvc/japi-compliance-checker
-
-      - name: Copy JAR files to japi-compliance-checker
-        run: |
-          cp build/libs/*.jar japi-compliance-checker
+          mv build/libs/*.jar japi-compliance-checker/old.jar
 
       - name: Run JAPI Compliance Checker
         run: |
           cd japi-compliance-checker
-          ./japi-compliance-checker.pl -old old.jar -new new.jar -report report.html
+          perl japi-compliance-checker.pl -old old.jar -new new.jar -report report.html
 
       - name: Upload report as artifact
         uses: actions/upload-artifact@v2
