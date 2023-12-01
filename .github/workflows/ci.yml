@@ -196,7 +196,7 @@ jobs:
 
       - name: Copy JAR files to japi-compliance-checker
         run: |
-          cp stripe-java/build/libs/*.jar japi-compliance-checker
+          cp build/libs/*.jar japi-compliance-checker
 
       - name: Run JAPI Compliance Checker
         run: |
