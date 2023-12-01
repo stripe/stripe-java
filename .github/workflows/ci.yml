@@ -205,28 +205,19 @@ jobs:
       - name: Run JAPI Compliance Checker
         run: |
           cd ../japi-compliance-checker
-          (perl japi-compliance-checker.pl -old old.jar -new new.jar --lib=stripe-java || :) | tee report_stdout
+          (perl japi-compliance-checker.pl -old old.jar -new new.jar --lib=stripe-java || echo "failed" > compliance_failure) | tee report_stdout
           cd ../stripe-java
           mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
 
       - name: Upload report as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: JAPI Compliance Report
           path: report.html
 
       - name: Fail if compatibility problems exist
         run: |
-          total_source_problems=$(awk -F ': ' '/Total source compatibility problems:/ {print $2}' ../japi-compliance-checker/report_stdout)
-          total_binary_problems=$(awk -F ': ' '/Total binary compatibility problems:/ {print $2}' ../japi-compliance-checker/report_stdout)
-
-          if (( total_source_problems > 0 )); then
-             echo "Source compatibility problems: $total_source_problems"
-             exit 1
+          if [ -f "../japi-compliance-checker/compliance_failure" ]; then
+            echo "There were compatibility problems. See the generated report at https://github.com/stripe/stripe-java/actions/runs/${{ github.run_id }}?check_suite_focus=true#artifacts"
+            exit 1
           fi
-
-          if (( total_binary_problems > 0 )); then
-             echo "Binary compatibility problems: $total_binary_problems"
-             exit 1
-          fi
-
