@@ -161,3 +161,63 @@ jobs:
         env:
           GRGIT_USER: ${{ github.actor }}
           GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+
+  compat:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        id: setup-jre
+        uses: actions/setup-java@v1
+        with:
+          java-version: "17" # always use 17 TLS for building
+          architecture: x64
+
+      - name: Set Test Java Runtime Environment variable
+        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
+
+      - name: Clone japi-compliance-checker
+        run: |
+          git clone https://github.com/lvc/japi-compliance-checker ../japi-compliance-checker
+
+      - name: Build HEAD JAR file
+        run: ./gradlew jar
+
+      - name: Copy JAR to japi-compliance-checker
+        run: |
+          mv build/libs/*.jar ../japi-compliance-checker/new.jar
+
+      - name: Checkout base branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - name: Build Base JAR file
+        run: ./gradlew jar
+
+      - name: Copy JAR to japi-compliance-checker
+        run: |
+          mv build/libs/*.jar ../japi-compliance-checker/old.jar
+
+      - name: Run JAPI Compliance Checker
+        run: |
+          cd ../japi-compliance-checker
+          perl japi-compliance-checker.pl -old old.jar -new new.jar --lib=stripe-java || echo "failed" > compliance_failure
+          cd ../stripe-java
+          mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
+
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: JAPI Compliance Report
+          path: report.html
+
+      - name: Fail if compatibility problems exist
+        run: |
+          if [ -f "../japi-compliance-checker/compliance_failure" ]; then
+            echo "There were compatibility problems. See the generated report at https://github.com/stripe/stripe-java/actions/runs/${{ github.run_id }}?check_suite_focus=true#artifacts"
+            exit 1
+          fi
