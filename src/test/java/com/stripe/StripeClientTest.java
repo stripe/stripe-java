@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.*;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
