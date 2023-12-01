@@ -206,8 +206,8 @@ jobs:
         run: |
           cd ../japi-compliance-checker
           perl japi-compliance-checker.pl -old old.jar -new new.jar --lib=stripe-java
-          cd stripe-java
-          mv ../compat_reports/stripe-java/*/compat_report.html report.html
+          cd ../stripe-java
+          mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
 
       - name: Upload report as artifact
         uses: actions/upload-artifact@v2
