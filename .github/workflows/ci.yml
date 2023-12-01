@@ -205,7 +205,7 @@ jobs:
       - name: Run JAPI Compliance Checker
         run: |
           cd ../japi-compliance-checker
-          (perl japi-compliance-checker.pl -old old.jar -new new.jar --lib=stripe-java || echo "failed" > compliance_failure) | tee report_stdout
+          perl japi-compliance-checker.pl -old old.jar -new new.jar --lib=stripe-java || echo "failed" > compliance_failure
           cd ../stripe-java
           mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
 
