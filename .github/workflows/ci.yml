@@ -181,14 +181,14 @@ jobs:
 
       - name: Clone japi-compliance-checker
         run: |
-          git clone https://github.com/lvc/japi-compliance-checker
+          git clone https://github.com/lvc/japi-compliance-checker ../japi-compliance-checker
 
       - name: Build HEAD JAR file
         run: ./gradlew jar
 
       - name: Copy JAR to japi-compliance-checker
         run: |
-          mv build/libs/*.jar japi-compliance-checker/new.jar
+          mv build/libs/*.jar ../japi-compliance-checker/new.jar
 
       - name: Checkout base branch
         uses: actions/checkout@v2
@@ -200,15 +200,15 @@ jobs:
 
       - name: Copy JAR to japi-compliance-checker
         run: |
-          mv build/libs/*.jar japi-compliance-checker/old.jar
+          mv build/libs/*.jar ../japi-compliance-checker/old.jar
 
       - name: Run JAPI Compliance Checker
         run: |
-          cd japi-compliance-checker
+          cd ../japi-compliance-checker
           perl japi-compliance-checker.pl -old old.jar -new new.jar -report report.html
 
       - name: Upload report as artifact
         uses: actions/upload-artifact@v2
         with:
           name: JAPI Compliance Report
-          path: japi-compliance-checker/report.html
+          path: ../japi-compliance-checker/report.html
