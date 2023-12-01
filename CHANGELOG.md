@@ -3,6 +3,16 @@
 ## 24.7.0-beta.1 - 2023-11-30
 * [#1695](https://github.com/stripe/stripe-java/pull/1695) Update generated code for beta
 
+## 24.6.0 - 2023-11-30
+* [#1694](https://github.com/stripe/stripe-java/pull/1694) Update generated code
+  * Add support for new resources `Climate.Order`, `Climate.Product`, and `Climate.Supplier`
+  * Add support for `cancel`, `create`, `list`, `retrieve`, and `update` methods on resource `Order`
+  * Add support for `list` and `retrieve` methods on resources `Product` and `Supplier`
+  * Add support for `created` on `checkout.SessionListParams`
+  * Add support for `validate_location` on `CustomerCreateParams.tax` and `CustomerUpdateParams.tax`
+  * Add support for new values `climate_order_purchase` and `climate_order_refund` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
+  * Add support for new values `climate.order.canceled`, `climate.order.created`, `climate.order.delayed`, `climate.order.delivered`, `climate.order.product_substituted`, `climate.product.created`, and `climate.product.pricing_updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 24.6.0-beta.1 - 2023-11-21
 * [#1691](https://github.com/stripe/stripe-java/pull/1691) Update generated code for beta
   * Rename `receipient` to `recipient` beneath `PaymentDetails` on `Charge` and `PaymentIntent` APIs.
