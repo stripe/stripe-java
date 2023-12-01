@@ -37,6 +37,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Customer extends ApiResource implements HasId, MetadataStore<Customer> {
+  /** The customer's address. */
+  @SerializedName("address")
+  Address address;
+
   /**
    * The current balance, if any, that's stored on the customer. If negative, the customer has
    * credit to apply to their next invoice. If positive, the customer has an amount owed that's
@@ -1019,6 +1023,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(address, responseGetter);
     trySetResponseGetter(cashBalance, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
     trySetResponseGetter(discount, responseGetter);
