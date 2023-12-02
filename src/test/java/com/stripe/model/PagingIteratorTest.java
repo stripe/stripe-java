@@ -315,13 +315,11 @@ public class PagingIteratorTest extends BaseStripeTest {
     Mockito.doAnswer((Answer<PageableModel>) invocation -> new PageableModel())
         .when(networkSpy)
         .request(
-            Mockito.<BaseAddress>any(),
-            Mockito.eq(ApiResource.RequestMethod.DELETE),
-            Mockito.anyString(),
-            Mockito.<Map<String, Object>>any(),
-            Mockito.<Class<PageableModelCollection>>any(),
-            Mockito.<RequestOptions>any(),
-            Mockito.<ApiMode>any());
+            Mockito.<ApiRequest>argThat(
+                (req) -> {
+                  return req.getMethod() == ApiResource.RequestMethod.GET;
+                }),
+            Mockito.<Class<PageableModelCollection>>any());
 
     final String data = getResourceAsString("/model_fixtures/pageable_model_page_0.json");
     PageableModelCollection collection =

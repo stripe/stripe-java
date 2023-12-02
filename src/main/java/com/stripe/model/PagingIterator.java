@@ -77,7 +77,8 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
   @SuppressWarnings("unchecked")
   private StripeCollectionInterface<T> list(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
-    return getResponseGetter()
-        .request(BaseAddress.API, RequestMethod.GET, url, params, pageType, options, ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, RequestMethod.GET, url, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, pageType);
   }
 }

@@ -1,5 +1,7 @@
 package com.stripe;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.reset;
 
 import com.google.gson.Gson;
@@ -17,6 +19,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,7 @@ import lombok.Cleanup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoAssertionError;
@@ -176,6 +180,7 @@ public class BaseStripeTest {
    * @param params map containing the parameters. If null, the parameters are not checked.
    * @param options request options. If null, the options are not checked.
    */
+  @SuppressWarnings("AssertionFailureIgnored")
   public static <T extends StripeObjectInterface> void verifyRequest(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
@@ -184,33 +189,42 @@ public class BaseStripeTest {
       RequestOptions options)
       throws StripeException {
 
+    ArgumentCaptor<ApiRequest> requestCaptor = ArgumentCaptor.forClass(ApiRequest.class);
+    List<AssertionError> exceptions = new ArrayList<AssertionError>();
     try {
-      Mockito.verify(networkSpy)
-          .requestStream(
-              Mockito.eq(baseAddress),
-              Mockito.eq(method),
-              Mockito.eq(path),
-              (params != null)
-                  ? Mockito.argThat(new ParamMapMatcher(params))
-                  : Mockito.<Map<String, Object>>any(),
-              (options != null)
-                  ? Mockito.argThat(new RequestOptionsMatcher(options))
-                  : Mockito.<RequestOptions>any(),
-              Mockito.eq(ApiMode.V1));
+      Mockito.verify(networkSpy, Mockito.atLeastOnce()).requestStream(requestCaptor.capture());
     } catch (MockitoAssertionError e) {
-      Mockito.verify(networkSpy)
-          .request(
-              Mockito.eq(baseAddress),
-              Mockito.eq(method),
-              Mockito.eq(path),
-              (params != null)
-                  ? Mockito.argThat(new ParamMapMatcher(params))
-                  : Mockito.<Map<String, Object>>any(),
-              Mockito.<Type>any(),
-              (options != null)
-                  ? Mockito.argThat(new RequestOptionsMatcher(options))
-                  : Mockito.<RequestOptions>any(),
-              Mockito.eq(ApiMode.V1));
+      Mockito.verify(networkSpy, Mockito.atLeastOnce())
+          .request(requestCaptor.capture(), Mockito.<Type>any());
+    }
+
+    for (ApiRequest req : requestCaptor.getAllValues()) {
+      try {
+        assertEquals(baseAddress, req.getBaseAddress());
+        assertEquals(method, req.getMethod());
+        assertEquals(path, req.getPath());
+        if (params != null) {
+          final String msg = String.format("Params did not match - expected: %s, received: %s", params, req.getParams());
+          assertTrue(msg, compareParamObjects(params, req.getParams()));
+        }
+        if (options != null) {
+          assertEquals(options, req.getOptions());
+        }
+        // If we get here, we have found a request that triggered no assertion failures.
+        return;
+      } catch (AssertionError e) {
+        exceptions.add(e);
+      }
+    }
+
+    // If we get here, each request failed an assertion.
+    if (exceptions.size() != 0) {
+      // Combine all exceptions into a single message
+      String msg = "";
+      for (AssertionError e : exceptions) {
+        msg += e.getMessage() + "\n\n";
+      }
+      throw new AssertionError(msg);
     }
   }
 
@@ -264,7 +278,7 @@ public class BaseStripeTest {
    * @param response JSON payload of the API resource that will be returned for the stubbed request.
    */
   public static <T extends StripeObjectInterface> void stubRequest(
-      BaseAddress mode,
+      BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
@@ -276,17 +290,16 @@ public class BaseStripeTest {
     Mockito.doReturn(ApiResource.GSON.fromJson(response, typeToken))
         .when(networkSpy)
         .request(
-            Mockito.eq(mode),
-            Mockito.eq(method),
-            Mockito.eq(path),
-            (params != null)
-                ? Mockito.argThat(new ParamMapMatcher(params))
-                : Mockito.<Map<String, Object>>any(),
-            Mockito.<Type>any(),
-            (options != null)
-                ? Mockito.argThat(new RequestOptionsMatcher(options))
-                : Mockito.<RequestOptions>any(),
-            Mockito.<ApiMode>any());
+            Mockito.argThat(
+                (req) -> {
+                  return req.getBaseAddress().equals(baseAddress)
+                      && req.getMethod().equals(method)
+                      && req.getPath().equals(path)
+                      && (params == null || new ParamMapMatcher(params).matches(req.getParams()))
+                      && (options == null
+                          || new RequestOptionsMatcher(options).matches(req.getOptions()));
+                }),
+            Mockito.<Type>any());
   }
 
   /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
@@ -295,13 +308,11 @@ public class BaseStripeTest {
     Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy)
         .request(
-            Mockito.any(BaseAddress.class),
-            Mockito.any(ApiResource.RequestMethod.class),
-            Mockito.anyString(),
-            Mockito.<Map<String, Object>>any(),
-            Mockito.<Class<T>>any(),
-            Mockito.<RequestOptions>any(),
-            Mockito.eq(ApiMode.OAuth));
+            Mockito.argThat(
+                (req) -> {
+                  return req.getApiMode() == ApiMode.OAuth;
+                }),
+            Mockito.<Type>any());
   }
 
   /**
