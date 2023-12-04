@@ -117,6 +117,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("id")
   String id;
 
+  /** The custom message to be displayed to a customer when a payment link is no longer active. */
+  @SerializedName("inactive_message")
+  String inactiveMessage;
+
   /** Configuration for creating invoice for payment mode payment links. */
   @SerializedName("invoice_creation")
   InvoiceCreation invoiceCreation;
@@ -181,6 +185,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
   @SerializedName("phone_number_collection")
   PhoneNumberCollection phoneNumberCollection;
+
+  /** Settings that restrict the usage of a payment link. */
+  @SerializedName("restrictions")
+  Restrictions restrictions;
 
   /** Configuration for collecting the customer's shipping address. */
   @SerializedName("shipping_address_collection")
@@ -894,6 +902,33 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Restrictions extends StripeObject {
+    @SerializedName("completed_sessions")
+    CompletedSessions completedSessions;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CompletedSessions extends StripeObject {
+      /**
+       * The current number of checkout sessions that have been completed on the payment link which
+       * count towards the {@code completed_sessions} restriction to be met.
+       */
+      @SerializedName("count")
+      Long count;
+
+      /**
+       * The maximum number of checkout sessions that can be completed for the {@code
+       * completed_sessions} restriction to be met.
+       */
+      @SerializedName("limit")
+      Long limit;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingAddressCollection extends StripeObject {
     /**
      * An array of two-letter ISO country codes representing which countries Checkout should provide
@@ -1024,6 +1059,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntentData, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
+    trySetResponseGetter(restrictions, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(subscriptionData, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
