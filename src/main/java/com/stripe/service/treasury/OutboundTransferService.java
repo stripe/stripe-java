@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.OutboundTransfer;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -30,15 +31,15 @@ public final class OutboundTransferService extends ApiService {
   public OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/outbound_transfers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundTransfer.class);
   }
   /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
   public StripeCollection<OutboundTransfer> list(OutboundTransferListParams params)
@@ -49,15 +50,16 @@ public final class OutboundTransferService extends ApiService {
   public StripeCollection<OutboundTransfer> list(
       OutboundTransferListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/outbound_transfers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
@@ -92,15 +94,15 @@ public final class OutboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundTransfer.class);
   }
   /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
   public OutboundTransfer cancel(String outboundTransfer, OutboundTransferCancelParams params)
@@ -123,14 +125,14 @@ public final class OutboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/treasury/outbound_transfers/%s/cancel", ApiResource.urlEncodeId(outboundTransfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundTransfer.class);
   }
 }

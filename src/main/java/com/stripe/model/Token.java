@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -117,15 +118,10 @@ public class Token extends ApiResource implements HasId {
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tokens";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Token.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Token.class);
   }
 
   /**
@@ -146,15 +142,15 @@ public class Token extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tokens";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Token.class);
   }
 
   /** Retrieves the token with the given ID. */
@@ -171,15 +167,10 @@ public class Token extends ApiResource implements HasId {
   public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Token.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Token.class);
   }
 
   /** Retrieves the token with the given ID. */
@@ -187,15 +178,15 @@ public class Token extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Token.class);
   }
 
   @Override

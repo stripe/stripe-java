@@ -8,6 +8,7 @@ import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.model.Subscription;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -50,15 +51,16 @@ public final class SubscriptionService extends ApiService {
   public StripeSearchResult<Subscription> search(
       SubscriptionSearchParams params, RequestOptions options) throws StripeException {
     String path = "/v1/subscriptions/search";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeSearchResult<Subscription>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
   }
   /**
    * By default, returns a list of subscriptions that have not been canceled. In order to list
@@ -88,15 +90,16 @@ public final class SubscriptionService extends ApiService {
   public StripeCollection<Subscription> list(SubscriptionListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscriptions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Subscription>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Subscription>>() {}.getType());
   }
   /**
    * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
@@ -132,15 +135,15 @@ public final class SubscriptionService extends ApiService {
   public Subscription create(SubscriptionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscriptions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
   /**
    * Updates an existing subscription to match the specified parameters. When changing prices or
@@ -342,15 +345,15 @@ public final class SubscriptionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
   /** Retrieves the subscription with the given ID. */
   public Subscription retrieve(String subscriptionExposedId, SubscriptionRetrieveParams params)
@@ -373,15 +376,15 @@ public final class SubscriptionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
   /**
    * Cancels a customer’s subscription immediately. The customer will not be charged again for the
@@ -467,15 +470,15 @@ public final class SubscriptionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
@@ -520,15 +523,15 @@ public final class SubscriptionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(subscription));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
   /** Removes the currently applied discount on a subscription. */
   public Discount deleteDiscount(String subscriptionExposedId) throws StripeException {
@@ -540,14 +543,9 @@ public final class SubscriptionService extends ApiService {
     String path =
         String.format(
             "/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(subscriptionExposedId));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Discount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Discount.class);
   }
 }

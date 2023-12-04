@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -196,15 +197,10 @@ public class CustomerBalanceTransaction extends ApiResource
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            CustomerBalanceTransaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
 
   /**
@@ -228,15 +224,15 @@ public class CustomerBalanceTransaction extends ApiResource
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerBalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
 
   @Override

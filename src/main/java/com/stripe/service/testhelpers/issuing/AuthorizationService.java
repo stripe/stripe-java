@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.issuing;
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -29,15 +30,15 @@ public final class AuthorizationService extends ApiService {
   public Authorization create(AuthorizationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/test_helpers/issuing/authorizations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
   /** Increment a test-mode Authorization. */
   public Authorization increment(String authorization, AuthorizationIncrementParams params)
@@ -52,15 +53,15 @@ public final class AuthorizationService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/authorizations/%s/increment",
             ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
   /** Reverse a test-mode Authorization. */
   public Authorization reverse(String authorization, AuthorizationReverseParams params)
@@ -84,15 +85,15 @@ public final class AuthorizationService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/authorizations/%s/reverse",
             ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
   /** Expire a test-mode Authorization. */
   public Authorization expire(String authorization, AuthorizationExpireParams params)
@@ -115,15 +116,15 @@ public final class AuthorizationService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/authorizations/%s/expire",
             ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
   /** Capture a test-mode authorization. */
   public Authorization capture(String authorization, AuthorizationCaptureParams params)
@@ -147,14 +148,14 @@ public final class AuthorizationService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/authorizations/%s/capture",
             ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
 }

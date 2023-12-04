@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -85,15 +86,10 @@ public class Product extends ApiResource implements HasId {
   public static ProductCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/climate/products";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ProductCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ProductCollection.class);
   }
 
   /** Lists all available Climate product objects. */
@@ -106,15 +102,15 @@ public class Product extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/climate/products";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ProductCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ProductCollection.class);
   }
 
   /** Retrieves the details of a Climate product with the given ID. */
@@ -131,15 +127,10 @@ public class Product extends ApiResource implements HasId {
   public static Product retrieve(String product, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Product.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Product.class);
   }
 
   /** Retrieves the details of a Climate product with the given ID. */
@@ -147,15 +138,15 @@ public class Product extends ApiResource implements HasId {
       String product, ProductRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Product.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Product.class);
   }
 
   @Getter

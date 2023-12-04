@@ -8,6 +8,7 @@ import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -77,15 +78,10 @@ public class Configuration extends ApiResource implements HasId {
   public static Configuration create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/configurations";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Configuration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
   /** Creates a new {@code Configuration} object. */
@@ -98,15 +94,15 @@ public class Configuration extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/terminal/configurations";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
   /** Deletes a {@code Configuration} object. */
@@ -129,15 +125,10 @@ public class Configuration extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            Configuration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
 
   /** Returns a list of {@code Configuration} objects. */
@@ -149,15 +140,10 @@ public class Configuration extends ApiResource implements HasId {
   public static ConfigurationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/configurations";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ConfigurationCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ConfigurationCollection.class);
   }
 
   /** Returns a list of {@code Configuration} objects. */
@@ -171,15 +157,15 @@ public class Configuration extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/terminal/configurations";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ConfigurationCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ConfigurationCollection.class);
   }
 
   /** Retrieves a {@code Configuration} object. */
@@ -199,15 +185,10 @@ public class Configuration extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Configuration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
   /** Retrieves a {@code Configuration} object. */
@@ -217,15 +198,15 @@ public class Configuration extends ApiResource implements HasId {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
   /** Updates a new {@code Configuration} object. */
@@ -238,15 +219,10 @@ public class Configuration extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Configuration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
 
   /** Updates a new {@code Configuration} object. */
@@ -260,15 +236,15 @@ public class Configuration extends ApiResource implements HasId {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
 
   @Getter

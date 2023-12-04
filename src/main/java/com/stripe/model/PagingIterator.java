@@ -74,7 +74,6 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
     throw new UnsupportedOperationException();
   }
 
-  @SuppressWarnings("unchecked")
   private StripeCollectionInterface<T> list(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
     ApiRequest request =

@@ -7,6 +7,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -119,15 +120,10 @@ public class Transaction extends ApiResource implements HasId {
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/transactions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            TransactionCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TransactionCollection.class);
   }
 
   /** Retrieves a list of Transaction objects. */
@@ -140,15 +136,15 @@ public class Transaction extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/treasury/transactions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TransactionCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TransactionCollection.class);
   }
 
   /** Retrieves the details of an existing Transaction. */
@@ -165,15 +161,10 @@ public class Transaction extends ApiResource implements HasId {
   public static Transaction retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Transaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
   /** Retrieves the details of an existing Transaction. */
@@ -181,15 +172,15 @@ public class Transaction extends ApiResource implements HasId {
       String id, TransactionRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
   /** Change to a FinancialAccount's balance. */

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExternalAccount;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -42,15 +43,16 @@ public final class ExternalAccountService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ExternalAccount>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
   }
   /** Create an external account for a given account. */
   public ExternalAccount create(String account, ExternalAccountCreateParams params)
@@ -63,15 +65,15 @@ public final class ExternalAccountService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ExternalAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
   /** Retrieve a specified external account for a given account. */
   public ExternalAccount retrieve(String account, String id, ExternalAccountRetrieveParams params)
@@ -95,15 +97,15 @@ public final class ExternalAccountService extends ApiService {
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ExternalAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
@@ -155,15 +157,15 @@ public final class ExternalAccountService extends ApiService {
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ExternalAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
   /** Delete a specified external account for a given account. */
   public ExternalAccount delete(String account, String id) throws StripeException {
@@ -176,14 +178,9 @@ public final class ExternalAccountService extends ApiService {
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            ExternalAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
 }

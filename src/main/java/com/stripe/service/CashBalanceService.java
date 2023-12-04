@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.CashBalance;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -36,15 +37,15 @@ public final class CashBalanceService extends ApiService {
       String customer, CashBalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CashBalance.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CashBalance.class);
   }
   /** Changes the settings on a customer’s cash balance. */
   public CashBalance update(String customer, CashBalanceUpdateParams params)
@@ -63,14 +64,14 @@ public final class CashBalanceService extends ApiService {
   public CashBalance update(String customer, CashBalanceUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CashBalance.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CashBalance.class);
   }
 }

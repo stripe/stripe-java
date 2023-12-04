@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.AccountSession;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -31,14 +32,14 @@ public final class AccountSessionService extends ApiService {
   public AccountSession create(AccountSessionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/account_sessions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountSession.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, AccountSession.class);
   }
 }

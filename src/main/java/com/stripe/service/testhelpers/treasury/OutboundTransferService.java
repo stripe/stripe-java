@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.treasury;
 import com.stripe.exception.StripeException;
 import com.stripe.model.treasury.OutboundTransfer;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -53,15 +54,15 @@ public final class OutboundTransferService extends ApiService {
         String.format(
             "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
             ApiResource.urlEncodeId(outboundTransfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundTransfer.class);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
@@ -97,15 +98,15 @@ public final class OutboundTransferService extends ApiService {
         String.format(
             "/v1/test_helpers/treasury/outbound_transfers/%s/post",
             ApiResource.urlEncodeId(outboundTransfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundTransfer.class);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
@@ -148,14 +149,14 @@ public final class OutboundTransferService extends ApiService {
         String.format(
             "/v1/test_helpers/treasury/outbound_transfers/%s/return",
             ApiResource.urlEncodeId(outboundTransfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundTransfer.class);
   }
 }

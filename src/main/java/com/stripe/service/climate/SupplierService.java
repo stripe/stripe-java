@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.climate.Supplier;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -36,15 +37,15 @@ public final class SupplierService extends ApiService {
   public Supplier retrieve(String supplier, SupplierRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(supplier));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Supplier.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Supplier.class);
   }
   /** Lists all available Climate supplier objects. */
   public StripeCollection<Supplier> list(SupplierListParams params) throws StripeException {
@@ -62,14 +63,15 @@ public final class SupplierService extends ApiService {
   public StripeCollection<Supplier> list(SupplierListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/climate/suppliers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Supplier>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Supplier>>() {}.getType());
   }
 }

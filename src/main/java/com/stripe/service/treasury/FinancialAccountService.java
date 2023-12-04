@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.FinancialAccount;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -36,15 +37,15 @@ public final class FinancialAccountService extends ApiService {
   public FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/financial_accounts";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccount.class);
   }
   /** Returns a list of FinancialAccounts. */
   public StripeCollection<FinancialAccount> list(FinancialAccountListParams params)
@@ -63,15 +64,16 @@ public final class FinancialAccountService extends ApiService {
   public StripeCollection<FinancialAccount> list(
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/financial_accounts";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<FinancialAccount>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<FinancialAccount>>() {}.getType());
   }
   /** Updates the details of a FinancialAccount. */
   public FinancialAccount update(String financialAccount, FinancialAccountUpdateParams params)
@@ -94,15 +96,15 @@ public final class FinancialAccountService extends ApiService {
     String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccount.class);
   }
   /** Retrieves the details of a FinancialAccount. */
   public FinancialAccount retrieve(String financialAccount, FinancialAccountRetrieveParams params)
@@ -125,15 +127,15 @@ public final class FinancialAccountService extends ApiService {
     String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccount.class);
   }
 
   public com.stripe.service.treasury.FinancialAccountFeaturesService features() {

@@ -7,6 +7,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -148,15 +149,10 @@ public class Session extends ApiResource implements HasId {
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/billing_portal/sessions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Session.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Session.class);
   }
 
   /** Creates a session of the customer portal. */
@@ -169,15 +165,15 @@ public class Session extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/billing_portal/sessions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Session.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Session.class);
   }
 
   @Getter

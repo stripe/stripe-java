@@ -4,6 +4,7 @@ package com.stripe.service.financialconnections;
 import com.stripe.exception.StripeException;
 import com.stripe.model.financialconnections.Session;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -31,15 +32,15 @@ public final class SessionService extends ApiService {
    */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/financial_connections/sessions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Session.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
   }
   /** Retrieves the details of a Financial Connections {@code Session}. */
   public Session retrieve(String session, SessionRetrieveParams params) throws StripeException {
@@ -58,14 +59,14 @@ public final class SessionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Session.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
   }
 }

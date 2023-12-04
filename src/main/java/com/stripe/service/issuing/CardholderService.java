@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.Cardholder;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -50,15 +51,16 @@ public final class CardholderService extends ApiService {
   public StripeCollection<Cardholder> list(CardholderListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/cardholders";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Cardholder>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Cardholder>>() {}.getType());
   }
   /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public Cardholder create(CardholderCreateParams params) throws StripeException {
@@ -68,15 +70,15 @@ public final class CardholderService extends ApiService {
   public Cardholder create(CardholderCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/cardholders";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Cardholder.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Cardholder.class);
   }
   /** Retrieves an Issuing {@code Cardholder} object. */
   public Cardholder retrieve(String cardholder, CardholderRetrieveParams params)
@@ -96,15 +98,15 @@ public final class CardholderService extends ApiService {
       String cardholder, CardholderRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Cardholder.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Cardholder.class);
   }
   /**
    * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
@@ -135,14 +137,14 @@ public final class CardholderService extends ApiService {
   public Cardholder update(String cardholder, CardholderUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Cardholder.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Cardholder.class);
   }
 }

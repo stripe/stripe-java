@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.billingportal.Configuration;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -39,15 +40,16 @@ public final class ConfigurationService extends ApiService {
   public StripeCollection<Configuration> list(
       ConfigurationListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/billing_portal/configurations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Configuration>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
   /** Creates a configuration that describes the functionality and behavior of a PortalSession. */
   public Configuration create(ConfigurationCreateParams params) throws StripeException {
@@ -57,15 +59,15 @@ public final class ConfigurationService extends ApiService {
   public Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/billing_portal/configurations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
   public Configuration update(String configuration, ConfigurationUpdateParams params)
@@ -87,15 +89,15 @@ public final class ConfigurationService extends ApiService {
     String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
   public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
@@ -118,14 +120,14 @@ public final class ConfigurationService extends ApiService {
     String path =
         String.format(
             "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
 }

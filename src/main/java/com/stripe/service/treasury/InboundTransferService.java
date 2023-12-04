@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.InboundTransfer;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -43,15 +44,15 @@ public final class InboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(inboundTransfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InboundTransfer.class);
   }
   /** Creates an InboundTransfer. */
   public InboundTransfer create(InboundTransferCreateParams params) throws StripeException {
@@ -61,15 +62,15 @@ public final class InboundTransferService extends ApiService {
   public InboundTransfer create(InboundTransferCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/inbound_transfers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InboundTransfer.class);
   }
   /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
   public StripeCollection<InboundTransfer> list(InboundTransferListParams params)
@@ -80,15 +81,16 @@ public final class InboundTransferService extends ApiService {
   public StripeCollection<InboundTransfer> list(
       InboundTransferListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/inbound_transfers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<InboundTransfer>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<InboundTransfer>>() {}.getType());
   }
   /** Retrieves the details of an existing InboundTransfer. */
   public InboundTransfer retrieve(String id, InboundTransferRetrieveParams params)
@@ -108,14 +110,14 @@ public final class InboundTransferService extends ApiService {
       String id, InboundTransferRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InboundTransfer.class);
   }
 }

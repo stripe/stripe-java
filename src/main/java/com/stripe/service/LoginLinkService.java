@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.LoginLink;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -57,14 +58,14 @@ public final class LoginLinkService extends ApiService {
   public LoginLink create(String account, LoginLinkCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            LoginLink.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, LoginLink.class);
   }
 }

@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.treasury;
 import com.stripe.exception.StripeException;
 import com.stripe.model.treasury.InboundTransfer;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -51,15 +52,15 @@ public final class InboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/treasury/inbound_transfers/%s/succeed", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InboundTransfer.class);
   }
   /**
    * Transitions a test mode created InboundTransfer to the {@code failed} status. The
@@ -91,15 +92,15 @@ public final class InboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/treasury/inbound_transfers/%s/fail", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InboundTransfer.class);
   }
   /**
    * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
@@ -135,14 +136,14 @@ public final class InboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/treasury/inbound_transfers/%s/return", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InboundTransfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InboundTransfer.class);
   }
 }

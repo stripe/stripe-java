@@ -9,6 +9,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -230,15 +231,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static Card create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/cards";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Card.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Card.class);
   }
 
   /** Creates an Issuing {@code Card} object. */
@@ -251,15 +247,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String path = "/v1/issuing/cards";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Card.class);
   }
 
   /**
@@ -277,15 +273,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static CardCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/cards";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            CardCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CardCollection.class);
   }
 
   /**
@@ -304,15 +295,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String path = "/v1/issuing/cards";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CardCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CardCollection.class);
   }
 
   /** Retrieves an Issuing {@code Card} object. */
@@ -329,15 +320,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static Card retrieve(String card, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Card.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Card.class);
   }
 
   /** Retrieves an Issuing {@code Card} object. */
@@ -345,15 +331,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Card.class);
   }
 
   /**
@@ -372,15 +358,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Override
   public Card update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Card.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
 
   /**
@@ -398,15 +379,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public Card update(CardUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
 
   @Getter
@@ -667,16 +648,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
           String.format(
               "/v1/test_helpers/issuing/cards/%s/shipping/deliver",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Card.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
 
     /**
@@ -698,16 +673,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
               "/v1/test_helpers/issuing/cards/%s/shipping/deliver",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Card.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
 
     /**
@@ -740,16 +714,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
           String.format(
               "/v1/test_helpers/issuing/cards/%s/shipping/ship",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Card.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
 
     /**
@@ -768,16 +736,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
               "/v1/test_helpers/issuing/cards/%s/shipping/ship",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Card.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
 
     /**
@@ -810,16 +777,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
           String.format(
               "/v1/test_helpers/issuing/cards/%s/shipping/return",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Card.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
 
     /**
@@ -839,16 +800,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
               "/v1/test_helpers/issuing/cards/%s/shipping/return",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Card.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
 
     /**
@@ -881,16 +841,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
           String.format(
               "/v1/test_helpers/issuing/cards/%s/shipping/fail",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Card.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
 
     /**
@@ -909,16 +863,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
               "/v1/test_helpers/issuing/cards/%s/shipping/fail",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Card.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, Card.class);
     }
   }
 

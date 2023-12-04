@@ -4,6 +4,7 @@ package com.stripe.service.terminal;
 import com.stripe.exception.StripeException;
 import com.stripe.model.terminal.ConnectionToken;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -49,14 +50,14 @@ public final class ConnectionTokenService extends ApiService {
   public ConnectionToken create(ConnectionTokenCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/connection_tokens";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ConnectionToken.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ConnectionToken.class);
   }
 }

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.File;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -49,15 +50,16 @@ public final class FileService extends ApiService {
   public StripeCollection<File> list(FileListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/files";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<File>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<File>>() {}.getType());
   }
   /**
    * To upload a file to Stripe, you need to send a request of type {@code multipart/form-data}.
@@ -78,15 +80,15 @@ public final class FileService extends ApiService {
    */
   public File create(FileCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/files";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.FILES,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            File.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, File.class);
   }
   /**
    * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
@@ -120,14 +122,14 @@ public final class FileService extends ApiService {
   public File retrieve(String file, FileRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            File.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, File.class);
   }
 }

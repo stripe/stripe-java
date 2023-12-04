@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.Transaction;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -49,15 +50,16 @@ public final class TransactionService extends ApiService {
   public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/transactions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Transaction>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Transaction} object. */
   public Transaction retrieve(String transaction, TransactionRetrieveParams params)
@@ -78,15 +80,15 @@ public final class TransactionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /**
    * Updates the specified Issuing {@code Transaction} object by setting the values of the
@@ -119,14 +121,14 @@ public final class TransactionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
 }

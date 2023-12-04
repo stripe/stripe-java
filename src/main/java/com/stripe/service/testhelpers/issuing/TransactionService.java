@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.issuing;
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Transaction;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -28,15 +29,15 @@ public final class TransactionService extends ApiService {
   public Transaction createForceCapture(
       TransactionCreateForceCaptureParams params, RequestOptions options) throws StripeException {
     String path = "/v1/test_helpers/issuing/transactions/create_force_capture";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
   public Transaction createUnlinkedRefund(TransactionCreateUnlinkedRefundParams params)
@@ -47,15 +48,15 @@ public final class TransactionService extends ApiService {
   public Transaction createUnlinkedRefund(
       TransactionCreateUnlinkedRefundParams params, RequestOptions options) throws StripeException {
     String path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Refund a test-mode Transaction. */
   public Transaction refund(String transaction, TransactionRefundParams params)
@@ -78,14 +79,14 @@ public final class TransactionService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/transactions/%s/refund",
             ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
 }

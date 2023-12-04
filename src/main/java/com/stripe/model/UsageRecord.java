@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -85,15 +86,10 @@ public class UsageRecord extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(subscriptionItem));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            UsageRecord.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, UsageRecord.class);
   }
 
   /**
@@ -127,14 +123,14 @@ public class UsageRecord extends ApiResource implements HasId {
         String.format(
             "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(subscriptionItem));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            UsageRecord.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, UsageRecord.class);
   }
 }

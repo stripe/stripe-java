@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.SubscriptionSchedule;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -42,15 +43,16 @@ public final class SubscriptionScheduleService extends ApiService {
   public StripeCollection<SubscriptionSchedule> list(
       SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/subscription_schedules";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<SubscriptionSchedule>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<SubscriptionSchedule>>() {}.getType());
   }
   /**
    * Creates a new subscription schedule object. Each customer can have up to 500 active or
@@ -81,15 +83,15 @@ public final class SubscriptionScheduleService extends ApiService {
   public SubscriptionSchedule create(
       SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/subscription_schedules";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
@@ -122,15 +124,15 @@ public final class SubscriptionScheduleService extends ApiService {
       String schedule, SubscriptionScheduleRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /** Updates an existing subscription schedule. */
   public SubscriptionSchedule update(String schedule, SubscriptionScheduleUpdateParams params)
@@ -151,15 +153,15 @@ public final class SubscriptionScheduleService extends ApiService {
       String schedule, SubscriptionScheduleUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
@@ -197,15 +199,15 @@ public final class SubscriptionScheduleService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(schedule));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
@@ -251,14 +253,14 @@ public final class SubscriptionScheduleService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(schedule));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 }

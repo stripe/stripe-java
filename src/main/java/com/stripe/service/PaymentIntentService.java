@@ -7,6 +7,7 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -53,15 +54,16 @@ public final class PaymentIntentService extends ApiService {
   public StripeSearchResult<PaymentIntent> search(
       PaymentIntentSearchParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_intents/search";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeSearchResult<PaymentIntent>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<PaymentIntent>>() {}.getType());
   }
   /**
    * Creates a PaymentIntent object.
@@ -95,15 +97,15 @@ public final class PaymentIntentService extends ApiService {
   public PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_intents";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /** Returns a list of PaymentIntents. */
   public StripeCollection<PaymentIntent> list(PaymentIntentListParams params)
@@ -122,15 +124,16 @@ public final class PaymentIntentService extends ApiService {
   public StripeCollection<PaymentIntent> list(
       PaymentIntentListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_intents";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PaymentIntent>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PaymentIntent>>() {}.getType());
   }
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
@@ -186,15 +189,15 @@ public final class PaymentIntentService extends ApiService {
       String intent, PaymentIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
    * Updates properties on a PaymentIntent object without confirming.
@@ -246,15 +249,15 @@ public final class PaymentIntentService extends ApiService {
       String intent, PaymentIntentUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
    * Confirm that your customer intends to pay with current or provided payment method. Upon
@@ -358,15 +361,15 @@ public final class PaymentIntentService extends ApiService {
       String intent, PaymentIntentConfirmParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
    * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
@@ -438,15 +441,15 @@ public final class PaymentIntentService extends ApiService {
       String intent, PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
@@ -502,15 +505,15 @@ public final class PaymentIntentService extends ApiService {
       String intent, PaymentIntentCaptureParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
    * Perform an incremental authorization on an eligible <a
@@ -576,15 +579,15 @@ public final class PaymentIntentService extends ApiService {
     String path =
         String.format(
             "/v1/payment_intents/%s/increment_authorization", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /** Verifies microdeposits on a PaymentIntent object. */
   public PaymentIntent verifyMicrodeposits(
@@ -608,15 +611,15 @@ public final class PaymentIntentService extends ApiService {
     String path =
         String.format(
             "/v1/payment_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
   /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
@@ -640,14 +643,14 @@ public final class PaymentIntentService extends ApiService {
     String path =
         String.format(
             "/v1/payment_intents/%s/apply_customer_balance", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
 }

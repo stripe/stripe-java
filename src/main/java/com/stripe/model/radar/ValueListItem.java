@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -81,15 +82,10 @@ public class ValueListItem extends ApiResource implements HasId {
   public static ValueListItem create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/radar/value_list_items";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            ValueListItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ValueListItem.class);
   }
 
   /**
@@ -106,15 +102,15 @@ public class ValueListItem extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/radar/value_list_items";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueListItem.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ValueListItem.class);
   }
 
   /** Deletes a {@code ValueListItem} object, removing it from its parent value list. */
@@ -137,15 +133,10 @@ public class ValueListItem extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            ValueListItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, ValueListItem.class);
   }
 
   /**
@@ -163,15 +154,10 @@ public class ValueListItem extends ApiResource implements HasId {
   public static ValueListItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/radar/value_list_items";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ValueListItemCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ValueListItemCollection.class);
   }
 
   /**
@@ -191,15 +177,15 @@ public class ValueListItem extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/radar/value_list_items";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueListItemCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ValueListItemCollection.class);
   }
 
   /** Retrieves a {@code ValueListItem} object. */
@@ -216,15 +202,10 @@ public class ValueListItem extends ApiResource implements HasId {
   public static ValueListItem retrieve(
       String item, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ValueListItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ValueListItem.class);
   }
 
   /** Retrieves a {@code ValueListItem} object. */
@@ -233,14 +214,14 @@ public class ValueListItem extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueListItem.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ValueListItem.class);
   }
 }

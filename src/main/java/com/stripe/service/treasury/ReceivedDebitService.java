@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.ReceivedDebit;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -29,15 +30,16 @@ public final class ReceivedDebitService extends ApiService {
   public StripeCollection<ReceivedDebit> list(
       ReceivedDebitListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/received_debits";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ReceivedDebit>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ReceivedDebit>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing ReceivedDebit by passing the unique ReceivedDebit ID from
@@ -69,14 +71,14 @@ public final class ReceivedDebitService extends ApiService {
       String id, ReceivedDebitRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedDebit.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ReceivedDebit.class);
   }
 }

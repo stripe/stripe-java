@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -65,15 +66,16 @@ public final class BalanceTransactionService extends ApiService {
   public StripeCollection<BalanceTransaction> list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/balance_transactions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<BalanceTransaction>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<BalanceTransaction>>() {}.getType());
   }
   /**
    * Retrieves the balance transaction with the given ID.
@@ -109,14 +111,14 @@ public final class BalanceTransactionService extends ApiService {
       String id, BalanceTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            BalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, BalanceTransaction.class);
   }
 }

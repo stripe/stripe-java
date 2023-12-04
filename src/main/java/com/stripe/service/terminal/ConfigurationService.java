@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.terminal.Configuration;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,15 @@ public final class ConfigurationService extends ApiService {
   public Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/configurations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
   /** Returns a list of {@code Configuration} objects. */
   public StripeCollection<Configuration> list(ConfigurationListParams params)
@@ -65,15 +66,16 @@ public final class ConfigurationService extends ApiService {
   public StripeCollection<Configuration> list(
       ConfigurationListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/terminal/configurations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Configuration>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
   /** Retrieves a {@code Configuration} object. */
   public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
@@ -95,15 +97,15 @@ public final class ConfigurationService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
   /** Updates a new {@code Configuration} object. */
   public Configuration update(String configuration, ConfigurationUpdateParams params)
@@ -124,15 +126,15 @@ public final class ConfigurationService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Configuration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
   /** Deletes a {@code Configuration} object. */
   public Configuration delete(String configuration) throws StripeException {
@@ -142,14 +144,9 @@ public final class ConfigurationService extends ApiService {
   public Configuration delete(String configuration, RequestOptions options) throws StripeException {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Configuration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
   }
 }

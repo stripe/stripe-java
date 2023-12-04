@@ -204,7 +204,9 @@ public class BaseStripeTest {
         assertEquals(method, req.getMethod());
         assertEquals(path, req.getPath());
         if (params != null) {
-          final String msg = String.format("Params did not match - expected: %s, received: %s", params, req.getParams());
+          final String msg =
+              String.format(
+                  "Params did not match - expected: %s, received: %s", params, req.getParams());
           assertTrue(msg, compareParamObjects(params, req.getParams()));
         }
         if (options != null) {

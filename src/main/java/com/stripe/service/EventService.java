@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Event;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -56,15 +57,16 @@ public final class EventService extends ApiService {
   public StripeCollection<Event> list(EventListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/events";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Event>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Event>>() {}.getType());
   }
   /**
    * Retrieves the details of an event. Supply the unique identifier of the event, which you might
@@ -94,14 +96,14 @@ public final class EventService extends ApiService {
   public Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Event.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Event.class);
   }
 }

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -50,15 +51,16 @@ public final class InvoiceItemService extends ApiService {
   public StripeCollection<InvoiceItem> list(InvoiceItemListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoiceitems";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<InvoiceItem>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<InvoiceItem>>() {}.getType());
   }
   /**
    * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
@@ -74,15 +76,15 @@ public final class InvoiceItemService extends ApiService {
   public InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoiceitems";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoiceItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceItem.class);
   }
   /** Retrieves the invoice item with the given ID. */
   public InvoiceItem retrieve(String invoiceitem, InvoiceItemRetrieveParams params)
@@ -102,15 +104,15 @@ public final class InvoiceItemService extends ApiService {
       String invoiceitem, InvoiceItemRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoiceItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceItem.class);
   }
   /**
    * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
@@ -142,15 +144,15 @@ public final class InvoiceItemService extends ApiService {
       String invoiceitem, InvoiceItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoiceItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceItem.class);
   }
   /**
    * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
@@ -165,14 +167,9 @@ public final class InvoiceItemService extends ApiService {
    */
   public InvoiceItem delete(String invoiceitem, RequestOptions options) throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            InvoiceItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceItem.class);
   }
 }

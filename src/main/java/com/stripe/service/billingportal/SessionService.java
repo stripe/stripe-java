@@ -4,6 +4,7 @@ package com.stripe.service.billingportal;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billingportal.Session;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -24,14 +25,14 @@ public final class SessionService extends ApiService {
   /** Creates a session of the customer portal. */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/billing_portal/sessions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Session.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
   }
 }

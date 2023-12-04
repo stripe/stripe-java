@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentLink;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,16 @@ public final class PaymentLinkService extends ApiService {
   public StripeCollection<PaymentLink> list(PaymentLinkListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_links";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PaymentLink>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PaymentLink>>() {}.getType());
   }
   /** Creates a payment link. */
   public PaymentLink create(PaymentLinkCreateParams params) throws StripeException {
@@ -56,15 +58,15 @@ public final class PaymentLinkService extends ApiService {
   public PaymentLink create(PaymentLinkCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_links";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentLink.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentLink.class);
   }
   /** Retrieve a payment link. */
   public PaymentLink retrieve(String paymentLink, PaymentLinkRetrieveParams params)
@@ -84,15 +86,15 @@ public final class PaymentLinkService extends ApiService {
       String paymentLink, PaymentLinkRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentLink.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentLink.class);
   }
   /** Updates a payment link. */
   public PaymentLink update(String paymentLink, PaymentLinkUpdateParams params)
@@ -112,15 +114,15 @@ public final class PaymentLinkService extends ApiService {
       String paymentLink, PaymentLinkUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentLink.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentLink.class);
   }
 
   public com.stripe.service.PaymentLinkLineItemService lineItems() {

@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Refund;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -34,14 +35,14 @@ public final class RefundService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/test_helpers/refunds/%s/expire", ApiResource.urlEncodeId(refund));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Refund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Refund.class);
   }
 }

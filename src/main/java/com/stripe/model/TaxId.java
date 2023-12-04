@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
@@ -129,15 +130,10 @@ public class TaxId extends ApiResource implements HasId {
         String.format(
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            TaxId.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, TaxId.class);
   }
 
   @Getter

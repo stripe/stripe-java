@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -115,15 +116,10 @@ public class Mandate extends ApiResource implements HasId {
   public static Mandate retrieve(String mandate, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Mandate.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Mandate.class);
   }
 
   /** Retrieves a Mandate object. */
@@ -131,15 +127,15 @@ public class Mandate extends ApiResource implements HasId {
       String mandate, MandateRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Mandate.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Mandate.class);
   }
 
   @Getter

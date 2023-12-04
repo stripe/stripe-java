@@ -7,6 +7,7 @@ import com.stripe.model.BankAccount;
 import com.stripe.model.PaymentSource;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -44,15 +45,16 @@ public final class PaymentSourceService extends ApiService {
       String customer, PaymentSourceListParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PaymentSource>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PaymentSource>>() {}.getType());
   }
   /**
    * When you create a new credit card, you must specify a customer or recipient on which to create
@@ -80,15 +82,15 @@ public final class PaymentSourceService extends ApiService {
       String customer, PaymentSourceCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentSource.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Retrieve a specified source for a given customer. */
   public PaymentSource retrieve(String customer, String id, PaymentSourceRetrieveParams params)
@@ -112,15 +114,15 @@ public final class PaymentSourceService extends ApiService {
         String.format(
             "/v1/customers/%s/sources/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentSource.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Update a specified source for a given customer. */
   public PaymentSource update(String customer, String id, PaymentSourceUpdateParams params)
@@ -144,15 +146,15 @@ public final class PaymentSourceService extends ApiService {
         String.format(
             "/v1/customers/%s/sources/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentSource.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Delete a specified source for a given customer. */
   public PaymentSource delete(String customer, String id, PaymentSourceDeleteParams params)
@@ -176,15 +178,15 @@ public final class PaymentSourceService extends ApiService {
         String.format(
             "/v1/customers/%s/sources/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentSource.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Verify a specified bank account for a given customer. */
   public BankAccount verify(String customer, String id, PaymentSourceVerifyParams params)
@@ -208,14 +210,14 @@ public final class PaymentSourceService extends ApiService {
         String.format(
             "/v1/customers/%s/sources/%s/verify",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            BankAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, BankAccount.class);
   }
 }
