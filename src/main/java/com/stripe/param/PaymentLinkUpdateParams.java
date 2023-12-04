@@ -67,6 +67,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The custom message to be displayed to a customer when a payment link is no longer active. */
+  @SerializedName("inactive_message")
+  Object inactiveMessage;
+
   /** Generate a post-purchase Invoice for one-time payments. */
   @SerializedName("invoice_creation")
   InvoiceCreation invoiceCreation;
@@ -119,6 +123,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method_types")
   Object paymentMethodTypes;
 
+  /** Settings that restrict the usage of a payment link. */
+  @SerializedName("restrictions")
+  Object restrictions;
+
   /** Configuration for collecting the customer's shipping address. */
   @SerializedName("shipping_address_collection")
   Object shippingAddressCollection;
@@ -141,12 +149,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       CustomerCreation customerCreation,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object inactiveMessage,
       InvoiceCreation invoiceCreation,
       List<PaymentLinkUpdateParams.LineItem> lineItems,
       Map<String, String> metadata,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       Object paymentMethodTypes,
+      Object restrictions,
       Object shippingAddressCollection,
       SubscriptionData subscriptionData) {
     this.active = active;
@@ -159,12 +169,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.customerCreation = customerCreation;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.inactiveMessage = inactiveMessage;
     this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.restrictions = restrictions;
     this.shippingAddressCollection = shippingAddressCollection;
     this.subscriptionData = subscriptionData;
   }
@@ -194,6 +206,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Object inactiveMessage;
+
     private InvoiceCreation invoiceCreation;
 
     private List<PaymentLinkUpdateParams.LineItem> lineItems;
@@ -205,6 +219,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     private PaymentMethodCollection paymentMethodCollection;
 
     private Object paymentMethodTypes;
+
+    private Object restrictions;
 
     private Object shippingAddressCollection;
 
@@ -223,12 +239,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.customerCreation,
           this.expand,
           this.extraParams,
+          this.inactiveMessage,
           this.invoiceCreation,
           this.lineItems,
           this.metadata,
           this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodTypes,
+          this.restrictions,
           this.shippingAddressCollection,
           this.subscriptionData);
     }
@@ -381,6 +399,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The custom message to be displayed to a customer when a payment link is no longer active. */
+    public Builder setInactiveMessage(String inactiveMessage) {
+      this.inactiveMessage = inactiveMessage;
+      return this;
+    }
+
+    /** The custom message to be displayed to a customer when a payment link is no longer active. */
+    public Builder setInactiveMessage(EmptyParam inactiveMessage) {
+      this.inactiveMessage = inactiveMessage;
+      return this;
+    }
+
     /** Generate a post-purchase Invoice for one-time payments. */
     public Builder setInvoiceCreation(PaymentLinkUpdateParams.InvoiceCreation invoiceCreation) {
       this.invoiceCreation = invoiceCreation;
@@ -513,6 +543,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     public Builder setPaymentMethodTypes(
         List<PaymentLinkUpdateParams.PaymentMethodType> paymentMethodTypes) {
       this.paymentMethodTypes = paymentMethodTypes;
+      return this;
+    }
+
+    /** Settings that restrict the usage of a payment link. */
+    public Builder setRestrictions(PaymentLinkUpdateParams.Restrictions restrictions) {
+      this.restrictions = restrictions;
+      return this;
+    }
+
+    /** Settings that restrict the usage of a payment link. */
+    public Builder setRestrictions(EmptyParam restrictions) {
+      this.restrictions = restrictions;
       return this;
     }
 
@@ -3263,6 +3305,157 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       public Builder setStatementDescriptorSuffix(EmptyParam statementDescriptorSuffix) {
         this.statementDescriptorSuffix = statementDescriptorSuffix;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Restrictions {
+    /**
+     * <strong>Required.</strong> Configuration for the {@code completed_sessions} restriction type.
+     */
+    @SerializedName("completed_sessions")
+    CompletedSessions completedSessions;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Restrictions(CompletedSessions completedSessions, Map<String, Object> extraParams) {
+      this.completedSessions = completedSessions;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CompletedSessions completedSessions;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.Restrictions build() {
+        return new PaymentLinkUpdateParams.Restrictions(this.completedSessions, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> Configuration for the {@code completed_sessions} restriction
+       * type.
+       */
+      public Builder setCompletedSessions(
+          PaymentLinkUpdateParams.Restrictions.CompletedSessions completedSessions) {
+        this.completedSessions = completedSessions;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.Restrictions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.Restrictions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class CompletedSessions {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The maximum number of checkout sessions that can be completed
+       * for the {@code completed_sessions} restriction to be met.
+       */
+      @SerializedName("limit")
+      Long limit;
+
+      private CompletedSessions(Map<String, Object> extraParams, Long limit) {
+        this.extraParams = extraParams;
+        this.limit = limit;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long limit;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.Restrictions.CompletedSessions build() {
+          return new PaymentLinkUpdateParams.Restrictions.CompletedSessions(
+              this.extraParams, this.limit);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.Restrictions.CompletedSessions#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.Restrictions.CompletedSessions#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The maximum number of checkout sessions that can be completed
+         * for the {@code completed_sessions} restriction to be met.
+         */
+        public Builder setLimit(Long limit) {
+          this.limit = limit;
+          return this;
+        }
       }
     }
   }
