@@ -4046,9 +4046,15 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Object metadata;
 
-    private SubscriptionData(Map<String, Object> extraParams, Object metadata) {
+    /** Settings related to subscription trials. */
+    @SerializedName("trial_settings")
+    Object trialSettings;
+
+    private SubscriptionData(
+        Map<String, Object> extraParams, Object metadata, Object trialSettings) {
       this.extraParams = extraParams;
       this.metadata = metadata;
+      this.trialSettings = trialSettings;
     }
 
     public static Builder builder() {
@@ -4060,9 +4066,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Object metadata;
 
+      private Object trialSettings;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.SubscriptionData build() {
-        return new PaymentLinkUpdateParams.SubscriptionData(this.extraParams, this.metadata);
+        return new PaymentLinkUpdateParams.SubscriptionData(
+            this.extraParams, this.metadata, this.trialSettings);
       }
 
       /**
@@ -4142,6 +4151,199 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       public Builder setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
         return this;
+      }
+
+      /** Settings related to subscription trials. */
+      public Builder setTrialSettings(
+          PaymentLinkUpdateParams.SubscriptionData.TrialSettings trialSettings) {
+        this.trialSettings = trialSettings;
+        return this;
+      }
+
+      /** Settings related to subscription trials. */
+      public Builder setTrialSettings(EmptyParam trialSettings) {
+        this.trialSettings = trialSettings;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class TrialSettings {
+      /**
+       * <strong>Required.</strong> Defines how the subscription should behave when the user's free
+       * trial ends.
+       */
+      @SerializedName("end_behavior")
+      EndBehavior endBehavior;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TrialSettings(EndBehavior endBehavior, Map<String, Object> extraParams) {
+        this.endBehavior = endBehavior;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private EndBehavior endBehavior;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.SubscriptionData.TrialSettings build() {
+          return new PaymentLinkUpdateParams.SubscriptionData.TrialSettings(
+              this.endBehavior, this.extraParams);
+        }
+
+        /**
+         * <strong>Required.</strong> Defines how the subscription should behave when the user's
+         * free trial ends.
+         */
+        public Builder setEndBehavior(
+            PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior endBehavior) {
+          this.endBehavior = endBehavior;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.SubscriptionData.TrialSettings#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.SubscriptionData.TrialSettings#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class EndBehavior {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> Indicates how the subscription should change when the trial
+         * ends if the user did not provide a payment method.
+         */
+        @SerializedName("missing_payment_method")
+        MissingPaymentMethod missingPaymentMethod;
+
+        private EndBehavior(
+            Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+          this.extraParams = extraParams;
+          this.missingPaymentMethod = missingPaymentMethod;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MissingPaymentMethod missingPaymentMethod;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior build() {
+            return new PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior(
+                this.extraParams, this.missingPaymentMethod);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Indicates how the subscription should change when the trial
+           * ends if the user did not provide a payment method.
+           */
+          public Builder setMissingPaymentMethod(
+              PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior
+                      .MissingPaymentMethod
+                  missingPaymentMethod) {
+            this.missingPaymentMethod = missingPaymentMethod;
+            return this;
+          }
+        }
+
+        public enum MissingPaymentMethod implements ApiRequestParams.EnumParam {
+          @SerializedName("cancel")
+          CANCEL("cancel"),
+
+          @SerializedName("create_invoice")
+          CREATE_INVOICE("create_invoice"),
+
+          @SerializedName("pause")
+          PAUSE("pause");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          MissingPaymentMethod(String value) {
+            this.value = value;
+          }
+        }
       }
     }
   }

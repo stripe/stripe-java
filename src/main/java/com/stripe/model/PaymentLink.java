@@ -999,6 +999,35 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
+
+    /** Settings related to subscription trials. */
+    @SerializedName("trial_settings")
+    TrialSettings trialSettings;
+
+    /** Configures how this subscription behaves during the trial period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TrialSettings extends StripeObject {
+      /** Defines how a subscription behaves when a free trial ends. */
+      @SerializedName("end_behavior")
+      EndBehavior endBehavior;
+
+      /** Defines how a subscription behaves when a free trial ends. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EndBehavior extends StripeObject {
+        /**
+         * Indicates how the subscription should change when the trial ends if the user did not
+         * provide a payment method.
+         *
+         * <p>One of {@code cancel}, {@code create_invoice}, or {@code pause}.
+         */
+        @SerializedName("missing_payment_method")
+        String missingPaymentMethod;
+      }
+    }
   }
 
   @Getter
