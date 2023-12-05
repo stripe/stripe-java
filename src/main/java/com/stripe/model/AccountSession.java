@@ -148,6 +148,14 @@ public class AccountSession extends ApiResource {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     @Getter
