@@ -69,7 +69,7 @@ public class Transaction extends StripeObject implements HasId {
   @SerializedName("transacted_at")
   Long transactedAt;
 
-  /** The transaction_refresh object that last updated or created this transaction. */
+  /** The token of the transaction refresh that last updated or created this transaction. */
   @SerializedName("transaction_refresh")
   String transactionRefresh;
 
