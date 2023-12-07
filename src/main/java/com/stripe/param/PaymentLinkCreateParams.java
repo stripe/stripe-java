@@ -3092,6 +3092,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("statement_descriptor_suffix")
     String statementDescriptorSuffix;
 
+    /**
+     * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+     * accounts</a> for details.
+     */
+    @SerializedName("transfer_group")
+    String transferGroup;
+
     private PaymentIntentData(
         CaptureMethod captureMethod,
         String description,
@@ -3099,7 +3107,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         Map<String, String> metadata,
         SetupFutureUsage setupFutureUsage,
         String statementDescriptor,
-        String statementDescriptorSuffix) {
+        String statementDescriptorSuffix,
+        String transferGroup) {
       this.captureMethod = captureMethod;
       this.description = description;
       this.extraParams = extraParams;
@@ -3107,6 +3116,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       this.setupFutureUsage = setupFutureUsage;
       this.statementDescriptor = statementDescriptor;
       this.statementDescriptorSuffix = statementDescriptorSuffix;
+      this.transferGroup = transferGroup;
     }
 
     public static Builder builder() {
@@ -3128,6 +3138,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       private String statementDescriptorSuffix;
 
+      private String transferGroup;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkCreateParams.PaymentIntentData build() {
         return new PaymentLinkCreateParams.PaymentIntentData(
@@ -3137,7 +3149,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
             this.metadata,
             this.setupFutureUsage,
             this.statementDescriptor,
-            this.statementDescriptorSuffix);
+            this.statementDescriptorSuffix,
+            this.transferGroup);
       }
 
       /** Controls when the funds will be captured from the customer's account. */
@@ -3251,6 +3264,16 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        */
       public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
         this.statementDescriptorSuffix = statementDescriptorSuffix;
+        return this;
+      }
+
+      /**
+       * A string that identifies the resulting payment as part of a group. See the PaymentIntents
+       * <a href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for
+       * connected accounts</a> for details.
+       */
+      public Builder setTransferGroup(String transferGroup) {
+        this.transferGroup = transferGroup;
         return this;
       }
     }
