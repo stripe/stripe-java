@@ -977,6 +977,14 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("statement_descriptor_suffix")
     String statementDescriptorSuffix;
+
+    /**
+     * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+     * accounts</a> for details.
+     */
+    @SerializedName("transfer_group")
+    String transferGroup;
   }
 
   @Getter

@@ -3140,17 +3140,27 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("statement_descriptor_suffix")
     Object statementDescriptorSuffix;
 
+    /**
+     * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+     * accounts</a> for details.
+     */
+    @SerializedName("transfer_group")
+    Object transferGroup;
+
     private PaymentIntentData(
         Object description,
         Map<String, Object> extraParams,
         Object metadata,
         Object statementDescriptor,
-        Object statementDescriptorSuffix) {
+        Object statementDescriptorSuffix,
+        Object transferGroup) {
       this.description = description;
       this.extraParams = extraParams;
       this.metadata = metadata;
       this.statementDescriptor = statementDescriptor;
       this.statementDescriptorSuffix = statementDescriptorSuffix;
+      this.transferGroup = transferGroup;
     }
 
     public static Builder builder() {
@@ -3168,6 +3178,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Object statementDescriptorSuffix;
 
+      private Object transferGroup;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.PaymentIntentData build() {
         return new PaymentLinkUpdateParams.PaymentIntentData(
@@ -3175,7 +3187,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
             this.extraParams,
             this.metadata,
             this.statementDescriptor,
-            this.statementDescriptorSuffix);
+            this.statementDescriptorSuffix,
+            this.transferGroup);
       }
 
       /** An arbitrary string attached to the object. Often useful for displaying to users. */
@@ -3304,6 +3317,26 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
        */
       public Builder setStatementDescriptorSuffix(EmptyParam statementDescriptorSuffix) {
         this.statementDescriptorSuffix = statementDescriptorSuffix;
+        return this;
+      }
+
+      /**
+       * A string that identifies the resulting payment as part of a group. See the PaymentIntents
+       * <a href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for
+       * connected accounts</a> for details.
+       */
+      public Builder setTransferGroup(String transferGroup) {
+        this.transferGroup = transferGroup;
+        return this;
+      }
+
+      /**
+       * A string that identifies the resulting payment as part of a group. See the PaymentIntents
+       * <a href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for
+       * connected accounts</a> for details.
+       */
+      public Builder setTransferGroup(EmptyParam transferGroup) {
+        this.transferGroup = transferGroup;
         return this;
       }
     }
