@@ -35,8 +35,10 @@ public class StripeError extends StripeObject {
    * charge_expired_for_capture}, {@code charge_invalid_parameter}, {@code charge_not_refundable},
    * {@code clearing_code_unsupported}, {@code country_code_invalid}, {@code country_unsupported},
    * {@code coupon_expired}, {@code customer_max_payment_methods}, {@code
-   * customer_max_subscriptions}, {@code debit_not_authorized}, {@code email_invalid}, {@code
-   * expired_card}, {@code financial_connections_account_inactive}, {@code
+   * customer_max_subscriptions}, {@code customer_tax_location_invalid}, {@code
+   * debit_not_authorized}, {@code email_invalid}, {@code expired_card}, {@code
+   * financial_connections_account_inactive}, {@code
+   * financial_connections_no_successful_transaction_refresh}, {@code
    * gift_card_balance_insufficient}, {@code gift_card_code_exists}, {@code gift_card_inactive},
    * {@code idempotency_key_in_use}, {@code incorrect_address}, {@code incorrect_cvc}, {@code
    * incorrect_number}, {@code incorrect_zip}, {@code instant_payouts_config_disabled}, {@code
