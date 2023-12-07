@@ -2762,13 +2762,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
        * However, if you wish to request 3D Secure based on logic from your own fraud engine,
-       * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
-       * provided, defaults to {@code automatic}. Read our guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
-       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
-       * Engine.
+       * provide this option. If not provided, this value defaults to {@code automatic}. Read our
+       * guide on <a href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually
+       * requesting 3D Secure</a> for more information on how this configuration interacts with
+       * Radar and our SCA Engine.
        *
-       * <p>One of {@code any}, {@code automatic}, {@code challenge}, or {@code challenge_only}.
+       * <p>One of {@code any}, or {@code automatic}.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;

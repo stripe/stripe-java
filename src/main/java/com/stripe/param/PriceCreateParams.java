@@ -1386,11 +1386,8 @@ public class PriceCreateParams extends ApiRequestParams {
   @Getter
   public static class Recurring {
     /**
-     * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Allowed
-     * values are {@code sum} for summing up all usage during a period, {@code last_during_period}
-     * for using the last usage record reported within a period, {@code last_ever} for using the
-     * last usage record ever (across period bounds) or {@code max} which uses the usage record with
-     * the maximum reported usage during a period. Defaults to {@code sum}.
+     * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Defaults to
+     * {@code sum}.
      */
     @SerializedName("aggregate_usage")
     AggregateUsage aggregateUsage;
@@ -1480,11 +1477,8 @@ public class PriceCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Allowed
-       * values are {@code sum} for summing up all usage during a period, {@code last_during_period}
-       * for using the last usage record reported within a period, {@code last_ever} for using the
-       * last usage record ever (across period bounds) or {@code max} which uses the usage record
-       * with the maximum reported usage during a period. Defaults to {@code sum}.
+       * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Defaults
+       * to {@code sum}.
        */
       public Builder setAggregateUsage(PriceCreateParams.Recurring.AggregateUsage aggregateUsage) {
         this.aggregateUsage = aggregateUsage;
