@@ -2,8 +2,17 @@
 package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.financialconnections.TransactionRetrieveParams;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Transaction extends StripeObject implements HasId {
+public class Transaction extends ApiResource implements HasId {
   /** The ID of the Financial Connections Account this transaction belongs to. */
   @SerializedName("account")
   String account;
@@ -69,13 +78,61 @@ public class Transaction extends StripeObject implements HasId {
   @SerializedName("transacted_at")
   Long transactedAt;
 
-  /** The transaction_refresh object that last updated or created this transaction. */
+  /** The token of the transaction refresh that last updated or created this transaction. */
   @SerializedName("transaction_refresh")
   String transactionRefresh;
 
   /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated")
   Long updated;
+
+  /** Retrieves the details of a Financial Connections {@code Transaction}. */
+  public static Transaction retrieve(String transaction) throws StripeException {
+    return retrieve(transaction, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the details of a Financial Connections {@code Transaction}. */
+  public static Transaction retrieve(String transaction, RequestOptions options)
+      throws StripeException {
+    return retrieve(transaction, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the details of a Financial Connections {@code Transaction}. */
+  public static Transaction retrieve(
+      String transaction, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(transaction));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Transaction.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /** Retrieves the details of a Financial Connections {@code Transaction}. */
+  public static Transaction retrieve(
+      String transaction, TransactionRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(transaction));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Transaction.class,
+            options,
+            ApiMode.V1);
+  }
 
   @Getter
   @Setter
@@ -88,5 +145,11 @@ public class Transaction extends StripeObject implements HasId {
     /** Time at which this transaction was voided. Measured in seconds since the Unix epoch. */
     @SerializedName("void_at")
     Long voidAt;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

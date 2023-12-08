@@ -313,28 +313,32 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the payment element supports detaching a payment method. */
-        @SerializedName("payment_method_detach")
-        PaymentMethodDetach paymentMethodDetach;
+        /** Controls whether the Payment Element allows the removal of a saved payment method. */
+        @SerializedName("payment_method_remove")
+        PaymentMethodRemove paymentMethodRemove;
 
-        /**
-         * Whether the payment element supports setting a payment method as the customer's default.
-         */
-        @SerializedName("payment_method_set_as_customer_default")
-        PaymentMethodSetAsCustomerDefault paymentMethodSetAsCustomerDefault;
+        /** Controls whether the Payment Element offers to save a new payment method. */
+        @SerializedName("payment_method_save")
+        PaymentMethodSave paymentMethodSave;
 
-        /** Whether the payment element supports updating a payment method. */
+        /** Controls whether the Payment Element offers to set a payment method as the default. */
+        @SerializedName("payment_method_set_as_default")
+        PaymentMethodSetAsDefault paymentMethodSetAsDefault;
+
+        /** Controls whether the Payment Element allows the updating of a saved payment method. */
         @SerializedName("payment_method_update")
         PaymentMethodUpdate paymentMethodUpdate;
 
         private Features(
             Map<String, Object> extraParams,
-            PaymentMethodDetach paymentMethodDetach,
-            PaymentMethodSetAsCustomerDefault paymentMethodSetAsCustomerDefault,
+            PaymentMethodRemove paymentMethodRemove,
+            PaymentMethodSave paymentMethodSave,
+            PaymentMethodSetAsDefault paymentMethodSetAsDefault,
             PaymentMethodUpdate paymentMethodUpdate) {
           this.extraParams = extraParams;
-          this.paymentMethodDetach = paymentMethodDetach;
-          this.paymentMethodSetAsCustomerDefault = paymentMethodSetAsCustomerDefault;
+          this.paymentMethodRemove = paymentMethodRemove;
+          this.paymentMethodSave = paymentMethodSave;
+          this.paymentMethodSetAsDefault = paymentMethodSetAsDefault;
           this.paymentMethodUpdate = paymentMethodUpdate;
         }
 
@@ -345,9 +349,11 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private PaymentMethodDetach paymentMethodDetach;
+          private PaymentMethodRemove paymentMethodRemove;
 
-          private PaymentMethodSetAsCustomerDefault paymentMethodSetAsCustomerDefault;
+          private PaymentMethodSave paymentMethodSave;
+
+          private PaymentMethodSetAsDefault paymentMethodSetAsDefault;
 
           private PaymentMethodUpdate paymentMethodUpdate;
 
@@ -355,8 +361,9 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           public CustomerSessionCreateParams.Components.PaymentElement.Features build() {
             return new CustomerSessionCreateParams.Components.PaymentElement.Features(
                 this.extraParams,
-                this.paymentMethodDetach,
-                this.paymentMethodSetAsCustomerDefault,
+                this.paymentMethodRemove,
+                this.paymentMethodSave,
+                this.paymentMethodSetAsDefault,
                 this.paymentMethodUpdate);
           }
 
@@ -390,27 +397,32 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the payment element supports detaching a payment method. */
-          public Builder setPaymentMethodDetach(
-              CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodDetach
-                  paymentMethodDetach) {
-            this.paymentMethodDetach = paymentMethodDetach;
+          /** Controls whether the Payment Element allows the removal of a saved payment method. */
+          public Builder setPaymentMethodRemove(
+              CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodRemove
+                  paymentMethodRemove) {
+            this.paymentMethodRemove = paymentMethodRemove;
             return this;
           }
 
-          /**
-           * Whether the payment element supports setting a payment method as the customer's
-           * default.
-           */
-          public Builder setPaymentMethodSetAsCustomerDefault(
+          /** Controls whether the Payment Element offers to save a new payment method. */
+          public Builder setPaymentMethodSave(
+              CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodSave
+                  paymentMethodSave) {
+            this.paymentMethodSave = paymentMethodSave;
+            return this;
+          }
+
+          /** Controls whether the Payment Element offers to set a payment method as the default. */
+          public Builder setPaymentMethodSetAsDefault(
               CustomerSessionCreateParams.Components.PaymentElement.Features
-                      .PaymentMethodSetAsCustomerDefault
-                  paymentMethodSetAsCustomerDefault) {
-            this.paymentMethodSetAsCustomerDefault = paymentMethodSetAsCustomerDefault;
+                      .PaymentMethodSetAsDefault
+                  paymentMethodSetAsDefault) {
+            this.paymentMethodSetAsDefault = paymentMethodSetAsDefault;
             return this;
           }
 
-          /** Whether the payment element supports updating a payment method. */
+          /** Controls whether the Payment Element allows the updating of a saved payment method. */
           public Builder setPaymentMethodUpdate(
               CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodUpdate
                   paymentMethodUpdate) {
@@ -419,7 +431,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           }
         }
 
-        public enum PaymentMethodDetach implements ApiRequestParams.EnumParam {
+        public enum PaymentMethodRemove implements ApiRequestParams.EnumParam {
           @SerializedName("auto")
           AUTO("auto"),
 
@@ -429,12 +441,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           @Getter(onMethod_ = {@Override})
           private final String value;
 
-          PaymentMethodDetach(String value) {
+          PaymentMethodRemove(String value) {
             this.value = value;
           }
         }
 
-        public enum PaymentMethodSetAsCustomerDefault implements ApiRequestParams.EnumParam {
+        public enum PaymentMethodSave implements ApiRequestParams.EnumParam {
           @SerializedName("auto")
           AUTO("auto"),
 
@@ -444,7 +456,22 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           @Getter(onMethod_ = {@Override})
           private final String value;
 
-          PaymentMethodSetAsCustomerDefault(String value) {
+          PaymentMethodSave(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentMethodSetAsDefault implements ApiRequestParams.EnumParam {
+          @SerializedName("auto")
+          AUTO("auto"),
+
+          @SerializedName("never")
+          NEVER("never");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentMethodSetAsDefault(String value) {
             this.value = value;
           }
         }
@@ -468,7 +495,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class PricingTable {
-      /** <strong>Required.</strong> Whether pricing table is enabled. */
+      /** <strong>Required.</strong> Whether the pricing table is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -501,7 +528,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
               this.enabled, this.extraParams);
         }
 
-        /** <strong>Required.</strong> Whether pricing table is enabled. */
+        /** <strong>Required.</strong> Whether the pricing table is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;

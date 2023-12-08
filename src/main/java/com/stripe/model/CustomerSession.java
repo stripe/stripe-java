@@ -160,7 +160,7 @@ public class CustomerSession extends ApiResource {
       @SerializedName("enabled")
       Boolean enabled;
 
-      /** This hash contains the features the Payment Element supports. */
+      /** This hash defines whether the payment element supports certain features. */
       @SerializedName("features")
       Features features;
 
@@ -170,23 +170,31 @@ public class CustomerSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Whether the payment element supports detaching payment methods.
+         * Controls whether the Payment Element allows the removal of a saved payment method.
          *
          * <p>One of {@code auto}, or {@code never}.
          */
-        @SerializedName("payment_method_detach")
-        String paymentMethodDetach;
+        @SerializedName("payment_method_remove")
+        String paymentMethodRemove;
 
         /**
-         * Whether the payment element supports setting payment methods as the customer's default.
+         * Controls whether the Payment Element offers to save a new payment method.
          *
          * <p>One of {@code auto}, or {@code never}.
          */
-        @SerializedName("payment_method_set_as_customer_default")
-        String paymentMethodSetAsCustomerDefault;
+        @SerializedName("payment_method_save")
+        String paymentMethodSave;
 
         /**
-         * Whether the payment element supports updating payment methods.
+         * Controls whether the Payment Element offers to set a payment method as the default.
+         *
+         * <p>One of {@code auto}, or {@code never}.
+         */
+        @SerializedName("payment_method_set_as_default")
+        String paymentMethodSetAsDefault;
+
+        /**
+         * Controls whether the Payment Element allows the updating of a saved payment method.
          *
          * <p>One of {@code auto}, or {@code never}.
          */
