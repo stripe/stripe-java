@@ -1,5 +1,12 @@
 # Changelog
 
+## 24.8.0-beta.1 - 2023-12-08
+* [#1703](https://github.com/stripe/stripe-java/pull/1703) Update generated code for beta
+  * Add support for `retrieve` method on resource `FinancialConnections.Transaction`
+  * Remove support for `issuing_card` and `issuing_cards_list` on `AccountSessionCreateParams.components`
+  * Add support for `payment_method_remove`, `payment_method_save`, and `payment_method_set_as_default` on `CustomerSession.components.payment_element.features` and `CustomerSessionCreateParams.components.payment_element.features`
+  * Remove support for `payment_method_detach` and `payment_method_set_as_customer_default` on `CustomerSession.components.payment_element.features` and `CustomerSessionCreateParams.components.payment_element.features`
+
 ## 24.7.0 - 2023-12-07
 * [#1700](https://github.com/stripe/stripe-java/pull/1700) Update generated code
   * Add support for `payment_details`, `payments`, and `payouts` on `AccountSession.components` and `AccountSessionCreateParams.components`
