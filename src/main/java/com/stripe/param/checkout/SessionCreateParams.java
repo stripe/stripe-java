@@ -1297,6 +1297,13 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Determines the display of payment method reuse agreement text in the UI. If set to {@code
+     * hidden}, it will hide legal text related to the reuse of a payment method.
+     */
+    @SerializedName("payment_method_reuse_agreement")
+    PaymentMethodReuseAgreement paymentMethodReuseAgreement;
+
+    /**
      * If set to {@code auto}, enables the collection of customer consent for promotional
      * communications. The Checkout Session will determine whether to display an option to opt into
      * promotional communication from the merchant depending on the customer's locale. Only
@@ -1314,8 +1321,12 @@ public class SessionCreateParams extends ApiRequestParams {
     TermsOfService termsOfService;
 
     private ConsentCollection(
-        Map<String, Object> extraParams, Promotions promotions, TermsOfService termsOfService) {
+        Map<String, Object> extraParams,
+        PaymentMethodReuseAgreement paymentMethodReuseAgreement,
+        Promotions promotions,
+        TermsOfService termsOfService) {
       this.extraParams = extraParams;
+      this.paymentMethodReuseAgreement = paymentMethodReuseAgreement;
       this.promotions = promotions;
       this.termsOfService = termsOfService;
     }
@@ -1327,6 +1338,8 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private PaymentMethodReuseAgreement paymentMethodReuseAgreement;
+
       private Promotions promotions;
 
       private TermsOfService termsOfService;
@@ -1334,7 +1347,10 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.ConsentCollection build() {
         return new SessionCreateParams.ConsentCollection(
-            this.extraParams, this.promotions, this.termsOfService);
+            this.extraParams,
+            this.paymentMethodReuseAgreement,
+            this.promotions,
+            this.termsOfService);
       }
 
       /**
@@ -1364,6 +1380,17 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Determines the display of payment method reuse agreement text in the UI. If set to {@code
+       * hidden}, it will hide legal text related to the reuse of a payment method.
+       */
+      public Builder setPaymentMethodReuseAgreement(
+          SessionCreateParams.ConsentCollection.PaymentMethodReuseAgreement
+              paymentMethodReuseAgreement) {
+        this.paymentMethodReuseAgreement = paymentMethodReuseAgreement;
+        return this;
+      }
+
+      /**
        * If set to {@code auto}, enables the collection of customer consent for promotional
        * communications. The Checkout Session will determine whether to display an option to opt
        * into promotional communication from the merchant depending on the customer's locale. Only
@@ -1383,6 +1410,105 @@ public class SessionCreateParams extends ApiRequestParams {
           SessionCreateParams.ConsentCollection.TermsOfService termsOfService) {
         this.termsOfService = termsOfService;
         return this;
+      }
+    }
+
+    @Getter
+    public static class PaymentMethodReuseAgreement {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> Determines the position and visibility of the payment method
+       * reuse agreement in the UI. When set to {@code auto}, Stripe's defaults will be used. When
+       * set to {@code hidden}, the payment method reuse agreement text will always be hidden in the
+       * UI.
+       */
+      @SerializedName("position")
+      Position position;
+
+      private PaymentMethodReuseAgreement(Map<String, Object> extraParams, Position position) {
+        this.extraParams = extraParams;
+        this.position = position;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Position position;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.ConsentCollection.PaymentMethodReuseAgreement build() {
+          return new SessionCreateParams.ConsentCollection.PaymentMethodReuseAgreement(
+              this.extraParams, this.position);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionCreateParams.ConsentCollection.PaymentMethodReuseAgreement#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionCreateParams.ConsentCollection.PaymentMethodReuseAgreement#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Determines the position and visibility of the payment method
+         * reuse agreement in the UI. When set to {@code auto}, Stripe's defaults will be used. When
+         * set to {@code hidden}, the payment method reuse agreement text will always be hidden in
+         * the UI.
+         */
+        public Builder setPosition(
+            SessionCreateParams.ConsentCollection.PaymentMethodReuseAgreement.Position position) {
+          this.position = position;
+          return this;
+        }
+      }
+
+      public enum Position implements ApiRequestParams.EnumParam {
+        @SerializedName("auto")
+        AUTO("auto"),
+
+        @SerializedName("hidden")
+        HIDDEN("hidden");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Position(String value) {
+          this.value = value;
+        }
       }
     }
 
@@ -2076,6 +2202,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class CustomText {
+    /** Custom text that should be displayed after the payment confirmation button. */
+    @SerializedName("after_submit")
+    Object afterSubmit;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -2100,10 +2230,12 @@ public class SessionCreateParams extends ApiRequestParams {
     Object termsOfServiceAcceptance;
 
     private CustomText(
+        Object afterSubmit,
         Map<String, Object> extraParams,
         Object shippingAddress,
         Object submit,
         Object termsOfServiceAcceptance) {
+      this.afterSubmit = afterSubmit;
       this.extraParams = extraParams;
       this.shippingAddress = shippingAddress;
       this.submit = submit;
@@ -2115,6 +2247,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object afterSubmit;
+
       private Map<String, Object> extraParams;
 
       private Object shippingAddress;
@@ -2126,7 +2260,23 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.CustomText build() {
         return new SessionCreateParams.CustomText(
-            this.extraParams, this.shippingAddress, this.submit, this.termsOfServiceAcceptance);
+            this.afterSubmit,
+            this.extraParams,
+            this.shippingAddress,
+            this.submit,
+            this.termsOfServiceAcceptance);
+      }
+
+      /** Custom text that should be displayed after the payment confirmation button. */
+      public Builder setAfterSubmit(SessionCreateParams.CustomText.AfterSubmit afterSubmit) {
+        this.afterSubmit = afterSubmit;
+        return this;
+      }
+
+      /** Custom text that should be displayed after the payment confirmation button. */
+      public Builder setAfterSubmit(EmptyParam afterSubmit) {
+        this.afterSubmit = afterSubmit;
+        return this;
       }
 
       /**
@@ -2197,6 +2347,76 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setTermsOfServiceAcceptance(EmptyParam termsOfServiceAcceptance) {
         this.termsOfServiceAcceptance = termsOfServiceAcceptance;
         return this;
+      }
+    }
+
+    @Getter
+    public static class AfterSubmit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      @SerializedName("message")
+      String message;
+
+      private AfterSubmit(Map<String, Object> extraParams, String message) {
+        this.extraParams = extraParams;
+        this.message = message;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String message;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.CustomText.AfterSubmit build() {
+          return new SessionCreateParams.CustomText.AfterSubmit(this.extraParams, this.message);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CustomText.AfterSubmit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CustomText.AfterSubmit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        public Builder setMessage(String message) {
+          this.message = message;
+          return this;
+        }
       }
     }
 

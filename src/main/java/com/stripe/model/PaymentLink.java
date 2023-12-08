@@ -552,6 +552,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ConsentCollection extends StripeObject {
+    /** Settings related to the payment method reuse text shown in the Checkout UI. */
+    @SerializedName("payment_method_reuse_agreement")
+    PaymentMethodReuseAgreement paymentMethodReuseAgreement;
+
     /**
      * If set to {@code auto}, enables the collection of customer consent for promotional
      * communications.
@@ -570,6 +574,23 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("terms_of_service")
     String termsOfService;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodReuseAgreement extends StripeObject {
+      /**
+       * Determines the position and visibility of the payment method reuse agreement in the UI.
+       * When set to {@code auto}, Stripe's defaults will be used.
+       *
+       * <p>When set to {@code hidden}, the payment method reuse agreement text will always be
+       * hidden in the UI.
+       *
+       * <p>One of {@code auto}, or {@code hidden}.
+       */
+      @SerializedName("position")
+      String position;
+    }
   }
 
   @Getter
@@ -684,6 +705,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomText extends StripeObject {
+    /** Custom text that should be displayed after the payment confirmation button. */
+    @SerializedName("after_submit")
+    AfterSubmit afterSubmit;
+
     /** Custom text that should be displayed alongside shipping address collection. */
     @SerializedName("shipping_address")
     ShippingAddress shippingAddress;
@@ -697,6 +722,15 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("terms_of_service_acceptance")
     TermsOfServiceAcceptance termsOfServiceAcceptance;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AfterSubmit extends StripeObject {
+      /** Text may be up to 1200 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
 
     @Getter
     @Setter
