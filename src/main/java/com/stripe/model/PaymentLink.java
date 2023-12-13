@@ -117,6 +117,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("id")
   String id;
 
+  /** The custom message to be displayed to a customer when a payment link is no longer active. */
+  @SerializedName("inactive_message")
+  String inactiveMessage;
+
   /** Configuration for creating invoice for payment mode payment links. */
   @SerializedName("invoice_creation")
   InvoiceCreation invoiceCreation;
@@ -181,6 +185,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
   @SerializedName("phone_number_collection")
   PhoneNumberCollection phoneNumberCollection;
+
+  /** Settings that restrict the usage of a payment link. */
+  @SerializedName("restrictions")
+  Restrictions restrictions;
 
   /** Configuration for collecting the customer's shipping address. */
   @SerializedName("shipping_address_collection")
@@ -880,6 +888,14 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("statement_descriptor_suffix")
     String statementDescriptorSuffix;
+
+    /**
+     * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+     * accounts</a> for details.
+     */
+    @SerializedName("transfer_group")
+    String transferGroup;
   }
 
   @Getter
@@ -889,6 +905,33 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /** If {@code true}, a phone number will be collected during checkout. */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Restrictions extends StripeObject {
+    @SerializedName("completed_sessions")
+    CompletedSessions completedSessions;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CompletedSessions extends StripeObject {
+      /**
+       * The current number of checkout sessions that have been completed on the payment link which
+       * count towards the {@code completed_sessions} restriction to be met.
+       */
+      @SerializedName("count")
+      Long count;
+
+      /**
+       * The maximum number of checkout sessions that can be completed for the {@code
+       * completed_sessions} restriction to be met.
+       */
+      @SerializedName("limit")
+      Long limit;
+    }
   }
 
   @Getter
@@ -964,6 +1007,35 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
+
+    /** Settings related to subscription trials. */
+    @SerializedName("trial_settings")
+    TrialSettings trialSettings;
+
+    /** Configures how this subscription behaves during the trial period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TrialSettings extends StripeObject {
+      /** Defines how a subscription behaves when a free trial ends. */
+      @SerializedName("end_behavior")
+      EndBehavior endBehavior;
+
+      /** Defines how a subscription behaves when a free trial ends. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EndBehavior extends StripeObject {
+        /**
+         * Indicates how the subscription should change when the trial ends if the user did not
+         * provide a payment method.
+         *
+         * <p>One of {@code cancel}, {@code create_invoice}, or {@code pause}.
+         */
+        @SerializedName("missing_payment_method")
+        String missingPaymentMethod;
+      }
+    }
   }
 
   @Getter
@@ -1024,6 +1096,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntentData, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
+    trySetResponseGetter(restrictions, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(subscriptionData, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
