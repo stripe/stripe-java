@@ -100,8 +100,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   String schedule;
 
   /**
-   * The schedule creation or modification params to apply as a preview. Cannot be used with
-   * subscription or subscription fields.
+   * The schedule creation or modification params to apply as a preview. Cannot be used with {@code
+   * subscription} or {@code subscription_} prefixed fields.
    */
   @SerializedName("schedule_details")
   ScheduleDetails scheduleDetails;
@@ -127,8 +127,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   Object subscriptionBillingCycleAnchor;
 
   /**
-   * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-   * within the current period and prorations have been enabled using {@code proration_behavior}.
+   * A timestamp at which the subscription should cancel. If set to a date before the current period
+   * ends, this will cause a proration if prorations have been enabled using {@code
+   * proration_behavior}. If set during a future period, this will always cause a proration for that
+   * period.
    */
   @SerializedName("subscription_cancel_at")
   Object subscriptionCancelAt;
@@ -576,7 +578,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * The schedule creation or modification params to apply as a preview. Cannot be used with
-     * subscription or subscription fields.
+     * {@code subscription} or {@code subscription_} prefixed fields.
      */
     public Builder setScheduleDetails(InvoiceUpcomingParams.ScheduleDetails scheduleDetails) {
       this.scheduleDetails = scheduleDetails;
@@ -621,8 +623,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period and prorations have been enabled using {@code proration_behavior}.
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
      */
     public Builder setSubscriptionCancelAt(Long subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;
@@ -630,8 +634,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period and prorations have been enabled using {@code proration_behavior}.
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
      */
     public Builder setSubscriptionCancelAt(EmptyParam subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;
