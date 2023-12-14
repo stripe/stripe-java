@@ -818,7 +818,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
       @SerializedName("features")
       Features features;
 
@@ -879,7 +878,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.Payouts.Features features) {
           this.features = features;

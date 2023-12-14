@@ -855,6 +855,12 @@ public class Session extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ConsentCollection extends StripeObject {
     /**
+     * If set to {@code hidden}, it will hide legal text related to the reuse of a payment method.
+     */
+    @SerializedName("payment_method_reuse_agreement")
+    PaymentMethodReuseAgreement paymentMethodReuseAgreement;
+
+    /**
      * If set to {@code auto}, enables the collection of customer consent for promotional
      * communications. The Checkout Session will determine whether to display an option to opt into
      * promotional communication from the merchant depending on the customer's locale. Only
@@ -873,6 +879,23 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("terms_of_service")
     String termsOfService;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodReuseAgreement extends StripeObject {
+      /**
+       * Determines the position and visibility of the payment method reuse agreement in the UI.
+       * When set to {@code auto}, Stripe's defaults will be used.
+       *
+       * <p>When set to {@code hidden}, the payment method reuse agreement text will always be
+       * hidden in the UI.
+       *
+       * <p>One of {@code auto}, or {@code hidden}.
+       */
+      @SerializedName("position")
+      String position;
+    }
   }
 
   @Getter
@@ -1020,6 +1043,10 @@ public class Session extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomText extends StripeObject {
+    /** Custom text that should be displayed after the payment confirmation button. */
+    @SerializedName("after_submit")
+    AfterSubmit afterSubmit;
+
     /** Custom text that should be displayed alongside shipping address collection. */
     @SerializedName("shipping_address")
     ShippingAddress shippingAddress;
@@ -1033,6 +1060,15 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("terms_of_service_acceptance")
     TermsOfServiceAcceptance termsOfServiceAcceptance;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AfterSubmit extends StripeObject {
+      /** Text may be up to 1200 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
 
     @Getter
     @Setter

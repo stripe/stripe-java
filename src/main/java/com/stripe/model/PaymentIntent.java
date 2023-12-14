@@ -131,6 +131,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("client_secret")
   String clientSecret;
 
+  /**
+   * Describes whether we can confirm this PaymentIntent automatically, or if it requires customer
+   * action to confirm the payment.
+   *
+   * <p>One of {@code automatic}, or {@code manual}.
+   */
   @SerializedName("confirmation_method")
   String confirmationMethod;
 
