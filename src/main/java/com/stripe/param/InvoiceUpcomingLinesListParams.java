@@ -3697,6 +3697,26 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     List<InvoiceUpcomingLinesListParams.ScheduleDetails.Amendment> amendments;
 
     /**
+     * Configures when the subscription schedule generates prorations for phase transitions.
+     * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
+     * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
+     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
+     * phases within the current billing cycle up front.
+     */
+    @SerializedName("billing_behavior")
+    BillingBehavior billingBehavior;
+
+    /**
+     * Behavior of the subscription schedule and underlying subscription when it ends. Possible
+     * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
+     * release} will end the subscription schedule and keep the underlying subscription
+     * running.{@code cancel} will end the subscription schedule and cancel the underlying
+     * subscription.
+     */
+    @SerializedName("end_behavior")
+    EndBehavior endBehavior;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -3717,15 +3737,28 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     @SerializedName("prebilling")
     Object prebilling;
 
+    /**
+     * In cases where the {@code schedule_details} params update the currently active phase,
+     * specifies if and how to prorate at the time of the request.
+     */
+    @SerializedName("proration_behavior")
+    ProrationBehavior prorationBehavior;
+
     private ScheduleDetails(
         List<InvoiceUpcomingLinesListParams.ScheduleDetails.Amendment> amendments,
+        BillingBehavior billingBehavior,
+        EndBehavior endBehavior,
         Map<String, Object> extraParams,
         List<InvoiceUpcomingLinesListParams.ScheduleDetails.Phase> phases,
-        Object prebilling) {
+        Object prebilling,
+        ProrationBehavior prorationBehavior) {
       this.amendments = amendments;
+      this.billingBehavior = billingBehavior;
+      this.endBehavior = endBehavior;
       this.extraParams = extraParams;
       this.phases = phases;
       this.prebilling = prebilling;
+      this.prorationBehavior = prorationBehavior;
     }
 
     public static Builder builder() {
@@ -3735,16 +3768,28 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     public static class Builder {
       private List<InvoiceUpcomingLinesListParams.ScheduleDetails.Amendment> amendments;
 
+      private BillingBehavior billingBehavior;
+
+      private EndBehavior endBehavior;
+
       private Map<String, Object> extraParams;
 
       private List<InvoiceUpcomingLinesListParams.ScheduleDetails.Phase> phases;
 
       private Object prebilling;
 
+      private ProrationBehavior prorationBehavior;
+
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceUpcomingLinesListParams.ScheduleDetails build() {
         return new InvoiceUpcomingLinesListParams.ScheduleDetails(
-            this.amendments, this.extraParams, this.phases, this.prebilling);
+            this.amendments,
+            this.billingBehavior,
+            this.endBehavior,
+            this.extraParams,
+            this.phases,
+            this.prebilling,
+            this.prorationBehavior);
       }
 
       /**
@@ -3772,6 +3817,32 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
           this.amendments = new ArrayList<>();
         }
         this.amendments.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Configures when the subscription schedule generates prorations for phase transitions.
+       * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
+       * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
+       * changes and generate prorations at transition time.{@code prorate_up_front} will bill for
+       * all phases within the current billing cycle up front.
+       */
+      public Builder setBillingBehavior(
+          InvoiceUpcomingLinesListParams.ScheduleDetails.BillingBehavior billingBehavior) {
+        this.billingBehavior = billingBehavior;
+        return this;
+      }
+
+      /**
+       * Behavior of the subscription schedule and underlying subscription when it ends. Possible
+       * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
+       * release} will end the subscription schedule and keep the underlying subscription
+       * running.{@code cancel} will end the subscription schedule and cancel the underlying
+       * subscription.
+       */
+      public Builder setEndBehavior(
+          InvoiceUpcomingLinesListParams.ScheduleDetails.EndBehavior endBehavior) {
+        this.endBehavior = endBehavior;
         return this;
       }
 
@@ -3873,6 +3944,16 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       public Builder setPrebilling(
           List<InvoiceUpcomingLinesListParams.ScheduleDetails.Prebilling> prebilling) {
         this.prebilling = prebilling;
+        return this;
+      }
+
+      /**
+       * In cases where the {@code schedule_details} params update the currently active phase,
+       * specifies if and how to prorate at the time of the request.
+       */
+      public Builder setProrationBehavior(
+          InvoiceUpcomingLinesListParams.ScheduleDetails.ProrationBehavior prorationBehavior) {
+        this.prorationBehavior = prorationBehavior;
         return this;
       }
     }
@@ -12558,6 +12639,54 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
             this.value = value;
           }
         }
+      }
+    }
+
+    public enum BillingBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("prorate_on_next_phase")
+      PRORATE_ON_NEXT_PHASE("prorate_on_next_phase"),
+
+      @SerializedName("prorate_up_front")
+      PRORATE_UP_FRONT("prorate_up_front");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingBehavior(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum EndBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("cancel")
+      CANCEL("cancel"),
+
+      @SerializedName("release")
+      RELEASE("release");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EndBehavior(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("always_invoice")
+      ALWAYS_INVOICE("always_invoice"),
+
+      @SerializedName("create_prorations")
+      CREATE_PRORATIONS("create_prorations"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ProrationBehavior(String value) {
+        this.value = value;
       }
     }
   }
