@@ -818,14 +818,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
-      @SerializedName("features")
-      Features features;
-
-      private Payouts(Boolean enabled, Map<String, Object> extraParams, Features features) {
+      private Payouts(Boolean enabled, Map<String, Object> extraParams) {
         this.enabled = enabled;
         this.extraParams = extraParams;
-        this.features = features;
       }
 
       public static Builder builder() {
@@ -837,12 +832,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private Features features;
-
         /** Finalize and obtain parameter instance from this builder. */
         public AccountSessionCreateParams.Components.Payouts build() {
-          return new AccountSessionCreateParams.Components.Payouts(
-              this.enabled, this.extraParams, this.features);
+          return new AccountSessionCreateParams.Components.Payouts(this.enabled, this.extraParams);
         }
 
         /** <strong>Required.</strong> Whether the embedded component is enabled. */
@@ -877,71 +869,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
-        }
-
-        /** The list of features enabled in the embedded component. */
-        public Builder setFeatures(
-            AccountSessionCreateParams.Components.Payouts.Features features) {
-          this.features = features;
-          return this;
-        }
-      }
-
-      @Getter
-      public static class Features {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        private Features(Map<String, Object> extraParams) {
-          this.extraParams = extraParams;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public AccountSessionCreateParams.Components.Payouts.Features build() {
-            return new AccountSessionCreateParams.Components.Payouts.Features(this.extraParams);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link AccountSessionCreateParams.Components.Payouts.Features#extraParams} for
-           * the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link AccountSessionCreateParams.Components.Payouts.Features#extraParams} for
-           * the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
         }
       }
     }
