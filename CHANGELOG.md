@@ -1,5 +1,11 @@
 # Changelog
 
+## 24.8.0 - 2023-12-14
+* [#1704](https://github.com/stripe/stripe-java/pull/1704) Update generated code
+  * Add support for `payment_method_reuse_agreement` on `Checkout.Session.consent_collection`, `PaymentLink.consent_collection`, `PaymentLinkCreateParams.consent_collection`, and `checkout.SessionCreateParams.consent_collection`
+  * Add support for `after_submit` on `Checkout.Session.custom_text`, `PaymentLink.custom_text`, `PaymentLinkCreateParams.custom_text`, `PaymentLinkUpdateParams.custom_text`, and 
+  * Add support for `created` on `radar.EarlyFraudWarningListParams`
+
 ## 24.7.0 - 2023-12-07
 * [#1700](https://github.com/stripe/stripe-java/pull/1700) Update generated code
   * Add support for `payment_details`, `payments`, and `payouts` on `AccountSession.components` and `AccountSessionCreateParams.components`
