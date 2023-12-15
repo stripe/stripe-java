@@ -48,6 +48,10 @@ public class CalculationCreateParams extends ApiRequestParams {
   @SerializedName("line_items")
   List<CalculationCreateParams.LineItem> lineItems;
 
+  /** Details about the address from which the goods are being shippped. */
+  @SerializedName("ship_from_details")
+  ShipFromDetails shipFromDetails;
+
   /** Shipping cost details to be used for the calculation. */
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
@@ -67,6 +71,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       List<CalculationCreateParams.LineItem> lineItems,
+      ShipFromDetails shipFromDetails,
       ShippingCost shippingCost,
       Long taxDate) {
     this.currency = currency;
@@ -75,6 +80,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.lineItems = lineItems;
+    this.shipFromDetails = shipFromDetails;
     this.shippingCost = shippingCost;
     this.taxDate = taxDate;
   }
@@ -96,6 +102,8 @@ public class CalculationCreateParams extends ApiRequestParams {
 
     private List<CalculationCreateParams.LineItem> lineItems;
 
+    private ShipFromDetails shipFromDetails;
+
     private ShippingCost shippingCost;
 
     private Long taxDate;
@@ -109,6 +117,7 @@ public class CalculationCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.lineItems,
+          this.shipFromDetails,
           this.shippingCost,
           this.taxDate);
     }
@@ -213,6 +222,12 @@ public class CalculationCreateParams extends ApiRequestParams {
         this.lineItems = new ArrayList<>();
       }
       this.lineItems.addAll(elements);
+      return this;
+    }
+
+    /** Details about the address from which the goods are being shippped. */
+    public Builder setShipFromDetails(CalculationCreateParams.ShipFromDetails shipFromDetails) {
+      this.shipFromDetails = shipFromDetails;
       return this;
     }
 
@@ -1144,6 +1159,269 @@ public class CalculationCreateParams extends ApiRequestParams {
 
       TaxBehavior(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class ShipFromDetails {
+    /** <strong>Required.</strong> The address from which the goods are being shipped from. */
+    @SerializedName("address")
+    Address address;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ShipFromDetails(Address address, Map<String, Object> extraParams) {
+      this.address = address;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Address address;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CalculationCreateParams.ShipFromDetails build() {
+        return new CalculationCreateParams.ShipFromDetails(this.address, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> The address from which the goods are being shipped from. */
+      public Builder setAddress(CalculationCreateParams.ShipFromDetails.Address address) {
+        this.address = address;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CalculationCreateParams.ShipFromDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CalculationCreateParams.ShipFromDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Address {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      Object city;
+
+      /**
+       * <strong>Required.</strong> Two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      Object line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      Object line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      Object postalCode;
+
+      /**
+       * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
+       * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+       */
+      @SerializedName("state")
+      Object state;
+
+      private Address(
+          Object city,
+          String country,
+          Map<String, Object> extraParams,
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object city;
+
+        private String country;
+
+        private Map<String, Object> extraParams;
+
+        private Object line1;
+
+        private Object line2;
+
+        private Object postalCode;
+
+        private Object state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CalculationCreateParams.ShipFromDetails.Address build() {
+          return new CalculationCreateParams.ShipFromDetails.Address(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CalculationCreateParams.ShipFromDetails.Address#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CalculationCreateParams.ShipFromDetails.Address#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(EmptyParam line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /**
+         * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
+         * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+         */
+        public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /**
+         * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
+         * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+         */
+        public Builder setState(EmptyParam state) {
+          this.state = state;
+          return this;
+        }
       }
     }
   }
