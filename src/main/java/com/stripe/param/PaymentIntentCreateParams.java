@@ -56,6 +56,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("confirm")
   Boolean confirm;
 
+  /**
+   * Describes whether we can confirm this PaymentIntent automatically, or if it requires customer
+   * action to confirm the payment.
+   */
   @SerializedName("confirmation_method")
   ConfirmationMethod confirmationMethod;
 
@@ -540,6 +544,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Describes whether we can confirm this PaymentIntent automatically, or if it requires customer
+     * action to confirm the payment.
+     */
     public Builder setConfirmationMethod(
         PaymentIntentCreateParams.ConfirmationMethod confirmationMethod) {
       this.confirmationMethod = confirmationMethod;
