@@ -1,5 +1,11 @@
 # Changelog
 
+## 24.9.0-beta.1 - 2023-12-14
+* [#1706](https://github.com/stripe/stripe-java/pull/1706) Update generated code for beta
+  * Add support for `preview_mode` and `subscription_details` on `InvoiceUpcomingLinesParams` and `InvoiceUpcomingParams`
+  * Remove support for `subscription_trial_from_plan` on `InvoiceUpcomingLinesParams` and `InvoiceUpcomingParams`
+  * Add support for `billing_behavior`, `end_behavior`, and `proration_behavior` on `InvoiceUpcomingLinesParams.schedule_details` and `InvoiceUpcomingParams.schedule_details`
+
 ## 24.8.0 - 2023-12-14
 * [#1704](https://github.com/stripe/stripe-java/pull/1704) Update generated code
   * Add support for `payment_method_reuse_agreement` on `Checkout.Session.consent_collection`, `PaymentLink.consent_collection`, `PaymentLinkCreateParams.consent_collection`, and `checkout.SessionCreateParams.consent_collection`
