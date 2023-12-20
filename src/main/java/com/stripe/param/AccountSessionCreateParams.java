@@ -818,6 +818,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** The list of features enabled in the embedded component. */
       @SerializedName("features")
       Features features;
 
@@ -878,6 +879,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The list of features enabled in the embedded component. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.Payouts.Features features) {
           this.features = features;
@@ -888,6 +890,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
+         * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
+         * Loss Liability, default {@code false} otherwise.
+         */
+        @SerializedName("edit_payout_schedule")
+        Boolean editPayoutSchedule;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -897,8 +906,29 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Map<String, Object> extraParams) {
+        /**
+         * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns Loss
+         * Liability, default {@code false} otherwise.
+         */
+        @SerializedName("instant_payouts")
+        Boolean instantPayouts;
+
+        /**
+         * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns Loss
+         * Liability, default {@code false} otherwise.
+         */
+        @SerializedName("standard_payouts")
+        Boolean standardPayouts;
+
+        private Features(
+            Boolean editPayoutSchedule,
+            Map<String, Object> extraParams,
+            Boolean instantPayouts,
+            Boolean standardPayouts) {
+          this.editPayoutSchedule = editPayoutSchedule;
           this.extraParams = extraParams;
+          this.instantPayouts = instantPayouts;
+          this.standardPayouts = standardPayouts;
         }
 
         public static Builder builder() {
@@ -906,11 +936,30 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean editPayoutSchedule;
+
           private Map<String, Object> extraParams;
+
+          private Boolean instantPayouts;
+
+          private Boolean standardPayouts;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.Payouts.Features build() {
-            return new AccountSessionCreateParams.Components.Payouts.Features(this.extraParams);
+            return new AccountSessionCreateParams.Components.Payouts.Features(
+                this.editPayoutSchedule,
+                this.extraParams,
+                this.instantPayouts,
+                this.standardPayouts);
+          }
+
+          /**
+           * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
+           * Loss Liability, default {@code false} otherwise.
+           */
+          public Builder setEditPayoutSchedule(Boolean editPayoutSchedule) {
+            this.editPayoutSchedule = editPayoutSchedule;
+            return this;
           }
 
           /**
@@ -938,6 +987,24 @@ public class AccountSessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns
+           * Loss Liability, default {@code false} otherwise.
+           */
+          public Builder setInstantPayouts(Boolean instantPayouts) {
+            this.instantPayouts = instantPayouts;
+            return this;
+          }
+
+          /**
+           * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns
+           * Loss Liability, default {@code false} otherwise.
+           */
+          public Builder setStandardPayouts(Boolean standardPayouts) {
+            this.standardPayouts = standardPayouts;
             return this;
           }
         }
