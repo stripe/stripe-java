@@ -242,7 +242,28 @@ public class AccountSession extends ApiResource {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
+         * Loss Liability, default {@code false} otherwise.
+         */
+        @SerializedName("edit_payout_schedule")
+        Boolean editPayoutSchedule;
+
+        /**
+         * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns Loss
+         * Liability, default {@code false} otherwise.
+         */
+        @SerializedName("instant_payouts")
+        Boolean instantPayouts;
+
+        /**
+         * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns Loss
+         * Liability, default {@code false} otherwise.
+         */
+        @SerializedName("standard_payouts")
+        Boolean standardPayouts;
+      }
     }
   }
 
