@@ -16,4 +16,8 @@ public final class FinancialConnectionsService extends ApiService {
   public com.stripe.service.financialconnections.SessionService sessions() {
     return new com.stripe.service.financialconnections.SessionService(this.getResponseGetter());
   }
+
+  public com.stripe.service.financialconnections.TransactionService transactions() {
+    return new com.stripe.service.financialconnections.TransactionService(this.getResponseGetter());
+  }
 }

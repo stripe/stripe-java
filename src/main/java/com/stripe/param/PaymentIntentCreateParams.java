@@ -14280,7 +14280,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         public enum Prefetch implements ApiRequestParams.EnumParam {
           @SerializedName("balances")
-          BALANCES("balances");
+          BALANCES("balances"),
+
+          @SerializedName("transactions")
+          TRANSACTIONS("transactions");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

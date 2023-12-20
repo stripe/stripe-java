@@ -16,6 +16,8 @@ import com.stripe.param.financialconnections.AccountDisconnectParams;
 import com.stripe.param.financialconnections.AccountListParams;
 import com.stripe.param.financialconnections.AccountRefreshParams;
 import com.stripe.param.financialconnections.AccountRetrieveParams;
+import com.stripe.param.financialconnections.AccountSubscribeParams;
+import com.stripe.param.financialconnections.AccountUnsubscribeParams;
 
 public final class AccountService extends ApiService {
   public AccountService(StripeResponseGetter responseGetter) {
@@ -125,6 +127,60 @@ public final class AccountService extends ApiService {
     String path =
         String.format(
             "/v1/financial_connections/accounts/%s/disconnect", ApiResource.urlEncodeId(account));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Account.class,
+            options,
+            ApiMode.V1);
+  }
+  /**
+   * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public Account subscribe(String account, AccountSubscribeParams params) throws StripeException {
+    return subscribe(account, params, (RequestOptions) null);
+  }
+  /**
+   * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public Account subscribe(String account, AccountSubscribeParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/subscribe", ApiResource.urlEncodeId(account));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Account.class,
+            options,
+            ApiMode.V1);
+  }
+  /**
+   * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public Account unsubscribe(String account, AccountUnsubscribeParams params)
+      throws StripeException {
+    return unsubscribe(account, params, (RequestOptions) null);
+  }
+  /**
+   * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public Account unsubscribe(
+      String account, AccountUnsubscribeParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/unsubscribe", ApiResource.urlEncodeId(account));
     return getResponseGetter()
         .request(
             BaseAddress.API,
