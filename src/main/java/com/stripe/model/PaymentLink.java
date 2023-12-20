@@ -1116,7 +1116,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("description")
     String description;
 
-    /** All invoices will be billed using the specified settings. */
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
