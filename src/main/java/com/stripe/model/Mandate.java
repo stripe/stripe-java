@@ -342,7 +342,15 @@ public class Mandate extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {}
+    public static class UsBankAccount extends StripeObject {
+      /**
+       * Mandate collection method
+       *
+       * <p>Equal to {@code paper}.
+       */
+      @SerializedName("collection_method")
+      String collectionMethod;
+    }
   }
 
   @Getter
