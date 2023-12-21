@@ -3967,6 +3967,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
 
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Preferred transaction settlement speed
        *
@@ -4040,6 +4043,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("mode")
           String mode;
         }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Mandate collection method
+         *
+         * <p>Equal to {@code paper}.
+         */
+        @SerializedName("collection_method")
+        String collectionMethod;
       }
     }
 
