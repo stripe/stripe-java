@@ -347,7 +347,8 @@ public class Session extends ApiResource implements HasId {
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
    * Checkout Sessions in {@code payment} mode, but not Checkout Sessions in {@code subscription} or
-   * {@code setup} mode.
+   * {@code setup} mode. Possible values are {@code auto}, {@code pay}, {@code book}, {@code
+   * donate}. If blank or {@code auto}, {@code pay} is used.
    *
    * <p>One of {@code auto}, {@code book}, {@code donate}, or {@code pay}.
    */
