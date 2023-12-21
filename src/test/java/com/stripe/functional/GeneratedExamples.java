@@ -10390,6 +10390,60 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testTaxSettingsGet() throws StripeException {
+    com.stripe.model.tax.Settings settings = com.stripe.model.tax.Settings.retrieve();
+    assertNotNull(settings);
+    verifyRequest(BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/tax/settings", null, null);
+  }
+
+  @Test
+  public void testTaxSettingsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.SettingsRetrieveParams params =
+        com.stripe.param.tax.SettingsRetrieveParams.builder().build();
+
+    com.stripe.model.tax.Settings settings = client.tax().settings().retrieve(params);
+    assertNotNull(settings);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/tax/settings", params.toMap(), null);
+  }
+
+  @Test
+  public void testTaxSettingsPost() throws StripeException {
+    com.stripe.param.tax.SettingsUpdateParams params =
+        com.stripe.param.tax.SettingsUpdateParams.builder()
+            .setDefaults(
+                com.stripe.param.tax.SettingsUpdateParams.Defaults.builder()
+                    .setTaxCode("txcd_10000000")
+                    .build())
+            .build();
+
+    com.stripe.model.tax.Settings settings = com.stripe.model.tax.Settings.update(params);
+    assertNotNull(settings);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.POST, "/v1/tax/settings", params.toMap(), null);
+  }
+
+  @Test
+  public void testTaxSettingsPostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.SettingsUpdateParams params =
+        com.stripe.param.tax.SettingsUpdateParams.builder()
+            .setDefaults(
+                com.stripe.param.tax.SettingsUpdateParams.Defaults.builder()
+                    .setTaxCode("txcd_10000000")
+                    .build())
+            .build();
+
+    com.stripe.model.tax.Settings settings = client.tax().settings().update(params);
+    assertNotNull(settings);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.POST, "/v1/tax/settings", params.toMap(), null);
+  }
+
+  @Test
   public void testTaxTransactionsCreateFromCalculationPost() throws StripeException {
     com.stripe.param.tax.TransactionCreateFromCalculationParams params =
         com.stripe.param.tax.TransactionCreateFromCalculationParams.builder()
