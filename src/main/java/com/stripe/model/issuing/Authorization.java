@@ -972,7 +972,8 @@ public class Authorization extends ApiResource
       /**
        * The specific exemption claimed for this authorization.
        *
-       * <p>One of {@code low_value_transaction}, or {@code transaction_risk_analysis}.
+       * <p>One of {@code low_value_transaction}, {@code transaction_risk_analysis}, or {@code
+       * unknown}.
        */
       @SerializedName("type")
       String type;

@@ -294,6 +294,14 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   Promptpay promptpay;
 
   /**
+   * Revolut Pay, developed by Revolut, a global finance app, is a digital wallet payment method.
+   * Revolut Pay uses the customer’s stored balance or cards to fund the payment, and offers the
+   * option for non-Revolut customers to save their details after their first purchase.
+   */
+  @SerializedName("revolut_pay")
+  RevolutPay revolutPay;
+
+  /**
    * The <a href="https://en.wikipedia.org/wiki/Single_Euro_Payments_Area">Single Euro Payments Area
    * (SEPA)</a> is an initiative of the European Union to simplify payments within and across member
    * countries. SEPA established and enforced banking standards to allow for the direct debiting of
@@ -365,6 +373,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
       Paynow paynow,
       Paypal paypal,
       Promptpay promptpay,
+      RevolutPay revolutPay,
       SepaDebit sepaDebit,
       Sofort sofort,
       UsBankAccount usBankAccount,
@@ -402,6 +411,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     this.paynow = paynow;
     this.paypal = paypal;
     this.promptpay = promptpay;
+    this.revolutPay = revolutPay;
     this.sepaDebit = sepaDebit;
     this.sofort = sofort;
     this.usBankAccount = usBankAccount;
@@ -479,6 +489,8 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
 
     private Promptpay promptpay;
 
+    private RevolutPay revolutPay;
+
     private SepaDebit sepaDebit;
 
     private Sofort sofort;
@@ -523,6 +535,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
           this.paynow,
           this.paypal,
           this.promptpay,
+          this.revolutPay,
           this.sepaDebit,
           this.sofort,
           this.usBankAccount,
@@ -913,6 +926,16 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
      */
     public Builder setPromptpay(PaymentMethodConfigurationCreateParams.Promptpay promptpay) {
       this.promptpay = promptpay;
+      return this;
+    }
+
+    /**
+     * Revolut Pay, developed by Revolut, a global finance app, is a digital wallet payment method.
+     * Revolut Pay uses the customer’s stored balance or cards to fund the payment, and offers the
+     * option for non-Revolut customers to save their details after their first purchase.
+     */
+    public Builder setRevolutPay(PaymentMethodConfigurationCreateParams.RevolutPay revolutPay) {
+      this.revolutPay = revolutPay;
       return this;
     }
 
@@ -5678,6 +5701,170 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationCreateParams.Promptpay.DisplayPreference.Preference
+                preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class RevolutPay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private RevolutPay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationCreateParams.RevolutPay build() {
+        return new PaymentMethodConfigurationCreateParams.RevolutPay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationCreateParams.RevolutPay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationCreateParams.RevolutPay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationCreateParams.RevolutPay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationCreateParams.RevolutPay.DisplayPreference build() {
+          return new PaymentMethodConfigurationCreateParams.RevolutPay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.RevolutPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.RevolutPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationCreateParams.RevolutPay.DisplayPreference.Preference
                 preference) {
           this.preference = preference;
           return this;

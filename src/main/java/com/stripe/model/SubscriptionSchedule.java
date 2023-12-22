@@ -884,10 +884,6 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("days_until_due")
       Long daysUntilDue;
 
-      /**
-       * The connected account that issues the invoice. The invoice is presented with the branding
-       * and support information of the specified account.
-       */
       @SerializedName("issuer")
       Issuer issuer;
 

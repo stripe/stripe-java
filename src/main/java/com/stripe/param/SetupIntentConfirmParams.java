@@ -6224,7 +6224,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         ANY("any"),
 
         @SerializedName("automatic")
-        AUTOMATIC("automatic");
+        AUTOMATIC("automatic"),
+
+        @SerializedName("challenge")
+        CHALLENGE("challenge");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -6586,6 +6589,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
 
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /** Additional fields for network related functions. */
       @SerializedName("networks")
       Networks networks;
@@ -6597,10 +6604,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       private UsBankAccount(
           Map<String, Object> extraParams,
           FinancialConnections financialConnections,
+          MandateOptions mandateOptions,
           Networks networks,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.financialConnections = financialConnections;
+        this.mandateOptions = mandateOptions;
         this.networks = networks;
         this.verificationMethod = verificationMethod;
       }
@@ -6614,6 +6623,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private FinancialConnections financialConnections;
 
+        private MandateOptions mandateOptions;
+
         private Networks networks;
 
         private VerificationMethod verificationMethod;
@@ -6621,7 +6632,11 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount build() {
           return new SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount(
-              this.extraParams, this.financialConnections, this.networks, this.verificationMethod);
+              this.extraParams,
+              this.financialConnections,
+              this.mandateOptions,
+              this.networks,
+              this.verificationMethod);
         }
 
         /**
@@ -6657,6 +6672,14 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
                 financialConnections) {
           this.financialConnections = financialConnections;
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.MandateOptions
+                mandateOptions) {
+          this.mandateOptions = mandateOptions;
           return this;
         }
 
@@ -7025,6 +7048,103 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           private final String value;
 
           Prefetch(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      public static class MandateOptions {
+        /** The method used to collect offline mandate customer acceptance. */
+        @SerializedName("collection_method")
+        ApiRequestParams.EnumParam collectionMethod;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(
+            ApiRequestParams.EnumParam collectionMethod, Map<String, Object> extraParams) {
+          this.collectionMethod = collectionMethod;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private ApiRequestParams.EnumParam collectionMethod;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.MandateOptions
+              build() {
+            return new SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.MandateOptions(
+                this.collectionMethod, this.extraParams);
+          }
+
+          /** The method used to collect offline mandate customer acceptance. */
+          public Builder setCollectionMethod(
+              SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.MandateOptions
+                      .CollectionMethod
+                  collectionMethod) {
+            this.collectionMethod = collectionMethod;
+            return this;
+          }
+
+          /** The method used to collect offline mandate customer acceptance. */
+          public Builder setCollectionMethod(EmptyParam collectionMethod) {
+            this.collectionMethod = collectionMethod;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.MandateOptions#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.MandateOptions#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum CollectionMethod implements ApiRequestParams.EnumParam {
+          @SerializedName("paper")
+          PAPER("paper");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          CollectionMethod(String value) {
             this.value = value;
           }
         }
