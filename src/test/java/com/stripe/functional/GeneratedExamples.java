@@ -3962,6 +3962,90 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testFinancialConnectionsAccountsSubscribePost() throws StripeException {
+    com.stripe.model.financialconnections.Account resource =
+        com.stripe.model.financialconnections.Account.retrieve("fa_123");
+
+    com.stripe.param.financialconnections.AccountSubscribeParams params =
+        com.stripe.param.financialconnections.AccountSubscribeParams.builder()
+            .addFeature(
+                com.stripe.param.financialconnections.AccountSubscribeParams.Feature.TRANSACTIONS)
+            .build();
+
+    com.stripe.model.financialconnections.Account account = resource.subscribe(params);
+    assertNotNull(account);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/financial_connections/accounts/fa_123/subscribe",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testFinancialConnectionsAccountsSubscribePostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.financialconnections.AccountSubscribeParams params =
+        com.stripe.param.financialconnections.AccountSubscribeParams.builder()
+            .addFeature(
+                com.stripe.param.financialconnections.AccountSubscribeParams.Feature.TRANSACTIONS)
+            .build();
+
+    com.stripe.model.financialconnections.Account account =
+        client.financialConnections().accounts().subscribe("fa_123", params);
+    assertNotNull(account);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/financial_connections/accounts/fa_123/subscribe",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testFinancialConnectionsAccountsUnsubscribePost() throws StripeException {
+    com.stripe.model.financialconnections.Account resource =
+        com.stripe.model.financialconnections.Account.retrieve("fa_123");
+
+    com.stripe.param.financialconnections.AccountUnsubscribeParams params =
+        com.stripe.param.financialconnections.AccountUnsubscribeParams.builder()
+            .addFeature(
+                com.stripe.param.financialconnections.AccountUnsubscribeParams.Feature.TRANSACTIONS)
+            .build();
+
+    com.stripe.model.financialconnections.Account account = resource.unsubscribe(params);
+    assertNotNull(account);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/financial_connections/accounts/fa_123/unsubscribe",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testFinancialConnectionsAccountsUnsubscribePostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.financialconnections.AccountUnsubscribeParams params =
+        com.stripe.param.financialconnections.AccountUnsubscribeParams.builder()
+            .addFeature(
+                com.stripe.param.financialconnections.AccountUnsubscribeParams.Feature.TRANSACTIONS)
+            .build();
+
+    com.stripe.model.financialconnections.Account account =
+        client.financialConnections().accounts().unsubscribe("fa_123", params);
+    assertNotNull(account);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/financial_connections/accounts/fa_123/unsubscribe",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testFinancialConnectionsSessionsGet() throws StripeException {
     com.stripe.model.financialconnections.Session session =
         com.stripe.model.financialconnections.Session.retrieve("fcsess_xyz");
@@ -4139,6 +4223,75 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v1/financial_connections/sessions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testFinancialConnectionsTransactionsGet() throws StripeException {
+    com.stripe.model.financialconnections.Transaction transaction =
+        com.stripe.model.financialconnections.Transaction.retrieve("tr_123");
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/financial_connections/transactions/tr_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testFinancialConnectionsTransactionsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.financialconnections.TransactionRetrieveParams params =
+        com.stripe.param.financialconnections.TransactionRetrieveParams.builder().build();
+
+    com.stripe.model.financialconnections.Transaction transaction =
+        client.financialConnections().transactions().retrieve("tr_123", params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/financial_connections/transactions/tr_123",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testFinancialConnectionsTransactionsGet2() throws StripeException {
+    com.stripe.param.financialconnections.TransactionListParams params =
+        com.stripe.param.financialconnections.TransactionListParams.builder()
+            .setAccount("fca_xyz")
+            .build();
+
+    com.stripe.model.financialconnections.TransactionCollection transactions =
+        com.stripe.model.financialconnections.Transaction.list(params);
+    assertNotNull(transactions);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/financial_connections/transactions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testFinancialConnectionsTransactionsGet2Services() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.financialconnections.TransactionListParams params =
+        com.stripe.param.financialconnections.TransactionListParams.builder()
+            .setAccount("fca_xyz")
+            .build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.financialconnections.Transaction>
+        stripeCollection = client.financialConnections().transactions().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/financial_connections/transactions",
         params.toMap(),
         null);
   }
@@ -10421,6 +10574,155 @@ class GeneratedExamples extends BaseStripeTest {
         "/v1/tax_rates/txr_xxxxxxxxxxxxx",
         params.toMap(),
         null);
+  }
+
+  @Test
+  public void testTaxRegistrationsGet() throws StripeException {
+    com.stripe.param.tax.RegistrationListParams params =
+        com.stripe.param.tax.RegistrationListParams.builder()
+            .setStatus(com.stripe.param.tax.RegistrationListParams.Status.ALL)
+            .build();
+
+    com.stripe.model.tax.RegistrationCollection registrations =
+        com.stripe.model.tax.Registration.list(params);
+    assertNotNull(registrations);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTaxRegistrationsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.RegistrationListParams params =
+        com.stripe.param.tax.RegistrationListParams.builder()
+            .setStatus(com.stripe.param.tax.RegistrationListParams.Status.ALL)
+            .build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.tax.Registration> stripeCollection =
+        client.tax().registrations().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTaxRegistrationsPost() throws StripeException {
+    com.stripe.param.tax.RegistrationCreateParams params =
+        com.stripe.param.tax.RegistrationCreateParams.builder()
+            .setCountry("IE")
+            .setCountryOptions(
+                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.builder()
+                    .setIe(
+                        com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.builder()
+                            .setType(
+                                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.Type
+                                    .OSS_UNION)
+                            .build())
+                    .build())
+            .setActiveFrom(com.stripe.param.tax.RegistrationCreateParams.ActiveFrom.NOW)
+            .build();
+
+    com.stripe.model.tax.Registration registration =
+        com.stripe.model.tax.Registration.create(params);
+    assertNotNull(registration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTaxRegistrationsPostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.RegistrationCreateParams params =
+        com.stripe.param.tax.RegistrationCreateParams.builder()
+            .setCountry("IE")
+            .setCountryOptions(
+                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.builder()
+                    .setIe(
+                        com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.builder()
+                            .setType(
+                                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.Type
+                                    .OSS_UNION)
+                            .build())
+                    .build())
+            .setActiveFrom(com.stripe.param.tax.RegistrationCreateParams.ActiveFrom.NOW)
+            .build();
+
+    com.stripe.model.tax.Registration registration = client.tax().registrations().create(params);
+    assertNotNull(registration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTaxSettingsGet() throws StripeException {
+    com.stripe.model.tax.Settings settings = com.stripe.model.tax.Settings.retrieve();
+    assertNotNull(settings);
+    verifyRequest(BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/tax/settings", null, null);
+  }
+
+  @Test
+  public void testTaxSettingsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.SettingsRetrieveParams params =
+        com.stripe.param.tax.SettingsRetrieveParams.builder().build();
+
+    com.stripe.model.tax.Settings settings = client.tax().settings().retrieve(params);
+    assertNotNull(settings);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/tax/settings", params.toMap(), null);
+  }
+
+  @Test
+  public void testTaxSettingsPost() throws StripeException {
+    com.stripe.param.tax.SettingsUpdateParams params =
+        com.stripe.param.tax.SettingsUpdateParams.builder()
+            .setDefaults(
+                com.stripe.param.tax.SettingsUpdateParams.Defaults.builder()
+                    .setTaxCode("txcd_10000000")
+                    .build())
+            .build();
+
+    com.stripe.model.tax.Settings settings = com.stripe.model.tax.Settings.update(params);
+    assertNotNull(settings);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.POST, "/v1/tax/settings", params.toMap(), null);
+  }
+
+  @Test
+  public void testTaxSettingsPostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.SettingsUpdateParams params =
+        com.stripe.param.tax.SettingsUpdateParams.builder()
+            .setDefaults(
+                com.stripe.param.tax.SettingsUpdateParams.Defaults.builder()
+                    .setTaxCode("txcd_10000000")
+                    .build())
+            .build();
+
+    com.stripe.model.tax.Settings settings = client.tax().settings().update(params);
+    assertNotNull(settings);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.POST, "/v1/tax/settings", params.toMap(), null);
   }
 
   @Test

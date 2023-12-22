@@ -163,7 +163,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Invoice> invoice;
 
-  /** All invoices will be billed using the specified settings. */
   @SerializedName("invoice_settings")
   InvoiceSettings invoiceSettings;
 
@@ -1693,10 +1692,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("days_until_due")
     Long daysUntilDue;
 
-    /**
-     * The connected account that issues the invoice. The invoice is presented with the branding and
-     * support information of the specified account.
-     */
     @SerializedName("issuer")
     Issuer issuer;
 

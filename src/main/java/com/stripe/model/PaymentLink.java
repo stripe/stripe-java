@@ -1116,7 +1116,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("description")
     String description;
 
-    /** All invoices will be billed using the specified settings. */
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
@@ -1143,10 +1142,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class InvoiceSettings extends StripeObject {
-      /**
-       * The connected account that issues the invoice. The invoice is presented with the branding
-       * and support information of the specified account.
-       */
       @SerializedName("issuer")
       Issuer issuer;
 

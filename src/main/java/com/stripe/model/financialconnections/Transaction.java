@@ -11,6 +11,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.financialconnections.TransactionListParams;
 import com.stripe.param.financialconnections.TransactionRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -85,6 +86,47 @@ public class Transaction extends ApiResource implements HasId {
   /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated")
   Long updated;
+
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
+  public static TransactionCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
+  public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/financial_connections/transactions";
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            TransactionCollection.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
+  public static TransactionCollection list(TransactionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
+  public static TransactionCollection list(TransactionListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/financial_connections/transactions";
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            TransactionCollection.class,
+            options,
+            ApiMode.V1);
+  }
 
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
   public static Transaction retrieve(String transaction) throws StripeException {

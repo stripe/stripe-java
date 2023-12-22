@@ -64,6 +64,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("description")
   String description;
 
+  @SerializedName("destination_details")
+  DestinationDetails destinationDetails;
+
   /**
    * After the refund fails, this balance transaction describes the adjustment made on your account
    * balance that reverses the initial balance transaction.
@@ -610,6 +613,357 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class DestinationDetails extends StripeObject {
+    @SerializedName("affirm")
+    Affirm affirm;
+
+    @SerializedName("afterpay_clearpay")
+    AfterpayClearpay afterpayClearpay;
+
+    @SerializedName("alipay")
+    Alipay alipay;
+
+    @SerializedName("au_bank_transfer")
+    AuBankTransfer auBankTransfer;
+
+    @SerializedName("blik")
+    Blik blik;
+
+    @SerializedName("br_bank_transfer")
+    BrBankTransfer brBankTransfer;
+
+    @SerializedName("card")
+    Card card;
+
+    @SerializedName("cashapp")
+    Cashapp cashapp;
+
+    @SerializedName("customer_cash_balance")
+    CustomerCashBalance customerCashBalance;
+
+    @SerializedName("eps")
+    Eps eps;
+
+    @SerializedName("eu_bank_transfer")
+    EuBankTransfer euBankTransfer;
+
+    @SerializedName("gb_bank_transfer")
+    GbBankTransfer gbBankTransfer;
+
+    @SerializedName("giropay")
+    Giropay giropay;
+
+    @SerializedName("grabpay")
+    Grabpay grabpay;
+
+    @SerializedName("jp_bank_transfer")
+    JpBankTransfer jpBankTransfer;
+
+    @SerializedName("klarna")
+    Klarna klarna;
+
+    @SerializedName("mx_bank_transfer")
+    MxBankTransfer mxBankTransfer;
+
+    @SerializedName("p24")
+    P24 p24;
+
+    @SerializedName("paynow")
+    Paynow paynow;
+
+    @SerializedName("paypal")
+    Paypal paypal;
+
+    @SerializedName("pix")
+    Pix pix;
+
+    @SerializedName("revolut")
+    Revolut revolut;
+
+    @SerializedName("sofort")
+    Sofort sofort;
+
+    @SerializedName("th_bank_transfer")
+    ThBankTransfer thBankTransfer;
+
+    /**
+     * The type of transaction-specific details of the payment method used in the refund (e.g.,
+     * {@code card}). An additional hash is included on {@code destination_details} with a name
+     * matching this value. It contains information specific to the refund transaction.
+     */
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("us_bank_transfer")
+    UsBankTransfer usBankTransfer;
+
+    @SerializedName("wechat_pay")
+    WechatPay wechatPay;
+
+    @SerializedName("zip")
+    Zip zip;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Affirm extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AfterpayClearpay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuBankTransfer extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BrBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /** Value of the reference number assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference number on the refund. This can be {@code pending}, {@code
+       * available} or {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+
+      /** Type of the reference number assigned to the refund. */
+      @SerializedName("reference_type")
+      String referenceType;
+
+      /**
+       * The type of refund. This can be {@code refund}, {@code reversal}, or {@code pending}.
+       *
+       * <p>One of {@code pending}, {@code refund}, or {@code reversal}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cashapp extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerCashBalance extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Eps extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EuBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GbBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Giropay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Grabpay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class JpBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MxBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class P24 extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paynow extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypal extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Revolut extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sofort extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ThBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Zip extends StripeObject {}
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
     /** Contains the refund details. */
     @SerializedName("display_details")
@@ -718,6 +1072,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
+    trySetResponseGetter(destinationDetails, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);

@@ -132,6 +132,9 @@ public class AccountSession extends ApiResource {
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
+    @SerializedName("capital_financing_promotion")
+    CapitalFinancingPromotion capitalFinancingPromotion;
+
     @SerializedName("payment_details")
     PaymentDetails paymentDetails;
 
@@ -145,6 +148,23 @@ public class AccountSession extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AccountOnboarding extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CapitalFinancingPromotion extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -242,7 +262,28 @@ public class AccountSession extends ApiResource {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
+         * Loss Liability, default {@code false} otherwise.
+         */
+        @SerializedName("edit_payout_schedule")
+        Boolean editPayoutSchedule;
+
+        /**
+         * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns Loss
+         * Liability, default {@code false} otherwise.
+         */
+        @SerializedName("instant_payouts")
+        Boolean instantPayouts;
+
+        /**
+         * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns Loss
+         * Liability, default {@code false} otherwise.
+         */
+        @SerializedName("standard_payouts")
+        Boolean standardPayouts;
+      }
     }
   }
 

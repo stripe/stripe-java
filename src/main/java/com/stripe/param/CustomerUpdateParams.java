@@ -984,8 +984,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @Getter
   public static class InvoiceSettings {
     /**
-     * Default custom fields to be displayed on invoices for this customer. When updating, pass an
-     * empty string to remove previously-defined fields.
+     * The list of up to 4 default custom fields to be displayed on invoices for this customer. When
+     * updating, pass an empty string to remove previously-defined fields.
      */
     @SerializedName("custom_fields")
     Object customFields;
@@ -1083,8 +1083,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Default custom fields to be displayed on invoices for this customer. When updating, pass an
-       * empty string to remove previously-defined fields.
+       * The list of up to 4 default custom fields to be displayed on invoices for this customer.
+       * When updating, pass an empty string to remove previously-defined fields.
        */
       public Builder setCustomFields(EmptyParam customFields) {
         this.customFields = customFields;
@@ -1092,8 +1092,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Default custom fields to be displayed on invoices for this customer. When updating, pass an
-       * empty string to remove previously-defined fields.
+       * The list of up to 4 default custom fields to be displayed on invoices for this customer.
+       * When updating, pass an empty string to remove previously-defined fields.
        */
       public Builder setCustomFields(
           List<CustomerUpdateParams.InvoiceSettings.CustomField> customFields) {

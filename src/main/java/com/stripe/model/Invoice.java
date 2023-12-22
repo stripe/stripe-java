@@ -378,10 +378,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("invoice_pdf")
   String invoicePdf;
 
-  /**
-   * The connected account that issues the invoice. The invoice is presented with the branding and
-   * support information of the specified account.
-   */
   @SerializedName("issuer")
   Issuer issuer;
 
