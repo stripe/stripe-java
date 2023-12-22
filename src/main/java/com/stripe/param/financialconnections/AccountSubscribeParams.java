@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class AccountRefreshParams extends ApiRequestParams {
+public class AccountSubscribeParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,14 +24,16 @@ public class AccountRefreshParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The list of account features that you would like to refresh. */
+  /**
+   * <strong>Required.</strong> The list of account features to which you would like to subscribe.`.
+   */
   @SerializedName("features")
-  List<AccountRefreshParams.Feature> features;
+  List<AccountSubscribeParams.Feature> features;
 
-  private AccountRefreshParams(
+  private AccountSubscribeParams(
       List<String> expand,
       Map<String, Object> extraParams,
-      List<AccountRefreshParams.Feature> features) {
+      List<AccountSubscribeParams.Feature> features) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
@@ -46,17 +48,17 @@ public class AccountRefreshParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<AccountRefreshParams.Feature> features;
+    private List<AccountSubscribeParams.Feature> features;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public AccountRefreshParams build() {
-      return new AccountRefreshParams(this.expand, this.extraParams, this.features);
+    public AccountSubscribeParams build() {
+      return new AccountSubscribeParams(this.expand, this.extraParams, this.features);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountRefreshParams#expand} for the field documentation.
+     * AccountSubscribeParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -69,7 +71,7 @@ public class AccountRefreshParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountRefreshParams#expand} for the field documentation.
+     * AccountSubscribeParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -82,7 +84,7 @@ public class AccountRefreshParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountRefreshParams#extraParams} for the field documentation.
+     * AccountSubscribeParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -95,7 +97,7 @@ public class AccountRefreshParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountRefreshParams#extraParams} for the field documentation.
+     * See {@link AccountSubscribeParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -108,9 +110,9 @@ public class AccountRefreshParams extends ApiRequestParams {
     /**
      * Add an element to `features` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountRefreshParams#features} for the field documentation.
+     * AccountSubscribeParams#features} for the field documentation.
      */
-    public Builder addFeature(AccountRefreshParams.Feature element) {
+    public Builder addFeature(AccountSubscribeParams.Feature element) {
       if (this.features == null) {
         this.features = new ArrayList<>();
       }
@@ -121,9 +123,9 @@ public class AccountRefreshParams extends ApiRequestParams {
     /**
      * Add all elements to `features` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * AccountRefreshParams#features} for the field documentation.
+     * AccountSubscribeParams#features} for the field documentation.
      */
-    public Builder addAllFeature(List<AccountRefreshParams.Feature> elements) {
+    public Builder addAllFeature(List<AccountSubscribeParams.Feature> elements) {
       if (this.features == null) {
         this.features = new ArrayList<>();
       }
@@ -133,12 +135,6 @@ public class AccountRefreshParams extends ApiRequestParams {
   }
 
   public enum Feature implements ApiRequestParams.EnumParam {
-    @SerializedName("balance")
-    BALANCE("balance"),
-
-    @SerializedName("ownership")
-    OWNERSHIP("ownership"),
-
     @SerializedName("transactions")
     TRANSACTIONS("transactions");
 

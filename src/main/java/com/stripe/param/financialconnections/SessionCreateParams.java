@@ -463,7 +463,10 @@ public class SessionCreateParams extends ApiRequestParams {
     BALANCES("balances"),
 
     @SerializedName("ownership")
-    OWNERSHIP("ownership");
+    OWNERSHIP("ownership"),
+
+    @SerializedName("transactions")
+    TRANSACTIONS("transactions");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

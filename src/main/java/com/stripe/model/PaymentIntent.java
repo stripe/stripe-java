@@ -2773,7 +2773,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        *
-       * <p>One of {@code any}, or {@code automatic}.
+       * <p>One of {@code any}, {@code automatic}, or {@code challenge}.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
@@ -3605,6 +3605,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
 
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Preferred transaction settlement speed
        *
@@ -3662,6 +3665,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("return_url")
         String returnUrl;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Mandate collection method
+         *
+         * <p>Equal to {@code paper}.
+         */
+        @SerializedName("collection_method")
+        String collectionMethod;
       }
     }
 

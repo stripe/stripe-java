@@ -151,7 +151,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Invoice> invoice;
 
-  /** All invoices will be billed using the specified settings. */
   @SerializedName("invoice_settings")
   InvoiceSettings invoiceSettings;
 

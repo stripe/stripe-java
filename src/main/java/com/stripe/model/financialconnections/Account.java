@@ -18,6 +18,8 @@ import com.stripe.param.financialconnections.AccountListOwnersParams;
 import com.stripe.param.financialconnections.AccountListParams;
 import com.stripe.param.financialconnections.AccountRefreshParams;
 import com.stripe.param.financialconnections.AccountRetrieveParams;
+import com.stripe.param.financialconnections.AccountSubscribeParams;
+import com.stripe.param.financialconnections.AccountUnsubscribeParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -127,6 +129,10 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("subcategory")
   String subcategory;
 
+  /** The list of data refresh subscriptions requested on this account. */
+  @SerializedName("subscriptions")
+  List<String> subscriptions;
+
   /**
    * The <a
    * href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod
@@ -134,6 +140,10 @@ public class Account extends ApiResource implements HasId {
    */
   @SerializedName("supported_payment_method_types")
   List<String> supportedPaymentMethodTypes;
+
+  /** The state of the most recent attempt to refresh the account transactions. */
+  @SerializedName("transaction_refresh")
+  TransactionRefresh transactionRefresh;
 
   /** Get ID of expandable {@code ownership} object. */
   public String getOwnership() {
@@ -410,6 +420,128 @@ public class Account extends ApiResource implements HasId {
             ApiMode.V1);
   }
 
+  /**
+   * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account subscribe(Map<String, Object> params)
+      throws StripeException {
+    return subscribe(params, (RequestOptions) null);
+  }
+
+  /**
+   * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account subscribe(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/subscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            com.stripe.model.financialconnections.Account.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /**
+   * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account subscribe(AccountSubscribeParams params)
+      throws StripeException {
+    return subscribe(params, (RequestOptions) null);
+  }
+
+  /**
+   * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account subscribe(
+      AccountSubscribeParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/subscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            com.stripe.model.financialconnections.Account.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /**
+   * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account unsubscribe(Map<String, Object> params)
+      throws StripeException {
+    return unsubscribe(params, (RequestOptions) null);
+  }
+
+  /**
+   * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account unsubscribe(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/unsubscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            params,
+            com.stripe.model.financialconnections.Account.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /**
+   * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account unsubscribe(AccountUnsubscribeParams params)
+      throws StripeException {
+    return unsubscribe(params, (RequestOptions) null);
+  }
+
+  /**
+   * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
+   * Account}.
+   */
+  public com.stripe.model.financialconnections.Account unsubscribe(
+      AccountUnsubscribeParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/unsubscribe",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            com.stripe.model.financialconnections.Account.class,
+            options,
+            ApiMode.V1);
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -566,6 +698,13 @@ public class Account extends ApiResource implements HasId {
     Long lastAttemptedAt;
 
     /**
+     * Time at which the next balance refresh can be initiated. This value will be {@code null} when
+     * {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
+
+    /**
      * The status of the last refresh attempt.
      *
      * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
@@ -594,6 +733,38 @@ public class Account extends ApiResource implements HasId {
     String status;
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransactionRefresh extends StripeObject implements HasId {
+    /** Unique identifier for the object. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /**
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
+     * epoch.
+     */
+    @SerializedName("last_attempted_at")
+    Long lastAttemptedAt;
+
+    /**
+     * Time at which the next transaction refresh can be initiated. This value will be {@code null}
+     * when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
+
+    /**
+     * The status of the last refresh attempt.
+     *
+     * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -602,5 +773,6 @@ public class Account extends ApiResource implements HasId {
     trySetResponseGetter(balanceRefresh, responseGetter);
     trySetResponseGetter(ownership, responseGetter);
     trySetResponseGetter(ownershipRefresh, responseGetter);
+    trySetResponseGetter(transactionRefresh, responseGetter);
   }
 }

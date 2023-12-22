@@ -1218,6 +1218,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
 
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Bank account verification method.
        *
@@ -1247,6 +1250,19 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
          */
         @SerializedName("return_url")
         String returnUrl;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Mandate collection method
+         *
+         * <p>Equal to {@code paper}.
+         */
+        @SerializedName("collection_method")
+        String collectionMethod;
       }
     }
   }

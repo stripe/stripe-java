@@ -1854,7 +1854,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
         LOW_VALUE_TRANSACTION("low_value_transaction"),
 
         @SerializedName("transaction_risk_analysis")
-        TRANSACTION_RISK_ANALYSIS("transaction_risk_analysis");
+        TRANSACTION_RISK_ANALYSIS("transaction_risk_analysis"),
+
+        @SerializedName("unknown")
+        UNKNOWN("unknown");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
