@@ -4260,16 +4260,13 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testFinancialConnectionsTransactionsGet2() throws StripeException {
-    com.stripe.model.financialconnections.Transaction resource =
-        com.stripe.model.financialconnections.Transaction.retrieve();
-
     com.stripe.param.financialconnections.TransactionListParams params =
         com.stripe.param.financialconnections.TransactionListParams.builder()
             .setAccount("fca_xyz")
             .build();
 
     com.stripe.model.financialconnections.TransactionCollection transactions =
-        resource.list(params);
+        com.stripe.model.financialconnections.Transaction.list(params);
     assertNotNull(transactions);
     verifyRequest(
         BaseAddress.API,
