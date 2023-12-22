@@ -10546,6 +10546,101 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testTaxRegistrationsGet() throws StripeException {
+    com.stripe.param.tax.RegistrationListParams params =
+        com.stripe.param.tax.RegistrationListParams.builder()
+            .setStatus(com.stripe.param.tax.RegistrationListParams.Status.ALL)
+            .build();
+
+    com.stripe.model.tax.RegistrationCollection registrations =
+        com.stripe.model.tax.Registration.list(params);
+    assertNotNull(registrations);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTaxRegistrationsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.RegistrationListParams params =
+        com.stripe.param.tax.RegistrationListParams.builder()
+            .setStatus(com.stripe.param.tax.RegistrationListParams.Status.ALL)
+            .build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.tax.Registration> stripeCollection =
+        client.tax().registrations().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTaxRegistrationsPost() throws StripeException {
+    com.stripe.param.tax.RegistrationCreateParams params =
+        com.stripe.param.tax.RegistrationCreateParams.builder()
+            .setCountry("IE")
+            .setCountryOptions(
+                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.builder()
+                    .setIe(
+                        com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.builder()
+                            .setType(
+                                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.Type
+                                    .OSS_UNION)
+                            .build())
+                    .build())
+            .setActiveFrom(com.stripe.param.tax.RegistrationCreateParams.ActiveFrom.NOW)
+            .build();
+
+    com.stripe.model.tax.Registration registration =
+        com.stripe.model.tax.Registration.create(params);
+    assertNotNull(registration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTaxRegistrationsPostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.tax.RegistrationCreateParams params =
+        com.stripe.param.tax.RegistrationCreateParams.builder()
+            .setCountry("IE")
+            .setCountryOptions(
+                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.builder()
+                    .setIe(
+                        com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.builder()
+                            .setType(
+                                com.stripe.param.tax.RegistrationCreateParams.CountryOptions.Ie.Type
+                                    .OSS_UNION)
+                            .build())
+                    .build())
+            .setActiveFrom(com.stripe.param.tax.RegistrationCreateParams.ActiveFrom.NOW)
+            .build();
+
+    com.stripe.model.tax.Registration registration = client.tax().registrations().create(params);
+    assertNotNull(registration);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/tax/registrations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testTaxSettingsGet() throws StripeException {
     com.stripe.model.tax.Settings settings = com.stripe.model.tax.Settings.retrieve();
     assertNotNull(settings);
