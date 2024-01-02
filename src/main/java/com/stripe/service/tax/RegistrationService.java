@@ -14,6 +14,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.RegistrationCreateParams;
 import com.stripe.param.tax.RegistrationListParams;
+import com.stripe.param.tax.RegistrationRetrieveParams;
 import com.stripe.param.tax.RegistrationUpdateParams;
 
 public final class RegistrationService extends ApiService {
@@ -59,6 +60,33 @@ public final class RegistrationService extends ApiService {
         .request(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Registration.class,
+            options,
+            ApiMode.V1);
+  }
+  /** Returns a Tax {@code Registration} object. */
+  public Registration retrieve(String id, RegistrationRetrieveParams params)
+      throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Returns a Tax {@code Registration} object. */
+  public Registration retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (RegistrationRetrieveParams) null, options);
+  }
+  /** Returns a Tax {@code Registration} object. */
+  public Registration retrieve(String id) throws StripeException {
+    return retrieve(id, (RegistrationRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Returns a Tax {@code Registration} object. */
+  public Registration retrieve(String id, RegistrationRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(id));
+    return getResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             Registration.class,

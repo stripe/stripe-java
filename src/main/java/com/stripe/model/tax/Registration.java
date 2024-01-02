@@ -13,6 +13,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.RegistrationCreateParams;
 import com.stripe.param.tax.RegistrationListParams;
+import com.stripe.param.tax.RegistrationRetrieveParams;
 import com.stripe.param.tax.RegistrationUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -167,6 +168,47 @@ public class Registration extends ApiResource implements HasId {
             path,
             ApiRequestParams.paramsToMap(params),
             RegistrationCollection.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /** Returns a Tax {@code Registration} object. */
+  public static Registration retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Returns a Tax {@code Registration} object. */
+  public static Registration retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Returns a Tax {@code Registration} object. */
+  public static Registration retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(id));
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            params,
+            Registration.class,
+            options,
+            ApiMode.V1);
+  }
+
+  /** Returns a Tax {@code Registration} object. */
+  public static Registration retrieve(
+      String id, RegistrationRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    return getGlobalResponseGetter()
+        .request(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            Registration.class,
             options,
             ApiMode.V1);
   }
