@@ -53,8 +53,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   AutomaticTax automaticTax;
 
   /**
-   * Determines the date of the first full invoice, and, for plans with {@code month} or {@code
-   * year} intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
+   * The reference point that aligns future <a
+   * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a> dates. It sets the
+   * day of week for {@code week} intervals, the day of month for {@code month} and {@code year}
+   * intervals, and the month of year for {@code year} intervals. The timestamp is in UTC format.
    */
   @SerializedName("billing_cycle_anchor")
   Long billingCycleAnchor;

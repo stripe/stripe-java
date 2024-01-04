@@ -1,5 +1,9 @@
 # Changelog
 
+## 24.10.0 - 2024-01-04
+* [#1712](https://github.com/stripe/stripe-java/pull/1712) Update generated code
+  * Add support for `retrieve` method on resource `Tax.Registration`
+
 ## 24.10.0-beta.1 - 2023-12-22
 * [#1710](https://github.com/stripe/stripe-java/pull/1710) Update generated code for beta
   * Add support for `capital_financing_promotion` on `AccountSession.components` and `AccountSessionCreateParams.components`
