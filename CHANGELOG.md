@@ -1,5 +1,9 @@
 # Changelog
 
+## 24.10.0 - 2024-01-04
+* [#1712](https://github.com/stripe/stripe-java/pull/1712) Update generated code
+  * Add support for `retrieve` method on resource `Tax.Registration`
+
 ## 24.9.0 - 2023-12-22
 * [#1709](https://github.com/stripe/stripe-java/pull/1709) Update generated code
 * [#1707](https://github.com/stripe/stripe-java/pull/1707) Update generated code
