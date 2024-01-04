@@ -671,7 +671,6 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("description")
     String description;
 
-    /** The subscription schedule's default invoice settings. */
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
