@@ -47,10 +47,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Long backdateStartDate;
 
   /**
-   * A future timestamp to anchor the subscription's <a
-   * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
-   * determine the date of the first full invoice, and, for plans with {@code month} or {@code year}
-   * intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
+   * A future timestamp in UTC format to anchor the subscription's <a
+   * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. The anchor is the
+   * reference point that aligns future billing cycle dates. It sets the day of week for {@code
+   * week} intervals, the day of month for {@code month} and {@code year} intervals, and the month
+   * of year for {@code year} intervals.
    */
   @SerializedName("billing_cycle_anchor")
   Long billingCycleAnchor;
@@ -527,11 +528,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A future timestamp to anchor the subscription's <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
-     * determine the date of the first full invoice, and, for plans with {@code month} or {@code
-     * year} intervals, the day of the month for subsequent invoices. The timestamp is in UTC
-     * format.
+     * A future timestamp in UTC format to anchor the subscription's <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. The anchor is
+     * the reference point that aligns future billing cycle dates. It sets the day of week for
+     * {@code week} intervals, the day of month for {@code month} and {@code year} intervals, and
+     * the month of year for {@code year} intervals.
      */
     public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
