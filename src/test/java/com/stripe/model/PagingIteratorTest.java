@@ -34,13 +34,14 @@ public class PagingIteratorTest extends BaseStripeTest {
         throws StripeException {
       return getGlobalResponseGetter()
           .request(
-              BaseAddress.API,
-              RequestMethod.GET,
-              "/v1/pageable_models",
-              params,
-              PageableModelCollection.class,
-              options,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.API,
+                  RequestMethod.GET,
+                  "/v1/pageable_models",
+                  params,
+                  options,
+                  ApiMode.V1),
+              PageableModelCollection.class);
     }
 
     @Override
@@ -51,13 +52,14 @@ public class PagingIteratorTest extends BaseStripeTest {
     public PageableModel delete() throws StripeException {
       return getResponseGetter()
           .request(
-              BaseAddress.API,
-              RequestMethod.DELETE,
-              String.format("/v1/pageable_models/%s", getId()),
-              (Map<String, Object>) null,
-              PageableModel.class,
-              null,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.API,
+                  RequestMethod.DELETE,
+                  String.format("/v1/pageable_models/%s", getId()),
+                  (Map<String, Object>) null,
+                  null,
+                  ApiMode.V1),
+              PageableModel.class);
     }
   }
 
@@ -78,13 +80,14 @@ public class PagingIteratorTest extends BaseStripeTest {
     public static ReferencesPageableModel retrieve(RequestOptions options) throws StripeException {
       return getGlobalResponseGetter()
           .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.GET,
-              "/v1/references_pageable_models",
-              new HashMap<String, Object>(),
-              ReferencesPageableModel.class,
-              options,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.API,
+                  ApiResource.RequestMethod.GET,
+                  "/v1/references_pageable_models",
+                  new HashMap<String, Object>(),
+                  options,
+                  ApiMode.V1),
+              ReferencesPageableModel.class);
     }
 
     @Override
