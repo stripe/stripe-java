@@ -9826,7 +9826,8 @@ class GeneratedExamples extends BaseStripeTest {
             .setTimestamp(1571252444L)
             .build();
 
-    UsageRecord usageRecord = UsageRecord.createOnSubscriptionItem("si_xxxxxxxxxxxxx", params);
+    UsageRecord usageRecord =
+        UsageRecord.createOnSubscriptionItem("si_xxxxxxxxxxxxx", params, null);
     assertNotNull(usageRecord);
     verifyRequest(
         BaseAddress.API,

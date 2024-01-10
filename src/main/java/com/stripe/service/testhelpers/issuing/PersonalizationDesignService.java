@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.issuing;
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.PersonalizationDesign;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -57,15 +58,15 @@ public final class PersonalizationDesignService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/personalization_designs/%s/activate",
             ApiResource.urlEncodeId(personalizationDesign));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
@@ -105,15 +106,15 @@ public final class PersonalizationDesignService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/personalization_designs/%s/deactivate",
             ApiResource.urlEncodeId(personalizationDesign));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
@@ -137,14 +138,14 @@ public final class PersonalizationDesignService extends ApiService {
         String.format(
             "/v1/test_helpers/issuing/personalization_designs/%s/reject",
             ApiResource.urlEncodeId(personalizationDesign));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
 }

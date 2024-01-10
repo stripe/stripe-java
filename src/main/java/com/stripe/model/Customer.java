@@ -604,17 +604,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(String paymentMethod) throws StripeException {
-    return retrievePaymentMethod(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(String paymentMethod, Map<String, Object> params)
-      throws StripeException {
-    return retrievePaymentMethod(paymentMethod, params, (RequestOptions) null);
-  }
-
-  /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
       String paymentMethod, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -626,12 +615,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, PaymentMethod.class);
-  }
-
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(
-      String paymentMethod, CustomerRetrievePaymentMethodParams params) throws StripeException {
-    return retrievePaymentMethod(paymentMethod, params, (RequestOptions) null);
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */

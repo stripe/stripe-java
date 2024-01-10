@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.PersonalizationDesign;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -52,15 +53,16 @@ public final class PersonalizationDesignService extends ApiService {
   public StripeCollection<PersonalizationDesign> list(
       PersonalizationDesignListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/personalization_designs";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PersonalizationDesign>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PersonalizationDesign>>() {}.getType());
   }
   /** Creates a personalization design object. */
   public PersonalizationDesign create(PersonalizationDesignCreateParams params)
@@ -71,15 +73,15 @@ public final class PersonalizationDesignService extends ApiService {
   public PersonalizationDesign create(
       PersonalizationDesignCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/personalization_designs";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
   /** Retrieves a personalization design object. */
   public PersonalizationDesign retrieve(
@@ -107,15 +109,15 @@ public final class PersonalizationDesignService extends ApiService {
         String.format(
             "/v1/issuing/personalization_designs/%s",
             ApiResource.urlEncodeId(personalizationDesign));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
   /** Updates a card personalization object. */
   public PersonalizationDesign update(
@@ -143,14 +145,14 @@ public final class PersonalizationDesignService extends ApiService {
         String.format(
             "/v1/issuing/personalization_designs/%s",
             ApiResource.urlEncodeId(personalizationDesign));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
 }

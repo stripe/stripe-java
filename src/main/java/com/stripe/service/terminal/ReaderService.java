@@ -256,15 +256,15 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Initiates a refund on a Reader. */
   public Reader refundPayment(String reader, ReaderRefundPaymentParams params)
@@ -313,15 +313,15 @@ public final class ReaderService extends ApiService {
     String path =
         String.format(
             "/v1/terminal/readers/%s/collect_payment_method", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Finalizes a payment on a Reader. */
   public Reader confirmPaymentIntent(String reader, ReaderConfirmPaymentIntentParams params)
@@ -335,14 +335,14 @@ public final class ReaderService extends ApiService {
     String path =
         String.format(
             "/v1/terminal/readers/%s/confirm_payment_intent", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 }

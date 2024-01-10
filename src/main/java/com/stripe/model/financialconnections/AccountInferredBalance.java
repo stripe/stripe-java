@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -69,15 +70,10 @@ public class AccountInferredBalance extends ApiResource implements HasId {
         String.format(
             "/v1/financial_connections/accounts/%s/inferred_balances",
             ApiResource.urlEncodeId(account));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            AccountInferredBalanceCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountInferredBalanceCollection.class);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
@@ -95,14 +91,14 @@ public class AccountInferredBalance extends ApiResource implements HasId {
             "/v1/financial_connections/accounts/%s/inferred_balances",
             ApiResource.urlEncodeId(account));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountInferredBalanceCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountInferredBalanceCollection.class);
   }
 }

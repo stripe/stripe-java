@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.giftcards.Transaction;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -40,15 +41,16 @@ public final class TransactionService extends ApiService {
   public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/gift_cards/transactions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Transaction>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
   /** Create a gift card transaction. */
   public Transaction create(TransactionCreateParams params) throws StripeException {
@@ -58,15 +60,15 @@ public final class TransactionService extends ApiService {
   public Transaction create(TransactionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/gift_cards/transactions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Retrieves the gift card transaction. */
   public Transaction retrieve(String id, TransactionRetrieveParams params) throws StripeException {
@@ -84,15 +86,15 @@ public final class TransactionService extends ApiService {
   public Transaction retrieve(String id, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Update a gift card transaction. */
   public Transaction update(String id, TransactionUpdateParams params) throws StripeException {
@@ -110,15 +112,15 @@ public final class TransactionService extends ApiService {
   public Transaction update(String id, TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/gift_cards/transactions/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Cancel a gift card transaction. */
   public Transaction cancel(String id, TransactionCancelParams params) throws StripeException {
@@ -137,15 +139,15 @@ public final class TransactionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/gift_cards/transactions/%s/cancel", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Confirm a gift card transaction. */
   public Transaction confirm(String id, TransactionConfirmParams params) throws StripeException {
@@ -164,14 +166,14 @@ public final class TransactionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/gift_cards/transactions/%s/confirm", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
 }

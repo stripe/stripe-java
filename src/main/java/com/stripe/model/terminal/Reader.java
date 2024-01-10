@@ -197,15 +197,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Initiates an input collection flow on a Reader. */
@@ -220,15 +215,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /**
@@ -249,15 +244,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/collect_payment_method",
             ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /**
@@ -280,15 +270,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             "/v1/terminal/readers/%s/collect_payment_method",
             ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Finalizes a payment on a Reader. */
@@ -303,15 +293,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/confirm_payment_intent",
             ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Finalizes a payment on a Reader. */
@@ -328,15 +313,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             "/v1/terminal/readers/%s/confirm_payment_intent",
             ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Creates a new {@code Reader} object. */

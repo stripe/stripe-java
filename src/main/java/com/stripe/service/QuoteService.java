@@ -247,15 +247,15 @@ public final class QuoteService extends ApiService {
   public Quote reestimate(String quote, QuoteReestimateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/reestimate", ApiResource.urlEncodeId(quote));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Quote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Quote.class);
   }
   /** Converts a stale quote to draft. */
   public Quote markDraft(String quote, QuoteMarkDraftParams params) throws StripeException {
@@ -273,15 +273,15 @@ public final class QuoteService extends ApiService {
   public Quote markDraft(String quote, QuoteMarkDraftParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/mark_draft", ApiResource.urlEncodeId(quote));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Quote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Quote.class);
   }
   /** Converts a draft or open quote to stale. */
   public Quote markStale(String quote, QuoteMarkStaleParams params) throws StripeException {
@@ -299,15 +299,15 @@ public final class QuoteService extends ApiService {
   public Quote markStale(String quote, QuoteMarkStaleParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/mark_stale", ApiResource.urlEncodeId(quote));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Quote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Quote.class);
   }
   /** Download the PDF for a finalized quote. */
   public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
@@ -364,15 +364,16 @@ public final class QuoteService extends ApiService {
         String.format(
             "/v1/quotes/%s/preview_invoices/%s/lines",
             ApiResource.urlEncodeId(quote), ApiResource.urlEncodeId(previewInvoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType());
   }
 
   public com.stripe.service.QuoteComputedUpfrontLineItemsService computedUpfrontLineItems() {

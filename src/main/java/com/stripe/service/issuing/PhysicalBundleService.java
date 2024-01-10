@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.PhysicalBundle;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -49,15 +50,16 @@ public final class PhysicalBundleService extends ApiService {
   public StripeCollection<PhysicalBundle> list(
       PhysicalBundleListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/physical_bundles";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PhysicalBundle>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PhysicalBundle>>() {}.getType());
   }
   /** Retrieves a physical bundle object. */
   public PhysicalBundle retrieve(String physicalBundle, PhysicalBundleRetrieveParams params)
@@ -79,14 +81,14 @@ public final class PhysicalBundleService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PhysicalBundle.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PhysicalBundle.class);
   }
 }

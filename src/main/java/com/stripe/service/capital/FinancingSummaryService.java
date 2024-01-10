@@ -4,6 +4,7 @@ package com.stripe.service.capital;
 import com.stripe.exception.StripeException;
 import com.stripe.model.capital.FinancingSummary;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -33,14 +34,14 @@ public final class FinancingSummaryService extends ApiService {
   public FinancingSummary retrieve(FinancingSummaryRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/capital/financing_summary";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancingSummary.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancingSummary.class);
   }
 }

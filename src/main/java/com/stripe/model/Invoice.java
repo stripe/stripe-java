@@ -1005,15 +1005,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     String path =
         String.format(
             "/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Invoice.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
 
   /**
@@ -1051,15 +1046,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         String.format(
             "/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
 
   /**

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.capital.FinancingOffer;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -46,15 +47,16 @@ public final class FinancingOfferService extends ApiService {
   public StripeCollection<FinancingOffer> list(
       FinancingOfferListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/capital/financing_offers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<FinancingOffer>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<FinancingOffer>>() {}.getType());
   }
   /** Get the details of the financing offer. */
   public FinancingOffer retrieve(String financingOffer, FinancingOfferRetrieveParams params)
@@ -76,15 +78,15 @@ public final class FinancingOfferService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancingOffer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancingOffer.class);
   }
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
@@ -121,14 +123,14 @@ public final class FinancingOfferService extends ApiService {
         String.format(
             "/v1/capital/financing_offers/%s/mark_delivered",
             ApiResource.urlEncodeId(financingOffer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancingOffer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancingOffer.class);
   }
 }

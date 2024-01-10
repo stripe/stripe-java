@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.InvoicePayment;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -55,15 +56,16 @@ public final class InvoicePaymentService extends ApiService {
       String invoice, InvoicePaymentListParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/payments", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<InvoicePayment>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<InvoicePayment>>() {}.getType());
   }
   /** Retrieves the invoice payment with the given ID. */
   public InvoicePayment retrieve(
@@ -92,14 +94,14 @@ public final class InvoicePaymentService extends ApiService {
         String.format(
             "/v1/invoices/%s/payments/%s",
             ApiResource.urlEncodeId(invoice), ApiResource.urlEncodeId(invoicePayment));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoicePayment.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InvoicePayment.class);
   }
 }

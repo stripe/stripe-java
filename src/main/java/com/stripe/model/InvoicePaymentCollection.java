@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -29,15 +30,10 @@ public class InvoicePaymentCollection extends StripeCollection<InvoicePayment> {
   public InvoicePaymentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            InvoicePaymentCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, InvoicePaymentCollection.class);
   }
 
   /**
@@ -59,15 +55,15 @@ public class InvoicePaymentCollection extends StripeCollection<InvoicePayment> {
       InvoicePaymentCollectionListParams params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoicePaymentCollection.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InvoicePaymentCollection.class);
   }
 
   /** Retrieves the invoice payment with the given ID. */
@@ -84,15 +80,10 @@ public class InvoicePaymentCollection extends StripeCollection<InvoicePayment> {
   public InvoicePayment retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            InvoicePayment.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, InvoicePayment.class);
   }
 
   /** Retrieves the invoice payment with the given ID. */
@@ -101,14 +92,14 @@ public class InvoicePaymentCollection extends StripeCollection<InvoicePayment> {
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoicePayment.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InvoicePayment.class);
   }
 }

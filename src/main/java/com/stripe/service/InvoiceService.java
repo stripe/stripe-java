@@ -633,15 +633,15 @@ public final class InvoiceService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
 
   public com.stripe.service.InvoiceLineItemService lineItems() {

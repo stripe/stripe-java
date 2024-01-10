@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.QuoteLine;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -53,14 +54,15 @@ public final class QuoteLineService extends ApiService {
   public StripeCollection<QuoteLine> list(
       String quote, QuoteLineListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/quotes/%s/lines", ApiResource.urlEncodeId(quote));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<QuoteLine>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<QuoteLine>>() {}.getType());
   }
 }

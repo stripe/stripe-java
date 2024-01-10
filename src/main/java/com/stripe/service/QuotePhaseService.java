@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.QuotePhase;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -28,15 +29,16 @@ public final class QuotePhaseService extends ApiService {
   public StripeCollection<QuotePhase> list(QuotePhaseListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/quote_phases";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<QuotePhase>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<QuotePhase>>() {}.getType());
   }
   /** Retrieves the quote phase with the given ID. */
   public QuotePhase retrieve(String quotePhase, QuotePhaseRetrieveParams params)
@@ -56,15 +58,15 @@ public final class QuotePhaseService extends ApiService {
       String quotePhase, QuotePhaseRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            QuotePhase.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, QuotePhase.class);
   }
 
   public com.stripe.service.QuotePhaseLineItemService lineItems() {

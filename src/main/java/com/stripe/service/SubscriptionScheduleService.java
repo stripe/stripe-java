@@ -184,15 +184,15 @@ public final class SubscriptionScheduleService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(schedule));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the

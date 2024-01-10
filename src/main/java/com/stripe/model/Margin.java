@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -102,15 +103,10 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
   public static Margin create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/billing/margins";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Margin.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Margin.class);
   }
 
   /**
@@ -135,15 +131,15 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
       throws StripeException {
     String path = "/v1/billing/margins";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Margin.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Margin.class);
   }
 
   /** Retrieve a list of your margins. */
@@ -155,15 +151,10 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
   public static MarginCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/billing/margins";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            MarginCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, MarginCollection.class);
   }
 
   /** Retrieve a list of your margins. */
@@ -176,15 +167,15 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
       throws StripeException {
     String path = "/v1/billing/margins";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            MarginCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, MarginCollection.class);
   }
 
   /** Retrieve a margin object with the given ID. */
@@ -201,15 +192,10 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
   public static Margin retrieve(String margin, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Margin.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Margin.class);
   }
 
   /** Retrieve a margin object with the given ID. */
@@ -217,15 +203,15 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
       throws StripeException {
     String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Margin.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Margin.class);
   }
 
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
@@ -238,15 +224,10 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
   @Override
   public Margin update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Margin.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Margin.class);
   }
 
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
@@ -258,14 +239,14 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
   public Margin update(MarginUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Margin.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Margin.class);
   }
 }

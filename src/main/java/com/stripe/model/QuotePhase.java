@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -242,15 +243,10 @@ public class QuotePhase extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            LineItemCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, LineItemCollection.class);
   }
 
   /**
@@ -273,15 +269,15 @@ public class QuotePhase extends ApiResource implements HasId {
     String path =
         String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            LineItemCollection.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, LineItemCollection.class);
   }
 
   /** Retrieves the quote phase with the given ID. */
@@ -300,15 +296,10 @@ public class QuotePhase extends ApiResource implements HasId {
       String quotePhase, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            QuotePhase.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, QuotePhase.class);
   }
 
   /** Retrieves the quote phase with the given ID. */
@@ -317,15 +308,15 @@ public class QuotePhase extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            QuotePhase.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, QuotePhase.class);
   }
 
   @Getter

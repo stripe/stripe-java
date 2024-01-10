@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.tax.Form;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -36,15 +37,16 @@ public final class FormService extends ApiService {
   public StripeCollection<Form> list(FormListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/forms";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Form>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Form>>() {}.getType());
   }
   /**
    * Retrieves the details of a tax form that has previously been created. Supply the unique tax
@@ -78,15 +80,15 @@ public final class FormService extends ApiService {
   public Form retrieve(String id, FormRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/forms/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Form.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Form.class);
   }
   /** Download the PDF for a tax form. */
   public InputStream pdf(String id, FormPdfParams params) throws StripeException {
@@ -104,13 +106,14 @@ public final class FormService extends ApiService {
   public InputStream pdf(String id, FormPdfParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .requestStream(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.FILES,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    return getResponseGetter().requestStream(request);
   }
 }

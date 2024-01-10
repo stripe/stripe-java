@@ -264,15 +264,10 @@ public class SubscriptionSchedule extends ApiResource
       throws StripeException {
     String path =
         String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            SubscriptionSchedule.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /** Amends an existing subscription schedule. */
@@ -286,15 +281,15 @@ public class SubscriptionSchedule extends ApiResource
     String path =
         String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
