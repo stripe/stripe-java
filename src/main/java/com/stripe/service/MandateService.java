@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Mandate;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -33,14 +34,14 @@ public final class MandateService extends ApiService {
   public Mandate retrieve(String mandate, MandateRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Mandate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Mandate.class);
   }
 }

@@ -13,6 +13,7 @@ import com.stripe.model.Refund;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -156,15 +157,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Cancels the current reader action. */
@@ -179,15 +175,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Initiates an input collection flow on a Reader. */
@@ -352,15 +348,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public static Reader create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/readers";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Reader.class);
   }
 
   /** Creates a new {@code Reader} object. */
@@ -373,15 +364,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       throws StripeException {
     String path = "/v1/terminal/readers";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Reader.class);
   }
 
   /** Deletes a {@code Reader} object. */
@@ -402,15 +393,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /** Deletes a {@code Reader} object. */
   public Reader delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Returns a list of {@code Reader} objects. */
@@ -422,15 +408,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public static ReaderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/readers";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReaderCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReaderCollection.class);
   }
 
   /** Returns a list of {@code Reader} objects. */
@@ -443,15 +424,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       throws StripeException {
     String path = "/v1/terminal/readers";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReaderCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReaderCollection.class);
   }
 
   /** Initiates a payment flow on a Reader. */
@@ -466,15 +447,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/process_payment_intent",
             ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Initiates a payment flow on a Reader. */
@@ -491,15 +467,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             "/v1/terminal/readers/%s/process_payment_intent",
             ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Initiates a setup intent flow on a Reader. */
@@ -513,15 +489,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/process_setup_intent", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Initiates a setup intent flow on a Reader. */
@@ -536,15 +507,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/process_setup_intent", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Initiates a refund on a Reader. */
@@ -568,15 +539,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Initiates a refund on a Reader. */
@@ -591,15 +557,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Retrieves a {@code Reader} object. */
@@ -616,15 +582,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public static Reader retrieve(String reader, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Reader.class);
   }
 
   /** Retrieves a {@code Reader} object. */
@@ -632,15 +593,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Reader.class);
   }
 
   /** Sets reader display to show cart details. */
@@ -654,15 +615,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/set_reader_display", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Sets reader display to show cart details. */
@@ -677,15 +633,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/set_reader_display", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /**
@@ -704,15 +660,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Override
   public Reader update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /**
@@ -730,15 +681,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader update(ReaderUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 
   /** Represents an action performed by the reader. */
@@ -1379,16 +1330,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           String.format(
               "/v1/test_helpers/terminal/readers/%s/present_payment_method",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Reader.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Reader.class);
     }
 
     /**
@@ -1411,16 +1356,15 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
               "/v1/test_helpers/terminal/readers/%s/present_payment_method",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Reader.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, Reader.class);
     }
   }
 

@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -231,15 +232,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static Plan create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/plans";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Plan.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Plan.class);
   }
 
   /**
@@ -260,15 +256,15 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String path = "/v1/plans";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Plan.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Plan.class);
   }
 
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
@@ -289,15 +285,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
   public Plan delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            Plan.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Plan.class);
   }
 
   /** Returns a list of your plans. */
@@ -309,15 +300,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/plans";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            PlanCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PlanCollection.class);
   }
 
   /** Returns a list of your plans. */
@@ -330,15 +316,15 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String path = "/v1/plans";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PlanCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PlanCollection.class);
   }
 
   /** Retrieves the plan with the given ID. */
@@ -355,15 +341,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static Plan retrieve(String plan, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Plan.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Plan.class);
   }
 
   /** Retrieves the plan with the given ID. */
@@ -371,15 +352,15 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Plan.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Plan.class);
   }
 
   /**
@@ -400,15 +381,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @Override
   public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Plan.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Plan.class);
   }
 
   /**
@@ -428,15 +404,15 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public Plan update(PlanUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Plan.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Plan.class);
   }
 
   @Getter

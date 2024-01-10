@@ -29,13 +29,14 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
         Map<String, Object> params, RequestOptions options) throws StripeException {
       return getGlobalResponseGetter()
           .request(
-              BaseAddress.API,
-              RequestMethod.GET,
-              "/v1/searchable_models",
-              params,
-              SearchableModelCollection.class,
-              options,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.API,
+                  RequestMethod.GET,
+                  "/v1/searchable_models",
+                  params,
+                  options,
+                  ApiMode.V1),
+              SearchableModelCollection.class);
     }
 
     @Override
@@ -46,13 +47,14 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     public SearchableModel delete() throws StripeException {
       return getResponseGetter()
           .request(
-              BaseAddress.API,
-              RequestMethod.DELETE,
-              String.format("/v1/searchable_models/%s", getId()),
-              (Map<String, Object>) null,
-              SearchableModel.class,
-              null,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.API,
+                  RequestMethod.DELETE,
+                  String.format("/v1/searchable_models/%s", getId()),
+                  (Map<String, Object>) null,
+                  null,
+                  ApiMode.V1),
+              SearchableModel.class);
     }
   }
 
@@ -205,13 +207,11 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     Mockito.doAnswer((Answer<SearchableModel>) invocation -> new SearchableModel())
         .when(networkSpy)
         .request(
-            Mockito.<BaseAddress>any(),
-            Mockito.eq(ApiResource.RequestMethod.DELETE),
-            Mockito.anyString(),
-            Mockito.<Map<String, Object>>any(),
-            Mockito.<Class<SearchableModel>>any(),
-            Mockito.<RequestOptions>any(),
-            Mockito.<ApiMode>any());
+            Mockito.<ApiRequest>argThat(
+                (req) -> {
+                  return req.getMethod().equals(ApiResource.RequestMethod.DELETE);
+                }),
+            Mockito.<Class<SearchableModel>>any());
 
     final String data = getResourceAsString("/model_fixtures/searchable_model_page_0.json");
     SearchableModelCollection collection =

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.radar.ValueList;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -50,15 +51,16 @@ public final class ValueListService extends ApiService {
   public StripeCollection<ValueList> list(ValueListListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/radar/value_lists";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ValueList>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ValueList>>() {}.getType());
   }
   /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public ValueList create(ValueListCreateParams params) throws StripeException {
@@ -68,15 +70,15 @@ public final class ValueListService extends ApiService {
   public ValueList create(ValueListCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/radar/value_lists";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueList.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ValueList.class);
   }
   /** Retrieves a {@code ValueList} object. */
   public ValueList retrieve(String valueList, ValueListRetrieveParams params)
@@ -96,15 +98,15 @@ public final class ValueListService extends ApiService {
       String valueList, ValueListRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueList.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ValueList.class);
   }
   /**
    * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
@@ -134,15 +136,15 @@ public final class ValueListService extends ApiService {
   public ValueList update(String valueList, ValueListUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueList.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ValueList.class);
   }
   /**
    * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
@@ -157,14 +159,9 @@ public final class ValueListService extends ApiService {
    */
   public ValueList delete(String valueList, RequestOptions options) throws StripeException {
     String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            ValueList.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, ValueList.class);
   }
 }

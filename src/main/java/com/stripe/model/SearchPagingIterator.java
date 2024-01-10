@@ -76,7 +76,8 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
 
   private StripeSearchResultInterface<T> search(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
-    return getResponseGetter()
-        .request(BaseAddress.API, RequestMethod.GET, url, params, pageType, options, ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, RequestMethod.GET, url, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, pageType);
   }
 }

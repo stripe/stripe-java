@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -161,15 +162,10 @@ public class Review extends ApiResource implements HasId {
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Review.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Review.class);
   }
 
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
@@ -181,15 +177,15 @@ public class Review extends ApiResource implements HasId {
   public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Review.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Review.class);
   }
 
   /**
@@ -209,15 +205,10 @@ public class Review extends ApiResource implements HasId {
   public static ReviewCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reviews";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReviewCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReviewCollection.class);
   }
 
   /**
@@ -238,15 +229,15 @@ public class Review extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/reviews";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReviewCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReviewCollection.class);
   }
 
   /** Retrieves a {@code Review} object. */
@@ -263,15 +254,10 @@ public class Review extends ApiResource implements HasId {
   public static Review retrieve(String review, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Review.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Review.class);
   }
 
   /** Retrieves a {@code Review} object. */
@@ -279,15 +265,15 @@ public class Review extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Review.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Review.class);
   }
 
   @Getter

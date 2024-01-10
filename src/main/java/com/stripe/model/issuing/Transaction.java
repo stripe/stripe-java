@@ -9,6 +9,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -307,15 +308,10 @@ public class Transaction extends ApiResource
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/transactions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            TransactionCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TransactionCollection.class);
   }
 
   /**
@@ -334,15 +330,15 @@ public class Transaction extends ApiResource
       throws StripeException {
     String path = "/v1/issuing/transactions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TransactionCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TransactionCollection.class);
   }
 
   /** Retrieves an Issuing {@code Transaction} object. */
@@ -362,15 +358,10 @@ public class Transaction extends ApiResource
       throws StripeException {
     String path =
         String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Transaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
   /** Retrieves an Issuing {@code Transaction} object. */
@@ -380,15 +371,15 @@ public class Transaction extends ApiResource
     String path =
         String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
   /**
@@ -409,15 +400,10 @@ public class Transaction extends ApiResource
       throws StripeException {
     String path =
         String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Transaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
 
   /**
@@ -437,15 +423,15 @@ public class Transaction extends ApiResource
     String path =
         String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
 
   @Getter
@@ -727,15 +713,10 @@ public class Transaction extends ApiResource
     public static Transaction createForceCapture(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_force_capture";
-      return getGlobalResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Transaction.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return getGlobalResponseGetter().request(request, Transaction.class);
     }
 
     /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
@@ -749,15 +730,15 @@ public class Transaction extends ApiResource
         TransactionCreateForceCaptureParams params, RequestOptions options) throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_force_capture";
       ApiResource.checkNullTypedParams(path, params);
-      return getGlobalResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Transaction.class,
               options,
               ApiMode.V1);
+      return getGlobalResponseGetter().request(request, Transaction.class);
     }
 
     /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
@@ -770,15 +751,10 @@ public class Transaction extends ApiResource
     public static Transaction createUnlinkedRefund(
         Map<String, Object> params, RequestOptions options) throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund";
-      return getGlobalResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Transaction.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return getGlobalResponseGetter().request(request, Transaction.class);
     }
 
     /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
@@ -793,15 +769,15 @@ public class Transaction extends ApiResource
         throws StripeException {
       String path = "/v1/test_helpers/issuing/transactions/create_unlinked_refund";
       ApiResource.checkNullTypedParams(path, params);
-      return getGlobalResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Transaction.class,
               options,
               ApiMode.V1);
+      return getGlobalResponseGetter().request(request, Transaction.class);
     }
 
     /** Refund a test-mode Transaction. */
@@ -826,16 +802,10 @@ public class Transaction extends ApiResource
           String.format(
               "/v1/test_helpers/issuing/transactions/%s/refund",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              Transaction.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Transaction.class);
     }
 
     /** Refund a test-mode Transaction. */
@@ -851,16 +821,15 @@ public class Transaction extends ApiResource
               "/v1/test_helpers/issuing/transactions/%s/refund",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              Transaction.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, Transaction.class);
     }
   }
 

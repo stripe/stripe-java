@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.reporting.ReportType;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -51,15 +52,15 @@ public final class ReportTypeService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportType.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ReportType.class);
   }
   /** Returns a full list of Report Types. */
   public StripeCollection<ReportType> list(ReportTypeListParams params) throws StripeException {
@@ -77,14 +78,15 @@ public final class ReportTypeService extends ApiService {
   public StripeCollection<ReportType> list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reporting/report_types";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ReportType>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ReportType>>() {}.getType());
   }
 }

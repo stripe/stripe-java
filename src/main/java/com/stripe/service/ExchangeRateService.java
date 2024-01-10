@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExchangeRate;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -48,15 +49,16 @@ public final class ExchangeRateService extends ApiService {
   public StripeCollection<ExchangeRate> list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/exchange_rates";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ExchangeRate>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ExchangeRate>>() {}.getType());
   }
   /** Retrieves the exchange rates from the given currency to every supported currency. */
   public ExchangeRate retrieve(String rateId, ExchangeRateRetrieveParams params)
@@ -76,14 +78,14 @@ public final class ExchangeRateService extends ApiService {
       String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ExchangeRate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ExchangeRate.class);
   }
 }

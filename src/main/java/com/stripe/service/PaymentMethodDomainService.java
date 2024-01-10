@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentMethodDomain;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -45,15 +46,15 @@ public final class PaymentMethodDomainService extends ApiService {
     String path =
         String.format(
             "/v1/payment_method_domains/%s", ApiResource.urlEncodeId(paymentMethodDomain));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodDomain.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
   /** Updates an existing payment method domain. */
   public PaymentMethodDomain update(
@@ -77,15 +78,15 @@ public final class PaymentMethodDomainService extends ApiService {
     String path =
         String.format(
             "/v1/payment_method_domains/%s", ApiResource.urlEncodeId(paymentMethodDomain));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodDomain.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
   /** Lists the details of existing payment method domains. */
   public StripeCollection<PaymentMethodDomain> list(PaymentMethodDomainListParams params)
@@ -104,15 +105,16 @@ public final class PaymentMethodDomainService extends ApiService {
   public StripeCollection<PaymentMethodDomain> list(
       PaymentMethodDomainListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_method_domains";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PaymentMethodDomain>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PaymentMethodDomain>>() {}.getType());
   }
   /** Creates a payment method domain. */
   public PaymentMethodDomain create(PaymentMethodDomainCreateParams params) throws StripeException {
@@ -122,15 +124,15 @@ public final class PaymentMethodDomainService extends ApiService {
   public PaymentMethodDomain create(PaymentMethodDomainCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_method_domains";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodDomain.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
   /**
    * Some payment methods such as Apple Pay require additional steps to verify a domain. If the
@@ -206,14 +208,14 @@ public final class PaymentMethodDomainService extends ApiService {
     String path =
         String.format(
             "/v1/payment_method_domains/%s/validate", ApiResource.urlEncodeId(paymentMethodDomain));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodDomain.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
 }

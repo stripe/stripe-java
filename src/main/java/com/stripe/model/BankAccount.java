@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -230,15 +231,10 @@ public class BankAccount extends ApiResource
         String.format(
             "/v1/customers/%s/sources/%s/verify",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            BankAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, BankAccount.class);
   }
 
   /** Verify a specified bank account for a given customer. */
@@ -254,15 +250,15 @@ public class BankAccount extends ApiResource
             "/v1/customers/%s/sources/%s/verify",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            BankAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, BankAccount.class);
   }
 
   /**
@@ -319,15 +315,10 @@ public class BankAccount extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            url,
-            params,
-            BankAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, url, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, BankAccount.class);
   }
 
   /**
@@ -377,15 +368,15 @@ public class BankAccount extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             url,
             ApiRequestParams.paramsToMap(params),
-            BankAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, BankAccount.class);
   }
 
   /**
@@ -435,15 +426,16 @@ public class BankAccount extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             url,
             ApiRequestParams.paramsToMap(params),
-            BankAccount.class,
             options,
             ApiMode.V1);
+
+    return getResponseGetter().request(request, BankAccount.class);
   }
 
   /**
@@ -504,15 +496,10 @@ public class BankAccount extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            url,
-            params,
-            BankAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, url, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, BankAccount.class);
   }
 
   @Getter

@@ -7,6 +7,7 @@ import com.stripe.model.Charge;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -47,15 +48,16 @@ public final class ChargeService extends ApiService {
   public StripeSearchResult<Charge> search(ChargeSearchParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/charges/search";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeSearchResult<Charge>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Charge>>() {}.getType());
   }
   /**
    * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
@@ -85,15 +87,16 @@ public final class ChargeService extends ApiService {
   public StripeCollection<Charge> list(ChargeListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/charges";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Charge>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Charge>>() {}.getType());
   }
   /**
    * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
@@ -130,15 +133,15 @@ public final class ChargeService extends ApiService {
    */
   public Charge create(ChargeCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/charges";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Charge.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Charge.class);
   }
   /**
    * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
@@ -172,15 +175,15 @@ public final class ChargeService extends ApiService {
   public Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Charge.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Charge.class);
   }
   /**
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
@@ -210,15 +213,15 @@ public final class ChargeService extends ApiService {
   public Charge update(String charge, ChargeUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Charge.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Charge.class);
   }
   /**
    * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
@@ -276,14 +279,14 @@ public final class ChargeService extends ApiService {
   public Charge capture(String charge, ChargeCaptureParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(charge));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Charge.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Charge.class);
   }
 }

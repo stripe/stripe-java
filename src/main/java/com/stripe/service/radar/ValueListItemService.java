@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.radar.ValueListItem;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -36,15 +37,16 @@ public final class ValueListItemService extends ApiService {
   public StripeCollection<ValueListItem> list(
       ValueListItemListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/radar/value_list_items";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ValueListItem>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ValueListItem>>() {}.getType());
   }
   /**
    * Creates a new {@code ValueListItem} object, which is added to the specified parent value list.
@@ -58,15 +60,15 @@ public final class ValueListItemService extends ApiService {
   public ValueListItem create(ValueListItemCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/radar/value_list_items";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueListItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ValueListItem.class);
   }
   /** Retrieves a {@code ValueListItem} object. */
   public ValueListItem retrieve(String item, ValueListItemRetrieveParams params)
@@ -86,15 +88,15 @@ public final class ValueListItemService extends ApiService {
       String item, ValueListItemRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ValueListItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ValueListItem.class);
   }
   /** Deletes a {@code ValueListItem} object, removing it from its parent value list. */
   public ValueListItem delete(String item) throws StripeException {
@@ -103,14 +105,9 @@ public final class ValueListItemService extends ApiService {
   /** Deletes a {@code ValueListItem} object, removing it from its parent value list. */
   public ValueListItem delete(String item, RequestOptions options) throws StripeException {
     String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            ValueListItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, ValueListItem.class);
   }
 }

@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -235,15 +236,10 @@ public class SetupAttempt extends ApiResource implements HasId {
   public static SetupAttemptCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/setup_attempts";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            SetupAttemptCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SetupAttemptCollection.class);
   }
 
   /** Returns a list of SetupAttempts that associate with a provided SetupIntent. */
@@ -256,15 +252,15 @@ public class SetupAttempt extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/setup_attempts";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SetupAttemptCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SetupAttemptCollection.class);
   }
 
   @Getter

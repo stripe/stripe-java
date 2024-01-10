@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -49,15 +50,16 @@ public final class ApplicationFeeService extends ApiService {
   public StripeCollection<ApplicationFee> list(
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/application_fees";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ApplicationFee>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ApplicationFee>>() {}.getType());
   }
   /**
    * Retrieves the details of an application fee that your account has collected. The same
@@ -89,15 +91,15 @@ public final class ApplicationFeeService extends ApiService {
       String id, ApplicationFeeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ApplicationFee.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ApplicationFee.class);
   }
 
   public com.stripe.service.FeeRefundService feeRefunds() {

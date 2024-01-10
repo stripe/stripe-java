@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Token;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -34,15 +35,15 @@ public final class TokenService extends ApiService {
   public Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Token.class);
   }
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
@@ -75,14 +76,14 @@ public final class TokenService extends ApiService {
    */
   public Token create(TokenCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/tokens";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Token.class);
   }
 }

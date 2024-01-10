@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.financialconnections.Account;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -40,15 +41,16 @@ public final class AccountService extends ApiService {
   public StripeCollection<Account> list(AccountListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/financial_connections/accounts";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Account>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
   /** Retrieves the details of an Financial Connections {@code Account}. */
   public Account retrieve(String account, AccountRetrieveParams params) throws StripeException {
@@ -67,15 +69,15 @@ public final class AccountService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public Account refresh(String account, AccountRefreshParams params) throws StripeException {
@@ -87,15 +89,15 @@ public final class AccountService extends ApiService {
     String path =
         String.format(
             "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /**
    * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
@@ -127,15 +129,15 @@ public final class AccountService extends ApiService {
     String path =
         String.format(
             "/v1/financial_connections/accounts/%s/disconnect", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
@@ -153,15 +155,15 @@ public final class AccountService extends ApiService {
     String path =
         String.format(
             "/v1/financial_connections/accounts/%s/subscribe", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /**
    * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
@@ -181,15 +183,15 @@ public final class AccountService extends ApiService {
     String path =
         String.format(
             "/v1/financial_connections/accounts/%s/unsubscribe", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
 
   public com.stripe.service.financialconnections.AccountInferredBalanceService inferredBalances() {

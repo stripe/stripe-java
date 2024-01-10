@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.CustomerBalanceTransaction;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -66,15 +67,15 @@ public final class CustomerBalanceTransactionService extends ApiService {
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerBalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
   /**
    * Most credit balance transaction fields are immutable, but you may update its {@code
@@ -119,15 +120,15 @@ public final class CustomerBalanceTransactionService extends ApiService {
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerBalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
   /**
    * Returns a list of transactions that updated the customer’s <a
@@ -161,15 +162,17 @@ public final class CustomerBalanceTransactionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<CustomerBalanceTransaction>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(
+            request, new TypeToken<StripeCollection<CustomerBalanceTransaction>>() {}.getType());
   }
   /**
    * Creates an immutable transaction that updates the customer’s credit <a
@@ -188,14 +191,14 @@ public final class CustomerBalanceTransactionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerBalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
 }

@@ -6,6 +6,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -247,15 +248,10 @@ public class Event extends ApiResource implements HasId {
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/events";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            EventCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, EventCollection.class);
   }
 
   /**
@@ -278,15 +274,15 @@ public class Event extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/events";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            EventCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, EventCollection.class);
   }
 
   /**
@@ -312,15 +308,10 @@ public class Event extends ApiResource implements HasId {
   public static Event retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Event.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Event.class);
   }
 
   /**
@@ -331,15 +322,15 @@ public class Event extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/events/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Event.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Event.class);
   }
 
   /**

@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.terminal;
 import com.stripe.exception.StripeException;
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -51,14 +52,14 @@ public final class ReaderService extends ApiService {
         String.format(
             "/v1/test_helpers/terminal/readers/%s/present_payment_method",
             ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 }

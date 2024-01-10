@@ -7,6 +7,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -130,15 +131,10 @@ public class Token extends ApiResource implements HasId {
   public static TokenCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/tokens";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            TokenCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TokenCollection.class);
   }
 
   /** Lists all Issuing {@code Token} objects for a given card. */
@@ -151,15 +147,15 @@ public class Token extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/issuing/tokens";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TokenCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TokenCollection.class);
   }
 
   /** Retrieves an Issuing {@code Token} object. */
@@ -176,15 +172,10 @@ public class Token extends ApiResource implements HasId {
   public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Token.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Token.class);
   }
 
   /** Retrieves an Issuing {@code Token} object. */
@@ -192,15 +183,15 @@ public class Token extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Token.class);
   }
 
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
@@ -211,15 +202,10 @@ public class Token extends ApiResource implements HasId {
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
   public Token update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Token.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Token.class);
   }
 
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
@@ -231,15 +217,15 @@ public class Token extends ApiResource implements HasId {
   public Token update(TokenUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Token.class);
   }
 
   @Getter

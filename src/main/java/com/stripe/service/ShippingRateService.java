@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,16 @@ public final class ShippingRateService extends ApiService {
   public StripeCollection<ShippingRate> list(ShippingRateListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/shipping_rates";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ShippingRate>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ShippingRate>>() {}.getType());
   }
   /** Creates a new shipping rate object. */
   public ShippingRate create(ShippingRateCreateParams params) throws StripeException {
@@ -56,15 +58,15 @@ public final class ShippingRateService extends ApiService {
   public ShippingRate create(ShippingRateCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/shipping_rates";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ShippingRate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ShippingRate.class);
   }
   /** Returns the shipping rate object with the given ID. */
   public ShippingRate retrieve(String shippingRateToken, ShippingRateRetrieveParams params)
@@ -86,15 +88,15 @@ public final class ShippingRateService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ShippingRate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ShippingRate.class);
   }
   /** Updates an existing shipping rate object. */
   public ShippingRate update(String shippingRateToken, ShippingRateUpdateParams params)
@@ -116,14 +118,14 @@ public final class ShippingRateService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ShippingRate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ShippingRate.class);
   }
 }

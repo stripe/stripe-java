@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BankAccount;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -39,14 +40,14 @@ public final class BankAccountService extends ApiService {
         String.format(
             "/v1/customers/%s/sources/%s/verify",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            BankAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, BankAccount.class);
   }
 }

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.Dispute;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -51,15 +52,16 @@ public final class DisputeService extends ApiService {
   public StripeCollection<Dispute> list(DisputeListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/disputes";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Dispute>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Dispute>>() {}.getType());
   }
   /**
    * Creates an Issuing {@code Dispute} object. Individual pieces of evidence within the {@code
@@ -100,15 +102,15 @@ public final class DisputeService extends ApiService {
    */
   public Dispute create(DisputeCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/disputes";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Dispute.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Dispute.class);
   }
   /**
    * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
@@ -142,15 +144,15 @@ public final class DisputeService extends ApiService {
   public Dispute update(String dispute, DisputeUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Dispute.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Dispute.class);
   }
   /** Retrieves an Issuing {@code Dispute} object. */
   public Dispute retrieve(String dispute, DisputeRetrieveParams params) throws StripeException {
@@ -168,15 +170,15 @@ public final class DisputeService extends ApiService {
   public Dispute retrieve(String dispute, DisputeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Dispute.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Dispute.class);
   }
   /**
    * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
@@ -214,14 +216,14 @@ public final class DisputeService extends ApiService {
   public Dispute submit(String dispute, DisputeSubmitParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/disputes/%s/submit", ApiResource.urlEncodeId(dispute));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Dispute.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Dispute.class);
   }
 }

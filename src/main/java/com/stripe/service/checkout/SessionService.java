@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.checkout.Session;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,16 @@ public final class SessionService extends ApiService {
   public StripeCollection<Session> list(SessionListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/checkout/sessions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Session>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Session>>() {}.getType());
   }
   /** Creates a Session object. */
   public Session create(SessionCreateParams params) throws StripeException {
@@ -63,15 +65,15 @@ public final class SessionService extends ApiService {
   /** Creates a Session object. */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/checkout/sessions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Session.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
   }
   /** Retrieves a Session object. */
   public Session retrieve(String session, SessionRetrieveParams params) throws StripeException {
@@ -89,15 +91,15 @@ public final class SessionService extends ApiService {
   public Session retrieve(String session, SessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Session.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
   }
   /**
    * A Session can be expired when it is in one of these statuses: {@code open}
@@ -136,15 +138,15 @@ public final class SessionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Session.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
   }
 
   public com.stripe.service.checkout.SessionLineItemService lineItems() {

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -74,15 +75,10 @@ public class Supplier extends ApiResource implements HasId {
   public static SupplierCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/climate/suppliers";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            SupplierCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SupplierCollection.class);
   }
 
   /** Lists all available Climate supplier objects. */
@@ -95,15 +91,15 @@ public class Supplier extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/climate/suppliers";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SupplierCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SupplierCollection.class);
   }
 
   /** Retrieves a Climate supplier object. */
@@ -120,15 +116,10 @@ public class Supplier extends ApiResource implements HasId {
   public static Supplier retrieve(
       String supplier, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(supplier));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Supplier.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Supplier.class);
   }
 
   /** Retrieves a Climate supplier object. */
@@ -137,15 +128,15 @@ public class Supplier extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(supplier));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Supplier.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Supplier.class);
   }
 
   @Getter

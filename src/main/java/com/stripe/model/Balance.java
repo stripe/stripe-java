@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -108,15 +109,10 @@ public class Balance extends ApiResource {
   public static Balance retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/balance";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Balance.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Balance.class);
   }
 
   /**
@@ -129,15 +125,15 @@ public class Balance extends ApiResource {
       throws StripeException {
     String path = "/v1/balance";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Balance.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Balance.class);
   }
 
   @Getter

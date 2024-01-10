@@ -8,6 +8,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -156,15 +157,10 @@ public class ReceivedDebit extends ApiResource implements HasId {
   public static ReceivedDebitCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/received_debits";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReceivedDebitCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedDebitCollection.class);
   }
 
   /** Returns a list of ReceivedDebits. */
@@ -178,15 +174,15 @@ public class ReceivedDebit extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/treasury/received_debits";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedDebitCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedDebitCollection.class);
   }
 
   /**
@@ -212,15 +208,10 @@ public class ReceivedDebit extends ApiResource implements HasId {
   public static ReceivedDebit retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReceivedDebit.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedDebit.class);
   }
 
   /**
@@ -232,15 +223,15 @@ public class ReceivedDebit extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedDebit.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedDebit.class);
   }
 
   @Getter
@@ -427,15 +418,10 @@ public class ReceivedDebit extends ApiResource implements HasId {
     public static ReceivedDebit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path = "/v1/test_helpers/treasury/received_debits";
-      return getGlobalResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              ReceivedDebit.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ReceivedDebit.class);
     }
 
     /**
@@ -454,15 +440,15 @@ public class ReceivedDebit extends ApiResource implements HasId {
         throws StripeException {
       String path = "/v1/test_helpers/treasury/received_debits";
       ApiResource.checkNullTypedParams(path, params);
-      return getGlobalResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              ReceivedDebit.class,
               options,
               ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ReceivedDebit.class);
     }
   }
 

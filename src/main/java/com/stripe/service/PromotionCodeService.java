@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PromotionCode;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -57,15 +58,15 @@ public final class PromotionCodeService extends ApiService {
       String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PromotionCode.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PromotionCode.class);
   }
   /**
    * Updates the specified promotion code by setting the values of the parameters passed. Most
@@ -97,15 +98,15 @@ public final class PromotionCodeService extends ApiService {
       String promotionCode, PromotionCodeUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PromotionCode.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PromotionCode.class);
   }
   /**
    * A promotion code points to a coupon. You can optionally restrict the code to a specific
@@ -121,15 +122,15 @@ public final class PromotionCodeService extends ApiService {
   public PromotionCode create(PromotionCodeCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/promotion_codes";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PromotionCode.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PromotionCode.class);
   }
   /** Returns a list of your promotion codes. */
   public StripeCollection<PromotionCode> list(PromotionCodeListParams params)
@@ -148,14 +149,15 @@ public final class PromotionCodeService extends ApiService {
   public StripeCollection<PromotionCode> list(
       PromotionCodeListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/promotion_codes";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PromotionCode>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PromotionCode>>() {}.getType());
   }
 }

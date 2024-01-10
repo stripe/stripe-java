@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -198,15 +199,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
   public static BalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/balance_transactions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            BalanceTransactionCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, BalanceTransactionCollection.class);
   }
 
   /**
@@ -234,15 +230,15 @@ public class BalanceTransaction extends ApiResource implements HasId {
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/balance_transactions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            BalanceTransactionCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, BalanceTransactionCollection.class);
   }
 
   /**
@@ -272,15 +268,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
   public static BalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            BalanceTransaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, BalanceTransaction.class);
   }
 
   /**
@@ -293,15 +284,15 @@ public class BalanceTransaction extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            BalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, BalanceTransaction.class);
   }
 
   @Getter

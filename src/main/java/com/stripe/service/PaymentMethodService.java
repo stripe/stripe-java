@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentMethod;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -80,15 +81,15 @@ public final class PaymentMethodService extends ApiService {
   public PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_methods";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethod.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethod.class);
   }
   /**
    * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
@@ -127,15 +128,16 @@ public final class PaymentMethodService extends ApiService {
   public StripeCollection<PaymentMethod> list(
       PaymentMethodListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_methods";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PaymentMethod>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PaymentMethod>>() {}.getType());
   }
   /**
    * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
@@ -176,15 +178,15 @@ public final class PaymentMethodService extends ApiService {
       String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethod.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethod.class);
   }
   /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
   public PaymentMethod update(String paymentMethod, PaymentMethodUpdateParams params)
@@ -204,15 +206,15 @@ public final class PaymentMethodService extends ApiService {
       String paymentMethod, PaymentMethodUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethod.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethod.class);
   }
   /**
    * Attaches a PaymentMethod object to a Customer.
@@ -257,15 +259,15 @@ public final class PaymentMethodService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(paymentMethod));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethod.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethod.class);
   }
   /**
    * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
@@ -298,14 +300,14 @@ public final class PaymentMethodService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(paymentMethod));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethod.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethod.class);
   }
 }

@@ -8,6 +8,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.PaymentIntent;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -130,15 +131,10 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   public static EarlyFraudWarningCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/radar/early_fraud_warnings";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            EarlyFraudWarningCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, EarlyFraudWarningCollection.class);
   }
 
   /** Returns a list of early fraud warnings. */
@@ -152,15 +148,15 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
       EarlyFraudWarningListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/radar/early_fraud_warnings";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            EarlyFraudWarningCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, EarlyFraudWarningCollection.class);
   }
 
   /**
@@ -196,15 +192,10 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            EarlyFraudWarning.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, EarlyFraudWarning.class);
   }
 
   /**
@@ -220,15 +211,15 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
         String.format(
             "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            EarlyFraudWarning.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, EarlyFraudWarning.class);
   }
 
   @Override

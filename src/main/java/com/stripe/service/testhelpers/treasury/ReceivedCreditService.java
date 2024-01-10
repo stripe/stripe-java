@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.treasury;
 import com.stripe.exception.StripeException;
 import com.stripe.model.treasury.ReceivedCredit;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -31,14 +32,14 @@ public final class ReceivedCreditService extends ApiService {
   public ReceivedCredit create(ReceivedCreditCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/test_helpers/treasury/received_credits";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedCredit.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ReceivedCredit.class);
   }
 }

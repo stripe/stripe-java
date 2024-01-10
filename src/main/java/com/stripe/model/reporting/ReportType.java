@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -100,15 +101,10 @@ public class ReportType extends ApiResource implements HasId {
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reporting/report_types";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReportTypeCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportTypeCollection.class);
   }
 
   /** Returns a full list of Report Types. */
@@ -121,15 +117,15 @@ public class ReportType extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/reporting/report_types";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportTypeCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportTypeCollection.class);
   }
 
   /**
@@ -158,15 +154,10 @@ public class ReportType extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReportType.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportType.class);
   }
 
   /**
@@ -179,14 +170,14 @@ public class ReportType extends ApiResource implements HasId {
     String path =
         String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportType.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportType.class);
   }
 }
