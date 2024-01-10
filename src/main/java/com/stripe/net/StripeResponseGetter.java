@@ -7,7 +7,9 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 public interface StripeResponseGetter {
+  /** @deprecated Use {@link #request(ApiRequest, Type)} instead. */
   @SuppressWarnings("TypeParameterUnusedInFormals")
+  @Deprecated
   <T extends StripeObjectInterface> T request(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
@@ -31,6 +33,9 @@ public interface StripeResponseGetter {
         request.getApiMode());
   };
 
+  /** @deprecated Use {@link #request(ApiRequest, Type)} instead. */
+  @SuppressWarnings("TypeParameterUnusedInFormals")
+  @Deprecated
   InputStream requestStream(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,

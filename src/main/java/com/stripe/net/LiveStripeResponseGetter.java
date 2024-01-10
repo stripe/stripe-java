@@ -47,8 +47,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
   public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
       throws StripeException {
-    String fullUrl =
-        fullUrl(apiRequest.getBaseAddress(), apiRequest.getOptions(), apiRequest.getPath());
+    String fullUrl = fullUrl(apiRequest);
     StripeRequest request =
         new StripeRequest(
             apiRequest.getMethod(),
@@ -84,8 +83,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   @Override
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
-    String fullUrl =
-        fullUrl(apiRequest.getBaseAddress(), apiRequest.getOptions(), apiRequest.getPath());
+    String fullUrl = fullUrl(apiRequest);
 
     StripeRequest request =
         new StripeRequest(
@@ -118,7 +116,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
-  @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
+  @SuppressWarnings({"TypeParameterUnusedInFormals", "deprecation"})
   public <T extends StripeObjectInterface> T request(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
@@ -133,6 +131,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
+  @SuppressWarnings({"TypeParameterUnusedInFormals", "deprecation"})
   public InputStream requestStream(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
@@ -319,7 +318,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
-  private String fullUrl(BaseAddress baseAddress, RequestOptions options, String relativeUrl) {
+  private String fullUrl(ApiRequest apiRequest) {
+    BaseAddress baseAddress = apiRequest.getBaseAddress();
+    RequestOptions options = apiRequest.getOptions();
+    String relativeUrl = apiRequest.getPath();
     String baseUrl;
     switch (baseAddress) {
       case API:
