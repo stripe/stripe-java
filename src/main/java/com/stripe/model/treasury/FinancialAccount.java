@@ -7,6 +7,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -139,15 +140,10 @@ public class FinancialAccount extends ApiResource
   public static FinancialAccount create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/financial_accounts";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            FinancialAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
   /**
@@ -167,15 +163,15 @@ public class FinancialAccount extends ApiResource
       throws StripeException {
     String path = "/v1/treasury/financial_accounts";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccount.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
   /** Returns a list of FinancialAccounts. */
@@ -187,15 +183,10 @@ public class FinancialAccount extends ApiResource
   public static FinancialAccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/financial_accounts";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FinancialAccountCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancialAccountCollection.class);
   }
 
   /** Returns a list of FinancialAccounts. */
@@ -209,15 +200,15 @@ public class FinancialAccount extends ApiResource
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/financial_accounts";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccountCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancialAccountCollection.class);
   }
 
   /** Retrieves the details of a FinancialAccount. */
@@ -238,15 +229,10 @@ public class FinancialAccount extends ApiResource
     String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FinancialAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
   /** Retrieves the details of a FinancialAccount. */
@@ -257,15 +243,15 @@ public class FinancialAccount extends ApiResource
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccount.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
   /** Retrieves Features information associated with the FinancialAccount. */
@@ -285,15 +271,10 @@ public class FinancialAccount extends ApiResource
     String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FinancialAccountFeatures.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
   /** Retrieves Features information associated with the FinancialAccount. */
@@ -310,15 +291,15 @@ public class FinancialAccount extends ApiResource
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccountFeatures.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
   /** Updates the details of a FinancialAccount. */
@@ -333,15 +314,10 @@ public class FinancialAccount extends ApiResource
       throws StripeException {
     String path =
         String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            FinancialAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccount.class);
   }
 
   /** Updates the details of a FinancialAccount. */
@@ -355,15 +331,15 @@ public class FinancialAccount extends ApiResource
     String path =
         String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccount.class);
   }
 
   /** Updates the Features associated with a FinancialAccount. */
@@ -388,15 +364,10 @@ public class FinancialAccount extends ApiResource
     String path =
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            FinancialAccountFeatures.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
   /** Updates the Features associated with a FinancialAccount. */
@@ -412,15 +383,15 @@ public class FinancialAccount extends ApiResource
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancialAccountFeatures.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
   /** Balance information for the FinancialAccount. */

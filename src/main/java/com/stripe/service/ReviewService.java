@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Review;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -53,15 +54,16 @@ public final class ReviewService extends ApiService {
   public StripeCollection<Review> list(ReviewListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reviews";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Review>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Review>>() {}.getType());
   }
   /** Retrieves a {@code Review} object. */
   public Review retrieve(String review, ReviewRetrieveParams params) throws StripeException {
@@ -79,15 +81,15 @@ public final class ReviewService extends ApiService {
   public Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Review.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Review.class);
   }
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(String review, ReviewApproveParams params) throws StripeException {
@@ -105,14 +107,14 @@ public final class ReviewService extends ApiService {
   public Review approve(String review, ReviewApproveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(review));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Review.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Review.class);
   }
 }

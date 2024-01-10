@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -40,15 +41,15 @@ public final class AccountService extends ApiService {
   public Account retrieveCurrent(AccountRetrieveCurrentParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/account";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /** Retrieves the details of an account. */
   public Account retrieve(String account, AccountRetrieveParams params) throws StripeException {
@@ -66,15 +67,15 @@ public final class AccountService extends ApiService {
   public Account retrieve(String account, AccountRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /**
    * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
@@ -148,15 +149,15 @@ public final class AccountService extends ApiService {
   public Account update(String account, AccountUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
@@ -185,15 +186,10 @@ public final class AccountService extends ApiService {
    */
   public Account delete(String account, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Account.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /**
    * Returns a list of accounts connected to your platform via <a
@@ -227,15 +223,16 @@ public final class AccountService extends ApiService {
   public StripeCollection<Account> list(AccountListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/accounts";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Account>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
   /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
@@ -288,15 +285,15 @@ public final class AccountService extends ApiService {
    */
   public Account create(AccountCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/accounts";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
   /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
@@ -318,15 +315,15 @@ public final class AccountService extends ApiService {
   public Account reject(String account, AccountRejectParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Account.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
   }
 
   public com.stripe.service.CapabilityService capabilities() {

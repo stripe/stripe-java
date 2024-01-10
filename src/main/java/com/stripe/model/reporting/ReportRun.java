@@ -7,6 +7,7 @@ import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -115,15 +116,10 @@ public class ReportRun extends ApiResource implements HasId {
   public static ReportRun create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reporting/report_runs";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            ReportRun.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportRun.class);
   }
 
   /**
@@ -142,15 +138,15 @@ public class ReportRun extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/reporting/report_runs";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportRun.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportRun.class);
   }
 
   /** Returns a list of Report Runs, with the most recent appearing first. */
@@ -162,15 +158,10 @@ public class ReportRun extends ApiResource implements HasId {
   public static ReportRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reporting/report_runs";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReportRunCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportRunCollection.class);
   }
 
   /** Returns a list of Report Runs, with the most recent appearing first. */
@@ -183,15 +174,15 @@ public class ReportRun extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/reporting/report_runs";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportRunCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportRunCollection.class);
   }
 
   /** Retrieves the details of an existing Report Run. */
@@ -209,15 +200,10 @@ public class ReportRun extends ApiResource implements HasId {
   public static ReportRun retrieve(
       String reportRun, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReportRun.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportRun.class);
   }
 
   /** Retrieves the details of an existing Report Run. */
@@ -226,15 +212,15 @@ public class ReportRun extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportRun.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReportRun.class);
   }
 
   @Getter

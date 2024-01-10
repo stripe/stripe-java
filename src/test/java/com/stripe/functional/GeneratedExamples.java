@@ -9819,6 +9819,25 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testSubscriptionItemsUsageRecordsPost() throws StripeException {
+    UsageRecordCreateOnSubscriptionItemParams params =
+        UsageRecordCreateOnSubscriptionItemParams.builder()
+            .setQuantity(100L)
+            .setTimestamp(1571252444L)
+            .build();
+
+    UsageRecord usageRecord =
+        UsageRecord.createOnSubscriptionItem("si_xxxxxxxxxxxxx", params, null);
+    assertNotNull(usageRecord);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/subscription_items/si_xxxxxxxxxxxxx/usage_records",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testSubscriptionItemsUsageRecordsPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 

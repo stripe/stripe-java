@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -94,15 +95,10 @@ public class FinancingTransaction extends ApiResource implements HasId {
   public static FinancingTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/capital/financing_transactions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FinancingTransactionCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancingTransactionCollection.class);
   }
 
   /**
@@ -122,15 +118,15 @@ public class FinancingTransaction extends ApiResource implements HasId {
       FinancingTransactionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/capital/financing_transactions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancingTransactionCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancingTransactionCollection.class);
   }
 
   /** Retrieves a financing transaction for a financing offer. */
@@ -151,15 +147,10 @@ public class FinancingTransaction extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FinancingTransaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancingTransaction.class);
   }
 
   /** Retrieves a financing transaction for a financing offer. */
@@ -172,15 +163,15 @@ public class FinancingTransaction extends ApiResource implements HasId {
         String.format(
             "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancingTransaction.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancingTransaction.class);
   }
 
   /** This is an object representing a transaction on a Capital financing offer. */

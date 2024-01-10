@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -69,15 +70,10 @@ public class FinancingSummary extends ApiResource {
   public static FinancingSummary retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/capital/financing_summary";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FinancingSummary.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancingSummary.class);
   }
 
   /** Retrieve the financing state for the account that was authenticated in the request. */
@@ -85,15 +81,15 @@ public class FinancingSummary extends ApiResource {
       FinancingSummaryRetrieveParams params, RequestOptions options) throws StripeException {
     String path = "/v1/capital/financing_summary";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancingSummary.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FinancingSummary.class);
   }
 
   @Getter

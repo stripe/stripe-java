@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -84,15 +85,10 @@ public class PhysicalBundle extends ApiResource implements HasId {
   public static PhysicalBundleCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/physical_bundles";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            PhysicalBundleCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PhysicalBundleCollection.class);
   }
 
   /**
@@ -112,15 +108,15 @@ public class PhysicalBundle extends ApiResource implements HasId {
       PhysicalBundleListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/physical_bundles";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PhysicalBundleCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PhysicalBundleCollection.class);
   }
 
   /** Retrieves a physical bundle object. */
@@ -140,15 +136,10 @@ public class PhysicalBundle extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            PhysicalBundle.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PhysicalBundle.class);
   }
 
   /** Retrieves a physical bundle object. */
@@ -158,15 +149,15 @@ public class PhysicalBundle extends ApiResource implements HasId {
     String path =
         String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PhysicalBundle.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PhysicalBundle.class);
   }
 
   @Getter

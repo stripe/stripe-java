@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.AccountNotice;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -40,15 +41,15 @@ public final class AccountNoticeService extends ApiService {
       String accountNotice, AccountNoticeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountNotice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, AccountNotice.class);
   }
   /** Updates an {@code AccountNotice} object. */
   public AccountNotice update(String accountNotice, AccountNoticeUpdateParams params)
@@ -60,15 +61,15 @@ public final class AccountNoticeService extends ApiService {
       String accountNotice, AccountNoticeUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountNotice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, AccountNotice.class);
   }
   /**
    * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
@@ -99,14 +100,15 @@ public final class AccountNoticeService extends ApiService {
   public StripeCollection<AccountNotice> list(
       AccountNoticeListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/account_notices";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<AccountNotice>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<AccountNotice>>() {}.getType());
   }
 }

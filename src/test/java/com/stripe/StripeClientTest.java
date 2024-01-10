@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.*;
-import java.util.Map;
+import java.lang.reflect.Type;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
@@ -18,14 +18,7 @@ public class StripeClientTest {
 
     Mockito.doAnswer((Answer<Reader>) invocation -> new Reader())
         .when(responseGetter)
-        .request(
-            Mockito.<BaseAddress>any(),
-            Mockito.<ApiResource.RequestMethod>any(),
-            Mockito.anyString(),
-            Mockito.<Map<String, Object>>any(),
-            Mockito.<Class<Reader>>any(),
-            Mockito.<RequestOptions>any(),
-            Mockito.<ApiMode>any());
+        .request(Mockito.<ApiRequest>any(), Mockito.<Type>any());
 
     client.terminal().readers().retrieve("r_123");
 

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.Transfer;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,15 @@ public final class TransferService extends ApiService {
   public Transfer create(TransferCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/transfers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transfer.class);
   }
   /**
    * Returns a list of existing transfers sent to connected accounts. The transfers are returned in
@@ -76,15 +77,16 @@ public final class TransferService extends ApiService {
   public StripeCollection<Transfer> list(TransferListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/transfers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Transfer>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Transfer>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing transfer. Supply the unique transfer ID from either a
@@ -118,15 +120,15 @@ public final class TransferService extends ApiService {
   public Transfer retrieve(String transfer, TransferRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transfer.class);
   }
   /**
    * Updates the specified transfer by setting the values of the parameters passed. Any parameters
@@ -164,15 +166,15 @@ public final class TransferService extends ApiService {
   public Transfer update(String transfer, TransferUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transfer.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transfer.class);
   }
 
   public com.stripe.service.TransferReversalService reversals() {

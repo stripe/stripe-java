@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TransferReversal;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -76,15 +77,15 @@ public final class TransferReversalService extends ApiService {
       String id, TransferReversalCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/transfers/%s/reversals", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            TransferReversal.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversal.class);
   }
   /**
    * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
@@ -124,15 +125,16 @@ public final class TransferReversalService extends ApiService {
   public StripeCollection<TransferReversal> list(
       String id, TransferReversalListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/transfers/%s/reversals", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<TransferReversal>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TransferReversal>>() {}.getType());
   }
   /**
    * By default, you can see the 10 most recent reversals stored directly on the transfer object,
@@ -168,15 +170,15 @@ public final class TransferReversalService extends ApiService {
         String.format(
             "/v1/transfers/%s/reversals/%s",
             ApiResource.urlEncodeId(transfer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TransferReversal.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversal.class);
   }
   /**
    * Updates the specified reversal by setting the values of the parameters passed. Any parameters
@@ -220,14 +222,14 @@ public final class TransferReversalService extends ApiService {
         String.format(
             "/v1/transfers/%s/reversals/%s",
             ApiResource.urlEncodeId(transfer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            TransferReversal.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversal.class);
   }
 }

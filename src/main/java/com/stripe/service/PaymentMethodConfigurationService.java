@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentMethodConfiguration;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -40,15 +41,17 @@ public final class PaymentMethodConfigurationService extends ApiService {
   public StripeCollection<PaymentMethodConfiguration> list(
       PaymentMethodConfigurationListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_method_configurations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<PaymentMethodConfiguration>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(
+            request, new TypeToken<StripeCollection<PaymentMethodConfiguration>>() {}.getType());
   }
   /** Creates a payment method configuration. */
   public PaymentMethodConfiguration create(PaymentMethodConfigurationCreateParams params)
@@ -68,15 +71,15 @@ public final class PaymentMethodConfigurationService extends ApiService {
       PaymentMethodConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_method_configurations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodConfiguration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
   /** Retrieve payment method configuration. */
   public PaymentMethodConfiguration retrieve(
@@ -101,15 +104,15 @@ public final class PaymentMethodConfigurationService extends ApiService {
     String path =
         String.format(
             "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodConfiguration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
   /** Update payment method configuration. */
   public PaymentMethodConfiguration update(
@@ -133,14 +136,14 @@ public final class PaymentMethodConfigurationService extends ApiService {
     String path =
         String.format(
             "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodConfiguration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 }

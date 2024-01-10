@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.identity.VerificationSession;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -54,15 +55,15 @@ public final class VerificationSessionService extends ApiService {
   public VerificationSession create(VerificationSessionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/identity/verification_sessions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            VerificationSession.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, VerificationSession.class);
   }
   /** Returns a list of VerificationSessions. */
   public StripeCollection<VerificationSession> list(VerificationSessionListParams params)
@@ -81,15 +82,16 @@ public final class VerificationSessionService extends ApiService {
   public StripeCollection<VerificationSession> list(
       VerificationSessionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/identity/verification_sessions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<VerificationSession>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<VerificationSession>>() {}.getType());
   }
   /**
    * Retrieves the details of a VerificationSession that was previously created.
@@ -131,15 +133,15 @@ public final class VerificationSessionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            VerificationSession.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, VerificationSession.class);
   }
   /**
    * Updates a VerificationSession object.
@@ -180,15 +182,15 @@ public final class VerificationSessionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            VerificationSession.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, VerificationSession.class);
   }
   /**
    * A VerificationSession object can be canceled when it is in {@code requires_input} <a
@@ -234,15 +236,15 @@ public final class VerificationSessionService extends ApiService {
     String path =
         String.format(
             "/v1/identity/verification_sessions/%s/cancel", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            VerificationSession.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, VerificationSession.class);
   }
   /**
    * Redact a VerificationSession to remove all collected information from Stripe. This will redact
@@ -344,14 +346,14 @@ public final class VerificationSessionService extends ApiService {
     String path =
         String.format(
             "/v1/identity/verification_sessions/%s/redact", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            VerificationSession.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, VerificationSession.class);
   }
 }

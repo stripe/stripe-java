@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.reporting.ReportRun;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -39,15 +40,15 @@ public final class ReportRunService extends ApiService {
       String reportRun, ReportRunRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportRun.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ReportRun.class);
   }
   /**
    * Creates a new object and begin running the report. (Certain report types require a <a
@@ -63,15 +64,15 @@ public final class ReportRunService extends ApiService {
   public ReportRun create(ReportRunCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reporting/report_runs";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReportRun.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ReportRun.class);
   }
   /** Returns a list of Report Runs, with the most recent appearing first. */
   public StripeCollection<ReportRun> list(ReportRunListParams params) throws StripeException {
@@ -89,14 +90,15 @@ public final class ReportRunService extends ApiService {
   public StripeCollection<ReportRun> list(ReportRunListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/reporting/report_runs";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ReportRun>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ReportRun>>() {}.getType());
   }
 }

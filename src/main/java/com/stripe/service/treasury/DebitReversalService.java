@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.DebitReversal;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -29,15 +30,15 @@ public final class DebitReversalService extends ApiService {
   public DebitReversal create(DebitReversalCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/debit_reversals";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            DebitReversal.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, DebitReversal.class);
   }
   /** Returns a list of DebitReversals. */
   public StripeCollection<DebitReversal> list(DebitReversalListParams params)
@@ -48,15 +49,16 @@ public final class DebitReversalService extends ApiService {
   public StripeCollection<DebitReversal> list(
       DebitReversalListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/debit_reversals";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<DebitReversal>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<DebitReversal>>() {}.getType());
   }
   /** Retrieves a DebitReversal object. */
   public DebitReversal retrieve(String debitReversal, DebitReversalRetrieveParams params)
@@ -78,14 +80,14 @@ public final class DebitReversalService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            DebitReversal.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, DebitReversal.class);
   }
 }

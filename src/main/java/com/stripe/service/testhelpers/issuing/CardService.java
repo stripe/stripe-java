@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.issuing;
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Card;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -46,15 +47,15 @@ public final class CardService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/deliver", ApiResource.urlEncodeId(card));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
@@ -82,15 +83,15 @@ public final class CardService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/ship", ApiResource.urlEncodeId(card));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
@@ -118,15 +119,15 @@ public final class CardService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/return", ApiResource.urlEncodeId(card));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
@@ -154,14 +155,14 @@ public final class CardService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/cards/%s/shipping/fail", ApiResource.urlEncodeId(card));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
 }

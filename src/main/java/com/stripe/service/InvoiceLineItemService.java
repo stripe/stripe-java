@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.InvoiceLineItem;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -54,14 +55,15 @@ public final class InvoiceLineItemService extends ApiService {
       String invoice, InvoiceLineItemListParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/lines", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType());
   }
 }

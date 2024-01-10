@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.Token;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -29,15 +30,16 @@ public final class TokenService extends ApiService {
   public StripeCollection<Token> list(TokenListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/tokens";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Token>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Token>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Token} object. */
   public Token retrieve(String token, TokenRetrieveParams params) throws StripeException {
@@ -55,15 +57,15 @@ public final class TokenService extends ApiService {
   public Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Token.class);
   }
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
   public Token update(String token, TokenUpdateParams params) throws StripeException {
@@ -73,14 +75,14 @@ public final class TokenService extends ApiService {
   public Token update(String token, TokenUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Token.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Token.class);
   }
 }

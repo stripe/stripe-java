@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.WebhookEndpoint;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -39,15 +40,16 @@ public final class WebhookEndpointService extends ApiService {
   public StripeCollection<WebhookEndpoint> list(
       WebhookEndpointListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/webhook_endpoints";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType());
   }
   /**
    * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
@@ -73,15 +75,15 @@ public final class WebhookEndpointService extends ApiService {
   public WebhookEndpoint create(WebhookEndpointCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/webhook_endpoints";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            WebhookEndpoint.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, WebhookEndpoint.class);
   }
   /** Retrieves the webhook endpoint with the given ID. */
   public WebhookEndpoint retrieve(String webhookEndpoint, WebhookEndpointRetrieveParams params)
@@ -103,15 +105,15 @@ public final class WebhookEndpointService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            WebhookEndpoint.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, WebhookEndpoint.class);
   }
   /**
    * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
@@ -145,15 +147,15 @@ public final class WebhookEndpointService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            WebhookEndpoint.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, WebhookEndpoint.class);
   }
   /**
    * You can also delete webhook endpoints via the <a
@@ -172,14 +174,9 @@ public final class WebhookEndpointService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            WebhookEndpoint.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, WebhookEndpoint.class);
   }
 }

@@ -4,6 +4,7 @@ package com.stripe.service.tax;
 import com.stripe.exception.StripeException;
 import com.stripe.model.tax.Settings;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -34,15 +35,15 @@ public final class SettingsService extends ApiService {
   public Settings retrieve(SettingsRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/settings";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Settings.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Settings.class);
   }
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
@@ -72,14 +73,14 @@ public final class SettingsService extends ApiService {
   public Settings update(SettingsUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/settings";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Settings.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Settings.class);
   }
 }

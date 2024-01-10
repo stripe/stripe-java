@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Plan;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,16 @@ public final class PlanService extends ApiService {
   public StripeCollection<Plan> list(PlanListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/plans";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Plan>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
   }
   /**
    * You can now model subscriptions more flexibly using the <a
@@ -63,15 +65,15 @@ public final class PlanService extends ApiService {
    */
   public Plan create(PlanCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/plans";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Plan.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Plan.class);
   }
   /** Retrieves the plan with the given ID. */
   public Plan retrieve(String plan, PlanRetrieveParams params) throws StripeException {
@@ -89,15 +91,15 @@ public final class PlanService extends ApiService {
   public Plan retrieve(String plan, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Plan.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Plan.class);
   }
   /**
    * Updates the specified plan by setting the values of the parameters passed. Any parameters not
@@ -131,15 +133,15 @@ public final class PlanService extends ApiService {
   public Plan update(String plan, PlanUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Plan.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Plan.class);
   }
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
   public Plan delete(String plan) throws StripeException {
@@ -148,14 +150,9 @@ public final class PlanService extends ApiService {
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
   public Plan delete(String plan, RequestOptions options) throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Plan.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Plan.class);
   }
 }

@@ -8,6 +8,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -125,15 +126,10 @@ public class Form extends ApiResource implements HasId {
   public static FormCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/forms";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FormCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FormCollection.class);
   }
 
   /**
@@ -152,15 +148,15 @@ public class Form extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tax/forms";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FormCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FormCollection.class);
   }
 
   /** Download the PDF for a tax form. */
@@ -177,9 +173,10 @@ public class Form extends ApiResource implements HasId {
   public InputStream pdf(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .requestStream(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.FILES, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().requestStream(request);
   }
 
   /** Download the PDF for a tax form. */
@@ -191,14 +188,15 @@ public class Form extends ApiResource implements HasId {
   public InputStream pdf(FormPdfParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/tax/forms/%s/pdf", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .requestStream(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.FILES,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    return getResponseGetter().requestStream(request);
   }
 
   /**
@@ -227,15 +225,10 @@ public class Form extends ApiResource implements HasId {
   public static Form retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/forms/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Form.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Form.class);
   }
 
   /**
@@ -247,15 +240,15 @@ public class Form extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/tax/forms/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Form.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Form.class);
   }
 
   @Getter

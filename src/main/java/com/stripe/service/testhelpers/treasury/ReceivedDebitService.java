@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.treasury;
 import com.stripe.exception.StripeException;
 import com.stripe.model.treasury.ReceivedDebit;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -31,14 +32,14 @@ public final class ReceivedDebitService extends ApiService {
   public ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/test_helpers/treasury/received_debits";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedDebit.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ReceivedDebit.class);
   }
 }

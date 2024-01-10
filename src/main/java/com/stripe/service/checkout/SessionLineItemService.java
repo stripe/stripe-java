@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.LineItem;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -55,14 +56,15 @@ public final class SessionLineItemService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(session));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<LineItem>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<LineItem>>() {}.getType());
   }
 }

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -311,15 +312,10 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            url,
-            params,
-            Card.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, url, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
 
   /**
@@ -361,15 +357,15 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             url,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
 
   /**
@@ -411,15 +407,15 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             url,
             ApiRequestParams.paramsToMap(params),
-            Card.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
 
   /**
@@ -479,14 +475,9 @@ public class Card extends ApiResource
           0,
           null);
     }
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            url,
-            params,
-            Card.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, url, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
   }
 }

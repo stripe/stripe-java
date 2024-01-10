@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.identity.VerificationReport;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -39,15 +40,15 @@ public final class VerificationReportService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            VerificationReport.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, VerificationReport.class);
   }
   /** List all verification reports. */
   public StripeCollection<VerificationReport> list(VerificationReportListParams params)
@@ -66,14 +67,15 @@ public final class VerificationReportService extends ApiService {
   public StripeCollection<VerificationReport> list(
       VerificationReportListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/identity/verification_reports";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<VerificationReport>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<VerificationReport>>() {}.getType());
   }
 }

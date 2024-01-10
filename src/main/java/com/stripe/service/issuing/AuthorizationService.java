@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -52,15 +53,16 @@ public final class AuthorizationService extends ApiService {
   public StripeCollection<Authorization> list(
       AuthorizationListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/authorizations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Authorization>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Authorization>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Authorization} object. */
   public Authorization retrieve(String authorization, AuthorizationRetrieveParams params)
@@ -82,15 +84,15 @@ public final class AuthorizationService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
   /**
    * Updates the specified Issuing {@code Authorization} object by setting the values of the
@@ -123,15 +125,15 @@ public final class AuthorizationService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
   /**
    * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
@@ -182,15 +184,15 @@ public final class AuthorizationService extends ApiService {
     String path =
         String.format(
             "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
   /**
    * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
@@ -241,14 +243,14 @@ public final class AuthorizationService extends ApiService {
     String path =
         String.format(
             "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(authorization));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Authorization.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
   }
 }

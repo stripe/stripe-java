@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.climate.Order;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -39,15 +40,15 @@ public final class OrderService extends ApiService {
   public Order retrieve(String order, OrderRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Order.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
   }
   /** Updates the specified order by setting the values of the parameters passed. */
   public Order update(String order, OrderUpdateParams params) throws StripeException {
@@ -65,15 +66,15 @@ public final class OrderService extends ApiService {
   public Order update(String order, OrderUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Order.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
   }
   /**
    * Lists all Climate order objects. The orders are returned sorted by creation date, with the most
@@ -103,15 +104,16 @@ public final class OrderService extends ApiService {
   public StripeCollection<Order> list(OrderListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/climate/orders";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Order>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
   }
   /**
    * Creates a Climate order object for a given Climate product. The order will be processed
@@ -126,15 +128,15 @@ public final class OrderService extends ApiService {
    */
   public Order create(OrderCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/climate/orders";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Order.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
   }
   /**
    * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
@@ -176,14 +178,14 @@ public final class OrderService extends ApiService {
   public Order cancel(String order, OrderCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/climate/orders/%s/cancel", ApiResource.urlEncodeId(order));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Order.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
   }
 }

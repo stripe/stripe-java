@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.EphemeralKey;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -64,15 +65,15 @@ public final class EphemeralKeyService extends ApiService {
     overriddenParams.remove("stripe-version");
 
     String path = "/v1/ephemeral_keys";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             overriddenParams,
-            EphemeralKey.class,
             overriddenOptions,
             ApiMode.V1);
+    return getResponseGetter().request(request, EphemeralKey.class);
   }
   /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(String key, EphemeralKeyDeleteParams params) throws StripeException {
@@ -90,14 +91,14 @@ public final class EphemeralKeyService extends ApiService {
   public EphemeralKey delete(String key, EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(key));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            EphemeralKey.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, EphemeralKey.class);
   }
 }

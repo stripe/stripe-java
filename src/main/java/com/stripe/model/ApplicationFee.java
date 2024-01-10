@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -216,15 +217,10 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/application_fees";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ApplicationFeeCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ApplicationFeeCollection.class);
   }
 
   /**
@@ -244,15 +240,15 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/application_fees";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ApplicationFeeCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ApplicationFeeCollection.class);
   }
 
   /**
@@ -278,15 +274,10 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFee retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ApplicationFee.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ApplicationFee.class);
   }
 
   /**
@@ -298,15 +289,15 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
       throws StripeException {
     String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ApplicationFee.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ApplicationFee.class);
   }
 
   @Override

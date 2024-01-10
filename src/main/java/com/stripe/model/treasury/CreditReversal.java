@@ -7,6 +7,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -140,15 +141,10 @@ public class CreditReversal extends ApiResource implements HasId {
   public static CreditReversal create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/credit_reversals";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            CreditReversal.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CreditReversal.class);
   }
 
   /** Reverses a ReceivedCredit and creates a CreditReversal object. */
@@ -161,15 +157,15 @@ public class CreditReversal extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/treasury/credit_reversals";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditReversal.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CreditReversal.class);
   }
 
   /** Returns a list of CreditReversals. */
@@ -181,15 +177,10 @@ public class CreditReversal extends ApiResource implements HasId {
   public static CreditReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/credit_reversals";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            CreditReversalCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CreditReversalCollection.class);
   }
 
   /** Returns a list of CreditReversals. */
@@ -203,15 +194,15 @@ public class CreditReversal extends ApiResource implements HasId {
       CreditReversalListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/credit_reversals";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditReversalCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CreditReversalCollection.class);
   }
 
   /**
@@ -240,15 +231,10 @@ public class CreditReversal extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            CreditReversal.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CreditReversal.class);
   }
 
   /**
@@ -261,15 +247,15 @@ public class CreditReversal extends ApiResource implements HasId {
     String path =
         String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditReversal.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CreditReversal.class);
   }
 
   @Getter

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -58,15 +59,15 @@ public final class ReaderService extends ApiService {
   public Reader update(String reader, ReaderUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Retrieves a {@code Reader} object. */
   public Reader retrieve(String reader, ReaderRetrieveParams params) throws StripeException {
@@ -84,15 +85,15 @@ public final class ReaderService extends ApiService {
   public Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Deletes a {@code Reader} object. */
   public Reader delete(String reader) throws StripeException {
@@ -101,15 +102,10 @@ public final class ReaderService extends ApiService {
   /** Deletes a {@code Reader} object. */
   public Reader delete(String reader, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Reader.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Creates a new {@code Reader} object. */
   public Reader create(ReaderCreateParams params) throws StripeException {
@@ -118,15 +114,15 @@ public final class ReaderService extends ApiService {
   /** Creates a new {@code Reader} object. */
   public Reader create(ReaderCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/terminal/readers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Returns a list of {@code Reader} objects. */
   public StripeCollection<Reader> list(ReaderListParams params) throws StripeException {
@@ -144,15 +140,16 @@ public final class ReaderService extends ApiService {
   public StripeCollection<Reader> list(ReaderListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/readers";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Reader>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Reader>>() {}.getType());
   }
   /** Initiates a payment flow on a Reader. */
   public Reader processPaymentIntent(String reader, ReaderProcessPaymentIntentParams params)
@@ -166,15 +163,15 @@ public final class ReaderService extends ApiService {
     String path =
         String.format(
             "/v1/terminal/readers/%s/process_payment_intent", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Initiates a setup intent flow on a Reader. */
   public Reader processSetupIntent(String reader, ReaderProcessSetupIntentParams params)
@@ -188,15 +185,15 @@ public final class ReaderService extends ApiService {
     String path =
         String.format(
             "/v1/terminal/readers/%s/process_setup_intent", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Cancels the current reader action. */
   public Reader cancelAction(String reader, ReaderCancelActionParams params)
@@ -216,15 +213,15 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Sets reader display to show cart details. */
   public Reader setReaderDisplay(String reader, ReaderSetReaderDisplayParams params)
@@ -238,15 +235,15 @@ public final class ReaderService extends ApiService {
     String path =
         String.format(
             "/v1/terminal/readers/%s/set_reader_display", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Initiates an input collection flow on a Reader. */
   public Reader collectInputs(String reader, ReaderCollectInputsParams params)
@@ -259,15 +256,15 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Initiates a refund on a Reader. */
   public Reader refundPayment(String reader, ReaderRefundPaymentParams params)
@@ -288,15 +285,15 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
@@ -316,15 +313,15 @@ public final class ReaderService extends ApiService {
     String path =
         String.format(
             "/v1/terminal/readers/%s/collect_payment_method", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
   /** Finalizes a payment on a Reader. */
   public Reader confirmPaymentIntent(String reader, ReaderConfirmPaymentIntentParams params)
@@ -338,14 +335,14 @@ public final class ReaderService extends ApiService {
     String path =
         String.format(
             "/v1/terminal/readers/%s/confirm_payment_intent", ApiResource.urlEncodeId(reader));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Reader.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Reader.class);
   }
 }

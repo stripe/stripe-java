@@ -54,13 +54,14 @@ public class RequestOptionsTest extends BaseStripeTest {
         throws StripeException {
       return getGlobalResponseGetter()
           .request(
-              BaseAddress.FILES,
-              ApiResource.RequestMethod.POST,
-              "/v1/foo/bar",
-              params,
-              MyResource.class,
-              options,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.FILES,
+                  ApiResource.RequestMethod.POST,
+                  "/v1/foo/bar",
+                  params,
+                  options,
+                  ApiMode.V1),
+              MyResource.class);
     }
   }
 

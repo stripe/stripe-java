@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -94,15 +95,10 @@ public class Secret extends ApiResource implements HasId {
   public static Secret create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/apps/secrets";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Secret.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Secret.class);
   }
 
   /** Create or replace a secret in the secret store. */
@@ -115,15 +111,15 @@ public class Secret extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/apps/secrets";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Secret.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Secret.class);
   }
 
   /** Deletes a secret from the secret store by name and scope. */
@@ -135,15 +131,10 @@ public class Secret extends ApiResource implements HasId {
   public static Secret deleteWhere(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/apps/secrets/delete";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Secret.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Secret.class);
   }
 
   /** Deletes a secret from the secret store by name and scope. */
@@ -156,15 +147,15 @@ public class Secret extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/apps/secrets/delete";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Secret.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Secret.class);
   }
 
   /** Finds a secret in the secret store by name and scope. */
@@ -176,15 +167,10 @@ public class Secret extends ApiResource implements HasId {
   public static Secret find(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/apps/secrets/find";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Secret.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Secret.class);
   }
 
   /** Finds a secret in the secret store by name and scope. */
@@ -197,15 +183,15 @@ public class Secret extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/apps/secrets/find";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Secret.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Secret.class);
   }
 
   /** List all secrets stored on the given scope. */
@@ -217,15 +203,10 @@ public class Secret extends ApiResource implements HasId {
   public static SecretCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/apps/secrets";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            SecretCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SecretCollection.class);
   }
 
   /** List all secrets stored on the given scope. */
@@ -238,15 +219,15 @@ public class Secret extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/apps/secrets";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SecretCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SecretCollection.class);
   }
 
   @Getter

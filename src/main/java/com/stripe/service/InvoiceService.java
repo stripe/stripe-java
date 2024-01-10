@@ -7,6 +7,7 @@ import com.stripe.model.Invoice;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -53,15 +54,16 @@ public final class InvoiceService extends ApiService {
   public StripeSearchResult<Invoice> search(InvoiceSearchParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoices/search";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeSearchResult<Invoice>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Invoice>>() {}.getType());
   }
   /**
    * At any time, you can preview the upcoming invoice for a customer. This will show you all the
@@ -155,15 +157,15 @@ public final class InvoiceService extends ApiService {
   public Invoice upcoming(InvoiceUpcomingParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoices/upcoming";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
@@ -217,15 +219,15 @@ public final class InvoiceService extends ApiService {
   public Invoice update(String invoice, InvoiceUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /** Retrieves the invoice with the given ID. */
   public Invoice retrieve(String invoice, InvoiceRetrieveParams params) throws StripeException {
@@ -243,15 +245,15 @@ public final class InvoiceService extends ApiService {
   public Invoice retrieve(String invoice, InvoiceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
@@ -270,15 +272,10 @@ public final class InvoiceService extends ApiService {
    */
   public Invoice delete(String invoice, RequestOptions options) throws StripeException {
     String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Invoice.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
@@ -320,15 +317,15 @@ public final class InvoiceService extends ApiService {
   public Invoice pay(String invoice, InvoicePayParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/pay", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
@@ -365,15 +362,15 @@ public final class InvoiceService extends ApiService {
    */
   public Invoice create(InvoiceCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/invoices";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * You can list all invoices, or list the invoices for a specific customer. The invoices are
@@ -403,15 +400,16 @@ public final class InvoiceService extends ApiService {
   public StripeCollection<Invoice> list(InvoiceListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoices";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Invoice>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Invoice>>() {}.getType());
   }
   /**
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
@@ -443,15 +441,15 @@ public final class InvoiceService extends ApiService {
       String invoice, InvoiceFinalizeInvoiceParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/finalize", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * Stripe will automatically send invoices to customers according to your <a
@@ -507,15 +505,15 @@ public final class InvoiceService extends ApiService {
       String invoice, InvoiceSendInvoiceParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
@@ -548,15 +546,15 @@ public final class InvoiceService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/invoices/%s/mark_uncollectible", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
@@ -592,15 +590,15 @@ public final class InvoiceService extends ApiService {
       String invoice, InvoiceVoidInvoiceParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
   /**
    * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
@@ -635,15 +633,15 @@ public final class InvoiceService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(invoice));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Invoice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
   }
 
   public com.stripe.service.InvoiceLineItemService lineItems() {

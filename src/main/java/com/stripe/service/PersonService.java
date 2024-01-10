@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Person;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -52,15 +53,16 @@ public final class PersonService extends ApiService {
   public StripeCollection<Person> list(
       String account, PersonListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Person>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
   }
   /** Creates a new person. */
   public Person create(String account, PersonCreateParams params) throws StripeException {
@@ -78,15 +80,15 @@ public final class PersonService extends ApiService {
   public Person create(String account, PersonCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Person.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Person.class);
   }
   /** Retrieves an existing person. */
   public Person retrieve(String account, String person, PersonRetrieveParams params)
@@ -110,15 +112,15 @@ public final class PersonService extends ApiService {
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Person.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Person.class);
   }
   /** Updates an existing person. */
   public Person update(String account, String person, PersonUpdateParams params)
@@ -142,15 +144,15 @@ public final class PersonService extends ApiService {
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Person.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Person.class);
   }
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
@@ -173,14 +175,9 @@ public final class PersonService extends ApiService {
         String.format(
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Person.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Person.class);
   }
 }

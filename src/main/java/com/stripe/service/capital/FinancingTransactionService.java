@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.capital.FinancingTransaction;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -45,15 +46,15 @@ public final class FinancingTransactionService extends ApiService {
     String path =
         String.format(
             "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FinancingTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FinancingTransaction.class);
   }
   /**
    * Returns a list of financing transactions. The transactions are returned in sorted order, with
@@ -85,14 +86,15 @@ public final class FinancingTransactionService extends ApiService {
   public StripeCollection<FinancingTransaction> list(
       FinancingTransactionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/capital/financing_transactions";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<FinancingTransaction>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<FinancingTransaction>>() {}.getType());
   }
 }

@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.FundingInstructions;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,14 +39,14 @@ public final class CustomerFundingInstructionsService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FundingInstructions.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FundingInstructions.class);
   }
 }

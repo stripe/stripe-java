@@ -7,6 +7,7 @@ import com.stripe.model.Product;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -46,15 +47,16 @@ public final class ProductService extends ApiService {
   public StripeSearchResult<Product> search(ProductSearchParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/products/search";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeSearchResult<Product>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
   }
   /** Creates a new product object. */
   public Product create(ProductCreateParams params) throws StripeException {
@@ -63,15 +65,15 @@ public final class ProductService extends ApiService {
   /** Creates a new product object. */
   public Product create(ProductCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/products";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Product.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Product.class);
   }
   /**
    * Returns a list of your products. The products are returned sorted by creation date, with the
@@ -101,15 +103,16 @@ public final class ProductService extends ApiService {
   public StripeCollection<Product> list(ProductListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/products";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Product>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing product. Supply the unique product ID from either a
@@ -143,15 +146,15 @@ public final class ProductService extends ApiService {
   public Product retrieve(String id, ProductRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Product.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Product.class);
   }
   /**
    * Updates the specific product by setting the values of the parameters passed. Any parameters not
@@ -181,15 +184,15 @@ public final class ProductService extends ApiService {
   public Product update(String id, ProductUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Product.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Product.class);
   }
   /**
    * Delete a product. Deleting a product is only possible if it has no prices associated with it.
@@ -206,14 +209,9 @@ public final class ProductService extends ApiService {
    */
   public Product delete(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Product.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Product.class);
   }
 }

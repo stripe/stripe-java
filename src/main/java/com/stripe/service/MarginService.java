@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Margin;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -41,15 +42,15 @@ public final class MarginService extends ApiService {
    */
   public Margin create(MarginCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/billing/margins";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Margin.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Margin.class);
   }
   /** Retrieve a list of your margins. */
   public StripeCollection<Margin> list(MarginListParams params) throws StripeException {
@@ -67,15 +68,16 @@ public final class MarginService extends ApiService {
   public StripeCollection<Margin> list(MarginListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/billing/margins";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Margin>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Margin>>() {}.getType());
   }
   /** Retrieve a margin object with the given ID. */
   public Margin retrieve(String margin, MarginRetrieveParams params) throws StripeException {
@@ -93,15 +95,15 @@ public final class MarginService extends ApiService {
   public Margin retrieve(String margin, MarginRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Margin.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Margin.class);
   }
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
   public Margin update(String margin, MarginUpdateParams params) throws StripeException {
@@ -119,14 +121,14 @@ public final class MarginService extends ApiService {
   public Margin update(String margin, MarginUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Margin.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Margin.class);
   }
 }

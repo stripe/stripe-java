@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -105,15 +106,10 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public static FileLink create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/file_links";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            FileLink.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FileLink.class);
   }
 
   /** Creates a new file link object. */
@@ -126,15 +122,15 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
       throws StripeException {
     String path = "/v1/file_links";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FileLink.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FileLink.class);
   }
 
   /** Returns a list of file links. */
@@ -146,15 +142,10 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public static FileLinkCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/file_links";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FileLinkCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FileLinkCollection.class);
   }
 
   /** Returns a list of file links. */
@@ -167,15 +158,15 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
       throws StripeException {
     String path = "/v1/file_links";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FileLinkCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FileLinkCollection.class);
   }
 
   /** Retrieves the file link with the given ID. */
@@ -192,15 +183,10 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public static FileLink retrieve(String link, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FileLink.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FileLink.class);
   }
 
   /** Retrieves the file link with the given ID. */
@@ -208,15 +194,15 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
       String link, FileLinkRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FileLink.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, FileLink.class);
   }
 
   /** Updates an existing file link object. Expired links can no longer be updated. */
@@ -230,15 +216,10 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public FileLink update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            FileLink.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FileLink.class);
   }
 
   /** Updates an existing file link object. Expired links can no longer be updated. */
@@ -251,15 +232,15 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
       throws StripeException {
     String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FileLink.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FileLink.class);
   }
 
   @Override

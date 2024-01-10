@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -111,15 +112,10 @@ public class Calculation extends ApiResource implements HasId {
   public static Calculation create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/calculations";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Calculation.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
   /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
@@ -132,15 +128,15 @@ public class Calculation extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tax/calculations";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Calculation.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
@@ -159,15 +155,10 @@ public class Calculation extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
         String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            CalculationLineItemCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CalculationLineItemCollection.class);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
@@ -182,15 +173,15 @@ public class Calculation extends ApiResource implements HasId {
     String path =
         String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CalculationLineItemCollection.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CalculationLineItemCollection.class);
   }
 
   @Getter

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.Topup;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -30,15 +31,15 @@ public final class TopupService extends ApiService {
   /** Top up the balance of an account. */
   public Topup create(TopupCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/topups";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Topup.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Topup.class);
   }
   /** Returns a list of top-ups. */
   public StripeCollection<Topup> list(TopupListParams params) throws StripeException {
@@ -56,15 +57,16 @@ public final class TopupService extends ApiService {
   public StripeCollection<Topup> list(TopupListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/topups";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Topup>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Topup>>() {}.getType());
   }
   /**
    * Retrieves the details of a top-up that has previously been created. Supply the unique top-up ID
@@ -98,15 +100,15 @@ public final class TopupService extends ApiService {
   public Topup retrieve(String topup, TopupRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Topup.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Topup.class);
   }
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
   public Topup update(String topup, TopupUpdateParams params) throws StripeException {
@@ -124,15 +126,15 @@ public final class TopupService extends ApiService {
   public Topup update(String topup, TopupUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Topup.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Topup.class);
   }
   /** Cancels a top-up. Only pending top-ups can be canceled. */
   public Topup cancel(String topup, TopupCancelParams params) throws StripeException {
@@ -150,14 +152,14 @@ public final class TopupService extends ApiService {
   public Topup cancel(String topup, TopupCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(topup));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Topup.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Topup.class);
   }
 }

@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -100,15 +101,10 @@ public class CustomerSession extends ApiResource {
   public static CustomerSession create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/customer_sessions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            CustomerSession.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CustomerSession.class);
   }
 
   /**
@@ -127,15 +123,15 @@ public class CustomerSession extends ApiResource {
       throws StripeException {
     String path = "/v1/customer_sessions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerSession.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CustomerSession.class);
   }
 
   /** Configuration for the components supported by this customer session. */

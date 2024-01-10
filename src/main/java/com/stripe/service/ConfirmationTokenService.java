@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ConfirmationToken;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,14 +39,14 @@ public final class ConfirmationTokenService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(confirmationToken));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ConfirmationToken.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ConfirmationToken.class);
   }
 }

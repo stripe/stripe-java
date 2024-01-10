@@ -9,6 +9,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -152,15 +153,10 @@ public class PersonalizationDesign extends ApiResource
   public static PersonalizationDesign create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/personalization_designs";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            PersonalizationDesign.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PersonalizationDesign.class);
   }
 
   /** Creates a personalization design object. */
@@ -174,15 +170,15 @@ public class PersonalizationDesign extends ApiResource
       PersonalizationDesignCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/personalization_designs";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PersonalizationDesign.class);
   }
 
   /**
@@ -201,15 +197,10 @@ public class PersonalizationDesign extends ApiResource
   public static PersonalizationDesignCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/personalization_designs";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            PersonalizationDesignCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PersonalizationDesignCollection.class);
   }
 
   /**
@@ -229,15 +220,15 @@ public class PersonalizationDesign extends ApiResource
       PersonalizationDesignListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/personalization_designs";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesignCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PersonalizationDesignCollection.class);
   }
 
   /** Retrieves a personalization design object. */
@@ -260,15 +251,10 @@ public class PersonalizationDesign extends ApiResource
         String.format(
             "/v1/issuing/personalization_designs/%s",
             ApiResource.urlEncodeId(personalizationDesign));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            PersonalizationDesign.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PersonalizationDesign.class);
   }
 
   /** Retrieves a personalization design object. */
@@ -282,15 +268,15 @@ public class PersonalizationDesign extends ApiResource
             "/v1/issuing/personalization_designs/%s",
             ApiResource.urlEncodeId(personalizationDesign));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PersonalizationDesign.class);
   }
 
   /** Updates a card personalization object. */
@@ -306,15 +292,10 @@ public class PersonalizationDesign extends ApiResource
     String path =
         String.format(
             "/v1/issuing/personalization_designs/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            PersonalizationDesign.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
 
   /** Updates a card personalization object. */
@@ -330,15 +311,15 @@ public class PersonalizationDesign extends ApiResource
         String.format(
             "/v1/issuing/personalization_designs/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PersonalizationDesign.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PersonalizationDesign.class);
   }
 
   @Getter
@@ -440,16 +421,10 @@ public class PersonalizationDesign extends ApiResource
           String.format(
               "/v1/test_helpers/issuing/personalization_designs/%s/activate",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              PersonalizationDesign.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, PersonalizationDesign.class);
     }
 
     /**
@@ -472,16 +447,15 @@ public class PersonalizationDesign extends ApiResource
               "/v1/test_helpers/issuing/personalization_designs/%s/activate",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              PersonalizationDesign.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, PersonalizationDesign.class);
     }
 
     /**
@@ -518,16 +492,10 @@ public class PersonalizationDesign extends ApiResource
           String.format(
               "/v1/test_helpers/issuing/personalization_designs/%s/deactivate",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              PersonalizationDesign.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, PersonalizationDesign.class);
     }
 
     /**
@@ -551,16 +519,15 @@ public class PersonalizationDesign extends ApiResource
               "/v1/test_helpers/issuing/personalization_designs/%s/deactivate",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              PersonalizationDesign.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, PersonalizationDesign.class);
     }
 
     /**
@@ -581,16 +548,10 @@ public class PersonalizationDesign extends ApiResource
           String.format(
               "/v1/test_helpers/issuing/personalization_designs/%s/reject",
               ApiResource.urlEncodeId(this.resource.getId()));
-      return resource
-          .getResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              PersonalizationDesign.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, PersonalizationDesign.class);
     }
 
     /**
@@ -613,16 +574,15 @@ public class PersonalizationDesign extends ApiResource
               "/v1/test_helpers/issuing/personalization_designs/%s/reject",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
-      return resource
-          .getResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              PersonalizationDesign.class,
               options,
               ApiMode.V1);
+      return resource.getResponseGetter().request(request, PersonalizationDesign.class);
     }
   }
 

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.radar.EarlyFraudWarning;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -37,15 +38,16 @@ public final class EarlyFraudWarningService extends ApiService {
   public StripeCollection<EarlyFraudWarning> list(
       EarlyFraudWarningListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/radar/early_fraud_warnings";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<EarlyFraudWarning>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<EarlyFraudWarning>>() {}.getType());
   }
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
@@ -89,14 +91,14 @@ public final class EarlyFraudWarningService extends ApiService {
     String path =
         String.format(
             "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            EarlyFraudWarning.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, EarlyFraudWarning.class);
   }
 }

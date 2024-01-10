@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -114,15 +115,10 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
   public static AccountNoticeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/account_notices";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            AccountNoticeCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountNoticeCollection.class);
   }
 
   /**
@@ -142,15 +138,15 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
       throws StripeException {
     String path = "/v1/account_notices";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountNoticeCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountNoticeCollection.class);
   }
 
   /** Retrieves an {@code AccountNotice} object. */
@@ -169,15 +165,10 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
       String accountNotice, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            AccountNotice.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountNotice.class);
   }
 
   /** Retrieves an {@code AccountNotice} object. */
@@ -186,15 +177,15 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
       throws StripeException {
     String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountNotice.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountNotice.class);
   }
 
   /** Updates an {@code AccountNotice} object. */
@@ -208,15 +199,10 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
   public AccountNotice update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            AccountNotice.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, AccountNotice.class);
   }
 
   /** Updates an {@code AccountNotice} object. */
@@ -229,15 +215,15 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
       throws StripeException {
     String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountNotice.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, AccountNotice.class);
   }
 
   @Getter
