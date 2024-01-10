@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -41,15 +42,15 @@ public final class TestClockService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TestClock.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TestClock.class);
   }
   /** Deletes a test clock. */
   public TestClock delete(String testClock) throws StripeException {
@@ -59,15 +60,10 @@ public final class TestClockService extends ApiService {
   public TestClock delete(String testClock, RequestOptions options) throws StripeException {
     String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            TestClock.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, TestClock.class);
   }
   /** Creates a new test clock that can be attached to new customers and quotes. */
   public TestClock create(TestClockCreateParams params) throws StripeException {
@@ -77,15 +73,15 @@ public final class TestClockService extends ApiService {
   public TestClock create(TestClockCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/test_helpers/test_clocks";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            TestClock.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TestClock.class);
   }
   /** Returns a list of your test clocks. */
   public StripeCollection<TestClock> list(TestClockListParams params) throws StripeException {
@@ -103,15 +99,16 @@ public final class TestClockService extends ApiService {
   public StripeCollection<TestClock> list(TestClockListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/test_helpers/test_clocks";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<TestClock>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TestClock>>() {}.getType());
   }
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
@@ -129,14 +126,14 @@ public final class TestClockService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(testClock));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            TestClock.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TestClock.class);
   }
 }

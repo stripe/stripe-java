@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TaxId;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -29,15 +30,15 @@ public final class TaxIdService extends ApiService {
   public TaxId create(String customer, TaxIdCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxId.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TaxId.class);
   }
   /** Returns a list of tax IDs for a customer. */
   public StripeCollection<TaxId> list(String customer, TaxIdListParams params)
@@ -57,15 +58,16 @@ public final class TaxIdService extends ApiService {
   public StripeCollection<TaxId> list(
       String customer, TaxIdListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<TaxId>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TaxId>>() {}.getType());
   }
   /** Retrieves the {@code tax_id} object with the given identifier. */
   public TaxId retrieve(String customer, String id, TaxIdRetrieveParams params)
@@ -88,15 +90,15 @@ public final class TaxIdService extends ApiService {
         String.format(
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxId.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TaxId.class);
   }
   /** Deletes an existing {@code tax_id} object. */
   public TaxId delete(String customer, String id) throws StripeException {
@@ -108,14 +110,9 @@ public final class TaxIdService extends ApiService {
         String.format(
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            TaxId.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, TaxId.class);
   }
 }

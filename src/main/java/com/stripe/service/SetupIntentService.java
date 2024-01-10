@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -65,15 +66,15 @@ public final class SetupIntentService extends ApiService {
   public SetupIntent create(SetupIntentCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/setup_intents";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SetupIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SetupIntent.class);
   }
   /** Returns a list of SetupIntents. */
   public StripeCollection<SetupIntent> list(SetupIntentListParams params) throws StripeException {
@@ -91,15 +92,16 @@ public final class SetupIntentService extends ApiService {
   public StripeCollection<SetupIntent> list(SetupIntentListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/setup_intents";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<SetupIntent>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<SetupIntent>>() {}.getType());
   }
   /**
    * Retrieves the details of a SetupIntent that has previously been created.
@@ -155,15 +157,15 @@ public final class SetupIntentService extends ApiService {
       String intent, SetupIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SetupIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SetupIntent.class);
   }
   /** Updates a SetupIntent object. */
   public SetupIntent update(String intent, SetupIntentUpdateParams params) throws StripeException {
@@ -181,15 +183,15 @@ public final class SetupIntentService extends ApiService {
   public SetupIntent update(String intent, SetupIntentUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SetupIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SetupIntent.class);
   }
   /**
    * Confirm that your customer intends to set up the current or provided payment method. For
@@ -256,15 +258,15 @@ public final class SetupIntentService extends ApiService {
   public SetupIntent confirm(String intent, SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SetupIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SetupIntent.class);
   }
   /**
    * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
@@ -306,15 +308,15 @@ public final class SetupIntentService extends ApiService {
   public SetupIntent cancel(String intent, SetupIntentCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SetupIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SetupIntent.class);
   }
   /** Verifies microdeposits on a SetupIntent object. */
   public SetupIntent verifyMicrodeposits(String intent, SetupIntentVerifyMicrodepositsParams params)
@@ -337,14 +339,14 @@ public final class SetupIntentService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/setup_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SetupIntent.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SetupIntent.class);
   }
 }

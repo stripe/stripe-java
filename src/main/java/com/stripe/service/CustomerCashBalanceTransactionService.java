@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.CustomerCashBalanceTransaction;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -64,15 +65,15 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
         String.format(
             "/v1/customers/%s/cash_balance_transactions/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerCashBalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerCashBalanceTransaction.class);
   }
   /**
    * Returns a list of transactions that modified the customer’s <a
@@ -108,14 +109,17 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
     String path =
         String.format(
             "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(customer));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<CustomerCashBalanceTransaction>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(
+            request,
+            new TypeToken<StripeCollection<CustomerCashBalanceTransaction>>() {}.getType());
   }
 }

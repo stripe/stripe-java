@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -70,15 +71,10 @@ public class CashBalance extends ApiResource {
   public static CashBalance retrieve(
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            CashBalance.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CashBalance.class);
   }
 
   /** Retrieves a customer’s cash balance. */
@@ -87,15 +83,15 @@ public class CashBalance extends ApiResource {
       throws StripeException {
     String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CashBalance.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CashBalance.class);
   }
 
   /** Changes the settings on a customer’s cash balance. */
@@ -108,15 +104,10 @@ public class CashBalance extends ApiResource {
       throws StripeException {
     String path =
         String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            CashBalance.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CashBalance.class);
   }
 
   /** Changes the settings on a customer’s cash balance. */
@@ -130,15 +121,15 @@ public class CashBalance extends ApiResource {
     String path =
         String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CashBalance.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CashBalance.class);
   }
 
   @Getter

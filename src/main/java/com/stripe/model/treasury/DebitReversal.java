@@ -7,6 +7,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -144,15 +145,10 @@ public class DebitReversal extends ApiResource implements HasId {
   public static DebitReversal create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/debit_reversals";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            DebitReversal.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, DebitReversal.class);
   }
 
   /** Reverses a ReceivedDebit and creates a DebitReversal object. */
@@ -165,15 +161,15 @@ public class DebitReversal extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/treasury/debit_reversals";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            DebitReversal.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, DebitReversal.class);
   }
 
   /** Returns a list of DebitReversals. */
@@ -185,15 +181,10 @@ public class DebitReversal extends ApiResource implements HasId {
   public static DebitReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/debit_reversals";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            DebitReversalCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, DebitReversalCollection.class);
   }
 
   /** Returns a list of DebitReversals. */
@@ -207,15 +198,15 @@ public class DebitReversal extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/treasury/debit_reversals";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            DebitReversalCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, DebitReversalCollection.class);
   }
 
   /** Retrieves a DebitReversal object. */
@@ -235,15 +226,10 @@ public class DebitReversal extends ApiResource implements HasId {
       throws StripeException {
     String path =
         String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            DebitReversal.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, DebitReversal.class);
   }
 
   /** Retrieves a DebitReversal object. */
@@ -253,15 +239,15 @@ public class DebitReversal extends ApiResource implements HasId {
     String path =
         String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            DebitReversal.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, DebitReversal.class);
   }
 
   @Getter

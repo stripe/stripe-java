@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.FeeRefund;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -78,15 +79,15 @@ public final class FeeRefundService extends ApiService {
   public FeeRefund create(String id, FeeRefundCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FeeRefund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
   /**
    * You can see a list of the refunds belonging to a specific application fee. Note that the 10
@@ -126,15 +127,16 @@ public final class FeeRefundService extends ApiService {
   public StripeCollection<FeeRefund> list(
       String id, FeeRefundListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<FeeRefund>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<FeeRefund>>() {}.getType());
   }
   /**
    * By default, you can see the 10 most recent refunds stored directly on the application fee
@@ -173,15 +175,15 @@ public final class FeeRefundService extends ApiService {
         String.format(
             "/v1/application_fees/%s/refunds/%s",
             ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FeeRefund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
   /**
    * Updates the specified application fee refund by setting the values of the parameters passed.
@@ -224,14 +226,14 @@ public final class FeeRefundService extends ApiService {
         String.format(
             "/v1/application_fees/%s/refunds/%s",
             ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FeeRefund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
 }

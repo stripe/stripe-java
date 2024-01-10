@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -583,15 +584,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public Subscription cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            Subscription.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
 
   /**
@@ -636,15 +632,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
 
   /**
@@ -682,15 +678,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static Subscription create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscriptions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Subscription.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Subscription.class);
   }
 
   /**
@@ -729,15 +720,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path = "/v1/subscriptions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Subscription.class);
   }
 
   /** Removes the currently applied discount on a subscription. */
@@ -755,15 +746,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            Discount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Discount.class);
   }
 
   /**
@@ -781,15 +767,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static SubscriptionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscriptions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            SubscriptionCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionCollection.class);
   }
 
   /**
@@ -808,15 +789,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path = "/v1/subscriptions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionCollection.class);
   }
 
   /**
@@ -863,15 +844,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Subscription.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
 
   /**
@@ -897,15 +873,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     String path =
         String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
 
   /** Retrieves the subscription with the given ID. */
@@ -925,15 +901,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Subscription.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Subscription.class);
   }
 
   /** Retrieves the subscription with the given ID. */
@@ -943,15 +914,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     String path =
         String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Subscription.class);
   }
 
   /**
@@ -977,15 +948,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static SubscriptionSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscriptions/search";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            SubscriptionSearchResult.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionSearchResult.class);
   }
 
   /**
@@ -1013,15 +979,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       SubscriptionSearchParams params, RequestOptions options) throws StripeException {
     String path = "/v1/subscriptions/search";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSearchResult.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionSearchResult.class);
   }
 
   /**
@@ -1125,15 +1091,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public Subscription update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            Subscription.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
 
   /**
@@ -1236,15 +1197,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Subscription.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Subscription.class);
   }
 
   @Getter

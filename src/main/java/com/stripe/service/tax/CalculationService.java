@@ -4,6 +4,7 @@ package com.stripe.service.tax;
 import com.stripe.exception.StripeException;
 import com.stripe.model.tax.Calculation;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -25,15 +26,15 @@ public final class CalculationService extends ApiService {
   public Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/calculations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Calculation.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Calculation.class);
   }
 
   public com.stripe.service.tax.CalculationLineItemService lineItems() {

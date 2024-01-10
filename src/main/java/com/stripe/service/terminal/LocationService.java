@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.terminal.Location;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,15 @@ public final class LocationService extends ApiService {
   public Location retrieve(String location, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Location.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Location.class);
   }
   /**
    * Updates a {@code Location} object by setting the values of the parameters passed. Any
@@ -76,15 +77,15 @@ public final class LocationService extends ApiService {
   public Location update(String location, LocationUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Location.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Location.class);
   }
   /** Deletes a {@code Location} object. */
   public Location delete(String location) throws StripeException {
@@ -93,15 +94,10 @@ public final class LocationService extends ApiService {
   /** Deletes a {@code Location} object. */
   public Location delete(String location, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            null,
-            Location.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Location.class);
   }
   /**
    * Creates a new {@code Location} object. For further details, including which address fields are
@@ -119,15 +115,15 @@ public final class LocationService extends ApiService {
   public Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/locations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Location.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Location.class);
   }
   /** Returns a list of {@code Location} objects. */
   public StripeCollection<Location> list(LocationListParams params) throws StripeException {
@@ -145,14 +141,15 @@ public final class LocationService extends ApiService {
   public StripeCollection<Location> list(LocationListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/locations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Location>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Location>>() {}.getType());
   }
 }

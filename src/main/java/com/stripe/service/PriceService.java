@@ -7,6 +7,7 @@ import com.stripe.model.Price;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -46,15 +47,16 @@ public final class PriceService extends ApiService {
   public StripeSearchResult<Price> search(PriceSearchParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/prices/search";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeSearchResult<Price>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Price>>() {}.getType());
   }
   /**
    * Returns a list of your active prices, excluding <a
@@ -88,15 +90,16 @@ public final class PriceService extends ApiService {
   public StripeCollection<Price> list(PriceListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/prices";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Price>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Price>>() {}.getType());
   }
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public Price create(PriceCreateParams params) throws StripeException {
@@ -105,15 +108,15 @@ public final class PriceService extends ApiService {
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public Price create(PriceCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/prices";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Price.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Price.class);
   }
   /** Retrieves the price with the given ID. */
   public Price retrieve(String price, PriceRetrieveParams params) throws StripeException {
@@ -131,15 +134,15 @@ public final class PriceService extends ApiService {
   public Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Price.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Price.class);
   }
   /**
    * Updates the specified price by setting the values of the parameters passed. Any parameters not
@@ -169,14 +172,14 @@ public final class PriceService extends ApiService {
   public Price update(String price, PriceUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Price.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Price.class);
   }
 }

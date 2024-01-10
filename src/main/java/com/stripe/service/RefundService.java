@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Refund;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -55,15 +56,16 @@ public final class RefundService extends ApiService {
   public StripeCollection<Refund> list(RefundListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/refunds";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Refund>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Refund>>() {}.getType());
   }
   /**
    * When you create a new refund, you must specify a Charge or a PaymentIntent object on which to
@@ -132,15 +134,15 @@ public final class RefundService extends ApiService {
    */
   public Refund create(RefundCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/refunds";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Refund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Refund.class);
   }
   /** Retrieves the details of an existing refund. */
   public Refund retrieve(String refund, RefundRetrieveParams params) throws StripeException {
@@ -158,15 +160,15 @@ public final class RefundService extends ApiService {
   public Refund retrieve(String refund, RefundRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Refund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Refund.class);
   }
   /**
    * Updates the refund that you specify by setting the values of the passed parameters. Any
@@ -204,15 +206,15 @@ public final class RefundService extends ApiService {
   public Refund update(String refund, RefundUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Refund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Refund.class);
   }
   /**
    * Cancels a refund with a status of {@code requires_action}.
@@ -250,14 +252,14 @@ public final class RefundService extends ApiService {
   public Refund cancel(String refund, RefundCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(refund));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Refund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Refund.class);
   }
 }

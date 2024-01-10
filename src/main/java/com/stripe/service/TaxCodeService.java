@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TaxCode;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -48,15 +49,16 @@ public final class TaxCodeService extends ApiService {
   public StripeCollection<TaxCode> list(TaxCodeListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax_codes";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<TaxCode>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TaxCode>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing tax code. Supply the unique tax code ID and Stripe will
@@ -86,14 +88,14 @@ public final class TaxCodeService extends ApiService {
   public TaxCode retrieve(String id, TaxCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxCode.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TaxCode.class);
   }
 }

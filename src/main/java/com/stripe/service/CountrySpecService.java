@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.CountrySpec;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -36,15 +37,16 @@ public final class CountrySpecService extends ApiService {
   public StripeCollection<CountrySpec> list(CountrySpecListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/country_specs";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<CountrySpec>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<CountrySpec>>() {}.getType());
   }
   /** Returns a Country Spec for a given Country code. */
   public CountrySpec retrieve(String country, CountrySpecRetrieveParams params)
@@ -64,14 +66,14 @@ public final class CountrySpecService extends ApiService {
       String country, CountrySpecRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CountrySpec.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CountrySpec.class);
   }
 }

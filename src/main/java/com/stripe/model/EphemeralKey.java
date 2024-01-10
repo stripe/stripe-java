@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -87,15 +88,15 @@ public class EphemeralKey extends ApiResource implements HasId {
     // request body.
     final Map<String, Object> overriddenParams = new java.util.HashMap<String, Object>(params);
     overriddenParams.remove("stripe-version");
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             "/v1/ephemeral_keys",
             overriddenParams,
-            EphemeralKey.class,
             overriddenOptions,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, EphemeralKey.class);
   }
 
   /** Creates a short-lived API key for a given resource. */
@@ -135,15 +136,10 @@ public class EphemeralKey extends ApiResource implements HasId {
   public EphemeralKey delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            EphemeralKey.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, EphemeralKey.class);
   }
 
   /** Invalidates a short-lived API key for a given resource. */
@@ -156,14 +152,14 @@ public class EphemeralKey extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            EphemeralKey.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, EphemeralKey.class);
   }
 }

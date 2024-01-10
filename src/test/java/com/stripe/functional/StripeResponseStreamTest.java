@@ -10,6 +10,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
@@ -33,13 +34,14 @@ public class StripeResponseStreamTest extends BaseStripeTest {
     public static TestResource retrieve(String id) throws StripeException {
       return getGlobalResponseGetter()
           .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.GET,
-              String.format("/v1/foos/%s", ApiResource.urlEncodeId(id)),
-              (Map<String, Object>) null,
-              TestResource.class,
-              (RequestOptions) null,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.API,
+                  ApiResource.RequestMethod.GET,
+                  String.format("/v1/foos/%s", ApiResource.urlEncodeId(id)),
+                  (Map<String, Object>) null,
+                  (RequestOptions) null,
+                  ApiMode.V1),
+              TestResource.class);
     }
 
     public InputStream pdf() throws StripeException {

@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -53,14 +54,14 @@ public final class BalanceService extends ApiService {
   public Balance retrieve(BalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/balance";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Balance.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Balance.class);
   }
 }

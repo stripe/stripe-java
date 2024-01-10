@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -96,15 +97,10 @@ public class Transaction extends ApiResource implements HasId {
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/financial_connections/transactions";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            TransactionCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TransactionCollection.class);
   }
 
   /** Returns a list of Financial Connections {@code Transaction} objects. */
@@ -117,15 +113,15 @@ public class Transaction extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/financial_connections/transactions";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TransactionCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TransactionCollection.class);
   }
 
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
@@ -146,15 +142,10 @@ public class Transaction extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(transaction));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            Transaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
@@ -165,15 +156,15 @@ public class Transaction extends ApiResource implements HasId {
         String.format(
             "/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(transaction));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
   @Getter

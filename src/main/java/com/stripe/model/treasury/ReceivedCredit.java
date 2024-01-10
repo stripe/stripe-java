@@ -9,6 +9,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.Payout;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -152,15 +153,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
   public static ReceivedCreditCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/received_credits";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReceivedCreditCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedCreditCollection.class);
   }
 
   /** Returns a list of ReceivedCredits. */
@@ -174,15 +170,15 @@ public class ReceivedCredit extends ApiResource implements HasId {
       ReceivedCreditListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/received_credits";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedCreditCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedCreditCollection.class);
   }
 
   /**
@@ -208,15 +204,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
   public static ReceivedCredit retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ReceivedCredit.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedCredit.class);
   }
 
   /**
@@ -228,15 +219,15 @@ public class ReceivedCredit extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedCredit.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ReceivedCredit.class);
   }
 
   @Getter
@@ -456,15 +447,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     public static ReceivedCredit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path = "/v1/test_helpers/treasury/received_credits";
-      return getGlobalResponseGetter()
-          .request(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              params,
-              ReceivedCredit.class,
-              options,
-              ApiMode.V1);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ReceivedCredit.class);
     }
 
     /**
@@ -483,15 +469,15 @@ public class ReceivedCredit extends ApiResource implements HasId {
         throws StripeException {
       String path = "/v1/test_helpers/treasury/received_credits";
       ApiResource.checkNullTypedParams(path, params);
-      return getGlobalResponseGetter()
-          .request(
+      ApiRequest request =
+          new ApiRequest(
               BaseAddress.API,
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              ReceivedCredit.class,
               options,
               ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ReceivedCredit.class);
     }
   }
 

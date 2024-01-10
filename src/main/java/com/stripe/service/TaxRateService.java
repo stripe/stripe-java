@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TaxRate;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -50,15 +51,16 @@ public final class TaxRateService extends ApiService {
   public StripeCollection<TaxRate> list(TaxRateListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax_rates";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<TaxRate>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TaxRate>>() {}.getType());
   }
   /** Creates a new tax rate. */
   public TaxRate create(TaxRateCreateParams params) throws StripeException {
@@ -67,15 +69,15 @@ public final class TaxRateService extends ApiService {
   /** Creates a new tax rate. */
   public TaxRate create(TaxRateCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/tax_rates";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxRate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TaxRate.class);
   }
   /** Retrieves a tax rate with the given ID. */
   public TaxRate retrieve(String taxRate, TaxRateRetrieveParams params) throws StripeException {
@@ -93,15 +95,15 @@ public final class TaxRateService extends ApiService {
   public TaxRate retrieve(String taxRate, TaxRateRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxRate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TaxRate.class);
   }
   /** Updates an existing tax rate. */
   public TaxRate update(String taxRate, TaxRateUpdateParams params) throws StripeException {
@@ -119,14 +121,14 @@ public final class TaxRateService extends ApiService {
   public TaxRate update(String taxRate, TaxRateUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxRate.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TaxRate.class);
   }
 }

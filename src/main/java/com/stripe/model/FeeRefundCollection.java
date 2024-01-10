@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -42,15 +43,10 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefund create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            FeeRefund.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
 
   /**
@@ -83,15 +79,15 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            FeeRefund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
 
   /**
@@ -113,15 +109,10 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FeeRefundCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefundCollection.class);
   }
 
   /**
@@ -144,15 +135,15 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FeeRefundCollection.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefundCollection.class);
   }
 
   /**
@@ -181,15 +172,10 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            FeeRefund.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
 
   /**
@@ -202,14 +188,14 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            FeeRefund.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
 }

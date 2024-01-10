@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -29,15 +30,10 @@ public class CustomerBalanceTransactionCollection
   public CustomerBalanceTransaction create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            CustomerBalanceTransaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
 
   /**
@@ -58,15 +54,15 @@ public class CustomerBalanceTransactionCollection
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerBalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
 
   /**
@@ -85,15 +81,10 @@ public class CustomerBalanceTransactionCollection
   public CustomerBalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            CustomerBalanceTransactionCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransactionCollection.class);
   }
 
   /**
@@ -114,15 +105,15 @@ public class CustomerBalanceTransactionCollection
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerBalanceTransactionCollection.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransactionCollection.class);
   }
 
   /**
@@ -149,15 +140,10 @@ public class CustomerBalanceTransactionCollection
   public CustomerBalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            CustomerBalanceTransaction.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
 
   /**
@@ -169,14 +155,14 @@ public class CustomerBalanceTransactionCollection
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CustomerBalanceTransaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
   }
 }

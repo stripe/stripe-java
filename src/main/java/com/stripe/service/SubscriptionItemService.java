@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.SubscriptionItem;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -32,15 +33,16 @@ public final class SubscriptionItemService extends ApiService {
   public StripeCollection<SubscriptionItem> list(
       SubscriptionItemListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/subscription_items";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType());
   }
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public SubscriptionItem create(SubscriptionItemCreateParams params) throws StripeException {
@@ -50,15 +52,15 @@ public final class SubscriptionItemService extends ApiService {
   public SubscriptionItem create(SubscriptionItemCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscription_items";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionItem.class);
   }
   /** Retrieves the subscription item with the given ID. */
   public SubscriptionItem retrieve(String item, SubscriptionItemRetrieveParams params)
@@ -78,15 +80,15 @@ public final class SubscriptionItemService extends ApiService {
       String item, SubscriptionItemRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionItem.class);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
   public SubscriptionItem update(String item, SubscriptionItemUpdateParams params)
@@ -106,15 +108,15 @@ public final class SubscriptionItemService extends ApiService {
       String item, SubscriptionItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionItem.class);
   }
   /**
    * Deletes an item from the subscription. Removing a subscription item from a subscription will
@@ -146,15 +148,15 @@ public final class SubscriptionItemService extends ApiService {
       String item, SubscriptionItemDeleteParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionItem.class);
   }
 
   public com.stripe.service.UsageRecordSummaryService usageRecordSummaries() {

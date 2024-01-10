@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.climate.Product;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -36,15 +37,15 @@ public final class ProductService extends ApiService {
   public Product retrieve(String product, ProductRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Product.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Product.class);
   }
   /** Lists all available Climate product objects. */
   public StripeCollection<Product> list(ProductListParams params) throws StripeException {
@@ -62,14 +63,15 @@ public final class ProductService extends ApiService {
   public StripeCollection<Product> list(ProductListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/climate/products";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Product>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
 }

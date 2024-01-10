@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Payout;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -52,15 +53,15 @@ public final class PayoutService extends ApiService {
   public Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Payout.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Payout.class);
   }
   /**
    * Updates the specified payout by setting the values of the parameters you pass. We don’t change
@@ -90,15 +91,15 @@ public final class PayoutService extends ApiService {
   public Payout update(String payout, PayoutUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Payout.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Payout.class);
   }
   /**
    * Returns a list of existing payouts sent to third-party bank accounts or payouts that Stripe
@@ -132,15 +133,16 @@ public final class PayoutService extends ApiService {
   public StripeCollection<Payout> list(PayoutListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payouts";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Payout>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Payout>>() {}.getType());
   }
   /**
    * To send funds to your own bank account, create a new payout object. Your <a
@@ -173,15 +175,15 @@ public final class PayoutService extends ApiService {
    */
   public Payout create(PayoutCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payouts";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Payout.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Payout.class);
   }
   /**
    * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
@@ -211,15 +213,15 @@ public final class PayoutService extends ApiService {
   public Payout cancel(String payout, PayoutCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(payout));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Payout.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Payout.class);
   }
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
@@ -269,14 +271,14 @@ public final class PayoutService extends ApiService {
   public Payout reverse(String payout, PayoutReverseParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(payout));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Payout.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Payout.class);
   }
 }

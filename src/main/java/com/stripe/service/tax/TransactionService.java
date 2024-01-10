@@ -4,6 +4,7 @@ package com.stripe.service.tax;
 import com.stripe.exception.StripeException;
 import com.stripe.model.tax.Transaction;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -37,15 +38,15 @@ public final class TransactionService extends ApiService {
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Partially or fully reverses a previously created {@code Transaction}. */
   public Transaction createReversal(TransactionCreateReversalParams params) throws StripeException {
@@ -55,15 +56,15 @@ public final class TransactionService extends ApiService {
   public Transaction createReversal(TransactionCreateReversalParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/transactions/create_reversal";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
   /** Creates a Tax {@code Transaction} from a calculation. */
   public Transaction createFromCalculation(TransactionCreateFromCalculationParams params)
@@ -75,15 +76,15 @@ public final class TransactionService extends ApiService {
       TransactionCreateFromCalculationParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/transactions/create_from_calculation";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Transaction.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
   }
 
   public com.stripe.service.tax.TransactionLineItemService lineItems() {

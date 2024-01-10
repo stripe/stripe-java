@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.apps.Secret;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -29,15 +30,15 @@ public final class SecretService extends ApiService {
   /** Finds a secret in the secret store by name and scope. */
   public Secret find(SecretFindParams params, RequestOptions options) throws StripeException {
     String path = "/v1/apps/secrets/find";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Secret.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Secret.class);
   }
   /** Create or replace a secret in the secret store. */
   public Secret create(SecretCreateParams params) throws StripeException {
@@ -46,15 +47,15 @@ public final class SecretService extends ApiService {
   /** Create or replace a secret in the secret store. */
   public Secret create(SecretCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/apps/secrets";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Secret.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Secret.class);
   }
   /** List all secrets stored on the given scope. */
   public StripeCollection<Secret> list(SecretListParams params) throws StripeException {
@@ -64,15 +65,16 @@ public final class SecretService extends ApiService {
   public StripeCollection<Secret> list(SecretListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/apps/secrets";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Secret>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Secret>>() {}.getType());
   }
   /** Deletes a secret from the secret store by name and scope. */
   public Secret deleteWhere(SecretDeleteWhereParams params) throws StripeException {
@@ -82,14 +84,14 @@ public final class SecretService extends ApiService {
   public Secret deleteWhere(SecretDeleteWhereParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/apps/secrets/delete";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Secret.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Secret.class);
   }
 }

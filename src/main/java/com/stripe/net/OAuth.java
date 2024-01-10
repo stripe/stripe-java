@@ -46,14 +46,15 @@ public final class OAuth {
    */
   public static TokenResponse token(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return OAuth.globalResponseGetter.request(
-        BaseAddress.CONNECT,
-        ApiResource.RequestMethod.POST,
-        "/oauth/token",
-        params,
-        TokenResponse.class,
-        options,
-        ApiMode.OAuth);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.CONNECT,
+            ApiResource.RequestMethod.POST,
+            "/oauth/token",
+            params,
+            options,
+            ApiMode.OAuth);
+    return OAuth.globalResponseGetter.request(request, TokenResponse.class);
   }
 
   /**
@@ -69,14 +70,15 @@ public final class OAuth {
     paramsCopy.putAll(params);
 
     paramsCopy.put("client_id", getClientId(paramsCopy, options));
-    return OAuth.globalResponseGetter.request(
-        BaseAddress.CONNECT,
-        ApiResource.RequestMethod.POST,
-        "/oauth/deauthorize",
-        paramsCopy,
-        DeauthorizedAccount.class,
-        options,
-        ApiMode.OAuth);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.CONNECT,
+            ApiResource.RequestMethod.POST,
+            "/oauth/deauthorize",
+            paramsCopy,
+            options,
+            ApiMode.OAuth);
+    return OAuth.globalResponseGetter.request(request, DeauthorizedAccount.class);
   }
 
   /**

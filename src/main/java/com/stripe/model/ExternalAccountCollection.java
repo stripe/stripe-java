@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -22,15 +23,10 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   public ExternalAccount create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            ExternalAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
 
   /** Create an external account for a given account. */
@@ -44,15 +40,15 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
       ExternalAccountCollectionCreateParams params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            ExternalAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
 
   /** List external accounts for an account. */
@@ -64,15 +60,10 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   public ExternalAccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ExternalAccountCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccountCollection.class);
   }
 
   /** List external accounts for an account. */
@@ -86,15 +77,15 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
       ExternalAccountCollectionListParams params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ExternalAccountCollection.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccountCollection.class);
   }
 
   /** Retrieve a specified external account for a given account. */
@@ -111,15 +102,10 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   public ExternalAccount retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            ExternalAccount.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
 
   /** Retrieve a specified external account for a given account. */
@@ -128,14 +114,14 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ExternalAccount.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
   }
 }

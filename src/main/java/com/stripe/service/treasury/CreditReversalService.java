@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.CreditReversal;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -30,15 +31,16 @@ public final class CreditReversalService extends ApiService {
   public StripeCollection<CreditReversal> list(
       CreditReversalListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/credit_reversals";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<CreditReversal>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<CreditReversal>>() {}.getType());
   }
   /** Reverses a ReceivedCredit and creates a CreditReversal object. */
   public CreditReversal create(CreditReversalCreateParams params) throws StripeException {
@@ -48,15 +50,15 @@ public final class CreditReversalService extends ApiService {
   public CreditReversal create(CreditReversalCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/treasury/credit_reversals";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditReversal.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CreditReversal.class);
   }
   /**
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
@@ -90,14 +92,14 @@ public final class CreditReversalService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditReversal.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CreditReversal.class);
   }
 }

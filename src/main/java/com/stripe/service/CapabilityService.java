@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Capability;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -51,15 +52,16 @@ public final class CapabilityService extends ApiService {
   public StripeCollection<Capability> list(
       String account, CapabilityListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(account));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Capability>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Capability>>() {}.getType());
   }
   /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(String account, String capability, CapabilityRetrieveParams params)
@@ -83,15 +85,15 @@ public final class CapabilityService extends ApiService {
         String.format(
             "/v1/accounts/%s/capabilities/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(capability));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Capability.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Capability.class);
   }
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
@@ -127,14 +129,14 @@ public final class CapabilityService extends ApiService {
         String.format(
             "/v1/accounts/%s/capabilities/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(capability));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Capability.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Capability.class);
   }
 }

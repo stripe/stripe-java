@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.CreditNote;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -78,15 +79,15 @@ public final class CreditNoteService extends ApiService {
   public CreditNote create(CreditNoteCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/credit_notes";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditNote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CreditNote.class);
   }
   /** Returns a list of credit notes. */
   public StripeCollection<CreditNote> list(CreditNoteListParams params) throws StripeException {
@@ -104,15 +105,16 @@ public final class CreditNoteService extends ApiService {
   public StripeCollection<CreditNote> list(CreditNoteListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/credit_notes";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<CreditNote>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<CreditNote>>() {}.getType());
   }
   /** Get a preview of a credit note without creating it. */
   public CreditNote preview(CreditNotePreviewParams params) throws StripeException {
@@ -122,15 +124,15 @@ public final class CreditNoteService extends ApiService {
   public CreditNote preview(CreditNotePreviewParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/credit_notes/preview";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditNote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CreditNote.class);
   }
   /** Retrieves the credit note object with the given identifier. */
   public CreditNote retrieve(String id, CreditNoteRetrieveParams params) throws StripeException {
@@ -148,15 +150,15 @@ public final class CreditNoteService extends ApiService {
   public CreditNote retrieve(String id, CreditNoteRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditNote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CreditNote.class);
   }
   /** Updates an existing credit note. */
   public CreditNote update(String id, CreditNoteUpdateParams params) throws StripeException {
@@ -174,15 +176,15 @@ public final class CreditNoteService extends ApiService {
   public CreditNote update(String id, CreditNoteUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditNote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CreditNote.class);
   }
   /**
    * Marks a credit note as void. Learn more about <a
@@ -214,15 +216,15 @@ public final class CreditNoteService extends ApiService {
       String id, CreditNoteVoidCreditNoteParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            CreditNote.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, CreditNote.class);
   }
 
   public com.stripe.service.CreditNoteLineItemService lineItems() {

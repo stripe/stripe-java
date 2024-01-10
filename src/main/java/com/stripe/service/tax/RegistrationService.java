@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.tax.Registration;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,16 @@ public final class RegistrationService extends ApiService {
   public StripeCollection<Registration> list(RegistrationListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/registrations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<Registration>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Registration>>() {}.getType());
   }
   /** Creates a new Tax {@code Registration} object. */
   public Registration create(RegistrationCreateParams params) throws StripeException {
@@ -56,15 +58,15 @@ public final class RegistrationService extends ApiService {
   public Registration create(RegistrationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/registrations";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Registration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Registration.class);
   }
   /** Returns a Tax {@code Registration} object. */
   public Registration retrieve(String id, RegistrationRetrieveParams params)
@@ -83,15 +85,15 @@ public final class RegistrationService extends ApiService {
   public Registration retrieve(String id, RegistrationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            Registration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Registration.class);
   }
   /**
    * Updates an existing Tax {@code Registration} object.
@@ -129,14 +131,14 @@ public final class RegistrationService extends ApiService {
   public Registration update(String id, RegistrationUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/registrations/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            Registration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, Registration.class);
   }
 }

@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -59,15 +60,10 @@ public class TaxCode extends ApiResource implements HasId {
   public static TaxCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax_codes";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            TaxCodeCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxCodeCollection.class);
   }
 
   /**
@@ -86,15 +82,15 @@ public class TaxCode extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tax_codes";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxCodeCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxCodeCollection.class);
   }
 
   /**
@@ -120,15 +116,10 @@ public class TaxCode extends ApiResource implements HasId {
   public static TaxCode retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            TaxCode.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxCode.class);
   }
 
   /**
@@ -139,14 +130,14 @@ public class TaxCode extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TaxCode.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxCode.class);
   }
 }

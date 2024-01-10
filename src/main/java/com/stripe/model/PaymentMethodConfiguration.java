@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -216,15 +217,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   public static PaymentMethodConfiguration create(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_method_configurations";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            PaymentMethodConfiguration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 
   /** Creates a payment method configuration. */
@@ -239,15 +235,15 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/payment_method_configurations";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodConfiguration.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 
   /** List payment method configurations. */
@@ -260,15 +256,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   public static PaymentMethodConfigurationCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_method_configurations";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            PaymentMethodConfigurationCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PaymentMethodConfigurationCollection.class);
   }
 
   /** List payment method configurations. */
@@ -282,15 +273,15 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
       PaymentMethodConfigurationListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_method_configurations";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodConfigurationCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PaymentMethodConfigurationCollection.class);
   }
 
   /** Retrieve payment method configuration. */
@@ -311,15 +302,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            PaymentMethodConfiguration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 
   /** Retrieve payment method configuration. */
@@ -330,15 +316,15 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
         String.format(
             "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodConfiguration.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 
   /** Update payment method configuration. */
@@ -352,15 +338,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            PaymentMethodConfiguration.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 
   /** Update payment method configuration. */
@@ -377,15 +358,15 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
         String.format(
             "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            PaymentMethodConfiguration.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 
   @Getter

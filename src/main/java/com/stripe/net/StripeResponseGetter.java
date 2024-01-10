@@ -7,7 +7,9 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 public interface StripeResponseGetter {
+  /** @deprecated Use {@link #request(ApiRequest, Type)} instead. */
   @SuppressWarnings("TypeParameterUnusedInFormals")
+  @Deprecated
   <T extends StripeObjectInterface> T request(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
@@ -18,6 +20,22 @@ public interface StripeResponseGetter {
       ApiMode apiMode)
       throws StripeException;
 
+  @SuppressWarnings("TypeParameterUnusedInFormals")
+  default <T extends StripeObjectInterface> T request(ApiRequest request, Type typeToken)
+      throws StripeException {
+    return request(
+        request.getBaseAddress(),
+        request.getMethod(),
+        request.getPath(),
+        request.getParams(),
+        typeToken,
+        request.getOptions(),
+        request.getApiMode());
+  };
+
+  /** @deprecated Use {@link #request(ApiRequest, Type)} instead. */
+  @SuppressWarnings("TypeParameterUnusedInFormals")
+  @Deprecated
   InputStream requestStream(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
@@ -26,6 +44,16 @@ public interface StripeResponseGetter {
       RequestOptions options,
       ApiMode apiMode)
       throws StripeException;
+
+  default InputStream requestStream(ApiRequest request) throws StripeException {
+    return requestStream(
+        request.getBaseAddress(),
+        request.getMethod(),
+        request.getPath(),
+        request.getParams(),
+        request.getOptions(),
+        request.getApiMode());
+  };
 
   /**
    * This method should e.g. throws an ApiKeyMissingError if a proper API Key cannot be determined

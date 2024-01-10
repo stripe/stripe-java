@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -311,15 +312,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoiceitems";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            InvoiceItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, InvoiceItem.class);
   }
 
   /**
@@ -338,15 +334,15 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       throws StripeException {
     String path = "/v1/invoiceitems";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoiceItem.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, InvoiceItem.class);
   }
 
   /**
@@ -380,15 +376,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public InvoiceItem delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
-            path,
-            params,
-            InvoiceItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceItem.class);
   }
 
   /**
@@ -406,15 +397,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoiceitems";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            InvoiceItemCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, InvoiceItemCollection.class);
   }
 
   /**
@@ -433,15 +419,15 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       throws StripeException {
     String path = "/v1/invoiceitems";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoiceItemCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, InvoiceItemCollection.class);
   }
 
   /** Retrieves the invoice item with the given ID. */
@@ -460,15 +446,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       String invoiceitem, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            InvoiceItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, InvoiceItem.class);
   }
 
   /** Retrieves the invoice item with the given ID. */
@@ -477,15 +458,15 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoiceItem.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, InvoiceItem.class);
   }
 
   /**
@@ -505,15 +486,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            InvoiceItem.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceItem.class);
   }
 
   /**
@@ -532,15 +508,15 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            InvoiceItem.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceItem.class);
   }
 
   @Getter

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.TransactionEntry;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -38,15 +39,15 @@ public final class TransactionEntryService extends ApiService {
       String id, TransactionEntryRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/treasury/transaction_entries/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            TransactionEntry.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, TransactionEntry.class);
   }
   /** Retrieves a list of TransactionEntry objects. */
   public StripeCollection<TransactionEntry> list(TransactionEntryListParams params)
@@ -57,14 +58,15 @@ public final class TransactionEntryService extends ApiService {
   public StripeCollection<TransactionEntry> list(
       TransactionEntryListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/transaction_entries";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<TransactionEntry>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TransactionEntry>>() {}.getType());
   }
 }

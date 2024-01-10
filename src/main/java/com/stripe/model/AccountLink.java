@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -60,15 +61,10 @@ public class AccountLink extends ApiResource {
   public static AccountLink create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/account_links";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            AccountLink.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountLink.class);
   }
 
   /**
@@ -87,14 +83,14 @@ public class AccountLink extends ApiResource {
       throws StripeException {
     String path = "/v1/account_links";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            AccountLink.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AccountLink.class);
   }
 }

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.ReceivedCredit;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -29,15 +30,16 @@ public final class ReceivedCreditService extends ApiService {
   public StripeCollection<ReceivedCredit> list(
       ReceivedCreditListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/treasury/received_credits";
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            new TypeToken<StripeCollection<ReceivedCredit>>() {}.getType(),
             options,
             ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ReceivedCredit>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID
@@ -69,14 +71,14 @@ public final class ReceivedCreditService extends ApiService {
       String id, ReceivedCreditRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            ReceivedCredit.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, ReceivedCredit.class);
   }
 }

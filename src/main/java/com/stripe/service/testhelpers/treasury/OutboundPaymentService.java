@@ -4,6 +4,7 @@ package com.stripe.service.testhelpers.treasury;
 import com.stripe.exception.StripeException;
 import com.stripe.model.treasury.OutboundPayment;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiService;
@@ -49,15 +50,15 @@ public final class OutboundPaymentService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_payments/%s/fail", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundPayment.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundPayment.class);
   }
   /**
    * Transitions a test mode created OutboundPayment to the {@code posted} status. The
@@ -89,15 +90,15 @@ public final class OutboundPaymentService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_payments/%s/post", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundPayment.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundPayment.class);
   }
   /**
    * Transitions a test mode created OutboundPayment to the {@code returned} status. The
@@ -133,14 +134,14 @@ public final class OutboundPaymentService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/treasury/outbound_payments/%s/return", ApiResource.urlEncodeId(id));
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            OutboundPayment.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, OutboundPayment.class);
   }
 }

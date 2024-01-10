@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -263,15 +264,10 @@ public class SubscriptionSchedule extends ApiResource
     String path =
         String.format(
             "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            SubscriptionSchedule.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
@@ -295,15 +291,15 @@ public class SubscriptionSchedule extends ApiResource
         String.format(
             "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
@@ -321,15 +317,10 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionSchedule create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscription_schedules";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            SubscriptionSchedule.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
@@ -349,15 +340,15 @@ public class SubscriptionSchedule extends ApiResource
       SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/subscription_schedules";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /** Retrieves the list of your subscription schedules. */
@@ -370,15 +361,10 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionScheduleCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/subscription_schedules";
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            SubscriptionScheduleCollection.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionScheduleCollection.class);
   }
 
   /** Retrieves the list of your subscription schedules. */
@@ -392,15 +378,15 @@ public class SubscriptionSchedule extends ApiResource
       SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/subscription_schedules";
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionScheduleCollection.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionScheduleCollection.class);
   }
 
   /**
@@ -448,15 +434,10 @@ public class SubscriptionSchedule extends ApiResource
     String path =
         String.format(
             "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            SubscriptionSchedule.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
@@ -484,15 +465,15 @@ public class SubscriptionSchedule extends ApiResource
         String.format(
             "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
@@ -519,15 +500,10 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionSchedule retrieve(
       String schedule, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
-    return getGlobalResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            params,
-            SubscriptionSchedule.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
@@ -539,15 +515,15 @@ public class SubscriptionSchedule extends ApiResource
       throws StripeException {
     String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
     ApiResource.checkNullTypedParams(path, params);
-    return getGlobalResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /** Updates an existing subscription schedule. */
@@ -562,15 +538,10 @@ public class SubscriptionSchedule extends ApiResource
       throws StripeException {
     String path =
         String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-        .request(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            params,
-            SubscriptionSchedule.class,
-            options,
-            ApiMode.V1);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /** Updates an existing subscription schedule. */
@@ -585,15 +556,15 @@ public class SubscriptionSchedule extends ApiResource
     String path =
         String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
-    return getResponseGetter()
-        .request(
+    ApiRequest request =
+        new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            SubscriptionSchedule.class,
             options,
             ApiMode.V1);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   @Getter
