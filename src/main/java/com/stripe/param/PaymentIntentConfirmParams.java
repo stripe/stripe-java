@@ -5904,7 +5904,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       ApiRequestParams.EnumParam setupFutureUsage;
 
-      /** Verification method for the intent. */
+      /** Bank account verification method. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
@@ -6029,7 +6029,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /** Verification method for the intent. */
+        /** Bank account verification method. */
         public Builder setVerificationMethod(
             PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.VerificationMethod
                 verificationMethod) {
@@ -13374,7 +13374,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       ApiRequestParams.EnumParam setupFutureUsage;
 
-      /** Verification method for the intent. */
+      /** Bank account verification method. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
@@ -13545,7 +13545,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /** Verification method for the intent. */
+        /** Bank account verification method. */
         public Builder setVerificationMethod(
             PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.VerificationMethod
                 verificationMethod) {

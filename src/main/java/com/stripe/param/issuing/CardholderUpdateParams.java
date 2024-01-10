@@ -833,8 +833,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Information about cardholder acceptance of <a
-       * href="https://stripe.com/docs/issuing/cards">Authorized User Terms</a>.
+       * Information about cardholder acceptance of Celtic <a
+       * href="https://stripe.com/docs/issuing/cards#accept-authorized-user-terms">Authorized User
+       * Terms</a>. Required for cards backed by a Celtic program.
        */
       @SerializedName("user_terms_acceptance")
       UserTermsAcceptance userTermsAcceptance;
@@ -889,8 +890,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Information about cardholder acceptance of <a
-         * href="https://stripe.com/docs/issuing/cards">Authorized User Terms</a>.
+         * Information about cardholder acceptance of Celtic <a
+         * href="https://stripe.com/docs/issuing/cards#accept-authorized-user-terms">Authorized User
+         * Terms</a>. Required for cards backed by a Celtic program.
          */
         public Builder setUserTermsAcceptance(
             CardholderUpdateParams.Individual.CardIssuing.UserTermsAcceptance userTermsAcceptance) {
