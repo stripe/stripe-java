@@ -358,7 +358,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
-  private String fullUrl(ApiRequest apiRequest) {
+  private String fullUrl(BaseApiRequest apiRequest) {
     BaseAddress baseAddress = apiRequest.getBaseAddress();
     RequestOptions options = apiRequest.getOptions();
     String relativeUrl = apiRequest.getPath();

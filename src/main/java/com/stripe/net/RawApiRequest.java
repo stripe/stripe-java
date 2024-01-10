@@ -2,7 +2,7 @@ package com.stripe.net;
 
 import lombok.Getter;
 
-public class RawApiRequest extends ApiRequest {
+public class RawApiRequest extends BaseApiRequest {
 
   @Getter(onMethod_ = {@Override})
   private RawRequestOptions options;
@@ -16,7 +16,8 @@ public class RawApiRequest extends ApiRequest {
       String rawContent,
       RawRequestOptions options,
       ApiMode apiMode) {
-    super(baseAddress, method, path, null, options, apiMode);
+    super(baseAddress, method, path, options, apiMode);
+    this.rawContent = rawContent;
     this.options = options;
   }
 }
