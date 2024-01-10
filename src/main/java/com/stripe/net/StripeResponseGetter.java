@@ -33,7 +33,7 @@ public interface StripeResponseGetter {
         request.getApiMode());
   };
 
-  /** @deprecated Use {@link #requestStream(ApiRequest, Type)} instead. */
+  /** @deprecated Use {@link #requestStream(ApiRequest)} instead. */
   @SuppressWarnings("TypeParameterUnusedInFormals")
   @Deprecated
   InputStream requestStream(
