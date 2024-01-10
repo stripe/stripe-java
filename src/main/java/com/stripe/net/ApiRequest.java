@@ -1,20 +1,11 @@
 package com.stripe.net;
 
-import java.util.List;
 import java.util.Map;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-public class ApiRequest {
-  private BaseAddress baseAddress;
-  private ApiResource.RequestMethod method;
-  private String path;
+public class ApiRequest extends BaseApiRequest {
   private Map<String, Object> params;
-  private RequestOptions options;
-  private ApiMode apiMode;
-
-  @Setter private List<String> usage;
 
   public ApiRequest(
       BaseAddress baseAddress,
@@ -23,11 +14,7 @@ public class ApiRequest {
       Map<String, Object> params,
       RequestOptions options,
       ApiMode apiMode) {
-    this.baseAddress = baseAddress;
-    this.method = method;
-    this.path = path;
+    super(baseAddress, method, path, options, apiMode);
     this.params = params;
-    this.options = options;
-    this.apiMode = apiMode;
   }
 }
