@@ -45,17 +45,6 @@ public interface StripeResponseGetter {
       ApiMode apiMode)
       throws StripeException;
 
-  default StripeResponse rawRequest(
-      BaseAddress baseAddress,
-      ApiResource.RequestMethod method,
-      String path,
-      String content,
-      RawRequestOptions options)
-      throws StripeException {
-    throw new UnsupportedOperationException(
-        "rawRequest is unimplemented for this StripeResponseGetter");
-  }
-
   default InputStream requestStream(ApiRequest request) throws StripeException {
     return requestStream(
         request.getBaseAddress(),
@@ -66,6 +55,10 @@ public interface StripeResponseGetter {
         request.getApiMode());
   };
 
+  default StripeResponse rawRequest(RawApiRequest request) throws StripeException {
+    throw new UnsupportedOperationException(
+        "rawRequest is unimplemented for this StripeResponseGetter");
+  };
   /**
    * This method should e.g. throws an ApiKeyMissingError if a proper API Key cannot be determined
    * by the ResponseGetter or from the RequestOptions passed in.

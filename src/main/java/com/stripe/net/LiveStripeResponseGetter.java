@@ -43,17 +43,39 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
   }
 
+  private StripeRequest toStripeRequest(ApiRequest apiRequest) throws StripeException {
+    String fullUrl = fullUrl(apiRequest);
+
+    return new StripeRequest(
+        apiRequest.getMethod(),
+        fullUrl,
+        apiRequest.getParams(),
+        RequestOptions.merge(this.options, apiRequest.getOptions()));
+  }
+
+  private StripeRequest toRawStripeRequest(RawApiRequest apiRequest) throws StripeException {
+    String fullUrl = fullUrl(apiRequest);
+
+    StripeRequest stripeRequest =
+        StripeRequest.createWithStringContent(
+            apiRequest.getMethod(),
+            fullUrl,
+            apiRequest.getRawContent(),
+            RequestOptions.merge(this.options, apiRequest.getOptions()),
+            apiRequest.getApiMode() == ApiMode.PREVIEW);
+
+    if (apiRequest.getApiMode() == ApiMode.PREVIEW) {
+      return stripeRequest.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
+    }
+    return stripeRequest;
+  }
+
   @Override
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
   public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
       throws StripeException {
-    String fullUrl = fullUrl(apiRequest);
-    StripeRequest request =
-        new StripeRequest(
-            apiRequest.getMethod(),
-            fullUrl,
-            apiRequest.getParams(),
-            RequestOptions.merge(this.options, apiRequest.getOptions()));
+
+    StripeRequest request = toStripeRequest(apiRequest);
     StripeResponse response = httpClient.requestWithRetries(request);
 
     int responseCode = response.code();
@@ -83,14 +105,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   @Override
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
-    String fullUrl = fullUrl(apiRequest);
-
-    StripeRequest request =
-        new StripeRequest(
-            apiRequest.getMethod(),
-            fullUrl,
-            apiRequest.getParams(),
-            RequestOptions.merge(this.options, apiRequest.getOptions()));
+    StripeRequest request = toStripeRequest(apiRequest);
     StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
 
     int responseCode = responseStream.code();
@@ -116,30 +131,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
-  public StripeResponse rawRequest(
-      BaseAddress baseAddress,
-      ApiResource.RequestMethod method,
-      String path,
-      String content,
-      RawRequestOptions options)
-      throws StripeException {
-    String fullUrl = fullUrl(baseAddress, options, path);
+  public StripeResponse rawRequest(RawApiRequest apiRequest) throws StripeException {
+    StripeRequest request = toRawStripeRequest(apiRequest);
 
-    ApiMode apiMode = options != null ? options.getApiMode() : ApiMode.V1;
-
-    StripeRequest request =
-        StripeRequest.createWithStringContent(
-            method,
-            fullUrl,
-            content,
-            RequestOptions.merge(this.options, options),
-            apiMode == ApiMode.PREVIEW);
-
-    if (apiMode == ApiMode.PREVIEW) {
-      request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
-    }
-
-    Map<String, String> additionalHeaders = options.getAdditionalHeaders();
+    Map<String, String> additionalHeaders = apiRequest.getOptions().getAdditionalHeaders();
 
     if (additionalHeaders != null) {
       for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
