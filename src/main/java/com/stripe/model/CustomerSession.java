@@ -139,6 +139,10 @@ public class CustomerSession extends ApiResource {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Components extends StripeObject {
+    /** This hash contains whether the buy button is enabled. */
+    @SerializedName("buy_button")
+    BuyButton buyButton;
+
     /** This hash contains whether the payment element is enabled and the features it supports. */
     @SerializedName("payment_element")
     PaymentElement paymentElement;
@@ -146,6 +150,16 @@ public class CustomerSession extends ApiResource {
     /** This hash contains whether the pricing table is enabled. */
     @SerializedName("pricing_table")
     PricingTable pricingTable;
+
+    /** This hash contains whether the buy button is enabled. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BuyButton extends StripeObject {
+      /** Whether the buy button is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+    }
 
     /** This hash contains whether the payment element is enabled and the features it supports. */
     @Getter
