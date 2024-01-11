@@ -204,9 +204,9 @@ jobs:
 
       - name: Run JAPI Compliance Checker
         run: |
-          cd ../japi-compliance-checker
+          pushd ../japi-compliance-checker
           perl japi-compliance-checker.pl -old old.jar -new new.jar --lib=stripe-java || echo "failed" > compliance_failure
-          cd ../stripe-java
+          popd
           mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
 
       - name: Upload report as artifact
@@ -218,6 +218,6 @@ jobs:
       - name: Fail if compatibility problems exist
         run: |
           if [ -f "../japi-compliance-checker/compliance_failure" ]; then
-            echo "There were compatibility problems. See the generated report at https://github.com/stripe/stripe-java/actions/runs/${{ github.run_id }}?check_suite_focus=true#artifacts"
+            echo "There were compatibility problems. See the generated report at https://github.com/stripe/${{ github.repository }}/actions/runs/${{ github.run_id }}?check_suite_focus=true#artifacts"
             exit 1
           fi
