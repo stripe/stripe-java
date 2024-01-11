@@ -148,8 +148,9 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
    * refund}, {@code refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code
    * stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup}, {@code topup_reversal},
-   * {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code
-   * transfer_refund}.
+   * {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, {@code transfer_refund},
+   * {@code obligation_inbound}, {@code obligation_payout}, {@code obligation_payout_failure}, or
+   * {@code obligation_reversal_outbound}.
    */
   @SerializedName("type")
   String type;
