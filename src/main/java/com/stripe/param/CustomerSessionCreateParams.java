@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class CustomerSessionCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> Configuration for each component. */
+  /** <strong>Required.</strong> Configuration for each component. 1 component must be enabled. */
   @SerializedName("components")
   Components components;
 
@@ -65,7 +65,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           this.components, this.customer, this.expand, this.extraParams);
     }
 
-    /** <strong>Required.</strong> Configuration for each component. */
+    /** <strong>Required.</strong> Configuration for each component. 1 component must be enabled. */
     public Builder setComponents(CustomerSessionCreateParams.Components components) {
       this.components = components;
       return this;

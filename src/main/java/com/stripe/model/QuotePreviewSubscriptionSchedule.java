@@ -36,8 +36,8 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
    * Configures when the subscription schedule generates prorations for phase transitions. Possible
    * values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the default being
    * {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase changes and
-   * generate prorations at transition time.{@code prorate_up_front} will bill for all phases within
-   * the current billing cycle up front.
+   * generate prorations at transition time. {@code prorate_up_front} will bill for all phases
+   * within the current billing cycle up front.
    *
    * <p>One of {@code prorate_on_next_phase}, or {@code prorate_up_front}.
    */
@@ -80,7 +80,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   /**
    * Behavior of the subscription schedule and underlying subscription when it ends. Possible values
    * are {@code release} or {@code cancel} with the default being {@code release}. {@code release}
-   * will end the subscription schedule and keep the underlying subscription running.{@code cancel}
+   * will end the subscription schedule and keep the underlying subscription running. {@code cancel}
    * will end the subscription schedule and cancel the underlying subscription.
    *
    * <p>One of {@code cancel}, {@code none}, {@code release}, or {@code renew}.

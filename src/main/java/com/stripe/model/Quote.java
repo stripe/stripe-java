@@ -1812,8 +1812,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
      * Configures when the subscription schedule generates prorations for phase transitions.
      * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
      * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
-     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
-     * phases within the current billing cycle up front.
+     * changes and generate prorations at transition time. {@code prorate_up_front} will bill for
+     * all phases within the current billing cycle up front.
      *
      * <p>One of {@code prorate_on_next_phase}, or {@code prorate_up_front}.
      */
@@ -2073,8 +2073,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
      * Configures when the subscription schedule generates prorations for phase transitions.
      * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
      * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
-     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
-     * phases within the current billing cycle up front.
+     * changes and generate prorations at transition time. {@code prorate_up_front} will bill for
+     * all phases within the current billing cycle up front.
      *
      * <p>One of {@code prorate_on_next_phase}, or {@code prorate_up_front}.
      */

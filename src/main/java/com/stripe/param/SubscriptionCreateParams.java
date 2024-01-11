@@ -57,6 +57,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Long billingCycleAnchor;
 
   /**
+   * Mutually exclusive with billing_cycle_anchor and only valid with monthly and yearly price
+   * intervals. When provided, the billing_cycle_anchor is set to the next occurence of the
+   * day_of_month at the hour, minute, and second UTC.
+   */
+  @SerializedName("billing_cycle_anchor_config")
+  BillingCycleAnchorConfig billingCycleAnchorConfig;
+
+  /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period. Pass an empty string to remove previously-defined thresholds.
    */
@@ -312,6 +320,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       Long backdateStartDate,
       Long billingCycleAnchor,
+      BillingCycleAnchorConfig billingCycleAnchorConfig,
       Object billingThresholds,
       Long cancelAt,
       Boolean cancelAtPeriodEnd,
@@ -348,6 +357,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.backdateStartDate = backdateStartDate;
     this.billingCycleAnchor = billingCycleAnchor;
+    this.billingCycleAnchorConfig = billingCycleAnchorConfig;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -395,6 +405,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Long backdateStartDate;
 
     private Long billingCycleAnchor;
+
+    private BillingCycleAnchorConfig billingCycleAnchorConfig;
 
     private Object billingThresholds;
 
@@ -466,6 +478,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.automaticTax,
           this.backdateStartDate,
           this.billingCycleAnchor,
+          this.billingCycleAnchorConfig,
           this.billingThresholds,
           this.cancelAt,
           this.cancelAtPeriodEnd,
@@ -566,6 +579,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
+      return this;
+    }
+
+    /**
+     * Mutually exclusive with billing_cycle_anchor and only valid with monthly and yearly price
+     * intervals. When provided, the billing_cycle_anchor is set to the next occurence of the
+     * day_of_month at the hour, minute, and second UTC.
+     */
+    public Builder setBillingCycleAnchorConfig(
+        SubscriptionCreateParams.BillingCycleAnchorConfig billingCycleAnchorConfig) {
+      this.billingCycleAnchorConfig = billingCycleAnchorConfig;
       return this;
     }
 
@@ -2026,6 +2050,140 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class BillingCycleAnchorConfig {
+    /**
+     * <strong>Required.</strong> The day of the month the billing_cycle_anchor should be. Ranges
+     * from 1 to 31.
+     */
+    @SerializedName("day_of_month")
+    Long dayOfMonth;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The hour of the day the billing_cycle_anchor should be. Ranges from 0 to 23. */
+    @SerializedName("hour")
+    Long hour;
+
+    /** The minute of the hour the billing_cycle_anchor should be. Ranges from 0 to 59. */
+    @SerializedName("minute")
+    Long minute;
+
+    /** The month to start full cycle billing periods. Ranges from 1 to 12. */
+    @SerializedName("month")
+    Long month;
+
+    /** The second of the minute the billing_cycle_anchor should be. Ranges from 0 to 59. */
+    @SerializedName("second")
+    Long second;
+
+    private BillingCycleAnchorConfig(
+        Long dayOfMonth,
+        Map<String, Object> extraParams,
+        Long hour,
+        Long minute,
+        Long month,
+        Long second) {
+      this.dayOfMonth = dayOfMonth;
+      this.extraParams = extraParams;
+      this.hour = hour;
+      this.minute = minute;
+      this.month = month;
+      this.second = second;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long dayOfMonth;
+
+      private Map<String, Object> extraParams;
+
+      private Long hour;
+
+      private Long minute;
+
+      private Long month;
+
+      private Long second;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionCreateParams.BillingCycleAnchorConfig build() {
+        return new SubscriptionCreateParams.BillingCycleAnchorConfig(
+            this.dayOfMonth, this.extraParams, this.hour, this.minute, this.month, this.second);
+      }
+
+      /**
+       * <strong>Required.</strong> The day of the month the billing_cycle_anchor should be. Ranges
+       * from 1 to 31.
+       */
+      public Builder setDayOfMonth(Long dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.BillingCycleAnchorConfig#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.BillingCycleAnchorConfig#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The hour of the day the billing_cycle_anchor should be. Ranges from 0 to 23. */
+      public Builder setHour(Long hour) {
+        this.hour = hour;
+        return this;
+      }
+
+      /** The minute of the hour the billing_cycle_anchor should be. Ranges from 0 to 59. */
+      public Builder setMinute(Long minute) {
+        this.minute = minute;
+        return this;
+      }
+
+      /** The month to start full cycle billing periods. Ranges from 1 to 12. */
+      public Builder setMonth(Long month) {
+        this.month = month;
+        return this;
+      }
+
+      /** The second of the minute the billing_cycle_anchor should be. Ranges from 0 to 59. */
+      public Builder setSecond(Long second) {
+        this.second = second;
+        return this;
       }
     }
   }
@@ -5609,6 +5767,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
 
+      @SerializedName("eps")
+      EPS("eps"),
+
       @SerializedName("fpx")
       FPX("fpx"),
 
@@ -5626,6 +5787,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("link")
       LINK("link"),
+
+      @SerializedName("p24")
+      P24("p24"),
 
       @SerializedName("paynow")
       PAYNOW("paynow"),

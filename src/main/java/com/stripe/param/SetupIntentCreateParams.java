@@ -5215,7 +5215,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
-      /** Verification method for the intent. */
+      /** Bank account verification method. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
@@ -5295,7 +5295,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Verification method for the intent. */
+        /** Bank account verification method. */
         public Builder setVerificationMethod(
             SetupIntentCreateParams.PaymentMethodOptions.AcssDebit.VerificationMethod
                 verificationMethod) {
@@ -7051,7 +7051,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName("networks")
       Networks networks;
 
-      /** Verification method for the intent. */
+      /** Bank account verification method. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
@@ -7144,7 +7144,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Verification method for the intent. */
+        /** Bank account verification method. */
         public Builder setVerificationMethod(
             SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.VerificationMethod
                 verificationMethod) {

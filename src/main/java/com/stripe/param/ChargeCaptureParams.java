@@ -2765,6 +2765,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
       @Getter
       public static class Segment {
+        /** The flight segment amount. */
+        @SerializedName("amount")
+        Long amount;
+
         /**
          * The International Air Transport Association (IATA) airport code for the arrival airport.
          */
@@ -2815,6 +2819,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
         ServiceClass serviceClass;
 
         private Segment(
+            Long amount,
             String arrivalAirport,
             Long arrivesAt,
             String carrier,
@@ -2823,6 +2828,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             String flightNumber,
             ServiceClass serviceClass) {
+          this.amount = amount;
           this.arrivalAirport = arrivalAirport;
           this.arrivesAt = arrivesAt;
           this.carrier = carrier;
@@ -2838,6 +2844,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Long amount;
+
           private String arrivalAirport;
 
           private Long arrivesAt;
@@ -2857,6 +2865,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public ChargeCaptureParams.PaymentDetails.Flight.Segment build() {
             return new ChargeCaptureParams.PaymentDetails.Flight.Segment(
+                this.amount,
                 this.arrivalAirport,
                 this.arrivesAt,
                 this.carrier,
@@ -2865,6 +2874,12 @@ public class ChargeCaptureParams extends ApiRequestParams {
                 this.extraParams,
                 this.flightNumber,
                 this.serviceClass);
+          }
+
+          /** The flight segment amount. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
           }
 
           /**
@@ -3049,6 +3064,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
       @SerializedName("no_show")
       Boolean noShow;
 
+      /** The number of rooms on the booking. */
+      @SerializedName("number_of_rooms")
+      Long numberOfRooms;
+
       /** The details of the passengers in the travel reservation. */
       @SerializedName("passengers")
       List<ChargeCaptureParams.PaymentDetails.Lodging.Passenger> passengers;
@@ -3056,6 +3075,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
       /** The phone number of the lodging location. */
       @SerializedName("property_phone_number")
       String propertyPhoneNumber;
+
+      /** The room class for this purchase. */
+      @SerializedName("room_class")
+      String roomClass;
 
       /** The number of room nights. */
       @SerializedName("room_nights")
@@ -3085,8 +3108,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
           Boolean fireSafetyActCompliance,
           String name,
           Boolean noShow,
+          Long numberOfRooms,
           List<ChargeCaptureParams.PaymentDetails.Lodging.Passenger> passengers,
           String propertyPhoneNumber,
+          String roomClass,
           Long roomNights,
           Long totalRoomTaxAmount,
           Long totalTaxAmount) {
@@ -3105,8 +3130,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
         this.fireSafetyActCompliance = fireSafetyActCompliance;
         this.name = name;
         this.noShow = noShow;
+        this.numberOfRooms = numberOfRooms;
         this.passengers = passengers;
         this.propertyPhoneNumber = propertyPhoneNumber;
+        this.roomClass = roomClass;
         this.roomNights = roomNights;
         this.totalRoomTaxAmount = totalRoomTaxAmount;
         this.totalTaxAmount = totalTaxAmount;
@@ -3147,9 +3174,13 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
         private Boolean noShow;
 
+        private Long numberOfRooms;
+
         private List<ChargeCaptureParams.PaymentDetails.Lodging.Passenger> passengers;
 
         private String propertyPhoneNumber;
+
+        private String roomClass;
 
         private Long roomNights;
 
@@ -3175,8 +3206,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
               this.fireSafetyActCompliance,
               this.name,
               this.noShow,
+              this.numberOfRooms,
               this.passengers,
               this.propertyPhoneNumber,
+              this.roomClass,
               this.roomNights,
               this.totalRoomTaxAmount,
               this.totalTaxAmount);
@@ -3326,6 +3359,12 @@ public class ChargeCaptureParams extends ApiRequestParams {
           return this;
         }
 
+        /** The number of rooms on the booking. */
+        public Builder setNumberOfRooms(Long numberOfRooms) {
+          this.numberOfRooms = numberOfRooms;
+          return this;
+        }
+
         /**
          * Add an element to `passengers` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
@@ -3356,6 +3395,12 @@ public class ChargeCaptureParams extends ApiRequestParams {
         /** The phone number of the lodging location. */
         public Builder setPropertyPhoneNumber(String propertyPhoneNumber) {
           this.propertyPhoneNumber = propertyPhoneNumber;
+          return this;
+        }
+
+        /** The room class for this purchase. */
+        public Builder setRoomClass(String roomClass) {
+          this.roomClass = roomClass;
           return this;
         }
 

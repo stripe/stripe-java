@@ -362,8 +362,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @EqualsAndHashCode(callSuper = false)
     public static class CardIssuing extends StripeObject {
       /**
-       * Information about cardholder acceptance of <a
-       * href="https://stripe.com/docs/issuing/cards">Authorized User Terms</a>.
+       * Information about cardholder acceptance of Celtic <a
+       * href="https://stripe.com/docs/issuing/cards#accept-authorized-user-terms">Authorized User
+       * Terms</a>. Required for cards backed by a Celtic program.
        */
       @SerializedName("user_terms_acceptance")
       UserTermsAcceptance userTermsAcceptance;
@@ -372,17 +373,11 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class UserTermsAcceptance extends StripeObject {
-        /**
-         * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
-         * Required for Celtic Spend Card users.
-         */
+        /** The Unix timestamp marking when the cardholder accepted the Authorized User Terms. */
         @SerializedName("date")
         Long date;
 
-        /**
-         * The IP address from which the cardholder accepted the Authorized User Terms. Required for
-         * Celtic Spend Card users.
-         */
+        /** The IP address from which the cardholder accepted the Authorized User Terms. */
         @SerializedName("ip")
         String ip;
 
