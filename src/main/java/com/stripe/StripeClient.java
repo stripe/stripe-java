@@ -101,6 +101,10 @@ public class StripeClient {
     return new com.stripe.service.CreditNoteService(this.getResponseGetter());
   }
 
+  public com.stripe.service.CustomerSessionService customerSessions() {
+    return new com.stripe.service.CustomerSessionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CustomerService customers() {
     return new com.stripe.service.CustomerService(this.getResponseGetter());
   }
