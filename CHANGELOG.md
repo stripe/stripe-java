@@ -1,5 +1,17 @@
 # Changelog
 
+## 24.12.0-beta.1 - 2024-01-12
+* [#1714](https://github.com/stripe/stripe-java/pull/1714) Update generated code for beta
+  * Add support for `amount` on `ChargeCaptureParams.payment_details.flight.segments[]`, `ChargeUpdateParams.payment_details.flight.segments[]`, `PaymentIntentCaptureParams.payment_details.flight.segments[]`, `PaymentIntentConfirmParams.payment_details.flight.segments[]`, `PaymentIntentCreateParams.payment_details.flight.segments[]`, and `PaymentIntentUpdateParams.payment_details.flight.segments[]`
+  * Add support for `number_of_rooms` and `room_class` on `ChargeCaptureParams.payment_details.lodging`, `ChargeUpdateParams.payment_details.lodging`, `PaymentIntentCaptureParams.payment_details.lodging`, `PaymentIntentConfirmParams.payment_details.lodging`, `PaymentIntentCreateParams.payment_details.lodging`, and `PaymentIntentUpdateParams.payment_details.lodging`
+  * Add support for `buy_button` on `CustomerSession.components` and `CustomerSessionCreateParams.components`
+  * Add support for new values `high_risk_industry`, `insufficient_margin_ratio`, `insufficient_operating_profit`, `insufficient_reserves`, `insufficient_time_in_network`, `lacking_cash_account`, and `poor_payment_history_with_platform` on enums `issuing.CreditUnderwritingRecordCorrectParams.decision.application_rejected.reasons[]` and `issuing.CreditUnderwritingRecordReportDecisionParams.decision.application_rejected.reasons[]`
+  * Add support for new values `high_risk_industry`, `insufficient_margin_ratio`, `insufficient_operating_profit`, `insufficient_reserves`, `insufficient_time_in_network`, and `lacking_cash_account` on enums `issuing.CreditUnderwritingRecordCorrectParams.decision.credit_limit_decreased.reasons[]`, `issuing.CreditUnderwritingRecordCorrectParams.decision.credit_line_closed.reasons[]`, `issuing.CreditUnderwritingRecordCreateFromProactiveReviewParams.decision.credit_limit_decreased.reasons[]`, and `issuing.CreditUnderwritingRecordCreateFromProactiveReviewParams.decision.credit_line_closed.reasons[]`
+* [#1717](https://github.com/stripe/stripe-java/pull/1717) Beta: RawApiRequest
+  * ⚠️ Changed input parameters of `StripeResponseGetter.rawRequest(...)` -- new usage is `StripeResponseGetter.rawRequest(new RawApiRequest(...))`
+* [#1713](https://github.com/stripe/stripe-java/pull/1713) Update generated code for beta
+
+
 ## 24.11.0 - 2024-01-12
 * [#1715](https://github.com/stripe/stripe-java/pull/1715) Update generated code
   * Add support for new resource `CustomerSession`
