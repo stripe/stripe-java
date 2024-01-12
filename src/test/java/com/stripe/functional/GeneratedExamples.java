@@ -2378,6 +2378,56 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCustomerSessionsPost() throws StripeException {
+    CustomerSessionCreateParams params =
+        CustomerSessionCreateParams.builder()
+            .setCustomer("cus_123")
+            .setComponents(
+                CustomerSessionCreateParams.Components.builder()
+                    .setBuyButton(
+                        CustomerSessionCreateParams.Components.BuyButton.builder()
+                            .setEnabled(true)
+                            .build())
+                    .build())
+            .build();
+
+    CustomerSession customerSession = CustomerSession.create(params);
+    assertNotNull(customerSession);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/customer_sessions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testCustomerSessionsPostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.CustomerSessionCreateParams params =
+        com.stripe.param.CustomerSessionCreateParams.builder()
+            .setCustomer("cus_123")
+            .setComponents(
+                com.stripe.param.CustomerSessionCreateParams.Components.builder()
+                    .setBuyButton(
+                        com.stripe.param.CustomerSessionCreateParams.Components.BuyButton.builder()
+                            .setEnabled(true)
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.CustomerSession customerSession = client.customerSessions().create(params);
+    assertNotNull(customerSession);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/customer_sessions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testCustomersBalanceTransactionsGet() throws StripeException {
     Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx");
 
