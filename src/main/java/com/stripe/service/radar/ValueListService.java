@@ -24,60 +24,21 @@ public final class ValueListService extends ApiService {
   }
 
   /**
-   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
-   * creation date, with the most recently created object appearing first.
+   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
+   * be deleted, a value list must not be referenced in any rules.
    */
-  public StripeCollection<ValueList> list(ValueListListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public ValueList delete(String valueList) throws StripeException {
+    return delete(valueList, (RequestOptions) null);
   }
   /**
-   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
-   * creation date, with the most recently created object appearing first.
+   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
+   * be deleted, a value list must not be referenced in any rules.
    */
-  public StripeCollection<ValueList> list(RequestOptions options) throws StripeException {
-    return list((ValueListListParams) null, options);
-  }
-  /**
-   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
-   * creation date, with the most recently created object appearing first.
-   */
-  public StripeCollection<ValueList> list() throws StripeException {
-    return list((ValueListListParams) null, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
-   * creation date, with the most recently created object appearing first.
-   */
-  public StripeCollection<ValueList> list(ValueListListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/radar/value_lists";
+  public ValueList delete(String valueList, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ValueList>>() {}.getType());
-  }
-  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
-  public ValueList create(ValueListCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
-  public ValueList create(ValueListCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/radar/value_lists";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, ValueList.class);
   }
   /** Retrieves a {@code ValueList} object. */
@@ -147,21 +108,60 @@ public final class ValueListService extends ApiService {
     return getResponseGetter().request(request, ValueList.class);
   }
   /**
-   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
-   * be deleted, a value list must not be referenced in any rules.
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
-  public ValueList delete(String valueList) throws StripeException {
-    return delete(valueList, (RequestOptions) null);
+  public StripeCollection<ValueList> list(ValueListListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
   /**
-   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
-   * be deleted, a value list must not be referenced in any rules.
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
-  public ValueList delete(String valueList, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+  public StripeCollection<ValueList> list(RequestOptions options) throws StripeException {
+    return list((ValueListListParams) null, options);
+  }
+  /**
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
+   */
+  public StripeCollection<ValueList> list() throws StripeException {
+    return list((ValueListListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
+   */
+  public StripeCollection<ValueList> list(ValueListListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/radar/value_lists";
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ValueList>>() {}.getType());
+  }
+  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
+  public ValueList create(ValueListCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
+  public ValueList create(ValueListCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/radar/value_lists";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, ValueList.class);
   }
 }

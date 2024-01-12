@@ -26,23 +26,6 @@ public final class OrderService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates a new {@code open} order object. */
-  public Order create(OrderCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a new {@code open} order object. */
-  public Order create(OrderCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/orders";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Order.class);
-  }
   /**
    * Returns a list of your orders. The orders are returned sorted by creation date, with the most
    * recently created orders appearing first.
@@ -81,6 +64,23 @@ public final class OrderService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
+  }
+  /** Creates a new {@code open} order object. */
+  public Order create(OrderCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a new {@code open} order object. */
+  public Order create(OrderCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/orders";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
   }
   /**
    * Retrieves the details of an existing order. Supply the unique order ID from either an order
@@ -158,36 +158,6 @@ public final class OrderService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Order.class);
   }
-  /**
-   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
-   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
-   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
-   * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
-   * called.
-   */
-  public Order submit(String id, OrderSubmitParams params) throws StripeException {
-    return submit(id, params, (RequestOptions) null);
-  }
-  /**
-   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
-   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
-   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
-   * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
-   * called.
-   */
-  public Order submit(String id, OrderSubmitParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/orders/%s/submit", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Order.class);
-  }
   /** Cancels the order as well as the payment intent if one is attached. */
   public Order cancel(String id, OrderCancelParams params) throws StripeException {
     return cancel(id, params, (RequestOptions) null);
@@ -230,6 +200,36 @@ public final class OrderService extends ApiService {
   public Order reopen(String id, OrderReopenParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
+  }
+  /**
+   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
+   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
+   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
+   * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
+   * called.
+   */
+  public Order submit(String id, OrderSubmitParams params) throws StripeException {
+    return submit(id, params, (RequestOptions) null);
+  }
+  /**
+   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
+   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
+   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
+   * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
+   * called.
+   */
+  public Order submit(String id, OrderSubmitParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/orders/%s/submit", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -25,6 +25,33 @@ public final class CreditNoteService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of credit notes. */
+  public StripeCollection<CreditNote> list(CreditNoteListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of credit notes. */
+  public StripeCollection<CreditNote> list(RequestOptions options) throws StripeException {
+    return list((CreditNoteListParams) null, options);
+  }
+  /** Returns a list of credit notes. */
+  public StripeCollection<CreditNote> list() throws StripeException {
+    return list((CreditNoteListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of credit notes. */
+  public StripeCollection<CreditNote> list(CreditNoteListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/credit_notes";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<CreditNote>>() {}.getType());
+  }
   /**
    * Issue a credit note to adjust the amount of a finalized invoice. For a {@code status=open}
    * invoice, a credit note reduces its {@code amount_due}. For a {@code status=paid} invoice, a
@@ -89,51 +116,6 @@ public final class CreditNoteService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, CreditNote.class);
   }
-  /** Returns a list of credit notes. */
-  public StripeCollection<CreditNote> list(CreditNoteListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of credit notes. */
-  public StripeCollection<CreditNote> list(RequestOptions options) throws StripeException {
-    return list((CreditNoteListParams) null, options);
-  }
-  /** Returns a list of credit notes. */
-  public StripeCollection<CreditNote> list() throws StripeException {
-    return list((CreditNoteListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of credit notes. */
-  public StripeCollection<CreditNote> list(CreditNoteListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/credit_notes";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<CreditNote>>() {}.getType());
-  }
-  /** Get a preview of a credit note without creating it. */
-  public CreditNote preview(CreditNotePreviewParams params) throws StripeException {
-    return preview(params, (RequestOptions) null);
-  }
-  /** Get a preview of a credit note without creating it. */
-  public CreditNote preview(CreditNotePreviewParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/credit_notes/preview";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, CreditNote.class);
-  }
   /** Retrieves the credit note object with the given identifier. */
   public CreditNote retrieve(String id, CreditNoteRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
@@ -180,6 +162,24 @@ public final class CreditNoteService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CreditNote.class);
+  }
+  /** Get a preview of a credit note without creating it. */
+  public CreditNote preview(CreditNotePreviewParams params) throws StripeException {
+    return preview(params, (RequestOptions) null);
+  }
+  /** Get a preview of a credit note without creating it. */
+  public CreditNote preview(CreditNotePreviewParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/credit_notes/preview";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

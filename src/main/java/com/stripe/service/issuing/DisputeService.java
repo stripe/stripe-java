@@ -112,6 +112,32 @@ public final class DisputeService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Dispute.class);
   }
+  /** Retrieves an Issuing {@code Dispute} object. */
+  public Dispute retrieve(String dispute, DisputeRetrieveParams params) throws StripeException {
+    return retrieve(dispute, params, (RequestOptions) null);
+  }
+  /** Retrieves an Issuing {@code Dispute} object. */
+  public Dispute retrieve(String dispute, RequestOptions options) throws StripeException {
+    return retrieve(dispute, (DisputeRetrieveParams) null, options);
+  }
+  /** Retrieves an Issuing {@code Dispute} object. */
+  public Dispute retrieve(String dispute) throws StripeException {
+    return retrieve(dispute, (DisputeRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves an Issuing {@code Dispute} object. */
+  public Dispute retrieve(String dispute, DisputeRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Dispute.class);
+  }
   /**
    * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
@@ -148,32 +174,6 @@ public final class DisputeService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Dispute.class);
-  }
-  /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute, DisputeRetrieveParams params) throws StripeException {
-    return retrieve(dispute, params, (RequestOptions) null);
-  }
-  /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute, RequestOptions options) throws StripeException {
-    return retrieve(dispute, (DisputeRetrieveParams) null, options);
-  }
-  /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute) throws StripeException {
-    return retrieve(dispute, (DisputeRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute, DisputeRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

@@ -23,59 +23,18 @@ public final class ConfigurationService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates a new {@code Configuration} object. */
-  public Configuration create(ConfigurationCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  /** Deletes a {@code Configuration} object. */
+  public Configuration delete(String configuration) throws StripeException {
+    return delete(configuration, (RequestOptions) null);
   }
-  /** Creates a new {@code Configuration} object. */
-  public Configuration create(RequestOptions options) throws StripeException {
-    return create((ConfigurationCreateParams) null, options);
-  }
-  /** Creates a new {@code Configuration} object. */
-  public Configuration create() throws StripeException {
-    return create((ConfigurationCreateParams) null, (RequestOptions) null);
-  }
-  /** Creates a new {@code Configuration} object. */
-  public Configuration create(ConfigurationCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/terminal/configurations";
+  /** Deletes a {@code Configuration} object. */
+  public Configuration delete(String configuration, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, Configuration.class);
-  }
-  /** Returns a list of {@code Configuration} objects. */
-  public StripeCollection<Configuration> list(ConfigurationListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of {@code Configuration} objects. */
-  public StripeCollection<Configuration> list(RequestOptions options) throws StripeException {
-    return list((ConfigurationListParams) null, options);
-  }
-  /** Returns a list of {@code Configuration} objects. */
-  public StripeCollection<Configuration> list() throws StripeException {
-    return list((ConfigurationListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of {@code Configuration} objects. */
-  public StripeCollection<Configuration> list(
-      ConfigurationListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/terminal/configurations";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
   /** Retrieves a {@code Configuration} object. */
   public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
@@ -136,17 +95,58 @@ public final class ConfigurationService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Configuration.class);
   }
-  /** Deletes a {@code Configuration} object. */
-  public Configuration delete(String configuration) throws StripeException {
-    return delete(configuration, (RequestOptions) null);
+  /** Returns a list of {@code Configuration} objects. */
+  public StripeCollection<Configuration> list(ConfigurationListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
   }
-  /** Deletes a {@code Configuration} object. */
-  public Configuration delete(String configuration, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
+  /** Returns a list of {@code Configuration} objects. */
+  public StripeCollection<Configuration> list(RequestOptions options) throws StripeException {
+    return list((ConfigurationListParams) null, options);
+  }
+  /** Returns a list of {@code Configuration} objects. */
+  public StripeCollection<Configuration> list() throws StripeException {
+    return list((ConfigurationListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of {@code Configuration} objects. */
+  public StripeCollection<Configuration> list(
+      ConfigurationListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/terminal/configurations";
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
+  }
+  /** Creates a new {@code Configuration} object. */
+  public Configuration create(ConfigurationCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a new {@code Configuration} object. */
+  public Configuration create(RequestOptions options) throws StripeException {
+    return create((ConfigurationCreateParams) null, options);
+  }
+  /** Creates a new {@code Configuration} object. */
+  public Configuration create() throws StripeException {
+    return create((ConfigurationCreateParams) null, (RequestOptions) null);
+  }
+  /** Creates a new {@code Configuration} object. */
+  public Configuration create(ConfigurationCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/terminal/configurations";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Configuration.class);
   }
 }

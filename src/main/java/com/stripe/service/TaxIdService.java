@@ -22,18 +22,46 @@ public final class TaxIdService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates a new {@code tax_id} object for a customer. */
-  public TaxId create(String customer, TaxIdCreateParams params) throws StripeException {
-    return create(customer, params, (RequestOptions) null);
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(String customer, String id) throws StripeException {
+    return delete(customer, id, (RequestOptions) null);
   }
-  /** Creates a new {@code tax_id} object for a customer. */
-  public TaxId create(String customer, TaxIdCreateParams params, RequestOptions options)
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(String customer, String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/tax_ids/%s",
+            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, TaxId.class);
+  }
+  /** Retrieves the {@code tax_id} object with the given identifier. */
+  public TaxId retrieve(String customer, String id, TaxIdRetrieveParams params)
       throws StripeException {
-    String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
+    return retrieve(customer, id, params, (RequestOptions) null);
+  }
+  /** Retrieves the {@code tax_id} object with the given identifier. */
+  public TaxId retrieve(String customer, String id, RequestOptions options) throws StripeException {
+    return retrieve(customer, id, (TaxIdRetrieveParams) null, options);
+  }
+  /** Retrieves the {@code tax_id} object with the given identifier. */
+  public TaxId retrieve(String customer, String id) throws StripeException {
+    return retrieve(customer, id, (TaxIdRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the {@code tax_id} object with the given identifier. */
+  public TaxId retrieve(
+      String customer, String id, TaxIdRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/tax_ids/%s",
+            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
-            ApiResource.RequestMethod.POST,
+            ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
@@ -69,50 +97,22 @@ public final class TaxIdService extends ApiService {
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<TaxId>>() {}.getType());
   }
-  /** Retrieves the {@code tax_id} object with the given identifier. */
-  public TaxId retrieve(String customer, String id, TaxIdRetrieveParams params)
+  /** Creates a new {@code tax_id} object for a customer. */
+  public TaxId create(String customer, TaxIdCreateParams params) throws StripeException {
+    return create(customer, params, (RequestOptions) null);
+  }
+  /** Creates a new {@code tax_id} object for a customer. */
+  public TaxId create(String customer, TaxIdCreateParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(customer, id, params, (RequestOptions) null);
-  }
-  /** Retrieves the {@code tax_id} object with the given identifier. */
-  public TaxId retrieve(String customer, String id, RequestOptions options) throws StripeException {
-    return retrieve(customer, id, (TaxIdRetrieveParams) null, options);
-  }
-  /** Retrieves the {@code tax_id} object with the given identifier. */
-  public TaxId retrieve(String customer, String id) throws StripeException {
-    return retrieve(customer, id, (TaxIdRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the {@code tax_id} object with the given identifier. */
-  public TaxId retrieve(
-      String customer, String id, TaxIdRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/customers/%s/tax_ids/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+    String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(customer));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
-            ApiResource.RequestMethod.GET,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    return getResponseGetter().request(request, TaxId.class);
-  }
-  /** Deletes an existing {@code tax_id} object. */
-  public TaxId delete(String customer, String id) throws StripeException {
-    return delete(customer, id, (RequestOptions) null);
-  }
-  /** Deletes an existing {@code tax_id} object. */
-  public TaxId delete(String customer, String id, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/customers/%s/tax_ids/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, TaxId.class);
   }
 }

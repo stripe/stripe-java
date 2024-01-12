@@ -27,101 +27,21 @@ public final class CustomerService extends ApiService {
   }
 
   /**
-   * Search for customers you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
+   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
+   * subscriptions on the customer.
    */
-  public StripeSearchResult<Customer> search(CustomerSearchParams params) throws StripeException {
-    return search(params, (RequestOptions) null);
+  public Customer delete(String customer) throws StripeException {
+    return delete(customer, (RequestOptions) null);
   }
   /**
-   * Search for customers you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
+   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
+   * subscriptions on the customer.
    */
-  public StripeSearchResult<Customer> search(CustomerSearchParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/customers/search";
+  public Customer delete(String customer, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
-  }
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public StripeCollection<Customer> list(CustomerListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public StripeCollection<Customer> list(RequestOptions options) throws StripeException {
-    return list((CustomerListParams) null, options);
-  }
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public StripeCollection<Customer> list() throws StripeException {
-    return list((CustomerListParams) null, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public StripeCollection<Customer> list(CustomerListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/customers";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Customer>>() {}.getType());
-  }
-  /** Creates a new customer object. */
-  public Customer create(CustomerCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a new customer object. */
-  public Customer create(RequestOptions options) throws StripeException {
-    return create((CustomerCreateParams) null, options);
-  }
-  /** Creates a new customer object. */
-  public Customer create() throws StripeException {
-    return create((CustomerCreateParams) null, (RequestOptions) null);
-  }
-  /** Creates a new customer object. */
-  public Customer create(CustomerCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/customers";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, Customer.class);
   }
   /** Retrieves a Customer object. */
@@ -228,24 +148,6 @@ public final class CustomerService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Customer.class);
   }
-  /**
-   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
-   * subscriptions on the customer.
-   */
-  public Customer delete(String customer) throws StripeException {
-    return delete(customer, (RequestOptions) null);
-  }
-  /**
-   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
-   * subscriptions on the customer.
-   */
-  public Customer delete(String customer, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    return getResponseGetter().request(request, Customer.class);
-  }
   /** Removes the currently applied discount on a customer. */
   public Discount deleteDiscount(String customer) throws StripeException {
     return deleteDiscount(customer, (RequestOptions) null);
@@ -257,6 +159,104 @@ public final class CustomerService extends ApiService {
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, Discount.class);
+  }
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public StripeCollection<Customer> list(CustomerListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public StripeCollection<Customer> list(RequestOptions options) throws StripeException {
+    return list((CustomerListParams) null, options);
+  }
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public StripeCollection<Customer> list() throws StripeException {
+    return list((CustomerListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public StripeCollection<Customer> list(CustomerListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/customers";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Customer>>() {}.getType());
+  }
+  /** Creates a new customer object. */
+  public Customer create(CustomerCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a new customer object. */
+  public Customer create(RequestOptions options) throws StripeException {
+    return create((CustomerCreateParams) null, options);
+  }
+  /** Creates a new customer object. */
+  public Customer create() throws StripeException {
+    return create((CustomerCreateParams) null, (RequestOptions) null);
+  }
+  /** Creates a new customer object. */
+  public Customer create(CustomerCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/customers";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Customer.class);
+  }
+  /**
+   * Search for customers you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Customer> search(CustomerSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+  /**
+   * Search for customers you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Customer> search(CustomerSearchParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/customers/search";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
   }
 
   public com.stripe.service.CustomerBalanceTransactionService balanceTransactions() {

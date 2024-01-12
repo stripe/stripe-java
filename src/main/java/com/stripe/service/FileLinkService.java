@@ -23,6 +23,51 @@ public final class FileLinkService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of file links. */
+  public StripeCollection<FileLink> list(FileLinkListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of file links. */
+  public StripeCollection<FileLink> list(RequestOptions options) throws StripeException {
+    return list((FileLinkListParams) null, options);
+  }
+  /** Returns a list of file links. */
+  public StripeCollection<FileLink> list() throws StripeException {
+    return list((FileLinkListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of file links. */
+  public StripeCollection<FileLink> list(FileLinkListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/file_links";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<FileLink>>() {}.getType());
+  }
+  /** Creates a new file link object. */
+  public FileLink create(FileLinkCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a new file link object. */
+  public FileLink create(FileLinkCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/file_links";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, FileLink.class);
+  }
   /** Retrieves the file link with the given ID. */
   public FileLink retrieve(String link, FileLinkRetrieveParams params) throws StripeException {
     return retrieve(link, params, (RequestOptions) null);
@@ -74,50 +119,5 @@ public final class FileLinkService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, FileLink.class);
-  }
-  /** Creates a new file link object. */
-  public FileLink create(FileLinkCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a new file link object. */
-  public FileLink create(FileLinkCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/file_links";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, FileLink.class);
-  }
-  /** Returns a list of file links. */
-  public StripeCollection<FileLink> list(FileLinkListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of file links. */
-  public StripeCollection<FileLink> list(RequestOptions options) throws StripeException {
-    return list((FileLinkListParams) null, options);
-  }
-  /** Returns a list of file links. */
-  public StripeCollection<FileLink> list() throws StripeException {
-    return list((FileLinkListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of file links. */
-  public StripeCollection<FileLink> list(FileLinkListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/file_links";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<FileLink>>() {}.getType());
   }
 }

@@ -40,6 +40,69 @@ public final class AuthorizationService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Authorization.class);
   }
+  /** Capture a test-mode authorization. */
+  public Authorization capture(String authorization, AuthorizationCaptureParams params)
+      throws StripeException {
+    return capture(authorization, params, (RequestOptions) null);
+  }
+  /** Capture a test-mode authorization. */
+  public Authorization capture(String authorization, RequestOptions options)
+      throws StripeException {
+    return capture(authorization, (AuthorizationCaptureParams) null, options);
+  }
+  /** Capture a test-mode authorization. */
+  public Authorization capture(String authorization) throws StripeException {
+    return capture(authorization, (AuthorizationCaptureParams) null, (RequestOptions) null);
+  }
+  /** Capture a test-mode authorization. */
+  public Authorization capture(
+      String authorization, AuthorizationCaptureParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/issuing/authorizations/%s/capture",
+            ApiResource.urlEncodeId(authorization));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
+  }
+  /** Expire a test-mode Authorization. */
+  public Authorization expire(String authorization, AuthorizationExpireParams params)
+      throws StripeException {
+    return expire(authorization, params, (RequestOptions) null);
+  }
+  /** Expire a test-mode Authorization. */
+  public Authorization expire(String authorization, RequestOptions options) throws StripeException {
+    return expire(authorization, (AuthorizationExpireParams) null, options);
+  }
+  /** Expire a test-mode Authorization. */
+  public Authorization expire(String authorization) throws StripeException {
+    return expire(authorization, (AuthorizationExpireParams) null, (RequestOptions) null);
+  }
+  /** Expire a test-mode Authorization. */
+  public Authorization expire(
+      String authorization, AuthorizationExpireParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/issuing/authorizations/%s/expire",
+            ApiResource.urlEncodeId(authorization));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Authorization.class);
+  }
   /** Increment a test-mode Authorization. */
   public Authorization increment(String authorization, AuthorizationIncrementParams params)
       throws StripeException {
@@ -84,69 +147,6 @@ public final class AuthorizationService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/authorizations/%s/reverse",
-            ApiResource.urlEncodeId(authorization));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Authorization.class);
-  }
-  /** Expire a test-mode Authorization. */
-  public Authorization expire(String authorization, AuthorizationExpireParams params)
-      throws StripeException {
-    return expire(authorization, params, (RequestOptions) null);
-  }
-  /** Expire a test-mode Authorization. */
-  public Authorization expire(String authorization, RequestOptions options) throws StripeException {
-    return expire(authorization, (AuthorizationExpireParams) null, options);
-  }
-  /** Expire a test-mode Authorization. */
-  public Authorization expire(String authorization) throws StripeException {
-    return expire(authorization, (AuthorizationExpireParams) null, (RequestOptions) null);
-  }
-  /** Expire a test-mode Authorization. */
-  public Authorization expire(
-      String authorization, AuthorizationExpireParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/test_helpers/issuing/authorizations/%s/expire",
-            ApiResource.urlEncodeId(authorization));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Authorization.class);
-  }
-  /** Capture a test-mode authorization. */
-  public Authorization capture(String authorization, AuthorizationCaptureParams params)
-      throws StripeException {
-    return capture(authorization, params, (RequestOptions) null);
-  }
-  /** Capture a test-mode authorization. */
-  public Authorization capture(String authorization, RequestOptions options)
-      throws StripeException {
-    return capture(authorization, (AuthorizationCaptureParams) null, options);
-  }
-  /** Capture a test-mode authorization. */
-  public Authorization capture(String authorization) throws StripeException {
-    return capture(authorization, (AuthorizationCaptureParams) null, (RequestOptions) null);
-  }
-  /** Capture a test-mode authorization. */
-  public Authorization capture(
-      String authorization, AuthorizationCaptureParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/test_helpers/issuing/authorizations/%s/capture",
             ApiResource.urlEncodeId(authorization));
     ApiRequest request =
         new ApiRequest(

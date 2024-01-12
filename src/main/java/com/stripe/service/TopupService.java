@@ -24,23 +24,6 @@ public final class TopupService extends ApiService {
     super(responseGetter);
   }
 
-  /** Top up the balance of an account. */
-  public Topup create(TopupCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Top up the balance of an account. */
-  public Topup create(TopupCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/topups";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Topup.class);
-  }
   /** Returns a list of top-ups. */
   public StripeCollection<Topup> list(TopupListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -67,6 +50,23 @@ public final class TopupService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Topup>>() {}.getType());
+  }
+  /** Top up the balance of an account. */
+  public Topup create(TopupCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Top up the balance of an account. */
+  public Topup create(TopupCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/topups";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Topup.class);
   }
   /**
    * Retrieves the details of a top-up that has previously been created. Supply the unique top-up ID

@@ -22,24 +22,6 @@ public final class DebitReversalService extends ApiService {
     super(responseGetter);
   }
 
-  /** Reverses a ReceivedDebit and creates a DebitReversal object. */
-  public DebitReversal create(DebitReversalCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Reverses a ReceivedDebit and creates a DebitReversal object. */
-  public DebitReversal create(DebitReversalCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/treasury/debit_reversals";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, DebitReversal.class);
-  }
   /** Returns a list of DebitReversals. */
   public StripeCollection<DebitReversal> list(DebitReversalListParams params)
       throws StripeException {
@@ -59,6 +41,24 @@ public final class DebitReversalService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<DebitReversal>>() {}.getType());
+  }
+  /** Reverses a ReceivedDebit and creates a DebitReversal object. */
+  public DebitReversal create(DebitReversalCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Reverses a ReceivedDebit and creates a DebitReversal object. */
+  public DebitReversal create(DebitReversalCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/treasury/debit_reversals";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, DebitReversal.class);
   }
   /** Retrieves a DebitReversal object. */
   public DebitReversal retrieve(String debitReversal, DebitReversalRetrieveParams params)

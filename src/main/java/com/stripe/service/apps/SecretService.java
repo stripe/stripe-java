@@ -23,40 +23,6 @@ public final class SecretService extends ApiService {
     super(responseGetter);
   }
 
-  /** Finds a secret in the secret store by name and scope. */
-  public Secret find(SecretFindParams params) throws StripeException {
-    return find(params, (RequestOptions) null);
-  }
-  /** Finds a secret in the secret store by name and scope. */
-  public Secret find(SecretFindParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/apps/secrets/find";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Secret.class);
-  }
-  /** Create or replace a secret in the secret store. */
-  public Secret create(SecretCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Create or replace a secret in the secret store. */
-  public Secret create(SecretCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/apps/secrets";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Secret.class);
-  }
   /** List all secrets stored on the given scope. */
   public StripeCollection<Secret> list(SecretListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -75,6 +41,40 @@ public final class SecretService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Secret>>() {}.getType());
+  }
+  /** Create or replace a secret in the secret store. */
+  public Secret create(SecretCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Create or replace a secret in the secret store. */
+  public Secret create(SecretCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/apps/secrets";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Secret.class);
+  }
+  /** Finds a secret in the secret store by name and scope. */
+  public Secret find(SecretFindParams params) throws StripeException {
+    return find(params, (RequestOptions) null);
+  }
+  /** Finds a secret in the secret store by name and scope. */
+  public Secret find(SecretFindParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/apps/secrets/find";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Secret.class);
   }
   /** Deletes a secret from the secret store by name and scope. */
   public Secret deleteWhere(SecretDeleteWhereParams params) throws StripeException {

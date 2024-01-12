@@ -24,121 +24,6 @@ public final class FeeRefundService extends ApiService {
   }
 
   /**
-   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
-   * be refunded to the Stripe account from which the fee was originally collected.
-   *
-   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
-   * until the entire fee has been refunded.
-   *
-   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
-   * an error when called on an already-refunded application fee, or when trying to refund more
-   * money than is left on an application fee.
-   */
-  public FeeRefund create(String id, FeeRefundCreateParams params) throws StripeException {
-    return create(id, params, (RequestOptions) null);
-  }
-  /**
-   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
-   * be refunded to the Stripe account from which the fee was originally collected.
-   *
-   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
-   * until the entire fee has been refunded.
-   *
-   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
-   * an error when called on an already-refunded application fee, or when trying to refund more
-   * money than is left on an application fee.
-   */
-  public FeeRefund create(String id, RequestOptions options) throws StripeException {
-    return create(id, (FeeRefundCreateParams) null, options);
-  }
-  /**
-   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
-   * be refunded to the Stripe account from which the fee was originally collected.
-   *
-   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
-   * until the entire fee has been refunded.
-   *
-   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
-   * an error when called on an already-refunded application fee, or when trying to refund more
-   * money than is left on an application fee.
-   */
-  public FeeRefund create(String id) throws StripeException {
-    return create(id, (FeeRefundCreateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
-   * be refunded to the Stripe account from which the fee was originally collected.
-   *
-   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
-   * until the entire fee has been refunded.
-   *
-   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
-   * an error when called on an already-refunded application fee, or when trying to refund more
-   * money than is left on an application fee.
-   */
-  public FeeRefund create(String id, FeeRefundCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, FeeRefund.class);
-  }
-  /**
-   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
-   * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the {@code limit} and {@code
-   * starting_after} parameters to page through additional refunds.
-   */
-  public StripeCollection<FeeRefund> list(String id, FeeRefundListParams params)
-      throws StripeException {
-    return list(id, params, (RequestOptions) null);
-  }
-  /**
-   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
-   * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the {@code limit} and {@code
-   * starting_after} parameters to page through additional refunds.
-   */
-  public StripeCollection<FeeRefund> list(String id, RequestOptions options)
-      throws StripeException {
-    return list(id, (FeeRefundListParams) null, options);
-  }
-  /**
-   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
-   * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the {@code limit} and {@code
-   * starting_after} parameters to page through additional refunds.
-   */
-  public StripeCollection<FeeRefund> list(String id) throws StripeException {
-    return list(id, (FeeRefundListParams) null, (RequestOptions) null);
-  }
-  /**
-   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
-   * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the {@code limit} and {@code
-   * starting_after} parameters to page through additional refunds.
-   */
-  public StripeCollection<FeeRefund> list(
-      String id, FeeRefundListParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<FeeRefund>>() {}.getType());
-  }
-  /**
    * By default, you can see the 10 most recent refunds stored directly on the application fee
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
@@ -226,6 +111,121 @@ public final class FeeRefundService extends ApiService {
         String.format(
             "/v1/application_fees/%s/refunds/%s",
             ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
+  }
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public StripeCollection<FeeRefund> list(String id, FeeRefundListParams params)
+      throws StripeException {
+    return list(id, params, (RequestOptions) null);
+  }
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public StripeCollection<FeeRefund> list(String id, RequestOptions options)
+      throws StripeException {
+    return list(id, (FeeRefundListParams) null, options);
+  }
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public StripeCollection<FeeRefund> list(String id) throws StripeException {
+    return list(id, (FeeRefundListParams) null, (RequestOptions) null);
+  }
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public StripeCollection<FeeRefund> list(
+      String id, FeeRefundListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<FeeRefund>>() {}.getType());
+  }
+  /**
+   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
+   * be refunded to the Stripe account from which the fee was originally collected.
+   *
+   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
+   * until the entire fee has been refunded.
+   *
+   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
+   * an error when called on an already-refunded application fee, or when trying to refund more
+   * money than is left on an application fee.
+   */
+  public FeeRefund create(String id, FeeRefundCreateParams params) throws StripeException {
+    return create(id, params, (RequestOptions) null);
+  }
+  /**
+   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
+   * be refunded to the Stripe account from which the fee was originally collected.
+   *
+   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
+   * until the entire fee has been refunded.
+   *
+   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
+   * an error when called on an already-refunded application fee, or when trying to refund more
+   * money than is left on an application fee.
+   */
+  public FeeRefund create(String id, RequestOptions options) throws StripeException {
+    return create(id, (FeeRefundCreateParams) null, options);
+  }
+  /**
+   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
+   * be refunded to the Stripe account from which the fee was originally collected.
+   *
+   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
+   * until the entire fee has been refunded.
+   *
+   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
+   * an error when called on an already-refunded application fee, or when trying to refund more
+   * money than is left on an application fee.
+   */
+  public FeeRefund create(String id) throws StripeException {
+    return create(id, (FeeRefundCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
+   * be refunded to the Stripe account from which the fee was originally collected.
+   *
+   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
+   * until the entire fee has been refunded.
+   *
+   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
+   * an error when called on an already-refunded application fee, or when trying to refund more
+   * money than is left on an application fee.
+   */
+  public FeeRefund create(String id, FeeRefundCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

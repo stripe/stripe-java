@@ -24,6 +24,55 @@ public final class TransferReversalService extends ApiService {
   }
 
   /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public StripeCollection<TransferReversal> list(String id, TransferReversalListParams params)
+      throws StripeException {
+    return list(id, params, (RequestOptions) null);
+  }
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public StripeCollection<TransferReversal> list(String id, RequestOptions options)
+      throws StripeException {
+    return list(id, (TransferReversalListParams) null, options);
+  }
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public StripeCollection<TransferReversal> list(String id) throws StripeException {
+    return list(id, (TransferReversalListParams) null, (RequestOptions) null);
+  }
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public StripeCollection<TransferReversal> list(
+      String id, TransferReversalListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/transfers/%s/reversals", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TransferReversal>>() {}.getType());
+  }
+  /**
    * When you create a new reversal, you must specify a transfer to create it on.
    *
    * <p>When reversing transfers, you can optionally reverse part of the transfer. You can do so as
@@ -86,55 +135,6 @@ public final class TransferReversalService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, TransferReversal.class);
-  }
-  /**
-   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
-   * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
-   * parameters to page through additional reversals.
-   */
-  public StripeCollection<TransferReversal> list(String id, TransferReversalListParams params)
-      throws StripeException {
-    return list(id, params, (RequestOptions) null);
-  }
-  /**
-   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
-   * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
-   * parameters to page through additional reversals.
-   */
-  public StripeCollection<TransferReversal> list(String id, RequestOptions options)
-      throws StripeException {
-    return list(id, (TransferReversalListParams) null, options);
-  }
-  /**
-   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
-   * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
-   * parameters to page through additional reversals.
-   */
-  public StripeCollection<TransferReversal> list(String id) throws StripeException {
-    return list(id, (TransferReversalListParams) null, (RequestOptions) null);
-  }
-  /**
-   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
-   * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
-   * parameters to page through additional reversals.
-   */
-  public StripeCollection<TransferReversal> list(
-      String id, TransferReversalListParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/transfers/%s/reversals", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TransferReversal>>() {}.getType());
   }
   /**
    * By default, you can see the 10 most recent reversals stored directly on the transfer object,

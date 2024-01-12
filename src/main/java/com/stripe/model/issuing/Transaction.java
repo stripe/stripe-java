@@ -703,6 +703,58 @@ public class Transaction extends ApiResource
       this.resource = resource;
     }
 
+    /** Refund a test-mode Transaction. */
+    public Transaction refund() throws StripeException {
+      return refund((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(RequestOptions options) throws StripeException {
+      return refund((Map<String, Object>) null, options);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(Map<String, Object> params) throws StripeException {
+      return refund(params, (RequestOptions) null);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/transactions/%s/refund",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Transaction.class);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(TransactionRefundParams params) throws StripeException {
+      return refund(params, (RequestOptions) null);
+    }
+
+    /** Refund a test-mode Transaction. */
+    public Transaction refund(TransactionRefundParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/transactions/%s/refund",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options,
+              ApiMode.V1);
+      return resource.getResponseGetter().request(request, Transaction.class);
+    }
+
     /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
     public static Transaction createForceCapture(Map<String, Object> params)
         throws StripeException {
@@ -778,58 +830,6 @@ public class Transaction extends ApiResource
               options,
               ApiMode.V1);
       return getGlobalResponseGetter().request(request, Transaction.class);
-    }
-
-    /** Refund a test-mode Transaction. */
-    public Transaction refund() throws StripeException {
-      return refund((Map<String, Object>) null, (RequestOptions) null);
-    }
-
-    /** Refund a test-mode Transaction. */
-    public Transaction refund(RequestOptions options) throws StripeException {
-      return refund((Map<String, Object>) null, options);
-    }
-
-    /** Refund a test-mode Transaction. */
-    public Transaction refund(Map<String, Object> params) throws StripeException {
-      return refund(params, (RequestOptions) null);
-    }
-
-    /** Refund a test-mode Transaction. */
-    public Transaction refund(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
-      String path =
-          String.format(
-              "/v1/test_helpers/issuing/transactions/%s/refund",
-              ApiResource.urlEncodeId(this.resource.getId()));
-      ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
-      return resource.getResponseGetter().request(request, Transaction.class);
-    }
-
-    /** Refund a test-mode Transaction. */
-    public Transaction refund(TransactionRefundParams params) throws StripeException {
-      return refund(params, (RequestOptions) null);
-    }
-
-    /** Refund a test-mode Transaction. */
-    public Transaction refund(TransactionRefundParams params, RequestOptions options)
-        throws StripeException {
-      String path =
-          String.format(
-              "/v1/test_helpers/issuing/transactions/%s/refund",
-              ApiResource.urlEncodeId(this.resource.getId()));
-      ApiResource.checkNullTypedParams(path, params);
-      ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
-      return resource.getResponseGetter().request(request, Transaction.class);
     }
   }
 
