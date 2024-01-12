@@ -20,7 +20,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   /**
    * Behavior of the subscription schedule and underlying subscription when it ends. Possible values
    * are {@code release} or {@code cancel} with the default being {@code release}. {@code release}
-   * will end the subscription schedule and keep the underlying subscription running.{@code cancel}
+   * will end the subscription schedule and keep the underlying subscription running. {@code cancel}
    * will end the subscription schedule and cancel the underlying subscription.
    */
   @SerializedName("end_behavior")
@@ -122,9 +122,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
      * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
-     * release} will end the subscription schedule and keep the underlying subscription
-     * running.{@code cancel} will end the subscription schedule and cancel the underlying
-     * subscription.
+     * release} will end the subscription schedule and keep the underlying subscription running.
+     * {@code cancel} will end the subscription schedule and cancel the underlying subscription.
      */
     public Builder setEndBehavior(SubscriptionScheduleUpdateParams.EndBehavior endBehavior) {
       this.endBehavior = endBehavior;

@@ -26,6 +26,33 @@ public final class SetupIntentService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of SetupIntents. */
+  public StripeCollection<SetupIntent> list(SetupIntentListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of SetupIntents. */
+  public StripeCollection<SetupIntent> list(RequestOptions options) throws StripeException {
+    return list((SetupIntentListParams) null, options);
+  }
+  /** Returns a list of SetupIntents. */
+  public StripeCollection<SetupIntent> list() throws StripeException {
+    return list((SetupIntentListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of SetupIntents. */
+  public StripeCollection<SetupIntent> list(SetupIntentListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/setup_intents";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<SetupIntent>>() {}.getType());
+  }
   /**
    * Creates a SetupIntent object.
    *
@@ -75,33 +102,6 @@ public final class SetupIntentService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, SetupIntent.class);
-  }
-  /** Returns a list of SetupIntents. */
-  public StripeCollection<SetupIntent> list(SetupIntentListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of SetupIntents. */
-  public StripeCollection<SetupIntent> list(RequestOptions options) throws StripeException {
-    return list((SetupIntentListParams) null, options);
-  }
-  /** Returns a list of SetupIntents. */
-  public StripeCollection<SetupIntent> list() throws StripeException {
-    return list((SetupIntentListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of SetupIntents. */
-  public StripeCollection<SetupIntent> list(SetupIntentListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/setup_intents";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<SetupIntent>>() {}.getType());
   }
   /**
    * Retrieves the details of a SetupIntent that has previously been created.
@@ -194,6 +194,56 @@ public final class SetupIntentService extends ApiService {
     return getResponseGetter().request(request, SetupIntent.class);
   }
   /**
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
+   *
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
+   * error.
+   */
+  public SetupIntent cancel(String intent, SetupIntentCancelParams params) throws StripeException {
+    return cancel(intent, params, (RequestOptions) null);
+  }
+  /**
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
+   *
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
+   * error.
+   */
+  public SetupIntent cancel(String intent, RequestOptions options) throws StripeException {
+    return cancel(intent, (SetupIntentCancelParams) null, options);
+  }
+  /**
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
+   *
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
+   * error.
+   */
+  public SetupIntent cancel(String intent) throws StripeException {
+    return cancel(intent, (SetupIntentCancelParams) null, (RequestOptions) null);
+  }
+  /**
+   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
+   *
+   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
+   * error.
+   */
+  public SetupIntent cancel(String intent, SetupIntentCancelParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(intent));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, SetupIntent.class);
+  }
+  /**
    * Confirm that your customer intends to set up the current or provided payment method. For
    * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
    * method management page on your website.
@@ -258,56 +308,6 @@ public final class SetupIntentService extends ApiService {
   public SetupIntent confirm(String intent, SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(intent));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, SetupIntent.class);
-  }
-  /**
-   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
-   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
-   *
-   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
-   */
-  public SetupIntent cancel(String intent, SetupIntentCancelParams params) throws StripeException {
-    return cancel(intent, params, (RequestOptions) null);
-  }
-  /**
-   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
-   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
-   *
-   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
-   */
-  public SetupIntent cancel(String intent, RequestOptions options) throws StripeException {
-    return cancel(intent, (SetupIntentCancelParams) null, options);
-  }
-  /**
-   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
-   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
-   *
-   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
-   */
-  public SetupIntent cancel(String intent) throws StripeException {
-    return cancel(intent, (SetupIntentCancelParams) null, (RequestOptions) null);
-  }
-  /**
-   * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
-   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
-   *
-   * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
-   */
-  public SetupIntent cancel(String intent, SetupIntentCancelParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(intent));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

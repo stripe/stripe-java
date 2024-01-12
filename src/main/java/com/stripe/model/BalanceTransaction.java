@@ -125,9 +125,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charge}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
    * connect_collection_transfer}, {@code contribution}, {@code issuing_authorization_hold}, {@code
    * issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
-   * obligation_inbound}, {@code obligation_outbound}, {@code obligation_reversal_inbound}, {@code
-   * obligation_reversal_outbound}, {@code obligation_payout}, {@code obligation_payout_failure},
-   * {@code payment}, {@code payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
+   * obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
+   * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
    * refund}, {@code refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code
@@ -143,15 +142,15 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charge}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
    * connect_collection_transfer}, {@code contribution}, {@code issuing_authorization_hold}, {@code
    * issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
-   * obligation_inbound}, {@code obligation_outbound}, {@code obligation_payout}, {@code
-   * obligation_payout_failure}, {@code obligation_reversal_inbound}, {@code
-   * obligation_reversal_outbound}, {@code payment}, {@code payment_failure_refund}, {@code
-   * payment_network_reserve_hold}, {@code payment_network_reserve_release}, {@code payment_refund},
-   * {@code payment_reversal}, {@code payment_unreconciled}, {@code payout}, {@code payout_cancel},
-   * {@code payout_failure}, {@code refund}, {@code refund_failure}, {@code reserve_transaction},
-   * {@code reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code
-   * topup}, {@code topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code
-   * transfer_failure}, or {@code transfer_refund}.
+   * obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
+   * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
+   * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
+   * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
+   * refund}, {@code refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code
+   * stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup}, {@code topup_reversal},
+   * {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, {@code transfer_refund},
+   * {@code obligation_inbound}, {@code obligation_payout}, {@code obligation_payout_failure}, or
+   * {@code obligation_reversal_outbound}.
    */
   @SerializedName("type")
   String type;

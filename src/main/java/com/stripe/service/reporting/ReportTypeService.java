@@ -21,6 +21,33 @@ public final class ReportTypeService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a full list of Report Types. */
+  public StripeCollection<ReportType> list(ReportTypeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a full list of Report Types. */
+  public StripeCollection<ReportType> list(RequestOptions options) throws StripeException {
+    return list((ReportTypeListParams) null, options);
+  }
+  /** Returns a full list of Report Types. */
+  public StripeCollection<ReportType> list() throws StripeException {
+    return list((ReportTypeListParams) null, (RequestOptions) null);
+  }
+  /** Returns a full list of Report Types. */
+  public StripeCollection<ReportType> list(ReportTypeListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/reporting/report_types";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ReportType>>() {}.getType());
+  }
   /**
    * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
@@ -61,32 +88,5 @@ public final class ReportTypeService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, ReportType.class);
-  }
-  /** Returns a full list of Report Types. */
-  public StripeCollection<ReportType> list(ReportTypeListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a full list of Report Types. */
-  public StripeCollection<ReportType> list(RequestOptions options) throws StripeException {
-    return list((ReportTypeListParams) null, options);
-  }
-  /** Returns a full list of Report Types. */
-  public StripeCollection<ReportType> list() throws StripeException {
-    return list((ReportTypeListParams) null, (RequestOptions) null);
-  }
-  /** Returns a full list of Report Types. */
-  public StripeCollection<ReportType> list(ReportTypeListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/reporting/report_types";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ReportType>>() {}.getType());
   }
 }

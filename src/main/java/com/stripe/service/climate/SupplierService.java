@@ -21,32 +21,6 @@ public final class SupplierService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier, SupplierRetrieveParams params) throws StripeException {
-    return retrieve(supplier, params, (RequestOptions) null);
-  }
-  /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier, RequestOptions options) throws StripeException {
-    return retrieve(supplier, (SupplierRetrieveParams) null, options);
-  }
-  /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier) throws StripeException {
-    return retrieve(supplier, (SupplierRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier, SupplierRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(supplier));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Supplier.class);
-  }
   /** Lists all available Climate supplier objects. */
   public StripeCollection<Supplier> list(SupplierListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -73,5 +47,31 @@ public final class SupplierService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Supplier>>() {}.getType());
+  }
+  /** Retrieves a Climate supplier object. */
+  public Supplier retrieve(String supplier, SupplierRetrieveParams params) throws StripeException {
+    return retrieve(supplier, params, (RequestOptions) null);
+  }
+  /** Retrieves a Climate supplier object. */
+  public Supplier retrieve(String supplier, RequestOptions options) throws StripeException {
+    return retrieve(supplier, (SupplierRetrieveParams) null, options);
+  }
+  /** Retrieves a Climate supplier object. */
+  public Supplier retrieve(String supplier) throws StripeException {
+    return retrieve(supplier, (SupplierRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a Climate supplier object. */
+  public Supplier retrieve(String supplier, SupplierRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(supplier));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Supplier.class);
   }
 }

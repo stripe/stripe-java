@@ -22,6 +22,53 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
   }
 
   /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public StripeCollection<CustomerCashBalanceTransaction> list(
+      String customer, CustomerCashBalanceTransactionListParams params) throws StripeException {
+    return list(customer, params, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public StripeCollection<CustomerCashBalanceTransaction> list(
+      String customer, RequestOptions options) throws StripeException {
+    return list(customer, (CustomerCashBalanceTransactionListParams) null, options);
+  }
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public StripeCollection<CustomerCashBalanceTransaction> list(String customer)
+      throws StripeException {
+    return list(customer, (CustomerCashBalanceTransactionListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public StripeCollection<CustomerCashBalanceTransaction> list(
+      String customer, CustomerCashBalanceTransactionListParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(customer));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(
+            request,
+            new TypeToken<StripeCollection<CustomerCashBalanceTransaction>>() {}.getType());
+  }
+  /**
    * Retrieves a specific cash balance transaction, which updated the customer’s <a
    * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
    */
@@ -74,52 +121,5 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, CustomerCashBalanceTransaction.class);
-  }
-  /**
-   * Returns a list of transactions that modified the customer’s <a
-   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
-   */
-  public StripeCollection<CustomerCashBalanceTransaction> list(
-      String customer, CustomerCashBalanceTransactionListParams params) throws StripeException {
-    return list(customer, params, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of transactions that modified the customer’s <a
-   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
-   */
-  public StripeCollection<CustomerCashBalanceTransaction> list(
-      String customer, RequestOptions options) throws StripeException {
-    return list(customer, (CustomerCashBalanceTransactionListParams) null, options);
-  }
-  /**
-   * Returns a list of transactions that modified the customer’s <a
-   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
-   */
-  public StripeCollection<CustomerCashBalanceTransaction> list(String customer)
-      throws StripeException {
-    return list(customer, (CustomerCashBalanceTransactionListParams) null, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of transactions that modified the customer’s <a
-   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
-   */
-  public StripeCollection<CustomerCashBalanceTransaction> list(
-      String customer, CustomerCashBalanceTransactionListParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(customer));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(
-            request,
-            new TypeToken<StripeCollection<CustomerCashBalanceTransaction>>() {}.getType());
   }
 }

@@ -23,6 +23,92 @@ public final class CouponService extends ApiService {
     super(responseGetter);
   }
 
+  /**
+   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
+   * customers who have already applied the coupon; it means that new customers can’t redeem the
+   * coupon. You can also delete coupons via the API.
+   */
+  public Coupon delete(String coupon) throws StripeException {
+    return delete(coupon, (RequestOptions) null);
+  }
+  /**
+   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
+   * customers who have already applied the coupon; it means that new customers can’t redeem the
+   * coupon. You can also delete coupons via the API.
+   */
+  public Coupon delete(String coupon, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Coupon.class);
+  }
+  /** Retrieves the coupon with the given ID. */
+  public Coupon retrieve(String coupon, CouponRetrieveParams params) throws StripeException {
+    return retrieve(coupon, params, (RequestOptions) null);
+  }
+  /** Retrieves the coupon with the given ID. */
+  public Coupon retrieve(String coupon, RequestOptions options) throws StripeException {
+    return retrieve(coupon, (CouponRetrieveParams) null, options);
+  }
+  /** Retrieves the coupon with the given ID. */
+  public Coupon retrieve(String coupon) throws StripeException {
+    return retrieve(coupon, (CouponRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the coupon with the given ID. */
+  public Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Coupon.class);
+  }
+  /**
+   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
+   * design, not editable.
+   */
+  public Coupon update(String coupon, CouponUpdateParams params) throws StripeException {
+    return update(coupon, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
+   * design, not editable.
+   */
+  public Coupon update(String coupon, RequestOptions options) throws StripeException {
+    return update(coupon, (CouponUpdateParams) null, options);
+  }
+  /**
+   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
+   * design, not editable.
+   */
+  public Coupon update(String coupon) throws StripeException {
+    return update(coupon, (CouponUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
+   * design, not editable.
+   */
+  public Coupon update(String coupon, CouponUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Coupon.class);
+  }
   /** Returns a list of your coupons. */
   public StripeCollection<Coupon> list(CouponListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -113,92 +199,6 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    return getResponseGetter().request(request, Coupon.class);
-  }
-  /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon, CouponRetrieveParams params) throws StripeException {
-    return retrieve(coupon, params, (RequestOptions) null);
-  }
-  /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon, RequestOptions options) throws StripeException {
-    return retrieve(coupon, (CouponRetrieveParams) null, options);
-  }
-  /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon) throws StripeException {
-    return retrieve(coupon, (CouponRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Coupon.class);
-  }
-  /**
-   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
-   * design, not editable.
-   */
-  public Coupon update(String coupon, CouponUpdateParams params) throws StripeException {
-    return update(coupon, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
-   * design, not editable.
-   */
-  public Coupon update(String coupon, RequestOptions options) throws StripeException {
-    return update(coupon, (CouponUpdateParams) null, options);
-  }
-  /**
-   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
-   * design, not editable.
-   */
-  public Coupon update(String coupon) throws StripeException {
-    return update(coupon, (CouponUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
-   * design, not editable.
-   */
-  public Coupon update(String coupon, CouponUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Coupon.class);
-  }
-  /**
-   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
-   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
-   * customers who have already applied the coupon; it means that new customers can’t redeem the
-   * coupon. You can also delete coupons via the API.
-   */
-  public Coupon delete(String coupon) throws StripeException {
-    return delete(coupon, (RequestOptions) null);
-  }
-  /**
-   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
-   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
-   * customers who have already applied the coupon; it means that new customers can’t redeem the
-   * coupon. You can also delete coupons via the API.
-   */
-  public Coupon delete(String coupon, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, Coupon.class);
   }
 }

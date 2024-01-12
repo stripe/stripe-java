@@ -21,48 +21,6 @@ public final class InboundTransferService extends ApiService {
   }
 
   /**
-   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-   * InboundTransfer must already be in the {@code processing} state.
-   */
-  public InboundTransfer succeed(String id, InboundTransferSucceedParams params)
-      throws StripeException {
-    return succeed(id, params, (RequestOptions) null);
-  }
-  /**
-   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-   * InboundTransfer must already be in the {@code processing} state.
-   */
-  public InboundTransfer succeed(String id, RequestOptions options) throws StripeException {
-    return succeed(id, (InboundTransferSucceedParams) null, options);
-  }
-  /**
-   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-   * InboundTransfer must already be in the {@code processing} state.
-   */
-  public InboundTransfer succeed(String id) throws StripeException {
-    return succeed(id, (InboundTransferSucceedParams) null, (RequestOptions) null);
-  }
-  /**
-   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-   * InboundTransfer must already be in the {@code processing} state.
-   */
-  public InboundTransfer succeed(
-      String id, InboundTransferSucceedParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/test_helpers/treasury/inbound_transfers/%s/succeed", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, InboundTransfer.class);
-  }
-  /**
    * Transitions a test mode created InboundTransfer to the {@code failed} status. The
    * InboundTransfer must already be in the {@code processing} state.
    */
@@ -136,6 +94,48 @@ public final class InboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/treasury/inbound_transfers/%s/return", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, InboundTransfer.class);
+  }
+  /**
+   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+   * InboundTransfer must already be in the {@code processing} state.
+   */
+  public InboundTransfer succeed(String id, InboundTransferSucceedParams params)
+      throws StripeException {
+    return succeed(id, params, (RequestOptions) null);
+  }
+  /**
+   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+   * InboundTransfer must already be in the {@code processing} state.
+   */
+  public InboundTransfer succeed(String id, RequestOptions options) throws StripeException {
+    return succeed(id, (InboundTransferSucceedParams) null, options);
+  }
+  /**
+   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+   * InboundTransfer must already be in the {@code processing} state.
+   */
+  public InboundTransfer succeed(String id) throws StripeException {
+    return succeed(id, (InboundTransferSucceedParams) null, (RequestOptions) null);
+  }
+  /**
+   * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+   * InboundTransfer must already be in the {@code processing} state.
+   */
+  public InboundTransfer succeed(
+      String id, InboundTransferSucceedParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/treasury/inbound_transfers/%s/succeed", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

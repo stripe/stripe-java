@@ -21,6 +21,25 @@ public final class TransactionService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
+  public StripeCollection<Transaction> list(TransactionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
+  public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/financial_connections/transactions";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
+  }
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
   public Transaction retrieve(String transaction, TransactionRetrieveParams params)
       throws StripeException {
@@ -50,24 +69,5 @@ public final class TransactionService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Transaction.class);
-  }
-  /** Returns a list of Financial Connections {@code Transaction} objects. */
-  public StripeCollection<Transaction> list(TransactionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of Financial Connections {@code Transaction} objects. */
-  public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/financial_connections/transactions";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
 }

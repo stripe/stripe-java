@@ -28,6 +28,74 @@ public final class QuoteService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of your quotes. */
+  public StripeCollection<Quote> list(QuoteListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of your quotes. */
+  public StripeCollection<Quote> list(RequestOptions options) throws StripeException {
+    return list((QuoteListParams) null, options);
+  }
+  /** Returns a list of your quotes. */
+  public StripeCollection<Quote> list() throws StripeException {
+    return list((QuoteListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of your quotes. */
+  public StripeCollection<Quote> list(QuoteListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/quotes";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Quote>>() {}.getType());
+  }
+  /**
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
+   */
+  public Quote create(QuoteCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
+   */
+  public Quote create(RequestOptions options) throws StripeException {
+    return create((QuoteCreateParams) null, options);
+  }
+  /**
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
+   */
+  public Quote create() throws StripeException {
+    return create((QuoteCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
+   */
+  public Quote create(QuoteCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/quotes";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Quote.class);
+  }
   /** Retrieves the quote with the given ID. */
   public Quote retrieve(String quote, QuoteRetrieveParams params) throws StripeException {
     return retrieve(quote, params, (RequestOptions) null);
@@ -80,37 +148,22 @@ public final class QuoteService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Quote.class);
   }
-  /**
-   * A quote models prices and services for a customer. Default options for {@code header}, {@code
-   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
-   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
-   */
-  public Quote create(QuoteCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  /** Accepts the specified quote. */
+  public Quote accept(String quote, QuoteAcceptParams params) throws StripeException {
+    return accept(quote, params, (RequestOptions) null);
   }
-  /**
-   * A quote models prices and services for a customer. Default options for {@code header}, {@code
-   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
-   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
-   */
-  public Quote create(RequestOptions options) throws StripeException {
-    return create((QuoteCreateParams) null, options);
+  /** Accepts the specified quote. */
+  public Quote accept(String quote, RequestOptions options) throws StripeException {
+    return accept(quote, (QuoteAcceptParams) null, options);
   }
-  /**
-   * A quote models prices and services for a customer. Default options for {@code header}, {@code
-   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
-   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
-   */
-  public Quote create() throws StripeException {
-    return create((QuoteCreateParams) null, (RequestOptions) null);
+  /** Accepts the specified quote. */
+  public Quote accept(String quote) throws StripeException {
+    return accept(quote, (QuoteAcceptParams) null, (RequestOptions) null);
   }
-  /**
-   * A quote models prices and services for a customer. Default options for {@code header}, {@code
-   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
-   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
-   */
-  public Quote create(QuoteCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/quotes";
+  /** Accepts the specified quote. */
+  public Quote accept(String quote, QuoteAcceptParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(quote));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -120,33 +173,6 @@ public final class QuoteService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Quote.class);
-  }
-  /** Returns a list of your quotes. */
-  public StripeCollection<Quote> list(QuoteListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of your quotes. */
-  public StripeCollection<Quote> list(RequestOptions options) throws StripeException {
-    return list((QuoteListParams) null, options);
-  }
-  /** Returns a list of your quotes. */
-  public StripeCollection<Quote> list() throws StripeException {
-    return list((QuoteListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of your quotes. */
-  public StripeCollection<Quote> list(QuoteListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/quotes";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Quote>>() {}.getType());
   }
   /** Cancels the quote. */
   public Quote cancel(String quote, QuoteCancelParams params) throws StripeException {
@@ -190,32 +216,6 @@ public final class QuoteService extends ApiService {
   public Quote finalizeQuote(String quote, QuoteFinalizeQuoteParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/finalize", ApiResource.urlEncodeId(quote));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Quote.class);
-  }
-  /** Accepts the specified quote. */
-  public Quote accept(String quote, QuoteAcceptParams params) throws StripeException {
-    return accept(quote, params, (RequestOptions) null);
-  }
-  /** Accepts the specified quote. */
-  public Quote accept(String quote, RequestOptions options) throws StripeException {
-    return accept(quote, (QuoteAcceptParams) null, options);
-  }
-  /** Accepts the specified quote. */
-  public Quote accept(String quote) throws StripeException {
-    return accept(quote, (QuoteAcceptParams) null, (RequestOptions) null);
-  }
-  /** Accepts the specified quote. */
-  public Quote accept(String quote, QuoteAcceptParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(quote));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

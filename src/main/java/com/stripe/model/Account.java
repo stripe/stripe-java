@@ -524,42 +524,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /** Retrieves the details of an account. */
-  public static Account retrieve() throws StripeException {
-    return retrieve((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the details of an account. */
-  public static Account retrieve(RequestOptions options) throws StripeException {
-    return retrieve((Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the details of an account. */
-  public static Account retrieve(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/account";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getGlobalResponseGetter().request(request, Account.class);
-  }
-
-  /** Retrieves the details of an account. */
-  public static Account retrieve(AccountRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/account";
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getGlobalResponseGetter().request(request, Account.class);
-  }
-
-  /** Retrieves the details of an account. */
   public static Account retrieve(String account) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
   }
@@ -583,6 +547,42 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public static Account retrieve(
       String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Account.class);
+  }
+
+  /** Retrieves the details of an account. */
+  public static Account retrieve() throws StripeException {
+    return retrieve((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the details of an account. */
+  public static Account retrieve(RequestOptions options) throws StripeException {
+    return retrieve((Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the details of an account. */
+  public static Account retrieve(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/account";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Account.class);
+  }
+
+  /** Retrieves the details of an account. */
+  public static Account retrieve(AccountRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/account";
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

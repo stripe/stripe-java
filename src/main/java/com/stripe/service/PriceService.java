@@ -26,39 +26,6 @@ public final class PriceService extends ApiService {
   }
 
   /**
-   * Search for prices you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public StripeSearchResult<Price> search(PriceSearchParams params) throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-  /**
-   * Search for prices you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public StripeSearchResult<Price> search(PriceSearchParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/prices/search";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Price>>() {}.getType());
-  }
-  /**
    * Returns a list of your active prices, excluding <a
    * href="https://stripe.com/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
    * For the list of inactive prices, set {@code active} to false.
@@ -181,5 +148,38 @@ public final class PriceService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Price.class);
+  }
+  /**
+   * Search for prices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Price> search(PriceSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+  /**
+   * Search for prices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Price> search(PriceSearchParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/prices/search";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Price>>() {}.getType());
   }
 }

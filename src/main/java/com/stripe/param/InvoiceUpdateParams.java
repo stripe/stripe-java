@@ -3026,6 +3026,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
 
+      @SerializedName("eps")
+      EPS("eps"),
+
       @SerializedName("fpx")
       FPX("fpx"),
 
@@ -3043,6 +3046,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("link")
       LINK("link"),
+
+      @SerializedName("p24")
+      P24("p24"),
 
       @SerializedName("paynow")
       PAYNOW("paynow"),

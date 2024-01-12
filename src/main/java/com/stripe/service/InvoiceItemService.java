@@ -24,66 +24,21 @@ public final class InvoiceItemService extends ApiService {
   }
 
   /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
+   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
+   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
    */
-  public StripeCollection<InvoiceItem> list(InvoiceItemListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public InvoiceItem delete(String invoiceitem) throws StripeException {
+    return delete(invoiceitem, (RequestOptions) null);
   }
   /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
+   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
+   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
    */
-  public StripeCollection<InvoiceItem> list(RequestOptions options) throws StripeException {
-    return list((InvoiceItemListParams) null, options);
-  }
-  /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
-   */
-  public StripeCollection<InvoiceItem> list() throws StripeException {
-    return list((InvoiceItemListParams) null, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
-   */
-  public StripeCollection<InvoiceItem> list(InvoiceItemListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/invoiceitems";
+  public InvoiceItem delete(String invoiceitem, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<InvoiceItem>>() {}.getType());
-  }
-  /**
-   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
-   * specified, the item will be on the next invoice created for the customer specified.
-   */
-  public InvoiceItem create(InvoiceItemCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
-   * specified, the item will be on the next invoice created for the customer specified.
-   */
-  public InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/invoiceitems";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, InvoiceItem.class);
   }
   /** Retrieves the invoice item with the given ID. */
@@ -155,21 +110,66 @@ public final class InvoiceItemService extends ApiService {
     return getResponseGetter().request(request, InvoiceItem.class);
   }
   /**
-   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
-   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
    */
-  public InvoiceItem delete(String invoiceitem) throws StripeException {
-    return delete(invoiceitem, (RequestOptions) null);
+  public StripeCollection<InvoiceItem> list(InvoiceItemListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
   /**
-   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
-   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
    */
-  public InvoiceItem delete(String invoiceitem, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+  public StripeCollection<InvoiceItem> list(RequestOptions options) throws StripeException {
+    return list((InvoiceItemListParams) null, options);
+  }
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public StripeCollection<InvoiceItem> list() throws StripeException {
+    return list((InvoiceItemListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public StripeCollection<InvoiceItem> list(InvoiceItemListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/invoiceitems";
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<InvoiceItem>>() {}.getType());
+  }
+  /**
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
+   */
+  public InvoiceItem create(InvoiceItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
+   */
+  public InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/invoiceitems";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, InvoiceItem.class);
   }
 }

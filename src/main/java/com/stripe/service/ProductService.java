@@ -26,93 +26,24 @@ public final class ProductService extends ApiService {
   }
 
   /**
-   * Search for products you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
+   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
+   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
+   * associated with it.
    */
-  public StripeSearchResult<Product> search(ProductSearchParams params) throws StripeException {
-    return search(params, (RequestOptions) null);
+  public Product delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
-   * Search for products you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
+   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
+   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
+   * associated with it.
    */
-  public StripeSearchResult<Product> search(ProductSearchParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/products/search";
+  public Product delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
-  }
-  /** Creates a new product object. */
-  public Product create(ProductCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a new product object. */
-  public Product create(ProductCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/products";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, Product.class);
-  }
-  /**
-   * Returns a list of your products. The products are returned sorted by creation date, with the
-   * most recently created products appearing first.
-   */
-  public StripeCollection<Product> list(ProductListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of your products. The products are returned sorted by creation date, with the
-   * most recently created products appearing first.
-   */
-  public StripeCollection<Product> list(RequestOptions options) throws StripeException {
-    return list((ProductListParams) null, options);
-  }
-  /**
-   * Returns a list of your products. The products are returned sorted by creation date, with the
-   * most recently created products appearing first.
-   */
-  public StripeCollection<Product> list() throws StripeException {
-    return list((ProductListParams) null, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of your products. The products are returned sorted by creation date, with the
-   * most recently created products appearing first.
-   */
-  public StripeCollection<Product> list(ProductListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/products";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing product. Supply the unique product ID from either a
@@ -195,23 +126,92 @@ public final class ProductService extends ApiService {
     return getResponseGetter().request(request, Product.class);
   }
   /**
-   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
-   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
-   * associated with it.
+   * Returns a list of your products. The products are returned sorted by creation date, with the
+   * most recently created products appearing first.
    */
-  public Product delete(String id) throws StripeException {
-    return delete(id, (RequestOptions) null);
+  public StripeCollection<Product> list(ProductListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
   /**
-   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
-   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
-   * associated with it.
+   * Returns a list of your products. The products are returned sorted by creation date, with the
+   * most recently created products appearing first.
    */
-  public Product delete(String id, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
+  public StripeCollection<Product> list(RequestOptions options) throws StripeException {
+    return list((ProductListParams) null, options);
+  }
+  /**
+   * Returns a list of your products. The products are returned sorted by creation date, with the
+   * most recently created products appearing first.
+   */
+  public StripeCollection<Product> list() throws StripeException {
+    return list((ProductListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of your products. The products are returned sorted by creation date, with the
+   * most recently created products appearing first.
+   */
+  public StripeCollection<Product> list(ProductListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/products";
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
+  }
+  /** Creates a new product object. */
+  public Product create(ProductCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a new product object. */
+  public Product create(ProductCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/products";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Product.class);
+  }
+  /**
+   * Search for products you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Product> search(ProductSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+  /**
+   * Search for products you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Product> search(ProductSearchParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/products/search";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
   }
 }

@@ -22,6 +22,57 @@ public final class ReportRunService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of Report Runs, with the most recent appearing first. */
+  public StripeCollection<ReportRun> list(ReportRunListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of Report Runs, with the most recent appearing first. */
+  public StripeCollection<ReportRun> list(RequestOptions options) throws StripeException {
+    return list((ReportRunListParams) null, options);
+  }
+  /** Returns a list of Report Runs, with the most recent appearing first. */
+  public StripeCollection<ReportRun> list() throws StripeException {
+    return list((ReportRunListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of Report Runs, with the most recent appearing first. */
+  public StripeCollection<ReportRun> list(ReportRunListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/reporting/report_runs";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ReportRun>>() {}.getType());
+  }
+  /**
+   * Creates a new object and begin running the report. (Certain report types require a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public ReportRun create(ReportRunCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * Creates a new object and begin running the report. (Certain report types require a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public ReportRun create(ReportRunCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/reporting/report_runs";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, ReportRun.class);
+  }
   /** Retrieves the details of an existing Report Run. */
   public ReportRun retrieve(String reportRun, ReportRunRetrieveParams params)
       throws StripeException {
@@ -49,56 +100,5 @@ public final class ReportRunService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, ReportRun.class);
-  }
-  /**
-   * Creates a new object and begin running the report. (Certain report types require a <a
-   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
-   */
-  public ReportRun create(ReportRunCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * Creates a new object and begin running the report. (Certain report types require a <a
-   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
-   */
-  public ReportRun create(ReportRunCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/reporting/report_runs";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, ReportRun.class);
-  }
-  /** Returns a list of Report Runs, with the most recent appearing first. */
-  public StripeCollection<ReportRun> list(ReportRunListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of Report Runs, with the most recent appearing first. */
-  public StripeCollection<ReportRun> list(RequestOptions options) throws StripeException {
-    return list((ReportRunListParams) null, options);
-  }
-  /** Returns a list of Report Runs, with the most recent appearing first. */
-  public StripeCollection<ReportRun> list() throws StripeException {
-    return list((ReportRunListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of Report Runs, with the most recent appearing first. */
-  public StripeCollection<ReportRun> list(ReportRunListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/reporting/report_runs";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ReportRun>>() {}.getType());
   }
 }
