@@ -21,6 +21,34 @@ public final class VerificationReportService extends ApiService {
     super(responseGetter);
   }
 
+  /** List all verification reports. */
+  public StripeCollection<VerificationReport> list(VerificationReportListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** List all verification reports. */
+  public StripeCollection<VerificationReport> list(RequestOptions options) throws StripeException {
+    return list((VerificationReportListParams) null, options);
+  }
+  /** List all verification reports. */
+  public StripeCollection<VerificationReport> list() throws StripeException {
+    return list((VerificationReportListParams) null, (RequestOptions) null);
+  }
+  /** List all verification reports. */
+  public StripeCollection<VerificationReport> list(
+      VerificationReportListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/identity/verification_reports";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<VerificationReport>>() {}.getType());
+  }
   /** Retrieves an existing VerificationReport. */
   public VerificationReport retrieve(String report, VerificationReportRetrieveParams params)
       throws StripeException {
@@ -49,33 +77,5 @@ public final class VerificationReportService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, VerificationReport.class);
-  }
-  /** List all verification reports. */
-  public StripeCollection<VerificationReport> list(VerificationReportListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** List all verification reports. */
-  public StripeCollection<VerificationReport> list(RequestOptions options) throws StripeException {
-    return list((VerificationReportListParams) null, options);
-  }
-  /** List all verification reports. */
-  public StripeCollection<VerificationReport> list() throws StripeException {
-    return list((VerificationReportListParams) null, (RequestOptions) null);
-  }
-  /** List all verification reports. */
-  public StripeCollection<VerificationReport> list(
-      VerificationReportListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/identity/verification_reports";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<VerificationReport>>() {}.getType());
   }
 }

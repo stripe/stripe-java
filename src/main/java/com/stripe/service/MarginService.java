@@ -23,6 +23,33 @@ public final class MarginService extends ApiService {
     super(responseGetter);
   }
 
+  /** Retrieve a list of your margins. */
+  public StripeCollection<Margin> list(MarginListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Retrieve a list of your margins. */
+  public StripeCollection<Margin> list(RequestOptions options) throws StripeException {
+    return list((MarginListParams) null, options);
+  }
+  /** Retrieve a list of your margins. */
+  public StripeCollection<Margin> list() throws StripeException {
+    return list((MarginListParams) null, (RequestOptions) null);
+  }
+  /** Retrieve a list of your margins. */
+  public StripeCollection<Margin> list(MarginListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/billing/margins";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Margin>>() {}.getType());
+  }
   /**
    * Create a margin object to be used with invoices, invoice items, and invoice line items for a
    * customer to represent a partner discount.A margin has a {@code percent_off} which is the
@@ -51,33 +78,6 @@ public final class MarginService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Margin.class);
-  }
-  /** Retrieve a list of your margins. */
-  public StripeCollection<Margin> list(MarginListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Retrieve a list of your margins. */
-  public StripeCollection<Margin> list(RequestOptions options) throws StripeException {
-    return list((MarginListParams) null, options);
-  }
-  /** Retrieve a list of your margins. */
-  public StripeCollection<Margin> list() throws StripeException {
-    return list((MarginListParams) null, (RequestOptions) null);
-  }
-  /** Retrieve a list of your margins. */
-  public StripeCollection<Margin> list(MarginListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/billing/margins";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Margin>>() {}.getType());
   }
   /** Retrieve a margin object with the given ID. */
   public Margin retrieve(String margin, MarginRetrieveParams params) throws StripeException {

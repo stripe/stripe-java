@@ -23,66 +23,26 @@ public final class WebhookEndpointService extends ApiService {
     super(responseGetter);
   }
 
-  /** Returns a list of your webhook endpoints. */
-  public StripeCollection<WebhookEndpoint> list(WebhookEndpointListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of your webhook endpoints. */
-  public StripeCollection<WebhookEndpoint> list(RequestOptions options) throws StripeException {
-    return list((WebhookEndpointListParams) null, options);
-  }
-  /** Returns a list of your webhook endpoints. */
-  public StripeCollection<WebhookEndpoint> list() throws StripeException {
-    return list((WebhookEndpointListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of your webhook endpoints. */
-  public StripeCollection<WebhookEndpoint> list(
-      WebhookEndpointListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/webhook_endpoints";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType());
+  /**
+   * You can also delete webhook endpoints via the <a
+   * href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of
+   * the Stripe dashboard.
+   */
+  public WebhookEndpoint delete(String webhookEndpoint) throws StripeException {
+    return delete(webhookEndpoint, (RequestOptions) null);
   }
   /**
-   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
-   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
-   * webhook endpoint that notifies the specified {@code url} about events from all connected
-   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
-   * url} only about events from your account is created. You can also create webhook endpoints in
-   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
-   * the Dashboard.
+   * You can also delete webhook endpoints via the <a
+   * href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of
+   * the Stripe dashboard.
    */
-  public WebhookEndpoint create(WebhookEndpointCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
-   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
-   * webhook endpoint that notifies the specified {@code url} about events from all connected
-   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
-   * url} only about events from your account is created. You can also create webhook endpoints in
-   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
-   * the Dashboard.
-   */
-  public WebhookEndpoint create(WebhookEndpointCreateParams params, RequestOptions options)
+  public WebhookEndpoint delete(String webhookEndpoint, RequestOptions options)
       throws StripeException {
-    String path = "/v1/webhook_endpoints";
+    String path =
+        String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
   /** Retrieves the webhook endpoint with the given ID. */
@@ -157,26 +117,66 @@ public final class WebhookEndpointService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
-  /**
-   * You can also delete webhook endpoints via the <a
-   * href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of
-   * the Stripe dashboard.
-   */
-  public WebhookEndpoint delete(String webhookEndpoint) throws StripeException {
-    return delete(webhookEndpoint, (RequestOptions) null);
-  }
-  /**
-   * You can also delete webhook endpoints via the <a
-   * href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of
-   * the Stripe dashboard.
-   */
-  public WebhookEndpoint delete(String webhookEndpoint, RequestOptions options)
+  /** Returns a list of your webhook endpoints. */
+  public StripeCollection<WebhookEndpoint> list(WebhookEndpointListParams params)
       throws StripeException {
-    String path =
-        String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of your webhook endpoints. */
+  public StripeCollection<WebhookEndpoint> list(RequestOptions options) throws StripeException {
+    return list((WebhookEndpointListParams) null, options);
+  }
+  /** Returns a list of your webhook endpoints. */
+  public StripeCollection<WebhookEndpoint> list() throws StripeException {
+    return list((WebhookEndpointListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of your webhook endpoints. */
+  public StripeCollection<WebhookEndpoint> list(
+      WebhookEndpointListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/webhook_endpoints";
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType());
+  }
+  /**
+   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
+   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
+   * webhook endpoint that notifies the specified {@code url} about events from all connected
+   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
+   * url} only about events from your account is created. You can also create webhook endpoints in
+   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
+   * the Dashboard.
+   */
+  public WebhookEndpoint create(WebhookEndpointCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
+   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
+   * webhook endpoint that notifies the specified {@code url} about events from all connected
+   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
+   * url} only about events from your account is created. You can also create webhook endpoints in
+   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
+   * the Dashboard.
+   */
+  public WebhookEndpoint create(WebhookEndpointCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/webhook_endpoints";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
 }

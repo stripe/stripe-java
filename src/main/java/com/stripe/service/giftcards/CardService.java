@@ -24,23 +24,6 @@ public final class CardService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates a new gift card object. */
-  public Card create(CardCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a new gift card object. */
-  public Card create(CardCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/gift_cards/cards";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Card.class);
-  }
   /** List gift cards for an account. */
   public StripeCollection<Card> list(CardListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -68,13 +51,13 @@ public final class CardService extends ApiService {
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Card>>() {}.getType());
   }
-  /** Validates a gift card code, returning the matching gift card object if it exists. */
-  public Card validate(CardValidateParams params) throws StripeException {
-    return validate(params, (RequestOptions) null);
+  /** Creates a new gift card object. */
+  public Card create(CardCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
-  /** Validates a gift card code, returning the matching gift card object if it exists. */
-  public Card validate(CardValidateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/gift_cards/cards/validate";
+  /** Creates a new gift card object. */
+  public Card create(CardCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/gift_cards/cards";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -127,6 +110,23 @@ public final class CardService extends ApiService {
   public Card update(String id, CardUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Card.class);
+  }
+  /** Validates a gift card code, returning the matching gift card object if it exists. */
+  public Card validate(CardValidateParams params) throws StripeException {
+    return validate(params, (RequestOptions) null);
+  }
+  /** Validates a gift card code, returning the matching gift card object if it exists. */
+  public Card validate(CardValidateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/gift_cards/cards/validate";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

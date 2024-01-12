@@ -19,29 +19,6 @@ public final class SessionService extends ApiService {
     super(responseGetter);
   }
 
-  /**
-   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
-   * {@code client_secret} can be used to launch the flow using Stripe.js.
-   */
-  public Session create(SessionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
-   * {@code client_secret} can be used to launch the flow using Stripe.js.
-   */
-  public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/financial_connections/sessions";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Session.class);
-  }
   /** Retrieves the details of a Financial Connections {@code Session}. */
   public Session retrieve(String session, SessionRetrieveParams params) throws StripeException {
     return retrieve(session, params, (RequestOptions) null);
@@ -63,6 +40,29 @@ public final class SessionService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
+  }
+  /**
+   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
+   * {@code client_secret} can be used to launch the flow using Stripe.js.
+   */
+  public Session create(SessionCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
+   * {@code client_secret} can be used to launch the flow using Stripe.js.
+   */
+  public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/financial_connections/sessions";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

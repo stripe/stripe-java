@@ -23,24 +23,6 @@ public final class OutboundPaymentService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates an OutboundPayment. */
-  public OutboundPayment create(OutboundPaymentCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates an OutboundPayment. */
-  public OutboundPayment create(OutboundPaymentCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/treasury/outbound_payments";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, OutboundPayment.class);
-  }
   /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
   public StripeCollection<OutboundPayment> list(OutboundPaymentListParams params)
       throws StripeException {
@@ -60,6 +42,24 @@ public final class OutboundPaymentService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<OutboundPayment>>() {}.getType());
+  }
+  /** Creates an OutboundPayment. */
+  public OutboundPayment create(OutboundPaymentCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates an OutboundPayment. */
+  public OutboundPayment create(OutboundPaymentCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/treasury/outbound_payments";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, OutboundPayment.class);
   }
   /**
    * Retrieves the details of an existing OutboundPayment by passing the unique OutboundPayment ID

@@ -21,6 +21,25 @@ public final class TransactionService extends ApiService {
     super(responseGetter);
   }
 
+  /** Retrieves a list of Transaction objects. */
+  public StripeCollection<Transaction> list(TransactionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Retrieves a list of Transaction objects. */
+  public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/treasury/transactions";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
+  }
   /** Retrieves the details of an existing Transaction. */
   public Transaction retrieve(String id, TransactionRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
@@ -46,24 +65,5 @@ public final class TransactionService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Transaction.class);
-  }
-  /** Retrieves a list of Transaction objects. */
-  public StripeCollection<Transaction> list(TransactionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Retrieves a list of Transaction objects. */
-  public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/treasury/transactions";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
 }

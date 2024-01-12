@@ -773,6 +773,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("high_concentration_of_clients")
         HIGH_CONCENTRATION_OF_CLIENTS("high_concentration_of_clients"),
 
+        @SerializedName("high_risk_industry")
+        HIGH_RISK_INDUSTRY("high_risk_industry"),
+
         @SerializedName("incomplete_application")
         INCOMPLETE_APPLICATION("incomplete_application"),
 
@@ -803,8 +806,17 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("insufficient_income")
         INSUFFICIENT_INCOME("insufficient_income"),
 
+        @SerializedName("insufficient_margin_ratio")
+        INSUFFICIENT_MARGIN_RATIO("insufficient_margin_ratio"),
+
+        @SerializedName("insufficient_operating_profit")
+        INSUFFICIENT_OPERATING_PROFIT("insufficient_operating_profit"),
+
         @SerializedName("insufficient_period_in_operation")
         INSUFFICIENT_PERIOD_IN_OPERATION("insufficient_period_in_operation"),
+
+        @SerializedName("insufficient_reserves")
+        INSUFFICIENT_RESERVES("insufficient_reserves"),
 
         @SerializedName("insufficient_revenue")
         INSUFFICIENT_REVENUE("insufficient_revenue"),
@@ -812,11 +824,17 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("insufficient_social_media_performance")
         INSUFFICIENT_SOCIAL_MEDIA_PERFORMANCE("insufficient_social_media_performance"),
 
+        @SerializedName("insufficient_time_in_network")
+        INSUFFICIENT_TIME_IN_NETWORK("insufficient_time_in_network"),
+
         @SerializedName("insufficient_trade_credit_insurance")
         INSUFFICIENT_TRADE_CREDIT_INSURANCE("insufficient_trade_credit_insurance"),
 
         @SerializedName("invalid_business_license")
         INVALID_BUSINESS_LICENSE("invalid_business_license"),
+
+        @SerializedName("lacking_cash_account")
+        LACKING_CASH_ACCOUNT("lacking_cash_account"),
 
         @SerializedName("late_payment_history_reported_to_bureau")
         LATE_PAYMENT_HISTORY_REPORTED_TO_BUREAU("late_payment_history_reported_to_bureau"),
@@ -838,6 +856,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("outside_supported_state")
         OUTSIDE_SUPPORTED_STATE("outside_supported_state"),
+
+        @SerializedName("poor_payment_history_with_platform")
+        POOR_PAYMENT_HISTORY_WITH_PLATFORM("poor_payment_history_with_platform"),
 
         @SerializedName("prior_or_current_legal_action")
         PRIOR_OR_CURRENT_LEGAL_ACTION("prior_or_current_legal_action"),
@@ -1217,6 +1238,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("high_concentration_of_clients")
         HIGH_CONCENTRATION_OF_CLIENTS("high_concentration_of_clients"),
 
+        @SerializedName("high_risk_industry")
+        HIGH_RISK_INDUSTRY("high_risk_industry"),
+
         @SerializedName("incomplete_application")
         INCOMPLETE_APPLICATION("incomplete_application"),
 
@@ -1250,14 +1274,26 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("insufficient_income")
         INSUFFICIENT_INCOME("insufficient_income"),
 
+        @SerializedName("insufficient_margin_ratio")
+        INSUFFICIENT_MARGIN_RATIO("insufficient_margin_ratio"),
+
+        @SerializedName("insufficient_operating_profit")
+        INSUFFICIENT_OPERATING_PROFIT("insufficient_operating_profit"),
+
         @SerializedName("insufficient_period_in_operation")
         INSUFFICIENT_PERIOD_IN_OPERATION("insufficient_period_in_operation"),
+
+        @SerializedName("insufficient_reserves")
+        INSUFFICIENT_RESERVES("insufficient_reserves"),
 
         @SerializedName("insufficient_revenue")
         INSUFFICIENT_REVENUE("insufficient_revenue"),
 
         @SerializedName("insufficient_social_media_performance")
         INSUFFICIENT_SOCIAL_MEDIA_PERFORMANCE("insufficient_social_media_performance"),
+
+        @SerializedName("insufficient_time_in_network")
+        INSUFFICIENT_TIME_IN_NETWORK("insufficient_time_in_network"),
 
         @SerializedName("insufficient_trade_credit_insurance")
         INSUFFICIENT_TRADE_CREDIT_INSURANCE("insufficient_trade_credit_insurance"),
@@ -1267,6 +1303,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("invalid_business_license")
         INVALID_BUSINESS_LICENSE("invalid_business_license"),
+
+        @SerializedName("lacking_cash_account")
+        LACKING_CASH_ACCOUNT("lacking_cash_account"),
 
         @SerializedName("late_payment_history_reported_to_bureau")
         LATE_PAYMENT_HISTORY_REPORTED_TO_BUREAU("late_payment_history_reported_to_bureau"),
@@ -1538,6 +1577,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("high_concentration_of_clients")
         HIGH_CONCENTRATION_OF_CLIENTS("high_concentration_of_clients"),
 
+        @SerializedName("high_risk_industry")
+        HIGH_RISK_INDUSTRY("high_risk_industry"),
+
         @SerializedName("incomplete_application")
         INCOMPLETE_APPLICATION("incomplete_application"),
 
@@ -1571,14 +1613,26 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
         @SerializedName("insufficient_income")
         INSUFFICIENT_INCOME("insufficient_income"),
 
+        @SerializedName("insufficient_margin_ratio")
+        INSUFFICIENT_MARGIN_RATIO("insufficient_margin_ratio"),
+
+        @SerializedName("insufficient_operating_profit")
+        INSUFFICIENT_OPERATING_PROFIT("insufficient_operating_profit"),
+
         @SerializedName("insufficient_period_in_operation")
         INSUFFICIENT_PERIOD_IN_OPERATION("insufficient_period_in_operation"),
+
+        @SerializedName("insufficient_reserves")
+        INSUFFICIENT_RESERVES("insufficient_reserves"),
 
         @SerializedName("insufficient_revenue")
         INSUFFICIENT_REVENUE("insufficient_revenue"),
 
         @SerializedName("insufficient_social_media_performance")
         INSUFFICIENT_SOCIAL_MEDIA_PERFORMANCE("insufficient_social_media_performance"),
+
+        @SerializedName("insufficient_time_in_network")
+        INSUFFICIENT_TIME_IN_NETWORK("insufficient_time_in_network"),
 
         @SerializedName("insufficient_trade_credit_insurance")
         INSUFFICIENT_TRADE_CREDIT_INSURANCE("insufficient_trade_credit_insurance"),
@@ -1588,6 +1642,9 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         @SerializedName("invalid_business_license")
         INVALID_BUSINESS_LICENSE("invalid_business_license"),
+
+        @SerializedName("lacking_cash_account")
+        LACKING_CASH_ACCOUNT("lacking_cash_account"),
 
         @SerializedName("late_payment_history_reported_to_bureau")
         LATE_PAYMENT_HISTORY_REPORTED_TO_BUREAU("late_payment_history_reported_to_bureau"),

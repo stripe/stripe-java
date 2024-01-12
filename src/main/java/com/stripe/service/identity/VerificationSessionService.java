@@ -25,6 +25,34 @@ public final class VerificationSessionService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of VerificationSessions. */
+  public StripeCollection<VerificationSession> list(VerificationSessionListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of VerificationSessions. */
+  public StripeCollection<VerificationSession> list(RequestOptions options) throws StripeException {
+    return list((VerificationSessionListParams) null, options);
+  }
+  /** Returns a list of VerificationSessions. */
+  public StripeCollection<VerificationSession> list() throws StripeException {
+    return list((VerificationSessionListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of VerificationSessions. */
+  public StripeCollection<VerificationSession> list(
+      VerificationSessionListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/identity/verification_sessions";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<VerificationSession>>() {}.getType());
+  }
   /**
    * Creates a VerificationSession object.
    *
@@ -64,34 +92,6 @@ public final class VerificationSessionService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, VerificationSession.class);
-  }
-  /** Returns a list of VerificationSessions. */
-  public StripeCollection<VerificationSession> list(VerificationSessionListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Returns a list of VerificationSessions. */
-  public StripeCollection<VerificationSession> list(RequestOptions options) throws StripeException {
-    return list((VerificationSessionListParams) null, options);
-  }
-  /** Returns a list of VerificationSessions. */
-  public StripeCollection<VerificationSession> list() throws StripeException {
-    return list((VerificationSessionListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of VerificationSessions. */
-  public StripeCollection<VerificationSession> list(
-      VerificationSessionListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/identity/verification_sessions";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<VerificationSession>>() {}.getType());
   }
   /**
    * Retrieves the details of a VerificationSession that was previously created.

@@ -62,6 +62,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_cycle_anchor")
   Long billingCycleAnchor;
 
+  /** The fixed values used to calculate the {@code billing_cycle_anchor}. */
+  @SerializedName("billing_cycle_anchor_config")
+  BillingCycleAnchorConfig billingCycleAnchorConfig;
+
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period.
@@ -1318,6 +1322,31 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class BillingCycleAnchorConfig extends StripeObject {
+    /** The day of the month of the billing_cycle_anchor. */
+    @SerializedName("day_of_month")
+    Long dayOfMonth;
+
+    /** The hour of the day of the billing_cycle_anchor. */
+    @SerializedName("hour")
+    Long hour;
+
+    /** The minute of the hour of the billing_cycle_anchor. */
+    @SerializedName("minute")
+    Long minute;
+
+    /** The month to start full cycle billing periods. */
+    @SerializedName("month")
+    Long month;
+
+    /** The second of the minute of the billing_cycle_anchor. */
+    @SerializedName("second")
+    Long second;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingThresholds extends StripeObject {
     /** Monetary threshold that triggers the subscription to create an invoice. */
     @SerializedName("amount_gte")
@@ -1829,6 +1858,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
+    trySetResponseGetter(billingCycleAnchorConfig, responseGetter);
     trySetResponseGetter(billingThresholds, responseGetter);
     trySetResponseGetter(cancellationDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);

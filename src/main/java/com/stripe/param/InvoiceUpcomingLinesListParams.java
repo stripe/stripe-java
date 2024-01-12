@@ -3777,8 +3777,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
      * Configures when the subscription schedule generates prorations for phase transitions.
      * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
      * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
-     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
-     * phases within the current billing cycle up front.
+     * changes and generate prorations at transition time. {@code prorate_up_front} will bill for
+     * all phases within the current billing cycle up front.
      */
     @SerializedName("billing_behavior")
     BillingBehavior billingBehavior;
@@ -3786,9 +3786,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
      * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
-     * release} will end the subscription schedule and keep the underlying subscription
-     * running.{@code cancel} will end the subscription schedule and cancel the underlying
-     * subscription.
+     * release} will end the subscription schedule and keep the underlying subscription running.
+     * {@code cancel} will end the subscription schedule and cancel the underlying subscription.
      */
     @SerializedName("end_behavior")
     EndBehavior endBehavior;
@@ -3901,7 +3900,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
        * Configures when the subscription schedule generates prorations for phase transitions.
        * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
        * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
-       * changes and generate prorations at transition time.{@code prorate_up_front} will bill for
+       * changes and generate prorations at transition time. {@code prorate_up_front} will bill for
        * all phases within the current billing cycle up front.
        */
       public Builder setBillingBehavior(
@@ -3913,9 +3912,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       /**
        * Behavior of the subscription schedule and underlying subscription when it ends. Possible
        * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
-       * release} will end the subscription schedule and keep the underlying subscription
-       * running.{@code cancel} will end the subscription schedule and cancel the underlying
-       * subscription.
+       * release} will end the subscription schedule and keep the underlying subscription running.
+       * {@code cancel} will end the subscription schedule and cancel the underlying subscription.
        */
       public Builder setEndBehavior(
           InvoiceUpcomingLinesListParams.ScheduleDetails.EndBehavior endBehavior) {

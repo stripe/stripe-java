@@ -21,6 +21,26 @@ public final class TransactionEntryService extends ApiService {
     super(responseGetter);
   }
 
+  /** Retrieves a list of TransactionEntry objects. */
+  public StripeCollection<TransactionEntry> list(TransactionEntryListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Retrieves a list of TransactionEntry objects. */
+  public StripeCollection<TransactionEntry> list(
+      TransactionEntryListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/treasury/transaction_entries";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<TransactionEntry>>() {}.getType());
+  }
   /** Retrieves a TransactionEntry object. */
   public TransactionEntry retrieve(String id, TransactionEntryRetrieveParams params)
       throws StripeException {
@@ -48,25 +68,5 @@ public final class TransactionEntryService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, TransactionEntry.class);
-  }
-  /** Retrieves a list of TransactionEntry objects. */
-  public StripeCollection<TransactionEntry> list(TransactionEntryListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Retrieves a list of TransactionEntry objects. */
-  public StripeCollection<TransactionEntry> list(
-      TransactionEntryListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/treasury/transaction_entries";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TransactionEntry>>() {}.getType());
   }
 }

@@ -23,56 +23,16 @@ public final class PlanService extends ApiService {
     super(responseGetter);
   }
 
-  /** Returns a list of your plans. */
-  public StripeCollection<Plan> list(PlanListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
+  public Plan delete(String plan) throws StripeException {
+    return delete(plan, (RequestOptions) null);
   }
-  /** Returns a list of your plans. */
-  public StripeCollection<Plan> list(RequestOptions options) throws StripeException {
-    return list((PlanListParams) null, options);
-  }
-  /** Returns a list of your plans. */
-  public StripeCollection<Plan> list() throws StripeException {
-    return list((PlanListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of your plans. */
-  public StripeCollection<Plan> list(PlanListParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/plans";
+  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
+  public Plan delete(String plan, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
-  }
-  /**
-   * You can now model subscriptions more flexibly using the <a
-   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
-   * backwards compatible to simplify your migration.
-   */
-  public Plan create(PlanCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * You can now model subscriptions more flexibly using the <a
-   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
-   * backwards compatible to simplify your migration.
-   */
-  public Plan create(PlanCreateParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/plans";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, Plan.class);
   }
   /** Retrieves the plan with the given ID. */
@@ -143,16 +103,56 @@ public final class PlanService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Plan.class);
   }
-  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete(String plan) throws StripeException {
-    return delete(plan, (RequestOptions) null);
+  /** Returns a list of your plans. */
+  public StripeCollection<Plan> list(PlanListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
-  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete(String plan, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+  /** Returns a list of your plans. */
+  public StripeCollection<Plan> list(RequestOptions options) throws StripeException {
+    return list((PlanListParams) null, options);
+  }
+  /** Returns a list of your plans. */
+  public StripeCollection<Plan> list() throws StripeException {
+    return list((PlanListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of your plans. */
+  public StripeCollection<Plan> list(PlanListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/plans";
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
+  }
+  /**
+   * You can now model subscriptions more flexibly using the <a
+   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
+   * backwards compatible to simplify your migration.
+   */
+  public Plan create(PlanCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * You can now model subscriptions more flexibly using the <a
+   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
+   * backwards compatible to simplify your migration.
+   */
+  public Plan create(PlanCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/plans";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Plan.class);
   }
 }

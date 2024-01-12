@@ -22,6 +22,46 @@ public final class AccountNoticeService extends ApiService {
     super(responseGetter);
   }
 
+  /**
+   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
+   * by creation date, with the most-recently-created object appearing first.
+   */
+  public StripeCollection<AccountNotice> list(AccountNoticeListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /**
+   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
+   * by creation date, with the most-recently-created object appearing first.
+   */
+  public StripeCollection<AccountNotice> list(RequestOptions options) throws StripeException {
+    return list((AccountNoticeListParams) null, options);
+  }
+  /**
+   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
+   * by creation date, with the most-recently-created object appearing first.
+   */
+  public StripeCollection<AccountNotice> list() throws StripeException {
+    return list((AccountNoticeListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
+   * by creation date, with the most-recently-created object appearing first.
+   */
+  public StripeCollection<AccountNotice> list(
+      AccountNoticeListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/account_notices";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<AccountNotice>>() {}.getType());
+  }
   /** Retrieves an {@code AccountNotice} object. */
   public AccountNotice retrieve(String accountNotice, AccountNoticeRetrieveParams params)
       throws StripeException {
@@ -70,45 +110,5 @@ public final class AccountNoticeService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, AccountNotice.class);
-  }
-  /**
-   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
-   * by creation date, with the most-recently-created object appearing first.
-   */
-  public StripeCollection<AccountNotice> list(AccountNoticeListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /**
-   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
-   * by creation date, with the most-recently-created object appearing first.
-   */
-  public StripeCollection<AccountNotice> list(RequestOptions options) throws StripeException {
-    return list((AccountNoticeListParams) null, options);
-  }
-  /**
-   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
-   * by creation date, with the most-recently-created object appearing first.
-   */
-  public StripeCollection<AccountNotice> list() throws StripeException {
-    return list((AccountNoticeListParams) null, (RequestOptions) null);
-  }
-  /**
-   * Retrieves a list of {@code AccountNotice} objects. The objects are sorted in descending order
-   * by creation date, with the most-recently-created object appearing first.
-   */
-  public StripeCollection<AccountNotice> list(
-      AccountNoticeListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/account_notices";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<AccountNotice>>() {}.getType());
   }
 }

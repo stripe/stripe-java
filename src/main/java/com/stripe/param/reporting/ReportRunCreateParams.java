@@ -421,9 +421,6 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("network_cost")
       NETWORK_COST("network_cost"),
 
-      @SerializedName("obligation")
-      OBLIGATION("obligation"),
-
       @SerializedName("other_adjustment")
       OTHER_ADJUSTMENT("other_adjustment"),
 
@@ -467,7 +464,10 @@ public class ReportRunCreateParams extends ApiRequestParams {
       TRANSFER_REVERSAL("transfer_reversal"),
 
       @SerializedName("unreconciled_customer_funds")
-      UNRECONCILED_CUSTOMER_FUNDS("unreconciled_customer_funds");
+      UNRECONCILED_CUSTOMER_FUNDS("unreconciled_customer_funds"),
+
+      @SerializedName("obligation")
+      OBLIGATION("obligation");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

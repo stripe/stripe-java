@@ -23,6 +23,18 @@ public final class LocationService extends ApiService {
     super(responseGetter);
   }
 
+  /** Deletes a {@code Location} object. */
+  public Location delete(String location) throws StripeException {
+    return delete(location, (RequestOptions) null);
+  }
+  /** Deletes a {@code Location} object. */
+  public Location delete(String location, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, Location.class);
+  }
   /** Retrieves a {@code Location} object. */
   public Location retrieve(String location, LocationRetrieveParams params) throws StripeException {
     return retrieve(location, params, (RequestOptions) null);
@@ -87,44 +99,6 @@ public final class LocationService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Location.class);
   }
-  /** Deletes a {@code Location} object. */
-  public Location delete(String location) throws StripeException {
-    return delete(location, (RequestOptions) null);
-  }
-  /** Deletes a {@code Location} object. */
-  public Location delete(String location, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    return getResponseGetter().request(request, Location.class);
-  }
-  /**
-   * Creates a new {@code Location} object. For further details, including which address fields are
-   * required in each country, see the <a
-   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
-   */
-  public Location create(LocationCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * Creates a new {@code Location} object. For further details, including which address fields are
-   * required in each country, see the <a
-   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
-   */
-  public Location create(LocationCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/terminal/locations";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Location.class);
-  }
   /** Returns a list of {@code Location} objects. */
   public StripeCollection<Location> list(LocationListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -151,5 +125,31 @@ public final class LocationService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Location>>() {}.getType());
+  }
+  /**
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
+  public Location create(LocationCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
+  public Location create(LocationCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/terminal/locations";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Location.class);
   }
 }

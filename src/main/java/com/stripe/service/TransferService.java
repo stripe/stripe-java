@@ -24,32 +24,6 @@ public final class TransferService extends ApiService {
   }
 
   /**
-   * To send funds from your Stripe account to a connected account, you create a new transfer
-   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
-   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
-   */
-  public Transfer create(TransferCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * To send funds from your Stripe account to a connected account, you create a new transfer
-   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
-   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
-   */
-  public Transfer create(TransferCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/transfers";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Transfer.class);
-  }
-  /**
    * Returns a list of existing transfers sent to connected accounts. The transfers are returned in
    * sorted order, with the most recently created transfers appearing first.
    */
@@ -87,6 +61,32 @@ public final class TransferService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Transfer>>() {}.getType());
+  }
+  /**
+   * To send funds from your Stripe account to a connected account, you create a new transfer
+   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
+   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
+   */
+  public Transfer create(TransferCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /**
+   * To send funds from your Stripe account to a connected account, you create a new transfer
+   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
+   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
+   */
+  public Transfer create(TransferCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/transfers";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Transfer.class);
   }
   /**
    * Retrieves the details of an existing transfer. Supply the unique transfer ID from either a

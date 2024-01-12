@@ -24,38 +24,40 @@ public final class SubscriptionItemService extends ApiService {
     super(responseGetter);
   }
 
-  /** Returns a list of your subscription items for a given subscription. */
-  public StripeCollection<SubscriptionItem> list(SubscriptionItemListParams params)
+  /**
+   * Deletes an item from the subscription. Removing a subscription item from a subscription will
+   * not cancel the subscription.
+   */
+  public SubscriptionItem delete(String item, SubscriptionItemDeleteParams params)
       throws StripeException {
-    return list(params, (RequestOptions) null);
+    return delete(item, params, (RequestOptions) null);
   }
-  /** Returns a list of your subscription items for a given subscription. */
-  public StripeCollection<SubscriptionItem> list(
-      SubscriptionItemListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/subscription_items";
+  /**
+   * Deletes an item from the subscription. Removing a subscription item from a subscription will
+   * not cancel the subscription.
+   */
+  public SubscriptionItem delete(String item, RequestOptions options) throws StripeException {
+    return delete(item, (SubscriptionItemDeleteParams) null, options);
+  }
+  /**
+   * Deletes an item from the subscription. Removing a subscription item from a subscription will
+   * not cancel the subscription.
+   */
+  public SubscriptionItem delete(String item) throws StripeException {
+    return delete(item, (SubscriptionItemDeleteParams) null, (RequestOptions) null);
+  }
+  /**
+   * Deletes an item from the subscription. Removing a subscription item from a subscription will
+   * not cancel the subscription.
+   */
+  public SubscriptionItem delete(
+      String item, SubscriptionItemDeleteParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType());
-  }
-  /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
-  public SubscriptionItem create(SubscriptionItemCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
-  public SubscriptionItem create(SubscriptionItemCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/subscription_items";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
+            ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
@@ -118,40 +120,38 @@ public final class SubscriptionItemService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
-  /**
-   * Deletes an item from the subscription. Removing a subscription item from a subscription will
-   * not cancel the subscription.
-   */
-  public SubscriptionItem delete(String item, SubscriptionItemDeleteParams params)
+  /** Returns a list of your subscription items for a given subscription. */
+  public StripeCollection<SubscriptionItem> list(SubscriptionItemListParams params)
       throws StripeException {
-    return delete(item, params, (RequestOptions) null);
+    return list(params, (RequestOptions) null);
   }
-  /**
-   * Deletes an item from the subscription. Removing a subscription item from a subscription will
-   * not cancel the subscription.
-   */
-  public SubscriptionItem delete(String item, RequestOptions options) throws StripeException {
-    return delete(item, (SubscriptionItemDeleteParams) null, options);
-  }
-  /**
-   * Deletes an item from the subscription. Removing a subscription item from a subscription will
-   * not cancel the subscription.
-   */
-  public SubscriptionItem delete(String item) throws StripeException {
-    return delete(item, (SubscriptionItemDeleteParams) null, (RequestOptions) null);
-  }
-  /**
-   * Deletes an item from the subscription. Removing a subscription item from a subscription will
-   * not cancel the subscription.
-   */
-  public SubscriptionItem delete(
-      String item, SubscriptionItemDeleteParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
+  /** Returns a list of your subscription items for a given subscription. */
+  public StripeCollection<SubscriptionItem> list(
+      SubscriptionItemListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/subscription_items";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
-            ApiResource.RequestMethod.DELETE,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType());
+  }
+  /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
+  public SubscriptionItem create(SubscriptionItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
+  public SubscriptionItem create(SubscriptionItemCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/subscription_items";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

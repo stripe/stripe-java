@@ -21,41 +21,6 @@ public final class FinancingTransactionService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieves a financing transaction for a financing offer. */
-  public FinancingTransaction retrieve(
-      String financingTransaction, FinancingTransactionRetrieveParams params)
-      throws StripeException {
-    return retrieve(financingTransaction, params, (RequestOptions) null);
-  }
-  /** Retrieves a financing transaction for a financing offer. */
-  public FinancingTransaction retrieve(String financingTransaction, RequestOptions options)
-      throws StripeException {
-    return retrieve(financingTransaction, (FinancingTransactionRetrieveParams) null, options);
-  }
-  /** Retrieves a financing transaction for a financing offer. */
-  public FinancingTransaction retrieve(String financingTransaction) throws StripeException {
-    return retrieve(
-        financingTransaction, (FinancingTransactionRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves a financing transaction for a financing offer. */
-  public FinancingTransaction retrieve(
-      String financingTransaction,
-      FinancingTransactionRetrieveParams params,
-      RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, FinancingTransaction.class);
-  }
   /**
    * Returns a list of financing transactions. The transactions are returned in sorted order, with
    * the most recent transactions appearing first.
@@ -96,5 +61,40 @@ public final class FinancingTransactionService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<FinancingTransaction>>() {}.getType());
+  }
+  /** Retrieves a financing transaction for a financing offer. */
+  public FinancingTransaction retrieve(
+      String financingTransaction, FinancingTransactionRetrieveParams params)
+      throws StripeException {
+    return retrieve(financingTransaction, params, (RequestOptions) null);
+  }
+  /** Retrieves a financing transaction for a financing offer. */
+  public FinancingTransaction retrieve(String financingTransaction, RequestOptions options)
+      throws StripeException {
+    return retrieve(financingTransaction, (FinancingTransactionRetrieveParams) null, options);
+  }
+  /** Retrieves a financing transaction for a financing offer. */
+  public FinancingTransaction retrieve(String financingTransaction) throws StripeException {
+    return retrieve(
+        financingTransaction, (FinancingTransactionRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a financing transaction for a financing offer. */
+  public FinancingTransaction retrieve(
+      String financingTransaction,
+      FinancingTransactionRetrieveParams params,
+      RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, FinancingTransaction.class);
   }
 }

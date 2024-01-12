@@ -25,30 +25,36 @@ public final class AccountService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieves the details of an account. */
-  public Account retrieveCurrent(AccountRetrieveCurrentParams params) throws StripeException {
-    return retrieveCurrent(params, (RequestOptions) null);
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   *
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
+   *
+   * <p>If you want to delete your own account, use the <a
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
+   * settings</a> instead.
+   */
+  public Account delete(String account) throws StripeException {
+    return delete(account, (RequestOptions) null);
   }
-  /** Retrieves the details of an account. */
-  public Account retrieveCurrent(RequestOptions options) throws StripeException {
-    return retrieveCurrent((AccountRetrieveCurrentParams) null, options);
-  }
-  /** Retrieves the details of an account. */
-  public Account retrieveCurrent() throws StripeException {
-    return retrieveCurrent((AccountRetrieveCurrentParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the details of an account. */
-  public Account retrieveCurrent(AccountRetrieveCurrentParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/account";
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   *
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
+   *
+   * <p>If you want to delete your own account, use the <a
+   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
+   * settings</a> instead.
+   */
+  public Account delete(String account, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, Account.class);
   }
   /** Retrieves the details of an account. */
@@ -159,36 +165,30 @@ public final class AccountService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Account.class);
   }
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
-   *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
-   *
-   * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
-   * settings</a> instead.
-   */
-  public Account delete(String account) throws StripeException {
-    return delete(account, (RequestOptions) null);
+  /** Retrieves the details of an account. */
+  public Account retrieveCurrent(AccountRetrieveCurrentParams params) throws StripeException {
+    return retrieveCurrent(params, (RequestOptions) null);
   }
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
-   *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
-   *
-   * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/settings/account">account information tab in your account
-   * settings</a> instead.
-   */
-  public Account delete(String account, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+  /** Retrieves the details of an account. */
+  public Account retrieveCurrent(RequestOptions options) throws StripeException {
+    return retrieveCurrent((AccountRetrieveCurrentParams) null, options);
+  }
+  /** Retrieves the details of an account. */
+  public Account retrieveCurrent() throws StripeException {
+    return retrieveCurrent((AccountRetrieveCurrentParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the details of an account. */
+  public Account retrieveCurrent(AccountRetrieveCurrentParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/account";
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Account.class);
   }
   /**

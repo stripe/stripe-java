@@ -741,34 +741,34 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
-    public Card shipCard() throws StripeException {
-      return shipCard((Map<String, Object>) null, (RequestOptions) null);
+    public Card failCard() throws StripeException {
+      return failCard((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
-    public Card shipCard(RequestOptions options) throws StripeException {
-      return shipCard((Map<String, Object>) null, options);
+    public Card failCard(RequestOptions options) throws StripeException {
+      return failCard((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
-    public Card shipCard(Map<String, Object> params) throws StripeException {
-      return shipCard(params, (RequestOptions) null);
+    public Card failCard(Map<String, Object> params) throws StripeException {
+      return failCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
-    public Card shipCard(Map<String, Object> params, RequestOptions options)
+    public Card failCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path =
           String.format(
-              "/v1/test_helpers/issuing/cards/%s/shipping/ship",
+              "/v1/test_helpers/issuing/cards/%s/shipping/fail",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
           new ApiRequest(
@@ -777,19 +777,19 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
-    public Card shipCard(CardShipCardParams params) throws StripeException {
-      return shipCard(params, (RequestOptions) null);
+    public Card failCard(CardFailCardParams params) throws StripeException {
+      return failCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
-    public Card shipCard(CardShipCardParams params, RequestOptions options) throws StripeException {
+    public Card failCard(CardFailCardParams params, RequestOptions options) throws StripeException {
       String path =
           String.format(
-              "/v1/test_helpers/issuing/cards/%s/shipping/ship",
+              "/v1/test_helpers/issuing/cards/%s/shipping/fail",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
       ApiRequest request =
@@ -868,34 +868,34 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
-    public Card failCard() throws StripeException {
-      return failCard((Map<String, Object>) null, (RequestOptions) null);
+    public Card shipCard() throws StripeException {
+      return shipCard((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
-    public Card failCard(RequestOptions options) throws StripeException {
-      return failCard((Map<String, Object>) null, options);
+    public Card shipCard(RequestOptions options) throws StripeException {
+      return shipCard((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
-    public Card failCard(Map<String, Object> params) throws StripeException {
-      return failCard(params, (RequestOptions) null);
+    public Card shipCard(Map<String, Object> params) throws StripeException {
+      return shipCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
-    public Card failCard(Map<String, Object> params, RequestOptions options)
+    public Card shipCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path =
           String.format(
-              "/v1/test_helpers/issuing/cards/%s/shipping/fail",
+              "/v1/test_helpers/issuing/cards/%s/shipping/ship",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
           new ApiRequest(
@@ -904,19 +904,19 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
-    public Card failCard(CardFailCardParams params) throws StripeException {
-      return failCard(params, (RequestOptions) null);
+    public Card shipCard(CardShipCardParams params) throws StripeException {
+      return shipCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
-    public Card failCard(CardFailCardParams params, RequestOptions options) throws StripeException {
+    public Card shipCard(CardShipCardParams params, RequestOptions options) throws StripeException {
       String path =
           String.format(
-              "/v1/test_helpers/issuing/cards/%s/shipping/fail",
+              "/v1/test_helpers/issuing/cards/%s/shipping/ship",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
       ApiRequest request =
