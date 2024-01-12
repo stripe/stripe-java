@@ -79,26 +79,6 @@ public final class AccountService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Account.class);
   }
-  /** Refreshes the data associated with a Financial Connections {@code Account}. */
-  public Account refresh(String account, AccountRefreshParams params) throws StripeException {
-    return refresh(account, params, (RequestOptions) null);
-  }
-  /** Refreshes the data associated with a Financial Connections {@code Account}. */
-  public Account refresh(String account, AccountRefreshParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Account.class);
-  }
   /**
    * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
    * access data associated with the account (e.g. balances, transactions).
@@ -129,6 +109,26 @@ public final class AccountService extends ApiService {
     String path =
         String.format(
             "/v1/financial_connections/accounts/%s/disconnect", ApiResource.urlEncodeId(account));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Account.class);
+  }
+  /** Refreshes the data associated with a Financial Connections {@code Account}. */
+  public Account refresh(String account, AccountRefreshParams params) throws StripeException {
+    return refresh(account, params, (RequestOptions) null);
+  }
+  /** Refreshes the data associated with a Financial Connections {@code Account}. */
+  public Account refresh(String account, AccountRefreshParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

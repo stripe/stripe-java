@@ -468,76 +468,6 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
-     */
-    public InboundTransfer succeed() throws StripeException {
-      return succeed((Map<String, Object>) null, (RequestOptions) null);
-    }
-
-    /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
-     */
-    public InboundTransfer succeed(RequestOptions options) throws StripeException {
-      return succeed((Map<String, Object>) null, options);
-    }
-
-    /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
-     */
-    public InboundTransfer succeed(Map<String, Object> params) throws StripeException {
-      return succeed(params, (RequestOptions) null);
-    }
-
-    /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
-     */
-    public InboundTransfer succeed(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
-      String path =
-          String.format(
-              "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
-              ApiResource.urlEncodeId(this.resource.getId()));
-      ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
-      return resource.getResponseGetter().request(request, InboundTransfer.class);
-    }
-
-    /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
-     */
-    public InboundTransfer succeed(InboundTransferSucceedParams params) throws StripeException {
-      return succeed(params, (RequestOptions) null);
-    }
-
-    /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
-     */
-    public InboundTransfer succeed(InboundTransferSucceedParams params, RequestOptions options)
-        throws StripeException {
-      String path =
-          String.format(
-              "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
-              ApiResource.urlEncodeId(this.resource.getId()));
-      ApiResource.checkNullTypedParams(path, params);
-      ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              path,
-              ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
-      return resource.getResponseGetter().request(request, InboundTransfer.class);
-    }
-
-    /**
      * Transitions a test mode created InboundTransfer to the {@code failed} status. The
      * InboundTransfer must already be in the {@code processing} state.
      */
@@ -667,6 +597,76 @@ public class InboundTransfer extends ApiResource implements HasId {
       String path =
           String.format(
               "/v1/test_helpers/treasury/inbound_transfers/%s/return",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options,
+              ApiMode.V1);
+      return resource.getResponseGetter().request(request, InboundTransfer.class);
+    }
+
+    /**
+     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+     * InboundTransfer must already be in the {@code processing} state.
+     */
+    public InboundTransfer succeed() throws StripeException {
+      return succeed((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /**
+     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+     * InboundTransfer must already be in the {@code processing} state.
+     */
+    public InboundTransfer succeed(RequestOptions options) throws StripeException {
+      return succeed((Map<String, Object>) null, options);
+    }
+
+    /**
+     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+     * InboundTransfer must already be in the {@code processing} state.
+     */
+    public InboundTransfer succeed(Map<String, Object> params) throws StripeException {
+      return succeed(params, (RequestOptions) null);
+    }
+
+    /**
+     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+     * InboundTransfer must already be in the {@code processing} state.
+     */
+    public InboundTransfer succeed(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, InboundTransfer.class);
+    }
+
+    /**
+     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+     * InboundTransfer must already be in the {@code processing} state.
+     */
+    public InboundTransfer succeed(InboundTransferSucceedParams params) throws StripeException {
+      return succeed(params, (RequestOptions) null);
+    }
+
+    /**
+     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
+     * InboundTransfer must already be in the {@code processing} state.
+     */
+    public InboundTransfer succeed(InboundTransferSucceedParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
       ApiRequest request =

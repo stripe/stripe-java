@@ -26,6 +26,54 @@ public final class PaymentMethodService extends ApiService {
   }
 
   /**
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a> API instead.
+   */
+  public StripeCollection<PaymentMethod> list(PaymentMethodListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a> API instead.
+   */
+  public StripeCollection<PaymentMethod> list(RequestOptions options) throws StripeException {
+    return list((PaymentMethodListParams) null, options);
+  }
+  /**
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a> API instead.
+   */
+  public StripeCollection<PaymentMethod> list() throws StripeException {
+    return list((PaymentMethodListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a> API instead.
+   */
+  public StripeCollection<PaymentMethod> list(
+      PaymentMethodListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_methods";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PaymentMethod>>() {}.getType());
+  }
+  /**
    * Creates a PaymentMethod object. Read the <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
    * reference</a> to learn how to create PaymentMethods via Stripe.js.
@@ -90,54 +138,6 @@ public final class PaymentMethodService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, PaymentMethod.class);
-  }
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
-  public StripeCollection<PaymentMethod> list(PaymentMethodListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
-  public StripeCollection<PaymentMethod> list(RequestOptions options) throws StripeException {
-    return list((PaymentMethodListParams) null, options);
-  }
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
-  public StripeCollection<PaymentMethod> list() throws StripeException {
-    return list((PaymentMethodListParams) null, (RequestOptions) null);
-  }
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
-  public StripeCollection<PaymentMethod> list(
-      PaymentMethodListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/payment_methods";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PaymentMethod>>() {}.getType());
   }
   /**
    * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method

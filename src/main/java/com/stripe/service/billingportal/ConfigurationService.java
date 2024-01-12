@@ -69,36 +69,6 @@ public final class ConfigurationService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Configuration.class);
   }
-  /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(String configuration, ConfigurationUpdateParams params)
-      throws StripeException {
-    return update(configuration, params, (RequestOptions) null);
-  }
-  /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(String configuration, RequestOptions options) throws StripeException {
-    return update(configuration, (ConfigurationUpdateParams) null, options);
-  }
-  /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(String configuration) throws StripeException {
-    return update(configuration, (ConfigurationUpdateParams) null, (RequestOptions) null);
-  }
-  /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(
-      String configuration, ConfigurationUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Configuration.class);
-  }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
   public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
       throws StripeException {
@@ -124,6 +94,36 @@ public final class ConfigurationService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Configuration.class);
+  }
+  /** Updates a configuration that describes the functionality of the customer portal. */
+  public Configuration update(String configuration, ConfigurationUpdateParams params)
+      throws StripeException {
+    return update(configuration, params, (RequestOptions) null);
+  }
+  /** Updates a configuration that describes the functionality of the customer portal. */
+  public Configuration update(String configuration, RequestOptions options) throws StripeException {
+    return update(configuration, (ConfigurationUpdateParams) null, options);
+  }
+  /** Updates a configuration that describes the functionality of the customer portal. */
+  public Configuration update(String configuration) throws StripeException {
+    return update(configuration, (ConfigurationUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates a configuration that describes the functionality of the customer portal. */
+  public Configuration update(
+      String configuration, ConfigurationUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

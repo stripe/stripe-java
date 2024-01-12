@@ -24,58 +24,6 @@ public final class OrderService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order, OrderRetrieveParams params) throws StripeException {
-    return retrieve(order, params, (RequestOptions) null);
-  }
-  /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order, RequestOptions options) throws StripeException {
-    return retrieve(order, (OrderRetrieveParams) null, options);
-  }
-  /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order) throws StripeException {
-    return retrieve(order, (OrderRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order, OrderRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Order.class);
-  }
-  /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order, OrderUpdateParams params) throws StripeException {
-    return update(order, params, (RequestOptions) null);
-  }
-  /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order, RequestOptions options) throws StripeException {
-    return update(order, (OrderUpdateParams) null, options);
-  }
-  /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order) throws StripeException {
-    return update(order, (OrderUpdateParams) null, (RequestOptions) null);
-  }
-  /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order, OrderUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Order.class);
-  }
   /**
    * Lists all Climate order objects. The orders are returned sorted by creation date, with the most
    * recently created orders appearing first.
@@ -128,6 +76,58 @@ public final class OrderService extends ApiService {
    */
   public Order create(OrderCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/climate/orders";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
+  }
+  /** Retrieves the details of a Climate order object with the given ID. */
+  public Order retrieve(String order, OrderRetrieveParams params) throws StripeException {
+    return retrieve(order, params, (RequestOptions) null);
+  }
+  /** Retrieves the details of a Climate order object with the given ID. */
+  public Order retrieve(String order, RequestOptions options) throws StripeException {
+    return retrieve(order, (OrderRetrieveParams) null, options);
+  }
+  /** Retrieves the details of a Climate order object with the given ID. */
+  public Order retrieve(String order) throws StripeException {
+    return retrieve(order, (OrderRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the details of a Climate order object with the given ID. */
+  public Order retrieve(String order, OrderRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Order.class);
+  }
+  /** Updates the specified order by setting the values of the parameters passed. */
+  public Order update(String order, OrderUpdateParams params) throws StripeException {
+    return update(order, params, (RequestOptions) null);
+  }
+  /** Updates the specified order by setting the values of the parameters passed. */
+  public Order update(String order, RequestOptions options) throws StripeException {
+    return update(order, (OrderUpdateParams) null, options);
+  }
+  /** Updates the specified order by setting the values of the parameters passed. */
+  public Order update(String order) throws StripeException {
+    return update(order, (OrderUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates the specified order by setting the values of the parameters passed. */
+  public Order update(String order, OrderUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

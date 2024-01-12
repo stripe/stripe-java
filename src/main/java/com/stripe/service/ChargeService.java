@@ -27,39 +27,6 @@ public final class ChargeService extends ApiService {
   }
 
   /**
-   * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public StripeSearchResult<Charge> search(ChargeSearchParams params) throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-  /**
-   * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public StripeSearchResult<Charge> search(ChargeSearchParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/charges/search";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Charge>>() {}.getType());
-  }
-  /**
    * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
    * with the most recent charges appearing first.
    */
@@ -222,6 +189,39 @@ public final class ChargeService extends ApiService {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Charge.class);
+  }
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Charge> search(ChargeSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<Charge> search(ChargeSearchParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/charges/search";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeSearchResult<Charge>>() {}.getType());
   }
   /**
    * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}

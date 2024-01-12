@@ -23,6 +23,19 @@ public final class TestClockService extends ApiService {
     super(responseGetter);
   }
 
+  /** Deletes a test clock. */
+  public TestClock delete(String testClock) throws StripeException {
+    return delete(testClock, (RequestOptions) null);
+  }
+  /** Deletes a test clock. */
+  public TestClock delete(String testClock, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return getResponseGetter().request(request, TestClock.class);
+  }
   /** Retrieves a test clock. */
   public TestClock retrieve(String testClock, TestClockRetrieveParams params)
       throws StripeException {
@@ -46,37 +59,6 @@ public final class TestClockService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, TestClock.class);
-  }
-  /** Deletes a test clock. */
-  public TestClock delete(String testClock) throws StripeException {
-    return delete(testClock, (RequestOptions) null);
-  }
-  /** Deletes a test clock. */
-  public TestClock delete(String testClock, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    return getResponseGetter().request(request, TestClock.class);
-  }
-  /** Creates a new test clock that can be attached to new customers and quotes. */
-  public TestClock create(TestClockCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a new test clock that can be attached to new customers and quotes. */
-  public TestClock create(TestClockCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/test_helpers/test_clocks";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
@@ -109,6 +91,24 @@ public final class TestClockService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<TestClock>>() {}.getType());
+  }
+  /** Creates a new test clock that can be attached to new customers and quotes. */
+  public TestClock create(TestClockCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a new test clock that can be attached to new customers and quotes. */
+  public TestClock create(TestClockCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/test_helpers/test_clocks";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, TestClock.class);
   }
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when

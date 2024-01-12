@@ -24,6 +24,52 @@ public final class PaymentMethodDomainService extends ApiService {
     super(responseGetter);
   }
 
+  /** Lists the details of existing payment method domains. */
+  public StripeCollection<PaymentMethodDomain> list(PaymentMethodDomainListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Lists the details of existing payment method domains. */
+  public StripeCollection<PaymentMethodDomain> list(RequestOptions options) throws StripeException {
+    return list((PaymentMethodDomainListParams) null, options);
+  }
+  /** Lists the details of existing payment method domains. */
+  public StripeCollection<PaymentMethodDomain> list() throws StripeException {
+    return list((PaymentMethodDomainListParams) null, (RequestOptions) null);
+  }
+  /** Lists the details of existing payment method domains. */
+  public StripeCollection<PaymentMethodDomain> list(
+      PaymentMethodDomainListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_method_domains";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<PaymentMethodDomain>>() {}.getType());
+  }
+  /** Creates a payment method domain. */
+  public PaymentMethodDomain create(PaymentMethodDomainCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates a payment method domain. */
+  public PaymentMethodDomain create(PaymentMethodDomainCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_method_domains";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, PaymentMethodDomain.class);
+  }
   /** Retrieves the details of an existing payment method domain. */
   public PaymentMethodDomain retrieve(
       String paymentMethodDomain, PaymentMethodDomainRetrieveParams params) throws StripeException {
@@ -78,52 +124,6 @@ public final class PaymentMethodDomainService extends ApiService {
     String path =
         String.format(
             "/v1/payment_method_domains/%s", ApiResource.urlEncodeId(paymentMethodDomain));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, PaymentMethodDomain.class);
-  }
-  /** Lists the details of existing payment method domains. */
-  public StripeCollection<PaymentMethodDomain> list(PaymentMethodDomainListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Lists the details of existing payment method domains. */
-  public StripeCollection<PaymentMethodDomain> list(RequestOptions options) throws StripeException {
-    return list((PaymentMethodDomainListParams) null, options);
-  }
-  /** Lists the details of existing payment method domains. */
-  public StripeCollection<PaymentMethodDomain> list() throws StripeException {
-    return list((PaymentMethodDomainListParams) null, (RequestOptions) null);
-  }
-  /** Lists the details of existing payment method domains. */
-  public StripeCollection<PaymentMethodDomain> list(
-      PaymentMethodDomainListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/payment_method_domains";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PaymentMethodDomain>>() {}.getType());
-  }
-  /** Creates a payment method domain. */
-  public PaymentMethodDomain create(PaymentMethodDomainCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates a payment method domain. */
-  public PaymentMethodDomain create(PaymentMethodDomainCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/payment_method_domains";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

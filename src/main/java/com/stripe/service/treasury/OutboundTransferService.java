@@ -23,24 +23,6 @@ public final class OutboundTransferService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates an OutboundTransfer. */
-  public OutboundTransfer create(OutboundTransferCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates an OutboundTransfer. */
-  public OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/treasury/outbound_transfers";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, OutboundTransfer.class);
-  }
   /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
   public StripeCollection<OutboundTransfer> list(OutboundTransferListParams params)
       throws StripeException {
@@ -60,6 +42,24 @@ public final class OutboundTransferService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType());
+  }
+  /** Creates an OutboundTransfer. */
+  public OutboundTransfer create(OutboundTransferCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates an OutboundTransfer. */
+  public OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/treasury/outbound_transfers";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, OutboundTransfer.class);
   }
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID

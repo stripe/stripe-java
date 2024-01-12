@@ -23,30 +23,6 @@ public final class FinancialAccountService extends ApiService {
     super(responseGetter);
   }
 
-  /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
-   */
-  public FinancialAccount create(FinancialAccountCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
-   */
-  public FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/treasury/financial_accounts";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, FinancialAccount.class);
-  }
   /** Returns a list of FinancialAccounts. */
   public StripeCollection<FinancialAccount> list(FinancialAccountListParams params)
       throws StripeException {
@@ -75,27 +51,20 @@ public final class FinancialAccountService extends ApiService {
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<FinancialAccount>>() {}.getType());
   }
-  /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(String financialAccount, FinancialAccountUpdateParams params)
-      throws StripeException {
-    return update(financialAccount, params, (RequestOptions) null);
+  /**
+   * Creates a new FinancialAccount. For now, each connected account can only have one
+   * FinancialAccount.
+   */
+  public FinancialAccount create(FinancialAccountCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
-  /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(String financialAccount, RequestOptions options)
+  /**
+   * Creates a new FinancialAccount. For now, each connected account can only have one
+   * FinancialAccount.
+   */
+  public FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
       throws StripeException {
-    return update(financialAccount, (FinancialAccountUpdateParams) null, options);
-  }
-  /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(String financialAccount) throws StripeException {
-    return update(financialAccount, (FinancialAccountUpdateParams) null, (RequestOptions) null);
-  }
-  /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(
-      String financialAccount, FinancialAccountUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
+    String path = "/v1/treasury/financial_accounts";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -131,6 +100,37 @@ public final class FinancialAccountService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, FinancialAccount.class);
+  }
+  /** Updates the details of a FinancialAccount. */
+  public FinancialAccount update(String financialAccount, FinancialAccountUpdateParams params)
+      throws StripeException {
+    return update(financialAccount, params, (RequestOptions) null);
+  }
+  /** Updates the details of a FinancialAccount. */
+  public FinancialAccount update(String financialAccount, RequestOptions options)
+      throws StripeException {
+    return update(financialAccount, (FinancialAccountUpdateParams) null, options);
+  }
+  /** Updates the details of a FinancialAccount. */
+  public FinancialAccount update(String financialAccount) throws StripeException {
+    return update(financialAccount, (FinancialAccountUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates the details of a FinancialAccount. */
+  public FinancialAccount update(
+      String financialAccount, FinancialAccountUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

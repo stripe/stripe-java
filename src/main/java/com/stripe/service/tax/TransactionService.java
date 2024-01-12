@@ -48,24 +48,6 @@ public final class TransactionService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, Transaction.class);
   }
-  /** Partially or fully reverses a previously created {@code Transaction}. */
-  public Transaction createReversal(TransactionCreateReversalParams params) throws StripeException {
-    return createReversal(params, (RequestOptions) null);
-  }
-  /** Partially or fully reverses a previously created {@code Transaction}. */
-  public Transaction createReversal(TransactionCreateReversalParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/tax/transactions/create_reversal";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Transaction.class);
-  }
   /** Creates a Tax {@code Transaction} from a calculation. */
   public Transaction createFromCalculation(TransactionCreateFromCalculationParams params)
       throws StripeException {
@@ -76,6 +58,24 @@ public final class TransactionService extends ApiService {
       TransactionCreateFromCalculationParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/transactions/create_from_calculation";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Transaction.class);
+  }
+  /** Partially or fully reverses a previously created {@code Transaction}. */
+  public Transaction createReversal(TransactionCreateReversalParams params) throws StripeException {
+    return createReversal(params, (RequestOptions) null);
+  }
+  /** Partially or fully reverses a previously created {@code Transaction}. */
+  public Transaction createReversal(TransactionCreateReversalParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/tax/transactions/create_reversal";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

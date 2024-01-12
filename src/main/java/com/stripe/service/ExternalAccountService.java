@@ -23,56 +23,20 @@ public final class ExternalAccountService extends ApiService {
     super(responseGetter);
   }
 
-  /** List external accounts for an account. */
-  public StripeCollection<ExternalAccount> list(String account, ExternalAccountListParams params)
-      throws StripeException {
-    return list(account, params, (RequestOptions) null);
+  /** Delete a specified external account for a given account. */
+  public ExternalAccount delete(String account, String id) throws StripeException {
+    return delete(account, id, (RequestOptions) null);
   }
-  /** List external accounts for an account. */
-  public StripeCollection<ExternalAccount> list(String account, RequestOptions options)
-      throws StripeException {
-    return list(account, (ExternalAccountListParams) null, options);
-  }
-  /** List external accounts for an account. */
-  public StripeCollection<ExternalAccount> list(String account) throws StripeException {
-    return list(account, (ExternalAccountListParams) null, (RequestOptions) null);
-  }
-  /** List external accounts for an account. */
-  public StripeCollection<ExternalAccount> list(
-      String account, ExternalAccountListParams params, RequestOptions options)
+  /** Delete a specified external account for a given account. */
+  public ExternalAccount delete(String account, String id, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
+        String.format(
+            "/v1/accounts/%s/external_accounts/%s",
+            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
-  }
-  /** Create an external account for a given account. */
-  public ExternalAccount create(String account, ExternalAccountCreateParams params)
-      throws StripeException {
-    return create(account, params, (RequestOptions) null);
-  }
-  /** Create an external account for a given account. */
-  public ExternalAccount create(
-      String account, ExternalAccountCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return getResponseGetter().request(request, ExternalAccount.class);
   }
   /** Retrieve a specified external account for a given account. */
@@ -167,20 +131,56 @@ public final class ExternalAccountService extends ApiService {
             ApiMode.V1);
     return getResponseGetter().request(request, ExternalAccount.class);
   }
-  /** Delete a specified external account for a given account. */
-  public ExternalAccount delete(String account, String id) throws StripeException {
-    return delete(account, id, (RequestOptions) null);
+  /** List external accounts for an account. */
+  public StripeCollection<ExternalAccount> list(String account, ExternalAccountListParams params)
+      throws StripeException {
+    return list(account, params, (RequestOptions) null);
   }
-  /** Delete a specified external account for a given account. */
-  public ExternalAccount delete(String account, String id, RequestOptions options)
+  /** List external accounts for an account. */
+  public StripeCollection<ExternalAccount> list(String account, RequestOptions options)
+      throws StripeException {
+    return list(account, (ExternalAccountListParams) null, options);
+  }
+  /** List external accounts for an account. */
+  public StripeCollection<ExternalAccount> list(String account) throws StripeException {
+    return list(account, (ExternalAccountListParams) null, (RequestOptions) null);
+  }
+  /** List external accounts for an account. */
+  public StripeCollection<ExternalAccount> list(
+      String account, ExternalAccountListParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/accounts/%s/external_accounts/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
+        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter()
+        .request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
+  }
+  /** Create an external account for a given account. */
+  public ExternalAccount create(String account, ExternalAccountCreateParams params)
+      throws StripeException {
+    return create(account, params, (RequestOptions) null);
+  }
+  /** Create an external account for a given account. */
+  public ExternalAccount create(
+      String account, ExternalAccountCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, ExternalAccount.class);
   }
 }

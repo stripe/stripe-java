@@ -26,82 +26,6 @@ public final class PayoutService extends ApiService {
   }
 
   /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list. Stripe returns the corresponding payout information.
-   */
-  public Payout retrieve(String payout, PayoutRetrieveParams params) throws StripeException {
-    return retrieve(payout, params, (RequestOptions) null);
-  }
-  /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list. Stripe returns the corresponding payout information.
-   */
-  public Payout retrieve(String payout, RequestOptions options) throws StripeException {
-    return retrieve(payout, (PayoutRetrieveParams) null, options);
-  }
-  /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list. Stripe returns the corresponding payout information.
-   */
-  public Payout retrieve(String payout) throws StripeException {
-    return retrieve(payout, (PayoutRetrieveParams) null, (RequestOptions) null);
-  }
-  /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list. Stripe returns the corresponding payout information.
-   */
-  public Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Payout.class);
-  }
-  /**
-   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
-   * parameters that you don’t provide. This request only accepts the metadata as arguments.
-   */
-  public Payout update(String payout, PayoutUpdateParams params) throws StripeException {
-    return update(payout, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
-   * parameters that you don’t provide. This request only accepts the metadata as arguments.
-   */
-  public Payout update(String payout, RequestOptions options) throws StripeException {
-    return update(payout, (PayoutUpdateParams) null, options);
-  }
-  /**
-   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
-   * parameters that you don’t provide. This request only accepts the metadata as arguments.
-   */
-  public Payout update(String payout) throws StripeException {
-    return update(payout, (PayoutUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
-   * parameters that you don’t provide. This request only accepts the metadata as arguments.
-   */
-  public Payout update(String payout, PayoutUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Payout.class);
-  }
-  /**
    * Returns a list of existing payouts sent to third-party bank accounts or payouts that Stripe
    * sent to you. The payouts return in sorted order, with the most recently created payouts
    * appearing first.
@@ -175,6 +99,82 @@ public final class PayoutService extends ApiService {
    */
   public Payout create(PayoutCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payouts";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Payout.class);
+  }
+  /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list. Stripe returns the corresponding payout information.
+   */
+  public Payout retrieve(String payout, PayoutRetrieveParams params) throws StripeException {
+    return retrieve(payout, params, (RequestOptions) null);
+  }
+  /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list. Stripe returns the corresponding payout information.
+   */
+  public Payout retrieve(String payout, RequestOptions options) throws StripeException {
+    return retrieve(payout, (PayoutRetrieveParams) null, options);
+  }
+  /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list. Stripe returns the corresponding payout information.
+   */
+  public Payout retrieve(String payout) throws StripeException {
+    return retrieve(payout, (PayoutRetrieveParams) null, (RequestOptions) null);
+  }
+  /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list. Stripe returns the corresponding payout information.
+   */
+  public Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Payout.class);
+  }
+  /**
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
+   */
+  public Payout update(String payout, PayoutUpdateParams params) throws StripeException {
+    return update(payout, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
+   */
+  public Payout update(String payout, RequestOptions options) throws StripeException {
+    return update(payout, (PayoutUpdateParams) null, options);
+  }
+  /**
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
+   */
+  public Payout update(String payout) throws StripeException {
+    return update(payout, (PayoutUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified payout by setting the values of the parameters you pass. We don’t change
+   * parameters that you don’t provide. This request only accepts the metadata as arguments.
+   */
+  public Payout update(String payout, PayoutUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

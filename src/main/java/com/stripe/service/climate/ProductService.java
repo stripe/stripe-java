@@ -21,32 +21,6 @@ public final class ProductService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product, ProductRetrieveParams params) throws StripeException {
-    return retrieve(product, params, (RequestOptions) null);
-  }
-  /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product, RequestOptions options) throws StripeException {
-    return retrieve(product, (ProductRetrieveParams) null, options);
-  }
-  /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product) throws StripeException {
-    return retrieve(product, (ProductRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product, ProductRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Product.class);
-  }
   /** Lists all available Climate product objects. */
   public StripeCollection<Product> list(ProductListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -73,5 +47,31 @@ public final class ProductService extends ApiService {
             ApiMode.V1);
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
+  }
+  /** Retrieves the details of a Climate product with the given ID. */
+  public Product retrieve(String product, ProductRetrieveParams params) throws StripeException {
+    return retrieve(product, params, (RequestOptions) null);
+  }
+  /** Retrieves the details of a Climate product with the given ID. */
+  public Product retrieve(String product, RequestOptions options) throws StripeException {
+    return retrieve(product, (ProductRetrieveParams) null, options);
+  }
+  /** Retrieves the details of a Climate product with the given ID. */
+  public Product retrieve(String product) throws StripeException {
+    return retrieve(product, (ProductRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the details of a Climate product with the given ID. */
+  public Product retrieve(String product, ProductRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Product.class);
   }
 }
