@@ -1,9 +1,22 @@
 # Changelog
 
+## 24.11.0 - 2024-01-12
+* [#1715](https://github.com/stripe/stripe-java/pull/1715) Update generated code
+  * Add support for new resource `CustomerSession`
+  * Add support for `create` method on resource `CustomerSession`
+  * Remove support for `expand` on `BankAccountDeleteParams` and `CardDeleteParams`
+  * Add support for `account_type`, `default_for_currency`, and `documents` on `BankAccountUpdateParams` and `CardUpdateParams`
+  * Remove support for `owner` on `BankAccountUpdateParams` and `CardUpdateParams`
+  * Change type of `BankAccountUpdateParams.account_holder_type` and `CardUpdateParams.account_holder_type` from `enum('company'|'individual')` to `emptyStringable(enum('company'|'individual'))`
+  * Add support for new values `eps` and `p24` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
+  * Remove support for value `obligation` from enum `reporting.ReportRunCreateParams.parameters.reporting_category`
+  * Add support for `billing_cycle_anchor_config` on `SubscriptionCreateParams` and `Subscription`
+* [#1702](https://github.com/stripe/stripe-java/pull/1702) Change StripeResponseGetter to take a single APIRequest object
+* [#1716](https://github.com/stripe/stripe-java/pull/1716) Add missing method overloads
+
 ## 24.11.0-beta.1 - 2024-01-04
 * [#1713](https://github.com/stripe/stripe-java/pull/1713) Update generated code for beta
   * Updated stable APIs to the latest version
-
 
 ## 24.10.0 - 2024-01-04
 * [#1712](https://github.com/stripe/stripe-java/pull/1712) Update generated code
