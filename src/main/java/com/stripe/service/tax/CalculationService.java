@@ -34,6 +34,7 @@ public final class CalculationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Calculation.class);
   }
 

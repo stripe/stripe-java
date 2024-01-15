@@ -62,6 +62,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
   /** Retrieves the subscription item with the given ID. */
@@ -90,6 +91,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
@@ -118,6 +120,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
   /** Returns a list of your subscription items for a given subscription. */
@@ -137,6 +140,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType());
   }
@@ -156,6 +160,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
 

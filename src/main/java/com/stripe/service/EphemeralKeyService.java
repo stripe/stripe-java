@@ -43,6 +43,7 @@ public final class EphemeralKeyService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, EphemeralKey.class);
   }
   /** Creates a short-lived API key for a given resource. */

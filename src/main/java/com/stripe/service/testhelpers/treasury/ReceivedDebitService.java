@@ -40,6 +40,7 @@ public final class ReceivedDebitService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, ReceivedDebit.class);
   }
 }

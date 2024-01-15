@@ -45,6 +45,7 @@ public final class CreditNotePreviewLinesService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<CreditNoteLineItem>>() {}.getType());
   }

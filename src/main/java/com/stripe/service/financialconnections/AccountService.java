@@ -49,6 +49,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
@@ -77,6 +78,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /**
@@ -117,6 +119,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
@@ -137,6 +140,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /**
@@ -163,6 +167,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /**
@@ -191,6 +196,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
 

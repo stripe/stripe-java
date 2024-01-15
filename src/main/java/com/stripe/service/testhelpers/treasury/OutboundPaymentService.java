@@ -58,6 +58,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, OutboundPayment.class);
   }
   /**
@@ -98,6 +99,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, OutboundPayment.class);
   }
   /**
@@ -142,6 +144,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, OutboundPayment.class);
   }
 }

@@ -44,6 +44,7 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Session.class);
   }
   /**
@@ -67,6 +68,7 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Session.class);
   }
 }

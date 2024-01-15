@@ -49,6 +49,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<PaymentMethodDomain>>() {}.getType());
   }
@@ -68,6 +69,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
   /** Retrieves the details of an existing payment method domain. */
@@ -100,6 +102,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
   /** Updates an existing payment method domain. */
@@ -132,6 +135,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
   /**
@@ -216,6 +220,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethodDomain.class);
   }
 }

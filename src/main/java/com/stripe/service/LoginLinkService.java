@@ -66,6 +66,7 @@ public final class LoginLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, LoginLink.class);
   }
 }

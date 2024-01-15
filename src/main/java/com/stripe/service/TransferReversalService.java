@@ -69,6 +69,7 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<TransferReversal>>() {}.getType());
   }
@@ -134,6 +135,7 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, TransferReversal.class);
   }
   /**
@@ -178,6 +180,7 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, TransferReversal.class);
   }
   /**
@@ -230,6 +233,7 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, TransferReversal.class);
   }
 }

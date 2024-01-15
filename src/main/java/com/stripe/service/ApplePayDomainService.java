@@ -32,6 +32,7 @@ public final class ApplePayDomainService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, ApplePayDomain.class);
   }
   /** Retrieve an apple pay domain. */
@@ -60,6 +61,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, ApplePayDomain.class);
   }
   /** List apple pay domains. */
@@ -87,6 +89,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<ApplePayDomain>>() {}.getType());
   }
@@ -106,6 +109,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, ApplePayDomain.class);
   }
 }

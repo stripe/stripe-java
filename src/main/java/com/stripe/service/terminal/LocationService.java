@@ -33,6 +33,7 @@ public final class LocationService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Location.class);
   }
   /** Retrieves a {@code Location} object. */
@@ -59,6 +60,7 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Location.class);
   }
   /**
@@ -97,6 +99,7 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Location.class);
   }
   /** Returns a list of {@code Location} objects. */
@@ -123,6 +126,7 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Location>>() {}.getType());
   }
@@ -150,6 +154,7 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Location.class);
   }
 }

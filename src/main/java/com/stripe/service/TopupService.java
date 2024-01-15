@@ -48,6 +48,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Topup>>() {}.getType());
   }
@@ -66,6 +67,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Topup.class);
   }
   /**
@@ -108,6 +110,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Topup.class);
   }
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
@@ -134,6 +137,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Topup.class);
   }
   /** Cancels a top-up. Only pending top-ups can be canceled. */
@@ -160,6 +164,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Topup.class);
   }
 }

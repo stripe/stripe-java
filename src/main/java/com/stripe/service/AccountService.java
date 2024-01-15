@@ -55,6 +55,7 @@ public final class AccountService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /** Retrieves the details of an account. */
@@ -81,6 +82,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /**
@@ -163,6 +165,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /** Retrieves the details of an account. */
@@ -189,6 +192,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /**
@@ -231,6 +235,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
@@ -293,6 +298,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
   /**
@@ -323,6 +329,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Account.class);
   }
 

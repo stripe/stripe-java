@@ -62,6 +62,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Charge>>() {}.getType());
   }
@@ -108,6 +109,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Charge.class);
   }
   /**
@@ -150,6 +152,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Charge.class);
   }
   /**
@@ -188,6 +191,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Charge.class);
   }
   /**
@@ -220,6 +224,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeSearchResult<Charge>>() {}.getType());
   }
@@ -287,6 +292,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request.addUsage("stripe_client");
     return getResponseGetter().request(request, Charge.class);
   }
 }
