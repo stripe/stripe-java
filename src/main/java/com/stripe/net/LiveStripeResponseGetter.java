@@ -43,17 +43,22 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
   }
 
+  private StripeRequest toStripeRequest(ApiRequest apiRequest) throws StripeException {
+    String fullUrl = fullUrl(apiRequest);
+
+    return new StripeRequest(
+        apiRequest.getMethod(),
+        fullUrl,
+        apiRequest.getParams(),
+        RequestOptions.merge(this.options, apiRequest.getOptions()));
+  }
+
   @Override
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
   public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
       throws StripeException {
-    String fullUrl = fullUrl(apiRequest);
-    StripeRequest request =
-        new StripeRequest(
-            apiRequest.getMethod(),
-            fullUrl,
-            apiRequest.getParams(),
-            RequestOptions.merge(this.options, apiRequest.getOptions()));
+
+    StripeRequest request = toStripeRequest(apiRequest);
     StripeResponse response = httpClient.requestWithRetries(request);
 
     int responseCode = response.code();
@@ -83,14 +88,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   @Override
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
-    String fullUrl = fullUrl(apiRequest);
-
-    StripeRequest request =
-        new StripeRequest(
-            apiRequest.getMethod(),
-            fullUrl,
-            apiRequest.getParams(),
-            RequestOptions.merge(this.options, apiRequest.getOptions()));
+    StripeRequest request = toStripeRequest(apiRequest);
     StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
 
     int responseCode = responseStream.code();
@@ -318,7 +316,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
-  private String fullUrl(ApiRequest apiRequest) {
+  private String fullUrl(BaseApiRequest apiRequest) {
     BaseAddress baseAddress = apiRequest.getBaseAddress();
     RequestOptions options = apiRequest.getOptions();
     String relativeUrl = apiRequest.getPath();
