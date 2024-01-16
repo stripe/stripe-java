@@ -78,7 +78,7 @@ class RequestTelemetry {
       return;
     }
 
-    if (usage.size() == 0) {
+    if (usage != null && usage.size() == 0) {
       usage = null;
     }
 

@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,9 @@ class BaseApiRequest {
 
   /** Internal method. Adds a record of a tracked behavior identified by "used" to the request. */
   public void addUsage(String used) {
+    if (this.usage == null) {
+      this.usage = new ArrayList<>();
+    }
     this.usage.add(used);
   }
 
