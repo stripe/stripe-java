@@ -13,5 +13,15 @@ class BaseApiRequest {
   private final String path;
   private final RequestOptions options;
   private final ApiMode apiMode;
-  private final List<String> usage;
+
+  // TODO (major): Remove setter and make final
+  private List<String> usage;
+
+  /**
+   * @deprecated Use {@link com.stripe.net.ApiRequest#withAddedUsage(String)} instead.
+   */
+  @Deprecated
+  public void setUsage(List<String> usage) {
+    this.usage = usage;
+  }
 }
