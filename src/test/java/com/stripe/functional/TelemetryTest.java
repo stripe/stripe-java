@@ -1,16 +1,20 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
+import com.stripe.model.Customer;
+import com.stripe.param.CustomerCreateParams;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,6 +24,9 @@ import lombok.Cleanup;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TelemetryTest extends BaseStripeTest {
@@ -179,5 +186,37 @@ public class TelemetryTest extends BaseStripeTest {
     assertEquals(10, seenRequestIds.size());
 
     server.shutdown();
+  }
+
+  private Boolean originalTelemetry;
+
+  @BeforeEach
+  public void setUp() {
+    this.originalTelemetry = Stripe.enableTelemetry;
+    Stripe.enableTelemetry = true;
+  }
+
+  @AfterEach
+  public void tearDown() {
+    Stripe.enableTelemetry = originalTelemetry;
+  }
+
+  @Test
+  public void testGlobalClientTelemetryTest() throws StripeException {
+    Customer.create(CustomerCreateParams.builder().build());
+    Customer.create(CustomerCreateParams.builder().build());
+    verifyStripeRequest(
+        stripeRequest -> {
+          assert (stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
+          JsonObject metrics =
+              new Gson()
+                  .fromJson(
+                      stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").get(),
+                      JsonObject.class)
+                  .get("last_request_metrics")
+                  .getAsJsonObject();
+          assertFalse(metrics.has("usage"));
+          assert (metrics.has("request_duration_ms"));
+        });
   }
 }

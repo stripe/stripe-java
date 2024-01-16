@@ -32,7 +32,7 @@ public class StripeClientTest extends BaseStripeTest {
     mockClient.customers().update("cus_xyz");
     verifyStripeRequest(
         (stripeRequest) -> {
-          assert(stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
+          assert (stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
           String usage =
               new Gson()
                   .fromJson(
