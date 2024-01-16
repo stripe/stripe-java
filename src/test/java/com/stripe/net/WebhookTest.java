@@ -12,14 +12,12 @@ import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.Event;
-
+import com.stripe.model.terminal.Reader;
 import java.lang.reflect.Type;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.stripe.model.terminal.Reader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -219,21 +217,24 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testStripeClientConstructEvent()
-          throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
+      throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
     StripeResponseGetter responseGetter = Mockito.spy(new LiveStripeResponseGetter());
     StripeClient client = new StripeClient(responseGetter);
 
     Mockito.doAnswer((Answer<Reader>) invocation -> new Reader())
-            .when(responseGetter)
-            .request(Mockito.<ApiRequest>argThat(
-                    (req) -> req.getMethod().equals(ApiResource.RequestMethod.DELETE) &&
-                            req.getPath().equals("/v1/terminal/readers/rdr_123")), Mockito.<Type>any());
+        .when(responseGetter)
+        .request(
+            Mockito.<ApiRequest>argThat(
+                (req) ->
+                    req.getMethod().equals(ApiResource.RequestMethod.DELETE)
+                        && req.getPath().equals("/v1/terminal/readers/rdr_123")),
+            Mockito.<Type>any());
 
     final String payload =
-            "{\"id\": \"evt_test_webhook\",\"api_version\":\""
-                    + Stripe.API_VERSION
-                    + "\","
-                    + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"rdr_123\",\"object\": \"terminal.reader\"}}}";
+        "{\"id\": \"evt_test_webhook\",\"api_version\":\""
+            + Stripe.API_VERSION
+            + "\","
+            + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"rdr_123\",\"object\": \"terminal.reader\"}}}";
 
     final Map<String, Object> options = new HashMap<>();
     options.put("payload", payload);
@@ -249,21 +250,24 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testStripeClientConstructEventWithTolerance()
-          throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
+      throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
     StripeResponseGetter responseGetter = Mockito.spy(new LiveStripeResponseGetter());
     StripeClient client = new StripeClient(responseGetter);
 
     Mockito.doAnswer((Answer<Reader>) invocation -> new Reader())
-            .when(responseGetter)
-            .request(Mockito.argThat(
-                    (req) -> req.getMethod().equals(ApiResource.RequestMethod.DELETE) &&
-                            req.getPath().equals("/v1/terminal/readers/rdr_123")), Mockito.any());
+        .when(responseGetter)
+        .request(
+            Mockito.argThat(
+                (req) ->
+                    req.getMethod().equals(ApiResource.RequestMethod.DELETE)
+                        && req.getPath().equals("/v1/terminal/readers/rdr_123")),
+            Mockito.any());
 
     final String payload =
-            "{\"id\": \"evt_test_webhook\",\"api_version\":\""
-                    + Stripe.API_VERSION
-                    + "\","
-                    + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"rdr_123\",\"object\": \"terminal.reader\"}}}";
+        "{\"id\": \"evt_test_webhook\",\"api_version\":\""
+            + Stripe.API_VERSION
+            + "\","
+            + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"rdr_123\",\"object\": \"terminal.reader\"}}}";
 
     final Map<String, Object> options = new HashMap<>();
     options.put("payload", payload);

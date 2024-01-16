@@ -2,7 +2,6 @@ package com.stripe;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
-import com.stripe.model.StripeObject;
 import com.stripe.net.*;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
@@ -51,7 +50,7 @@ public class StripeClient {
    * @throws SignatureVerificationException if the verification fails.
    */
   public Event constructEvent(String payload, String sigHeader, String secret)
-          throws SignatureVerificationException {
+      throws SignatureVerificationException {
     Event event = Webhook.constructEvent(payload, sigHeader, secret);
     event.setResponseGetter(this.getResponseGetter());
     return event;
@@ -70,9 +69,8 @@ public class StripeClient {
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public Event constructEvent(
-          String payload, String sigHeader, String secret, long tolerance)
-          throws SignatureVerificationException {
+  public Event constructEvent(String payload, String sigHeader, String secret, long tolerance)
+      throws SignatureVerificationException {
     Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);
     event.setResponseGetter(this.getResponseGetter());
     return event;
