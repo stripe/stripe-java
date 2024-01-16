@@ -39,7 +39,7 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Secret>>() {}.getType());
   }
@@ -58,7 +58,7 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Secret.class);
   }
   /** Finds a secret in the secret store by name and scope. */
@@ -76,7 +76,7 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Secret.class);
   }
   /** Deletes a secret from the secret store by name and scope. */
@@ -95,7 +95,7 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Secret.class);
   }
 }

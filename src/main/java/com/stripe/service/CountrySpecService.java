@@ -45,7 +45,7 @@ public final class CountrySpecService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<CountrySpec>>() {}.getType());
   }
@@ -75,7 +75,7 @@ public final class CountrySpecService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CountrySpec.class);
   }
 }

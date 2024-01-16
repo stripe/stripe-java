@@ -42,6 +42,7 @@ public class ApiRequest extends BaseApiRequest {
         this.getPath(),
         this.getOptions(),
         this.getApiMode(),
-        newUsage, this.getParams());
+        newUsage,
+        this.getParams());
   }
 }

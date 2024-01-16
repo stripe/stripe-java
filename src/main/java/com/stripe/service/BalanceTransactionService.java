@@ -74,7 +74,7 @@ public final class BalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<BalanceTransaction>>() {}.getType());
   }
@@ -120,7 +120,7 @@ public final class BalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, BalanceTransaction.class);
   }
 }

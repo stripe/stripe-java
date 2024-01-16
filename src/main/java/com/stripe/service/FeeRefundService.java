@@ -68,7 +68,7 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, FeeRefund.class);
   }
   /**
@@ -120,7 +120,7 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, FeeRefund.class);
   }
   /**
@@ -169,7 +169,7 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<FeeRefund>>() {}.getType());
   }
@@ -237,7 +237,7 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, FeeRefund.class);
   }
 }

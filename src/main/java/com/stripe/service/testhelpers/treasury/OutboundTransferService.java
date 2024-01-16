@@ -62,7 +62,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, OutboundTransfer.class);
   }
   /**
@@ -107,7 +107,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, OutboundTransfer.class);
   }
   /**
@@ -159,7 +159,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, OutboundTransfer.class);
   }
 }

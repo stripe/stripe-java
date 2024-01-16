@@ -47,7 +47,7 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Registration>>() {}.getType());
   }
@@ -67,7 +67,7 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Registration.class);
   }
   /** Returns a Tax {@code Registration} object. */
@@ -95,7 +95,7 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Registration.class);
   }
   /**
@@ -142,7 +142,7 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Registration.class);
   }
 }

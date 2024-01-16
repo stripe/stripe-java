@@ -45,7 +45,7 @@ public final class CashBalanceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CashBalance.class);
   }
   /** Changes the settings on a customer’s cash balance. */
@@ -73,7 +73,7 @@ public final class CashBalanceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CashBalance.class);
   }
 }

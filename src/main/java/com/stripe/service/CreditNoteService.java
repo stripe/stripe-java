@@ -49,7 +49,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<CreditNote>>() {}.getType());
   }
@@ -115,7 +115,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CreditNote.class);
   }
   /** Retrieves the credit note object with the given identifier. */
@@ -142,7 +142,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CreditNote.class);
   }
   /** Updates an existing credit note. */
@@ -169,7 +169,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CreditNote.class);
   }
   /** Get a preview of a credit note without creating it. */
@@ -188,7 +188,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CreditNote.class);
   }
   /**
@@ -229,7 +229,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, CreditNote.class);
   }
 

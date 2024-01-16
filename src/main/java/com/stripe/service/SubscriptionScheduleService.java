@@ -51,7 +51,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<SubscriptionSchedule>>() {}.getType());
   }
@@ -92,7 +92,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**
@@ -134,7 +134,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /** Updates an existing subscription schedule. */
@@ -164,7 +164,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**
@@ -211,7 +211,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**
@@ -266,7 +266,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 }

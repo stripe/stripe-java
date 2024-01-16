@@ -70,7 +70,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<PaymentMethod>>() {}.getType());
   }
@@ -138,7 +138,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethod.class);
   }
   /**
@@ -188,7 +188,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethod.class);
   }
   /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
@@ -217,7 +217,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethod.class);
   }
   /**
@@ -271,7 +271,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethod.class);
   }
   /**
@@ -313,7 +313,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethod.class);
   }
 }

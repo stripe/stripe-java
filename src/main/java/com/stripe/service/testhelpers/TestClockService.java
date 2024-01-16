@@ -34,7 +34,7 @@ public final class TestClockService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, TestClock.class);
   }
   /** Retrieves a test clock. */
@@ -64,7 +64,7 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, TestClock.class);
   }
   /** Returns a list of your test clocks. */
@@ -91,7 +91,7 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<TestClock>>() {}.getType());
   }
@@ -111,7 +111,7 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, TestClock.class);
   }
   /**
@@ -138,7 +138,7 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, TestClock.class);
   }
 }

@@ -39,7 +39,7 @@ public final class ValueListService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ValueList.class);
   }
   /** Retrieves a {@code ValueList} object. */
@@ -68,7 +68,7 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ValueList.class);
   }
   /**
@@ -107,7 +107,7 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ValueList.class);
   }
   /**
@@ -146,7 +146,7 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<ValueList>>() {}.getType());
   }
@@ -166,7 +166,7 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ValueList.class);
   }
 }

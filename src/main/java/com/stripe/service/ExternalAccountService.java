@@ -37,7 +37,7 @@ public final class ExternalAccountService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ExternalAccount.class);
   }
   /** Retrieve a specified external account for a given account. */
@@ -70,7 +70,7 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ExternalAccount.class);
   }
   /**
@@ -131,7 +131,7 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ExternalAccount.class);
   }
   /** List external accounts for an account. */
@@ -162,7 +162,7 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
   }
@@ -185,7 +185,7 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, ExternalAccount.class);
   }
 }

@@ -50,7 +50,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<SetupIntent>>() {}.getType());
   }
@@ -102,7 +102,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SetupIntent.class);
   }
   /**
@@ -167,7 +167,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SetupIntent.class);
   }
   /** Updates a SetupIntent object. */
@@ -194,7 +194,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SetupIntent.class);
   }
   /**
@@ -245,7 +245,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SetupIntent.class);
   }
   /**
@@ -321,7 +321,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SetupIntent.class);
   }
   /** Verifies microdeposits on a SetupIntent object. */
@@ -353,7 +353,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, SetupIntent.class);
   }
 }

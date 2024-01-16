@@ -50,7 +50,7 @@ public final class FinancialAccountFeaturesService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
   /** Retrieves Features information associated with the FinancialAccount. */
@@ -83,7 +83,7 @@ public final class FinancialAccountFeaturesService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 }

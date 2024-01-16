@@ -43,7 +43,7 @@ public final class WebhookEndpointService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
   /** Retrieves the webhook endpoint with the given ID. */
@@ -74,7 +74,7 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
   /**
@@ -117,7 +117,7 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
   /** Returns a list of your webhook endpoints. */
@@ -145,7 +145,7 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType());
   }
@@ -181,7 +181,7 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
 }

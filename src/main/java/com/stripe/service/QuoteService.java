@@ -52,7 +52,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Quote>>() {}.getType());
   }
@@ -95,7 +95,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Retrieves the quote with the given ID. */
@@ -122,7 +122,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** A quote models prices and services for a customer. */
@@ -149,7 +149,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Accepts the specified quote. */
@@ -176,7 +176,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Cancels the quote. */
@@ -203,7 +203,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Finalizes the quote. */
@@ -230,7 +230,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Download the PDF for a finalized quote. */
@@ -257,7 +257,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request.addUsage("stripe_client");
+    request = request.withAddedUsage("stripe_client");
     return getResponseGetter().requestStream(request);
   }
 
