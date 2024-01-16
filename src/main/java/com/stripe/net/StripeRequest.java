@@ -7,7 +7,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -98,7 +97,7 @@ public class StripeRequest {
       Map<String, Object> params,
       RequestOptions options)
       throws StripeException {
-    this(method, url, params, options, new ArrayList<String>());
+    this(method, url, params, options, Collections.emptyList());
   }
 
   /**
