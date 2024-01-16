@@ -36,6 +36,7 @@ public class ApiRequest extends BaseApiRequest {
     if (this.getUsage() != null) {
       newUsage.addAll(this.getUsage());
     }
+    newUsage.add(usage);
     return new ApiRequest(
         this.getBaseAddress(),
         this.getMethod(),
