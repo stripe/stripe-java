@@ -12,14 +12,37 @@ import com.stripe.exception.oauth.UnsupportedGrantTypeException;
 import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.*;
 import com.stripe.model.oauth.OAuthError;
+import com.stripe.util.Stopwatch;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.Optional;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
+
+  private final RequestTelemetry requestTelemetry = new RequestTelemetry();
+
+  @FunctionalInterface
+  private interface RequestSendFunction<R> {
+    R apply(StripeRequest request) throws StripeException;
+  }
+
+  private <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
+      StripeRequest request, RequestSendFunction<T> send) throws StripeException {
+
+    Stopwatch stopwatch = Stopwatch.startNew();
+
+    T response = send.apply(request);
+
+    stopwatch.stop();
+
+    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed());
+
+    return response;
+  }
 
   /**
    * Initializes a new instance of the {@link LiveStripeResponseGetter} class with default
@@ -46,11 +69,18 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private StripeRequest toStripeRequest(ApiRequest apiRequest) throws StripeException {
     String fullUrl = fullUrl(apiRequest);
 
-    return new StripeRequest(
-        apiRequest.getMethod(),
-        fullUrl,
-        apiRequest.getParams(),
-        RequestOptions.merge(this.options, apiRequest.getOptions()));
+    Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
+    StripeRequest request =
+        new StripeRequest(
+            apiRequest.getMethod(),
+            fullUrl,
+            apiRequest.getParams(),
+            RequestOptions.merge(this.options, apiRequest.getOptions()));
+    if (telemetryHeaderValue.isPresent()) {
+      request =
+          request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
+    }
+    return request;
   }
 
   @Override
@@ -59,7 +89,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       throws StripeException {
 
     StripeRequest request = toStripeRequest(apiRequest);
-    StripeResponse response = httpClient.requestWithRetries(request);
+    StripeResponse response = sendWithTelemetry(request, r -> httpClient.requestWithRetries(r));
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -89,7 +119,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   @Override
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
     StripeRequest request = toStripeRequest(apiRequest);
-    StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
+    StripeResponseStream responseStream =
+        sendWithTelemetry(request, r -> httpClient.requestStreamWithRetries(r));
 
     int responseCode = responseStream.code();
 

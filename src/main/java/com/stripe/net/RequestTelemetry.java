@@ -26,12 +26,18 @@ class RequestTelemetry {
    * metrics, or if telemetry is disabled, then the returned {@code Optional} is empty.
    *
    * @param headers the request headers
+   * @deprecated Use {$ling {@link #pollPayload()} instead.
    */
+  @Deprecated
   public Optional<String> getHeaderValue(HttpHeaders headers) {
     if (headers.firstValue(HEADER_NAME).isPresent()) {
       return Optional.empty();
     }
 
+    return this.pollPayload();
+  }
+
+  public Optional<String> pollPayload() {
     RequestMetrics requestMetrics = prevRequestMetrics.poll();
     if (requestMetrics == null) {
       return Optional.empty();

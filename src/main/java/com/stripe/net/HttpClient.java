@@ -3,13 +3,11 @@ package com.stripe.net;
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
-import com.stripe.util.Stopwatch;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 /** Base abstract class for HTTP clients used to send requests to Stripe's API. */
@@ -19,8 +17,6 @@ public abstract class HttpClient {
 
   /** Minimum sleep time between tries to send HTTP requests after network failure. */
   public static final Duration minNetworkRetriesDelay = Duration.ofMillis(500);
-
-  private final RequestTelemetry requestTelemetry = new RequestTelemetry();
 
   /** A value indicating whether the client should sleep between automatic request retries. */
   boolean networkRetriesSleep = true;
@@ -53,47 +49,27 @@ public abstract class HttpClient {
     R apply(StripeRequest request) throws StripeException;
   }
 
-  private <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
-      StripeRequest request, RequestSendFunction<T> send) throws StripeException {
-    Optional<String> telemetryHeaderValue = requestTelemetry.getHeaderValue(request.headers());
-    if (telemetryHeaderValue.isPresent()) {
-      request =
-          request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
-    }
-
-    Stopwatch stopwatch = Stopwatch.startNew();
-
-    T response = send.apply(request);
-
-    stopwatch.stop();
-
-    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed());
-
-    return response;
-  }
-
   /**
-   * Sends the given request to Stripe's API, handling telemetry if not disabled.
-   *
    * @param request the request
    * @return the response
    * @throws StripeException If the request fails for any reason
+   * @deprecated Use {@link #request(StripeRequest)} instead.
    */
+  @Deprecated
   public StripeResponse requestWithTelemetry(StripeRequest request) throws StripeException {
-    return sendWithTelemetry(request, this::request);
+    return this.request(request);
   }
 
   /**
-   * Sends the given request to Stripe's API, streaming the response, and handling telemetry if not
-   * disabled.
-   *
    * @param request the request
    * @return the response
    * @throws StripeException If the request fails for any reason
+   * @deprecated Use {@link #requestStream(StripeRequest)} instead.
    */
+  @Deprecated
   public StripeResponseStream requestStreamWithTelemetry(StripeRequest request)
       throws StripeException {
-    return sendWithTelemetry(request, this::requestStream);
+    return this.requestStream(request);
   }
 
   public <T extends AbstractStripeResponse<?>> T sendWithRetries(
@@ -142,7 +118,7 @@ public abstract class HttpClient {
    * @throws StripeException If the request fails for any reason
    */
   public StripeResponse requestWithRetries(StripeRequest request) throws StripeException {
-    return sendWithRetries(request, (r) -> this.requestWithTelemetry(r));
+    return sendWithRetries(request, (r) -> this.request(r));
   }
 
   /**
@@ -155,7 +131,7 @@ public abstract class HttpClient {
    */
   public StripeResponseStream requestStreamWithRetries(StripeRequest request)
       throws StripeException {
-    return sendWithRetries(request, (r) -> this.requestStreamWithTelemetry(r));
+    return sendWithRetries(request, (r) -> this.requestStream(r));
   }
 
   /**
