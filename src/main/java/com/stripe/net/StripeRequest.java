@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Value;
 import lombok.experimental.Accessors;
 
@@ -52,6 +53,7 @@ public class StripeRequest {
   RequestOptions options;
 
   /** List of tracked behaviors associated with this request. */
+  @Getter(AccessLevel.PACKAGE)
   List<String> usage;
 
   /**
