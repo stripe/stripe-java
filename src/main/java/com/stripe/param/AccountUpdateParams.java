@@ -389,6 +389,26 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * A card or bank account to attach to the account for receiving <a
+     * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
+     * to use it for top-ups). You can provide either a token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+     * external_account} parameter for <a
+     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
+     * <br>
+     * <br>
+     * By default, providing an external account sets it as the new default external account for its
+     * currency, and deletes the old default if one exists. To add additional external accounts
+     * without replacing the existing default for the currency, use the <a
+     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
+     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
+     */
+    public Builder setExternalAccount(EmptyParam externalAccount) {
+      this.externalAccount = externalAccount;
+      return this;
+    }
+
+    /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
      * AccountUpdateParams#extraParams} for the field documentation.

@@ -60,6 +60,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
   }
@@ -84,6 +85,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /** Retrieves the details of a Climate order object with the given ID. */
@@ -110,6 +112,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /** Updates the specified order by setting the values of the parameters passed. */
@@ -136,6 +139,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /**
@@ -186,6 +190,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
 }

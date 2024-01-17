@@ -38,6 +38,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Authorization.class);
   }
   /** Capture a test-mode authorization. */
@@ -70,6 +71,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Authorization.class);
   }
   /** Expire a test-mode Authorization. */
@@ -101,6 +103,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Authorization.class);
   }
   /** Increment a test-mode Authorization. */
@@ -124,6 +127,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Authorization.class);
   }
   /** Reverse a test-mode Authorization. */
@@ -156,6 +160,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Authorization.class);
   }
 }
