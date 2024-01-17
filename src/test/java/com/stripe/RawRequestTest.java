@@ -1,4 +1,4 @@
-package com.stripe.net;
+package com.stripe;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -10,6 +10,14 @@ import com.stripe.Stripe;
 import com.stripe.StripeClient;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
+import com.stripe.net.ApiMode;
+import com.stripe.net.HttpURLConnectionClient;
+import com.stripe.net.LiveStripeResponseGetter;
+import com.stripe.net.RawRequestOptions;
+import com.stripe.net.StripeResponse;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.net.ApiResource.RequestMethod;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,21 +27,25 @@ import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
-public class RawRequestOptionsTest extends BaseStripeTest {
-  public static MockWebServer server;
-  public static StripeClient client;
+public class RawRequestTest extends BaseStripeTest {
+  private static MockWebServer server;
+  private static StripeClient client;
+  private StripeResponseGetter responseGetter;
 
   @BeforeEach
   void setUp() throws IOException {
     server = new MockWebServer();
     server.start();
     Stripe.overrideApiBase(server.url("").toString());
-    client =
+    responseGetter = Mockito.spy(new LiveStripeResponseGetter(
         StripeClient.builder()
             .setApiKey(TEST_API_KEY)
             .setApiBase(server.url("").toString())
-            .build();
+            .buildOptions()
+        , new HttpURLConnectionClient()));
+    client = new StripeClient(responseGetter);
   }
 
   @AfterEach
@@ -57,7 +69,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     final StripeResponse response =
         Stripe.rawRequest(
-            ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
+            RequestMethod.POST, "/v1/customers", "description=test+customer", options);
 
     assertNotNull(response);
     assertEquals(200, response.code());
@@ -83,7 +95,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     final StripeResponse response =
         Stripe.rawRequest(
-            ApiResource.RequestMethod.POST,
+            RequestMethod.POST,
             "/v1/subscription_schedules",
             "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
             options);
@@ -112,7 +124,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(apiMode, options.getApiMode());
 
     final StripeResponse response =
-        Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/subscription_schedules", "", options);
+        Stripe.rawRequest(RequestMethod.GET, "/v1/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));
@@ -140,7 +152,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(additionalHeaders, options.getAdditionalHeaders());
 
     final StripeResponse response =
-        Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", null, options);
+        Stripe.rawRequest(RequestMethod.GET, "/v1/customers", null, options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals("bar", request.getHeader("foo"));
@@ -166,7 +178,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     final StripeResponse response =
         Stripe.rawRequest(
-            ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
+            RequestMethod.POST, "/v1/customers", "description=test+customer", options);
 
     assertNotNull(response);
     assertEquals(200, response.code());
@@ -180,7 +192,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
   @Test
   public void testRaisesErrorWhenGetRequestAndContentIsNonNullGlobal() throws StripeException {
     try {
-      Stripe.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", "key=value!", null);
+      Stripe.rawRequest(RequestMethod.GET, "/v1/customers", "key=value!", null);
       fail("Expected illegal argument exception.");
     } catch (IllegalArgumentException e) {
       assertTrue(e.getMessage().contains("content is not allowed for non-POST requests."));
@@ -203,7 +215,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     final StripeResponse response =
         client.rawRequest(
-            ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
+            RequestMethod.POST, "/v1/customers", "description=test+customer", options);
 
     assertNotNull(response);
     assertEquals(200, response.code());
@@ -229,7 +241,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     final StripeResponse response =
         client.rawRequest(
-            ApiResource.RequestMethod.POST,
+            RequestMethod.POST,
             "/v1/subscription_schedules",
             "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
             options);
@@ -258,7 +270,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(apiMode, options.getApiMode());
 
     final StripeResponse response =
-        client.rawRequest(ApiResource.RequestMethod.GET, "/v1/subscription_schedules", "", options);
+        client.rawRequest(RequestMethod.GET, "/v1/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));
@@ -286,7 +298,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(additionalHeaders, options.getAdditionalHeaders());
 
     final StripeResponse response =
-        client.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", null, options);
+        client.rawRequest(RequestMethod.GET, "/v1/customers", null, options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals("bar", request.getHeader("foo"));
@@ -312,7 +324,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
 
     final StripeResponse response =
         client.rawRequest(
-            ApiResource.RequestMethod.POST, "/v1/customers", "description=test+customer", options);
+            RequestMethod.POST, "/v1/customers", "description=test+customer", options);
 
     assertNotNull(response);
     assertEquals(200, response.code());
@@ -321,12 +333,13 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     Customer customer = (Customer) client.deserialize(response.body());
     assertTrue(customer.getId().startsWith("cus_"));
     assertEquals("test customer", customer.getDescription());
+    assertTrue(Mockito.mockingDetails(responseGetter).getInvocations().stream().count() > 0);
   }
 
   @Test
   public void testRaisesErrorWhenGetRequestAndContentIsNonNullClient() throws StripeException {
     try {
-      client.rawRequest(ApiResource.RequestMethod.GET, "/v1/customers", "key=value!", null);
+      client.rawRequest(RequestMethod.GET, "/v1/customers", "key=value!", null);
       fail("Expected illegal argument exception.");
     } catch (IllegalArgumentException e) {
       assertTrue(e.getMessage().contains("content is not allowed for non-POST requests."));
