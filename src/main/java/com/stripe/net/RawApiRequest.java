@@ -16,7 +16,7 @@ public class RawApiRequest extends BaseApiRequest {
       String rawContent,
       RawRequestOptions options,
       ApiMode apiMode) {
-    super(baseAddress, method, path, options, apiMode);
+    super(baseAddress, method, path, options, apiMode, null);
     this.rawContent = rawContent;
     this.options = options;
   }
