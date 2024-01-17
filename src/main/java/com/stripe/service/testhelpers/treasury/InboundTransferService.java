@@ -58,6 +58,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, InboundTransfer.class);
   }
   /**
@@ -102,6 +103,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, InboundTransfer.class);
   }
   /**
@@ -144,6 +146,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, InboundTransfer.class);
   }
 }

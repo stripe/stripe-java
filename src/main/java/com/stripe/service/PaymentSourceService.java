@@ -53,6 +53,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<PaymentSource>>() {}.getType());
   }
@@ -90,6 +91,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Retrieve a specified source for a given customer. */
@@ -122,6 +124,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Update a specified source for a given customer. */
@@ -154,6 +157,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Delete a specified source for a given customer. */
@@ -186,6 +190,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentSource.class);
   }
   /** Verify a specified bank account for a given customer. */
@@ -218,6 +223,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, BankAccount.class);
   }
 }

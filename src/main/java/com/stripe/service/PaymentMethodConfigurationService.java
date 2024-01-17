@@ -49,6 +49,7 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(
             request, new TypeToken<StripeCollection<PaymentMethodConfiguration>>() {}.getType());
@@ -79,6 +80,7 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
   /** Retrieve payment method configuration. */
@@ -112,6 +114,7 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
   /** Update payment method configuration. */
@@ -144,6 +147,7 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 }

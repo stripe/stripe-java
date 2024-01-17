@@ -47,6 +47,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<PaymentLink>>() {}.getType());
   }
@@ -66,6 +67,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentLink.class);
   }
   /** Retrieve a payment link. */
@@ -94,6 +96,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentLink.class);
   }
   /** Updates a payment link. */
@@ -122,6 +125,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentLink.class);
   }
 

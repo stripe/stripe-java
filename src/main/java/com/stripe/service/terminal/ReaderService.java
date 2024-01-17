@@ -41,6 +41,7 @@ public final class ReaderService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /** Retrieves a {@code Reader} object. */
@@ -67,6 +68,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /**
@@ -105,6 +107,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /** Returns a list of {@code Reader} objects. */
@@ -131,6 +134,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Reader>>() {}.getType());
   }
@@ -149,6 +153,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /** Cancels the current reader action. */
@@ -177,6 +182,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /** Initiates an input collection flow on a Reader. */
@@ -270,6 +276,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /** Initiates a setup intent flow on a Reader. */
@@ -292,6 +299,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /** Initiates a refund on a Reader. */
@@ -321,6 +329,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
   /** Sets reader display to show cart details. */
@@ -343,6 +352,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Reader.class);
   }
 }
