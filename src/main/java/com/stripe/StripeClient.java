@@ -584,7 +584,6 @@ public class StripeClient {
    * @param content the body of the request as a string
    * @return the JSON response as a string
    */
-  @Deprecated
   public StripeResponse rawRequest(
       final ApiResource.RequestMethod method, final String relativeUrl, final String content)
       throws StripeException {
