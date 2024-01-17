@@ -48,6 +48,7 @@ public class BaseStripeTest {
   private String origClientId;
   private String origUploadBase;
   private String origStripeVersion;
+  protected final static String TEST_API_KEY = "sk_test_123";
 
   static {
     // To only stop stripe-mock process after all the test classes.
@@ -121,7 +122,7 @@ public class BaseStripeTest {
 
     Stripe.overrideApiBase("http://localhost:" + port);
     Stripe.overrideUploadBase("http://localhost:" + port);
-    Stripe.apiKey = "sk_test_123";
+    Stripe.apiKey = TEST_API_KEY;
     Stripe.clientId = "ca_123";
     Stripe.enableTelemetry = false;
 
