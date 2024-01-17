@@ -48,6 +48,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
@@ -67,6 +68,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Configuration.class);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
@@ -98,6 +100,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Configuration.class);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
@@ -128,6 +131,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Configuration.class);
   }
 }

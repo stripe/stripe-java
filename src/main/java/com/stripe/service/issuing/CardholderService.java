@@ -59,6 +59,7 @@ public final class CardholderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Cardholder>>() {}.getType());
   }
@@ -78,6 +79,7 @@ public final class CardholderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Cardholder.class);
   }
   /** Retrieves an Issuing {@code Cardholder} object. */
@@ -106,6 +108,7 @@ public final class CardholderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Cardholder.class);
   }
   /**
@@ -145,6 +148,7 @@ public final class CardholderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Cardholder.class);
   }
 }

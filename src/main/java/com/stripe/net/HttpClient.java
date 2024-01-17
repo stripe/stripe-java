@@ -48,7 +48,6 @@ public abstract class HttpClient {
   private interface RequestSendFunction<R> {
     R apply(StripeRequest request) throws StripeException;
   }
-
   /**
    * @param request the request
    * @return the response

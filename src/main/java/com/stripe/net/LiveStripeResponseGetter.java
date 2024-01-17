@@ -16,6 +16,7 @@ import com.stripe.util.Stopwatch;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,7 +32,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
-      StripeRequest request, RequestSendFunction<T> send) throws StripeException {
+      StripeRequest request, List<String> usage, RequestSendFunction<T> send)
+      throws StripeException {
 
     Stopwatch stopwatch = Stopwatch.startNew();
 
@@ -39,7 +41,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     stopwatch.stop();
 
-    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed());
+    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed(), usage);
 
     return response;
   }
@@ -89,7 +91,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       throws StripeException {
 
     StripeRequest request = toStripeRequest(apiRequest);
-    StripeResponse response = sendWithTelemetry(request, r -> httpClient.requestWithRetries(r));
+    StripeResponse response =
+        sendWithTelemetry(request, apiRequest.getUsage(), r -> httpClient.requestWithRetries(r));
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -120,7 +123,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
     StripeRequest request = toStripeRequest(apiRequest);
     StripeResponseStream responseStream =
-        sendWithTelemetry(request, r -> httpClient.requestStreamWithRetries(r));
+        sendWithTelemetry(
+            request, apiRequest.getUsage(), r -> httpClient.requestStreamWithRetries(r));
 
     int responseCode = responseStream.code();
 

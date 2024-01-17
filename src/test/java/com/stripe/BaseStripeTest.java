@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import lombok.Cleanup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -189,6 +190,27 @@ public class BaseStripeTest {
       RequestOptions options)
       throws StripeException {
 
+    verifyRequest(
+        (req) -> {
+          assertEquals(baseAddress, req.getBaseAddress());
+          assertEquals(method, req.getMethod());
+          assertEquals(path, req.getPath());
+          if (params != null) {
+            final String msg =
+                String.format(
+                    "Params did not match - expected: %s, received: %s", params, req.getParams());
+            assertTrue(msg, compareParamObjects(params, req.getParams()));
+          }
+          if (options != null) {
+            assertEquals(options, req.getOptions());
+          }
+        });
+  }
+
+  @SuppressWarnings("AssertionFailureIgnored")
+  public static <T extends StripeObjectInterface> void verifyRequest(
+      Consumer<ApiRequest> assertOnApiRequest) throws StripeException {
+
     ArgumentCaptor<ApiRequest> requestCaptor = ArgumentCaptor.forClass(ApiRequest.class);
     List<AssertionError> exceptions = new ArrayList<AssertionError>();
     try {
@@ -200,19 +222,35 @@ public class BaseStripeTest {
 
     for (ApiRequest req : requestCaptor.getAllValues()) {
       try {
-        assertEquals(baseAddress, req.getBaseAddress());
-        assertEquals(method, req.getMethod());
-        assertEquals(path, req.getPath());
-        if (params != null) {
-          final String msg =
-              String.format(
-                  "Params did not match - expected: %s, received: %s", params, req.getParams());
-          assertTrue(msg, compareParamObjects(params, req.getParams()));
-        }
-        if (options != null) {
-          assertEquals(options, req.getOptions());
-        }
-        // If we get here, we have found a request that triggered no assertion failures.
+        assertOnApiRequest.accept(req);
+        return;
+      } catch (AssertionError e) {
+        exceptions.add(e);
+      }
+    }
+
+    // If we get here, each request failed an assertion.
+    if (exceptions.size() != 0) {
+      // Combine all exceptions into a single message
+      String msg = "";
+      for (AssertionError e : exceptions) {
+        msg += e.getMessage() + "\n\n";
+      }
+      throw new AssertionError(msg);
+    }
+  }
+
+  @SuppressWarnings("AssertionFailureIgnored")
+  public static <T extends StripeObjectInterface> void verifyStripeRequest(
+      Consumer<StripeRequest> assertOnStripeRequest) throws StripeException {
+
+    ArgumentCaptor<StripeRequest> requestCaptor = ArgumentCaptor.forClass(StripeRequest.class);
+    List<AssertionError> exceptions = new ArrayList<AssertionError>();
+    Mockito.verify(httpClientSpy, Mockito.atLeastOnce()).request(requestCaptor.capture());
+
+    for (StripeRequest req : requestCaptor.getAllValues()) {
+      try {
+        assertOnStripeRequest.accept(req);
         return;
       } catch (AssertionError e) {
         exceptions.add(e);
