@@ -5,19 +5,15 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.stripe.BaseStripeTest;
-import com.stripe.Stripe;
-import com.stripe.StripeClient;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.net.ApiMode;
+import com.stripe.net.ApiResource.RequestMethod;
 import com.stripe.net.HttpURLConnectionClient;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.RawRequestOptions;
 import com.stripe.net.StripeResponse;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.net.ApiResource.RequestMethod;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +35,14 @@ public class RawRequestTest extends BaseStripeTest {
     server = new MockWebServer();
     server.start();
     Stripe.overrideApiBase(server.url("").toString());
-    responseGetter = Mockito.spy(new LiveStripeResponseGetter(
-        StripeClient.builder()
-            .setApiKey(TEST_API_KEY)
-            .setApiBase(server.url("").toString())
-            .buildOptions()
-        , new HttpURLConnectionClient()));
+    responseGetter =
+        Mockito.spy(
+            new LiveStripeResponseGetter(
+                StripeClient.builder()
+                    .setApiKey(TEST_API_KEY)
+                    .setApiBase(server.url("").toString())
+                    .buildOptions(),
+                new HttpURLConnectionClient()));
     client = new StripeClient(responseGetter);
   }
 
