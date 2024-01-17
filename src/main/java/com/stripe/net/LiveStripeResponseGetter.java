@@ -185,7 +185,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       }
     }
 
-    StripeResponse response = httpClient.requestWithRetries(request);
+    StripeResponse response =
+        sendWithTelemetry(request, apiRequest.getUsage(), r -> httpClient.requestWithRetries(r));
 
     int responseCode = response.code();
 

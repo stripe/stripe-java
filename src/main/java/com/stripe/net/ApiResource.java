@@ -122,8 +122,10 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
   public static StripeResponse rawRequest(
       ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
       throws StripeException {
-    return globalResponseGetter.rawRequest(
-        new RawApiRequest(BaseAddress.API, method, url, content, options, options.getApiMode()));
+    RawApiRequest req =
+        new RawApiRequest(BaseAddress.API, method, url, content, options, options.getApiMode());
+    req = req.addUsage("raw_request");
+    return globalResponseGetter.rawRequest(req);
   }
 
   /**
