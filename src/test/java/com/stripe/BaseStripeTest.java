@@ -48,7 +48,7 @@ public class BaseStripeTest {
   private String origClientId;
   private String origUploadBase;
   private String origStripeVersion;
-  protected final static String TEST_API_KEY = "sk_test_123";
+  protected static final String TEST_API_KEY = "sk_test_123";
 
   static {
     // To only stop stripe-mock process after all the test classes.

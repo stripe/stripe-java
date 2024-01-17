@@ -8,7 +8,6 @@ import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-import com.stripe.*;
 
 public abstract class Stripe {
   public static final int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;
@@ -222,7 +221,8 @@ public abstract class Stripe {
    * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
    * @param content the body of the request as a string
    * @return the JSON response as a string
-   * @deprecated Use {@link #com.stripe.StripeClient#rawRequest(ApiResource.RequestMethod, String, String)} instead.
+   * @deprecated Use {@link com.stripe.StripeClient#rawRequest(ApiResource.RequestMethod, String,
+   *     String)} instead.
    */
   @Deprecated
   public static StripeResponse rawRequest(
@@ -242,7 +242,8 @@ public abstract class Stripe {
    * @param content the body of the request as a string
    * @param options the special modifiers of the request
    * @return the JSON response as a string
-   * @deprecated Use {@link #com.stripe.StripeClient#rawRequest(ApiResource.RequestMethod, String, String, RawRequestOptions)} instead.
+   * @deprecated Use {@link com.stripe.StripeClient#rawRequest(ApiResource.RequestMethod, String,
+   *     String, RawRequestOptions)} instead.
    */
   @Deprecated
   public static StripeResponse rawRequest(

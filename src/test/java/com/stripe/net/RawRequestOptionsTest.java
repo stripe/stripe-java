@@ -29,7 +29,11 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     server = new MockWebServer();
     server.start();
     Stripe.overrideApiBase(server.url("").toString());
-    client = StripeClient.builder().setApiKey(TEST_API_KEY).setApiBase(server.url("").toString()).build();
+    client =
+        StripeClient.builder()
+            .setApiKey(TEST_API_KEY)
+            .setApiBase(server.url("").toString())
+            .build();
   }
 
   @AfterEach
