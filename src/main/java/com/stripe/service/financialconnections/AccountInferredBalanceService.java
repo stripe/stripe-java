@@ -50,6 +50,7 @@ public final class AccountInferredBalanceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<AccountInferredBalance>>() {}.getType());
   }

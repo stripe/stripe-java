@@ -409,6 +409,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**

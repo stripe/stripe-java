@@ -100,6 +100,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @SerializedName("cashapp")
   Cashapp cashapp;
 
+  @SerializedName("customer_balance")
+  CustomerBalance customerBalance;
+
   @SerializedName("eps")
   Eps eps;
 
@@ -889,6 +892,49 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Cashapp extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomerBalance extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2019,6 +2065,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cartesBancaires, responseGetter);
     trySetResponseGetter(cashapp, responseGetter);
+    trySetResponseGetter(customerBalance, responseGetter);
     trySetResponseGetter(eps, responseGetter);
     trySetResponseGetter(fpx, responseGetter);
     trySetResponseGetter(giropay, responseGetter);
