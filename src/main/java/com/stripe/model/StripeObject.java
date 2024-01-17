@@ -100,7 +100,7 @@ public abstract class StripeObject implements StripeObjectInterface {
     return deserializeStripeObject(eventDataObjectJson, ApiResource.getGlobalResponseGetter());
   }
 
-  static StripeObject deserializeStripeObject(
+  public static StripeObject deserializeStripeObject(
       JsonObject eventDataObjectJson, StripeResponseGetter responseGetter) {
     String type = eventDataObjectJson.getAsJsonObject().get("object").getAsString();
     Class<? extends StripeObject> cl = EventDataClassLookup.classLookup.get(type);

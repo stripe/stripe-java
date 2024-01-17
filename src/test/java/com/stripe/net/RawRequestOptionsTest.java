@@ -172,7 +172,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(200, response.code());
     assertTrue(response.body().length() > 0);
 
-    Customer customer = (Customer) Stripe.deserialize(response.body());
+    Customer customer = (Customer) client.deserialize(response.body());
     assertTrue(customer.getId().startsWith("cus_"));
     assertEquals("test customer", customer.getDescription());
   }
@@ -318,7 +318,7 @@ public class RawRequestOptionsTest extends BaseStripeTest {
     assertEquals(200, response.code());
     assertTrue(response.body().length() > 0);
 
-    Customer customer = (Customer) Stripe.deserialize(response.body());
+    Customer customer = (Customer) client.deserialize(response.body());
     assertTrue(customer.getId().startsWith("cus_"));
     assertEquals("test customer", customer.getDescription());
   }

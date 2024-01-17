@@ -620,11 +620,8 @@ public class StripeClient {
 
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */
   public StripeObject deserialize(String rawJson) throws StripeException {
-    if (rawJson == null) {
-      throw new IllegalArgumentException("rawJson cannot be null");
-    }
-
     return StripeObject.deserializeStripeObject(
-        ApiResource.GSON.fromJson(rawJson, JsonObject.class));
+        ApiResource.GSON.fromJson(rawJson, JsonObject.class).getAsJsonObject(),
+        this.getResponseGetter());
   }
 }
