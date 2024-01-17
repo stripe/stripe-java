@@ -17,7 +17,7 @@ class BaseApiRequest {
   // TODO (major): Remove setter and make final
   private List<String> usage;
 
-  /** @deprecated Use {@link com.stripe.net.ApiRequest#withAddedUsage(String)} instead. */
+  /** @deprecated Use {@link com.stripe.net.ApiRequest#addUsage(String)} instead. */
   @Deprecated
   public void setUsage(List<String> usage) {
     this.usage = usage;
