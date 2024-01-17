@@ -77,8 +77,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
             apiRequest.getMethod(),
             fullUrl,
             apiRequest.getParams(),
-            RequestOptions.merge(this.options, apiRequest.getOptions()),
-            apiRequest.getUsage());
+            RequestOptions.merge(this.options, apiRequest.getOptions()));
     if (telemetryHeaderValue.isPresent()) {
       request =
           request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
