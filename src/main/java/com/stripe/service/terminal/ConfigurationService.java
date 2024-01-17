@@ -34,7 +34,7 @@ public final class ConfigurationService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Configuration.class);
   }
   /** Retrieves a {@code Configuration} object. */
@@ -65,7 +65,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Configuration.class);
   }
   /** Updates a new {@code Configuration} object. */
@@ -95,7 +95,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Configuration.class);
   }
   /** Returns a list of {@code Configuration} objects. */
@@ -123,7 +123,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
@@ -151,7 +151,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Configuration.class);
   }
 }

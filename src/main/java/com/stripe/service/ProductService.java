@@ -43,7 +43,7 @@ public final class ProductService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Product.class);
   }
   /**
@@ -86,7 +86,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Product.class);
   }
   /**
@@ -125,7 +125,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Product.class);
   }
   /**
@@ -164,7 +164,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
@@ -183,7 +183,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Product.class);
   }
   /**
@@ -216,7 +216,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
   }

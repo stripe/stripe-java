@@ -43,7 +43,7 @@ public final class CouponService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Coupon.class);
   }
   /** Retrieves the coupon with the given ID. */
@@ -70,7 +70,7 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Coupon.class);
   }
   /**
@@ -109,7 +109,7 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Coupon.class);
   }
   /** Returns a list of your coupons. */
@@ -136,7 +136,7 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Coupon>>() {}.getType());
   }
@@ -203,7 +203,7 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Coupon.class);
   }
 }

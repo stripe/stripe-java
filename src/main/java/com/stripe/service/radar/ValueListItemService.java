@@ -32,7 +32,7 @@ public final class ValueListItemService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, ValueListItem.class);
   }
   /** Retrieves a {@code ValueListItem} object. */
@@ -61,7 +61,7 @@ public final class ValueListItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, ValueListItem.class);
   }
   /**
@@ -87,7 +87,7 @@ public final class ValueListItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<ValueListItem>>() {}.getType());
   }
@@ -111,7 +111,7 @@ public final class ValueListItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, ValueListItem.class);
   }
 }

@@ -46,7 +46,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Creates a Tax {@code Transaction} from a calculation. */
@@ -67,7 +67,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Partially or fully reverses a previously created {@code Transaction}. */
@@ -86,7 +86,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
 

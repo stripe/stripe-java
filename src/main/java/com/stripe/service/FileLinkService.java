@@ -47,7 +47,7 @@ public final class FileLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<FileLink>>() {}.getType());
   }
@@ -67,7 +67,7 @@ public final class FileLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FileLink.class);
   }
   /** Retrieves the file link with the given ID. */
@@ -94,7 +94,7 @@ public final class FileLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FileLink.class);
   }
   /** Updates an existing file link object. Expired links can no longer be updated. */
@@ -121,7 +121,7 @@ public final class FileLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FileLink.class);
   }
 }

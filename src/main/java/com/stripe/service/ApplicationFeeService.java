@@ -58,7 +58,7 @@ public final class ApplicationFeeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<ApplicationFee>>() {}.getType());
   }
@@ -100,7 +100,7 @@ public final class ApplicationFeeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, ApplicationFee.class);
   }
 

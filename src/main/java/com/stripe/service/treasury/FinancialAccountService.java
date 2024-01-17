@@ -48,7 +48,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<FinancialAccount>>() {}.getType());
   }
@@ -74,7 +74,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FinancialAccount.class);
   }
   /** Retrieves the details of a FinancialAccount. */
@@ -106,7 +106,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FinancialAccount.class);
   }
   /** Updates the details of a FinancialAccount. */
@@ -138,7 +138,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FinancialAccount.class);
   }
 

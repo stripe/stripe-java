@@ -31,7 +31,7 @@ public class ApiRequest extends BaseApiRequest {
     this(baseAddress, method, path, options, apiMode, null, params);
   }
 
-  public ApiRequest withAddedUsage(String usage) {
+  public ApiRequest addUsage(String usage) {
     List<String> newUsage = new ArrayList<>();
     if (this.getUsage() != null) {
       newUsage.addAll(this.getUsage());

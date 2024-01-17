@@ -62,7 +62,7 @@ public final class ReviewService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Review>>() {}.getType());
   }
@@ -90,7 +90,7 @@ public final class ReviewService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Review.class);
   }
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
@@ -117,7 +117,7 @@ public final class ReviewService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Review.class);
   }
 }

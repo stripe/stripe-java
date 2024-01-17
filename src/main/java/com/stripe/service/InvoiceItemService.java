@@ -39,7 +39,7 @@ public final class InvoiceItemService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, InvoiceItem.class);
   }
   /** Retrieves the invoice item with the given ID. */
@@ -68,7 +68,7 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, InvoiceItem.class);
   }
   /**
@@ -109,7 +109,7 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, InvoiceItem.class);
   }
   /**
@@ -148,7 +148,7 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<InvoiceItem>>() {}.getType());
   }
@@ -174,7 +174,7 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.withAddedUsage("stripe_client");
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, InvoiceItem.class);
   }
 }
