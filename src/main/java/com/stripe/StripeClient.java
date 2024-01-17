@@ -1,6 +1,5 @@
 package com.stripe;
 
-import com.google.gson.JsonObject;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
 import com.stripe.net.*;
@@ -620,8 +619,6 @@ public class StripeClient {
 
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */
   public StripeObject deserialize(String rawJson) throws StripeException {
-    return StripeObject.deserializeStripeObject(
-        ApiResource.GSON.fromJson(rawJson, JsonObject.class).getAsJsonObject(),
-        this.getResponseGetter());
+    return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter());
   }
 }
