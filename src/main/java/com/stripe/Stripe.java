@@ -222,6 +222,7 @@ public abstract class Stripe {
    * @param content the body of the request as a string
    * @return the JSON response as a string
    */
+  @Deprecated
   public static StripeResponse rawRequest(
       final ApiResource.RequestMethod method, final String relativeUrl, final String content)
       throws StripeException {
@@ -240,6 +241,7 @@ public abstract class Stripe {
    * @param options the special modifiers of the request
    * @return the JSON response as a string
    */
+  @Deprecated
   public static StripeResponse rawRequest(
       final ApiResource.RequestMethod method,
       final String relativeUrl,
@@ -254,6 +256,7 @@ public abstract class Stripe {
   }
 
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */
+  @Deprecated
   public static StripeObject deserialize(String rawJson) throws StripeException {
     if (rawJson == null) {
       throw new IllegalArgumentException("rawJson cannot be null");

@@ -1,5 +1,8 @@
 package com.stripe;
 
+import com.google.gson.JsonObject;
+import com.stripe.exception.StripeException;
+import com.stripe.model.StripeObject;
 import com.stripe.net.*;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
@@ -569,5 +572,57 @@ public class StripeClient {
           filesBase,
           connectBase);
     }
+  }
+
+  /**
+   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
+   * API. This method is useful for interacting with endpoints that are not covered yet in
+   * stripe-java.
+   *
+   * @param method the HTTP method
+   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
+   * @param content the body of the request as a string
+   * @return the JSON response as a string
+   */
+  @Deprecated
+  public StripeResponse rawRequest(
+      final ApiResource.RequestMethod method, final String relativeUrl, final String content)
+      throws StripeException {
+    RawRequestOptions options = RawRequestOptions.builder().build();
+    return rawRequest(method, relativeUrl, content, options);
+  }
+
+  /**
+   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
+   * API. This method is useful for interacting with endpoints that are not covered yet in
+   * stripe-java.
+   *
+   * @param method the HTTP method
+   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
+   * @param content the body of the request as a string
+   * @param options the special modifiers of the request
+   * @return the JSON response as a string
+   */
+  public StripeResponse rawRequest(
+      final ApiResource.RequestMethod method,
+      final String relativeUrl,
+      final String content,
+      final RawRequestOptions options)
+      throws StripeException {
+    if (method != ApiResource.RequestMethod.POST && content != null && !content.equals("")) {
+      throw new IllegalArgumentException(
+          "content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");
+    }
+    return this.getResponseGetter().rawRequest(new RawApiRequest(BaseAddress.API, method, relativeUrl, content, options, options.getApiMode()));
+  }
+
+  /** Deserializes StripeResponse returned by rawRequest into a similar class. */
+  public StripeObject deserialize(String rawJson) throws StripeException {
+    if (rawJson == null) {
+      throw new IllegalArgumentException("rawJson cannot be null");
+    }
+
+    return StripeObject.deserializeStripeObject(
+        ApiResource.GSON.fromJson(rawJson, JsonObject.class));
   }
 }
