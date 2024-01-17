@@ -12,14 +12,39 @@ import com.stripe.exception.oauth.UnsupportedGrantTypeException;
 import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.*;
 import com.stripe.model.oauth.OAuthError;
+import com.stripe.util.Stopwatch;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
+
+  private final RequestTelemetry requestTelemetry = new RequestTelemetry();
+
+  @FunctionalInterface
+  private interface RequestSendFunction<R> {
+    R apply(StripeRequest request) throws StripeException;
+  }
+
+  private <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
+      StripeRequest request, List<String> usage, RequestSendFunction<T> send)
+      throws StripeException {
+
+    Stopwatch stopwatch = Stopwatch.startNew();
+
+    T response = send.apply(request);
+
+    stopwatch.stop();
+
+    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed(), usage);
+
+    return response;
+  }
 
   /**
    * Initializes a new instance of the {@link LiveStripeResponseGetter} class with default
@@ -46,17 +71,26 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private StripeRequest toStripeRequest(ApiRequest apiRequest) throws StripeException {
     String fullUrl = fullUrl(apiRequest);
 
-    return new StripeRequest(
-        apiRequest.getMethod(),
-        fullUrl,
-        apiRequest.getParams(),
-        RequestOptions.merge(this.options, apiRequest.getOptions()));
+    Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
+    StripeRequest request =
+        new StripeRequest(
+            apiRequest.getMethod(),
+            fullUrl,
+            apiRequest.getParams(),
+            RequestOptions.merge(this.options, apiRequest.getOptions()));
+
+    if (telemetryHeaderValue.isPresent()) {
+      request =
+          request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
+    }
+    return request;
   }
 
   private StripeRequest toRawStripeRequest(RawApiRequest apiRequest) throws StripeException {
     String fullUrl = fullUrl(apiRequest);
 
-    StripeRequest stripeRequest =
+    Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
+    StripeRequest request =
         StripeRequest.createWithStringContent(
             apiRequest.getMethod(),
             fullUrl,
@@ -65,9 +99,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
             apiRequest.getApiMode() == ApiMode.PREVIEW);
 
     if (apiRequest.getApiMode() == ApiMode.PREVIEW) {
-      return stripeRequest.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
+      request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
     }
-    return stripeRequest;
+    if (telemetryHeaderValue.isPresent()) {
+      request =
+          request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
+    }
+    return request;
   }
 
   @Override
@@ -76,7 +114,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       throws StripeException {
 
     StripeRequest request = toStripeRequest(apiRequest);
-    StripeResponse response = httpClient.requestWithRetries(request);
+    StripeResponse response =
+        sendWithTelemetry(request, apiRequest.getUsage(), r -> httpClient.requestWithRetries(r));
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -106,7 +145,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   @Override
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
     StripeRequest request = toStripeRequest(apiRequest);
-    StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
+    StripeResponseStream responseStream =
+        sendWithTelemetry(
+            request, apiRequest.getUsage(), r -> httpClient.requestStreamWithRetries(r));
 
     int responseCode = responseStream.code();
 

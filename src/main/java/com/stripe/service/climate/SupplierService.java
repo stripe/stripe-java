@@ -45,6 +45,7 @@ public final class SupplierService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Supplier>>() {}.getType());
   }
@@ -72,6 +73,7 @@ public final class SupplierService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Supplier.class);
   }
 }

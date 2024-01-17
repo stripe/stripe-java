@@ -33,6 +33,7 @@ public final class PlanService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Plan.class);
   }
   /** Retrieves the plan with the given ID. */
@@ -59,6 +60,7 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Plan.class);
   }
   /**
@@ -101,6 +103,7 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Plan.class);
   }
   /** Returns a list of your plans. */
@@ -127,6 +130,7 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
   }
@@ -153,6 +157,7 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Plan.class);
   }
 }

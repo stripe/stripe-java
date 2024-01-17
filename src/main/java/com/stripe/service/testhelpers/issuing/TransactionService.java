@@ -49,6 +49,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
@@ -68,6 +69,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
@@ -87,6 +89,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
 }
