@@ -52,6 +52,7 @@ public final class InvoiceService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /** Retrieves the invoice with the given ID. */
@@ -78,6 +79,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -140,6 +142,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -178,6 +181,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Invoice>>() {}.getType());
   }
@@ -224,6 +228,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -256,6 +261,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeSearchResult<Invoice>>() {}.getType());
   }
@@ -359,6 +365,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -442,6 +449,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -483,6 +491,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -533,6 +542,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -597,6 +607,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
   /**
@@ -641,6 +652,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Invoice.class);
   }
 

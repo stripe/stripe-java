@@ -62,6 +62,7 @@ public final class BalanceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Balance.class);
   }
 }

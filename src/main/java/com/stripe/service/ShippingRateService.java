@@ -47,6 +47,7 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<ShippingRate>>() {}.getType());
   }
@@ -66,6 +67,7 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, ShippingRate.class);
   }
   /** Returns the shipping rate object with the given ID. */
@@ -96,6 +98,7 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, ShippingRate.class);
   }
   /** Updates an existing shipping rate object. */
@@ -126,6 +129,7 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, ShippingRate.class);
   }
 }
