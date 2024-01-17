@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Value;
 import lombok.experimental.Accessors;
 
@@ -52,10 +51,6 @@ public class StripeRequest {
   /** The special modifiers of the request. */
   RequestOptions options;
 
-  /** List of tracked behaviors associated with this request. */
-  @Getter(AccessLevel.PACKAGE)
-  List<String> usage;
-
   /**
    * Initializes a new instance of the {@link StripeRequest} class.
    *
@@ -63,15 +58,13 @@ public class StripeRequest {
    * @param url the URL of the request
    * @param params the parameters of the request
    * @param options the special modifiers of the request
-   * @param usage list of tracked behaviors associated with this request
    * @throws StripeException if the request cannot be initialized for any reason
    */
   public StripeRequest(
       ApiResource.RequestMethod method,
       String url,
       Map<String, Object> params,
-      RequestOptions options,
-      List<String> usage)
+      RequestOptions options)
       throws StripeException {
     try {
       this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
@@ -80,7 +73,6 @@ public class StripeRequest {
       this.url = buildURL(method, url, params);
       this.content = buildContent(method, params);
       this.headers = buildHeaders(method, this.options);
-      this.usage = usage;
     } catch (IOException e) {
       throw new ApiConnectionException(
           String.format(
@@ -91,15 +83,6 @@ public class StripeRequest {
               Stripe.getApiBase(), e.getMessage()),
           e);
     }
-  }
-
-  public StripeRequest(
-      ApiResource.RequestMethod method,
-      String url,
-      Map<String, Object> params,
-      RequestOptions options)
-      throws StripeException {
-    this(method, url, params, options, Collections.emptyList());
   }
 
   /**
@@ -116,8 +99,7 @@ public class StripeRequest {
         this.content,
         this.headers.withAdditionalHeader(name, value),
         this.params,
-        this.options,
-        this.usage);
+        this.options);
   }
 
   private static URL buildURL(
