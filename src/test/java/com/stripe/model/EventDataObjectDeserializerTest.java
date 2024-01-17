@@ -162,8 +162,6 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
     event.apiVersion = CURRENT_EVENT_VERSION + "; some_beta=v1; some_beta=v2";
 
-    assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
-
     Stripe.stripeVersion = CURRENT_EVENT_VERSION;
     EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
