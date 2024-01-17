@@ -143,13 +143,28 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   }
 
   @Test
-  public void testIgnoresBetaHeadersWhenDeterminingMatch() throws Exception {
+  public void testIgnoresBetaHeadersInLibraryVersionWhenDeterminingMatch() throws Exception {
     final String data = getCurrentEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
     assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
 
     Stripe.stripeVersion = CURRENT_EVENT_VERSION + "; some_beta=v1; some_beta=v2";
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
+
+    assertTrue(deserializer.getObject().isPresent());
+    verifyDeserializedStripeObject(deserializer.getObject().get());
+  }
+
+  @Test
+  public void testIgnoresBetaHeadersInEventVersionWhenDeterminingMatch() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+    event.apiVersion = CURRENT_EVENT_VERSION + "; some_beta=v1; some_beta=v2";
+
+    assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
+
+    Stripe.stripeVersion = CURRENT_EVENT_VERSION;
     EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
     assertTrue(deserializer.getObject().isPresent());

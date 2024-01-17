@@ -195,7 +195,7 @@ public class EventDataObjectDeserializer {
     // Trim the locally configured API version to not include beta headers, since the payload won't
     // have any.
     String localApiVersion = StringUtils.trimApiVersion(Stripe.stripeVersion);
-    return localApiVersion.equals(this.apiVersion);
+    return localApiVersion.equals(StringUtils.trimApiVersion(this.apiVersion));
   }
 
   /**
