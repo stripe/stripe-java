@@ -47,6 +47,7 @@ public final class MarginService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Margin>>() {}.getType());
   }
@@ -77,6 +78,7 @@ public final class MarginService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Margin.class);
   }
   /** Retrieve a margin object with the given ID. */
@@ -103,6 +105,7 @@ public final class MarginService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Margin.class);
   }
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
@@ -129,6 +132,7 @@ public final class MarginService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Margin.class);
   }
 }

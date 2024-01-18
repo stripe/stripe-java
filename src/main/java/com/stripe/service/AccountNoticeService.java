@@ -59,6 +59,7 @@ public final class AccountNoticeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<AccountNotice>>() {}.getType());
   }
@@ -89,6 +90,7 @@ public final class AccountNoticeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, AccountNotice.class);
   }
   /** Updates an {@code AccountNotice} object. */
@@ -109,6 +111,7 @@ public final class AccountNoticeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, AccountNotice.class);
   }
 }

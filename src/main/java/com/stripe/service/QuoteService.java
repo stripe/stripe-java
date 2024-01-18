@@ -262,6 +262,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Converts a draft or open quote to stale. */
@@ -288,6 +289,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Recompute the upcoming invoice estimate for the quote. */
@@ -314,6 +316,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Quote.class);
   }
   /** Download the PDF for a finalized quote. */
@@ -380,6 +383,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType());
   }

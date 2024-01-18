@@ -196,6 +196,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
   /**

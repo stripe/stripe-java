@@ -63,6 +63,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<CreditUnderwritingRecord>>() {}.getType());
   }
@@ -103,6 +104,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
   /** Update a {@code CreditUnderwritingRecord} object to correct mistakes. */
@@ -141,6 +143,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
   /**
@@ -171,6 +174,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
   /**
@@ -197,6 +201,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
   /**
@@ -223,6 +228,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 }
