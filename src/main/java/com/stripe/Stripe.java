@@ -228,8 +228,7 @@ public abstract class Stripe {
   public static StripeResponse rawRequest(
       final ApiResource.RequestMethod method, final String relativeUrl, final String content)
       throws StripeException {
-    RawRequestOptions options = RawRequestOptions.builder().build();
-    return rawRequest(method, relativeUrl, content, options);
+    return rawRequest(method, relativeUrl, content, null);
   }
 
   /**
@@ -250,8 +249,11 @@ public abstract class Stripe {
       final ApiResource.RequestMethod method,
       final String relativeUrl,
       final String content,
-      final RawRequestOptions options)
+      RawRequestOptions options)
       throws StripeException {
+    if (options == null) {
+      options = RawRequestOptions.builder().build();
+    }
     if (method != ApiResource.RequestMethod.POST && content != null && !content.equals("")) {
       throw new IllegalArgumentException(
           "content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");

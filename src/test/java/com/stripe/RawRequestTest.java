@@ -81,6 +81,15 @@ public class RawRequestTest extends BaseStripeTest {
   }
 
   @Test
+  public void testNullOptionsGlobal() throws StripeException, InterruptedException {
+    server.enqueue(new MockResponse().setBody("{}"));
+    final ApiMode apiMode = ApiMode.V1;
+    final StripeResponse response =
+        Stripe.rawRequest(RequestMethod.POST, "/v1/customers", "description=test+customer", null);
+    assertNotNull(response);
+  }
+
+  @Test
   public void testPreviewPostRequestGlobal() throws StripeException, InterruptedException {
     server.enqueue(
         new MockResponse()
@@ -195,6 +204,15 @@ public class RawRequestTest extends BaseStripeTest {
     } catch (IllegalArgumentException e) {
       assertTrue(e.getMessage().contains("content is not allowed for non-POST requests."));
     }
+  }
+
+  @Test
+  public void testNullOptionsClient() throws StripeException, InterruptedException {
+    server.enqueue(new MockResponse().setBody("{}"));
+    final ApiMode apiMode = ApiMode.V1;
+    final StripeResponse response =
+        client.rawRequest(RequestMethod.POST, "/v1/customers", "description=test+customer", null);
+    assertNotNull(response);
   }
 
   @Test
