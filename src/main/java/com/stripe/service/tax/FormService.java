@@ -45,6 +45,7 @@ public final class FormService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Form>>() {}.getType());
   }
@@ -88,6 +89,7 @@ public final class FormService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Form.class);
   }
   /** Download the PDF for a tax form. */
@@ -114,6 +116,7 @@ public final class FormService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().requestStream(request);
   }
 }
