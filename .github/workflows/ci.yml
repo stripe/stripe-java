@@ -218,6 +218,6 @@ jobs:
       - name: Fail if compatibility problems exist
         run: |
           if [ -f "../japi-compliance-checker/compliance_failure" ]; then
-            echo "There were compatibility problems. See the generated report at https://github.com/stripe/${{ github.repository }}/actions/runs/${{ github.run_id }}?check_suite_focus=true#artifacts"
+            echo "There were compatibility problems. See the generated report at https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts"
             exit 1
           fi
