@@ -1,5 +1,13 @@
 # Changelog
 
+## 24.13.0-beta.1 - 2024-01-18
+* [#1734](https://github.com/stripe/stripe-java/pull/1734) Update generated code for beta
+  Release specs are identical.
+* [#1733](https://github.com/stripe/stripe-java/pull/1733) Merge master into beta
+* [#1728](https://github.com/stripe/stripe-java/pull/1728) Beta: Stripe.rawRequest -> StripeClient.rawRequest
+* [#1727](https://github.com/stripe/stripe-java/pull/1727) Trim event API version when matching
+* [#1726](https://github.com/stripe/stripe-java/pull/1726) Merge java beta
+
 ## 24.12.0 - 2024-01-18
 * [#1732](https://github.com/stripe/stripe-java/pull/1732) Update generated code
 * [#1723](https://github.com/stripe/stripe-java/pull/1723) Update generated code
