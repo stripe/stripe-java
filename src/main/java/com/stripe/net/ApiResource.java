@@ -118,6 +118,7 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
     return urlEncode(id);
   }
 
+  @Deprecated
   public static StripeResponse rawRequest(
       ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
       throws StripeException {

@@ -111,6 +111,12 @@ public abstract class StripeObject implements StripeObjectInterface {
   }
 
   public static StripeObject deserializeStripeObject(
+      String payload, StripeResponseGetter responseGetter) {
+    JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
+    return deserializeStripeObject(jsonObject, responseGetter);
+  }
+
+  public static StripeObject deserializeStripeObject(
       JsonObject payload, Type type, StripeResponseGetter responseGetter) {
     StripeObject object = ApiResource.INTERNAL_GSON.fromJson(payload, type);
 
