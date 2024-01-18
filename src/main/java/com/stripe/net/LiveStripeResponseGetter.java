@@ -12,14 +12,39 @@ import com.stripe.exception.oauth.UnsupportedGrantTypeException;
 import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.*;
 import com.stripe.model.oauth.OAuthError;
+import com.stripe.util.Stopwatch;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
+
+  private final RequestTelemetry requestTelemetry = new RequestTelemetry();
+
+  @FunctionalInterface
+  private interface RequestSendFunction<R> {
+    R apply(StripeRequest request) throws StripeException;
+  }
+
+  private <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
+      StripeRequest request, List<String> usage, RequestSendFunction<T> send)
+      throws StripeException {
+
+    Stopwatch stopwatch = Stopwatch.startNew();
+
+    T response = send.apply(request);
+
+    stopwatch.stop();
+
+    requestTelemetry.maybeEnqueueMetrics(response, stopwatch.getElapsed(), usage);
+
+    return response;
+  }
 
   /**
    * Initializes a new instance of the {@link LiveStripeResponseGetter} class with default
@@ -43,18 +68,31 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
   }
 
-  @Override
-  @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
-  public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
-      throws StripeException {
+  private StripeRequest toStripeRequest(ApiRequest apiRequest) throws StripeException {
     String fullUrl = fullUrl(apiRequest);
+
+    Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
     StripeRequest request =
         new StripeRequest(
             apiRequest.getMethod(),
             fullUrl,
             apiRequest.getParams(),
             RequestOptions.merge(this.options, apiRequest.getOptions()));
-    StripeResponse response = httpClient.requestWithRetries(request);
+    if (telemetryHeaderValue.isPresent()) {
+      request =
+          request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
+    }
+    return request;
+  }
+
+  @Override
+  @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
+  public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
+      throws StripeException {
+
+    StripeRequest request = toStripeRequest(apiRequest);
+    StripeResponse response =
+        sendWithTelemetry(request, apiRequest.getUsage(), r -> httpClient.requestWithRetries(r));
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -83,15 +121,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   @Override
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
-    String fullUrl = fullUrl(apiRequest);
-
-    StripeRequest request =
-        new StripeRequest(
-            apiRequest.getMethod(),
-            fullUrl,
-            apiRequest.getParams(),
-            RequestOptions.merge(this.options, apiRequest.getOptions()));
-    StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
+    StripeRequest request = toStripeRequest(apiRequest);
+    StripeResponseStream responseStream =
+        sendWithTelemetry(
+            request, apiRequest.getUsage(), r -> httpClient.requestStreamWithRetries(r));
 
     int responseCode = responseStream.code();
 
@@ -318,7 +351,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
-  private String fullUrl(ApiRequest apiRequest) {
+  private String fullUrl(BaseApiRequest apiRequest) {
     BaseAddress baseAddress = apiRequest.getBaseAddress();
     RequestOptions options = apiRequest.getOptions();
     String relativeUrl = apiRequest.getPath();
