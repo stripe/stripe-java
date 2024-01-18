@@ -49,6 +49,7 @@ public final class CustomerPaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<PaymentMethod>>() {}.getType());
   }
@@ -87,6 +88,7 @@ public final class CustomerPaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentMethod.class);
   }
 }

@@ -1,29 +1,25 @@
 package com.stripe.net;
 
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 class BaseApiRequest {
-  private BaseAddress baseAddress;
-  private ApiResource.RequestMethod method;
-  private String path;
-  private RequestOptions options;
-  private ApiMode apiMode;
+  private final BaseAddress baseAddress;
+  private final ApiResource.RequestMethod method;
+  private final String path;
+  private final RequestOptions options;
+  private final ApiMode apiMode;
 
-  @Setter private List<String> usage;
+  // TODO (major): Remove setter and make final
+  private List<String> usage;
 
-  public BaseApiRequest(
-      BaseAddress baseAddress,
-      ApiResource.RequestMethod method,
-      String path,
-      RequestOptions options,
-      ApiMode apiMode) {
-    this.baseAddress = baseAddress;
-    this.method = method;
-    this.path = path;
-    this.options = options;
-    this.apiMode = apiMode;
+  /** @deprecated Use {@link com.stripe.net.ApiRequest#addUsage(String)} instead. */
+  @Deprecated
+  public void setUsage(List<String> usage) {
+    this.usage = usage;
   }
 }
