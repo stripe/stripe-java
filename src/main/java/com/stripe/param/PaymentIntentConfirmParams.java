@@ -7454,6 +7454,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName("n26")
         N26("n26"),
 
+        @SerializedName("nn")
+        NN("nn"),
+
         @SerializedName("rabobank")
         RABOBANK("rabobank"),
 

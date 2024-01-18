@@ -283,6 +283,16 @@ public class Mandate extends ApiResource implements HasId {
       @SerializedName("reference")
       String reference;
 
+      /**
+       * When the mandate is revoked on the Bacs network this field displays the reason for the
+       * revocation.
+       *
+       * <p>One of {@code account_closed}, {@code bank_account_restricted}, {@code
+       * bank_ownership_changed}, {@code could_not_process}, or {@code debit_not_authorized}.
+       */
+      @SerializedName("revocation_reason")
+      String revocationReason;
+
       /** The URL that will contain the mandate that the customer has signed. */
       @SerializedName("url")
       String url;
