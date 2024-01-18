@@ -65,7 +65,6 @@ public class StripeClientTest extends BaseStripeTest {
                   .getAsJsonObject()
                   .get("usage")
                   .getAsJsonArray();
-          System.out.println("usage: " + usage);
           assertEquals(2, usage.size());
           assertEquals("stripe_client", usage.get(0).getAsString());
           assertEquals("raw_request", usage.get(1).getAsString());
