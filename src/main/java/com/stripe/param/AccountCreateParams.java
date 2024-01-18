@@ -4596,7 +4596,7 @@ public class AccountCreateParams extends ApiRequestParams {
     /**
      * The category identifying the legal structure of the company or legal entity. See <a
      * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-     * structure</a> for more details.
+     * structure</a> for more details. Pass an empty string to unset this value.
      */
     @SerializedName("structure")
     ApiRequestParams.EnumParam structure;
@@ -4876,7 +4876,7 @@ public class AccountCreateParams extends ApiRequestParams {
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
        * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-       * structure</a> for more details.
+       * structure</a> for more details. Pass an empty string to unset this value.
        */
       public Builder setStructure(AccountCreateParams.Company.Structure structure) {
         this.structure = structure;
@@ -4886,7 +4886,7 @@ public class AccountCreateParams extends ApiRequestParams {
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
        * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-       * structure</a> for more details.
+       * structure</a> for more details. Pass an empty string to unset this value.
        */
       public Builder setStructure(EmptyParam structure) {
         this.structure = structure;
