@@ -9853,8 +9853,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object promptpay;
 
     /**
-     * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the Demo
-     * Pay payment method options.
+     * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
+     * Revolut Pay payment method options.
      */
     @SerializedName("revolut_pay")
     Object revolutPay;
@@ -10618,7 +10618,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
-       * Demo Pay payment method options.
+       * Revolut Pay payment method options.
        */
       public Builder setRevolutPay(
           PaymentIntentUpdateParams.PaymentMethodOptions.RevolutPay revolutPay) {
@@ -10628,7 +10628,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
-       * Demo Pay payment method options.
+       * Revolut Pay payment method options.
        */
       public Builder setRevolutPay(EmptyParam revolutPay) {
         this.revolutPay = revolutPay;
