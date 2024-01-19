@@ -2371,15 +2371,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        Object promotionCode;
+
         private Discount(
             Object coupon,
             Object discount,
             DiscountEnd discountEnd,
-            Map<String, Object> extraParams) {
+            Map<String, Object> extraParams,
+            Object promotionCode) {
           this.coupon = coupon;
           this.discount = discount;
           this.discountEnd = discountEnd;
           this.extraParams = extraParams;
+          this.promotionCode = promotionCode;
         }
 
         public static Builder builder() {
@@ -2395,10 +2401,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private Object promotionCode;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Discount build() {
             return new SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Discount(
-                this.coupon, this.discount, this.discountEnd, this.extraParams);
+                this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
           }
 
           /** ID of the coupon to create a new discount for. */
@@ -2460,6 +2468,18 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** ID of the promotion code to create a new discount for. */
+          public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
+            return this;
+          }
+
+          /** ID of the promotion code to create a new discount for. */
+          public Builder setPromotionCode(EmptyParam promotionCode) {
+            this.promotionCode = promotionCode;
             return this;
           }
         }
@@ -3264,15 +3284,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** ID of the promotion code to create a new discount for. */
+      @SerializedName("promotion_code")
+      Object promotionCode;
+
       private Discount(
           Object coupon,
           Object discount,
           DiscountEnd discountEnd,
-          Map<String, Object> extraParams) {
+          Map<String, Object> extraParams,
+          Object promotionCode) {
         this.coupon = coupon;
         this.discount = discount;
         this.discountEnd = discountEnd;
         this.extraParams = extraParams;
+        this.promotionCode = promotionCode;
       }
 
       public static Builder builder() {
@@ -3288,10 +3314,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Object promotionCode;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleUpdateParams.Phase.Discount build() {
           return new SubscriptionScheduleUpdateParams.Phase.Discount(
-              this.coupon, this.discount, this.discountEnd, this.extraParams);
+              this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -3350,6 +3378,18 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** ID of the promotion code to create a new discount for. */
+        public Builder setPromotionCode(String promotionCode) {
+          this.promotionCode = promotionCode;
+          return this;
+        }
+
+        /** ID of the promotion code to create a new discount for. */
+        public Builder setPromotionCode(EmptyParam promotionCode) {
+          this.promotionCode = promotionCode;
           return this;
         }
       }
@@ -4281,15 +4321,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        Object promotionCode;
+
         private Discount(
             Object coupon,
             Object discount,
             DiscountEnd discountEnd,
-            Map<String, Object> extraParams) {
+            Map<String, Object> extraParams,
+            Object promotionCode) {
           this.coupon = coupon;
           this.discount = discount;
           this.discountEnd = discountEnd;
           this.extraParams = extraParams;
+          this.promotionCode = promotionCode;
         }
 
         public static Builder builder() {
@@ -4305,10 +4351,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private Object promotionCode;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionScheduleUpdateParams.Phase.Item.Discount build() {
             return new SubscriptionScheduleUpdateParams.Phase.Item.Discount(
-                this.coupon, this.discount, this.discountEnd, this.extraParams);
+                this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
           }
 
           /** ID of the coupon to create a new discount for. */
@@ -4367,6 +4415,18 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** ID of the promotion code to create a new discount for. */
+          public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
+            return this;
+          }
+
+          /** ID of the promotion code to create a new discount for. */
+          public Builder setPromotionCode(EmptyParam promotionCode) {
+            this.promotionCode = promotionCode;
             return this;
           }
         }

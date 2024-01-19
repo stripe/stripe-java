@@ -6009,15 +6009,21 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
+            /** ID of the promotion code to create a new discount for. */
+            @SerializedName("promotion_code")
+            String promotionCode;
+
             private Discount(
                 String coupon,
                 String discount,
                 DiscountEnd discountEnd,
-                Map<String, Object> extraParams) {
+                Map<String, Object> extraParams,
+                String promotionCode) {
               this.coupon = coupon;
               this.discount = discount;
               this.discountEnd = discountEnd;
               this.extraParams = extraParams;
+              this.promotionCode = promotionCode;
             }
 
             public static Builder builder() {
@@ -6033,12 +6039,19 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
               private Map<String, Object> extraParams;
 
+              private String promotionCode;
+
               /** Finalize and obtain parameter instance from this builder. */
               public InvoiceUpcomingLinesListParams.ScheduleDetails.Amendment.ItemAction.Add
                       .Discount
                   build() {
                 return new InvoiceUpcomingLinesListParams.ScheduleDetails.Amendment.ItemAction.Add
-                    .Discount(this.coupon, this.discount, this.discountEnd, this.extraParams);
+                    .Discount(
+                    this.coupon,
+                    this.discount,
+                    this.discountEnd,
+                    this.extraParams,
+                    this.promotionCode);
               }
 
               /** ID of the coupon to create a new discount for. */
@@ -6089,6 +6102,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
                   this.extraParams = new HashMap<>();
                 }
                 this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** ID of the promotion code to create a new discount for. */
+              public Builder setPromotionCode(String promotionCode) {
+                this.promotionCode = promotionCode;
                 return this;
               }
             }
@@ -6852,15 +6871,21 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
+            /** ID of the promotion code to create a new discount for. */
+            @SerializedName("promotion_code")
+            String promotionCode;
+
             private Discount(
                 String coupon,
                 String discount,
                 DiscountEnd discountEnd,
-                Map<String, Object> extraParams) {
+                Map<String, Object> extraParams,
+                String promotionCode) {
               this.coupon = coupon;
               this.discount = discount;
               this.discountEnd = discountEnd;
               this.extraParams = extraParams;
+              this.promotionCode = promotionCode;
             }
 
             public static Builder builder() {
@@ -6876,12 +6901,19 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
               private Map<String, Object> extraParams;
 
+              private String promotionCode;
+
               /** Finalize and obtain parameter instance from this builder. */
               public InvoiceUpcomingLinesListParams.ScheduleDetails.Amendment.ItemAction.Set
                       .Discount
                   build() {
                 return new InvoiceUpcomingLinesListParams.ScheduleDetails.Amendment.ItemAction.Set
-                    .Discount(this.coupon, this.discount, this.discountEnd, this.extraParams);
+                    .Discount(
+                    this.coupon,
+                    this.discount,
+                    this.discountEnd,
+                    this.extraParams,
+                    this.promotionCode);
               }
 
               /** ID of the coupon to create a new discount for. */
@@ -6932,6 +6964,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
                   this.extraParams = new HashMap<>();
                 }
                 this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** ID of the promotion code to create a new discount for. */
+              public Builder setPromotionCode(String promotionCode) {
+                this.promotionCode = promotionCode;
                 return this;
               }
             }
@@ -9097,15 +9135,21 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** ID of the promotion code to create a new discount for. */
+          @SerializedName("promotion_code")
+          String promotionCode;
+
           private Discount(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
-              Map<String, Object> extraParams) {
+              Map<String, Object> extraParams,
+              String promotionCode) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
+            this.promotionCode = promotionCode;
           }
 
           public static Builder builder() {
@@ -9121,11 +9165,18 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private String promotionCode;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceUpcomingLinesListParams.ScheduleDetails.Phase.AddInvoiceItem.Discount
                 build() {
               return new InvoiceUpcomingLinesListParams.ScheduleDetails.Phase.AddInvoiceItem
-                  .Discount(this.coupon, this.discount, this.discountEnd, this.extraParams);
+                  .Discount(
+                  this.coupon,
+                  this.discount,
+                  this.discountEnd,
+                  this.extraParams,
+                  this.promotionCode);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -9176,6 +9227,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** ID of the promotion code to create a new discount for. */
+            public Builder setPromotionCode(String promotionCode) {
+              this.promotionCode = promotionCode;
               return this;
             }
           }
@@ -9969,15 +10026,21 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        String promotionCode;
+
         private Discount(
             String coupon,
             String discount,
             DiscountEnd discountEnd,
-            Map<String, Object> extraParams) {
+            Map<String, Object> extraParams,
+            String promotionCode) {
           this.coupon = coupon;
           this.discount = discount;
           this.discountEnd = discountEnd;
           this.extraParams = extraParams;
+          this.promotionCode = promotionCode;
         }
 
         public static Builder builder() {
@@ -9993,10 +10056,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private String promotionCode;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceUpcomingLinesListParams.ScheduleDetails.Phase.Discount build() {
             return new InvoiceUpcomingLinesListParams.ScheduleDetails.Phase.Discount(
-                this.coupon, this.discount, this.discountEnd, this.extraParams);
+                this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
           }
 
           /** ID of the coupon to create a new discount for. */
@@ -10046,6 +10111,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** ID of the promotion code to create a new discount for. */
+          public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
             return this;
           }
         }
@@ -10987,15 +11058,21 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** ID of the promotion code to create a new discount for. */
+          @SerializedName("promotion_code")
+          String promotionCode;
+
           private Discount(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
-              Map<String, Object> extraParams) {
+              Map<String, Object> extraParams,
+              String promotionCode) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
+            this.promotionCode = promotionCode;
           }
 
           public static Builder builder() {
@@ -11011,10 +11088,16 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private String promotionCode;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceUpcomingLinesListParams.ScheduleDetails.Phase.Item.Discount build() {
               return new InvoiceUpcomingLinesListParams.ScheduleDetails.Phase.Item.Discount(
-                  this.coupon, this.discount, this.discountEnd, this.extraParams);
+                  this.coupon,
+                  this.discount,
+                  this.discountEnd,
+                  this.extraParams,
+                  this.promotionCode);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -11064,6 +11147,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** ID of the promotion code to create a new discount for. */
+            public Builder setPromotionCode(String promotionCode) {
+              this.promotionCode = promotionCode;
               return this;
             }
           }
@@ -13699,15 +13788,21 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        String promotionCode;
+
         private Discount(
             String coupon,
             String discount,
             DiscountEnd discountEnd,
-            Map<String, Object> extraParams) {
+            Map<String, Object> extraParams,
+            String promotionCode) {
           this.coupon = coupon;
           this.discount = discount;
           this.discountEnd = discountEnd;
           this.extraParams = extraParams;
+          this.promotionCode = promotionCode;
         }
 
         public static Builder builder() {
@@ -13723,10 +13818,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private String promotionCode;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceUpcomingLinesListParams.SubscriptionDetails.Item.Discount build() {
             return new InvoiceUpcomingLinesListParams.SubscriptionDetails.Item.Discount(
-                this.coupon, this.discount, this.discountEnd, this.extraParams);
+                this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
           }
 
           /** ID of the coupon to create a new discount for. */
@@ -13776,6 +13873,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** ID of the promotion code to create a new discount for. */
+          public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
             return this;
           }
         }
@@ -15023,15 +15126,21 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** ID of the promotion code to create a new discount for. */
+      @SerializedName("promotion_code")
+      String promotionCode;
+
       private Discount(
           String coupon,
           String discount,
           DiscountEnd discountEnd,
-          Map<String, Object> extraParams) {
+          Map<String, Object> extraParams,
+          String promotionCode) {
         this.coupon = coupon;
         this.discount = discount;
         this.discountEnd = discountEnd;
         this.extraParams = extraParams;
+        this.promotionCode = promotionCode;
       }
 
       public static Builder builder() {
@@ -15047,10 +15156,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String promotionCode;
+
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceUpcomingLinesListParams.SubscriptionItem.Discount build() {
           return new InvoiceUpcomingLinesListParams.SubscriptionItem.Discount(
-              this.coupon, this.discount, this.discountEnd, this.extraParams);
+              this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -15097,6 +15208,12 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** ID of the promotion code to create a new discount for. */
+        public Builder setPromotionCode(String promotionCode) {
+          this.promotionCode = promotionCode;
           return this;
         }
       }
