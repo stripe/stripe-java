@@ -30,9 +30,9 @@ import lombok.Setter;
  *
  * <p>For Custom accounts, the properties below are always returned. For other accounts, some
  * properties are returned until that account has started to go through Connect Onboarding. Once you
- * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a Standard or
- * Express account, some parameters are no longer returned. These are marked as <strong>Custom
- * Only</strong> or <strong>Custom and Express</strong> below. Learn about the differences <a
+ * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+ * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties are only
+ * returned for Custom accounts. Learn about the differences <a
  * href="https://stripe.com/docs/connect/accounts">between accounts</a>.
  */
 @Getter
@@ -44,7 +44,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   BusinessProfile businessProfile;
 
   /**
-   * The business type.
+   * The business type. Once you create an <a
+   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property is only
+   * returned for Custom accounts.
    *
    * <p>One of {@code company}, {@code government_entity}, {@code individual}, or {@code
    * non_profit}.
@@ -99,7 +102,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("email")
   String email;
 
-  /** External accounts (bank accounts and debit cards) currently attached to this account. */
+  /**
+   * External accounts (bank accounts and debit cards) currently attached to this account. External
+   * accounts are only returned for requests where {@code controller[is_controller]} is true.
+   */
   @SerializedName("external_accounts")
   ExternalAccountCollection externalAccounts;
 
@@ -601,9 +607,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -621,9 +627,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -645,9 +651,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -664,9 +670,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
