@@ -23,7 +23,12 @@ public class AccountUpdateParams extends ApiRequestParams {
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
-  /** The business type. */
+  /**
+   * The business type. Once you create an <a
+   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * be updated for Custom accounts.
+   */
   @SerializedName("business_type")
   BusinessType businessType;
 
@@ -38,7 +43,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Information about the company or business. This field is available for any {@code
-   * business_type}.
+   * business_type}. Once you create an <a href="https://stripe.com/docs/api/account_links">Account
+   * Link</a> or <a href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this
+   * property can only be updated for Custom accounts.
    */
   @SerializedName("company")
   Company company;
@@ -78,7 +85,11 @@ public class AccountUpdateParams extends ApiRequestParams {
    * currency, and deletes the old default if one exists. To add additional external accounts
    * without replacing the existing default for the currency, use the <a
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
+   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
+   * <br>
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * be updated for Custom accounts.
    */
   @SerializedName("external_account")
   Object externalAccount;
@@ -94,7 +105,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Information about the person represented by the account. This field is null unless {@code
-   * business_type} is set to {@code individual}.
+   * business_type} is set to {@code individual}. Once you create an <a
+   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * be updated for Custom accounts.
    */
   @SerializedName("individual")
   Individual individual;
@@ -115,7 +129,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   /**
    * Details on the account's acceptance of the <a
    * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
-   * Agreement</a>.
+   * Agreement</a> This property can only be updated for Custom accounts.
    */
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
@@ -232,7 +246,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The business type. */
+    /**
+     * The business type. Once you create an <a
+     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
+     */
     public Builder setBusinessType(AccountUpdateParams.BusinessType businessType) {
       this.businessType = businessType;
       return this;
@@ -251,7 +270,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Information about the company or business. This field is available for any {@code
-     * business_type}.
+     * business_type}. Once you create an <a
+     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setCompany(AccountUpdateParams.Company company) {
       this.company = company;
@@ -341,7 +363,11 @@ public class AccountUpdateParams extends ApiRequestParams {
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
+     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
+     * <br>
+     * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
@@ -361,7 +387,11 @@ public class AccountUpdateParams extends ApiRequestParams {
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
+     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
+     * <br>
+     * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setExternalAccount(EmptyParam externalAccount) {
       this.externalAccount = externalAccount;
@@ -396,7 +426,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Information about the person represented by the account. This field is null unless {@code
-     * business_type} is set to {@code individual}.
+     * business_type} is set to {@code individual}. Once you create an <a
+     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setIndividual(AccountUpdateParams.Individual individual) {
       this.individual = individual;
@@ -462,7 +495,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     /**
      * Details on the account's acceptance of the <a
      * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
-     * Agreement</a>.
+     * Agreement</a> This property can only be updated for Custom accounts.
      */
     public Builder setTosAcceptance(AccountUpdateParams.TosAcceptance tosAcceptance) {
       this.tosAcceptance = tosAcceptance;
