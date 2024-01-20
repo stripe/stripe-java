@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class LiveStripeResponseGetterTest extends BaseStripeTest {
-
   @Test
   public void testInvalidJson() throws StripeException {
     HttpClient spy = Mockito.spy(new HttpURLConnectionClient());

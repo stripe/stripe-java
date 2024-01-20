@@ -59,6 +59,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Transfer>>() {}.getType());
   }
@@ -86,6 +87,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transfer.class);
   }
   /**
@@ -128,6 +130,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transfer.class);
   }
   /**
@@ -174,6 +177,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transfer.class);
   }
 

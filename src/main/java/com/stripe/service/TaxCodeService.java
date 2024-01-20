@@ -57,6 +57,7 @@ public final class TaxCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<TaxCode>>() {}.getType());
   }
@@ -96,6 +97,7 @@ public final class TaxCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, TaxCode.class);
   }
 }

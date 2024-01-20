@@ -42,6 +42,7 @@ public final class CustomerService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Customer.class);
   }
   /** Retrieves a Customer object. */
@@ -68,6 +69,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Customer.class);
   }
   /**
@@ -146,6 +148,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Customer.class);
   }
   /** Removes the currently applied discount on a customer. */
@@ -158,6 +161,7 @@ public final class CustomerService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Discount.class);
   }
   /**
@@ -196,6 +200,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Customer>>() {}.getType());
   }
@@ -223,6 +228,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Customer.class);
   }
   /**
@@ -255,6 +261,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
   }

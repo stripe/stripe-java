@@ -53,6 +53,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentSource.class);
   }
   /**
@@ -91,6 +92,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Source.class);
   }
   /**
@@ -145,6 +147,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Source.class);
   }
   /** Creates a new source object. */
@@ -170,6 +173,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Source.class);
   }
   /** Verify a given source. */
@@ -188,6 +192,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Source.class);
   }
 

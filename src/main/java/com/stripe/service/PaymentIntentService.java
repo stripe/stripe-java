@@ -56,6 +56,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<PaymentIntent>>() {}.getType());
   }
@@ -99,6 +100,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
@@ -163,6 +165,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
@@ -223,6 +226,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
@@ -256,6 +260,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeSearchResult<PaymentIntent>>() {}.getType());
   }
@@ -289,6 +294,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
@@ -369,6 +375,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
@@ -433,6 +440,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
@@ -545,6 +553,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /**
@@ -619,6 +628,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
   /** Verifies microdeposits on a PaymentIntent object. */
@@ -651,6 +661,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 }

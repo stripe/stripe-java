@@ -1,5 +1,27 @@
 # Changelog
 
+## 24.12.0 - 2024-01-18
+* [#1732](https://github.com/stripe/stripe-java/pull/1732) Update generated code
+* [#1723](https://github.com/stripe/stripe-java/pull/1723) Update generated code
+  * Add support for `issuer` on `InvoiceCreateParams`, `InvoiceUpcomingLinesParams`, `InvoiceUpcomingParams`, `InvoiceUpdateParams`, and `Invoice`
+  * Add support for `liability` on `Invoice.automatic_tax`, `InvoiceCreateParams.automatic_tax`, `InvoiceUpcomingLinesParams.automatic_tax`, `InvoiceUpcomingParams.automatic_tax`, `InvoiceUpdateParams.automatic_tax`, `Subscription.automatic_tax`, `SubscriptionCreateParams.automatic_tax`, and `SubscriptionUpdateParams.automatic_tax`
+  * Add support for `on_behalf_of` on `InvoiceUpcomingLinesParams` and `InvoiceUpcomingParams`
+  * Add support for `pin` on `issuing.CardCreateParams`
+  * Add support for `revocation_reason` on `Mandate.payment_method_details.bacs_debit`
+  * Add support for new value `nn` on enums `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for `customer_balance` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
+  * Add support for `invoice_settings` on `SubscriptionCreateParams` and `SubscriptionUpdateParams`
+* [#1724](https://github.com/stripe/stripe-java/pull/1724) Add webhook parsing method on StripeClient
+  * Add support for `constructEvent()` instance method on `StripeClient` that parses Webhook events and uses the settings inherited from the StripeClient instance to make further requests.
+* [#1721](https://github.com/stripe/stripe-java/pull/1721) Report usage of `stripe_client`
+  * Reports use of the new `StripeClient` in `X-Stripe-Client-Telemetry`. (You can disable telemetry via `Stripe.enableTelemetry = false;`, see the [README](https://github.com/stripe/stripe-java/blob/master/README.md#telemetry).)
+
+  ## Details
+  * A different approach to #1698. This one sets `usage` on each callsite to `StripeResponseGetter.request` from `StripeClient`, rather than attempting to wrap `LiveStripeResponseGetter`.
+  * Modifies `RequestTelemetry` to accept usage and set it appropriately on `X-Stripe-Client-Telemetry`. Had to add a parameter to a public method, so I made a new overload and deprecated the old one. Had to disable a linter rule to do this.
+* [#1725](https://github.com/stripe/stripe-java/pull/1725) Move request telemetry to LiveStripeResponseGetter
+* [#1722](https://github.com/stripe/stripe-java/pull/1722) Refactor LiveStripeResponseGetter
+
 ## 24.11.0 - 2024-01-12
 * [#1715](https://github.com/stripe/stripe-java/pull/1715) Update generated code
   * Add support for new resource `CustomerSession`

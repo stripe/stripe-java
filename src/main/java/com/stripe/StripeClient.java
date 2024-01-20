@@ -1,5 +1,7 @@
 package com.stripe;
 
+import com.stripe.exception.SignatureVerificationException;
+import com.stripe.model.Event;
 import com.stripe.net.*;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
@@ -34,6 +36,44 @@ public class StripeClient {
 
   protected StripeResponseGetter getResponseGetter() {
     return responseGetter;
+  }
+
+  /**
+   * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
+   * payload is not valid JSON, and a SignatureVerificationException if the signature verification
+   * fails for any reason.
+   *
+   * @param payload the payload sent by Stripe.
+   * @param sigHeader the contents of the signature header sent by Stripe.
+   * @param secret secret used to generate the signature.
+   * @return the Event instance
+   * @throws SignatureVerificationException if the verification fails.
+   */
+  public Event constructEvent(String payload, String sigHeader, String secret)
+      throws SignatureVerificationException {
+    Event event = Webhook.constructEvent(payload, sigHeader, secret);
+    event.setResponseGetter(this.getResponseGetter());
+    return event;
+  }
+
+  /**
+   * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
+   * payload is not valid JSON, and a SignatureVerificationException if the signature verification
+   * fails for any reason.
+   *
+   * @param payload the payload sent by Stripe.
+   * @param sigHeader the contents of the signature header sent by Stripe.
+   * @param secret secret used to generate the signature.
+   * @param tolerance maximum difference in seconds allowed between the header's timestamp and the
+   *     current time
+   * @return the Event instance
+   * @throws SignatureVerificationException if the verification fails.
+   */
+  public Event constructEvent(String payload, String sigHeader, String secret, long tolerance)
+      throws SignatureVerificationException {
+    Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);
+    event.setResponseGetter(this.getResponseGetter());
+    return event;
   }
 
   // The beginning of the section generated from our OpenAPI spec
