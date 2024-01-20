@@ -16,6 +16,9 @@ import com.stripe.model.terminal.Reader;
 import java.lang.reflect.Type;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -80,6 +83,21 @@ public class WebhookTest extends BaseStripeTest {
   }
 
   @Test
+  public void testValidJsonAndHeaderButOutsideTimeTolerance() throws NoSuchAlgorithmException, InvalidKeyException {
+    final Map<String, Object> options = new HashMap<>();
+    options.put("timestamp", 1L);
+
+    final String sigHeader = generateSigHeader(options);
+    final Clock clock = Clock.fixed(Instant.ofEpochMilli(12000), ZoneId.of("UTC"));
+
+    assertThrows(
+      SignatureVerificationException.class,
+      () -> {
+        Webhook.constructEvent(payload, sigHeader, secret, 10, clock);
+      });
+  }
+
+  @Test
   @SuppressWarnings("deprecation")
   public void testValidJsonAndHeaderCanMakeRequestsOnDataObject()
       throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
@@ -135,7 +153,7 @@ public class WebhookTest extends BaseStripeTest {
         assertThrows(
             SignatureVerificationException.class,
             () -> {
-              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0, null);
             });
     assertEquals("Unable to extract timestamp and signatures from header", exception.getMessage());
   }
@@ -151,7 +169,7 @@ public class WebhookTest extends BaseStripeTest {
         assertThrows(
             SignatureVerificationException.class,
             () -> {
-              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0, null);
             });
     assertEquals("No signatures found with expected scheme", exception.getMessage());
   }
@@ -167,7 +185,7 @@ public class WebhookTest extends BaseStripeTest {
         assertThrows(
             SignatureVerificationException.class,
             () -> {
-              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0, null);
             });
     assertEquals(
         "No signatures found matching the expected signature for payload", exception.getMessage());
@@ -184,7 +202,7 @@ public class WebhookTest extends BaseStripeTest {
         assertThrows(
             SignatureVerificationException.class,
             () -> {
-              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10);
+              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, null);
             });
     assertEquals("Timestamp outside the tolerance zone", exception.getMessage());
   }
@@ -194,7 +212,7 @@ public class WebhookTest extends BaseStripeTest {
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     final String sigHeader = generateSigHeader();
 
-    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10));
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, null));
   }
 
   @Test
@@ -202,7 +220,7 @@ public class WebhookTest extends BaseStripeTest {
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     final String sigHeader = String.format("%s,v1=bad_signature", generateSigHeader());
 
-    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10));
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, null));
   }
 
   @Test
@@ -212,7 +230,33 @@ public class WebhookTest extends BaseStripeTest {
     options.put("timestamp", Long.valueOf(12345L));
     final String sigHeader = generateSigHeader(options);
 
-    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0));
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0, null));
+  }
+
+  @Test
+  public void testTimestampWithClock()
+    throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+
+    final Map<String, Object> options = new HashMap<>();
+    options.put("timestamp", 11L);
+
+    final String sigHeader = generateSigHeader(options);
+    final Clock clock = Clock.fixed(Instant.ofEpochMilli(1), ZoneId.of("UTC"));
+
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, clock));
+  }
+
+  @Test
+  public void testTimestampWithClockOutsideTolerance()
+    throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+
+    final Map<String, Object> options = new HashMap<>();
+    options.put("timestamp", 11L);
+
+    final String sigHeader = generateSigHeader(options);
+    final Clock clock = Clock.fixed(Instant.ofEpochMilli(12), ZoneId.of("UTC"));
+
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, clock));
   }
 
   @Test
