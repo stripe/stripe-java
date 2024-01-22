@@ -5121,17 +5121,23 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           @SerializedName("index")
           Long index;
 
+          /** The promotion code to redeem. */
+          @SerializedName("promotion_code")
+          String promotionCode;
+
           private Add(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
               Map<String, Object> extraParams,
-              Long index) {
+              Long index,
+              String promotionCode) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
             this.index = index;
+            this.promotionCode = promotionCode;
           }
 
           public static Builder builder() {
@@ -5149,10 +5155,17 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
             private Long index;
 
+            private String promotionCode;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceUpcomingParams.ScheduleDetails.Amendment.DiscountAction.Add build() {
               return new InvoiceUpcomingParams.ScheduleDetails.Amendment.DiscountAction.Add(
-                  this.coupon, this.discount, this.discountEnd, this.extraParams, this.index);
+                  this.coupon,
+                  this.discount,
+                  this.discountEnd,
+                  this.extraParams,
+                  this.index,
+                  this.promotionCode);
             }
 
             /** The coupon code to redeem. */
@@ -5211,6 +5224,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
              */
             public Builder setIndex(Long index) {
               this.index = index;
+              return this;
+            }
+
+            /** The promotion code to redeem. */
+            public Builder setPromotionCode(String promotionCode) {
+              this.promotionCode = promotionCode;
               return this;
             }
           }
@@ -5332,10 +5351,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private Remove(String coupon, String discount, Map<String, Object> extraParams) {
+          /** The ID of a promotion code to remove from the {@code discounts} array. */
+          @SerializedName("promotion_code")
+          String promotionCode;
+
+          private Remove(
+              String coupon,
+              String discount,
+              Map<String, Object> extraParams,
+              String promotionCode) {
             this.coupon = coupon;
             this.discount = discount;
             this.extraParams = extraParams;
+            this.promotionCode = promotionCode;
           }
 
           public static Builder builder() {
@@ -5349,10 +5377,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private String promotionCode;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceUpcomingParams.ScheduleDetails.Amendment.DiscountAction.Remove build() {
               return new InvoiceUpcomingParams.ScheduleDetails.Amendment.DiscountAction.Remove(
-                  this.coupon, this.discount, this.extraParams);
+                  this.coupon, this.discount, this.extraParams, this.promotionCode);
             }
 
             /** The coupon code to remove from the {@code discounts} array. */
@@ -5396,6 +5426,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
               this.extraParams.putAll(map);
               return this;
             }
+
+            /** The ID of a promotion code to remove from the {@code discounts} array. */
+            public Builder setPromotionCode(String promotionCode) {
+              this.promotionCode = promotionCode;
+              return this;
+            }
           }
         }
 
@@ -5419,10 +5455,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private Set(String coupon, String discount, Map<String, Object> extraParams) {
+          /** An ID of an existing promotion code to replace the {@code discounts} array with. */
+          @SerializedName("promotion_code")
+          String promotionCode;
+
+          private Set(
+              String coupon,
+              String discount,
+              Map<String, Object> extraParams,
+              String promotionCode) {
             this.coupon = coupon;
             this.discount = discount;
             this.extraParams = extraParams;
+            this.promotionCode = promotionCode;
           }
 
           public static Builder builder() {
@@ -5436,10 +5481,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private String promotionCode;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceUpcomingParams.ScheduleDetails.Amendment.DiscountAction.Set build() {
               return new InvoiceUpcomingParams.ScheduleDetails.Amendment.DiscountAction.Set(
-                  this.coupon, this.discount, this.extraParams);
+                  this.coupon, this.discount, this.extraParams, this.promotionCode);
             }
 
             /** The coupon code to replace the {@code discounts} array with. */
@@ -5481,6 +5528,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** An ID of an existing promotion code to replace the {@code discounts} array with. */
+            public Builder setPromotionCode(String promotionCode) {
+              this.promotionCode = promotionCode;
               return this;
             }
           }
