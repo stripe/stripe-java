@@ -4037,7 +4037,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           ANY("any"),
 
           @SerializedName("automatic")
-          AUTOMATIC("automatic");
+          AUTOMATIC("automatic"),
+
+          @SerializedName("challenge")
+          CHALLENGE("challenge");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

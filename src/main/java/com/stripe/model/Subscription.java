@@ -1501,7 +1501,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
          * Secure</a> for more information on how this configuration interacts with Radar and our
          * SCA Engine.
          *
-         * <p>One of {@code any}, or {@code automatic}.
+         * <p>One of {@code any}, {@code automatic}, or {@code challenge}.
          */
         @SerializedName("request_three_d_secure")
         String requestThreeDSecure;
