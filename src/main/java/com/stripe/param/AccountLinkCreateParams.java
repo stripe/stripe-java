@@ -15,12 +15,16 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   @SerializedName("account")
   String account;
 
-  /**
-   * Which information the platform needs to collect from the user. One of {@code currently_due} or
-   * {@code eventually_due}. Default is {@code currently_due}.
-   */
+  /** The collect parameter is deprecated. Use {@code collection_options} instead. */
   @SerializedName("collect")
   Collect collect;
+
+  /**
+   * Specifies the requirements that Stripe collects from connected accounts in the Connect
+   * Onboarding flow.
+   */
+  @SerializedName("collection_options")
+  CollectionOptions collectionOptions;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -60,6 +64,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   private AccountLinkCreateParams(
       String account,
       Collect collect,
+      CollectionOptions collectionOptions,
       List<String> expand,
       Map<String, Object> extraParams,
       String refreshUrl,
@@ -67,6 +72,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       Type type) {
     this.account = account;
     this.collect = collect;
+    this.collectionOptions = collectionOptions;
     this.expand = expand;
     this.extraParams = extraParams;
     this.refreshUrl = refreshUrl;
@@ -83,6 +89,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
     private Collect collect;
 
+    private CollectionOptions collectionOptions;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -98,6 +106,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       return new AccountLinkCreateParams(
           this.account,
           this.collect,
+          this.collectionOptions,
           this.expand,
           this.extraParams,
           this.refreshUrl,
@@ -111,12 +120,19 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Which information the platform needs to collect from the user. One of {@code currently_due}
-     * or {@code eventually_due}. Default is {@code currently_due}.
-     */
+    /** The collect parameter is deprecated. Use {@code collection_options} instead. */
     public Builder setCollect(AccountLinkCreateParams.Collect collect) {
       this.collect = collect;
+      return this;
+    }
+
+    /**
+     * Specifies the requirements that Stripe collects from connected accounts in the Connect
+     * Onboarding flow.
+     */
+    public Builder setCollectionOptions(
+        AccountLinkCreateParams.CollectionOptions collectionOptions) {
+      this.collectionOptions = collectionOptions;
       return this;
     }
 
@@ -198,6 +214,131 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     public Builder setType(AccountLinkCreateParams.Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  @Getter
+  public static class CollectionOptions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> Specifies whether the platform collects only currently_due
+     * requirements ({@code currently_due}) or both currently_due and eventually_due requirements
+     * ({@code eventually_due}). If you don't specify {@code collection_options}, the default value
+     * is {@code currently_due}.
+     */
+    @SerializedName("fields")
+    Fields fields;
+
+    /** Options for collecting future_requirements in Connect Onboarding. */
+    @SerializedName("future_requirements")
+    FutureRequirements futureRequirements;
+
+    private CollectionOptions(
+        Map<String, Object> extraParams, Fields fields, FutureRequirements futureRequirements) {
+      this.extraParams = extraParams;
+      this.fields = fields;
+      this.futureRequirements = futureRequirements;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Fields fields;
+
+      private FutureRequirements futureRequirements;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountLinkCreateParams.CollectionOptions build() {
+        return new AccountLinkCreateParams.CollectionOptions(
+            this.extraParams, this.fields, this.futureRequirements);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountLinkCreateParams.CollectionOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountLinkCreateParams.CollectionOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Specifies whether the platform collects only currently_due
+       * requirements ({@code currently_due}) or both currently_due and eventually_due requirements
+       * ({@code eventually_due}). If you don't specify {@code collection_options}, the default
+       * value is {@code currently_due}.
+       */
+      public Builder setFields(AccountLinkCreateParams.CollectionOptions.Fields fields) {
+        this.fields = fields;
+        return this;
+      }
+
+      /** Options for collecting future_requirements in Connect Onboarding. */
+      public Builder setFutureRequirements(
+          AccountLinkCreateParams.CollectionOptions.FutureRequirements futureRequirements) {
+        this.futureRequirements = futureRequirements;
+        return this;
+      }
+    }
+
+    public enum Fields implements ApiRequestParams.EnumParam {
+      @SerializedName("currently_due")
+      CURRENTLY_DUE("currently_due"),
+
+      @SerializedName("eventually_due")
+      EVENTUALLY_DUE("eventually_due");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Fields(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum FutureRequirements implements ApiRequestParams.EnumParam {
+      @SerializedName("include")
+      INCLUDE("include"),
+
+      @SerializedName("omit")
+      OMIT("omit");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      FutureRequirements(String value) {
+        this.value = value;
+      }
     }
   }
 
