@@ -6196,6 +6196,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("public_partnership")
       PUBLIC_PARTNERSHIP("public_partnership"),
 
+      @SerializedName("registered_charity")
+      REGISTERED_CHARITY("registered_charity"),
+
       @SerializedName("single_member_llc")
       SINGLE_MEMBER_LLC("single_member_llc"),
 
