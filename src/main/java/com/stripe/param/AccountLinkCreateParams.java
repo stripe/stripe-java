@@ -237,7 +237,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     @SerializedName("fields")
     Fields fields;
 
-    /** Options for collecting future_requirements in Connect Onboarding. */
+    /**
+     * Specifies whether the platform collects future_requirements in addition to requirements in
+     * Connect Onboarding. The default value is {@code omit}.
+     */
     @SerializedName("future_requirements")
     FutureRequirements futureRequirements;
 
@@ -303,7 +306,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Options for collecting future_requirements in Connect Onboarding. */
+      /**
+       * Specifies whether the platform collects future_requirements in addition to requirements in
+       * Connect Onboarding. The default value is {@code omit}.
+       */
       public Builder setFutureRequirements(
           AccountLinkCreateParams.CollectionOptions.FutureRequirements futureRequirements) {
         this.futureRequirements = futureRequirements;
