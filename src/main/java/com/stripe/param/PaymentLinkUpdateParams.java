@@ -36,7 +36,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   BillingAddressCollection billingAddressCollection;
 
   /**
-   * Collect additional information from your customer using custom fields. Up to 2 fields are
+   * Collect additional information from your customer using custom fields. Up to 3 fields are
    * supported.
    */
   @SerializedName("custom_fields")
@@ -314,7 +314,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Collect additional information from your customer using custom fields. Up to 2 fields are
+     * Collect additional information from your customer using custom fields. Up to 3 fields are
      * supported.
      */
     public Builder setCustomFields(EmptyParam customFields) {
@@ -323,7 +323,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Collect additional information from your customer using custom fields. Up to 2 fields are
+     * Collect additional information from your customer using custom fields. Up to 3 fields are
      * supported.
      */
     public Builder setCustomFields(List<PaymentLinkUpdateParams.CustomField> customFields) {
