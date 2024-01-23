@@ -709,9 +709,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class UsBankAccount {
-    /** Bank account type. */
+    /** Bank account holder type. */
     @SerializedName("account_holder_type")
     AccountHolderType accountHolderType;
+
+    /** Bank account type. */
+    @SerializedName("account_type")
+    AccountType accountType;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -722,8 +726,12 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private UsBankAccount(AccountHolderType accountHolderType, Map<String, Object> extraParams) {
+    private UsBankAccount(
+        AccountHolderType accountHolderType,
+        AccountType accountType,
+        Map<String, Object> extraParams) {
       this.accountHolderType = accountHolderType;
+      this.accountType = accountType;
       this.extraParams = extraParams;
     }
 
@@ -734,18 +742,27 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     public static class Builder {
       private AccountHolderType accountHolderType;
 
+      private AccountType accountType;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodUpdateParams.UsBankAccount build() {
         return new PaymentMethodUpdateParams.UsBankAccount(
-            this.accountHolderType, this.extraParams);
+            this.accountHolderType, this.accountType, this.extraParams);
       }
 
-      /** Bank account type. */
+      /** Bank account holder type. */
       public Builder setAccountHolderType(
           PaymentMethodUpdateParams.UsBankAccount.AccountHolderType accountHolderType) {
         this.accountHolderType = accountHolderType;
+        return this;
+      }
+
+      /** Bank account type. */
+      public Builder setAccountType(
+          PaymentMethodUpdateParams.UsBankAccount.AccountType accountType) {
+        this.accountType = accountType;
         return this;
       }
 
@@ -788,6 +805,21 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private final String value;
 
       AccountHolderType(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum AccountType implements ApiRequestParams.EnumParam {
+      @SerializedName("checking")
+      CHECKING("checking"),
+
+      @SerializedName("savings")
+      SAVINGS("savings");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AccountType(String value) {
         this.value = value;
       }
     }
