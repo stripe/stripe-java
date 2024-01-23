@@ -131,7 +131,7 @@ public class Session extends ApiResource implements HasId {
   CurrencyConversion currencyConversion;
 
   /**
-   * Collect additional information from your customer using custom fields. Up to 2 fields are
+   * Collect additional information from your customer using custom fields. Up to 3 fields are
    * supported.
    */
   @SerializedName("custom_fields")
