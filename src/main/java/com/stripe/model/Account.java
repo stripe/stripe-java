@@ -697,6 +697,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BusinessProfile extends StripeObject {
+    /** The applicant's gross annual revenue for its preceding fiscal year. */
+    @SerializedName("annual_revenue")
+    AnnualRevenue annualRevenue;
+
+    /**
+     * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
+     * business.
+     */
+    @SerializedName("estimated_worker_count")
+    Long estimatedWorkerCount;
+
     /**
      * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
      * account</a>. MCCs are used to classify businesses based on the goods or services they
@@ -738,6 +749,33 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** The business's publicly available website. */
     @SerializedName("url")
     String url;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AnnualRevenue extends StripeObject {
+      /**
+       * A non-negative integer representing the amount in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * The close-out date of the preceding fiscal year in ISO 8601 format. E.g. 2023-12-31 for the
+       * 31st of December, 2023.
+       */
+      @SerializedName("fiscal_year_end")
+      String fiscalYearEnd;
+    }
 
     @Getter
     @Setter

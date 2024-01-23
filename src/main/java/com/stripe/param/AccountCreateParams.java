@@ -521,6 +521,17 @@ public class AccountCreateParams extends ApiRequestParams {
 
   @Getter
   public static class BusinessProfile {
+    /** The applicant's gross annual revenue for its preceding fiscal year. */
+    @SerializedName("annual_revenue")
+    AnnualRevenue annualRevenue;
+
+    /**
+     * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
+     * business.
+     */
+    @SerializedName("estimated_worker_count")
+    Long estimatedWorkerCount;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -577,6 +588,8 @@ public class AccountCreateParams extends ApiRequestParams {
     String url;
 
     private BusinessProfile(
+        AnnualRevenue annualRevenue,
+        Long estimatedWorkerCount,
         Map<String, Object> extraParams,
         String mcc,
         MonthlyEstimatedRevenue monthlyEstimatedRevenue,
@@ -587,6 +600,8 @@ public class AccountCreateParams extends ApiRequestParams {
         String supportPhone,
         Object supportUrl,
         String url) {
+      this.annualRevenue = annualRevenue;
+      this.estimatedWorkerCount = estimatedWorkerCount;
       this.extraParams = extraParams;
       this.mcc = mcc;
       this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
@@ -604,6 +619,10 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AnnualRevenue annualRevenue;
+
+      private Long estimatedWorkerCount;
+
       private Map<String, Object> extraParams;
 
       private String mcc;
@@ -627,6 +646,8 @@ public class AccountCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountCreateParams.BusinessProfile build() {
         return new AccountCreateParams.BusinessProfile(
+            this.annualRevenue,
+            this.estimatedWorkerCount,
             this.extraParams,
             this.mcc,
             this.monthlyEstimatedRevenue,
@@ -637,6 +658,22 @@ public class AccountCreateParams extends ApiRequestParams {
             this.supportPhone,
             this.supportUrl,
             this.url);
+      }
+
+      /** The applicant's gross annual revenue for its preceding fiscal year. */
+      public Builder setAnnualRevenue(
+          AccountCreateParams.BusinessProfile.AnnualRevenue annualRevenue) {
+        this.annualRevenue = annualRevenue;
+        return this;
+      }
+
+      /**
+       * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
+       * business.
+       */
+      public Builder setEstimatedWorkerCount(Long estimatedWorkerCount) {
+        this.estimatedWorkerCount = estimatedWorkerCount;
+        return this;
       }
 
       /**
@@ -735,6 +772,124 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setUrl(String url) {
         this.url = url;
         return this;
+      }
+    }
+
+    @Getter
+    public static class AnnualRevenue {
+      /**
+       * <strong>Required.</strong> A non-negative integer representing the amount in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The close-out date of the preceding fiscal year in ISO 8601
+       * format. E.g. 2023-12-31 for the 31st of December, 2023.
+       */
+      @SerializedName("fiscal_year_end")
+      String fiscalYearEnd;
+
+      private AnnualRevenue(
+          Long amount, String currency, Map<String, Object> extraParams, String fiscalYearEnd) {
+        this.amount = amount;
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.fiscalYearEnd = fiscalYearEnd;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amount;
+
+        private String currency;
+
+        private Map<String, Object> extraParams;
+
+        private String fiscalYearEnd;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.BusinessProfile.AnnualRevenue build() {
+          return new AccountCreateParams.BusinessProfile.AnnualRevenue(
+              this.amount, this.currency, this.extraParams, this.fiscalYearEnd);
+        }
+
+        /**
+         * <strong>Required.</strong> A non-negative integer representing the amount in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.BusinessProfile.AnnualRevenue#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.BusinessProfile.AnnualRevenue#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The close-out date of the preceding fiscal year in ISO 8601
+         * format. E.g. 2023-12-31 for the 31st of December, 2023.
+         */
+        public Builder setFiscalYearEnd(String fiscalYearEnd) {
+          this.fiscalYearEnd = fiscalYearEnd;
+          return this;
+        }
       }
     }
 
