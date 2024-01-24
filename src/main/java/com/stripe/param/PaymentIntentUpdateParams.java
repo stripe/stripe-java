@@ -12539,8 +12539,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-       * PaymentIntent.
+       * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+       * authorization</a> for this PaymentIntent.
        */
       @SerializedName("request_incremental_authorization")
       RequestIncrementalAuthorization requestIncrementalAuthorization;
@@ -12856,8 +12856,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         /**
          * Request ability to <a
-         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-         * PaymentIntent.
+         * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+         * authorization</a> for this PaymentIntent.
          */
         public Builder setRequestIncrementalAuthorization(
             PaymentIntentUpdateParams.PaymentMethodOptions.Card.RequestIncrementalAuthorization
