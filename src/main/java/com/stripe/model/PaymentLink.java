@@ -522,6 +522,51 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /** If {@code true}, tax will be calculated automatically using the customer's location. */
     @SerializedName("enabled")
     Boolean enabled;
+
+    /**
+     * The account that's liable for tax. If set, the business address and tax registrations
+     * required to perform the tax calculation are loaded from this account. The tax transaction is
+     * returned in the report of the connected account.
+     */
+    @SerializedName("liability")
+    Liability liability;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Liability extends StripeObject {
+      /** The connected account being referenced when {@code type} is {@code account}. */
+      @SerializedName("account")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Account> account;
+
+      /**
+       * Type of the account referenced.
+       *
+       * <p>One of {@code account}, or {@code self}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code account} object. */
+      public String getAccount() {
+        return (this.account != null) ? this.account.getId() : null;
+      }
+
+      public void setAccount(String id) {
+        this.account = ApiResource.setExpandableFieldId(id, this.account);
+      }
+
+      /** Get expanded {@code account}. */
+      public Account getAccountObject() {
+        return (this.account != null) ? this.account.getExpanded() : null;
+      }
+
+      public void setAccountObject(Account expandableObject) {
+        this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+      }
+    }
   }
 
   @Getter
@@ -769,6 +814,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       String footer;
 
       /**
+       * The connected account that issues the invoice. The invoice is presented with the branding
+       * and support information of the specified account.
+       */
+      @SerializedName("issuer")
+      Issuer issuer;
+
+      /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format.
@@ -835,6 +887,43 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         /** The value of the custom field. */
         @SerializedName("value")
         String value;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Issuer extends StripeObject {
+        /** The connected account being referenced when {@code type} is {@code account}. */
+        @SerializedName("account")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<Account> account;
+
+        /**
+         * Type of the account referenced.
+         *
+         * <p>One of {@code account}, or {@code self}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Get ID of expandable {@code account} object. */
+        public String getAccount() {
+          return (this.account != null) ? this.account.getId() : null;
+        }
+
+        public void setAccount(String id) {
+          this.account = ApiResource.setExpandableFieldId(id, this.account);
+        }
+
+        /** Get expanded {@code account}. */
+        public Account getAccountObject() {
+          return (this.account != null) ? this.account.getExpanded() : null;
+        }
+
+        public void setAccountObject(Account expandableObject) {
+          this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+        }
       }
 
       @Getter
@@ -1003,6 +1092,9 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("description")
     String description;
 
+    @SerializedName("invoice_settings")
+    InvoiceSettings invoiceSettings;
+
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
      * metadata on <a href="https://stripe.com/docs/api/subscriptions">Subscriptions</a> generated
@@ -1021,6 +1113,51 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /** Settings related to subscription trials. */
     @SerializedName("trial_settings")
     TrialSettings trialSettings;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InvoiceSettings extends StripeObject {
+      @SerializedName("issuer")
+      Issuer issuer;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Issuer extends StripeObject {
+        /** The connected account being referenced when {@code type} is {@code account}. */
+        @SerializedName("account")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<Account> account;
+
+        /**
+         * Type of the account referenced.
+         *
+         * <p>One of {@code account}, or {@code self}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Get ID of expandable {@code account} object. */
+        public String getAccount() {
+          return (this.account != null) ? this.account.getId() : null;
+        }
+
+        public void setAccount(String id) {
+          this.account = ApiResource.setExpandableFieldId(id, this.account);
+        }
+
+        /** Get expanded {@code account}. */
+        public Account getAccountObject() {
+          return (this.account != null) ? this.account.getExpanded() : null;
+        }
+
+        public void setAccountObject(Account expandableObject) {
+          this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+        }
+      }
+    }
 
     /** Configures how this subscription behaves during the trial period. */
     @Getter
