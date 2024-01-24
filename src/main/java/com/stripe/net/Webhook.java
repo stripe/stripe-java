@@ -48,7 +48,7 @@ public final class Webhook {
   public static Event constructEvent(
       String payload, String sigHeader, String secret, long tolerance)
       throws SignatureVerificationException {
-    return constructInternalEvent(payload, sigHeader, secret, tolerance, null);
+    return constructEvent(payload, sigHeader, secret, tolerance, null);
   }
 
   /**
@@ -94,18 +94,40 @@ public final class Webhook {
      * @throws SignatureVerificationException if the verification fails.
      */
     public static boolean verifyHeader(
-        String payload, String sigHeader, String secret, long tolerance, Clock clock)
-        throws SignatureVerificationException {
+        String payload, String sigHeader, String secret, long tolerance) throws SignatureVerificationException {
+        return verifyHeaderInternal(payload, sigHeader, secret, tolerance, null);
+    }
+
+    /**
+     * Verifies the signature header sent by Stripe. Throws a SignatureVerificationException if the
+     * verification fails for any reason.
+     *
+     * @param payload the payload sent by Stripe.
+     * @param sigHeader the contents of the signature header sent by Stripe.
+     * @param secret secret used to generate the signature.
+     * @param tolerance maximum difference allowed between the header's timestamp and the current
+     *     time
+     * @param clock instance of clock if you want to use custom time instance
+     * @throws SignatureVerificationException if the verification fails.
+     */
+    public static boolean verifyHeader(
+      String payload, String sigHeader, String secret, long tolerance, Clock clock)
+      throws SignatureVerificationException {
+      return verifyHeaderInternal(payload, sigHeader, secret, tolerance, clock);
+    }
+
+    private static boolean verifyHeaderInternal(String payload, String sigHeader, String secret,
+                                                long tolerance, Clock clock) throws SignatureVerificationException {
       // Get timestamp and signatures from header
       long timestamp = getTimestamp(sigHeader);
       List<String> signatures = getSignatures(sigHeader, EXPECTED_SCHEME);
       if (timestamp <= 0) {
         throw new SignatureVerificationException(
-            "Unable to extract timestamp and signatures from header", sigHeader);
+          "Unable to extract timestamp and signatures from header", sigHeader);
       }
       if (signatures.size() == 0) {
         throw new SignatureVerificationException(
-            "No signatures found with expected scheme", sigHeader);
+          "No signatures found with expected scheme", sigHeader);
       }
 
       // Compute expected signature
@@ -115,7 +137,7 @@ public final class Webhook {
         expectedSignature = computeSignature(signedPayload, secret);
       } catch (Exception e) {
         throw new SignatureVerificationException(
-            "Unable to compute signature for payload", sigHeader);
+          "Unable to compute signature for payload", sigHeader);
       }
 
       // Check if expected signature is found in list of header's signatures
@@ -128,7 +150,7 @@ public final class Webhook {
       }
       if (!signatureFound) {
         throw new SignatureVerificationException(
-            "No signatures found matching the expected signature for payload", sigHeader);
+          "No signatures found matching the expected signature for payload", sigHeader);
       }
 
       long currentTime = clock == null ? Util.getTimeNow() : clock.millis() / 1000;
