@@ -67,13 +67,7 @@ public final class Webhook {
    */
   public static Event constructEvent(String payload, String sigHeader, String secret, long tolerance, Clock clock)
     throws SignatureVerificationException {
-    return constructInternalEvent(payload, sigHeader, secret, tolerance, clock);
-  }
-
-  private static Event constructInternalEvent(String payload, String sigHeader, String secret, long tolerance, Clock clock)
-    throws SignatureVerificationException {
-    Event event = StripeObject.deserializeStripeObject(
-      payload, Event.class, ApiResource.getGlobalResponseGetter());
+    Event event = StripeObject.deserializeStripeObject(payload, Event.class, ApiResource.getGlobalResponseGetter());
     Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
 
     return event;
@@ -95,7 +89,7 @@ public final class Webhook {
      */
     public static boolean verifyHeader(
         String payload, String sigHeader, String secret, long tolerance) throws SignatureVerificationException {
-        return verifyHeaderInternal(payload, sigHeader, secret, tolerance, null);
+        return verifyHeader(payload, sigHeader, secret, tolerance, null);
     }
 
     /**
@@ -110,14 +104,8 @@ public final class Webhook {
      * @param clock instance of clock if you want to use custom time instance
      * @throws SignatureVerificationException if the verification fails.
      */
-    public static boolean verifyHeader(
-      String payload, String sigHeader, String secret, long tolerance, Clock clock)
+    public static boolean verifyHeader(String payload, String sigHeader, String secret, long tolerance, Clock clock)
       throws SignatureVerificationException {
-      return verifyHeaderInternal(payload, sigHeader, secret, tolerance, clock);
-    }
-
-    private static boolean verifyHeaderInternal(String payload, String sigHeader, String secret,
-                                                long tolerance, Clock clock) throws SignatureVerificationException {
       // Get timestamp and signatures from header
       long timestamp = getTimestamp(sigHeader);
       List<String> signatures = getSignatures(sigHeader, EXPECTED_SCHEME);
