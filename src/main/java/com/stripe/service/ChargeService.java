@@ -67,37 +67,37 @@ public final class ChargeService extends ApiService {
         .request(request, new TypeToken<StripeCollection<Charge>>() {}.getType());
   }
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public Charge create(ChargeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public Charge create(RequestOptions options) throws StripeException {
     return create((ChargeCreateParams) null, options);
   }
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public Charge create() throws StripeException {
     return create((ChargeCreateParams) null, (RequestOptions) null);
   }
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public Charge create(ChargeCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/charges";
