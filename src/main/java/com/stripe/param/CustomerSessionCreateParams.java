@@ -525,11 +525,11 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         }
 
         public enum PaymentMethodRemove implements ApiRequestParams.EnumParam {
-          @SerializedName("auto")
-          AUTO("auto"),
+          @SerializedName("disabled")
+          DISABLED("disabled"),
 
-          @SerializedName("never")
-          NEVER("never");
+          @SerializedName("enabled")
+          ENABLED("enabled");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -540,11 +540,11 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         }
 
         public enum PaymentMethodSave implements ApiRequestParams.EnumParam {
-          @SerializedName("auto")
-          AUTO("auto"),
+          @SerializedName("disabled")
+          DISABLED("disabled"),
 
-          @SerializedName("never")
-          NEVER("never");
+          @SerializedName("enabled")
+          ENABLED("enabled");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -555,11 +555,11 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         }
 
         public enum PaymentMethodSetAsDefault implements ApiRequestParams.EnumParam {
-          @SerializedName("auto")
-          AUTO("auto"),
+          @SerializedName("disabled")
+          DISABLED("disabled"),
 
-          @SerializedName("never")
-          NEVER("never");
+          @SerializedName("enabled")
+          ENABLED("enabled");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -570,11 +570,11 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         }
 
         public enum PaymentMethodUpdate implements ApiRequestParams.EnumParam {
-          @SerializedName("auto")
-          AUTO("auto"),
+          @SerializedName("disabled")
+          DISABLED("disabled"),
 
-          @SerializedName("never")
-          NEVER("never");
+          @SerializedName("enabled")
+          ENABLED("enabled");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
