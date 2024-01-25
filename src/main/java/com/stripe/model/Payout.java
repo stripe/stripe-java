@@ -287,7 +287,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel() throws StripeException {
@@ -295,7 +295,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(RequestOptions options) throws StripeException {
@@ -303,7 +303,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(Map<String, Object> params) throws StripeException {
@@ -311,7 +311,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -323,7 +323,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(PayoutCancelParams params) throws StripeException {
@@ -331,7 +331,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * You can cancel a previously created payout if it hasn’t been paid out yet. Stripe refunds the
+   * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
   public Payout cancel(PayoutCancelParams params, RequestOptions options) throws StripeException {
@@ -534,8 +534,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
-   * status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
+   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -547,8 +547,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
-   * status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
+   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -560,8 +560,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
-   * status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
+   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -573,8 +573,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
-   * status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
+   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -590,8 +590,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
-   * status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
+   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -603,8 +603,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is in the {@code pending}
-   * status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
+   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and

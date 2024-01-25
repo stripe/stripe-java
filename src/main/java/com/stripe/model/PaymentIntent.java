@@ -2981,8 +2981,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       /**
        * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-       * PaymentIntent.
+       * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+       * authorization</a> for this PaymentIntent.
        *
        * <p>One of {@code if_available}, or {@code never}.
        */

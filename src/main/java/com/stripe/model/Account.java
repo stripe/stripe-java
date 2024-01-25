@@ -30,9 +30,9 @@ import lombok.Setter;
  *
  * <p>For Custom accounts, the properties below are always returned. For other accounts, some
  * properties are returned until that account has started to go through Connect Onboarding. Once you
- * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a Standard or
- * Express account, some parameters are no longer returned. These are marked as <strong>Custom
- * Only</strong> or <strong>Custom and Express</strong> below. Learn about the differences <a
+ * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+ * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties are only
+ * returned for Custom accounts. Learn about the differences <a
  * href="https://stripe.com/docs/connect/accounts">between accounts</a>.
  */
 @Getter
@@ -44,7 +44,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   BusinessProfile businessProfile;
 
   /**
-   * The business type.
+   * The business type. Once you create an <a
+   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property is only
+   * returned for Custom accounts.
    *
    * <p>One of {@code company}, {@code government_entity}, {@code individual}, or {@code
    * non_profit}.
@@ -99,7 +102,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("email")
   String email;
 
-  /** External accounts (bank accounts and debit cards) currently attached to this account. */
+  /**
+   * External accounts (bank accounts and debit cards) currently attached to this account. External
+   * accounts are only returned for requests where {@code controller[is_controller]} is true.
+   */
   @SerializedName("external_accounts")
   ExternalAccountCollection externalAccounts;
 
@@ -601,9 +607,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -621,9 +627,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -645,9 +651,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -664,9 +670,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>For Custom accounts, you can update any information on the account. For other accounts, you
    * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
-   * Standard or Express account, some parameters can no longer be changed. These are marked as
-   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
+   * only be changed or updated for Custom accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -691,6 +697,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BusinessProfile extends StripeObject {
+    /** The applicant's gross annual revenue for its preceding fiscal year. */
+    @SerializedName("annual_revenue")
+    AnnualRevenue annualRevenue;
+
+    /**
+     * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
+     * business.
+     */
+    @SerializedName("estimated_worker_count")
+    Long estimatedWorkerCount;
+
     /**
      * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
      * account</a>. MCCs are used to classify businesses based on the goods or services they
@@ -732,6 +749,33 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** The business's publicly available website. */
     @SerializedName("url")
     String url;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AnnualRevenue extends StripeObject {
+      /**
+       * A non-negative integer representing the amount in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * The close-out date of the preceding fiscal year in ISO 8601 format. E.g. 2023-12-31 for the
+       * 31st of December, 2023.
+       */
+      @SerializedName("fiscal_year_end")
+      String fiscalYearEnd;
+    }
 
     @Getter
     @Setter
@@ -1187,10 +1231,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * {@code incorporated_partnership}, {@code limited_liability_partnership}, {@code llc}, {@code
      * multi_member_llc}, {@code private_company}, {@code private_corporation}, {@code
      * private_partnership}, {@code public_company}, {@code public_corporation}, {@code
-     * public_partnership}, {@code single_member_llc}, {@code sole_establishment}, {@code
-     * sole_proprietorship}, {@code tax_exempt_government_instrumentality}, {@code
-     * unincorporated_association}, {@code unincorporated_non_profit}, or {@code
-     * unincorporated_partnership}.
+     * public_partnership}, {@code registered_charity}, {@code single_member_llc}, {@code
+     * sole_establishment}, {@code sole_proprietorship}, {@code
+     * tax_exempt_government_instrumentality}, {@code unincorporated_association}, {@code
+     * unincorporated_non_profit}, or {@code unincorporated_partnership}.
      */
     @SerializedName("structure")
     String structure;

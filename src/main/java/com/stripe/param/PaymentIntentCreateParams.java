@@ -9673,8 +9673,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object promptpay;
 
     /**
-     * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the Demo
-     * Pay payment method options.
+     * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
+     * Revolut Pay payment method options.
      */
     @SerializedName("revolut_pay")
     Object revolutPay;
@@ -10438,7 +10438,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
-       * Demo Pay payment method options.
+       * Revolut Pay payment method options.
        */
       public Builder setRevolutPay(
           PaymentIntentCreateParams.PaymentMethodOptions.RevolutPay revolutPay) {
@@ -10448,7 +10448,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
-       * Demo Pay payment method options.
+       * Revolut Pay payment method options.
        */
       public Builder setRevolutPay(EmptyParam revolutPay) {
         this.revolutPay = revolutPay;
@@ -12323,8 +12323,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-       * PaymentIntent.
+       * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+       * authorization</a> for this PaymentIntent.
        */
       @SerializedName("request_incremental_authorization")
       RequestIncrementalAuthorization requestIncrementalAuthorization;
@@ -12630,8 +12630,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * Request ability to <a
-         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-         * PaymentIntent.
+         * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+         * authorization</a> for this PaymentIntent.
          */
         public Builder setRequestIncrementalAuthorization(
             PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestIncrementalAuthorization
