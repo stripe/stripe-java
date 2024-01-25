@@ -83,7 +83,8 @@ public class WebhookTest extends BaseStripeTest {
   }
 
   @Test
-  public void testValidJsonAndHeaderButOutsideTimeTolerance() throws NoSuchAlgorithmException, InvalidKeyException {
+  public void testValidJsonAndHeaderButOutsideTimeTolerance()
+      throws NoSuchAlgorithmException, InvalidKeyException {
     final Map<String, Object> options = new HashMap<>();
     options.put("timestamp", 1L);
 
@@ -91,10 +92,10 @@ public class WebhookTest extends BaseStripeTest {
     final Clock clock = Clock.fixed(Instant.ofEpochMilli(12000), ZoneId.of("UTC"));
 
     assertThrows(
-      SignatureVerificationException.class,
-      () -> {
-        Webhook.constructEvent(payload, sigHeader, secret, 10, clock);
-      });
+        SignatureVerificationException.class,
+        () -> {
+          Webhook.constructEvent(payload, sigHeader, secret, 10, clock);
+        });
   }
 
   @Test
@@ -235,7 +236,7 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testTimestampWithClock()
-    throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
 
     final Map<String, Object> options = new HashMap<>();
     options.put("timestamp", 11L);
@@ -248,7 +249,7 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testTimestampWithClockOutsideTolerance()
-    throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
 
     final Map<String, Object> options = new HashMap<>();
     options.put("timestamp", 11L);
