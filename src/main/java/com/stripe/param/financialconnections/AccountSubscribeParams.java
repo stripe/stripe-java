@@ -25,7 +25,7 @@ public class AccountSubscribeParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> The list of account features to which you would like to subscribe.`.
+   * <strong>Required.</strong> The list of account features to which you would like to subscribe.
    */
   @SerializedName("features")
   List<AccountSubscribeParams.Feature> features;

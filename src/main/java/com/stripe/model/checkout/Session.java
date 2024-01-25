@@ -3,6 +3,7 @@ package com.stripe.model.checkout;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Account;
 import com.stripe.model.Address;
 import com.stripe.model.Customer;
 import com.stripe.model.Discount;
@@ -130,7 +131,7 @@ public class Session extends ApiResource implements HasId {
   CurrencyConversion currencyConversion;
 
   /**
-   * Collect additional information from your customer using custom fields. Up to 2 fields are
+   * Collect additional information from your customer using custom fields. Up to 3 fields are
    * supported.
    */
   @SerializedName("custom_fields")
@@ -796,12 +797,57 @@ public class Session extends ApiResource implements HasId {
     Boolean enabled;
 
     /**
+     * The account that's liable for tax. If set, the business address and tax registrations
+     * required to perform the tax calculation are loaded from this account. The tax transaction is
+     * returned in the report of the connected account.
+     */
+    @SerializedName("liability")
+    Liability liability;
+
+    /**
      * The status of the most recent automated tax calculation for this session.
      *
      * <p>One of {@code complete}, {@code failed}, or {@code requires_location_inputs}.
      */
     @SerializedName("status")
     String status;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Liability extends StripeObject {
+      /** The connected account being referenced when {@code type} is {@code account}. */
+      @SerializedName("account")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Account> account;
+
+      /**
+       * Type of the account referenced.
+       *
+       * <p>One of {@code account}, or {@code self}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code account} object. */
+      public String getAccount() {
+        return (this.account != null) ? this.account.getId() : null;
+      }
+
+      public void setAccount(String id) {
+        this.account = ApiResource.setExpandableFieldId(id, this.account);
+      }
+
+      /** Get expanded {@code account}. */
+      public Account getAccountObject() {
+        return (this.account != null) ? this.account.getExpanded() : null;
+      }
+
+      public void setAccountObject(Account expandableObject) {
+        this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+      }
+    }
   }
 
   @Getter
@@ -1178,6 +1224,13 @@ public class Session extends ApiResource implements HasId {
       String footer;
 
       /**
+       * The connected account that issues the invoice. The invoice is presented with the branding
+       * and support information of the specified account.
+       */
+      @SerializedName("issuer")
+      Issuer issuer;
+
+      /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format.
@@ -1244,6 +1297,43 @@ public class Session extends ApiResource implements HasId {
         /** The value of the custom field. */
         @SerializedName("value")
         String value;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Issuer extends StripeObject {
+        /** The connected account being referenced when {@code type} is {@code account}. */
+        @SerializedName("account")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<Account> account;
+
+        /**
+         * Type of the account referenced.
+         *
+         * <p>One of {@code account}, or {@code self}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Get ID of expandable {@code account} object. */
+        public String getAccount() {
+          return (this.account != null) ? this.account.getId() : null;
+        }
+
+        public void setAccount(String id) {
+          this.account = ApiResource.setExpandableFieldId(id, this.account);
+        }
+
+        /** Get expanded {@code account}. */
+        public Account getAccountObject() {
+          return (this.account != null) ? this.account.getExpanded() : null;
+        }
+
+        public void setAccountObject(Account expandableObject) {
+          this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+        }
       }
 
       @Getter
