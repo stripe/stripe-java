@@ -63,6 +63,10 @@ public class Dispute extends ApiResource
   @SerializedName("currency")
   String currency;
 
+  /** List of eligibility types that are included in {@code enhanced_evidence}. */
+  @SerializedName("enhanced_eligibility_types")
+  List<String> enhancedEligibilityTypes;
+
   @SerializedName("evidence")
   Evidence evidence;
 
@@ -492,6 +496,9 @@ public class Dispute extends ApiResource
     @SerializedName("duplicate_charge_id")
     String duplicateChargeId;
 
+    @SerializedName("enhanced_evidence")
+    EnhancedEvidence enhancedEvidence;
+
     /** A description of the product or service that was sold. */
     @SerializedName("product_description")
     String productDescription;
@@ -766,6 +773,195 @@ public class Dispute extends ApiResource
       this.uncategorizedFile =
           new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnhancedEvidence extends StripeObject {
+      @SerializedName("visa_compelling_evidence_3")
+      VisaCompellingEvidence3 visaCompellingEvidence3;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class VisaCompellingEvidence3 extends StripeObject {
+        /** Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission. */
+        @SerializedName("disputed_transaction")
+        DisputedTransaction disputedTransaction;
+
+        /**
+         * List of exactly two prior undisputed transaction objects for Visa Compelling Evidence 3.0
+         * evidence submission.
+         */
+        @SerializedName("prior_undisputed_transactions")
+        List<Dispute.Evidence.EnhancedEvidence.VisaCompellingEvidence3.PriorUndisputedTransaction>
+            priorUndisputedTransactions;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DisputedTransaction extends StripeObject {
+          /**
+           * User Account ID used to log into business platform. Must be recognizable by the user.
+           */
+          @SerializedName("customer_account_id")
+          String customerAccountId;
+
+          /**
+           * Unique identifier of the cardholder’s device derived from a combination of at least two
+           * hardware and software attributes. Must be at least 20 characters.
+           */
+          @SerializedName("customer_device_fingerprint")
+          String customerDeviceFingerprint;
+
+          /**
+           * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+           * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+           */
+          @SerializedName("customer_device_id")
+          String customerDeviceId;
+
+          /** The email address of the customer. */
+          @SerializedName("customer_email_address")
+          String customerEmailAddress;
+
+          /** The IP address that the customer used when making the purchase. */
+          @SerializedName("customer_purchase_ip")
+          String customerPurchaseIp;
+
+          /**
+           * Categorization of disputed payment.
+           *
+           * <p>One of {@code merchandise}, or {@code services}.
+           */
+          @SerializedName("merchandise_or_services")
+          String merchandiseOrServices;
+
+          /** A description of the product or service that was sold. */
+          @SerializedName("product_description")
+          String productDescription;
+
+          /**
+           * The address to which a physical product was shipped. All fields are required for Visa
+           * Compelling Evidence 3.0 evidence submission.
+           */
+          @SerializedName("shipping_address")
+          ShippingAddress shippingAddress;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ShippingAddress extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PriorUndisputedTransaction extends StripeObject {
+          /** Stripe charge ID for the Visa Compelling Evidence 3.0 eligible prior charge. */
+          @SerializedName("charge")
+          String charge;
+
+          /**
+           * User Account ID used to log into business platform. Must be recognizable by the user.
+           */
+          @SerializedName("customer_account_id")
+          String customerAccountId;
+
+          /**
+           * Unique identifier of the cardholder’s device derived from a combination of at least two
+           * hardware and software attributes. Must be at least 20 characters.
+           */
+          @SerializedName("customer_device_fingerprint")
+          String customerDeviceFingerprint;
+
+          /**
+           * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+           * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+           */
+          @SerializedName("customer_device_id")
+          String customerDeviceId;
+
+          /** The email address of the customer. */
+          @SerializedName("customer_email_address")
+          String customerEmailAddress;
+
+          /** The IP address that the customer used when making the purchase. */
+          @SerializedName("customer_purchase_ip")
+          String customerPurchaseIp;
+
+          /** A description of the product or service that was sold. */
+          @SerializedName("product_description")
+          String productDescription;
+
+          /**
+           * The address to which a physical product was shipped. All fields are required for Visa
+           * Compelling Evidence 3.0 evidence submission.
+           */
+          @SerializedName("shipping_address")
+          ShippingAddress shippingAddress;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ShippingAddress extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+        }
+      }
+    }
   }
 
   @Getter
@@ -779,6 +975,9 @@ public class Dispute extends ApiResource
      */
     @SerializedName("due_by")
     Long dueBy;
+
+    @SerializedName("enhanced_eligibility")
+    EnhancedEligibility enhancedEligibility;
 
     /** Whether evidence has been staged for this dispute. */
     @SerializedName("has_evidence")
@@ -798,6 +997,45 @@ public class Dispute extends ApiResource
      */
     @SerializedName("submission_count")
     Long submissionCount;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnhancedEligibility extends StripeObject {
+      @SerializedName("visa_compelling_evidence_3")
+      VisaCompellingEvidence3 visaCompellingEvidence3;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class VisaCompellingEvidence3 extends StripeObject {
+        /**
+         * Rejection reason for evidence submitted as Visa Compelling Evidence 3.0 to Visa and
+         * rejected by Visa.
+         *
+         * <p>One of {@code fraudulent_prior_transaction}, {@code other}, or {@code
+         * visa_internal_error}.
+         */
+        @SerializedName("partner_rejected_details")
+        String partnerRejectedDetails;
+
+        /**
+         * List of actions required to qualify dispute for Visa Compelling Evidence 3.0 evidence
+         * submission.
+         */
+        @SerializedName("required_actions")
+        List<String> requiredActions;
+
+        /**
+         * Visa Compelling Evidence 3.0 eligibility status.
+         *
+         * <p>One of {@code accepted}, {@code partner_rejected}, {@code qualified}, {@code
+         * requires_action}, or {@code submitted}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+    }
   }
 
   @Getter
