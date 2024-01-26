@@ -14,13 +14,17 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CalculationLineItem extends StripeObject implements HasId {
   /**
-   * The line item amount in integer cents. If {@code tax_behavior=inclusive}, then this amount
-   * includes taxes. Otherwise, taxes were calculated on top of this amount.
+   * The line item amount in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+   * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
+   * Otherwise, taxes were calculated on top of this amount.
    */
   @SerializedName("amount")
   Long amount;
 
-  /** The amount of tax calculated for this line item, in integer cents. */
+  /**
+   * The amount of tax calculated for this line item, in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
   @SerializedName("amount_tax")
   Long amountTax;
 
@@ -82,7 +86,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TaxBreakdown extends StripeObject {
-    /** The amount of tax, in integer cents. */
+    /**
+     * The amount of tax, in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * currency unit</a>.
+     */
     @SerializedName("amount")
     Long amount;
 
@@ -118,7 +125,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
     @SerializedName("taxability_reason")
     String taxabilityReason;
 
-    /** The amount on which tax is calculated, in integer cents. */
+    /**
+     * The amount on which tax is calculated, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
     @SerializedName("taxable_amount")
     Long taxableAmount;
 

@@ -25,8 +25,9 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A flat amount to reverse across the entire transaction, in negative integer cents. This value
-   * represents the total amount to refund from the transaction, including taxes.
+   * A flat amount to reverse across the entire transaction, in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in negative.
+   * This value represents the total amount to refund from the transaction, including taxes.
    */
   @SerializedName("flat_amount")
   Long flatAmount;
@@ -179,8 +180,10 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     }
 
     /**
-     * A flat amount to reverse across the entire transaction, in negative integer cents. This value
-     * represents the total amount to refund from the transaction, including taxes.
+     * A flat amount to reverse across the entire transaction, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * negative. This value represents the total amount to refund from the transaction, including
+     * taxes.
      */
     public Builder setFlatAmount(Long flatAmount) {
       this.flatAmount = flatAmount;
@@ -274,11 +277,19 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
   @Getter
   public static class LineItem {
-    /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
+    /**
+     * <strong>Required.</strong> The amount to reverse, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * negative.
+     */
     @SerializedName("amount")
     Long amount;
 
-    /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
+    /**
+     * <strong>Required.</strong> The amount of tax to reverse, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * negative.
+     */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -368,13 +379,21 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
             this.reference);
       }
 
-      /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
+      /**
+       * <strong>Required.</strong> The amount to reverse, in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * negative.
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
+      /**
+       * <strong>Required.</strong> The amount of tax to reverse, in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * negative.
+       */
       public Builder setAmountTax(Long amountTax) {
         this.amountTax = amountTax;
         return this;
@@ -464,11 +483,19 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
   @Getter
   public static class ShippingCost {
-    /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
+    /**
+     * <strong>Required.</strong> The amount to reverse, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * negative.
+     */
     @SerializedName("amount")
     Long amount;
 
-    /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
+    /**
+     * <strong>Required.</strong> The amount of tax to reverse, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * negative.
+     */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -504,13 +531,21 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
             this.amount, this.amountTax, this.extraParams);
       }
 
-      /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
+      /**
+       * <strong>Required.</strong> The amount to reverse, in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * negative.
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
+      /**
+       * <strong>Required.</strong> The amount of tax to reverse, in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * negative.
+       */
       public Builder setAmountTax(Long amountTax) {
         this.amountTax = amountTax;
         return this;

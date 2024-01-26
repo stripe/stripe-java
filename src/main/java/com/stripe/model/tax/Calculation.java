@@ -327,13 +327,17 @@ public class Calculation extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost extends StripeObject {
     /**
-     * The shipping amount in integer cents. If {@code tax_behavior=inclusive}, then this amount
-     * includes taxes. Otherwise, taxes were calculated on top of this amount.
+     * The shipping amount in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
+     * Otherwise, taxes were calculated on top of this amount.
      */
     @SerializedName("amount")
     Long amount;
 
-    /** The amount of tax calculated for shipping, in integer cents. */
+    /**
+     * The amount of tax calculated for shipping, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -367,7 +371,10 @@ public class Calculation extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxBreakdown extends StripeObject {
-      /** The amount of tax, in integer cents. */
+      /**
+       * The amount of tax, in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
       @SerializedName("amount")
       Long amount;
 
@@ -403,7 +410,10 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("taxability_reason")
       String taxabilityReason;
 
-      /** The amount on which tax is calculated, in integer cents. */
+      /**
+       * The amount on which tax is calculated, in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
       @SerializedName("taxable_amount")
       Long taxableAmount;
 
@@ -474,7 +484,10 @@ public class Calculation extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TaxBreakdown extends StripeObject {
-    /** The amount of tax, in integer cents. */
+    /**
+     * The amount of tax, in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * currency unit</a>.
+     */
     @SerializedName("amount")
     Long amount;
 
@@ -498,7 +511,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("taxability_reason")
     String taxabilityReason;
 
-    /** The amount on which tax is calculated, in integer cents. */
+    /**
+     * The amount on which tax is calculated, in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
