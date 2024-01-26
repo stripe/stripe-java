@@ -954,9 +954,10 @@ public class CalculationCreateParams extends ApiRequestParams {
   @Getter
   public static class LineItem {
     /**
-     * <strong>Required.</strong> A positive integer in cents representing the line item's total
-     * price. If {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes
-     * are calculated on top of this amount.
+     * <strong>Required.</strong> A positive integer in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>
+     * representing the line item's total price. If {@code tax_behavior=inclusive}, then this amount
+     * includes taxes. Otherwise, taxes are calculated on top of this amount.
      */
     @SerializedName("amount")
     Long amount;
@@ -1054,9 +1055,10 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> A positive integer in cents representing the line item's total
-       * price. If {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes
-       * are calculated on top of this amount.
+       * <strong>Required.</strong> A positive integer in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>
+       * representing the line item's total price. If {@code tax_behavior=inclusive}, then this
+       * amount includes taxes. Otherwise, taxes are calculated on top of this amount.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
@@ -1155,9 +1157,9 @@ public class CalculationCreateParams extends ApiRequestParams {
   @Getter
   public static class ShippingCost {
     /**
-     * A positive integer in cents representing the shipping charge. If {@code
-     * tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are calculated on
-     * top of this amount.
+     * A positive integer in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * currency unit</a> representing the shipping charge. If {@code tax_behavior=inclusive}, then
+     * this amount includes taxes. Otherwise, taxes are calculated on top of this amount.
      */
     @SerializedName("amount")
     Long amount;
@@ -1230,9 +1232,10 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A positive integer in cents representing the shipping charge. If {@code
-       * tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are calculated
-       * on top of this amount.
+       * A positive integer in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>
+       * representing the shipping charge. If {@code tax_behavior=inclusive}, then this amount
+       * includes taxes. Otherwise, taxes are calculated on top of this amount.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
