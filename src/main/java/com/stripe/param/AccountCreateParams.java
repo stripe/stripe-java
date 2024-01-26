@@ -97,9 +97,8 @@ public class AccountCreateParams extends ApiRequestParams {
    * currency, and deletes the old default if one exists. To add additional external accounts
    * without replacing the existing default for the currency, use the <a
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
-   * <br>
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs. After you create
+   * an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
    * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
    * be updated for Custom accounts.
    */
@@ -379,9 +378,8 @@ public class AccountCreateParams extends ApiRequestParams {
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
-     * <br>
-     * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs. After you
+     * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
      * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
      * only be updated for Custom accounts.
      */
