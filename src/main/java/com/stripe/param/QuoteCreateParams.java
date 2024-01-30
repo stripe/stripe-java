@@ -2632,15 +2632,21 @@ public class QuoteCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** ID of the promotion code to create a new discount for. */
+          @SerializedName("promotion_code")
+          String promotionCode;
+
           private Discount(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
-              Map<String, Object> extraParams) {
+              Map<String, Object> extraParams,
+              String promotionCode) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
+            this.promotionCode = promotionCode;
           }
 
           public static Builder builder() {
@@ -2656,10 +2662,16 @@ public class QuoteCreateParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private String promotionCode;
+
             /** Finalize and obtain parameter instance from this builder. */
             public QuoteCreateParams.Line.Action.AddItem.Discount build() {
               return new QuoteCreateParams.Line.Action.AddItem.Discount(
-                  this.coupon, this.discount, this.discountEnd, this.extraParams);
+                  this.coupon,
+                  this.discount,
+                  this.discountEnd,
+                  this.extraParams,
+                  this.promotionCode);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -2706,6 +2718,12 @@ public class QuoteCreateParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** ID of the promotion code to create a new discount for. */
+            public Builder setPromotionCode(String promotionCode) {
+              this.promotionCode = promotionCode;
               return this;
             }
           }
@@ -3103,10 +3121,16 @@ public class QuoteCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private RemoveDiscount(String coupon, String discount, Map<String, Object> extraParams) {
+        /** The ID of a promotion code to remove from the {@code discounts} array. */
+        @SerializedName("promotion_code")
+        String promotionCode;
+
+        private RemoveDiscount(
+            String coupon, String discount, Map<String, Object> extraParams, String promotionCode) {
           this.coupon = coupon;
           this.discount = discount;
           this.extraParams = extraParams;
+          this.promotionCode = promotionCode;
         }
 
         public static Builder builder() {
@@ -3120,10 +3144,12 @@ public class QuoteCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private String promotionCode;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteCreateParams.Line.Action.RemoveDiscount build() {
             return new QuoteCreateParams.Line.Action.RemoveDiscount(
-                this.coupon, this.discount, this.extraParams);
+                this.coupon, this.discount, this.extraParams, this.promotionCode);
           }
 
           /** The coupon code to remove from the {@code discounts} array. */
@@ -3163,6 +3189,12 @@ public class QuoteCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The ID of a promotion code to remove from the {@code discounts} array. */
+          public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
             return this;
           }
         }
@@ -3259,10 +3291,16 @@ public class QuoteCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private SetDiscount(String coupon, String discount, Map<String, Object> extraParams) {
+        /** An ID of an existing promotion code to replace the {@code discounts} array with. */
+        @SerializedName("promotion_code")
+        String promotionCode;
+
+        private SetDiscount(
+            String coupon, String discount, Map<String, Object> extraParams, String promotionCode) {
           this.coupon = coupon;
           this.discount = discount;
           this.extraParams = extraParams;
+          this.promotionCode = promotionCode;
         }
 
         public static Builder builder() {
@@ -3276,10 +3314,12 @@ public class QuoteCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private String promotionCode;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteCreateParams.Line.Action.SetDiscount build() {
             return new QuoteCreateParams.Line.Action.SetDiscount(
-                this.coupon, this.discount, this.extraParams);
+                this.coupon, this.discount, this.extraParams, this.promotionCode);
           }
 
           /** The coupon code to replace the {@code discounts} array with. */
@@ -3319,6 +3359,12 @@ public class QuoteCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** An ID of an existing promotion code to replace the {@code discounts} array with. */
+          public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
             return this;
           }
         }
@@ -3591,15 +3637,21 @@ public class QuoteCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** ID of the promotion code to create a new discount for. */
+          @SerializedName("promotion_code")
+          String promotionCode;
+
           private Discount(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
-              Map<String, Object> extraParams) {
+              Map<String, Object> extraParams,
+              String promotionCode) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
+            this.promotionCode = promotionCode;
           }
 
           public static Builder builder() {
@@ -3615,10 +3667,16 @@ public class QuoteCreateParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private String promotionCode;
+
             /** Finalize and obtain parameter instance from this builder. */
             public QuoteCreateParams.Line.Action.SetItem.Discount build() {
               return new QuoteCreateParams.Line.Action.SetItem.Discount(
-                  this.coupon, this.discount, this.discountEnd, this.extraParams);
+                  this.coupon,
+                  this.discount,
+                  this.discountEnd,
+                  this.extraParams,
+                  this.promotionCode);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -3665,6 +3723,12 @@ public class QuoteCreateParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** ID of the promotion code to create a new discount for. */
+            public Builder setPromotionCode(String promotionCode) {
+              this.promotionCode = promotionCode;
               return this;
             }
           }
@@ -6014,8 +6078,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
         /**
          * The number of intervals between subscription billings. For example, {@code
-         * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
-         * interval allowed (1 year, 12 months, or 52 weeks).
+         * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of three years
+         * interval allowed (3 years, 36 months, or 156 weeks).
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -6083,8 +6147,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
           /**
            * The number of intervals between subscription billings. For example, {@code
-           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
-           * interval allowed (1 year, 12 months, or 52 weeks).
+           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of three
+           * years interval allowed (3 years, 36 months, or 156 weeks).
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;
@@ -6594,15 +6658,21 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** ID of the promotion code to create a new discount for. */
+      @SerializedName("promotion_code")
+      String promotionCode;
+
       private Discount(
           String coupon,
           String discount,
           DiscountEnd discountEnd,
-          Map<String, Object> extraParams) {
+          Map<String, Object> extraParams,
+          String promotionCode) {
         this.coupon = coupon;
         this.discount = discount;
         this.discountEnd = discountEnd;
         this.extraParams = extraParams;
+        this.promotionCode = promotionCode;
       }
 
       public static Builder builder() {
@@ -6618,10 +6688,12 @@ public class QuoteCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String promotionCode;
+
         /** Finalize and obtain parameter instance from this builder. */
         public QuoteCreateParams.Phase.Discount build() {
           return new QuoteCreateParams.Phase.Discount(
-              this.coupon, this.discount, this.discountEnd, this.extraParams);
+              this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -6667,6 +6739,12 @@ public class QuoteCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** ID of the promotion code to create a new discount for. */
+        public Builder setPromotionCode(String promotionCode) {
+          this.promotionCode = promotionCode;
           return this;
         }
       }
@@ -7772,8 +7850,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
           /**
            * The number of intervals between subscription billings. For example, {@code
-           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
-           * interval allowed (1 year, 12 months, or 52 weeks).
+           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of three
+           * years interval allowed (3 years, 36 months, or 156 weeks).
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -7844,8 +7922,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
             /**
              * The number of intervals between subscription billings. For example, {@code
-             * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one
-             * year interval allowed (1 year, 12 months, or 52 weeks).
+             * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of three
+             * years interval allowed (3 years, 36 months, or 156 weeks).
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;

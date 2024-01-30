@@ -40,6 +40,13 @@ public class FinancingOffer extends ApiResource implements HasId {
   @SerializedName("account")
   String account;
 
+  /**
+   * The time at which this financing offer was charged off, if applicable. Given in seconds since
+   * unix epoch.
+   */
+  @SerializedName("charged_off_at")
+  Long chargedOffAt;
+
   /** Time at which the offer was created. Given in seconds since unix epoch. */
   @SerializedName("created")
   Long created;

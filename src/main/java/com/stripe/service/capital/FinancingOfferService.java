@@ -55,6 +55,7 @@ public final class FinancingOfferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<FinancingOffer>>() {}.getType());
   }
@@ -86,6 +87,7 @@ public final class FinancingOfferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FinancingOffer.class);
   }
   /**
@@ -131,6 +133,7 @@ public final class FinancingOfferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, FinancingOffer.class);
   }
 }

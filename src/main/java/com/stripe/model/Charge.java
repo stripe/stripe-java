@@ -659,20 +659,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public static Charge create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -684,20 +684,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public static Charge create(ChargeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Use the <a href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to
-   * initiate a new payment instead of using this method. Confirmation of the PaymentIntent creates
-   * the {@code Charge} object used to request payment, so this method is limited to legacy
-   * integrations.
+   * This method is no longer recommended—use the <a
+   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
+   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
+   * request payment.
    */
   public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {
@@ -2318,9 +2318,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public static class Ideal extends StripeObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code n26}, {@code rabobank},
-       * {@code regiobank}, {@code revolut}, {@code sns_bank}, {@code triodos_bank}, {@code
-       * van_lanschot}, or {@code yoursafe}.
+       * handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code n26}, {@code nn}, {@code
+       * rabobank}, {@code regiobank}, {@code revolut}, {@code sns_bank}, {@code triodos_bank},
+       * {@code van_lanschot}, or {@code yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -2330,8 +2330,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        *
        * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
        * FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code MOYONL21}, {@code
-       * NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code
-       * SNSBNL2A}, or {@code TRIONL2U}.
+       * NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code
+       * REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;

@@ -62,6 +62,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
   }
@@ -80,6 +81,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /**
@@ -118,6 +120,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /**
@@ -156,6 +159,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /** Cancels the order as well as the payment intent if one is attached. */
@@ -182,6 +186,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /** Reopens a {@code submitted} order. */
@@ -208,6 +213,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
   /**
@@ -238,6 +244,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Order.class);
   }
 

@@ -895,6 +895,12 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<PromotionCode> promotionCode;
+
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -931,6 +937,25 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
           this.discount =
               new ExpandableField<com.stripe.model.Discount>(
                   expandableObject.getId(), expandableObject);
+        }
+
+        /** Get ID of expandable {@code promotionCode} object. */
+        public String getPromotionCode() {
+          return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+        }
+
+        public void setPromotionCode(String id) {
+          this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+        }
+
+        /** Get expanded {@code promotionCode}. */
+        public PromotionCode getPromotionCodeObject() {
+          return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+        }
+
+        public void setPromotionCodeObject(PromotionCode expandableObject) {
+          this.promotionCode =
+              new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
         }
 
         @Getter
@@ -1045,6 +1070,12 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       @SerializedName("discount_end")
       DiscountEnd discountEnd;
 
+      /** ID of the promotion code to create a new discount for. */
+      @SerializedName("promotion_code")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<PromotionCode> promotionCode;
+
       /** Get ID of expandable {@code coupon} object. */
       public String getCoupon() {
         return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1081,6 +1112,25 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         this.discount =
             new ExpandableField<com.stripe.model.Discount>(
                 expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code promotionCode} object. */
+      public String getPromotionCode() {
+        return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+      }
+
+      public void setPromotionCode(String id) {
+        this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+      }
+
+      /** Get expanded {@code promotionCode}. */
+      public PromotionCode getPromotionCodeObject() {
+        return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+      }
+
+      public void setPromotionCodeObject(PromotionCode expandableObject) {
+        this.promotionCode =
+            new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
       }
 
       @Getter
@@ -1277,6 +1327,12 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<PromotionCode> promotionCode;
+
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1313,6 +1369,25 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
           this.discount =
               new ExpandableField<com.stripe.model.Discount>(
                   expandableObject.getId(), expandableObject);
+        }
+
+        /** Get ID of expandable {@code promotionCode} object. */
+        public String getPromotionCode() {
+          return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+        }
+
+        public void setPromotionCode(String id) {
+          this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+        }
+
+        /** Get expanded {@code promotionCode}. */
+        public PromotionCode getPromotionCodeObject() {
+          return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+        }
+
+        public void setPromotionCodeObject(PromotionCode expandableObject) {
+          this.promotionCode =
+              new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
         }
 
         @Getter

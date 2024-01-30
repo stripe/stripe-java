@@ -467,7 +467,7 @@ public class TokenCreateParams extends ApiRequestParams {
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
        * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-       * structure</a> for more details.
+       * structure</a> for more details. Pass an empty string to unset this value.
        */
       @SerializedName("structure")
       ApiRequestParams.EnumParam structure;
@@ -766,7 +766,7 @@ public class TokenCreateParams extends ApiRequestParams {
         /**
          * The category identifying the legal structure of the company or legal entity. See <a
          * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-         * structure</a> for more details.
+         * structure</a> for more details. Pass an empty string to unset this value.
          */
         public Builder setStructure(TokenCreateParams.Account.Company.Structure structure) {
           this.structure = structure;
@@ -776,7 +776,7 @@ public class TokenCreateParams extends ApiRequestParams {
         /**
          * The category identifying the legal structure of the company or legal entity. See <a
          * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-         * structure</a> for more details.
+         * structure</a> for more details. Pass an empty string to unset this value.
          */
         public Builder setStructure(EmptyParam structure) {
           this.structure = structure;
@@ -1642,6 +1642,9 @@ public class TokenCreateParams extends ApiRequestParams {
 
         @SerializedName("public_partnership")
         PUBLIC_PARTNERSHIP("public_partnership"),
+
+        @SerializedName("registered_charity")
+        REGISTERED_CHARITY("registered_charity"),
 
         @SerializedName("single_member_llc")
         SINGLE_MEMBER_LLC("single_member_llc"),

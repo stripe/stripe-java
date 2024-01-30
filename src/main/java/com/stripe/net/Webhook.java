@@ -7,6 +7,7 @@ import com.stripe.util.StringUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.crypto.Mac;
@@ -47,10 +48,31 @@ public final class Webhook {
   public static Event constructEvent(
       String payload, String sigHeader, String secret, long tolerance)
       throws SignatureVerificationException {
+    return constructEvent(payload, sigHeader, secret, tolerance, null);
+  }
+
+  /**
+   * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
+   * payload is not valid JSON, and a SignatureVerificationException if the signature verification
+   * fails for any reason.
+   *
+   * @param payload the payload sent by Stripe.
+   * @param sigHeader the contents of the signature header sent by Stripe.
+   * @param secret secret used to generate the signature.
+   * @param tolerance maximum difference in seconds allowed between the header's timestamp and the
+   *     current time
+   * @param clock instance of clock if you want to use custom time instance
+   * @return the Event instance
+   * @throws SignatureVerificationException if the verification fails.
+   */
+  public static Event constructEvent(
+      String payload, String sigHeader, String secret, long tolerance, Clock clock)
+      throws SignatureVerificationException {
     Event event =
         StripeObject.deserializeStripeObject(
             payload, Event.class, ApiResource.getGlobalResponseGetter());
-    Signature.verifyHeader(payload, sigHeader, secret, tolerance);
+    Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
+
     return event;
   }
 
@@ -70,6 +92,24 @@ public final class Webhook {
      */
     public static boolean verifyHeader(
         String payload, String sigHeader, String secret, long tolerance)
+        throws SignatureVerificationException {
+      return verifyHeader(payload, sigHeader, secret, tolerance, null);
+    }
+
+    /**
+     * Verifies the signature header sent by Stripe. Throws a SignatureVerificationException if the
+     * verification fails for any reason.
+     *
+     * @param payload the payload sent by Stripe.
+     * @param sigHeader the contents of the signature header sent by Stripe.
+     * @param secret secret used to generate the signature.
+     * @param tolerance maximum difference allowed between the header's timestamp and the current
+     *     time
+     * @param clock instance of clock if you want to use custom time instance
+     * @throws SignatureVerificationException if the verification fails.
+     */
+    public static boolean verifyHeader(
+        String payload, String sigHeader, String secret, long tolerance, Clock clock)
         throws SignatureVerificationException {
       // Get timestamp and signatures from header
       long timestamp = getTimestamp(sigHeader);
@@ -106,8 +146,10 @@ public final class Webhook {
             "No signatures found matching the expected signature for payload", sigHeader);
       }
 
+      long currentTime = clock == null ? Util.getTimeNow() : clock.millis() / 1000;
+
       // Check tolerance
-      if ((tolerance > 0) && (timestamp < (Util.getTimeNow() - tolerance))) {
+      if ((tolerance > 0) && (timestamp < (currentTime - tolerance))) {
         throw new SignatureVerificationException("Timestamp outside the tolerance zone", sigHeader);
       }
 

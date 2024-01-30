@@ -1,5 +1,58 @@
 # Changelog
 
+## 24.14.0-beta.1 - 2024-01-25
+* [#1735](https://github.com/stripe/stripe-java/pull/1735) Update generated code for beta
+  * Add support for `create_preview` method on resource `Invoice`
+  * Add support for `charged_off_at` on `Capital.FinancingOffer`
+  * Add support for new values `disabled` and `enabled` on enums `CustomerSessionCreateParams.components.payment_element.features.payment_method_remove`, `CustomerSessionCreateParams.components.payment_element.features.payment_method_save`, `CustomerSessionCreateParams.components.payment_element.features.payment_method_set_as_default`, and `CustomerSessionCreateParams.components.payment_element.features.payment_method_update`
+  * Remove support for values `auto` and `never` from enums `CustomerSessionCreateParams.components.payment_element.features.payment_method_remove`, `CustomerSessionCreateParams.components.payment_element.features.payment_method_save`, `CustomerSessionCreateParams.components.payment_element.features.payment_method_set_as_default`, and `CustomerSessionCreateParams.components.payment_element.features.payment_method_update`
+  * Add support for `enhanced_evidence` on `Dispute.evidence` and `DisputeUpdateParams.evidence`
+  * Add support for `enhanced_eligibility_types` on `Dispute`
+  * Add support for `enhanced_eligibility` on `Dispute.evidence_details`
+  * Add support for `promotion_code` on `InvoiceUpcomingLinesParams.schedule_details.amendments[].discount_actions[].add`, `InvoiceUpcomingLinesParams.schedule_details.amendments[].discount_actions[].remove`, `InvoiceUpcomingLinesParams.schedule_details.amendments[].discount_actions[].set`, `InvoiceUpcomingLinesParams.schedule_details.amendments[].item_actions[].add.discounts[]`, `InvoiceUpcomingLinesParams.schedule_details.amendments[].item_actions[].set.discounts[]`, `InvoiceUpcomingLinesParams.schedule_details.phases[].add_invoice_items[].discounts[]`, `InvoiceUpcomingLinesParams.schedule_details.phases[].discounts[]`, `InvoiceUpcomingLinesParams.schedule_details.phases[].items[].discounts[]`, `InvoiceUpcomingLinesParams.subscription_details.items[].discounts[]`, `InvoiceUpcomingLinesParams.subscription_items[].discounts[]`, `InvoiceUpcomingParams.schedule_details.amendments[].discount_actions[].add`, `InvoiceUpcomingParams.schedule_details.amendments[].discount_actions[].remove`, `InvoiceUpcomingParams.schedule_details.amendments[].discount_actions[].set`, `InvoiceUpcomingParams.schedule_details.amendments[].item_actions[].add.discounts[]`, `InvoiceUpcomingParams.schedule_details.amendments[].item_actions[].set.discounts[]`, `InvoiceUpcomingParams.schedule_details.phases[].add_invoice_items[].discounts[]`, `InvoiceUpcomingParams.schedule_details.phases[].discounts[]`, `InvoiceUpcomingParams.schedule_details.phases[].items[].discounts[]`, `InvoiceUpcomingParams.subscription_details.items[].discounts[]`, `InvoiceUpcomingParams.subscription_items[].discounts[]`, `QuoteCreateParams.lines[].actions[].add_item.discounts[]`, `QuoteCreateParams.lines[].actions[].remove_discount`, `QuoteCreateParams.lines[].actions[].set_discounts[]`, `QuoteCreateParams.lines[].actions[].set_items[].discounts[]`, `QuoteCreateParams.phases[].discounts[]`, `QuoteLine.actions[].add_discount`, `QuoteLine.actions[].add_item.discounts[]`, `QuoteLine.actions[].remove_discount`, `QuoteLine.actions[].set_discounts[]`, `QuoteLine.actions[].set_items[].discounts[]`, `QuoteUpdateParams.lines[].actions[].add_item.discounts[]`, `QuoteUpdateParams.lines[].actions[].remove_discount`, `QuoteUpdateParams.lines[].actions[].set_discounts[]`, `QuoteUpdateParams.lines[].actions[].set_items[].discounts[]`, `QuoteUpdateParams.phases[].discounts[]`, `SubscriptionCreateParams.add_invoice_items[].discounts[]`, `SubscriptionCreateParams.discounts[]`, `SubscriptionCreateParams.items[].discounts[]`, `SubscriptionItemCreateParams.discounts[]`, `SubscriptionItemUpdateParams.discounts[]`, `SubscriptionSchedule.phases[].add_invoice_items[].discounts[]`, `SubscriptionSchedule.phases[].discounts[]`, `SubscriptionSchedule.phases[].items[].discounts[]`, `SubscriptionScheduleAmendParams.amendments[].discount_actions[].add`, `SubscriptionScheduleAmendParams.amendments[].discount_actions[].remove`, `SubscriptionScheduleAmendParams.amendments[].discount_actions[].set`, `SubscriptionScheduleAmendParams.amendments[].item_actions[].add.discounts[]`, `SubscriptionScheduleAmendParams.amendments[].item_actions[].set.discounts[]`, `SubscriptionScheduleCreateParams.phases[].add_invoice_items[].discounts[]`, `SubscriptionScheduleCreateParams.phases[].discounts[]`, `SubscriptionScheduleCreateParams.phases[].items[].discounts[]`, `SubscriptionScheduleUpdateParams.phases[].add_invoice_items[].discounts[]`, `SubscriptionScheduleUpdateParams.phases[].discounts[]`, `SubscriptionScheduleUpdateParams.phases[].items[].discounts[]`, `SubscriptionUpdateParams.add_invoice_items[].discounts[]`, `SubscriptionUpdateParams.discounts[]`, and `SubscriptionUpdateParams.items[].discounts[]`
+
+## 24.13.0 - 2024-01-25
+* [#1736](https://github.com/stripe/stripe-java/pull/1736) Update generated code
+  * Add support for `annual_revenue` and `estimated_worker_count` on `Account.business_profile`, `Account.CreateParams.business_profile`, and `Account.UpdateParams.business_profile`
+  * Add support for new value `registered_charity` on enums `Account.CreateParams.company.structure`, `Account.UpdateParams.company.structure`, and `Token.CreateParams.account.company.structure`
+  * Add support for `collection_options` on `AccountLink.CreateParams`
+  * Add support for `liability` on `Checkout.Session.automatic_tax`, `PaymentLink.automatic_tax`, `PaymentLink.CreateParams.automatic_tax`, `PaymentLink.UpdateParams.automatic_tax`, `Quote.automatic_tax`, `Quote.CreateParams.automatic_tax`, `Quote.UpdateParams.automatic_tax`, `SubscriptionSchedule.default_settings.automatic_tax`, `SubscriptionSchedule.phases[].automatic_tax`, `SubscriptionSchedule.CreateParams.default_settings.automatic_tax`, `SubscriptionSchedule.CreateParams.phases[].automatic_tax`, `SubscriptionSchedule.UpdateParams.default_settings.automatic_tax`, `SubscriptionSchedule.UpdateParams.phases[].automatic_tax`, and `checkout.Session.CreateParams.automatic_tax`
+  * Add support for `issuer` on `Checkout.Session.invoice_creation.invoice_data`, `PaymentLink.invoice_creation.invoice_data`, `PaymentLink.CreateParams.invoice_creation.invoice_data`, `PaymentLink.UpdateParams.invoice_creation.invoice_data`, `Quote.invoice_settings`, `Quote.CreateParams.invoice_settings`, `Quote.UpdateParams.invoice_settings`, `SubscriptionSchedule.default_settings.invoice_settings`, `SubscriptionSchedule.phases[].invoice_settings`, `SubscriptionSchedule.CreateParams.default_settings.invoice_settings`, `SubscriptionSchedule.CreateParams.phases[].invoice_settings`, `SubscriptionSchedule.UpdateParams.default_settings.invoice_settings`, `SubscriptionSchedule.UpdateParams.phases[].invoice_settings`, and `checkout.Session.CreateParams.invoice_creation.invoice_data`
+  * Add support for `invoice_settings` on `PaymentLink.subscription_data`, `PaymentLink.CreateParams.subscription_data`, `PaymentLink.UpdateParams.subscription_data`, and `checkout.Session.CreateParams.subscription_data`
+  * Add support for new value `challenge` on enums `Invoice.CreateParams.payment_settings.payment_method_options.card.request_three_d_secure`, `Invoice.UpdateParams.payment_settings.payment_method_options.card.request_three_d_secure`, `Subscription.CreateParams.payment_settings.payment_method_options.card.request_three_d_secure`, and `Subscription.UpdateParams.payment_settings.payment_method_options.card.request_three_d_secure`
+  * Add support for `promotion_code` on `Invoice.UpcomingLinesParams.discounts[]`, `Invoice.UpcomingLinesParams.invoice_items[].discounts[]`, `Invoice.UpcomingParams.discounts[]`, and `Invoice.UpcomingParams.invoice_items[].discounts[]`
+  * Add support for `account_type` on `PaymentMethod.UpdateParams.us_bank_account`
+
+## 24.13.0-beta.1 - 2024-01-18
+* [#1734](https://github.com/stripe/stripe-java/pull/1734) Update generated code for beta
+  Release specs are identical.
+* [#1733](https://github.com/stripe/stripe-java/pull/1733) Merge master into beta
+* [#1728](https://github.com/stripe/stripe-java/pull/1728) Beta: Stripe.rawRequest -> StripeClient.rawRequest
+* [#1727](https://github.com/stripe/stripe-java/pull/1727) Trim event API version when matching
+* [#1726](https://github.com/stripe/stripe-java/pull/1726) Merge java beta
+
+## 24.12.0 - 2024-01-18
+* [#1732](https://github.com/stripe/stripe-java/pull/1732) Update generated code
+* [#1723](https://github.com/stripe/stripe-java/pull/1723) Update generated code
+  * Add support for `issuer` on `InvoiceCreateParams`, `InvoiceUpcomingLinesParams`, `InvoiceUpcomingParams`, `InvoiceUpdateParams`, and `Invoice`
+  * Add support for `liability` on `Invoice.automatic_tax`, `InvoiceCreateParams.automatic_tax`, `InvoiceUpcomingLinesParams.automatic_tax`, `InvoiceUpcomingParams.automatic_tax`, `InvoiceUpdateParams.automatic_tax`, `Subscription.automatic_tax`, `SubscriptionCreateParams.automatic_tax`, and `SubscriptionUpdateParams.automatic_tax`
+  * Add support for `on_behalf_of` on `InvoiceUpcomingLinesParams` and `InvoiceUpcomingParams`
+  * Add support for `pin` on `issuing.CardCreateParams`
+  * Add support for `revocation_reason` on `Mandate.payment_method_details.bacs_debit`
+  * Add support for new value `nn` on enums `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for `customer_balance` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
+  * Add support for `invoice_settings` on `SubscriptionCreateParams` and `SubscriptionUpdateParams`
+* [#1724](https://github.com/stripe/stripe-java/pull/1724) Add webhook parsing method on StripeClient
+  * Add support for `constructEvent()` instance method on `StripeClient` that parses Webhook events and uses the settings inherited from the StripeClient instance to make further requests.
+* [#1721](https://github.com/stripe/stripe-java/pull/1721) Report usage of `stripe_client`
+  * Reports use of the new `StripeClient` in `X-Stripe-Client-Telemetry`. (You can disable telemetry via `Stripe.enableTelemetry = false;`, see the [README](https://github.com/stripe/stripe-java/blob/master/README.md#telemetry).)
+
+  ## Details
+  * A different approach to #1698. This one sets `usage` on each callsite to `StripeResponseGetter.request` from `StripeClient`, rather than attempting to wrap `LiveStripeResponseGetter`.
+  * Modifies `RequestTelemetry` to accept usage and set it appropriately on `X-Stripe-Client-Telemetry`. Had to add a parameter to a public method, so I made a new overload and deprecated the old one. Had to disable a linter rule to do this.
+* [#1725](https://github.com/stripe/stripe-java/pull/1725) Move request telemetry to LiveStripeResponseGetter
+* [#1722](https://github.com/stripe/stripe-java/pull/1722) Refactor LiveStripeResponseGetter
+
 ## 24.12.0-beta.1 - 2024-01-12
 * [#1714](https://github.com/stripe/stripe-java/pull/1714) Update generated code for beta
   * Add support for `amount` on `ChargeCaptureParams.payment_details.flight.segments[]`, `ChargeUpdateParams.payment_details.flight.segments[]`, `PaymentIntentCaptureParams.payment_details.flight.segments[]`, `PaymentIntentConfirmParams.payment_details.flight.segments[]`, `PaymentIntentCreateParams.payment_details.flight.segments[]`, and `PaymentIntentUpdateParams.payment_details.flight.segments[]`
@@ -10,7 +63,6 @@
 * [#1717](https://github.com/stripe/stripe-java/pull/1717) Beta: RawApiRequest
   * ⚠️ Changed input parameters of `StripeResponseGetter.rawRequest(...)` -- new usage is `StripeResponseGetter.rawRequest(new RawApiRequest(...))`
 * [#1713](https://github.com/stripe/stripe-java/pull/1713) Update generated code for beta
-
 
 ## 24.11.0 - 2024-01-12
 * [#1715](https://github.com/stripe/stripe-java/pull/1715) Update generated code

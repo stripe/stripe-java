@@ -49,6 +49,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
@@ -68,6 +69,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Retrieves the gift card transaction. */
@@ -94,6 +96,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Update a gift card transaction. */
@@ -120,6 +123,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Cancel a gift card transaction. */
@@ -147,6 +151,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
   /** Confirm a gift card transaction. */
@@ -174,6 +179,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Transaction.class);
   }
 }

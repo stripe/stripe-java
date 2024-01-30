@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
-public class StripeClientTest {
+public class StripeClientTest extends BaseStripeTest {
   @Test
   public void testFlowsStripeResponseGetter() throws Exception {
     StripeResponseGetter responseGetter = Mockito.spy(new LiveStripeResponseGetter());

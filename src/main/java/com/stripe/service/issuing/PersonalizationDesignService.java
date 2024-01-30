@@ -61,6 +61,7 @@ public final class PersonalizationDesignService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<PersonalizationDesign>>() {}.getType());
   }
@@ -81,6 +82,7 @@ public final class PersonalizationDesignService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PersonalizationDesign.class);
   }
   /** Retrieves a personalization design object. */
@@ -117,6 +119,7 @@ public final class PersonalizationDesignService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PersonalizationDesign.class);
   }
   /** Updates a card personalization object. */
@@ -153,6 +156,7 @@ public final class PersonalizationDesignService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, PersonalizationDesign.class);
   }
 }

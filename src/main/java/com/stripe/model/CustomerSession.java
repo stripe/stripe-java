@@ -182,7 +182,7 @@ public class CustomerSession extends ApiResource {
         /**
          * Controls whether the Payment Element allows the removal of a saved payment method.
          *
-         * <p>One of {@code auto}, or {@code never}.
+         * <p>One of {@code disabled}, or {@code enabled}.
          */
         @SerializedName("payment_method_remove")
         String paymentMethodRemove;
@@ -190,7 +190,7 @@ public class CustomerSession extends ApiResource {
         /**
          * Controls whether the Payment Element offers to save a new payment method.
          *
-         * <p>One of {@code auto}, or {@code never}.
+         * <p>One of {@code disabled}, or {@code enabled}.
          */
         @SerializedName("payment_method_save")
         String paymentMethodSave;
@@ -198,7 +198,7 @@ public class CustomerSession extends ApiResource {
         /**
          * Controls whether the Payment Element offers to set a payment method as the default.
          *
-         * <p>One of {@code auto}, or {@code never}.
+         * <p>One of {@code disabled}, or {@code enabled}.
          */
         @SerializedName("payment_method_set_as_default")
         String paymentMethodSetAsDefault;
@@ -206,7 +206,7 @@ public class CustomerSession extends ApiResource {
         /**
          * Controls whether the Payment Element allows the updating of a saved payment method.
          *
-         * <p>One of {@code auto}, or {@code never}.
+         * <p>One of {@code disabled}, or {@code enabled}.
          */
         @SerializedName("payment_method_update")
         String paymentMethodUpdate;

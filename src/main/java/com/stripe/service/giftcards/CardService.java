@@ -48,6 +48,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter()
         .request(request, new TypeToken<StripeCollection<Card>>() {}.getType());
   }
@@ -66,6 +67,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Card.class);
   }
   /** Retrieve a gift card by id. */
@@ -92,6 +94,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Card.class);
   }
   /** Update a gift card. */
@@ -118,6 +121,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Card.class);
   }
   /** Validates a gift card code, returning the matching gift card object if it exists. */
@@ -135,6 +139,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
+    request = request.addUsage("stripe_client");
     return getResponseGetter().request(request, Card.class);
   }
 }

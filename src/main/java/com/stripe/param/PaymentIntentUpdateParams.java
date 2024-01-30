@@ -77,7 +77,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   /** This hash contains details about the Mandate to create. */
   @SerializedName("mandate_data")
-  MandateDataPublishableKey mandateData;
+  MandateData mandateData;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -199,7 +199,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
-      MandateDataPublishableKey mandateData,
+      MandateData mandateData,
       Object metadata,
       Object paymentDetails,
       Object paymentMethod,
@@ -260,7 +260,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private MandateDataPublishableKey mandateData;
+    private MandateData mandateData;
 
     private Object metadata;
 
@@ -477,7 +477,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /** This hash contains details about the Mandate to create. */
-    public Builder setMandateData(PaymentIntentUpdateParams.MandateDataPublishableKey mandateData) {
+    public Builder setMandateData(PaymentIntentUpdateParams.MandateData mandateData) {
       this.mandateData = mandateData;
       return this;
     }
@@ -778,7 +778,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class MandateDataPublishableKey {
+  public static class MandateData {
     /**
      * <strong>Required.</strong> This hash contains details about the customer acceptance of the
      * Mandate.
@@ -795,8 +795,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private MandateDataPublishableKey(
-        CustomerAcceptance customerAcceptance, Map<String, Object> extraParams) {
+    private MandateData(CustomerAcceptance customerAcceptance, Map<String, Object> extraParams) {
       this.customerAcceptance = customerAcceptance;
       this.extraParams = extraParams;
     }
@@ -811,9 +810,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentIntentUpdateParams.MandateDataPublishableKey build() {
-        return new PaymentIntentUpdateParams.MandateDataPublishableKey(
-            this.customerAcceptance, this.extraParams);
+      public PaymentIntentUpdateParams.MandateData build() {
+        return new PaymentIntentUpdateParams.MandateData(this.customerAcceptance, this.extraParams);
       }
 
       /**
@@ -821,8 +819,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        * Mandate.
        */
       public Builder setCustomerAcceptance(
-          PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance
-              customerAcceptance) {
+          PaymentIntentUpdateParams.MandateData.CustomerAcceptance customerAcceptance) {
         this.customerAcceptance = customerAcceptance;
         return this;
       }
@@ -830,8 +827,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentIntentUpdateParams.MandateDataPublishableKey#extraParams} for the field
-       * documentation.
+       * PaymentIntentUpdateParams.MandateData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -844,8 +840,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentIntentUpdateParams.MandateDataPublishableKey#extraParams} for the field
-       * documentation.
+       * See {@link PaymentIntentUpdateParams.MandateData#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -899,16 +894,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance build() {
-          return new PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance(
+        public PaymentIntentUpdateParams.MandateData.CustomerAcceptance build() {
+          return new PaymentIntentUpdateParams.MandateData.CustomerAcceptance(
               this.extraParams, this.online, this.type);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance#extraParams} for
+         * map. See {@link PaymentIntentUpdateParams.MandateData.CustomerAcceptance#extraParams} for
          * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -922,8 +916,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance#extraParams} for
+         * map. See {@link PaymentIntentUpdateParams.MandateData.CustomerAcceptance#extraParams} for
          * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -939,7 +932,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * details about the online acceptance.
          */
         public Builder setOnline(
-            PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Online online) {
+            PaymentIntentUpdateParams.MandateData.CustomerAcceptance.Online online) {
           this.online = online;
           return this;
         }
@@ -948,8 +941,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * <strong>Required.</strong> The type of customer acceptance information included with the
          * Mandate.
          */
-        public Builder setType(
-            PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Type type) {
+        public Builder setType(PaymentIntentUpdateParams.MandateData.CustomerAcceptance.Type type) {
           this.type = type;
           return this;
         }
@@ -993,18 +985,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           private Object userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Online
-              build() {
-            return new PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance
-                .Online(this.extraParams, this.ipAddress, this.userAgent);
+          public PaymentIntentUpdateParams.MandateData.CustomerAcceptance.Online build() {
+            return new PaymentIntentUpdateParams.MandateData.CustomerAcceptance.Online(
+                this.extraParams, this.ipAddress, this.userAgent);
           }
 
           /**
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Online#extraParams}
-           * for the field documentation.
+           * PaymentIntentUpdateParams.MandateData.CustomerAcceptance.Online#extraParams} for the
+           * field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -1018,8 +1009,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Online#extraParams}
-           * for the field documentation.
+           * PaymentIntentUpdateParams.MandateData.CustomerAcceptance.Online#extraParams} for the
+           * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
@@ -8116,6 +8107,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("n26")
         N26("n26"),
 
+        @SerializedName("nn")
+        NN("nn"),
+
         @SerializedName("rabobank")
         RABOBANK("rabobank"),
 
@@ -9859,8 +9853,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object promptpay;
 
     /**
-     * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the Demo
-     * Pay payment method options.
+     * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
+     * Revolut Pay payment method options.
      */
     @SerializedName("revolut_pay")
     Object revolutPay;
@@ -10624,7 +10618,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
-       * Demo Pay payment method options.
+       * Revolut Pay payment method options.
        */
       public Builder setRevolutPay(
           PaymentIntentUpdateParams.PaymentMethodOptions.RevolutPay revolutPay) {
@@ -10634,7 +10628,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * If this is a {@code revolut_pay} PaymentMethod, this sub-hash contains details about the
-       * Demo Pay payment method options.
+       * Revolut Pay payment method options.
        */
       public Builder setRevolutPay(EmptyParam revolutPay) {
         this.revolutPay = revolutPay;
@@ -12545,8 +12539,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-       * PaymentIntent.
+       * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+       * authorization</a> for this PaymentIntent.
        */
       @SerializedName("request_incremental_authorization")
       RequestIncrementalAuthorization requestIncrementalAuthorization;
@@ -12862,8 +12856,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         /**
          * Request ability to <a
-         * href="https://stripe.com/docs/payments/incremental-authorization">increment</a> for this
-         * PaymentIntent.
+         * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+         * authorization</a> for this PaymentIntent.
          */
         public Builder setRequestIncrementalAuthorization(
             PaymentIntentUpdateParams.PaymentMethodOptions.Card.RequestIncrementalAuthorization

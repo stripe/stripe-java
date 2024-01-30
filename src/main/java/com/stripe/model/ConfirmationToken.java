@@ -917,7 +917,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
       /**
        * The customer's bank, if provided. Can be one of {@code abn_amro}, {@code asn_bank}, {@code
        * bunq}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code n26},
-       * {@code rabobank}, {@code regiobank}, {@code revolut}, {@code sns_bank}, {@code
+       * {@code nn}, {@code rabobank}, {@code regiobank}, {@code revolut}, {@code sns_bank}, {@code
        * triodos_bank}, {@code van_lanschot}, or {@code yoursafe}.
        */
       @SerializedName("bank")
@@ -928,8 +928,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
        *
        * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
        * FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code MOYONL21}, {@code
-       * NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code
-       * SNSBNL2A}, or {@code TRIONL2U}.
+       * NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code
+       * REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;

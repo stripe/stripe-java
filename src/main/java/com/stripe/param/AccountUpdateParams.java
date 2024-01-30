@@ -23,7 +23,12 @@ public class AccountUpdateParams extends ApiRequestParams {
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
-  /** The business type. */
+  /**
+   * The business type. Once you create an <a
+   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * be updated for Custom accounts.
+   */
   @SerializedName("business_type")
   BusinessType businessType;
 
@@ -38,7 +43,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Information about the company or business. This field is available for any {@code
-   * business_type}.
+   * business_type}. Once you create an <a href="https://stripe.com/docs/api/account_links">Account
+   * Link</a> or <a href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this
+   * property can only be updated for Custom accounts.
    */
   @SerializedName("company")
   Company company;
@@ -78,7 +85,11 @@ public class AccountUpdateParams extends ApiRequestParams {
    * currency, and deletes the old default if one exists. To add additional external accounts
    * without replacing the existing default for the currency, use the <a
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
+   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
+   * <br>
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * be updated for Custom accounts.
    */
   @SerializedName("external_account")
   Object externalAccount;
@@ -94,7 +105,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Information about the person represented by the account. This field is null unless {@code
-   * business_type} is set to {@code individual}.
+   * business_type} is set to {@code individual}. Once you create an <a
+   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * be updated for Custom accounts.
    */
   @SerializedName("individual")
   Individual individual;
@@ -115,7 +129,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   /**
    * Details on the account's acceptance of the <a
    * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
-   * Agreement</a>.
+   * Agreement</a> This property can only be updated for Custom accounts.
    */
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
@@ -232,7 +246,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The business type. */
+    /**
+     * The business type. Once you create an <a
+     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
+     */
     public Builder setBusinessType(AccountUpdateParams.BusinessType businessType) {
       this.businessType = businessType;
       return this;
@@ -251,7 +270,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Information about the company or business. This field is available for any {@code
-     * business_type}.
+     * business_type}. Once you create an <a
+     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setCompany(AccountUpdateParams.Company company) {
       this.company = company;
@@ -341,7 +363,11 @@ public class AccountUpdateParams extends ApiRequestParams {
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
+     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
+     * <br>
+     * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
@@ -361,7 +387,11 @@ public class AccountUpdateParams extends ApiRequestParams {
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
+     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.<br>
+     * <br>
+     * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setExternalAccount(EmptyParam externalAccount) {
       this.externalAccount = externalAccount;
@@ -396,7 +426,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Information about the person represented by the account. This field is null unless {@code
-     * business_type} is set to {@code individual}.
+     * business_type} is set to {@code individual}. Once you create an <a
+     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * only be updated for Custom accounts.
      */
     public Builder setIndividual(AccountUpdateParams.Individual individual) {
       this.individual = individual;
@@ -462,7 +495,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     /**
      * Details on the account's acceptance of the <a
      * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
-     * Agreement</a>.
+     * Agreement</a> This property can only be updated for Custom accounts.
      */
     public Builder setTosAcceptance(AccountUpdateParams.TosAcceptance tosAcceptance) {
       this.tosAcceptance = tosAcceptance;
@@ -472,6 +505,17 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class BusinessProfile {
+    /** The applicant's gross annual revenue for its preceding fiscal year. */
+    @SerializedName("annual_revenue")
+    AnnualRevenue annualRevenue;
+
+    /**
+     * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
+     * business.
+     */
+    @SerializedName("estimated_worker_count")
+    Long estimatedWorkerCount;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -528,6 +572,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     Object url;
 
     private BusinessProfile(
+        AnnualRevenue annualRevenue,
+        Long estimatedWorkerCount,
         Map<String, Object> extraParams,
         Object mcc,
         MonthlyEstimatedRevenue monthlyEstimatedRevenue,
@@ -538,6 +584,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object supportPhone,
         Object supportUrl,
         Object url) {
+      this.annualRevenue = annualRevenue;
+      this.estimatedWorkerCount = estimatedWorkerCount;
       this.extraParams = extraParams;
       this.mcc = mcc;
       this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
@@ -555,6 +603,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AnnualRevenue annualRevenue;
+
+      private Long estimatedWorkerCount;
+
       private Map<String, Object> extraParams;
 
       private Object mcc;
@@ -578,6 +630,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountUpdateParams.BusinessProfile build() {
         return new AccountUpdateParams.BusinessProfile(
+            this.annualRevenue,
+            this.estimatedWorkerCount,
             this.extraParams,
             this.mcc,
             this.monthlyEstimatedRevenue,
@@ -588,6 +642,22 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.supportPhone,
             this.supportUrl,
             this.url);
+      }
+
+      /** The applicant's gross annual revenue for its preceding fiscal year. */
+      public Builder setAnnualRevenue(
+          AccountUpdateParams.BusinessProfile.AnnualRevenue annualRevenue) {
+        this.annualRevenue = annualRevenue;
+        return this;
+      }
+
+      /**
+       * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
+       * business.
+       */
+      public Builder setEstimatedWorkerCount(Long estimatedWorkerCount) {
+        this.estimatedWorkerCount = estimatedWorkerCount;
+        return this;
       }
 
       /**
@@ -729,6 +799,143 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setUrl(EmptyParam url) {
         this.url = url;
         return this;
+      }
+    }
+
+    @Getter
+    public static class AnnualRevenue {
+      /**
+       * <strong>Required.</strong> A non-negative integer representing the amount in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
+      @SerializedName("currency")
+      Object currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The close-out date of the preceding fiscal year in ISO 8601
+       * format. E.g. 2023-12-31 for the 31st of December, 2023.
+       */
+      @SerializedName("fiscal_year_end")
+      Object fiscalYearEnd;
+
+      private AnnualRevenue(
+          Long amount, Object currency, Map<String, Object> extraParams, Object fiscalYearEnd) {
+        this.amount = amount;
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.fiscalYearEnd = fiscalYearEnd;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amount;
+
+        private Object currency;
+
+        private Map<String, Object> extraParams;
+
+        private Object fiscalYearEnd;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.BusinessProfile.AnnualRevenue build() {
+          return new AccountUpdateParams.BusinessProfile.AnnualRevenue(
+              this.amount, this.currency, this.extraParams, this.fiscalYearEnd);
+        }
+
+        /**
+         * <strong>Required.</strong> A non-negative integer representing the amount in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.BusinessProfile.AnnualRevenue#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.BusinessProfile.AnnualRevenue#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The close-out date of the preceding fiscal year in ISO 8601
+         * format. E.g. 2023-12-31 for the 31st of December, 2023.
+         */
+        public Builder setFiscalYearEnd(String fiscalYearEnd) {
+          this.fiscalYearEnd = fiscalYearEnd;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The close-out date of the preceding fiscal year in ISO 8601
+         * format. E.g. 2023-12-31 for the 31st of December, 2023.
+         */
+        public Builder setFiscalYearEnd(EmptyParam fiscalYearEnd) {
+          this.fiscalYearEnd = fiscalYearEnd;
+          return this;
+        }
       }
     }
 
@@ -4778,7 +4985,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     /**
      * The category identifying the legal structure of the company or legal entity. See <a
      * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-     * structure</a> for more details.
+     * structure</a> for more details. Pass an empty string to unset this value.
      */
     @SerializedName("structure")
     ApiRequestParams.EnumParam structure;
@@ -5108,7 +5315,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
        * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-       * structure</a> for more details.
+       * structure</a> for more details. Pass an empty string to unset this value.
        */
       public Builder setStructure(AccountUpdateParams.Company.Structure structure) {
         this.structure = structure;
@@ -5118,7 +5325,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
        * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
-       * structure</a> for more details.
+       * structure</a> for more details. Pass an empty string to unset this value.
        */
       public Builder setStructure(EmptyParam structure) {
         this.structure = structure;
@@ -6162,6 +6369,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       @SerializedName("public_partnership")
       PUBLIC_PARTNERSHIP("public_partnership"),
+
+      @SerializedName("registered_charity")
+      REGISTERED_CHARITY("registered_charity"),
 
       @SerializedName("single_member_llc")
       SINGLE_MEMBER_LLC("single_member_llc"),
