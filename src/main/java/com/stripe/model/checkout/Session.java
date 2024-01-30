@@ -6,7 +6,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.Address;
 import com.stripe.model.Customer;
-import com.stripe.model.Discount;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Invoice;
@@ -18,7 +17,6 @@ import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
-import com.stripe.model.TaxId;
 import com.stripe.model.TaxRate;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
@@ -1209,7 +1207,7 @@ public class Session extends ApiResource implements HasId {
     public static class InvoiceData extends StripeObject {
       /** The account tax IDs associated with the invoice. */
       @SerializedName("account_tax_ids")
-      List<ExpandableField<TaxId>> accountTaxIds;
+      List<ExpandableField<com.stripe.model.TaxId>> accountTaxIds;
 
       /** Custom fields displayed on the invoice. */
       @SerializedName("custom_fields")
@@ -1265,23 +1263,23 @@ public class Session extends ApiResource implements HasId {
         this.accountTaxIds =
             (ids != null)
                 ? ids.stream()
-                    .map(id -> new ExpandableField<TaxId>(id, null))
+                    .map(id -> new ExpandableField<com.stripe.model.TaxId>(id, null))
                     .collect(Collectors.toList())
                 : null;
       }
 
       /** Get expanded {@code accountTaxIds}. */
-      public List<TaxId> getAccountTaxIdObjects() {
+      public List<com.stripe.model.TaxId> getAccountTaxIdObjects() {
         return (this.accountTaxIds != null)
             ? this.accountTaxIds.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
             : null;
       }
 
-      public void setAccountTaxIdObjects(List<TaxId> objs) {
+      public void setAccountTaxIdObjects(List<com.stripe.model.TaxId> objs) {
         this.accountTaxIds =
             objs != null
                 ? objs.stream()
-                    .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                    .map(x -> new ExpandableField<com.stripe.model.TaxId>(x.getId(), x))
                     .collect(Collectors.toList())
                 : null;
       }
@@ -2579,7 +2577,7 @@ public class Session extends ApiResource implements HasId {
          * subscriptions</a>
          */
         @SerializedName("discount")
-        Discount discount;
+        com.stripe.model.Discount discount;
       }
 
       @Getter
