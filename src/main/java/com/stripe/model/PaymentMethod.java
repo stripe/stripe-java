@@ -861,7 +861,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("available")
       List<String> available;
 
-      /** The preferred network for the card. */
+      /**
+       * The preferred network for the card. Will contain invalid_preference if requested network is
+       * not valid for the card.
+       */
       @SerializedName("preferred")
       String preferred;
     }
