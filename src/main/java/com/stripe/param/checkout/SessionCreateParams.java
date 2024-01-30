@@ -5481,6 +5481,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("sofort")
     Sofort sofort;
 
+    /** contains details about the Swish payment method options. */
+    @SerializedName("swish")
+    Swish swish;
+
     /** contains details about the Us Bank Account payment method options. */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -5518,6 +5522,7 @@ public class SessionCreateParams extends ApiRequestParams {
         RevolutPay revolutPay,
         SepaDebit sepaDebit,
         Sofort sofort,
+        Swish swish,
         UsBankAccount usBankAccount,
         WechatPay wechatPay) {
       this.acssDebit = acssDebit;
@@ -5548,6 +5553,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.revolutPay = revolutPay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
+      this.swish = swish;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
     }
@@ -5613,6 +5619,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Sofort sofort;
 
+      private Swish swish;
+
       private UsBankAccount usBankAccount;
 
       private WechatPay wechatPay;
@@ -5648,6 +5656,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.revolutPay,
             this.sepaDebit,
             this.sofort,
+            this.swish,
             this.usBankAccount,
             this.wechatPay);
       }
@@ -5841,6 +5850,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Sofort payment method options. */
       public Builder setSofort(SessionCreateParams.PaymentMethodOptions.Sofort sofort) {
         this.sofort = sofort;
+        return this;
+      }
+
+      /** contains details about the Swish payment method options. */
+      public Builder setSwish(SessionCreateParams.PaymentMethodOptions.Swish swish) {
+        this.swish = swish;
         return this;
       }
 
@@ -10121,6 +10136,92 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Swish {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The order reference that will be displayed to customers in the Swish application. Defaults
+       * to the {@code id} of the Payment Intent.
+       */
+      @SerializedName("reference")
+      Object reference;
+
+      private Swish(Map<String, Object> extraParams, Object reference) {
+        this.extraParams = extraParams;
+        this.reference = reference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object reference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Swish build() {
+          return new SessionCreateParams.PaymentMethodOptions.Swish(
+              this.extraParams, this.reference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Swish#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Swish#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The order reference that will be displayed to customers in the Swish application.
+         * Defaults to the {@code id} of the Payment Intent.
+         */
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /**
+         * The order reference that will be displayed to customers in the Swish application.
+         * Defaults to the {@code id} of the Payment Intent.
+         */
+        public Builder setReference(EmptyParam reference) {
+          this.reference = reference;
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13783,6 +13884,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("sofort")
     SOFORT("sofort"),
+
+    @SerializedName("swish")
+    SWISH("swish"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),

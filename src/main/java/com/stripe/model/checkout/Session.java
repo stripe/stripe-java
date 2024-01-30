@@ -1448,6 +1448,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("sofort")
     Sofort sofort;
 
+    @SerializedName("swish")
+    Swish swish;
+
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
@@ -2287,6 +2290,18 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Swish extends StripeObject {
+      /**
+       * The order reference that will be displayed to customers in the Swish application. Defaults
+       * to the {@code id} of the Payment Intent.
+       */
+      @SerializedName("reference")
+      String reference;
     }
 
     @Getter
