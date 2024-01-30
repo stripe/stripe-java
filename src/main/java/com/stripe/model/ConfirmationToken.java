@@ -583,7 +583,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @SerializedName("available")
         List<String> available;
 
-        /** The preferred network for the card. */
+        /**
+         * The preferred network for the card. Will contain invalid_preference if requested network
+         * is not valid for the card.
+         */
         @SerializedName("preferred")
         String preferred;
       }
