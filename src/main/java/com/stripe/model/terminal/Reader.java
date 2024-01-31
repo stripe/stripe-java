@@ -114,7 +114,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @SerializedName("serial_number")
   String serialNumber;
 
-  /** The networking status of the reader. */
+  /**
+   * The networking status of the reader.
+   *
+   * <p>One of {@code offline}, or {@code online}.
+   */
   @SerializedName("status")
   String status;
 
