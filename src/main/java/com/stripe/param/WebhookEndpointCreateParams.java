@@ -777,6 +777,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("customer.discount.updated")
     CUSTOMER__DISCOUNT__UPDATED("customer.discount.updated"),
 
+    @SerializedName("customer.entitlement_summary.updated")
+    CUSTOMER__ENTITLEMENT_SUMMARY__UPDATED("customer.entitlement_summary.updated"),
+
     @SerializedName("customer.source.created")
     CUSTOMER__SOURCE__CREATED("customer.source.created"),
 

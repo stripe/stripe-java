@@ -45,7 +45,7 @@ public class ProductCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A list of up to 15 features for this product. These are displayed in <a
+   * A list of up to 15 features for this product. Entries using {@code name} are displayed in <a
    * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("features")
@@ -1355,12 +1355,20 @@ public class ProductCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * The ID of the <a href="docs/api/entitlements/feature">Feature</a> object. This property is
+     * mutually-exclusive with {@code name}; either one must be specified, but not both.
+     */
+    @SerializedName("feature")
+    String feature;
+
     /** <strong>Required.</strong> The feature's name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
 
-    private Feature(Map<String, Object> extraParams, String name) {
+    private Feature(Map<String, Object> extraParams, String feature, String name) {
       this.extraParams = extraParams;
+      this.feature = feature;
       this.name = name;
     }
 
@@ -1371,11 +1379,13 @@ public class ProductCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private String feature;
+
       private String name;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ProductCreateParams.Feature build() {
-        return new ProductCreateParams.Feature(this.extraParams, this.name);
+        return new ProductCreateParams.Feature(this.extraParams, this.feature, this.name);
       }
 
       /**
@@ -1401,6 +1411,15 @@ public class ProductCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The ID of the <a href="docs/api/entitlements/feature">Feature</a> object. This property is
+       * mutually-exclusive with {@code name}; either one must be specified, but not both.
+       */
+      public Builder setFeature(String feature) {
+        this.feature = feature;
         return this;
       }
 

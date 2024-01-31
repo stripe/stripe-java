@@ -278,6 +278,14 @@ public final class CustomerService extends ApiService {
     return new com.stripe.service.CustomerCashBalanceTransactionService(this.getResponseGetter());
   }
 
+  public com.stripe.service.CustomerEntitlementSummaryService entitlementSummary() {
+    return new com.stripe.service.CustomerEntitlementSummaryService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.CustomerEntitlementService entitlements() {
+    return new com.stripe.service.CustomerEntitlementService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CustomerFundingInstructionsService fundingInstructions() {
     return new com.stripe.service.CustomerFundingInstructionsService(this.getResponseGetter());
   }

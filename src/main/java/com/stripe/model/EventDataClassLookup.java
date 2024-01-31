@@ -35,6 +35,8 @@ final class EventDataClassLookup {
     classLookup.put("customer", Customer.class);
     classLookup.put("customer_balance_transaction", CustomerBalanceTransaction.class);
     classLookup.put("customer_cash_balance_transaction", CustomerCashBalanceTransaction.class);
+    classLookup.put("customer_entitlement", CustomerEntitlement.class);
+    classLookup.put("customer_entitlement_summary", CustomerEntitlementSummary.class);
     classLookup.put("customer_session", CustomerSession.class);
     classLookup.put("discount", Discount.class);
     classLookup.put("dispute", Dispute.class);
@@ -111,6 +113,9 @@ final class EventDataClassLookup {
     classLookup.put("climate.order", com.stripe.model.climate.Order.class);
     classLookup.put("climate.product", com.stripe.model.climate.Product.class);
     classLookup.put("climate.supplier", com.stripe.model.climate.Supplier.class);
+
+    classLookup.put("entitlements.event", com.stripe.model.entitlements.Event.class);
+    classLookup.put("entitlements.feature", com.stripe.model.entitlements.Feature.class);
 
     classLookup.put(
         "financial_connections.account", com.stripe.model.financialconnections.Account.class);

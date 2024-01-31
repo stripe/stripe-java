@@ -167,6 +167,10 @@ public class StripeClient {
     return new com.stripe.service.DisputeService(this.getResponseGetter());
   }
 
+  public com.stripe.service.EntitlementsService entitlements() {
+    return new com.stripe.service.EntitlementsService(this.getResponseGetter());
+  }
+
   public com.stripe.service.EphemeralKeyService ephemeralKeys() {
     return new com.stripe.service.EphemeralKeyService(this.getResponseGetter());
   }

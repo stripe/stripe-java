@@ -46,7 +46,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A list of up to 15 features for this product. These are displayed in <a
+   * A list of up to 15 features for this product. Entries using {@code name} are displayed in <a
    * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("features")
@@ -318,7 +318,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 15 features for this product. These are displayed in <a
+     * A list of up to 15 features for this product. Entries using {@code name} are displayed in <a
      * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setFeatures(EmptyParam features) {
@@ -327,7 +327,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 15 features for this product. These are displayed in <a
+     * A list of up to 15 features for this product. Entries using {@code name} are displayed in <a
      * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setFeatures(List<ProductUpdateParams.Feature> features) {
@@ -545,12 +545,20 @@ public class ProductUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * The ID of the <a href="docs/api/entitlements/feature">Feature</a> object. This property is
+     * mutually-exclusive with {@code name}; either one must be specified, but not both.
+     */
+    @SerializedName("feature")
+    Object feature;
+
     /** <strong>Required.</strong> The feature's name. Up to 80 characters long. */
     @SerializedName("name")
     Object name;
 
-    private Feature(Map<String, Object> extraParams, Object name) {
+    private Feature(Map<String, Object> extraParams, Object feature, Object name) {
       this.extraParams = extraParams;
+      this.feature = feature;
       this.name = name;
     }
 
@@ -561,11 +569,13 @@ public class ProductUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private Object feature;
+
       private Object name;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ProductUpdateParams.Feature build() {
-        return new ProductUpdateParams.Feature(this.extraParams, this.name);
+        return new ProductUpdateParams.Feature(this.extraParams, this.feature, this.name);
       }
 
       /**
@@ -591,6 +601,24 @@ public class ProductUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The ID of the <a href="docs/api/entitlements/feature">Feature</a> object. This property is
+       * mutually-exclusive with {@code name}; either one must be specified, but not both.
+       */
+      public Builder setFeature(String feature) {
+        this.feature = feature;
+        return this;
+      }
+
+      /**
+       * The ID of the <a href="docs/api/entitlements/feature">Feature</a> object. This property is
+       * mutually-exclusive with {@code name}; either one must be specified, but not both.
+       */
+      public Builder setFeature(EmptyParam feature) {
+        this.feature = feature;
         return this;
       }
 
