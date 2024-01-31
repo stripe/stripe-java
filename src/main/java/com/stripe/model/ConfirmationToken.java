@@ -584,8 +584,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
         List<String> available;
 
         /**
-         * The preferred network for the card. Will contain invalid_preference if requested network
-         * is not valid for the card.
+         * The preferred network for the card. Can be {@code cartes_bancaires}, {@code mastercard},
+         * {@code visa} or {@code invalid_preference} if requested network is not valid for the
+         * card.
          */
         @SerializedName("preferred")
         String preferred;
