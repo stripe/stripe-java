@@ -15,8 +15,8 @@ final class ApiResourceTypeAdapterFactoryProvider {
   private static final List<TypeAdapterFactory> factories = new ArrayList<>();
 
   static {
-    factories.add(new ExternalAccountTypeAdapterFactory());
     factories.add(new BalanceTransactionSourceTypeAdapterFactory());
+    factories.add(new ExternalAccountTypeAdapterFactory());
     factories.add(new PaymentSourceTypeAdapterFactory());
   }
 
