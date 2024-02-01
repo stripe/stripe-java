@@ -4,6 +4,7 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7396,6 +7397,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("registered_address")
     RegisteredAddress registeredAddress;
 
+    /** Describes the person’s relationship to the account. */
+    @SerializedName("relationship")
+    Relationship relationship;
+
     /** The last four digits of the individual's Social Security Number (U.S. only). */
     @SerializedName("ssn_last_4")
     Object ssnLast4;
@@ -7426,6 +7431,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object phone,
         PoliticalExposure politicalExposure,
         RegisteredAddress registeredAddress,
+        Relationship relationship,
         Object ssnLast4,
         Verification verification) {
       this.address = address;
@@ -7449,6 +7455,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.phone = phone;
       this.politicalExposure = politicalExposure;
       this.registeredAddress = registeredAddress;
+      this.relationship = relationship;
       this.ssnLast4 = ssnLast4;
       this.verification = verification;
     }
@@ -7500,6 +7507,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private RegisteredAddress registeredAddress;
 
+      private Relationship relationship;
+
       private Object ssnLast4;
 
       private Verification verification;
@@ -7528,6 +7537,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.phone,
             this.politicalExposure,
             this.registeredAddress,
+            this.relationship,
             this.ssnLast4,
             this.verification);
       }
@@ -7867,6 +7877,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setRegisteredAddress(
           AccountUpdateParams.Individual.RegisteredAddress registeredAddress) {
         this.registeredAddress = registeredAddress;
+        return this;
+      }
+
+      /** Describes the person’s relationship to the account. */
+      public Builder setRelationship(AccountUpdateParams.Individual.Relationship relationship) {
+        this.relationship = relationship;
         return this;
       }
 
@@ -8799,6 +8815,166 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** State, county, province, or region. */
         public Builder setState(EmptyParam state) {
           this.state = state;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Relationship {
+      /**
+       * Whether the person is a director of the account's legal entity. Directors are typically
+       * members of the governing board of the company, or responsible for ensuring the company
+       * meets its regulatory obligations.
+       */
+      @SerializedName("director")
+      Boolean director;
+
+      /**
+       * Whether the person has significant responsibility to control, manage, or direct the
+       * organization.
+       */
+      @SerializedName("executive")
+      Boolean executive;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Whether the person is an owner of the account’s legal entity. */
+      @SerializedName("owner")
+      Boolean owner;
+
+      /** The percent owned by the person of the account's legal entity. */
+      @SerializedName("percent_ownership")
+      Object percentOwnership;
+
+      /** The person's title (e.g., CEO, Support Engineer). */
+      @SerializedName("title")
+      Object title;
+
+      private Relationship(
+          Boolean director,
+          Boolean executive,
+          Map<String, Object> extraParams,
+          Boolean owner,
+          Object percentOwnership,
+          Object title) {
+        this.director = director;
+        this.executive = executive;
+        this.extraParams = extraParams;
+        this.owner = owner;
+        this.percentOwnership = percentOwnership;
+        this.title = title;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean director;
+
+        private Boolean executive;
+
+        private Map<String, Object> extraParams;
+
+        private Boolean owner;
+
+        private Object percentOwnership;
+
+        private Object title;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Individual.Relationship build() {
+          return new AccountUpdateParams.Individual.Relationship(
+              this.director,
+              this.executive,
+              this.extraParams,
+              this.owner,
+              this.percentOwnership,
+              this.title);
+        }
+
+        /**
+         * Whether the person is a director of the account's legal entity. Directors are typically
+         * members of the governing board of the company, or responsible for ensuring the company
+         * meets its regulatory obligations.
+         */
+        public Builder setDirector(Boolean director) {
+          this.director = director;
+          return this;
+        }
+
+        /**
+         * Whether the person has significant responsibility to control, manage, or direct the
+         * organization.
+         */
+        public Builder setExecutive(Boolean executive) {
+          this.executive = executive;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Individual.Relationship#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Individual.Relationship#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Whether the person is an owner of the account’s legal entity. */
+        public Builder setOwner(Boolean owner) {
+          this.owner = owner;
+          return this;
+        }
+
+        /** The percent owned by the person of the account's legal entity. */
+        public Builder setPercentOwnership(BigDecimal percentOwnership) {
+          this.percentOwnership = percentOwnership;
+          return this;
+        }
+
+        /** The percent owned by the person of the account's legal entity. */
+        public Builder setPercentOwnership(EmptyParam percentOwnership) {
+          this.percentOwnership = percentOwnership;
+          return this;
+        }
+
+        /** The person's title (e.g., CEO, Support Engineer). */
+        public Builder setTitle(String title) {
+          this.title = title;
+          return this;
+        }
+
+        /** The person's title (e.g., CEO, Support Engineer). */
+        public Builder setTitle(EmptyParam title) {
+          this.title = title;
           return this;
         }
       }
