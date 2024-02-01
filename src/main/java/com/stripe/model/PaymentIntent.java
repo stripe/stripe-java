@@ -1567,6 +1567,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("redirect_to_url")
     RedirectToUrl redirectToUrl;
 
+    @SerializedName("swish_handle_redirect_or_display_qr_code")
+    SwishHandleRedirectOrDisplayQrCode swishHandleRedirectOrDisplayQrCode;
+
     /**
      * Type of the next action to perform, one of {@code redirect_to_url}, {@code use_stripe_sdk},
      * {@code alipay_handle_redirect}, {@code oxxo_display_details}, or {@code
@@ -2136,6 +2139,44 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class SwishHandleRedirectOrDisplayQrCode extends StripeObject {
+      /**
+       * The URL to the hosted Swish instructions page, which allows customers to view the QR code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /** The url for mobile redirect based auth. */
+      @SerializedName("mobile_auth_url")
+      String mobileAuthUrl;
+
+      @SerializedName("qr_code")
+      QrCode qrCode;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class QrCode extends StripeObject {
+        /**
+         * The raw data string used to generate QR code, it should be used together with QR code
+         * library.
+         */
+        @SerializedName("data")
+        String data;
+
+        /** The image_url_png string used to render QR code. */
+        @SerializedName("image_url_png")
+        String imageUrlPng;
+
+        /** The image_url_svg string used to render QR code. */
+        @SerializedName("image_url_svg")
+        String imageUrlSvg;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
       /** The timestamp when the microdeposits are expected to land. */
       @SerializedName("arrival_date")
@@ -2635,6 +2676,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("sofort")
     Sofort sofort;
+
+    @SerializedName("swish")
+    Swish swish;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -3901,6 +3945,35 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Swish extends StripeObject {
+      /** The order ID displayed in the Swish app after the payment is authorized. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;

@@ -1090,6 +1090,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String sofortPayments;
 
     /**
+     * The status of the Swish capability of the account, or whether the account can directly
+     * process Swish payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("swish_payments")
+    String swishPayments;
+
+    /**
      * The status of the tax reporting 1099-K (US) capability of the account.
      *
      * <p>One of {@code active}, {@code inactive}, or {@code pending}.
