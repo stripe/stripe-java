@@ -1,5 +1,13 @@
 # Changelog
 
+## 24.14.0 - 2024-02-01
+* [#1740](https://github.com/stripe/stripe-java/pull/1740) Update generated code
+  * Add support for `swish` payment method throughout the API
+  * Add support for `relationship` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, and `TokenCreateParams.account.individual`
+  * Add support for `jurisdiction_level` on `TaxRate`
+  * ⚠️  Fix broken reference to `com.stripe.model.Discount` from `checkout.Session.TotalDetails.Breakdown.Discount` (this represents a bugfix as this class would never have worked, but might be a breaking type change)
+* [#1739](https://github.com/stripe/stripe-java/pull/1739) Add clock instance on webhook
+
 ## 24.13.0 - 2024-01-25
 * [#1736](https://github.com/stripe/stripe-java/pull/1736) Update generated code
   * Add support for `annual_revenue` and `estimated_worker_count` on `Account.business_profile`, `Account.CreateParams.business_profile`, and `Account.UpdateParams.business_profile`
