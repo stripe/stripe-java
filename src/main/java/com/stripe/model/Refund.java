@@ -659,6 +659,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("sofort")
     Sofort sofort;
 
+    @SerializedName("swish")
+    Swish swish;
+
     @SerializedName("th_bank_transfer")
     ThBankTransfer thBankTransfer;
 
@@ -893,6 +896,22 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Sofort extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Swish extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
 
     @Getter
     @Setter
