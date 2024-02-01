@@ -283,6 +283,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("sofort")
     SOFORT("sofort"),
 
+    @SerializedName("swish")
+    SWISH("swish"),
+
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
 

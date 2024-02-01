@@ -1289,6 +1289,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     Sofort sofort;
 
     /**
+     * If this is a {@code swish} PaymentMethod, this hash contains details about the Swish payment
+     * method.
+     */
+    @SerializedName("swish")
+    Swish swish;
+
+    /**
      * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
      * the PaymentMethod with a name matching this value. It contains additional information
      * specific to the PaymentMethod type.
@@ -1351,6 +1358,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         RevolutPay revolutPay,
         SepaDebit sepaDebit,
         Sofort sofort,
+        Swish swish,
         Type type,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
@@ -1388,6 +1396,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       this.revolutPay = revolutPay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
+      this.swish = swish;
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
@@ -1465,6 +1474,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       private Sofort sofort;
 
+      private Swish swish;
+
       private Type type;
 
       private UsBankAccount usBankAccount;
@@ -1509,6 +1520,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             this.revolutPay,
             this.sepaDebit,
             this.sofort,
+            this.swish,
             this.type,
             this.usBankAccount,
             this.wechatPay,
@@ -1852,6 +1864,15 @@ public class SetupIntentCreateParams extends ApiRequestParams {
        */
       public Builder setSofort(SetupIntentCreateParams.PaymentMethodData.Sofort sofort) {
         this.sofort = sofort;
+        return this;
+      }
+
+      /**
+       * If this is a {@code swish} PaymentMethod, this hash contains details about the Swish
+       * payment method.
+       */
+      public Builder setSwish(SetupIntentCreateParams.PaymentMethodData.Swish swish) {
+        this.swish = swish;
         return this;
       }
 
@@ -4606,6 +4627,63 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Swish {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Swish(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentCreateParams.PaymentMethodData.Swish build() {
+          return new SetupIntentCreateParams.PaymentMethodData.Swish(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Swish#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Swish#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -4970,6 +5048,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("sofort")
       SOFORT("sofort"),
+
+      @SerializedName("swish")
+      SWISH("swish"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),

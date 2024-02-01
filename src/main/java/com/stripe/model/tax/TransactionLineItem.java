@@ -14,13 +14,17 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class TransactionLineItem extends StripeObject implements HasId {
   /**
-   * The line item amount in integer cents. If {@code tax_behavior=inclusive}, then this amount
-   * includes taxes. Otherwise, taxes were calculated on top of this amount.
+   * The line item amount in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+   * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
+   * Otherwise, taxes were calculated on top of this amount.
    */
   @SerializedName("amount")
   Long amount;
 
-  /** The amount of tax calculated for this line item, in integer cents. */
+  /**
+   * The amount of tax calculated for this line item, in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
   @SerializedName("amount_tax")
   Long amountTax;
 
