@@ -19,6 +19,7 @@ import com.stripe.param.AccountRetrieveParams;
 import com.stripe.param.AccountUpdateParams;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -1846,6 +1847,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("dashboard")
     Dashboard dashboard;
 
+    @SerializedName("invoices")
+    Invoices invoices;
+
     @SerializedName("payments")
     Payments payments;
 
@@ -2059,6 +2063,64 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("timezone")
       String timezone;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Invoices extends StripeObject {
+      /**
+       * The list of default Account Tax IDs to automatically include on invoices. Account Tax IDs
+       * get added when an invoice is finalized.
+       */
+      @SerializedName("default_account_tax_ids")
+      List<ExpandableField<TaxId>> defaultAccountTaxIds;
+
+      /** Get IDs of expandable {@code defaultAccountTaxIds} object list. */
+      public List<String> getDefaultAccountTaxIds() {
+        return (this.defaultAccountTaxIds != null)
+            ? this.defaultAccountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList())
+            : null;
+      }
+
+      public void setDefaultAccountTaxIds(List<String> ids) {
+        if (ids == null) {
+          this.defaultAccountTaxIds = null;
+          return;
+        }
+        if (this.defaultAccountTaxIds != null
+            && this.defaultAccountTaxIds.stream()
+                .map(x -> x.getId())
+                .collect(Collectors.toList())
+                .equals(ids)) {
+          // noop if the ids are equal to what are already present
+          return;
+        }
+        this.defaultAccountTaxIds =
+            (ids != null)
+                ? ids.stream()
+                    .map(id -> new ExpandableField<TaxId>(id, null))
+                    .collect(Collectors.toList())
+                : null;
+      }
+
+      /** Get expanded {@code defaultAccountTaxIds}. */
+      public List<TaxId> getDefaultAccountTaxIdObjects() {
+        return (this.defaultAccountTaxIds != null)
+            ? this.defaultAccountTaxIds.stream()
+                .map(x -> x.getExpanded())
+                .collect(Collectors.toList())
+            : null;
+      }
+
+      public void setDefaultAccountTaxIdObjects(List<TaxId> objs) {
+        this.defaultAccountTaxIds =
+            objs != null
+                ? objs.stream()
+                    .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                    .collect(Collectors.toList())
+                : null;
+      }
     }
 
     @Getter
