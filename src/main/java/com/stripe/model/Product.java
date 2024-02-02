@@ -70,7 +70,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   String description;
 
   /**
-   * A list of up to 15 features for this product. These are displayed in <a
+   * A list of up to 15 features for this product. Entries using {@code name} are displayed in <a
    * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("features")
@@ -492,9 +492,38 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Feature extends StripeObject {
+    /**
+     * The ID of the <a href="docs/api/entitlements/feature">Feature</a> object. This property is
+     * mutually-exclusive with {@code name}; either one must be specified, but not both.
+     */
+    @SerializedName("feature")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<com.stripe.model.entitlements.Feature> feature;
+
     /** The feature's name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
+
+    /** Get ID of expandable {@code feature} object. */
+    public String getFeature() {
+      return (this.feature != null) ? this.feature.getId() : null;
+    }
+
+    public void setFeature(String id) {
+      this.feature = ApiResource.setExpandableFieldId(id, this.feature);
+    }
+
+    /** Get expanded {@code feature}. */
+    public com.stripe.model.entitlements.Feature getFeatureObject() {
+      return (this.feature != null) ? this.feature.getExpanded() : null;
+    }
+
+    public void setFeatureObject(com.stripe.model.entitlements.Feature expandableObject) {
+      this.feature =
+          new ExpandableField<com.stripe.model.entitlements.Feature>(
+              expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter

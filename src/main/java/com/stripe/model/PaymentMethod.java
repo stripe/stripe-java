@@ -179,6 +179,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sofort")
   Sofort sofort;
 
+  @SerializedName("swish")
+  Swish swish;
+
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
@@ -189,7 +192,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code klarna},
    * {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
    * {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code
-   * us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * swish}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -861,7 +864,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("available")
       List<String> available;
 
-      /** The preferred network for the card. */
+      /**
+       * The preferred network for the card. Can be {@code cartes_bancaires}, {@code mastercard},
+       * {@code visa} or {@code invalid_preference} if requested network is not valid for the card.
+       */
       @SerializedName("preferred")
       String preferred;
     }
@@ -1549,6 +1555,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Swish extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class UsBankAccount extends StripeObject {
     /**
      * Account holder type: individual or company.
@@ -1694,6 +1705,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
+    trySetResponseGetter(swish, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
     trySetResponseGetter(wechatPay, responseGetter);
     trySetResponseGetter(zip, responseGetter);

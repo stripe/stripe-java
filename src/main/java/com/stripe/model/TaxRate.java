@@ -91,6 +91,16 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   String jurisdiction;
 
   /**
+   * The level of the jurisdiction that imposes this tax rate. Will be {@code null} for manually
+   * defined tax rates.
+   *
+   * <p>One of {@code city}, {@code country}, {@code county}, {@code district}, {@code multiple}, or
+   * {@code state}.
+   */
+  @SerializedName("jurisdiction_level")
+  String jurisdictionLevel;
+
+  /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
    */

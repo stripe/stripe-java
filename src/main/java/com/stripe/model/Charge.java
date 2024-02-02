@@ -1224,6 +1224,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("stripe_account")
     StripeAccount stripeAccount;
 
+    @SerializedName("swish")
+    Swish swish;
+
     /**
      * The type of transaction-specific details of the payment method used in the payment, one of
      * {@code ach_credit_transfer}, {@code ach_debit}, {@code acss_debit}, {@code alipay}, {@code
@@ -2949,6 +2952,26 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeAccount extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Swish extends StripeObject {
+      /**
+       * Uniquely identifies the payer's Swish account. You can use this attribute to check whether
+       * two Swish transactions were paid for by the same payer
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Payer bank reference number for the payment. */
+      @SerializedName("payment_reference")
+      String paymentReference;
+
+      /** The last four digits of the Swish account phone number. */
+      @SerializedName("verified_phone_last4")
+      String verifiedPhoneLast4;
+    }
 
     @Getter
     @Setter
