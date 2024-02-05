@@ -2,6 +2,7 @@ package com.stripe.net;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObjectInterface;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,5 +20,10 @@ public abstract class ApiService {
       throws StripeException {
     request.addUsage("stripe_client");
     return this.getResponseGetter().request(request, typeToken);
+  }
+
+  protected InputStream requestStream(ApiRequest request) throws StripeException {
+    request.addUsage("stripe_client");
+    return this.getResponseGetter().requestStream(request);
   }
 }
