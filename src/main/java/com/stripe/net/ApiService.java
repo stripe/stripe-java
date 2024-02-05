@@ -16,14 +16,13 @@ public abstract class ApiService {
     this.responseGetter = responseGetter;
   }
 
+  @SuppressWarnings("TypeParameterUnusedInFormals")
   protected <T extends StripeObjectInterface> T request(ApiRequest request, Type typeToken)
       throws StripeException {
-    request.addUsage("stripe_client");
-    return this.getResponseGetter().request(request, typeToken);
+    return this.getResponseGetter().request(request.addUsage("stripe_client"), typeToken);
   }
 
   protected InputStream requestStream(ApiRequest request) throws StripeException {
-    request.addUsage("stripe_client");
-    return this.getResponseGetter().requestStream(request);
+    return this.getResponseGetter().requestStream(request.addUsage("stripe_client"));
   }
 }
