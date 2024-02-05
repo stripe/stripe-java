@@ -61,9 +61,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Authorization>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Authorization>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Authorization} object. */
   public Authorization retrieve(String authorization, AuthorizationRetrieveParams params)
@@ -93,8 +91,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
   /**
    * Updates the specified Issuing {@code Authorization} object by setting the values of the
@@ -135,8 +132,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
   /**
    * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
@@ -195,8 +191,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
   /**
    * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
@@ -255,7 +250,6 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
 }

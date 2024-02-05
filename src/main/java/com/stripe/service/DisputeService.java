@@ -47,9 +47,7 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Dispute>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Dispute>>() {}.getType());
   }
   /** Retrieves the dispute with the given ID. */
   public Dispute retrieve(String dispute, DisputeRetrieveParams params) throws StripeException {
@@ -75,8 +73,7 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Dispute.class);
+    return this.request(request, Dispute.class);
   }
   /**
    * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
@@ -138,8 +135,7 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Dispute.class);
+    return this.request(request, Dispute.class);
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
@@ -189,7 +185,6 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Dispute.class);
+    return this.request(request, Dispute.class);
   }
 }

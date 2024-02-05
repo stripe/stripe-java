@@ -53,9 +53,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PaymentSource>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<PaymentSource>>() {}.getType());
   }
   /**
    * When you create a new credit card, you must specify a customer or recipient on which to create
@@ -91,8 +89,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentSource.class);
+    return this.request(request, PaymentSource.class);
   }
   /** Retrieve a specified source for a given customer. */
   public PaymentSource retrieve(String customer, String id, PaymentSourceRetrieveParams params)
@@ -124,8 +121,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentSource.class);
+    return this.request(request, PaymentSource.class);
   }
   /** Update a specified source for a given customer. */
   public PaymentSource update(String customer, String id, PaymentSourceUpdateParams params)
@@ -157,8 +153,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentSource.class);
+    return this.request(request, PaymentSource.class);
   }
   /** Delete a specified source for a given customer. */
   public PaymentSource delete(String customer, String id, PaymentSourceDeleteParams params)
@@ -190,8 +185,7 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentSource.class);
+    return this.request(request, PaymentSource.class);
   }
   /** Verify a specified bank account for a given customer. */
   public BankAccount verify(String customer, String id, PaymentSourceVerifyParams params)
@@ -223,7 +217,6 @@ public final class PaymentSourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, BankAccount.class);
+    return this.request(request, BankAccount.class);
   }
 }

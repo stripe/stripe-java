@@ -40,9 +40,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<InboundTransfer>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<InboundTransfer>>() {}.getType());
   }
   /** Creates an InboundTransfer. */
   public InboundTransfer create(InboundTransferCreateParams params) throws StripeException {
@@ -60,8 +58,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InboundTransfer.class);
+    return this.request(request, InboundTransfer.class);
   }
   /** Retrieves the details of an existing InboundTransfer. */
   public InboundTransfer retrieve(String id, InboundTransferRetrieveParams params)
@@ -89,8 +86,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InboundTransfer.class);
+    return this.request(request, InboundTransfer.class);
   }
   /** Cancels an InboundTransfer. */
   public InboundTransfer cancel(String inboundTransfer, InboundTransferCancelParams params)
@@ -121,7 +117,6 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InboundTransfer.class);
+    return this.request(request, InboundTransfer.class);
   }
 }

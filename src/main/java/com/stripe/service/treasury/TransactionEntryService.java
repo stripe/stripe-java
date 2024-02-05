@@ -38,9 +38,7 @@ public final class TransactionEntryService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TransactionEntry>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<TransactionEntry>>() {}.getType());
   }
   /** Retrieves a TransactionEntry object. */
   public TransactionEntry retrieve(String id, TransactionEntryRetrieveParams params)
@@ -68,7 +66,6 @@ public final class TransactionEntryService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TransactionEntry.class);
+    return this.request(request, TransactionEntry.class);
   }
 }

@@ -59,9 +59,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Transfer>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Transfer>>() {}.getType());
   }
   /**
    * To send funds from your Stripe account to a connected account, you create a new transfer
@@ -87,8 +85,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transfer.class);
+    return this.request(request, Transfer.class);
   }
   /**
    * Retrieves the details of an existing transfer. Supply the unique transfer ID from either a
@@ -130,8 +127,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transfer.class);
+    return this.request(request, Transfer.class);
   }
   /**
    * Updates the specified transfer by setting the values of the parameters passed. Any parameters
@@ -177,8 +173,7 @@ public final class TransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transfer.class);
+    return this.request(request, Transfer.class);
   }
 
   public com.stripe.service.TransferReversalService reversals() {

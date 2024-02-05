@@ -60,9 +60,7 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Dispute>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Dispute>>() {}.getType());
   }
   /**
    * Creates an Issuing {@code Dispute} object. Individual pieces of evidence within the {@code
@@ -111,8 +109,7 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Dispute.class);
+    return this.request(request, Dispute.class);
   }
   /** Retrieves an Issuing {@code Dispute} object. */
   public Dispute retrieve(String dispute, DisputeRetrieveParams params) throws StripeException {
@@ -138,8 +135,7 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Dispute.class);
+    return this.request(request, Dispute.class);
   }
   /**
    * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
@@ -181,8 +177,7 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Dispute.class);
+    return this.request(request, Dispute.class);
   }
   /**
    * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
@@ -228,7 +223,6 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Dispute.class);
+    return this.request(request, Dispute.class);
   }
 }

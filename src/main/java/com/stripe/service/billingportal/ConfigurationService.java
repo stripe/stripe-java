@@ -48,9 +48,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
   /** Creates a configuration that describes the functionality and behavior of a PortalSession. */
   public Configuration create(ConfigurationCreateParams params) throws StripeException {
@@ -68,8 +66,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Configuration.class);
+    return this.request(request, Configuration.class);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
   public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
@@ -100,8 +97,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Configuration.class);
+    return this.request(request, Configuration.class);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
   public Configuration update(String configuration, ConfigurationUpdateParams params)
@@ -131,7 +127,6 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Configuration.class);
+    return this.request(request, Configuration.class);
   }
 }

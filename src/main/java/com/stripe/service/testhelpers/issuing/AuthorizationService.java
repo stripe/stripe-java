@@ -38,8 +38,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
   /** Capture a test-mode authorization. */
   public Authorization capture(String authorization, AuthorizationCaptureParams params)
@@ -71,8 +70,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
   /** Expire a test-mode Authorization. */
   public Authorization expire(String authorization, AuthorizationExpireParams params)
@@ -103,8 +101,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
   /** Increment a test-mode Authorization. */
   public Authorization increment(String authorization, AuthorizationIncrementParams params)
@@ -127,8 +124,7 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
   /** Reverse a test-mode Authorization. */
   public Authorization reverse(String authorization, AuthorizationReverseParams params)
@@ -160,7 +156,6 @@ public final class AuthorizationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Authorization.class);
+    return this.request(request, Authorization.class);
   }
 }

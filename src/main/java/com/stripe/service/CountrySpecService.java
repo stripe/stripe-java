@@ -45,9 +45,7 @@ public final class CountrySpecService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<CountrySpec>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<CountrySpec>>() {}.getType());
   }
   /** Returns a Country Spec for a given Country code. */
   public CountrySpec retrieve(String country, CountrySpecRetrieveParams params)
@@ -75,7 +73,6 @@ public final class CountrySpecService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CountrySpec.class);
+    return this.request(request, CountrySpec.class);
   }
 }

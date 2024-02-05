@@ -43,8 +43,7 @@ public final class WebhookEndpointService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, WebhookEndpoint.class);
+    return this.request(request, WebhookEndpoint.class);
   }
   /** Retrieves the webhook endpoint with the given ID. */
   public WebhookEndpoint retrieve(String webhookEndpoint, WebhookEndpointRetrieveParams params)
@@ -74,8 +73,7 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, WebhookEndpoint.class);
+    return this.request(request, WebhookEndpoint.class);
   }
   /**
    * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
@@ -117,8 +115,7 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, WebhookEndpoint.class);
+    return this.request(request, WebhookEndpoint.class);
   }
   /** Returns a list of your webhook endpoints. */
   public StripeCollection<WebhookEndpoint> list(WebhookEndpointListParams params)
@@ -145,9 +142,7 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<WebhookEndpoint>>() {}.getType());
   }
   /**
    * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
@@ -181,7 +176,6 @@ public final class WebhookEndpointService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, WebhookEndpoint.class);
+    return this.request(request, WebhookEndpoint.class);
   }
 }

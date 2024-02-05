@@ -63,10 +63,8 @@ public final class CustomerBalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(
-            request, new TypeToken<StripeCollection<CustomerBalanceTransaction>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<CustomerBalanceTransaction>>() {}.getType());
   }
   /**
    * Creates an immutable transaction that updates the customer’s credit <a
@@ -93,8 +91,7 @@ public final class CustomerBalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
+    return this.request(request, CustomerBalanceTransaction.class);
   }
   /**
    * Retrieves a specific customer balance transaction that updated the customer’s <a
@@ -148,8 +145,7 @@ public final class CustomerBalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
+    return this.request(request, CustomerBalanceTransaction.class);
   }
   /**
    * Most credit balance transaction fields are immutable, but you may update its {@code
@@ -202,7 +198,6 @@ public final class CustomerBalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
+    return this.request(request, CustomerBalanceTransaction.class);
   }
 }
