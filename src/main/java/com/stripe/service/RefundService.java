@@ -64,9 +64,7 @@ public final class RefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Refund>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Refund>>() {}.getType());
   }
   /**
    * When you create a new refund, you must specify a Charge or a PaymentIntent object on which to
@@ -143,8 +141,7 @@ public final class RefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Refund.class);
+    return this.request(request, Refund.class);
   }
   /** Retrieves the details of an existing refund. */
   public Refund retrieve(String refund, RefundRetrieveParams params) throws StripeException {
@@ -170,8 +167,7 @@ public final class RefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Refund.class);
+    return this.request(request, Refund.class);
   }
   /**
    * Updates the refund that you specify by setting the values of the passed parameters. Any
@@ -217,8 +213,7 @@ public final class RefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Refund.class);
+    return this.request(request, Refund.class);
   }
   /**
    * Cancels a refund with a status of {@code requires_action}.
@@ -264,7 +259,6 @@ public final class RefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Refund.class);
+    return this.request(request, Refund.class);
   }
 }

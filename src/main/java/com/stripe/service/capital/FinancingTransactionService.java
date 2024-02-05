@@ -59,9 +59,8 @@ public final class FinancingTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<FinancingTransaction>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<FinancingTransaction>>() {}.getType());
   }
   /** Retrieves a financing transaction for a financing offer. */
   public FinancingTransaction retrieve(
@@ -96,7 +95,6 @@ public final class FinancingTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FinancingTransaction.class);
+    return this.request(request, FinancingTransaction.class);
   }
 }

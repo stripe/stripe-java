@@ -55,9 +55,7 @@ public final class FinancingOfferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<FinancingOffer>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<FinancingOffer>>() {}.getType());
   }
   /** Get the details of the financing offer. */
   public FinancingOffer retrieve(String financingOffer, FinancingOfferRetrieveParams params)
@@ -87,8 +85,7 @@ public final class FinancingOfferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FinancingOffer.class);
+    return this.request(request, FinancingOffer.class);
   }
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
@@ -133,7 +130,6 @@ public final class FinancingOfferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FinancingOffer.class);
+    return this.request(request, FinancingOffer.class);
   }
 }

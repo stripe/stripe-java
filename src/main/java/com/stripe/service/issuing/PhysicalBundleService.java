@@ -58,9 +58,7 @@ public final class PhysicalBundleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PhysicalBundle>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<PhysicalBundle>>() {}.getType());
   }
   /** Retrieves a physical bundle object. */
   public PhysicalBundle retrieve(String physicalBundle, PhysicalBundleRetrieveParams params)
@@ -90,7 +88,6 @@ public final class PhysicalBundleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PhysicalBundle.class);
+    return this.request(request, PhysicalBundle.class);
   }
 }

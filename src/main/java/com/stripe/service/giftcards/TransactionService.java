@@ -49,9 +49,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
   /** Create a gift card transaction. */
   public Transaction create(TransactionCreateParams params) throws StripeException {
@@ -69,8 +67,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
   /** Retrieves the gift card transaction. */
   public Transaction retrieve(String id, TransactionRetrieveParams params) throws StripeException {
@@ -96,8 +93,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
   /** Update a gift card transaction. */
   public Transaction update(String id, TransactionUpdateParams params) throws StripeException {
@@ -123,8 +119,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
   /** Cancel a gift card transaction. */
   public Transaction cancel(String id, TransactionCancelParams params) throws StripeException {
@@ -151,8 +146,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
   /** Confirm a gift card transaction. */
   public Transaction confirm(String id, TransactionConfirmParams params) throws StripeException {
@@ -179,7 +173,6 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
 }

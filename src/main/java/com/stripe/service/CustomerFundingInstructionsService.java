@@ -47,7 +47,6 @@ public final class CustomerFundingInstructionsService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FundingInstructions.class);
+    return this.request(request, FundingInstructions.class);
   }
 }

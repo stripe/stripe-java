@@ -62,9 +62,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
   }
   /** Creates a new {@code open} order object. */
   public Order create(OrderCreateParams params) throws StripeException {
@@ -81,8 +79,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /**
    * Retrieves the details of an existing order. Supply the unique order ID from either an order
@@ -120,8 +117,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /**
    * Updates the specific order by setting the values of the parameters passed. Any parameters not
@@ -159,8 +155,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /** Cancels the order as well as the payment intent if one is attached. */
   public Order cancel(String id, OrderCancelParams params) throws StripeException {
@@ -186,8 +181,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /** Reopens a {@code submitted} order. */
   public Order reopen(String id, OrderReopenParams params) throws StripeException {
@@ -213,8 +207,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /**
    * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
@@ -244,8 +237,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
 
   public com.stripe.service.OrderLineItemService lineItems() {

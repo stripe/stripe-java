@@ -46,9 +46,7 @@ public final class EarlyFraudWarningService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<EarlyFraudWarning>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<EarlyFraudWarning>>() {}.getType());
   }
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
@@ -100,7 +98,6 @@ public final class EarlyFraudWarningService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, EarlyFraudWarning.class);
+    return this.request(request, EarlyFraudWarning.class);
   }
 }

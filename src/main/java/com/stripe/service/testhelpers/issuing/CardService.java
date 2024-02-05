@@ -55,8 +55,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
@@ -92,8 +91,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
@@ -129,8 +127,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
@@ -166,7 +163,6 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
 }

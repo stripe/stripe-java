@@ -52,9 +52,8 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<SubscriptionSchedule>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<SubscriptionSchedule>>() {}.getType());
   }
   /**
    * Creates a new subscription schedule object. Each customer can have up to 500 active or
@@ -93,8 +92,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionSchedule.class);
+    return this.request(request, SubscriptionSchedule.class);
   }
   /**
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
@@ -135,8 +133,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionSchedule.class);
+    return this.request(request, SubscriptionSchedule.class);
   }
   /** Updates an existing subscription schedule. */
   public SubscriptionSchedule update(String schedule, SubscriptionScheduleUpdateParams params)
@@ -165,8 +162,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionSchedule.class);
+    return this.request(request, SubscriptionSchedule.class);
   }
   /** Amends an existing subscription schedule. */
   public SubscriptionSchedule amend(String schedule, SubscriptionScheduleAmendParams params)
@@ -196,8 +192,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionSchedule.class);
+    return this.request(request, SubscriptionSchedule.class);
   }
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
@@ -243,8 +238,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionSchedule.class);
+    return this.request(request, SubscriptionSchedule.class);
   }
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
@@ -298,7 +292,6 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionSchedule.class);
+    return this.request(request, SubscriptionSchedule.class);
   }
 }

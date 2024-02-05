@@ -44,8 +44,7 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Session.class);
+    return this.request(request, Session.class);
   }
   /**
    * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
@@ -68,7 +67,6 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Session.class);
+    return this.request(request, Session.class);
   }
 }

@@ -49,10 +49,8 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(
-            request, new TypeToken<StripeCollection<PaymentMethodConfiguration>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<PaymentMethodConfiguration>>() {}.getType());
   }
   /** Creates a payment method configuration. */
   public PaymentMethodConfiguration create(PaymentMethodConfigurationCreateParams params)
@@ -80,8 +78,7 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
+    return this.request(request, PaymentMethodConfiguration.class);
   }
   /** Retrieve payment method configuration. */
   public PaymentMethodConfiguration retrieve(
@@ -114,8 +111,7 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
+    return this.request(request, PaymentMethodConfiguration.class);
   }
   /** Update payment method configuration. */
   public PaymentMethodConfiguration update(
@@ -147,7 +143,6 @@ public final class PaymentMethodConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethodConfiguration.class);
+    return this.request(request, PaymentMethodConfiguration.class);
   }
 }

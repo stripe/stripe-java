@@ -64,9 +64,7 @@ public final class InvoicePaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<InvoicePayment>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<InvoicePayment>>() {}.getType());
   }
   /** Retrieves the invoice payment with the given ID. */
   public InvoicePayment retrieve(
@@ -103,7 +101,6 @@ public final class InvoicePaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InvoicePayment.class);
+    return this.request(request, InvoicePayment.class);
   }
 }

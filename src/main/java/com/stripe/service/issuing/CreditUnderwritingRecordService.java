@@ -63,9 +63,8 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<CreditUnderwritingRecord>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<CreditUnderwritingRecord>>() {}.getType());
   }
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
   public CreditUnderwritingRecord retrieve(
@@ -104,8 +103,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditUnderwritingRecord.class);
+    return this.request(request, CreditUnderwritingRecord.class);
   }
   /** Update a {@code CreditUnderwritingRecord} object to correct mistakes. */
   public CreditUnderwritingRecord correct(
@@ -143,8 +141,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditUnderwritingRecord.class);
+    return this.request(request, CreditUnderwritingRecord.class);
   }
   /**
    * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
@@ -174,8 +171,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditUnderwritingRecord.class);
+    return this.request(request, CreditUnderwritingRecord.class);
   }
   /**
    * Creates a {@code CreditUnderwritingRecord} object with information about a credit application
@@ -201,8 +197,7 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditUnderwritingRecord.class);
+    return this.request(request, CreditUnderwritingRecord.class);
   }
   /**
    * Creates a {@code CreditUnderwritingRecord} object from an underwriting decision coming from a
@@ -228,7 +223,6 @@ public final class CreditUnderwritingRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditUnderwritingRecord.class);
+    return this.request(request, CreditUnderwritingRecord.class);
   }
 }

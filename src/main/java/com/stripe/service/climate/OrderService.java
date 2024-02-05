@@ -60,9 +60,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
   }
   /**
    * Creates a Climate order object for a given Climate product. The order will be processed
@@ -85,8 +83,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /** Retrieves the details of a Climate order object with the given ID. */
   public Order retrieve(String order, OrderRetrieveParams params) throws StripeException {
@@ -112,8 +109,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /** Updates the specified order by setting the values of the parameters passed. */
   public Order update(String order, OrderUpdateParams params) throws StripeException {
@@ -139,8 +135,7 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
   /**
    * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
@@ -190,7 +185,6 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Order.class);
+    return this.request(request, Order.class);
   }
 }

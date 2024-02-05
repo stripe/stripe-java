@@ -45,9 +45,7 @@ public final class FormService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Form>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Form>>() {}.getType());
   }
   /**
    * Retrieves the details of a tax form that has previously been created. Supply the unique tax
@@ -89,8 +87,7 @@ public final class FormService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Form.class);
+    return this.request(request, Form.class);
   }
   /** Download the PDF for a tax form. */
   public InputStream pdf(String id, FormPdfParams params) throws StripeException {
@@ -116,7 +113,6 @@ public final class FormService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().requestStream(request);
+    return this.requestStream(request);
   }
 }

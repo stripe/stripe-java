@@ -37,9 +37,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
   public Transaction retrieve(String transaction, TransactionRetrieveParams params)
@@ -69,7 +67,6 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
 }

@@ -53,8 +53,7 @@ public final class InvoiceService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /** Retrieves the invoice with the given ID. */
   public Invoice retrieve(String invoice, InvoiceRetrieveParams params) throws StripeException {
@@ -80,8 +79,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
@@ -143,8 +141,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * You can list all invoices, or list the invoices for a specific customer. The invoices are
@@ -182,9 +179,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Invoice>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Invoice>>() {}.getType());
   }
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
@@ -229,8 +224,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Search for invoices you’ve previously created using Stripe’s <a
@@ -262,9 +256,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Invoice>>() {}.getType());
+    return this.request(request, new TypeToken<StripeSearchResult<Invoice>>() {}.getType());
   }
   /**
    * At any time, you can preview the upcoming invoice for a customer. This will show you all the
@@ -366,8 +358,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
@@ -410,8 +401,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
@@ -451,8 +441,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
@@ -493,8 +482,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
@@ -544,8 +532,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Stripe will automatically send invoices to customers according to your <a
@@ -609,8 +596,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
@@ -654,8 +640,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
   /**
    * At any time, you can preview the upcoming invoice for a customer. This will show you all the
@@ -757,8 +742,7 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Invoice.class);
+    return this.request(request, Invoice.class);
   }
 
   public com.stripe.service.InvoiceLineItemService lineItems() {

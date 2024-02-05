@@ -40,9 +40,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType());
   }
   /** Creates an OutboundTransfer. */
   public OutboundTransfer create(OutboundTransferCreateParams params) throws StripeException {
@@ -60,8 +58,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundTransfer.class);
+    return this.request(request, OutboundTransfer.class);
   }
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
@@ -104,8 +101,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundTransfer.class);
+    return this.request(request, OutboundTransfer.class);
   }
   /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
   public OutboundTransfer cancel(String outboundTransfer, OutboundTransferCancelParams params)
@@ -136,7 +132,6 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundTransfer.class);
+    return this.request(request, OutboundTransfer.class);
   }
 }

@@ -47,9 +47,7 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Registration>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Registration>>() {}.getType());
   }
   /** Creates a new Tax {@code Registration} object. */
   public Registration create(RegistrationCreateParams params) throws StripeException {
@@ -67,8 +65,7 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Registration.class);
+    return this.request(request, Registration.class);
   }
   /** Returns a Tax {@code Registration} object. */
   public Registration retrieve(String id, RegistrationRetrieveParams params)
@@ -95,8 +92,7 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Registration.class);
+    return this.request(request, Registration.class);
   }
   /**
    * Updates an existing Tax {@code Registration} object.
@@ -142,7 +138,6 @@ public final class RegistrationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Registration.class);
+    return this.request(request, Registration.class);
   }
 }

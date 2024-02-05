@@ -48,9 +48,7 @@ public final class PromotionCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PromotionCode>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<PromotionCode>>() {}.getType());
   }
   /**
    * A promotion code points to a coupon. You can optionally restrict the code to a specific
@@ -74,8 +72,7 @@ public final class PromotionCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PromotionCode.class);
+    return this.request(request, PromotionCode.class);
   }
   /**
    * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
@@ -120,8 +117,7 @@ public final class PromotionCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PromotionCode.class);
+    return this.request(request, PromotionCode.class);
   }
   /**
    * Updates the specified promotion code by setting the values of the parameters passed. Most
@@ -161,7 +157,6 @@ public final class PromotionCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PromotionCode.class);
+    return this.request(request, PromotionCode.class);
   }
 }

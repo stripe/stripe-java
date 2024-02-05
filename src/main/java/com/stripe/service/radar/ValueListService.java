@@ -39,8 +39,7 @@ public final class ValueListService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ValueList.class);
+    return this.request(request, ValueList.class);
   }
   /** Retrieves a {@code ValueList} object. */
   public ValueList retrieve(String valueList, ValueListRetrieveParams params)
@@ -68,8 +67,7 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ValueList.class);
+    return this.request(request, ValueList.class);
   }
   /**
    * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
@@ -107,8 +105,7 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ValueList.class);
+    return this.request(request, ValueList.class);
   }
   /**
    * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
@@ -146,9 +143,7 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ValueList>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ValueList>>() {}.getType());
   }
   /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public ValueList create(ValueListCreateParams params) throws StripeException {
@@ -166,7 +161,6 @@ public final class ValueListService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ValueList.class);
+    return this.request(request, ValueList.class);
   }
 }

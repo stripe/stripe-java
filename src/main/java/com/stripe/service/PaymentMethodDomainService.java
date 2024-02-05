@@ -49,9 +49,8 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PaymentMethodDomain>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<PaymentMethodDomain>>() {}.getType());
   }
   /** Creates a payment method domain. */
   public PaymentMethodDomain create(PaymentMethodDomainCreateParams params) throws StripeException {
@@ -69,8 +68,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethodDomain.class);
+    return this.request(request, PaymentMethodDomain.class);
   }
   /** Retrieves the details of an existing payment method domain. */
   public PaymentMethodDomain retrieve(
@@ -102,8 +100,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethodDomain.class);
+    return this.request(request, PaymentMethodDomain.class);
   }
   /** Updates an existing payment method domain. */
   public PaymentMethodDomain update(
@@ -135,8 +132,7 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethodDomain.class);
+    return this.request(request, PaymentMethodDomain.class);
   }
   /**
    * Some payment methods such as Apple Pay require additional steps to verify a domain. If the
@@ -220,7 +216,6 @@ public final class PaymentMethodDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethodDomain.class);
+    return this.request(request, PaymentMethodDomain.class);
   }
 }

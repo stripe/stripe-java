@@ -45,9 +45,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
   /** Retrieves the details of a Climate product with the given ID. */
   public Product retrieve(String product, ProductRetrieveParams params) throws StripeException {
@@ -73,7 +71,6 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Product.class);
+    return this.request(request, Product.class);
   }
 }

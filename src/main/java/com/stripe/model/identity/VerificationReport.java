@@ -327,7 +327,9 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("first_name")
     String firstName;
 
-    /** ID number. */
+    /**
+     * ID number. When {@code id_number_type} is {@code us_ssn}, only the last 4 digits are present.
+     */
     @SerializedName("id_number")
     String idNumber;
 
