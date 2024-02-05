@@ -62,9 +62,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Charge>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Charge>>() {}.getType());
   }
   /**
    * This method is no longer recommended—use the <a
@@ -109,8 +107,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Charge.class);
+    return this.request(request, Charge.class);
   }
   /**
    * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
@@ -152,8 +149,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Charge.class);
+    return this.request(request, Charge.class);
   }
   /**
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
@@ -191,8 +187,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Charge.class);
+    return this.request(request, Charge.class);
   }
   /**
    * Search for charges you’ve previously created using Stripe’s <a
@@ -224,9 +219,7 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Charge>>() {}.getType());
+    return this.request(request, new TypeToken<StripeSearchResult<Charge>>() {}.getType());
   }
   /**
    * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
@@ -292,7 +285,6 @@ public final class ChargeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Charge.class);
+    return this.request(request, Charge.class);
   }
 }

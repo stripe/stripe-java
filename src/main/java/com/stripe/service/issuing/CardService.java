@@ -59,9 +59,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Card>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Card>>() {}.getType());
   }
   /** Creates an Issuing {@code Card} object. */
   public Card create(CardCreateParams params) throws StripeException {
@@ -78,8 +76,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /** Retrieves an Issuing {@code Card} object. */
   public Card retrieve(String card, CardRetrieveParams params) throws StripeException {
@@ -105,8 +102,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /**
    * Updates the specified Issuing {@code Card} object by setting the values of the parameters
@@ -144,7 +140,6 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
 }

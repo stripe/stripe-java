@@ -58,9 +58,7 @@ public final class FileService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<File>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<File>>() {}.getType());
   }
   /**
    * To upload a file to Stripe, you need to send a request of type {@code multipart/form-data}.
@@ -89,8 +87,7 @@ public final class FileService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, File.class);
+    return this.request(request, File.class);
   }
   /**
    * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
@@ -132,7 +129,6 @@ public final class FileService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, File.class);
+    return this.request(request, File.class);
   }
 }

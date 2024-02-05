@@ -46,9 +46,8 @@ public final class VerificationReportService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<VerificationReport>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<VerificationReport>>() {}.getType());
   }
   /** Retrieves an existing VerificationReport. */
   public VerificationReport retrieve(String report, VerificationReportRetrieveParams params)
@@ -77,7 +76,6 @@ public final class VerificationReportService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, VerificationReport.class);
+    return this.request(request, VerificationReport.class);
   }
 }

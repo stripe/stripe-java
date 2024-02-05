@@ -47,9 +47,7 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Session>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Session>>() {}.getType());
   }
   /** Creates a Session object. */
   public Session create(SessionCreateParams params) throws StripeException {
@@ -74,8 +72,7 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Session.class);
+    return this.request(request, Session.class);
   }
   /** Retrieves a Session object. */
   public Session retrieve(String session, SessionRetrieveParams params) throws StripeException {
@@ -101,8 +98,7 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Session.class);
+    return this.request(request, Session.class);
   }
   /**
    * A Session can be expired when it is in one of these statuses: {@code open}
@@ -149,8 +145,7 @@ public final class SessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Session.class);
+    return this.request(request, Session.class);
   }
 
   public com.stripe.service.checkout.SessionLineItemService lineItems() {

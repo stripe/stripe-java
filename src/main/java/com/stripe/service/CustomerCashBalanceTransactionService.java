@@ -63,11 +63,8 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(
-            request,
-            new TypeToken<StripeCollection<CustomerCashBalanceTransaction>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<CustomerCashBalanceTransaction>>() {}.getType());
   }
   /**
    * Retrieves a specific cash balance transaction, which updated the customer’s <a
@@ -121,7 +118,6 @@ public final class CustomerCashBalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CustomerCashBalanceTransaction.class);
+    return this.request(request, CustomerCashBalanceTransaction.class);
   }
 }

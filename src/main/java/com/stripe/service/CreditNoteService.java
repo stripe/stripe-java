@@ -49,9 +49,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<CreditNote>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<CreditNote>>() {}.getType());
   }
   /**
    * Issue a credit note to adjust the amount of a finalized invoice. For a {@code status=open}
@@ -115,8 +113,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditNote.class);
+    return this.request(request, CreditNote.class);
   }
   /** Retrieves the credit note object with the given identifier. */
   public CreditNote retrieve(String id, CreditNoteRetrieveParams params) throws StripeException {
@@ -142,8 +139,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditNote.class);
+    return this.request(request, CreditNote.class);
   }
   /** Updates an existing credit note. */
   public CreditNote update(String id, CreditNoteUpdateParams params) throws StripeException {
@@ -169,8 +165,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditNote.class);
+    return this.request(request, CreditNote.class);
   }
   /** Get a preview of a credit note without creating it. */
   public CreditNote preview(CreditNotePreviewParams params) throws StripeException {
@@ -188,8 +183,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditNote.class);
+    return this.request(request, CreditNote.class);
   }
   /**
    * Marks a credit note as void. Learn more about <a
@@ -229,8 +223,7 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditNote.class);
+    return this.request(request, CreditNote.class);
   }
 
   public com.stripe.service.CreditNoteLineItemService lineItems() {

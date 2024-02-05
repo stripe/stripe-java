@@ -62,8 +62,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundTransfer.class);
+    return this.request(request, OutboundTransfer.class);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
@@ -107,8 +106,7 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundTransfer.class);
+    return this.request(request, OutboundTransfer.class);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
@@ -159,7 +157,6 @@ public final class OutboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundTransfer.class);
+    return this.request(request, OutboundTransfer.class);
   }
 }

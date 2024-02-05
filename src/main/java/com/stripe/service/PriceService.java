@@ -65,9 +65,7 @@ public final class PriceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Price>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Price>>() {}.getType());
   }
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public Price create(PriceCreateParams params) throws StripeException {
@@ -84,8 +82,7 @@ public final class PriceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Price.class);
+    return this.request(request, Price.class);
   }
   /** Retrieves the price with the given ID. */
   public Price retrieve(String price, PriceRetrieveParams params) throws StripeException {
@@ -111,8 +108,7 @@ public final class PriceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Price.class);
+    return this.request(request, Price.class);
   }
   /**
    * Updates the specified price by setting the values of the parameters passed. Any parameters not
@@ -150,8 +146,7 @@ public final class PriceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Price.class);
+    return this.request(request, Price.class);
   }
   /**
    * Search for prices you’ve previously created using Stripe’s <a
@@ -183,8 +178,6 @@ public final class PriceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Price>>() {}.getType());
+    return this.request(request, new TypeToken<StripeSearchResult<Price>>() {}.getType());
   }
 }

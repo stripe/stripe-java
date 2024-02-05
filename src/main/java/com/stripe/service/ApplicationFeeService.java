@@ -58,9 +58,7 @@ public final class ApplicationFeeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ApplicationFee>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ApplicationFee>>() {}.getType());
   }
   /**
    * Retrieves the details of an application fee that your account has collected. The same
@@ -100,8 +98,7 @@ public final class ApplicationFeeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ApplicationFee.class);
+    return this.request(request, ApplicationFee.class);
   }
 
   public com.stripe.service.FeeRefundService feeRefunds() {

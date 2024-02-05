@@ -48,9 +48,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Topup>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Topup>>() {}.getType());
   }
   /** Top up the balance of an account. */
   public Topup create(TopupCreateParams params) throws StripeException {
@@ -67,8 +65,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Topup.class);
+    return this.request(request, Topup.class);
   }
   /**
    * Retrieves the details of a top-up that has previously been created. Supply the unique top-up ID
@@ -110,8 +107,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Topup.class);
+    return this.request(request, Topup.class);
   }
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
   public Topup update(String topup, TopupUpdateParams params) throws StripeException {
@@ -137,8 +133,7 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Topup.class);
+    return this.request(request, Topup.class);
   }
   /** Cancels a top-up. Only pending top-ups can be canceled. */
   public Topup cancel(String topup, TopupCancelParams params) throws StripeException {
@@ -164,7 +159,6 @@ public final class TopupService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Topup.class);
+    return this.request(request, Topup.class);
   }
 }

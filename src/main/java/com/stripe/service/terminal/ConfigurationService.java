@@ -34,8 +34,7 @@ public final class ConfigurationService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Configuration.class);
+    return this.request(request, Configuration.class);
   }
   /** Retrieves a {@code Configuration} object. */
   public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
@@ -65,8 +64,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Configuration.class);
+    return this.request(request, Configuration.class);
   }
   /** Updates a new {@code Configuration} object. */
   public Configuration update(String configuration, ConfigurationUpdateParams params)
@@ -95,8 +93,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Configuration.class);
+    return this.request(request, Configuration.class);
   }
   /** Returns a list of {@code Configuration} objects. */
   public StripeCollection<Configuration> list(ConfigurationListParams params)
@@ -123,9 +120,7 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
   /** Creates a new {@code Configuration} object. */
   public Configuration create(ConfigurationCreateParams params) throws StripeException {
@@ -151,7 +146,6 @@ public final class ConfigurationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Configuration.class);
+    return this.request(request, Configuration.class);
   }
 }

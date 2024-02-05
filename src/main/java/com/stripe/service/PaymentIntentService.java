@@ -56,9 +56,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PaymentIntent>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<PaymentIntent>>() {}.getType());
   }
   /**
    * Creates a PaymentIntent object.
@@ -100,8 +98,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
@@ -165,8 +162,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /**
    * Updates properties on a PaymentIntent object without confirming.
@@ -226,8 +222,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /**
    * Search for PaymentIntents you’ve previously created using Stripe’s <a
@@ -260,9 +255,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<PaymentIntent>>() {}.getType());
+    return this.request(request, new TypeToken<StripeSearchResult<PaymentIntent>>() {}.getType());
   }
   /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
@@ -294,8 +287,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /**
    * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
@@ -375,8 +367,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /**
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
@@ -440,8 +431,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /**
    * Confirm that your customer intends to pay with current or provided payment method. Upon
@@ -553,8 +543,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /**
    * Perform an incremental authorization on an eligible <a
@@ -628,8 +617,7 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
   /** Verifies microdeposits on a PaymentIntent object. */
   public PaymentIntent verifyMicrodeposits(
@@ -661,7 +649,6 @@ public final class PaymentIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentIntent.class);
+    return this.request(request, PaymentIntent.class);
   }
 }

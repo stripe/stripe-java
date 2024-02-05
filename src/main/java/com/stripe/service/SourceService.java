@@ -53,8 +53,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentSource.class);
+    return this.request(request, PaymentSource.class);
   }
   /**
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
@@ -92,8 +91,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Source.class);
+    return this.request(request, Source.class);
   }
   /**
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
@@ -147,8 +145,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Source.class);
+    return this.request(request, Source.class);
   }
   /** Creates a new source object. */
   public Source create(SourceCreateParams params) throws StripeException {
@@ -173,8 +170,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Source.class);
+    return this.request(request, Source.class);
   }
   /** Verify a given source. */
   public Source verify(String source, SourceVerifyParams params) throws StripeException {
@@ -192,8 +188,7 @@ public final class SourceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Source.class);
+    return this.request(request, Source.class);
   }
 
   public com.stripe.service.SourceTransactionService transactions() {

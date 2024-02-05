@@ -34,8 +34,7 @@ public final class CalculationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Calculation.class);
+    return this.request(request, Calculation.class);
   }
 
   public com.stripe.service.tax.CalculationLineItemService lineItems() {

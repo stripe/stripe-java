@@ -50,9 +50,8 @@ public final class VerificationSessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<VerificationSession>>() {}.getType());
+    return this.request(
+        request, new TypeToken<StripeCollection<VerificationSession>>() {}.getType());
   }
   /**
    * Creates a VerificationSession object.
@@ -92,8 +91,7 @@ public final class VerificationSessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, VerificationSession.class);
+    return this.request(request, VerificationSession.class);
   }
   /**
    * Retrieves the details of a VerificationSession that was previously created.
@@ -143,8 +141,7 @@ public final class VerificationSessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, VerificationSession.class);
+    return this.request(request, VerificationSession.class);
   }
   /**
    * Updates a VerificationSession object.
@@ -193,8 +190,7 @@ public final class VerificationSessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, VerificationSession.class);
+    return this.request(request, VerificationSession.class);
   }
   /**
    * A VerificationSession object can be canceled when it is in {@code requires_input} <a
@@ -248,8 +244,7 @@ public final class VerificationSessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, VerificationSession.class);
+    return this.request(request, VerificationSession.class);
   }
   /**
    * Redact a VerificationSession to remove all collected information from Stripe. This will redact
@@ -359,7 +354,6 @@ public final class VerificationSessionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, VerificationSession.class);
+    return this.request(request, VerificationSession.class);
   }
 }

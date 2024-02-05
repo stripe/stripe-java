@@ -47,8 +47,7 @@ public final class PersonService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Person.class);
+    return this.request(request, Person.class);
   }
   /** Retrieves an existing person. */
   public Person retrieve(String account, String person, PersonRetrieveParams params)
@@ -80,8 +79,7 @@ public final class PersonService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Person.class);
+    return this.request(request, Person.class);
   }
   /** Updates an existing person. */
   public Person update(String account, String person, PersonUpdateParams params)
@@ -113,8 +111,7 @@ public final class PersonService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Person.class);
+    return this.request(request, Person.class);
   }
   /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
@@ -154,9 +151,7 @@ public final class PersonService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
   }
   /** Creates a new person. */
   public Person create(String account, PersonCreateParams params) throws StripeException {
@@ -182,7 +177,6 @@ public final class PersonService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Person.class);
+    return this.request(request, Person.class);
   }
 }
