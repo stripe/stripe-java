@@ -45,9 +45,7 @@ public final class ReportTypeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ReportType>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ReportType>>() {}.getType());
   }
   /**
    * Retrieves the details of a Report Type. (Certain report types require a <a
@@ -88,7 +86,6 @@ public final class ReportTypeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ReportType.class);
+    return this.request(request, ReportType.class);
   }
 }

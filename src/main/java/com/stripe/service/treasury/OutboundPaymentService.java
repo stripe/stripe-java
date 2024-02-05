@@ -40,9 +40,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<OutboundPayment>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<OutboundPayment>>() {}.getType());
   }
   /** Creates an OutboundPayment. */
   public OutboundPayment create(OutboundPaymentCreateParams params) throws StripeException {
@@ -60,8 +58,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundPayment.class);
+    return this.request(request, OutboundPayment.class);
   }
   /**
    * Retrieves the details of an existing OutboundPayment by passing the unique OutboundPayment ID
@@ -101,8 +98,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundPayment.class);
+    return this.request(request, OutboundPayment.class);
   }
   /** Cancel an OutboundPayment. */
   public OutboundPayment cancel(String id, OutboundPaymentCancelParams params)
@@ -131,7 +127,6 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundPayment.class);
+    return this.request(request, OutboundPayment.class);
   }
 }

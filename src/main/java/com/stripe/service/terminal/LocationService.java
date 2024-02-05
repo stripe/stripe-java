@@ -33,8 +33,7 @@ public final class LocationService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Location.class);
+    return this.request(request, Location.class);
   }
   /** Retrieves a {@code Location} object. */
   public Location retrieve(String location, LocationRetrieveParams params) throws StripeException {
@@ -60,8 +59,7 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Location.class);
+    return this.request(request, Location.class);
   }
   /**
    * Updates a {@code Location} object by setting the values of the parameters passed. Any
@@ -99,8 +97,7 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Location.class);
+    return this.request(request, Location.class);
   }
   /** Returns a list of {@code Location} objects. */
   public StripeCollection<Location> list(LocationListParams params) throws StripeException {
@@ -126,9 +123,7 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Location>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Location>>() {}.getType());
   }
   /**
    * Creates a new {@code Location} object. For further details, including which address fields are
@@ -154,7 +149,6 @@ public final class LocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Location.class);
+    return this.request(request, Location.class);
   }
 }

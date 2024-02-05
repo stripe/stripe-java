@@ -34,8 +34,7 @@ public final class TestClockService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TestClock.class);
+    return this.request(request, TestClock.class);
   }
   /** Retrieves a test clock. */
   public TestClock retrieve(String testClock, TestClockRetrieveParams params)
@@ -64,8 +63,7 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TestClock.class);
+    return this.request(request, TestClock.class);
   }
   /** Returns a list of your test clocks. */
   public StripeCollection<TestClock> list(TestClockListParams params) throws StripeException {
@@ -91,9 +89,7 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TestClock>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<TestClock>>() {}.getType());
   }
   /** Creates a new test clock that can be attached to new customers and quotes. */
   public TestClock create(TestClockCreateParams params) throws StripeException {
@@ -111,8 +107,7 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TestClock.class);
+    return this.request(request, TestClock.class);
   }
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
@@ -138,7 +133,6 @@ public final class TestClockService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TestClock.class);
+    return this.request(request, TestClock.class);
   }
 }

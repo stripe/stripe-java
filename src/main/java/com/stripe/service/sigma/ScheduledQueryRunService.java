@@ -46,9 +46,7 @@ public final class ScheduledQueryRunService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ScheduledQueryRun>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ScheduledQueryRun>>() {}.getType());
   }
   /** Retrieves the details of an scheduled query run. */
   public ScheduledQueryRun retrieve(
@@ -80,7 +78,6 @@ public final class ScheduledQueryRunService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ScheduledQueryRun.class);
+    return this.request(request, ScheduledQueryRun.class);
   }
 }

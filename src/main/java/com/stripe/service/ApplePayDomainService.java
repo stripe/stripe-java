@@ -32,8 +32,7 @@ public final class ApplePayDomainService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ApplePayDomain.class);
+    return this.request(request, ApplePayDomain.class);
   }
   /** Retrieve an apple pay domain. */
   public ApplePayDomain retrieve(String domain, ApplePayDomainRetrieveParams params)
@@ -61,8 +60,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ApplePayDomain.class);
+    return this.request(request, ApplePayDomain.class);
   }
   /** List apple pay domains. */
   public StripeCollection<ApplePayDomain> list(ApplePayDomainListParams params)
@@ -89,9 +87,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ApplePayDomain>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ApplePayDomain>>() {}.getType());
   }
   /** Create an apple pay domain. */
   public ApplePayDomain create(ApplePayDomainCreateParams params) throws StripeException {
@@ -109,7 +105,6 @@ public final class ApplePayDomainService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ApplePayDomain.class);
+    return this.request(request, ApplePayDomain.class);
   }
 }

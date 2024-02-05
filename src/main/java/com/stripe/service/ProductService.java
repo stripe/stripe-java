@@ -43,8 +43,7 @@ public final class ProductService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Product.class);
+    return this.request(request, Product.class);
   }
   /**
    * Retrieves the details of an existing product. Supply the unique product ID from either a
@@ -86,8 +85,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Product.class);
+    return this.request(request, Product.class);
   }
   /**
    * Updates the specific product by setting the values of the parameters passed. Any parameters not
@@ -125,8 +123,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Product.class);
+    return this.request(request, Product.class);
   }
   /**
    * Returns a list of your products. The products are returned sorted by creation date, with the
@@ -164,9 +161,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
   /** Creates a new product object. */
   public Product create(ProductCreateParams params) throws StripeException {
@@ -183,8 +178,7 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Product.class);
+    return this.request(request, Product.class);
   }
   /**
    * Search for products you’ve previously created using Stripe’s <a
@@ -216,8 +210,6 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
+    return this.request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
   }
 }

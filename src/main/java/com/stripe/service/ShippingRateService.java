@@ -47,9 +47,7 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ShippingRate>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ShippingRate>>() {}.getType());
   }
   /** Creates a new shipping rate object. */
   public ShippingRate create(ShippingRateCreateParams params) throws StripeException {
@@ -67,8 +65,7 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ShippingRate.class);
+    return this.request(request, ShippingRate.class);
   }
   /** Returns the shipping rate object with the given ID. */
   public ShippingRate retrieve(String shippingRateToken, ShippingRateRetrieveParams params)
@@ -98,8 +95,7 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ShippingRate.class);
+    return this.request(request, ShippingRate.class);
   }
   /** Updates an existing shipping rate object. */
   public ShippingRate update(String shippingRateToken, ShippingRateUpdateParams params)
@@ -129,7 +125,6 @@ public final class ShippingRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ShippingRate.class);
+    return this.request(request, ShippingRate.class);
   }
 }

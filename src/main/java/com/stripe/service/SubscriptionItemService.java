@@ -62,8 +62,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionItem.class);
+    return this.request(request, SubscriptionItem.class);
   }
   /** Retrieves the subscription item with the given ID. */
   public SubscriptionItem retrieve(String item, SubscriptionItemRetrieveParams params)
@@ -91,8 +90,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionItem.class);
+    return this.request(request, SubscriptionItem.class);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
   public SubscriptionItem update(String item, SubscriptionItemUpdateParams params)
@@ -120,8 +118,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionItem.class);
+    return this.request(request, SubscriptionItem.class);
   }
   /** Returns a list of your subscription items for a given subscription. */
   public StripeCollection<SubscriptionItem> list(SubscriptionItemListParams params)
@@ -140,9 +137,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType());
   }
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public SubscriptionItem create(SubscriptionItemCreateParams params) throws StripeException {
@@ -160,8 +155,7 @@ public final class SubscriptionItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SubscriptionItem.class);
+    return this.request(request, SubscriptionItem.class);
   }
 
   public com.stripe.service.UsageRecordSummaryService usageRecordSummaries() {

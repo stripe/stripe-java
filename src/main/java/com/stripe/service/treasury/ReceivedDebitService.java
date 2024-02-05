@@ -38,9 +38,7 @@ public final class ReceivedDebitService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ReceivedDebit>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ReceivedDebit>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing ReceivedDebit by passing the unique ReceivedDebit ID from
@@ -80,7 +78,6 @@ public final class ReceivedDebitService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ReceivedDebit.class);
+    return this.request(request, ReceivedDebit.class);
   }
 }

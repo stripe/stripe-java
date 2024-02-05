@@ -59,9 +59,7 @@ public final class TaxRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TaxRate>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<TaxRate>>() {}.getType());
   }
   /** Creates a new tax rate. */
   public TaxRate create(TaxRateCreateParams params) throws StripeException {
@@ -78,8 +76,7 @@ public final class TaxRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TaxRate.class);
+    return this.request(request, TaxRate.class);
   }
   /** Retrieves a tax rate with the given ID. */
   public TaxRate retrieve(String taxRate, TaxRateRetrieveParams params) throws StripeException {
@@ -105,8 +102,7 @@ public final class TaxRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TaxRate.class);
+    return this.request(request, TaxRate.class);
   }
   /** Updates an existing tax rate. */
   public TaxRate update(String taxRate, TaxRateUpdateParams params) throws StripeException {
@@ -132,7 +128,6 @@ public final class TaxRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TaxRate.class);
+    return this.request(request, TaxRate.class);
   }
 }

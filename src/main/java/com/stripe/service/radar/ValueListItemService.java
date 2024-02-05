@@ -32,8 +32,7 @@ public final class ValueListItemService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ValueListItem.class);
+    return this.request(request, ValueListItem.class);
   }
   /** Retrieves a {@code ValueListItem} object. */
   public ValueListItem retrieve(String item, ValueListItemRetrieveParams params)
@@ -61,8 +60,7 @@ public final class ValueListItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ValueListItem.class);
+    return this.request(request, ValueListItem.class);
   }
   /**
    * Returns a list of {@code ValueListItem} objects. The objects are sorted in descending order by
@@ -87,9 +85,7 @@ public final class ValueListItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ValueListItem>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ValueListItem>>() {}.getType());
   }
   /**
    * Creates a new {@code ValueListItem} object, which is added to the specified parent value list.
@@ -111,7 +107,6 @@ public final class ValueListItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ValueListItem.class);
+    return this.request(request, ValueListItem.class);
   }
 }

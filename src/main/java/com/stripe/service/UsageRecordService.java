@@ -80,7 +80,6 @@ public final class UsageRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, UsageRecord.class);
+    return this.request(request, UsageRecord.class);
   }
 }

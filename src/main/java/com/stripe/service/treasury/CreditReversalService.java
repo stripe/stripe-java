@@ -39,9 +39,7 @@ public final class CreditReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<CreditReversal>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<CreditReversal>>() {}.getType());
   }
   /** Reverses a ReceivedCredit and creates a CreditReversal object. */
   public CreditReversal create(CreditReversalCreateParams params) throws StripeException {
@@ -59,8 +57,7 @@ public final class CreditReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditReversal.class);
+    return this.request(request, CreditReversal.class);
   }
   /**
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
@@ -102,7 +99,6 @@ public final class CreditReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, CreditReversal.class);
+    return this.request(request, CreditReversal.class);
   }
 }

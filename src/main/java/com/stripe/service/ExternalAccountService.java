@@ -37,8 +37,7 @@ public final class ExternalAccountService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ExternalAccount.class);
+    return this.request(request, ExternalAccount.class);
   }
   /** Retrieve a specified external account for a given account. */
   public ExternalAccount retrieve(String account, String id, ExternalAccountRetrieveParams params)
@@ -70,8 +69,7 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ExternalAccount.class);
+    return this.request(request, ExternalAccount.class);
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
@@ -131,8 +129,7 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ExternalAccount.class);
+    return this.request(request, ExternalAccount.class);
   }
   /** List external accounts for an account. */
   public StripeCollection<ExternalAccount> list(String account, ExternalAccountListParams params)
@@ -162,9 +159,7 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
   }
   /** Create an external account for a given account. */
   public ExternalAccount create(String account, ExternalAccountCreateParams params)
@@ -185,7 +180,6 @@ public final class ExternalAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ExternalAccount.class);
+    return this.request(request, ExternalAccount.class);
   }
 }

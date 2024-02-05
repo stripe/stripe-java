@@ -46,9 +46,7 @@ public final class ReportRunService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ReportRun>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ReportRun>>() {}.getType());
   }
   /**
    * Creates a new object and begin running the report. (Certain report types require a <a
@@ -72,8 +70,7 @@ public final class ReportRunService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ReportRun.class);
+    return this.request(request, ReportRun.class);
   }
   /** Retrieves the details of an existing Report Run. */
   public ReportRun retrieve(String reportRun, ReportRunRetrieveParams params)
@@ -101,7 +98,6 @@ public final class ReportRunService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ReportRun.class);
+    return this.request(request, ReportRun.class);
   }
 }

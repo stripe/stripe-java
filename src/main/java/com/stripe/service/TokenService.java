@@ -43,8 +43,7 @@ public final class TokenService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Token.class);
+    return this.request(request, Token.class);
   }
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
@@ -85,7 +84,6 @@ public final class TokenService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Token.class);
+    return this.request(request, Token.class);
   }
 }

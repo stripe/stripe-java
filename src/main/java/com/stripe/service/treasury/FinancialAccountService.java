@@ -48,9 +48,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<FinancialAccount>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<FinancialAccount>>() {}.getType());
   }
   /**
    * Creates a new FinancialAccount. For now, each connected account can only have one
@@ -74,8 +72,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FinancialAccount.class);
+    return this.request(request, FinancialAccount.class);
   }
   /** Retrieves the details of a FinancialAccount. */
   public FinancialAccount retrieve(String financialAccount, FinancialAccountRetrieveParams params)
@@ -106,8 +103,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FinancialAccount.class);
+    return this.request(request, FinancialAccount.class);
   }
   /** Updates the details of a FinancialAccount. */
   public FinancialAccount update(String financialAccount, FinancialAccountUpdateParams params)
@@ -138,8 +134,7 @@ public final class FinancialAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FinancialAccount.class);
+    return this.request(request, FinancialAccount.class);
   }
 
   public com.stripe.service.treasury.FinancialAccountFeaturesService features() {

@@ -48,7 +48,6 @@ public final class BankAccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, BankAccount.class);
+    return this.request(request, BankAccount.class);
   }
 }

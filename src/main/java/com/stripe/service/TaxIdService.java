@@ -35,8 +35,7 @@ public final class TaxIdService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TaxId.class);
+    return this.request(request, TaxId.class);
   }
   /** Retrieves the {@code tax_id} object with the given identifier. */
   public TaxId retrieve(String customer, String id, TaxIdRetrieveParams params)
@@ -67,8 +66,7 @@ public final class TaxIdService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TaxId.class);
+    return this.request(request, TaxId.class);
   }
   /** Returns a list of tax IDs for a customer. */
   public StripeCollection<TaxId> list(String customer, TaxIdListParams params)
@@ -96,9 +94,7 @@ public final class TaxIdService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TaxId>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<TaxId>>() {}.getType());
   }
   /** Creates a new {@code tax_id} object for a customer. */
   public TaxId create(String customer, TaxIdCreateParams params) throws StripeException {
@@ -116,7 +112,6 @@ public final class TaxIdService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TaxId.class);
+    return this.request(request, TaxId.class);
   }
 }

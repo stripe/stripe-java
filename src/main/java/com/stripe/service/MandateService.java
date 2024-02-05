@@ -42,7 +42,6 @@ public final class MandateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Mandate.class);
+    return this.request(request, Mandate.class);
   }
 }

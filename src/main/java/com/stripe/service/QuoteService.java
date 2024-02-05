@@ -52,9 +52,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Quote>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Quote>>() {}.getType());
   }
   /**
    * A quote models prices and services for a customer. Default options for {@code header}, {@code
@@ -95,8 +93,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Quote.class);
+    return this.request(request, Quote.class);
   }
   /** Retrieves the quote with the given ID. */
   public Quote retrieve(String quote, QuoteRetrieveParams params) throws StripeException {
@@ -122,8 +119,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Quote.class);
+    return this.request(request, Quote.class);
   }
   /** A quote models prices and services for a customer. */
   public Quote update(String quote, QuoteUpdateParams params) throws StripeException {
@@ -149,8 +145,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Quote.class);
+    return this.request(request, Quote.class);
   }
   /** Accepts the specified quote. */
   public Quote accept(String quote, QuoteAcceptParams params) throws StripeException {
@@ -176,8 +171,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Quote.class);
+    return this.request(request, Quote.class);
   }
   /** Cancels the quote. */
   public Quote cancel(String quote, QuoteCancelParams params) throws StripeException {
@@ -203,8 +197,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Quote.class);
+    return this.request(request, Quote.class);
   }
   /** Finalizes the quote. */
   public Quote finalizeQuote(String quote, QuoteFinalizeQuoteParams params) throws StripeException {
@@ -230,8 +223,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Quote.class);
+    return this.request(request, Quote.class);
   }
   /** Download the PDF for a finalized quote. */
   public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
@@ -257,8 +249,7 @@ public final class QuoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().requestStream(request);
+    return this.requestStream(request);
   }
 
   public com.stripe.service.QuoteComputedUpfrontLineItemsService computedUpfrontLineItems() {
