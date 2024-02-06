@@ -12468,6 +12468,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       RequestThreeDSecure requestThreeDSecure;
 
       /**
+       * When enabled, using a card that is attached to a customer will require the CVC to be
+       * provided again (i.e. using the cvc_token parameter).
+       */
+      @SerializedName("require_cvc_recollection")
+      Boolean requireCvcRecollection;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>Providing this parameter will <a
@@ -12536,6 +12543,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           RequestMulticapture requestMulticapture,
           RequestOvercapture requestOvercapture,
           RequestThreeDSecure requestThreeDSecure,
+          Boolean requireCvcRecollection,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
           Object statementDescriptorSuffixKanji,
@@ -12553,6 +12561,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.requestMulticapture = requestMulticapture;
         this.requestOvercapture = requestOvercapture;
         this.requestThreeDSecure = requestThreeDSecure;
+        this.requireCvcRecollection = requireCvcRecollection;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
@@ -12589,6 +12598,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        private Boolean requireCvcRecollection;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private Object statementDescriptorSuffixKana;
@@ -12614,6 +12625,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.requestMulticapture,
               this.requestOvercapture,
               this.requestThreeDSecure,
+              this.requireCvcRecollection,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji,
@@ -12787,6 +12799,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestThreeDSecure
                 requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
+          return this;
+        }
+
+        /**
+         * When enabled, using a card that is attached to a customer will require the CVC to be
+         * provided again (i.e. using the cvc_token parameter).
+         */
+        public Builder setRequireCvcRecollection(Boolean requireCvcRecollection) {
+          this.requireCvcRecollection = requireCvcRecollection;
           return this;
         }
 

@@ -78,6 +78,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentMethod> paymentMethod;
 
+  /** Payment-method-specific configuration for this ConfirmationToken. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /**
    * Payment details collected by the Payment Element, used to create a PaymentMethod when a
    * PaymentIntent or SetupIntent is confirmed with this ConfirmationToken.
@@ -211,6 +215,26 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @SerializedName("user_agent")
         String userAgent;
       }
+    }
+  }
+
+  /** Payment-method-specific configuration. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions extends StripeObject {
+    /** This hash contains the card payment method options. */
+    @SerializedName("card")
+    Card card;
+
+    /** This hash contains the card payment method options. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /** The {@code cvc_update} Token collected from the Payment Element. */
+      @SerializedName("cvc_token")
+      String cvcToken;
     }
   }
 
@@ -1402,6 +1426,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(mandateData, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
+    trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
   }
