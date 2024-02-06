@@ -2769,6 +2769,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String requestThreeDSecure;
 
       /**
+       * When enabled, using a card that is attached to a customer will require the CVC to be
+       * provided again (i.e. using the cvc_token parameter).
+       */
+      @SerializedName("require_cvc_recollection")
+      Boolean requireCvcRecollection;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>Providing this parameter will <a
