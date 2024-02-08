@@ -1,5 +1,9 @@
 # Changelog
 
+## 24.16.0-beta.1 - 2024-02-08
+* [#1743](https://github.com/stripe/stripe-java/pull/1743) Update generated code for beta
+  * Add support for `payment_method_options` on `ConfirmationToken`
+
 ## 24.15.0-beta.1 - 2024-02-01
 * [#1741](https://github.com/stripe/stripe-java/pull/1741) Update generated code for beta
   * Add support for new resources `Entitlements.Event` and `Entitlements.Feature`
