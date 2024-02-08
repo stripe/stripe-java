@@ -37,9 +37,7 @@ public final class QuotePhaseService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<QuotePhase>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<QuotePhase>>() {}.getType());
   }
   /** Retrieves the quote phase with the given ID. */
   public QuotePhase retrieve(String quotePhase, QuotePhaseRetrieveParams params)
@@ -67,8 +65,7 @@ public final class QuotePhaseService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, QuotePhase.class);
+    return this.request(request, QuotePhase.class);
   }
 
   public com.stripe.service.QuotePhaseLineItemService lineItems() {

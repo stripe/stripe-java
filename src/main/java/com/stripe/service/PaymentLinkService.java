@@ -47,9 +47,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PaymentLink>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<PaymentLink>>() {}.getType());
   }
   /** Creates a payment link. */
   public PaymentLink create(PaymentLinkCreateParams params) throws StripeException {
@@ -67,8 +65,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentLink.class);
+    return this.request(request, PaymentLink.class);
   }
   /** Retrieve a payment link. */
   public PaymentLink retrieve(String paymentLink, PaymentLinkRetrieveParams params)
@@ -96,8 +93,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentLink.class);
+    return this.request(request, PaymentLink.class);
   }
   /** Updates a payment link. */
   public PaymentLink update(String paymentLink, PaymentLinkUpdateParams params)
@@ -125,8 +121,7 @@ public final class PaymentLinkService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentLink.class);
+    return this.request(request, PaymentLink.class);
   }
 
   public com.stripe.service.PaymentLinkLineItemService lineItems() {

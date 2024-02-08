@@ -2664,11 +2664,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The customer's bank. Can be one of {@code ing}, {@code citi_handlowy}, {@code
        * tmobile_usbugi_bankowe}, {@code plus_bank}, {@code etransfer_pocztowy24}, {@code
-       * banki_spbdzielcze}, {@code bank_nowy_bfg_sa}, {@code getin_bank}, {@code blik}, {@code
-       * noble_pay}, {@code ideabank}, {@code envelobank}, {@code santander_przelew24}, {@code
-       * nest_przelew}, {@code mbank_mtransfer}, {@code inteligo}, {@code pbac_z_ipko}, {@code
-       * bnp_paribas}, {@code credit_agricole}, {@code toyota_bank}, {@code bank_pekao_sa}, {@code
-       * volkswagen_bank}, {@code bank_millennium}, {@code alior_bank}, or {@code boz}.
+       * banki_spbdzielcze}, {@code bank_nowy_bfg_sa}, {@code getin_bank}, {@code velobank}, {@code
+       * blik}, {@code noble_pay}, {@code ideabank}, {@code envelobank}, {@code
+       * santander_przelew24}, {@code nest_przelew}, {@code mbank_mtransfer}, {@code inteligo},
+       * {@code pbac_z_ipko}, {@code bnp_paribas}, {@code credit_agricole}, {@code toyota_bank},
+       * {@code bank_pekao_sa}, {@code volkswagen_bank}, {@code bank_millennium}, {@code
+       * alior_bank}, or {@code boz}.
        */
       @SerializedName("bank")
       String bank;

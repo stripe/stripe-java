@@ -60,9 +60,7 @@ public final class CapabilityService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Capability>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Capability>>() {}.getType());
   }
   /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(String account, String capability, CapabilityRetrieveParams params)
@@ -94,8 +92,7 @@ public final class CapabilityService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Capability.class);
+    return this.request(request, Capability.class);
   }
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
@@ -139,7 +136,6 @@ public final class CapabilityService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Capability.class);
+    return this.request(request, Capability.class);
   }
 }

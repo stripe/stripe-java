@@ -46,8 +46,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
   /** Creates a Tax {@code Transaction} from a calculation. */
   public Transaction createFromCalculation(TransactionCreateFromCalculationParams params)
@@ -67,8 +66,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
   /** Partially or fully reverses a previously created {@code Transaction}. */
   public Transaction createReversal(TransactionCreateReversalParams params) throws StripeException {
@@ -86,8 +84,7 @@ public final class TransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Transaction.class);
+    return this.request(request, Transaction.class);
   }
 
   public com.stripe.service.tax.TransactionLineItemService lineItems() {

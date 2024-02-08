@@ -68,8 +68,7 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FeeRefund.class);
+    return this.request(request, FeeRefund.class);
   }
   /**
    * Updates the specified application fee refund by setting the values of the parameters passed.
@@ -120,8 +119,7 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FeeRefund.class);
+    return this.request(request, FeeRefund.class);
   }
   /**
    * You can see a list of the refunds belonging to a specific application fee. Note that the 10
@@ -169,9 +167,7 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<FeeRefund>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<FeeRefund>>() {}.getType());
   }
   /**
    * Refunds an application fee that has previously been collected but not yet refunded. Funds will
@@ -237,7 +233,6 @@ public final class FeeRefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, FeeRefund.class);
+    return this.request(request, FeeRefund.class);
   }
 }

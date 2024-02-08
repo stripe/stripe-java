@@ -36,8 +36,6 @@ public final class SetupAttemptService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<SetupAttempt>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<SetupAttempt>>() {}.getType());
   }
 }

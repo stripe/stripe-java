@@ -70,9 +70,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<PaymentMethod>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<PaymentMethod>>() {}.getType());
   }
   /**
    * Creates a PaymentMethod object. Read the <a
@@ -138,8 +136,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethod.class);
+    return this.request(request, PaymentMethod.class);
   }
   /**
    * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
@@ -188,8 +185,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethod.class);
+    return this.request(request, PaymentMethod.class);
   }
   /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
   public PaymentMethod update(String paymentMethod, PaymentMethodUpdateParams params)
@@ -217,8 +213,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethod.class);
+    return this.request(request, PaymentMethod.class);
   }
   /**
    * Attaches a PaymentMethod object to a Customer.
@@ -271,8 +266,7 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethod.class);
+    return this.request(request, PaymentMethod.class);
   }
   /**
    * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
@@ -313,7 +307,6 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PaymentMethod.class);
+    return this.request(request, PaymentMethod.class);
   }
 }

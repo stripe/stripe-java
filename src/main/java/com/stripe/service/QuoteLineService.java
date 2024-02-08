@@ -62,8 +62,6 @@ public final class QuoteLineService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<QuoteLine>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<QuoteLine>>() {}.getType());
   }
 }

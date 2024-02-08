@@ -57,9 +57,7 @@ public final class TaxCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TaxCode>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<TaxCode>>() {}.getType());
   }
   /**
    * Retrieves the details of an existing tax code. Supply the unique tax code ID and Stripe will
@@ -97,7 +95,6 @@ public final class TaxCodeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TaxCode.class);
+    return this.request(request, TaxCode.class);
   }
 }

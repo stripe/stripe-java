@@ -48,9 +48,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Card>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Card>>() {}.getType());
   }
   /** Creates a new gift card object. */
   public Card create(CardCreateParams params) throws StripeException {
@@ -67,8 +65,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /** Retrieve a gift card by id. */
   public Card retrieve(String id, CardRetrieveParams params) throws StripeException {
@@ -94,8 +91,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /** Update a gift card. */
   public Card update(String id, CardUpdateParams params) throws StripeException {
@@ -121,8 +117,7 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
   /** Validates a gift card code, returning the matching gift card object if it exists. */
   public Card validate(CardValidateParams params) throws StripeException {
@@ -139,7 +134,6 @@ public final class CardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Card.class);
+    return this.request(request, Card.class);
   }
 }

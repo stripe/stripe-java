@@ -57,9 +57,7 @@ public final class ExchangeRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<ExchangeRate>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<ExchangeRate>>() {}.getType());
   }
   /** Retrieves the exchange rates from the given currency to every supported currency. */
   public ExchangeRate retrieve(String rateId, ExchangeRateRetrieveParams params)
@@ -87,7 +85,6 @@ public final class ExchangeRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ExchangeRate.class);
+    return this.request(request, ExchangeRate.class);
   }
 }

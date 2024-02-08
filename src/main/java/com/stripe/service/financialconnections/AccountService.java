@@ -49,9 +49,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
   /** Retrieves the details of an Financial Connections {@code Account}. */
   public Account retrieve(String account, AccountRetrieveParams params) throws StripeException {
@@ -78,8 +76,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Account.class);
+    return this.request(request, Account.class);
   }
   /**
    * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
@@ -119,8 +116,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Account.class);
+    return this.request(request, Account.class);
   }
   /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public Account refresh(String account, AccountRefreshParams params) throws StripeException {
@@ -140,8 +136,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Account.class);
+    return this.request(request, Account.class);
   }
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
@@ -167,8 +162,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Account.class);
+    return this.request(request, Account.class);
   }
   /**
    * Unsubscribes from periodic refreshes of data associated with a Financial Connections {@code
@@ -196,8 +190,7 @@ public final class AccountService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Account.class);
+    return this.request(request, Account.class);
   }
 
   public com.stripe.service.financialconnections.AccountInferredBalanceService inferredBalances() {

@@ -38,9 +38,7 @@ public final class TokenService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Token>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Token>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Token} object. */
   public Token retrieve(String token, TokenRetrieveParams params) throws StripeException {
@@ -66,8 +64,7 @@ public final class TokenService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Token.class);
+    return this.request(request, Token.class);
   }
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
   public Token update(String token, TokenUpdateParams params) throws StripeException {
@@ -85,7 +82,6 @@ public final class TokenService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Token.class);
+    return this.request(request, Token.class);
   }
 }

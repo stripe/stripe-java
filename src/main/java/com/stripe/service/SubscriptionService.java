@@ -120,8 +120,7 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Subscription.class);
+    return this.request(request, Subscription.class);
   }
   /** Retrieves the subscription with the given ID. */
   public Subscription retrieve(String subscriptionExposedId, SubscriptionRetrieveParams params)
@@ -152,8 +151,7 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Subscription.class);
+    return this.request(request, Subscription.class);
   }
   /**
    * Updates an existing subscription to match the specified parameters. When changing prices or
@@ -363,8 +361,7 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Subscription.class);
+    return this.request(request, Subscription.class);
   }
   /** Removes the currently applied discount on a subscription. */
   public Discount deleteDiscount(String subscriptionExposedId) throws StripeException {
@@ -379,8 +376,7 @@ public final class SubscriptionService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Discount.class);
+    return this.request(request, Discount.class);
   }
   /**
    * By default, returns a list of subscriptions that have not been canceled. In order to list
@@ -418,9 +414,7 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Subscription>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Subscription>>() {}.getType());
   }
   /**
    * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
@@ -464,8 +458,7 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Subscription.class);
+    return this.request(request, Subscription.class);
   }
   /**
    * Search for subscriptions you’ve previously created using Stripe’s <a
@@ -498,9 +491,7 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
+    return this.request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
@@ -553,7 +544,6 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Subscription.class);
+    return this.request(request, Subscription.class);
   }
 }

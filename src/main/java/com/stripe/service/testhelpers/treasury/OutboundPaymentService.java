@@ -58,8 +58,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundPayment.class);
+    return this.request(request, OutboundPayment.class);
   }
   /**
    * Transitions a test mode created OutboundPayment to the {@code posted} status. The
@@ -99,8 +98,7 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundPayment.class);
+    return this.request(request, OutboundPayment.class);
   }
   /**
    * Transitions a test mode created OutboundPayment to the {@code returned} status. The
@@ -144,7 +142,6 @@ public final class OutboundPaymentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, OutboundPayment.class);
+    return this.request(request, OutboundPayment.class);
   }
 }

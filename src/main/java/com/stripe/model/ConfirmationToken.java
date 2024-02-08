@@ -78,6 +78,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentMethod> paymentMethod;
 
+  /** Payment-method-specific configuration for this ConfirmationToken. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /**
    * Payment details collected by the Payment Element, used to create a PaymentMethod when a
    * PaymentIntent or SetupIntent is confirmed with this ConfirmationToken.
@@ -211,6 +215,26 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @SerializedName("user_agent")
         String userAgent;
       }
+    }
+  }
+
+  /** Payment-method-specific configuration. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions extends StripeObject {
+    /** This hash contains the card payment method options. */
+    @SerializedName("card")
+    Card card;
+
+    /** This hash contains the card payment method options. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /** The {@code cvc_update} Token collected from the Payment Element. */
+      @SerializedName("cvc_token")
+      String cvcToken;
     }
   }
 
@@ -587,9 +611,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
         List<String> available;
 
         /**
-         * The preferred network for the card. Can be {@code cartes_bancaires}, {@code mastercard},
-         * {@code visa} or {@code invalid_preference} if requested network is not valid for the
-         * card.
+         * The preferred network for co-branded cards. Can be {@code cartes_bancaires}, {@code
+         * mastercard}, {@code visa} or {@code invalid_preference} if requested network is not valid
+         * for the card.
          */
         @SerializedName("preferred")
         String preferred;
@@ -1113,7 +1137,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
        * etransfer_pocztowy24}, {@code getin_bank}, {@code ideabank}, {@code ing}, {@code inteligo},
        * {@code mbank_mtransfer}, {@code nest_przelew}, {@code noble_pay}, {@code pbac_z_ipko},
        * {@code plus_bank}, {@code santander_przelew24}, {@code tmobile_usbugi_bankowe}, {@code
-       * toyota_bank}, or {@code volkswagen_bank}.
+       * toyota_bank}, {@code velobank}, or {@code volkswagen_bank}.
        */
       @SerializedName("bank")
       String bank;
@@ -1402,6 +1426,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(mandateData, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
+    trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
   }

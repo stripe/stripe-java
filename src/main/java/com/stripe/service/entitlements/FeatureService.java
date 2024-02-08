@@ -45,9 +45,7 @@ public final class FeatureService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Feature>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Feature>>() {}.getType());
   }
   /** Creates a feature. */
   public Feature create(FeatureCreateParams params) throws StripeException {
@@ -64,7 +62,6 @@ public final class FeatureService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Feature.class);
+    return this.request(request, Feature.class);
   }
 }

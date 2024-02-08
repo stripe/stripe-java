@@ -39,9 +39,7 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Secret>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Secret>>() {}.getType());
   }
   /** Create or replace a secret in the secret store. */
   public Secret create(SecretCreateParams params) throws StripeException {
@@ -58,8 +56,7 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Secret.class);
+    return this.request(request, Secret.class);
   }
   /** Finds a secret in the secret store by name and scope. */
   public Secret find(SecretFindParams params) throws StripeException {
@@ -76,8 +73,7 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Secret.class);
+    return this.request(request, Secret.class);
   }
   /** Deletes a secret from the secret store by name and scope. */
   public Secret deleteWhere(SecretDeleteWhereParams params) throws StripeException {
@@ -95,7 +91,6 @@ public final class SecretService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Secret.class);
+    return this.request(request, Secret.class);
   }
 }

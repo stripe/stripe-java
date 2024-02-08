@@ -39,8 +39,7 @@ public final class InvoiceItemService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InvoiceItem.class);
+    return this.request(request, InvoiceItem.class);
   }
   /** Retrieves the invoice item with the given ID. */
   public InvoiceItem retrieve(String invoiceitem, InvoiceItemRetrieveParams params)
@@ -68,8 +67,7 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InvoiceItem.class);
+    return this.request(request, InvoiceItem.class);
   }
   /**
    * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
@@ -109,8 +107,7 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InvoiceItem.class);
+    return this.request(request, InvoiceItem.class);
   }
   /**
    * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
@@ -148,9 +145,7 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<InvoiceItem>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<InvoiceItem>>() {}.getType());
   }
   /**
    * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
@@ -174,7 +169,6 @@ public final class InvoiceItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InvoiceItem.class);
+    return this.request(request, InvoiceItem.class);
   }
 }

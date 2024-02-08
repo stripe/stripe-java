@@ -43,8 +43,7 @@ public final class CouponService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Coupon.class);
+    return this.request(request, Coupon.class);
   }
   /** Retrieves the coupon with the given ID. */
   public Coupon retrieve(String coupon, CouponRetrieveParams params) throws StripeException {
@@ -70,8 +69,7 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Coupon.class);
+    return this.request(request, Coupon.class);
   }
   /**
    * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
@@ -109,8 +107,7 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Coupon.class);
+    return this.request(request, Coupon.class);
   }
   /** Returns a list of your coupons. */
   public StripeCollection<Coupon> list(CouponListParams params) throws StripeException {
@@ -136,9 +133,7 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Coupon>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Coupon>>() {}.getType());
   }
   /**
    * You can create coupons easily via the <a href="https://dashboard.stripe.com/coupons">coupon
@@ -203,7 +198,6 @@ public final class CouponService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Coupon.class);
+    return this.request(request, Coupon.class);
   }
 }

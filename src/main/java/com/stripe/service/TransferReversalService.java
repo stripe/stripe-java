@@ -69,9 +69,7 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<TransferReversal>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<TransferReversal>>() {}.getType());
   }
   /**
    * When you create a new reversal, you must specify a transfer to create it on.
@@ -135,8 +133,7 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TransferReversal.class);
+    return this.request(request, TransferReversal.class);
   }
   /**
    * By default, you can see the 10 most recent reversals stored directly on the transfer object,
@@ -180,8 +177,7 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TransferReversal.class);
+    return this.request(request, TransferReversal.class);
   }
   /**
    * Updates the specified reversal by setting the values of the parameters passed. Any parameters
@@ -233,7 +229,6 @@ public final class TransferReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, TransferReversal.class);
+    return this.request(request, TransferReversal.class);
   }
 }

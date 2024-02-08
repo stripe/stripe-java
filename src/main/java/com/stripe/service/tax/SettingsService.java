@@ -43,8 +43,7 @@ public final class SettingsService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Settings.class);
+    return this.request(request, Settings.class);
   }
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
@@ -82,7 +81,6 @@ public final class SettingsService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Settings.class);
+    return this.request(request, Settings.class);
   }
 }

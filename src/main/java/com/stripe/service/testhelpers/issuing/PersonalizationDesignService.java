@@ -66,8 +66,7 @@ public final class PersonalizationDesignService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PersonalizationDesign.class);
+    return this.request(request, PersonalizationDesign.class);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
@@ -115,8 +114,7 @@ public final class PersonalizationDesignService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PersonalizationDesign.class);
+    return this.request(request, PersonalizationDesign.class);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
@@ -148,7 +146,6 @@ public final class PersonalizationDesignService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, PersonalizationDesign.class);
+    return this.request(request, PersonalizationDesign.class);
   }
 }

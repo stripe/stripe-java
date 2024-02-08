@@ -41,8 +41,7 @@ public final class ReaderService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Retrieves a {@code Reader} object. */
   public Reader retrieve(String reader, ReaderRetrieveParams params) throws StripeException {
@@ -68,8 +67,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /**
    * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
@@ -107,8 +105,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Returns a list of {@code Reader} objects. */
   public StripeCollection<Reader> list(ReaderListParams params) throws StripeException {
@@ -134,9 +131,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Reader>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Reader>>() {}.getType());
   }
   /** Creates a new {@code Reader} object. */
   public Reader create(ReaderCreateParams params) throws StripeException {
@@ -153,8 +148,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Cancels the current reader action. */
   public Reader cancelAction(String reader, ReaderCancelActionParams params)
@@ -182,8 +176,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Initiates an input collection flow on a Reader. */
   public Reader collectInputs(String reader, ReaderCollectInputsParams params)
@@ -204,8 +197,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
@@ -233,8 +225,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Finalizes a payment on a Reader. */
   public Reader confirmPaymentIntent(String reader, ReaderConfirmPaymentIntentParams params)
@@ -256,8 +247,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Initiates a payment flow on a Reader. */
   public Reader processPaymentIntent(String reader, ReaderProcessPaymentIntentParams params)
@@ -279,8 +269,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Initiates a setup intent flow on a Reader. */
   public Reader processSetupIntent(String reader, ReaderProcessSetupIntentParams params)
@@ -302,8 +291,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Initiates a refund on a Reader. */
   public Reader refundPayment(String reader, ReaderRefundPaymentParams params)
@@ -332,8 +320,7 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
   /** Sets reader display to show cart details. */
   public Reader setReaderDisplay(String reader, ReaderSetReaderDisplayParams params)
@@ -355,7 +342,6 @@ public final class ReaderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Reader.class);
+    return this.request(request, Reader.class);
   }
 }

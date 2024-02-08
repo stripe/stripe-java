@@ -42,8 +42,7 @@ public final class CustomerService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Customer.class);
+    return this.request(request, Customer.class);
   }
   /** Retrieves a Customer object. */
   public Customer retrieve(String customer, CustomerRetrieveParams params) throws StripeException {
@@ -69,8 +68,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Customer.class);
+    return this.request(request, Customer.class);
   }
   /**
    * Updates the specified customer by setting the values of the parameters passed. Any parameters
@@ -148,8 +146,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Customer.class);
+    return this.request(request, Customer.class);
   }
   /** Removes the currently applied discount on a customer. */
   public Discount deleteDiscount(String customer) throws StripeException {
@@ -161,8 +158,7 @@ public final class CustomerService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Discount.class);
+    return this.request(request, Discount.class);
   }
   /**
    * Returns a list of your customers. The customers are returned sorted by creation date, with the
@@ -200,9 +196,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Customer>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Customer>>() {}.getType());
   }
   /** Creates a new customer object. */
   public Customer create(CustomerCreateParams params) throws StripeException {
@@ -228,8 +222,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Customer.class);
+    return this.request(request, Customer.class);
   }
   /**
    * Search for customers you’ve previously created using Stripe’s <a
@@ -261,9 +254,7 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
+    return this.request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
   }
 
   public com.stripe.service.CustomerBalanceTransactionService balanceTransactions() {

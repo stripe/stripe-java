@@ -33,8 +33,7 @@ public final class PlanService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Plan.class);
+    return this.request(request, Plan.class);
   }
   /** Retrieves the plan with the given ID. */
   public Plan retrieve(String plan, PlanRetrieveParams params) throws StripeException {
@@ -60,8 +59,7 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Plan.class);
+    return this.request(request, Plan.class);
   }
   /**
    * Updates the specified plan by setting the values of the parameters passed. Any parameters not
@@ -103,8 +101,7 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Plan.class);
+    return this.request(request, Plan.class);
   }
   /** Returns a list of your plans. */
   public StripeCollection<Plan> list(PlanListParams params) throws StripeException {
@@ -130,9 +127,7 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
   }
   /**
    * You can now model subscriptions more flexibly using the <a
@@ -157,7 +152,6 @@ public final class PlanService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Plan.class);
+    return this.request(request, Plan.class);
   }
 }

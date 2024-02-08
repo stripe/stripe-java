@@ -39,9 +39,7 @@ public final class DebitReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<DebitReversal>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<DebitReversal>>() {}.getType());
   }
   /** Reverses a ReceivedDebit and creates a DebitReversal object. */
   public DebitReversal create(DebitReversalCreateParams params) throws StripeException {
@@ -59,8 +57,7 @@ public final class DebitReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, DebitReversal.class);
+    return this.request(request, DebitReversal.class);
   }
   /** Retrieves a DebitReversal object. */
   public DebitReversal retrieve(String debitReversal, DebitReversalRetrieveParams params)
@@ -90,7 +87,6 @@ public final class DebitReversalService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, DebitReversal.class);
+    return this.request(request, DebitReversal.class);
   }
 }

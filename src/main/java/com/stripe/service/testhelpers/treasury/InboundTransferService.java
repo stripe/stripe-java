@@ -58,8 +58,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InboundTransfer.class);
+    return this.request(request, InboundTransfer.class);
   }
   /**
    * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
@@ -103,8 +102,7 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InboundTransfer.class);
+    return this.request(request, InboundTransfer.class);
   }
   /**
    * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
@@ -146,7 +144,6 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, InboundTransfer.class);
+    return this.request(request, InboundTransfer.class);
   }
 }

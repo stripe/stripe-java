@@ -50,9 +50,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<SetupIntent>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<SetupIntent>>() {}.getType());
   }
   /**
    * Creates a SetupIntent object.
@@ -102,8 +100,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SetupIntent.class);
+    return this.request(request, SetupIntent.class);
   }
   /**
    * Retrieves the details of a SetupIntent that has previously been created.
@@ -167,8 +164,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SetupIntent.class);
+    return this.request(request, SetupIntent.class);
   }
   /** Updates a SetupIntent object. */
   public SetupIntent update(String intent, SetupIntentUpdateParams params) throws StripeException {
@@ -194,8 +190,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SetupIntent.class);
+    return this.request(request, SetupIntent.class);
   }
   /**
    * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
@@ -245,8 +240,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SetupIntent.class);
+    return this.request(request, SetupIntent.class);
   }
   /**
    * Confirm that your customer intends to set up the current or provided payment method. For
@@ -321,8 +315,7 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SetupIntent.class);
+    return this.request(request, SetupIntent.class);
   }
   /** Verifies microdeposits on a SetupIntent object. */
   public SetupIntent verifyMicrodeposits(String intent, SetupIntentVerifyMicrodepositsParams params)
@@ -353,7 +346,6 @@ public final class SetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, SetupIntent.class);
+    return this.request(request, SetupIntent.class);
   }
 }

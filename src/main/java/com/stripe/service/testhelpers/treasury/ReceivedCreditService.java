@@ -40,7 +40,6 @@ public final class ReceivedCreditService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, ReceivedCredit.class);
+    return this.request(request, ReceivedCredit.class);
   }
 }

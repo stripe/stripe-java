@@ -65,9 +65,7 @@ public final class PayoutService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter()
-        .request(request, new TypeToken<StripeCollection<Payout>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<Payout>>() {}.getType());
   }
   /**
    * To send funds to your own bank account, create a new payout object. Your <a
@@ -108,8 +106,7 @@ public final class PayoutService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Payout.class);
+    return this.request(request, Payout.class);
   }
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
@@ -147,8 +144,7 @@ public final class PayoutService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Payout.class);
+    return this.request(request, Payout.class);
   }
   /**
    * Updates the specified payout by setting the values of the parameters you pass. We don’t change
@@ -186,8 +182,7 @@ public final class PayoutService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Payout.class);
+    return this.request(request, Payout.class);
   }
   /**
    * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
@@ -225,8 +220,7 @@ public final class PayoutService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Payout.class);
+    return this.request(request, Payout.class);
   }
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
@@ -284,7 +278,6 @@ public final class PayoutService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    request = request.addUsage("stripe_client");
-    return getResponseGetter().request(request, Payout.class);
+    return this.request(request, Payout.class);
   }
 }
