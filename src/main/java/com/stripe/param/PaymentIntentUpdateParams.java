@@ -8699,6 +8699,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("toyota_bank")
         TOYOTA_BANK("toyota_bank"),
 
+        @SerializedName("velobank")
+        VELOBANK("velobank"),
+
         @SerializedName("volkswagen_bank")
         VOLKSWAGEN_BANK("volkswagen_bank");
 

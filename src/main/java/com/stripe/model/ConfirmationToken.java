@@ -1137,7 +1137,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
        * etransfer_pocztowy24}, {@code getin_bank}, {@code ideabank}, {@code ing}, {@code inteligo},
        * {@code mbank_mtransfer}, {@code nest_przelew}, {@code noble_pay}, {@code pbac_z_ipko},
        * {@code plus_bank}, {@code santander_przelew24}, {@code tmobile_usbugi_bankowe}, {@code
-       * toyota_bank}, or {@code volkswagen_bank}.
+       * toyota_bank}, {@code velobank}, or {@code volkswagen_bank}.
        */
       @SerializedName("bank")
       String bank;
