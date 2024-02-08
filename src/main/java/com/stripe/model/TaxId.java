@@ -65,6 +65,10 @@ public class TaxId extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The account or customer the tax ID belongs to. */
+  @SerializedName("owner")
+  Owner owner;
+
   /**
    * Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn}, {@code ar_cuit}, {@code au_abn},
    * {@code au_arn}, {@code bg_uic}, {@code bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn},
@@ -139,6 +143,92 @@ public class TaxId extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Owner extends StripeObject {
+    /** The account being referenced when {@code type} is {@code account}. */
+    @SerializedName("account")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> account;
+
+    /** The Connect Application being referenced when {@code type} is {@code application}. */
+    @SerializedName("application")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Application> application;
+
+    /** The customer being referenced when {@code type} is {@code customer}. */
+    @SerializedName("customer")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Customer> customer;
+
+    /**
+     * Type of owner referenced.
+     *
+     * <p>One of {@code account}, {@code application}, {@code customer}, or {@code self}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code account} object. */
+    public String getAccount() {
+      return (this.account != null) ? this.account.getId() : null;
+    }
+
+    public void setAccount(String id) {
+      this.account = ApiResource.setExpandableFieldId(id, this.account);
+    }
+
+    /** Get expanded {@code account}. */
+    public Account getAccountObject() {
+      return (this.account != null) ? this.account.getExpanded() : null;
+    }
+
+    public void setAccountObject(Account expandableObject) {
+      this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code application} object. */
+    public String getApplication() {
+      return (this.application != null) ? this.application.getId() : null;
+    }
+
+    public void setApplication(String id) {
+      this.application = ApiResource.setExpandableFieldId(id, this.application);
+    }
+
+    /** Get expanded {@code application}. */
+    public Application getApplicationObject() {
+      return (this.application != null) ? this.application.getExpanded() : null;
+    }
+
+    public void setApplicationObject(Application expandableObject) {
+      this.application =
+          new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code customer} object. */
+    public String getCustomer() {
+      return (this.customer != null) ? this.customer.getId() : null;
+    }
+
+    public void setCustomer(String id) {
+      this.customer = ApiResource.setExpandableFieldId(id, this.customer);
+    }
+
+    /** Get expanded {@code customer}. */
+    public Customer getCustomerObject() {
+      return (this.customer != null) ? this.customer.getExpanded() : null;
+    }
+
+    public void setCustomerObject(Customer expandableObject) {
+      this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Verification extends StripeObject {
     /**
      * Verification status, one of {@code pending}, {@code verified}, {@code unverified}, or {@code
@@ -160,6 +250,7 @@ public class TaxId extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(owner, responseGetter);
     trySetResponseGetter(verification, responseGetter);
   }
 }

@@ -4411,6 +4411,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("toyota_bank")
         TOYOTA_BANK("toyota_bank"),
 
+        @SerializedName("velobank")
+        VELOBANK("velobank"),
+
         @SerializedName("volkswagen_bank")
         VOLKSWAGEN_BANK("volkswagen_bank");
 
@@ -7987,9 +7990,35 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Blik(String code, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Blik(
+          String code,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.code = code;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -8001,10 +8030,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.Blik build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.Blik(
-              this.code, this.extraParams);
+              this.code, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -8042,6 +8073,69 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.Blik.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
         }
       }
     }
@@ -8326,6 +8420,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       RequestThreeDSecure requestThreeDSecure;
 
       /**
+       * When enabled, using a card that is attached to a customer will require the CVC to be
+       * provided again (i.e. using the cvc_token parameter).
+       */
+      @SerializedName("require_cvc_recollection")
+      Boolean requireCvcRecollection;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>Providing this parameter will <a
@@ -8387,6 +8488,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           RequestMulticapture requestMulticapture,
           RequestOvercapture requestOvercapture,
           RequestThreeDSecure requestThreeDSecure,
+          Boolean requireCvcRecollection,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
           Object statementDescriptorSuffixKanji,
@@ -8403,6 +8505,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.requestMulticapture = requestMulticapture;
         this.requestOvercapture = requestOvercapture;
         this.requestThreeDSecure = requestThreeDSecure;
+        this.requireCvcRecollection = requireCvcRecollection;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
@@ -8438,6 +8541,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        private Boolean requireCvcRecollection;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private Object statementDescriptorSuffixKana;
@@ -8461,6 +8566,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.requestMulticapture,
               this.requestOvercapture,
               this.requestThreeDSecure,
+              this.requireCvcRecollection,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji,
@@ -8633,6 +8739,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestThreeDSecure
                 requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
+          return this;
+        }
+
+        /**
+         * When enabled, using a card that is attached to a customer will require the CVC to be
+         * provided again (i.e. using the cvc_token parameter).
+         */
+        public Builder setRequireCvcRecollection(Boolean requireCvcRecollection) {
+          this.requireCvcRecollection = requireCvcRecollection;
           return this;
         }
 
