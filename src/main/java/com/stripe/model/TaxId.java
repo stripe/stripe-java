@@ -2,7 +2,14 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class TaxId extends StripeObject implements HasId {
+public class TaxId extends ApiResource implements HasId {
   /** Two-letter ISO code representing the country of the tax ID. */
   @SerializedName("country")
   String country;
@@ -104,6 +111,33 @@ public class TaxId extends StripeObject implements HasId {
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/tax_ids/%s",
+            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, TaxId.class);
   }
 
   @Getter
@@ -210,5 +244,13 @@ public class TaxId extends StripeObject implements HasId {
     /** Verified name. */
     @SerializedName("verified_name")
     String verifiedName;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(owner, responseGetter);
+    trySetResponseGetter(verification, responseGetter);
   }
 }

@@ -2,7 +2,15 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.CustomerBalanceTransactionUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +30,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CustomerBalanceTransaction extends StripeObject implements HasId {
+public class CustomerBalanceTransaction extends ApiResource
+    implements HasId, MetadataStore<CustomerBalanceTransaction> {
   /**
    * The amount of the transaction. A negative value is a credit for the customer's balance, and a
    * positive value is a debit to the customer's {@code balance}.
@@ -88,6 +97,7 @@ public class CustomerBalanceTransaction extends StripeObject implements HasId {
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -165,5 +175,71 @@ public class CustomerBalanceTransaction extends StripeObject implements HasId {
 
   public void setInvoiceObject(Invoice expandableObject) {
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  @Override
+  public CustomerBalanceTransaction update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  @Override
+  public CustomerBalanceTransaction update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/balance_transactions/%s",
+            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  public CustomerBalanceTransaction update(CustomerBalanceTransactionUpdateParams params)
+      throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  public CustomerBalanceTransaction update(
+      CustomerBalanceTransactionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/balance_transactions/%s",
+            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(creditNote, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(invoice, responseGetter);
   }
 }

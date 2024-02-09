@@ -2,7 +2,15 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.FeeRefundUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,7 +28,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class FeeRefund extends StripeObject implements BalanceTransactionSource {
+public class FeeRefund extends ApiResource
+    implements MetadataStore<FeeRefund>, BalanceTransactionSource {
   /** Amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
@@ -58,6 +67,7 @@ public class FeeRefund extends StripeObject implements BalanceTransactionSource 
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -104,5 +114,76 @@ public class FeeRefund extends StripeObject implements BalanceTransactionSource 
 
   public void setFeeObject(ApplicationFee expandableObject) {
     this.fee = new ExpandableField<ApplicationFee>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  @Override
+  public FeeRefund update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  @Override
+  public FeeRefund update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/application_fees/%s/refunds/%s",
+            ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(FeeRefundUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(FeeRefundUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/application_fees/%s/refunds/%s",
+            ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(balanceTransaction, responseGetter);
+    trySetResponseGetter(fee, responseGetter);
   }
 }

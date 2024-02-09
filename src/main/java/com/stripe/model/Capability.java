@@ -2,8 +2,17 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.CapabilityUpdateParams;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Capability extends StripeObject implements HasId {
+public class Capability extends ApiResource implements HasId {
   /** The account for which the capability enables functionality. */
   @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
@@ -74,6 +83,60 @@ public class Capability extends StripeObject implements HasId {
 
   public void setAccountObject(Account expandableObject) {
     this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/capabilities/%s",
+            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Capability.class);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(CapabilityUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(CapabilityUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/capabilities/%s",
+            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Capability.class);
   }
 
   @Getter
@@ -407,5 +470,13 @@ public class Capability extends StripeObject implements HasId {
       @SerializedName("requirement")
       String requirement;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(account, responseGetter);
+    trySetResponseGetter(futureRequirements, responseGetter);
+    trySetResponseGetter(requirements, responseGetter);
   }
 }
