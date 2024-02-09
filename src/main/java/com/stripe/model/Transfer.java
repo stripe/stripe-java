@@ -14,7 +14,6 @@ import com.stripe.param.TransferCreateParams;
 import com.stripe.param.TransferListParams;
 import com.stripe.param.TransferRetrieveParams;
 import com.stripe.param.TransferUpdateParams;
-import com.stripe.param.TransferUpdateTransferReversalParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -434,70 +433,6 @@ public class Transfer extends ApiResource
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Transfer.class);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  public TransferReversal updateTransferReversal(Map<String, Object> params)
-      throws StripeException {
-    return updateTransferReversal(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  public TransferReversal updateTransferReversal(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, TransferReversal.class);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  public TransferReversal updateTransferReversal(TransferUpdateTransferReversalParams params)
-      throws StripeException {
-    return updateTransferReversal(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  public TransferReversal updateTransferReversal(
-      TransferUpdateTransferReversalParams params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, TransferReversal.class);
   }
 
   @Override
