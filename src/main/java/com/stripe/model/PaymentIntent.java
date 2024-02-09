@@ -803,9 +803,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm() throws StripeException {
     return confirm((Map<String, Object>) null, (RequestOptions) null);
@@ -829,9 +827,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(RequestOptions options) throws StripeException {
     return confirm((Map<String, Object>) null, options);
@@ -855,9 +851,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(Map<String, Object> params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -881,9 +875,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -913,9 +905,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(PaymentIntentConfirmParams params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -939,9 +929,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(PaymentIntentConfirmParams params, RequestOptions options)
       throws StripeException {
