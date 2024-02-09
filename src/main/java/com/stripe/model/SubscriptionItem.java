@@ -15,7 +15,6 @@ import com.stripe.param.SubscriptionItemDeleteParams;
 import com.stripe.param.SubscriptionItemListParams;
 import com.stripe.param.SubscriptionItemRetrieveParams;
 import com.stripe.param.SubscriptionItemUpdateParams;
-import com.stripe.param.SubscriptionItemUsageRecordSummariesParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -166,6 +165,130 @@ public class SubscriptionItem extends ApiResource
   }
 
   /**
+   * Creates a usage record for a specified subscription item and date, and fills it with a
+   * quantity.
+   *
+   * <p>Usage records provide {@code quantity} information that Stripe uses to track how much a
+   * customer is using your service. With usage information and the pricing model set up by the <a
+   * href="https://stripe.com/docs/billing/subscriptions/metered-billing">metered billing</a> plan,
+   * Stripe helps you send accurate invoices to your customers.
+   *
+   * <p>The default calculation for usage is to add up all the {@code quantity} values of the usage
+   * records within a billing period. You can change this default behavior with the billing plan’s
+   * {@code aggregate_usage} <a
+   * href="https://stripe.com/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When
+   * there is more than one usage record with the same timestamp, Stripe adds the {@code quantity}
+   * values together. In most cases, this is the desired resolution, however, you can change this
+   * behavior with the {@code action} parameter.
+   *
+   * <p>The default pricing model for metered billing is <a
+   * href="https://stripe.com/docs/api/plans/object#plan_object-billing_scheme">per-unit
+   * pricing</a>. For finer granularity, you can configure metered billing to have a <a
+   * href="https://stripe.com/docs/billing/subscriptions/tiers">tiered pricing</a> model.
+   */
+  public UsageRecord create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a usage record for a specified subscription item and date, and fills it with a
+   * quantity.
+   *
+   * <p>Usage records provide {@code quantity} information that Stripe uses to track how much a
+   * customer is using your service. With usage information and the pricing model set up by the <a
+   * href="https://stripe.com/docs/billing/subscriptions/metered-billing">metered billing</a> plan,
+   * Stripe helps you send accurate invoices to your customers.
+   *
+   * <p>The default calculation for usage is to add up all the {@code quantity} values of the usage
+   * records within a billing period. You can change this default behavior with the billing plan’s
+   * {@code aggregate_usage} <a
+   * href="https://stripe.com/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When
+   * there is more than one usage record with the same timestamp, Stripe adds the {@code quantity}
+   * values together. In most cases, this is the desired resolution, however, you can change this
+   * behavior with the {@code action} parameter.
+   *
+   * <p>The default pricing model for metered billing is <a
+   * href="https://stripe.com/docs/api/plans/object#plan_object-billing_scheme">per-unit
+   * pricing</a>. For finer granularity, you can configure metered billing to have a <a
+   * href="https://stripe.com/docs/billing/subscriptions/tiers">tiered pricing</a> model.
+   */
+  public UsageRecord create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, UsageRecord.class);
+  }
+
+  /**
+   * Creates a usage record for a specified subscription item and date, and fills it with a
+   * quantity.
+   *
+   * <p>Usage records provide {@code quantity} information that Stripe uses to track how much a
+   * customer is using your service. With usage information and the pricing model set up by the <a
+   * href="https://stripe.com/docs/billing/subscriptions/metered-billing">metered billing</a> plan,
+   * Stripe helps you send accurate invoices to your customers.
+   *
+   * <p>The default calculation for usage is to add up all the {@code quantity} values of the usage
+   * records within a billing period. You can change this default behavior with the billing plan’s
+   * {@code aggregate_usage} <a
+   * href="https://stripe.com/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When
+   * there is more than one usage record with the same timestamp, Stripe adds the {@code quantity}
+   * values together. In most cases, this is the desired resolution, however, you can change this
+   * behavior with the {@code action} parameter.
+   *
+   * <p>The default pricing model for metered billing is <a
+   * href="https://stripe.com/docs/api/plans/object#plan_object-billing_scheme">per-unit
+   * pricing</a>. For finer granularity, you can configure metered billing to have a <a
+   * href="https://stripe.com/docs/billing/subscriptions/tiers">tiered pricing</a> model.
+   */
+  public UsageRecord create(SubscriptionItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a usage record for a specified subscription item and date, and fills it with a
+   * quantity.
+   *
+   * <p>Usage records provide {@code quantity} information that Stripe uses to track how much a
+   * customer is using your service. With usage information and the pricing model set up by the <a
+   * href="https://stripe.com/docs/billing/subscriptions/metered-billing">metered billing</a> plan,
+   * Stripe helps you send accurate invoices to your customers.
+   *
+   * <p>The default calculation for usage is to add up all the {@code quantity} values of the usage
+   * records within a billing period. You can change this default behavior with the billing plan’s
+   * {@code aggregate_usage} <a
+   * href="https://stripe.com/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When
+   * there is more than one usage record with the same timestamp, Stripe adds the {@code quantity}
+   * values together. In most cases, this is the desired resolution, however, you can change this
+   * behavior with the {@code action} parameter.
+   *
+   * <p>The default pricing model for metered billing is <a
+   * href="https://stripe.com/docs/api/plans/object#plan_object-billing_scheme">per-unit
+   * pricing</a>. For finer granularity, you can configure metered billing to have a <a
+   * href="https://stripe.com/docs/billing/subscriptions/tiers">tiered pricing</a> model.
+   */
+  public UsageRecord create(SubscriptionItemCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/subscription_items/%s/usage_records", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, UsageRecord.class);
+  }
+
+  /**
    * Deletes an item from the subscription. Removing a subscription item from a subscription will
    * not cancel the subscription.
    */
@@ -266,6 +389,85 @@ public class SubscriptionItem extends ApiResource
     return getGlobalResponseGetter().request(request, SubscriptionItemCollection.class);
   }
 
+  /**
+   * For the specified subscription item, returns a list of summary objects. Each object in the list
+   * provides usage information that’s been summarized from multiple usage records and over a
+   * subscription billing period (e.g., 15 usage records in the month of September).
+   *
+   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
+   * represents the most current usage period that hasn’t ended yet. Since new usage records can
+   * still be added, the returned summary information for the subscription item’s ID should be seen
+   * as unstable until the subscription billing period ends.
+   */
+  public UsageRecordSummaryCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * For the specified subscription item, returns a list of summary objects. Each object in the list
+   * provides usage information that’s been summarized from multiple usage records and over a
+   * subscription billing period (e.g., 15 usage records in the month of September).
+   *
+   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
+   * represents the most current usage period that hasn’t ended yet. Since new usage records can
+   * still be added, the returned summary information for the subscription item’s ID should be seen
+   * as unstable until the subscription billing period ends.
+   */
+  public UsageRecordSummaryCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/subscription_items/%s/usage_record_summaries",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
+  }
+
+  /**
+   * For the specified subscription item, returns a list of summary objects. Each object in the list
+   * provides usage information that’s been summarized from multiple usage records and over a
+   * subscription billing period (e.g., 15 usage records in the month of September).
+   *
+   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
+   * represents the most current usage period that hasn’t ended yet. Since new usage records can
+   * still be added, the returned summary information for the subscription item’s ID should be seen
+   * as unstable until the subscription billing period ends.
+   */
+  public UsageRecordSummaryCollection list(SubscriptionItemListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * For the specified subscription item, returns a list of summary objects. Each object in the list
+   * provides usage information that’s been summarized from multiple usage records and over a
+   * subscription billing period (e.g., 15 usage records in the month of September).
+   *
+   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
+   * represents the most current usage period that hasn’t ended yet. Since new usage records can
+   * still be added, the returned summary information for the subscription item’s ID should be seen
+   * as unstable until the subscription billing period ends.
+   */
+  public UsageRecordSummaryCollection list(
+      SubscriptionItemListParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/subscription_items/%s/usage_record_summaries",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
+  }
+
   /** Retrieves the subscription item with the given ID. */
   public static SubscriptionItem retrieve(String item) throws StripeException {
     return retrieve(item, (Map<String, Object>) null, (RequestOptions) null);
@@ -340,101 +542,6 @@ public class SubscriptionItem extends ApiResource
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, SubscriptionItem.class);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries() throws StripeException {
-    return usageRecordSummaries((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(Map<String, Object> params)
-      throws StripeException {
-    return usageRecordSummaries(params, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/subscription_items/%s/usage_record_summaries",
-            ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      SubscriptionItemUsageRecordSummariesParams params) throws StripeException {
-    return usageRecordSummaries(params, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      SubscriptionItemUsageRecordSummariesParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/subscription_items/%s/usage_record_summaries",
-            ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
   }
 
   @Getter

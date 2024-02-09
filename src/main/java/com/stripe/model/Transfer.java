@@ -435,6 +435,70 @@ public class Transfer extends ApiResource
     return getResponseGetter().request(request, Transfer.class);
   }
 
+  /**
+   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata and description as arguments.
+   */
+  @Override
+  public TransferReversal update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata and description as arguments.
+   */
+  @Override
+  public TransferReversal update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/transfers/%s/reversals/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversal.class);
+  }
+
+  /**
+   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata and description as arguments.
+   */
+  public TransferReversal update(TransferUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata and description as arguments.
+   */
+  public TransferReversal update(TransferUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/transfers/%s/reversals/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversal.class);
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);

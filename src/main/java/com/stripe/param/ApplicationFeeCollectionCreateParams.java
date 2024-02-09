@@ -10,24 +10,17 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
+public class ApplicationFeeCollectionCreateParams extends ApiRequestParams {
   /**
-   * When set to true, or if this is the first external account added in this currency, this account
-   * becomes the default external account for its currency.
+   * A positive integer, in <em>cents (or local equivalent)</em>, representing how much of this fee
+   * to refund. Can refund only up to the remaining unrefunded amount of the fee.
    */
-  @SerializedName("default_for_currency")
-  Boolean defaultForCurrency;
+  @SerializedName("amount")
+  Long amount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
-
-  /**
-   * <strong>Required.</strong> Please refer to full <a
-   * href="https://stripe.com/docs/api">documentation</a> instead.
-   */
-  @SerializedName("external_account")
-  String externalAccount;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -47,15 +40,13 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  private ExternalAccountCollectionCreateParams(
-      Boolean defaultForCurrency,
+  private ApplicationFeeCollectionCreateParams(
+      Long amount,
       List<String> expand,
-      String externalAccount,
       Map<String, Object> extraParams,
       Map<String, String> metadata) {
-    this.defaultForCurrency = defaultForCurrency;
+    this.amount = amount;
     this.expand = expand;
-    this.externalAccount = externalAccount;
     this.extraParams = extraParams;
     this.metadata = metadata;
   }
@@ -65,39 +56,33 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Boolean defaultForCurrency;
+    private Long amount;
 
     private List<String> expand;
-
-    private String externalAccount;
 
     private Map<String, Object> extraParams;
 
     private Map<String, String> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public ExternalAccountCollectionCreateParams build() {
-      return new ExternalAccountCollectionCreateParams(
-          this.defaultForCurrency,
-          this.expand,
-          this.externalAccount,
-          this.extraParams,
-          this.metadata);
+    public ApplicationFeeCollectionCreateParams build() {
+      return new ApplicationFeeCollectionCreateParams(
+          this.amount, this.expand, this.extraParams, this.metadata);
     }
 
     /**
-     * When set to true, or if this is the first external account added in this currency, this
-     * account becomes the default external account for its currency.
+     * A positive integer, in <em>cents (or local equivalent)</em>, representing how much of this
+     * fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
      */
-    public Builder setDefaultForCurrency(Boolean defaultForCurrency) {
-      this.defaultForCurrency = defaultForCurrency;
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ExternalAccountCollectionCreateParams#expand} for the field documentation.
+     * ApplicationFeeCollectionCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -110,7 +95,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ExternalAccountCollectionCreateParams#expand} for the field documentation.
+     * ApplicationFeeCollectionCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -121,18 +106,9 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
-     */
-    public Builder setExternalAccount(String externalAccount) {
-      this.externalAccount = externalAccount;
-      return this;
-    }
-
-    /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ExternalAccountCollectionCreateParams#extraParams} for the field documentation.
+     * ApplicationFeeCollectionCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -145,7 +121,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ExternalAccountCollectionCreateParams#extraParams} for the field documentation.
+     * See {@link ApplicationFeeCollectionCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -158,7 +134,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ExternalAccountCollectionCreateParams#metadata} for the field documentation.
+     * ApplicationFeeCollectionCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -171,7 +147,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ExternalAccountCollectionCreateParams#metadata} for the field documentation.
+     * See {@link ApplicationFeeCollectionCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {

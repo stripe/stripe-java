@@ -2,15 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
-import com.stripe.net.ApiRequest;
-import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
-import com.stripe.net.BaseAddress;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.PersonUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Person extends ApiResource implements HasId, MetadataStore<Person> {
+public class Person extends StripeObject implements HasId {
   /** The account the person is associated with. */
   @SerializedName("account")
   String account;
@@ -138,7 +130,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
-  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -190,95 +181,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   @SerializedName("verification")
   Verification verification;
-
-  /**
-   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the {@code
-   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
-   * delete the only verified {@code executive} on file.
-   */
-  public Person delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the {@code
-   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
-   * delete the only verified {@code executive} on file.
-   */
-  public Person delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the {@code
-   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
-   * delete the only verified {@code executive} on file.
-   */
-  public Person delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /**
-   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the {@code
-   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
-   * delete the only verified {@code executive} on file.
-   */
-  public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, Person.class);
-  }
-
-  /** Updates an existing person. */
-  @Override
-  public Person update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates an existing person. */
-  @Override
-  public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, Person.class);
-  }
-
-  /** Updates an existing person. */
-  public Person update(PersonUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates an existing person. */
-  public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, Person.class);
-  }
 
   @Getter
   @Setter
@@ -931,20 +833,5 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
         this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(additionalTosAcceptances, responseGetter);
-    trySetResponseGetter(address, responseGetter);
-    trySetResponseGetter(addressKana, responseGetter);
-    trySetResponseGetter(addressKanji, responseGetter);
-    trySetResponseGetter(dob, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
-    trySetResponseGetter(registeredAddress, responseGetter);
-    trySetResponseGetter(relationship, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
-    trySetResponseGetter(verification, responseGetter);
   }
 }

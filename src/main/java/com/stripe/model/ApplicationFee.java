@@ -12,6 +12,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.ApplicationFeeListParams;
 import com.stripe.param.ApplicationFeeRetrieveParams;
+import com.stripe.param.ApplicationFeeUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -298,6 +299,68 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, ApplicationFee.class);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(String fee, Map<String, Object> params) throws StripeException {
+    return update(fee, params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(String fee, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/application_fees/%s/refunds/%s",
+            ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(String fee, ApplicationFeeUpdateParams params) throws StripeException {
+    return update(fee, params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(String fee, ApplicationFeeUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/application_fees/%s/refunds/%s",
+            ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefund.class);
   }
 
   @Override

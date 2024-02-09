@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CustomerCashBalanceTransactionCollectionRetrieveParams extends ApiRequestParams {
+public class AccountCollectionListParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,8 +24,7 @@ public class CustomerCashBalanceTransactionCollectionRetrieveParams extends ApiR
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private CustomerCashBalanceTransactionCollectionRetrieveParams(
-      List<String> expand, Map<String, Object> extraParams) {
+  private AccountCollectionListParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -40,15 +39,14 @@ public class CustomerCashBalanceTransactionCollectionRetrieveParams extends ApiR
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerCashBalanceTransactionCollectionRetrieveParams build() {
-      return new CustomerCashBalanceTransactionCollectionRetrieveParams(
-          this.expand, this.extraParams);
+    public AccountCollectionListParams build() {
+      return new AccountCollectionListParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCashBalanceTransactionCollectionRetrieveParams#expand} for the field documentation.
+     * AccountCollectionListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -61,7 +59,7 @@ public class CustomerCashBalanceTransactionCollectionRetrieveParams extends ApiR
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCashBalanceTransactionCollectionRetrieveParams#expand} for the field documentation.
+     * AccountCollectionListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -74,8 +72,7 @@ public class CustomerCashBalanceTransactionCollectionRetrieveParams extends ApiR
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerCashBalanceTransactionCollectionRetrieveParams#extraParams} for the field
-     * documentation.
+     * AccountCollectionListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -88,8 +85,7 @@ public class CustomerCashBalanceTransactionCollectionRetrieveParams extends ApiR
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerCashBalanceTransactionCollectionRetrieveParams#extraParams} for the field
-     * documentation.
+     * See {@link AccountCollectionListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

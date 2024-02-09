@@ -11,9 +11,9 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.CustomerBalanceTransactionsParams;
 import com.stripe.param.CustomerCreateFundingInstructionsParams;
 import com.stripe.param.CustomerCreateParams;
+import com.stripe.param.CustomerDeleteParams;
 import com.stripe.param.CustomerFundCashBalanceParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerListPaymentMethodsParams;
@@ -255,68 +255,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
-    return balanceTransactions((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
-      throws StripeException {
-    return balanceTransactions(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, CustomerBalanceTransactionCollection.class);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(
-      CustomerBalanceTransactionsParams params) throws StripeException {
-    return balanceTransactions(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(
-      CustomerBalanceTransactionsParams params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, CustomerBalanceTransactionCollection.class);
-  }
-
   /** Creates a new customer object. */
   public static Customer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -451,6 +389,85 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Customer.class);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public PaymentSource delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public PaymentSource delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public PaymentSource delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public PaymentSource delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/sources/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public PaymentSource delete(CustomerDeleteParams params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public PaymentSource delete(CustomerDeleteParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/sources/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.DELETE,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/tax_ids/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, TaxId.class);
   }
 
   /** Removes the currently applied discount on a customer. */
@@ -601,6 +618,44 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, Customer.class);
+  }
+
+  /** Retrieves a customer’s cash balance. */
+  public static CashBalance retrieve(String customer) throws StripeException {
+    return retrieve(customer, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a customer’s cash balance. */
+  public static CashBalance retrieve(String customer, RequestOptions options)
+      throws StripeException {
+    return retrieve(customer, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a customer’s cash balance. */
+  public static CashBalance retrieve(
+      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CashBalance.class);
+  }
+
+  /** Retrieves a customer’s cash balance. */
+  public static CashBalance retrieve(
+      String customer, CustomerRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, CashBalance.class);
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
@@ -806,6 +861,148 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Customer.class);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  public CustomerBalanceTransaction update(String transaction, Map<String, Object> params)
+      throws StripeException {
+    return update(transaction, params, (RequestOptions) null);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  public CustomerBalanceTransaction update(
+      String transaction, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/balance_transactions/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(transaction));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  public CustomerBalanceTransaction update(String transaction, CustomerUpdateParams params)
+      throws StripeException {
+    return update(transaction, params, (RequestOptions) null);
+  }
+
+  /**
+   * Most credit balance transaction fields are immutable, but you may update its {@code
+   * description} and {@code metadata}.
+   */
+  public CustomerBalanceTransaction update(
+      String transaction, CustomerUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/balance_transactions/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(transaction));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransaction.class);
+  }
+
+  /** Update a specified source for a given customer. */
+  @Override
+  public PaymentSource update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Update a specified source for a given customer. */
+  @Override
+  public PaymentSource update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/sources/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
+  }
+
+  /** Update a specified source for a given customer. */
+  public PaymentSource update(CustomerUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Update a specified source for a given customer. */
+  public PaymentSource update(CustomerUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/sources/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSource.class);
+  }
+
+  /** Changes the settings on a customer’s cash balance. */
+  @Override
+  public CashBalance update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Changes the settings on a customer’s cash balance. */
+  @Override
+  public CashBalance update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CashBalance.class);
+  }
+
+  /** Changes the settings on a customer’s cash balance. */
+  public CashBalance update(CustomerUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Changes the settings on a customer’s cash balance. */
+  public CashBalance update(CustomerUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CashBalance.class);
   }
 
   @Getter

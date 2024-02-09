@@ -2,15 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
-import com.stripe.net.ApiRequest;
-import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
-import com.stripe.net.BaseAddress;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.TransferReversalUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,8 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class TransferReversal extends ApiResource
-    implements MetadataStore<TransferReversal>, BalanceTransactionSource {
+public class TransferReversal extends StripeObject implements BalanceTransactionSource {
   /** Amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
@@ -74,7 +65,6 @@ public class TransferReversal extends ApiResource
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
-  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -173,78 +163,5 @@ public class TransferReversal extends ApiResource
 
   public void setTransferObject(Transfer expandableObject) {
     this.transfer = new ExpandableField<Transfer>(expandableObject.getId(), expandableObject);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  @Override
-  public TransferReversal update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  @Override
-  public TransferReversal update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(this.getTransfer()), ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, TransferReversal.class);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  public TransferReversal update(TransferReversalUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
-   * not provided will be left unchanged.
-   *
-   * <p>This request only accepts metadata and description as arguments.
-   */
-  public TransferReversal update(TransferReversalUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(this.getTransfer()), ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, TransferReversal.class);
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(balanceTransaction, responseGetter);
-    trySetResponseGetter(destinationPaymentRefund, responseGetter);
-    trySetResponseGetter(sourceRefund, responseGetter);
-    trySetResponseGetter(transfer, responseGetter);
   }
 }

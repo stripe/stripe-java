@@ -10,10 +10,8 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.AccountCapabilitiesParams;
 import com.stripe.param.AccountCreateParams;
 import com.stripe.param.AccountListParams;
-import com.stripe.param.AccountPersonsParams;
 import com.stripe.param.AccountRejectParams;
 import com.stripe.param.AccountRetrieveParams;
 import com.stripe.param.AccountUpdateParams;
@@ -170,65 +168,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   String type;
 
   /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities() throws StripeException {
-    return capabilities((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(Map<String, Object> params) throws StripeException {
-    return capabilities(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, CapabilityCollection.class);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(AccountCapabilitiesParams params)
-      throws StripeException {
-    return capabilities(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(AccountCapabilitiesParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, CapabilityCollection.class);
-  }
-
-  /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
@@ -301,6 +240,68 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
+   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   *
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
+   */
+  public LoginLink create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   *
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
+   */
+  public LoginLink create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, LoginLink.class);
+  }
+
+  /**
+   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   *
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
+   */
+  public LoginLink create(AccountCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   *
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
+   */
+  public LoginLink create(AccountCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, LoginLink.class);
+  }
+
+  /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
    * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
@@ -364,6 +365,82 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     return getResponseGetter().request(request, Account.class);
   }
 
+  /** Delete a specified external account for a given account. */
+  public ExternalAccount delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Delete a specified external account for a given account. */
+  public ExternalAccount delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Delete a specified external account for a given account. */
+  public ExternalAccount delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Delete a specified external account for a given account. */
+  public ExternalAccount delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/external_accounts/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
+  }
+
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
+   */
+  public Person delete(String person) throws StripeException {
+    return delete(person, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
+   */
+  public Person delete(String person, RequestOptions options) throws StripeException {
+    return delete(person, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
+   */
+  public Person delete(String person, Map<String, Object> params) throws StripeException {
+    return delete(person, params, (RequestOptions) null);
+  }
+
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
+   */
+  public Person delete(String person, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/persons/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(person));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Person.class);
+  }
+
   /**
    * Returns a list of accounts connected to your platform via <a
    * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
@@ -414,62 +491,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, AccountCollection.class);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons() throws StripeException {
-    return persons((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(Map<String, Object> params) throws StripeException {
-    return persons(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, PersonCollection.class);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(AccountPersonsParams params) throws StripeException {
-    return persons(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, PersonCollection.class);
   }
 
   /**
@@ -692,6 +713,174 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Account.class);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(String capability, Map<String, Object> params) throws StripeException {
+    return update(capability, params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(String capability, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/capabilities/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(capability));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Capability.class);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(String capability, AccountUpdateParams params) throws StripeException {
+    return update(capability, params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates an existing Account Capability. Request or remove a capability by updating its {@code
+   * requested} parameter.
+   */
+  public Capability update(String capability, AccountUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/capabilities/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(capability));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Capability.class);
+  }
+
+  /**
+   * Updates the metadata, account holder name, account holder type of a bank account belonging to a
+   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
+   * sets it as the default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   */
+  @Override
+  public ExternalAccount update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the metadata, account holder name, account holder type of a bank account belonging to a
+   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
+   * sets it as the default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   */
+  @Override
+  public ExternalAccount update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/external_accounts/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
+  }
+
+  /**
+   * Updates the metadata, account holder name, account holder type of a bank account belonging to a
+   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
+   * sets it as the default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   */
+  public ExternalAccount update(AccountUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the metadata, account holder name, account holder type of a bank account belonging to a
+   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
+   * sets it as the default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   */
+  public ExternalAccount update(AccountUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/external_accounts/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccount.class);
+  }
+
+  /** Updates an existing person. */
+  public Person update(String person, Map<String, Object> params) throws StripeException {
+    return update(person, params, (RequestOptions) null);
+  }
+
+  /** Updates an existing person. */
+  public Person update(String person, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/persons/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(person));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Person.class);
+  }
+
+  /** Updates an existing person. */
+  public Person update(String person, AccountUpdateParams params) throws StripeException {
+    return update(person, params, (RequestOptions) null);
+  }
+
+  /** Updates an existing person. */
+  public Person update(String person, AccountUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/accounts/%s/persons/%s",
+            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(person));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Person.class);
   }
 
   @Getter
