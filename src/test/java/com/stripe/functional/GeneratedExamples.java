@@ -84,17 +84,13 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testAccountsCapabilitiesGet2() throws StripeException {
-    Account resource = Account.retrieve("acct_xxxxxxxxxxxxx", "card_payments");
-
-    AccountRetrieveParams params = AccountRetrieveParams.builder().build();
-
-    Capability capability = resource.retrieve(params);
+    Capability capability = Account.retrieve("acct_xxxxxxxxxxxxx", "card_payments");
     assertNotNull(capability);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v1/accounts/acct_xxxxxxxxxxxxx/capabilities/card_payments",
-        params.toMap(),
+        null,
         null);
   }
 
@@ -529,17 +525,13 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testAccountsPersonsGet2() throws StripeException {
-    Account resource = Account.retrieve("acct_xxxxxxxxxxxxx", "person_xxxxxxxxxxxxx");
-
-    AccountRetrieveParams params = AccountRetrieveParams.builder().build();
-
-    Person person = resource.retrieve(params);
+    Person person = Account.retrieve("acct_xxxxxxxxxxxxx", "person_xxxxxxxxxxxxx");
     assertNotNull(person);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v1/accounts/acct_xxxxxxxxxxxxx/persons/person_xxxxxxxxxxxxx",
-        params.toMap(),
+        null,
         null);
   }
 
@@ -853,17 +845,13 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testApplicationFeesRefundsGet2() throws StripeException {
-    ApplicationFee resource = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx", "fr_xxxxxxxxxxxxx");
-
-    ApplicationFeeRetrieveParams params = ApplicationFeeRetrieveParams.builder().build();
-
-    FeeRefund feeRefund = resource.retrieve(params);
+    FeeRefund feeRefund = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx", "fr_xxxxxxxxxxxxx");
     assertNotNull(feeRefund);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v1/application_fees/fee_xxxxxxxxxxxxx/refunds/fr_xxxxxxxxxxxxx",
-        params.toMap(),
+        null,
         null);
   }
 
@@ -2460,17 +2448,14 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testCustomersBalanceTransactionsGet2() throws StripeException {
-    Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx", "cbtxn_xxxxxxxxxxxxx");
-
-    CustomerRetrieveParams params = CustomerRetrieveParams.builder().build();
-
-    CustomerBalanceTransaction customerBalanceTransaction = resource.retrieve(params);
+    CustomerBalanceTransaction customerBalanceTransaction =
+        Customer.retrieve("cus_xxxxxxxxxxxxx", "cbtxn_xxxxxxxxxxxxx");
     assertNotNull(customerBalanceTransaction);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v1/customers/cus_xxxxxxxxxxxxx/balance_transactions/cbtxn_xxxxxxxxxxxxx",
-        params.toMap(),
+        null,
         null);
   }
 
@@ -13873,17 +13858,13 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testTransfersReversalsGet2() throws StripeException {
-    Transfer resource = Transfer.retrieve("tr_xxxxxxxxxxxxx", "trr_xxxxxxxxxxxxx");
-
-    TransferRetrieveParams params = TransferRetrieveParams.builder().build();
-
-    TransferReversal transferReversal = resource.retrieve(params);
+    TransferReversal transferReversal = Transfer.retrieve("tr_xxxxxxxxxxxxx", "trr_xxxxxxxxxxxxx");
     assertNotNull(transferReversal);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v1/transfers/tr_xxxxxxxxxxxxx/reversals/trr_xxxxxxxxxxxxx",
-        params.toMap(),
+        null,
         null);
   }
 

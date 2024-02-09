@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CreditNoteCreateParams;
+import com.stripe.param.CreditNoteCreditNoteLineItemsParams;
 import com.stripe.param.CreditNoteListParams;
 import com.stripe.param.CreditNotePreviewParams;
 import com.stripe.param.CreditNoteRetrieveParams;
@@ -415,6 +416,60 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, CreditNote.class);
+  }
+
+  /**
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of line items.
+   */
+  public CreditNoteLineItemCollection creditNoteLineItems(Map<String, Object> params)
+      throws StripeException {
+    return creditNoteLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of line items.
+   */
+  public CreditNoteLineItemCollection creditNoteLineItems(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/credit_notes/%s/lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CreditNoteLineItemCollection.class);
+  }
+
+  /**
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of line items.
+   */
+  public CreditNoteLineItemCollection creditNoteLineItems(
+      CreditNoteCreditNoteLineItemsParams params) throws StripeException {
+    return creditNoteLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of line items.
+   */
+  public CreditNoteLineItemCollection creditNoteLineItems(
+      CreditNoteCreditNoteLineItemsParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/credit_notes/%s/lines", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CreditNoteLineItemCollection.class);
   }
 
   /** Returns a list of credit notes. */

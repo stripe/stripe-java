@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CustomerCollectionCustomerCashBalanceTransactionsParams extends ApiRequestParams {
+public class CustomerPaymentSourcesParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -40,6 +40,10 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
   @SerializedName("limit")
   Long limit;
 
+  /** Filter sources according to a particular object type. */
+  @SerializedName("object")
+  String object;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -49,16 +53,18 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
   @SerializedName("starting_after")
   String startingAfter;
 
-  private CustomerCollectionCustomerCashBalanceTransactionsParams(
+  private CustomerPaymentSourcesParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String object,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.object = object;
     this.startingAfter = startingAfter;
   }
 
@@ -75,12 +81,19 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
 
     private Long limit;
 
+    private String object;
+
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerCollectionCustomerCashBalanceTransactionsParams build() {
-      return new CustomerCollectionCustomerCashBalanceTransactionsParams(
-          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
+    public CustomerPaymentSourcesParams build() {
+      return new CustomerPaymentSourcesParams(
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.object,
+          this.startingAfter);
     }
 
     /**
@@ -97,7 +110,7 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCollectionCustomerCashBalanceTransactionsParams#expand} for the field documentation.
+     * CustomerPaymentSourcesParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -110,7 +123,7 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCollectionCustomerCashBalanceTransactionsParams#expand} for the field documentation.
+     * CustomerPaymentSourcesParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -123,8 +136,7 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerCollectionCustomerCashBalanceTransactionsParams#extraParams} for the field
-     * documentation.
+     * CustomerPaymentSourcesParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -137,8 +149,7 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerCollectionCustomerCashBalanceTransactionsParams#extraParams} for the field
-     * documentation.
+     * See {@link CustomerPaymentSourcesParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -154,6 +165,12 @@ public class CustomerCollectionCustomerCashBalanceTransactionsParams extends Api
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /** Filter sources according to a particular object type. */
+    public Builder setObject(String object) {
+      this.object = object;
       return this;
     }
 

@@ -10,6 +10,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.ApplicationFeeFeeRefundsParams;
 import com.stripe.param.ApplicationFeeListParams;
 import com.stripe.param.ApplicationFeeRetrieveParams;
 import java.util.Map;
@@ -200,6 +201,65 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public void setOriginatingTransactionObject(Charge expandableObject) {
     this.originatingTransaction =
         new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public FeeRefundCollection feeRefunds(Map<String, Object> params) throws StripeException {
+    return feeRefunds(params, (RequestOptions) null);
+  }
+
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public FeeRefundCollection feeRefunds(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefundCollection.class);
+  }
+
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public FeeRefundCollection feeRefunds(ApplicationFeeFeeRefundsParams params)
+      throws StripeException {
+    return feeRefunds(params, (RequestOptions) null);
+  }
+
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
+   */
+  public FeeRefundCollection feeRefunds(
+      ApplicationFeeFeeRefundsParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/application_fees/%s/refunds", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, FeeRefundCollection.class);
   }
 
   /**

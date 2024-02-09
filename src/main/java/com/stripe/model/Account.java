@@ -10,8 +10,11 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.AccountCapabilitiesParams;
 import com.stripe.param.AccountCreateParams;
+import com.stripe.param.AccountExternalAccountsParams;
 import com.stripe.param.AccountListParams;
+import com.stripe.param.AccountPersonsParams;
 import com.stripe.param.AccountRejectParams;
 import com.stripe.param.AccountRetrieveParams;
 import com.stripe.param.AccountUpdateParams;
@@ -168,6 +171,57 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   String type;
 
   /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params) throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CapabilityCollection.class);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(AccountCapabilitiesParams params)
+      throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(AccountCapabilitiesParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CapabilityCollection.class);
+  }
+
+  /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
@@ -303,6 +357,46 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     return getResponseGetter().request(request, Account.class);
   }
 
+  /** List external accounts for an account. */
+  public ExternalAccountCollection externalAccounts(Map<String, Object> params)
+      throws StripeException {
+    return externalAccounts(params, (RequestOptions) null);
+  }
+
+  /** List external accounts for an account. */
+  public ExternalAccountCollection externalAccounts(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccountCollection.class);
+  }
+
+  /** List external accounts for an account. */
+  public ExternalAccountCollection externalAccounts(AccountExternalAccountsParams params)
+      throws StripeException {
+    return externalAccounts(params, (RequestOptions) null);
+  }
+
+  /** List external accounts for an account. */
+  public ExternalAccountCollection externalAccounts(
+      AccountExternalAccountsParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, ExternalAccountCollection.class);
+  }
+
   /**
    * Returns a list of accounts connected to your platform via <a
    * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
@@ -353,6 +447,110 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, AccountCollection.class);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons() throws StripeException {
+    return persons((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(Map<String, Object> params) throws StripeException {
+    return persons(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PersonCollection.class);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params) throws StripeException {
+    return persons(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, PersonCollection.class);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(Map<String, Object> params) throws StripeException {
+    return persons(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PersonCollection.class);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params) throws StripeException {
+    return persons(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, PersonCollection.class);
   }
 
   /**

@@ -13,6 +13,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
+import com.stripe.param.InvoiceInvoiceLineItemsParams;
 import com.stripe.param.InvoiceListParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
 import com.stripe.param.InvoicePayParams;
@@ -1067,6 +1068,60 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total
+   * count of line items and the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of line items.
+   */
+  public InvoiceLineItemCollection invoiceLineItems(Map<String, Object> params)
+      throws StripeException {
+    return invoiceLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total
+   * count of line items and the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of line items.
+   */
+  public InvoiceLineItemCollection invoiceLineItems(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoices/%s/lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceLineItemCollection.class);
+  }
+
+  /**
+   * When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total
+   * count of line items and the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of line items.
+   */
+  public InvoiceLineItemCollection invoiceLineItems(InvoiceInvoiceLineItemsParams params)
+      throws StripeException {
+    return invoiceLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total
+   * count of line items and the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of line items.
+   */
+  public InvoiceLineItemCollection invoiceLineItems(
+      InvoiceInvoiceLineItemsParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoices/%s/lines", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, InvoiceLineItemCollection.class);
   }
 
   /**

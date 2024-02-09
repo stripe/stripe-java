@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class AccountCollectionPersonsParams extends ApiRequestParams {
+public class AccountPersonsParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -56,7 +56,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private AccountCollectionPersonsParams(
+  private AccountPersonsParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -89,8 +89,8 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public AccountCollectionPersonsParams build() {
-      return new AccountCollectionPersonsParams(
+    public AccountPersonsParams build() {
+      return new AccountPersonsParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -113,7 +113,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountCollectionPersonsParams#expand} for the field documentation.
+     * AccountPersonsParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -126,7 +126,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountCollectionPersonsParams#expand} for the field documentation.
+     * AccountPersonsParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -139,7 +139,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountCollectionPersonsParams#extraParams} for the field documentation.
+     * AccountPersonsParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -152,7 +152,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountCollectionPersonsParams#extraParams} for the field documentation.
+     * See {@link AccountPersonsParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -175,7 +175,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
      * Filters on the list of people returned based on the person's relationship to the account's
      * company.
      */
-    public Builder setRelationship(AccountCollectionPersonsParams.Relationship relationship) {
+    public Builder setRelationship(AccountPersonsParams.Relationship relationship) {
       this.relationship = relationship;
       return this;
     }
@@ -271,8 +271,8 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
       private Boolean representative;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AccountCollectionPersonsParams.Relationship build() {
-        return new AccountCollectionPersonsParams.Relationship(
+      public AccountPersonsParams.Relationship build() {
+        return new AccountPersonsParams.Relationship(
             this.director,
             this.executive,
             this.extraParams,
@@ -302,7 +302,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AccountCollectionPersonsParams.Relationship#extraParams} for the field documentation.
+       * AccountPersonsParams.Relationship#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -315,8 +315,7 @@ public class AccountCollectionPersonsParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AccountCollectionPersonsParams.Relationship#extraParams} for the field
-       * documentation.
+       * See {@link AccountPersonsParams.Relationship#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

@@ -13,6 +13,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.TransferCreateParams;
 import com.stripe.param.TransferListParams;
 import com.stripe.param.TransferRetrieveParams;
+import com.stripe.param.TransferTransferReversalsParams;
 import com.stripe.param.TransferUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -375,6 +376,66 @@ public class Transfer extends ApiResource
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, Transfer.class);
+  }
+
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public TransferReversalCollection transferReversals(Map<String, Object> params)
+      throws StripeException {
+    return transferReversals(params, (RequestOptions) null);
+  }
+
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public TransferReversalCollection transferReversals(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/transfers/%s/reversals", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversalCollection.class);
+  }
+
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public TransferReversalCollection transferReversals(TransferTransferReversalsParams params)
+      throws StripeException {
+    return transferReversals(params, (RequestOptions) null);
+  }
+
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public TransferReversalCollection transferReversals(
+      TransferTransferReversalsParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/transfers/%s/reversals", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversalCollection.class);
   }
 
   /**

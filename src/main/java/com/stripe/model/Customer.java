@@ -13,12 +13,16 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CustomerCreateFundingInstructionsParams;
 import com.stripe.param.CustomerCreateParams;
+import com.stripe.param.CustomerCustomerBalanceTransactionsParams;
+import com.stripe.param.CustomerCustomerCashBalanceTransactionsParams;
 import com.stripe.param.CustomerFundCashBalanceParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerListPaymentMethodsParams;
+import com.stripe.param.CustomerPaymentSourcesParams;
 import com.stripe.param.CustomerRetrieveParams;
 import com.stripe.param.CustomerRetrievePaymentMethodParams;
 import com.stripe.param.CustomerSearchParams;
+import com.stripe.param.CustomerTaxIdsParams;
 import com.stripe.param.CustomerUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -354,6 +358,116 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      Map<String, Object> params) throws StripeException {
+    return customerBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransactionCollection.class);
+  }
+
+  /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      CustomerCustomerBalanceTransactionsParams params) throws StripeException {
+    return customerBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      CustomerCustomerBalanceTransactionsParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CustomerBalanceTransactionCollection.class);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection customerCashBalanceTransactions(
+      Map<String, Object> params) throws StripeException {
+    return customerCashBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection customerCashBalanceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerCashBalanceTransactionCollection.class);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection customerCashBalanceTransactions(
+      CustomerCustomerCashBalanceTransactionsParams params) throws StripeException {
+    return customerCashBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection customerCashBalanceTransactions(
+      CustomerCustomerCashBalanceTransactionsParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CustomerCashBalanceTransactionCollection.class);
+  }
+
+  /**
    * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
    * subscriptions on the customer.
    */
@@ -501,6 +615,43 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, PaymentMethodCollection.class);
+  }
+
+  /** List sources for a specified customer. */
+  public PaymentSourceCollection paymentSources(Map<String, Object> params) throws StripeException {
+    return paymentSources(params, (RequestOptions) null);
+  }
+
+  /** List sources for a specified customer. */
+  public PaymentSourceCollection paymentSources(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSourceCollection.class);
+  }
+
+  /** List sources for a specified customer. */
+  public PaymentSourceCollection paymentSources(CustomerPaymentSourcesParams params)
+      throws StripeException {
+    return paymentSources(params, (RequestOptions) null);
+  }
+
+  /** List sources for a specified customer. */
+  public PaymentSourceCollection paymentSources(
+      CustomerPaymentSourcesParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, PaymentSourceCollection.class);
   }
 
   /** Retrieves a Customer object. */
@@ -653,6 +804,42 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, CustomerSearchResult.class);
+  }
+
+  /** Returns a list of tax IDs for a customer. */
+  public TaxIdCollection taxIds(Map<String, Object> params) throws StripeException {
+    return taxIds(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of tax IDs for a customer. */
+  public TaxIdCollection taxIds(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, TaxIdCollection.class);
+  }
+
+  /** Returns a list of tax IDs for a customer. */
+  public TaxIdCollection taxIds(CustomerTaxIdsParams params) throws StripeException {
+    return taxIds(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of tax IDs for a customer. */
+  public TaxIdCollection taxIds(CustomerTaxIdsParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/customers/%s/tax_ids", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, TaxIdCollection.class);
   }
 
   /**
