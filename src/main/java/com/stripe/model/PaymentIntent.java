@@ -2129,14 +2129,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class SwishHandleRedirectOrDisplayQrCode extends StripeObject {
       /**
-       * The URL to the hosted Swish instructions page, which allows customers to view the QR code.
+       * The URL to the hosted Swish instructions page, which allows customers to view the QR code
+       * or redirect to the Swish mobile app.
        */
       @SerializedName("hosted_instructions_url")
       String hostedInstructionsUrl;
-
-      /** The url for mobile redirect based auth. */
-      @SerializedName("mobile_auth_url")
-      String mobileAuthUrl;
 
       @SerializedName("qr_code")
       QrCode qrCode;
