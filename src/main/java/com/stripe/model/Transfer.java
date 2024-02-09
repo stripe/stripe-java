@@ -14,6 +14,7 @@ import com.stripe.param.TransferCreateParams;
 import com.stripe.param.TransferListParams;
 import com.stripe.param.TransferRetrieveParams;
 import com.stripe.param.TransferUpdateParams;
+import com.stripe.param.TransferUpdateTransferReversalParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -441,9 +442,9 @@ public class Transfer extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  @Override
-  public TransferReversal update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public TransferReversal updateTransferReversal(Map<String, Object> params)
+      throws StripeException {
+    return updateTransferReversal(params, (RequestOptions) null);
   }
 
   /**
@@ -452,8 +453,7 @@ public class Transfer extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  @Override
-  public TransferReversal update(Map<String, Object> params, RequestOptions options)
+  public TransferReversal updateTransferReversal(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -471,8 +471,9 @@ public class Transfer extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  public TransferReversal update(TransferUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public TransferReversal updateTransferReversal(TransferUpdateTransferReversalParams params)
+      throws StripeException {
+    return updateTransferReversal(params, (RequestOptions) null);
   }
 
   /**
@@ -481,8 +482,8 @@ public class Transfer extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  public TransferReversal update(TransferUpdateParams params, RequestOptions options)
-      throws StripeException {
+  public TransferReversal updateTransferReversal(
+      TransferUpdateTransferReversalParams params, RequestOptions options) throws StripeException {
     String path =
         String.format(
             "/v1/transfers/%s/reversals/%s",

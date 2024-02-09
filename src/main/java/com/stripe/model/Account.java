@@ -10,11 +10,15 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.AccountCreateLoginLinkParams;
 import com.stripe.param.AccountCreateParams;
 import com.stripe.param.AccountListParams;
 import com.stripe.param.AccountRejectParams;
 import com.stripe.param.AccountRetrieveParams;
+import com.stripe.param.AccountUpdateCapabilityParams;
+import com.stripe.param.AccountUpdateExternalAccountParams;
 import com.stripe.param.AccountUpdateParams;
+import com.stripe.param.AccountUpdatePersonParams;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -246,8 +250,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
    * platform</strong>.
    */
-  public LoginLink create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public LoginLink createLoginLink(Map<String, Object> params) throws StripeException {
+    return createLoginLink(params, (RequestOptions) null);
   }
 
   /**
@@ -257,7 +261,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
    * platform</strong>.
    */
-  public LoginLink create(Map<String, Object> params, RequestOptions options)
+  public LoginLink createLoginLink(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(this.getId()));
@@ -274,8 +278,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
    * platform</strong>.
    */
-  public LoginLink create(AccountCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public LoginLink createLoginLink(AccountCreateLoginLinkParams params) throws StripeException {
+    return createLoginLink(params, (RequestOptions) null);
   }
 
   /**
@@ -285,7 +289,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
    * platform</strong>.
    */
-  public LoginLink create(AccountCreateParams params, RequestOptions options)
+  public LoginLink createLoginLink(AccountCreateLoginLinkParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(this.getId()));
@@ -366,22 +370,22 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /** Delete a specified external account for a given account. */
-  public ExternalAccount delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
+  public ExternalAccount deleteExternalAccount() throws StripeException {
+    return deleteExternalAccount((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Delete a specified external account for a given account. */
-  public ExternalAccount delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
+  public ExternalAccount deleteExternalAccount(RequestOptions options) throws StripeException {
+    return deleteExternalAccount((Map<String, Object>) null, options);
   }
 
   /** Delete a specified external account for a given account. */
-  public ExternalAccount delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
+  public ExternalAccount deleteExternalAccount(Map<String, Object> params) throws StripeException {
+    return deleteExternalAccount(params, (RequestOptions) null);
   }
 
   /** Delete a specified external account for a given account. */
-  public ExternalAccount delete(Map<String, Object> params, RequestOptions options)
+  public ExternalAccount deleteExternalAccount(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -399,8 +403,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * account_opener}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(String person) throws StripeException {
-    return delete(person, (Map<String, Object>) null, (RequestOptions) null);
+  public Person deletePerson(String person) throws StripeException {
+    return deletePerson(person, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -409,8 +413,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * account_opener}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(String person, RequestOptions options) throws StripeException {
-    return delete(person, (Map<String, Object>) null, options);
+  public Person deletePerson(String person, RequestOptions options) throws StripeException {
+    return deletePerson(person, (Map<String, Object>) null, options);
   }
 
   /**
@@ -419,8 +423,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * account_opener}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(String person, Map<String, Object> params) throws StripeException {
-    return delete(person, params, (RequestOptions) null);
+  public Person deletePerson(String person, Map<String, Object> params) throws StripeException {
+    return deletePerson(person, params, (RequestOptions) null);
   }
 
   /**
@@ -429,7 +433,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * account_opener}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(String person, Map<String, Object> params, RequestOptions options)
+  public Person deletePerson(String person, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -719,15 +723,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(String capability, Map<String, Object> params) throws StripeException {
-    return update(capability, params, (RequestOptions) null);
+  public Capability updateCapability(String capability, Map<String, Object> params)
+      throws StripeException {
+    return updateCapability(capability, params, (RequestOptions) null);
   }
 
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(String capability, Map<String, Object> params, RequestOptions options)
+  public Capability updateCapability(
+      String capability, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -743,15 +749,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(String capability, AccountUpdateParams params) throws StripeException {
-    return update(capability, params, (RequestOptions) null);
+  public Capability updateCapability(String capability, AccountUpdateCapabilityParams params)
+      throws StripeException {
+    return updateCapability(capability, params, (RequestOptions) null);
   }
 
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(String capability, AccountUpdateParams params, RequestOptions options)
+  public Capability updateCapability(
+      String capability, AccountUpdateCapabilityParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -777,9 +785,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
    */
-  @Override
-  public ExternalAccount update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public ExternalAccount updateExternalAccount(Map<String, Object> params) throws StripeException {
+    return updateExternalAccount(params, (RequestOptions) null);
   }
 
   /**
@@ -790,8 +797,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
    */
-  @Override
-  public ExternalAccount update(Map<String, Object> params, RequestOptions options)
+  public ExternalAccount updateExternalAccount(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -811,8 +817,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
    */
-  public ExternalAccount update(AccountUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public ExternalAccount updateExternalAccount(AccountUpdateExternalAccountParams params)
+      throws StripeException {
+    return updateExternalAccount(params, (RequestOptions) null);
   }
 
   /**
@@ -823,8 +830,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
    */
-  public ExternalAccount update(AccountUpdateParams params, RequestOptions options)
-      throws StripeException {
+  public ExternalAccount updateExternalAccount(
+      AccountUpdateExternalAccountParams params, RequestOptions options) throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
@@ -842,12 +849,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /** Updates an existing person. */
-  public Person update(String person, Map<String, Object> params) throws StripeException {
-    return update(person, params, (RequestOptions) null);
+  public Person updatePerson(String person, Map<String, Object> params) throws StripeException {
+    return updatePerson(person, params, (RequestOptions) null);
   }
 
   /** Updates an existing person. */
-  public Person update(String person, Map<String, Object> params, RequestOptions options)
+  public Person updatePerson(String person, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -860,12 +867,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /** Updates an existing person. */
-  public Person update(String person, AccountUpdateParams params) throws StripeException {
-    return update(person, params, (RequestOptions) null);
+  public Person updatePerson(String person, AccountUpdatePersonParams params)
+      throws StripeException {
+    return updatePerson(person, params, (RequestOptions) null);
   }
 
   /** Updates an existing person. */
-  public Person update(String person, AccountUpdateParams params, RequestOptions options)
+  public Person updatePerson(
+      String person, AccountUpdatePersonParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(

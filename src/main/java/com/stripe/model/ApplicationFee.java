@@ -12,7 +12,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.ApplicationFeeListParams;
 import com.stripe.param.ApplicationFeeRetrieveParams;
-import com.stripe.param.ApplicationFeeUpdateParams;
+import com.stripe.param.ApplicationFeeUpdateFeeRefundParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -307,8 +307,8 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(String fee, Map<String, Object> params) throws StripeException {
-    return update(fee, params, (RequestOptions) null);
+  public FeeRefund updateFeeRefund(String fee, Map<String, Object> params) throws StripeException {
+    return updateFeeRefund(fee, params, (RequestOptions) null);
   }
 
   /**
@@ -317,7 +317,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(String fee, Map<String, Object> params, RequestOptions options)
+  public FeeRefund updateFeeRefund(String fee, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -335,8 +335,9 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(String fee, ApplicationFeeUpdateParams params) throws StripeException {
-    return update(fee, params, (RequestOptions) null);
+  public FeeRefund updateFeeRefund(String fee, ApplicationFeeUpdateFeeRefundParams params)
+      throws StripeException {
+    return updateFeeRefund(fee, params, (RequestOptions) null);
   }
 
   /**
@@ -345,7 +346,8 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(String fee, ApplicationFeeUpdateParams params, RequestOptions options)
+  public FeeRefund updateFeeRefund(
+      String fee, ApplicationFeeUpdateFeeRefundParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(

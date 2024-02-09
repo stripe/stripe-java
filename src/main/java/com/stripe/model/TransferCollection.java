@@ -8,9 +8,9 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.TransferCollectionCreateParams;
-import com.stripe.param.TransferCollectionListParams;
-import com.stripe.param.TransferCollectionRetrieveParams;
+import com.stripe.param.TransferCollectionCreateTransferReversalParams;
+import com.stripe.param.TransferCollectionRetrieveTransferReversalParams;
+import com.stripe.param.TransferCollectionTransferReversalsParams;
 import java.util.Map;
 
 public class TransferCollection extends StripeCollection<Transfer> {
@@ -24,8 +24,9 @@ public class TransferCollection extends StripeCollection<Transfer> {
    * when called on an already-reversed transfer, or when trying to reverse more money than is left
    * on a transfer.
    */
-  public TransferReversal create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public TransferReversal createTransferReversal(Map<String, Object> params)
+      throws StripeException {
+    return createTransferReversal(params, (RequestOptions) null);
   }
 
   /**
@@ -38,7 +39,7 @@ public class TransferCollection extends StripeCollection<Transfer> {
    * when called on an already-reversed transfer, or when trying to reverse more money than is left
    * on a transfer.
    */
-  public TransferReversal create(Map<String, Object> params, RequestOptions options)
+  public TransferReversal createTransferReversal(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
@@ -57,8 +58,9 @@ public class TransferCollection extends StripeCollection<Transfer> {
    * when called on an already-reversed transfer, or when trying to reverse more money than is left
    * on a transfer.
    */
-  public TransferReversal create(TransferCollectionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public TransferReversal createTransferReversal(
+      TransferCollectionCreateTransferReversalParams params) throws StripeException {
+    return createTransferReversal(params, (RequestOptions) null);
   }
 
   /**
@@ -71,7 +73,8 @@ public class TransferCollection extends StripeCollection<Transfer> {
    * when called on an already-reversed transfer, or when trying to reverse more money than is left
    * on a transfer.
    */
-  public TransferReversal create(TransferCollectionCreateParams params, RequestOptions options)
+  public TransferReversal createTransferReversal(
+      TransferCollectionCreateTransferReversalParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
@@ -87,13 +90,53 @@ public class TransferCollection extends StripeCollection<Transfer> {
   }
 
   /**
-   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
-   * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
-   * parameters to page through additional reversals.
+   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
+   * but you can also retrieve details about a specific reversal stored on the transfer.
    */
-  public TransferReversalCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public TransferReversal retrieveTransferReversal(String id) throws StripeException {
+    return retrieveTransferReversal(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
+   * but you can also retrieve details about a specific reversal stored on the transfer.
+   */
+  public TransferReversal retrieveTransferReversal(String id, RequestOptions options)
+      throws StripeException {
+    return retrieveTransferReversal(id, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
+   * but you can also retrieve details about a specific reversal stored on the transfer.
+   */
+  public TransferReversal retrieveTransferReversal(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversal.class);
+  }
+
+  /**
+   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
+   * but you can also retrieve details about a specific reversal stored on the transfer.
+   */
+  public TransferReversal retrieveTransferReversal(
+      String id, TransferCollectionRetrieveTransferReversalParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, TransferReversal.class);
   }
 
   /**
@@ -102,8 +145,19 @@ public class TransferCollection extends StripeCollection<Transfer> {
    * those 10, you can use this API method and the {@code limit} and {@code starting_after}
    * parameters to page through additional reversals.
    */
-  public TransferReversalCollection list(Map<String, Object> params, RequestOptions options)
+  public TransferReversalCollection transferReversals(Map<String, Object> params)
       throws StripeException {
+    return transferReversals(params, (RequestOptions) null);
+  }
+
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
+   */
+  public TransferReversalCollection transferReversals(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
         new ApiRequest(
@@ -117,9 +171,9 @@ public class TransferCollection extends StripeCollection<Transfer> {
    * those 10, you can use this API method and the {@code limit} and {@code starting_after}
    * parameters to page through additional reversals.
    */
-  public TransferReversalCollection list(TransferCollectionListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
+  public TransferReversalCollection transferReversals(
+      TransferCollectionTransferReversalsParams params) throws StripeException {
+    return transferReversals(params, (RequestOptions) null);
   }
 
   /**
@@ -128,8 +182,9 @@ public class TransferCollection extends StripeCollection<Transfer> {
    * those 10, you can use this API method and the {@code limit} and {@code starting_after}
    * parameters to page through additional reversals.
    */
-  public TransferReversalCollection list(
-      TransferCollectionListParams params, RequestOptions options) throws StripeException {
+  public TransferReversalCollection transferReversals(
+      TransferCollectionTransferReversalsParams params, RequestOptions options)
+      throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
@@ -141,54 +196,5 @@ public class TransferCollection extends StripeCollection<Transfer> {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, TransferReversalCollection.class);
-  }
-
-  /**
-   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
-   * but you can also retrieve details about a specific reversal stored on the transfer.
-   */
-  public TransferReversal retrieve(String id) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
-   * but you can also retrieve details about a specific reversal stored on the transfer.
-   */
-  public TransferReversal retrieve(String id, RequestOptions options) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, options);
-  }
-
-  /**
-   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
-   * but you can also retrieve details about a specific reversal stored on the transfer.
-   */
-  public TransferReversal retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, TransferReversal.class);
-  }
-
-  /**
-   * By default, you can see the 10 most recent reversals stored directly on the transfer object,
-   * but you can also retrieve details about a specific reversal stored on the transfer.
-   */
-  public TransferReversal retrieve(
-      String id, TransferCollectionRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, TransferReversal.class);
   }
 }

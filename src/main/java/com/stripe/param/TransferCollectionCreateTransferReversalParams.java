@@ -11,7 +11,23 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class ApplicationFeeUpdateParams extends ApiRequestParams {
+public class TransferCollectionCreateTransferReversalParams extends ApiRequestParams {
+  /**
+   * A positive integer in cents (or local equivalent) representing how much of this transfer to
+   * reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial
+   * transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire
+   * transfer amount.
+   */
+  @SerializedName("amount")
+  Long amount;
+
+  /**
+   * An arbitrary string which you can attach to a reversal object. It is displayed alongside the
+   * reversal in the Dashboard. This will be unset if you POST an empty value.
+   */
+  @SerializedName("description")
+  String description;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -34,11 +50,28 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  private ApplicationFeeUpdateParams(
-      List<String> expand, Map<String, Object> extraParams, Object metadata) {
+  /**
+   * Boolean indicating whether the application fee should be refunded when reversing this transfer.
+   * If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the
+   * application fee will be refunded with an amount proportional to the amount of the transfer
+   * reversed.
+   */
+  @SerializedName("refund_application_fee")
+  Boolean refundApplicationFee;
+
+  private TransferCollectionCreateTransferReversalParams(
+      Long amount,
+      String description,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Object metadata,
+      Boolean refundApplicationFee) {
+    this.amount = amount;
+    this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.refundApplicationFee = refundApplicationFee;
   }
 
   public static Builder builder() {
@@ -46,21 +79,53 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Long amount;
+
+    private String description;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     private Object metadata;
 
+    private Boolean refundApplicationFee;
+
     /** Finalize and obtain parameter instance from this builder. */
-    public ApplicationFeeUpdateParams build() {
-      return new ApplicationFeeUpdateParams(this.expand, this.extraParams, this.metadata);
+    public TransferCollectionCreateTransferReversalParams build() {
+      return new TransferCollectionCreateTransferReversalParams(
+          this.amount,
+          this.description,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.refundApplicationFee);
+    }
+
+    /**
+     * A positive integer in cents (or local equivalent) representing how much of this transfer to
+     * reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial
+     * transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire
+     * transfer amount.
+     */
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
+      return this;
+    }
+
+    /**
+     * An arbitrary string which you can attach to a reversal object. It is displayed alongside the
+     * reversal in the Dashboard. This will be unset if you POST an empty value.
+     */
+    public Builder setDescription(String description) {
+      this.description = description;
+      return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ApplicationFeeUpdateParams#expand} for the field documentation.
+     * TransferCollectionCreateTransferReversalParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -73,7 +138,7 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ApplicationFeeUpdateParams#expand} for the field documentation.
+     * TransferCollectionCreateTransferReversalParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -86,7 +151,7 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ApplicationFeeUpdateParams#extraParams} for the field documentation.
+     * TransferCollectionCreateTransferReversalParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -99,7 +164,8 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ApplicationFeeUpdateParams#extraParams} for the field documentation.
+     * See {@link TransferCollectionCreateTransferReversalParams#extraParams} for the field
+     * documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -112,7 +178,7 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ApplicationFeeUpdateParams#metadata} for the field documentation.
+     * TransferCollectionCreateTransferReversalParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -126,7 +192,8 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ApplicationFeeUpdateParams#metadata} for the field documentation.
+     * See {@link TransferCollectionCreateTransferReversalParams#metadata} for the field
+     * documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -156,6 +223,17 @@ public class ApplicationFeeUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Boolean indicating whether the application fee should be refunded when reversing this
+     * transfer. If a full transfer reversal is given, the full application fee will be refunded.
+     * Otherwise, the application fee will be refunded with an amount proportional to the amount of
+     * the transfer reversed.
+     */
+    public Builder setRefundApplicationFee(Boolean refundApplicationFee) {
+      this.refundApplicationFee = refundApplicationFee;
       return this;
     }
   }

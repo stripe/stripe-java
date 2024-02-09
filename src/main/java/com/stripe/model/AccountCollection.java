@@ -8,19 +8,73 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.AccountCollectionCreateParams;
-import com.stripe.param.AccountCollectionListParams;
-import com.stripe.param.AccountCollectionRetrieveParams;
+import com.stripe.param.AccountCollectionCapabilitiesParams;
+import com.stripe.param.AccountCollectionCreateExternalAccountParams;
+import com.stripe.param.AccountCollectionCreatePersonParams;
+import com.stripe.param.AccountCollectionExternalAccountsParams;
+import com.stripe.param.AccountCollectionPeopleParams;
+import com.stripe.param.AccountCollectionRetrieveCapabilityParams;
+import com.stripe.param.AccountCollectionRetrieveExternalAccountParams;
+import com.stripe.param.AccountCollectionRetrievePersonParams;
 import java.util.Map;
 
 public class AccountCollection extends StripeCollection<Account> {
-  /** Create an external account for a given account. */
-  public ExternalAccount create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params) throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = this.getUrl();
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CapabilityCollection.class);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(AccountCollectionCapabilitiesParams params)
+      throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(
+      AccountCollectionCapabilitiesParams params, RequestOptions options) throws StripeException {
+    String path = this.getUrl();
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CapabilityCollection.class);
   }
 
   /** Create an external account for a given account. */
-  public ExternalAccount create(Map<String, Object> params, RequestOptions options)
+  public ExternalAccount createExternalAccount(Map<String, Object> params) throws StripeException {
+    return createExternalAccount(params, (RequestOptions) null);
+  }
+
+  /** Create an external account for a given account. */
+  public ExternalAccount createExternalAccount(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
@@ -30,12 +84,14 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Create an external account for a given account. */
-  public ExternalAccount create(AccountCollectionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public ExternalAccount createExternalAccount(AccountCollectionCreateExternalAccountParams params)
+      throws StripeException {
+    return createExternalAccount(params, (RequestOptions) null);
   }
 
   /** Create an external account for a given account. */
-  public ExternalAccount create(AccountCollectionCreateParams params, RequestOptions options)
+  public ExternalAccount createExternalAccount(
+      AccountCollectionCreateExternalAccountParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
@@ -51,12 +107,13 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Creates a new person. */
-  public Person create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public Person createPerson(Map<String, Object> params) throws StripeException {
+    return createPerson(params, (RequestOptions) null);
   }
 
   /** Creates a new person. */
-  public Person create(Map<String, Object> params, RequestOptions options) throws StripeException {
+  public Person createPerson(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
         new ApiRequest(
@@ -65,12 +122,12 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Creates a new person. */
-  public Person create(AccountCollectionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public Person createPerson(AccountCollectionCreatePersonParams params) throws StripeException {
+    return createPerson(params, (RequestOptions) null);
   }
 
   /** Creates a new person. */
-  public Person create(AccountCollectionCreateParams params, RequestOptions options)
+  public Person createPerson(AccountCollectionCreatePersonParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
@@ -85,62 +142,15 @@ public class AccountCollection extends StripeCollection<Account> {
     return getResponseGetter().request(request, Person.class);
   }
 
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection list(Map<String, Object> params, RequestOptions options)
+  /** List external accounts for an account. */
+  public ExternalAccountCollection externalAccounts(Map<String, Object> params)
       throws StripeException {
-    String path = this.getUrl();
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getResponseGetter().request(request, CapabilityCollection.class);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection list(AccountCollectionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection list(AccountCollectionListParams params, RequestOptions options)
-      throws StripeException {
-    String path = this.getUrl();
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
-    return getResponseGetter().request(request, CapabilityCollection.class);
+    return externalAccounts(params, (RequestOptions) null);
   }
 
   /** List external accounts for an account. */
-  public ExternalAccountCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** List external accounts for an account. */
-  public ExternalAccountCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public ExternalAccountCollection externalAccounts(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
         new ApiRequest(
@@ -149,12 +159,14 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** List external accounts for an account. */
-  public ExternalAccountCollection list(AccountCollectionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public ExternalAccountCollection externalAccounts(AccountCollectionExternalAccountsParams params)
+      throws StripeException {
+    return externalAccounts(params, (RequestOptions) null);
   }
 
   /** List external accounts for an account. */
-  public ExternalAccountCollection list(AccountCollectionListParams params, RequestOptions options)
+  public ExternalAccountCollection externalAccounts(
+      AccountCollectionExternalAccountsParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
@@ -173,15 +185,15 @@ public class AccountCollection extends StripeCollection<Account> {
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
-  public PersonCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public PersonCollection people(Map<String, Object> params) throws StripeException {
+    return people(params, (RequestOptions) null);
   }
 
   /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
-  public PersonCollection list(Map<String, Object> params, RequestOptions options)
+  public PersonCollection people(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
@@ -194,15 +206,15 @@ public class AccountCollection extends StripeCollection<Account> {
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
-  public PersonCollection list(AccountCollectionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public PersonCollection people(AccountCollectionPeopleParams params) throws StripeException {
+    return people(params, (RequestOptions) null);
   }
 
   /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
-  public PersonCollection list(AccountCollectionListParams params, RequestOptions options)
+  public PersonCollection people(AccountCollectionPeopleParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
@@ -218,18 +230,18 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Retrieves information about the specified Account Capability. */
-  public Capability retrieve(String id) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  public Capability retrieveCapability(String id) throws StripeException {
+    return retrieveCapability(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves information about the specified Account Capability. */
-  public Capability retrieve(String id, RequestOptions options) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, options);
+  public Capability retrieveCapability(String id, RequestOptions options) throws StripeException {
+    return retrieveCapability(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves information about the specified Account Capability. */
-  public Capability retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public Capability retrieveCapability(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
@@ -238,8 +250,8 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Retrieves information about the specified Account Capability. */
-  public Capability retrieve(
-      String id, AccountCollectionRetrieveParams params, RequestOptions options)
+  public Capability retrieveCapability(
+      String id, AccountCollectionRetrieveCapabilityParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
@@ -255,18 +267,19 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Retrieve a specified external account for a given account. */
-  public ExternalAccount retrieve(String id) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  public ExternalAccount retrieveExternalAccount(String id) throws StripeException {
+    return retrieveExternalAccount(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieve a specified external account for a given account. */
-  public ExternalAccount retrieve(String id, RequestOptions options) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieve a specified external account for a given account. */
-  public ExternalAccount retrieve(String id, Map<String, Object> params, RequestOptions options)
+  public ExternalAccount retrieveExternalAccount(String id, RequestOptions options)
       throws StripeException {
+    return retrieveExternalAccount(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieve a specified external account for a given account. */
+  public ExternalAccount retrieveExternalAccount(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
@@ -275,8 +288,8 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Retrieve a specified external account for a given account. */
-  public ExternalAccount retrieve(
-      String id, AccountCollectionRetrieveParams params, RequestOptions options)
+  public ExternalAccount retrieveExternalAccount(
+      String id, AccountCollectionRetrieveExternalAccountParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
@@ -292,17 +305,17 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Retrieves an existing person. */
-  public Person retrieve(String id) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  public Person retrievePerson(String id) throws StripeException {
+    return retrievePerson(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an existing person. */
-  public Person retrieve(String id, RequestOptions options) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, options);
+  public Person retrievePerson(String id, RequestOptions options) throws StripeException {
+    return retrievePerson(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an existing person. */
-  public Person retrieve(String id, Map<String, Object> params, RequestOptions options)
+  public Person retrievePerson(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiRequest request =
@@ -312,7 +325,8 @@ public class AccountCollection extends StripeCollection<Account> {
   }
 
   /** Retrieves an existing person. */
-  public Person retrieve(String id, AccountCollectionRetrieveParams params, RequestOptions options)
+  public Person retrievePerson(
+      String id, AccountCollectionRetrievePersonParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);

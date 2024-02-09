@@ -8,7 +8,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.CreditNoteCollectionListParams;
+import com.stripe.param.CreditNoteCollectionCreditNoteLineItemsParams;
 import java.util.Map;
 
 public class CreditNoteCollection extends StripeCollection<CreditNote> {
@@ -17,8 +17,9 @@ public class CreditNoteCollection extends StripeCollection<CreditNote> {
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
-  public CreditNoteLineItemCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public CreditNoteLineItemCollection creditNoteLineItems(Map<String, Object> params)
+      throws StripeException {
+    return creditNoteLineItems(params, (RequestOptions) null);
   }
 
   /**
@@ -26,8 +27,8 @@ public class CreditNoteCollection extends StripeCollection<CreditNote> {
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
-  public CreditNoteLineItemCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public CreditNoteLineItemCollection creditNoteLineItems(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
         new ApiRequest(
@@ -40,9 +41,9 @@ public class CreditNoteCollection extends StripeCollection<CreditNote> {
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
-  public CreditNoteLineItemCollection list(CreditNoteCollectionListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
+  public CreditNoteLineItemCollection creditNoteLineItems(
+      CreditNoteCollectionCreditNoteLineItemsParams params) throws StripeException {
+    return creditNoteLineItems(params, (RequestOptions) null);
   }
 
   /**
@@ -50,8 +51,9 @@ public class CreditNoteCollection extends StripeCollection<CreditNote> {
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
-  public CreditNoteLineItemCollection list(
-      CreditNoteCollectionListParams params, RequestOptions options) throws StripeException {
+  public CreditNoteLineItemCollection creditNoteLineItems(
+      CreditNoteCollectionCreditNoteLineItemsParams params, RequestOptions options)
+      throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =

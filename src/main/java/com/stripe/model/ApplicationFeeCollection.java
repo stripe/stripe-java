@@ -8,9 +8,9 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.ApplicationFeeCollectionCreateParams;
-import com.stripe.param.ApplicationFeeCollectionListParams;
-import com.stripe.param.ApplicationFeeCollectionRetrieveParams;
+import com.stripe.param.ApplicationFeeCollectionCreateFeeRefundParams;
+import com.stripe.param.ApplicationFeeCollectionFeeRefundsParams;
+import com.stripe.param.ApplicationFeeCollectionRetrieveFeeRefundParams;
 import java.util.Map;
 
 public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
@@ -25,8 +25,8 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * an error when called on an already-refunded application fee, or when trying to refund more
    * money than is left on an application fee.
    */
-  public FeeRefund create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public FeeRefund createFeeRefund(Map<String, Object> params) throws StripeException {
+    return createFeeRefund(params, (RequestOptions) null);
   }
 
   /**
@@ -40,7 +40,7 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * an error when called on an already-refunded application fee, or when trying to refund more
    * money than is left on an application fee.
    */
-  public FeeRefund create(Map<String, Object> params, RequestOptions options)
+  public FeeRefund createFeeRefund(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
@@ -60,8 +60,9 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * an error when called on an already-refunded application fee, or when trying to refund more
    * money than is left on an application fee.
    */
-  public FeeRefund create(ApplicationFeeCollectionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  public FeeRefund createFeeRefund(ApplicationFeeCollectionCreateFeeRefundParams params)
+      throws StripeException {
+    return createFeeRefund(params, (RequestOptions) null);
   }
 
   /**
@@ -75,7 +76,8 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * an error when called on an already-refunded application fee, or when trying to refund more
    * money than is left on an application fee.
    */
-  public FeeRefund create(ApplicationFeeCollectionCreateParams params, RequestOptions options)
+  public FeeRefund createFeeRefund(
+      ApplicationFeeCollectionCreateFeeRefundParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
@@ -96,8 +98,8 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * more than those 10, you can use this API method and the {@code limit} and {@code
    * starting_after} parameters to page through additional refunds.
    */
-  public FeeRefundCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public FeeRefundCollection feeRefunds(Map<String, Object> params) throws StripeException {
+    return feeRefunds(params, (RequestOptions) null);
   }
 
   /**
@@ -106,7 +108,7 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * more than those 10, you can use this API method and the {@code limit} and {@code
    * starting_after} parameters to page through additional refunds.
    */
-  public FeeRefundCollection list(Map<String, Object> params, RequestOptions options)
+  public FeeRefundCollection feeRefunds(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
@@ -121,9 +123,9 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * more than those 10, you can use this API method and the {@code limit} and {@code
    * starting_after} parameters to page through additional refunds.
    */
-  public FeeRefundCollection list(ApplicationFeeCollectionListParams params)
+  public FeeRefundCollection feeRefunds(ApplicationFeeCollectionFeeRefundsParams params)
       throws StripeException {
-    return list(params, (RequestOptions) null);
+    return feeRefunds(params, (RequestOptions) null);
   }
 
   /**
@@ -132,7 +134,8 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * more than those 10, you can use this API method and the {@code limit} and {@code
    * starting_after} parameters to page through additional refunds.
    */
-  public FeeRefundCollection list(ApplicationFeeCollectionListParams params, RequestOptions options)
+  public FeeRefundCollection feeRefunds(
+      ApplicationFeeCollectionFeeRefundsParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
@@ -152,8 +155,8 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
    */
-  public FeeRefund retrieve(String id) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  public FeeRefund retrieveFeeRefund(String id) throws StripeException {
+    return retrieveFeeRefund(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -161,8 +164,8 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
    */
-  public FeeRefund retrieve(String id, RequestOptions options) throws StripeException {
-    return retrieve(id, (Map<String, Object>) null, options);
+  public FeeRefund retrieveFeeRefund(String id, RequestOptions options) throws StripeException {
+    return retrieveFeeRefund(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -170,7 +173,7 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
    */
-  public FeeRefund retrieve(String id, Map<String, Object> params, RequestOptions options)
+  public FeeRefund retrieveFeeRefund(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiRequest request =
@@ -184,8 +187,8 @@ public class ApplicationFeeCollection extends StripeCollection<ApplicationFee> {
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
    */
-  public FeeRefund retrieve(
-      String id, ApplicationFeeCollectionRetrieveParams params, RequestOptions options)
+  public FeeRefund retrieveFeeRefund(
+      String id, ApplicationFeeCollectionRetrieveFeeRefundParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);

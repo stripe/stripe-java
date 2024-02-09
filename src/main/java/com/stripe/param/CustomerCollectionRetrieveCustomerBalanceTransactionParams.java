@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CustomerCollectionRetrieveParams extends ApiRequestParams {
+public class CustomerCollectionRetrieveCustomerBalanceTransactionParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,7 +24,8 @@ public class CustomerCollectionRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private CustomerCollectionRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
+  private CustomerCollectionRetrieveCustomerBalanceTransactionParams(
+      List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -39,14 +40,16 @@ public class CustomerCollectionRetrieveParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerCollectionRetrieveParams build() {
-      return new CustomerCollectionRetrieveParams(this.expand, this.extraParams);
+    public CustomerCollectionRetrieveCustomerBalanceTransactionParams build() {
+      return new CustomerCollectionRetrieveCustomerBalanceTransactionParams(
+          this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCollectionRetrieveParams#expand} for the field documentation.
+     * CustomerCollectionRetrieveCustomerBalanceTransactionParams#expand} for the field
+     * documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -59,7 +62,8 @@ public class CustomerCollectionRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCollectionRetrieveParams#expand} for the field documentation.
+     * CustomerCollectionRetrieveCustomerBalanceTransactionParams#expand} for the field
+     * documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -72,7 +76,8 @@ public class CustomerCollectionRetrieveParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerCollectionRetrieveParams#extraParams} for the field documentation.
+     * CustomerCollectionRetrieveCustomerBalanceTransactionParams#extraParams} for the field
+     * documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -85,7 +90,8 @@ public class CustomerCollectionRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerCollectionRetrieveParams#extraParams} for the field documentation.
+     * See {@link CustomerCollectionRetrieveCustomerBalanceTransactionParams#extraParams} for the
+     * field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

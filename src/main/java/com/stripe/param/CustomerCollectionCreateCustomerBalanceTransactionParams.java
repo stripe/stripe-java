@@ -11,7 +11,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CustomerCollectionCreateParams extends ApiRequestParams {
+public class CustomerCollectionCreateCustomerBalanceTransactionParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The integer amount in <strong>cents (or local equivalent)</strong>
    * to apply to the customer's credit balance.
@@ -56,7 +56,7 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  private CustomerCollectionCreateParams(
+  private CustomerCollectionCreateCustomerBalanceTransactionParams(
       Long amount,
       String currency,
       String description,
@@ -89,8 +89,8 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
     private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerCollectionCreateParams build() {
-      return new CustomerCollectionCreateParams(
+    public CustomerCollectionCreateCustomerBalanceTransactionParams build() {
+      return new CustomerCollectionCreateCustomerBalanceTransactionParams(
           this.amount,
           this.currency,
           this.description,
@@ -131,7 +131,7 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCollectionCreateParams#expand} for the field documentation.
+     * CustomerCollectionCreateCustomerBalanceTransactionParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -144,7 +144,7 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCollectionCreateParams#expand} for the field documentation.
+     * CustomerCollectionCreateCustomerBalanceTransactionParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -157,7 +157,8 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerCollectionCreateParams#extraParams} for the field documentation.
+     * CustomerCollectionCreateCustomerBalanceTransactionParams#extraParams} for the field
+     * documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -170,7 +171,8 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerCollectionCreateParams#extraParams} for the field documentation.
+     * See {@link CustomerCollectionCreateCustomerBalanceTransactionParams#extraParams} for the
+     * field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -183,7 +185,8 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerCollectionCreateParams#metadata} for the field documentation.
+     * CustomerCollectionCreateCustomerBalanceTransactionParams#metadata} for the field
+     * documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -197,7 +200,8 @@ public class CustomerCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerCollectionCreateParams#metadata} for the field documentation.
+     * See {@link CustomerCollectionCreateCustomerBalanceTransactionParams#metadata} for the field
+     * documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {

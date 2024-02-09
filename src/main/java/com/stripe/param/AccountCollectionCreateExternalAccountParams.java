@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class AccountCollectionCreateParams extends ApiRequestParams {
+public class AccountCollectionCreateExternalAccountParams extends ApiRequestParams {
   /**
    * When set to true, or if this is the first external account added in this currency, this account
    * becomes the default external account for its currency.
@@ -47,7 +47,7 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  private AccountCollectionCreateParams(
+  private AccountCollectionCreateExternalAccountParams(
       Boolean defaultForCurrency,
       List<String> expand,
       Object externalAccount,
@@ -76,8 +76,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
     private Map<String, String> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public AccountCollectionCreateParams build() {
-      return new AccountCollectionCreateParams(
+    public AccountCollectionCreateExternalAccountParams build() {
+      return new AccountCollectionCreateExternalAccountParams(
           this.defaultForCurrency,
           this.expand,
           this.externalAccount,
@@ -97,7 +97,7 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountCollectionCreateParams#expand} for the field documentation.
+     * AccountCollectionCreateExternalAccountParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -110,7 +110,7 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountCollectionCreateParams#expand} for the field documentation.
+     * AccountCollectionCreateExternalAccountParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -133,7 +133,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
      * <strong>Required.</strong> Please refer to full <a
      * href="https://stripe.com/docs/api">documentation</a> instead.
      */
-    public Builder setExternalAccount(AccountCollectionCreateParams.Card externalAccount) {
+    public Builder setExternalAccount(
+        AccountCollectionCreateExternalAccountParams.Card externalAccount) {
       this.externalAccount = externalAccount;
       return this;
     }
@@ -142,7 +143,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
      * <strong>Required.</strong> Please refer to full <a
      * href="https://stripe.com/docs/api">documentation</a> instead.
      */
-    public Builder setExternalAccount(AccountCollectionCreateParams.BankAccount externalAccount) {
+    public Builder setExternalAccount(
+        AccountCollectionCreateExternalAccountParams.BankAccount externalAccount) {
       this.externalAccount = externalAccount;
       return this;
     }
@@ -151,7 +153,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
      * <strong>Required.</strong> Please refer to full <a
      * href="https://stripe.com/docs/api">documentation</a> instead.
      */
-    public Builder setExternalAccount(AccountCollectionCreateParams.CardToken externalAccount) {
+    public Builder setExternalAccount(
+        AccountCollectionCreateExternalAccountParams.CardToken externalAccount) {
       this.externalAccount = externalAccount;
       return this;
     }
@@ -159,7 +162,7 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountCollectionCreateParams#extraParams} for the field documentation.
+     * AccountCollectionCreateExternalAccountParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -172,7 +175,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountCollectionCreateParams#extraParams} for the field documentation.
+     * See {@link AccountCollectionCreateExternalAccountParams#extraParams} for the field
+     * documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -185,7 +189,7 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountCollectionCreateParams#metadata} for the field documentation.
+     * AccountCollectionCreateExternalAccountParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -198,7 +202,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountCollectionCreateParams#metadata} for the field documentation.
+     * See {@link AccountCollectionCreateExternalAccountParams#metadata} for the field
+     * documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -306,8 +311,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       private String routingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AccountCollectionCreateParams.BankAccount build() {
-        return new AccountCollectionCreateParams.BankAccount(
+      public AccountCollectionCreateExternalAccountParams.BankAccount build() {
+        return new AccountCollectionCreateExternalAccountParams.BankAccount(
             this.accountHolderName,
             this.accountHolderType,
             this.accountNumber,
@@ -332,7 +337,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
        * This field is required when attaching the bank account to a {@code Customer} object.
        */
       public Builder setAccountHolderType(
-          AccountCollectionCreateParams.BankAccount.AccountHolderType accountHolderType) {
+          AccountCollectionCreateExternalAccountParams.BankAccount.AccountHolderType
+              accountHolderType) {
         this.accountHolderType = accountHolderType;
         return this;
       }
@@ -364,7 +370,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AccountCollectionCreateParams.BankAccount#extraParams} for the field documentation.
+       * AccountCollectionCreateExternalAccountParams.BankAccount#extraParams} for the field
+       * documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -377,8 +384,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AccountCollectionCreateParams.BankAccount#extraParams} for the field
-       * documentation.
+       * See {@link AccountCollectionCreateExternalAccountParams.BankAccount#extraParams} for the
+       * field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -553,8 +560,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       private String object;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AccountCollectionCreateParams.Card build() {
-        return new AccountCollectionCreateParams.Card(
+      public AccountCollectionCreateExternalAccountParams.Card build() {
+        return new AccountCollectionCreateExternalAccountParams.Card(
             this.addressCity,
             this.addressCountry,
             this.addressLine1,
@@ -627,7 +634,7 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AccountCollectionCreateParams.Card#extraParams} for the field documentation.
+       * AccountCollectionCreateExternalAccountParams.Card#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -640,7 +647,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AccountCollectionCreateParams.Card#extraParams} for the field documentation.
+       * See {@link AccountCollectionCreateExternalAccountParams.Card#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -653,7 +661,7 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AccountCollectionCreateParams.Card#metadata} for the field documentation.
+       * AccountCollectionCreateExternalAccountParams.Card#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -666,7 +674,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AccountCollectionCreateParams.Card#metadata} for the field documentation.
+       * See {@link AccountCollectionCreateExternalAccountParams.Card#metadata} for the field
+       * documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -739,8 +748,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       private String token;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AccountCollectionCreateParams.CardToken build() {
-        return new AccountCollectionCreateParams.CardToken(
+      public AccountCollectionCreateExternalAccountParams.CardToken build() {
+        return new AccountCollectionCreateExternalAccountParams.CardToken(
             this.currency, this.extraParams, this.object, this.token);
       }
 
@@ -752,7 +761,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AccountCollectionCreateParams.CardToken#extraParams} for the field documentation.
+       * AccountCollectionCreateExternalAccountParams.CardToken#extraParams} for the field
+       * documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -765,8 +775,8 @@ public class AccountCollectionCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AccountCollectionCreateParams.CardToken#extraParams} for the field
-       * documentation.
+       * See {@link AccountCollectionCreateExternalAccountParams.CardToken#extraParams} for the
+       * field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

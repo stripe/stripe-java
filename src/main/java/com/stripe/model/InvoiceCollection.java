@@ -8,7 +8,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.InvoiceCollectionListParams;
+import com.stripe.param.InvoiceCollectionInvoiceLineItemsParams;
 import java.util.Map;
 
 public class InvoiceCollection extends StripeCollection<Invoice> {
@@ -17,8 +17,9 @@ public class InvoiceCollection extends StripeCollection<Invoice> {
    * count of line items and the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of line items.
    */
-  public InvoiceLineItemCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public InvoiceLineItemCollection invoiceLineItems(Map<String, Object> params)
+      throws StripeException {
+    return invoiceLineItems(params, (RequestOptions) null);
   }
 
   /**
@@ -26,8 +27,8 @@ public class InvoiceCollection extends StripeCollection<Invoice> {
    * count of line items and the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of line items.
    */
-  public InvoiceLineItemCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public InvoiceLineItemCollection invoiceLineItems(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
         new ApiRequest(
@@ -40,8 +41,9 @@ public class InvoiceCollection extends StripeCollection<Invoice> {
    * count of line items and the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of line items.
    */
-  public InvoiceLineItemCollection list(InvoiceCollectionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
+  public InvoiceLineItemCollection invoiceLineItems(InvoiceCollectionInvoiceLineItemsParams params)
+      throws StripeException {
+    return invoiceLineItems(params, (RequestOptions) null);
   }
 
   /**
@@ -49,7 +51,8 @@ public class InvoiceCollection extends StripeCollection<Invoice> {
    * count of line items and the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of line items.
    */
-  public InvoiceLineItemCollection list(InvoiceCollectionListParams params, RequestOptions options)
+  public InvoiceLineItemCollection invoiceLineItems(
+      InvoiceCollectionInvoiceLineItemsParams params, RequestOptions options)
       throws StripeException {
     String path = this.getUrl();
     ApiResource.checkNullTypedParams(path, params);
