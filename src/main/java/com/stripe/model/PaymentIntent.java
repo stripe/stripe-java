@@ -2122,7 +2122,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("hosted_instructions_url")
       String hostedInstructionsUrl;
 
-      /** The url for mobile redirect based auth. */
+      /**
+       * The url for mobile redirect based auth (for internal use only and not typically available
+       * in standard API requests).
+       */
       @SerializedName("mobile_auth_url")
       String mobileAuthUrl;
 
