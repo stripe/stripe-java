@@ -519,6 +519,16 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("description")
       String description;
 
+      /**
+       * The brand to use when displaying the card, this accounts for customer's brand choice on
+       * dual-branded cards. Can be {@code american_express}, {@code cartes_bancaires}, {@code
+       * diners_club}, {@code discover}, {@code eftpos_australia}, {@code interac}, {@code jcb},
+       * {@code mastercard}, {@code union_pay}, {@code visa}, or {@code other} and may contain more
+       * values in the future.
+       */
+      @SerializedName("display_brand")
+      String displayBrand;
+
       /** Two-digit number representing the card's expiration month. */
       @SerializedName("exp_month")
       Long expMonth;

@@ -590,10 +590,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private Card(Long expMonth, Long expYear, Map<String, Object> extraParams) {
+    /** Contains information about card networks used to process the payment. */
+    @SerializedName("networks")
+    Networks networks;
+
+    private Card(Long expMonth, Long expYear, Map<String, Object> extraParams, Networks networks) {
       this.expMonth = expMonth;
       this.expYear = expYear;
       this.extraParams = extraParams;
+      this.networks = networks;
     }
 
     public static Builder builder() {
@@ -607,9 +612,12 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Networks networks;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodUpdateParams.Card build() {
-        return new PaymentMethodUpdateParams.Card(this.expMonth, this.expYear, this.extraParams);
+        return new PaymentMethodUpdateParams.Card(
+            this.expMonth, this.expYear, this.extraParams, this.networks);
       }
 
       /** Two-digit number representing the card's expiration month. */
@@ -648,6 +656,118 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+
+      /** Contains information about card networks used to process the payment. */
+      public Builder setNetworks(PaymentMethodUpdateParams.Card.Networks networks) {
+        this.networks = networks;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Networks {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The customer's preferred card network for co-branded cards. Supports {@code
+       * cartes_bancaires}, {@code mastercard}, or {@code visa}. Selection of a network that does
+       * not apply to the card will be stored as {@code invalid_preference} on the card.
+       */
+      @SerializedName("preferred")
+      ApiRequestParams.EnumParam preferred;
+
+      private Networks(Map<String, Object> extraParams, ApiRequestParams.EnumParam preferred) {
+        this.extraParams = extraParams;
+        this.preferred = preferred;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private ApiRequestParams.EnumParam preferred;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodUpdateParams.Card.Networks build() {
+          return new PaymentMethodUpdateParams.Card.Networks(this.extraParams, this.preferred);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodUpdateParams.Card.Networks#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodUpdateParams.Card.Networks#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The customer's preferred card network for co-branded cards. Supports {@code
+         * cartes_bancaires}, {@code mastercard}, or {@code visa}. Selection of a network that does
+         * not apply to the card will be stored as {@code invalid_preference} on the card.
+         */
+        public Builder setPreferred(PaymentMethodUpdateParams.Card.Networks.Preferred preferred) {
+          this.preferred = preferred;
+          return this;
+        }
+
+        /**
+         * The customer's preferred card network for co-branded cards. Supports {@code
+         * cartes_bancaires}, {@code mastercard}, or {@code visa}. Selection of a network that does
+         * not apply to the card will be stored as {@code invalid_preference} on the card.
+         */
+        public Builder setPreferred(EmptyParam preferred) {
+          this.preferred = preferred;
+          return this;
+        }
+      }
+
+      public enum Preferred implements ApiRequestParams.EnumParam {
+        @SerializedName("cartes_bancaires")
+        CARTES_BANCAIRES("cartes_bancaires"),
+
+        @SerializedName("mastercard")
+        MASTERCARD("mastercard"),
+
+        @SerializedName("visa")
+        VISA("visa");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preferred(String value) {
+          this.value = value;
+        }
       }
     }
   }
