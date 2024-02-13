@@ -207,6 +207,9 @@ public class Card extends ApiResource
   @SerializedName("name")
   String name;
 
+  @SerializedName("networks")
+  Networks networks;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -479,5 +482,18 @@ public class Card extends ApiResource
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, url, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Card.class);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Networks extends StripeObject {
+    /**
+     * The preferred network for co-branded cards. Can be {@code cartes_bancaires}, {@code
+     * mastercard}, {@code visa} or {@code invalid_preference} if requested network is not valid for
+     * the card.
+     */
+    @SerializedName("preferred")
+    String preferred;
   }
 }
