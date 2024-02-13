@@ -53,6 +53,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
+   * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo payment
+   * method.
+   */
+  @SerializedName("payto")
+  Payto payto;
+
+  /**
    * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
    * bank account payment method.
    */
@@ -66,6 +73,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Link link,
       Object metadata,
+      Payto payto,
       UsBankAccount usBankAccount) {
     this.billingDetails = billingDetails;
     this.card = card;
@@ -73,6 +81,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.link = link;
     this.metadata = metadata;
+    this.payto = payto;
     this.usBankAccount = usBankAccount;
   }
 
@@ -93,6 +102,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Payto payto;
+
     private UsBankAccount usBankAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -104,6 +115,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.link,
           this.metadata,
+          this.payto,
           this.usBankAccount);
     }
 
@@ -230,6 +242,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo payment
+     * method.
+     */
+    public Builder setPayto(PaymentMethodUpdateParams.Payto payto) {
+      this.payto = payto;
       return this;
     }
 
@@ -822,6 +843,120 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Payto {
+    /** The account number for the bank account. */
+    @SerializedName("account_number")
+    Object accountNumber;
+
+    /** Bank-State-Branch number of the bank account. */
+    @SerializedName("bsb_number")
+    Object bsbNumber;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The PayID alias for the bank account. */
+    @SerializedName("pay_id")
+    Object payId;
+
+    private Payto(
+        Object accountNumber, Object bsbNumber, Map<String, Object> extraParams, Object payId) {
+      this.accountNumber = accountNumber;
+      this.bsbNumber = bsbNumber;
+      this.extraParams = extraParams;
+      this.payId = payId;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object accountNumber;
+
+      private Object bsbNumber;
+
+      private Map<String, Object> extraParams;
+
+      private Object payId;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodUpdateParams.Payto build() {
+        return new PaymentMethodUpdateParams.Payto(
+            this.accountNumber, this.bsbNumber, this.extraParams, this.payId);
+      }
+
+      /** The account number for the bank account. */
+      public Builder setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
+      }
+
+      /** The account number for the bank account. */
+      public Builder setAccountNumber(EmptyParam accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
+      }
+
+      /** Bank-State-Branch number of the bank account. */
+      public Builder setBsbNumber(String bsbNumber) {
+        this.bsbNumber = bsbNumber;
+        return this;
+      }
+
+      /** Bank-State-Branch number of the bank account. */
+      public Builder setBsbNumber(EmptyParam bsbNumber) {
+        this.bsbNumber = bsbNumber;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.Payto#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.Payto#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The PayID alias for the bank account. */
+      public Builder setPayId(String payId) {
+        this.payId = payId;
+        return this;
+      }
+
+      /** The PayID alias for the bank account. */
+      public Builder setPayId(EmptyParam payId) {
+        this.payId = payId;
         return this;
       }
     }

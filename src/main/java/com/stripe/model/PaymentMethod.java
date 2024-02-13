@@ -157,6 +157,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("paypal")
   Paypal paypal;
 
+  @SerializedName("payto")
+  Payto payto;
+
   @SerializedName("pix")
   Pix pix;
 
@@ -191,8 +194,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps}, {@code
    * fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code klarna},
    * {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
-   * {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code
-   * swish}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * {@code payto}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code
+   * sofort}, {@code swish}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -1439,6 +1442,23 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Payto extends StripeObject {
+    /** Bank-State-Branch number of the bank account. */
+    @SerializedName("bsb_number")
+    String bsbNumber;
+
+    /** Last four digits of the bank account number. */
+    @SerializedName("last4")
+    String last4;
+
+    /** The PayID alias for the bank account. */
+    @SerializedName("pay_id")
+    String payId;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Pix extends StripeObject {}
 
   @Getter
@@ -1710,6 +1730,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(p24, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
     trySetResponseGetter(paypal, responseGetter);
+    trySetResponseGetter(payto, responseGetter);
     trySetResponseGetter(pix, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);

@@ -1055,6 +1055,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String paypalPayments;
 
     /**
+     * The status of the PayTo capability of the account, or whether the account can directly
+     * process PayTo charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("payto_payments")
+    String paytoPayments;
+
+    /**
      * The status of the promptpay payments capability of the account, or whether the account can
      * directly process promptpay charges.
      *
