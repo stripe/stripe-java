@@ -484,6 +484,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_BALANCE(
         "financial_connections.account.refreshed_balance"),
 
+    @SerializedName("financial_connections.account.refreshed_ownership")
+    FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_OWNERSHIP(
+        "financial_connections.account.refreshed_ownership"),
+
     @SerializedName("financial_connections.account.refreshed_transactions")
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_TRANSACTIONS(
         "financial_connections.account.refreshed_transactions"),

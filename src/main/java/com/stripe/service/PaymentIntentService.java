@@ -451,9 +451,7 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(String intent, PaymentIntentConfirmParams params)
       throws StripeException {
@@ -477,9 +475,7 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(String intent, RequestOptions options) throws StripeException {
     return confirm(intent, (PaymentIntentConfirmParams) null, options);
@@ -502,9 +498,7 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(String intent) throws StripeException {
     return confirm(intent, (PaymentIntentConfirmParams) null, (RequestOptions) null);
@@ -527,9 +521,7 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(
       String intent, PaymentIntentConfirmParams params, RequestOptions options)

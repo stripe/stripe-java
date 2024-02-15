@@ -57,6 +57,10 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
+  /** The ID of the invoice that contains this line item. */
+  @SerializedName("invoice")
+  String invoice;
+
   /**
    * The ID of the <a href="https://stripe.com/docs/api/invoiceitems">invoice item</a> associated
    * with this line item if any.
