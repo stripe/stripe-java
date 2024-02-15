@@ -1294,9 +1294,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
          * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. Read our guide on <a
-         * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
-         * Secure</a> for more information on how this configuration interacts with Radar and our
-         * SCA Engine.
+         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * requesting 3D Secure</a> for more information on how this configuration interacts with
+         * Radar and our SCA Engine.
          *
          * <p>One of {@code any}, {@code automatic}, or {@code challenge}.
          */
