@@ -12986,6 +12986,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
+       * href="https://stripe.com/docs/payments/decremental-authorization">decrement the
+       * authorization</a> for this PaymentIntent.
+       */
+      @SerializedName("request_decremental_authorization")
+      RequestDecrementalAuthorization requestDecrementalAuthorization;
+
+      /**
+       * Request ability to <a
        * href="https://stripe.com/docs/payments/extended-authorization">capture beyond the standard
        * authorization validity window</a> for this PaymentIntent.
        */
@@ -13099,6 +13107,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           MandateOptions mandateOptions,
           Boolean moto,
           Network network,
+          RequestDecrementalAuthorization requestDecrementalAuthorization,
           RequestExtendedAuthorization requestExtendedAuthorization,
           RequestIncrementalAuthorization requestIncrementalAuthorization,
           RequestMulticapture requestMulticapture,
@@ -13117,6 +13126,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.mandateOptions = mandateOptions;
         this.moto = moto;
         this.network = network;
+        this.requestDecrementalAuthorization = requestDecrementalAuthorization;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
         this.requestIncrementalAuthorization = requestIncrementalAuthorization;
         this.requestMulticapture = requestMulticapture;
@@ -13148,6 +13158,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private Boolean moto;
 
         private Network network;
+
+        private RequestDecrementalAuthorization requestDecrementalAuthorization;
 
         private RequestExtendedAuthorization requestExtendedAuthorization;
 
@@ -13181,6 +13193,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.mandateOptions,
               this.moto,
               this.network,
+              this.requestDecrementalAuthorization,
               this.requestExtendedAuthorization,
               this.requestIncrementalAuthorization,
               this.requestMulticapture,
@@ -13307,6 +13320,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setNetwork(
             PaymentIntentUpdateParams.PaymentMethodOptions.Card.Network network) {
           this.network = network;
+          return this;
+        }
+
+        /**
+         * Request ability to <a
+         * href="https://stripe.com/docs/payments/decremental-authorization">decrement the
+         * authorization</a> for this PaymentIntent.
+         */
+        public Builder setRequestDecrementalAuthorization(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Card.RequestDecrementalAuthorization
+                requestDecrementalAuthorization) {
+          this.requestDecrementalAuthorization = requestDecrementalAuthorization;
           return this;
         }
 
@@ -15043,6 +15068,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private final String value;
 
         Network(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestDecrementalAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestDecrementalAuthorization(String value) {
           this.value = value;
         }
       }

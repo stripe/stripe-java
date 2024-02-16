@@ -1576,6 +1576,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("country")
       String country;
 
+      @SerializedName("decremental_authorization")
+      DecrementalAuthorization decrementalAuthorization;
+
       /**
        * A high-level description of the type of cards issued in this range. (For internal use only
        * and not typically available in standard API requests.)
@@ -1704,6 +1707,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("cvc_check")
         String cvcCheck;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DecrementalAuthorization extends StripeObject {
+        /**
+         * Indicates whether or not the decremental authorization feature is supported.
+         *
+         * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
       }
 
       @Getter
