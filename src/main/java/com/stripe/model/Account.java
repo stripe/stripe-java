@@ -1055,6 +1055,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String paypalPayments;
 
     /**
+     * The status of the PayTo capability of the account, or whether the account can directly
+     * process PayTo charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("payto_payments")
+    String paytoPayments;
+
+    /**
      * The status of the promptpay payments capability of the account, or whether the account can
      * directly process promptpay charges.
      *
@@ -1131,6 +1140,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("treasury")
     String treasury;
+
+    /**
+     * The status of the Twint capability of the account, or whether the account can directly
+     * process Twint charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("twint_payments")
+    String twintPayments;
 
     /**
      * The status of the US bank account ACH payments capability of the account, or whether the

@@ -1364,6 +1364,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("paypal_payments")
     PaypalPayments paypalPayments;
 
+    /** The payto_payments capability. */
+    @SerializedName("payto_payments")
+    PaytoPayments paytoPayments;
+
     /** The promptpay_payments capability. */
     @SerializedName("promptpay_payments")
     PromptpayPayments promptpayPayments;
@@ -1399,6 +1403,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     /** The treasury capability. */
     @SerializedName("treasury")
     Treasury treasury;
+
+    /** The twint_payments capability. */
+    @SerializedName("twint_payments")
+    TwintPayments twintPayments;
 
     /** The us_bank_account_ach_payments capability. */
     @SerializedName("us_bank_account_ach_payments")
@@ -1438,6 +1446,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         P24Payments p24Payments,
         PaynowPayments paynowPayments,
         PaypalPayments paypalPayments,
+        PaytoPayments paytoPayments,
         PromptpayPayments promptpayPayments,
         RevolutPayPayments revolutPayPayments,
         SepaDebitPayments sepaDebitPayments,
@@ -1447,6 +1456,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         TaxReportingUs1099Misc taxReportingUs1099Misc,
         Transfers transfers,
         Treasury treasury,
+        TwintPayments twintPayments,
         UsBankAccountAchPayments usBankAccountAchPayments,
         ZipPayments zipPayments) {
       this.acssDebitPayments = acssDebitPayments;
@@ -1478,6 +1488,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.p24Payments = p24Payments;
       this.paynowPayments = paynowPayments;
       this.paypalPayments = paypalPayments;
+      this.paytoPayments = paytoPayments;
       this.promptpayPayments = promptpayPayments;
       this.revolutPayPayments = revolutPayPayments;
       this.sepaDebitPayments = sepaDebitPayments;
@@ -1487,6 +1498,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.taxReportingUs1099Misc = taxReportingUs1099Misc;
       this.transfers = transfers;
       this.treasury = treasury;
+      this.twintPayments = twintPayments;
       this.usBankAccountAchPayments = usBankAccountAchPayments;
       this.zipPayments = zipPayments;
     }
@@ -1554,6 +1566,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private PaypalPayments paypalPayments;
 
+      private PaytoPayments paytoPayments;
+
       private PromptpayPayments promptpayPayments;
 
       private RevolutPayPayments revolutPayPayments;
@@ -1571,6 +1585,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private Transfers transfers;
 
       private Treasury treasury;
+
+      private TwintPayments twintPayments;
 
       private UsBankAccountAchPayments usBankAccountAchPayments;
 
@@ -1608,6 +1624,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.p24Payments,
             this.paynowPayments,
             this.paypalPayments,
+            this.paytoPayments,
             this.promptpayPayments,
             this.revolutPayPayments,
             this.sepaDebitPayments,
@@ -1617,6 +1634,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.taxReportingUs1099Misc,
             this.transfers,
             this.treasury,
+            this.twintPayments,
             this.usBankAccountAchPayments,
             this.zipPayments);
       }
@@ -1834,6 +1852,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The payto_payments capability. */
+      public Builder setPaytoPayments(
+          AccountUpdateParams.Capabilities.PaytoPayments paytoPayments) {
+        this.paytoPayments = paytoPayments;
+        return this;
+      }
+
       /** The promptpay_payments capability. */
       public Builder setPromptpayPayments(
           AccountUpdateParams.Capabilities.PromptpayPayments promptpayPayments) {
@@ -1892,6 +1917,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** The treasury capability. */
       public Builder setTreasury(AccountUpdateParams.Capabilities.Treasury treasury) {
         this.treasury = treasury;
+        return this;
+      }
+
+      /** The twint_payments capability. */
+      public Builder setTwintPayments(
+          AccountUpdateParams.Capabilities.TwintPayments twintPayments) {
+        this.twintPayments = twintPayments;
         return this;
       }
 
@@ -4117,6 +4149,85 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class PaytoPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private PaytoPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.PaytoPayments build() {
+          return new AccountUpdateParams.Capabilities.PaytoPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.PaytoPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.PaytoPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class PromptpayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4803,6 +4914,85 @@ public class AccountUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.Treasury#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TwintPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private TwintPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.TwintPayments build() {
+          return new AccountUpdateParams.Capabilities.TwintPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.TwintPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.TwintPayments#extraParams} for the field
          * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

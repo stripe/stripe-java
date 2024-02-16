@@ -815,6 +815,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Paypal paypal;
 
     /**
+     * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo payment
+     * method.
+     */
+    @SerializedName("payto")
+    Payto payto;
+
+    /**
      * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
      * method.
      */
@@ -862,6 +869,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
      */
     @SerializedName("swish")
     Swish swish;
+
+    /**
+     * If this is a Twint PaymentMethod, this hash contains details about the Twint payment method.
+     */
+    @SerializedName("twint")
+    Twint twint;
 
     /**
      * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
@@ -920,6 +933,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         P24 p24,
         Paynow paynow,
         Paypal paypal,
+        Payto payto,
         Pix pix,
         Promptpay promptpay,
         RadarOptions radarOptions,
@@ -927,6 +941,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
+        Twint twint,
         Type type,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
@@ -958,6 +973,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.p24 = p24;
       this.paynow = paynow;
       this.paypal = paypal;
+      this.payto = payto;
       this.pix = pix;
       this.promptpay = promptpay;
       this.radarOptions = radarOptions;
@@ -965,6 +981,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
+      this.twint = twint;
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
@@ -1030,6 +1047,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Paypal paypal;
 
+      private Payto payto;
+
       private Pix pix;
 
       private Promptpay promptpay;
@@ -1043,6 +1062,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       private Sofort sofort;
 
       private Swish swish;
+
+      private Twint twint;
 
       private Type type;
 
@@ -1082,6 +1103,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.p24,
             this.paynow,
             this.paypal,
+            this.payto,
             this.pix,
             this.promptpay,
             this.radarOptions,
@@ -1089,6 +1111,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.swish,
+            this.twint,
             this.type,
             this.usBankAccount,
             this.wechatPay,
@@ -1381,6 +1404,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo
+       * payment method.
+       */
+      public Builder setPayto(SetupIntentConfirmParams.PaymentMethodData.Payto payto) {
+        this.payto = payto;
+        return this;
+      }
+
+      /**
        * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
        * method.
        */
@@ -1442,6 +1474,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setSwish(SetupIntentConfirmParams.PaymentMethodData.Swish swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a Twint PaymentMethod, this hash contains details about the Twint payment
+       * method.
+       */
+      public Builder setTwint(SetupIntentConfirmParams.PaymentMethodData.Twint twint) {
+        this.twint = twint;
         return this;
       }
 
@@ -3774,6 +3815,104 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Payto {
+      /** The account number for the bank account. */
+      @SerializedName("account_number")
+      String accountNumber;
+
+      /** Bank-State-Branch number of the bank account. */
+      @SerializedName("bsb_number")
+      String bsbNumber;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The PayID alias for the bank account. */
+      @SerializedName("pay_id")
+      String payId;
+
+      private Payto(
+          String accountNumber, String bsbNumber, Map<String, Object> extraParams, String payId) {
+        this.accountNumber = accountNumber;
+        this.bsbNumber = bsbNumber;
+        this.extraParams = extraParams;
+        this.payId = payId;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String accountNumber;
+
+        private String bsbNumber;
+
+        private Map<String, Object> extraParams;
+
+        private String payId;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Payto build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Payto(
+              this.accountNumber, this.bsbNumber, this.extraParams, this.payId);
+        }
+
+        /** The account number for the bank account. */
+        public Builder setAccountNumber(String accountNumber) {
+          this.accountNumber = accountNumber;
+          return this;
+        }
+
+        /** Bank-State-Branch number of the bank account. */
+        public Builder setBsbNumber(String bsbNumber) {
+          this.bsbNumber = bsbNumber;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The PayID alias for the bank account. */
+        public Builder setPayId(String payId) {
+          this.payId = payId;
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Pix {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4257,6 +4396,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Twint {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Twint(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Twint build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Twint(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -4607,6 +4803,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("paypal")
       PAYPAL("paypal"),
 
+      @SerializedName("payto")
+      PAYTO("payto"),
+
       @SerializedName("pix")
       PIX("pix"),
 
@@ -4624,6 +4823,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("twint")
+      TWINT("twint"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),
@@ -4680,6 +4882,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Paypal paypal;
 
     /**
+     * If this is a {@code payto} SetupIntent, this sub-hash contains details about the PayTo
+     * payment method options.
+     */
+    @SerializedName("payto")
+    Payto payto;
+
+    /**
      * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
@@ -4699,6 +4908,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Link link,
         Paypal paypal,
+        Payto payto,
         SepaDebit sepaDebit,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
@@ -4706,6 +4916,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.link = link;
       this.paypal = paypal;
+      this.payto = payto;
       this.sepaDebit = sepaDebit;
       this.usBankAccount = usBankAccount;
     }
@@ -4725,6 +4936,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Paypal paypal;
 
+      private Payto payto;
+
       private SepaDebit sepaDebit;
 
       private UsBankAccount usBankAccount;
@@ -4737,6 +4950,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.extraParams,
             this.link,
             this.paypal,
+            this.payto,
             this.sepaDebit,
             this.usBankAccount);
       }
@@ -4799,6 +5013,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setPaypal(SetupIntentConfirmParams.PaymentMethodOptions.Paypal paypal) {
         this.paypal = paypal;
+        return this;
+      }
+
+      /**
+       * If this is a {@code payto} SetupIntent, this sub-hash contains details about the PayTo
+       * payment method options.
+       */
+      public Builder setPayto(SetupIntentConfirmParams.PaymentMethodOptions.Payto payto) {
+        this.payto = payto;
         return this;
       }
 
@@ -5253,7 +5476,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
        * However, if you wish to request 3D Secure based on logic from your own fraud engine,
        * provide this option. If not provided, this value defaults to {@code automatic}. Read our
-       * guide on <a href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually
+       * guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        */
@@ -5371,7 +5595,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. If not provided, this value defaults to {@code automatic}. Read our
-         * guide on <a href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually
+         * guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
          * requesting 3D Secure</a> for more information on how this configuration interacts with
          * Radar and our SCA Engine.
          */
@@ -6524,6 +6749,372 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           }
           this.subsellers.addAll(elements);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Payto {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      private Payto(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodOptions.Payto build() {
+          return new SetupIntentConfirmParams.PaymentMethodOptions.Payto(
+              this.extraParams, this.mandateOptions);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class MandateOptions {
+        /**
+         * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * The type of amount that will be collected. The amount charged must be exact or up to the
+         * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         */
+        @SerializedName("amount_type")
+        AmountType amountType;
+
+        /**
+         * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+         * end date.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The periodicity at which payments will be collected. */
+        @SerializedName("payment_schedule")
+        PaymentSchedule paymentSchedule;
+
+        /**
+         * The number of payments that will be made during a payment period. Defaults to 1 except
+         * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+         * limit.
+         */
+        @SerializedName("payments_per_period")
+        Long paymentsPerPeriod;
+
+        /** The purpose for which payments are made. Defaults to retail. */
+        @SerializedName("purpose")
+        Purpose purpose;
+
+        /**
+         * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
+         * confirmation time.
+         */
+        @SerializedName("start_date")
+        String startDate;
+
+        private MandateOptions(
+            Long amount,
+            AmountType amountType,
+            String endDate,
+            Map<String, Object> extraParams,
+            PaymentSchedule paymentSchedule,
+            Long paymentsPerPeriod,
+            Purpose purpose,
+            String startDate) {
+          this.amount = amount;
+          this.amountType = amountType;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+          this.paymentSchedule = paymentSchedule;
+          this.paymentsPerPeriod = paymentsPerPeriod;
+          this.purpose = purpose;
+          this.startDate = startDate;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private AmountType amountType;
+
+          private String endDate;
+
+          private Map<String, Object> extraParams;
+
+          private PaymentSchedule paymentSchedule;
+
+          private Long paymentsPerPeriod;
+
+          private Purpose purpose;
+
+          private String startDate;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions build() {
+            return new SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions(
+                this.amount,
+                this.amountType,
+                this.endDate,
+                this.extraParams,
+                this.paymentSchedule,
+                this.paymentsPerPeriod,
+                this.purpose,
+                this.startDate);
+          }
+
+          /**
+           * Amount that will be collected. It is required when {@code amount_type} is {@code
+           * fixed}.
+           */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * The type of amount that will be collected. The amount charged must be exact or up to
+           * the value of {@code amount} param for {@code fixed} or {@code maximum} type
+           * respectively.
+           */
+          public Builder setAmountType(
+              SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions.AmountType
+                  amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+           * end date.
+           */
+          public Builder setEndDate(String endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The periodicity at which payments will be collected. */
+          public Builder setPaymentSchedule(
+              SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions.PaymentSchedule
+                  paymentSchedule) {
+            this.paymentSchedule = paymentSchedule;
+            return this;
+          }
+
+          /**
+           * The number of payments that will be made during a payment period. Defaults to 1 except
+           * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+           * limit.
+           */
+          public Builder setPaymentsPerPeriod(Long paymentsPerPeriod) {
+            this.paymentsPerPeriod = paymentsPerPeriod;
+            return this;
+          }
+
+          /** The purpose for which payments are made. Defaults to retail. */
+          public Builder setPurpose(
+              SetupIntentConfirmParams.PaymentMethodOptions.Payto.MandateOptions.Purpose purpose) {
+            this.purpose = purpose;
+            return this;
+          }
+
+          /**
+           * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
+           * confirmation time.
+           */
+          public Builder setStartDate(String startDate) {
+            this.startDate = startDate;
+            return this;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentSchedule implements ApiRequestParams.EnumParam {
+          @SerializedName("adhoc")
+          ADHOC("adhoc"),
+
+          @SerializedName("annual")
+          ANNUAL("annual"),
+
+          @SerializedName("daily")
+          DAILY("daily"),
+
+          @SerializedName("fortnightly")
+          FORTNIGHTLY("fortnightly"),
+
+          @SerializedName("monthly")
+          MONTHLY("monthly"),
+
+          @SerializedName("quarterly")
+          QUARTERLY("quarterly"),
+
+          @SerializedName("semi_annual")
+          SEMI_ANNUAL("semi_annual"),
+
+          @SerializedName("weekly")
+          WEEKLY("weekly");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentSchedule(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Purpose implements ApiRequestParams.EnumParam {
+          @SerializedName("dependant_support")
+          DEPENDANT_SUPPORT("dependant_support"),
+
+          @SerializedName("government")
+          GOVERNMENT("government"),
+
+          @SerializedName("loan")
+          LOAN("loan"),
+
+          @SerializedName("mortgage")
+          MORTGAGE("mortgage"),
+
+          @SerializedName("other")
+          OTHER("other"),
+
+          @SerializedName("pension")
+          PENSION("pension"),
+
+          @SerializedName("personal")
+          PERSONAL("personal"),
+
+          @SerializedName("retail")
+          RETAIL("retail"),
+
+          @SerializedName("salary")
+          SALARY("salary"),
+
+          @SerializedName("tax")
+          TAX("tax"),
+
+          @SerializedName("utility")
+          UTILITY("utility");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Purpose(String value) {
+            this.value = value;
+          }
         }
       }
     }

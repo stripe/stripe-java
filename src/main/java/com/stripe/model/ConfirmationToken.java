@@ -324,6 +324,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("payto")
+    Payto payto;
+
     @SerializedName("pix")
     Pix pix;
 
@@ -342,6 +345,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("twint")
+    Twint twint;
+
     /**
      * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
      * name matching this value. It contains additional information specific to the PaymentMethod
@@ -352,8 +358,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps},
      * {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code
      * klarna}, {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code
-     * paypal}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code
-     * sofort}, {@code swish}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code
+     * sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
+     * wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -518,6 +525,16 @@ public class ConfirmationToken extends ApiResource implements HasId {
        */
       @SerializedName("description")
       String description;
+
+      /**
+       * The brand to use when displaying the card, this accounts for customer's brand choice on
+       * dual-branded cards. Can be {@code american_express}, {@code cartes_bancaires}, {@code
+       * diners_club}, {@code discover}, {@code eftpos_australia}, {@code interac}, {@code jcb},
+       * {@code mastercard}, {@code union_pay}, {@code visa}, or {@code other} and may contain more
+       * values in the future.
+       */
+      @SerializedName("display_brand")
+      String displayBrand;
 
       /** Two-digit number representing the card's expiration month. */
       @SerializedName("exp_month")
@@ -1181,6 +1198,23 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      /** Bank-State-Branch number of the bank account. */
+      @SerializedName("bsb_number")
+      String bsbNumber;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** The PayID alias for the bank account. */
+      @SerializedName("pay_id")
+      String payId;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pix extends StripeObject {}
 
     @Getter
@@ -1292,6 +1326,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {}
 
     @Getter
     @Setter

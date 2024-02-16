@@ -283,6 +283,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("paypal")
     PAYPAL("paypal"),
 
+    @SerializedName("payto")
+    PAYTO("payto"),
+
     @SerializedName("pix")
     PIX("pix"),
 
@@ -300,6 +303,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("swish")
     SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),

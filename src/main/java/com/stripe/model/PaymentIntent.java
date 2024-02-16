@@ -15,6 +15,7 @@ import com.stripe.param.PaymentIntentCancelParams;
 import com.stripe.param.PaymentIntentCaptureParams;
 import com.stripe.param.PaymentIntentConfirmParams;
 import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.PaymentIntentDecrementAuthorizationParams;
 import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
@@ -803,9 +804,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm() throws StripeException {
     return confirm((Map<String, Object>) null, (RequestOptions) null);
@@ -829,9 +828,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(RequestOptions options) throws StripeException {
     return confirm((Map<String, Object>) null, options);
@@ -855,9 +852,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(Map<String, Object> params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -881,9 +876,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -913,9 +906,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(PaymentIntentConfirmParams params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -939,9 +930,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
+   * next payment attempt.
    */
   public PaymentIntent confirm(PaymentIntentConfirmParams params, RequestOptions options)
       throws StripeException {
@@ -1041,6 +1030,122 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
+   * Perform an decremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
+   * must be {@code available}.
+   *
+   * <p>Decremental authorizations decrease the authorized amount on your customer’s card to the
+   * new, lower {@code amount} provided. A single PaymentIntent can call this endpoint multiple
+   * times to further decrease the authorized amount.
+   *
+   * <p>After decrement, the PaymentIntent object returns with the updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * The PaymentIntent will now be capturable up to the new authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
+   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * decremented.
+   */
+  public PaymentIntent decrementAuthorization(Map<String, Object> params) throws StripeException {
+    return decrementAuthorization(params, (RequestOptions) null);
+  }
+
+  /**
+   * Perform an decremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
+   * must be {@code available}.
+   *
+   * <p>Decremental authorizations decrease the authorized amount on your customer’s card to the
+   * new, lower {@code amount} provided. A single PaymentIntent can call this endpoint multiple
+   * times to further decrease the authorized amount.
+   *
+   * <p>After decrement, the PaymentIntent object returns with the updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * The PaymentIntent will now be capturable up to the new authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
+   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * decremented.
+   */
+  public PaymentIntent decrementAuthorization(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_intents/%s/decrement_authorization",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
+   * Perform an decremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
+   * must be {@code available}.
+   *
+   * <p>Decremental authorizations decrease the authorized amount on your customer’s card to the
+   * new, lower {@code amount} provided. A single PaymentIntent can call this endpoint multiple
+   * times to further decrease the authorized amount.
+   *
+   * <p>After decrement, the PaymentIntent object returns with the updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * The PaymentIntent will now be capturable up to the new authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
+   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * decremented.
+   */
+  public PaymentIntent decrementAuthorization(PaymentIntentDecrementAuthorizationParams params)
+      throws StripeException {
+    return decrementAuthorization(params, (RequestOptions) null);
+  }
+
+  /**
+   * Perform an decremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
+   * must be {@code available}.
+   *
+   * <p>Decremental authorizations decrease the authorized amount on your customer’s card to the
+   * new, lower {@code amount} provided. A single PaymentIntent can call this endpoint multiple
+   * times to further decrease the authorized amount.
+   *
+   * <p>After decrement, the PaymentIntent object returns with the updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * The PaymentIntent will now be capturable up to the new authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
+   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * decremented.
+   */
+  public PaymentIntent decrementAuthorization(
+      PaymentIntentDecrementAuthorizationParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_intents/%s/decrement_authorization",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, PaymentIntent.class);
   }
 
   /**
@@ -2146,7 +2251,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("hosted_instructions_url")
       String hostedInstructionsUrl;
 
-      /** The url for mobile redirect based auth. */
+      /**
+       * The url for mobile redirect based auth (for internal use only and not typically available
+       * in standard API requests).
+       */
       @SerializedName("mobile_auth_url")
       String mobileAuthUrl;
 
@@ -2662,6 +2770,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("payto")
+    Payto payto;
+
     @SerializedName("pix")
     Pix pix;
 
@@ -3035,6 +3146,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       /**
        * Request ability to <a
+       * href="https://stripe.com/docs/payments/decremental-authorization">decrement the
+       * authorization</a> for this PaymentIntent.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_decremental_authorization")
+      String requestDecrementalAuthorization;
+
+      /**
+       * Request ability to <a
        * href="https://stripe.com/docs/payments/extended-authorization">capture beyond the standard
        * authorization validity window</a> for this PaymentIntent.
        *
@@ -3077,7 +3198,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
        * However, if you wish to request 3D Secure based on logic from your own fraud engine,
        * provide this option. If not provided, this value defaults to {@code automatic}. Read our
-       * guide on <a href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually
+       * guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        *
@@ -3845,6 +3967,88 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("subsellers")
       List<String> subsellers;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * The type of amount that will be collected. The amount charged must be exact or up to the
+         * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+         * end date.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * The periodicity at which payments will be collected.
+         *
+         * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
+         * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /**
+         * The number of payments that will be made during a payment period. Defaults to 1 except
+         * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+         * limit.
+         */
+        @SerializedName("payments_per_period")
+        Long paymentsPerPeriod;
+
+        /**
+         * The purpose for which payments are made. Defaults to retail.
+         *
+         * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
+         * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code
+         * tax}, or {@code utility}.
+         */
+        @SerializedName("purpose")
+        String purpose;
+      }
     }
 
     @Getter
