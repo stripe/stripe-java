@@ -1,5 +1,12 @@
 # Changelog
 
+## 24.16.0 - 2024-02-15
+* [#1745](https://github.com/stripe/stripe-java/pull/1745) Update generated code
+  * Add support for `networks` on `Card`, `PaymentMethodCreateParams.CardDetails`, `PaymentMethodUpdateParams.Card`, and `TokenCreateParams.Card`
+  * Add support for new value `no_voec` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `TaxIdCreateParams.type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for `display_brand` on `PaymentMethod.card`
+  * Add support for new value `financial_connections.account.refreshed_ownership` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 24.16.0-beta.1 - 2024-02-08
 * [#1743](https://github.com/stripe/stripe-java/pull/1743) Update generated code for beta
   * Add support for `payment_method_options` on `ConfirmationToken`

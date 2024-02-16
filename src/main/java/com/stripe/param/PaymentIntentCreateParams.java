@@ -5780,6 +5780,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Swish swish;
 
     /**
+     * If this is a Twint PaymentMethod, this hash contains details about the Twint payment method.
+     */
+    @SerializedName("twint")
+    Twint twint;
+
+    /**
      * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
      * the PaymentMethod with a name matching this value. It contains additional information
      * specific to the PaymentMethod type.
@@ -5844,6 +5850,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
+        Twint twint,
         Type type,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
@@ -5883,6 +5890,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
+      this.twint = twint;
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
@@ -5964,6 +5972,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Swish swish;
 
+      private Twint twint;
+
       private Type type;
 
       private UsBankAccount usBankAccount;
@@ -6010,6 +6020,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.swish,
+            this.twint,
             this.type,
             this.usBankAccount,
             this.wechatPay,
@@ -6372,6 +6383,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setSwish(PaymentIntentCreateParams.PaymentMethodData.Swish swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a Twint PaymentMethod, this hash contains details about the Twint payment
+       * method.
+       */
+      public Builder setTwint(PaymentIntentCreateParams.PaymentMethodData.Twint twint) {
+        this.twint = twint;
         return this;
       }
 
@@ -9285,6 +9305,63 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Twint {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Twint(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodData.Twint build() {
+          return new PaymentIntentCreateParams.PaymentMethodData.Twint(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -9655,6 +9732,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("twint")
+      TWINT("twint"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),
