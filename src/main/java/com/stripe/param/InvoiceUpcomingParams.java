@@ -193,9 +193,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * Determines how to handle <a
-   * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
-   * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
-   * or starting a trial), or if an item's {@code quantity} changes. The default value is {@code
+   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the billing
+   * cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now}, or
+   * starting a trial), or if an item's {@code quantity} changes. The default value is {@code
    * create_prorations}. This field has been deprecated and will be removed in a future API version.
    * Use {@code subscription_details.proration_behavior} instead.
    */
@@ -814,7 +814,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      * The default value is {@code create_prorations}. This field has been deprecated and will be
@@ -12819,7 +12819,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      * The default value is {@code create_prorations}.
@@ -13109,8 +13109,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       /**
        * Determines how to handle <a
-       * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when
-       * the billing cycle changes (e.g., when switching plans, resetting {@code
+       * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
+       * billing cycle changes (e.g., when switching plans, resetting {@code
        * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
        * The default value is {@code create_prorations}.
        */

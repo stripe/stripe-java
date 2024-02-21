@@ -266,8 +266,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Determines how to handle <a
-   * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> resulting
-   * from the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
+   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
+   * the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
    * create_prorations}.
    */
   @SerializedName("proration_behavior")
@@ -1042,8 +1042,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>
-     * resulting from the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
+     * the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
      * create_prorations}.
      */
     public Builder setProrationBehavior(
