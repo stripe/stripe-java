@@ -188,11 +188,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
   PaymentSettings paymentSettings;
 
   /**
-   * How to handle pending invoice items on invoice creation. One of {@code include} or {@code
-   * exclude}. {@code include} will include any pending invoice items, and will create an empty
-   * draft invoice if no pending invoice items exist. {@code exclude} will always create an empty
-   * invoice draft regardless if there are pending invoice items or not. Defaults to {@code exclude}
-   * if the parameter is omitted.
+   * How to handle pending invoice items on invoice creation. Defaults to {@code exclude} if the
+   * parameter is omitted.
    */
   @SerializedName("pending_invoice_items_behavior")
   PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
@@ -916,11 +913,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * How to handle pending invoice items on invoice creation. One of {@code include} or {@code
-     * exclude}. {@code include} will include any pending invoice items, and will create an empty
-     * draft invoice if no pending invoice items exist. {@code exclude} will always create an empty
-     * invoice draft regardless if there are pending invoice items or not. Defaults to {@code
-     * exclude} if the parameter is omitted.
+     * How to handle pending invoice items on invoice creation. Defaults to {@code exclude} if the
+     * parameter is omitted.
      */
     public Builder setPendingInvoiceItemsBehavior(
         InvoiceCreateParams.PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior) {
@@ -5457,10 +5451,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     EXCLUDE("exclude"),
 
     @SerializedName("include")
-    INCLUDE("include"),
-
-    @SerializedName("include_and_require")
-    INCLUDE_AND_REQUIRE("include_and_require");
+    INCLUDE("include");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
