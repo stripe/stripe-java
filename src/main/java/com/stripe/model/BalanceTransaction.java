@@ -318,7 +318,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
     @SerializedName("description")
     String description;
 
-    /** Type of the fee, one of: {@code application_fee}, {@code stripe_fee} or {@code tax}. */
+    /**
+     * Type of the fee, one of: {@code application_fee}, {@code payment_method_passthrough_fee},
+     * {@code stripe_fee} or {@code tax}.
+     */
     @SerializedName("type")
     String type;
   }
