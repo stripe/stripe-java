@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class CustomerListParams extends ApiRequestParams {
+  /** Only return customers that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -119,11 +120,13 @@ public class CustomerListParams extends ApiRequestParams {
           this.testClock);
     }
 
+    /** Only return customers that were created during the given date interval. */
     public Builder setCreated(CustomerListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return customers that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

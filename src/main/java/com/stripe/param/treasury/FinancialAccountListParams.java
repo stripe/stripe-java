@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class FinancialAccountListParams extends ApiRequestParams {
+  /** Only return FinancialAccounts that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -82,11 +83,13 @@ public class FinancialAccountListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
+    /** Only return FinancialAccounts that were created during the given date interval. */
     public Builder setCreated(FinancialAccountListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return FinancialAccounts that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

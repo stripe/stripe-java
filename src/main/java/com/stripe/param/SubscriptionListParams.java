@@ -22,6 +22,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
 
+  /** Only return subscriptions that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -202,11 +203,13 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return subscriptions that were created during the given date interval. */
     public Builder setCreated(SubscriptionListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return subscriptions that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

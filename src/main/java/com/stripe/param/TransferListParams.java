@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class TransferListParams extends ApiRequestParams {
+  /** Only return transfers that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -113,11 +114,13 @@ public class TransferListParams extends ApiRequestParams {
           this.transferGroup);
     }
 
+    /** Only return transfers that were created during the given date interval. */
     public Builder setCreated(TransferListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return transfers that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

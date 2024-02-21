@@ -15,7 +15,7 @@ public class TokenListParams extends ApiRequestParams {
   @SerializedName("card")
   String card;
 
-  /** Select Issuing tokens that were created during the given date interval. */
+  /** Only return Issuing tokens that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -120,13 +120,13 @@ public class TokenListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Select Issuing tokens that were created during the given date interval. */
+    /** Only return Issuing tokens that were created during the given date interval. */
     public Builder setCreated(TokenListParams.Created created) {
       this.created = created;
       return this;
     }
 
-    /** Select Issuing tokens that were created during the given date interval. */
+    /** Only return Issuing tokens that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

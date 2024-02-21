@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ReviewListParams extends ApiRequestParams {
+  /** Only return reviews that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -95,11 +96,13 @@ public class ReviewListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
+    /** Only return reviews that were created during the given date interval. */
     public Builder setCreated(ReviewListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return reviews that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

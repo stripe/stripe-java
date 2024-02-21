@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class FileListParams extends ApiRequestParams {
+  /** Only return files that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -107,11 +108,13 @@ public class FileListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
+    /** Only return files that were created during the given date interval. */
     public Builder setCreated(FileListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return files that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class EventListParams extends ApiRequestParams {
+  /** Only return events that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -132,11 +133,13 @@ public class EventListParams extends ApiRequestParams {
           this.types);
     }
 
+    /** Only return events that were created during the given date interval. */
     public Builder setCreated(EventListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return events that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
