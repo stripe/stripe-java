@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class TransactionEntryListParams extends ApiRequestParams {
+  /** Only return TransactionEntries that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -133,11 +134,13 @@ public class TransactionEntryListParams extends ApiRequestParams {
           this.transaction);
     }
 
+    /** Only return TransactionEntries that were created during the given date interval. */
     public Builder setCreated(TransactionEntryListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return TransactionEntries that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

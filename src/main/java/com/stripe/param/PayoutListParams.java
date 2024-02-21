@@ -14,6 +14,7 @@ public class PayoutListParams extends ApiRequestParams {
   @SerializedName("arrival_date")
   Object arrivalDate;
 
+  /** Only return payouts that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -134,11 +135,13 @@ public class PayoutListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return payouts that were created during the given date interval. */
     public Builder setCreated(PayoutListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return payouts that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

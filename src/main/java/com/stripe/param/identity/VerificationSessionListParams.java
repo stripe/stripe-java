@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class VerificationSessionListParams extends ApiRequestParams {
+  /** Only return VerificationSessions that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -108,11 +109,13 @@ public class VerificationSessionListParams extends ApiRequestParams {
           this.status);
     }
 
+    /** Only return VerificationSessions that were created during the given date interval. */
     public Builder setCreated(VerificationSessionListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return VerificationSessions that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class SessionListParams extends ApiRequestParams {
-  /** Only return the Checkout Sessions that were created during the given date interval. */
+  /** Only return Checkout Sessions that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -150,13 +150,13 @@ public class SessionListParams extends ApiRequestParams {
           this.subscription);
     }
 
-    /** Only return the Checkout Sessions that were created during the given date interval. */
+    /** Only return Checkout Sessions that were created during the given date interval. */
     public Builder setCreated(SessionListParams.Created created) {
       this.created = created;
       return this;
     }
 
-    /** Only return the Checkout Sessions that were created during the given date interval. */
+    /** Only return Checkout Sessions that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

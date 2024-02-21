@@ -15,6 +15,7 @@ public class RefundListParams extends ApiRequestParams {
   @SerializedName("charge")
   String charge;
 
+  /** Only return refunds that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -119,11 +120,13 @@ public class RefundListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return refunds that were created during the given date interval. */
     public Builder setCreated(RefundListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return refunds that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

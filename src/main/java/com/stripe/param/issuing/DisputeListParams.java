@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class DisputeListParams extends ApiRequestParams {
-  /** Select Issuing disputes that were created during the given date interval. */
+  /** Only return Issuing disputes that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -114,13 +114,13 @@ public class DisputeListParams extends ApiRequestParams {
           this.transaction);
     }
 
-    /** Select Issuing disputes that were created during the given date interval. */
+    /** Only return Issuing disputes that were created during the given date interval. */
     public Builder setCreated(DisputeListParams.Created created) {
       this.created = created;
       return this;
     }
 
-    /** Select Issuing disputes that were created during the given date interval. */
+    /** Only return Issuing disputes that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
