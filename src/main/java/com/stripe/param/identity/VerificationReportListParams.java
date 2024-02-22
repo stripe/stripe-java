@@ -11,6 +11,13 @@ import lombok.Getter;
 
 @Getter
 public class VerificationReportListParams extends ApiRequestParams {
+  /**
+   * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+   * be used to reconcile this verification with your internal systems.
+   */
+  @SerializedName("client_reference_id")
+  String clientReferenceId;
+
   /** Only return VerificationReports that were created during the given date interval. */
   @SerializedName("created")
   Object created;
@@ -65,6 +72,7 @@ public class VerificationReportListParams extends ApiRequestParams {
   String verificationSession;
 
   private VerificationReportListParams(
+      String clientReferenceId,
       Object created,
       String endingBefore,
       List<String> expand,
@@ -73,6 +81,7 @@ public class VerificationReportListParams extends ApiRequestParams {
       String startingAfter,
       Type type,
       String verificationSession) {
+    this.clientReferenceId = clientReferenceId;
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -88,6 +97,8 @@ public class VerificationReportListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String clientReferenceId;
+
     private Object created;
 
     private String endingBefore;
@@ -107,6 +118,7 @@ public class VerificationReportListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public VerificationReportListParams build() {
       return new VerificationReportListParams(
+          this.clientReferenceId,
           this.created,
           this.endingBefore,
           this.expand,
@@ -115,6 +127,15 @@ public class VerificationReportListParams extends ApiRequestParams {
           this.startingAfter,
           this.type,
           this.verificationSession);
+    }
+
+    /**
+     * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+     * be used to reconcile this verification with your internal systems.
+     */
+    public Builder setClientReferenceId(String clientReferenceId) {
+      this.clientReferenceId = clientReferenceId;
+      return this;
     }
 
     /** Only return VerificationReports that were created during the given date interval. */

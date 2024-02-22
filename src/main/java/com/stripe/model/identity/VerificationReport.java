@@ -41,6 +41,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class VerificationReport extends ApiResource implements HasId {
+  /**
+   * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+   * be used to reconcile this verification with your internal systems.
+   */
+  @SerializedName("client_reference_id")
+  String clientReferenceId;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;

@@ -11,6 +11,13 @@ import lombok.Getter;
 
 @Getter
 public class VerificationSessionListParams extends ApiRequestParams {
+  /**
+   * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+   * be used to reconcile this verification with your internal systems.
+   */
+  @SerializedName("client_reference_id")
+  String clientReferenceId;
+
   /** Only return VerificationSessions that were created during the given date interval. */
   @SerializedName("created")
   Object created;
@@ -62,6 +69,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
   Status status;
 
   private VerificationSessionListParams(
+      String clientReferenceId,
       Object created,
       String endingBefore,
       List<String> expand,
@@ -69,6 +77,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
       Long limit,
       String startingAfter,
       Status status) {
+    this.clientReferenceId = clientReferenceId;
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -83,6 +92,8 @@ public class VerificationSessionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String clientReferenceId;
+
     private Object created;
 
     private String endingBefore;
@@ -100,6 +111,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public VerificationSessionListParams build() {
       return new VerificationSessionListParams(
+          this.clientReferenceId,
           this.created,
           this.endingBefore,
           this.expand,
@@ -107,6 +119,15 @@ public class VerificationSessionListParams extends ApiRequestParams {
           this.limit,
           this.startingAfter,
           this.status);
+    }
+
+    /**
+     * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+     * be used to reconcile this verification with your internal systems.
+     */
+    public Builder setClientReferenceId(String clientReferenceId) {
+      this.clientReferenceId = clientReferenceId;
+      return this;
     }
 
     /** Only return VerificationSessions that were created during the given date interval. */
