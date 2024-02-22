@@ -47,6 +47,13 @@ import lombok.Setter;
 public class VerificationSession extends ApiResource
     implements HasId, MetadataStore<VerificationSession> {
   /**
+   * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+   * be used to reconcile this verification with your internal systems.
+   */
+  @SerializedName("client_reference_id")
+  String clientReferenceId;
+
+  /**
    * The short-lived client secret used by Stripe.js to <a
    * href="https://stripe.com/docs/js/identity/modal">show a verification modal</a> inside your app.
    * This client secret expires after 24 hours and can only be used once. Don’t store it, log it,

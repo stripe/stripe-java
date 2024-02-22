@@ -12,6 +12,13 @@ import lombok.Getter;
 
 @Getter
 public class VerificationSessionCreateParams extends ApiRequestParams {
+  /**
+   * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+   * be used to reconcile this verification with your internal systems.
+   */
+  @SerializedName("client_reference_id")
+  String clientReferenceId;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -51,12 +58,14 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   Type type;
 
   private VerificationSessionCreateParams(
+      String clientReferenceId,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       Options options,
       String returnUrl,
       Type type) {
+    this.clientReferenceId = clientReferenceId;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -70,6 +79,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String clientReferenceId;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -85,7 +96,22 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public VerificationSessionCreateParams build() {
       return new VerificationSessionCreateParams(
-          this.expand, this.extraParams, this.metadata, this.options, this.returnUrl, this.type);
+          this.clientReferenceId,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.options,
+          this.returnUrl,
+          this.type);
+    }
+
+    /**
+     * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
+     * be used to reconcile this verification with your internal systems.
+     */
+    public Builder setClientReferenceId(String clientReferenceId) {
+      this.clientReferenceId = clientReferenceId;
+      return this;
     }
 
     /**
