@@ -15,6 +15,7 @@ public class ApplicationFeeListParams extends ApiRequestParams {
   @SerializedName("charge")
   String charge;
 
+  /** Only return applications fees that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -110,11 +111,13 @@ public class ApplicationFeeListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return applications fees that were created during the given date interval. */
     public Builder setCreated(ApplicationFeeListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return applications fees that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

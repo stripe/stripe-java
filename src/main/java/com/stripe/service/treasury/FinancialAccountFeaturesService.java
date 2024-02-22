@@ -13,6 +13,8 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.treasury.FinancialAccountFeaturesCreateParams;
 import com.stripe.param.treasury.FinancialAccountFeaturesListParams;
+import com.stripe.param.treasury.FinancialAccountFeaturesRetrieveParams;
+import com.stripe.param.treasury.FinancialAccountFeaturesUpdateParams;
 
 public final class FinancialAccountFeaturesService extends ApiService {
   public FinancialAccountFeaturesService(StripeResponseGetter responseGetter) {
@@ -20,23 +22,23 @@ public final class FinancialAccountFeaturesService extends ApiService {
   }
 
   /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures create(
-      String financialAccount, FinancialAccountFeaturesCreateParams params) throws StripeException {
-    return create(financialAccount, params, (RequestOptions) null);
+  public FinancialAccountFeatures update(
+      String financialAccount, FinancialAccountFeaturesUpdateParams params) throws StripeException {
+    return update(financialAccount, params, (RequestOptions) null);
   }
   /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures create(String financialAccount, RequestOptions options)
+  public FinancialAccountFeatures update(String financialAccount, RequestOptions options)
       throws StripeException {
-    return create(financialAccount, (FinancialAccountFeaturesCreateParams) null, options);
+    return update(financialAccount, (FinancialAccountFeaturesUpdateParams) null, options);
   }
   /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures create(String financialAccount) throws StripeException {
-    return create(
-        financialAccount, (FinancialAccountFeaturesCreateParams) null, (RequestOptions) null);
+  public FinancialAccountFeatures update(String financialAccount) throws StripeException {
+    return update(
+        financialAccount, (FinancialAccountFeaturesUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures create(
-      String financialAccount, FinancialAccountFeaturesCreateParams params, RequestOptions options)
+  public FinancialAccountFeatures update(
+      String financialAccount, FinancialAccountFeaturesUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -46,6 +48,42 @@ public final class FinancialAccountFeaturesService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, FinancialAccountFeatures.class);
+  }
+  /** Retrieves Features information associated with the FinancialAccount. */
+  public FinancialAccountFeatures retrieve(
+      String financialAccount, FinancialAccountFeaturesRetrieveParams params)
+      throws StripeException {
+    return retrieve(financialAccount, params, (RequestOptions) null);
+  }
+  /** Retrieves Features information associated with the FinancialAccount. */
+  public FinancialAccountFeatures retrieve(String financialAccount, RequestOptions options)
+      throws StripeException {
+    return retrieve(financialAccount, (FinancialAccountFeaturesRetrieveParams) null, options);
+  }
+  /** Retrieves Features information associated with the FinancialAccount. */
+  public FinancialAccountFeatures retrieve(String financialAccount) throws StripeException {
+    return retrieve(
+        financialAccount, (FinancialAccountFeaturesRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves Features information associated with the FinancialAccount. */
+  public FinancialAccountFeatures retrieve(
+      String financialAccount,
+      FinancialAccountFeaturesRetrieveParams params,
+      RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/treasury/financial_accounts/%s/features",
+            ApiResource.urlEncodeId(financialAccount));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
@@ -78,6 +116,39 @@ public final class FinancialAccountFeaturesService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, FinancialAccountFeatures.class);
+  }
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures create(
+      String financialAccount, FinancialAccountFeaturesCreateParams params) throws StripeException {
+    return create(financialAccount, params, (RequestOptions) null);
+  }
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures create(String financialAccount, RequestOptions options)
+      throws StripeException {
+    return create(financialAccount, (FinancialAccountFeaturesCreateParams) null, options);
+  }
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures create(String financialAccount) throws StripeException {
+    return create(
+        financialAccount, (FinancialAccountFeaturesCreateParams) null, (RequestOptions) null);
+  }
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures create(
+      String financialAccount, FinancialAccountFeaturesCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/treasury/financial_accounts/%s/features",
+            ApiResource.urlEncodeId(financialAccount));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

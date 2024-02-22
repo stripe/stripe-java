@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class InvoiceItemListParams extends ApiRequestParams {
+  /** Only return invoice items that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -132,11 +133,13 @@ public class InvoiceItemListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
+    /** Only return invoice items that were created during the given date interval. */
     public Builder setCreated(InvoiceItemListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return invoice items that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

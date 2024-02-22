@@ -15,6 +15,7 @@ public class FinancingOfferListParams extends ApiRequestParams {
   @SerializedName("connected_account")
   String connectedAccount;
 
+  /** Only return offers that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -119,11 +120,13 @@ public class FinancingOfferListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return offers that were created during the given date interval. */
     public Builder setCreated(FinancingOfferListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return offers that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
