@@ -1,5 +1,13 @@
 # Changelog
 
+## 24.17.0 - 2024-02-22
+* [#1748](https://github.com/stripe/stripe-java/pull/1748) Update generated code
+  * Add support for `client_reference_id` on `Identity.VerificationReport`, `Identity.VerificationSession`, `identity.VerificationReportListParams`, `identity.VerificationSessionCreateParams`, and `identity.VerificationSessionListParams`
+  * Remove support for value `include_and_require` from enum `InvoiceCreateParams.pending_invoice_items_behavior`
+  * Remove support for value `service_tax` from enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
+  * Add support for `created` on `treasury.OutboundPaymentListParams`
+  * Add `InvoiceLineItem.update` method.
+
 ## 24.17.0-beta.1 - 2024-02-16
 * [#1746](https://github.com/stripe/stripe-java/pull/1746) Update generated code for beta
   * Add support for `payto` and `twint` payment methods across the API
