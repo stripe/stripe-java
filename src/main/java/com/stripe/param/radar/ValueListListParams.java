@@ -19,6 +19,7 @@ public class ValueListListParams extends ApiRequestParams {
   @SerializedName("contains")
   String contains;
 
+  /** Only return value lists that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -125,11 +126,13 @@ public class ValueListListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return value lists that were created during the given date interval. */
     public Builder setCreated(ValueListListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return value lists that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

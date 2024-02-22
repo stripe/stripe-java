@@ -18,6 +18,7 @@ public class InvoiceListParams extends ApiRequestParams {
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
 
+  /** Only return invoices that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -155,11 +156,13 @@ public class InvoiceListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return invoices that were created during the given date interval. */
     public Builder setCreated(InvoiceListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return invoices that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

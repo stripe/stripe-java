@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ChargeListParams extends ApiRequestParams {
+  /** Only return charges that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -124,11 +125,13 @@ public class ChargeListParams extends ApiRequestParams {
           this.transferGroup);
     }
 
+    /** Only return charges that were created during the given date interval. */
     public Builder setCreated(ChargeListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return charges that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

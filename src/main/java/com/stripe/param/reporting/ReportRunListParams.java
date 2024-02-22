@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ReportRunListParams extends ApiRequestParams {
+  /** Only return Report Runs that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -95,11 +96,13 @@ public class ReportRunListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
+    /** Only return Report Runs that were created during the given date interval. */
     public Builder setCreated(ReportRunListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return Report Runs that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

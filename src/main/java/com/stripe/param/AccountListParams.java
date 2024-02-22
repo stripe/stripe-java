@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class AccountListParams extends ApiRequestParams {
+  /** Only return connected accounts that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -95,11 +96,13 @@ public class AccountListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
+    /** Only return connected accounts that were created during the given date interval. */
     public Builder setCreated(AccountListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return connected accounts that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

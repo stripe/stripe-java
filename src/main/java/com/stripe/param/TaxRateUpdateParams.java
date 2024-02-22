@@ -378,11 +378,11 @@ public class TaxRateUpdateParams extends ApiRequestParams {
     @SerializedName("sales_tax")
     SALES_TAX("sales_tax"),
 
-    @SerializedName("service_tax")
-    SERVICE_TAX("service_tax"),
-
     @SerializedName("vat")
-    VAT("vat");
+    VAT("vat"),
+
+    @SerializedName("service_tax")
+    SERVICE_TAX("service_tax");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

@@ -423,7 +423,8 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
 
       /**
        * Determines how to handle prorations resulting from subscription updates. Valid values are
-       * {@code none}, {@code create_prorations}, and {@code always_invoice}.
+       * {@code none}, {@code create_prorations}, and {@code always_invoice}. Defaults to a value of
+       * {@code none} if you don't set it during creation.
        *
        * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
        */
