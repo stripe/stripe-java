@@ -34,12 +34,7 @@ public abstract class Stripe {
    */
   public static volatile String stripeVersion = API_VERSION;
 
-  /**
-   * Add a specified beta to the global Stripe API Version. Only call this method once per beta.
-   *
-   * @param betaName
-   * @param betaVersion
-   */
+  /** Add a specified beta to the global Stripe API Version. Only call this method once per beta. */
   public static void addBetaVersion(String betaName, String betaVersion) {
     if (stripeVersion.indexOf("; " + betaName) >= 0) {
       throw new RuntimeException(
