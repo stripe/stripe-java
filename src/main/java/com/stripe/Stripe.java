@@ -42,7 +42,10 @@ public abstract class Stripe {
    */
   public static void addBetaVersion(String betaName, String betaVersion) {
     if (stripeVersion.indexOf("; " + betaName) >= 0) {
-      throw new RuntimeException(String.format("Stripe version header %s already contains entry for beta %s", stripeVersion, betaName));
+      throw new RuntimeException(
+          String.format(
+              "Stripe version header %s already contains entry for beta %s",
+              stripeVersion, betaName));
     }
 
     stripeVersion = String.format("%s; %s=%s", stripeVersion, betaName, betaVersion);
