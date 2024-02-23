@@ -36,7 +36,7 @@ public abstract class Stripe {
 
   /** Add a specified beta to the global Stripe API Version. Only call this method once per beta. */
   public static void addBetaVersion(String betaName, String betaVersion) {
-    if (stripeVersion.indexOf("; " + betaName + "=") >= 0 ) {
+    if (stripeVersion.indexOf("; " + betaName + "=") >= 0) {
       throw new RuntimeException(
           String.format(
               "Stripe version header %s already contains entry for beta %s",
