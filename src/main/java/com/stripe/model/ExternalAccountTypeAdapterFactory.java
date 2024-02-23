@@ -83,6 +83,27 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
     }
     /** Unsupported operation for unknown subtype. */
     @Override
+    public ExternalAccount update(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      throw new UnsupportedOperationException(
+          String.format(
+              "Unknown subtype of ExternalAccount with id: %s, object: %s, "
+                  + "does not implement method: update. "
+                  + "Please contact support@stripe.com for assistance.",
+              this.id, this.object));
+    }
+    /** Unsupported operation for unknown subtype. */
+    @Override
+    public ExternalAccount update(Map<String, Object> params) throws StripeException {
+      throw new UnsupportedOperationException(
+          String.format(
+              "Unknown subtype of ExternalAccount with id: %s, object: %s, "
+                  + "does not implement method: update. "
+                  + "Please contact support@stripe.com for assistance.",
+              this.id, this.object));
+    }
+    /** Unsupported operation for unknown subtype. */
+    @Override
     public ExternalAccount delete(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       throw new UnsupportedOperationException(
@@ -119,27 +140,6 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
           String.format(
               "Unknown subtype of ExternalAccount with id: %s, object: %s, "
                   + "does not implement method: delete. "
-                  + "Please contact support@stripe.com for assistance.",
-              this.id, this.object));
-    }
-    /** Unsupported operation for unknown subtype. */
-    @Override
-    public ExternalAccount update(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
-      throw new UnsupportedOperationException(
-          String.format(
-              "Unknown subtype of ExternalAccount with id: %s, object: %s, "
-                  + "does not implement method: update. "
-                  + "Please contact support@stripe.com for assistance.",
-              this.id, this.object));
-    }
-    /** Unsupported operation for unknown subtype. */
-    @Override
-    public ExternalAccount update(Map<String, Object> params) throws StripeException {
-      throw new UnsupportedOperationException(
-          String.format(
-              "Unknown subtype of ExternalAccount with id: %s, object: %s, "
-                  + "does not implement method: update. "
                   + "Please contact support@stripe.com for assistance.",
               this.id, this.object));
     }
