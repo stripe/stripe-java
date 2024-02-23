@@ -34,6 +34,20 @@ public abstract class Stripe {
    */
   public static volatile String stripeVersion = API_VERSION;
 
+  /**
+   * Add a specified beta to the global Stripe API Version. Only call this method once per beta.
+   *
+   * @param betaName
+   * @param betaVersion
+   */
+  public static void addBetaVersion(String betaName, String betaVersion) {
+    if (stripeVersion.indexOf("; " + betaName) >= 0) {
+      throw new RuntimeException(String.format("Stripe version header %s already contains entry for beta %s", stripeVersion, betaName));
+    }
+
+    stripeVersion = String.format("%s; %s=%s", stripeVersion, betaName, betaVersion);
+  }
+
   // Note that URLConnection reserves the value of 0 to mean "infinite
   // timeout", so we use -1 here to represent an unset value which should
   // fall back to a default.
