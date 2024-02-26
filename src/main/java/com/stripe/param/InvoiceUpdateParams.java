@@ -147,6 +147,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
+   * Set the number for this invoice. If no number is present then a number will be assigned
+   * automatically when the invoice is finalized. In many markets, regulations require invoices to
+   * be unique, sequential and / or gapless. You are responsible for ensuring this is true across
+   * all your different invoicing systems in the event that you edit the invoice number using our
+   * API. If you use only Stripe for your invoices and do not change invoice numbers, Stripe handles
+   * this aspect of compliance for you automatically.
+   */
+  @SerializedName("number")
+  Object number;
+
+  /**
    * The account (if any) for which the funds of the invoice payment are intended. If set, the
    * invoice will be presented with the branding and support information of the specified account.
    * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
@@ -223,6 +234,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object footer,
       Issuer issuer,
       Object metadata,
+      Object number,
       Object onBehalfOf,
       PaymentSettings paymentSettings,
       Rendering rendering,
@@ -250,6 +262,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.footer = footer;
     this.issuer = issuer;
     this.metadata = metadata;
+    this.number = number;
     this.onBehalfOf = onBehalfOf;
     this.paymentSettings = paymentSettings;
     this.rendering = rendering;
@@ -303,6 +316,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Object number;
+
     private Object onBehalfOf;
 
     private PaymentSettings paymentSettings;
@@ -341,6 +356,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.footer,
           this.issuer,
           this.metadata,
+          this.number,
           this.onBehalfOf,
           this.paymentSettings,
           this.rendering,
@@ -789,6 +805,32 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set the number for this invoice. If no number is present then a number will be assigned
+     * automatically when the invoice is finalized. In many markets, regulations require invoices to
+     * be unique, sequential and / or gapless. You are responsible for ensuring this is true across
+     * all your different invoicing systems in the event that you edit the invoice number using our
+     * API. If you use only Stripe for your invoices and do not change invoice numbers, Stripe
+     * handles this aspect of compliance for you automatically.
+     */
+    public Builder setNumber(String number) {
+      this.number = number;
+      return this;
+    }
+
+    /**
+     * Set the number for this invoice. If no number is present then a number will be assigned
+     * automatically when the invoice is finalized. In many markets, regulations require invoices to
+     * be unique, sequential and / or gapless. You are responsible for ensuring this is true across
+     * all your different invoicing systems in the event that you edit the invoice number using our
+     * API. If you use only Stripe for your invoices and do not change invoice numbers, Stripe
+     * handles this aspect of compliance for you automatically.
+     */
+    public Builder setNumber(EmptyParam number) {
+      this.number = number;
       return this;
     }
 
