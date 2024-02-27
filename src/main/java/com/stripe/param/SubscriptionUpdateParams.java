@@ -85,7 +85,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-   * only affect invoices created for that particular subscription.
+   * only affect invoices created for that particular subscription. This field has been deprecated
+   * and will be removed in a future API version. Use {@code discounts} instead.
    */
   @SerializedName("coupon")
   Object coupon;
@@ -609,7 +610,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-     * only affect invoices created for that particular subscription.
+     * only affect invoices created for that particular subscription. This field has been deprecated
+     * and will be removed in a future API version. Use {@code discounts} instead.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -618,7 +620,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-     * only affect invoices created for that particular subscription.
+     * only affect invoices created for that particular subscription. This field has been deprecated
+     * and will be removed in a future API version. Use {@code discounts} instead.
      */
     public Builder setCoupon(EmptyParam coupon) {
       this.coupon = coupon;
