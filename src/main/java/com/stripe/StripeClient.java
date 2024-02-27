@@ -297,6 +297,10 @@ public class StripeClient {
     return new com.stripe.service.TaxCodeService(this.getResponseGetter());
   }
 
+  public com.stripe.service.TaxIdService taxIds() {
+    return new com.stripe.service.TaxIdService(this.getResponseGetter());
+  }
+
   public com.stripe.service.TaxRateService taxRates() {
     return new com.stripe.service.TaxRateService(this.getResponseGetter());
   }

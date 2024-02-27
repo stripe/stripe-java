@@ -6,6 +6,10 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public interface ExternalAccount extends StripeObjectInterface, HasId {
+  ExternalAccount update(Map<String, Object> params, RequestOptions options) throws StripeException;
+
+  ExternalAccount update(Map<String, Object> params) throws StripeException;
+
   ExternalAccount delete(Map<String, Object> params, RequestOptions options) throws StripeException;
 
   ExternalAccount delete() throws StripeException;
@@ -13,8 +17,4 @@ public interface ExternalAccount extends StripeObjectInterface, HasId {
   ExternalAccount delete(RequestOptions options) throws StripeException;
 
   ExternalAccount delete(Map<String, Object> params) throws StripeException;
-
-  ExternalAccount update(Map<String, Object> params, RequestOptions options) throws StripeException;
-
-  ExternalAccount update(Map<String, Object> params) throws StripeException;
 }
