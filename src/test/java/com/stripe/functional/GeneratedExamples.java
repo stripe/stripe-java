@@ -14248,11 +14248,11 @@ class GeneratedExamples extends BaseStripeTest {
   public void testTreasuryFinancialAccountsFeaturesGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.treasury.FinancialAccountFeaturesListParams params =
-        com.stripe.param.treasury.FinancialAccountFeaturesListParams.builder().build();
+    com.stripe.param.treasury.FinancialAccountFeaturesRetrieveParams params =
+        com.stripe.param.treasury.FinancialAccountFeaturesRetrieveParams.builder().build();
 
     com.stripe.model.treasury.FinancialAccountFeatures financialAccountFeatures =
-        client.treasury().financialAccounts().features().list("fa_xxxxxxxxxxxxx", params);
+        client.treasury().financialAccounts().features().retrieve("fa_xxxxxxxxxxxxx", params);
     assertNotNull(financialAccountFeatures);
     verifyRequest(
         BaseAddress.API,

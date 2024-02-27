@@ -109,10 +109,6 @@ public class StripeClient {
     return new com.stripe.service.BalanceTransactionService(this.getResponseGetter());
   }
 
-  public com.stripe.service.BankAccountService bankAccounts() {
-    return new com.stripe.service.BankAccountService(this.getResponseGetter());
-  }
-
   public com.stripe.service.BillingPortalService billingPortal() {
     return new com.stripe.service.BillingPortalService(this.getResponseGetter());
   }
