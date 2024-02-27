@@ -9,10 +9,6 @@ public final class EntitlementsService extends ApiService {
     super(responseGetter);
   }
 
-  public com.stripe.service.entitlements.EventService events() {
-    return new com.stripe.service.entitlements.EventService(this.getResponseGetter());
-  }
-
   public com.stripe.service.entitlements.FeatureService features() {
     return new com.stripe.service.entitlements.FeatureService(this.getResponseGetter());
   }

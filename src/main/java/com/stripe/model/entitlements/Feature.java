@@ -4,14 +4,12 @@ package com.stripe.model.entitlements;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.entitlements.FeatureCreateParams;
 import com.stripe.param.entitlements.FeatureListParams;
 import java.util.Map;
@@ -55,18 +53,6 @@ public class Feature extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
-
-  /** Contains information about type=quantity features. This is required when type=quantity. */
-  @SerializedName("quantity")
-  Quantity quantity;
-
-  /**
-   * The type of feature.
-   *
-   * <p>One of {@code quantity}, or {@code switch}.
-   */
-  @SerializedName("type")
-  String type;
 
   /** Creates a feature. */
   public static Feature create(Map<String, Object> params) throws StripeException {
@@ -138,23 +124,5 @@ public class Feature extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, FeatureCollection.class);
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Quantity extends StripeObject {
-    /**
-     * The quantity of units made available by this feature. This quantity will be multiplied by the
-     * line_item quantity for line_items that contain this feature.
-     */
-    @SerializedName("units_available")
-    Long unitsAvailable;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(quantity, responseGetter);
   }
 }

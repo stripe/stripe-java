@@ -9,7 +9,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CustomerEntitlementListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -49,21 +48,6 @@ public class CustomerEntitlement extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /**
-   * Contains information about entitlements relating to features with type=quantity. Required when
-   * the feature has type=quantity.
-   */
-  @SerializedName("quantity")
-  Quantity quantity;
-
-  /**
-   * The type of feature.
-   *
-   * <p>One of {@code quantity}, or {@code switch}.
-   */
-  @SerializedName("type")
-  String type;
-
   /** Retrieve a list of entitlements for a customer. */
   public static CustomerEntitlementCollection list(String customer, Map<String, Object> params)
       throws StripeException {
@@ -101,20 +85,5 @@ public class CustomerEntitlement extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, CustomerEntitlementCollection.class);
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Quantity extends StripeObject {
-    /** The total quantity available to the customer. */
-    @SerializedName("total_available")
-    Long totalAvailable;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(quantity, responseGetter);
   }
 }
