@@ -164,7 +164,7 @@ public class BankAccount extends ApiResource
    *
    * <p>For external accounts, possible values are {@code new}, {@code errored} and {@code
    * verification_failed}. If a payouts fails, the status is set to {@code errored} and scheduled
-   * payouts are stopped until account details are updated. In India, if we can't <a
+   * payouts are stopped until account details are updated. In US and India, if we can't <a
    * href="https://support.stripe.com/questions/bank-account-ownership-verification">verify the
    * owner of the bank account</a>, we'll set the status to {@code verification_failed}. Other
    * validations aren't run against external accounts because they're only used for payouts. This
