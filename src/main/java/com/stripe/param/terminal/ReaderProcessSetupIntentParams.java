@@ -147,6 +147,10 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
 
   @Getter
   public static class ProcessConfig {
+    /** Enables cancel button on transaction screens. */
+    @SerializedName("enable_customer_cancellation")
+    Boolean enableCustomerCancellation;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -156,7 +160,8 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private ProcessConfig(Map<String, Object> extraParams) {
+    private ProcessConfig(Boolean enableCustomerCancellation, Map<String, Object> extraParams) {
+      this.enableCustomerCancellation = enableCustomerCancellation;
       this.extraParams = extraParams;
     }
 
@@ -165,11 +170,20 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean enableCustomerCancellation;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ReaderProcessSetupIntentParams.ProcessConfig build() {
-        return new ReaderProcessSetupIntentParams.ProcessConfig(this.extraParams);
+        return new ReaderProcessSetupIntentParams.ProcessConfig(
+            this.enableCustomerCancellation, this.extraParams);
+      }
+
+      /** Enables cancel button on transaction screens. */
+      public Builder setEnableCustomerCancellation(Boolean enableCustomerCancellation) {
+        this.enableCustomerCancellation = enableCustomerCancellation;
+        return this;
       }
 
       /**

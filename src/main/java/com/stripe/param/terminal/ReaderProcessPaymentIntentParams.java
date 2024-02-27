@@ -129,6 +129,10 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
 
   @Getter
   public static class ProcessConfig {
+    /** Enables cancel button on transaction screens. */
+    @SerializedName("enable_customer_cancellation")
+    Boolean enableCustomerCancellation;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -146,7 +150,12 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     @SerializedName("tipping")
     Tipping tipping;
 
-    private ProcessConfig(Map<String, Object> extraParams, Boolean skipTipping, Tipping tipping) {
+    private ProcessConfig(
+        Boolean enableCustomerCancellation,
+        Map<String, Object> extraParams,
+        Boolean skipTipping,
+        Tipping tipping) {
+      this.enableCustomerCancellation = enableCustomerCancellation;
       this.extraParams = extraParams;
       this.skipTipping = skipTipping;
       this.tipping = tipping;
@@ -157,6 +166,8 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean enableCustomerCancellation;
+
       private Map<String, Object> extraParams;
 
       private Boolean skipTipping;
@@ -166,7 +177,13 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public ReaderProcessPaymentIntentParams.ProcessConfig build() {
         return new ReaderProcessPaymentIntentParams.ProcessConfig(
-            this.extraParams, this.skipTipping, this.tipping);
+            this.enableCustomerCancellation, this.extraParams, this.skipTipping, this.tipping);
+      }
+
+      /** Enables cancel button on transaction screens. */
+      public Builder setEnableCustomerCancellation(Boolean enableCustomerCancellation) {
+        this.enableCustomerCancellation = enableCustomerCancellation;
+        return this;
       }
 
       /**
