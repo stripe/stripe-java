@@ -160,7 +160,7 @@ public class Session extends ApiResource implements HasId {
 
   /**
    * The customer details including the customer's tax exempt status and the customer's tax IDs.
-   * Only the customer's email is present on Sessions in {@code setup} mode.
+   * Customer's address details are not present on Sessions in {@code setup} mode.
    */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
