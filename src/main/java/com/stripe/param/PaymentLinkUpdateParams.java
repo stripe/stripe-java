@@ -31,7 +31,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
-  /** Configuration for collecting the customer's billing address. */
+  /** Configuration for collecting the customer's billing address. Defaults to {@code auto}. */
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
 
@@ -106,7 +106,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
    * Checkout will not collect a payment method when the total due for the session is 0.This may
    * occur if the Checkout Session includes a free trial or a discount.
    *
-   * <p>Can only be set in {@code subscription} mode.
+   * <p>Can only be set in {@code subscription} mode. Defaults to {@code always}.
    *
    * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
    * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
@@ -278,7 +278,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Configuration for collecting the customer's billing address. */
+    /** Configuration for collecting the customer's billing address. Defaults to {@code auto}. */
     public Builder setBillingAddressCollection(
         PaymentLinkUpdateParams.BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
@@ -484,7 +484,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
      * Checkout will not collect a payment method when the total due for the session is 0.This may
      * occur if the Checkout Session includes a free trial or a discount.
      *
-     * <p>Can only be set in {@code subscription} mode.
+     * <p>Can only be set in {@code subscription} mode. Defaults to {@code always}.
      *
      * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
      * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
