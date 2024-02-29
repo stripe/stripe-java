@@ -9,9 +9,16 @@
   * Add support for `enable_customer_cancellation` on `Terminal.Reader.action.collect_payment_method.collect_config` and `terminal.ReaderCollectPaymentMethodParams.collect_config`
 * [#1752](https://github.com/stripe/stripe-java/pull/1752) Add helper for setting beta versions
 
+## 24.18.0 - 2024-02-29
+* [#1750](https://github.com/stripe/stripe-java/pull/1750) Update generated code
+  * Add support for `number` on `InvoiceCreateParams` and `InvoiceUpdateParams`
+  * Add support for `enable_customer_cancellation` on `Terminal.Reader.action.process_payment_intent.process_config`, `Terminal.Reader.action.process_setup_intent.process_config`, `terminal.ReaderProcessPaymentIntentParams.process_config`, and `terminal.ReaderProcessSetupIntentParams.process_config`
+  * Add support for `refund_payment_config` on `Terminal.Reader.action.refund_payment` and `terminal.ReaderRefundPaymentParams`
+  * Add support for `payment_method` on `TokenCreateParams.bank_account`
+* [#1753](https://github.com/stripe/stripe-java/pull/1753) Update README to reference addBetaVersion helper
+
 ## 24.18.0-beta.1 - 2024-02-22
 * [#1749](https://github.com/stripe/stripe-java/pull/1749) Update generated code for beta
-
 
 ## 24.17.0 - 2024-02-22
 * [#1748](https://github.com/stripe/stripe-java/pull/1748) Update generated code
