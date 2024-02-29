@@ -624,6 +624,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ProcessConfig extends StripeObject {
+        /** Enable customer initiated cancellation when processing this payment. */
+        @SerializedName("enable_customer_cancellation")
+        Boolean enableCustomerCancellation;
+
         /** Override showing a tipping selection screen on this transaction. */
         @SerializedName("skip_tipping")
         Boolean skipTipping;
@@ -694,7 +698,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ProcessConfig extends StripeObject {}
+      public static class ProcessConfig extends StripeObject {
+        /** Enable customer initiated cancellation when processing this SetupIntent. */
+        @SerializedName("enable_customer_cancellation")
+        Boolean enableCustomerCancellation;
+      }
     }
 
     /** Represents a reader action to refund a payment. */
@@ -749,6 +757,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
        */
       @SerializedName("refund_application_fee")
       Boolean refundApplicationFee;
+
+      /** Represents a per-transaction override of a reader configuration. */
+      @SerializedName("refund_payment_config")
+      RefundPaymentConfig refundPaymentConfig;
 
       /**
        * Boolean indicating whether the transfer should be reversed when refunding this charge. The
@@ -812,6 +824,16 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
       public void setRefundObject(Refund expandableObject) {
         this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Represents a per-transaction override of a reader configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RefundPaymentConfig extends StripeObject {
+        /** Enable customer initiated cancellation when refunding this payment. */
+        @SerializedName("enable_customer_cancellation")
+        Boolean enableCustomerCancellation;
       }
     }
 

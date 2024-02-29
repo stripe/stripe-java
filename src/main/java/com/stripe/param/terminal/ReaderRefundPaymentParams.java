@@ -56,6 +56,10 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
   @SerializedName("refund_application_fee")
   Boolean refundApplicationFee;
 
+  /** Configuration overrides. */
+  @SerializedName("refund_payment_config")
+  RefundPaymentConfig refundPaymentConfig;
+
   /**
    * Boolean indicating whether the transfer should be reversed when refunding this charge. The
    * transfer will be reversed proportionally to the amount being refunded (either the entire or
@@ -72,6 +76,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
       Map<String, String> metadata,
       String paymentIntent,
       Boolean refundApplicationFee,
+      RefundPaymentConfig refundPaymentConfig,
       Boolean reverseTransfer) {
     this.amount = amount;
     this.charge = charge;
@@ -80,6 +85,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
     this.metadata = metadata;
     this.paymentIntent = paymentIntent;
     this.refundApplicationFee = refundApplicationFee;
+    this.refundPaymentConfig = refundPaymentConfig;
     this.reverseTransfer = reverseTransfer;
   }
 
@@ -102,6 +108,8 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
 
     private Boolean refundApplicationFee;
 
+    private RefundPaymentConfig refundPaymentConfig;
+
     private Boolean reverseTransfer;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -114,6 +122,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
           this.metadata,
           this.paymentIntent,
           this.refundApplicationFee,
+          this.refundPaymentConfig,
           this.reverseTransfer);
     }
 
@@ -226,6 +235,13 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
       return this;
     }
 
+    /** Configuration overrides. */
+    public Builder setRefundPaymentConfig(
+        ReaderRefundPaymentParams.RefundPaymentConfig refundPaymentConfig) {
+      this.refundPaymentConfig = refundPaymentConfig;
+      return this;
+    }
+
     /**
      * Boolean indicating whether the transfer should be reversed when refunding this charge. The
      * transfer will be reversed proportionally to the amount being refunded (either the entire or
@@ -234,6 +250,77 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
     public Builder setReverseTransfer(Boolean reverseTransfer) {
       this.reverseTransfer = reverseTransfer;
       return this;
+    }
+  }
+
+  @Getter
+  public static class RefundPaymentConfig {
+    /** Enables cancel button on transaction screens. */
+    @SerializedName("enable_customer_cancellation")
+    Boolean enableCustomerCancellation;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private RefundPaymentConfig(
+        Boolean enableCustomerCancellation, Map<String, Object> extraParams) {
+      this.enableCustomerCancellation = enableCustomerCancellation;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enableCustomerCancellation;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ReaderRefundPaymentParams.RefundPaymentConfig build() {
+        return new ReaderRefundPaymentParams.RefundPaymentConfig(
+            this.enableCustomerCancellation, this.extraParams);
+      }
+
+      /** Enables cancel button on transaction screens. */
+      public Builder setEnableCustomerCancellation(Boolean enableCustomerCancellation) {
+        this.enableCustomerCancellation = enableCustomerCancellation;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ReaderRefundPaymentParams.RefundPaymentConfig#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ReaderRefundPaymentParams.RefundPaymentConfig#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 }
