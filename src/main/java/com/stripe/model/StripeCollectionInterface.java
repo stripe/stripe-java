@@ -36,6 +36,5 @@ public interface StripeCollectionInterface<T> extends StripeObjectInterface {
    */
   void setRequestParams(Map<String, Object> requestParams);
 
-  // TODO (major) remove the default implementation and make this required
-  default void setPageTypeToken(Type type) {};
+  void setPageTypeToken(Type type);
 }
