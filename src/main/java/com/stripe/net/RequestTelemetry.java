@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
