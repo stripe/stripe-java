@@ -53,15 +53,6 @@ class RequestTelemetry {
     return Optional.of(gson.toJson(payload));
   }
 
-  // TODO (major) remove this overload
-  /**
-   * @deprecated use {@link #maybeEnqueueMetrics(AbstractStripeResponse, Duration, List)} instead.
-   */
-  @Deprecated
-  public void maybeEnqueueMetrics(AbstractStripeResponse<?> response, Duration duration) {
-    maybeEnqueueMetrics(response, duration, new ArrayList<String>());
-  }
-
   /**
    * If telemetry is enabled and the queue is not full, then enqueue a new metrics item; otherwise,
    * do nothing.
