@@ -3479,7 +3479,7 @@ public class TokenCreateParams extends ApiRequestParams {
   @Getter
   public static class BankAccount {
     /**
-     * The name of the person or business that owns the bank account.This field is required when
+     * The name of the person or business that owns the bank account. This field is required when
      * attaching the bank account to a {@code Customer} object.
      */
     @SerializedName("account_holder_name")
@@ -3527,6 +3527,18 @@ public class TokenCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * The ID of a Payment Method with a {@code type} of {@code us_bank_account}. The Payment
+     * Method's bank account information will be copied and returned as a Bank Account Token. This
+     * parameter is exclusive with respect to all other parameters in the {@code bank_account} hash.
+     * You must include the top-level {@code customer} parameter if the Payment Method is attached
+     * to a {@code Customer} object. If the Payment Method is not attached to a {@code Customer}
+     * object, it will be consumed and cannot be used again. You may not use Payment Methods which
+     * were created by a Setup Intent with {@code attach_to_self=true}.
+     */
+    @SerializedName("payment_method")
+    String paymentMethod;
+
+    /**
      * The routing number, sort code, or other country-appropriateinstitution number for the bank
      * account. For US bank accounts, this is required and should bethe ACH routing number, not the
      * wire routing number. If you are providing an IBAN for{@code account_number}, this field is
@@ -3543,6 +3555,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String country,
         String currency,
         Map<String, Object> extraParams,
+        String paymentMethod,
         String routingNumber) {
       this.accountHolderName = accountHolderName;
       this.accountHolderType = accountHolderType;
@@ -3551,6 +3564,7 @@ public class TokenCreateParams extends ApiRequestParams {
       this.country = country;
       this.currency = currency;
       this.extraParams = extraParams;
+      this.paymentMethod = paymentMethod;
       this.routingNumber = routingNumber;
     }
 
@@ -3573,6 +3587,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String paymentMethod;
+
       private String routingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -3585,11 +3601,12 @@ public class TokenCreateParams extends ApiRequestParams {
             this.country,
             this.currency,
             this.extraParams,
+            this.paymentMethod,
             this.routingNumber);
       }
 
       /**
-       * The name of the person or business that owns the bank account.This field is required when
+       * The name of the person or business that owns the bank account. This field is required when
        * attaching the bank account to a {@code Customer} object.
        */
       public Builder setAccountHolderName(String accountHolderName) {
@@ -3663,6 +3680,20 @@ public class TokenCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The ID of a Payment Method with a {@code type} of {@code us_bank_account}. The Payment
+       * Method's bank account information will be copied and returned as a Bank Account Token. This
+       * parameter is exclusive with respect to all other parameters in the {@code bank_account}
+       * hash. You must include the top-level {@code customer} parameter if the Payment Method is
+       * attached to a {@code Customer} object. If the Payment Method is not attached to a {@code
+       * Customer} object, it will be consumed and cannot be used again. You may not use Payment
+       * Methods which were created by a Setup Intent with {@code attach_to_self=true}.
+       */
+      public Builder setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
         return this;
       }
 
