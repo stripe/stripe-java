@@ -1,5 +1,14 @@
 # Changelog
 
+## 24.19.0-beta.1 - 2024-02-29
+* [#1751](https://github.com/stripe/stripe-java/pull/1751) Update generated code for beta
+  * Remove support for resource `Entitlements.Event`
+  * Remove support for `quantity` and `type` on `Entitlements.Feature` and `entitlements.FeatureCreateParams`
+  * Add support for `livemode` on `Issuing.PersonalizationDesign`
+  * Add support for `application_fee_amount`, `description`, `metadata`, and `transfer_data` on `PaymentIntentDecrementAuthorizationParams`
+  * Add support for `enable_customer_cancellation` on `Terminal.Reader.action.collect_payment_method.collect_config` and `terminal.ReaderCollectPaymentMethodParams.collect_config`
+* [#1752](https://github.com/stripe/stripe-java/pull/1752) Add helper for setting beta versions
+
 ## 24.18.0-beta.1 - 2024-02-22
 * [#1749](https://github.com/stripe/stripe-java/pull/1749) Update generated code for beta
 
