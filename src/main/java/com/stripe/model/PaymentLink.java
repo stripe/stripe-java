@@ -77,7 +77,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   AutomaticTax automaticTax;
 
   /**
-   * Configuration for collecting the customer's billing address.
+   * Configuration for collecting the customer's billing address. Defaults to {@code auto}.
    *
    * <p>One of {@code auto}, or {@code required}.
    */
@@ -169,7 +169,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   PaymentIntentData paymentIntentData;
 
   /**
-   * Configuration for collecting a payment method during checkout.
+   * Configuration for collecting a payment method during checkout. Defaults to {@code always}.
    *
    * <p>One of {@code always}, or {@code if_required}.
    */

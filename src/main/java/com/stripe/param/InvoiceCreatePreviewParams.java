@@ -8072,7 +8072,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName("collection_method")
       CollectionMethod collectionMethod;
 
-      /** The identifier of the coupon to apply to this phase of the subscription schedule. */
+      /**
+       * The identifier of the coupon to apply to this phase of the subscription schedule. This
+       * field has been deprecated and will be removed in a future API version. Use {@code
+       * discounts} instead.
+       */
       @SerializedName("coupon")
       String coupon;
 
@@ -8471,7 +8475,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** The identifier of the coupon to apply to this phase of the subscription schedule. */
+        /**
+         * The identifier of the coupon to apply to this phase of the subscription schedule. This
+         * field has been deprecated and will be removed in a future API version. Use {@code
+         * discounts} instead.
+         */
         public Builder setCoupon(String coupon) {
           this.coupon = coupon;
           return this;

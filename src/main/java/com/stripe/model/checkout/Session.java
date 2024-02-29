@@ -77,7 +77,8 @@ public class Session extends ApiResource implements HasId {
   AutomaticTax automaticTax;
 
   /**
-   * Describes whether Checkout should collect the customer's billing address.
+   * Describes whether Checkout should collect the customer's billing address. Defaults to {@code
+   * auto}.
    *
    * <p>One of {@code auto}, or {@code required}.
    */
@@ -159,7 +160,7 @@ public class Session extends ApiResource implements HasId {
 
   /**
    * The customer details including the customer's tax exempt status and the customer's tax IDs.
-   * Only the customer's email is present on Sessions in {@code setup} mode.
+   * Customer's address details are not present on Sessions in {@code setup} mode.
    */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
@@ -254,7 +255,8 @@ public class Session extends ApiResource implements HasId {
   ExpandableField<PaymentLink> paymentLink;
 
   /**
-   * Configure whether a Checkout Session should collect a payment method.
+   * Configure whether a Checkout Session should collect a payment method. Defaults to {@code
+   * always}.
    *
    * <p>One of {@code always}, or {@code if_required}.
    */
@@ -296,10 +298,9 @@ public class Session extends ApiResource implements HasId {
   String recoveredFrom;
 
   /**
-   * Applies to Checkout Sessions with {@code ui_mode: embedded}. By default, Stripe will always
-   * redirect to your return_url after a successful confirmation. If you set {@code
-   * redirect_on_completion: 'if_required'}, then we will only redirect if your user chooses a
-   * redirect-based payment method.
+   * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
+   * href="https://stripe.com/docs/payments/checkout/custom-redirect-behavior">redirect behavior</a>
+   * of embedded sessions. Defaults to {@code always}.
    *
    * <p>One of {@code always}, {@code if_required}, or {@code never}.
    */
@@ -373,7 +374,11 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("total_details")
   TotalDetails totalDetails;
 
-  /** The UI mode of the Session. Can be {@code hosted} (default) or {@code embedded}. */
+  /**
+   * The UI mode of the Session. Defaults to {@code hosted}.
+   *
+   * <p>One of {@code embedded}, or {@code hosted}.
+   */
   @SerializedName("ui_mode")
   String uiMode;
 

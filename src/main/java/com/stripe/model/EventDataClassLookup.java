@@ -114,7 +114,6 @@ final class EventDataClassLookup {
     classLookup.put("climate.product", com.stripe.model.climate.Product.class);
     classLookup.put("climate.supplier", com.stripe.model.climate.Supplier.class);
 
-    classLookup.put("entitlements.event", com.stripe.model.entitlements.Event.class);
     classLookup.put("entitlements.feature", com.stripe.model.entitlements.Feature.class);
 
     classLookup.put(

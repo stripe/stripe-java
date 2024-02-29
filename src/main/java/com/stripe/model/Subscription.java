@@ -190,7 +190,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Describes the current discount applied to this subscription, if there is one. When billing, a
-   * discount applied to a subscription overrides a discount applied on a customer-wide basis.
+   * discount applied to a subscription overrides a discount applied on a customer-wide basis. This
+   * field has been deprecated and will be removed in a future API version. Use {@code discounts}
+   * instead.
    */
   @SerializedName("discount")
   Discount discount;

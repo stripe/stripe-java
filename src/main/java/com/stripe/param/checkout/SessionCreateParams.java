@@ -28,7 +28,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
-  /** Specify whether Checkout should collect the customer's billing address. */
+  /**
+   * Specify whether Checkout should collect the customer's billing address. Defaults to {@code
+   * auto}.
+   */
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
 
@@ -210,7 +213,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * Checkout will not collect a payment method when the total due for the session is 0. This may
    * occur if the Checkout Session includes a free trial or a discount.
    *
-   * <p>Can only be set in {@code subscription} mode.
+   * <p>Can only be set in {@code subscription} mode. Defaults to {@code always}.
    *
    * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
    * guide on configuring <a
@@ -258,10 +261,9 @@ public class SessionCreateParams extends ApiRequestParams {
   PhoneNumberCollection phoneNumberCollection;
 
   /**
-   * This parameter applies to {@code ui_mode: embedded}. By default, Stripe will always redirect to
-   * your return_url after a successful confirmation. If you set {@code redirect_on_completion:
-   * 'if_required'}, then we will only redirect if your user chooses a redirect-based payment
-   * method.
+   * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
+   * href="https://stripe.com/docs/payments/checkout/custom-redirect-behavior">redirect behavior</a>
+   * of embedded sessions. Defaults to {@code always}.
    */
   @SerializedName("redirect_on_completion")
   RedirectOnCompletion redirectOnCompletion;
@@ -320,7 +322,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("tax_id_collection")
   TaxIdCollection taxIdCollection;
 
-  /** {@code ui_mode} can be {@code hosted} or {@code embedded}. The default is {@code hosted}. */
+  /** The UI mode of the Session. Defaults to {@code hosted}. */
   @SerializedName("ui_mode")
   UiMode uiMode;
 
@@ -553,7 +555,10 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Specify whether Checkout should collect the customer's billing address. */
+    /**
+     * Specify whether Checkout should collect the customer's billing address. Defaults to {@code
+     * auto}.
+     */
     public Builder setBillingAddressCollection(
         SessionCreateParams.BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
@@ -872,7 +877,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * Checkout will not collect a payment method when the total due for the session is 0. This may
      * occur if the Checkout Session includes a free trial or a discount.
      *
-     * <p>Can only be set in {@code subscription} mode.
+     * <p>Can only be set in {@code subscription} mode. Defaults to {@code always}.
      *
      * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
      * guide on configuring <a
@@ -939,10 +944,9 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * This parameter applies to {@code ui_mode: embedded}. By default, Stripe will always redirect
-     * to your return_url after a successful confirmation. If you set {@code redirect_on_completion:
-     * 'if_required'}, then we will only redirect if your user chooses a redirect-based payment
-     * method.
+     * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
+     * href="https://stripe.com/docs/payments/checkout/custom-redirect-behavior">redirect
+     * behavior</a> of embedded sessions. Defaults to {@code always}.
      */
     public Builder setRedirectOnCompletion(
         SessionCreateParams.RedirectOnCompletion redirectOnCompletion) {
@@ -1041,7 +1045,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** {@code ui_mode} can be {@code hosted} or {@code embedded}. The default is {@code hosted}. */
+    /** The UI mode of the Session. Defaults to {@code hosted}. */
     public Builder setUiMode(SessionCreateParams.UiMode uiMode) {
       this.uiMode = uiMode;
       return this;
