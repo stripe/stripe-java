@@ -68,8 +68,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsCapabilitiesGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CapabilityListParams params =
-        com.stripe.param.CapabilityListParams.builder().build();
+    com.stripe.param.AccountCapabilityListParams params =
+        com.stripe.param.AccountCapabilityListParams.builder().build();
 
     com.stripe.model.StripeCollection<com.stripe.model.Capability> stripeCollection =
         client.accounts().capabilities().list("acct_xxxxxxxxxxxxx", params);
@@ -100,8 +100,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsCapabilitiesGet2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CapabilityRetrieveParams params =
-        com.stripe.param.CapabilityRetrieveParams.builder().build();
+    com.stripe.param.AccountCapabilityRetrieveParams params =
+        com.stripe.param.AccountCapabilityRetrieveParams.builder().build();
 
     com.stripe.model.Capability capability =
         client.accounts().capabilities().retrieve("acct_xxxxxxxxxxxxx", "card_payments", params);
@@ -136,8 +136,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsCapabilitiesPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CapabilityUpdateParams params =
-        com.stripe.param.CapabilityUpdateParams.builder().setRequested(true).build();
+    com.stripe.param.AccountCapabilityUpdateParams params =
+        com.stripe.param.AccountCapabilityUpdateParams.builder().setRequested(true).build();
 
     com.stripe.model.Capability capability =
         client.accounts().capabilities().update("acct_xxxxxxxxxxxxx", "card_payments", params);
@@ -212,8 +212,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountListParams params =
-        com.stripe.param.ExternalAccountListParams.builder().setLimit(3L).build();
+    com.stripe.param.AccountExternalAccountListParams params =
+        com.stripe.param.AccountExternalAccountListParams.builder().setLimit(3L).build();
 
     com.stripe.model.StripeCollection<com.stripe.model.ExternalAccount> stripeCollection =
         client.accounts().externalAccounts().list("acct_xxxxxxxxxxxxx", params);
@@ -230,8 +230,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsGet2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountListParams params =
-        com.stripe.param.ExternalAccountListParams.builder()
+    com.stripe.param.AccountExternalAccountListParams params =
+        com.stripe.param.AccountExternalAccountListParams.builder()
             .setObject("bank_account")
             .setLimit(3L)
             .build();
@@ -251,8 +251,11 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsGet3Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountListParams params =
-        com.stripe.param.ExternalAccountListParams.builder().setObject("card").setLimit(3L).build();
+    com.stripe.param.AccountExternalAccountListParams params =
+        com.stripe.param.AccountExternalAccountListParams.builder()
+            .setObject("card")
+            .setLimit(3L)
+            .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.ExternalAccount> stripeCollection =
         client.accounts().externalAccounts().list("acct_xxxxxxxxxxxxx", params);
@@ -269,8 +272,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsGet4Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountRetrieveParams params =
-        com.stripe.param.ExternalAccountRetrieveParams.builder().build();
+    com.stripe.param.AccountExternalAccountRetrieveParams params =
+        com.stripe.param.AccountExternalAccountRetrieveParams.builder().build();
 
     com.stripe.model.ExternalAccount externalAccount =
         client
@@ -290,8 +293,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsGet5Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountRetrieveParams params =
-        com.stripe.param.ExternalAccountRetrieveParams.builder().build();
+    com.stripe.param.AccountExternalAccountRetrieveParams params =
+        com.stripe.param.AccountExternalAccountRetrieveParams.builder().build();
 
     com.stripe.model.ExternalAccount externalAccount =
         client
@@ -311,8 +314,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountCreateParams params =
-        com.stripe.param.ExternalAccountCreateParams.builder()
+    com.stripe.param.AccountExternalAccountCreateParams params =
+        com.stripe.param.AccountExternalAccountCreateParams.builder()
             .setExternalAccount("btok_xxxxxxxxxxxxx")
             .build();
 
@@ -331,8 +334,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsPost2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountCreateParams params =
-        com.stripe.param.ExternalAccountCreateParams.builder()
+    com.stripe.param.AccountExternalAccountCreateParams params =
+        com.stripe.param.AccountExternalAccountCreateParams.builder()
             .setExternalAccount("tok_xxxx_debit")
             .build();
 
@@ -351,8 +354,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsPost3Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountUpdateParams params =
-        com.stripe.param.ExternalAccountUpdateParams.builder()
+    com.stripe.param.AccountExternalAccountUpdateParams params =
+        com.stripe.param.AccountExternalAccountUpdateParams.builder()
             .putMetadata("order_id", "6735")
             .build();
 
@@ -374,8 +377,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsExternalAccountsPost4Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.ExternalAccountUpdateParams params =
-        com.stripe.param.ExternalAccountUpdateParams.builder()
+    com.stripe.param.AccountExternalAccountUpdateParams params =
+        com.stripe.param.AccountExternalAccountUpdateParams.builder()
             .putMetadata("order_id", "6735")
             .build();
 
@@ -450,8 +453,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsLoginLinksPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.LoginLinkCreateParams params =
-        com.stripe.param.LoginLinkCreateParams.builder().build();
+    com.stripe.param.AccountLoginLinkCreateParams params =
+        com.stripe.param.AccountLoginLinkCreateParams.builder().build();
 
     com.stripe.model.LoginLink loginLink =
         client.accounts().loginLinks().create("acct_xxxxxxxxxxxxx", params);
@@ -515,8 +518,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsPersonsGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PersonListParams params =
-        com.stripe.param.PersonListParams.builder().setLimit(3L).build();
+    com.stripe.param.AccountPersonListParams params =
+        com.stripe.param.AccountPersonListParams.builder().setLimit(3L).build();
 
     com.stripe.model.StripeCollection<com.stripe.model.Person> stripeCollection =
         client.accounts().persons().list("acct_xxxxxxxxxxxxx", params);
@@ -547,8 +550,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsPersonsGet2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PersonRetrieveParams params =
-        com.stripe.param.PersonRetrieveParams.builder().build();
+    com.stripe.param.AccountPersonRetrieveParams params =
+        com.stripe.param.AccountPersonRetrieveParams.builder().build();
 
     com.stripe.model.Person person =
         client.accounts().persons().retrieve("acct_xxxxxxxxxxxxx", "person_xxxxxxxxxxxxx", params);
@@ -582,8 +585,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsPersonsPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PersonCreateParams params =
-        com.stripe.param.PersonCreateParams.builder()
+    com.stripe.param.AccountPersonCreateParams params =
+        com.stripe.param.AccountPersonCreateParams.builder()
             .setFirstName("Jane")
             .setLastName("Diaz")
             .build();
@@ -622,8 +625,10 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsPersonsPost2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PersonUpdateParams params =
-        com.stripe.param.PersonUpdateParams.builder().putMetadata("order_id", "6735").build();
+    com.stripe.param.AccountPersonUpdateParams params =
+        com.stripe.param.AccountPersonUpdateParams.builder()
+            .putMetadata("order_id", "6735")
+            .build();
 
     com.stripe.model.Person person =
         client.accounts().persons().update("acct_xxxxxxxxxxxxx", "person_xxxxxxxxxxxxx", params);
@@ -840,11 +845,11 @@ class GeneratedExamples extends BaseStripeTest {
   public void testApplicationFeesRefundsGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.FeeRefundListParams params =
-        com.stripe.param.FeeRefundListParams.builder().setLimit(3L).build();
+    com.stripe.param.ApplicationFeeRefundListParams params =
+        com.stripe.param.ApplicationFeeRefundListParams.builder().setLimit(3L).build();
 
     com.stripe.model.StripeCollection<com.stripe.model.FeeRefund> stripeCollection =
-        client.applicationFees().feeRefunds().list("fee_xxxxxxxxxxxxx", params);
+        client.applicationFees().refunds().list("fee_xxxxxxxxxxxxx", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -872,13 +877,13 @@ class GeneratedExamples extends BaseStripeTest {
   public void testApplicationFeesRefundsGet2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.FeeRefundRetrieveParams params =
-        com.stripe.param.FeeRefundRetrieveParams.builder().build();
+    com.stripe.param.ApplicationFeeRefundRetrieveParams params =
+        com.stripe.param.ApplicationFeeRefundRetrieveParams.builder().build();
 
     com.stripe.model.FeeRefund feeRefund =
         client
             .applicationFees()
-            .feeRefunds()
+            .refunds()
             .retrieve("fee_xxxxxxxxxxxxx", "fr_xxxxxxxxxxxxx", params);
     assertNotNull(feeRefund);
     verifyRequest(
@@ -909,11 +914,11 @@ class GeneratedExamples extends BaseStripeTest {
   public void testApplicationFeesRefundsPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.FeeRefundCreateParams params =
-        com.stripe.param.FeeRefundCreateParams.builder().build();
+    com.stripe.param.ApplicationFeeRefundCreateParams params =
+        com.stripe.param.ApplicationFeeRefundCreateParams.builder().build();
 
     com.stripe.model.FeeRefund feeRefund =
-        client.applicationFees().feeRefunds().create("fee_xxxxxxxxxxxxx", params);
+        client.applicationFees().refunds().create("fee_xxxxxxxxxxxxx", params);
     assertNotNull(feeRefund);
     verifyRequest(
         BaseAddress.API,
@@ -946,14 +951,13 @@ class GeneratedExamples extends BaseStripeTest {
   public void testApplicationFeesRefundsPost2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.FeeRefundUpdateParams params =
-        com.stripe.param.FeeRefundUpdateParams.builder().putMetadata("order_id", "6735").build();
+    com.stripe.param.ApplicationFeeRefundUpdateParams params =
+        com.stripe.param.ApplicationFeeRefundUpdateParams.builder()
+            .putMetadata("order_id", "6735")
+            .build();
 
     com.stripe.model.FeeRefund feeRefund =
-        client
-            .applicationFees()
-            .feeRefunds()
-            .update("fee_xxxxxxxxxxxxx", "fr_xxxxxxxxxxxxx", params);
+        client.applicationFees().refunds().update("fee_xxxxxxxxxxxxx", "fr_xxxxxxxxxxxxx", params);
     assertNotNull(feeRefund);
     verifyRequest(
         BaseAddress.API,
@@ -2589,8 +2593,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersCashBalanceGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CashBalanceRetrieveParams params =
-        com.stripe.param.CashBalanceRetrieveParams.builder().build();
+    com.stripe.param.CustomerCashBalanceRetrieveParams params =
+        com.stripe.param.CustomerCashBalanceRetrieveParams.builder().build();
 
     com.stripe.model.CashBalance cashBalance =
         client.customers().cashBalance().retrieve("cus_123", params);
@@ -2607,12 +2611,13 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersCashBalancePostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.CashBalanceUpdateParams params =
-        com.stripe.param.CashBalanceUpdateParams.builder()
+    com.stripe.param.CustomerCashBalanceUpdateParams params =
+        com.stripe.param.CustomerCashBalanceUpdateParams.builder()
             .setSettings(
-                com.stripe.param.CashBalanceUpdateParams.Settings.builder()
+                com.stripe.param.CustomerCashBalanceUpdateParams.Settings.builder()
                     .setReconciliationMode(
-                        com.stripe.param.CashBalanceUpdateParams.Settings.ReconciliationMode.MANUAL)
+                        com.stripe.param.CustomerCashBalanceUpdateParams.Settings.ReconciliationMode
+                            .MANUAL)
                     .build())
             .build();
 
@@ -3047,8 +3052,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceListParams params =
-        com.stripe.param.PaymentSourceListParams.builder()
+    com.stripe.param.CustomerPaymentSourceListParams params =
+        com.stripe.param.CustomerPaymentSourceListParams.builder()
             .setObject("bank_account")
             .setLimit(3L)
             .build();
@@ -3068,8 +3073,11 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesGet2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceListParams params =
-        com.stripe.param.PaymentSourceListParams.builder().setObject("card").setLimit(3L).build();
+    com.stripe.param.CustomerPaymentSourceListParams params =
+        com.stripe.param.CustomerPaymentSourceListParams.builder()
+            .setObject("card")
+            .setLimit(3L)
+            .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.PaymentSource> stripeCollection =
         client.customers().paymentSources().list("cus_xxxxxxxxxxxxx", params);
@@ -3086,8 +3094,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesGet3Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceRetrieveParams params =
-        com.stripe.param.PaymentSourceRetrieveParams.builder().build();
+    com.stripe.param.CustomerPaymentSourceRetrieveParams params =
+        com.stripe.param.CustomerPaymentSourceRetrieveParams.builder().build();
 
     com.stripe.model.PaymentSource paymentSource =
         client
@@ -3107,8 +3115,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesGet4Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceRetrieveParams params =
-        com.stripe.param.PaymentSourceRetrieveParams.builder().build();
+    com.stripe.param.CustomerPaymentSourceRetrieveParams params =
+        com.stripe.param.CustomerPaymentSourceRetrieveParams.builder().build();
 
     com.stripe.model.PaymentSource paymentSource =
         client
@@ -3128,8 +3136,10 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceUpdateParams params =
-        com.stripe.param.PaymentSourceUpdateParams.builder().setAccountHolderName("Kamil").build();
+    com.stripe.param.CustomerPaymentSourceUpdateParams params =
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
+            .setAccountHolderName("Kamil")
+            .build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.customers().paymentSources().update("cus_123", "card_123", params);
@@ -3146,8 +3156,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesPost2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceCreateParams params =
-        com.stripe.param.PaymentSourceCreateParams.builder()
+    com.stripe.param.CustomerPaymentSourceCreateParams params =
+        com.stripe.param.CustomerPaymentSourceCreateParams.builder()
             .setSource("btok_xxxxxxxxxxxxx")
             .build();
 
@@ -3166,8 +3176,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesPost3Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceCreateParams params =
-        com.stripe.param.PaymentSourceCreateParams.builder().setSource("tok_xxxx").build();
+    com.stripe.param.CustomerPaymentSourceCreateParams params =
+        com.stripe.param.CustomerPaymentSourceCreateParams.builder().setSource("tok_xxxx").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.customers().paymentSources().create("cus_xxxxxxxxxxxxx", params);
@@ -3184,8 +3194,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesPost4Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceUpdateParams params =
-        com.stripe.param.PaymentSourceUpdateParams.builder()
+    com.stripe.param.CustomerPaymentSourceUpdateParams params =
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
             .putMetadata("order_id", "6735")
             .build();
 
@@ -3204,8 +3214,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesPost5Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceUpdateParams params =
-        com.stripe.param.PaymentSourceUpdateParams.builder().setName("Jenny Rosen").build();
+    com.stripe.param.CustomerPaymentSourceUpdateParams params =
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder().setName("Jenny Rosen").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client
@@ -3225,8 +3235,11 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersSourcesVerifyPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.PaymentSourceVerifyParams params =
-        com.stripe.param.PaymentSourceVerifyParams.builder().addAmount(32L).addAmount(45L).build();
+    com.stripe.param.CustomerPaymentSourceVerifyParams params =
+        com.stripe.param.CustomerPaymentSourceVerifyParams.builder()
+            .addAmount(32L)
+            .addAmount(45L)
+            .build();
 
     com.stripe.model.BankAccount bankAccount =
         client.customers().paymentSources().verify("cus_xxxxxxxxxxxxx", "ba_xxxxxxxxxxxxx", params);
@@ -3258,8 +3271,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersTaxIdsGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.TaxIdListParams params =
-        com.stripe.param.TaxIdListParams.builder().setLimit(3L).build();
+    com.stripe.param.CustomerTaxIdListParams params =
+        com.stripe.param.CustomerTaxIdListParams.builder().setLimit(3L).build();
 
     com.stripe.model.StripeCollection<com.stripe.model.TaxId> stripeCollection =
         client.customers().taxIds().list("cus_xxxxxxxxxxxxx", params);
@@ -3276,8 +3289,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersTaxIdsGet2Services() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.TaxIdRetrieveParams params =
-        com.stripe.param.TaxIdRetrieveParams.builder().build();
+    com.stripe.param.CustomerTaxIdRetrieveParams params =
+        com.stripe.param.CustomerTaxIdRetrieveParams.builder().build();
 
     com.stripe.model.TaxId taxId =
         client.customers().taxIds().retrieve("cus_xxxxxxxxxxxxx", "txi_xxxxxxxxxxxxx", params);
@@ -3294,9 +3307,9 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomersTaxIdsPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.TaxIdCreateParams params =
-        com.stripe.param.TaxIdCreateParams.builder()
-            .setType(com.stripe.param.TaxIdCreateParams.Type.EU_VAT)
+    com.stripe.param.CustomerTaxIdCreateParams params =
+        com.stripe.param.CustomerTaxIdCreateParams.builder()
+            .setType(com.stripe.param.CustomerTaxIdCreateParams.Type.EU_VAT)
             .setValue("DE123456789")
             .build();
 
@@ -9854,8 +9867,10 @@ class GeneratedExamples extends BaseStripeTest {
   public void testSubscriptionItemsUsageRecordSummariesGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.UsageRecordSummaryListParams params =
-        com.stripe.param.UsageRecordSummaryListParams.builder().setLimit(3L).build();
+    com.stripe.param.SubscriptionItemUsageRecordSummaryListParams params =
+        com.stripe.param.SubscriptionItemUsageRecordSummaryListParams.builder()
+            .setLimit(3L)
+            .build();
 
     com.stripe.model.StripeCollection<com.stripe.model.UsageRecordSummary> stripeCollection =
         client.subscriptionItems().usageRecordSummaries().list("si_xxxxxxxxxxxxx", params);
@@ -9890,8 +9905,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testSubscriptionItemsUsageRecordsPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.UsageRecordCreateParams params =
-        com.stripe.param.UsageRecordCreateParams.builder()
+    com.stripe.param.SubscriptionItemUsageRecordCreateParams params =
+        com.stripe.param.SubscriptionItemUsageRecordCreateParams.builder()
             .setQuantity(100L)
             .setTimestamp(1571252444L)
             .build();
@@ -14233,11 +14248,11 @@ class GeneratedExamples extends BaseStripeTest {
   public void testTreasuryFinancialAccountsFeaturesGetServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.treasury.FinancialAccountFeaturesListParams params =
-        com.stripe.param.treasury.FinancialAccountFeaturesListParams.builder().build();
+    com.stripe.param.treasury.FinancialAccountFeaturesRetrieveParams params =
+        com.stripe.param.treasury.FinancialAccountFeaturesRetrieveParams.builder().build();
 
     com.stripe.model.treasury.FinancialAccountFeatures financialAccountFeatures =
-        client.treasury().financialAccounts().features().list("fa_xxxxxxxxxxxxx", params);
+        client.treasury().financialAccounts().features().retrieve("fa_xxxxxxxxxxxxx", params);
     assertNotNull(financialAccountFeatures);
     verifyRequest(
         BaseAddress.API,

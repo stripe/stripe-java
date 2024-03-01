@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class TaxIdListParams extends ApiRequestParams {
+public class AccountPersonListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -40,9 +40,12 @@ public class TaxIdListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** The account or customer the tax ID belongs to. Defaults to {@code owner[type]=self}. */
-  @SerializedName("owner")
-  Owner owner;
+  /**
+   * Filters on the list of people returned based on the person's relationship to the account's
+   * company.
+   */
+  @SerializedName("relationship")
+  Relationship relationship;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -53,18 +56,18 @@ public class TaxIdListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private TaxIdListParams(
+  private AccountPersonListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      Owner owner,
+      Relationship relationship,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.owner = owner;
+    this.relationship = relationship;
     this.startingAfter = startingAfter;
   }
 
@@ -81,18 +84,18 @@ public class TaxIdListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private Owner owner;
+    private Relationship relationship;
 
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public TaxIdListParams build() {
-      return new TaxIdListParams(
+    public AccountPersonListParams build() {
+      return new AccountPersonListParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.owner,
+          this.relationship,
           this.startingAfter);
     }
 
@@ -110,7 +113,7 @@ public class TaxIdListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TaxIdListParams#expand} for the field documentation.
+     * AccountPersonListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -123,7 +126,7 @@ public class TaxIdListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TaxIdListParams#expand} for the field documentation.
+     * AccountPersonListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -136,7 +139,7 @@ public class TaxIdListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * TaxIdListParams#extraParams} for the field documentation.
+     * AccountPersonListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -149,7 +152,7 @@ public class TaxIdListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TaxIdListParams#extraParams} for the field documentation.
+     * See {@link AccountPersonListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -168,9 +171,12 @@ public class TaxIdListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The account or customer the tax ID belongs to. Defaults to {@code owner[type]=self}. */
-    public Builder setOwner(TaxIdListParams.Owner owner) {
-      this.owner = owner;
+    /**
+     * Filters on the list of people returned based on the person's relationship to the account's
+     * company.
+     */
+    public Builder setRelationship(AccountPersonListParams.Relationship relationship) {
+      this.relationship = relationship;
       return this;
     }
 
@@ -187,14 +193,20 @@ public class TaxIdListParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class Owner {
-    /** Account the tax ID belongs to. Required when {@code type=account} */
-    @SerializedName("account")
-    String account;
+  public static class Relationship {
+    /**
+     * A filter on the list of people returned based on whether these people are directors of the
+     * account's company.
+     */
+    @SerializedName("director")
+    Boolean director;
 
-    /** Customer the tax ID belongs to. Required when {@code type=customer} */
-    @SerializedName("customer")
-    String customer;
+    /**
+     * A filter on the list of people returned based on whether these people are executives of the
+     * account's company.
+     */
+    @SerializedName("executive")
+    Boolean executive;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -205,15 +217,40 @@ public class TaxIdListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Type of owner referenced. */
-    @SerializedName("type")
-    Type type;
+    /**
+     * A filter on the list of people returned based on whether these people are legal guardians of
+     * the account's representative.
+     */
+    @SerializedName("legal_guardian")
+    Boolean legalGuardian;
 
-    private Owner(String account, String customer, Map<String, Object> extraParams, Type type) {
-      this.account = account;
-      this.customer = customer;
+    /**
+     * A filter on the list of people returned based on whether these people are owners of the
+     * account's company.
+     */
+    @SerializedName("owner")
+    Boolean owner;
+
+    /**
+     * A filter on the list of people returned based on whether these people are the representative
+     * of the account's company.
+     */
+    @SerializedName("representative")
+    Boolean representative;
+
+    private Relationship(
+        Boolean director,
+        Boolean executive,
+        Map<String, Object> extraParams,
+        Boolean legalGuardian,
+        Boolean owner,
+        Boolean representative) {
+      this.director = director;
+      this.executive = executive;
       this.extraParams = extraParams;
-      this.type = type;
+      this.legalGuardian = legalGuardian;
+      this.owner = owner;
+      this.representative = representative;
     }
 
     public static Builder builder() {
@@ -221,35 +258,51 @@ public class TaxIdListParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String account;
+      private Boolean director;
 
-      private String customer;
+      private Boolean executive;
 
       private Map<String, Object> extraParams;
 
-      private Type type;
+      private Boolean legalGuardian;
+
+      private Boolean owner;
+
+      private Boolean representative;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TaxIdListParams.Owner build() {
-        return new TaxIdListParams.Owner(this.account, this.customer, this.extraParams, this.type);
+      public AccountPersonListParams.Relationship build() {
+        return new AccountPersonListParams.Relationship(
+            this.director,
+            this.executive,
+            this.extraParams,
+            this.legalGuardian,
+            this.owner,
+            this.representative);
       }
 
-      /** Account the tax ID belongs to. Required when {@code type=account} */
-      public Builder setAccount(String account) {
-        this.account = account;
+      /**
+       * A filter on the list of people returned based on whether these people are directors of the
+       * account's company.
+       */
+      public Builder setDirector(Boolean director) {
+        this.director = director;
         return this;
       }
 
-      /** Customer the tax ID belongs to. Required when {@code type=customer} */
-      public Builder setCustomer(String customer) {
-        this.customer = customer;
+      /**
+       * A filter on the list of people returned based on whether these people are executives of the
+       * account's company.
+       */
+      public Builder setExecutive(Boolean executive) {
+        this.executive = executive;
         return this;
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TaxIdListParams.Owner#extraParams} for the field documentation.
+       * AccountPersonListParams.Relationship#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -262,7 +315,7 @@ public class TaxIdListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TaxIdListParams.Owner#extraParams} for the field documentation.
+       * See {@link AccountPersonListParams.Relationship#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -272,31 +325,31 @@ public class TaxIdListParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Type of owner referenced. */
-      public Builder setType(TaxIdListParams.Owner.Type type) {
-        this.type = type;
+      /**
+       * A filter on the list of people returned based on whether these people are legal guardians
+       * of the account's representative.
+       */
+      public Builder setLegalGuardian(Boolean legalGuardian) {
+        this.legalGuardian = legalGuardian;
         return this;
       }
-    }
 
-    public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("account")
-      ACCOUNT("account"),
+      /**
+       * A filter on the list of people returned based on whether these people are owners of the
+       * account's company.
+       */
+      public Builder setOwner(Boolean owner) {
+        this.owner = owner;
+        return this;
+      }
 
-      @SerializedName("application")
-      APPLICATION("application"),
-
-      @SerializedName("customer")
-      CUSTOMER("customer"),
-
-      @SerializedName("self")
-      SELF("self");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Type(String value) {
-        this.value = value;
+      /**
+       * A filter on the list of people returned based on whether these people are the
+       * representative of the account's company.
+       */
+      public Builder setRepresentative(Boolean representative) {
+        this.representative = representative;
+        return this;
       }
     }
   }
