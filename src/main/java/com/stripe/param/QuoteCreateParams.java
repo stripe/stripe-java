@@ -4581,6 +4581,9 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("billing_period_end")
+        BILLING_PERIOD_END("billing_period_end"),
+
         @SerializedName("discount_end")
         DISCOUNT_END("discount_end"),
 

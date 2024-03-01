@@ -886,8 +886,8 @@ public class QuoteLine extends StripeObject implements HasId {
     /**
      * Select a way to pass in {@code ends_at}.
      *
-     * <p>One of {@code discount_end}, {@code duration}, {@code quote_acceptance_date}, {@code
-     * schedule_end}, {@code timestamp}, or {@code upcoming_invoice}.
+     * <p>One of {@code billing_period_end}, {@code discount_end}, {@code duration}, {@code
+     * quote_acceptance_date}, {@code schedule_end}, {@code timestamp}, or {@code upcoming_invoice}.
      */
     @SerializedName("type")
     String type;
