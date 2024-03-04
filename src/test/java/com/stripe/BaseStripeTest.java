@@ -522,10 +522,10 @@ public class BaseStripeTest {
     }
 
     if (thisValue instanceof Object[]) {
-      thisValue = Arrays.asList((Object[]) thisValue);
+      thisValue = List.of((Object[]) thisValue);
     }
     if (otherValue instanceof Object[]) {
-      otherValue = Arrays.asList((Object[]) otherValue);
+      otherValue = List.of((Object[]) otherValue);
     }
 
     if (thisValue instanceof List<?> && otherValue instanceof List<?>) {

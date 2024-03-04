@@ -79,7 +79,7 @@ public class InvoiceTest extends BaseStripeTest {
     customField2.put("value", "val2");
 
     final Map<String, Object> params = new HashMap<>();
-    params.put("custom_fields", Arrays.asList(customField1, customField2));
+    params.put("custom_fields", List.of(customField1, customField2));
     params.put("metadata", metadata);
 
     InvoiceUpdateParams.CustomField typedCustomField1 =
@@ -90,7 +90,7 @@ public class InvoiceTest extends BaseStripeTest {
 
     InvoiceUpdateParams typedParams =
         InvoiceUpdateParams.builder()
-            .setCustomFields(Arrays.asList(typedCustomField1, typedCustomField2))
+            .setCustomFields(List.of(typedCustomField1, typedCustomField2))
             .putMetadata("key", "value")
             .build();
 
@@ -153,7 +153,7 @@ public class InvoiceTest extends BaseStripeTest {
         // param with extra param has the same map as that using standard builder
         InvoiceCreateParams.builder()
             .setCustomFields(
-                Arrays.asList(
+              List.of(
                     InvoiceCreateParams.CustomField.builder().setName("A").setValue("1").build(),
                     InvoiceCreateParams.CustomField.builder().setName("B").setValue("2").build()))
             .build()
@@ -253,7 +253,7 @@ public class InvoiceTest extends BaseStripeTest {
     Map<String, Object> params = new HashMap<>();
     params.put(
         "invoice_items",
-        Arrays.asList(
+      List.of(
             ImmutableMap.of("amount", 123L, "currency", "usd"),
             ImmutableMap.of("amount", 456L, "currency", "jpy")));
 

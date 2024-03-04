@@ -165,14 +165,14 @@ public class ApiRequestParamsConverterTest {
   public void testHasListExtraParams() {
     ModelHasListExtraParams params = new ModelHasListExtraParams();
     params.paramFooList =
-        Arrays.asList(
+      List.of(
             new ModelHasExtraParams(ParamCode.ENUM_FOO),
             new ModelHasExtraParams(ParamCode.ENUM_BAR));
 
     Map<String, Object> expected = new HashMap<>();
     expected.put(
         "param_foo_list",
-        Arrays.asList(
+      List.of(
             ModelHasExtraParams.expectedParams("enum_foo"),
             ModelHasExtraParams.expectedParams("enum_bar")));
     assertEquals(expected, toMap(params));

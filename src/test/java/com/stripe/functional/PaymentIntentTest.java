@@ -66,7 +66,7 @@ public class PaymentIntentTest extends BaseStripeTest {
             .addExpand("application")
             .addExpand("customer")
             .addExpand("on_behalf_of")
-            .addAllExpand(Arrays.asList("review", "transfer_data.destination"))
+            .addAllExpand(List.of("review", "transfer_data.destination"))
             .build();
 
     final PaymentIntent resource =

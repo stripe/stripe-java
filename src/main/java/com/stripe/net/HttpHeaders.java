@@ -48,7 +48,7 @@ public class HttpHeaders {
   public HttpHeaders withAdditionalHeader(String name, String value) {
     requireNonNull(name);
     requireNonNull(value);
-    return this.withAdditionalHeader(name, Arrays.asList(value));
+    return this.withAdditionalHeader(name, List.of(value));
   }
 
   /**

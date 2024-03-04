@@ -121,7 +121,7 @@ public class UntypedMapDeserializerTest {
 
     Object untyped = flatteningDeserializer.deserializeJsonElement(jsonArray);
     assertEquals(
-        Arrays.asList(
+       List.of(
             ImmutableMap.of("grand_child", 1L),
             ImmutableMap.of("grand_child", 2L),
             ImmutableMap.of("grand_child", 3L)),
