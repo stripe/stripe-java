@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
@@ -585,7 +584,7 @@ public class FormEncoderTest extends BaseStripeTest {
     nestedList.add("C");
 
     List<Collection<String>> collections =
-        Arrays.asList(nestedTreeSet, nestedDequeue, nestedLinkedHashSet, nestedList);
+        List.of(nestedTreeSet, nestedDequeue, nestedLinkedHashSet, nestedList);
 
     for (Collection<String> collection : collections) {
       final Map<String, Object> params = new LinkedHashMap<>();

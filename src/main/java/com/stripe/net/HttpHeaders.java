@@ -3,7 +3,6 @@ package com.stripe.net;
 import static java.util.Objects.requireNonNull;
 
 import com.stripe.util.CaseInsensitiveMap;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +47,7 @@ public class HttpHeaders {
   public HttpHeaders withAdditionalHeader(String name, String value) {
     requireNonNull(name);
     requireNonNull(value);
-    return this.withAdditionalHeader(name, Arrays.asList(value));
+    return this.withAdditionalHeader(name, List.of(value));
   }
 
   /**

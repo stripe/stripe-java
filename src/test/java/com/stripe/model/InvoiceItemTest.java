@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -79,11 +78,11 @@ public class InvoiceItemTest extends BaseStripeTest {
     List<String> discountIds = discounts.stream().map(x -> x.getId()).collect(Collectors.toList());
     invoiceItem.setDiscounts(discountIds);
     assertEquals(discounts, invoiceItem.getDiscountObjects());
-    invoiceItem.setDiscounts(Arrays.asList(discountIds.get(0)));
+    invoiceItem.setDiscounts(List.of(discountIds.get(0)));
     assertEquals(invoiceItem.getDiscountObjects().size(), 1);
     assertNull(invoiceItem.getDiscountObjects().get(0));
     invoiceItem.setDiscounts(discountIds);
-    assertEquals(Arrays.asList(null, null), invoiceItem.getDiscountObjects());
+    assertEquals(List.of(null, null), invoiceItem.getDiscountObjects());
     invoiceItem.setDiscountObjects(discounts);
     assertEquals(discounts, invoiceItem.getDiscountObjects());
   }

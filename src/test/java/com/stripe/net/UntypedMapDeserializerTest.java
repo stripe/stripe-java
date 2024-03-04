@@ -9,7 +9,6 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -121,7 +120,7 @@ public class UntypedMapDeserializerTest {
 
     Object untyped = flatteningDeserializer.deserializeJsonElement(jsonArray);
     assertEquals(
-        Arrays.asList(
+        List.of(
             ImmutableMap.of("grand_child", 1L),
             ImmutableMap.of("grand_child", 2L),
             ImmutableMap.of("grand_child", 3L)),

@@ -7,7 +7,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -142,10 +141,10 @@ public class StripeRequest {
     Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
 
     // Accept
-    headerMap.put("Accept", Arrays.asList("application/json"));
+    headerMap.put("Accept", List.of("application/json"));
 
     // Accept-Charset
-    headerMap.put("Accept-Charset", Arrays.asList(ApiResource.CHARSET.name()));
+    headerMap.put("Accept-Charset", List.of(ApiResource.CHARSET.name()));
 
     // Authorization
     String apiKey = options.getApiKey();
@@ -177,14 +176,14 @@ public class StripeRequest {
           null,
           0);
     }
-    headerMap.put("Authorization", Arrays.asList(String.format("Bearer %s", apiKey)));
+    headerMap.put("Authorization", List.of(String.format("Bearer %s", apiKey)));
 
     // Stripe-Version
     if (RequestOptions.unsafeGetStripeVersionOverride(options) != null) {
       headerMap.put(
-          "Stripe-Version", Arrays.asList(RequestOptions.unsafeGetStripeVersionOverride(options)));
+          "Stripe-Version", List.of(RequestOptions.unsafeGetStripeVersionOverride(options)));
     } else if (options.getStripeVersion() != null) {
-      headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersion()));
+      headerMap.put("Stripe-Version", List.of(options.getStripeVersion()));
     } else {
       throw new IllegalStateException(
           "Either `stripeVersion` or `stripeVersionOverride` value must be set.");
@@ -192,14 +191,14 @@ public class StripeRequest {
 
     // Stripe-Account
     if (options.getStripeAccount() != null) {
-      headerMap.put("Stripe-Account", Arrays.asList(options.getStripeAccount()));
+      headerMap.put("Stripe-Account", List.of(options.getStripeAccount()));
     }
 
     // Idempotency-Key
     if (options.getIdempotencyKey() != null) {
-      headerMap.put("Idempotency-Key", Arrays.asList(options.getIdempotencyKey()));
+      headerMap.put("Idempotency-Key", List.of(options.getIdempotencyKey()));
     } else if (method == ApiResource.RequestMethod.POST) {
-      headerMap.put("Idempotency-Key", Arrays.asList(UUID.randomUUID().toString()));
+      headerMap.put("Idempotency-Key", List.of(UUID.randomUUID().toString()));
     }
 
     return HttpHeaders.of(headerMap);

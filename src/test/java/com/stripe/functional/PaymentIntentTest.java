@@ -16,7 +16,6 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +65,7 @@ public class PaymentIntentTest extends BaseStripeTest {
             .addExpand("application")
             .addExpand("customer")
             .addExpand("on_behalf_of")
-            .addAllExpand(Arrays.asList("review", "transfer_data.destination"))
+            .addAllExpand(List.of("review", "transfer_data.destination"))
             .build();
 
     final PaymentIntent resource =
