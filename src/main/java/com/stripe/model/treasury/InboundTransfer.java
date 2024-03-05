@@ -426,7 +426,9 @@ public class InboundTransfer extends ApiResource implements HasId {
       String last4;
 
       /**
-       * The US bank account network used to debit funds.
+       * The network rails used. See the <a
+       * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
+       * about money movement timelines for each network type.
        *
        * <p>Equal to {@code ach}.
        */

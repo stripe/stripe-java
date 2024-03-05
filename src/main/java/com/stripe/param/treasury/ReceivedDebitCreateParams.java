@@ -48,7 +48,12 @@ public class ReceivedDebitCreateParams extends ApiRequestParams {
   @SerializedName("initiating_payment_method_details")
   InitiatingPaymentMethodDetails initiatingPaymentMethodDetails;
 
-  /** <strong>Required.</strong> The rails used for the object. */
+  /**
+   * <strong>Required.</strong> Specifies the network rails to be used. If not set, will default to
+   * the PaymentMethod's preferred network. See the <a
+   * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more about
+   * money movement timelines for each network type.
+   */
   @SerializedName("network")
   Network network;
 
@@ -201,7 +206,12 @@ public class ReceivedDebitCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The rails used for the object. */
+    /**
+     * <strong>Required.</strong> Specifies the network rails to be used. If not set, will default
+     * to the PaymentMethod's preferred network. See the <a
+     * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more about
+     * money movement timelines for each network type.
+     */
     public Builder setNetwork(ReceivedDebitCreateParams.Network network) {
       this.network = network;
       return this;
