@@ -353,7 +353,12 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Designate the OutboundTransfer as using a US bank account network configuration. */
+      /**
+       * Specifies the network rails to be used. If not set, will default to the PaymentMethod's
+       * preferred network. See the <a
+       * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
+       * about money movement timelines for each network type.
+       */
       @SerializedName("network")
       Network network;
 
@@ -407,7 +412,12 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Designate the OutboundTransfer as using a US bank account network configuration. */
+        /**
+         * Specifies the network rails to be used. If not set, will default to the PaymentMethod's
+         * preferred network. See the <a
+         * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
+         * about money movement timelines for each network type.
+         */
         public Builder setNetwork(
             OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount.Network
                 network) {
