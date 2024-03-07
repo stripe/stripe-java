@@ -1232,6 +1232,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       Konbini konbini;
 
       /**
+       * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct Debit
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("sepa_debit")
+      SepaDebit sepaDebit;
+
+      /**
        * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
        * debit payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -1364,6 +1371,11 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SepaDebit extends StripeObject {}
 
       @Getter
       @Setter
