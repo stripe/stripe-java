@@ -762,9 +762,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Input extends StripeObject {
+        /** Default text of input being collected. */
         @SerializedName("custom_text")
         CustomText customText;
 
+        /** Indicate that this input is required, disabling the skip button. */
         @SerializedName("required")
         Boolean required;
 
@@ -776,11 +778,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("signature")
         Signature signature;
 
+        /** Indicate that this input was skipped by the user. */
         @SerializedName("skipped")
         Boolean skipped;
 
         /**
-         * Which supported input type will be collected.
+         * Type of input being collected.
          *
          * <p>One of {@code email}, {@code numeric}, {@code phone}, {@code selection}, {@code
          * signature}, or {@code text}.
