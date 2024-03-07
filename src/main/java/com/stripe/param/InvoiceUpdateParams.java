@@ -2187,6 +2187,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object konbini;
 
       /**
+       * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct Debit
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("sepa_debit")
+      Object sepaDebit;
+
+      /**
        * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
        * debit payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -2200,6 +2207,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           Object customerBalance,
           Map<String, Object> extraParams,
           Object konbini,
+          Object sepaDebit,
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
@@ -2207,6 +2215,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         this.customerBalance = customerBalance;
         this.extraParams = extraParams;
         this.konbini = konbini;
+        this.sepaDebit = sepaDebit;
         this.usBankAccount = usBankAccount;
       }
 
@@ -2227,6 +2236,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
         private Object konbini;
 
+        private Object sepaDebit;
+
         private Object usBankAccount;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -2238,6 +2249,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               this.customerBalance,
               this.extraParams,
               this.konbini,
+              this.sepaDebit,
               this.usBankAccount);
         }
 
@@ -2361,6 +2373,25 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          */
         public Builder setKonbini(EmptyParam konbini) {
           this.konbini = konbini;
+          return this;
+        }
+
+        /**
+         * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct
+         * Debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setSepaDebit(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit sepaDebit) {
+          this.sepaDebit = sepaDebit;
+          return this;
+        }
+
+        /**
+         * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct
+         * Debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setSepaDebit(EmptyParam sepaDebit) {
+          this.sepaDebit = sepaDebit;
           return this;
         }
 
@@ -3448,6 +3479,67 @@ public class InvoiceUpdateParams extends ApiRequestParams {
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
            * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class SepaDebit {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private SepaDebit(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit#extraParams} for the
            * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {

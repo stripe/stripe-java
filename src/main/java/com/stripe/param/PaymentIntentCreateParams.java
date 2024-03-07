@@ -48,10 +48,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * Set to {@code true} to attempt to <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm this PaymentIntent</a> this
-   * PaymentIntent immediately. This parameter defaults to {@code false}. When creating and
-   * confirming a PaymentIntent at the same time, you can also provide the parameters available in
-   * the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm this PaymentIntent</a>
+   * immediately. This parameter defaults to {@code false}. When creating and confirming a
+   * PaymentIntent at the same time, you can also provide the parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
    */
   @SerializedName("confirm")
   Boolean confirm;
@@ -535,9 +535,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * Set to {@code true} to attempt to <a
      * href="https://stripe.com/docs/api/payment_intents/confirm">confirm this PaymentIntent</a>
-     * this PaymentIntent immediately. This parameter defaults to {@code false}. When creating and
-     * confirming a PaymentIntent at the same time, you can also provide the parameters available in
-     * the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
+     * immediately. This parameter defaults to {@code false}. When creating and confirming a
+     * PaymentIntent at the same time, you can also provide the parameters available in the <a
+     * href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;

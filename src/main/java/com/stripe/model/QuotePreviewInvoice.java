@@ -1232,6 +1232,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       Konbini konbini;
 
       /**
+       * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct Debit
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("sepa_debit")
+      SepaDebit sepaDebit;
+
+      /**
        * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
        * debit payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -1364,6 +1371,11 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SepaDebit extends StripeObject {}
 
       @Getter
       @Setter
@@ -1545,8 +1557,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionDetails extends StripeObject {
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will reflect
-     * the metadata of the subscription at the time of invoice creation. <em>Note: This attribute is
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> defined as
+     * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
+     * subscription metadata at the time of invoice finalization. <em>Note: This attribute is
      * populated only for invoices created on or after June 29, 2023.</em>
      */
     @SerializedName("metadata")
