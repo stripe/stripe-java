@@ -1,5 +1,12 @@
 # Changelog
 
+## 24.19.0 - 2024-03-07
+* [#1758](https://github.com/stripe/stripe-java/pull/1758) Update generated code
+  * Add support for `documents` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `request_three_d_secure` on `Checkout.Session.payment_method_options.card` and `checkout.SessionCreateParams.payment_method_options.card`
+  * Add support for `created` on `CreditNoteListParams`
+  * Add support for `sepa_debit` on `Invoice.payment_settings.payment_method_options`, `InvoiceCreateParams.payment_settings.payment_method_options`, and `InvoiceUpdateParams.payment_settings.payment_method_options`
+
 ## 24.18.0 - 2024-02-29
 * [#1750](https://github.com/stripe/stripe-java/pull/1750) Update generated code
   * Add support for `number` on `InvoiceCreateParams` and `InvoiceUpdateParams`
