@@ -7178,6 +7178,20 @@ public class SessionCreateParams extends ApiRequestParams {
       Installments installments;
 
       /**
+       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. If not provided, this value defaults to {@code automatic}. Read our
+       * guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+       * requesting 3D Secure</a> for more information on how this configuration interacts with
+       * Radar and our SCA Engine.
+       */
+      @SerializedName("request_three_d_secure")
+      RequestThreeDSecure requestThreeDSecure;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>Providing this parameter will <a
@@ -7218,11 +7232,13 @@ public class SessionCreateParams extends ApiRequestParams {
       private Card(
           Map<String, Object> extraParams,
           Installments installments,
+          RequestThreeDSecure requestThreeDSecure,
           SetupFutureUsage setupFutureUsage,
           String statementDescriptorSuffixKana,
           String statementDescriptorSuffixKanji) {
         this.extraParams = extraParams;
         this.installments = installments;
+        this.requestThreeDSecure = requestThreeDSecure;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
@@ -7237,6 +7253,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Installments installments;
 
+        private RequestThreeDSecure requestThreeDSecure;
+
         private SetupFutureUsage setupFutureUsage;
 
         private String statementDescriptorSuffixKana;
@@ -7248,6 +7266,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return new SessionCreateParams.PaymentMethodOptions.Card(
               this.extraParams,
               this.installments,
+              this.requestThreeDSecure,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji);
@@ -7285,6 +7304,23 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setInstallments(
             SessionCreateParams.PaymentMethodOptions.Card.Installments installments) {
           this.installments = installments;
+          return this;
+        }
+
+        /**
+         * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+         * customers for authentication based on risk level and <a
+         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+         * provide this option. If not provided, this value defaults to {@code automatic}. Read our
+         * guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * requesting 3D Secure</a> for more information on how this configuration interacts with
+         * Radar and our SCA Engine.
+         */
+        public Builder setRequestThreeDSecure(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestThreeDSecure requestThreeDSecure) {
+          this.requestThreeDSecure = requestThreeDSecure;
           return this;
         }
 
@@ -7410,6 +7446,24 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams.putAll(map);
             return this;
           }
+        }
+      }
+
+      public enum RequestThreeDSecure implements ApiRequestParams.EnumParam {
+        @SerializedName("any")
+        ANY("any"),
+
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("challenge")
+        CHALLENGE("challenge");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestThreeDSecure(String value) {
+          this.value = value;
         }
       }
 
