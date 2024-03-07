@@ -1,5 +1,9 @@
 # Changelog
 
+## 24.20.0-beta.1 - 2024-03-07
+* [#1757](https://github.com/stripe/stripe-java/pull/1757) Update generated code for beta
+  * Add support for new value `billing_period_end` on enums `QuoteCreateParams.lines[].ends_at.type` and `QuoteUpdateParams.lines[].ends_at.type`
+
 ## 24.19.0-beta.1 - 2024-02-29
 * [#1751](https://github.com/stripe/stripe-java/pull/1751) Update generated code for beta
   * Remove support for resource `Entitlements.Event`
