@@ -10,15 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardListParams extends ApiRequestParams {
-  /** Only return cards belonging to the Cardholder with the provided ID. */
-  @SerializedName("cardholder")
-  String cardholder;
-
-  /** Only return cards that were issued during the given date interval. */
-  @SerializedName("created")
-  Object created;
-
+public class PersonalizationDesignListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -27,14 +19,6 @@ public class CardListParams extends ApiRequestParams {
    */
   @SerializedName("ending_before")
   String endingBefore;
-
-  /** Only return cards that have the given expiration month. */
-  @SerializedName("exp_month")
-  Long expMonth;
-
-  /** Only return cards that have the given expiration year. */
-  @SerializedName("exp_year")
-  Long expYear;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -49,10 +33,6 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Only return cards that have the given last four digits. */
-  @SerializedName("last4")
-  String last4;
-
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
@@ -60,8 +40,13 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  @SerializedName("personalization_design")
-  String personalizationDesign;
+  /** Only return personalization designs with the given lookup keys. */
+  @SerializedName("lookup_keys")
+  List<String> lookupKeys;
+
+  /** Only return personalization designs with the given preferences. */
+  @SerializedName("preferences")
+  Preferences preferences;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -72,44 +57,27 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /**
-   * Only return cards that have the given status. One of {@code active}, {@code inactive}, or
-   * {@code canceled}.
-   */
+  /** Only return personalization designs with the given status. */
   @SerializedName("status")
   Status status;
 
-  /** Only return cards that have the given type. One of {@code virtual} or {@code physical}. */
-  @SerializedName("type")
-  Type type;
-
-  private CardListParams(
-      String cardholder,
-      Object created,
+  private PersonalizationDesignListParams(
       String endingBefore,
-      Long expMonth,
-      Long expYear,
       List<String> expand,
       Map<String, Object> extraParams,
-      String last4,
       Long limit,
-      String personalizationDesign,
+      List<String> lookupKeys,
+      Preferences preferences,
       String startingAfter,
-      Status status,
-      Type type) {
-    this.cardholder = cardholder;
-    this.created = created;
+      Status status) {
     this.endingBefore = endingBefore;
-    this.expMonth = expMonth;
-    this.expYear = expYear;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.last4 = last4;
     this.limit = limit;
-    this.personalizationDesign = personalizationDesign;
+    this.lookupKeys = lookupKeys;
+    this.preferences = preferences;
     this.startingAfter = startingAfter;
     this.status = status;
-    this.type = type;
   }
 
   public static Builder builder() {
@@ -117,66 +85,33 @@ public class CardListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String cardholder;
-
-    private Object created;
-
     private String endingBefore;
-
-    private Long expMonth;
-
-    private Long expYear;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String last4;
-
     private Long limit;
 
-    private String personalizationDesign;
+    private List<String> lookupKeys;
+
+    private Preferences preferences;
 
     private String startingAfter;
 
     private Status status;
 
-    private Type type;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public CardListParams build() {
-      return new CardListParams(
-          this.cardholder,
-          this.created,
+    public PersonalizationDesignListParams build() {
+      return new PersonalizationDesignListParams(
           this.endingBefore,
-          this.expMonth,
-          this.expYear,
           this.expand,
           this.extraParams,
-          this.last4,
           this.limit,
-          this.personalizationDesign,
+          this.lookupKeys,
+          this.preferences,
           this.startingAfter,
-          this.status,
-          this.type);
-    }
-
-    /** Only return cards belonging to the Cardholder with the provided ID. */
-    public Builder setCardholder(String cardholder) {
-      this.cardholder = cardholder;
-      return this;
-    }
-
-    /** Only return cards that were issued during the given date interval. */
-    public Builder setCreated(CardListParams.Created created) {
-      this.created = created;
-      return this;
-    }
-
-    /** Only return cards that were issued during the given date interval. */
-    public Builder setCreated(Long created) {
-      this.created = created;
-      return this;
+          this.status);
     }
 
     /**
@@ -190,22 +125,10 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return cards that have the given expiration month. */
-    public Builder setExpMonth(Long expMonth) {
-      this.expMonth = expMonth;
-      return this;
-    }
-
-    /** Only return cards that have the given expiration year. */
-    public Builder setExpYear(Long expYear) {
-      this.expYear = expYear;
-      return this;
-    }
-
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardListParams#expand} for the field documentation.
+     * PersonalizationDesignListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -218,7 +141,7 @@ public class CardListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardListParams#expand} for the field documentation.
+     * PersonalizationDesignListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -231,7 +154,7 @@ public class CardListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardListParams#extraParams} for the field documentation.
+     * PersonalizationDesignListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -244,19 +167,13 @@ public class CardListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardListParams#extraParams} for the field documentation.
+     * See {@link PersonalizationDesignListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** Only return cards that have the given last four digits. */
-    public Builder setLast4(String last4) {
-      this.last4 = last4;
       return this;
     }
 
@@ -269,8 +186,35 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setPersonalizationDesign(String personalizationDesign) {
-      this.personalizationDesign = personalizationDesign;
+    /**
+     * Add an element to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PersonalizationDesignListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addLookupKey(String element) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PersonalizationDesignListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addAllLookupKey(List<String> elements) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.addAll(elements);
+      return this;
+    }
+
+    /** Only return personalization designs with the given preferences. */
+    public Builder setPreferences(PersonalizationDesignListParams.Preferences preferences) {
+      this.preferences = preferences;
       return this;
     }
 
@@ -285,24 +229,15 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Only return cards that have the given status. One of {@code active}, {@code inactive}, or
-     * {@code canceled}.
-     */
-    public Builder setStatus(CardListParams.Status status) {
+    /** Only return personalization designs with the given status. */
+    public Builder setStatus(PersonalizationDesignListParams.Status status) {
       this.status = status;
-      return this;
-    }
-
-    /** Only return cards that have the given type. One of {@code virtual} or {@code physical}. */
-    public Builder setType(CardListParams.Type type) {
-      this.type = type;
       return this;
     }
   }
 
   @Getter
-  public static class Created {
+  public static class Preferences {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -312,28 +247,25 @@ public class CardListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
+    /**
+     * Only return the personalization design that's set as the default. A connected account uses
+     * the Connect platform's default design if no personalization design is set as the default.
+     */
+    @SerializedName("is_default")
+    Boolean isDefault;
 
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
+    /**
+     * Only return the personalization design that is set as the Connect platform's default. This
+     * parameter is only applicable to connected accounts.
+     */
+    @SerializedName("is_platform_default")
+    Boolean isPlatformDefault;
 
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+    private Preferences(
+        Map<String, Object> extraParams, Boolean isDefault, Boolean isPlatformDefault) {
       this.extraParams = extraParams;
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
+      this.isDefault = isDefault;
+      this.isPlatformDefault = isPlatformDefault;
     }
 
     public static Builder builder() {
@@ -343,23 +275,20 @@ public class CardListParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private Long gt;
+      private Boolean isDefault;
 
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
+      private Boolean isPlatformDefault;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardListParams.Created build() {
-        return new CardListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public PersonalizationDesignListParams.Preferences build() {
+        return new PersonalizationDesignListParams.Preferences(
+            this.extraParams, this.isDefault, this.isPlatformDefault);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardListParams.Created#extraParams} for the field documentation.
+       * PersonalizationDesignListParams.Preferences#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -372,7 +301,8 @@ public class CardListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardListParams.Created#extraParams} for the field documentation.
+       * See {@link PersonalizationDesignListParams.Preferences#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -382,27 +312,21 @@ public class CardListParams extends ApiRequestParams {
         return this;
       }
 
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
+      /**
+       * Only return the personalization design that's set as the default. A connected account uses
+       * the Connect platform's default design if no personalization design is set as the default.
+       */
+      public Builder setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
         return this;
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
-
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /**
+       * Only return the personalization design that is set as the Connect platform's default. This
+       * parameter is only applicable to connected accounts.
+       */
+      public Builder setIsPlatformDefault(Boolean isPlatformDefault) {
+        this.isPlatformDefault = isPlatformDefault;
         return this;
       }
     }
@@ -412,31 +336,19 @@ public class CardListParams extends ApiRequestParams {
     @SerializedName("active")
     ACTIVE("active"),
 
-    @SerializedName("canceled")
-    CANCELED("canceled"),
-
     @SerializedName("inactive")
-    INACTIVE("inactive");
+    INACTIVE("inactive"),
+
+    @SerializedName("rejected")
+    REJECTED("rejected"),
+
+    @SerializedName("review")
+    REVIEW("review");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
     Status(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("physical")
-    PHYSICAL("physical"),
-
-    @SerializedName("virtual")
-    VIRTUAL("virtual");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Type(String value) {
       this.value = value;
     }
   }

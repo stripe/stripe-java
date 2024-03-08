@@ -38,6 +38,9 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  @SerializedName("personalization_design")
+  Object personalizationDesign;
+
   /** The desired new PIN for this card. */
   @SerializedName("pin")
   Pin pin;
@@ -64,6 +67,7 @@ public class CardUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
+      Object personalizationDesign,
       Pin pin,
       SpendingControls spendingControls,
       Status status) {
@@ -71,6 +75,7 @@ public class CardUpdateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.personalizationDesign = personalizationDesign;
     this.pin = pin;
     this.spendingControls = spendingControls;
     this.status = status;
@@ -89,6 +94,8 @@ public class CardUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Object personalizationDesign;
+
     private Pin pin;
 
     private SpendingControls spendingControls;
@@ -102,6 +109,7 @@ public class CardUpdateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.metadata,
+          this.personalizationDesign,
           this.pin,
           this.spendingControls,
           this.status);
@@ -212,6 +220,16 @@ public class CardUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    public Builder setPersonalizationDesign(String personalizationDesign) {
+      this.personalizationDesign = personalizationDesign;
+      return this;
+    }
+
+    public Builder setPersonalizationDesign(EmptyParam personalizationDesign) {
+      this.personalizationDesign = personalizationDesign;
       return this;
     }
 

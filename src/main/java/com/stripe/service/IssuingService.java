@@ -25,6 +25,14 @@ public final class IssuingService extends ApiService {
     return new com.stripe.service.issuing.DisputeService(this.getResponseGetter());
   }
 
+  public com.stripe.service.issuing.PersonalizationDesignService personalizationDesigns() {
+    return new com.stripe.service.issuing.PersonalizationDesignService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.issuing.PhysicalBundleService physicalBundles() {
+    return new com.stripe.service.issuing.PhysicalBundleService(this.getResponseGetter());
+  }
+
   public com.stripe.service.issuing.TokenService tokens() {
     return new com.stripe.service.issuing.TokenService(this.getResponseGetter());
   }

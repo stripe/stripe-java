@@ -138,6 +138,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("object")
   String object;
 
+  /** The personalization design object belonging to this card. */
+  @SerializedName("personalization_design")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PersonalizationDesign> personalizationDesign;
+
   /** The latest card that replaces this card, if any. */
   @SerializedName("replaced_by")
   @Getter(lombok.AccessLevel.NONE)
@@ -185,6 +191,25 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** Information relating to digital wallets (like Apple Pay and Google Pay). */
   @SerializedName("wallets")
   Wallets wallets;
+
+  /** Get ID of expandable {@code personalizationDesign} object. */
+  public String getPersonalizationDesign() {
+    return (this.personalizationDesign != null) ? this.personalizationDesign.getId() : null;
+  }
+
+  public void setPersonalizationDesign(String id) {
+    this.personalizationDesign = ApiResource.setExpandableFieldId(id, this.personalizationDesign);
+  }
+
+  /** Get expanded {@code personalizationDesign}. */
+  public PersonalizationDesign getPersonalizationDesignObject() {
+    return (this.personalizationDesign != null) ? this.personalizationDesign.getExpanded() : null;
+  }
+
+  public void setPersonalizationDesignObject(PersonalizationDesign expandableObject) {
+    this.personalizationDesign =
+        new ExpandableField<PersonalizationDesign>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code replacedBy} object. */
   public String getReplacedBy() {
@@ -879,6 +904,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
+    trySetResponseGetter(personalizationDesign, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
