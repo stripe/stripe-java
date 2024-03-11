@@ -2628,6 +2628,42 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCustomersCashBalanceTransactionsGet() throws StripeException {
+    Customer resource = Customer.retrieve("cus_123");
+
+    CustomerCashBalanceTransactionsParams params =
+        CustomerCashBalanceTransactionsParams.builder().setLimit(3L).build();
+
+    CustomerCashBalanceTransactionCollection customerCashBalanceTransactions =
+        resource.cashBalanceTransactions(params);
+    assertNotNull(customerCashBalanceTransactions);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/customers/cus_123/cash_balance_transactions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testCustomersCashBalanceTransactionsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.CustomerCashBalanceTransactionListParams params =
+        com.stripe.param.CustomerCashBalanceTransactionListParams.builder().setLimit(3L).build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.CustomerCashBalanceTransaction>
+        stripeCollection = client.customers().cashBalanceTransactions().list("cus_123", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/customers/cus_123/cash_balance_transactions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testCustomersDelete() throws StripeException {
     Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx");
 
