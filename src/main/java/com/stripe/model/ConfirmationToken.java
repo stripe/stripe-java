@@ -10,6 +10,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.ConfirmationTokenCreateParams;
 import com.stripe.param.ConfirmationTokenRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -1458,6 +1459,47 @@ public class ConfirmationToken extends ApiResource implements HasId {
     /** Recipient phone (including extension). */
     @SerializedName("phone")
     String phone;
+  }
+
+  public static class TestHelpers {
+    private TestHelpers() {}
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(Map<String, Object> params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/confirmation_tokens";
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ConfirmationToken.class);
+    }
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(ConfirmationTokenCreateParams params)
+        throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(
+        ConfirmationTokenCreateParams params, RequestOptions options) throws StripeException {
+      String path = "/v1/test_helpers/confirmation_tokens";
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options,
+              ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ConfirmationToken.class);
+    }
   }
 
   @Override
