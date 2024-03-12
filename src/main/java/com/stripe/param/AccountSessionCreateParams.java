@@ -141,6 +141,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("capital_financing_promotion")
     CapitalFinancingPromotion capitalFinancingPromotion;
 
+    /** Configuration for the documents embedded component. */
     @SerializedName("documents")
     Documents documents;
 
@@ -227,6 +228,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Configuration for the documents embedded component. */
       public Builder setDocuments(AccountSessionCreateParams.Components.Documents documents) {
         this.documents = documents;
         return this;
