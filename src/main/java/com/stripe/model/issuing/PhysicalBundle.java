@@ -179,6 +179,14 @@ public class PhysicalBundle extends ApiResource implements HasId {
      */
     @SerializedName("carrier_text")
     String carrierText;
+
+    /**
+     * The policy for how to use a second line on a card with this physical bundle.
+     *
+     * <p>One of {@code optional}, {@code required}, or {@code unsupported}.
+     */
+    @SerializedName("second_line")
+    String secondLine;
   }
 
   @Override
