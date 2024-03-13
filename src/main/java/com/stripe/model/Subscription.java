@@ -1483,6 +1483,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Konbini konbini;
 
       /**
+       * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
+       * to invoices created by the subscription.
+       */
+      @SerializedName("sepa_debit")
+      SepaDebit sepaDebit;
+
+      /**
        * This sub-hash contains details about the ACH direct debit payment method options to pass to
        * invoices created by the subscription.
        */
@@ -1637,6 +1644,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SepaDebit extends StripeObject {}
 
       @Getter
       @Setter
