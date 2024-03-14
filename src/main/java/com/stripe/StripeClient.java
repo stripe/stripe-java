@@ -119,6 +119,10 @@ public class StripeClient {
     return new com.stripe.service.BankAccountService(this.getResponseGetter());
   }
 
+  public com.stripe.service.BillingService billing() {
+    return new com.stripe.service.BillingService(this.getResponseGetter());
+  }
+
   public com.stripe.service.BillingPortalService billingPortal() {
     return new com.stripe.service.BillingPortalService(this.getResponseGetter());
   }
