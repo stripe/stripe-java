@@ -99,6 +99,13 @@ final class EventDataClassLookup {
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
+    classLookup.put("billing.meter", com.stripe.model.billing.Meter.class);
+    classLookup.put("billing.meter_event", com.stripe.model.billing.MeterEvent.class);
+    classLookup.put(
+        "billing.meter_event_adjustment", com.stripe.model.billing.MeterEventAdjustment.class);
+    classLookup.put(
+        "billing.meter_event_summary", com.stripe.model.billing.MeterEventSummary.class);
+
     classLookup.put(
         "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);

@@ -105,6 +105,10 @@ public class PlanCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /** The meter tracking the usage of a metered price. */
+  @SerializedName("meter")
+  String meter;
+
   /** A brief description of the plan, hidden from customers. */
   @SerializedName("nickname")
   String nickname;
@@ -164,6 +168,7 @@ public class PlanCreateParams extends ApiRequestParams {
       Interval interval,
       Long intervalCount,
       Object metadata,
+      String meter,
       String nickname,
       Object product,
       List<PlanCreateParams.Tier> tiers,
@@ -183,6 +188,7 @@ public class PlanCreateParams extends ApiRequestParams {
     this.interval = interval;
     this.intervalCount = intervalCount;
     this.metadata = metadata;
+    this.meter = meter;
     this.nickname = nickname;
     this.product = product;
     this.tiers = tiers;
@@ -221,6 +227,8 @@ public class PlanCreateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private String meter;
+
     private String nickname;
 
     private Object product;
@@ -250,6 +258,7 @@ public class PlanCreateParams extends ApiRequestParams {
           this.interval,
           this.intervalCount,
           this.metadata,
+          this.meter,
           this.nickname,
           this.product,
           this.tiers,
@@ -446,6 +455,12 @@ public class PlanCreateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /** The meter tracking the usage of a metered price. */
+    public Builder setMeter(String meter) {
+      this.meter = meter;
       return this;
     }
 

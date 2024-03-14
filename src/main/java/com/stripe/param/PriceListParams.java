@@ -443,15 +443,21 @@ public class PriceListParams extends ApiRequestParams {
     @SerializedName("interval")
     Interval interval;
 
+    /** Filter by the price's meter. */
+    @SerializedName("meter")
+    String meter;
+
     /**
      * Filter by the usage type for this price. Can be either {@code metered} or {@code licensed}.
      */
     @SerializedName("usage_type")
     UsageType usageType;
 
-    private Recurring(Map<String, Object> extraParams, Interval interval, UsageType usageType) {
+    private Recurring(
+        Map<String, Object> extraParams, Interval interval, String meter, UsageType usageType) {
       this.extraParams = extraParams;
       this.interval = interval;
+      this.meter = meter;
       this.usageType = usageType;
     }
 
@@ -464,11 +470,14 @@ public class PriceListParams extends ApiRequestParams {
 
       private Interval interval;
 
+      private String meter;
+
       private UsageType usageType;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PriceListParams.Recurring build() {
-        return new PriceListParams.Recurring(this.extraParams, this.interval, this.usageType);
+        return new PriceListParams.Recurring(
+            this.extraParams, this.interval, this.meter, this.usageType);
       }
 
       /**
@@ -503,6 +512,12 @@ public class PriceListParams extends ApiRequestParams {
        */
       public Builder setInterval(PriceListParams.Recurring.Interval interval) {
         this.interval = interval;
+        return this;
+      }
+
+      /** Filter by the price's meter. */
+      public Builder setMeter(String meter) {
+        this.meter = meter;
         return this;
       }
 
