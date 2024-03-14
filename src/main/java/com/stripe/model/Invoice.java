@@ -11,6 +11,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.InvoiceAddLinesParams;
 import com.stripe.param.InvoiceAttachPaymentIntentParams;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceCreatePreviewParams;
@@ -18,11 +19,13 @@ import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
 import com.stripe.param.InvoicePayParams;
+import com.stripe.param.InvoiceRemoveLinesParams;
 import com.stripe.param.InvoiceRetrieveParams;
 import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
 import com.stripe.param.InvoiceUpcomingLinesParams;
 import com.stripe.param.InvoiceUpcomingParams;
+import com.stripe.param.InvoiceUpdateLinesParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
 import java.util.List;
@@ -974,6 +977,50 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(Map<String, Object> params) throws StripeException {
+    return addLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(InvoiceAddLinesParams params) throws StripeException {
+    return addLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(InvoiceAddLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
    * Attaches a PaymentIntent to the invoice, adding it to the list of {@code payments}. When the
    * PaymentIntent’s status changes to {@code succeeded}, the payment is credited to the invoice,
    * increasing its {@code amount_paid}. When the invoice is fully paid, the invoice’s status
@@ -1576,6 +1623,56 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     return getResponseGetter().request(request, Invoice.class);
   }
 
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(Map<String, Object> params) throws StripeException {
+    return removeLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/remove_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(InvoiceRemoveLinesParams params) throws StripeException {
+    return removeLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(InvoiceRemoveLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/remove_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
   /** Retrieves the invoice with the given ID. */
   public static Invoice retrieve(String invoice) throws StripeException {
     return retrieve(invoice, (Map<String, Object>) null, (RequestOptions) null);
@@ -2035,6 +2132,56 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public Invoice update(InvoiceUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(Map<String, Object> params) throws StripeException {
+    return updateLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/update_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(InvoiceUpdateLinesParams params) throws StripeException {
+    return updateLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(InvoiceUpdateLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/update_lines", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

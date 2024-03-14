@@ -616,6 +616,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     @SerializedName("interval_count")
     Long intervalCount;
 
+    /** The meter tracking the usage of a metered price. */
+    @SerializedName("meter")
+    String meter;
+
     /**
      * Default number of trial days when subscribing a customer to this price using <a
      * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code

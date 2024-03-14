@@ -10,6 +10,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.ConfirmationTokenCreateParams;
 import com.stripe.param.ConfirmationTokenRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -312,6 +313,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -357,10 +361,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik}, {@code boleto},
      * {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps},
      * {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code
-     * klarna}, {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code
-     * paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code
-     * sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
-     * wechat_pay}, or {@code zip}.
+     * klarna}, {@code konbini}, {@code link}, {@code multibanco}, {@code oxxo}, {@code p24}, {@code
+     * paynow}, {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code revolut_pay},
+     * {@code sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account},
+     * {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1139,6 +1143,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {}
 
     @Getter
@@ -1458,6 +1467,47 @@ public class ConfirmationToken extends ApiResource implements HasId {
     /** Recipient phone (including extension). */
     @SerializedName("phone")
     String phone;
+  }
+
+  public static class TestHelpers {
+    private TestHelpers() {}
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(Map<String, Object> params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/confirmation_tokens";
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ConfirmationToken.class);
+    }
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(ConfirmationTokenCreateParams params)
+        throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    public static ConfirmationToken create(
+        ConfirmationTokenCreateParams params, RequestOptions options) throws StripeException {
+      String path = "/v1/test_helpers/confirmation_tokens";
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options,
+              ApiMode.V1);
+      return getGlobalResponseGetter().request(request, ConfirmationToken.class);
+    }
   }
 
   @Override

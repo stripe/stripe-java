@@ -6556,8 +6556,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Whether this account should have access to the full Stripe dashboard ({@code full}) or no
-       * dashboard ({@code none}).
+       * Whether this account should have access to the full Stripe Dashboard ({@code full}), to the
+       * Express Dashboard ({@code express}), or to no dashboard ({@code none}). Defaults to {@code
+       * full}.
        */
       @SerializedName("type")
       Type type;
@@ -6610,8 +6611,9 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Whether this account should have access to the full Stripe dashboard ({@code full}) or no
-         * dashboard ({@code none}).
+         * Whether this account should have access to the full Stripe Dashboard ({@code full}), to
+         * the Express Dashboard ({@code express}), or to no dashboard ({@code none}). Defaults to
+         * {@code full}.
          */
         public Builder setType(AccountCreateParams.Controller.Dashboard.Type type) {
           this.type = type;

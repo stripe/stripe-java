@@ -256,6 +256,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("link")
     LINK("link"),
 
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
