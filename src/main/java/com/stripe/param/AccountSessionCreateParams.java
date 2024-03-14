@@ -138,6 +138,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
+    /** Configuration for the documents embedded component. */
     @SerializedName("documents")
     Documents documents;
 
@@ -212,6 +213,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Configuration for the documents embedded component. */
       public Builder setDocuments(AccountSessionCreateParams.Components.Documents documents) {
         this.documents = documents;
         return this;
