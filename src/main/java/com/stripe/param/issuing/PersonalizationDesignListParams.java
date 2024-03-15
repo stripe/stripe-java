@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,15 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CreditNoteListParams extends ApiRequestParams {
-  /** Only return credit notes that were created during the given date interval. */
-  @SerializedName("created")
-  Object created;
-
-  /** Only return credit notes for the customer specified by this customer ID. */
-  @SerializedName("customer")
-  String customer;
-
+public class PersonalizationDesignListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -41,16 +33,20 @@ public class CreditNoteListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Only return credit notes for the invoice specified by this invoice ID. */
-  @SerializedName("invoice")
-  String invoice;
-
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
    */
   @SerializedName("limit")
   Long limit;
+
+  /** Only return personalization designs with the given lookup keys. */
+  @SerializedName("lookup_keys")
+  List<String> lookupKeys;
+
+  /** Only return personalization designs with the given preferences. */
+  @SerializedName("preferences")
+  Preferences preferences;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -61,23 +57,27 @@ public class CreditNoteListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private CreditNoteListParams(
-      Object created,
-      String customer,
+  /** Only return personalization designs with the given status. */
+  @SerializedName("status")
+  Status status;
+
+  private PersonalizationDesignListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
-      String invoice,
       Long limit,
-      String startingAfter) {
-    this.created = created;
-    this.customer = customer;
+      List<String> lookupKeys,
+      Preferences preferences,
+      String startingAfter,
+      Status status) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.invoice = invoice;
     this.limit = limit;
+    this.lookupKeys = lookupKeys;
+    this.preferences = preferences;
     this.startingAfter = startingAfter;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -85,51 +85,33 @@ public class CreditNoteListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Object created;
-
-    private String customer;
-
     private String endingBefore;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String invoice;
-
     private Long limit;
+
+    private List<String> lookupKeys;
+
+    private Preferences preferences;
 
     private String startingAfter;
 
+    private Status status;
+
     /** Finalize and obtain parameter instance from this builder. */
-    public CreditNoteListParams build() {
-      return new CreditNoteListParams(
-          this.created,
-          this.customer,
+    public PersonalizationDesignListParams build() {
+      return new PersonalizationDesignListParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
-          this.invoice,
           this.limit,
-          this.startingAfter);
-    }
-
-    /** Only return credit notes that were created during the given date interval. */
-    public Builder setCreated(CreditNoteListParams.Created created) {
-      this.created = created;
-      return this;
-    }
-
-    /** Only return credit notes that were created during the given date interval. */
-    public Builder setCreated(Long created) {
-      this.created = created;
-      return this;
-    }
-
-    /** Only return credit notes for the customer specified by this customer ID. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
-      return this;
+          this.lookupKeys,
+          this.preferences,
+          this.startingAfter,
+          this.status);
     }
 
     /**
@@ -146,7 +128,7 @@ public class CreditNoteListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CreditNoteListParams#expand} for the field documentation.
+     * PersonalizationDesignListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -159,7 +141,7 @@ public class CreditNoteListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CreditNoteListParams#expand} for the field documentation.
+     * PersonalizationDesignListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -172,7 +154,7 @@ public class CreditNoteListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CreditNoteListParams#extraParams} for the field documentation.
+     * PersonalizationDesignListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -185,19 +167,13 @@ public class CreditNoteListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CreditNoteListParams#extraParams} for the field documentation.
+     * See {@link PersonalizationDesignListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** Only return credit notes for the invoice specified by this invoice ID. */
-    public Builder setInvoice(String invoice) {
-      this.invoice = invoice;
       return this;
     }
 
@@ -211,6 +187,38 @@ public class CreditNoteListParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PersonalizationDesignListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addLookupKey(String element) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PersonalizationDesignListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addAllLookupKey(List<String> elements) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.addAll(elements);
+      return this;
+    }
+
+    /** Only return personalization designs with the given preferences. */
+    public Builder setPreferences(PersonalizationDesignListParams.Preferences preferences) {
+      this.preferences = preferences;
+      return this;
+    }
+
+    /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
      * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
@@ -220,10 +228,16 @@ public class CreditNoteListParams extends ApiRequestParams {
       this.startingAfter = startingAfter;
       return this;
     }
+
+    /** Only return personalization designs with the given status. */
+    public Builder setStatus(PersonalizationDesignListParams.Status status) {
+      this.status = status;
+      return this;
+    }
   }
 
   @Getter
-  public static class Created {
+  public static class Preferences {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -233,28 +247,25 @@ public class CreditNoteListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
+    /**
+     * Only return the personalization design that's set as the default. A connected account uses
+     * the Connect platform's default design if no personalization design is set as the default.
+     */
+    @SerializedName("is_default")
+    Boolean isDefault;
 
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
+    /**
+     * Only return the personalization design that is set as the Connect platform's default. This
+     * parameter is only applicable to connected accounts.
+     */
+    @SerializedName("is_platform_default")
+    Boolean isPlatformDefault;
 
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+    private Preferences(
+        Map<String, Object> extraParams, Boolean isDefault, Boolean isPlatformDefault) {
       this.extraParams = extraParams;
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
+      this.isDefault = isDefault;
+      this.isPlatformDefault = isPlatformDefault;
     }
 
     public static Builder builder() {
@@ -264,24 +275,20 @@ public class CreditNoteListParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private Long gt;
+      private Boolean isDefault;
 
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
+      private Boolean isPlatformDefault;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CreditNoteListParams.Created build() {
-        return new CreditNoteListParams.Created(
-            this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public PersonalizationDesignListParams.Preferences build() {
+        return new PersonalizationDesignListParams.Preferences(
+            this.extraParams, this.isDefault, this.isPlatformDefault);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CreditNoteListParams.Created#extraParams} for the field documentation.
+       * PersonalizationDesignListParams.Preferences#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -294,7 +301,8 @@ public class CreditNoteListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CreditNoteListParams.Created#extraParams} for the field documentation.
+       * See {@link PersonalizationDesignListParams.Preferences#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -304,29 +312,44 @@ public class CreditNoteListParams extends ApiRequestParams {
         return this;
       }
 
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
+      /**
+       * Only return the personalization design that's set as the default. A connected account uses
+       * the Connect platform's default design if no personalization design is set as the default.
+       */
+      public Builder setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
         return this;
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
+      /**
+       * Only return the personalization design that is set as the Connect platform's default. This
+       * parameter is only applicable to connected accounts.
+       */
+      public Builder setIsPlatformDefault(Boolean isPlatformDefault) {
+        this.isPlatformDefault = isPlatformDefault;
         return this;
       }
+    }
+  }
 
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("active")
+    ACTIVE("active"),
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
-        return this;
-      }
+    @SerializedName("inactive")
+    INACTIVE("inactive"),
+
+    @SerializedName("rejected")
+    REJECTED("rejected"),
+
+    @SerializedName("review")
+    REVIEW("review");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 }

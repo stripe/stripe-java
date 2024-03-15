@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class PayoutListParams extends ApiRequestParams {
+  /** Only return payouts that are expected to arrive during the given date interval. */
   @SerializedName("arrival_date")
   Object arrivalDate;
 
@@ -125,11 +126,13 @@ public class PayoutListParams extends ApiRequestParams {
           this.status);
     }
 
+    /** Only return payouts that are expected to arrive during the given date interval. */
     public Builder setArrivalDate(PayoutListParams.ArrivalDate arrivalDate) {
       this.arrivalDate = arrivalDate;
       return this;
     }
 
+    /** Only return payouts that are expected to arrive during the given date interval. */
     public Builder setArrivalDate(Long arrivalDate) {
       this.arrivalDate = arrivalDate;
       return this;

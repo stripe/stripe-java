@@ -18,6 +18,12 @@ public final class IssuingService extends ApiService {
     return new com.stripe.service.testhelpers.issuing.CardService(this.getResponseGetter());
   }
 
+  public com.stripe.service.testhelpers.issuing.PersonalizationDesignService
+      personalizationDesigns() {
+    return new com.stripe.service.testhelpers.issuing.PersonalizationDesignService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.testhelpers.issuing.TransactionService transactions() {
     return new com.stripe.service.testhelpers.issuing.TransactionService(this.getResponseGetter());
   }

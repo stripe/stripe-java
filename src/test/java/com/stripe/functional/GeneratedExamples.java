@@ -2633,6 +2633,42 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCustomersCashBalanceTransactionsGet() throws StripeException {
+    Customer resource = Customer.retrieve("cus_123");
+
+    CustomerCashBalanceTransactionsParams params =
+        CustomerCashBalanceTransactionsParams.builder().setLimit(3L).build();
+
+    CustomerCashBalanceTransactionCollection customerCashBalanceTransactions =
+        resource.cashBalanceTransactions(params);
+    assertNotNull(customerCashBalanceTransactions);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/customers/cus_123/cash_balance_transactions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testCustomersCashBalanceTransactionsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.CustomerCashBalanceTransactionListParams params =
+        com.stripe.param.CustomerCashBalanceTransactionListParams.builder().setLimit(3L).build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.CustomerCashBalanceTransaction>
+        stripeCollection = client.customers().cashBalanceTransactions().list("cus_123", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/customers/cus_123/cash_balance_transactions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testCustomersDelete() throws StripeException {
     Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx");
 
@@ -5810,6 +5846,210 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v1/issuing/disputes/idp_xxxxxxxxxxxxx/submit",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsGet() throws StripeException {
+    com.stripe.param.issuing.PersonalizationDesignListParams params =
+        com.stripe.param.issuing.PersonalizationDesignListParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesignCollection personalizationDesigns =
+        com.stripe.model.issuing.PersonalizationDesign.list(params);
+    assertNotNull(personalizationDesigns);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/personalization_designs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PersonalizationDesignListParams params =
+        com.stripe.param.issuing.PersonalizationDesignListParams.builder().build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.issuing.PersonalizationDesign>
+        stripeCollection = client.issuing().personalizationDesigns().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/personalization_designs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsGet2() throws StripeException {
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        com.stripe.model.issuing.PersonalizationDesign.retrieve("pd_xyz");
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/personalization_designs/pd_xyz",
+        null,
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsGet2Services() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PersonalizationDesignRetrieveParams params =
+        com.stripe.param.issuing.PersonalizationDesignRetrieveParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        client.issuing().personalizationDesigns().retrieve("pd_xyz", params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/personalization_designs/pd_xyz",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsPost() throws StripeException {
+    com.stripe.param.issuing.PersonalizationDesignCreateParams params =
+        com.stripe.param.issuing.PersonalizationDesignCreateParams.builder()
+            .setPhysicalBundle("pb_xyz")
+            .build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        com.stripe.model.issuing.PersonalizationDesign.create(params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/issuing/personalization_designs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsPostServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PersonalizationDesignCreateParams params =
+        com.stripe.param.issuing.PersonalizationDesignCreateParams.builder()
+            .setPhysicalBundle("pb_xyz")
+            .build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        client.issuing().personalizationDesigns().create(params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/issuing/personalization_designs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsPost2() throws StripeException {
+    com.stripe.model.issuing.PersonalizationDesign resource =
+        com.stripe.model.issuing.PersonalizationDesign.retrieve("pd_xyz");
+
+    com.stripe.param.issuing.PersonalizationDesignUpdateParams params =
+        com.stripe.param.issuing.PersonalizationDesignUpdateParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign = resource.update(params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/issuing/personalization_designs/pd_xyz",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPersonalizationDesignsPost2Services() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PersonalizationDesignUpdateParams params =
+        com.stripe.param.issuing.PersonalizationDesignUpdateParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        client.issuing().personalizationDesigns().update("pd_xyz", params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/issuing/personalization_designs/pd_xyz",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPhysicalBundlesGet() throws StripeException {
+    com.stripe.param.issuing.PhysicalBundleListParams params =
+        com.stripe.param.issuing.PhysicalBundleListParams.builder().build();
+
+    com.stripe.model.issuing.PhysicalBundleCollection physicalBundles =
+        com.stripe.model.issuing.PhysicalBundle.list(params);
+    assertNotNull(physicalBundles);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/physical_bundles",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPhysicalBundlesGetServices() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PhysicalBundleListParams params =
+        com.stripe.param.issuing.PhysicalBundleListParams.builder().build();
+
+    com.stripe.model.StripeCollection<com.stripe.model.issuing.PhysicalBundle> stripeCollection =
+        client.issuing().physicalBundles().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/physical_bundles",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testIssuingPhysicalBundlesGet2() throws StripeException {
+    com.stripe.model.issuing.PhysicalBundle physicalBundle =
+        com.stripe.model.issuing.PhysicalBundle.retrieve("pb_xyz");
+    assertNotNull(physicalBundle);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/physical_bundles/pb_xyz",
+        null,
+        null);
+  }
+
+  @Test
+  public void testIssuingPhysicalBundlesGet2Services() throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PhysicalBundleRetrieveParams params =
+        com.stripe.param.issuing.PhysicalBundleRetrieveParams.builder().build();
+
+    com.stripe.model.issuing.PhysicalBundle physicalBundle =
+        client.issuing().physicalBundles().retrieve("pb_xyz", params);
+    assertNotNull(physicalBundle);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v1/issuing/physical_bundles/pb_xyz",
         params.toMap(),
         null);
   }
@@ -12244,6 +12484,136 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v1/test_helpers/issuing/cards/card_123/shipping/ship",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTestHelpersIssuingPersonalizationDesignsActivatePost() throws StripeException {
+    com.stripe.model.issuing.PersonalizationDesign resource =
+        com.stripe.model.issuing.PersonalizationDesign.retrieve("pd_xyz");
+
+    com.stripe.param.issuing.PersonalizationDesignActivateParams params =
+        com.stripe.param.issuing.PersonalizationDesignActivateParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        resource.getTestHelpers().activate(params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/personalization_designs/pd_xyz/activate",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTestHelpersIssuingPersonalizationDesignsActivatePostServices()
+      throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PersonalizationDesignActivateParams params =
+        com.stripe.param.issuing.PersonalizationDesignActivateParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        client.testHelpers().issuing().personalizationDesigns().activate("pd_xyz", params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/personalization_designs/pd_xyz/activate",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTestHelpersIssuingPersonalizationDesignsDeactivatePost() throws StripeException {
+    com.stripe.model.issuing.PersonalizationDesign resource =
+        com.stripe.model.issuing.PersonalizationDesign.retrieve("pd_xyz");
+
+    com.stripe.param.issuing.PersonalizationDesignDeactivateParams params =
+        com.stripe.param.issuing.PersonalizationDesignDeactivateParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        resource.getTestHelpers().deactivate(params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/personalization_designs/pd_xyz/deactivate",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTestHelpersIssuingPersonalizationDesignsDeactivatePostServices()
+      throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PersonalizationDesignDeactivateParams params =
+        com.stripe.param.issuing.PersonalizationDesignDeactivateParams.builder().build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        client.testHelpers().issuing().personalizationDesigns().deactivate("pd_xyz", params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/personalization_designs/pd_xyz/deactivate",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTestHelpersIssuingPersonalizationDesignsRejectPost() throws StripeException {
+    com.stripe.model.issuing.PersonalizationDesign resource =
+        com.stripe.model.issuing.PersonalizationDesign.retrieve("pd_xyz");
+
+    com.stripe.param.issuing.PersonalizationDesignRejectParams params =
+        com.stripe.param.issuing.PersonalizationDesignRejectParams.builder()
+            .setRejectionReasons(
+                com.stripe.param.issuing.PersonalizationDesignRejectParams.RejectionReasons
+                    .builder()
+                    .addCardLogo(
+                        com.stripe.param.issuing.PersonalizationDesignRejectParams.RejectionReasons
+                            .CardLogo.GEOGRAPHIC_LOCATION)
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        resource.getTestHelpers().reject(params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/personalization_designs/pd_xyz/reject",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testTestHelpersIssuingPersonalizationDesignsRejectPostServices()
+      throws StripeException {
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.issuing.PersonalizationDesignRejectParams params =
+        com.stripe.param.issuing.PersonalizationDesignRejectParams.builder()
+            .setRejectionReasons(
+                com.stripe.param.issuing.PersonalizationDesignRejectParams.RejectionReasons
+                    .builder()
+                    .addCardLogo(
+                        com.stripe.param.issuing.PersonalizationDesignRejectParams.RejectionReasons
+                            .CardLogo.GEOGRAPHIC_LOCATION)
+                    .build())
+            .build();
+
+    com.stripe.model.issuing.PersonalizationDesign personalizationDesign =
+        client.testHelpers().issuing().personalizationDesigns().reject("pd_xyz", params);
+    assertNotNull(personalizationDesign);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/personalization_designs/pd_xyz/reject",
         params.toMap(),
         null);
   }

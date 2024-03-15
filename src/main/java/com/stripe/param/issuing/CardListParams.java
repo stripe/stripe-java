@@ -60,6 +60,9 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  @SerializedName("personalization_design")
+  String personalizationDesign;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -90,6 +93,7 @@ public class CardListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String last4,
       Long limit,
+      String personalizationDesign,
       String startingAfter,
       Status status,
       Type type) {
@@ -102,6 +106,7 @@ public class CardListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.last4 = last4;
     this.limit = limit;
+    this.personalizationDesign = personalizationDesign;
     this.startingAfter = startingAfter;
     this.status = status;
     this.type = type;
@@ -130,6 +135,8 @@ public class CardListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String personalizationDesign;
+
     private String startingAfter;
 
     private Status status;
@@ -148,6 +155,7 @@ public class CardListParams extends ApiRequestParams {
           this.extraParams,
           this.last4,
           this.limit,
+          this.personalizationDesign,
           this.startingAfter,
           this.status,
           this.type);
@@ -258,6 +266,11 @@ public class CardListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    public Builder setPersonalizationDesign(String personalizationDesign) {
+      this.personalizationDesign = personalizationDesign;
       return this;
     }
 

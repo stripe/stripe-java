@@ -47,6 +47,10 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The personalization design object belonging to this card. */
+  @SerializedName("personalization_design")
+  String personalizationDesign;
+
   /** The desired PIN for this card. */
   @SerializedName("pin")
   Pin pin;
@@ -94,6 +98,7 @@ public class CardCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String financialAccount,
       Map<String, String> metadata,
+      String personalizationDesign,
       Pin pin,
       String replacementFor,
       ReplacementReason replacementReason,
@@ -107,6 +112,7 @@ public class CardCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.metadata = metadata;
+    this.personalizationDesign = personalizationDesign;
     this.pin = pin;
     this.replacementFor = replacementFor;
     this.replacementReason = replacementReason;
@@ -133,6 +139,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String personalizationDesign;
+
     private Pin pin;
 
     private String replacementFor;
@@ -156,6 +164,7 @@ public class CardCreateParams extends ApiRequestParams {
           this.extraParams,
           this.financialAccount,
           this.metadata,
+          this.personalizationDesign,
           this.pin,
           this.replacementFor,
           this.replacementReason,
@@ -260,6 +269,12 @@ public class CardCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The personalization design object belonging to this card. */
+    public Builder setPersonalizationDesign(String personalizationDesign) {
+      this.personalizationDesign = personalizationDesign;
       return this;
     }
 

@@ -12,6 +12,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CustomerBalanceTransactionsParams;
+import com.stripe.param.CustomerCashBalanceTransactionsParams;
 import com.stripe.param.CustomerCreateFundingInstructionsParams;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerFundCashBalanceParams;
@@ -315,6 +316,68 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, CustomerBalanceTransactionCollection.class);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection cashBalanceTransactions() throws StripeException {
+    return cashBalanceTransactions((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection cashBalanceTransactions(
+      Map<String, Object> params) throws StripeException {
+    return cashBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection cashBalanceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, CustomerCashBalanceTransactionCollection.class);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection cashBalanceTransactions(
+      CustomerCashBalanceTransactionsParams params) throws StripeException {
+    return cashBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that modified the customer’s <a
+   * href="https://stripe.com/docs/payments/customer-balance">cash balance</a>.
+   */
+  public CustomerCashBalanceTransactionCollection cashBalanceTransactions(
+      CustomerCashBalanceTransactionsParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/cash_balance_transactions", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, CustomerCashBalanceTransactionCollection.class);
   }
 
   /** Creates a new customer object. */

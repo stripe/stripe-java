@@ -1,5 +1,21 @@
 # Changelog
 
+## 24.20.0 - 2024-03-14
+* [#1763](https://github.com/stripe/stripe-java/pull/1763) Update generated code
+  * Add support for new resources `Issuing.PersonalizationDesign` and `Issuing.PhysicalBundle`
+  * Add support for `create`, `list`, `retrieve`, and `update` methods on resource `PersonalizationDesign`
+  * Add support for `list` and `retrieve` methods on resource `PhysicalBundle`
+  * Add support for `personalization_design` on `Issuing.Card`, `issuing.CardCreateParams`, `issuing.CardListParams`, and `issuing.CardUpdateParams`
+  * Change type of `SubscriptionCreateParams.application_fee_percent` and `SubscriptionUpdateParams.application_fee_percent` from `number` to `emptyStringable(number)`
+  * Add support for `sepa_debit` on `Subscription.payment_settings.payment_method_options`, `SubscriptionCreateParams.payment_settings.payment_method_options`, and `SubscriptionUpdateParams.payment_settings.payment_method_options`
+
+## 24.19.0 - 2024-03-07
+* [#1758](https://github.com/stripe/stripe-java/pull/1758) Update generated code
+  * Add support for `documents` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `request_three_d_secure` on `Checkout.Session.payment_method_options.card` and `checkout.SessionCreateParams.payment_method_options.card`
+  * Add support for `created` on `CreditNoteListParams`
+  * Add support for `sepa_debit` on `Invoice.payment_settings.payment_method_options`, `InvoiceCreateParams.payment_settings.payment_method_options`, and `InvoiceUpdateParams.payment_settings.payment_method_options`
+
 ## 24.18.0 - 2024-02-29
 * [#1750](https://github.com/stripe/stripe-java/pull/1750) Update generated code
   * Add support for `number` on `InvoiceCreateParams` and `InvoiceUpdateParams`

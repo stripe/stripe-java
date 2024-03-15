@@ -29,7 +29,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
    */
   @SerializedName("application_fee_percent")
-  BigDecimal applicationFeePercent;
+  Object applicationFeePercent;
 
   /**
    * Automatic tax settings for this subscription. We recommend you only include this parameter when
@@ -282,7 +282,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   private SubscriptionUpdateParams(
       List<SubscriptionUpdateParams.AddInvoiceItem> addInvoiceItems,
-      BigDecimal applicationFeePercent,
+      Object applicationFeePercent,
       AutomaticTax automaticTax,
       BillingCycleAnchor billingCycleAnchor,
       Object billingThresholds,
@@ -356,7 +356,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   public static class Builder {
     private List<SubscriptionUpdateParams.AddInvoiceItem> addInvoiceItems;
 
-    private BigDecimal applicationFeePercent;
+    private Object applicationFeePercent;
 
     private AutomaticTax automaticTax;
 
@@ -493,6 +493,19 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
      */
     public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
+      this.applicationFeePercent = applicationFeePercent;
+      return this;
+    }
+
+    /**
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. The request must be made by a platform account on a connected account
+     * in order to set an application fee percentage. For more information, see the application fees
+     * <a
+     * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
+     */
+    public Builder setApplicationFeePercent(EmptyParam applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
       return this;
     }
@@ -3257,6 +3270,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object konbini;
 
       /**
+       * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
+       * to the invoice’s PaymentIntent.
+       */
+      @SerializedName("sepa_debit")
+      Object sepaDebit;
+
+      /**
        * This sub-hash contains details about the ACH direct debit payment method options to pass to
        * the invoice’s PaymentIntent.
        */
@@ -3270,6 +3290,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object customerBalance,
           Map<String, Object> extraParams,
           Object konbini,
+          Object sepaDebit,
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
@@ -3277,6 +3298,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         this.customerBalance = customerBalance;
         this.extraParams = extraParams;
         this.konbini = konbini;
+        this.sepaDebit = sepaDebit;
         this.usBankAccount = usBankAccount;
       }
 
@@ -3297,6 +3319,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         private Object konbini;
 
+        private Object sepaDebit;
+
         private Object usBankAccount;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -3308,6 +3332,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.customerBalance,
               this.extraParams,
               this.konbini,
+              this.sepaDebit,
               this.usBankAccount);
         }
 
@@ -3434,6 +3459,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setKonbini(EmptyParam konbini) {
           this.konbini = konbini;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
+         * to the invoice’s PaymentIntent.
+         */
+        public Builder setSepaDebit(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit sepaDebit) {
+          this.sepaDebit = sepaDebit;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
+         * to the invoice’s PaymentIntent.
+         */
+        public Builder setSepaDebit(EmptyParam sepaDebit) {
+          this.sepaDebit = sepaDebit;
           return this;
         }
 
@@ -4476,6 +4520,67 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * map. See {@link
            * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini#extraParams} for
            * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class SepaDebit {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private SepaDebit(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit#extraParams}
+           * for the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
