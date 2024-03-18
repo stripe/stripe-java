@@ -29,6 +29,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Name of the configuration. */
+  @SerializedName("name")
+  String name;
+
   /** Configurations for collecting transactions offline. */
   @SerializedName("offline")
   Object offline;
@@ -45,12 +49,14 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       BbposWiseposE bbposWiseposE,
       List<String> expand,
       Map<String, Object> extraParams,
+      String name,
       Object offline,
       Object tipping,
       VerifoneP400 verifoneP400) {
     this.bbposWiseposE = bbposWiseposE;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.name = name;
     this.offline = offline;
     this.tipping = tipping;
     this.verifoneP400 = verifoneP400;
@@ -67,6 +73,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String name;
+
     private Object offline;
 
     private Object tipping;
@@ -79,6 +87,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.bbposWiseposE,
           this.expand,
           this.extraParams,
+          this.name,
           this.offline,
           this.tipping,
           this.verifoneP400);
@@ -139,6 +148,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Name of the configuration. */
+    public Builder setName(String name) {
+      this.name = name;
       return this;
     }
 
