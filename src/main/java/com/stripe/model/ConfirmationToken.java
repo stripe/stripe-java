@@ -118,6 +118,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @SerializedName("shipping")
   Shipping shipping;
 
+  /**
+   * Indicates whether the Stripe SDK is used to handle confirmation flow. Defaults to {@code true}
+   * on ConfirmationToken.
+   */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   /** Get ID of expandable {@code paymentMethod} object. */
   public String getPaymentMethod() {
     return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
