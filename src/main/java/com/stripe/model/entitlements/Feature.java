@@ -26,6 +26,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Feature extends ApiResource implements HasId {
+  /**
+   * Inactive features cannot be attached to new products and will not be returned from the features
+   * list endpoint.
+   */
+  @SerializedName("active")
+  Boolean active;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
