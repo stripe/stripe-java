@@ -129,6 +129,10 @@ public class StripeClient {
     return new com.stripe.service.ClimateService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ConfirmationTokenService confirmationTokens() {
+    return new com.stripe.service.ConfirmationTokenService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CountrySpecService countrySpecs() {
     return new com.stripe.service.CountrySpecService(this.getResponseGetter());
   }

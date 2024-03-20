@@ -64,6 +64,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   ConfirmationMethod confirmationMethod;
 
   /**
+   * ID of the ConfirmationToken used to confirm this PaymentIntent.
+   *
+   * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+   * request, such as {@code payment_method}, then the values in this request will take precedence.
+   */
+  @SerializedName("confirmation_token")
+  String confirmationToken;
+
+  /**
    * <strong>Required.</strong> Three-letter <a
    * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
    * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -288,6 +297,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       CaptureMethod captureMethod,
       Boolean confirm,
       ConfirmationMethod confirmationMethod,
+      String confirmationToken,
       String currency,
       String customer,
       String description,
@@ -320,6 +330,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.captureMethod = captureMethod;
     this.confirm = confirm;
     this.confirmationMethod = confirmationMethod;
+    this.confirmationToken = confirmationToken;
     this.currency = currency;
     this.customer = customer;
     this.description = description;
@@ -364,6 +375,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private Boolean confirm;
 
     private ConfirmationMethod confirmationMethod;
+
+    private String confirmationToken;
 
     private String currency;
 
@@ -426,6 +439,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.captureMethod,
           this.confirm,
           this.confirmationMethod,
+          this.confirmationToken,
           this.currency,
           this.customer,
           this.description,
@@ -516,6 +530,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public Builder setConfirmationMethod(
         PaymentIntentCreateParams.ConfirmationMethod confirmationMethod) {
       this.confirmationMethod = confirmationMethod;
+      return this;
+    }
+
+    /**
+     * ID of the ConfirmationToken used to confirm this PaymentIntent.
+     *
+     * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+     * request, such as {@code payment_method}, then the values in this request will take
+     * precedence.
+     */
+    public Builder setConfirmationToken(String confirmationToken) {
+      this.confirmationToken = confirmationToken;
       return this;
     }
 

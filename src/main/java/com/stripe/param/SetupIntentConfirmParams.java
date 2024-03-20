@@ -12,6 +12,15 @@ import lombok.Getter;
 
 @Getter
 public class SetupIntentConfirmParams extends ApiRequestParams {
+  /**
+   * ID of the ConfirmationToken used to confirm this SetupIntent.
+   *
+   * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+   * request, such as {@code payment_method}, then the values in this request will take precedence.
+   */
+  @SerializedName("confirmation_token")
+  String confirmationToken;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -64,6 +73,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
   Boolean useStripeSdk;
 
   private SetupIntentConfirmParams(
+      String confirmationToken,
       List<String> expand,
       Map<String, Object> extraParams,
       Object mandateData,
@@ -72,6 +82,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       PaymentMethodOptions paymentMethodOptions,
       String returnUrl,
       Boolean useStripeSdk) {
+    this.confirmationToken = confirmationToken;
     this.expand = expand;
     this.extraParams = extraParams;
     this.mandateData = mandateData;
@@ -87,6 +98,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String confirmationToken;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -106,6 +119,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentConfirmParams build() {
       return new SetupIntentConfirmParams(
+          this.confirmationToken,
           this.expand,
           this.extraParams,
           this.mandateData,
@@ -114,6 +128,18 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           this.paymentMethodOptions,
           this.returnUrl,
           this.useStripeSdk);
+    }
+
+    /**
+     * ID of the ConfirmationToken used to confirm this SetupIntent.
+     *
+     * <p>If the provided ConfirmationToken contains properties that are also being provided in this
+     * request, such as {@code payment_method}, then the values in this request will take
+     * precedence.
+     */
+    public Builder setConfirmationToken(String confirmationToken) {
+      this.confirmationToken = confirmationToken;
+      return this;
     }
 
     /**

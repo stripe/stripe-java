@@ -25,6 +25,7 @@ final class EventDataClassLookup {
     classLookup.put("card", Card.class);
     classLookup.put("cash_balance", CashBalance.class);
     classLookup.put("charge", Charge.class);
+    classLookup.put("confirmation_token", ConfirmationToken.class);
     classLookup.put("connect_collection_transfer", ConnectCollectionTransfer.class);
     classLookup.put("country_spec", CountrySpec.class);
     classLookup.put("coupon", Coupon.class);
