@@ -3057,6 +3057,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("last4")
       String last4;
 
+      /** Reference number to locate ACH payments with customer's bank. */
+      @SerializedName("payment_reference")
+      String paymentReference;
+
       /** Routing number of the bank account. */
       @SerializedName("routing_number")
       String routingNumber;
