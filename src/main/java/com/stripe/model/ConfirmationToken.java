@@ -73,12 +73,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @SerializedName("payment_intent")
   String paymentIntent;
 
-  /** ID of an existing PaymentMethod. */
-  @SerializedName("payment_method")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<PaymentMethod> paymentMethod;
-
   /** Payment-method-specific configuration for this ConfirmationToken. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
@@ -124,25 +118,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
    */
   @SerializedName("use_stripe_sdk")
   Boolean useStripeSdk;
-
-  /** Get ID of expandable {@code paymentMethod} object. */
-  public String getPaymentMethod() {
-    return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
-  }
-
-  public void setPaymentMethod(String id) {
-    this.paymentMethod = ApiResource.setExpandableFieldId(id, this.paymentMethod);
-  }
-
-  /** Get expanded {@code paymentMethod}. */
-  public PaymentMethod getPaymentMethodObject() {
-    return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
-  }
-
-  public void setPaymentMethodObject(PaymentMethod expandableObject) {
-    this.paymentMethod =
-        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
-  }
 
   /** Retrieves an existing ConfirmationToken object. */
   public static ConfirmationToken retrieve(String confirmationToken) throws StripeException {
@@ -1521,7 +1496,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(mandateData, responseGetter);
-    trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
