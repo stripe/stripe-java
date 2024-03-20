@@ -199,6 +199,10 @@ public class StripeClient {
     return new com.stripe.service.FinancialConnectionsService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ForwardingService forwarding() {
+    return new com.stripe.service.ForwardingService(this.getResponseGetter());
+  }
+
   public com.stripe.service.GiftCardsService giftCards() {
     return new com.stripe.service.GiftCardsService(this.getResponseGetter());
   }

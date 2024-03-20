@@ -141,6 +141,8 @@ final class EventDataClassLookup {
         "financial_connections.transaction",
         com.stripe.model.financialconnections.Transaction.class);
 
+    classLookup.put("forwarding.request", com.stripe.model.forwarding.Request.class);
+
     classLookup.put("gift_cards.card", com.stripe.model.giftcards.Card.class);
     classLookup.put("gift_cards.transaction", com.stripe.model.giftcards.Transaction.class);
 
