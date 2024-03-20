@@ -43,7 +43,9 @@ public class RequestCreateParams extends ApiRequestParams {
   @SerializedName("replacements")
   List<RequestCreateParams.Replacement> replacements;
 
-  /** The request body and headers to be sent to the destination endpoint. */
+  /**
+   * <strong>Required.</strong> The request body and headers to be sent to the destination endpoint.
+   */
   @SerializedName("request")
   Request request;
 
@@ -199,7 +201,10 @@ public class RequestCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The request body and headers to be sent to the destination endpoint. */
+    /**
+     * <strong>Required.</strong> The request body and headers to be sent to the destination
+     * endpoint.
+     */
     public Builder setRequest(RequestCreateParams.Request request) {
       this.request = request;
       return this;
