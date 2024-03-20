@@ -181,6 +181,10 @@ public class StripeClient {
     return new com.stripe.service.FinancialConnectionsService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ForwardingService forwarding() {
+    return new com.stripe.service.ForwardingService(this.getResponseGetter());
+  }
+
   public com.stripe.service.IdentityService identity() {
     return new com.stripe.service.IdentityService(this.getResponseGetter());
   }

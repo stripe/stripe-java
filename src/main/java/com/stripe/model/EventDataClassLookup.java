@@ -113,6 +113,8 @@ final class EventDataClassLookup {
         "financial_connections.transaction",
         com.stripe.model.financialconnections.Transaction.class);
 
+    classLookup.put("forwarding.request", com.stripe.model.forwarding.Request.class);
+
     classLookup.put(
         "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
     classLookup.put(
