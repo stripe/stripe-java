@@ -3093,6 +3093,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("last4")
       String last4;
 
+      /** ID of the mandate used to make this payment. */
+      @SerializedName("mandate")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Mandate> mandate;
+
       /** Reference number to locate ACH payments with customer's bank. */
       @SerializedName("payment_reference")
       String paymentReference;
@@ -3100,6 +3106,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Routing number of the bank account. */
       @SerializedName("routing_number")
       String routingNumber;
+
+      /** Get ID of expandable {@code mandate} object. */
+      public String getMandate() {
+        return (this.mandate != null) ? this.mandate.getId() : null;
+      }
+
+      public void setMandate(String id) {
+        this.mandate = ApiResource.setExpandableFieldId(id, this.mandate);
+      }
+
+      /** Get expanded {@code mandate}. */
+      public Mandate getMandateObject() {
+        return (this.mandate != null) ? this.mandate.getExpanded() : null;
+      }
+
+      public void setMandateObject(Mandate expandableObject) {
+        this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
     }
 
     @Getter
