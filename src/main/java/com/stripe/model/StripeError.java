@@ -38,10 +38,12 @@ public class StripeError extends StripeObject {
    * customer_max_subscriptions}, {@code customer_tax_location_invalid}, {@code
    * debit_not_authorized}, {@code email_invalid}, {@code expired_card}, {@code
    * financial_connections_account_inactive}, {@code
-   * financial_connections_no_successful_transaction_refresh}, {@code
-   * gift_card_balance_insufficient}, {@code gift_card_code_exists}, {@code gift_card_inactive},
-   * {@code idempotency_key_in_use}, {@code incorrect_address}, {@code incorrect_cvc}, {@code
-   * incorrect_number}, {@code incorrect_zip}, {@code instant_payouts_config_disabled}, {@code
+   * financial_connections_no_successful_transaction_refresh}, {@code forwarding_api_inactive},
+   * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_upstream_connection_error},
+   * {@code forwarding_api_upstream_connection_timeout}, {@code gift_card_balance_insufficient},
+   * {@code gift_card_code_exists}, {@code gift_card_inactive}, {@code idempotency_key_in_use},
+   * {@code incorrect_address}, {@code incorrect_cvc}, {@code incorrect_number}, {@code
+   * incorrect_zip}, {@code instant_payouts_config_disabled}, {@code
    * instant_payouts_currency_disabled}, {@code instant_payouts_limit_exceeded}, {@code
    * instant_payouts_unsupported}, {@code insufficient_funds}, {@code intent_invalid_state}, {@code
    * intent_verification_method_missing}, {@code invalid_card_type}, {@code invalid_characters},
