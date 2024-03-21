@@ -70,7 +70,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   String description;
 
   /**
-   * A list of up to 15 features for this product. These are displayed in <a
+   * A list of up to 15 marketing features for this product. These are displayed in <a
    * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("features")
@@ -488,7 +488,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Feature extends StripeObject {
-    /** The feature's name. Up to 80 characters long. */
+    /** The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
   }

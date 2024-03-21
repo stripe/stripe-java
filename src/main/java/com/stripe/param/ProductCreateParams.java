@@ -45,7 +45,7 @@ public class ProductCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A list of up to 15 features for this product. These are displayed in <a
+   * A list of up to 15 marketing features for this product. These are displayed in <a
    * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("features")
@@ -1340,7 +1340,7 @@ public class ProductCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The feature's name. Up to 80 characters long. */
+    /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
 
@@ -1389,7 +1389,7 @@ public class ProductCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The feature's name. Up to 80 characters long. */
+      /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
       public Builder setName(String name) {
         this.name = name;
         return this;

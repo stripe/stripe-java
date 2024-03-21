@@ -52,6 +52,10 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** String indicating the name of the Configuration object, set by the user. */
+  @SerializedName("name")
+  String name;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *

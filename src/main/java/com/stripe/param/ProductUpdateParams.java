@@ -46,7 +46,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A list of up to 15 features for this product. These are displayed in <a
+   * A list of up to 15 marketing features for this product. These are displayed in <a
    * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("features")
@@ -318,7 +318,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 15 features for this product. These are displayed in <a
+     * A list of up to 15 marketing features for this product. These are displayed in <a
      * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setFeatures(EmptyParam features) {
@@ -327,7 +327,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 15 features for this product. These are displayed in <a
+     * A list of up to 15 marketing features for this product. These are displayed in <a
      * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setFeatures(List<ProductUpdateParams.Feature> features) {
@@ -545,7 +545,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The feature's name. Up to 80 characters long. */
+    /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     Object name;
 
@@ -594,13 +594,13 @@ public class ProductUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The feature's name. Up to 80 characters long. */
+      /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** <strong>Required.</strong> The feature's name. Up to 80 characters long. */
+      /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
       public Builder setName(EmptyParam name) {
         this.name = name;
         return this;
