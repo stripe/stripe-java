@@ -253,7 +253,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
-  /** If specified, payment collection for this subscription will be paused. */
+  /**
+   * If specified, payment collection for this subscription will be paused. Note that the
+   * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+   * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing collection</a>.
+   */
   @SerializedName("pause_collection")
   PauseCollection pauseCollection;
 
@@ -305,17 +309,25 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Possible values are {@code incomplete}, {@code incomplete_expired}, {@code trialing}, {@code
-   * active}, {@code past_due}, {@code canceled}, or {@code unpaid}.
+   * active}, {@code past_due}, {@code canceled}, {@code unpaid}, or {@code paused}.
    *
    * <p>For {@code collection_method=charge_automatically} a subscription moves into {@code
-   * incomplete} if the initial payment attempt fails. A subscription in this state can only have
+   * incomplete} if the initial payment attempt fails. A subscription in this status can only have
    * metadata and default_source updated. Once the first invoice is paid, the subscription moves
-   * into an {@code active} state. If the first invoice is not paid within 23 hours, the
-   * subscription transitions to {@code incomplete_expired}. This is a terminal state, the open
+   * into an {@code active} status. If the first invoice is not paid within 23 hours, the
+   * subscription transitions to {@code incomplete_expired}. This is a terminal status, the open
    * invoice will be voided and no further invoices will be generated.
    *
    * <p>A subscription that is currently in a trial period is {@code trialing} and moves to {@code
    * active} when the trial period is over.
+   *
+   * <p>A subscription can only enter a {@code paused} status <a
+   * href="https://stripe.com/billing/subscriptions/trials#create-free-trials-without-payment">when
+   * a trial ends without a payment method</a>. A {@code paused} subscription doesn't generate
+   * invoices and can be resumed after your customer adds their payment method. The {@code paused}
+   * status is different from <a
+   * href="https://stripe.com/billing/subscriptions/pause-payment">pausing collection</a>, which
+   * still generates invoices.
    *
    * <p>If subscription {@code collection_method=charge_automatically}, it becomes {@code past_due}
    * when payment is required but cannot be paid (due to failed payment or awaiting additional user
