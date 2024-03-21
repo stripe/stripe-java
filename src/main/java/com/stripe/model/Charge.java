@@ -1188,6 +1188,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("link")
     Link link;
 
+    @SerializedName("mobilepay")
+    Mobilepay mobilepay;
+
     @SerializedName("multibanco")
     Multibanco multibanco;
 
@@ -2633,6 +2636,39 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("country")
       String country;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mobilepay extends StripeObject {
+      @SerializedName("card")
+      Card card;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        /** Brand of the card used in the transaction. */
+        @SerializedName("brand")
+        String brand;
+
+        /** Two-letter ISO code representing the country of the card. */
+        @SerializedName("country")
+        String country;
+
+        /** Two digit number representing the card's expiration month. */
+        @SerializedName("exp_month")
+        Long expMonth;
+
+        /** Two digit number representing the card's expiration year. */
+        @SerializedName("exp_year")
+        Long expYear;
+
+        /** The last 4 digits of the card. */
+        @SerializedName("last4")
+        String last4;
+      }
     }
 
     @Getter

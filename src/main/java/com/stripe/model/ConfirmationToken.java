@@ -271,6 +271,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("mobilepay")
+    Mobilepay mobilepay;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -310,9 +313,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik}, {@code boleto},
      * {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps},
      * {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code
-     * klarna}, {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code
-     * paypal}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code
-     * sofort}, {@code swish}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * klarna}, {@code konbini}, {@code link}, {@code mobilepay}, {@code oxxo}, {@code p24}, {@code
+     * paynow}, {@code paypal}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code
+     * sepa_debit}, {@code sofort}, {@code swish}, {@code us_bank_account}, {@code wechat_pay}, or
+     * {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1087,6 +1091,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("persistent_token")
       String persistentToken;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mobilepay extends StripeObject {}
 
     @Getter
     @Setter
