@@ -1,25 +1,26 @@
 // File generated from our OpenAPI spec
-package com.stripe.model;
+package com.stripe.model.entitlements;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.HasId;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.CustomerEntitlementListParams;
+import com.stripe.param.entitlements.ActiveEntitlementListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A entitlement for a customer describes access to a feature. */
+/** An active entitlement describes access to a feature for a customer. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CustomerEntitlement extends ApiResource implements HasId {
+public class ActiveEntitlement extends ApiResource implements HasId {
   /** The feature that the customer is entitled to. */
   @SerializedName("feature")
   String feature;
@@ -43,38 +44,37 @@ public class CustomerEntitlement extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to {@code customer_entitlement}.
+   * <p>Equal to {@code entitlements.active_entitlement}.
    */
   @SerializedName("object")
   String object;
 
-  /** Retrieve a list of entitlements for a customer. */
-  public static CustomerEntitlementCollection list(String customer, Map<String, Object> params)
+  /** Retrieve a list of active entitlements for a customer. */
+  public static ActiveEntitlementCollection list(Map<String, Object> params)
       throws StripeException {
-    return list(customer, params, (RequestOptions) null);
+    return list(params, (RequestOptions) null);
   }
 
-  /** Retrieve a list of entitlements for a customer. */
-  public static CustomerEntitlementCollection list(
-      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/customers/%s/entitlements", ApiResource.urlEncodeId(customer));
+  /** Retrieve a list of active entitlements for a customer. */
+  public static ActiveEntitlementCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/entitlements/active_entitlements";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
-    return getGlobalResponseGetter().request(request, CustomerEntitlementCollection.class);
+    return getGlobalResponseGetter().request(request, ActiveEntitlementCollection.class);
   }
 
-  /** Retrieve a list of entitlements for a customer. */
-  public static CustomerEntitlementCollection list(
-      String customer, CustomerEntitlementListParams params) throws StripeException {
-    return list(customer, params, (RequestOptions) null);
-  }
-
-  /** Retrieve a list of entitlements for a customer. */
-  public static CustomerEntitlementCollection list(
-      String customer, CustomerEntitlementListParams params, RequestOptions options)
+  /** Retrieve a list of active entitlements for a customer. */
+  public static ActiveEntitlementCollection list(ActiveEntitlementListParams params)
       throws StripeException {
-    String path = String.format("/v1/customers/%s/entitlements", ApiResource.urlEncodeId(customer));
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieve a list of active entitlements for a customer. */
+  public static ActiveEntitlementCollection list(
+      ActiveEntitlementListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/entitlements/active_entitlements";
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -84,6 +84,6 @@ public class CustomerEntitlement extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options,
             ApiMode.V1);
-    return getGlobalResponseGetter().request(request, CustomerEntitlementCollection.class);
+    return getGlobalResponseGetter().request(request, ActiveEntitlementCollection.class);
   }
 }

@@ -136,19 +136,20 @@ public class Event extends ApiResource implements HasId {
    * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
    * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
    * customer.discount.created}, {@code customer.discount.deleted}, {@code
-   * customer.discount.updated}, {@code customer.entitlement_summary.updated}, {@code
-   * customer.source.created}, {@code customer.source.deleted}, {@code customer.source.expiring},
-   * {@code customer.source.updated}, {@code customer.subscription.collection_paused}, {@code
-   * customer.subscription.collection_resumed}, {@code customer.subscription.created}, {@code
-   * customer.subscription.custom_event}, {@code customer.subscription.deleted}, {@code
-   * customer.subscription.paused}, {@code customer.subscription.pending_update_applied}, {@code
+   * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
+   * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
+   * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
+   * {@code customer.subscription.created}, {@code customer.subscription.custom_event}, {@code
+   * customer.subscription.deleted}, {@code customer.subscription.paused}, {@code
+   * customer.subscription.pending_update_applied}, {@code
    * customer.subscription.pending_update_expired}, {@code customer.subscription.resumed}, {@code
    * customer.subscription.trial_will_end}, {@code customer.subscription.updated}, {@code
    * customer.tax_id.created}, {@code customer.tax_id.deleted}, {@code customer.tax_id.updated},
    * {@code customer.updated}, {@code customer_cash_balance_transaction.created}, {@code
-   * file.created}, {@code financial_connections.account.created}, {@code
-   * financial_connections.account.deactivated}, {@code financial_connections.account.disconnected},
-   * {@code financial_connections.account.reactivated}, {@code
+   * entitlements.active_entitlement_summary.updated}, {@code file.created}, {@code
+   * financial_connections.account.created}, {@code financial_connections.account.deactivated},
+   * {@code financial_connections.account.disconnected}, {@code
+   * financial_connections.account.reactivated}, {@code
    * financial_connections.account.refreshed_balance}, {@code
    * financial_connections.account.refreshed_inferred_balances}, {@code
    * financial_connections.account.refreshed_ownership}, {@code
