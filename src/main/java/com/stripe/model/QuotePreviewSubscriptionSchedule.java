@@ -784,7 +784,12 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> onBehalfOf;
 
-    /** If specified, payment collection for this subscription will be paused. */
+    /**
+     * If specified, payment collection for this subscription will be paused. Note that the
+     * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+     * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+     * collection</a>.
+     */
     @SerializedName("pause_collection")
     PauseCollection pauseCollection;
 

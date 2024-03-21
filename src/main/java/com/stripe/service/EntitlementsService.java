@@ -9,6 +9,10 @@ public final class EntitlementsService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.entitlements.ActiveEntitlementService activeEntitlements() {
+    return new com.stripe.service.entitlements.ActiveEntitlementService(this.getResponseGetter());
+  }
+
   public com.stripe.service.entitlements.FeatureService features() {
     return new com.stripe.service.entitlements.FeatureService(this.getResponseGetter());
   }

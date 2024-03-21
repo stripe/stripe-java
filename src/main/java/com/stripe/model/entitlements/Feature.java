@@ -26,6 +26,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Feature extends ApiResource implements HasId {
+  /**
+   * Inactive features cannot be attached to new products and will not be returned from the features
+   * list endpoint.
+   */
+  @SerializedName("active")
+  Boolean active;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -41,6 +48,13 @@ public class Feature extends ApiResource implements HasId {
   /** A unique key you provide as your own system identifier. This may be up to 80 characters. */
   @SerializedName("lookup_key")
   String lookupKey;
+
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /** The feature's name, for your own purpose, not meant to be displayable to the customer. */
   @SerializedName("name")

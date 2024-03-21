@@ -10,7 +10,14 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CustomerEntitlementSummaryRetrieveParams extends ApiRequestParams {
+public class ProductFeatureCreateParams extends ApiRequestParams {
+  /**
+   * <strong>Required.</strong> The ID of the <a href="docs/api/entitlements/feature">Feature</a>
+   * object attached to this product.
+   */
+  @SerializedName("entitlement_feature")
+  String entitlementFeature;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,8 +31,9 @@ public class CustomerEntitlementSummaryRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private CustomerEntitlementSummaryRetrieveParams(
-      List<String> expand, Map<String, Object> extraParams) {
+  private ProductFeatureCreateParams(
+      String entitlementFeature, List<String> expand, Map<String, Object> extraParams) {
+    this.entitlementFeature = entitlementFeature;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -35,19 +43,30 @@ public class CustomerEntitlementSummaryRetrieveParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String entitlementFeature;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerEntitlementSummaryRetrieveParams build() {
-      return new CustomerEntitlementSummaryRetrieveParams(this.expand, this.extraParams);
+    public ProductFeatureCreateParams build() {
+      return new ProductFeatureCreateParams(this.entitlementFeature, this.expand, this.extraParams);
+    }
+
+    /**
+     * <strong>Required.</strong> The ID of the <a href="docs/api/entitlements/feature">Feature</a>
+     * object attached to this product.
+     */
+    public Builder setEntitlementFeature(String entitlementFeature) {
+      this.entitlementFeature = entitlementFeature;
+      return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerEntitlementSummaryRetrieveParams#expand} for the field documentation.
+     * ProductFeatureCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -60,7 +79,7 @@ public class CustomerEntitlementSummaryRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerEntitlementSummaryRetrieveParams#expand} for the field documentation.
+     * ProductFeatureCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -73,7 +92,7 @@ public class CustomerEntitlementSummaryRetrieveParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerEntitlementSummaryRetrieveParams#extraParams} for the field documentation.
+     * ProductFeatureCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -86,7 +105,7 @@ public class CustomerEntitlementSummaryRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerEntitlementSummaryRetrieveParams#extraParams} for the field documentation.
+     * See {@link ProductFeatureCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

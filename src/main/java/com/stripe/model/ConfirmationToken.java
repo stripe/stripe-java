@@ -73,12 +73,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @SerializedName("payment_intent")
   String paymentIntent;
 
-  /** ID of an existing PaymentMethod. */
-  @SerializedName("payment_method")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<PaymentMethod> paymentMethod;
-
   /** Payment-method-specific configuration for this ConfirmationToken. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
@@ -118,24 +112,12 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @SerializedName("shipping")
   Shipping shipping;
 
-  /** Get ID of expandable {@code paymentMethod} object. */
-  public String getPaymentMethod() {
-    return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
-  }
-
-  public void setPaymentMethod(String id) {
-    this.paymentMethod = ApiResource.setExpandableFieldId(id, this.paymentMethod);
-  }
-
-  /** Get expanded {@code paymentMethod}. */
-  public PaymentMethod getPaymentMethodObject() {
-    return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
-  }
-
-  public void setPaymentMethodObject(PaymentMethod expandableObject) {
-    this.paymentMethod =
-        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
-  }
+  /**
+   * Indicates whether the Stripe SDK is used to handle confirmation flow. Defaults to {@code true}
+   * on ConfirmationToken.
+   */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
 
   /** Retrieves an existing ConfirmationToken object. */
   public static ConfirmationToken retrieve(String confirmationToken) throws StripeException {
@@ -313,6 +295,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("mobilepay")
+    Mobilepay mobilepay;
+
     @SerializedName("multibanco")
     Multibanco multibanco;
 
@@ -361,10 +346,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik}, {@code boleto},
      * {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps},
      * {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code
-     * klarna}, {@code konbini}, {@code link}, {@code multibanco}, {@code oxxo}, {@code p24}, {@code
-     * paynow}, {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code revolut_pay},
-     * {@code sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account},
-     * {@code wechat_pay}, or {@code zip}.
+     * klarna}, {@code konbini}, {@code link}, {@code mobilepay}, {@code multibanco}, {@code oxxo},
+     * {@code p24}, {@code paynow}, {@code paypal}, {@code payto}, {@code pix}, {@code promptpay},
+     * {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code
+     * us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1143,6 +1128,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Mobilepay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Multibanco extends StripeObject {}
 
     @Getter
@@ -1514,7 +1504,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(mandateData, responseGetter);
-    trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(shipping, responseGetter);

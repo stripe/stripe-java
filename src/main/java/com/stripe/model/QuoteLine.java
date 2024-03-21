@@ -928,7 +928,12 @@ public class QuoteLine extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SetPauseCollection extends StripeObject {
-    /** If specified, payment collection for this subscription will be paused. */
+    /**
+     * If specified, payment collection for this subscription will be paused. Note that the
+     * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+     * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+     * collection</a>.
+     */
     @SerializedName("set")
     Set set;
 

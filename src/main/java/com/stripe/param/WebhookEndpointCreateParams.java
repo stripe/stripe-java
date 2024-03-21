@@ -777,9 +777,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("customer.discount.updated")
     CUSTOMER__DISCOUNT__UPDATED("customer.discount.updated"),
 
-    @SerializedName("customer.entitlement_summary.updated")
-    CUSTOMER__ENTITLEMENT_SUMMARY__UPDATED("customer.entitlement_summary.updated"),
-
     @SerializedName("customer.source.created")
     CUSTOMER__SOURCE__CREATED("customer.source.created"),
 
@@ -839,6 +836,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("customer_cash_balance_transaction.created")
     CUSTOMER_CASH_BALANCE_TRANSACTION__CREATED("customer_cash_balance_transaction.created"),
+
+    @SerializedName("entitlements.active_entitlement_summary.updated")
+    ENTITLEMENTS__ACTIVE_ENTITLEMENT_SUMMARY__UPDATED(
+        "entitlements.active_entitlement_summary.updated"),
 
     @SerializedName("file.created")
     FILE__CREATED("file.created"),

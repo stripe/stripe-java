@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.entitlements;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,11 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CustomerListPaymentMethodsParams extends ApiRequestParams {
+public class ActiveEntitlementListParams extends ApiRequestParams {
+  /** <strong>Required.</strong> The ID of the customer. */
+  @SerializedName("customer")
+  String customer;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -49,27 +53,19 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /**
-   * An optional filter on the list, based on the object {@code type} field. Without the filter, the
-   * list includes all current and future payment method types. If your integration expects only one
-   * type of payment method in the response, make sure to provide a type value in the request.
-   */
-  @SerializedName("type")
-  Type type;
-
-  private CustomerListPaymentMethodsParams(
+  private ActiveEntitlementListParams(
+      String customer,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String startingAfter,
-      Type type) {
+      String startingAfter) {
+    this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
-    this.type = type;
   }
 
   public static Builder builder() {
@@ -77,6 +73,8 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String customer;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -87,17 +85,21 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
 
     private String startingAfter;
 
-    private Type type;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerListPaymentMethodsParams build() {
-      return new CustomerListPaymentMethodsParams(
+    public ActiveEntitlementListParams build() {
+      return new ActiveEntitlementListParams(
+          this.customer,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.startingAfter,
-          this.type);
+          this.startingAfter);
+    }
+
+    /** <strong>Required.</strong> The ID of the customer. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
+      return this;
     }
 
     /**
@@ -114,7 +116,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerListPaymentMethodsParams#expand} for the field documentation.
+     * ActiveEntitlementListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -127,7 +129,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerListPaymentMethodsParams#expand} for the field documentation.
+     * ActiveEntitlementListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -140,7 +142,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerListPaymentMethodsParams#extraParams} for the field documentation.
+     * ActiveEntitlementListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -153,7 +155,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerListPaymentMethodsParams#extraParams} for the field documentation.
+     * See {@link ActiveEntitlementListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -181,137 +183,6 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
-    }
-
-    /**
-     * An optional filter on the list, based on the object {@code type} field. Without the filter,
-     * the list includes all current and future payment method types. If your integration expects
-     * only one type of payment method in the response, make sure to provide a type value in the
-     * request.
-     */
-    public Builder setType(CustomerListPaymentMethodsParams.Type type) {
-      this.type = type;
-      return this;
-    }
-  }
-
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("acss_debit")
-    ACSS_DEBIT("acss_debit"),
-
-    @SerializedName("affirm")
-    AFFIRM("affirm"),
-
-    @SerializedName("afterpay_clearpay")
-    AFTERPAY_CLEARPAY("afterpay_clearpay"),
-
-    @SerializedName("alipay")
-    ALIPAY("alipay"),
-
-    @SerializedName("au_becs_debit")
-    AU_BECS_DEBIT("au_becs_debit"),
-
-    @SerializedName("bacs_debit")
-    BACS_DEBIT("bacs_debit"),
-
-    @SerializedName("bancontact")
-    BANCONTACT("bancontact"),
-
-    @SerializedName("blik")
-    BLIK("blik"),
-
-    @SerializedName("boleto")
-    BOLETO("boleto"),
-
-    @SerializedName("card")
-    CARD("card"),
-
-    @SerializedName("cashapp")
-    CASHAPP("cashapp"),
-
-    @SerializedName("customer_balance")
-    CUSTOMER_BALANCE("customer_balance"),
-
-    @SerializedName("eps")
-    EPS("eps"),
-
-    @SerializedName("fpx")
-    FPX("fpx"),
-
-    @SerializedName("giropay")
-    GIROPAY("giropay"),
-
-    @SerializedName("grabpay")
-    GRABPAY("grabpay"),
-
-    @SerializedName("ideal")
-    IDEAL("ideal"),
-
-    @SerializedName("klarna")
-    KLARNA("klarna"),
-
-    @SerializedName("konbini")
-    KONBINI("konbini"),
-
-    @SerializedName("link")
-    LINK("link"),
-
-    @SerializedName("mobilepay")
-    MOBILEPAY("mobilepay"),
-
-    @SerializedName("multibanco")
-    MULTIBANCO("multibanco"),
-
-    @SerializedName("oxxo")
-    OXXO("oxxo"),
-
-    @SerializedName("p24")
-    P24("p24"),
-
-    @SerializedName("paynow")
-    PAYNOW("paynow"),
-
-    @SerializedName("paypal")
-    PAYPAL("paypal"),
-
-    @SerializedName("payto")
-    PAYTO("payto"),
-
-    @SerializedName("pix")
-    PIX("pix"),
-
-    @SerializedName("promptpay")
-    PROMPTPAY("promptpay"),
-
-    @SerializedName("revolut_pay")
-    REVOLUT_PAY("revolut_pay"),
-
-    @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit"),
-
-    @SerializedName("sofort")
-    SOFORT("sofort"),
-
-    @SerializedName("swish")
-    SWISH("swish"),
-
-    @SerializedName("twint")
-    TWINT("twint"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account"),
-
-    @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay"),
-
-    @SerializedName("zip")
-    ZIP("zip");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Type(String value) {
-      this.value = value;
     }
   }
 }

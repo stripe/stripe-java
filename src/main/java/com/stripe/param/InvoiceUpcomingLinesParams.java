@@ -18,11 +18,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
-   * provided, the invoice returned will preview updating or creating a subscription with that
-   * coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming
-   * invoice from among the customer's subscriptions. The invoice can be previewed without a coupon
-   * by passing this value as an empty string.
+   * The identifier of the coupon to apply to this phase of the subscription schedule. This field
+   * has been deprecated and will be removed in a future API version. Use {@code discounts} instead.
    */
   @SerializedName("coupon")
   String coupon;
@@ -51,10 +48,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
   /**
    * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-   * discount from the customer or subscription. This only works for coupons directly applied to the
-   * invoice. To apply a coupon to a subscription, you must use the {@code coupon} parameter
-   * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
-   * invoice for a subscription that hasn't been created, use {@code coupon} instead.
+   * discount from the customer or subscription. This works for both coupons directly applied to an
+   * invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any
+   * discounts.
    */
   @SerializedName("discounts")
   Object discounts;
@@ -441,11 +437,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     }
 
     /**
-     * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
-     * provided, the invoice returned will preview updating or creating a subscription with that
-     * coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming
-     * invoice from among the customer's subscriptions. The invoice can be previewed without a
-     * coupon by passing this value as an empty string.
+     * The identifier of the coupon to apply to this phase of the subscription schedule. This field
+     * has been deprecated and will be removed in a future API version. Use {@code discounts}
+     * instead.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -511,10 +505,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This only works for coupons directly applied to
-     * the invoice. To apply a coupon to a subscription, you must use the {@code coupon} parameter
-     * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
-     * invoice for a subscription that hasn't been created, use {@code coupon} instead.
+     * discount from the customer or subscription. This works for both coupons directly applied to
+     * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
+     * any discounts.
      */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
@@ -523,10 +516,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This only works for coupons directly applied to
-     * the invoice. To apply a coupon to a subscription, you must use the {@code coupon} parameter
-     * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
-     * invoice for a subscription that hasn't been created, use {@code coupon} instead.
+     * discount from the customer or subscription. This works for both coupons directly applied to
+     * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
+     * any discounts.
      */
     public Builder setDiscounts(List<InvoiceUpcomingLinesParams.Discount> discounts) {
       this.discounts = discounts;
@@ -8249,7 +8241,12 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       @SerializedName("on_behalf_of")
       String onBehalfOf;
 
-      /** If specified, payment collection for this subscription will be paused. */
+      /**
+       * If specified, payment collection for this subscription will be paused. Note that the
+       * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+       * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+       * collection</a>.
+       */
       @SerializedName("pause_collection")
       PauseCollection pauseCollection;
 
@@ -8835,7 +8832,12 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           return this;
         }
 
-        /** If specified, payment collection for this subscription will be paused. */
+        /**
+         * If specified, payment collection for this subscription will be paused. Note that the
+         * subscription status will be unchanged and will not be updated to {@code paused}. Learn
+         * more about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+         * collection</a>.
+         */
         public Builder setPauseCollection(
             InvoiceUpcomingLinesParams.ScheduleDetails.Phase.PauseCollection pauseCollection) {
           this.pauseCollection = pauseCollection;

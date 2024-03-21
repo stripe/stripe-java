@@ -35,8 +35,6 @@ final class EventDataClassLookup {
     classLookup.put("customer", Customer.class);
     classLookup.put("customer_balance_transaction", CustomerBalanceTransaction.class);
     classLookup.put("customer_cash_balance_transaction", CustomerCashBalanceTransaction.class);
-    classLookup.put("customer_entitlement", CustomerEntitlement.class);
-    classLookup.put("customer_entitlement_summary", CustomerEntitlementSummary.class);
     classLookup.put("customer_session", CustomerSession.class);
     classLookup.put("discount", Discount.class);
     classLookup.put("dispute", Dispute.class);
@@ -67,6 +65,7 @@ final class EventDataClassLookup {
     classLookup.put("platform_tax_fee", PlatformTaxFee.class);
     classLookup.put("price", Price.class);
     classLookup.put("product", Product.class);
+    classLookup.put("product_feature", ProductFeature.class);
     classLookup.put("promotion_code", PromotionCode.class);
     classLookup.put("quote", Quote.class);
     classLookup.put("quote_line", QuoteLine.class);
@@ -121,6 +120,11 @@ final class EventDataClassLookup {
     classLookup.put("climate.product", com.stripe.model.climate.Product.class);
     classLookup.put("climate.supplier", com.stripe.model.climate.Supplier.class);
 
+    classLookup.put(
+        "entitlements.active_entitlement", com.stripe.model.entitlements.ActiveEntitlement.class);
+    classLookup.put(
+        "entitlements.active_entitlement_summary",
+        com.stripe.model.entitlements.ActiveEntitlementSummary.class);
     classLookup.put("entitlements.feature", com.stripe.model.entitlements.Feature.class);
 
     classLookup.put(
@@ -139,6 +143,8 @@ final class EventDataClassLookup {
     classLookup.put(
         "financial_connections.transaction",
         com.stripe.model.financialconnections.Transaction.class);
+
+    classLookup.put("forwarding.request", com.stripe.model.forwarding.Request.class);
 
     classLookup.put("gift_cards.card", com.stripe.model.giftcards.Card.class);
     classLookup.put("gift_cards.transaction", com.stripe.model.giftcards.Transaction.class);
