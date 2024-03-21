@@ -5180,6 +5180,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
+     * If this is a {@code mobilepay} PaymentMethod, this hash contains details about the MobilePay
+     * payment method.
+     */
+    @SerializedName("mobilepay")
+    Mobilepay mobilepay;
+
+    /**
      * If this is a {@code multibanco} PaymentMethod, this hash contains details about the
      * Multibanco payment method.
      */
@@ -5329,6 +5336,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Konbini konbini,
         Link link,
         Map<String, String> metadata,
+        Mobilepay mobilepay,
         Multibanco multibanco,
         Oxxo oxxo,
         P24 p24,
@@ -5370,6 +5378,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.konbini = konbini;
       this.link = link;
       this.metadata = metadata;
+      this.mobilepay = mobilepay;
       this.multibanco = multibanco;
       this.oxxo = oxxo;
       this.p24 = p24;
@@ -5441,6 +5450,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Map<String, String> metadata;
 
+      private Mobilepay mobilepay;
+
       private Multibanco multibanco;
 
       private Oxxo oxxo;
@@ -5503,6 +5514,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.konbini,
             this.link,
             this.metadata,
+            this.mobilepay,
             this.multibanco,
             this.oxxo,
             this.p24,
@@ -5771,6 +5783,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.metadata = new HashMap<>();
         }
         this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * If this is a {@code mobilepay} PaymentMethod, this hash contains details about the
+       * MobilePay payment method.
+       */
+      public Builder setMobilepay(
+          PaymentIntentConfirmParams.PaymentMethodData.Mobilepay mobilepay) {
+        this.mobilepay = mobilepay;
         return this;
       }
 
@@ -7912,6 +7934,63 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Mobilepay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Mobilepay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodData.Mobilepay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Mobilepay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Mobilepay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Mobilepay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Multibanco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9273,6 +9352,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("link")
       LINK("link"),
 
+      @SerializedName("mobilepay")
+      MOBILEPAY("mobilepay"),
+
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
 
@@ -9493,6 +9575,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object link;
 
     /**
+     * If this is a {@code MobilePay} PaymentMethod, this sub-hash contains details about the
+     * MobilePay payment method options.
+     */
+    @SerializedName("mobilepay")
+    Object mobilepay;
+
+    /**
      * If this is a {@code multibanco} PaymentMethod, this sub-hash contains details about the
      * Multibanco payment method options.
      */
@@ -9621,6 +9710,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object klarna,
         Object konbini,
         Object link,
+        Object mobilepay,
         Object multibanco,
         Object oxxo,
         Object p24,
@@ -9659,6 +9749,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.klarna = klarna;
       this.konbini = konbini;
       this.link = link;
+      this.mobilepay = mobilepay;
       this.multibanco = multibanco;
       this.oxxo = oxxo;
       this.p24 = p24;
@@ -9727,6 +9818,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object link;
 
+      private Object mobilepay;
+
       private Object multibanco;
 
       private Object oxxo;
@@ -9783,6 +9876,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.klarna,
             this.konbini,
             this.link,
+            this.mobilepay,
             this.multibanco,
             this.oxxo,
             this.p24,
@@ -10222,6 +10316,25 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setLink(EmptyParam link) {
         this.link = link;
+        return this;
+      }
+
+      /**
+       * If this is a {@code MobilePay} PaymentMethod, this sub-hash contains details about the
+       * MobilePay payment method options.
+       */
+      public Builder setMobilepay(
+          PaymentIntentConfirmParams.PaymentMethodOptions.Mobilepay mobilepay) {
+        this.mobilepay = mobilepay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code MobilePay} PaymentMethod, this sub-hash contains details about the
+       * MobilePay payment method options.
+       */
+      public Builder setMobilepay(EmptyParam mobilepay) {
+        this.mobilepay = mobilepay;
         return this;
       }
 
@@ -16799,6 +16912,187 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         @SerializedName("off_session")
         OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Mobilepay {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>If provided, this parameter will override the top-level {@code capture_method} when
+       * finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter will unset the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Mobilepay(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Mobilepay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Mobilepay(
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top-level {@code capture_method} when
+         * finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Mobilepay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top-level {@code capture_method} when
+         * finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Mobilepay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Mobilepay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Mobilepay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
