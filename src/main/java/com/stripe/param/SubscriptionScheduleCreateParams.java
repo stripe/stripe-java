@@ -1527,7 +1527,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("on_behalf_of")
     String onBehalfOf;
 
-    /** If specified, payment collection for this subscription will be paused. */
+    /**
+     * If specified, payment collection for this subscription will be paused. Note that the
+     * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+     * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+     * collection</a>.
+     */
     @SerializedName("pause_collection")
     PauseCollection pauseCollection;
 
@@ -2075,7 +2080,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** If specified, payment collection for this subscription will be paused. */
+      /**
+       * If specified, payment collection for this subscription will be paused. Note that the
+       * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+       * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+       * collection</a>.
+       */
       public Builder setPauseCollection(
           SubscriptionScheduleCreateParams.Phase.PauseCollection pauseCollection) {
         this.pauseCollection = pauseCollection;
