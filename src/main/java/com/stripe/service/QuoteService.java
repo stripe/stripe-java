@@ -308,19 +308,31 @@ public final class QuoteService extends ApiService {
             ApiMode.V1);
     return this.request(request, Quote.class);
   }
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
     return pdf(quote, params, (RequestOptions) null);
   }
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(String quote, RequestOptions options) throws StripeException {
     return pdf(quote, (QuotePdfParams) null, options);
   }
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(String quote) throws StripeException {
     return pdf(quote, (QuotePdfParams) null, (RequestOptions) null);
   }
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(String quote, QuotePdfParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(quote));
