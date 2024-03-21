@@ -49,6 +49,13 @@ public class Feature extends ApiResource implements HasId {
   @SerializedName("lookup_key")
   String lookupKey;
 
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
   /** The feature's name, for your own purpose, not meant to be displayable to the customer. */
   @SerializedName("name")
   String name;
