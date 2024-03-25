@@ -217,6 +217,13 @@ public class AccountSession extends ApiResource {
         Boolean capturePayments;
 
         /**
+         * Whether to allow connected accounts to manage destination charges that are created on
+         * behalf of them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
+
+        /**
          * Whether to allow responding to disputes, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
@@ -250,6 +257,13 @@ public class AccountSession extends ApiResource {
          */
         @SerializedName("capture_payments")
         Boolean capturePayments;
+
+        /**
+         * Whether to allow connected accounts to manage destination charges that are created on
+         * behalf of them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
 
         /**
          * Whether to allow responding to disputes, including submitting evidence and accepting
