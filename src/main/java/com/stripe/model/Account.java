@@ -831,6 +831,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String afterpayClearpayPayments;
 
     /**
+     * The status of the AmazonPay capability of the account, or whether the account can directly
+     * process AmazonPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("amazon_pay_payments")
+    String amazonPayPayments;
+
+    /**
      * The status of the BECS Direct Debit (AU) payments capability of the account, or whether the
      * account can directly process BECS Direct Debit (AU) charges.
      *
