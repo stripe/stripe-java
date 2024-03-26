@@ -125,6 +125,10 @@ public class StripeClient {
     return new com.stripe.service.ClimateService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ConfirmationTokenService confirmationTokens() {
+    return new com.stripe.service.ConfirmationTokenService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CountrySpecService countrySpecs() {
     return new com.stripe.service.CountrySpecService(this.getResponseGetter());
   }
@@ -171,6 +175,10 @@ public class StripeClient {
 
   public com.stripe.service.FinancialConnectionsService financialConnections() {
     return new com.stripe.service.FinancialConnectionsService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.ForwardingService forwarding() {
+    return new com.stripe.service.ForwardingService(this.getResponseGetter());
   }
 
   public com.stripe.service.IdentityService identity() {
