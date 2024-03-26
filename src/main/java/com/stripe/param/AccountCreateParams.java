@@ -51,7 +51,7 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("company")
   Company company;
 
-  /** The configuration of the account when {@code type} is not provided. */
+  /** A hash of configuration describing the account controller's attributes. */
   @SerializedName("controller")
   Controller controller;
 
@@ -309,7 +309,7 @@ public class AccountCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The configuration of the account when {@code type} is not provided. */
+    /** A hash of configuration describing the account controller's attributes. */
     public Builder setController(AccountCreateParams.Controller controller) {
       this.controller = controller;
       return this;
