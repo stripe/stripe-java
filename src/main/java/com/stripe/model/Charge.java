@@ -2192,7 +2192,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("authorization_response_code")
         String authorizationResponseCode;
 
-        /** How the cardholder verified ownership of the card. */
+        /**
+         * Describes the method used by the cardholder to verify ownership of the card. One of the
+         * following: {@code approval}, {@code failure}, {@code none}, {@code offline_pin}, {@code
+         * offline_pin_and_signature}, {@code online_pin}, or {@code signature}.
+         */
         @SerializedName("cardholder_verification_method")
         String cardholderVerificationMethod;
 
@@ -2555,7 +2559,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("authorization_response_code")
         String authorizationResponseCode;
 
-        /** How the cardholder verified ownership of the card. */
+        /**
+         * Describes the method used by the cardholder to verify ownership of the card. One of the
+         * following: {@code approval}, {@code failure}, {@code none}, {@code offline_pin}, {@code
+         * offline_pin_and_signature}, {@code online_pin}, or {@code signature}.
+         */
         @SerializedName("cardholder_verification_method")
         String cardholderVerificationMethod;
 
