@@ -3157,8 +3157,8 @@ public class OrderCreateParams extends ApiRequestParams {
           /**
            * Controls when the funds will be captured from the customer's account.
            *
-           * <p>If provided, this parameter will override the top-level {@code capture_method} when
-           * finalizing the payment with this payment method type.
+           * <p>If provided, this parameter will override the top level behavior of {@code
+           * capture_method} when finalizing the payment with this payment method type.
            *
            * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
            * value for this parameter will unset the stored value for this payment method type.
@@ -3241,8 +3241,8 @@ public class OrderCreateParams extends ApiRequestParams {
             /**
              * Controls when the funds will be captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top-level {@code capture_method}
-             * when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter will override the top level behavior of {@code
+             * capture_method} when finalizing the payment with this payment method type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.
@@ -4540,8 +4540,8 @@ public class OrderCreateParams extends ApiRequestParams {
           /**
            * Controls when the funds will be captured from the customer's account.
            *
-           * <p>If provided, this parameter will override the top-level {@code capture_method} when
-           * finalizing the payment with this payment method type.
+           * <p>If provided, this parameter will override the top level behavior of {@code
+           * capture_method} when finalizing the payment with this payment method type.
            *
            * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
            * value for this parameter will unset the stored value for this payment method type.
@@ -4625,8 +4625,8 @@ public class OrderCreateParams extends ApiRequestParams {
             /**
              * Controls when the funds will be captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top-level {@code capture_method}
-             * when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter will override the top level behavior of {@code
+             * capture_method} when finalizing the payment with this payment method type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.
@@ -4641,8 +4641,8 @@ public class OrderCreateParams extends ApiRequestParams {
             /**
              * Controls when the funds will be captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top-level {@code capture_method}
-             * when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter will override the top level behavior of {@code
+             * capture_method} when finalizing the payment with this payment method type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.
@@ -4893,8 +4893,8 @@ public class OrderCreateParams extends ApiRequestParams {
           /**
            * Controls when the funds will be captured from the customer's account.
            *
-           * <p>If provided, this parameter will override the top-level {@code capture_method} when
-           * finalizing the payment with this payment method type.
+           * <p>If provided, this parameter will override the top level behavior of {@code
+           * capture_method} when finalizing the payment with this payment method type.
            *
            * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
            * value for this parameter will unset the stored value for this payment method type.
@@ -4976,8 +4976,8 @@ public class OrderCreateParams extends ApiRequestParams {
             /**
              * Controls when the funds will be captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top-level {@code capture_method}
-             * when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter will override the top level behavior of {@code
+             * capture_method} when finalizing the payment with this payment method type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.
@@ -4992,8 +4992,8 @@ public class OrderCreateParams extends ApiRequestParams {
             /**
              * Controls when the funds will be captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top-level {@code capture_method}
-             * when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter will override the top level behavior of {@code
+             * capture_method} when finalizing the payment with this payment method type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.

@@ -831,6 +831,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String afterpayClearpayPayments;
 
     /**
+     * The status of the AmazonPay capability of the account, or whether the account can directly
+     * process AmazonPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("amazon_pay_payments")
+    String amazonPayPayments;
+
+    /**
      * The status of the BECS Direct Debit (AU) payments capability of the account, or whether the
      * account can directly process BECS Direct Debit (AU) charges.
      *
@@ -1667,6 +1676,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
        * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
        * verification_failed_name_match}, {@code verification_failed_other}, {@code
+       * verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, or {@code
@@ -1831,6 +1841,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
        * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
        * verification_failed_name_match}, {@code verification_failed_other}, {@code
+       * verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, or {@code
