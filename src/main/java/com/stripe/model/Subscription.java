@@ -341,7 +341,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * invoices and can be resumed after your customer adds their payment method. The {@code paused}
    * status is different from <a
    * href="https://stripe.com/billing/subscriptions/pause-payment">pausing collection</a>, which
-   * still generates invoices.
+   * still generates invoices and leaves the subscription's status unchanged.
    *
    * <p>If subscription {@code collection_method=charge_automatically}, it becomes {@code past_due}
    * when payment is required but cannot be paid (due to failed payment or awaiting additional user

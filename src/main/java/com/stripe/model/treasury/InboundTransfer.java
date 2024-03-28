@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.Mandate;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
@@ -425,6 +426,12 @@ public class InboundTransfer extends ApiResource implements HasId {
       @SerializedName("last4")
       String last4;
 
+      /** ID of the mandate used to make this payment. */
+      @SerializedName("mandate")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Mandate> mandate;
+
       /**
        * The network rails used. See the <a
        * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
@@ -438,6 +445,24 @@ public class InboundTransfer extends ApiResource implements HasId {
       /** Routing number of the bank account. */
       @SerializedName("routing_number")
       String routingNumber;
+
+      /** Get ID of expandable {@code mandate} object. */
+      public String getMandate() {
+        return (this.mandate != null) ? this.mandate.getId() : null;
+      }
+
+      public void setMandate(String id) {
+        this.mandate = ApiResource.setExpandableFieldId(id, this.mandate);
+      }
+
+      /** Get expanded {@code mandate}. */
+      public Mandate getMandateObject() {
+        return (this.mandate != null) ? this.mandate.getExpanded() : null;
+      }
+
+      public void setMandateObject(Mandate expandableObject) {
+        this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
     }
   }
 
