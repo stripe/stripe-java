@@ -811,17 +811,26 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf() throws StripeException {
     return pdf((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(Map<String, Object> params) throws StripeException {
     return pdf(params, (RequestOptions) null);
   }
 
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId()));
@@ -831,12 +840,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     return getResponseGetter().requestStream(request);
   }
 
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(QuotePdfParams params) throws StripeException {
     return pdf(params, (RequestOptions) null);
   }
 
-  /** Download the PDF for a finalized quote. */
+  /**
+   * Download the PDF for a finalized quote. Explanation for special handling can be found <a
+   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   */
   public InputStream pdf(QuotePdfParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
