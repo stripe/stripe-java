@@ -5099,10 +5099,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     EXCLUDE("exclude"),
 
     @SerializedName("include")
-    INCLUDE("include"),
-
-    @SerializedName("include_and_require")
-    INCLUDE_AND_REQUIRE("include_and_require");
+    INCLUDE("include");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
