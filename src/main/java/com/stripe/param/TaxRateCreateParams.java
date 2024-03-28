@@ -345,10 +345,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
     SALES_TAX("sales_tax"),
 
     @SerializedName("vat")
-    VAT("vat"),
-
-    @SerializedName("service_tax")
-    SERVICE_TAX("service_tax");
+    VAT("vat");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

@@ -1277,31 +1277,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     TREASURY__RECEIVED_CREDIT__SUCCEEDED("treasury.received_credit.succeeded"),
 
     @SerializedName("treasury.received_debit.created")
-    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
-
-    @SerializedName("invoiceitem.updated")
-    INVOICEITEM__UPDATED("invoiceitem.updated"),
-
-    @SerializedName("order.created")
-    ORDER__CREATED("order.created"),
-
-    @SerializedName("recipient.created")
-    RECIPIENT__CREATED("recipient.created"),
-
-    @SerializedName("recipient.deleted")
-    RECIPIENT__DELETED("recipient.deleted"),
-
-    @SerializedName("recipient.updated")
-    RECIPIENT__UPDATED("recipient.updated"),
-
-    @SerializedName("sku.created")
-    SKU__CREATED("sku.created"),
-
-    @SerializedName("sku.deleted")
-    SKU__DELETED("sku.deleted"),
-
-    @SerializedName("sku.updated")
-    SKU__UPDATED("sku.updated");
+    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
