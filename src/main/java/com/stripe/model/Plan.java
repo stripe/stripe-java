@@ -138,6 +138,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The meter tracking the usage of a metered price. */
+  @SerializedName("meter")
+  String meter;
+
   /** A brief description of the plan, hidden from customers. */
   @SerializedName("nickname")
   String nickname;

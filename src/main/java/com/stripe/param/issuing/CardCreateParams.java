@@ -3,6 +3,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,6 +66,10 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("replacement_reason")
   ReplacementReason replacementReason;
 
+  /** The second line to print on the card. */
+  @SerializedName("second_line")
+  Object secondLine;
+
   /** The address where the card will be shipped. */
   @SerializedName("shipping")
   Shipping shipping;
@@ -102,6 +107,7 @@ public class CardCreateParams extends ApiRequestParams {
       Pin pin,
       String replacementFor,
       ReplacementReason replacementReason,
+      Object secondLine,
       Shipping shipping,
       SpendingControls spendingControls,
       Status status,
@@ -116,6 +122,7 @@ public class CardCreateParams extends ApiRequestParams {
     this.pin = pin;
     this.replacementFor = replacementFor;
     this.replacementReason = replacementReason;
+    this.secondLine = secondLine;
     this.shipping = shipping;
     this.spendingControls = spendingControls;
     this.status = status;
@@ -147,6 +154,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     private ReplacementReason replacementReason;
 
+    private Object secondLine;
+
     private Shipping shipping;
 
     private SpendingControls spendingControls;
@@ -168,6 +177,7 @@ public class CardCreateParams extends ApiRequestParams {
           this.pin,
           this.replacementFor,
           this.replacementReason,
+          this.secondLine,
           this.shipping,
           this.spendingControls,
           this.status,
@@ -296,6 +306,18 @@ public class CardCreateParams extends ApiRequestParams {
      */
     public Builder setReplacementReason(CardCreateParams.ReplacementReason replacementReason) {
       this.replacementReason = replacementReason;
+      return this;
+    }
+
+    /** The second line to print on the card. */
+    public Builder setSecondLine(String secondLine) {
+      this.secondLine = secondLine;
+      return this;
+    }
+
+    /** The second line to print on the card. */
+    public Builder setSecondLine(EmptyParam secondLine) {
+      this.secondLine = secondLine;
       return this;
     }
 

@@ -37,6 +37,9 @@ import lombok.Setter;
  *
  * <p>Forwarding Requests are synchronous requests that return a response or time out according to
  * Stripe’s limits.
+ *
+ * <p>Related guide: <a href="https://docs.stripe.com/payments/forwarding">Forward card details to
+ * third-party API endpoints</a>.
  */
 @Getter
 @Setter

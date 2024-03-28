@@ -649,6 +649,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean capturePayments;
 
         /**
+         * Whether to allow connected accounts to manage destination charges that are created on
+         * behalf of them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
+
+        /**
          * Whether to allow responding to disputes, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
@@ -671,10 +678,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
         private Features(
             Boolean capturePayments,
+            Boolean destinationOnBehalfOfChargeManagement,
             Boolean disputeManagement,
             Map<String, Object> extraParams,
             Boolean refundManagement) {
           this.capturePayments = capturePayments;
+          this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
           this.disputeManagement = disputeManagement;
           this.extraParams = extraParams;
           this.refundManagement = refundManagement;
@@ -687,6 +696,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Boolean capturePayments;
 
+          private Boolean destinationOnBehalfOfChargeManagement;
+
           private Boolean disputeManagement;
 
           private Map<String, Object> extraParams;
@@ -697,6 +708,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           public AccountSessionCreateParams.Components.PaymentDetails.Features build() {
             return new AccountSessionCreateParams.Components.PaymentDetails.Features(
                 this.capturePayments,
+                this.destinationOnBehalfOfChargeManagement,
                 this.disputeManagement,
                 this.extraParams,
                 this.refundManagement);
@@ -708,6 +720,16 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            */
           public Builder setCapturePayments(Boolean capturePayments) {
             this.capturePayments = capturePayments;
+            return this;
+          }
+
+          /**
+           * Whether to allow connected accounts to manage destination charges that are created on
+           * behalf of them. This is {@code false} by default.
+           */
+          public Builder setDestinationOnBehalfOfChargeManagement(
+              Boolean destinationOnBehalfOfChargeManagement) {
+            this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
             return this;
           }
 
@@ -853,6 +875,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean capturePayments;
 
         /**
+         * Whether to allow connected accounts to manage destination charges that are created on
+         * behalf of them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
+
+        /**
          * Whether to allow responding to disputes, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
@@ -875,10 +904,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
         private Features(
             Boolean capturePayments,
+            Boolean destinationOnBehalfOfChargeManagement,
             Boolean disputeManagement,
             Map<String, Object> extraParams,
             Boolean refundManagement) {
           this.capturePayments = capturePayments;
+          this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
           this.disputeManagement = disputeManagement;
           this.extraParams = extraParams;
           this.refundManagement = refundManagement;
@@ -891,6 +922,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Boolean capturePayments;
 
+          private Boolean destinationOnBehalfOfChargeManagement;
+
           private Boolean disputeManagement;
 
           private Map<String, Object> extraParams;
@@ -901,6 +934,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           public AccountSessionCreateParams.Components.Payments.Features build() {
             return new AccountSessionCreateParams.Components.Payments.Features(
                 this.capturePayments,
+                this.destinationOnBehalfOfChargeManagement,
                 this.disputeManagement,
                 this.extraParams,
                 this.refundManagement);
@@ -912,6 +946,16 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            */
           public Builder setCapturePayments(Boolean capturePayments) {
             this.capturePayments = capturePayments;
+            return this;
+          }
+
+          /**
+           * Whether to allow connected accounts to manage destination charges that are created on
+           * behalf of them. This is {@code false} by default.
+           */
+          public Builder setDestinationOnBehalfOfChargeManagement(
+              Boolean destinationOnBehalfOfChargeManagement) {
+            this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
             return this;
           }
 

@@ -2192,7 +2192,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("authorization_response_code")
         String authorizationResponseCode;
 
-        /** How the cardholder verified ownership of the card. */
+        /**
+         * Describes the method used by the cardholder to verify ownership of the card. One of the
+         * following: {@code approval}, {@code failure}, {@code none}, {@code offline_pin}, {@code
+         * offline_pin_and_signature}, {@code online_pin}, or {@code signature}.
+         */
         @SerializedName("cardholder_verification_method")
         String cardholderVerificationMethod;
 
@@ -2555,7 +2559,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("authorization_response_code")
         String authorizationResponseCode;
 
-        /** How the cardholder verified ownership of the card. */
+        /**
+         * Describes the method used by the cardholder to verify ownership of the card. One of the
+         * following: {@code approval}, {@code failure}, {@code none}, {@code offline_pin}, {@code
+         * offline_pin_and_signature}, {@code online_pin}, or {@code signature}.
+         */
         @SerializedName("cardholder_verification_method")
         String cardholderVerificationMethod;
 
@@ -3015,6 +3023,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("last4")
       String last4;
 
+      /** ID of the mandate used to make this payment. */
+      @SerializedName("mandate")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Mandate> mandate;
+
       /** Reference number to locate ACH payments with customer's bank. */
       @SerializedName("payment_reference")
       String paymentReference;
@@ -3022,6 +3036,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Routing number of the bank account. */
       @SerializedName("routing_number")
       String routingNumber;
+
+      /** Get ID of expandable {@code mandate} object. */
+      public String getMandate() {
+        return (this.mandate != null) ? this.mandate.getId() : null;
+      }
+
+      public void setMandate(String id) {
+        this.mandate = ApiResource.setExpandableFieldId(id, this.mandate);
+      }
+
+      /** Get expanded {@code mandate}. */
+      public Mandate getMandateObject() {
+        return (this.mandate != null) ? this.mandate.getExpanded() : null;
+      }
+
+      public void setMandateObject(Mandate expandableObject) {
+        this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
     }
 
     @Getter
