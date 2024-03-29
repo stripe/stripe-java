@@ -15,6 +15,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.entitlements.FeatureCreateParams;
 import com.stripe.param.entitlements.FeatureListParams;
+import com.stripe.param.entitlements.FeatureUpdateParams;
 
 public final class FeatureService extends ApiService {
   public FeatureService(StripeResponseGetter responseGetter) {
@@ -54,6 +55,32 @@ public final class FeatureService extends ApiService {
   /** Creates a feature. */
   public Feature create(FeatureCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/entitlements/features";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Feature.class);
+  }
+  /** Update a feature’s metadata or permanently deactivate it. */
+  public Feature update(String id, FeatureUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Update a feature’s metadata or permanently deactivate it. */
+  public Feature update(String id, RequestOptions options) throws StripeException {
+    return update(id, (FeatureUpdateParams) null, options);
+  }
+  /** Update a feature’s metadata or permanently deactivate it. */
+  public Feature update(String id) throws StripeException {
+    return update(id, (FeatureUpdateParams) null, (RequestOptions) null);
+  }
+  /** Update a feature’s metadata or permanently deactivate it. */
+  public Feature update(String id, FeatureUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

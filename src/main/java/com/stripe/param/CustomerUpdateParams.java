@@ -1183,13 +1183,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+       * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
        */
       @SerializedName("name")
       Object name;
 
       /**
-       * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+       * <strong>Required.</strong> The value of the custom field. This may be up to 140 characters.
        */
       @SerializedName("value")
       Object value;
@@ -1246,7 +1246,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
          */
         public Builder setName(String name) {
           this.name = name;
@@ -1254,7 +1254,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
          */
         public Builder setName(EmptyParam name) {
           this.name = name;
@@ -1262,7 +1262,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * <strong>Required.</strong> The value of the custom field. This may be up to 140
          * characters.
          */
         public Builder setValue(String value) {
@@ -1271,7 +1271,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * <strong>Required.</strong> The value of the custom field. This may be up to 140
          * characters.
          */
         public Builder setValue(EmptyParam value) {
