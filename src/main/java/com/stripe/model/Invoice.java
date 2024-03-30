@@ -1738,6 +1738,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
    * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
+   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
+   * recommends that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice() throws StripeException {
     return voidInvoice((Map<String, Object>) null, (RequestOptions) null);
@@ -1747,6 +1753,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
    * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
+   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
+   * recommends that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(RequestOptions options) throws StripeException {
     return voidInvoice((Map<String, Object>) null, options);
@@ -1756,6 +1768,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
    * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
+   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
+   * recommends that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(Map<String, Object> params) throws StripeException {
     return voidInvoice(params, (RequestOptions) null);
@@ -1765,6 +1783,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
    * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
+   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
+   * recommends that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1779,6 +1803,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
    * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
+   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
+   * recommends that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(InvoiceVoidInvoiceParams params) throws StripeException {
     return voidInvoice(params, (RequestOptions) null);
@@ -1788,6 +1818,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
    * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
+   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
+   * recommends that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(InvoiceVoidInvoiceParams params, RequestOptions options)
       throws StripeException {

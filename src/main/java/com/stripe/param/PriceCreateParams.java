@@ -1416,6 +1416,10 @@ public class PriceCreateParams extends ApiRequestParams {
     @SerializedName("interval_count")
     Long intervalCount;
 
+    /** The meter tracking the usage of a metered price. */
+    @SerializedName("meter")
+    String meter;
+
     /**
      * Default number of trial days when subscribing a customer to this price using <a
      * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
@@ -1438,12 +1442,14 @@ public class PriceCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Interval interval,
         Long intervalCount,
+        String meter,
         Long trialPeriodDays,
         UsageType usageType) {
       this.aggregateUsage = aggregateUsage;
       this.extraParams = extraParams;
       this.interval = interval;
       this.intervalCount = intervalCount;
+      this.meter = meter;
       this.trialPeriodDays = trialPeriodDays;
       this.usageType = usageType;
     }
@@ -1461,6 +1467,8 @@ public class PriceCreateParams extends ApiRequestParams {
 
       private Long intervalCount;
 
+      private String meter;
+
       private Long trialPeriodDays;
 
       private UsageType usageType;
@@ -1472,6 +1480,7 @@ public class PriceCreateParams extends ApiRequestParams {
             this.extraParams,
             this.interval,
             this.intervalCount,
+            this.meter,
             this.trialPeriodDays,
             this.usageType);
       }
@@ -1527,6 +1536,12 @@ public class PriceCreateParams extends ApiRequestParams {
        */
       public Builder setIntervalCount(Long intervalCount) {
         this.intervalCount = intervalCount;
+        return this;
+      }
+
+      /** The meter tracking the usage of a metered price. */
+      public Builder setMeter(String meter) {
+        this.meter = meter;
         return this;
       }
 
