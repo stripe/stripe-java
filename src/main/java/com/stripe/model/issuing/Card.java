@@ -555,6 +555,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     List<String> allowedCategories;
 
     /**
+     * Array of strings containing representing countries from which authorizations will be allowed.
+     * Authorizations from merchants in all other countries will be declined. Country codes should
+     * be ISO 3166 alpha-2 country codes (e.g. {@code US}). Cannot be set with {@code
+     * blocked_merchant_countries}. Provide an empty value to unset this control.
+     */
+    @SerializedName("allowed_merchant_countries")
+    List<String> allowedMerchantCountries;
+
+    /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to decline. All other categories will be allowed. Cannot be set with {@code
@@ -562,6 +571,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("blocked_categories")
     List<String> blockedCategories;
+
+    /**
+     * Array of strings containing representing countries from which authorizations will be
+     * declined. Country codes should be ISO 3166 alpha-2 country codes (e.g. {@code US}). Cannot be
+     * set with {@code allowed_merchant_countries}. Provide an empty value to unset this control.
+     */
+    @SerializedName("blocked_merchant_countries")
+    List<String> blockedMerchantCountries;
 
     /**
      * Limit spending with amount-based rules that apply across any cards this card replaced (i.e.,
