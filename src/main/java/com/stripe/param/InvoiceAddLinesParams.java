@@ -222,8 +222,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     Boolean discountable;
 
     /**
-     * The coupons &amp; existing discounts which apply to the line item. Item discounts are applied
-     * before invoice discounts. Pass an empty string to remove previously-defined discounts.
+     * The coupons, promotion codes &amp; existing discounts which apply to the line item. Item
+     * discounts are applied before invoice discounts. Pass an empty string to remove
+     * previously-defined discounts.
      */
     @SerializedName("discounts")
     Object discounts;
@@ -448,9 +449,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       }
 
       /**
-       * The coupons &amp; existing discounts which apply to the line item. Item discounts are
-       * applied before invoice discounts. Pass an empty string to remove previously-defined
-       * discounts.
+       * The coupons, promotion codes &amp; existing discounts which apply to the line item. Item
+       * discounts are applied before invoice discounts. Pass an empty string to remove
+       * previously-defined discounts.
        */
       public Builder setDiscounts(EmptyParam discounts) {
         this.discounts = discounts;
@@ -458,9 +459,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       }
 
       /**
-       * The coupons &amp; existing discounts which apply to the line item. Item discounts are
-       * applied before invoice discounts. Pass an empty string to remove previously-defined
-       * discounts.
+       * The coupons, promotion codes &amp; existing discounts which apply to the line item. Item
+       * discounts are applied before invoice discounts. Pass an empty string to remove
+       * previously-defined discounts.
        */
       public Builder setDiscounts(List<InvoiceAddLinesParams.Line.Discount> discounts) {
         this.discounts = discounts;
@@ -762,15 +763,21 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** ID of the promotion code to create a new discount for. */
+      @SerializedName("promotion_code")
+      String promotionCode;
+
       private Discount(
           String coupon,
           String discount,
           DiscountEnd discountEnd,
-          Map<String, Object> extraParams) {
+          Map<String, Object> extraParams,
+          String promotionCode) {
         this.coupon = coupon;
         this.discount = discount;
         this.discountEnd = discountEnd;
         this.extraParams = extraParams;
+        this.promotionCode = promotionCode;
       }
 
       public static Builder builder() {
@@ -786,10 +793,12 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String promotionCode;
+
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceAddLinesParams.Line.Discount build() {
           return new InvoiceAddLinesParams.Line.Discount(
-              this.coupon, this.discount, this.discountEnd, this.extraParams);
+              this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -835,6 +844,12 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** ID of the promotion code to create a new discount for. */
+        public Builder setPromotionCode(String promotionCode) {
+          this.promotionCode = promotionCode;
           return this;
         }
       }
