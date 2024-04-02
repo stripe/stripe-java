@@ -10142,9 +10142,9 @@ public class SessionCreateParams extends ApiRequestParams {
        * to the {@code id} of the Payment Intent.
        */
       @SerializedName("reference")
-      Object reference;
+      String reference;
 
-      private Swish(Map<String, Object> extraParams, Object reference) {
+      private Swish(Map<String, Object> extraParams, String reference) {
         this.extraParams = extraParams;
         this.reference = reference;
       }
@@ -10156,7 +10156,7 @@ public class SessionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private Object reference;
+        private String reference;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Swish build() {
@@ -10197,15 +10197,6 @@ public class SessionCreateParams extends ApiRequestParams {
          * Defaults to the {@code id} of the Payment Intent.
          */
         public Builder setReference(String reference) {
-          this.reference = reference;
-          return this;
-        }
-
-        /**
-         * The order reference that will be displayed to customers in the Swish application.
-         * Defaults to the {@code id} of the Payment Intent.
-         */
-        public Builder setReference(EmptyParam reference) {
           this.reference = reference;
           return this;
         }
