@@ -760,7 +760,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class AnnualRevenue extends StripeObject {
       /**
        * A non-negative integer representing the amount in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -787,7 +787,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class MonthlyEstimatedRevenue extends StripeObject {
       /**
        * A non-negative integer representing how much to charge in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
