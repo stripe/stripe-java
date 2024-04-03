@@ -138,6 +138,14 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /**
+   * A hash to configure risk controls on the account. Please see <a
+   * href="https://stripe.com/docs/connect/pausing-payments-or-payouts-on-connected-accounts">this
+   * page for more details</a>.
+   */
+  @SerializedName("risk_controls")
+  RiskControls riskControls;
+
   /** Options for customizing how the account functions within Stripe. */
   @SerializedName("settings")
   Settings settings;
@@ -173,6 +181,7 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Individual individual,
       Object metadata,
+      RiskControls riskControls,
       Settings settings,
       TosAcceptance tosAcceptance,
       Type type) {
@@ -191,6 +200,7 @@ public class AccountCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.individual = individual;
     this.metadata = metadata;
+    this.riskControls = riskControls;
     this.settings = settings;
     this.tosAcceptance = tosAcceptance;
     this.type = type;
@@ -231,6 +241,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private RiskControls riskControls;
+
     private Settings settings;
 
     private TosAcceptance tosAcceptance;
@@ -255,6 +267,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.extraParams,
           this.individual,
           this.metadata,
+          this.riskControls,
           this.settings,
           this.tosAcceptance,
           this.type);
@@ -489,6 +502,16 @@ public class AccountCreateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * A hash to configure risk controls on the account. Please see <a
+     * href="https://stripe.com/docs/connect/pausing-payments-or-payouts-on-connected-accounts">this
+     * page for more details</a>.
+     */
+    public Builder setRiskControls(AccountCreateParams.RiskControls riskControls) {
+      this.riskControls = riskControls;
       return this;
     }
 
@@ -9461,6 +9484,261 @@ public class AccountCreateParams extends ApiRequestParams {
 
       PoliticalExposure(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class RiskControls {
+    /**
+     * Represents the risk control status of charges. Please see <a
+     * href="https://stripe.com/docs/connect/pausing-payments-or-payouts-on-connected-accounts">this
+     * page for more details</a>.
+     */
+    @SerializedName("charges")
+    Charges charges;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Represents the risk control status of payouts. Please see <a
+     * href="https://stripe.com/docs/connect/pausing-payments-or-payouts-on-connected-accounts">this
+     * page for more details</a>.
+     */
+    @SerializedName("payouts")
+    Payouts payouts;
+
+    private RiskControls(Charges charges, Map<String, Object> extraParams, Payouts payouts) {
+      this.charges = charges;
+      this.extraParams = extraParams;
+      this.payouts = payouts;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Charges charges;
+
+      private Map<String, Object> extraParams;
+
+      private Payouts payouts;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountCreateParams.RiskControls build() {
+        return new AccountCreateParams.RiskControls(this.charges, this.extraParams, this.payouts);
+      }
+
+      /**
+       * Represents the risk control status of charges. Please see <a
+       * href="https://stripe.com/docs/connect/pausing-payments-or-payouts-on-connected-accounts">this
+       * page for more details</a>.
+       */
+      public Builder setCharges(AccountCreateParams.RiskControls.Charges charges) {
+        this.charges = charges;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountCreateParams.RiskControls#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountCreateParams.RiskControls#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Represents the risk control status of payouts. Please see <a
+       * href="https://stripe.com/docs/connect/pausing-payments-or-payouts-on-connected-accounts">this
+       * page for more details</a>.
+       */
+      public Builder setPayouts(AccountCreateParams.RiskControls.Payouts payouts) {
+        this.payouts = payouts;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Charges {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * To request to pause a risk control, pass {@code true}. To request to unpause a risk
+       * control, pass {@code false}. There can be a delay before the risk control is paused or
+       * unpaused.
+       */
+      @SerializedName("pause_requested")
+      Boolean pauseRequested;
+
+      private Charges(Map<String, Object> extraParams, Boolean pauseRequested) {
+        this.extraParams = extraParams;
+        this.pauseRequested = pauseRequested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean pauseRequested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.RiskControls.Charges build() {
+          return new AccountCreateParams.RiskControls.Charges(
+              this.extraParams, this.pauseRequested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.RiskControls.Charges#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.RiskControls.Charges#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * To request to pause a risk control, pass {@code true}. To request to unpause a risk
+         * control, pass {@code false}. There can be a delay before the risk control is paused or
+         * unpaused.
+         */
+        public Builder setPauseRequested(Boolean pauseRequested) {
+          this.pauseRequested = pauseRequested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Payouts {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * To request to pause a risk control, pass {@code true}. To request to unpause a risk
+       * control, pass {@code false}. There can be a delay before the risk control is paused or
+       * unpaused.
+       */
+      @SerializedName("pause_requested")
+      Boolean pauseRequested;
+
+      private Payouts(Map<String, Object> extraParams, Boolean pauseRequested) {
+        this.extraParams = extraParams;
+        this.pauseRequested = pauseRequested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean pauseRequested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.RiskControls.Payouts build() {
+          return new AccountCreateParams.RiskControls.Payouts(
+              this.extraParams, this.pauseRequested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.RiskControls.Payouts#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.RiskControls.Payouts#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * To request to pause a risk control, pass {@code true}. To request to unpause a risk
+         * control, pass {@code false}. There can be a delay before the risk control is paused or
+         * unpaused.
+         */
+        public Builder setPauseRequested(Boolean pauseRequested) {
+          this.pauseRequested = pauseRequested;
+          return this;
+        }
       }
     }
   }
