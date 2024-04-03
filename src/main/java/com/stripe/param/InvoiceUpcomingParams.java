@@ -48,7 +48,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-   * discount from the customer or subscription. This works for both coupons directly applied to an
+   * discount from the subscription or customer. This works for both coupons directly applied to an
    * invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any
    * discounts.
    */
@@ -408,7 +408,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This works for both coupons directly applied to
+     * discount from the subscription or customer. This works for both coupons directly applied to
      * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
      * any discounts.
      */
@@ -419,7 +419,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This works for both coupons directly applied to
+     * discount from the subscription or customer. This works for both coupons directly applied to
      * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
      * any discounts.
      */
