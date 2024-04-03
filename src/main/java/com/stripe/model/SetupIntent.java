@@ -970,6 +970,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("card")
     Card card;
 
+    @SerializedName("card_present")
+    CardPresent cardPresent;
+
     @SerializedName("link")
     Link link;
 
@@ -1146,6 +1149,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         List<String> supportedTypes;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardPresent extends StripeObject {}
 
     @Getter
     @Setter
