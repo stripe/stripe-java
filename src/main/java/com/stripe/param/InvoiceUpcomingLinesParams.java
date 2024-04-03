@@ -18,11 +18,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
-   * provided, the invoice returned will preview updating or creating a subscription with that
-   * coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming
-   * invoice from among the customer's subscriptions. The invoice can be previewed without a coupon
-   * by passing this value as an empty string.
+   * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
+   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
    */
   @SerializedName("coupon")
   String coupon;
@@ -51,10 +48,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
   /**
    * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-   * discount from the customer or subscription. This only works for coupons directly applied to the
-   * invoice. To apply a coupon to a subscription, you must use the {@code coupon} parameter
-   * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
-   * invoice for a subscription that hasn't been created, use {@code coupon} instead.
+   * discount from the customer or subscription. This works for both coupons directly applied to an
+   * invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any
+   * discounts.
    */
   @SerializedName("discounts")
   Object discounts;
@@ -385,11 +381,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     }
 
     /**
-     * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
-     * provided, the invoice returned will preview updating or creating a subscription with that
-     * coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming
-     * invoice from among the customer's subscriptions. The invoice can be previewed without a
-     * coupon by passing this value as an empty string.
+     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
+     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -455,10 +448,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This only works for coupons directly applied to
-     * the invoice. To apply a coupon to a subscription, you must use the {@code coupon} parameter
-     * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
-     * invoice for a subscription that hasn't been created, use {@code coupon} instead.
+     * discount from the customer or subscription. This works for both coupons directly applied to
+     * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
+     * any discounts.
      */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
@@ -467,10 +459,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This only works for coupons directly applied to
-     * the invoice. To apply a coupon to a subscription, you must use the {@code coupon} parameter
-     * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
-     * invoice for a subscription that hasn't been created, use {@code coupon} instead.
+     * discount from the customer or subscription. This works for both coupons directly applied to
+     * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
+     * any discounts.
      */
     public Builder setDiscounts(List<InvoiceUpcomingLinesParams.Discount> discounts) {
       this.discounts = discounts;
@@ -3177,6 +3168,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     @SerializedName("deleted")
     Boolean deleted;
 
+    /** The coupons to redeem into discounts for the subscription item. */
+    @SerializedName("discounts")
+    Object discounts;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -3235,6 +3230,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         Object billingThresholds,
         Boolean clearUsage,
         Boolean deleted,
+        Object discounts,
         Map<String, Object> extraParams,
         String id,
         Object metadata,
@@ -3246,6 +3242,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       this.billingThresholds = billingThresholds;
       this.clearUsage = clearUsage;
       this.deleted = deleted;
+      this.discounts = discounts;
       this.extraParams = extraParams;
       this.id = id;
       this.metadata = metadata;
@@ -3266,6 +3263,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       private Boolean clearUsage;
 
       private Boolean deleted;
+
+      private Object discounts;
 
       private Map<String, Object> extraParams;
 
@@ -3289,6 +3288,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             this.billingThresholds,
             this.clearUsage,
             this.deleted,
+            this.discounts,
             this.extraParams,
             this.id,
             this.metadata,
@@ -3332,6 +3332,49 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       /** A flag that, if set to {@code true}, will delete the specified item. */
       public Builder setDeleted(Boolean deleted) {
         this.deleted = deleted;
+        return this;
+      }
+
+      /**
+       * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingLinesParams.SubscriptionItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addDiscount(InvoiceUpcomingLinesParams.SubscriptionItem.Discount element) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<InvoiceUpcomingLinesParams.SubscriptionItem.Discount>();
+        }
+        ((List<InvoiceUpcomingLinesParams.SubscriptionItem.Discount>) this.discounts).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingLinesParams.SubscriptionItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllDiscount(
+          List<InvoiceUpcomingLinesParams.SubscriptionItem.Discount> elements) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<InvoiceUpcomingLinesParams.SubscriptionItem.Discount>();
+        }
+        ((List<InvoiceUpcomingLinesParams.SubscriptionItem.Discount>) this.discounts)
+            .addAll(elements);
+        return this;
+      }
+
+      /** The coupons to redeem into discounts for the subscription item. */
+      public Builder setDiscounts(EmptyParam discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /** The coupons to redeem into discounts for the subscription item. */
+      public Builder setDiscounts(
+          List<InvoiceUpcomingLinesParams.SubscriptionItem.Discount> discounts) {
+        this.discounts = discounts;
         return this;
       }
 
@@ -3580,6 +3623,104 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
          */
         public Builder setUsageGte(Long usageGte) {
           this.usageGte = usageGte;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Discount {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      String coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      String discount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** ID of the promotion code to create a new discount for. */
+      @SerializedName("promotion_code")
+      String promotionCode;
+
+      private Discount(
+          String coupon, String discount, Map<String, Object> extraParams, String promotionCode) {
+        this.coupon = coupon;
+        this.discount = discount;
+        this.extraParams = extraParams;
+        this.promotionCode = promotionCode;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String coupon;
+
+        private String discount;
+
+        private Map<String, Object> extraParams;
+
+        private String promotionCode;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceUpcomingLinesParams.SubscriptionItem.Discount build() {
+          return new InvoiceUpcomingLinesParams.SubscriptionItem.Discount(
+              this.coupon, this.discount, this.extraParams, this.promotionCode);
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(String coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(String discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingLinesParams.SubscriptionItem.Discount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingLinesParams.SubscriptionItem.Discount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** ID of the promotion code to create a new discount for. */
+        public Builder setPromotionCode(String promotionCode) {
+          this.promotionCode = promotionCode;
           return this;
         }
       }

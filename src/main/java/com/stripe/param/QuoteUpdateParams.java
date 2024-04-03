@@ -1083,6 +1083,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class LineItem {
+    /** The discounts applied to this line item. */
+    @SerializedName("discounts")
+    Object discounts;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1119,12 +1123,14 @@ public class QuoteUpdateParams extends ApiRequestParams {
     Object taxRates;
 
     private LineItem(
+        Object discounts,
         Map<String, Object> extraParams,
         Object id,
         Object price,
         PriceData priceData,
         Long quantity,
         Object taxRates) {
+      this.discounts = discounts;
       this.extraParams = extraParams;
       this.id = id;
       this.price = price;
@@ -1138,6 +1144,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object discounts;
+
       private Map<String, Object> extraParams;
 
       private Object id;
@@ -1153,7 +1161,53 @@ public class QuoteUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public QuoteUpdateParams.LineItem build() {
         return new QuoteUpdateParams.LineItem(
-            this.extraParams, this.id, this.price, this.priceData, this.quantity, this.taxRates);
+            this.discounts,
+            this.extraParams,
+            this.id,
+            this.price,
+            this.priceData,
+            this.quantity,
+            this.taxRates);
+      }
+
+      /**
+       * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteUpdateParams.LineItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addDiscount(QuoteUpdateParams.LineItem.Discount element) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<QuoteUpdateParams.LineItem.Discount>();
+        }
+        ((List<QuoteUpdateParams.LineItem.Discount>) this.discounts).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteUpdateParams.LineItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllDiscount(List<QuoteUpdateParams.LineItem.Discount> elements) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<QuoteUpdateParams.LineItem.Discount>();
+        }
+        ((List<QuoteUpdateParams.LineItem.Discount>) this.discounts).addAll(elements);
+        return this;
+      }
+
+      /** The discounts applied to this line item. */
+      public Builder setDiscounts(EmptyParam discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /** The discounts applied to this line item. */
+      public Builder setDiscounts(List<QuoteUpdateParams.LineItem.Discount> discounts) {
+        this.discounts = discounts;
+        return this;
       }
 
       /**
@@ -1265,6 +1319,102 @@ public class QuoteUpdateParams extends ApiRequestParams {
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
         return this;
+      }
+    }
+
+    @Getter
+    public static class Discount {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      Object coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      Object discount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Discount(Object coupon, Object discount, Map<String, Object> extraParams) {
+        this.coupon = coupon;
+        this.discount = discount;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object coupon;
+
+        private Object discount;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public QuoteUpdateParams.LineItem.Discount build() {
+          return new QuoteUpdateParams.LineItem.Discount(
+              this.coupon, this.discount, this.extraParams);
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(String coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(EmptyParam coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(String discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(EmptyParam discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteUpdateParams.LineItem.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteUpdateParams.LineItem.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 
