@@ -5194,6 +5194,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     Card card;
 
     /**
+     * If this is a {@code card_present} PaymentMethod, this sub-hash contains details about the
+     * card-present payment method options.
+     */
+    @SerializedName("card_present")
+    CardPresent cardPresent;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -5233,6 +5240,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     private PaymentMethodOptions(
         AcssDebit acssDebit,
         Card card,
+        CardPresent cardPresent,
         Map<String, Object> extraParams,
         Link link,
         Paypal paypal,
@@ -5240,6 +5248,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
       this.card = card;
+      this.cardPresent = cardPresent;
       this.extraParams = extraParams;
       this.link = link;
       this.paypal = paypal;
@@ -5256,6 +5265,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       private Card card;
 
+      private CardPresent cardPresent;
+
       private Map<String, Object> extraParams;
 
       private Link link;
@@ -5271,6 +5282,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         return new SetupIntentCreateParams.PaymentMethodOptions(
             this.acssDebit,
             this.card,
+            this.cardPresent,
             this.extraParams,
             this.link,
             this.paypal,
@@ -5291,6 +5303,16 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       /** Configuration for any card setup attempted on this SetupIntent. */
       public Builder setCard(SetupIntentCreateParams.PaymentMethodOptions.Card card) {
         this.card = card;
+        return this;
+      }
+
+      /**
+       * If this is a {@code card_present} PaymentMethod, this sub-hash contains details about the
+       * card-present payment method options.
+       */
+      public Builder setCardPresent(
+          SetupIntentCreateParams.PaymentMethodOptions.CardPresent cardPresent) {
+        this.cardPresent = cardPresent;
         return this;
       }
 
@@ -6858,6 +6880,63 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         RequestThreeDSecure(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class CardPresent {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private CardPresent(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentCreateParams.PaymentMethodOptions.CardPresent build() {
+          return new SetupIntentCreateParams.PaymentMethodOptions.CardPresent(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodOptions.CardPresent#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodOptions.CardPresent#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
