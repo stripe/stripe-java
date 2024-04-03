@@ -18,8 +18,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The identifier of the coupon to apply to this phase of the subscription schedule. This field
-   * has been deprecated and will be removed in a future API version. Use {@code discounts} instead.
+   * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
+   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
    */
   @SerializedName("coupon")
   String coupon;
@@ -437,9 +437,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the coupon to apply to this phase of the subscription schedule. This field
-     * has been deprecated and will be removed in a future API version. Use {@code discounts}
-     * instead.
+     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
+     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -8136,9 +8135,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       CollectionMethod collectionMethod;
 
       /**
-       * The identifier of the coupon to apply to this phase of the subscription schedule. This
-       * field has been deprecated and will be removed in a future API version. Use {@code
-       * discounts} instead.
+       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
+       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
        */
       @SerializedName("coupon")
       String coupon;
@@ -8544,9 +8542,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         }
 
         /**
-         * The identifier of the coupon to apply to this phase of the subscription schedule. This
-         * field has been deprecated and will be removed in a future API version. Use {@code
-         * discounts} instead.
+         * The ID of the coupon to apply to this phase of the subscription schedule. This field has
+         * been deprecated and will be removed in a future API version. Use {@code discounts}
+         * instead.
          */
         public Builder setCoupon(String coupon) {
           this.coupon = coupon;

@@ -1399,9 +1399,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     CollectionMethod collectionMethod;
 
     /**
-     * The identifier of the coupon to apply to this phase of the subscription schedule. This field
-     * has been deprecated and will be removed in a future API version. Use {@code discounts}
-     * instead.
+     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
+     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
      */
     @SerializedName("coupon")
     Object coupon;
@@ -1802,9 +1801,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The identifier of the coupon to apply to this phase of the subscription schedule. This
-       * field has been deprecated and will be removed in a future API version. Use {@code
-       * discounts} instead.
+       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
+       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
        */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
@@ -1812,9 +1810,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The identifier of the coupon to apply to this phase of the subscription schedule. This
-       * field has been deprecated and will be removed in a future API version. Use {@code
-       * discounts} instead.
+       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
+       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
        */
       public Builder setCoupon(EmptyParam coupon) {
         this.coupon = coupon;
