@@ -6568,7 +6568,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Controller {
-    /** The documentation for the application hash. */
+    /** A hash of configuration describing the Connect application that controls the account. */
     @SerializedName("application")
     Application application;
 
@@ -6609,7 +6609,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.application, this.dashboard, this.extraParams);
       }
 
-      /** The documentation for the application hash. */
+      /** A hash of configuration describing the Connect application that controls the account. */
       public Builder setApplication(AccountCreateParams.Controller.Application application) {
         this.application = application;
         return this;
@@ -6770,8 +6770,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /**
        * Whether this account should have access to the full Stripe Dashboard ({@code full}), to the
-       * Express Dashboard ({@code express}), or to no dashboard ({@code none}). Defaults to {@code
-       * full}.
+       * Express Dashboard ({@code express}), or to no Stripe-hosted dashboard ({@code none}).
+       * Defaults to {@code full}.
        */
       @SerializedName("type")
       Type type;
@@ -6825,8 +6825,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * Whether this account should have access to the full Stripe Dashboard ({@code full}), to
-         * the Express Dashboard ({@code express}), or to no dashboard ({@code none}). Defaults to
-         * {@code full}.
+         * the Express Dashboard ({@code express}), or to no Stripe-hosted dashboard ({@code none}).
+         * Defaults to {@code full}.
          */
         public Builder setType(AccountCreateParams.Controller.Dashboard.Type type) {
           this.type = type;
