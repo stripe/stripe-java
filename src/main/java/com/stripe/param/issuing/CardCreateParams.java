@@ -968,6 +968,15 @@ public class CardCreateParams extends ApiRequestParams {
     List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories;
 
     /**
+     * Array of strings containing representing countries from which authorizations will be allowed.
+     * Authorizations from merchants in all other countries will be declined. Country codes should
+     * be ISO 3166 alpha-2 country codes (e.g. {@code US}). Cannot be set with {@code
+     * blocked_merchant_countries}. Provide an empty value to unset this control.
+     */
+    @SerializedName("allowed_merchant_countries")
+    List<String> allowedMerchantCountries;
+
+    /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to decline. All other categories will be allowed. Cannot be set with {@code
@@ -975,6 +984,14 @@ public class CardCreateParams extends ApiRequestParams {
      */
     @SerializedName("blocked_categories")
     List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories;
+
+    /**
+     * Array of strings containing representing countries from which authorizations will be
+     * declined. Country codes should be ISO 3166 alpha-2 country codes (e.g. {@code US}). Cannot be
+     * set with {@code allowed_merchant_countries}. Provide an empty value to unset this control.
+     */
+    @SerializedName("blocked_merchant_countries")
+    List<String> blockedMerchantCountries;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -995,11 +1012,15 @@ public class CardCreateParams extends ApiRequestParams {
 
     private SpendingControls(
         List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories,
+        List<String> allowedMerchantCountries,
         List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories,
+        List<String> blockedMerchantCountries,
         Map<String, Object> extraParams,
         List<CardCreateParams.SpendingControls.SpendingLimit> spendingLimits) {
       this.allowedCategories = allowedCategories;
+      this.allowedMerchantCountries = allowedMerchantCountries;
       this.blockedCategories = blockedCategories;
+      this.blockedMerchantCountries = blockedMerchantCountries;
       this.extraParams = extraParams;
       this.spendingLimits = spendingLimits;
     }
@@ -1011,7 +1032,11 @@ public class CardCreateParams extends ApiRequestParams {
     public static class Builder {
       private List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories;
 
+      private List<String> allowedMerchantCountries;
+
       private List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories;
+
+      private List<String> blockedMerchantCountries;
 
       private Map<String, Object> extraParams;
 
@@ -1020,7 +1045,12 @@ public class CardCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public CardCreateParams.SpendingControls build() {
         return new CardCreateParams.SpendingControls(
-            this.allowedCategories, this.blockedCategories, this.extraParams, this.spendingLimits);
+            this.allowedCategories,
+            this.allowedMerchantCountries,
+            this.blockedCategories,
+            this.blockedMerchantCountries,
+            this.extraParams,
+            this.spendingLimits);
       }
 
       /**
@@ -1051,6 +1081,34 @@ public class CardCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Add an element to `allowedMerchantCountries` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#allowedMerchantCountries} for the field
+       * documentation.
+       */
+      public Builder addAllowedMerchantCountry(String element) {
+        if (this.allowedMerchantCountries == null) {
+          this.allowedMerchantCountries = new ArrayList<>();
+        }
+        this.allowedMerchantCountries.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `allowedMerchantCountries` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#allowedMerchantCountries} for the field
+       * documentation.
+       */
+      public Builder addAllAllowedMerchantCountry(List<String> elements) {
+        if (this.allowedMerchantCountries == null) {
+          this.allowedMerchantCountries = new ArrayList<>();
+        }
+        this.allowedMerchantCountries.addAll(elements);
+        return this;
+      }
+
+      /**
        * Add an element to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link CardCreateParams.SpendingControls#blockedCategories} for the field documentation.
@@ -1074,6 +1132,34 @@ public class CardCreateParams extends ApiRequestParams {
           this.blockedCategories = new ArrayList<>();
         }
         this.blockedCategories.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add an element to `blockedMerchantCountries` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#blockedMerchantCountries} for the field
+       * documentation.
+       */
+      public Builder addBlockedMerchantCountry(String element) {
+        if (this.blockedMerchantCountries == null) {
+          this.blockedMerchantCountries = new ArrayList<>();
+        }
+        this.blockedMerchantCountries.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `blockedMerchantCountries` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#blockedMerchantCountries} for the field
+       * documentation.
+       */
+      public Builder addAllBlockedMerchantCountry(List<String> elements) {
+        if (this.blockedMerchantCountries == null) {
+          this.blockedMerchantCountries = new ArrayList<>();
+        }
+        this.blockedMerchantCountries.addAll(elements);
         return this;
       }
 

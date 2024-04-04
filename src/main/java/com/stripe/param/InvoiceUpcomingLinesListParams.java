@@ -18,8 +18,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The identifier of the coupon to apply to this phase of the subscription schedule. This field
-   * has been deprecated and will be removed in a future API version. Use {@code discounts} instead.
+   * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
+   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
    */
   @SerializedName("coupon")
   String coupon;
@@ -48,7 +48,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
   /**
    * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-   * discount from the customer or subscription. This works for both coupons directly applied to an
+   * discount from the subscription or customer. This works for both coupons directly applied to an
    * invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting any
    * discounts.
    */
@@ -437,9 +437,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the coupon to apply to this phase of the subscription schedule. This field
-     * has been deprecated and will be removed in a future API version. Use {@code discounts}
-     * instead.
+     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
+     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -506,7 +505,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This works for both coupons directly applied to
+     * discount from the subscription or customer. This works for both coupons directly applied to
      * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
      * any discounts.
      */
@@ -517,7 +516,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
-     * discount from the customer or subscription. This works for both coupons directly applied to
+     * discount from the subscription or customer. This works for both coupons directly applied to
      * an invoice and coupons applied to a subscription. Pass an empty string to avoid inheriting
      * any discounts.
      */
@@ -8189,9 +8188,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       CollectionMethod collectionMethod;
 
       /**
-       * The identifier of the coupon to apply to this phase of the subscription schedule. This
-       * field has been deprecated and will be removed in a future API version. Use {@code
-       * discounts} instead.
+       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
+       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
        */
       @SerializedName("coupon")
       String coupon;
@@ -8599,9 +8597,9 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         /**
-         * The identifier of the coupon to apply to this phase of the subscription schedule. This
-         * field has been deprecated and will be removed in a future API version. Use {@code
-         * discounts} instead.
+         * The ID of the coupon to apply to this phase of the subscription schedule. This field has
+         * been deprecated and will be removed in a future API version. Use {@code discounts}
+         * instead.
          */
         public Builder setCoupon(String coupon) {
           this.coupon = coupon;

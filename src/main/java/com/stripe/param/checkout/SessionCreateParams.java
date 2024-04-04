@@ -3374,13 +3374,13 @@ public class SessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
          */
         @SerializedName("name")
         String name;
 
         /**
-         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * <strong>Required.</strong> The value of the custom field. This may be up to 140
          * characters.
          */
         @SerializedName("value")
@@ -3440,7 +3440,7 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * <strong>Required.</strong> The name of the custom field. This may be up to 30
+           * <strong>Required.</strong> The name of the custom field. This may be up to 40
            * characters.
            */
           public Builder setName(String name) {
@@ -3449,7 +3449,7 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * <strong>Required.</strong> The value of the custom field. This may be up to 30
+           * <strong>Required.</strong> The value of the custom field. This may be up to 140
            * characters.
            */
           public Builder setValue(String value) {
@@ -10205,9 +10205,9 @@ public class SessionCreateParams extends ApiRequestParams {
        * to the {@code id} of the Payment Intent.
        */
       @SerializedName("reference")
-      Object reference;
+      String reference;
 
-      private Swish(Map<String, Object> extraParams, Object reference) {
+      private Swish(Map<String, Object> extraParams, String reference) {
         this.extraParams = extraParams;
         this.reference = reference;
       }
@@ -10219,7 +10219,7 @@ public class SessionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private Object reference;
+        private String reference;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Swish build() {
@@ -10260,15 +10260,6 @@ public class SessionCreateParams extends ApiRequestParams {
          * Defaults to the {@code id} of the Payment Intent.
          */
         public Builder setReference(String reference) {
-          this.reference = reference;
-          return this;
-        }
-
-        /**
-         * The order reference that will be displayed to customers in the Swish application.
-         * Defaults to the {@code id} of the Payment Intent.
-         */
-        public Builder setReference(EmptyParam reference) {
           this.reference = reference;
           return this;
         }

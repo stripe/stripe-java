@@ -649,6 +649,10 @@ public class SetupAttempt extends ApiResource implements HasId {
       @Setter(lombok.AccessLevel.NONE)
       ExpandableField<PaymentMethod> generatedCard;
 
+      /** Details about payments collected offline. */
+      @SerializedName("offline")
+      Offline offline;
+
       /** Get ID of expandable {@code generatedCard} object. */
       public String getGeneratedCard() {
         return (this.generatedCard != null) ? this.generatedCard.getId() : null;
@@ -666,6 +670,15 @@ public class SetupAttempt extends ApiResource implements HasId {
       public void setGeneratedCardObject(PaymentMethod expandableObject) {
         this.generatedCard =
             new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Offline extends StripeObject {
+        /** Time at which the payment was collected while offline. */
+        @SerializedName("stored_at")
+        Long storedAt;
       }
     }
 

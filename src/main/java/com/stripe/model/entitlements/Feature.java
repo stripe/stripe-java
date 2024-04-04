@@ -4,6 +4,7 @@ package com.stripe.model.entitlements;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -12,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.entitlements.FeatureCreateParams;
 import com.stripe.param.entitlements.FeatureListParams;
+import com.stripe.param.entitlements.FeatureUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,7 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Feature extends ApiResource implements HasId {
+public class Feature extends ApiResource implements HasId, MetadataStore<Feature> {
   /**
    * Inactive features cannot be attached to new products and will not be returned from the features
    * list endpoint.
@@ -53,6 +55,7 @@ public class Feature extends ApiResource implements HasId {
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -138,5 +141,43 @@ public class Feature extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, FeatureCollection.class);
+  }
+
+  /** Update a feature’s metadata or permanently deactivate it. */
+  @Override
+  public Feature update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Update a feature’s metadata or permanently deactivate it. */
+  @Override
+  public Feature update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Feature.class);
+  }
+
+  /** Update a feature’s metadata or permanently deactivate it. */
+  public Feature update(FeatureUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Update a feature’s metadata or permanently deactivate it. */
+  public Feature update(FeatureUpdateParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Feature.class);
   }
 }

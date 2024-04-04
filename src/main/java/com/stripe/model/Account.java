@@ -158,6 +158,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("requirements")
   Requirements requirements;
 
+  @SerializedName("risk_controls")
+  RiskControls riskControls;
+
   /** Options for customizing how the account functions within Stripe. */
   @SerializedName("settings")
   Settings settings;
@@ -757,7 +760,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class AnnualRevenue extends StripeObject {
       /**
        * A non-negative integer representing the amount in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -784,7 +787,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class MonthlyEstimatedRevenue extends StripeObject {
       /**
        * A non-negative integer representing how much to charge in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -1869,6 +1872,33 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class RiskControls extends StripeObject {
+    @SerializedName("charges")
+    Charges charges;
+
+    @SerializedName("payouts")
+    Payouts payouts;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Charges extends StripeObject {
+      @SerializedName("pause_requested")
+      Boolean pauseRequested;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payouts extends StripeObject {
+      @SerializedName("pause_requested")
+      Boolean pauseRequested;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Settings extends StripeObject {
     @SerializedName("bacs_debit_payments")
     BacsDebitPayments bacsDebitPayments;
@@ -2350,6 +2380,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     trySetResponseGetter(futureRequirements, responseGetter);
     trySetResponseGetter(individual, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
+    trySetResponseGetter(riskControls, responseGetter);
     trySetResponseGetter(settings, responseGetter);
     trySetResponseGetter(tosAcceptance, responseGetter);
   }

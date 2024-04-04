@@ -110,8 +110,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
   String description;
 
   /**
-   * The coupons to redeem into discounts for the invoice. If not specified, inherits the discount
-   * from the invoice's customer. Pass an empty string to avoid inheriting any discounts.
+   * The coupons and promotion codes to redeem into discounts for the invoice. If not specified,
+   * inherits the discount from the invoice's customer. Pass an empty string to avoid inheriting any
+   * discounts.
    */
   @SerializedName("discounts")
   Object discounts;
@@ -746,8 +747,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons to redeem into discounts for the invoice. If not specified, inherits the discount
-     * from the invoice's customer. Pass an empty string to avoid inheriting any discounts.
+     * The coupons and promotion codes to redeem into discounts for the invoice. If not specified,
+     * inherits the discount from the invoice's customer. Pass an empty string to avoid inheriting
+     * any discounts.
      */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
@@ -755,8 +757,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons to redeem into discounts for the invoice. If not specified, inherits the discount
-     * from the invoice's customer. Pass an empty string to avoid inheriting any discounts.
+     * The coupons and promotion codes to redeem into discounts for the invoice. If not specified,
+     * inherits the discount from the invoice's customer. Pass an empty string to avoid inheriting
+     * any discounts.
      */
     public Builder setDiscounts(List<InvoiceCreateParams.Discount> discounts) {
       this.discounts = discounts;
@@ -1352,12 +1355,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The name of the custom field. This may be up to 30 characters. */
+    /** <strong>Required.</strong> The name of the custom field. This may be up to 40 characters. */
     @SerializedName("name")
     String name;
 
     /**
-     * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+     * <strong>Required.</strong> The value of the custom field. This may be up to 140 characters.
      */
     @SerializedName("value")
     String value;
@@ -1411,7 +1414,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+       * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
        */
       public Builder setName(String name) {
         this.name = name;
@@ -1419,7 +1422,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+       * <strong>Required.</strong> The value of the custom field. This may be up to 140 characters.
        */
       public Builder setValue(String value) {
         this.value = value;
@@ -1451,12 +1454,21 @@ public class InvoiceCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** ID of the promotion code to create a new discount for. */
+    @SerializedName("promotion_code")
+    String promotionCode;
+
     private Discount(
-        String coupon, String discount, DiscountEnd discountEnd, Map<String, Object> extraParams) {
+        String coupon,
+        String discount,
+        DiscountEnd discountEnd,
+        Map<String, Object> extraParams,
+        String promotionCode) {
       this.coupon = coupon;
       this.discount = discount;
       this.discountEnd = discountEnd;
       this.extraParams = extraParams;
+      this.promotionCode = promotionCode;
     }
 
     public static Builder builder() {
@@ -1472,10 +1484,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String promotionCode;
+
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceCreateParams.Discount build() {
         return new InvoiceCreateParams.Discount(
-            this.coupon, this.discount, this.discountEnd, this.extraParams);
+            this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1519,6 +1533,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** ID of the promotion code to create a new discount for. */
+      public Builder setPromotionCode(String promotionCode) {
+        this.promotionCode = promotionCode;
         return this;
       }
     }
