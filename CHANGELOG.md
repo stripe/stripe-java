@@ -1,5 +1,11 @@
 # Changelog
 
+## 24.24.0-beta.1 - 2024-04-04
+* [#1775](https://github.com/stripe/stripe-java/pull/1775) Update generated code for beta
+  * Add support for `update` method on resource `Entitlements.Feature`
+  * Add support for `risk_controls` on `AccountCreateParams`, `AccountUpdateParams`, and `Account`
+  * Add support for `promotion_code` on `InvoiceAddLinesParams.lines[].discounts[]`, `InvoiceUpdateLinesParams.lines[].discounts[]`, `QuoteCreateParams.line_items[].discounts[]`, `QuoteCreateParams.lines[].actions[].add_discount`, `QuoteCreateParams.phases[].line_items[].discounts[]`, `QuoteUpdateParams.line_items[].discounts[]`, `QuoteUpdateParams.lines[].actions[].add_discount`, and `QuoteUpdateParams.phases[].line_items[].discounts[]`
+
 ## 24.23.0-beta.1 - 2024-03-28
 * [#1771](https://github.com/stripe/stripe-java/pull/1771) Update generated code for beta
   * Add support for `financial_account_transactions`, `financial_account`, `issuing_card`, and `issuing_cards_list` on `AccountSessionCreateParams.components`
