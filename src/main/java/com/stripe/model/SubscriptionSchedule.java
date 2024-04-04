@@ -1010,6 +1010,13 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("description")
     String description;
 
+    /**
+     * The stackable discounts that will be applied to the subscription on this phase. Subscription
+     * item discounts are applied before subscription discounts.
+     */
+    @SerializedName("discounts")
+    List<SubscriptionSchedule.Phase.Discount> discounts;
+
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
     Long endDate;
@@ -1131,6 +1138,10 @@ public class SubscriptionSchedule extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AddInvoiceItem extends StripeObject {
+      /** The stackable discounts that will be applied to the item. */
+      @SerializedName("discounts")
+      List<SubscriptionSchedule.Phase.AddInvoiceItem.Discount> discounts;
+
       /** ID of the price used to generate the invoice item. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -1164,6 +1175,86 @@ public class SubscriptionSchedule extends ApiResource
 
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Discount extends StripeObject {
+        /** ID of the coupon to create a new discount for. */
+        @SerializedName("coupon")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<Coupon> coupon;
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        @SerializedName("discount")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<com.stripe.model.Discount> discount;
+
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<PromotionCode> promotionCode;
+
+        /** Get ID of expandable {@code coupon} object. */
+        public String getCoupon() {
+          return (this.coupon != null) ? this.coupon.getId() : null;
+        }
+
+        public void setCoupon(String id) {
+          this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+        }
+
+        /** Get expanded {@code coupon}. */
+        public Coupon getCouponObject() {
+          return (this.coupon != null) ? this.coupon.getExpanded() : null;
+        }
+
+        public void setCouponObject(Coupon expandableObject) {
+          this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+        }
+
+        /** Get ID of expandable {@code discount} object. */
+        public String getDiscount() {
+          return (this.discount != null) ? this.discount.getId() : null;
+        }
+
+        public void setDiscount(String id) {
+          this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+        }
+
+        /** Get expanded {@code discount}. */
+        public com.stripe.model.Discount getDiscountObject() {
+          return (this.discount != null) ? this.discount.getExpanded() : null;
+        }
+
+        public void setDiscountObject(com.stripe.model.Discount expandableObject) {
+          this.discount =
+              new ExpandableField<com.stripe.model.Discount>(
+                  expandableObject.getId(), expandableObject);
+        }
+
+        /** Get ID of expandable {@code promotionCode} object. */
+        public String getPromotionCode() {
+          return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+        }
+
+        public void setPromotionCode(String id) {
+          this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+        }
+
+        /** Get expanded {@code promotionCode}. */
+        public PromotionCode getPromotionCodeObject() {
+          return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+        }
+
+        public void setPromotionCodeObject(PromotionCode expandableObject) {
+          this.promotionCode =
+              new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+        }
       }
     }
 
@@ -1238,6 +1329,86 @@ public class SubscriptionSchedule extends ApiResource
        */
       @SerializedName("reset_billing_cycle_anchor")
       Boolean resetBillingCycleAnchor;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Discount extends StripeObject {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Coupon> coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<com.stripe.model.Discount> discount;
+
+      /** ID of the promotion code to create a new discount for. */
+      @SerializedName("promotion_code")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<PromotionCode> promotionCode;
+
+      /** Get ID of expandable {@code coupon} object. */
+      public String getCoupon() {
+        return (this.coupon != null) ? this.coupon.getId() : null;
+      }
+
+      public void setCoupon(String id) {
+        this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+      }
+
+      /** Get expanded {@code coupon}. */
+      public Coupon getCouponObject() {
+        return (this.coupon != null) ? this.coupon.getExpanded() : null;
+      }
+
+      public void setCouponObject(Coupon expandableObject) {
+        this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code discount} object. */
+      public String getDiscount() {
+        return (this.discount != null) ? this.discount.getId() : null;
+      }
+
+      public void setDiscount(String id) {
+        this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+      }
+
+      /** Get expanded {@code discount}. */
+      public com.stripe.model.Discount getDiscountObject() {
+        return (this.discount != null) ? this.discount.getExpanded() : null;
+      }
+
+      public void setDiscountObject(com.stripe.model.Discount expandableObject) {
+        this.discount =
+            new ExpandableField<com.stripe.model.Discount>(
+                expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code promotionCode} object. */
+      public String getPromotionCode() {
+        return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+      }
+
+      public void setPromotionCode(String id) {
+        this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+      }
+
+      /** Get expanded {@code promotionCode}. */
+      public PromotionCode getPromotionCodeObject() {
+        return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+      }
+
+      public void setPromotionCodeObject(PromotionCode expandableObject) {
+        this.promotionCode =
+            new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+      }
     }
 
     @Getter
@@ -1361,6 +1532,13 @@ public class SubscriptionSchedule extends ApiResource
       BillingThresholds billingThresholds;
 
       /**
+       * The discounts applied to the subscription item. Subscription item discounts are applied
+       * before subscription discounts. Use {@code expand[]=discounts} to expand each discount.
+       */
+      @SerializedName("discounts")
+      List<SubscriptionSchedule.Phase.Item.Discount> discounts;
+
+      /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
        * attach to an item. Metadata on this item will update the underlying subscription item's
        * {@code metadata} when the phase is entered.
@@ -1434,6 +1612,86 @@ public class SubscriptionSchedule extends ApiResource
         /** Usage threshold that triggers the subscription to create an invoice. */
         @SerializedName("usage_gte")
         Long usageGte;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Discount extends StripeObject {
+        /** ID of the coupon to create a new discount for. */
+        @SerializedName("coupon")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<Coupon> coupon;
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        @SerializedName("discount")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<com.stripe.model.Discount> discount;
+
+        /** ID of the promotion code to create a new discount for. */
+        @SerializedName("promotion_code")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<PromotionCode> promotionCode;
+
+        /** Get ID of expandable {@code coupon} object. */
+        public String getCoupon() {
+          return (this.coupon != null) ? this.coupon.getId() : null;
+        }
+
+        public void setCoupon(String id) {
+          this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+        }
+
+        /** Get expanded {@code coupon}. */
+        public Coupon getCouponObject() {
+          return (this.coupon != null) ? this.coupon.getExpanded() : null;
+        }
+
+        public void setCouponObject(Coupon expandableObject) {
+          this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+        }
+
+        /** Get ID of expandable {@code discount} object. */
+        public String getDiscount() {
+          return (this.discount != null) ? this.discount.getId() : null;
+        }
+
+        public void setDiscount(String id) {
+          this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+        }
+
+        /** Get expanded {@code discount}. */
+        public com.stripe.model.Discount getDiscountObject() {
+          return (this.discount != null) ? this.discount.getExpanded() : null;
+        }
+
+        public void setDiscountObject(com.stripe.model.Discount expandableObject) {
+          this.discount =
+              new ExpandableField<com.stripe.model.Discount>(
+                  expandableObject.getId(), expandableObject);
+        }
+
+        /** Get ID of expandable {@code promotionCode} object. */
+        public String getPromotionCode() {
+          return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+        }
+
+        public void setPromotionCode(String id) {
+          this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+        }
+
+        /** Get expanded {@code promotionCode}. */
+        public PromotionCode getPromotionCodeObject() {
+          return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+        }
+
+        public void setPromotionCodeObject(PromotionCode expandableObject) {
+          this.promotionCode =
+              new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+        }
       }
     }
 

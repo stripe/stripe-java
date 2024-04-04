@@ -56,6 +56,10 @@ public class VerificationReport extends ApiResource implements HasId {
   @SerializedName("document")
   Document document;
 
+  /** Result from a email check. */
+  @SerializedName("email")
+  Email email;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -83,6 +87,10 @@ public class VerificationReport extends ApiResource implements HasId {
   @SerializedName("options")
   Options options;
 
+  /** Result from a phone check. */
+  @SerializedName("phone")
+  Phone phone;
+
   /** Result from a selfie check. */
   @SerializedName("selfie")
   Selfie selfie;
@@ -90,10 +98,14 @@ public class VerificationReport extends ApiResource implements HasId {
   /**
    * Type of report.
    *
-   * <p>One of {@code document}, or {@code id_number}.
+   * <p>One of {@code document}, {@code id_number}, or {@code verification_flow}.
    */
   @SerializedName("type")
   String type;
+
+  /** The configuration token of a Verification Flow from the dashboard. */
+  @SerializedName("verification_flow")
+  String verificationFlow;
 
   /** ID of the VerificationSession that created this report. */
   @SerializedName("verification_session")
@@ -317,6 +329,48 @@ public class VerificationReport extends ApiResource implements HasId {
     }
   }
 
+  /** Result from a email check. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Email extends StripeObject {
+    /** Email to be verified. */
+    @SerializedName("email")
+    String email;
+
+    /** Details on the verification error. Present when status is {@code unverified}. */
+    @SerializedName("error")
+    Errors error;
+
+    /**
+     * Status of this {@code email} check.
+     *
+     * <p>One of {@code unverified}, or {@code verified}.
+     */
+    @SerializedName("status")
+    String status;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * A short machine-readable string giving the reason for the verification failure.
+       *
+       * <p>One of {@code email_unverified_other}, or {@code email_verification_declined}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * A human-readable message giving the reason for the failure. These messages can be shown to
+       * your users.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+  }
+
   /** Result from an id_number check. */
   @Getter
   @Setter
@@ -453,6 +507,48 @@ public class VerificationReport extends ApiResource implements HasId {
     public static class IdNumber extends StripeObject {}
   }
 
+  /** Result from a phone check. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Phone extends StripeObject {
+    /** Details on the verification error. Present when status is {@code unverified}. */
+    @SerializedName("error")
+    Errors error;
+
+    /** Phone to be verified. */
+    @SerializedName("phone")
+    String phone;
+
+    /**
+     * Status of this {@code phone} check.
+     *
+     * <p>One of {@code unverified}, or {@code verified}.
+     */
+    @SerializedName("status")
+    String status;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * A short machine-readable string giving the reason for the verification failure.
+       *
+       * <p>One of {@code phone_unverified_other}, or {@code phone_verification_declined}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * A human-readable message giving the reason for the failure. These messages can be shown to
+       * your users.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+  }
+
   /** Result from a selfie check. */
   @Getter
   @Setter
@@ -510,8 +606,10 @@ public class VerificationReport extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(document, responseGetter);
+    trySetResponseGetter(email, responseGetter);
     trySetResponseGetter(idNumber, responseGetter);
     trySetResponseGetter(options, responseGetter);
+    trySetResponseGetter(phone, responseGetter);
     trySetResponseGetter(selfie, responseGetter);
   }
 }

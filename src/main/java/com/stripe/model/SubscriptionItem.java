@@ -18,6 +18,7 @@ import com.stripe.param.SubscriptionItemUpdateParams;
 import com.stripe.param.SubscriptionItemUsageRecordSummariesParams;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,6 +46,13 @@ public class SubscriptionItem extends ApiResource
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
+
+  /**
+   * The discounts applied to the subscription item. Subscription item discounts are applied before
+   * subscription discounts. Use {@code expand[]=discounts} to expand each discount.
+   */
+  @SerializedName("discounts")
+  List<ExpandableField<Discount>> discounts;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -127,6 +135,47 @@ public class SubscriptionItem extends ApiResource
    */
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
+
+  /** Get IDs of expandable {@code discounts} object list. */
+  public List<String> getDiscounts() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscounts(List<String> ids) {
+    if (ids == null) {
+      this.discounts = null;
+      return;
+    }
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.discounts =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Discount>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code discounts}. */
+  public List<Discount> getDiscountObjects() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscountObjects(List<Discount> objs) {
+    this.discounts =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
+  }
 
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public static SubscriptionItem create(Map<String, Object> params) throws StripeException {

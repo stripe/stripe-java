@@ -26,8 +26,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * The business type. Once you create an <a
-   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can only
    * be updated for Custom accounts.
    */
   @SerializedName("business_type")
@@ -44,8 +44,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Information about the company or business. This field is available for any {@code
-   * business_type}. Once you create an <a href="https://stripe.com/docs/api/account_links">Account
-   * Link</a> or <a href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this
+   * business_type}. Once you create an <a href="https://docs.stripe.com/api/account_links">Account
+   * Link</a> or <a href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this
    * property can only be updated for Custom accounts.
    */
   @SerializedName("company")
@@ -53,7 +53,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Three-letter ISO currency code representing the default currency for the account. This must be
-   * a currency that <a href="https://stripe.com/docs/payouts">Stripe supports in the account's
+   * a currency that <a href="https://docs.stripe.com/payouts">Stripe supports in the account's
    * country</a>.
    */
   @SerializedName("default_currency")
@@ -76,19 +76,19 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * A card or bank account to attach to the account for receiving <a
-   * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
+   * href="https://docs.stripe.com/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
    * to use it for top-ups). You can provide either a token, like the ones returned by <a
-   * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+   * href="https://docs.stripe.com/js">Stripe.js</a>, or a dictionary, as documented in the {@code
    * external_account} parameter for <a
-   * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation. <br>
+   * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> creation. <br>
    * <br>
    * By default, providing an external account sets it as the new default external account for its
    * currency, and deletes the old default if one exists. To add additional external accounts
    * without replacing the existing default for the currency, use the <a
-   * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs. After you create
-   * an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> or <a
+   * href="https://docs.stripe.com/api#account_create_card">card creation</a> APIs. After you create
+   * an <a href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can only
    * be updated for Custom accounts.
    */
   @SerializedName("external_account")
@@ -106,8 +106,8 @@ public class AccountUpdateParams extends ApiRequestParams {
   /**
    * Information about the person represented by the account. This field is null unless {@code
    * business_type} is set to {@code individual}. Once you create an <a
-   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can only
+   * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can only
    * be updated for Custom accounts.
    */
   @SerializedName("individual")
@@ -128,7 +128,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Details on the account's acceptance of the <a
-   * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
+   * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
    * Agreement</a> This property can only be updated for Custom accounts.
    */
   @SerializedName("tos_acceptance")
@@ -248,8 +248,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * The business type. Once you create an <a
-     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
      * only be updated for Custom accounts.
      */
     public Builder setBusinessType(AccountUpdateParams.BusinessType businessType) {
@@ -271,8 +271,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     /**
      * Information about the company or business. This field is available for any {@code
      * business_type}. Once you create an <a
-     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
      * only be updated for Custom accounts.
      */
     public Builder setCompany(AccountUpdateParams.Company company) {
@@ -282,7 +282,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Three-letter ISO currency code representing the default currency for the account. This must
-     * be a currency that <a href="https://stripe.com/docs/payouts">Stripe supports in the account's
+     * be a currency that <a href="https://docs.stripe.com/payouts">Stripe supports in the account's
      * country</a>.
      */
     public Builder setDefaultCurrency(String defaultCurrency) {
@@ -292,7 +292,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Three-letter ISO currency code representing the default currency for the account. This must
-     * be a currency that <a href="https://stripe.com/docs/payouts">Stripe supports in the account's
+     * be a currency that <a href="https://docs.stripe.com/payouts">Stripe supports in the account's
      * country</a>.
      */
     public Builder setDefaultCurrency(EmptyParam defaultCurrency) {
@@ -352,20 +352,20 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account for receiving <a
-     * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
+     * href="https://docs.stripe.com/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
      * to use it for top-ups). You can provide either a token, like the ones returned by <a
-     * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+     * href="https://docs.stripe.com/js">Stripe.js</a>, or a dictionary, as documented in the {@code
      * external_account} parameter for <a
-     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
+     * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> creation.
      * <br>
      * <br>
      * By default, providing an external account sets it as the new default external account for its
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
-     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs. After you
-     * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> or <a
+     * href="https://docs.stripe.com/api#account_create_card">card creation</a> APIs. After you
+     * create an <a href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
      * only be updated for Custom accounts.
      */
     public Builder setExternalAccount(String externalAccount) {
@@ -375,20 +375,20 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account for receiving <a
-     * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
+     * href="https://docs.stripe.com/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
      * to use it for top-ups). You can provide either a token, like the ones returned by <a
-     * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+     * href="https://docs.stripe.com/js">Stripe.js</a>, or a dictionary, as documented in the {@code
      * external_account} parameter for <a
-     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
+     * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> creation.
      * <br>
      * <br>
      * By default, providing an external account sets it as the new default external account for its
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
-     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
-     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs. After you
-     * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> or <a
+     * href="https://docs.stripe.com/api#account_create_card">card creation</a> APIs. After you
+     * create an <a href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
      * only be updated for Custom accounts.
      */
     public Builder setExternalAccount(EmptyParam externalAccount) {
@@ -425,8 +425,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     /**
      * Information about the person represented by the account. This field is null unless {@code
      * business_type} is set to {@code individual}. Once you create an <a
-     * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-     * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property can
+     * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
+     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
      * only be updated for Custom accounts.
      */
     public Builder setIndividual(AccountUpdateParams.Individual individual) {
@@ -492,7 +492,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Details on the account's acceptance of the <a
-     * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
+     * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
      * Agreement</a> This property can only be updated for Custom accounts.
      */
     public Builder setTosAcceptance(AccountUpdateParams.TosAcceptance tosAcceptance) {
@@ -524,7 +524,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+     * <a href="https://docs.stripe.com/connect/setting-mcc">The merchant category code for the
      * account</a>. MCCs are used to classify businesses based on the goods or services they
      * provide.
      */
@@ -685,7 +685,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+       * <a href="https://docs.stripe.com/connect/setting-mcc">The merchant category code for the
        * account</a>. MCCs are used to classify businesses based on the goods or services they
        * provide.
        */
@@ -695,7 +695,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+       * <a href="https://docs.stripe.com/connect/setting-mcc">The merchant category code for the
        * account</a>. MCCs are used to classify businesses based on the goods or services they
        * provide.
        */
@@ -804,7 +804,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class AnnualRevenue {
       /**
        * <strong>Required.</strong> A non-negative integer representing the amount in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -862,7 +862,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> A non-negative integer representing the amount in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          */
         public Builder setAmount(Long amount) {
           this.amount = amount;
@@ -941,7 +941,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class MonthlyEstimatedRevenue {
       /**
        * <strong>Required.</strong> A non-negative integer representing how much to charge in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -989,7 +989,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> A non-negative integer representing how much to charge in the
-         * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          */
         public Builder setAmount(Long amount) {
           this.amount = amount;
@@ -5094,7 +5094,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Whether the company's directors have been provided. Set this Boolean to {@code true} after
-     * creating all the company's directors with <a href="https://stripe.com/docs/api/persons">the
+     * creating all the company's directors with <a href="https://docs.stripe.com/api/persons">the
      * Persons API</a> for accounts with a {@code relationship.director} requirement. This value is
      * not automatically set to {@code true} after creating directors, so it needs to be updated to
      * indicate all directors have been provided.
@@ -5104,7 +5104,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Whether the company's executives have been provided. Set this Boolean to {@code true} after
-     * creating all the company's executives with <a href="https://stripe.com/docs/api/persons">the
+     * creating all the company's executives with <a href="https://docs.stripe.com/api/persons">the
      * Persons API</a> for accounts with a {@code relationship.executive} requirement.
      */
     @SerializedName("executives_provided")
@@ -5144,7 +5144,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Whether the company's owners have been provided. Set this Boolean to {@code true} after
-     * creating all the company's owners with <a href="https://stripe.com/docs/api/persons">the
+     * creating all the company's owners with <a href="https://docs.stripe.com/api/persons">the
      * Persons API</a> for accounts with a {@code relationship.owner} requirement.
      */
     @SerializedName("owners_provided")
@@ -5172,7 +5172,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * The category identifying the legal structure of the company or legal entity. See <a
-     * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+     * href="https://docs.stripe.com/connect/identity-verification#business-structure">Business
      * structure</a> for more details. Pass an empty string to unset this value.
      */
     @SerializedName("structure")
@@ -5333,7 +5333,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /**
        * Whether the company's directors have been provided. Set this Boolean to {@code true} after
-       * creating all the company's directors with <a href="https://stripe.com/docs/api/persons">the
+       * creating all the company's directors with <a href="https://docs.stripe.com/api/persons">the
        * Persons API</a> for accounts with a {@code relationship.director} requirement. This value
        * is not automatically set to {@code true} after creating directors, so it needs to be
        * updated to indicate all directors have been provided.
@@ -5346,7 +5346,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       /**
        * Whether the company's executives have been provided. Set this Boolean to {@code true} after
        * creating all the company's executives with <a
-       * href="https://stripe.com/docs/api/persons">the Persons API</a> for accounts with a {@code
+       * href="https://docs.stripe.com/api/persons">the Persons API</a> for accounts with a {@code
        * relationship.executive} requirement.
        */
       public Builder setExecutivesProvided(Boolean executivesProvided) {
@@ -5448,7 +5448,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /**
        * Whether the company's owners have been provided. Set this Boolean to {@code true} after
-       * creating all the company's owners with <a href="https://stripe.com/docs/api/persons">the
+       * creating all the company's owners with <a href="https://docs.stripe.com/api/persons">the
        * Persons API</a> for accounts with a {@code relationship.owner} requirement.
        */
       public Builder setOwnersProvided(Boolean ownersProvided) {
@@ -5502,7 +5502,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
-       * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+       * href="https://docs.stripe.com/connect/identity-verification#business-structure">Business
        * structure</a> for more details. Pass an empty string to unset this value.
        */
       public Builder setStructure(AccountUpdateParams.Company.Structure structure) {
@@ -5512,7 +5512,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
-       * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+       * href="https://docs.stripe.com/connect/identity-verification#business-structure">Business
        * structure</a> for more details. Pass an empty string to unset this value.
        */
       public Builder setStructure(EmptyParam structure) {
@@ -7530,7 +7530,7 @@ public class AccountUpdateParams extends ApiRequestParams {
      * The government-issued ID number of the individual, as appropriate for the representative's
      * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number in
      * Canada). Instead of the number itself, you can also provide a <a
-     * href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token created with
+     * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token created with
      * Stripe.js</a>.
      */
     @SerializedName("id_number")
@@ -7540,7 +7540,7 @@ public class AccountUpdateParams extends ApiRequestParams {
      * The government-issued secondary ID number of the individual, as appropriate for the
      * representative's country, will be used for enhanced verification checks. In Thailand, this
      * would be the laser code found on the back of an ID card. Instead of the number itself, you
-     * can also provide a <a href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII
+     * can also provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII
      * token created with Stripe.js</a>.
      */
     @SerializedName("id_number_secondary")
@@ -7898,7 +7898,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The government-issued ID number of the individual, as appropriate for the representative's
        * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
        * in Canada). Instead of the number itself, you can also provide a <a
-       * href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token created with
+       * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token created with
        * Stripe.js</a>.
        */
       public Builder setIdNumber(String idNumber) {
@@ -7910,7 +7910,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The government-issued ID number of the individual, as appropriate for the representative's
        * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
        * in Canada). Instead of the number itself, you can also provide a <a
-       * href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token created with
+       * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token created with
        * Stripe.js</a>.
        */
       public Builder setIdNumber(EmptyParam idNumber) {
@@ -7922,7 +7922,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The government-issued secondary ID number of the individual, as appropriate for the
        * representative's country, will be used for enhanced verification checks. In Thailand, this
        * would be the laser code found on the back of an ID card. Instead of the number itself, you
-       * can also provide a <a href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII
+       * can also provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII
        * token created with Stripe.js</a>.
        */
       public Builder setIdNumberSecondary(String idNumberSecondary) {
@@ -7934,7 +7934,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The government-issued secondary ID number of the individual, as appropriate for the
        * representative's country, will be used for enhanced verification checks. In Thailand, this
        * would be the laser code found on the back of an ID card. Instead of the number itself, you
-       * can also provide a <a href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII
+       * can also provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII
        * token created with Stripe.js</a>.
        */
       public Builder setIdNumberSecondary(EmptyParam idNumberSecondary) {
@@ -9993,7 +9993,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /**
        * Details on the account's acceptance of the <a
-       * href="https://stripe.com/docs/issuing/connect/tos_acceptance">Stripe Issuing Terms and
+       * href="https://docs.stripe.com/issuing/connect/tos_acceptance">Stripe Issuing Terms and
        * Disclosures</a>.
        */
       @SerializedName("tos_acceptance")
@@ -10048,7 +10048,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /**
          * Details on the account's acceptance of the <a
-         * href="https://stripe.com/docs/issuing/connect/tos_acceptance">Stripe Issuing Terms and
+         * href="https://docs.stripe.com/issuing/connect/tos_acceptance">Stripe Issuing Terms and
          * Disclosures</a>.
          */
         public Builder setTosAcceptance(
@@ -10755,7 +10755,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       /**
        * A Boolean indicating whether Stripe should try to reclaim negative balances from an
        * attached bank account. For details, see <a
-       * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
+       * href="https://docs.stripe.com/connect/account-balances">Understanding Connect Account
        * Balances</a>.
        */
       @SerializedName("debit_negative_balances")
@@ -10773,7 +10773,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       /**
        * Details on when funds from charges are available, and when they are paid out to an external
        * account. For details, see our <a
-       * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
+       * href="https://docs.stripe.com/connect/bank-transfers#payout-information">Setting Bank and
        * Debit Card Payouts</a> documentation.
        */
       @SerializedName("schedule")
@@ -10822,7 +10822,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         /**
          * A Boolean indicating whether Stripe should try to reclaim negative balances from an
          * attached bank account. For details, see <a
-         * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
+         * href="https://docs.stripe.com/connect/account-balances">Understanding Connect Account
          * Balances</a>.
          */
         public Builder setDebitNegativeBalances(Boolean debitNegativeBalances) {
@@ -10861,7 +10861,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         /**
          * Details on when funds from charges are available, and when they are paid out to an
          * external account. For details, see our <a
-         * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
+         * href="https://docs.stripe.com/connect/bank-transfers#payout-information">Setting Bank and
          * Debit Card Payouts</a> documentation.
          */
         public Builder setSchedule(AccountUpdateParams.Settings.Payouts.Schedule schedule) {
@@ -10895,7 +10895,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * minimum}, representing the lowest available value for the account country. Default is
          * {@code minimum}. The {@code delay_days} parameter remains at the last configured value if
          * {@code interval} is {@code manual}. <a
-         * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
+         * href="https://docs.stripe.com/connect/manage-payout-schedule">Learn more about
          * controlling payout delay days</a>.
          */
         @SerializedName("delay_days")
@@ -10978,7 +10978,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * {@code minimum}, representing the lowest available value for the account country.
            * Default is {@code minimum}. The {@code delay_days} parameter remains at the last
            * configured value if {@code interval} is {@code manual}. <a
-           * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
+           * href="https://docs.stripe.com/connect/manage-payout-schedule">Learn more about
            * controlling payout delay days</a>.
            */
           public Builder setDelayDays(
@@ -10992,7 +10992,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * {@code minimum}, representing the lowest available value for the account country.
            * Default is {@code minimum}. The {@code delay_days} parameter remains at the last
            * configured value if {@code interval} is {@code manual}. <a
-           * href="https://stripe.com/docs/connect/manage-payout-schedule">Learn more about
+           * href="https://docs.stripe.com/connect/manage-payout-schedule">Learn more about
            * controlling payout delay days</a>.
            */
           public Builder setDelayDays(Long delayDays) {

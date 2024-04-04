@@ -104,6 +104,13 @@ public class Discount extends StripeObject implements HasId {
   @SerializedName("subscription")
   String subscription;
 
+  /**
+   * The subscription item that this coupon is applied to, if it is applied to a particular
+   * subscription item.
+   */
+  @SerializedName("subscription_item")
+  String subscriptionItem;
+
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;

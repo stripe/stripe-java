@@ -21,6 +21,7 @@ import com.stripe.param.SubscriptionUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -189,10 +190,19 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Describes the current discount applied to this subscription, if there is one. When billing, a
-   * discount applied to a subscription overrides a discount applied on a customer-wide basis.
+   * discount applied to a subscription overrides a discount applied on a customer-wide basis. This
+   * field has been deprecated and will be removed in a future API version. Use {@code discounts}
+   * instead.
    */
   @SerializedName("discount")
   Discount discount;
+
+  /**
+   * The discounts applied to the subscription. Subscription item discounts are applied before
+   * subscription discounts. Use {@code expand[]=discounts} to expand each discount.
+   */
+  @SerializedName("discounts")
+  List<ExpandableField<Discount>> discounts;
 
   /** If the subscription has ended, the date the subscription ended. */
   @SerializedName("ended_at")
@@ -536,6 +546,47 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   public void setTestClockObject(TestClock expandableObject) {
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get IDs of expandable {@code discounts} object list. */
+  public List<String> getDiscounts() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscounts(List<String> ids) {
+    if (ids == null) {
+      this.discounts = null;
+      return;
+    }
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.discounts =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Discount>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code discounts}. */
+  public List<Discount> getDiscountObjects() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscountObjects(List<Discount> objs) {
+    this.discounts =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
   }
 
   /**

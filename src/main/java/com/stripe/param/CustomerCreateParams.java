@@ -99,9 +99,8 @@ public class CustomerCreateParams extends ApiRequestParams {
   List<String> preferredLocales;
 
   /**
-   * The API ID of a promotion code to apply to the customer. The customer will have a discount
-   * applied on all recurring payments. Charges you create through the API will not have the
-   * discount.
+   * The ID of a promotion code to apply to the customer. The customer will have a discount applied
+   * on all recurring payments. Charges you create through the API will not have the discount.
    */
   @SerializedName("promotion_code")
   String promotionCode;
@@ -484,7 +483,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The API ID of a promotion code to apply to the customer. The customer will have a discount
+     * The ID of a promotion code to apply to the customer. The customer will have a discount
      * applied on all recurring payments. Charges you create through the API will not have the
      * discount.
      */
@@ -1080,13 +1079,13 @@ public class CustomerCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+       * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
        */
       @SerializedName("name")
       String name;
 
       /**
-       * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+       * <strong>Required.</strong> The value of the custom field. This may be up to 140 characters.
        */
       @SerializedName("value")
       String value;
@@ -1143,7 +1142,7 @@ public class CustomerCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
          */
         public Builder setName(String name) {
           this.name = name;
@@ -1151,7 +1150,7 @@ public class CustomerCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * <strong>Required.</strong> The value of the custom field. This may be up to 140
          * characters.
          */
         public Builder setValue(String value) {
