@@ -15,6 +15,13 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
   @SerializedName("cancel")
   Cancel cancel;
 
+  /**
+   * <strong>Required.</strong> The name of the meter event. Corresponds with the {@code event_name}
+   * field on a meter.
+   */
+  @SerializedName("event_name")
+  String eventName;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -33,8 +40,13 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
   Type type;
 
   private MeterEventAdjustmentCreateParams(
-      Cancel cancel, List<String> expand, Map<String, Object> extraParams, Type type) {
+      Cancel cancel,
+      String eventName,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Type type) {
     this.cancel = cancel;
+    this.eventName = eventName;
     this.expand = expand;
     this.extraParams = extraParams;
     this.type = type;
@@ -47,6 +59,8 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
   public static class Builder {
     private Cancel cancel;
 
+    private String eventName;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -56,12 +70,21 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public MeterEventAdjustmentCreateParams build() {
       return new MeterEventAdjustmentCreateParams(
-          this.cancel, this.expand, this.extraParams, this.type);
+          this.cancel, this.eventName, this.expand, this.extraParams, this.type);
     }
 
     /** <strong>Required.</strong> Specifies which event to cancel. */
     public Builder setCancel(MeterEventAdjustmentCreateParams.Cancel cancel) {
       this.cancel = cancel;
+      return this;
+    }
+
+    /**
+     * <strong>Required.</strong> The name of the meter event. Corresponds with the {@code
+     * event_name} field on a meter.
+     */
+    public Builder setEventName(String eventName) {
+      this.eventName = eventName;
       return this;
     }
 

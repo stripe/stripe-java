@@ -2135,6 +2135,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("expires_at")
       Long expiresAt;
 
+      /**
+       * The URL for the hosted Multibanco voucher page, which allows customers to view a Multibanco
+       * voucher.
+       */
+      @SerializedName("hosted_voucher_url")
+      String hostedVoucherUrl;
+
       /** Reference number associated with this Multibanco payment. */
       @SerializedName("reference")
       String reference;
