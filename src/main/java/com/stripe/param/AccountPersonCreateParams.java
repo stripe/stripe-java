@@ -80,7 +80,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
   /**
    * The person's ID number, as appropriate for their country. For example, a social security number
    * in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also
-   * provide a <a href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token provided
+   * provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided
    * by Stripe.js</a>.
    */
   @SerializedName("id_number")
@@ -90,7 +90,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
    * The person's secondary ID number, as appropriate for their country, will be used for enhanced
    * verification checks. In Thailand, this would be the laser code found on the back of an ID card.
    * Instead of the number itself, you can also provide a <a
-   * href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token provided by
+   * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
    * Stripe.js</a>.
    */
   @SerializedName("id_number_secondary")
@@ -130,7 +130,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
   String nationality;
 
   /**
-   * A <a href="https://stripe.com/docs/connect/account-tokens">person token</a>, used to securely
+   * A <a href="https://docs.stripe.com/connect/account-tokens">person token</a>, used to securely
    * provide details to the person.
    */
   @SerializedName("person_token")
@@ -493,7 +493,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
     /**
      * The person's ID number, as appropriate for their country. For example, a social security
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
-     * can also provide a <a href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII
+     * can also provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII
      * token provided by Stripe.js</a>.
      */
     public Builder setIdNumber(String idNumber) {
@@ -505,7 +505,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
      * The person's secondary ID number, as appropriate for their country, will be used for enhanced
      * verification checks. In Thailand, this would be the laser code found on the back of an ID
      * card. Instead of the number itself, you can also provide a <a
-     * href="https://stripe.com/docs/js/tokens/create_token?type=pii">PII token provided by
+     * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
      * Stripe.js</a>.
      */
     public Builder setIdNumberSecondary(String idNumberSecondary) {
@@ -598,7 +598,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A <a href="https://stripe.com/docs/connect/account-tokens">person token</a>, used to securely
+     * A <a href="https://docs.stripe.com/connect/account-tokens">person token</a>, used to securely
      * provide details to the person.
      */
     public Builder setPersonToken(String personToken) {

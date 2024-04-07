@@ -119,6 +119,10 @@ public class VerificationSession extends ApiResource
   @SerializedName("options")
   Options options;
 
+  /** Details provided about the user being verified. These details may be shown to the user. */
+  @SerializedName("provided_details")
+  ProvidedDetails providedDetails;
+
   /**
    * Redaction status of this VerificationSession. If the VerificationSession is not redacted, this
    * field will be null.
@@ -140,7 +144,7 @@ public class VerificationSession extends ApiResource
    * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
    * check</a> to be performed.
    *
-   * <p>One of {@code document}, or {@code id_number}.
+   * <p>One of {@code document}, {@code id_number}, or {@code verification_flow}.
    */
   @SerializedName("type")
   String type;
@@ -154,6 +158,10 @@ public class VerificationSession extends ApiResource
    */
   @SerializedName("url")
   String url;
+
+  /** The configuration token of a Verification Flow from the dashboard. */
+  @SerializedName("verification_flow")
+  String verificationFlow;
 
   /** The user’s verified data. */
   @SerializedName("verified_outputs")
@@ -686,10 +694,12 @@ public class VerificationSession extends ApiResource
      *
      * <p>One of {@code abandoned}, {@code consent_declined}, {@code country_not_supported}, {@code
      * device_not_supported}, {@code document_expired}, {@code document_type_not_supported}, {@code
-     * document_unverified_other}, {@code id_number_insufficient_document_data}, {@code
-     * id_number_mismatch}, {@code id_number_unverified_other}, {@code
-     * selfie_document_missing_photo}, {@code selfie_face_mismatch}, {@code selfie_manipulated},
-     * {@code selfie_unverified_other}, or {@code under_supported_age}.
+     * document_unverified_other}, {@code email_unverified_other}, {@code
+     * email_verification_declined}, {@code id_number_insufficient_document_data}, {@code
+     * id_number_mismatch}, {@code id_number_unverified_other}, {@code phone_unverified_other},
+     * {@code phone_verification_declined}, {@code selfie_document_missing_photo}, {@code
+     * selfie_face_mismatch}, {@code selfie_manipulated}, {@code selfie_unverified_other}, or {@code
+     * under_supported_age}.
      */
     @SerializedName("code")
     String code;
@@ -706,8 +716,14 @@ public class VerificationSession extends ApiResource
     @SerializedName("document")
     Document document;
 
+    @SerializedName("email")
+    Email email;
+
     @SerializedName("id_number")
     IdNumber idNumber;
+
+    @SerializedName("phone")
+    Phone phone;
 
     @Getter
     @Setter
@@ -749,7 +765,38 @@ public class VerificationSession extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Email extends StripeObject {
+      /** Request one time password verification of {@code provided_details.email}. */
+      @SerializedName("require_verification")
+      Boolean requireVerification;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class IdNumber extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Phone extends StripeObject {
+      /** Request one time password verification of {@code provided_details.phone}. */
+      @SerializedName("require_verification")
+      Boolean requireVerification;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProvidedDetails extends StripeObject {
+    /** Email of user being verified. */
+    @SerializedName("email")
+    String email;
+
+    /** Phone number of user being verified. */
+    @SerializedName("phone")
+    String phone;
   }
 
   @Getter
@@ -777,6 +824,10 @@ public class VerificationSession extends ApiResource
     @SerializedName("dob")
     Dob dob;
 
+    /** The user's verified email address. */
+    @SerializedName("email")
+    String email;
+
     /** The user's verified first name. */
     @SerializedName("first_name")
     String firstName;
@@ -796,6 +847,10 @@ public class VerificationSession extends ApiResource
     /** The user's verified last name. */
     @SerializedName("last_name")
     String lastName;
+
+    /** The user's verified phone number. */
+    @SerializedName("phone")
+    String phone;
 
     /** Point in Time. */
     @Getter
@@ -822,6 +877,7 @@ public class VerificationSession extends ApiResource
     trySetResponseGetter(lastError, responseGetter);
     trySetResponseGetter(lastVerificationReport, responseGetter);
     trySetResponseGetter(options, responseGetter);
+    trySetResponseGetter(providedDetails, responseGetter);
     trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(verifiedOutputs, responseGetter);
   }

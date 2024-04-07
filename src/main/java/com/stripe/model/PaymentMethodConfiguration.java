@@ -195,6 +195,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @SerializedName("wechat_pay")
   WechatPay wechatPay;
 
+  @SerializedName("zip")
+  Zip zip;
+
   /** Creates a payment method configuration. */
   public static PaymentMethodConfiguration create(Map<String, Object> params)
       throws StripeException {
@@ -1819,6 +1822,49 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Zip extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -1856,5 +1902,6 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
     trySetResponseGetter(wechatPay, responseGetter);
+    trySetResponseGetter(zip, responseGetter);
   }
 }

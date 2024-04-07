@@ -1152,7 +1152,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     @Getter
     public static class SubscriptionPause {
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -1185,7 +1185,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
               this.enabled, this.extraParams);
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;

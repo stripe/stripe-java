@@ -31,7 +31,10 @@ public class MeterEventCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A unique identifier for the event. If not provided, one will be generated. */
+  /**
+   * A unique identifier for the event. If not provided, one will be generated. We recommend using a
+   * globally unique identifier for this. We'll enforce uniqueness within a rolling 24 hour period.
+   */
   @SerializedName("identifier")
   String identifier;
 
@@ -150,7 +153,11 @@ public class MeterEventCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A unique identifier for the event. If not provided, one will be generated. */
+    /**
+     * A unique identifier for the event. If not provided, one will be generated. We recommend using
+     * a globally unique identifier for this. We'll enforce uniqueness within a rolling 24 hour
+     * period.
+     */
     public Builder setIdentifier(String identifier) {
       this.identifier = identifier;
       return this;

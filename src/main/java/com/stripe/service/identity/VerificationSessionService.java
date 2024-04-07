@@ -80,6 +80,36 @@ public final class VerificationSessionService extends ApiService {
    * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
    * your users’ identity documents</a>.
    */
+  public VerificationSession create(RequestOptions options) throws StripeException {
+    return create((VerificationSessionCreateParams) null, options);
+  }
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * {@code client_secret} or send your users to the session’s {@code url}.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
+  public VerificationSession create() throws StripeException {
+    return create((VerificationSessionCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * {@code client_secret} or send your users to the session’s {@code url}.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
   public VerificationSession create(VerificationSessionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/identity/verification_sessions";
