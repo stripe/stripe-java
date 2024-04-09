@@ -1455,6 +1455,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Controller extends StripeObject {
+    @SerializedName("fees")
+    Fees fees;
+
     /**
      * {@code true} if the Connect application retrieving the resource controls the account and can
      * therefore exercise <a
@@ -1464,12 +1467,70 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("is_controller")
     Boolean isController;
 
+    @SerializedName("losses")
+    Losses losses;
+
+    /**
+     * A value indicating responsibility for collecting requirements on this account. Only returned
+     * when the Connect application retrieving the resource controls the account.
+     *
+     * <p>One of {@code application}, or {@code stripe}.
+     */
+    @SerializedName("requirement_collection")
+    String requirementCollection;
+
+    @SerializedName("stripe_dashboard")
+    StripeDashboard stripeDashboard;
+
     /**
      * The controller type. Can be {@code application}, if a Connect application controls the
      * account, or {@code account}, if the account controls itself.
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Fees extends StripeObject {
+      /**
+       * A value indicating the responsible payer of a bundle of Stripe fees for pricing-control
+       * eligible products on this account.
+       *
+       * <p>One of {@code account}, {@code application}, {@code application_custom}, or {@code
+       * application_express}.
+       */
+      @SerializedName("payer")
+      String payer;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Losses extends StripeObject {
+      /**
+       * A value indicating who is liable when this account can't pay back negative balances from
+       * payments.
+       *
+       * <p>One of {@code application}, or {@code stripe}.
+       */
+      @SerializedName("payments")
+      String payments;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeDashboard extends StripeObject {
+      /**
+       * A value indicating the Stripe dashboard this account has access to independent of the
+       * Connect application.
+       *
+       * <p>One of {@code express}, {@code full}, or {@code none}.
+       */
+      @SerializedName("type")
+      String type;
+    }
   }
 
   @Getter
