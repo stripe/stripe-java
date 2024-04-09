@@ -767,6 +767,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("custom_text")
         CustomText customText;
 
+        /** Information about a email being collected using a reader. */
+        @SerializedName("email")
+        Email email;
+
+        /** Information about a number being collected using a reader. */
+        @SerializedName("numeric")
+        Numeric numeric;
+
+        /** Information about a phone number being collected using a reader. */
+        @SerializedName("phone")
+        Phone phone;
+
         /** Indicate that this input is required, disabling the skip button. */
         @SerializedName("required")
         Boolean required;
@@ -782,6 +794,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /** Indicate that this input was skipped by the user. */
         @SerializedName("skipped")
         Boolean skipped;
+
+        /** Information about text being collected using a reader. */
+        @SerializedName("text")
+        Text text;
+
+        /** List of toggles being collected. Values are present if collection is complete. */
+        @SerializedName("toggles")
+        List<Reader.Action.CollectInputs.Input.Toggle> toggles;
 
         /**
          * Type of input being collected.
@@ -812,6 +832,36 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           /** Customize the default title for this input. */
           @SerializedName("title")
           String title;
+        }
+
+        /** Information about a email being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Email extends StripeObject {
+          /** The collected email address. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about a number being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Numeric extends StripeObject {
+          /** The collected number. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about a phone number being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Phone extends StripeObject {
+          /** The collected phone number. */
+          @SerializedName("value")
+          String value;
         }
 
         /** Information about a selection being collected using a reader. */
@@ -852,6 +902,46 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @EqualsAndHashCode(callSuper = false)
         public static class Signature extends StripeObject {
           /** The File ID of a collected signature image. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about text being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Text extends StripeObject {
+          /** The collected text value. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about an input's toggle. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Toggle extends StripeObject {
+          /**
+           * The toggle's default value
+           *
+           * <p>One of {@code disabled}, or {@code enabled}.
+           */
+          @SerializedName("default_value")
+          String defaultValue;
+
+          /** The toggle's description text. */
+          @SerializedName("description")
+          String description;
+
+          /** The toggle's title text. */
+          @SerializedName("title")
+          String title;
+
+          /**
+           * The toggle's collected value
+           *
+           * <p>One of {@code disabled}, or {@code enabled}.
+           */
           @SerializedName("value")
           String value;
         }
