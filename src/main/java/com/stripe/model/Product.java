@@ -69,13 +69,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("description")
   String description;
 
-  /**
-   * A list of up to 15 marketing features for this product. These are displayed in <a
-   * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
-   */
-  @SerializedName("features")
-  List<Product.Feature> features;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -91,6 +84,13 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /**
+   * A list of up to 15 marketing features for this product. These are displayed in <a
+   * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+   */
+  @SerializedName("marketing_features")
+  List<Product.MarketingFeature> marketingFeatures;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -491,7 +491,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Feature extends StripeObject {
+  public static class MarketingFeature extends StripeObject {
     /** The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
