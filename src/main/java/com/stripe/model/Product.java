@@ -492,34 +492,9 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Feature extends StripeObject {
-    @SerializedName("feature")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<com.stripe.model.entitlements.Feature> feature;
-
     /** The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
-
-    /** Get ID of expandable {@code feature} object. */
-    public String getFeature() {
-      return (this.feature != null) ? this.feature.getId() : null;
-    }
-
-    public void setFeature(String id) {
-      this.feature = ApiResource.setExpandableFieldId(id, this.feature);
-    }
-
-    /** Get expanded {@code feature}. */
-    public com.stripe.model.entitlements.Feature getFeatureObject() {
-      return (this.feature != null) ? this.feature.getExpanded() : null;
-    }
-
-    public void setFeatureObject(com.stripe.model.entitlements.Feature expandableObject) {
-      this.feature =
-          new ExpandableField<com.stripe.model.entitlements.Feature>(
-              expandableObject.getId(), expandableObject);
-    }
   }
 
   @Getter

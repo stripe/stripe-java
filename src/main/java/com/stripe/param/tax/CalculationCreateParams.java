@@ -973,10 +973,14 @@ public class CalculationCreateParams extends ApiRequestParams {
   @Getter
   public static class LineItem {
     /**
-     * <strong>Required.</strong> A positive integer in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>
-     * representing the line item's total price. If {@code tax_behavior=inclusive}, then this amount
-     * includes taxes. Otherwise, taxes are calculated on top of this amount.
+     * <strong>Required.</strong> A positive integer representing the line item's total price in the
+     * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g.,
+     * 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount
+     * is $0.0 US or <a
+     * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+     * charge currency</a>. The amount value supports up to twelve digits (e.g., a value of
+     * 999999999999 for a USD charge of $9,999,999,999.99). If {@code tax_behavior=inclusive}, then
+     * this amount includes taxes. Otherwise, taxes are calculated on top of this amount.
      */
     @SerializedName("amount")
     Long amount;
@@ -1074,10 +1078,14 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> A positive integer in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>
-       * representing the line item's total price. If {@code tax_behavior=inclusive}, then this
-       * amount includes taxes. Otherwise, taxes are calculated on top of this amount.
+       * <strong>Required.</strong> A positive integer representing the line item's total price in
+       * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>
+       * (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The
+       * minimum amount is $0.0 US or <a
+       * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+       * charge currency</a>. The amount value supports up to twelve digits (e.g., a value of
+       * 999999999999 for a USD charge of $9,999,999,999.99). If {@code tax_behavior=inclusive},
+       * then this amount includes taxes. Otherwise, taxes are calculated on top of this amount.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;

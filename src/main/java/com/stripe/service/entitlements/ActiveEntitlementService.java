@@ -14,6 +14,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.entitlements.ActiveEntitlementListParams;
+import com.stripe.param.entitlements.ActiveEntitlementRetrieveParams;
 
 public final class ActiveEntitlementService extends ApiService {
   public ActiveEntitlementService(StripeResponseGetter responseGetter) {
@@ -38,5 +39,34 @@ public final class ActiveEntitlementService extends ApiService {
             options,
             ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<ActiveEntitlement>>() {}.getType());
+  }
+  /** Retrieve an active entitlement. */
+  public ActiveEntitlement retrieve(String id, ActiveEntitlementRetrieveParams params)
+      throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieve an active entitlement. */
+  public ActiveEntitlement retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ActiveEntitlementRetrieveParams) null, options);
+  }
+  /** Retrieve an active entitlement. */
+  public ActiveEntitlement retrieve(String id) throws StripeException {
+    return retrieve(id, (ActiveEntitlementRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieve an active entitlement. */
+  public ActiveEntitlement retrieve(
+      String id, ActiveEntitlementRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/entitlements/active_entitlements/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, ActiveEntitlement.class);
   }
 }

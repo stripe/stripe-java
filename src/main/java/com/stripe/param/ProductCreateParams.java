@@ -1355,16 +1355,12 @@ public class ProductCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    @SerializedName("feature")
-    String feature;
-
     /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
 
-    private Feature(Map<String, Object> extraParams, String feature, String name) {
+    private Feature(Map<String, Object> extraParams, String name) {
       this.extraParams = extraParams;
-      this.feature = feature;
       this.name = name;
     }
 
@@ -1375,13 +1371,11 @@ public class ProductCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private String feature;
-
       private String name;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ProductCreateParams.Feature build() {
-        return new ProductCreateParams.Feature(this.extraParams, this.feature, this.name);
+        return new ProductCreateParams.Feature(this.extraParams, this.name);
       }
 
       /**
@@ -1407,11 +1401,6 @@ public class ProductCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
-        return this;
-      }
-
-      public Builder setFeature(String feature) {
-        this.feature = feature;
         return this;
       }
 
