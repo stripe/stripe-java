@@ -61,6 +61,7 @@ final class EventDataClassLookup {
     classLookup.put("platform_tax_fee", PlatformTaxFee.class);
     classLookup.put("price", Price.class);
     classLookup.put("product", Product.class);
+    classLookup.put("product_feature", ProductFeature.class);
     classLookup.put("promotion_code", PromotionCode.class);
     classLookup.put("quote", Quote.class);
     classLookup.put("refund", Refund.class);
@@ -105,6 +106,10 @@ final class EventDataClassLookup {
     classLookup.put("climate.order", com.stripe.model.climate.Order.class);
     classLookup.put("climate.product", com.stripe.model.climate.Product.class);
     classLookup.put("climate.supplier", com.stripe.model.climate.Supplier.class);
+
+    classLookup.put(
+        "entitlements.active_entitlement", com.stripe.model.entitlements.ActiveEntitlement.class);
+    classLookup.put("entitlements.feature", com.stripe.model.entitlements.Feature.class);
 
     classLookup.put(
         "financial_connections.account", com.stripe.model.financialconnections.Account.class);
