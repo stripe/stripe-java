@@ -498,6 +498,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("rendering")
   Rendering rendering;
 
+  /**
+   * This is a legacy field that will be removed soon. For details about {@code rendering_options},
+   * refer to {@code rendering} instead. Options for invoice PDF rendering.
+   */
+  @SerializedName("rendering_options")
+  RenderingOptions renderingOptions;
+
   /** The details of the cost of shipping, including the ShippingRate applied on the invoice. */
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
@@ -2274,6 +2281,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class RenderingOptions extends StripeObject {
+    /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+    @SerializedName("amount_tax_display")
+    String amountTaxDisplay;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost extends StripeObject {
     /** Total shipping cost before any taxes are applied. */
     @SerializedName("amount_subtotal")
@@ -2561,6 +2577,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(quote, responseGetter);
     trySetResponseGetter(rendering, responseGetter);
+    trySetResponseGetter(renderingOptions, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
