@@ -7,6 +7,7 @@ com.stripe.model.billing
 com.stripe.model.billingportal
 com.stripe.model.checkout
 com.stripe.model.climate
+com.stripe.model.entitlements
 com.stripe.model.financialconnections
 com.stripe.model.forwarding
 com.stripe.model.identity
@@ -27,6 +28,7 @@ com.stripe.param.billingportal
 com.stripe.param.checkout
 com.stripe.param.climate
 com.stripe.param.common
+com.stripe.param.entitlements
 com.stripe.param.financialconnections
 com.stripe.param.forwarding
 com.stripe.param.identity
@@ -44,6 +46,7 @@ com.stripe.service.billing
 com.stripe.service.billingportal
 com.stripe.service.checkout
 com.stripe.service.climate
+com.stripe.service.entitlements
 com.stripe.service.financialconnections
 com.stripe.service.forwarding
 com.stripe.service.identity
