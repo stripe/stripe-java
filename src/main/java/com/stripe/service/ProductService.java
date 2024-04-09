@@ -212,4 +212,8 @@ public final class ProductService extends ApiService {
             ApiMode.V1);
     return this.request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
   }
+
+  public com.stripe.service.ProductFeatureService features() {
+    return new com.stripe.service.ProductFeatureService(this.getResponseGetter());
+  }
 }

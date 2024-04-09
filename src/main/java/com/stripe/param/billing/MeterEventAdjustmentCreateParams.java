@@ -158,7 +158,10 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Unique identifier for the event. */
+    /**
+     * <strong>Required.</strong> Unique identifier for the event. You can only cancel events within
+     * 24 hours of Stripe receiving them.
+     */
     @SerializedName("identifier")
     String identifier;
 
@@ -208,7 +211,10 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Unique identifier for the event. */
+      /**
+       * <strong>Required.</strong> Unique identifier for the event. You can only cancel events
+       * within 24 hours of Stripe receiving them.
+       */
       public Builder setIdentifier(String identifier) {
         this.identifier = identifier;
         return this;
