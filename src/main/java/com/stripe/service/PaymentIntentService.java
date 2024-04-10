@@ -539,7 +539,7 @@ public final class PaymentIntentService extends ApiService {
     return this.request(request, PaymentIntent.class);
   }
   /**
-   * Perform an decremental authorization on an eligible <a
+   * Perform a decremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
@@ -554,7 +554,7 @@ public final class PaymentIntentService extends ApiService {
    * The PaymentIntent will now be capturable up to the new authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
-   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
    * decremented.
    */
   public PaymentIntent decrementAuthorization(
@@ -562,7 +562,7 @@ public final class PaymentIntentService extends ApiService {
     return decrementAuthorization(intent, params, (RequestOptions) null);
   }
   /**
-   * Perform an decremental authorization on an eligible <a
+   * Perform a decremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
@@ -577,7 +577,7 @@ public final class PaymentIntentService extends ApiService {
    * The PaymentIntent will now be capturable up to the new authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
-   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
    * decremented.
    */
   public PaymentIntent decrementAuthorization(
