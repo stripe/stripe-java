@@ -1071,7 +1071,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        *
-       * <p>One of {@code any}, {@code automatic}, {@code challenge}, or {@code challenge_only}.
+       * <p>One of {@code any}, {@code automatic}, or {@code challenge}.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;

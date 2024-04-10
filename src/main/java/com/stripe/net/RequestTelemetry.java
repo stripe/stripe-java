@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -51,15 +50,6 @@ class RequestTelemetry {
 
     ClientTelemetryPayload payload = new ClientTelemetryPayload(requestMetrics);
     return Optional.of(gson.toJson(payload));
-  }
-
-  // TODO (major) remove this overload
-  /**
-   * @deprecated use {@link #maybeEnqueueMetrics(AbstractStripeResponse, Duration, List)} instead.
-   */
-  @Deprecated
-  public void maybeEnqueueMetrics(AbstractStripeResponse<?> response, Duration duration) {
-    maybeEnqueueMetrics(response, duration, new ArrayList<String>());
   }
 
   /**
