@@ -101,7 +101,7 @@ public final class ApplicationFeeService extends ApiService {
     return this.request(request, ApplicationFee.class);
   }
 
-  public com.stripe.service.FeeRefundService feeRefunds() {
-    return new com.stripe.service.FeeRefundService(this.getResponseGetter());
+  public com.stripe.service.ApplicationFeeRefundService refunds() {
+    return new com.stripe.service.ApplicationFeeRefundService(this.getResponseGetter());
   }
 }

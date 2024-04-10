@@ -24,6 +24,10 @@ public class TaxIdCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The account or customer the tax ID belongs to. Defaults to {@code owner[type]=self}. */
+  @SerializedName("owner")
+  Owner owner;
+
   /**
    * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn}, {@code
    * ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bo_tin}, {@code br_cnpj},
@@ -47,9 +51,10 @@ public class TaxIdCreateParams extends ApiRequestParams {
   String value;
 
   private TaxIdCreateParams(
-      List<String> expand, Map<String, Object> extraParams, Type type, String value) {
+      List<String> expand, Map<String, Object> extraParams, Owner owner, Type type, String value) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.owner = owner;
     this.type = type;
     this.value = value;
   }
@@ -63,13 +68,16 @@ public class TaxIdCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Owner owner;
+
     private Type type;
 
     private String value;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TaxIdCreateParams build() {
-      return new TaxIdCreateParams(this.expand, this.extraParams, this.type, this.value);
+      return new TaxIdCreateParams(
+          this.expand, this.extraParams, this.owner, this.type, this.value);
     }
 
     /**
@@ -124,6 +132,12 @@ public class TaxIdCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The account or customer the tax ID belongs to. Defaults to {@code owner[type]=self}. */
+    public Builder setOwner(TaxIdCreateParams.Owner owner) {
+      this.owner = owner;
+      return this;
+    }
+
     /**
      * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn}, {@code
      * ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bo_tin}, {@code br_cnpj},
@@ -148,6 +162,122 @@ public class TaxIdCreateParams extends ApiRequestParams {
     public Builder setValue(String value) {
       this.value = value;
       return this;
+    }
+  }
+
+  @Getter
+  public static class Owner {
+    /** Account the tax ID belongs to. Required when {@code type=account} */
+    @SerializedName("account")
+    String account;
+
+    /** Customer the tax ID belongs to. Required when {@code type=customer} */
+    @SerializedName("customer")
+    String customer;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> Type of owner referenced. */
+    @SerializedName("type")
+    Type type;
+
+    private Owner(String account, String customer, Map<String, Object> extraParams, Type type) {
+      this.account = account;
+      this.customer = customer;
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String account;
+
+      private String customer;
+
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TaxIdCreateParams.Owner build() {
+        return new TaxIdCreateParams.Owner(
+            this.account, this.customer, this.extraParams, this.type);
+      }
+
+      /** Account the tax ID belongs to. Required when {@code type=account} */
+      public Builder setAccount(String account) {
+        this.account = account;
+        return this;
+      }
+
+      /** Customer the tax ID belongs to. Required when {@code type=customer} */
+      public Builder setCustomer(String customer) {
+        this.customer = customer;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TaxIdCreateParams.Owner#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TaxIdCreateParams.Owner#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> Type of owner referenced. */
+      public Builder setType(TaxIdCreateParams.Owner.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("account")
+      ACCOUNT("account"),
+
+      @SerializedName("application")
+      APPLICATION("application"),
+
+      @SerializedName("customer")
+      CUSTOMER("customer"),
+
+      @SerializedName("self")
+      SELF("self");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 

@@ -115,10 +115,6 @@ public class StripeClient {
     return new com.stripe.service.BalanceTransactionService(this.getResponseGetter());
   }
 
-  public com.stripe.service.BankAccountService bankAccounts() {
-    return new com.stripe.service.BankAccountService(this.getResponseGetter());
-  }
-
   public com.stripe.service.BillingService billing() {
     return new com.stripe.service.BillingService(this.getResponseGetter());
   }
@@ -337,6 +333,10 @@ public class StripeClient {
 
   public com.stripe.service.TaxCodeService taxCodes() {
     return new com.stripe.service.TaxCodeService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.TaxIdService taxIds() {
+    return new com.stripe.service.TaxIdService(this.getResponseGetter());
   }
 
   public com.stripe.service.TaxRateService taxRates() {

@@ -5,10 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.TaxIdCreateParams;
+import com.stripe.param.TaxIdListParams;
+import com.stripe.param.TaxIdRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -113,31 +117,167 @@ public class TaxId extends ApiResource implements HasId {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Deletes an existing {@code tax_id} object. */
+  /** Creates a new account or customer {@code tax_id} object. */
+  public static TaxId create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new account or customer {@code tax_id} object. */
+  public static TaxId create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/tax_ids";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxId.class);
+  }
+
+  /** Creates a new account or customer {@code tax_id} object. */
+  public static TaxId create(TaxIdCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new account or customer {@code tax_id} object. */
+  public static TaxId create(TaxIdCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/tax_ids";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxId.class);
+  }
+
+  /** Deletes an existing account or customer {@code tax_id} object. */
   public TaxId delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes an existing {@code tax_id} object. */
+  /** Deletes an existing account or customer {@code tax_id} object. */
   public TaxId delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes an existing {@code tax_id} object. */
+  /** Deletes an existing account or customer {@code tax_id} object. */
   public TaxId delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes an existing {@code tax_id} object. */
+  /** Deletes an existing account or customer {@code tax_id} object. */
   public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/customers/%s/tax_ids/%s",
-            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+    String path = String.format("/v1/tax_ids/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, TaxId.class);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public static TaxId delete(String customer, String id) throws StripeException {
+    return delete(customer, id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public static TaxId delete(String customer, String id, RequestOptions options)
+      throws StripeException {
+    return delete(customer, id, (Map<String, Object>) null, options);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public static TaxId delete(String customer, String id, Map<String, Object> params)
+      throws StripeException {
+    return delete(customer, id, params, (RequestOptions) null);
+  }
+
+  /** Deletes an existing {@code tax_id} object. */
+  public static TaxId delete(
+      String customer, String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/customers/%s/tax_ids/%s",
+            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxId.class);
+  }
+
+  /** Returns a list of tax IDs. */
+  public static TaxIdCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of tax IDs. */
+  public static TaxIdCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/tax_ids";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxIdCollection.class);
+  }
+
+  /** Returns a list of tax IDs. */
+  public static TaxIdCollection list(TaxIdListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of tax IDs. */
+  public static TaxIdCollection list(TaxIdListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/tax_ids";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxIdCollection.class);
+  }
+
+  /** Retrieves an account or customer {@code tax_id} object. */
+  public static TaxId retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves an account or customer {@code tax_id} object. */
+  public static TaxId retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves an account or customer {@code tax_id} object. */
+  public static TaxId retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax_ids/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxId.class);
+  }
+
+  /** Retrieves an account or customer {@code tax_id} object. */
+  public static TaxId retrieve(String id, TaxIdRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax_ids/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, TaxId.class);
   }
 
   @Getter
