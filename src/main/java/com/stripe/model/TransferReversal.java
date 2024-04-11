@@ -29,7 +29,7 @@ import lombok.Setter;
  * transfer only if the destination account has enough balance to cover the reversal.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/connect/separate-charges-and-transfers#reversing-transfers">Reversing
+ * href="https://stripe.com/docs/connect/separate-charges-and-transfers#reverse-transfers">Reverse
  * transfers</a>
  */
 @Getter
