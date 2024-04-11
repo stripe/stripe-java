@@ -442,9 +442,11 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> pastDue;
 
     /**
-     * Fields that may become required depending on the results of verification or review. Will be
-     * an empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due} or {@code currently_due}.
+     * Fields that might become required depending on the results of verification or review. It's an
+     * empty array unless an asynchronous verification is pending. If verification fails, these
+     * fields move to {@code eventually_due} or {@code currently_due}. Fields might appear in {@code
+     * eventually_due} or {@code currently_due} and in {@code pending_verification} if verification
+     * fails but another verification is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -633,9 +635,11 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> pastDue;
 
     /**
-     * Fields that may become required depending on the results of verification or review. Will be
-     * an empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}.
+     * Fields that might become required depending on the results of verification or review. It's an
+     * empty array unless an asynchronous verification is pending. If verification fails, these
+     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}. Fields
+     * might appear in {@code eventually_due}, {@code currently_due}, or {@code past_due} and in
+     * {@code pending_verification} if verification fails but another verification is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
