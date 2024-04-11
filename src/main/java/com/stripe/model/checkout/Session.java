@@ -1182,7 +1182,8 @@ public class Session extends ApiResource implements HasId {
        * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn},
        * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code
        * ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin},
-       * {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, or {@code unknown}.
+       * {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code
+       * kz_bin}, {@code ng_tin}, {@code om_vat}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -1379,6 +1380,9 @@ public class Session extends ApiResource implements HasId {
 
     @SerializedName("alipay")
     Alipay alipay;
+
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
 
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
@@ -1612,6 +1616,11 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {}
 
     @Getter
     @Setter

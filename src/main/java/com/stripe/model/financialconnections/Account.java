@@ -701,6 +701,13 @@ public class Account extends ApiResource implements HasId {
     Long lastAttemptedAt;
 
     /**
+     * Time at which the next ownership refresh can be initiated. This value will be {@code null}
+     * when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
+
+    /**
      * The status of the last refresh attempt.
      *
      * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.

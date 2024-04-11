@@ -125,11 +125,17 @@ public class AccountSession extends ApiResource {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Components extends StripeObject {
+    @SerializedName("account_management")
+    AccountManagement accountManagement;
+
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
     @SerializedName("documents")
     Documents documents;
+
+    @SerializedName("notification_banner")
+    NotificationBanner notificationBanner;
 
     @SerializedName("payment_details")
     PaymentDetails paymentDetails;
@@ -139,6 +145,32 @@ public class AccountSession extends ApiResource {
 
     @SerializedName("payouts")
     Payouts payouts;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AccountManagement extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+      }
+    }
 
     @Getter
     @Setter
@@ -154,7 +186,16 @@ public class AccountSession extends ApiResource {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+      }
     }
 
     @Getter
@@ -172,6 +213,32 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NotificationBanner extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+      }
     }
 
     @Getter

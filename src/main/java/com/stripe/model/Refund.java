@@ -599,6 +599,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("au_bank_transfer")
     AuBankTransfer auBankTransfer;
 
@@ -696,6 +699,11 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {}
 
     @Getter
     @Setter

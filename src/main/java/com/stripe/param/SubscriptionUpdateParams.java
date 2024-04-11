@@ -5396,6 +5396,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             @SerializedName("balances")
             BALANCES("balances"),
 
+            @SerializedName("ownership")
+            OWNERSHIP("ownership"),
+
             @SerializedName("transactions")
             TRANSACTIONS("transactions");
 
