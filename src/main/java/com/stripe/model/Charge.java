@@ -66,7 +66,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * The application fee (if any) for the charge. <a
-   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">See the Connect
+   * href="https://stripe.com/docs/connect/direct-charges#collect-fees">See the Connect
    * documentation</a> for details.
    */
   @SerializedName("application_fee")
@@ -76,7 +76,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * The amount of the application fee (if any) requested for the charge. <a
-   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">See the Connect
+   * href="https://stripe.com/docs/connect/direct-charges#collect-fees">See the Connect
    * documentation</a> for details.
    */
   @SerializedName("application_fee_amount")

@@ -32,7 +32,7 @@ public class ChargeCreateParams extends ApiRequestParams {
    * application owner's Stripe account. The request must be made with an OAuth key or the {@code
    * Stripe-Account} header in order to take an application fee. For more information, see the
    * application fees <a
-   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">documentation</a>.
+   * href="https://stripe.com/docs/connect/direct-charges#collect-fees">documentation</a>.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -96,7 +96,7 @@ public class ChargeCreateParams extends ApiRequestParams {
   /**
    * The Stripe account ID for which these funds are intended. Automatically set if you use the
    * {@code destination} parameter. For details, see <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#on-behalf-of">Creating
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#settlement-merchant">Creating
    * Separate Charges and Transfers</a>.
    */
   @SerializedName("on_behalf_of")
@@ -310,7 +310,7 @@ public class ChargeCreateParams extends ApiRequestParams {
      * the application owner's Stripe account. The request must be made with an OAuth key or the
      * {@code Stripe-Account} header in order to take an application fee. For more information, see
      * the application fees <a
-     * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">documentation</a>.
+     * href="https://stripe.com/docs/connect/direct-charges#collect-fees">documentation</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -467,7 +467,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     /**
      * The Stripe account ID for which these funds are intended. Automatically set if you use the
      * {@code destination} parameter. For details, see <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#on-behalf-of">Creating
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#settlement-merchant">Creating
      * Separate Charges and Transfers</a>.
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
