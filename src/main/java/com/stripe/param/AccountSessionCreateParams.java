@@ -432,6 +432,15 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -441,7 +450,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Map<String, Object> extraParams) {
+        private Features(Boolean externalAccountCollection, Map<String, Object> extraParams) {
+          this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
         }
 
@@ -450,12 +460,25 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean externalAccountCollection;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.AccountOnboarding.Features build() {
             return new AccountSessionCreateParams.Components.AccountOnboarding.Features(
-                this.extraParams);
+                this.externalAccountCollection, this.extraParams);
+          }
+
+          /**
+           * Whether to allow platforms to control bank account collection for their connected
+           * accounts. This feature can only be false for custom accounts (or accounts where the
+           * platform is compliance owner). Otherwise, bank account collection is determined by
+           * compliance requirements.
+           */
+          public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+            this.externalAccountCollection = externalAccountCollection;
+            return this;
           }
 
           /**

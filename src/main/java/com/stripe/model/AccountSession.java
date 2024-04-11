@@ -157,7 +157,16 @@ public class AccountSession extends ApiResource {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+      }
     }
 
     @Getter
