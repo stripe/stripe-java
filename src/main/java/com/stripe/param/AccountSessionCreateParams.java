@@ -134,6 +134,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Components {
+    /** Configuration for the account management embedded component. */
+    @SerializedName("account_management")
+    AccountManagement accountManagement;
+
     /** Configuration for the account onboarding embedded component. */
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
@@ -170,6 +174,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("issuing_cards_list")
     IssuingCardsList issuingCardsList;
 
+    /** Configuration for the notification banner embedded component. */
+    @SerializedName("notification_banner")
+    NotificationBanner notificationBanner;
+
     /** Configuration for the payment details embedded component. */
     @SerializedName("payment_details")
     PaymentDetails paymentDetails;
@@ -183,6 +191,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     Payouts payouts;
 
     private Components(
+        AccountManagement accountManagement,
         AccountOnboarding accountOnboarding,
         CapitalFinancingPromotion capitalFinancingPromotion,
         Documents documents,
@@ -191,9 +200,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         FinancialAccountTransactions financialAccountTransactions,
         IssuingCard issuingCard,
         IssuingCardsList issuingCardsList,
+        NotificationBanner notificationBanner,
         PaymentDetails paymentDetails,
         Payments payments,
         Payouts payouts) {
+      this.accountManagement = accountManagement;
       this.accountOnboarding = accountOnboarding;
       this.capitalFinancingPromotion = capitalFinancingPromotion;
       this.documents = documents;
@@ -202,6 +213,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.financialAccountTransactions = financialAccountTransactions;
       this.issuingCard = issuingCard;
       this.issuingCardsList = issuingCardsList;
+      this.notificationBanner = notificationBanner;
       this.paymentDetails = paymentDetails;
       this.payments = payments;
       this.payouts = payouts;
@@ -212,6 +224,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AccountManagement accountManagement;
+
       private AccountOnboarding accountOnboarding;
 
       private CapitalFinancingPromotion capitalFinancingPromotion;
@@ -228,6 +242,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       private IssuingCardsList issuingCardsList;
 
+      private NotificationBanner notificationBanner;
+
       private PaymentDetails paymentDetails;
 
       private Payments payments;
@@ -237,6 +253,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountSessionCreateParams.Components build() {
         return new AccountSessionCreateParams.Components(
+            this.accountManagement,
             this.accountOnboarding,
             this.capitalFinancingPromotion,
             this.documents,
@@ -245,9 +262,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.financialAccountTransactions,
             this.issuingCard,
             this.issuingCardsList,
+            this.notificationBanner,
             this.paymentDetails,
             this.payments,
             this.payouts);
+      }
+
+      /** Configuration for the account management embedded component. */
+      public Builder setAccountManagement(
+          AccountSessionCreateParams.Components.AccountManagement accountManagement) {
+        this.accountManagement = accountManagement;
+        return this;
       }
 
       /** Configuration for the account onboarding embedded component. */
@@ -324,6 +349,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Configuration for the notification banner embedded component. */
+      public Builder setNotificationBanner(
+          AccountSessionCreateParams.Components.NotificationBanner notificationBanner) {
+        this.notificationBanner = notificationBanner;
+        return this;
+      }
+
       /** Configuration for the payment details embedded component. */
       public Builder setPaymentDetails(
           AccountSessionCreateParams.Components.PaymentDetails paymentDetails) {
@@ -341,6 +373,176 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       public Builder setPayouts(AccountSessionCreateParams.Components.Payouts payouts) {
         this.payouts = payouts;
         return this;
+      }
+    }
+
+    @Getter
+    public static class AccountManagement {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private AccountManagement(
+          Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.AccountManagement build() {
+          return new AccountSessionCreateParams.Components.AccountManagement(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.AccountManagement#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.AccountManagement#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.AccountManagement.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Features {
+        /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Boolean externalAccountCollection, Map<String, Object> extraParams) {
+          this.externalAccountCollection = externalAccountCollection;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean externalAccountCollection;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.AccountManagement.Features build() {
+            return new AccountSessionCreateParams.Components.AccountManagement.Features(
+                this.externalAccountCollection, this.extraParams);
+          }
+
+          /**
+           * Whether to allow platforms to control bank account collection for their connected
+           * accounts. This feature can only be false for custom accounts (or accounts where the
+           * platform is compliance owner). Otherwise, bank account collection is determined by
+           * compliance requirements.
+           */
+          public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+            this.externalAccountCollection = externalAccountCollection;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.AccountManagement.Features#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.AccountManagement.Features#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
       }
     }
 
@@ -1429,6 +1631,176 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
            * AccountSessionCreateParams.Components.IssuingCardsList.Features#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class NotificationBanner {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private NotificationBanner(
+          Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.NotificationBanner build() {
+          return new AccountSessionCreateParams.Components.NotificationBanner(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.NotificationBanner#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.NotificationBanner#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.NotificationBanner.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Features {
+        /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Boolean externalAccountCollection, Map<String, Object> extraParams) {
+          this.externalAccountCollection = externalAccountCollection;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean externalAccountCollection;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.NotificationBanner.Features build() {
+            return new AccountSessionCreateParams.Components.NotificationBanner.Features(
+                this.externalAccountCollection, this.extraParams);
+          }
+
+          /**
+           * Whether to allow platforms to control bank account collection for their connected
+           * accounts. This feature can only be false for custom accounts (or accounts where the
+           * platform is compliance owner). Otherwise, bank account collection is determined by
+           * compliance requirements.
+           */
+          public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+            this.externalAccountCollection = externalAccountCollection;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.NotificationBanner.Features#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.NotificationBanner.Features#extraParams} for the
            * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
