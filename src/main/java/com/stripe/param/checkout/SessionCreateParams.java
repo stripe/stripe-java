@@ -5380,6 +5380,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("alipay")
     Alipay alipay;
 
+    /** contains details about the AmazonPay payment method options. */
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     /** contains details about the AU Becs Debit payment method options. */
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
@@ -5498,6 +5502,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
+        AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
         Bancontact bancontact,
@@ -5529,6 +5534,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
+      this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
@@ -5570,6 +5576,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private AfterpayClearpay afterpayClearpay;
 
       private Alipay alipay;
+
+      private AmazonPay amazonPay;
 
       private AuBecsDebit auBecsDebit;
 
@@ -5632,6 +5640,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
+            this.amazonPay,
             this.auBecsDebit,
             this.bacsDebit,
             this.bancontact,
@@ -5683,6 +5692,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Alipay payment method options. */
       public Builder setAlipay(SessionCreateParams.PaymentMethodOptions.Alipay alipay) {
         this.alipay = alipay;
+        return this;
+      }
+
+      /** contains details about the AmazonPay payment method options. */
+      public Builder setAmazonPay(SessionCreateParams.PaymentMethodOptions.AmazonPay amazonPay) {
+        this.amazonPay = amazonPay;
         return this;
       }
 
@@ -6663,6 +6678,122 @@ public class SessionCreateParams extends ApiRequestParams {
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
         NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class AmazonPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private AmazonPay(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.AmazonPay build() {
+          return new SessionCreateParams.PaymentMethodOptions.AmazonPay(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.AmazonPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.AmazonPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.AmazonPay.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -13788,6 +13919,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("alipay")
     ALIPAY("alipay"),
+
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
 
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
