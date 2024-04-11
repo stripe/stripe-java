@@ -17,11 +17,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A billing meter event adjustment represents the status of a meter event adjustment. */
+/**
+ * A billing meter event adjustment is a resource that allows you to cancel a meter event. For
+ * example, you might create a billing meter event adjustment to cancel a meter event that was
+ * created in error or attached to the wrong customer.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class MeterEventAdjustment extends ApiResource {
+  /** Specifies which event to cancel. */
   @SerializedName("cancel")
   Cancel cancel;
 
@@ -53,7 +58,8 @@ public class MeterEventAdjustment extends ApiResource {
   String status;
 
   /**
-   * Specifies whether to cancel a single event or a range of events for a time period.
+   * Specifies whether to cancel a single event or a range of events for a time period. Time period
+   * cancellation is not supported yet.
    *
    * <p>Equal to {@code cancel}.
    */

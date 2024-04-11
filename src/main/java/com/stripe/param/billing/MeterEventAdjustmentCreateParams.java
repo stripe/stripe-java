@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> Specifies which event to cancel. */
+  /** Specifies which event to cancel. */
   @SerializedName("cancel")
   Cancel cancel;
 
@@ -35,7 +35,10 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Specifies whether to cancel a single event or a range of events for a time period. */
+  /**
+   * <strong>Required.</strong> Specifies whether to cancel a single event or a range of events for
+   * a time period. Time period cancellation is not supported yet.
+   */
   @SerializedName("type")
   Type type;
 
@@ -73,7 +76,7 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
           this.cancel, this.eventName, this.expand, this.extraParams, this.type);
     }
 
-    /** <strong>Required.</strong> Specifies which event to cancel. */
+    /** Specifies which event to cancel. */
     public Builder setCancel(MeterEventAdjustmentCreateParams.Cancel cancel) {
       this.cancel = cancel;
       return this;
@@ -140,7 +143,10 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Specifies whether to cancel a single event or a range of events for a time period. */
+    /**
+     * <strong>Required.</strong> Specifies whether to cancel a single event or a range of events
+     * for a time period. Time period cancellation is not supported yet.
+     */
     public Builder setType(MeterEventAdjustmentCreateParams.Type type) {
       this.type = type;
       return this;
@@ -159,8 +165,8 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> Unique identifier for the event. You can only cancel events within
-     * 24 hours of Stripe receiving them.
+     * Unique identifier for the event. You can only cancel events within 24 hours of Stripe
+     * receiving them.
      */
     @SerializedName("identifier")
     String identifier;
@@ -212,8 +218,8 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Unique identifier for the event. You can only cancel events
-       * within 24 hours of Stripe receiving them.
+       * Unique identifier for the event. You can only cancel events within 24 hours of Stripe
+       * receiving them.
        */
       public Builder setIdentifier(String identifier) {
         this.identifier = identifier;
