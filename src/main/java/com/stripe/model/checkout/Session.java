@@ -1381,6 +1381,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
@@ -1613,6 +1616,11 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {}
 
     @Getter
     @Setter

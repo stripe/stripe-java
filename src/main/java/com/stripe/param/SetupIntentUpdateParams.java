@@ -455,6 +455,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Alipay alipay;
 
     /**
+     * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
+     * method.
+     */
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
+    /**
      * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
      * account.
      */
@@ -729,6 +736,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
+        AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
         Bancontact bancontact,
@@ -771,6 +779,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
+      this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
@@ -823,6 +832,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private AfterpayClearpay afterpayClearpay;
 
       private Alipay alipay;
+
+      private AmazonPay amazonPay;
 
       private AuBecsDebit auBecsDebit;
 
@@ -907,6 +918,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
+            this.amazonPay,
             this.auBecsDebit,
             this.bacsDebit,
             this.bancontact,
@@ -981,6 +993,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setAlipay(SetupIntentUpdateParams.PaymentMethodData.Alipay alipay) {
         this.alipay = alipay;
+        return this;
+      }
+
+      /**
+       * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay
+       * payment method.
+       */
+      public Builder setAmazonPay(SetupIntentUpdateParams.PaymentMethodData.AmazonPay amazonPay) {
+        this.amazonPay = amazonPay;
         return this;
       }
 
@@ -1650,6 +1671,63 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Alipay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class AmazonPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AmazonPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.AmazonPay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.AmazonPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.AmazonPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.AmazonPay#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -4848,6 +4926,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("alipay")
       ALIPAY("alipay"),
 
+      @SerializedName("amazon_pay")
+      AMAZON_PAY("amazon_pay"),
+
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),
 
@@ -4962,6 +5043,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    /**
+     * If this is a {@code amazon_pay} SetupIntent, this sub-hash contains details about the
+     * AmazonPay payment method options.
+     */
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
     Card card;
@@ -5019,6 +5107,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     private PaymentMethodOptions(
         AcssDebit acssDebit,
+        AmazonPay amazonPay,
         Card card,
         CardPresent cardPresent,
         Map<String, Object> extraParams,
@@ -5028,6 +5117,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
+      this.amazonPay = amazonPay;
       this.card = card;
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
@@ -5044,6 +5134,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     public static class Builder {
       private AcssDebit acssDebit;
+
+      private AmazonPay amazonPay;
 
       private Card card;
 
@@ -5065,6 +5157,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public SetupIntentUpdateParams.PaymentMethodOptions build() {
         return new SetupIntentUpdateParams.PaymentMethodOptions(
             this.acssDebit,
+            this.amazonPay,
             this.card,
             this.cardPresent,
             this.extraParams,
@@ -5082,6 +5175,16 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setAcssDebit(
           SetupIntentUpdateParams.PaymentMethodOptions.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code amazon_pay} SetupIntent, this sub-hash contains details about the
+       * AmazonPay payment method options.
+       */
+      public Builder setAmazonPay(
+          SetupIntentUpdateParams.PaymentMethodOptions.AmazonPay amazonPay) {
+        this.amazonPay = amazonPay;
         return this;
       }
 
@@ -5573,6 +5676,63 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         VerificationMethod(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class AmazonPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AmazonPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodOptions.AmazonPay build() {
+          return new SetupIntentUpdateParams.PaymentMethodOptions.AmazonPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.AmazonPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.AmazonPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }

@@ -967,6 +967,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("card")
     Card card;
 
@@ -1047,6 +1050,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         String transactionType;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {}
 
     @Getter
     @Setter
