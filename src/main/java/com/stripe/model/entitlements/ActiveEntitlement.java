@@ -11,6 +11,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.entitlements.ActiveEntitlementListParams;
+import com.stripe.param.entitlements.ActiveEntitlementRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -85,5 +86,45 @@ public class ActiveEntitlement extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, ActiveEntitlementCollection.class);
+  }
+
+  /** Retrieve an active entitlement. */
+  public static ActiveEntitlement retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieve an active entitlement. */
+  public static ActiveEntitlement retrieve(String id, RequestOptions options)
+      throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieve an active entitlement. */
+  public static ActiveEntitlement retrieve(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/entitlements/active_entitlements/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ActiveEntitlement.class);
+  }
+
+  /** Retrieve an active entitlement. */
+  public static ActiveEntitlement retrieve(
+      String id, ActiveEntitlementRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/entitlements/active_entitlements/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ActiveEntitlement.class);
   }
 }

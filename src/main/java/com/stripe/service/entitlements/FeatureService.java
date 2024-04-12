@@ -15,6 +15,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.entitlements.FeatureCreateParams;
 import com.stripe.param.entitlements.FeatureListParams;
+import com.stripe.param.entitlements.FeatureRetrieveParams;
 import com.stripe.param.entitlements.FeatureUpdateParams;
 
 public final class FeatureService extends ApiService {
@@ -59,6 +60,32 @@ public final class FeatureService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Feature.class);
+  }
+  /** Retrieves a feature. */
+  public Feature retrieve(String id, FeatureRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves a feature. */
+  public Feature retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (FeatureRetrieveParams) null, options);
+  }
+  /** Retrieves a feature. */
+  public Feature retrieve(String id) throws StripeException {
+    return retrieve(id, (FeatureRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a feature. */
+  public Feature retrieve(String id, FeatureRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options,

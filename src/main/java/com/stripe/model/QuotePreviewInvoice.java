@@ -468,13 +468,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("rendering")
   Rendering rendering;
 
-  /**
-   * This is a legacy field that will be removed soon. For details about {@code rendering_options},
-   * refer to {@code rendering} instead. Options for invoice PDF rendering.
-   */
-  @SerializedName("rendering_options")
-  RenderingOptions renderingOptions;
-
   /** The details of the cost of shipping, including the ShippingRate applied on the invoice. */
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
@@ -1087,7 +1080,8 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
      * {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code
      * sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat},
      * {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code
-     * tr_tin}, {@code eg_tin}, {@code ph_tin}, or {@code unknown}.
+     * tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin},
+     * {@code om_vat}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -1436,15 +1430,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       @SerializedName("page_size")
       String pageSize;
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class RenderingOptions extends StripeObject {
-    /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
-    @SerializedName("amount_tax_display")
-    String amountTaxDisplay;
   }
 
   @Getter
@@ -1799,7 +1784,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(payments, responseGetter);
     trySetResponseGetter(quote, responseGetter);
     trySetResponseGetter(rendering, responseGetter);
-    trySetResponseGetter(renderingOptions, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);

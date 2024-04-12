@@ -213,13 +213,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("rendering")
   Rendering rendering;
 
-  /**
-   * This is a legacy field that will be removed soon. For details about {@code rendering_options},
-   * refer to {@code rendering} instead. Options for invoice PDF rendering.
-   */
-  @SerializedName("rendering_options")
-  Object renderingOptions;
-
   /** Settings for the cost of shipping for this invoice. */
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
@@ -285,7 +278,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
       PaymentSettings paymentSettings,
       PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior,
       Rendering rendering,
-      Object renderingOptions,
       ShippingCost shippingCost,
       ShippingDetails shippingDetails,
       String statementDescriptor,
@@ -320,7 +312,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
     this.rendering = rendering;
-    this.renderingOptions = renderingOptions;
     this.shippingCost = shippingCost;
     this.shippingDetails = shippingDetails;
     this.statementDescriptor = statementDescriptor;
@@ -391,8 +382,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private Rendering rendering;
 
-    private Object renderingOptions;
-
     private ShippingCost shippingCost;
 
     private ShippingDetails shippingDetails;
@@ -435,7 +424,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.paymentSettings,
           this.pendingInvoiceItemsBehavior,
           this.rendering,
-          this.renderingOptions,
           this.shippingCost,
           this.shippingDetails,
           this.statementDescriptor,
@@ -960,24 +948,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setRendering(InvoiceCreateParams.Rendering rendering) {
       this.rendering = rendering;
-      return this;
-    }
-
-    /**
-     * This is a legacy field that will be removed soon. For details about {@code
-     * rendering_options}, refer to {@code rendering} instead. Options for invoice PDF rendering.
-     */
-    public Builder setRenderingOptions(InvoiceCreateParams.RenderingOptions renderingOptions) {
-      this.renderingOptions = renderingOptions;
-      return this;
-    }
-
-    /**
-     * This is a legacy field that will be removed soon. For details about {@code
-     * rendering_options}, refer to {@code rendering} instead. Options for invoice PDF rendering.
-     */
-    public Builder setRenderingOptions(EmptyParam renderingOptions) {
-      this.renderingOptions = renderingOptions;
       return this;
     }
 
@@ -4173,112 +4143,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class RenderingOptions {
-    /**
-     * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
-     * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
-     * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code exclude_tax}
-     * will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
-     */
-    @SerializedName("amount_tax_display")
-    ApiRequestParams.EnumParam amountTaxDisplay;
-
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    private RenderingOptions(
-        ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
-      this.amountTaxDisplay = amountTaxDisplay;
-      this.extraParams = extraParams;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private ApiRequestParams.EnumParam amountTaxDisplay;
-
-      private Map<String, Object> extraParams;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceCreateParams.RenderingOptions build() {
-        return new InvoiceCreateParams.RenderingOptions(this.amountTaxDisplay, this.extraParams);
-      }
-
-      /**
-       * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
-       * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
-       * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
-       * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
-       */
-      public Builder setAmountTaxDisplay(
-          InvoiceCreateParams.RenderingOptions.AmountTaxDisplay amountTaxDisplay) {
-        this.amountTaxDisplay = amountTaxDisplay;
-        return this;
-      }
-
-      /**
-       * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
-       * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
-       * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
-       * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
-       */
-      public Builder setAmountTaxDisplay(EmptyParam amountTaxDisplay) {
-        this.amountTaxDisplay = amountTaxDisplay;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceCreateParams.RenderingOptions#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceCreateParams.RenderingOptions#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-    }
-
-    public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
-      @SerializedName("exclude_tax")
-      EXCLUDE_TAX("exclude_tax"),
-
-      @SerializedName("include_inclusive_tax")
-      INCLUDE_INCLUSIVE_TAX("include_inclusive_tax");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      AmountTaxDisplay(String value) {
-        this.value = value;
-      }
-    }
-  }
-
-  @Getter
   public static class ShippingCost {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -5592,10 +5456,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     EXCLUDE("exclude"),
 
     @SerializedName("include")
-    INCLUDE("include"),
-
-    @SerializedName("include_and_require")
-    INCLUDE_AND_REQUIRE("include_and_require");
+    INCLUDE("include");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

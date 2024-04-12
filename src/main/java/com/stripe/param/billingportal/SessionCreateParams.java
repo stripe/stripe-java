@@ -56,7 +56,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
    * and invoices with this {@code on_behalf_of} account appear in the portal. For more information,
    * see the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#on-behalf-of">docs</a>.
+   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
    * Use the <a
    * href="https://stripe.com/docs/api/accounts/object#account_object-settings-branding">Accounts
    * API</a> to modify the {@code on_behalf_of} account's branding settings, which the portal
@@ -217,7 +217,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
      * and invoices with this {@code on_behalf_of} account appear in the portal. For more
      * information, see the <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#on-behalf-of">docs</a>.
+     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
      * Use the <a
      * href="https://stripe.com/docs/api/accounts/object#account_object-settings-branding">Accounts
      * API</a> to modify the {@code on_behalf_of} account's branding settings, which the portal

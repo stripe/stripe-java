@@ -967,6 +967,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("card")
     Card card;
 
@@ -1051,6 +1054,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /** Configuration options for setting up an eMandate for cards issued in India. */
       @SerializedName("mandate_options")
@@ -1074,7 +1082,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        *
-       * <p>One of {@code any}, {@code automatic}, {@code challenge}, or {@code challenge_only}.
+       * <p>One of {@code any}, {@code automatic}, or {@code challenge}.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;

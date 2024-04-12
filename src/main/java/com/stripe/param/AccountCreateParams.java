@@ -6585,11 +6585,43 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** A hash of configuration for who pays Stripe fees for product usage on this account. */
+    @SerializedName("fees")
+    Fees fees;
+
+    /**
+     * A hash of configuration for products that have negative balance liability, and whether Stripe
+     * or a Connect application is responsible for them.
+     */
+    @SerializedName("losses")
+    Losses losses;
+
+    /**
+     * A value indicating responsibility for collecting updated information when requirements on the
+     * account are due or change. Defaults to {@code stripe}.
+     */
+    @SerializedName("requirement_collection")
+    RequirementCollection requirementCollection;
+
+    /** A hash of configuration for Stripe-hosted dashboards. */
+    @SerializedName("stripe_dashboard")
+    StripeDashboard stripeDashboard;
+
     private Controller(
-        Application application, Dashboard dashboard, Map<String, Object> extraParams) {
+        Application application,
+        Dashboard dashboard,
+        Map<String, Object> extraParams,
+        Fees fees,
+        Losses losses,
+        RequirementCollection requirementCollection,
+        StripeDashboard stripeDashboard) {
       this.application = application;
       this.dashboard = dashboard;
       this.extraParams = extraParams;
+      this.fees = fees;
+      this.losses = losses;
+      this.requirementCollection = requirementCollection;
+      this.stripeDashboard = stripeDashboard;
     }
 
     public static Builder builder() {
@@ -6603,10 +6635,24 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Fees fees;
+
+      private Losses losses;
+
+      private RequirementCollection requirementCollection;
+
+      private StripeDashboard stripeDashboard;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AccountCreateParams.Controller build() {
         return new AccountCreateParams.Controller(
-            this.application, this.dashboard, this.extraParams);
+            this.application,
+            this.dashboard,
+            this.extraParams,
+            this.fees,
+            this.losses,
+            this.requirementCollection,
+            this.stripeDashboard);
       }
 
       /** A hash of configuration describing the Connect application that controls the account. */
@@ -6644,6 +6690,38 @@ public class AccountCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A hash of configuration for who pays Stripe fees for product usage on this account. */
+      public Builder setFees(AccountCreateParams.Controller.Fees fees) {
+        this.fees = fees;
+        return this;
+      }
+
+      /**
+       * A hash of configuration for products that have negative balance liability, and whether
+       * Stripe or a Connect application is responsible for them.
+       */
+      public Builder setLosses(AccountCreateParams.Controller.Losses losses) {
+        this.losses = losses;
+        return this;
+      }
+
+      /**
+       * A value indicating responsibility for collecting updated information when requirements on
+       * the account are due or change. Defaults to {@code stripe}.
+       */
+      public Builder setRequirementCollection(
+          AccountCreateParams.Controller.RequirementCollection requirementCollection) {
+        this.requirementCollection = requirementCollection;
+        return this;
+      }
+
+      /** A hash of configuration for Stripe-hosted dashboards. */
+      public Builder setStripeDashboard(
+          AccountCreateParams.Controller.StripeDashboard stripeDashboard) {
+        this.stripeDashboard = stripeDashboard;
         return this;
       }
     }
@@ -6850,6 +6928,299 @@ public class AccountCreateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+
+    @Getter
+    public static class Fees {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * A value indicating the responsible payer of Stripe fees on this account. Defaults to {@code
+       * account}.
+       */
+      @SerializedName("payer")
+      Payer payer;
+
+      private Fees(Map<String, Object> extraParams, Payer payer) {
+        this.extraParams = extraParams;
+        this.payer = payer;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Payer payer;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Controller.Fees build() {
+          return new AccountCreateParams.Controller.Fees(this.extraParams, this.payer);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Fees#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Fees#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * A value indicating the responsible payer of Stripe fees on this account. Defaults to
+         * {@code account}.
+         */
+        public Builder setPayer(AccountCreateParams.Controller.Fees.Payer payer) {
+          this.payer = payer;
+          return this;
+        }
+      }
+
+      public enum Payer implements ApiRequestParams.EnumParam {
+        @SerializedName("account")
+        ACCOUNT("account"),
+
+        @SerializedName("application")
+        APPLICATION("application");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Payer(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Losses {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * A value indicating who is liable when this account can't pay back negative balances
+       * resulting from payments. Defaults to {@code stripe}.
+       */
+      @SerializedName("payments")
+      Payments payments;
+
+      private Losses(Map<String, Object> extraParams, Payments payments) {
+        this.extraParams = extraParams;
+        this.payments = payments;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Payments payments;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Controller.Losses build() {
+          return new AccountCreateParams.Controller.Losses(this.extraParams, this.payments);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Losses#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Losses#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * A value indicating who is liable when this account can't pay back negative balances
+         * resulting from payments. Defaults to {@code stripe}.
+         */
+        public Builder setPayments(AccountCreateParams.Controller.Losses.Payments payments) {
+          this.payments = payments;
+          return this;
+        }
+      }
+
+      public enum Payments implements ApiRequestParams.EnumParam {
+        @SerializedName("application")
+        APPLICATION("application"),
+
+        @SerializedName("stripe")
+        STRIPE("stripe");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Payments(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class StripeDashboard {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Whether this account should have access to the full Stripe Dashboard ({@code full}), to the
+       * Express Dashboard ({@code express}), or to no Stripe-hosted dashboard ({@code none}).
+       * Defaults to {@code full}.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private StripeDashboard(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Controller.StripeDashboard build() {
+          return new AccountCreateParams.Controller.StripeDashboard(this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.StripeDashboard#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.StripeDashboard#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Whether this account should have access to the full Stripe Dashboard ({@code full}), to
+         * the Express Dashboard ({@code express}), or to no Stripe-hosted dashboard ({@code none}).
+         * Defaults to {@code full}.
+         */
+        public Builder setType(AccountCreateParams.Controller.StripeDashboard.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("express")
+        EXPRESS("express"),
+
+        @SerializedName("full")
+        FULL("full"),
+
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum RequirementCollection implements ApiRequestParams.EnumParam {
+      @SerializedName("application")
+      APPLICATION("application"),
+
+      @SerializedName("stripe")
+      STRIPE("stripe");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      RequirementCollection(String value) {
+        this.value = value;
       }
     }
   }

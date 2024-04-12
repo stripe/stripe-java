@@ -325,19 +325,19 @@ public final class AccountService extends ApiService {
     return this.request(request, Account.class);
   }
 
-  public com.stripe.service.CapabilityService capabilities() {
-    return new com.stripe.service.CapabilityService(this.getResponseGetter());
+  public com.stripe.service.AccountCapabilityService capabilities() {
+    return new com.stripe.service.AccountCapabilityService(this.getResponseGetter());
   }
 
-  public com.stripe.service.ExternalAccountService externalAccounts() {
-    return new com.stripe.service.ExternalAccountService(this.getResponseGetter());
+  public com.stripe.service.AccountExternalAccountService externalAccounts() {
+    return new com.stripe.service.AccountExternalAccountService(this.getResponseGetter());
   }
 
-  public com.stripe.service.LoginLinkService loginLinks() {
-    return new com.stripe.service.LoginLinkService(this.getResponseGetter());
+  public com.stripe.service.AccountLoginLinkService loginLinks() {
+    return new com.stripe.service.AccountLoginLinkService(this.getResponseGetter());
   }
 
-  public com.stripe.service.PersonService persons() {
-    return new com.stripe.service.PersonService(this.getResponseGetter());
+  public com.stripe.service.AccountPersonService persons() {
+    return new com.stripe.service.AccountPersonService(this.getResponseGetter());
   }
 }

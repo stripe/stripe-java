@@ -198,6 +198,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
     @SerializedName("selection")
     Selection selection;
 
+    /** List of toggles to be displayed and customization for the toggles. */
+    @SerializedName("toggles")
+    List<ReaderCollectInputsParams.Input.Toggle> toggles;
+
     /** <strong>Required.</strong> The type of input to collect */
     @SerializedName("type")
     Type type;
@@ -207,11 +211,13 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Boolean required,
         Selection selection,
+        List<ReaderCollectInputsParams.Input.Toggle> toggles,
         Type type) {
       this.customText = customText;
       this.extraParams = extraParams;
       this.required = required;
       this.selection = selection;
+      this.toggles = toggles;
       this.type = type;
     }
 
@@ -228,12 +234,19 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
 
       private Selection selection;
 
+      private List<ReaderCollectInputsParams.Input.Toggle> toggles;
+
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ReaderCollectInputsParams.Input build() {
         return new ReaderCollectInputsParams.Input(
-            this.customText, this.extraParams, this.required, this.selection, this.type);
+            this.customText,
+            this.extraParams,
+            this.required,
+            this.selection,
+            this.toggles,
+            this.type);
       }
 
       /**
@@ -280,6 +293,32 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
       /** Options for the {@code selection} input. */
       public Builder setSelection(ReaderCollectInputsParams.Input.Selection selection) {
         this.selection = selection;
+        return this;
+      }
+
+      /**
+       * Add an element to `toggles` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * ReaderCollectInputsParams.Input#toggles} for the field documentation.
+       */
+      public Builder addToggle(ReaderCollectInputsParams.Input.Toggle element) {
+        if (this.toggles == null) {
+          this.toggles = new ArrayList<>();
+        }
+        this.toggles.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `toggles` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * ReaderCollectInputsParams.Input#toggles} for the field documentation.
+       */
+      public Builder addAllToggle(List<ReaderCollectInputsParams.Input.Toggle> elements) {
+        if (this.toggles == null) {
+          this.toggles = new ArrayList<>();
+        }
+        this.toggles.addAll(elements);
         return this;
       }
 
@@ -602,12 +641,141 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
       }
     }
 
+    @Getter
+    public static class Toggle {
+      /** The default value of the toggle. */
+      @SerializedName("default_value")
+      DefaultValue defaultValue;
+
+      /** The description which will be displayed for the toggle. */
+      @SerializedName("description")
+      String description;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The title which will be displayed for the toggle. */
+      @SerializedName("title")
+      String title;
+
+      private Toggle(
+          DefaultValue defaultValue,
+          String description,
+          Map<String, Object> extraParams,
+          String title) {
+        this.defaultValue = defaultValue;
+        this.description = description;
+        this.extraParams = extraParams;
+        this.title = title;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private DefaultValue defaultValue;
+
+        private String description;
+
+        private Map<String, Object> extraParams;
+
+        private String title;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ReaderCollectInputsParams.Input.Toggle build() {
+          return new ReaderCollectInputsParams.Input.Toggle(
+              this.defaultValue, this.description, this.extraParams, this.title);
+        }
+
+        /** The default value of the toggle. */
+        public Builder setDefaultValue(
+            ReaderCollectInputsParams.Input.Toggle.DefaultValue defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
+        }
+
+        /** The description which will be displayed for the toggle. */
+        public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ReaderCollectInputsParams.Input.Toggle#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ReaderCollectInputsParams.Input.Toggle#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The title which will be displayed for the toggle. */
+        public Builder setTitle(String title) {
+          this.title = title;
+          return this;
+        }
+      }
+
+      public enum DefaultValue implements ApiRequestParams.EnumParam {
+        @SerializedName("disabled")
+        DISABLED("disabled"),
+
+        @SerializedName("enabled")
+        ENABLED("enabled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        DefaultValue(String value) {
+          this.value = value;
+        }
+      }
+    }
+
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("email")
+      EMAIL("email"),
+
+      @SerializedName("numeric")
+      NUMERIC("numeric"),
+
+      @SerializedName("phone")
+      PHONE("phone"),
+
       @SerializedName("selection")
       SELECTION("selection"),
 
       @SerializedName("signature")
-      SIGNATURE("signature");
+      SIGNATURE("signature"),
+
+      @SerializedName("text")
+      TEXT("text");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

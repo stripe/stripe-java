@@ -464,10 +464,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
       TRANSFER_REVERSAL("transfer_reversal"),
 
       @SerializedName("unreconciled_customer_funds")
-      UNRECONCILED_CUSTOMER_FUNDS("unreconciled_customer_funds"),
-
-      @SerializedName("obligation")
-      OBLIGATION("obligation");
+      UNRECONCILED_CUSTOMER_FUNDS("unreconciled_customer_funds");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

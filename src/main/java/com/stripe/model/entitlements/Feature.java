@@ -13,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.entitlements.FeatureCreateParams;
 import com.stripe.param.entitlements.FeatureListParams;
+import com.stripe.param.entitlements.FeatureRetrieveParams;
 import com.stripe.param.entitlements.FeatureUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -141,6 +142,42 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, FeatureCollection.class);
+  }
+
+  /** Retrieves a feature. */
+  public static Feature retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a feature. */
+  public static Feature retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a feature. */
+  public static Feature retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Feature.class);
+  }
+
+  /** Retrieves a feature. */
+  public static Feature retrieve(String id, FeatureRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Feature.class);
   }
 
   /** Update a feature’s metadata or permanently deactivate it. */

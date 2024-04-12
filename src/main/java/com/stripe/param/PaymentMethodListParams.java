@@ -223,6 +223,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("alipay")
     ALIPAY("alipay"),
 
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
+
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
 

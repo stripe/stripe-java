@@ -13,6 +13,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.ProductFeatureCreateParams;
 import com.stripe.param.ProductFeatureListParams;
+import com.stripe.param.ProductFeatureRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -163,6 +164,51 @@ public class ProductFeature extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, ProductFeatureCollection.class);
+  }
+
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public static ProductFeature retrieve(String product, String id) throws StripeException {
+    return retrieve(product, id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public static ProductFeature retrieve(String product, String id, RequestOptions options)
+      throws StripeException {
+    return retrieve(product, id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public static ProductFeature retrieve(
+      String product, String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/products/%s/features/%s",
+            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ProductFeature.class);
+  }
+
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public static ProductFeature retrieve(
+      String product, String id, ProductFeatureRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/products/%s/features/%s",
+            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, ProductFeature.class);
   }
 
   @Override

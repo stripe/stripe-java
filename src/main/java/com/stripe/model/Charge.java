@@ -66,7 +66,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * The application fee (if any) for the charge. <a
-   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">See the Connect
+   * href="https://stripe.com/docs/connect/direct-charges#collect-fees">See the Connect
    * documentation</a> for details.
    */
   @SerializedName("application_fee")
@@ -76,7 +76,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * The amount of the application fee (if any) requested for the charge. <a
-   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">See the Connect
+   * href="https://stripe.com/docs/connect/direct-charges#collect-fees">See the Connect
    * documentation</a> for details.
    */
   @SerializedName("application_fee_amount")
@@ -1134,6 +1134,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
@@ -1390,6 +1393,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {}
 
     @Getter
     @Setter

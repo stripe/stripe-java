@@ -15,6 +15,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.ProductFeatureCreateParams;
 import com.stripe.param.ProductFeatureListParams;
+import com.stripe.param.ProductFeatureRetrieveParams;
 
 public final class ProductFeatureService extends ApiService {
   public ProductFeatureService(StripeResponseGetter responseGetter) {
@@ -35,6 +36,38 @@ public final class ProductFeatureService extends ApiService {
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+    return this.request(request, ProductFeature.class);
+  }
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public ProductFeature retrieve(String product, String id, ProductFeatureRetrieveParams params)
+      throws StripeException {
+    return retrieve(product, id, params, (RequestOptions) null);
+  }
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public ProductFeature retrieve(String product, String id, RequestOptions options)
+      throws StripeException {
+    return retrieve(product, id, (ProductFeatureRetrieveParams) null, options);
+  }
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public ProductFeature retrieve(String product, String id) throws StripeException {
+    return retrieve(product, id, (ProductFeatureRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a product_feature, which represents a feature attachment to a product. */
+  public ProductFeature retrieve(
+      String product, String id, ProductFeatureRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/products/%s/features/%s",
+            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
     return this.request(request, ProductFeature.class);
   }
   /** Retrieve a list of features for a product. */

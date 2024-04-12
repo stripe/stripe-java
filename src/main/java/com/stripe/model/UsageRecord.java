@@ -21,6 +21,10 @@ import lombok.Setter;
  *
  * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/metered-billing">Metered
  * billing</a>
+ *
+ * <p>This is our legacy usage-based billing API. See the <a
+ * href="https://docs.stripe.com/billing/subscriptions/usage-based">updated usage-based billing
+ * docs</a>.
  */
 @Getter
 @Setter

@@ -45,16 +45,16 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
+  @SerializedName("images")
+  Object images;
+
   /**
    * A list of up to 15 marketing features for this product. These are displayed in <a
    * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
    */
-  @SerializedName("features")
-  Object features;
-
-  /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
-  @SerializedName("images")
-  Object images;
+  @SerializedName("marketing_features")
+  Object marketingFeatures;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -111,8 +111,8 @@ public class ProductUpdateParams extends ApiRequestParams {
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
-      Object features,
       Object images,
+      Object marketingFeatures,
       Object metadata,
       Object name,
       Object packageDimensions,
@@ -126,8 +126,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.features = features;
     this.images = images;
+    this.marketingFeatures = marketingFeatures;
     this.metadata = metadata;
     this.name = name;
     this.packageDimensions = packageDimensions;
@@ -153,9 +153,9 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Object features;
-
     private Object images;
+
+    private Object marketingFeatures;
 
     private Object metadata;
 
@@ -181,8 +181,8 @@ public class ProductUpdateParams extends ApiRequestParams {
           this.description,
           this.expand,
           this.extraParams,
-          this.features,
           this.images,
+          this.marketingFeatures,
           this.metadata,
           this.name,
           this.packageDimensions,
@@ -290,52 +290,6 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `features` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ProductUpdateParams#features} for the field documentation.
-     */
-    @SuppressWarnings("unchecked")
-    public Builder addFeature(ProductUpdateParams.Feature element) {
-      if (this.features == null || this.features instanceof EmptyParam) {
-        this.features = new ArrayList<ProductUpdateParams.Feature>();
-      }
-      ((List<ProductUpdateParams.Feature>) this.features).add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `features` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductUpdateParams#features} for the field documentation.
-     */
-    @SuppressWarnings("unchecked")
-    public Builder addAllFeature(List<ProductUpdateParams.Feature> elements) {
-      if (this.features == null || this.features instanceof EmptyParam) {
-        this.features = new ArrayList<ProductUpdateParams.Feature>();
-      }
-      ((List<ProductUpdateParams.Feature>) this.features).addAll(elements);
-      return this;
-    }
-
-    /**
-     * A list of up to 15 marketing features for this product. These are displayed in <a
-     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
-     */
-    public Builder setFeatures(EmptyParam features) {
-      this.features = features;
-      return this;
-    }
-
-    /**
-     * A list of up to 15 marketing features for this product. These are displayed in <a
-     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
-     */
-    public Builder setFeatures(List<ProductUpdateParams.Feature> features) {
-      this.features = features;
-      return this;
-    }
-
-    /**
      * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * ProductUpdateParams#images} for the field documentation.
@@ -376,6 +330,53 @@ public class ProductUpdateParams extends ApiRequestParams {
      */
     public Builder setImages(List<String> images) {
       this.images = images;
+      return this;
+    }
+
+    /**
+     * Add an element to `marketingFeatures` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#marketingFeatures} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addMarketingFeature(ProductUpdateParams.MarketingFeature element) {
+      if (this.marketingFeatures == null || this.marketingFeatures instanceof EmptyParam) {
+        this.marketingFeatures = new ArrayList<ProductUpdateParams.MarketingFeature>();
+      }
+      ((List<ProductUpdateParams.MarketingFeature>) this.marketingFeatures).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `marketingFeatures` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link ProductUpdateParams#marketingFeatures} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllMarketingFeature(List<ProductUpdateParams.MarketingFeature> elements) {
+      if (this.marketingFeatures == null || this.marketingFeatures instanceof EmptyParam) {
+        this.marketingFeatures = new ArrayList<ProductUpdateParams.MarketingFeature>();
+      }
+      ((List<ProductUpdateParams.MarketingFeature>) this.marketingFeatures).addAll(elements);
+      return this;
+    }
+
+    /**
+     * A list of up to 15 marketing features for this product. These are displayed in <a
+     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+     */
+    public Builder setMarketingFeatures(EmptyParam marketingFeatures) {
+      this.marketingFeatures = marketingFeatures;
+      return this;
+    }
+
+    /**
+     * A list of up to 15 marketing features for this product. These are displayed in <a
+     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+     */
+    public Builder setMarketingFeatures(
+        List<ProductUpdateParams.MarketingFeature> marketingFeatures) {
+      this.marketingFeatures = marketingFeatures;
       return this;
     }
 
@@ -535,7 +536,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class Feature {
+  public static class MarketingFeature {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -545,16 +546,12 @@ public class ProductUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    @SerializedName("feature")
-    Object feature;
-
     /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     Object name;
 
-    private Feature(Map<String, Object> extraParams, Object feature, Object name) {
+    private MarketingFeature(Map<String, Object> extraParams, Object name) {
       this.extraParams = extraParams;
-      this.feature = feature;
       this.name = name;
     }
 
@@ -565,19 +562,17 @@ public class ProductUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private Object feature;
-
       private Object name;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ProductUpdateParams.Feature build() {
-        return new ProductUpdateParams.Feature(this.extraParams, this.feature, this.name);
+      public ProductUpdateParams.MarketingFeature build() {
+        return new ProductUpdateParams.MarketingFeature(this.extraParams, this.name);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * ProductUpdateParams.Feature#extraParams} for the field documentation.
+       * ProductUpdateParams.MarketingFeature#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -590,23 +585,13 @@ public class ProductUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link ProductUpdateParams.Feature#extraParams} for the field documentation.
+       * See {@link ProductUpdateParams.MarketingFeature#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
-        return this;
-      }
-
-      public Builder setFeature(String feature) {
-        this.feature = feature;
-        return this;
-      }
-
-      public Builder setFeature(EmptyParam feature) {
-        this.feature = feature;
         return this;
       }
 

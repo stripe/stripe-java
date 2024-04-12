@@ -1033,7 +1033,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Perform an decremental authorization on an eligible <a
+   * Perform a decremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
@@ -1048,7 +1048,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * The PaymentIntent will now be capturable up to the new authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
-   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
    * decremented.
    */
   public PaymentIntent decrementAuthorization(Map<String, Object> params) throws StripeException {
@@ -1056,7 +1056,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Perform an decremental authorization on an eligible <a
+   * Perform a decremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
@@ -1071,7 +1071,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * The PaymentIntent will now be capturable up to the new authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
-   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
    * decremented.
    */
   public PaymentIntent decrementAuthorization(Map<String, Object> params, RequestOptions options)
@@ -1087,7 +1087,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Perform an decremental authorization on an eligible <a
+   * Perform a decremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
@@ -1102,7 +1102,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * The PaymentIntent will now be capturable up to the new authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
-   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
    * decremented.
    */
   public PaymentIntent decrementAuthorization(PaymentIntentDecrementAuthorizationParams params)
@@ -1111,7 +1111,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Perform an decremental authorization on an eligible <a
+   * Perform a decremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
@@ -1126,7 +1126,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * The PaymentIntent will now be capturable up to the new authorized amount.
    *
    * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
-   * attempts, including declines. After it’s captured, a PaymentIntent can no longer be
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
    * decremented.
    */
   public PaymentIntent decrementAuthorization(
@@ -2135,6 +2135,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("expires_at")
       Long expiresAt;
 
+      /**
+       * The URL for the hosted Multibanco voucher page, which allows customers to view a Multibanco
+       * voucher.
+       */
+      @SerializedName("hosted_voucher_url")
+      String hostedVoucherUrl;
+
       /** Reference number associated with this Multibanco payment. */
       @SerializedName("reference")
       String reference;
@@ -2724,6 +2731,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
@@ -2995,6 +3005,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
     }
 
     @Getter
@@ -4196,7 +4219,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RevolutPay extends StripeObject {}
+    public static class RevolutPay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
 
     @Getter
     @Setter

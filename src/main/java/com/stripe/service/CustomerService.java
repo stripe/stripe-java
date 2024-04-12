@@ -261,8 +261,8 @@ public final class CustomerService extends ApiService {
     return new com.stripe.service.CustomerBalanceTransactionService(this.getResponseGetter());
   }
 
-  public com.stripe.service.CashBalanceService cashBalance() {
-    return new com.stripe.service.CashBalanceService(this.getResponseGetter());
+  public com.stripe.service.CustomerCashBalanceService cashBalance() {
+    return new com.stripe.service.CustomerCashBalanceService(this.getResponseGetter());
   }
 
   public com.stripe.service.CustomerCashBalanceTransactionService cashBalanceTransactions() {
@@ -277,11 +277,11 @@ public final class CustomerService extends ApiService {
     return new com.stripe.service.CustomerPaymentMethodService(this.getResponseGetter());
   }
 
-  public com.stripe.service.PaymentSourceService paymentSources() {
-    return new com.stripe.service.PaymentSourceService(this.getResponseGetter());
+  public com.stripe.service.CustomerPaymentSourceService paymentSources() {
+    return new com.stripe.service.CustomerPaymentSourceService(this.getResponseGetter());
   }
 
-  public com.stripe.service.TaxIdService taxIds() {
-    return new com.stripe.service.TaxIdService(this.getResponseGetter());
+  public com.stripe.service.CustomerTaxIdService taxIds() {
+    return new com.stripe.service.CustomerTaxIdService(this.getResponseGetter());
   }
 }

@@ -5559,6 +5559,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Alipay alipay;
 
     /**
+     * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
+     * method.
+     */
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
+    /**
      * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
      * account.
      */
@@ -5833,6 +5840,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
+        AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
         Bancontact bancontact,
@@ -5875,6 +5883,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
+      this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
@@ -5927,6 +5936,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private AfterpayClearpay afterpayClearpay;
 
       private Alipay alipay;
+
+      private AmazonPay amazonPay;
 
       private AuBecsDebit auBecsDebit;
 
@@ -6011,6 +6022,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
+            this.amazonPay,
             this.auBecsDebit,
             this.bacsDebit,
             this.bancontact,
@@ -6085,6 +6097,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setAlipay(PaymentIntentCreateParams.PaymentMethodData.Alipay alipay) {
         this.alipay = alipay;
+        return this;
+      }
+
+      /**
+       * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay
+       * payment method.
+       */
+      public Builder setAmazonPay(PaymentIntentCreateParams.PaymentMethodData.AmazonPay amazonPay) {
+        this.amazonPay = amazonPay;
         return this;
       }
 
@@ -6738,6 +6759,63 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Alipay#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class AmazonPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AmazonPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodData.AmazonPay build() {
+          return new PaymentIntentCreateParams.PaymentMethodData.AmazonPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.AmazonPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.AmazonPay#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -9812,6 +9890,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("alipay")
       ALIPAY("alipay"),
 
+      @SerializedName("amazon_pay")
+      AMAZON_PAY("amazon_pay"),
+
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),
 
@@ -9946,6 +10027,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     @SerializedName("alipay")
     Object alipay;
+
+    /**
+     * If this is a {@code amazon_pay} PaymentMethod, this sub-hash contains details about the
+     * Amazon Pay payment method options.
+     */
+    @SerializedName("amazon_pay")
+    Object amazonPay;
 
     /**
      * If this is a {@code au_becs_debit} PaymentMethod, this sub-hash contains details about the AU
@@ -10196,6 +10284,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object affirm,
         Object afterpayClearpay,
         Object alipay,
+        Object amazonPay,
         Object auBecsDebit,
         Object bacsDebit,
         Object bancontact,
@@ -10235,6 +10324,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
+      this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
@@ -10284,6 +10374,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private Object afterpayClearpay;
 
       private Object alipay;
+
+      private Object amazonPay;
 
       private Object auBecsDebit;
 
@@ -10362,6 +10454,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
+            this.amazonPay,
             this.auBecsDebit,
             this.bacsDebit,
             this.bancontact,
@@ -10470,6 +10563,25 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setAlipay(EmptyParam alipay) {
         this.alipay = alipay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code amazon_pay} PaymentMethod, this sub-hash contains details about the
+       * Amazon Pay payment method options.
+       */
+      public Builder setAmazonPay(
+          PaymentIntentCreateParams.PaymentMethodOptions.AmazonPay amazonPay) {
+        this.amazonPay = amazonPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code amazon_pay} PaymentMethod, this sub-hash contains details about the
+       * Amazon Pay payment method options.
+       */
+      public Builder setAmazonPay(EmptyParam amazonPay) {
+        this.amazonPay = amazonPay;
         return this;
       }
 
@@ -12050,6 +12162,203 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class AmazonPay {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>If provided, this parameter will override the top level behavior of {@code
+       * capture_method} when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter will unset the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private AmazonPay(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodOptions.AmazonPay build() {
+          return new PaymentIntentCreateParams.PaymentMethodOptions.AmazonPay(
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top level behavior of {@code
+         * capture_method} when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentCreateParams.PaymentMethodOptions.AmazonPay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top level behavior of {@code
+         * capture_method} when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.AmazonPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.AmazonPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.AmazonPay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
 
@@ -15085,10 +15394,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("request_extended_authorization")
       Boolean requestExtendedAuthorization;
 
-      /** This field was released by mistake and will be removed in the next major version. */
-      @SerializedName("request_incremental_authorization")
-      RequestIncrementalAuthorization requestIncrementalAuthorization;
-
       /**
        * Request ability to <a
        * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
@@ -15103,11 +15408,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private CardPresent(
           Map<String, Object> extraParams,
           Boolean requestExtendedAuthorization,
-          RequestIncrementalAuthorization requestIncrementalAuthorization,
           Boolean requestIncrementalAuthorizationSupport) {
         this.extraParams = extraParams;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
-        this.requestIncrementalAuthorization = requestIncrementalAuthorization;
         this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
       }
 
@@ -15120,8 +15423,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Boolean requestExtendedAuthorization;
 
-        private RequestIncrementalAuthorization requestIncrementalAuthorization;
-
         private Boolean requestIncrementalAuthorizationSupport;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -15129,7 +15430,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent(
               this.extraParams,
               this.requestExtendedAuthorization,
-              this.requestIncrementalAuthorization,
               this.requestIncrementalAuthorizationSupport);
         }
 
@@ -15171,15 +15471,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** This field was released by mistake and will be removed in the next major version. */
-        public Builder setRequestIncrementalAuthorization(
-            PaymentIntentCreateParams.PaymentMethodOptions.CardPresent
-                    .RequestIncrementalAuthorization
-                requestIncrementalAuthorization) {
-          this.requestIncrementalAuthorization = requestIncrementalAuthorization;
-          return this;
-        }
-
         /**
          * Request ability to <a
          * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
@@ -15192,21 +15483,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             Boolean requestIncrementalAuthorizationSupport) {
           this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
           return this;
-        }
-      }
-
-      public enum RequestIncrementalAuthorization implements ApiRequestParams.EnumParam {
-        @SerializedName("if_available")
-        IF_AVAILABLE("if_available"),
-
-        @SerializedName("never")
-        NEVER("never");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        RequestIncrementalAuthorization(String value) {
-          this.value = value;
         }
       }
     }
@@ -19249,6 +19525,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @Getter
     public static class RevolutPay {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>If provided, this parameter will override the top level behavior of {@code
+       * capture_method} when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter will unset the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -19276,7 +19564,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       ApiRequestParams.EnumParam setupFutureUsage;
 
       private RevolutPay(
-          Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -19286,6 +19577,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
         private Map<String, Object> extraParams;
 
         private ApiRequestParams.EnumParam setupFutureUsage;
@@ -19293,7 +19586,36 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.RevolutPay build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.RevolutPay(
-              this.extraParams, this.setupFutureUsage);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top level behavior of {@code
+         * capture_method} when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentCreateParams.PaymentMethodOptions.RevolutPay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top level behavior of {@code
+         * capture_method} when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -19366,6 +19688,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
 

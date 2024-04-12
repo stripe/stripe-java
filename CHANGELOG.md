@@ -1,10 +1,119 @@
 # Changelog
 
+## 25.1.0 - 2024-04-11
+* [#1779](https://github.com/stripe/stripe-java/pull/1779) Update generated code
+  * Add support for `account_management` and `notification_banner` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `external_account_collection` on `AccountSession.components.account_onboarding.features` and `AccountSessionCreateParams.components.account_onboarding.features`
+  * Change `billing.MeterEventAdjustmentCreateParams.cancel.identifier` and `billing.MeterEventAdjustmentCreateParams.cancel` to be optional
+  * Change `billing.MeterEventAdjustmentCreateParams.type` to be required
+  * Change type of `Billing.MeterEventAdjustment.cancel` from `BillingMeterResourceBillingMeterEventAdjustmentCancel` to `nullable(BillingMeterResourceBillingMeterEventAdjustmentCancel)`
+  * Add support for `amazon_pay` on `Charge.payment_method_details`, `Checkout.Session.payment_method_options`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, `PaymentMethodConfiguration`, `PaymentMethodCreateParams`, `PaymentMethod`, `Refund.destination_details`, `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_data`, `SetupIntentCreateParams.payment_method_options`, `SetupIntentUpdateParams.payment_method_data`, `SetupIntentUpdateParams.payment_method_options`, and `checkout.SessionCreateParams.payment_method_options`
+  * Add support for new value `ownership` on enums `InvoiceCreateParams.payment_settings.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `InvoiceUpdateParams.payment_settings.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `PaymentIntentConfirmParams.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `PaymentIntentCreateParams.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `PaymentIntentUpdateParams.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `SetupIntentConfirmParams.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `SetupIntentCreateParams.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `SetupIntentUpdateParams.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `SubscriptionCreateParams.payment_settings.payment_method_options.us_bank_account.financial_connections.prefetch[]`, `SubscriptionUpdateParams.payment_settings.payment_method_options.us_bank_account.financial_connections.prefetch[]`, and `checkout.SessionCreateParams.payment_method_options.us_bank_account.financial_connections.prefetch[]`
+  * Add support for new value `amazon_pay` on enum `checkout.SessionCreateParams.payment_method_types[]`
+  * Add support for new value `amazon_pay` on enums `ConfirmationTokenCreateParams.payment_method_data.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for new values `bh_vat`, `kz_bin`, `ng_tin`, and `om_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `TaxIdCreateParams.type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for new value `amazon_pay` on enums `CustomerListPaymentMethodsParams.type`, `PaymentMethodCreateParams.type`, and `PaymentMethodListParams.type`
+  * Add support for `next_refresh_available_at` on `FinancialConnections.Account.ownership_refresh`
+
+## 25.0.0 - 2024-04-10
+* [#1776](https://github.com/stripe/stripe-java/pull/1776)
+
+  * This release changes the pinned API version to `2024-04-10`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-04-10) and carefully review the API changes before upgrading.
+
+  * Add a new `TaxIdService` for operations on `/v1/tax_ids` endpoints.
+
+  ### ⚠️ Breaking changes
+
+  * Rename `features` to `marketing_features` on `ProductCreateParams`, `ProductUpdateParams`, and `Product`
+  * Rename "child" services to be prefixed with the associated parent service to allow for the same resource to be exposed at top level (e.g., `/v1/tax_ids` via `client.taxIds()`) and as a child (e.g., `/v1/customers/{}/tax_ids` via `client.customers().taxIds()`).
+    * Rename `CapabilityService` -> `AccountCapabilityService`
+    * Rename `ExternalAccountService` -> `AccountExternalAccountService`
+    * Rename `LoginLinkService` -> `AccountLoginLinkService`
+    * Rename `PersonService` -> `AccountPersonService`
+    * Rename `FeeRefundService` -> `ApplicationFeeRefundService`
+    * Rename `CashBalanceService` -> `CustomerCashBalanceService`
+    * Rename `PaymentSourceService` -> `CustomerPaymentSourceService`
+    * Rename `UsageRecordService` -> `SubscriptionItemUsageRecordService`
+    * Rename `UsageRecordSummaryService` -> `SubscriptionItemUsageRecordSummaryService`
+    * Rename `TaxIdService` -> `CustomerTaxIdService`.
+  * Remove support for `verify` method on `BankAccountService`.
+    *  Please use the `verify` method on `CustomerPaymentSourceService` instead
+    ```java
+    // BEFORE
+    client.bankAccounts().verify("cus_...", "ba_...");
+
+    // AFTER
+    client.customers().paymentSources().verify("cus_...", "ba_...");
+    ```
+  * Remove support for `list` and `create` methods on `treasury.FinancialAccountFeaturesService`. These methods were incorrectly named.
+    * Please migrate `list` -> `retrieve` and `create` -> `update`.
+  * Update `setPageTypeToken` method on `StripeCollectionInterface` to be required and remove default implementation.
+  * Remove deprecated `setUsage` method on `BaseApiRequest`.
+  * Update `usage` on `BaseApiRequest` class to be `final`.
+  * Remove deprecated `maybeEnqueueMetrics` method on `RequestTelemetry`.
+
+  #### ⚠️ Removal of enum values, properties and events that are no longer part of the publicly documented Stripe API
+
+  * Remove `Configuration.SubscriptionPause` for Billing Portal as the feature to pause subscription on the portal has been deprecated.
+  * Remove the support for the below deprecated values in `BalanceTransaction.Type`
+      * `obligation_inbound`
+      * `obligation_payout`
+      * `obligation_payout_failure`
+      * `obligation_reversal_outbound`
+  * Remove the below deprecated events from `Event.Type`, `WebhookEndpointCreateOptions.EnabledEvent`, `WebhookEndpointUpdateOptions.EnabledEvent`
+     * `invoiceitem.updated`
+     * `order.created`
+     * `recipient.created`
+     * `recipient.deleted`
+     * `recipient.updated`
+     * `sku.created`
+     * `sku.deleted`
+     * `sku.updated`
+  * Remove support for `id_bank_transfer`, `multibanco`, `netbanking`, `pay_by_bank`, and `upi` on `PaymentMethodConfiguration` by removing the below classes
+     * `PaymentMethodConfiguration.IdBankTransfer`
+     * `PaymentMethodConfiguration.Multibanco`
+     * `PaymentMethodConfiguration.Netbanking`
+     * `PaymentMethodConfiguration.PayByBank`
+     * `PaymentMethodConfiguration.Upi`
+  * Remove the support for `challenge_only` in `SetupIntent.PaymentMethodOptions.Card.RequestThreeDSecure`
+  * Remove the support for deprecated value `service_tax` in `TaxRate.TaxType`, `InvoiceLinetItemUpdateParams.TaxAmount.TaxRateData.TaxType`,pweb`TaxRateCreateParams.TaxType`, `TaxRateUpdateParams.TaxType`
+  * Remove the support for `various` in `Climate.Supplier.removalPathway`
+  * Remove the deprecated value `INCLUDE_AND_REQUIRE` on the enum `InvoiceCreateParams.PendingInvoiceItemsBehavior`
+  * Remove the property `RequestIncrementalAuthorization` on `PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent`, `PaymentIntentCreateParams.PaymentMethodOptions.CardPresent` and `PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent`. This was shipped by mistake.
+  * Remove the support for deprecated value `obligation` on `ReportRunCreateParams.ReportingCategory`
+  * Remove the legacy field `rendering_options` on `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`. Use `rendering` instead.
+
+## 24.24.0 - 2024-04-09
+* [#1778](https://github.com/stripe/stripe-java/pull/1778) Update generated code
+  * Add support for new resources `Entitlements.ActiveEntitlement` and `Entitlements.Feature`
+  * Add support for `list` and `retrieve` methods on resource `ActiveEntitlement`
+  * Add support for `create`, `list`, `retrieve`, and `update` methods on resource `Feature`
+  * Add support for `controller` on `AccountCreateParams`
+  * Add support for `fees`, `losses`, `requirement_collection`, and `stripe_dashboard` on `Account.controller`
+  * Add support for `event_name` on `Billing.MeterEventAdjustment` and `billing.MeterEventAdjustmentCreateParams`
+  * Add support for `cancel` and `type` on `Billing.MeterEventAdjustment`
+
 ## 24.24.0-beta.1 - 2024-04-04
 * [#1775](https://github.com/stripe/stripe-java/pull/1775) Update generated code for beta
   * Add support for `update` method on resource `Entitlements.Feature`
   * Add support for `risk_controls` on `AccountCreateParams`, `AccountUpdateParams`, and `Account`
   * Add support for `promotion_code` on `InvoiceAddLinesParams.lines[].discounts[]`, `InvoiceUpdateLinesParams.lines[].discounts[]`, `QuoteCreateParams.line_items[].discounts[]`, `QuoteCreateParams.lines[].actions[].add_discount`, `QuoteCreateParams.phases[].line_items[].discounts[]`, `QuoteUpdateParams.line_items[].discounts[]`, `QuoteUpdateParams.lines[].actions[].add_discount`, and `QuoteUpdateParams.phases[].line_items[].discounts[]`
+
+## 24.23.0 - 2024-04-04
+* [#1774](https://github.com/stripe/stripe-java/pull/1774) Update generated code
+  * Change type of `checkout.SessionCreateParams.payment_method_options.swish.reference` from `emptyable(string)` to `string`
+  * Add support for `subscription_item` on `Discount`
+  * Add support for `email` and `phone` on `Identity.VerificationReport`, `Identity.VerificationSession.options`, `Identity.VerificationSession.verified_outputs`, `identity.VerificationSessionCreateParams.options`, and `identity.VerificationSessionUpdateParams.options`
+  * Add support for `verification_flow` on `Identity.VerificationReport`, `Identity.VerificationSession`, and `identity.VerificationSessionCreateParams`
+  * Add support for `provided_details` on `Identity.VerificationSession`, `identity.VerificationSessionCreateParams`, and `identity.VerificationSessionUpdateParams`
+  * Change `identity.VerificationSessionCreateParams.type` to be optional
+  * Add support for `promotion_code` on `InvoiceCreateParams.discounts[]`, `InvoiceItemCreateParams.discounts[]`, `InvoiceItemUpdateParams.discounts[]`, `InvoiceUpdateParams.discounts[]`, `QuoteCreateParams.discounts[]`, and `QuoteUpdateParams.discounts[]`
+  * Add support for `discounts` on `InvoiceUpcomingLinesParams.subscription_items[]`, `InvoiceUpcomingParams.subscription_items[]`, `QuoteCreateParams.line_items[]`, `QuoteUpdateParams.line_items[]`, `SubscriptionCreateParams.add_invoice_items[]`, `SubscriptionCreateParams.items[]`, `SubscriptionCreateParams`, `SubscriptionItemCreateParams`, `SubscriptionItemUpdateParams`, `SubscriptionItem`, `SubscriptionSchedule.phases[].add_invoice_items[]`, `SubscriptionSchedule.phases[].items[]`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.phases[].add_invoice_items[]`, `SubscriptionScheduleCreateParams.phases[].items[]`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.phases[].add_invoice_items[]`, `SubscriptionScheduleUpdateParams.phases[].items[]`, `SubscriptionScheduleUpdateParams.phases[]`, `SubscriptionUpdateParams.add_invoice_items[]`, `SubscriptionUpdateParams.items[]`, `SubscriptionUpdateParams`, and `Subscription`
+  * Add support for `allowed_merchant_countries` and `blocked_merchant_countries` on `Issuing.Card.spending_controls`, `Issuing.Cardholder.spending_controls`, `issuing.CardCreateParams.spending_controls`, `issuing.CardUpdateParams.spending_controls`, `issuing.CardholderCreateParams.spending_controls`, and `issuing.CardholderUpdateParams.spending_controls`
+  * Add support for `zip` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
+  * Add support for `offline` on `SetupAttempt.payment_method_details.card_present`
+  * Add support for `card_present` on `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_options`, and `SetupIntentUpdateParams.payment_method_options`
+  * Add support for new value `mobile_phone_reader` on enum `terminal.ReaderListParams.device_type`
 
 ## 24.23.0-beta.1 - 2024-03-28
 * [#1771](https://github.com/stripe/stripe-java/pull/1771) Update generated code for beta

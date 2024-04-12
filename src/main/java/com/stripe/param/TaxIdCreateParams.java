@@ -24,20 +24,24 @@ public class TaxIdCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The account or customer the tax ID belongs to. Defaults to {@code owner[type]=self}. */
+  @SerializedName("owner")
+  Owner owner;
+
   /**
    * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn}, {@code
-   * ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bo_tin}, {@code br_cnpj},
-   * {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code
-   * ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit},
-   * {@code cr_tin}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code
-   * eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin},
-   * {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn},
-   * {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp},
-   * {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code no_voec}, {@code nz_gst}, {@code
-   * pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
-   * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code
-   * tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code
-   * vn_tin}, or {@code za_vat}
+   * ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code bo_tin},
+   * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code
+   * ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin},
+   * {@code co_nit}, {@code cr_tin}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
+   * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
+   * hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code
+   * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code
+   * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
+   * no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin},
+   * {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen},
+   * {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat},
+   * {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, or {@code za_vat}
    */
   @SerializedName("type")
   Type type;
@@ -47,9 +51,10 @@ public class TaxIdCreateParams extends ApiRequestParams {
   String value;
 
   private TaxIdCreateParams(
-      List<String> expand, Map<String, Object> extraParams, Type type, String value) {
+      List<String> expand, Map<String, Object> extraParams, Owner owner, Type type, String value) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.owner = owner;
     this.type = type;
     this.value = value;
   }
@@ -63,13 +68,16 @@ public class TaxIdCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Owner owner;
+
     private Type type;
 
     private String value;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TaxIdCreateParams build() {
-      return new TaxIdCreateParams(this.expand, this.extraParams, this.type, this.value);
+      return new TaxIdCreateParams(
+          this.expand, this.extraParams, this.owner, this.type, this.value);
     }
 
     /**
@@ -124,20 +132,27 @@ public class TaxIdCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The account or customer the tax ID belongs to. Defaults to {@code owner[type]=self}. */
+    public Builder setOwner(TaxIdCreateParams.Owner owner) {
+      this.owner = owner;
+      return this;
+    }
+
     /**
      * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn}, {@code
-     * ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bo_tin}, {@code br_cnpj},
-     * {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb},
-     * {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code
-     * co_nit}, {@code cr_tin}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
-     * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
-     * hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn},
-     * {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code
-     * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code no_voec},
-     * {@code nz_gst}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code
-     * ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin},
-     * {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code
-     * us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, or {@code za_vat}
+     * ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code bo_tin},
+     * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code
+     * ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code
+     * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin},
+     * {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code
+     * hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
+     * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin},
+     * {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code
+     * ng_tin}, {@code no_vat}, {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc},
+     * {@code ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
+     * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat},
+     * {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code
+     * ve_rif}, {@code vn_tin}, or {@code za_vat}
      */
     public Builder setType(TaxIdCreateParams.Type type) {
       this.type = type;
@@ -148,6 +163,122 @@ public class TaxIdCreateParams extends ApiRequestParams {
     public Builder setValue(String value) {
       this.value = value;
       return this;
+    }
+  }
+
+  @Getter
+  public static class Owner {
+    /** Account the tax ID belongs to. Required when {@code type=account} */
+    @SerializedName("account")
+    String account;
+
+    /** Customer the tax ID belongs to. Required when {@code type=customer} */
+    @SerializedName("customer")
+    String customer;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> Type of owner referenced. */
+    @SerializedName("type")
+    Type type;
+
+    private Owner(String account, String customer, Map<String, Object> extraParams, Type type) {
+      this.account = account;
+      this.customer = customer;
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String account;
+
+      private String customer;
+
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TaxIdCreateParams.Owner build() {
+        return new TaxIdCreateParams.Owner(
+            this.account, this.customer, this.extraParams, this.type);
+      }
+
+      /** Account the tax ID belongs to. Required when {@code type=account} */
+      public Builder setAccount(String account) {
+        this.account = account;
+        return this;
+      }
+
+      /** Customer the tax ID belongs to. Required when {@code type=customer} */
+      public Builder setCustomer(String customer) {
+        this.customer = customer;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TaxIdCreateParams.Owner#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TaxIdCreateParams.Owner#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> Type of owner referenced. */
+      public Builder setType(TaxIdCreateParams.Owner.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("account")
+      ACCOUNT("account"),
+
+      @SerializedName("application")
+      APPLICATION("application"),
+
+      @SerializedName("customer")
+      CUSTOMER("customer"),
+
+      @SerializedName("self")
+      SELF("self");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 
@@ -169,6 +300,9 @@ public class TaxIdCreateParams extends ApiRequestParams {
 
     @SerializedName("bg_uic")
     BG_UIC("bg_uic"),
+
+    @SerializedName("bh_vat")
+    BH_VAT("bh_vat"),
 
     @SerializedName("bo_tin")
     BO_TIN("bo_tin"),
@@ -269,6 +403,9 @@ public class TaxIdCreateParams extends ApiRequestParams {
     @SerializedName("kr_brn")
     KR_BRN("kr_brn"),
 
+    @SerializedName("kz_bin")
+    KZ_BIN("kz_bin"),
+
     @SerializedName("li_uid")
     LI_UID("li_uid"),
 
@@ -284,6 +421,9 @@ public class TaxIdCreateParams extends ApiRequestParams {
     @SerializedName("my_sst")
     MY_SST("my_sst"),
 
+    @SerializedName("ng_tin")
+    NG_TIN("ng_tin"),
+
     @SerializedName("no_vat")
     NO_VAT("no_vat"),
 
@@ -292,6 +432,9 @@ public class TaxIdCreateParams extends ApiRequestParams {
 
     @SerializedName("nz_gst")
     NZ_GST("nz_gst"),
+
+    @SerializedName("om_vat")
+    OM_VAT("om_vat"),
 
     @SerializedName("pe_ruc")
     PE_RUC("pe_ruc"),
