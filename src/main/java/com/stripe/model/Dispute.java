@@ -804,7 +804,6 @@ public class Dispute extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails extends StripeObject {
-    /** Card specific dispute details. */
     @SerializedName("card")
     Card card;
 
