@@ -178,15 +178,15 @@ public class StripeError extends StripeObject {
    * <p>Create a SetupIntent when you're ready to collect your customer's payment credentials. Don't
    * maintain long-lived, unconfirmed SetupIntents because they might not be valid. The SetupIntent
    * transitions through multiple <a
-   * href="https://stripe.com/docs/payments/intents#intent-statuses">statuses</a> as it guides you
+   * href="https://docs.stripe.com/payments/intents#intent-statuses">statuses</a> as it guides you
    * through the setup process.
    *
    * <p>Successful SetupIntents result in payment credentials that are optimized for future
    * payments. For example, cardholders in <a
    * href="https://stripe.com/guides/strong-customer-authentication">certain regions</a> might need
-   * to be run through <a href="https://stripe.com/docs/strong-customer-authentication">Strong
+   * to be run through <a href="https://docs.stripe.com/strong-customer-authentication">Strong
    * Customer Authentication</a> during payment method collection to streamline later <a
-   * href="https://stripe.com/docs/payments/setup-intents">off-session payments</a>. If you use the
+   * href="https://docs.stripe.com/payments/setup-intents">off-session payments</a>. If you use the
    * SetupIntent with a <a
    * href="https://stripe.com/docs/api#setup_intent_object-customer">Customer</a>, it automatically
    * attaches the resulting payment method to that Customer after successful setup. We recommend
@@ -198,7 +198,7 @@ public class StripeError extends StripeObject {
    * <p>By using SetupIntents, you can reduce friction for your customers, even as regulations
    * change over time.
    *
-   * <p>Related guide: <a href="https://stripe.com/docs/payments/setup-intents">Setup Intents
+   * <p>Related guide: <a href="https://docs.stripe.com/payments/setup-intents">Setup Intents
    * API</a>
    */
   @SerializedName("setup_intent")
