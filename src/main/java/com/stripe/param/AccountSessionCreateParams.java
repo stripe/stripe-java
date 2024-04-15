@@ -1093,6 +1093,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       @Getter
       public static class Features {
+        /** Whether to allow external accounts to be linked for money transfer. */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1107,7 +1111,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName("money_movement")
         Boolean moneyMovement;
 
-        private Features(Map<String, Object> extraParams, Boolean moneyMovement) {
+        private Features(
+            Boolean externalAccountCollection,
+            Map<String, Object> extraParams,
+            Boolean moneyMovement) {
+          this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
           this.moneyMovement = moneyMovement;
         }
@@ -1117,6 +1125,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean externalAccountCollection;
+
           private Map<String, Object> extraParams;
 
           private Boolean moneyMovement;
@@ -1124,7 +1134,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.FinancialAccount.Features build() {
             return new AccountSessionCreateParams.Components.FinancialAccount.Features(
-                this.extraParams, this.moneyMovement);
+                this.externalAccountCollection, this.extraParams, this.moneyMovement);
+          }
+
+          /** Whether to allow external accounts to be linked for money transfer. */
+          public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+            this.externalAccountCollection = externalAccountCollection;
+            return this;
           }
 
           /**
