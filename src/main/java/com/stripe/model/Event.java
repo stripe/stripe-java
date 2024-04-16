@@ -131,9 +131,10 @@ public class Event extends ApiResource implements HasId {
    * customer.subscription.trial_will_end}, {@code customer.subscription.updated}, {@code
    * customer.tax_id.created}, {@code customer.tax_id.deleted}, {@code customer.tax_id.updated},
    * {@code customer.updated}, {@code customer_cash_balance_transaction.created}, {@code
-   * file.created}, {@code financial_connections.account.created}, {@code
-   * financial_connections.account.deactivated}, {@code financial_connections.account.disconnected},
-   * {@code financial_connections.account.reactivated}, {@code
+   * entitlements.active_entitlement_summary.updated}, {@code file.created}, {@code
+   * financial_connections.account.created}, {@code financial_connections.account.deactivated},
+   * {@code financial_connections.account.disconnected}, {@code
+   * financial_connections.account.reactivated}, {@code
    * financial_connections.account.refreshed_balance}, {@code
    * financial_connections.account.refreshed_ownership}, {@code
    * financial_connections.account.refreshed_transactions}, {@code

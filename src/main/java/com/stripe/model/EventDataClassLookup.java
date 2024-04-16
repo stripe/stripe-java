@@ -109,6 +109,9 @@ final class EventDataClassLookup {
 
     classLookup.put(
         "entitlements.active_entitlement", com.stripe.model.entitlements.ActiveEntitlement.class);
+    classLookup.put(
+        "entitlements.active_entitlement_summary",
+        com.stripe.model.entitlements.ActiveEntitlementSummary.class);
     classLookup.put("entitlements.feature", com.stripe.model.entitlements.Feature.class);
 
     classLookup.put(

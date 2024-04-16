@@ -14109,6 +14109,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @Getter
     public static class RevolutPay {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>If provided, this parameter will override the top level behavior of {@code
+       * capture_method} when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter will unset the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -14136,7 +14148,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       ApiRequestParams.EnumParam setupFutureUsage;
 
       private RevolutPay(
-          Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -14146,6 +14161,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
         private Map<String, Object> extraParams;
 
         private ApiRequestParams.EnumParam setupFutureUsage;
@@ -14153,7 +14170,36 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.RevolutPay build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.RevolutPay(
-              this.extraParams, this.setupFutureUsage);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top level behavior of {@code
+         * capture_method} when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentCreateParams.PaymentMethodOptions.RevolutPay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds will be captured from the customer's account.
+         *
+         * <p>If provided, this parameter will override the top level behavior of {@code
+         * capture_method} when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter will unset the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -14226,6 +14272,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
 
