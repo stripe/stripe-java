@@ -1,5 +1,15 @@
 # Changelog
 
+## 25.2.0 - 2024-04-16
+* [#1780](https://github.com/stripe/stripe-java/pull/1780) Update generated code
+  * Add support for new resource `Entitlements.ActiveEntitlementSummary`
+  * Add support for `balances` and `payouts_list` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Change `billing.MeterEventCreateParams.timestamp` to be optional
+  * Remove support for `config` on `Forwarding.Request` and `forwarding.RequestCreateParams`. This field is no longer used by the Forwarding Request API.
+  * Add support for `capture_method` on `PaymentIntent.payment_method_options.revolut_pay`, `PaymentIntentConfirmParams.payment_method_options.revolut_pay`, `PaymentIntentCreateParams.payment_method_options.revolut_pay`, and `PaymentIntentUpdateParams.payment_method_options.revolut_pay`
+  * Add support for `swish` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
+  * Add support for new value `entitlements.active_entitlement_summary.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 25.1.0 - 2024-04-11
 * [#1779](https://github.com/stripe/stripe-java/pull/1779) Update generated code
   * Add support for `account_management` and `notification_banner` on `AccountSession.components` and `AccountSessionCreateParams.components`
