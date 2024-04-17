@@ -314,6 +314,13 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("return_url")
   String returnUrl;
 
+  /**
+   * Controls saved payment method settings for the session. Only available in {@code payment} and
+   * {@code subscription} mode.
+   */
+  @SerializedName("saved_payment_method_options")
+  SavedPaymentMethodOptions savedPaymentMethodOptions;
+
   /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
@@ -2418,6 +2425,26 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class SavedPaymentMethodOptions extends StripeObject {
+    /**
+     * Controls which payment methods are eligible to be redisplayed to returning customers.
+     * Corresponds to {@code allow_redisplay} on the payment method.
+     */
+    @SerializedName("allow_redisplay_filters")
+    List<String> allowRedisplayFilters;
+
+    /**
+     * Enable customers to choose if they wish to save their payment method for future use.
+     *
+     * <p>One of {@code disabled}, or {@code enabled}.
+     */
+    @SerializedName("payment_method_save")
+    String paymentMethodSave;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingAddressCollection extends StripeObject {
     /**
      * An array of two-letter ISO country codes representing which countries Checkout should provide
@@ -2667,6 +2694,7 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
+    trySetResponseGetter(savedPaymentMethodOptions, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
