@@ -5559,6 +5559,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Alipay alipay;
 
     /**
+     * This field indicates whether this payment method can be shown again to its customer in a
+     * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+     * whether a payment method can be shown as a saved payment method in a checkout flow. The field
+     * defaults to {@code unspecified}.
+     */
+    @SerializedName("allow_redisplay")
+    AllowRedisplay allowRedisplay;
+
+    /**
      * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
      * method.
      */
@@ -5840,6 +5849,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
+        AllowRedisplay allowRedisplay,
         AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
@@ -5883,6 +5893,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
+      this.allowRedisplay = allowRedisplay;
       this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
@@ -5936,6 +5947,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private AfterpayClearpay afterpayClearpay;
 
       private Alipay alipay;
+
+      private AllowRedisplay allowRedisplay;
 
       private AmazonPay amazonPay;
 
@@ -6022,6 +6035,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
+            this.allowRedisplay,
             this.amazonPay,
             this.auBecsDebit,
             this.bacsDebit,
@@ -6097,6 +6111,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setAlipay(PaymentIntentCreateParams.PaymentMethodData.Alipay alipay) {
         this.alipay = alipay;
+        return this;
+      }
+
+      /**
+       * This field indicates whether this payment method can be shown again to its customer in a
+       * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+       * whether a payment method can be shown as a saved payment method in a checkout flow. The
+       * field defaults to {@code unspecified}.
+       */
+      public Builder setAllowRedisplay(
+          PaymentIntentCreateParams.PaymentMethodData.AllowRedisplay allowRedisplay) {
+        this.allowRedisplay = allowRedisplay;
         return this;
       }
 
@@ -9874,6 +9900,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+      }
+    }
+
+    public enum AllowRedisplay implements ApiRequestParams.EnumParam {
+      @SerializedName("always")
+      ALWAYS("always"),
+
+      @SerializedName("limited")
+      LIMITED("limited"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AllowRedisplay(String value) {
+        this.value = value;
       }
     }
 
