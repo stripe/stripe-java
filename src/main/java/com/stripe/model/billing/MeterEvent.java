@@ -51,7 +51,12 @@ public class MeterEvent extends ApiResource {
   @SerializedName("object")
   String object;
 
-  /** The payload of the event. */
+  /**
+   * The payload of the event. This contains the fields corresponding to a meter's {@code
+   * customer_mapping.event_payload_key} (default is {@code stripe_customer_id}) and {@code
+   * value_settings.event_payload_key} (default is {@code value}). Read more about the <a
+   * href="https://stripe.com/docs/billing/subscriptions/usage-based/recording-usage#payload-key-overrides">payload</a>.
+   */
   @SerializedName("payload")
   Map<String, String> payload;
 

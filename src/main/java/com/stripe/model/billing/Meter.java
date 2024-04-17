@@ -48,14 +48,14 @@ public class Meter extends ApiResource implements HasId {
   String displayName;
 
   /**
-   * The name of the usage event to record usage for. Corresponds with the {@code event_name} field
-   * on usage events.
+   * The name of the meter event to record usage for. Corresponds with the {@code event_name} field
+   * on meter events.
    */
   @SerializedName("event_name")
   String eventName;
 
   /**
-   * The time window to pre-aggregate usage events for, if any.
+   * The time window to pre-aggregate meter events for, if any.
    *
    * <p>One of {@code day}, or {@code hour}.
    */
@@ -342,7 +342,7 @@ public class Meter extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerMapping extends StripeObject {
-    /** The key in the usage event payload to use for mapping the event to a customer. */
+    /** The key in the meter event payload to use for mapping the event to a customer. */
     @SerializedName("event_payload_key")
     String eventPayloadKey;
 
@@ -381,7 +381,7 @@ public class Meter extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ValueSettings extends StripeObject {
-    /** The key in the usage event payload to use as the value for this meter. */
+    /** The key in the meter event payload to use as the value for this meter. */
     @SerializedName("event_payload_key")
     String eventPayloadKey;
   }

@@ -24,13 +24,13 @@ public class MeterCreateParams extends ApiRequestParams {
   String displayName;
 
   /**
-   * <strong>Required.</strong> The name of the usage event to record usage for. Corresponds with
-   * the {@code event_name} field on usage events.
+   * <strong>Required.</strong> The name of the meter event to record usage for. Corresponds with
+   * the {@code event_name} field on meter events.
    */
   @SerializedName("event_name")
   String eventName;
 
-  /** The time window to pre-aggregate usage events for, if any. */
+  /** The time window to pre-aggregate meter events for, if any. */
   @SerializedName("event_time_window")
   EventTimeWindow eventTimeWindow;
 
@@ -47,7 +47,7 @@ public class MeterCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Fields that specify how to calculate a usage event's value. */
+  /** Fields that specify how to calculate a meter event's value. */
   @SerializedName("value_settings")
   ValueSettings valueSettings;
 
@@ -123,15 +123,15 @@ public class MeterCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The name of the usage event to record usage for. Corresponds with
-     * the {@code event_name} field on usage events.
+     * <strong>Required.</strong> The name of the meter event to record usage for. Corresponds with
+     * the {@code event_name} field on meter events.
      */
     public Builder setEventName(String eventName) {
       this.eventName = eventName;
       return this;
     }
 
-    /** The time window to pre-aggregate usage events for, if any. */
+    /** The time window to pre-aggregate meter events for, if any. */
     public Builder setEventTimeWindow(MeterCreateParams.EventTimeWindow eventTimeWindow) {
       this.eventTimeWindow = eventTimeWindow;
       return this;
@@ -189,7 +189,7 @@ public class MeterCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Fields that specify how to calculate a usage event's value. */
+    /** Fields that specify how to calculate a meter event's value. */
     public Builder setValueSettings(MeterCreateParams.ValueSettings valueSettings) {
       this.valueSettings = valueSettings;
       return this;
