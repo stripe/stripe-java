@@ -8,6 +8,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
+import com.stripe.net.ApiRequest;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import lombok.EqualsAndHashCode;
@@ -110,15 +111,15 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
   public static SettlementCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/issuing/settlements";
-    return getGlobalResponseGetter()
-      .request(
+    ApiRequest request =
+      new ApiRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         path,
         params,
-        SettlementCollection.class,
         options,
         ApiMode.V1);
+    return getGlobalResponseGetter().request(request, SettlementCollection.class);
   }
 
   /** Retrieves an Issuing <code>Settlement</code> object. */
@@ -137,16 +138,15 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
       String settlement, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/settlements/%s", ApiResource.urlEncodeId(settlement));
-    return getGlobalResponseGetter()
-      .request(
+    ApiRequest request =
+      new ApiRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         path,
         params,
-        Settlement.class,
         options,
         ApiMode.V1);
-
+    return getGlobalResponseGetter().request(request, Settlement.class);
   }
 
   /**
@@ -166,14 +166,14 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
   public Settlement update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/issuing/settlements/%s", ApiResource.urlEncodeId(this.getId()));
-    return getResponseGetter()
-      .request(
+    ApiRequest request =
+      new ApiRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         path,
         params,
-        Settlement.class,
         options,
         ApiMode.V1);
+    return getResponseGetter().request(request, Settlement.class);
   }
 }
