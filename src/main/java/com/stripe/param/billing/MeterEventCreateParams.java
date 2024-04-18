@@ -48,8 +48,8 @@ public class MeterEventCreateParams extends ApiRequestParams {
   Map<String, String> payload;
 
   /**
-   * The time of the event. Measured in seconds since the Unix epoch. Defaults to current timestamp
-   * if not specified.
+   * The time of the event. Measured in seconds since the Unix epoch. Must be within the past 35
+   * calendar days or up to 5 minutes in the future. Defaults to current timestamp if not specified.
    */
   @SerializedName("timestamp")
   Long timestamp;
@@ -195,8 +195,9 @@ public class MeterEventCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The time of the event. Measured in seconds since the Unix epoch. Defaults to current
-     * timestamp if not specified.
+     * The time of the event. Measured in seconds since the Unix epoch. Must be within the past 35
+     * calendar days or up to 5 minutes in the future. Defaults to current timestamp if not
+     * specified.
      */
     public Builder setTimestamp(Long timestamp) {
       this.timestamp = timestamp;
