@@ -632,7 +632,10 @@ public class AuthorizationCaptureParams extends ApiRequestParams {
       @SerializedName("type")
       Type type;
 
-      /** The units for {@code volume_decimal}. One of {@code us_gallon} or {@code liter}. */
+      /**
+       * The units for {@code volume_decimal}. One of {@code liter}, {@code us_gallon}, or {@code
+       * other}.
+       */
       @SerializedName("unit")
       Unit unit;
 
@@ -721,7 +724,10 @@ public class AuthorizationCaptureParams extends ApiRequestParams {
           return this;
         }
 
-        /** The units for {@code volume_decimal}. One of {@code us_gallon} or {@code liter}. */
+        /**
+         * The units for {@code volume_decimal}. One of {@code liter}, {@code us_gallon}, or {@code
+         * other}.
+         */
         public Builder setUnit(AuthorizationCaptureParams.PurchaseDetails.Fuel.Unit unit) {
           this.unit = unit;
           return this;
@@ -773,6 +779,9 @@ public class AuthorizationCaptureParams extends ApiRequestParams {
       public enum Unit implements ApiRequestParams.EnumParam {
         @SerializedName("liter")
         LITER("liter"),
+
+        @SerializedName("other")
+        OTHER("other"),
 
         @SerializedName("us_gallon")
         US_GALLON("us_gallon");

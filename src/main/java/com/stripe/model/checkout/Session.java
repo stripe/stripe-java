@@ -314,6 +314,13 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("return_url")
   String returnUrl;
 
+  /**
+   * Controls saved payment method settings for the session. Only available in {@code payment} and
+   * {@code subscription} mode.
+   */
+  @SerializedName("saved_payment_method_options")
+  SavedPaymentMethodOptions savedPaymentMethodOptions;
+
   /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
@@ -1429,6 +1436,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("mobilepay")
+    Mobilepay mobilepay;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -2120,6 +2130,31 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Mobilepay extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {
       /**
        * The number of calendar days before an OXXO invoice expires. For example, if you create an
@@ -2393,6 +2428,26 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class SavedPaymentMethodOptions extends StripeObject {
+    /**
+     * Controls which payment methods are eligible to be redisplayed to returning customers.
+     * Corresponds to {@code allow_redisplay} on the payment method.
+     */
+    @SerializedName("allow_redisplay_filters")
+    List<String> allowRedisplayFilters;
+
+    /**
+     * Enable customers to choose if they wish to save their payment method for future use.
+     *
+     * <p>One of {@code disabled}, or {@code enabled}.
+     */
+    @SerializedName("payment_method_save")
+    String paymentMethodSave;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingAddressCollection extends StripeObject {
     /**
      * An array of two-letter ISO country codes representing which countries Checkout should provide
@@ -2642,6 +2697,7 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
+    trySetResponseGetter(savedPaymentMethodOptions, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);

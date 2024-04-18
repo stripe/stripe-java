@@ -227,6 +227,13 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_configuration")
   String paymentMethodConfiguration;
 
+  /**
+   * This parameter allows you to set some attributes on the payment method created during a
+   * Checkout session.
+   */
+  @SerializedName("payment_method_data")
+  PaymentMethodData paymentMethodData;
+
   /** Payment-method-specific configuration. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
@@ -275,6 +282,13 @@ public class SessionCreateParams extends ApiRequestParams {
    */
   @SerializedName("return_url")
   String returnUrl;
+
+  /**
+   * Controls saved payment method settings for the session. Only available in {@code payment} and
+   * {@code subscription} mode.
+   */
+  @SerializedName("saved_payment_method_options")
+  SavedPaymentMethodOptions savedPaymentMethodOptions;
 
   /**
    * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in {@code
@@ -353,11 +367,13 @@ public class SessionCreateParams extends ApiRequestParams {
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       String paymentMethodConfiguration,
+      PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       List<SessionCreateParams.PaymentMethodType> paymentMethodTypes,
       PhoneNumberCollection phoneNumberCollection,
       RedirectOnCompletion redirectOnCompletion,
       String returnUrl,
+      SavedPaymentMethodOptions savedPaymentMethodOptions,
       SetupIntentData setupIntentData,
       ShippingAddressCollection shippingAddressCollection,
       List<SessionCreateParams.ShippingOption> shippingOptions,
@@ -392,11 +408,13 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodConfiguration = paymentMethodConfiguration;
+    this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.phoneNumberCollection = phoneNumberCollection;
     this.redirectOnCompletion = redirectOnCompletion;
     this.returnUrl = returnUrl;
+    this.savedPaymentMethodOptions = savedPaymentMethodOptions;
     this.setupIntentData = setupIntentData;
     this.shippingAddressCollection = shippingAddressCollection;
     this.shippingOptions = shippingOptions;
@@ -464,6 +482,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private String paymentMethodConfiguration;
 
+    private PaymentMethodData paymentMethodData;
+
     private PaymentMethodOptions paymentMethodOptions;
 
     private List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
@@ -473,6 +493,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private RedirectOnCompletion redirectOnCompletion;
 
     private String returnUrl;
+
+    private SavedPaymentMethodOptions savedPaymentMethodOptions;
 
     private SetupIntentData setupIntentData;
 
@@ -519,11 +541,13 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodConfiguration,
+          this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.phoneNumberCollection,
           this.redirectOnCompletion,
           this.returnUrl,
+          this.savedPaymentMethodOptions,
           this.setupIntentData,
           this.shippingAddressCollection,
           this.shippingOptions,
@@ -896,6 +920,15 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * This parameter allows you to set some attributes on the payment method created during a
+     * Checkout session.
+     */
+    public Builder setPaymentMethodData(SessionCreateParams.PaymentMethodData paymentMethodData) {
+      this.paymentMethodData = paymentMethodData;
+      return this;
+    }
+
     /** Payment-method-specific configuration. */
     public Builder setPaymentMethodOptions(
         SessionCreateParams.PaymentMethodOptions paymentMethodOptions) {
@@ -961,6 +994,16 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /**
+     * Controls saved payment method settings for the session. Only available in {@code payment} and
+     * {@code subscription} mode.
+     */
+    public Builder setSavedPaymentMethodOptions(
+        SessionCreateParams.SavedPaymentMethodOptions savedPaymentMethodOptions) {
+      this.savedPaymentMethodOptions = savedPaymentMethodOptions;
       return this;
     }
 
@@ -5363,6 +5406,101 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class PaymentMethodData {
+    /**
+     * Allow redisplay will be set on the payment method on confirmation and indicates whether this
+     * payment method can be shown again to the customer in a checkout flow. Only set this field if
+     * you wish to override the allow_redisplay value determined by Checkout.
+     */
+    @SerializedName("allow_redisplay")
+    AllowRedisplay allowRedisplay;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentMethodData(AllowRedisplay allowRedisplay, Map<String, Object> extraParams) {
+      this.allowRedisplay = allowRedisplay;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AllowRedisplay allowRedisplay;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.PaymentMethodData build() {
+        return new SessionCreateParams.PaymentMethodData(this.allowRedisplay, this.extraParams);
+      }
+
+      /**
+       * Allow redisplay will be set on the payment method on confirmation and indicates whether
+       * this payment method can be shown again to the customer in a checkout flow. Only set this
+       * field if you wish to override the allow_redisplay value determined by Checkout.
+       */
+      public Builder setAllowRedisplay(
+          SessionCreateParams.PaymentMethodData.AllowRedisplay allowRedisplay) {
+        this.allowRedisplay = allowRedisplay;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.PaymentMethodData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.PaymentMethodData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum AllowRedisplay implements ApiRequestParams.EnumParam {
+      @SerializedName("always")
+      ALWAYS("always"),
+
+      @SerializedName("limited")
+      LIMITED("limited"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AllowRedisplay(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
   public static class PaymentMethodOptions {
     /** contains details about the ACSS Debit payment method options. */
     @SerializedName("acss_debit")
@@ -5453,6 +5591,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("link")
     Link link;
 
+    /** contains details about the Mobilepay payment method options. */
+    @SerializedName("mobilepay")
+    Mobilepay mobilepay;
+
     /** contains details about the OXXO payment method options. */
     @SerializedName("oxxo")
     Oxxo oxxo;
@@ -5519,6 +5661,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Klarna klarna,
         Konbini konbini,
         Link link,
+        Mobilepay mobilepay,
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
@@ -5551,6 +5694,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.klarna = klarna;
       this.konbini = konbini;
       this.link = link;
+      this.mobilepay = mobilepay;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
@@ -5611,6 +5755,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Link link;
 
+      private Mobilepay mobilepay;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -5657,6 +5803,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.klarna,
             this.konbini,
             this.link,
+            this.mobilepay,
             this.oxxo,
             this.p24,
             this.paynow,
@@ -5817,6 +5964,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Link payment method options. */
       public Builder setLink(SessionCreateParams.PaymentMethodOptions.Link link) {
         this.link = link;
+        return this;
+      }
+
+      /** contains details about the Mobilepay payment method options. */
+      public Builder setMobilepay(SessionCreateParams.PaymentMethodOptions.Mobilepay mobilepay) {
+        this.mobilepay = mobilepay;
         return this;
       }
 
@@ -9134,6 +9287,119 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Mobilepay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Mobilepay(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Mobilepay build() {
+          return new SessionCreateParams.PaymentMethodOptions.Mobilepay(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Mobilepay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Mobilepay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Mobilepay.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * The number of calendar days before an OXXO voucher expires. For example, if you create an
@@ -10938,6 +11204,155 @@ public class SessionCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class SavedPaymentMethodOptions {
+    /**
+     * Controls which payment methods are eligible to be redisplayed to returning customers.
+     * Corresponds to {@code allow_redisplay} on the payment method.
+     */
+    @SerializedName("allow_redisplay_filters")
+    List<SessionCreateParams.SavedPaymentMethodOptions.AllowRedisplayFilter> allowRedisplayFilters;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Enable customers to choose if they wish to save their payment method for future use. */
+    @SerializedName("payment_method_save")
+    PaymentMethodSave paymentMethodSave;
+
+    private SavedPaymentMethodOptions(
+        List<SessionCreateParams.SavedPaymentMethodOptions.AllowRedisplayFilter>
+            allowRedisplayFilters,
+        Map<String, Object> extraParams,
+        PaymentMethodSave paymentMethodSave) {
+      this.allowRedisplayFilters = allowRedisplayFilters;
+      this.extraParams = extraParams;
+      this.paymentMethodSave = paymentMethodSave;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private List<SessionCreateParams.SavedPaymentMethodOptions.AllowRedisplayFilter>
+          allowRedisplayFilters;
+
+      private Map<String, Object> extraParams;
+
+      private PaymentMethodSave paymentMethodSave;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.SavedPaymentMethodOptions build() {
+        return new SessionCreateParams.SavedPaymentMethodOptions(
+            this.allowRedisplayFilters, this.extraParams, this.paymentMethodSave);
+      }
+
+      /**
+       * Add an element to `allowRedisplayFilters` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SessionCreateParams.SavedPaymentMethodOptions#allowRedisplayFilters} for the field
+       * documentation.
+       */
+      public Builder addAllowRedisplayFilter(
+          SessionCreateParams.SavedPaymentMethodOptions.AllowRedisplayFilter element) {
+        if (this.allowRedisplayFilters == null) {
+          this.allowRedisplayFilters = new ArrayList<>();
+        }
+        this.allowRedisplayFilters.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `allowRedisplayFilters` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SessionCreateParams.SavedPaymentMethodOptions#allowRedisplayFilters} for the field
+       * documentation.
+       */
+      public Builder addAllAllowRedisplayFilter(
+          List<SessionCreateParams.SavedPaymentMethodOptions.AllowRedisplayFilter> elements) {
+        if (this.allowRedisplayFilters == null) {
+          this.allowRedisplayFilters = new ArrayList<>();
+        }
+        this.allowRedisplayFilters.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.SavedPaymentMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.SavedPaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Enable customers to choose if they wish to save their payment method for future use. */
+      public Builder setPaymentMethodSave(
+          SessionCreateParams.SavedPaymentMethodOptions.PaymentMethodSave paymentMethodSave) {
+        this.paymentMethodSave = paymentMethodSave;
+        return this;
+      }
+    }
+
+    public enum AllowRedisplayFilter implements ApiRequestParams.EnumParam {
+      @SerializedName("always")
+      ALWAYS("always"),
+
+      @SerializedName("limited")
+      LIMITED("limited"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AllowRedisplayFilter(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum PaymentMethodSave implements ApiRequestParams.EnumParam {
+      @SerializedName("disabled")
+      DISABLED("disabled"),
+
+      @SerializedName("enabled")
+      ENABLED("enabled");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      PaymentMethodSave(String value) {
+        this.value = value;
       }
     }
   }
@@ -13970,6 +14385,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("link")
     LINK("link"),
+
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
 
     @SerializedName("oxxo")
     OXXO("oxxo"),

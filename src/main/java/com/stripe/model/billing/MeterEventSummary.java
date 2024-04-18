@@ -27,13 +27,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class MeterEventSummary extends ApiResource implements HasId {
   /**
-   * Aggregated value of all the events within start_time (inclusive) and end_time (inclusive). The
-   * aggregation strategy is defined on meter via `default_aggregation``.
+   * Aggregated value of all the events within {@code start_time} (inclusive) and {@code end_time}
+   * (inclusive). The aggregation strategy is defined on meter via {@code default_aggregation}.
    */
   @SerializedName("aggregated_value")
   BigDecimal aggregatedValue;
 
-  /** End timestamp for this usage summary (inclusive). */
+  /** End timestamp for this event summary (inclusive). */
   @SerializedName("end_time")
   Long endTime;
 
@@ -49,7 +49,7 @@ public class MeterEventSummary extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The meter associated with this usage summary. */
+  /** The meter associated with this event summary. */
   @SerializedName("meter")
   String meter;
 
@@ -61,7 +61,7 @@ public class MeterEventSummary extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Start timestamp for this usage summary (inclusive). */
+  /** Start timestamp for this event summary (inclusive). */
   @SerializedName("start_time")
   Long startTime;
 
