@@ -110,6 +110,20 @@ public class Authorization extends ApiResource
   Fleet fleet;
 
   /**
+   * Fraud challenges sent to the cardholder, if this authorization was declined for fraud risk reasons.
+   */
+  @SerializedName("fraud_challenges")
+  List<FraudChallenge> fraudChallenges;
+
+  /**
+   * Likelihood that this transaction will be disputable in the event of fraud.
+   *
+   * <p>One of {@code neutral}, {@code unknown}, {@code very_likely}, or {@code very_unlikely}.
+   */
+  @SerializedName("fraud_disputability_likelihood")
+  String fraudDisputabilityLikelihood;
+
+  /**
    * Information about fuel that was purchased with this transaction. Typically this information is
    * received from the merchant after the authorization has been approved and the fuel dispensed.
    */
@@ -180,6 +194,12 @@ public class Authorization extends ApiResource
   PendingRequest pendingRequest;
 
   /**
+   * Projected liability for the transaction and the associated reason.
+   */
+  @SerializedName("projected_fraud_liability")
+  ProjectedFraudLiability projectedFraudLiability;
+
+  /**
    * History of every time a {@code pending_request} authorization was approved/declined, either by
    * you directly or by Stripe (e.g. based on your spending_controls). If the merchant changes the
    * authorization by performing an incremental authorization, you can look at this field to see the
@@ -188,6 +208,12 @@ public class Authorization extends ApiResource
    */
   @SerializedName("request_history")
   List<Authorization.RequestHistory> requestHistory;
+
+  /**
+   * Fraud risk details related to this authorization .
+   */
+  @SerializedName("risk_assessment")
+  RiskAssessment riskAssessment;
 
   @SerializedName("risk_score")
   Long riskScore;
@@ -754,6 +780,27 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class FraudChallenge extends StripeObject {
+    /**
+     * The method by which the fraud challenge was delivered to the cardholder.
+     *
+     * <p>One of {@code sms}.
+     */
+    @SerializedName("channel")
+    String channel;
+
+    /**
+     * The status of the fraud challenge.
+     *
+     * <p>One of {@code expired}, {@code pending}, {@code rejected}, {@code verified}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Fuel extends StripeObject {
     /**
      * <a href="https://www.conexxus.org/conexxus-payment-system-product-codes">Conexxus Payment
@@ -946,6 +993,31 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class ProjectedFraudLiability extends StripeObject {
+    /**
+     * The entity who Stripe projects to be liable for this transaction in the event of a fraud dispute.
+     *
+     * <p>One of {@code acquirer}, {@code issuer}, or {@code unknown}.
+     */
+    @SerializedName("liable_entity")
+    String liableEntity;
+
+    /**
+     * Reason that Stripe projected liability to the liable entity.
+     *
+     * <p>One of {@code chip_capable_card_swiped_at_chip_terminal},
+     * {@code chip_capable_card_swiped_at_non_chip_terminal}, {@code default_for_authorization_method},
+     * {@code manually_entered_card_with_cardholder_present}, {@code no_verification_data_at_unattended_terminal},
+     * {@code pin_preferring_card_used_at_pin_unsupported_terminal}, {@code three_d_secure_attempted},
+     * {@code three_d_secure_successful_challenge}, or {@code unknown}.
+     */
+    @SerializedName("reason")
+    String reason;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class RequestHistory extends StripeObject {
     /**
      * The {@code pending_request.amount} at the time of the request, presented in your card's
@@ -1055,6 +1127,124 @@ public class Authorization extends ApiResource
       /** The amount of cash requested by the cardholder. */
       @SerializedName("cashback_amount")
       Long cashbackAmount;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RiskAssessment extends StripeObject {
+    /**
+     * Details about the risk of card testing.
+     */
+    @SerializedName("card_testing_risk")
+    CardTestingRisk cardTestingRisk;
+
+    /**
+     * Details about the likelihood of fraud on this Authorization.
+     */
+    @SerializedName("fraud_risk")
+    FraudRisk fraudRisk;
+
+    /**
+     * Details about the dispute risk of the seller (grocery store, e-commerce website, etc.)
+     * where the card authorization happened.
+     */
+    @SerializedName("merchant_dispute_risk")
+    MerchantDisputeRisk merchantDisputeRisk;
+
+    /**
+     * Details about the risk of the seller (grocery store, e-commerce website, etc.)
+     * where the card authorization happened.
+     */
+    @SerializedName("merchant_risk")
+    MerchantRisk merchantRisk;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardTestingRisk extends StripeObject {
+      /**
+       * Invalid account number decline rate over the past hour.
+       */
+      @SerializedName("invalid_account_number_decline_rate_past_hour")
+      Long invalidAccountNumberDeclineRatePastHour;
+
+      /**
+       * Invalid credentials decline rate over the past hour.
+       */
+      @SerializedName("invalid_credentials_decline_rate_past_hour")
+      Long invalidCredentialsDeclineRatePastHour;
+
+      /**
+       * The likelihood that this authorization is part of a card testing attack.
+       *
+       * <p>One of {@code elevated}, {@code high}, {@code highest}, {@code normal},
+       * {@code not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudRisk extends StripeObject {
+      /**
+       * The percent likelihood of the authorization being fraudulent
+       */
+      @SerializedName("fraud_score")
+      Long fraudScore;
+
+      /**
+       * A numerical representation of the likelihood a transaction is fraudulent.
+       * Values range from 0 to 100, with higher values representing higher risk/
+       *
+       * <p>One of {@code elevated}, {@code high}, {@code highest}, {@code normal},
+       * {@code not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MerchantDisputeRisk extends StripeObject {
+      /**
+       * The overall dispute rate for the seller requesting the authorization.
+       */
+      @SerializedName("dispute_rate")
+      Long disputeRate;
+
+      /**
+       * The likelihood that seller is fraudulent.
+       *
+       * <p>One of {@code elevated}, {@code high}, {@code highest}, {@code normal},
+       * {@code not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MerchantRisk extends StripeObject {
+      /**
+       * The overall dispute rate for the seller requesting the authorization.
+       */
+      @SerializedName("dispute_rate")
+      Long disputeRate;
+
+      /**
+       * The likelihood that seller is fraudulent.
+       *
+       * <p>One of {@code elevated}, {@code high}, {@code highest}, {@code normal},
+       * {@code not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
     }
   }
 
