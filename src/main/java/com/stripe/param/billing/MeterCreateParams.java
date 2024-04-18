@@ -315,8 +315,7 @@ public class MeterCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Specifies how events are aggregated. Allowed values are {@code
-     * count} to count the number of events, {@code sum} to sum each event's value, or {@code last}
-     * to use the last event's value.
+     * count} to count the number of events and {@code sum} to sum each event's value.
      */
     @SerializedName("formula")
     Formula formula;
@@ -368,8 +367,7 @@ public class MeterCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Specifies how events are aggregated. Allowed values are {@code
-       * count} to count the number of events, {@code sum} to sum each event's value, or {@code
-       * last} to use the last event's value.
+       * count} to count the number of events and {@code sum} to sum each event's value.
        */
       public Builder setFormula(MeterCreateParams.DefaultAggregation.Formula formula) {
         this.formula = formula;
