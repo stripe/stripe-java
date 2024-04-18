@@ -237,6 +237,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_trial_end")
   Object subscriptionTrialEnd;
 
+  /**
+   * Indicates if a plan's {@code trial_period_days} should be applied to the subscription. Setting
+   * {@code subscription_trial_end} per subscription is preferred, and this defaults to {@code
+   * false}. Setting this flag to {@code true} together with {@code subscription_trial_end} is not
+   * allowed. See <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods
+   * on subscriptions</a> to learn more.
+   */
+  @SerializedName("subscription_trial_from_plan")
+  Boolean subscriptionTrialFromPlan;
+
   private InvoiceUpcomingParams(
       AutomaticTax automaticTax,
       String coupon,
@@ -265,7 +275,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Long subscriptionProrationDate,
       SubscriptionResumeAt subscriptionResumeAt,
       Long subscriptionStartDate,
-      Object subscriptionTrialEnd) {
+      Object subscriptionTrialEnd,
+      Boolean subscriptionTrialFromPlan) {
     this.automaticTax = automaticTax;
     this.coupon = coupon;
     this.currency = currency;
@@ -294,6 +305,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionResumeAt = subscriptionResumeAt;
     this.subscriptionStartDate = subscriptionStartDate;
     this.subscriptionTrialEnd = subscriptionTrialEnd;
+    this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
   }
 
   public static Builder builder() {
@@ -357,6 +369,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Object subscriptionTrialEnd;
 
+    private Boolean subscriptionTrialFromPlan;
+
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceUpcomingParams build() {
       return new InvoiceUpcomingParams(
@@ -387,7 +401,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionProrationDate,
           this.subscriptionResumeAt,
           this.subscriptionStartDate,
-          this.subscriptionTrialEnd);
+          this.subscriptionTrialEnd,
+          this.subscriptionTrialFromPlan);
     }
 
     /** Settings for automatic tax lookup for this invoice preview. */
@@ -874,6 +889,18 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      */
     public Builder setSubscriptionTrialEnd(Long subscriptionTrialEnd) {
       this.subscriptionTrialEnd = subscriptionTrialEnd;
+      return this;
+    }
+
+    /**
+     * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
+     * Setting {@code subscription_trial_end} per subscription is preferred, and this defaults to
+     * {@code false}. Setting this flag to {@code true} together with {@code subscription_trial_end}
+     * is not allowed. See <a href="https://stripe.com/docs/billing/subscriptions/trials">Using
+     * trial periods on subscriptions</a> to learn more.
+     */
+    public Builder setSubscriptionTrialFromPlan(Boolean subscriptionTrialFromPlan) {
+      this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
       return this;
     }
   }
