@@ -16,7 +16,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
   String customer;
 
   /**
-   * <strong>Required.</strong> The timestamp from when to stop aggregating usage events
+   * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
    * (exclusive).
    */
   @SerializedName("end_time")
@@ -52,7 +52,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * <strong>Required.</strong> The timestamp from when to start aggregating usage events
+   * <strong>Required.</strong> The timestamp from when to start aggregating meter events
    * (inclusive).
    */
   @SerializedName("start_time")
@@ -139,7 +139,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The timestamp from when to stop aggregating usage events
+     * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
      * (exclusive).
      */
     public Builder setEndTime(Long endTime) {
@@ -220,7 +220,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The timestamp from when to start aggregating usage events
+     * <strong>Required.</strong> The timestamp from when to start aggregating meter events
      * (inclusive).
      */
     public Builder setStartTime(Long startTime) {

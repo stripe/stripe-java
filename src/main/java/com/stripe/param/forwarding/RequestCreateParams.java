@@ -11,14 +11,6 @@ import lombok.Getter;
 
 @Getter
 public class RequestCreateParams extends ApiRequestParams {
-  /**
-   * <strong>Required.</strong> The Forwarding Config used when making the forwarded request. The
-   * config specifes the HTTP method, merchant credentials, connection settings, and supported
-   * destination URLs.
-   */
-  @SerializedName("config")
-  String config;
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -57,14 +49,12 @@ public class RequestCreateParams extends ApiRequestParams {
   String url;
 
   private RequestCreateParams(
-      String config,
       List<String> expand,
       Map<String, Object> extraParams,
       String paymentMethod,
       List<RequestCreateParams.Replacement> replacements,
       Request request,
       String url) {
-    this.config = config;
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentMethod = paymentMethod;
@@ -78,8 +68,6 @@ public class RequestCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String config;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -95,23 +83,12 @@ public class RequestCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public RequestCreateParams build() {
       return new RequestCreateParams(
-          this.config,
           this.expand,
           this.extraParams,
           this.paymentMethod,
           this.replacements,
           this.request,
           this.url);
-    }
-
-    /**
-     * <strong>Required.</strong> The Forwarding Config used when making the forwarded request. The
-     * config specifes the HTTP method, merchant credentials, connection settings, and supported
-     * destination URLs.
-     */
-    public Builder setConfig(String config) {
-      this.config = config;
-      return this;
     }
 
     /**

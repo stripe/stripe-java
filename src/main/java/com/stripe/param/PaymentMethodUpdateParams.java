@@ -13,6 +13,15 @@ import lombok.Getter;
 @Getter
 public class PaymentMethodUpdateParams extends ApiRequestParams {
   /**
+   * This field indicates whether this payment method can be shown again to its customer in a
+   * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+   * whether a payment method can be shown as a saved payment method in a checkout flow. The field
+   * defaults to {@code unspecified}.
+   */
+  @SerializedName("allow_redisplay")
+  AllowRedisplay allowRedisplay;
+
+  /**
    * Billing information associated with the PaymentMethod that may be used or required by
    * particular types of payment methods.
    */
@@ -67,6 +76,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   UsBankAccount usBankAccount;
 
   private PaymentMethodUpdateParams(
+      AllowRedisplay allowRedisplay,
       BillingDetails billingDetails,
       Card card,
       List<String> expand,
@@ -75,6 +85,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Object metadata,
       Payto payto,
       UsBankAccount usBankAccount) {
+    this.allowRedisplay = allowRedisplay;
     this.billingDetails = billingDetails;
     this.card = card;
     this.expand = expand;
@@ -90,6 +101,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AllowRedisplay allowRedisplay;
+
     private BillingDetails billingDetails;
 
     private Card card;
@@ -109,6 +122,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodUpdateParams build() {
       return new PaymentMethodUpdateParams(
+          this.allowRedisplay,
           this.billingDetails,
           this.card,
           this.expand,
@@ -117,6 +131,17 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.metadata,
           this.payto,
           this.usBankAccount);
+    }
+
+    /**
+     * This field indicates whether this payment method can be shown again to its customer in a
+     * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+     * whether a payment method can be shown as a saved payment method in a checkout flow. The field
+     * defaults to {@code unspecified}.
+     */
+    public Builder setAllowRedisplay(PaymentMethodUpdateParams.AllowRedisplay allowRedisplay) {
+      this.allowRedisplay = allowRedisplay;
+      return this;
     }
 
     /**
@@ -1077,6 +1102,24 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       AccountType(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum AllowRedisplay implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("limited")
+    LIMITED("limited"),
+
+    @SerializedName("unspecified")
+    UNSPECIFIED("unspecified");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AllowRedisplay(String value) {
+      this.value = value;
     }
   }
 }
