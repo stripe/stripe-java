@@ -12,6 +12,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceCreateParams;
+import com.stripe.param.InvoiceCreatePreviewParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
@@ -942,6 +943,154 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static Invoice create(InvoiceCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoices";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
+   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
+   * will also show you any discounts that are applicable to the invoice.
+   *
+   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
+   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
+   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
+   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
+   * or update the customer’s discount.
+   *
+   * <p>You can preview the effects of updating a subscription, including a preview of what
+   * proration will take place. To ensure that the actual proration is calculated exactly the same
+   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
+   * parameter when doing the actual subscription update. The recommended way to get only the
+   * prorations being previewed is to consider only proration line items where {@code period[start]}
+   * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   */
+  public static Invoice createPreview() throws StripeException {
+    return createPreview((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
+   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
+   * will also show you any discounts that are applicable to the invoice.
+   *
+   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
+   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
+   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
+   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
+   * or update the customer’s discount.
+   *
+   * <p>You can preview the effects of updating a subscription, including a preview of what
+   * proration will take place. To ensure that the actual proration is calculated exactly the same
+   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
+   * parameter when doing the actual subscription update. The recommended way to get only the
+   * prorations being previewed is to consider only proration line items where {@code period[start]}
+   * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   */
+  public static Invoice createPreview(RequestOptions options) throws StripeException {
+    return createPreview((Map<String, Object>) null, options);
+  }
+
+  /**
+   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
+   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
+   * will also show you any discounts that are applicable to the invoice.
+   *
+   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
+   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
+   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
+   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
+   * or update the customer’s discount.
+   *
+   * <p>You can preview the effects of updating a subscription, including a preview of what
+   * proration will take place. To ensure that the actual proration is calculated exactly the same
+   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
+   * parameter when doing the actual subscription update. The recommended way to get only the
+   * prorations being previewed is to consider only proration line items where {@code period[start]}
+   * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   */
+  public static Invoice createPreview(Map<String, Object> params) throws StripeException {
+    return createPreview(params, (RequestOptions) null);
+  }
+
+  /**
+   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
+   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
+   * will also show you any discounts that are applicable to the invoice.
+   *
+   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
+   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
+   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
+   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
+   * or update the customer’s discount.
+   *
+   * <p>You can preview the effects of updating a subscription, including a preview of what
+   * proration will take place. To ensure that the actual proration is calculated exactly the same
+   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
+   * parameter when doing the actual subscription update. The recommended way to get only the
+   * prorations being previewed is to consider only proration line items where {@code period[start]}
+   * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   */
+  public static Invoice createPreview(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/invoices/create_preview";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
+   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
+   * will also show you any discounts that are applicable to the invoice.
+   *
+   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
+   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
+   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
+   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
+   * or update the customer’s discount.
+   *
+   * <p>You can preview the effects of updating a subscription, including a preview of what
+   * proration will take place. To ensure that the actual proration is calculated exactly the same
+   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
+   * parameter when doing the actual subscription update. The recommended way to get only the
+   * prorations being previewed is to consider only proration line items where {@code period[start]}
+   * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   */
+  public static Invoice createPreview(InvoiceCreatePreviewParams params) throws StripeException {
+    return createPreview(params, (RequestOptions) null);
+  }
+
+  /**
+   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
+   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
+   * will also show you any discounts that are applicable to the invoice.
+   *
+   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
+   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
+   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
+   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
+   * or update the customer’s discount.
+   *
+   * <p>You can preview the effects of updating a subscription, including a preview of what
+   * proration will take place. To ensure that the actual proration is calculated exactly the same
+   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
+   * parameter when doing the actual subscription update. The recommended way to get only the
+   * prorations being previewed is to consider only proration line items where {@code period[start]}
+   * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   */
+  public static Invoice createPreview(InvoiceCreatePreviewParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/invoices/create_preview";
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
