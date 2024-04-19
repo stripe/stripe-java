@@ -16,6 +16,15 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   @SerializedName("application")
   Object application;
 
+  /**
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
+   */
+  @SerializedName("ending_before")
+  String endingBefore;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -29,11 +38,35 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 10.
+   */
+  @SerializedName("limit")
+  Long limit;
+
+  /**
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
+   */
+  @SerializedName("starting_after")
+  String startingAfter;
+
   private PaymentMethodConfigurationListParams(
-      Object application, List<String> expand, Map<String, Object> extraParams) {
+      Object application,
+      String endingBefore,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long limit,
+      String startingAfter) {
     this.application = application;
+    this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.limit = limit;
+    this.startingAfter = startingAfter;
   }
 
   public static Builder builder() {
@@ -43,14 +76,25 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   public static class Builder {
     private Object application;
 
+    private String endingBefore;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
+    private Long limit;
+
+    private String startingAfter;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodConfigurationListParams build() {
       return new PaymentMethodConfigurationListParams(
-          this.application, this.expand, this.extraParams);
+          this.application,
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.startingAfter);
     }
 
     /** The Connect application to filter by. */
@@ -62,6 +106,17 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
     /** The Connect application to filter by. */
     public Builder setApplication(EmptyParam application) {
       this.application = application;
+      return this;
+    }
+
+    /**
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
+     */
+    public Builder setEndingBefore(String endingBefore) {
+      this.endingBefore = endingBefore;
       return this;
     }
 
@@ -114,6 +169,26 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+     * default is 10.
+     */
+    public Builder setLimit(Long limit) {
+      this.limit = limit;
+      return this;
+    }
+
+    /**
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
+     */
+    public Builder setStartingAfter(String startingAfter) {
+      this.startingAfter = startingAfter;
       return this;
     }
   }
