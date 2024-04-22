@@ -29,12 +29,17 @@ import lombok.Setter;
  * account like its current requirements or if the account is enabled to make live charges or
  * receive payouts.
  *
- * <p>For Custom accounts, the properties below are always returned. For other accounts, some
- * properties are returned until that account has started to go through Connect Onboarding. Once you
- * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
- * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties are only
- * returned for Custom accounts. Learn about the differences <a
- * href="https://stripe.com/docs/connect/accounts">between accounts</a>.
+ * <p>For accounts where <a
+ * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+ * is {@code application}, which includes Custom accounts, the properties below are always returned.
+ *
+ * <p>For accounts where <a
+ * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+ * is {@code stripe}, which includes Standard and Express accounts, some properties are only
+ * returned until you create an <a href="https://stripe.com/api/account_links">Account Link</a> or
+ * <a href="https://stripe.com/api/account_sessions">Account Session</a> to start Connect
+ * Onboarding. Learn about the <a href="https://stripe.com/connect/accounts">differences between
+ * accounts</a>.
  */
 @Getter
 @Setter
@@ -45,10 +50,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   BusinessProfile businessProfile;
 
   /**
-   * The business type. Once you create an <a
-   * href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, this property is only
-   * returned for Custom accounts.
+   * The business type. After you create an <a href="https://stripe.com/api/account_links">Account
+   * Link</a> or <a href="https://stripe.com/api/account_sessions">Account Session</a>, this
+   * property is only returned for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    *
    * <p>One of {@code company}, {@code government_entity}, {@code individual}, or {@code
    * non_profit}.
@@ -90,8 +96,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   Boolean deleted;
 
   /**
-   * Whether account details have been submitted. Standard accounts cannot receive payouts before
-   * this is true.
+   * Whether account details have been submitted. Accounts with Stripe Dashboard access, which
+   * includes Standard accounts, cannot receive payouts before this is true.
    */
   @SerializedName("details_submitted")
   Boolean detailsSubmitted;
@@ -121,15 +127,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * This is an object representing a person associated with a Stripe account.
    *
-   * <p>A platform cannot access a Standard or Express account's persons after the account starts
-   * onboarding, such as after generating an account link for the account. See the <a
-   * href="https://stripe.com/docs/connect/standard-accounts">Standard onboarding</a> or <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express onboarding documentation</a>
-   * for information about platform prefilling and account onboarding steps.
+   * <p>A platform cannot access a person for an account where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
+   * is {@code stripe}, which includes Standard and Express accounts, after creating an Account Link
+   * or Account Session to start Connect onboarding.
    *
-   * <p>Related guide: <a
-   * href="https://stripe.com/docs/connect/handling-api-verification#person-information">Handling
-   * identity verification with the API</a>
+   * <p>See the <a href="https://stripe.com/connect/standard-accounts">Standard onboarding</a> or <a
+   * href="https://stripe.com/connect/express-accounts">Express onboarding</a> documentation for
+   * information about prefilling information and account onboarding steps. Learn more about <a
+   * href="https://stripe.com/connect/handling-api-verification#person-information">handling
+   * identity verification with the API</a>.
    */
   @SerializedName("individual")
   Person individual;
@@ -168,7 +175,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
 
-  /** The Stripe account type. Can be {@code standard}, {@code express}, or {@code custom}. */
+  /**
+   * The Stripe account type. Can be {@code standard}, {@code express}, {@code custom}, or {@code
+   * none}.
+   */
   @SerializedName("type")
   String type;
 
@@ -304,11 +314,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
+   * <p>Test-mode accounts can be deleted at any time.
+   *
+   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
+   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
+   * negative account balances, which includes Custom and Express accounts, can be deleted when all
+   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -319,11 +332,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
+   * <p>Test-mode accounts can be deleted at any time.
+   *
+   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
+   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
+   * negative account balances, which includes Custom and Express accounts, can be deleted when all
+   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -334,11 +350,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
+   * <p>Test-mode accounts can be deleted at any time.
+   *
+   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
+   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
+   * negative account balances, which includes Custom and Express accounts, can be deleted when all
+   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -349,11 +368,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
+   * <p>Test-mode accounts can be deleted at any time.
+   *
+   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
+   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
+   * negative account balances, which includes Custom and Express accounts, can be deleted when all
+   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -476,22 +498,24 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can reject accounts that you have
+   * flagged as suspicious.
    *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
+   * <p>Only accounts where your platform is liable for negative account balances, which includes
+   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
+   * Live-mode accounts can only be rejected after all balances are zero.
    */
   public Account reject(Map<String, Object> params) throws StripeException {
     return reject(params, (RequestOptions) null);
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can reject accounts that you have
+   * flagged as suspicious.
    *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
+   * <p>Only accounts where your platform is liable for negative account balances, which includes
+   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
+   * Live-mode accounts can only be rejected after all balances are zero.
    */
   public Account reject(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
@@ -502,22 +526,24 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can reject accounts that you have
+   * flagged as suspicious.
    *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
+   * <p>Only accounts where your platform is liable for negative account balances, which includes
+   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
+   * Live-mode accounts can only be rejected after all balances are zero.
    */
   public Account reject(AccountRejectParams params) throws StripeException {
     return reject(params, (RequestOptions) null);
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
+   * With <a href="https://stripe.com/connect">Connect</a>, you can reject accounts that you have
+   * flagged as suspicious.
    *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
+   * <p>Only accounts where your platform is liable for negative account balances, which includes
+   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
+   * Live-mode accounts can only be rejected after all balances are zero.
    */
   public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
@@ -606,14 +632,20 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   * Updates a <a href="https://stripe.com/connect/accounts">connected account</a> by setting the
+   * values of the parameters passed. Any parameters not provided are left unchanged.
    *
-   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
-   * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
-   * only be changed or updated for Custom accounts.
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts, you can update any information on the
+   * account.
+   *
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}, which includes Standard and Express accounts, you can update all information
+   * until you create an <a href="https://stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/api/account_sessions">Account Session</a> to start Connect onboarding,
+   * after which some properties can no longer be updated.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -626,14 +658,20 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   * Updates a <a href="https://stripe.com/connect/accounts">connected account</a> by setting the
+   * values of the parameters passed. Any parameters not provided are left unchanged.
    *
-   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
-   * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
-   * only be changed or updated for Custom accounts.
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts, you can update any information on the
+   * account.
+   *
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}, which includes Standard and Express accounts, you can update all information
+   * until you create an <a href="https://stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/api/account_sessions">Account Session</a> to start Connect onboarding,
+   * after which some properties can no longer be updated.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -650,14 +688,20 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   * Updates a <a href="https://stripe.com/connect/accounts">connected account</a> by setting the
+   * values of the parameters passed. Any parameters not provided are left unchanged.
    *
-   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
-   * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
-   * only be changed or updated for Custom accounts.
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts, you can update any information on the
+   * account.
+   *
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}, which includes Standard and Express accounts, you can update all information
+   * until you create an <a href="https://stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/api/account_sessions">Account Session</a> to start Connect onboarding,
+   * after which some properties can no longer be updated.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -669,14 +713,20 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   * Updates a <a href="https://stripe.com/connect/accounts">connected account</a> by setting the
+   * values of the parameters passed. Any parameters not provided are left unchanged.
    *
-   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
-   * can update all information until that account has started to go through Connect Onboarding.
-   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> or <a
-   * href="https://stripe.com/docs/api/account_sessions">Account Session</a>, some properties can
-   * only be changed or updated for Custom accounts.
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts, you can update any information on the
+   * account.
+   *
+   * <p>For accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}, which includes Standard and Express accounts, you can update all information
+   * until you create an <a href="https://stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/api/account_sessions">Account Session</a> to start Connect onboarding,
+   * after which some properties can no longer be updated.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">Dashboard</a>. Refer to our <a
@@ -2308,10 +2358,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class Payouts extends StripeObject {
       /**
        * A Boolean indicating if Stripe should try to reclaim negative balances from an attached
-       * bank account. See our <a
-       * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
-       * Balances</a> documentation for details. Default value is {@code false} for Custom accounts,
-       * otherwise {@code true}.
+       * bank account. See <a href="https://stripe.com/connect/account-balances">Understanding
+       * Connect account balances</a> for details. The default value is {@code false} when <a
+       * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+       * is {@code application}, which includes Custom accounts, otherwise {@code true}.
        */
       @SerializedName("debit_negative_balances")
       Boolean debitNegativeBalances;

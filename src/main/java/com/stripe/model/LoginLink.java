@@ -16,7 +16,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Login Links are single-use login link for an Express account to access their Stripe dashboard.
+ * Login Links are single-use URLs for a connected account to access the Express Dashboard. The
+ * connected account's <a
+ * href="https://stripe.com/api/accounts/object#account_object-controller-stripe_dashboard-type">account.controller.stripe_dashboard.type</a>
+ * must be {@code express} to have access to the Express Dashboard.
  */
 @Getter
 @Setter
@@ -39,22 +42,22 @@ public class LoginLink extends ApiResource {
   String url;
 
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public static LoginLink createOnAccount(String account) throws StripeException {
     return createOnAccount(account, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public static LoginLink createOnAccount(String account, RequestOptions options)
       throws StripeException {
@@ -62,11 +65,11 @@ public class LoginLink extends ApiResource {
   }
 
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public static LoginLink createOnAccount(String account, Map<String, Object> params)
       throws StripeException {
@@ -74,11 +77,11 @@ public class LoginLink extends ApiResource {
   }
 
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public static LoginLink createOnAccount(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -90,11 +93,11 @@ public class LoginLink extends ApiResource {
   }
 
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public static LoginLink createOnAccount(String account, LoginLinkCreateOnAccountParams params)
       throws StripeException {
@@ -102,11 +105,11 @@ public class LoginLink extends ApiResource {
   }
 
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public static LoginLink createOnAccount(
       String account, LoginLinkCreateOnAccountParams params, RequestOptions options)
