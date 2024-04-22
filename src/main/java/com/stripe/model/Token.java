@@ -33,7 +33,7 @@ import lombok.Setter;
  *
  * <p>You can't store or use tokens more than once. To store card or bank account information for
  * later use, create <a href="https://stripe.com/docs/api#customers">Customer</a> objects or <a
- * href="https://stripe.com/docs/api#external_accounts">Custom accounts</a>. <a
+ * href="https://stripe.com/api#external_accounts">External accounts</a>. <a
  * href="https://stripe.com/docs/radar">Radar</a>, our integrated solution for automatic fraud
  * protection, performs best with integrations that use client-side tokenization.
  */
@@ -44,13 +44,15 @@ public class Token extends ApiResource implements HasId {
   /**
    * These bank accounts are payment methods on {@code Customer} objects.
    *
-   * <p>On the other hand <a href="https://stripe.com/docs/api#external_accounts">External
-   * Accounts</a> are transfer destinations on {@code Account} objects for <a
-   * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a>. They can be bank
+   * <p>On the other hand <a href="https://stripe.com/api#external_accounts">External Accounts</a>
+   * are transfer destinations on {@code Account} objects for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes <a
+   * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>. They can be bank
    * accounts or debit cards as well, and are documented in the links above.
    *
-   * <p>Related guide: <a href="https://stripe.com/docs/payments/bank-debits-transfers">Bank debits
-   * and transfers</a>
+   * <p>Related guide: <a href="https://stripe.com/payments/bank-debits-transfers">Bank debits and
+   * transfers</a>
    */
   @SerializedName("bank_account")
   BankAccount bankAccount;
@@ -104,7 +106,10 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public static Token create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -113,7 +118,10 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -127,7 +135,10 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public static Token create(TokenCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -136,7 +147,10 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {
