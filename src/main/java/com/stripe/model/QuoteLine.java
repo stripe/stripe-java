@@ -38,7 +38,8 @@ public class QuoteLine extends StripeObject implements HasId {
    * A point-in-time operation that cancels an existing subscription schedule at the line's
    * starts_at timestamp. Currently only compatible with {@code quote_acceptance_date} for {@code
    * starts_at}. When using cancel_subscription_schedule, the subscription schedule on the quote
-   * remains unalterable, except for metadata modifications.
+   * remains unalterable, except for modifications to the metadata, collection_method or
+   * invoice_settings.
    */
   @SerializedName("cancel_subscription_schedule")
   CancelSubscriptionSchedule cancelSubscriptionSchedule;
