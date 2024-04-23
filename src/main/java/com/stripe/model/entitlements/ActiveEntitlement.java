@@ -3,6 +3,7 @@ package com.stripe.model.entitlements;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
@@ -10,6 +11,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.entitlements.ActiveEntitlementListParams;
 import com.stripe.param.entitlements.ActiveEntitlementRetrieveParams;
 import java.util.Map;
@@ -22,9 +24,14 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ActiveEntitlement extends ApiResource implements HasId {
-  /** The feature that the customer is entitled to. */
+  /**
+   * The <a href="https://stripe.com/docs/api/entitlements/feature">Feature</a> that the customer is
+   * entitled to.
+   */
   @SerializedName("feature")
-  String feature;
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Feature> feature;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -49,6 +56,24 @@ public class ActiveEntitlement extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** Get ID of expandable {@code feature} object. */
+  public String getFeature() {
+    return (this.feature != null) ? this.feature.getId() : null;
+  }
+
+  public void setFeature(String id) {
+    this.feature = ApiResource.setExpandableFieldId(id, this.feature);
+  }
+
+  /** Get expanded {@code feature}. */
+  public Feature getFeatureObject() {
+    return (this.feature != null) ? this.feature.getExpanded() : null;
+  }
+
+  public void setFeatureObject(Feature expandableObject) {
+    this.feature = new ExpandableField<Feature>(expandableObject.getId(), expandableObject);
+  }
 
   /** Retrieve a list of active entitlements for a customer. */
   public static ActiveEntitlementCollection list(Map<String, Object> params)
@@ -126,5 +151,11 @@ public class ActiveEntitlement extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, ActiveEntitlement.class);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(feature, responseGetter);
   }
 }
