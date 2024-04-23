@@ -98,8 +98,8 @@ public class Event extends ApiResource implements HasId {
 
   /**
    * Information about the action that causes the event. Only present when the event is triggered by
-   * an API request or an <a
-   * href="https://stripe.com/docs/billing/revenue-recovery/automations">Automation</a> action.
+   * an API request or an <a href="https://stripe.com/docs/billing/automations">Automation</a>
+   * action.
    */
   @SerializedName("reason")
   Reason reason;
@@ -420,8 +420,8 @@ public class Event extends ApiResource implements HasId {
 
       /**
        * The trigger name of the automation that triggered this action. Please visit <a
-       * href="https://stripe.com/docs/billing/revenue-recovery/automations#choose-a-trigger">Revenue
-       * and retention automations</a> for all possible trigger names.
+       * href="https://stripe.com/docs/billing/automations#choose-a-trigger">Revenue and retention
+       * automations</a> for all possible trigger names.
        */
       @SerializedName("trigger")
       String trigger;
