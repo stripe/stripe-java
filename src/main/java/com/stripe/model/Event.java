@@ -37,10 +37,10 @@ import lombok.Setter;
  * separate <a href="http://en.wikipedia.org/wiki/Webhook">webhooks</a> system for sending the
  * {@code Event} objects directly to an endpoint on your server. You can manage webhooks in your <a
  * href="https://dashboard.stripe.com/account/webhooks">account settings</a>. Learn how to <a
- * href="https://stripe.com/docs/webhooks">listen for events</a> so that your integration can
+ * href="https://docs.stripe.com/webhooks">listen for events</a> so that your integration can
  * automatically trigger reactions.
  *
- * <p>When using <a href="https://stripe.com/docs/connect">Connect</a>, you can also receive event
+ * <p>When using <a href="https://docs.stripe.com/connect">Connect</a>, you can also receive event
  * notifications that occur in connected accounts. For these events, there's an additional {@code
  * account} attribute in the received {@code Event} object.
  *
@@ -208,7 +208,7 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(Map<String, Object> params) throws StripeException {
@@ -218,7 +218,7 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
@@ -233,7 +233,7 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(EventListParams params) throws StripeException {
@@ -243,7 +243,7 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(EventListParams params, RequestOptions options)
