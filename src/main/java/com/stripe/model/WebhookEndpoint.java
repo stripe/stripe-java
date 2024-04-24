@@ -20,14 +20,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can configure <a href="https://stripe.com/docs/webhooks/">webhook endpoints</a> via the API
+ * You can configure <a href="https://docs.stripe.com/webhooks/">webhook endpoints</a> via the API
  * to be notified about events that happen in your Stripe account or connected accounts.
  *
  * <p>Most users configure webhooks from <a href="https://dashboard.stripe.com/webhooks">the
  * dashboard</a>, which provides a user interface for registering and testing your webhook
  * endpoints.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/webhooks/configure">Setting up webhooks</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/webhooks/configure">Setting up webhooks</a>
  */
 @Getter
 @Setter
@@ -91,7 +91,7 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
 
   /**
    * The endpoint's secret, used to generate <a
-   * href="https://stripe.com/docs/webhooks/signatures">webhook signatures</a>. Only returned at
+   * href="https://docs.stripe.com/webhooks/signatures">webhook signatures</a>. Only returned at
    * creation.
    */
   @SerializedName("secret")
