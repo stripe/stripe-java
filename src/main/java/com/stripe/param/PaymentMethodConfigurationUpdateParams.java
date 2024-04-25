@@ -263,6 +263,16 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("link")
   Link link;
 
+  /**
+   * MobilePay is a <a href="https://stripe.com/docs/payments/payment-methods#usage">single-use</a>
+   * card wallet payment method used in Denmark and Finland. It allows customers to <a
+   * href="https://stripe.com/docs/payments/payment-methods#customer-actions">authenticate and
+   * approve</a> payments using the MobilePay app. Check this <a
+   * href="https://stripe.com/docs/payments/mobilepay">page</a> for more details.
+   */
+  @SerializedName("mobilepay")
+  Mobilepay mobilepay;
+
   /** Configuration name. */
   @SerializedName("name")
   Object name;
@@ -403,6 +413,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       Klarna klarna,
       Konbini konbini,
       Link link,
+      Mobilepay mobilepay,
       Object name,
       Oxxo oxxo,
       P24 p24,
@@ -445,6 +456,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.klarna = klarna;
     this.konbini = konbini;
     this.link = link;
+    this.mobilepay = mobilepay;
     this.name = name;
     this.oxxo = oxxo;
     this.p24 = p24;
@@ -523,6 +535,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
 
     private Link link;
 
+    private Mobilepay mobilepay;
+
     private Object name;
 
     private Oxxo oxxo;
@@ -581,6 +595,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.klarna,
           this.konbini,
           this.link,
+          this.mobilepay,
           this.name,
           this.oxxo,
           this.p24,
@@ -941,6 +956,19 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setLink(PaymentMethodConfigurationUpdateParams.Link link) {
       this.link = link;
+      return this;
+    }
+
+    /**
+     * MobilePay is a <a
+     * href="https://stripe.com/docs/payments/payment-methods#usage">single-use</a> card wallet
+     * payment method used in Denmark and Finland. It allows customers to <a
+     * href="https://stripe.com/docs/payments/payment-methods#customer-actions">authenticate and
+     * approve</a> payments using the MobilePay app. Check this <a
+     * href="https://stripe.com/docs/payments/mobilepay">page</a> for more details.
+     */
+    public Builder setMobilepay(PaymentMethodConfigurationUpdateParams.Mobilepay mobilepay) {
+      this.mobilepay = mobilepay;
       return this;
     }
 
@@ -5320,6 +5348,170 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.Link.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class Mobilepay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Mobilepay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.Mobilepay build() {
+        return new PaymentMethodConfigurationUpdateParams.Mobilepay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.Mobilepay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.Mobilepay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.Mobilepay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.Mobilepay.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.Mobilepay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Mobilepay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Mobilepay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.Mobilepay.DisplayPreference.Preference
+                preference) {
           this.preference = preference;
           return this;
         }
