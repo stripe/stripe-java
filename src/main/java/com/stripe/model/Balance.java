@@ -45,8 +45,10 @@ public class Balance extends ApiResource {
   List<Balance.Available> available;
 
   /**
-   * Funds held due to negative balances on connected Custom accounts. You can find the connect
-   * reserve balance for each currency and payment type in the {@code source_types} property.
+   * Funds held due to negative balances on connected accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts. You can find the connect reserve
+   * balance for each currency and payment type in the {@code source_types} property.
    */
   @SerializedName("connect_reserved")
   List<Balance.ConnectReserved> connectReserved;

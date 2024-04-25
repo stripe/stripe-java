@@ -333,18 +333,23 @@ public class Capability extends ApiResource implements HasId {
 
     /**
      * If the capability is disabled, this string describes why. Can be {@code
-     * requirements.past_due}, {@code requirements.pending_verification}, {@code listed}, {@code
-     * platform_paused}, {@code rejected.fraud}, {@code rejected.listed}, {@code
-     * rejected.terms_of_service}, {@code rejected.other}, {@code under_review}, or {@code other}.
+     * requirements.fields_needed}, {@code pending.onboarding}, {@code pending.review}, {@code
+     * rejected.fraud}, {@code rejected.other}, {@code platform_paused}, {@code
+     * action_required.requested_capabilities}, {@code rejected.inactivty}, or {@code
+     * rejected.unsupported_business}.
      *
      * <p>{@code rejected.unsupported_business} means that the account's business is not supported
      * by the capability. For example, payment methods may restrict the businesses they support in
-     * their terms of service:
+     * their terms of service, such as in <a
+     * href="https://stripe.com/afterpay-clearpay/legal#restricted-businesses">Afterpay Clearpay's
+     * terms of service</a>.
      *
-     * <p>- <a href="https://stripe.com/afterpay-clearpay/legal#restricted-businesses">Afterpay
-     * Clearpay's terms of service</a>
+     * <p>{@code rejected.inactivity} means that the capability has been paused for inactivity. This
+     * disabled reason currently only applies to the Issuing capability. See <a
+     * href="https://support.stripe.com/questions/issuing-managing-inactive-connect-accounts">Issuing:
+     * Managing Inactive Connects</a> for more details.
      *
-     * <p>If you believe that the rejection is in error, please contact support at
+     * <p>If you believe that a rejection is in error, please contact support at
      * https://support.stripe.com/contact/ for assistance.
      */
     @SerializedName("disabled_reason")

@@ -25,28 +25,35 @@ public class AccountCreateParams extends ApiRequestParams {
   BusinessProfile businessProfile;
 
   /**
-   * The business type. Once you create an <a
-   * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
-   * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can only
-   * be updated for Custom accounts.
+   * The business type. Once you create an <a href="https://stripe.com/api/account_links">Account
+   * Link</a> or <a href="https://stripe.com/api/account_sessions">Account Session</a>, this
+   * property can only be updated for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   @SerializedName("business_type")
   BusinessType businessType;
 
   /**
    * Each key of the dictionary represents a capability, and each capability maps to its settings
-   * (e.g. whether it has been requested or not). Each capability will be inactive until you have
-   * provided its specific requirements and Stripe has verified them. An account may have some of
+   * (for example, whether it has been requested or not). Each capability is inactive until you have
+   * provided its specific requirements and Stripe has verified them. An account might have some of
    * its requested capabilities be active and some be inactive.
+   *
+   * <p>Required when <a
+   * href="https://stripe.com/api/accounts/create#create_account-controller-dashboard-type">account.controller.stripe_dashboard.type</a>
+   * is {@code none}, which includes Custom accounts.
    */
   @SerializedName("capabilities")
   Capabilities capabilities;
 
   /**
    * Information about the company or business. This field is available for any {@code
-   * business_type}. Once you create an <a href="https://docs.stripe.com/api/account_links">Account
-   * Link</a> or <a href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this
-   * property can only be updated for Custom accounts.
+   * business_type}. Once you create an <a href="https://stripe.com/api/account_links">Account
+   * Link</a> or <a href="https://stripe.com/api/account_sessions">Account Session</a>, this
+   * property can only be updated for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   @SerializedName("company")
   Company company;
@@ -81,7 +88,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * The email address of the account holder. This is only to make the account easier to identify to
-   * you. Stripe only emails Custom accounts with your consent.
+   * you. If <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts, Stripe doesn't email the account
+   * without your consent.
    */
   @SerializedName("email")
   String email;
@@ -92,20 +102,22 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * A card or bank account to attach to the account for receiving <a
-   * href="https://docs.stripe.com/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
-   * to use it for top-ups). You can provide either a token, like the ones returned by <a
-   * href="https://docs.stripe.com/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+   * href="https://stripe.com/connect/bank-debit-card-payouts">payouts</a> (you won’t be able to use
+   * it for top-ups). You can provide either a token, like the ones returned by <a
+   * href="https://stripe.com/js">Stripe.js</a>, or a dictionary, as documented in the {@code
    * external_account} parameter for <a
-   * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> creation. <br>
+   * href="https://stripe.com/api#account_create_bank_account">bank account</a> creation. <br>
    * <br>
    * By default, providing an external account sets it as the new default external account for its
    * currency, and deletes the old default if one exists. To add additional external accounts
    * without replacing the existing default for the currency, use the <a
-   * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> or <a
-   * href="https://docs.stripe.com/api#account_create_card">card creation</a> APIs. After you create
-   * an <a href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
-   * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can only
-   * be updated for Custom accounts.
+   * href="https://stripe.com/api#account_create_bank_account">bank account</a> or <a
+   * href="https://stripe.com/api#account_create_card">card creation</a> APIs. After you create an
+   * <a href="https://stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/api/account_sessions">Account Session</a>, this property can only be
+   * updated for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   @SerializedName("external_account")
   String externalAccount;
@@ -122,9 +134,11 @@ public class AccountCreateParams extends ApiRequestParams {
   /**
    * Information about the person represented by the account. This field is null unless {@code
    * business_type} is set to {@code individual}. Once you create an <a
-   * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
-   * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can only
-   * be updated for Custom accounts.
+   * href="https://stripe.com/api/account_links">Account Link</a> or <a
+   * href="https://stripe.com/api/account_sessions">Account Session</a>, this property can only be
+   * updated for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   @SerializedName("individual")
   Individual individual;
@@ -144,8 +158,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * Details on the account's acceptance of the <a
-   * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-   * Agreement</a> This property can only be updated for Custom accounts.
+   * href="https://stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
+   * Agreement</a>. This property can only be updated for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
@@ -276,10 +292,11 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The business type. Once you create an <a
-     * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
-     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
-     * only be updated for Custom accounts.
+     * The business type. Once you create an <a href="https://stripe.com/api/account_links">Account
+     * Link</a> or <a href="https://stripe.com/api/account_sessions">Account Session</a>, this
+     * property can only be updated for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code application}, which includes Custom accounts.
      */
     public Builder setBusinessType(AccountCreateParams.BusinessType businessType) {
       this.businessType = businessType;
@@ -288,9 +305,13 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * Each key of the dictionary represents a capability, and each capability maps to its settings
-     * (e.g. whether it has been requested or not). Each capability will be inactive until you have
-     * provided its specific requirements and Stripe has verified them. An account may have some of
-     * its requested capabilities be active and some be inactive.
+     * (for example, whether it has been requested or not). Each capability is inactive until you
+     * have provided its specific requirements and Stripe has verified them. An account might have
+     * some of its requested capabilities be active and some be inactive.
+     *
+     * <p>Required when <a
+     * href="https://stripe.com/api/accounts/create#create_account-controller-dashboard-type">account.controller.stripe_dashboard.type</a>
+     * is {@code none}, which includes Custom accounts.
      */
     public Builder setCapabilities(AccountCreateParams.Capabilities capabilities) {
       this.capabilities = capabilities;
@@ -299,10 +320,11 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * Information about the company or business. This field is available for any {@code
-     * business_type}. Once you create an <a
-     * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
-     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
-     * only be updated for Custom accounts.
+     * business_type}. Once you create an <a href="https://stripe.com/api/account_links">Account
+     * Link</a> or <a href="https://stripe.com/api/account_sessions">Account Session</a>, this
+     * property can only be updated for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code application}, which includes Custom accounts.
      */
     public Builder setCompany(AccountCreateParams.Company company) {
       this.company = company;
@@ -348,7 +370,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * The email address of the account holder. This is only to make the account easier to identify
-     * to you. Stripe only emails Custom accounts with your consent.
+     * to you. If <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code application}, which includes Custom accounts, Stripe doesn't email the account
+     * without your consent.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -383,21 +408,22 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account for receiving <a
-     * href="https://docs.stripe.com/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
-     * to use it for top-ups). You can provide either a token, like the ones returned by <a
-     * href="https://docs.stripe.com/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+     * href="https://stripe.com/connect/bank-debit-card-payouts">payouts</a> (you won’t be able to
+     * use it for top-ups). You can provide either a token, like the ones returned by <a
+     * href="https://stripe.com/js">Stripe.js</a>, or a dictionary, as documented in the {@code
      * external_account} parameter for <a
-     * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> creation.
-     * <br>
+     * href="https://stripe.com/api#account_create_bank_account">bank account</a> creation. <br>
      * <br>
      * By default, providing an external account sets it as the new default external account for its
      * currency, and deletes the old default if one exists. To add additional external accounts
      * without replacing the existing default for the currency, use the <a
-     * href="https://docs.stripe.com/api#account_create_bank_account">bank account</a> or <a
-     * href="https://docs.stripe.com/api#account_create_card">card creation</a> APIs. After you
-     * create an <a href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
-     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
-     * only be updated for Custom accounts.
+     * href="https://stripe.com/api#account_create_bank_account">bank account</a> or <a
+     * href="https://stripe.com/api#account_create_card">card creation</a> APIs. After you create an
+     * <a href="https://stripe.com/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/api/account_sessions">Account Session</a>, this property can only be
+     * updated for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code application}, which includes Custom accounts.
      */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
@@ -433,9 +459,11 @@ public class AccountCreateParams extends ApiRequestParams {
     /**
      * Information about the person represented by the account. This field is null unless {@code
      * business_type} is set to {@code individual}. Once you create an <a
-     * href="https://docs.stripe.com/api/account_links">Account Link</a> or <a
-     * href="https://docs.stripe.com/api/account_sessions">Account Session</a>, this property can
-     * only be updated for Custom accounts.
+     * href="https://stripe.com/api/account_links">Account Link</a> or <a
+     * href="https://stripe.com/api/account_sessions">Account Session</a>, this property can only be
+     * updated for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code application}, which includes Custom accounts.
      */
     public Builder setIndividual(AccountCreateParams.Individual individual) {
       this.individual = individual;
@@ -500,8 +528,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * Details on the account's acceptance of the <a
-     * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-     * Agreement</a> This property can only be updated for Custom accounts.
+     * href="https://stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
+     * Agreement</a>. This property can only be updated for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code application}, which includes Custom accounts.
      */
     public Builder setTosAcceptance(AccountCreateParams.TosAcceptance tosAcceptance) {
       this.tosAcceptance = tosAcceptance;
@@ -6401,7 +6431,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /**
        * A value indicating the responsible payer of Stripe fees on this account. Defaults to {@code
-       * account}.
+       * account}. Learn more about <a
+       * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
+       * connected accounts</a>.
        */
       @SerializedName("payer")
       Payer payer;
@@ -6455,7 +6487,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * A value indicating the responsible payer of Stripe fees on this account. Defaults to
-         * {@code account}.
+         * {@code account}. Learn more about <a
+         * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
+         * connected accounts</a>.
          */
         public Builder setPayer(AccountCreateParams.Controller.Fees.Payer payer) {
           this.payer = payer;

@@ -19,42 +19,42 @@ public final class AccountLoginLinkService extends ApiService {
   }
 
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public LoginLink create(String account, AccountLoginLinkCreateParams params)
       throws StripeException {
     return create(account, params, (RequestOptions) null);
   }
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public LoginLink create(String account, RequestOptions options) throws StripeException {
     return create(account, (AccountLoginLinkCreateParams) null, options);
   }
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public LoginLink create(String account) throws StripeException {
     return create(account, (AccountLoginLinkCreateParams) null, (RequestOptions) null);
   }
   /**
-   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   * Creates a single-use login link for a connected account to access the Express Dashboard.
    *
-   * <p><strong>You may only create login links for <a
-   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
-   * platform</strong>.
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
    */
   public LoginLink create(
       String account, AccountLoginLinkCreateParams params, RequestOptions options)

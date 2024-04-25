@@ -48,7 +48,10 @@ public final class TokenService extends ApiService {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public Token create(TokenCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -56,7 +59,10 @@ public final class TokenService extends ApiService {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public Token create(RequestOptions options) throws StripeException {
     return create((TokenCreateParams) null, options);
@@ -64,7 +70,10 @@ public final class TokenService extends ApiService {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public Token create() throws StripeException {
     return create((TokenCreateParams) null, (RequestOptions) null);
@@ -72,7 +81,10 @@ public final class TokenService extends ApiService {
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
    * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
+   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   public Token create(TokenCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/tokens";

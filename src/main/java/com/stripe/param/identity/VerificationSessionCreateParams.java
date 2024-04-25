@@ -55,12 +55,16 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
   /**
    * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
-   * check</a> to be performed.
+   * check</a> to be performed. You must provide a {@code type} if not passing {@code
+   * verification_flow}.
    */
   @SerializedName("type")
   Type type;
 
-  /** The ID of a Verification Flow from the Dashboard. */
+  /**
+   * The ID of a Verification Flow from the Dashboard. See
+   * https://docs.stripe.com/identity/verification-flows.
+   */
   @SerializedName("verification_flow")
   String verificationFlow;
 
@@ -230,14 +234,18 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
     /**
      * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
-     * check</a> to be performed.
+     * check</a> to be performed. You must provide a {@code type} if not passing {@code
+     * verification_flow}.
      */
     public Builder setType(VerificationSessionCreateParams.Type type) {
       this.type = type;
       return this;
     }
 
-    /** The ID of a Verification Flow from the Dashboard. */
+    /**
+     * The ID of a Verification Flow from the Dashboard. See
+     * https://docs.stripe.com/identity/verification-flows.
+     */
     public Builder setVerificationFlow(String verificationFlow) {
       this.verificationFlow = verificationFlow;
       return this;
@@ -253,10 +261,6 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     @SerializedName("document")
     Object document;
 
-    /** Options that apply to the email check. */
-    @SerializedName("email")
-    Object email;
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -266,15 +270,9 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Options that apply to the phone check. */
-    @SerializedName("phone")
-    Object phone;
-
-    private Options(Object document, Object email, Map<String, Object> extraParams, Object phone) {
+    private Options(Object document, Map<String, Object> extraParams) {
       this.document = document;
-      this.email = email;
       this.extraParams = extraParams;
-      this.phone = phone;
     }
 
     public static Builder builder() {
@@ -284,16 +282,11 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private Object document;
 
-      private Object email;
-
       private Map<String, Object> extraParams;
-
-      private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
       public VerificationSessionCreateParams.Options build() {
-        return new VerificationSessionCreateParams.Options(
-            this.document, this.email, this.extraParams, this.phone);
+        return new VerificationSessionCreateParams.Options(this.document, this.extraParams);
       }
 
       /**
@@ -313,18 +306,6 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
        */
       public Builder setDocument(EmptyParam document) {
         this.document = document;
-        return this;
-      }
-
-      /** Options that apply to the email check. */
-      public Builder setEmail(VerificationSessionCreateParams.Options.Email email) {
-        this.email = email;
-        return this;
-      }
-
-      /** Options that apply to the email check. */
-      public Builder setEmail(EmptyParam email) {
-        this.email = email;
         return this;
       }
 
@@ -352,18 +333,6 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** Options that apply to the phone check. */
-      public Builder setPhone(VerificationSessionCreateParams.Options.Phone phone) {
-        this.phone = phone;
-        return this;
-      }
-
-      /** Options that apply to the phone check. */
-      public Builder setPhone(EmptyParam phone) {
-        this.phone = phone;
         return this;
       }
     }
@@ -553,148 +522,6 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
         AllowedType(String value) {
           this.value = value;
-        }
-      }
-    }
-
-    @Getter
-    public static class Email {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Request one time password verification of {@code provided_details.email}. */
-      @SerializedName("require_verification")
-      Boolean requireVerification;
-
-      private Email(Map<String, Object> extraParams, Boolean requireVerification) {
-        this.extraParams = extraParams;
-        this.requireVerification = requireVerification;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private Boolean requireVerification;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public VerificationSessionCreateParams.Options.Email build() {
-          return new VerificationSessionCreateParams.Options.Email(
-              this.extraParams, this.requireVerification);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link VerificationSessionCreateParams.Options.Email#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link VerificationSessionCreateParams.Options.Email#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Request one time password verification of {@code provided_details.email}. */
-        public Builder setRequireVerification(Boolean requireVerification) {
-          this.requireVerification = requireVerification;
-          return this;
-        }
-      }
-    }
-
-    @Getter
-    public static class Phone {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Request one time password verification of {@code provided_details.phone}. */
-      @SerializedName("require_verification")
-      Boolean requireVerification;
-
-      private Phone(Map<String, Object> extraParams, Boolean requireVerification) {
-        this.extraParams = extraParams;
-        this.requireVerification = requireVerification;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private Boolean requireVerification;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public VerificationSessionCreateParams.Options.Phone build() {
-          return new VerificationSessionCreateParams.Options.Phone(
-              this.extraParams, this.requireVerification);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link VerificationSessionCreateParams.Options.Phone#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link VerificationSessionCreateParams.Options.Phone#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Request one time password verification of {@code provided_details.phone}. */
-        public Builder setRequireVerification(Boolean requireVerification) {
-          this.requireVerification = requireVerification;
-          return this;
         }
       }
     }

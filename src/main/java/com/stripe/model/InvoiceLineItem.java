@@ -88,8 +88,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
-   * structured format. Note that for line items with {@code type=subscription} this will reflect
-   * the metadata of the subscription that caused the line item to be created.
+   * structured format. Note that for line items with {@code type=subscription}, {@code metadata}
+   * reflects the current metadata from the subscription associated with the line item, unless the
+   * invoice line was directly updated with different metadata after creation.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
