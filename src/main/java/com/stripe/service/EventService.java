@@ -24,7 +24,7 @@ public final class EventService extends ApiService {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public StripeCollection<Event> list(EventListParams params) throws StripeException {
@@ -33,7 +33,7 @@ public final class EventService extends ApiService {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public StripeCollection<Event> list(RequestOptions options) throws StripeException {
@@ -42,7 +42,7 @@ public final class EventService extends ApiService {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public StripeCollection<Event> list() throws StripeException {
@@ -51,7 +51,7 @@ public final class EventService extends ApiService {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
    * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public StripeCollection<Event> list(EventListParams params, RequestOptions options)

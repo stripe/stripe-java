@@ -270,6 +270,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
@@ -306,6 +309,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("payto")
     Payto payto;
 
+    @SerializedName("revolut_pay")
+    RevolutPay revolutPay;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -327,6 +333,11 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {}
 
     @Getter
     @Setter
@@ -800,6 +811,11 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Payto extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RevolutPay extends StripeObject {}
 
     @Getter
     @Setter

@@ -1539,6 +1539,16 @@ public class QuoteUpdateParams extends ApiRequestParams {
     BillingCycleAnchor billingCycleAnchor;
 
     /**
+     * A point-in-time operation that cancels an existing subscription schedule at the line's
+     * starts_at timestamp. Currently only compatible with {@code quote_acceptance_date} for {@code
+     * starts_at}. When using cancel_subscription_schedule, the subscription schedule on the quote
+     * remains unalterable, except for modifications to the metadata, collection_method or
+     * invoice_settings.
+     */
+    @SerializedName("cancel_subscription_schedule")
+    CancelSubscriptionSchedule cancelSubscriptionSchedule;
+
+    /**
      * Details to identify the end of the time range modified by the proposed change. If not
      * supplied, the quote line is considered a point-in-time operation that only affects the exact
      * timestamp at {@code starts_at}, and a restricted set of attributes is supported on the quote
@@ -1593,6 +1603,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         List<QuoteUpdateParams.Line.Action> actions,
         AppliesTo appliesTo,
         BillingCycleAnchor billingCycleAnchor,
+        CancelSubscriptionSchedule cancelSubscriptionSchedule,
         EndsAt endsAt,
         Map<String, Object> extraParams,
         Object id,
@@ -1604,6 +1615,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       this.actions = actions;
       this.appliesTo = appliesTo;
       this.billingCycleAnchor = billingCycleAnchor;
+      this.cancelSubscriptionSchedule = cancelSubscriptionSchedule;
       this.endsAt = endsAt;
       this.extraParams = extraParams;
       this.id = id;
@@ -1624,6 +1636,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
       private AppliesTo appliesTo;
 
       private BillingCycleAnchor billingCycleAnchor;
+
+      private CancelSubscriptionSchedule cancelSubscriptionSchedule;
 
       private EndsAt endsAt;
 
@@ -1647,6 +1661,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
             this.actions,
             this.appliesTo,
             this.billingCycleAnchor,
+            this.cancelSubscriptionSchedule,
             this.endsAt,
             this.extraParams,
             this.id,
@@ -1696,6 +1711,19 @@ public class QuoteUpdateParams extends ApiRequestParams {
       public Builder setBillingCycleAnchor(
           QuoteUpdateParams.Line.BillingCycleAnchor billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * A point-in-time operation that cancels an existing subscription schedule at the line's
+       * starts_at timestamp. Currently only compatible with {@code quote_acceptance_date} for
+       * {@code starts_at}. When using cancel_subscription_schedule, the subscription schedule on
+       * the quote remains unalterable, except for modifications to the metadata, collection_method
+       * or invoice_settings.
+       */
+      public Builder setCancelSubscriptionSchedule(
+          QuoteUpdateParams.Line.CancelSubscriptionSchedule cancelSubscriptionSchedule) {
+        this.cancelSubscriptionSchedule = cancelSubscriptionSchedule;
         return this;
       }
 
@@ -4360,6 +4388,137 @@ public class QuoteUpdateParams extends ApiRequestParams {
         private final String value;
 
         Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class CancelSubscriptionSchedule {
+      /**
+       * <strong>Required.</strong> Timestamp helper to cancel the underlying schedule on the
+       * accompanying line's start date. Must be set to {@code line_starts_at}.
+       */
+      @SerializedName("cancel_at")
+      CancelAt cancelAt;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * If the subscription schedule is {@code active}, indicates if a final invoice will be
+       * generated that contains any un-invoiced metered usage and new/pending proration invoice
+       * items. Boolean that defaults to {@code true}.
+       */
+      @SerializedName("invoice_now")
+      Boolean invoiceNow;
+
+      /**
+       * If the subscription schedule is {@code active}, indicates if the cancellation should be
+       * prorated. Boolean that defaults to {@code true}.
+       */
+      @SerializedName("prorate")
+      Boolean prorate;
+
+      private CancelSubscriptionSchedule(
+          CancelAt cancelAt, Map<String, Object> extraParams, Boolean invoiceNow, Boolean prorate) {
+        this.cancelAt = cancelAt;
+        this.extraParams = extraParams;
+        this.invoiceNow = invoiceNow;
+        this.prorate = prorate;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CancelAt cancelAt;
+
+        private Map<String, Object> extraParams;
+
+        private Boolean invoiceNow;
+
+        private Boolean prorate;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public QuoteUpdateParams.Line.CancelSubscriptionSchedule build() {
+          return new QuoteUpdateParams.Line.CancelSubscriptionSchedule(
+              this.cancelAt, this.extraParams, this.invoiceNow, this.prorate);
+        }
+
+        /**
+         * <strong>Required.</strong> Timestamp helper to cancel the underlying schedule on the
+         * accompanying line's start date. Must be set to {@code line_starts_at}.
+         */
+        public Builder setCancelAt(
+            QuoteUpdateParams.Line.CancelSubscriptionSchedule.CancelAt cancelAt) {
+          this.cancelAt = cancelAt;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteUpdateParams.Line.CancelSubscriptionSchedule#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteUpdateParams.Line.CancelSubscriptionSchedule#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * If the subscription schedule is {@code active}, indicates if a final invoice will be
+         * generated that contains any un-invoiced metered usage and new/pending proration invoice
+         * items. Boolean that defaults to {@code true}.
+         */
+        public Builder setInvoiceNow(Boolean invoiceNow) {
+          this.invoiceNow = invoiceNow;
+          return this;
+        }
+
+        /**
+         * If the subscription schedule is {@code active}, indicates if the cancellation should be
+         * prorated. Boolean that defaults to {@code true}.
+         */
+        public Builder setProrate(Boolean prorate) {
+          this.prorate = prorate;
+          return this;
+        }
+      }
+
+      public enum CancelAt implements ApiRequestParams.EnumParam {
+        @SerializedName("line_starts_at")
+        LINE_STARTS_AT("line_starts_at");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CancelAt(String value) {
           this.value = value;
         }
       }

@@ -31,7 +31,10 @@ public class Card extends ApiResource
     implements MetadataStore<Card>, ExternalAccount, PaymentSource {
   /**
    * The account this card belongs to. This attribute will not be in the card object if the card
-   * belongs to a customer or recipient instead.
+   * belongs to a customer or recipient instead. This property is only available for accounts where
+   * <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
@@ -101,7 +104,9 @@ public class Card extends ApiResource
   /**
    * Three-letter <a href="https://stripe.com/docs/payouts">ISO code for currency</a>. Only
    * applicable on accounts (not customers or recipients). The card can be used as a transfer
-   * destination for funds in this currency.
+   * destination for funds in this currency. This property is only available for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
    */
   @SerializedName("currency")
   String currency;
@@ -126,7 +131,12 @@ public class Card extends ApiResource
   @SerializedName("cvc_check")
   String cvcCheck;
 
-  /** Whether this card is the default external account for its currency. */
+  /**
+   * Whether this card is the default external account for its currency. This property is only
+   * available for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code application}, which includes Custom accounts.
+   */
   @SerializedName("default_for_currency")
   Boolean defaultForCurrency;
 

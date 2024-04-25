@@ -78,8 +78,13 @@ public final class AccountExternalAccountService extends ApiService {
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
-   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
-   * sets it as the default for its currency. Other bank account details are not editable by design.
+   * connected account and optionally sets it as the default for its currency. Other bank account
+   * details are not editable by design.
+   *
+   * <p>You can only update bank accounts when <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
+   * is {@code application}, which includes <a
+   * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -90,8 +95,13 @@ public final class AccountExternalAccountService extends ApiService {
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
-   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
-   * sets it as the default for its currency. Other bank account details are not editable by design.
+   * connected account and optionally sets it as the default for its currency. Other bank account
+   * details are not editable by design.
+   *
+   * <p>You can only update bank accounts when <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
+   * is {@code application}, which includes <a
+   * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -102,8 +112,13 @@ public final class AccountExternalAccountService extends ApiService {
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
-   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
-   * sets it as the default for its currency. Other bank account details are not editable by design.
+   * connected account and optionally sets it as the default for its currency. Other bank account
+   * details are not editable by design.
+   *
+   * <p>You can only update bank accounts when <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
+   * is {@code application}, which includes <a
+   * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -113,8 +128,13 @@ public final class AccountExternalAccountService extends ApiService {
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
-   * <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and optionally
-   * sets it as the default for its currency. Other bank account details are not editable by design.
+   * connected account and optionally sets it as the default for its currency. Other bank account
+   * details are not editable by design.
+   *
+   * <p>You can only update bank accounts when <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
+   * is {@code application}, which includes <a
+   * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.

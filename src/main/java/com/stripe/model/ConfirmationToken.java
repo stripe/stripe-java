@@ -38,7 +38,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
   /**
    * Time at which this ConfirmationToken expires and can no longer be used to confirm a
-   * PaymentIntent or SetupIntent. This is set to null once this ConfirmationToken has been used.
+   * PaymentIntent or SetupIntent.
    */
   @SerializedName("expires_at")
   Long expiresAt;

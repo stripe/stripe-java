@@ -23,13 +23,15 @@ import lombok.Setter;
 /**
  * These bank accounts are payment methods on {@code Customer} objects.
  *
- * <p>On the other hand <a href="https://stripe.com/docs/api#external_accounts">External
- * Accounts</a> are transfer destinations on {@code Account} objects for <a
- * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a>. They can be bank
- * accounts or debit cards as well, and are documented in the links above.
+ * <p>On the other hand <a href="https://stripe.com/api#external_accounts">External Accounts</a> are
+ * transfer destinations on {@code Account} objects for accounts where <a
+ * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+ * is {@code application}, which includes <a
+ * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>. They can be bank accounts
+ * or debit cards as well, and are documented in the links above.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/payments/bank-debits-transfers">Bank debits
- * and transfers</a>
+ * <p>Related guide: <a href="https://stripe.com/payments/bank-debits-transfers">Bank debits and
+ * transfers</a>
  */
 @Getter
 @Setter

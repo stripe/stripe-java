@@ -6239,6 +6239,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
 
+      @SerializedName("amazon_pay")
+      AMAZON_PAY("amazon_pay"),
+
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),
 
@@ -6292,6 +6295,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
+
+      @SerializedName("revolut_pay")
+      REVOLUT_PAY("revolut_pay"),
 
       @SerializedName("sepa_credit_transfer")
       SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),

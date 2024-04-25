@@ -35,6 +35,16 @@ public class QuoteLine extends StripeObject implements HasId {
   String billingCycleAnchor;
 
   /**
+   * A point-in-time operation that cancels an existing subscription schedule at the line's
+   * starts_at timestamp. Currently only compatible with {@code quote_acceptance_date} for {@code
+   * starts_at}. When using cancel_subscription_schedule, the subscription schedule on the quote
+   * remains unalterable, except for modifications to the metadata, collection_method or
+   * invoice_settings.
+   */
+  @SerializedName("cancel_subscription_schedule")
+  CancelSubscriptionSchedule cancelSubscriptionSchedule;
+
+  /**
    * Details to identify the end of the time range modified by the proposed change. If not supplied,
    * the quote line is considered a point-in-time operation that only affects the exact timestamp at
    * {@code starts_at}, and a restricted set of attributes is supported on the quote line.
@@ -854,6 +864,36 @@ public class QuoteLine extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /** Configures the immediate cancellation settings for a subscription schedule via quotes. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CancelSubscriptionSchedule extends StripeObject {
+    /**
+     * Timestamp helper to cancel the underlying schedule on the accompanying line's start date.
+     * Must be set to {@code line_starts_at}.
+     *
+     * <p>Equal to {@code line_starts_at}.
+     */
+    @SerializedName("cancel_at")
+    String cancelAt;
+
+    /**
+     * If the subscription schedule is {@code active}, indicates if a final invoice will be
+     * generated that contains any un-invoiced metered usage and new/pending proration invoice
+     * items. Boolean that defaults to {@code true}.
+     */
+    @SerializedName("invoice_now")
+    Boolean invoiceNow;
+
+    /**
+     * If the subscription schedule is {@code active}, indicates if the cancellation should be
+     * prorated. Boolean that defaults to {@code true}.
+     */
+    @SerializedName("prorate")
+    Boolean prorate;
   }
 
   @Getter
