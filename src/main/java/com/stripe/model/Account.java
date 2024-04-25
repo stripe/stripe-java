@@ -1618,7 +1618,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class Fees extends StripeObject {
       /**
        * A value indicating the responsible payer of a bundle of Stripe fees for pricing-control
-       * eligible products on this account.
+       * eligible products on this account. Learn more about <a
+       * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
+       * connected accounts</a>.
        *
        * <p>One of {@code account}, {@code application}, {@code application_custom}, {@code
        * application_express}, or {@code application_unified_accounts_beta}.

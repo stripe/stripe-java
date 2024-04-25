@@ -6974,7 +6974,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /**
        * A value indicating the responsible payer of Stripe fees on this account. Defaults to {@code
-       * account}.
+       * account}. Learn more about <a
+       * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
+       * connected accounts</a>.
        */
       @SerializedName("payer")
       Payer payer;
@@ -7028,7 +7030,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * A value indicating the responsible payer of Stripe fees on this account. Defaults to
-         * {@code account}.
+         * {@code account}. Learn more about <a
+         * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
+         * connected accounts</a>.
          */
         public Builder setPayer(AccountCreateParams.Controller.Fees.Payer payer) {
           this.payer = payer;
