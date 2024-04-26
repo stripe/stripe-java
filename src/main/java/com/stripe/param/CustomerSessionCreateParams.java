@@ -406,19 +406,31 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Controls whether the Payment Element allows the removal of a saved payment method. */
+        /**
+         * Controls whether the Payment Element displays the option to remove a saved payment
+         * method.
+         */
         @SerializedName("payment_method_remove")
         PaymentMethodRemove paymentMethodRemove;
 
-        /** Controls whether the Payment Element offers to save a new payment method. */
+        /**
+         * Controls whether the Payment Element displays a checkbox offering to save a new payment
+         * method.
+         */
         @SerializedName("payment_method_save")
         PaymentMethodSave paymentMethodSave;
 
-        /** Controls whether the Payment Element offers to set a payment method as the default. */
+        /**
+         * Controls whether the Payment Element displays a checkbox offering to set a saved payment
+         * method as the default.
+         */
         @SerializedName("payment_method_set_as_default")
         PaymentMethodSetAsDefault paymentMethodSetAsDefault;
 
-        /** Controls whether the Payment Element allows the updating of a saved payment method. */
+        /**
+         * Controls whether the Payment Element displays the option to update a saved payment
+         * method.
+         */
         @SerializedName("payment_method_update")
         PaymentMethodUpdate paymentMethodUpdate;
 
@@ -490,7 +502,10 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Controls whether the Payment Element allows the removal of a saved payment method. */
+          /**
+           * Controls whether the Payment Element displays the option to remove a saved payment
+           * method.
+           */
           public Builder setPaymentMethodRemove(
               CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodRemove
                   paymentMethodRemove) {
@@ -498,7 +513,10 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Controls whether the Payment Element offers to save a new payment method. */
+          /**
+           * Controls whether the Payment Element displays a checkbox offering to save a new payment
+           * method.
+           */
           public Builder setPaymentMethodSave(
               CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodSave
                   paymentMethodSave) {
@@ -506,7 +524,10 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Controls whether the Payment Element offers to set a payment method as the default. */
+          /**
+           * Controls whether the Payment Element displays a checkbox offering to set a saved
+           * payment method as the default.
+           */
           public Builder setPaymentMethodSetAsDefault(
               CustomerSessionCreateParams.Components.PaymentElement.Features
                       .PaymentMethodSetAsDefault
@@ -515,7 +536,10 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Controls whether the Payment Element allows the updating of a saved payment method. */
+          /**
+           * Controls whether the Payment Element displays the option to update a saved payment
+           * method.
+           */
           public Builder setPaymentMethodUpdate(
               CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodUpdate
                   paymentMethodUpdate) {
