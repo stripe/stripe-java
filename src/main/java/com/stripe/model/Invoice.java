@@ -466,11 +466,21 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
 
-  /** End of the usage period during which invoice items were added to this invoice. */
+  /**
+   * End of the usage period during which invoice items were added to this invoice. This looks back
+   * one period for a subscription invoice. Use the <a
+   * href="https://stripe.com/api/invoices/line_item#invoice_line_item_object-period">line item
+   * period</a> to get the service period for each price.
+   */
   @SerializedName("period_end")
   Long periodEnd;
 
-  /** Start of the usage period during which invoice items were added to this invoice. */
+  /**
+   * Start of the usage period during which invoice items were added to this invoice. This looks
+   * back one period for a subscription invoice. Use the <a
+   * href="https://stripe.com/api/invoices/line_item#invoice_line_item_object-period">line item
+   * period</a> to get the service period for each price.
+   */
   @SerializedName("period_start")
   Long periodStart;
 
