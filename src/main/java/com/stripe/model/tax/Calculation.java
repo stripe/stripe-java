@@ -79,6 +79,10 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The details of the ship from location, such as the address. */
+  @SerializedName("ship_from_details")
+  ShipFromDetails shipFromDetails;
+
   /** The shipping cost details for the calculation. */
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
@@ -273,6 +277,49 @@ public class Calculation extends ApiResource implements HasId {
       /** The value of the tax ID. */
       @SerializedName("value")
       String value;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShipFromDetails extends StripeObject {
+    @SerializedName("address")
+    Address address;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Address extends StripeObject {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      String line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /**
+       * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
+       * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+       */
+      @SerializedName("state")
+      String state;
     }
   }
 
@@ -508,6 +555,7 @@ public class Calculation extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(shipFromDetails, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
   }
 }
