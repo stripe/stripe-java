@@ -86,6 +86,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   PaymentMethodOptions paymentMethodOptions;
 
   /**
+   * The list of payment method types (for example, a card) that this PaymentIntent can use. Use
+   * {@code automatic_payment_methods} to manage payment methods from the <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
+   */
+  @SerializedName("payment_method_types")
+  List<String> paymentMethodTypes;
+
+  /**
    * Options to configure Radar. Learn more about <a
    * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
    */
@@ -152,6 +160,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       String paymentMethod,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
+      List<String> paymentMethodTypes,
       RadarOptions radarOptions,
       Object receiptEmail,
       String returnUrl,
@@ -169,6 +178,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     this.paymentMethod = paymentMethod;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
+    this.paymentMethodTypes = paymentMethodTypes;
     this.radarOptions = radarOptions;
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
@@ -204,6 +214,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
+    private List<String> paymentMethodTypes;
+
     private RadarOptions radarOptions;
 
     private Object receiptEmail;
@@ -230,6 +242,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.paymentMethod,
           this.paymentMethodData,
           this.paymentMethodOptions,
+          this.paymentMethodTypes,
           this.radarOptions,
           this.receiptEmail,
           this.returnUrl,
@@ -384,6 +397,32 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         PaymentIntentConfirmParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
+      return this;
+    }
+
+    /**
+     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentIntentConfirmParams#paymentMethodTypes} for the field documentation.
+     */
+    public Builder addPaymentMethodType(String element) {
+      if (this.paymentMethodTypes == null) {
+        this.paymentMethodTypes = new ArrayList<>();
+      }
+      this.paymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentIntentConfirmParams#paymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllPaymentMethodType(List<String> elements) {
+      if (this.paymentMethodTypes == null) {
+        this.paymentMethodTypes = new ArrayList<>();
+      }
+      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
