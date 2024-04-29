@@ -6704,6 +6704,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       /** [Deprecated] This is a legacy parameter that no longer has any function. */
       @SerializedName("persistent_token")
+      @Deprecated
       String persistentToken;
 
       private Link(Map<String, Object> extraParams, String persistentToken) {
