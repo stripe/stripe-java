@@ -1131,6 +1131,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
       /** [Deprecated] This is a legacy parameter that no longer has any function. */
       @SerializedName("persistent_token")
+      @Deprecated
       String persistentToken;
     }
 
