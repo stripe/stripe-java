@@ -1144,6 +1144,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String promptpayPayments;
 
     /**
+     * The status of the Rechnung capability of the account, or whether the account can directly
+     * process Rechnung payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("rechnung_payments")
+    String rechnungPayments;
+
+    /**
      * The status of the RevolutPay capability of the account, or whether the account can directly
      * process RevolutPay payments.
      *

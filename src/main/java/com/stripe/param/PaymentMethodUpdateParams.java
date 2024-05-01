@@ -69,6 +69,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   Payto payto;
 
   /**
+   * If this is a Rechnung PaymentMethod, this hash contains details about the Rechnung payment
+   * method.
+   */
+  @SerializedName("rechnung")
+  Rechnung rechnung;
+
+  /**
    * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
    * bank account payment method.
    */
@@ -84,6 +91,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Link link,
       Object metadata,
       Payto payto,
+      Rechnung rechnung,
       UsBankAccount usBankAccount) {
     this.allowRedisplay = allowRedisplay;
     this.billingDetails = billingDetails;
@@ -93,6 +101,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     this.link = link;
     this.metadata = metadata;
     this.payto = payto;
+    this.rechnung = rechnung;
     this.usBankAccount = usBankAccount;
   }
 
@@ -117,6 +126,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private Payto payto;
 
+    private Rechnung rechnung;
+
     private UsBankAccount usBankAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -130,6 +141,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.link,
           this.metadata,
           this.payto,
+          this.rechnung,
           this.usBankAccount);
     }
 
@@ -276,6 +288,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setPayto(PaymentMethodUpdateParams.Payto payto) {
       this.payto = payto;
+      return this;
+    }
+
+    /**
+     * If this is a Rechnung PaymentMethod, this hash contains details about the Rechnung payment
+     * method.
+     */
+    public Builder setRechnung(PaymentMethodUpdateParams.Rechnung rechnung) {
+      this.rechnung = rechnung;
       return this;
     }
 
@@ -983,6 +1004,171 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       public Builder setPayId(EmptyParam payId) {
         this.payId = payId;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Rechnung {
+    /** <strong>Required.</strong> Customer's date of birth */
+    @SerializedName("dob")
+    Dob dob;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Rechnung(Dob dob, Map<String, Object> extraParams) {
+      this.dob = dob;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Dob dob;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodUpdateParams.Rechnung build() {
+        return new PaymentMethodUpdateParams.Rechnung(this.dob, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> Customer's date of birth */
+      public Builder setDob(PaymentMethodUpdateParams.Rechnung.Dob dob) {
+        this.dob = dob;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.Rechnung#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.Rechnung#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Dob {
+      /** <strong>Required.</strong> The day of birth, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The month of birth, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** <strong>Required.</strong> The four-digit year of birth. */
+      @SerializedName("year")
+      Long year;
+
+      private Dob(Long day, Map<String, Object> extraParams, Long month, Long year) {
+        this.day = day;
+        this.extraParams = extraParams;
+        this.month = month;
+        this.year = year;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long day;
+
+        private Map<String, Object> extraParams;
+
+        private Long month;
+
+        private Long year;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodUpdateParams.Rechnung.Dob build() {
+          return new PaymentMethodUpdateParams.Rechnung.Dob(
+              this.day, this.extraParams, this.month, this.year);
+        }
+
+        /** <strong>Required.</strong> The day of birth, between 1 and 31. */
+        public Builder setDay(Long day) {
+          this.day = day;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodUpdateParams.Rechnung.Dob#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodUpdateParams.Rechnung.Dob#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The month of birth, between 1 and 12. */
+        public Builder setMonth(Long month) {
+          this.month = month;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The four-digit year of birth. */
+        public Builder setYear(Long year) {
+          this.year = year;
+          return this;
+        }
       }
     }
   }
