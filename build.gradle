@@ -34,6 +34,7 @@ tasks.withType(JavaCompile) {
     options.release = project.targetCompatibility.majorVersion as Integer
 
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Xlint:-processing"
+    options.compilerArgs << "-Xmx2g" << "-Xms2g"
     options.encoding = "UTF-8"
 
     options.errorprone {
