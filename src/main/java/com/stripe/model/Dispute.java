@@ -807,10 +807,13 @@ public class Dispute extends ApiResource
     @SerializedName("card")
     Card card;
 
+    @SerializedName("paypal")
+    Paypal paypal;
+
     /**
      * Payment method type.
      *
-     * <p>Equal to {@code card}.
+     * <p>One of {@code card}, or {@code paypal}.
      */
     @SerializedName("type")
     String type;
@@ -834,6 +837,19 @@ public class Dispute extends ApiResource
        */
       @SerializedName("network_reason_code")
       String networkReasonCode;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypal extends StripeObject {
+      /** The ID of the dispute in PayPal. */
+      @SerializedName("case_id")
+      String caseId;
+
+      /** The reason for the dispute as defined by PayPal. */
+      @SerializedName("reason_code")
+      String reasonCode;
     }
   }
 

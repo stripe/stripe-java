@@ -2658,6 +2658,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay extends StripeObject {
+      /** Internal card details. */
       @SerializedName("card")
       Card card;
 
