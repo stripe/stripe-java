@@ -1386,6 +1386,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
     /** [Deprecated] This is a legacy parameter that no longer has any function. */
     @SerializedName("persistent_token")
+    @Deprecated
     String persistentToken;
   }
 
