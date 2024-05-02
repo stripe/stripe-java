@@ -182,6 +182,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("radar_options")
   RadarOptions radarOptions;
 
+  @SerializedName("rechnung")
+  Rechnung rechnung;
+
   @SerializedName("revolut_pay")
   RevolutPay revolutPay;
 
@@ -207,8 +210,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
    * interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay}, {@code
    * multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code payto}, {@code
-   * pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code
-   * swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code sepa_debit}, {@code
+   * sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code
+   * zip}.
    */
   @SerializedName("type")
   String type;
@@ -1395,6 +1399,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
     /** [Deprecated] This is a legacy parameter that no longer has any function. */
     @SerializedName("persistent_token")
+    @Deprecated
     String persistentToken;
   }
 
@@ -1509,6 +1514,31 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("session")
     String session;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Rechnung extends StripeObject {
+    @SerializedName("dob")
+    Dob dob;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dob extends StripeObject {
+      /** The day of birth, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /** The month of birth, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The four-digit year of birth. */
+      @SerializedName("year")
+      Long year;
+    }
   }
 
   @Getter
@@ -1770,6 +1800,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(pix, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);
+    trySetResponseGetter(rechnung, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);

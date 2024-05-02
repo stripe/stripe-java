@@ -1,9 +1,30 @@
 # Changelog
 
+## 25.5.0 - 2024-05-02
+* [#1785](https://github.com/stripe/stripe-java/pull/1785) Update generated code
+  * Add support for `paypal` on `Dispute.payment_method_details`
+  * Change type of `Dispute.payment_method_details.type` from `literal('card')` to `enum('card'|'paypal')`
+  * Change type of `entitlements.FeatureUpdateParams.metadata` from `map(string: string)` to `emptyable(map(string: string))`
+  * Add support for `payment_method_types` on `PaymentIntentConfirmParams`
+  * Add support for `ship_from_details` on `Tax.Calculation`, `Tax.Transaction`, and `tax.CalculationCreateParams`
+  * Add support for `bh`, `eg`, `ge`, `ke`, `kz`, `ng`, and `om` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+* [#1787](https://github.com/stripe/stripe-java/pull/1787) Deprecate Java params based on OpenAPI spec
+  - Mark as deprecated the `persistent_token` property on `ConfirmationToken.Link.persistentToken`, `PaymentIntent.Link.persistentToken`, `PaymentMethod.Link.persistentToken`, `SetupIntent.Link.persistentToken`, `PaymentIntentConfirmParams.Link.persistentToken`, `PaymentIntentCreateParams.Link.persistentToken`, `PaymentIntentUpdateParams.Link.persistentToken`, `SetupIntentConfirmParams.Link.persistentToken`, `SetupIntentCreateParams.Link.persistentToken`, `SetupIntentUpdateParams.Link.persistentToken`. This is a legacy parameter that no longer has any function.
+
 ## 25.5.0-beta.1 - 2024-04-25
 * [#1783](https://github.com/stripe/stripe-java/pull/1783) Update generated code for beta
   * Add support for `payment_method_settings` on `AccountSessionCreateParams.components`
   * Add support for `cancel_subscription_schedule` on `QuoteCreateParams.lines[]`, `QuoteLine`, and `QuoteUpdateParams.lines[]`
+
+## 25.4.0 - 2024-04-25
+* [#1784](https://github.com/stripe/stripe-java/pull/1784) Update generated code
+  * Add support for `setup_future_usage` on `Checkout.Session.payment_method_options.amazon_pay`, `Checkout.Session.payment_method_options.revolut_pay`, `PaymentIntent.payment_method_options.amazon_pay`, and `PaymentIntent.payment_method_options.revolut_pay`
+  * Change type of `Entitlements.ActiveEntitlement.feature` from `string` to `expandable($Entitlements.Feature)`
+  * Remove support for inadvertently released identity verification features `email` and `phone` on `identity.VerificationSessionCreateParams.options` and `identity.VerificationSessionUpdateParams.options`
+  * Add support for new values `amazon_pay` and `revolut_pay` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
+  * Add support for `amazon_pay` and `revolut_pay` on `Mandate.payment_method_details` and `SetupAttempt.payment_method_details`
+  * Add support for `ending_before`, `limit`, and `starting_after` on `PaymentMethodConfigurationListParams`
+  * Add support for `mobilepay` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
 
 ## 25.4.0-beta.1 - 2024-04-18
 * [#1781](https://github.com/stripe/stripe-java/pull/1781) Update generated code for beta

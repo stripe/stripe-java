@@ -48,7 +48,7 @@ public class CalculationCreateParams extends ApiRequestParams {
   @SerializedName("line_items")
   List<CalculationCreateParams.LineItem> lineItems;
 
-  /** Details about the address from which the goods are being shippped. */
+  /** Details about the address from which the goods are being shipped. */
   @SerializedName("ship_from_details")
   ShipFromDetails shipFromDetails;
 
@@ -225,7 +225,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Details about the address from which the goods are being shippped. */
+    /** Details about the address from which the goods are being shipped. */
     public Builder setShipFromDetails(CalculationCreateParams.ShipFromDetails shipFromDetails) {
       this.shipFromDetails = shipFromDetails;
       return this;

@@ -1169,6 +1169,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     public static class Link extends StripeObject {
       /** [Deprecated] This is a legacy parameter that no longer has any function. */
       @SerializedName("persistent_token")
+      @Deprecated
       String persistentToken;
     }
 

@@ -180,7 +180,8 @@ public class CustomerSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Controls whether the Payment Element allows the removal of a saved payment method.
+         * Controls whether the Payment Element displays the option to remove a saved payment
+         * method.
          *
          * <p>One of {@code disabled}, or {@code enabled}.
          */
@@ -188,7 +189,8 @@ public class CustomerSession extends ApiResource {
         String paymentMethodRemove;
 
         /**
-         * Controls whether the Payment Element offers to save a new payment method.
+         * Controls whether the Payment Element displays a checkbox offering to save a new payment
+         * method.
          *
          * <p>One of {@code disabled}, or {@code enabled}.
          */
@@ -196,7 +198,8 @@ public class CustomerSession extends ApiResource {
         String paymentMethodSave;
 
         /**
-         * Controls whether the Payment Element offers to set a payment method as the default.
+         * Controls whether the Payment Element displays a checkbox offering to set a saved payment
+         * method as the default.
          *
          * <p>One of {@code disabled}, or {@code enabled}.
          */
@@ -204,7 +207,8 @@ public class CustomerSession extends ApiResource {
         String paymentMethodSetAsDefault;
 
         /**
-         * Controls whether the Payment Element allows the updating of a saved payment method.
+         * Controls whether the Payment Element displays the option to update a saved payment
+         * method.
          *
          * <p>One of {@code disabled}, or {@code enabled}.
          */

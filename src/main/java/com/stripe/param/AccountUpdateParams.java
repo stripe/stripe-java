@@ -1437,6 +1437,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("promptpay_payments")
     PromptpayPayments promptpayPayments;
 
+    /** The rechnung_payments capability. */
+    @SerializedName("rechnung_payments")
+    RechnungPayments rechnungPayments;
+
     /** The revolut_pay_payments capability. */
     @SerializedName("revolut_pay_payments")
     RevolutPayPayments revolutPayPayments;
@@ -1515,6 +1519,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         PaypalPayments paypalPayments,
         PaytoPayments paytoPayments,
         PromptpayPayments promptpayPayments,
+        RechnungPayments rechnungPayments,
         RevolutPayPayments revolutPayPayments,
         SepaDebitPayments sepaDebitPayments,
         SofortPayments sofortPayments,
@@ -1559,6 +1564,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.paypalPayments = paypalPayments;
       this.paytoPayments = paytoPayments;
       this.promptpayPayments = promptpayPayments;
+      this.rechnungPayments = rechnungPayments;
       this.revolutPayPayments = revolutPayPayments;
       this.sepaDebitPayments = sepaDebitPayments;
       this.sofortPayments = sofortPayments;
@@ -1643,6 +1649,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private PromptpayPayments promptpayPayments;
 
+      private RechnungPayments rechnungPayments;
+
       private RevolutPayPayments revolutPayPayments;
 
       private SepaDebitPayments sepaDebitPayments;
@@ -1701,6 +1709,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.paypalPayments,
             this.paytoPayments,
             this.promptpayPayments,
+            this.rechnungPayments,
             this.revolutPayPayments,
             this.sepaDebitPayments,
             this.sofortPayments,
@@ -1952,6 +1961,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setPromptpayPayments(
           AccountUpdateParams.Capabilities.PromptpayPayments promptpayPayments) {
         this.promptpayPayments = promptpayPayments;
+        return this;
+      }
+
+      /** The rechnung_payments capability. */
+      public Builder setRechnungPayments(
+          AccountUpdateParams.Capabilities.RechnungPayments rechnungPayments) {
+        this.rechnungPayments = rechnungPayments;
         return this;
       }
 
@@ -4531,6 +4547,85 @@ public class AccountUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.PromptpayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class RechnungPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private RechnungPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.RechnungPayments build() {
+          return new AccountUpdateParams.Capabilities.RechnungPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.RechnungPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.RechnungPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

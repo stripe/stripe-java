@@ -1258,6 +1258,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
           /** [Deprecated] This is a legacy parameter that no longer has any function. */
           @SerializedName("persistent_token")
+          @Deprecated
           String persistentToken;
 
           /**
