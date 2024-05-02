@@ -1,5 +1,16 @@
 # Changelog
 
+## 25.5.0 - 2024-05-02
+* [#1785](https://github.com/stripe/stripe-java/pull/1785) Update generated code
+  * Add support for `paypal` on `Dispute.payment_method_details`
+  * Change type of `Dispute.payment_method_details.type` from `literal('card')` to `enum('card'|'paypal')`
+  * Change type of `entitlements.FeatureUpdateParams.metadata` from `map(string: string)` to `emptyable(map(string: string))`
+  * Add support for `payment_method_types` on `PaymentIntentConfirmParams`
+  * Add support for `ship_from_details` on `Tax.Calculation`, `Tax.Transaction`, and `tax.CalculationCreateParams`
+  * Add support for `bh`, `eg`, `ge`, `ke`, `kz`, `ng`, and `om` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+* [#1787](https://github.com/stripe/stripe-java/pull/1787) Deprecate Java params based on OpenAPI spec
+  - Mark as deprecated the `persistent_token` property on `ConfirmationToken.Link.persistentToken`, `PaymentIntent.Link.persistentToken`, `PaymentMethod.Link.persistentToken`, `SetupIntent.Link.persistentToken`, `PaymentIntentConfirmParams.Link.persistentToken`, `PaymentIntentCreateParams.Link.persistentToken`, `PaymentIntentUpdateParams.Link.persistentToken`, `SetupIntentConfirmParams.Link.persistentToken`, `SetupIntentCreateParams.Link.persistentToken`, `SetupIntentUpdateParams.Link.persistentToken`. This is a legacy parameter that no longer has any function.
+
 ## 25.4.0 - 2024-04-25
 * [#1784](https://github.com/stripe/stripe-java/pull/1784) Update generated code
   * Add support for `setup_future_usage` on `Checkout.Session.payment_method_options.amazon_pay`, `Checkout.Session.payment_method_options.revolut_pay`, `PaymentIntent.payment_method_options.amazon_pay`, and `PaymentIntent.payment_method_options.revolut_pay`
