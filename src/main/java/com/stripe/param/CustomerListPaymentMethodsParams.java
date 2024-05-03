@@ -330,6 +330,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
 
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
+
     @SerializedName("revolut_pay")
     REVOLUT_PAY("revolut_pay"),
 
