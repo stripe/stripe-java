@@ -31,6 +31,9 @@ tasks.withType(JavaCompile) {
         throw new GradleException("JDK 17 is required to build Stripe")
     }
 
+    options.fork = true
+    options.forkOptions.jvmArgs += ['-Xms256M', '-Xmx512M']
+
     options.release = project.targetCompatibility.majorVersion as Integer
 
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Xlint:-processing"
