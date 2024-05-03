@@ -752,6 +752,10 @@ public final class InvoiceService extends ApiService {
    * parameter when doing the actual subscription update. The recommended way to get only the
    * prorations being previewed is to consider only proration line items where {@code period[start]}
    * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   *
+   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
+   * vary between the time of the preview and the time of the actual invoice creation. <a
+   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
    */
   public Invoice createPreview(InvoiceCreatePreviewParams params) throws StripeException {
     return createPreview(params, (RequestOptions) null);
@@ -773,6 +777,10 @@ public final class InvoiceService extends ApiService {
    * parameter when doing the actual subscription update. The recommended way to get only the
    * prorations being previewed is to consider only proration line items where {@code period[start]}
    * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   *
+   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
+   * vary between the time of the preview and the time of the actual invoice creation. <a
+   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
    */
   public Invoice createPreview(RequestOptions options) throws StripeException {
     return createPreview((InvoiceCreatePreviewParams) null, options);
@@ -794,6 +802,10 @@ public final class InvoiceService extends ApiService {
    * parameter when doing the actual subscription update. The recommended way to get only the
    * prorations being previewed is to consider only proration line items where {@code period[start]}
    * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   *
+   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
+   * vary between the time of the preview and the time of the actual invoice creation. <a
+   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
    */
   public Invoice createPreview() throws StripeException {
     return createPreview((InvoiceCreatePreviewParams) null, (RequestOptions) null);
@@ -815,6 +827,10 @@ public final class InvoiceService extends ApiService {
    * parameter when doing the actual subscription update. The recommended way to get only the
    * prorations being previewed is to consider only proration line items where {@code period[start]}
    * is equal to the {@code subscription_details.proration_date} value passed in the request.
+   *
+   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
+   * vary between the time of the preview and the time of the actual invoice creation. <a
+   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
    */
   public Invoice createPreview(InvoiceCreatePreviewParams params, RequestOptions options)
       throws StripeException {
