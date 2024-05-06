@@ -14,12 +14,41 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.treasury.OutboundPaymentFailParams;
 import com.stripe.param.treasury.OutboundPaymentPostParams;
 import com.stripe.param.treasury.OutboundPaymentReturnOutboundPaymentParams;
+import com.stripe.param.treasury.OutboundPaymentUpdateParams;
 
 public final class OutboundPaymentService extends ApiService {
   public OutboundPaymentService(StripeResponseGetter responseGetter) {
     super(responseGetter);
   }
 
+  /**
+   * Updates a test mode created OutboundPayment with tracking details. The OutboundPayment must not
+   * be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+   */
+  public OutboundPayment update(String id, OutboundPaymentUpdateParams params)
+      throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates a test mode created OutboundPayment with tracking details. The OutboundPayment must not
+   * be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+   */
+  public OutboundPayment update(
+      String id, OutboundPaymentUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/treasury/outbound_payments/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, OutboundPayment.class);
+  }
   /**
    * Transitions a test mode created OutboundPayment to the {@code failed} status. The
    * OutboundPayment must already be in the {@code processing} state.
