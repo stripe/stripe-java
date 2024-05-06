@@ -46,6 +46,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("alipay")
   Alipay alipay;
 
+  /**
+   * This field indicates whether this payment method can be shown again to its customer in a
+   * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+   * whether a payment method can be shown as a saved payment method in a checkout flow. The field
+   * defaults to “unspecified”.
+   *
+   * <p>One of {@code always}, {@code limited}, or {@code unspecified}.
+   */
+  @SerializedName("allow_redisplay")
+  String allowRedisplay;
+
   @SerializedName("amazon_pay")
   AmazonPay amazonPay;
 
