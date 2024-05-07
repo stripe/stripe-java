@@ -217,12 +217,14 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_payment.canceled}, {@code treasury.outbound_payment.created}, {@code
    * treasury.outbound_payment.expected_arrival_date_updated}, {@code
    * treasury.outbound_payment.failed}, {@code treasury.outbound_payment.posted}, {@code
-   * treasury.outbound_payment.returned}, {@code treasury.outbound_transfer.canceled}, {@code
-   * treasury.outbound_transfer.created}, {@code
+   * treasury.outbound_payment.returned}, {@code
+   * treasury.outbound_payment.tracking_details_updated}, {@code
+   * treasury.outbound_transfer.canceled}, {@code treasury.outbound_transfer.created}, {@code
    * treasury.outbound_transfer.expected_arrival_date_updated}, {@code
    * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
-   * treasury.outbound_transfer.returned}, {@code treasury.received_credit.created}, {@code
-   * treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, or {@code
+   * treasury.outbound_transfer.returned}, {@code
+   * treasury.outbound_transfer.tracking_details_updated}, {@code treasury.received_credit.created},
+   * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, or {@code
    * treasury.received_debit.created}.
    */
   @SerializedName("type")

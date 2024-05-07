@@ -2815,6 +2815,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("rechnung")
+    Rechnung rechnung;
+
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
@@ -4235,6 +4238,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rechnung extends StripeObject {
+      /** A unique identifier that correlates each transaction with the collected risk data. */
+      @SerializedName("risk_correlation_id")
+      String riskCorrelationId;
     }
 
     @Getter

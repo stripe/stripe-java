@@ -332,11 +332,11 @@ public class Capability extends ApiResource implements HasId {
     List<String> currentlyDue;
 
     /**
-     * If the capability is disabled, this string describes why. Can be {@code
-     * requirements.fields_needed}, {@code pending.onboarding}, {@code pending.review}, {@code
-     * rejected.fraud}, {@code rejected.other}, {@code platform_paused}, {@code
-     * action_required.requested_capabilities}, {@code rejected.inactivty}, or {@code
-     * rejected.unsupported_business}.
+     * If the capability is disabled, this string describes why. <a
+     * href="https://stripe.com/docs/connect/handling-api-verification">Learn more about handling
+     * verification issues</a>. Can be {@code requirements.fields_needed}, {@code
+     * pending.onboarding}, {@code pending.review}, {@code rejected.other}, {@code platform_paused},
+     * {@code rejected.inactivty}, or {@code rejected.unsupported_business}.
      *
      * <p>{@code rejected.unsupported_business} means that the account's business is not supported
      * by the capability. For example, payment methods may restrict the businesses they support in
@@ -348,9 +348,6 @@ public class Capability extends ApiResource implements HasId {
      * disabled reason currently only applies to the Issuing capability. See <a
      * href="https://support.stripe.com/questions/issuing-managing-inactive-connect-accounts">Issuing:
      * Managing Inactive Connects</a> for more details.
-     *
-     * <p>If you believe that a rejection is in error, please contact support at
-     * https://support.stripe.com/contact/ for assistance.
      */
     @SerializedName("disabled_reason")
     String disabledReason;

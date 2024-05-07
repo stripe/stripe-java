@@ -1218,6 +1218,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("rechnung")
+    Rechnung rechnung;
+
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
@@ -2890,6 +2893,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("reference")
       String reference;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rechnung extends StripeObject {}
 
     @Getter
     @Setter
