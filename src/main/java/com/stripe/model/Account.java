@@ -97,7 +97,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   /**
    * Whether account details have been submitted. Accounts with Stripe Dashboard access, which
-   * includes Standard accounts, cannot receive payouts before this is true.
+   * includes Standard accounts, cannot receive payouts before this is true. Accounts where this is
+   * false should be directed to <a href="https://stripe.com/connect/onboarding">an onboarding
+   * flow</a> to finish submitting account details.
    */
   @SerializedName("details_submitted")
   Boolean detailsSubmitted;
