@@ -75,6 +75,8 @@ tasks.withType(Test) {
 
 compileJava {
     options.compilerArgs << "-Werror"
+    options.forkOptions.jvmArgs << '-Xmx1024m'
+    options.fork=true
 }
 
 configurations.all {
