@@ -7,7 +7,6 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Mandate;
-import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
@@ -42,7 +41,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class OutboundPayment extends ApiResource implements HasId, MetadataStore<OutboundPayment> {
+public class OutboundPayment extends ApiResource implements HasId {
   /** Amount (in cents) transferred. */
   @SerializedName("amount")
   Long amount;
@@ -121,7 +120,6 @@ public class OutboundPayment extends ApiResource implements HasId, MetadataStore
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
-  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
