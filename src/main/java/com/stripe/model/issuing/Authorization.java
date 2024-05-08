@@ -254,6 +254,13 @@ public class Authorization extends ApiResource
   VerificationData verificationData;
 
   /**
+   * Whether the authorization bypassed fraud risk checks because the cardholder has previously completed
+   * a fraud challenge on a similar high-risk authorization from the same merchant.
+   */
+  @SerializedName("verified_by_fraud_challenge")
+  Boolean verifiedByFraudChallenge;
+
+  /**
    * The digital wallet used for this transaction. One of {@code apple_pay}, {@code google_pay}, or
    * {@code samsung_pay}. Will populate as {@code null} when no digital wallet was utilized.
    */
