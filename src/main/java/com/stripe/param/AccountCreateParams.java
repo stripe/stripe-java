@@ -8241,11 +8241,11 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("address")
     Address address;
 
-    /** The Kana variation of the the individual's primary address (Japan only). */
+    /** The Kana variation of the individual's primary address (Japan only). */
     @SerializedName("address_kana")
     AddressKana addressKana;
 
-    /** The Kanji variation of the the individual's primary address (Japan only). */
+    /** The Kanji variation of the individual's primary address (Japan only). */
     @SerializedName("address_kanji")
     AddressKanji addressKanji;
 
@@ -8270,7 +8270,7 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("first_name")
     String firstName;
 
-    /** The Kana variation of the the individual's first name (Japan only). */
+    /** The Kana variation of the individual's first name (Japan only). */
     @SerializedName("first_name_kana")
     String firstNameKana;
 
@@ -8501,13 +8501,13 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Kana variation of the the individual's primary address (Japan only). */
+      /** The Kana variation of the individual's primary address (Japan only). */
       public Builder setAddressKana(AccountCreateParams.Individual.AddressKana addressKana) {
         this.addressKana = addressKana;
         return this;
       }
 
-      /** The Kanji variation of the the individual's primary address (Japan only). */
+      /** The Kanji variation of the individual's primary address (Japan only). */
       public Builder setAddressKanji(AccountCreateParams.Individual.AddressKanji addressKanji) {
         this.addressKanji = addressKanji;
         return this;
@@ -8563,7 +8563,7 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Kana variation of the the individual's first name (Japan only). */
+      /** The Kana variation of the individual's first name (Japan only). */
       public Builder setFirstNameKana(String firstNameKana) {
         this.firstNameKana = firstNameKana;
         return this;
