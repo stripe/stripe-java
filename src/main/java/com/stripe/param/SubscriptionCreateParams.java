@@ -255,13 +255,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Object pendingInvoiceItemInterval;
 
   /**
-   * How to handle a customer's pending invoice items if an invoice will be generated. Defaults to
-   * {@code include} if the parameter is omitted.
-   */
-  @SerializedName("pending_invoice_items_behavior")
-  PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
-
-  /**
    * The ID of a promotion code to apply to this subscription. A promotion code applied to a
    * subscription will only affect invoices created for that particular subscription. This field has
    * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
@@ -349,7 +342,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       PaymentBehavior paymentBehavior,
       PaymentSettings paymentSettings,
       Object pendingInvoiceItemInterval,
-      PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior,
       String promotionCode,
       ProrationBehavior prorationBehavior,
       TransferData transferData,
@@ -386,7 +378,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.paymentBehavior = paymentBehavior;
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
-    this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
     this.promotionCode = promotionCode;
     this.prorationBehavior = prorationBehavior;
     this.transferData = transferData;
@@ -459,8 +450,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Object pendingInvoiceItemInterval;
 
-    private PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
-
     private String promotionCode;
 
     private ProrationBehavior prorationBehavior;
@@ -507,7 +496,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.paymentBehavior,
           this.paymentSettings,
           this.pendingInvoiceItemInterval,
-          this.pendingInvoiceItemsBehavior,
           this.promotionCode,
           this.prorationBehavior,
           this.transferData,
@@ -1041,16 +1029,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
-      return this;
-    }
-
-    /**
-     * How to handle a customer's pending invoice items if an invoice will be generated. Defaults to
-     * {@code include} if the parameter is omitted.
-     */
-    public Builder setPendingInvoiceItemsBehavior(
-        SubscriptionCreateParams.PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior) {
-      this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
       return this;
     }
 
@@ -5564,21 +5542,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private final String value;
 
     PaymentBehavior(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum PendingInvoiceItemsBehavior implements ApiRequestParams.EnumParam {
-    @SerializedName("exclude")
-    EXCLUDE("exclude"),
-
-    @SerializedName("include")
-    INCLUDE("include");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    PendingInvoiceItemsBehavior(String value) {
       this.value = value;
     }
   }
