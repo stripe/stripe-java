@@ -2011,6 +2011,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Charges extends StripeObject {
+      /** Whether a pause of the risk control has been requested. */
       @SerializedName("pause_requested")
       Boolean pauseRequested;
     }
@@ -2019,6 +2020,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Payouts extends StripeObject {
+      /** Whether a pause of the risk control has been requested. */
       @SerializedName("pause_requested")
       Boolean pauseRequested;
     }
