@@ -351,7 +351,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Filters {
-    /** <strong>Required.</strong> List of countries from which to collect accounts. */
+    /** List of countries from which to collect accounts. */
     @SerializedName("countries")
     List<String> countries;
 
