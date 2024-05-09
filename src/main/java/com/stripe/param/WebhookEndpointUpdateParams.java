@@ -922,6 +922,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("treasury.outbound_payment.returned")
     TREASURY__OUTBOUND_PAYMENT__RETURNED("treasury.outbound_payment.returned"),
 
+    @SerializedName("treasury.outbound_payment.tracking_details_updated")
+    TREASURY__OUTBOUND_PAYMENT__TRACKING_DETAILS_UPDATED(
+        "treasury.outbound_payment.tracking_details_updated"),
+
     @SerializedName("treasury.outbound_transfer.canceled")
     TREASURY__OUTBOUND_TRANSFER__CANCELED("treasury.outbound_transfer.canceled"),
 
@@ -940,6 +944,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("treasury.outbound_transfer.returned")
     TREASURY__OUTBOUND_TRANSFER__RETURNED("treasury.outbound_transfer.returned"),
+
+    @SerializedName("treasury.outbound_transfer.tracking_details_updated")
+    TREASURY__OUTBOUND_TRANSFER__TRACKING_DETAILS_UPDATED(
+        "treasury.outbound_transfer.tracking_details_updated"),
 
     @SerializedName("treasury.received_credit.created")
     TREASURY__RECEIVED_CREDIT__CREATED("treasury.received_credit.created"),

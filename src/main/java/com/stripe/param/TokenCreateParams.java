@@ -1682,11 +1682,11 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("address")
       Address address;
 
-      /** The Kana variation of the the individual's primary address (Japan only). */
+      /** The Kana variation of the individual's primary address (Japan only). */
       @SerializedName("address_kana")
       AddressKana addressKana;
 
-      /** The Kanji variation of the the individual's primary address (Japan only). */
+      /** The Kanji variation of the individual's primary address (Japan only). */
       @SerializedName("address_kanji")
       AddressKanji addressKanji;
 
@@ -1711,7 +1711,7 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("first_name")
       String firstName;
 
-      /** The Kana variation of the the individual's first name (Japan only). */
+      /** The Kana variation of the individual's first name (Japan only). */
       @SerializedName("first_name_kana")
       String firstNameKana;
 
@@ -1942,14 +1942,14 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The Kana variation of the the individual's primary address (Japan only). */
+        /** The Kana variation of the individual's primary address (Japan only). */
         public Builder setAddressKana(
             TokenCreateParams.Account.Individual.AddressKana addressKana) {
           this.addressKana = addressKana;
           return this;
         }
 
-        /** The Kanji variation of the the individual's primary address (Japan only). */
+        /** The Kanji variation of the individual's primary address (Japan only). */
         public Builder setAddressKanji(
             TokenCreateParams.Account.Individual.AddressKanji addressKanji) {
           this.addressKanji = addressKanji;
@@ -2008,7 +2008,7 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The Kana variation of the the individual's first name (Japan only). */
+        /** The Kana variation of the individual's first name (Japan only). */
         public Builder setFirstNameKana(String firstNameKana) {
           this.firstNameKana = firstNameKana;
           return this;

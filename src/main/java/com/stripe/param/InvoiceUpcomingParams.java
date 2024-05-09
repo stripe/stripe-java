@@ -89,6 +89,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   Object onBehalfOf;
 
   /**
+   * Customizes the types of values to include when calculating the invoice. Defaults to {@code
+   * next} if unspecified.
+   */
+  @SerializedName("preview_mode")
+  PreviewMode previewMode;
+
+  /**
    * The identifier of the schedule whose upcoming invoice you'd like to retrieve. Cannot be used
    * with subscription or subscription fields.
    */
@@ -245,6 +252,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       List<InvoiceUpcomingParams.InvoiceItem> invoiceItems,
       Issuer issuer,
       Object onBehalfOf,
+      PreviewMode previewMode,
       String schedule,
       ScheduleDetails scheduleDetails,
       String subscription,
@@ -272,6 +280,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.invoiceItems = invoiceItems;
     this.issuer = issuer;
     this.onBehalfOf = onBehalfOf;
+    this.previewMode = previewMode;
     this.schedule = schedule;
     this.scheduleDetails = scheduleDetails;
     this.subscription = subscription;
@@ -316,6 +325,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     private Issuer issuer;
 
     private Object onBehalfOf;
+
+    private PreviewMode previewMode;
 
     private String schedule;
 
@@ -363,6 +374,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.invoiceItems,
           this.issuer,
           this.onBehalfOf,
+          this.previewMode,
           this.schedule,
           this.scheduleDetails,
           this.subscription,
@@ -581,6 +593,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      */
     public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /**
+     * Customizes the types of values to include when calculating the invoice. Defaults to {@code
+     * next} if unspecified.
+     */
+    public Builder setPreviewMode(InvoiceUpcomingParams.PreviewMode previewMode) {
+      this.previewMode = previewMode;
       return this;
     }
 
@@ -8640,6 +8661,21 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.value = value;
         }
       }
+    }
+  }
+
+  public enum PreviewMode implements ApiRequestParams.EnumParam {
+    @SerializedName("next")
+    NEXT("next"),
+
+    @SerializedName("recurring")
+    RECURRING("recurring");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PreviewMode(String value) {
+      this.value = value;
     }
   }
 

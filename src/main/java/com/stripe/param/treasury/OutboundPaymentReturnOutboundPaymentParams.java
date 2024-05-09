@@ -24,7 +24,7 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Optional hash to set the the return code. */
+  /** Optional hash to set the return code. */
   @SerializedName("returned_details")
   ReturnedDetails returnedDetails;
 
@@ -105,7 +105,7 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
       return this;
     }
 
-    /** Optional hash to set the the return code. */
+    /** Optional hash to set the return code. */
     public Builder setReturnedDetails(
         OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails returnedDetails) {
       this.returnedDetails = returnedDetails;

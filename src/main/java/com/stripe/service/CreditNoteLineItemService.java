@@ -21,7 +21,7 @@ public final class CreditNoteLineItemService extends ApiService {
   }
 
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
@@ -30,7 +30,7 @@ public final class CreditNoteLineItemService extends ApiService {
     return list(creditNote, params, (RequestOptions) null);
   }
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
@@ -39,7 +39,7 @@ public final class CreditNoteLineItemService extends ApiService {
     return list(creditNote, (CreditNoteLineItemListParams) null, options);
   }
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
@@ -47,7 +47,7 @@ public final class CreditNoteLineItemService extends ApiService {
     return list(creditNote, (CreditNoteLineItemListParams) null, (RequestOptions) null);
   }
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
