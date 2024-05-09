@@ -1,5 +1,9 @@
 # Changelog
 
+## 25.7.0 - 2024-05-09
+* [#1801](https://github.com/stripe/stripe-java/pull/1801) Update generated code
+  * Remove support for `pending_invoice_items_behavior` on `SubscriptionCreateParams` that was prematurely added in the previous release on the same day
+
 ## 25.6.0 - 2024-05-09
 * [#1797](https://github.com/stripe/stripe-java/pull/1797) Update generated code
   * Add support for `update` test helper method on resources `Treasury.OutboundPayment` and `Treasury.OutboundTransfer`
