@@ -224,6 +224,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("merchandise_not_as_described")
     Object merchandiseNotAsDescribed;
 
+    /** Evidence provided when {@code reason} is 'no_valid_authorization'. */
+    @SerializedName("no_valid_authorization")
+    Object noValidAuthorization;
+
     /** Evidence provided when {@code reason} is 'not_received'. */
     @SerializedName("not_received")
     Object notReceived;
@@ -249,6 +253,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Object fraudulent,
         Object merchandiseNotAsDescribed,
+        Object noValidAuthorization,
         Object notReceived,
         Object other,
         Reason reason,
@@ -258,6 +263,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.fraudulent = fraudulent;
       this.merchandiseNotAsDescribed = merchandiseNotAsDescribed;
+      this.noValidAuthorization = noValidAuthorization;
       this.notReceived = notReceived;
       this.other = other;
       this.reason = reason;
@@ -279,6 +285,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       private Object merchandiseNotAsDescribed;
 
+      private Object noValidAuthorization;
+
       private Object notReceived;
 
       private Object other;
@@ -295,6 +303,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
             this.extraParams,
             this.fraudulent,
             this.merchandiseNotAsDescribed,
+            this.noValidAuthorization,
             this.notReceived,
             this.other,
             this.reason,
@@ -373,6 +382,19 @@ public class DisputeUpdateParams extends ApiRequestParams {
       /** Evidence provided when {@code reason} is 'merchandise_not_as_described'. */
       public Builder setMerchandiseNotAsDescribed(EmptyParam merchandiseNotAsDescribed) {
         this.merchandiseNotAsDescribed = merchandiseNotAsDescribed;
+        return this;
+      }
+
+      /** Evidence provided when {@code reason} is 'no_valid_authorization'. */
+      public Builder setNoValidAuthorization(
+          DisputeUpdateParams.Evidence.NoValidAuthorization noValidAuthorization) {
+        this.noValidAuthorization = noValidAuthorization;
+        return this;
+      }
+
+      /** Evidence provided when {@code reason} is 'no_valid_authorization'. */
+      public Builder setNoValidAuthorization(EmptyParam noValidAuthorization) {
+        this.noValidAuthorization = noValidAuthorization;
         return this;
       }
 
@@ -1280,6 +1302,112 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class NoValidAuthorization {
+      /**
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+       * documentation supporting the dispute.
+       */
+      @SerializedName("additional_documentation")
+      Object additionalDocumentation;
+
+      /** Explanation of why the cardholder is disputing this transaction. */
+      @SerializedName("explanation")
+      Object explanation;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private NoValidAuthorization(
+          Object additionalDocumentation, Object explanation, Map<String, Object> extraParams) {
+        this.additionalDocumentation = additionalDocumentation;
+        this.explanation = explanation;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object additionalDocumentation;
+
+        private Object explanation;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public DisputeUpdateParams.Evidence.NoValidAuthorization build() {
+          return new DisputeUpdateParams.Evidence.NoValidAuthorization(
+              this.additionalDocumentation, this.explanation, this.extraParams);
+        }
+
+        /**
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+         * documentation supporting the dispute.
+         */
+        public Builder setAdditionalDocumentation(String additionalDocumentation) {
+          this.additionalDocumentation = additionalDocumentation;
+          return this;
+        }
+
+        /**
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+         * documentation supporting the dispute.
+         */
+        public Builder setAdditionalDocumentation(EmptyParam additionalDocumentation) {
+          this.additionalDocumentation = additionalDocumentation;
+          return this;
+        }
+
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(String explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
+        /** Explanation of why the cardholder is disputing this transaction. */
+        public Builder setExplanation(EmptyParam explanation) {
+          this.explanation = explanation;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeUpdateParams.Evidence.NoValidAuthorization#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeUpdateParams.Evidence.NoValidAuthorization#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class NotReceived {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -1820,6 +1948,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       @SerializedName("merchandise_not_as_described")
       MERCHANDISE_NOT_AS_DESCRIBED("merchandise_not_as_described"),
+
+      @SerializedName("no_valid_authorization")
+      NO_VALID_AUTHORIZATION("no_valid_authorization"),
 
       @SerializedName("not_received")
       NOT_RECEIVED("not_received"),
