@@ -1,5 +1,13 @@
 # Changelog
 
+## 25.6.0 - 2024-05-09
+* [#1797](https://github.com/stripe/stripe-java/pull/1797) Update generated code
+  * Add support for `update` test helper method on resources `Treasury.OutboundPayment` and `Treasury.OutboundTransfer`
+  * Add support for `allow_redisplay` on `ConfirmationToken.payment_method_preview` and `PaymentMethod`
+  * Add support for `preview_mode` on `InvoiceCreatePreviewParams`, `InvoiceUpcomingLinesParams`, and `InvoiceUpcomingParams`
+  * Add support for `tracking_details` on `Treasury.OutboundPayment` and `Treasury.OutboundTransfer`
+  * Add support for new values `treasury.outbound_payment.tracking_details_updated` and `treasury.outbound_transfer.tracking_details_updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 25.5.0 - 2024-05-02
 * [#1785](https://github.com/stripe/stripe-java/pull/1785) Update generated code
   * Add support for `paypal` on `Dispute.payment_method_details`
