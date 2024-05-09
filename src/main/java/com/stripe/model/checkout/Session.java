@@ -2530,7 +2530,8 @@ public class Session extends ApiResource implements HasId {
     List<String> allowRedisplayFilters;
 
     /**
-     * Enable customers to choose if they wish to save their payment method for future use.
+     * Enable customers to choose if they wish to save their payment method for future use. Disabled
+     * by default.
      *
      * <p>One of {@code disabled}, or {@code enabled}.
      */

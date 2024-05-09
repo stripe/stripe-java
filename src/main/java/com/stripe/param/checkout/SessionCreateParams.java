@@ -11420,7 +11420,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Enable customers to choose if they wish to save their payment method for future use. */
+    /**
+     * Enable customers to choose if they wish to save their payment method for future use. Disabled
+     * by default.
+     */
     @SerializedName("payment_method_save")
     PaymentMethodSave paymentMethodSave;
 
@@ -11509,7 +11512,10 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Enable customers to choose if they wish to save their payment method for future use. */
+      /**
+       * Enable customers to choose if they wish to save their payment method for future use.
+       * Disabled by default.
+       */
       public Builder setPaymentMethodSave(
           SessionCreateParams.SavedPaymentMethodOptions.PaymentMethodSave paymentMethodSave) {
         this.paymentMethodSave = paymentMethodSave;
