@@ -32,7 +32,7 @@ tasks.withType(JavaCompile) {
     }
 
     options.fork = true
-    options.forkOptions.jvmArgs += ['-Xms256M', '-Xmx512M']
+    options.forkOptions.jvmArgs += ['-Xms512M', '-Xmx1g']
 
     options.release = project.targetCompatibility.majorVersion as Integer
 

@@ -22,6 +22,7 @@ import com.stripe.param.treasury.OutboundPaymentListParams;
 import com.stripe.param.treasury.OutboundPaymentPostParams;
 import com.stripe.param.treasury.OutboundPaymentRetrieveParams;
 import com.stripe.param.treasury.OutboundPaymentReturnOutboundPaymentParams;
+import com.stripe.param.treasury.OutboundPaymentUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -157,6 +158,10 @@ public class OutboundPayment extends ApiResource implements HasId {
 
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
+
+  /** Details about network-specific tracking information if available. */
+  @SerializedName("tracking_details")
+  TrackingDetails trackingDetails;
 
   /** The Transaction associated with this object. */
   @SerializedName("transaction")
@@ -566,6 +571,51 @@ public class OutboundPayment extends ApiResource implements HasId {
     Long returnedAt;
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TrackingDetails extends StripeObject {
+    @SerializedName("ach")
+    Ach ach;
+
+    /**
+     * The US bank account network used to send funds.
+     *
+     * <p>One of {@code ach}, or {@code us_domestic_wire}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("us_domestic_wire")
+    UsDomesticWire usDomesticWire;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach extends StripeObject {
+      /** ACH trace ID of the OutboundPayment for payments sent over the {@code ach} network. */
+      @SerializedName("trace_id")
+      String traceId;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsDomesticWire extends StripeObject {
+      /**
+       * IMAD of the OutboundPayment for payments sent over the {@code us_domestic_wire} network.
+       */
+      @SerializedName("imad")
+      String imad;
+
+      /**
+       * OMAD of the OutboundPayment for payments sent over the {@code us_domestic_wire} network.
+       */
+      @SerializedName("omad")
+      String omad;
+    }
+  }
+
   public TestHelpers getTestHelpers() {
     return new TestHelpers(this);
   }
@@ -575,6 +625,60 @@ public class OutboundPayment extends ApiResource implements HasId {
 
     private TestHelpers(OutboundPayment resource) {
       this.resource = resource;
+    }
+
+    /**
+     * Updates a test mode created OutboundPayment with tracking details. The OutboundPayment must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundPayment update(Map<String, Object> params) throws StripeException {
+      return update(params, (RequestOptions) null);
+    }
+
+    /**
+     * Updates a test mode created OutboundPayment with tracking details. The OutboundPayment must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundPayment update(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, OutboundPayment.class);
+    }
+
+    /**
+     * Updates a test mode created OutboundPayment with tracking details. The OutboundPayment must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundPayment update(OutboundPaymentUpdateParams params) throws StripeException {
+      return update(params, (RequestOptions) null);
+    }
+
+    /**
+     * Updates a test mode created OutboundPayment with tracking details. The OutboundPayment must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundPayment update(OutboundPaymentUpdateParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_payments/%s",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options,
+              ApiMode.V1);
+      return resource.getResponseGetter().request(request, OutboundPayment.class);
     }
 
     /**
@@ -798,6 +902,7 @@ public class OutboundPayment extends ApiResource implements HasId {
     trySetResponseGetter(endUserDetails, responseGetter);
     trySetResponseGetter(returnedDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
+    trySetResponseGetter(trackingDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

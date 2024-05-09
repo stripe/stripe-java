@@ -97,7 +97,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   /**
    * Whether account details have been submitted. Accounts with Stripe Dashboard access, which
-   * includes Standard accounts, cannot receive payouts before this is true.
+   * includes Standard accounts, cannot receive payouts before this is true. Accounts where this is
+   * false should be directed to <a href="https://stripe.com/connect/onboarding">an onboarding
+   * flow</a> to finish submitting account details.
    */
   @SerializedName("details_submitted")
   Boolean detailsSubmitted;
@@ -1142,6 +1144,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("promptpay_payments")
     String promptpayPayments;
+
+    /**
+     * The status of the Rechnung capability of the account, or whether the account can directly
+     * process Rechnung payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("rechnung_payments")
+    String rechnungPayments;
 
     /**
      * The status of the RevolutPay capability of the account, or whether the account can directly

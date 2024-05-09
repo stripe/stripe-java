@@ -239,6 +239,17 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("alipay")
     Alipay alipay;
 
+    /**
+     * This field indicates whether this payment method can be shown again to its customer in a
+     * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+     * whether a payment method can be shown as a saved payment method in a checkout flow. The field
+     * defaults to “unspecified”.
+     *
+     * <p>One of {@code always}, {@code limited}, or {@code unspecified}.
+     */
+    @SerializedName("allow_redisplay")
+    String allowRedisplay;
+
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
@@ -326,6 +337,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("rechnung")
+    Rechnung rechnung;
+
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
@@ -352,8 +366,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
      * {@code interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay},
      * {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code payto},
-     * {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort},
-     * {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * {@code pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code sepa_debit},
+     * {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or
+     * {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1230,6 +1245,31 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Promptpay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rechnung extends StripeObject {
+      @SerializedName("dob")
+      Dob dob;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Dob extends StripeObject {
+        /** The day of birth, between 1 and 31. */
+        @SerializedName("day")
+        Long day;
+
+        /** The month of birth, between 1 and 12. */
+        @SerializedName("month")
+        Long month;
+
+        /** The four-digit year of birth. */
+        @SerializedName("year")
+        Long year;
+      }
+    }
 
     @Getter
     @Setter

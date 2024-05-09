@@ -121,8 +121,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   Long quantity;
 
   /**
-   * The ID of a subscription to add this invoice item to. When left blank, the invoice item will be
-   * be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions
+   * The ID of a subscription to add this invoice item to. When left blank, the invoice item is
+   * added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions
    * other than the specified subscription will ignore the invoice item. Use this when you want to
    * express that an invoice item has been accrued within the context of a particular subscription.
    */
@@ -553,11 +553,11 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of a subscription to add this invoice item to. When left blank, the invoice item will
-     * be be added to the next upcoming scheduled invoice. When set, scheduled invoices for
-     * subscriptions other than the specified subscription will ignore the invoice item. Use this
-     * when you want to express that an invoice item has been accrued within the context of a
-     * particular subscription.
+     * The ID of a subscription to add this invoice item to. When left blank, the invoice item is
+     * added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions
+     * other than the specified subscription will ignore the invoice item. Use this when you want to
+     * express that an invoice item has been accrued within the context of a particular
+     * subscription.
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;

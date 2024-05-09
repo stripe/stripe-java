@@ -22,6 +22,7 @@ import com.stripe.param.treasury.OutboundTransferListParams;
 import com.stripe.param.treasury.OutboundTransferPostParams;
 import com.stripe.param.treasury.OutboundTransferRetrieveParams;
 import com.stripe.param.treasury.OutboundTransferReturnOutboundTransferParams;
+import com.stripe.param.treasury.OutboundTransferUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -144,6 +145,10 @@ public class OutboundTransfer extends ApiResource implements HasId {
 
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
+
+  /** Details about network-specific tracking information if available. */
+  @SerializedName("tracking_details")
+  TrackingDetails trackingDetails;
 
   /** The Transaction associated with this object. */
   @SerializedName("transaction")
@@ -545,6 +550,51 @@ public class OutboundTransfer extends ApiResource implements HasId {
     Long returnedAt;
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TrackingDetails extends StripeObject {
+    @SerializedName("ach")
+    Ach ach;
+
+    /**
+     * The US bank account network used to send funds.
+     *
+     * <p>One of {@code ach}, or {@code us_domestic_wire}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("us_domestic_wire")
+    UsDomesticWire usDomesticWire;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach extends StripeObject {
+      /** ACH trace ID of the OutboundTransfer for transfers sent over the {@code ach} network. */
+      @SerializedName("trace_id")
+      String traceId;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsDomesticWire extends StripeObject {
+      /**
+       * IMAD of the OutboundTransfer for transfers sent over the {@code us_domestic_wire} network.
+       */
+      @SerializedName("imad")
+      String imad;
+
+      /**
+       * OMAD of the OutboundTransfer for transfers sent over the {@code us_domestic_wire} network.
+       */
+      @SerializedName("omad")
+      String omad;
+    }
+  }
+
   public TestHelpers getTestHelpers() {
     return new TestHelpers(this);
   }
@@ -554,6 +604,60 @@ public class OutboundTransfer extends ApiResource implements HasId {
 
     private TestHelpers(OutboundTransfer resource) {
       this.resource = resource;
+    }
+
+    /**
+     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundTransfer update(Map<String, Object> params) throws StripeException {
+      return update(params, (RequestOptions) null);
+    }
+
+    /**
+     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundTransfer update(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_transfers/%s",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, OutboundTransfer.class);
+    }
+
+    /**
+     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundTransfer update(OutboundTransferUpdateParams params) throws StripeException {
+      return update(params, (RequestOptions) null);
+    }
+
+    /**
+     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
+     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     */
+    public OutboundTransfer update(OutboundTransferUpdateParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/treasury/outbound_transfers/%s",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options,
+              ApiMode.V1);
+      return resource.getResponseGetter().request(request, OutboundTransfer.class);
     }
 
     /**
@@ -777,6 +881,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
     trySetResponseGetter(networkDetails, responseGetter);
     trySetResponseGetter(returnedDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
+    trySetResponseGetter(trackingDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

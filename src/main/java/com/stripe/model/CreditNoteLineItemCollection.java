@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLineItem> {
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
@@ -22,7 +22,7 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
   }
 
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
@@ -36,7 +36,7 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
   }
 
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
@@ -46,7 +46,7 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
   }
 
   /**
-   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the
+   * When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the
    * first handful of those items. There is also a URL where you can retrieve the full (paginated)
    * list of line items.
    */
