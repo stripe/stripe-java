@@ -1143,6 +1143,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("networks")
     Networks networks;
 
+    /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+    @SerializedName("preferred_locales")
+    List<String> preferredLocales;
+
     /**
      * How card details were read in this transaction.
      *

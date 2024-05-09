@@ -419,6 +419,9 @@ public class Dispute extends ApiResource
     @SerializedName("merchandise_not_as_described")
     MerchandiseNotAsDescribed merchandiseNotAsDescribed;
 
+    @SerializedName("no_valid_authorization")
+    NoValidAuthorization noValidAuthorization;
+
     @SerializedName("not_received")
     NotReceived notReceived;
 
@@ -429,8 +432,8 @@ public class Dispute extends ApiResource
      * The reason for filing the dispute. Its value will match the field containing the evidence.
      *
      * <p>One of {@code canceled}, {@code duplicate}, {@code fraudulent}, {@code
-     * merchandise_not_as_described}, {@code not_received}, {@code other}, or {@code
-     * service_not_as_described}.
+     * merchandise_not_as_described}, {@code no_valid_authorization}, {@code not_received}, {@code
+     * other}, or {@code service_not_as_described}.
      */
     @SerializedName("reason")
     String reason;
@@ -722,6 +725,46 @@ public class Dispute extends ApiResource
       /** Date when the product was returned or attempted to be returned. */
       @SerializedName("returned_at")
       Long returnedAt;
+
+      /** Get ID of expandable {@code additionalDocumentation} object. */
+      public String getAdditionalDocumentation() {
+        return (this.additionalDocumentation != null) ? this.additionalDocumentation.getId() : null;
+      }
+
+      public void setAdditionalDocumentation(String id) {
+        this.additionalDocumentation =
+            ApiResource.setExpandableFieldId(id, this.additionalDocumentation);
+      }
+
+      /** Get expanded {@code additionalDocumentation}. */
+      public File getAdditionalDocumentationObject() {
+        return (this.additionalDocumentation != null)
+            ? this.additionalDocumentation.getExpanded()
+            : null;
+      }
+
+      public void setAdditionalDocumentationObject(File expandableObject) {
+        this.additionalDocumentation =
+            new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NoValidAuthorization extends StripeObject {
+      /**
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+       * documentation supporting the dispute.
+       */
+      @SerializedName("additional_documentation")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> additionalDocumentation;
+
+      /** Explanation of why the cardholder is disputing this transaction. */
+      @SerializedName("explanation")
+      String explanation;
 
       /** Get ID of expandable {@code additionalDocumentation} object. */
       public String getAdditionalDocumentation() {
