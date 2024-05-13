@@ -6756,6 +6756,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         }
 
         /** [Deprecated] This is a legacy parameter that no longer has any function. */
+        @Deprecated
         public Builder setPersistentToken(String persistentToken) {
           this.persistentToken = persistentToken;
           return this;
