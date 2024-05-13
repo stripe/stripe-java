@@ -300,6 +300,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("konbini")
     KONBINI("konbini"),
 
+    @SerializedName("kr_market")
+    KR_MARKET("kr_market"),
+
     @SerializedName("link")
     LINK("link"),
 

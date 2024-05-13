@@ -197,6 +197,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Konbini konbini;
 
   /**
+   * If this is a KrMarket PaymentMethod, this hash contains details about the KrMarket payment
+   * method.
+   */
+  @SerializedName("kr_market")
+  KrMarket krMarket;
+
+  /**
    * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
    * method.
    */
@@ -355,6 +362,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       InteracPresent interacPresent,
       Klarna klarna,
       Konbini konbini,
+      KrMarket krMarket,
       Link link,
       Map<String, String> metadata,
       Mobilepay mobilepay,
@@ -400,6 +408,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.interacPresent = interacPresent;
     this.klarna = klarna;
     this.konbini = konbini;
+    this.krMarket = krMarket;
     this.link = link;
     this.metadata = metadata;
     this.mobilepay = mobilepay;
@@ -478,6 +487,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Konbini konbini;
 
+    private KrMarket krMarket;
+
     private Link link;
 
     private Map<String, String> metadata;
@@ -545,6 +556,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.interacPresent,
           this.klarna,
           this.konbini,
+          this.krMarket,
           this.link,
           this.metadata,
           this.mobilepay,
@@ -848,6 +860,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setKonbini(PaymentMethodCreateParams.Konbini konbini) {
       this.konbini = konbini;
+      return this;
+    }
+
+    /**
+     * If this is a KrMarket PaymentMethod, this hash contains details about the KrMarket payment
+     * method.
+     */
+    public Builder setKrMarket(PaymentMethodCreateParams.KrMarket krMarket) {
+      this.krMarket = krMarket;
       return this;
     }
 
@@ -3177,6 +3198,167 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class KrMarket {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Underlying payment method that the buyer selected. */
+    @SerializedName("underlying_payment_method")
+    UnderlyingPaymentMethod underlyingPaymentMethod;
+
+    private KrMarket(
+        Map<String, Object> extraParams, UnderlyingPaymentMethod underlyingPaymentMethod) {
+      this.extraParams = extraParams;
+      this.underlyingPaymentMethod = underlyingPaymentMethod;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private UnderlyingPaymentMethod underlyingPaymentMethod;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.KrMarket build() {
+        return new PaymentMethodCreateParams.KrMarket(
+            this.extraParams, this.underlyingPaymentMethod);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.KrMarket#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.KrMarket#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Underlying payment method that the buyer selected. */
+      public Builder setUnderlyingPaymentMethod(
+          PaymentMethodCreateParams.KrMarket.UnderlyingPaymentMethod underlyingPaymentMethod) {
+        this.underlyingPaymentMethod = underlyingPaymentMethod;
+        return this;
+      }
+    }
+
+    public enum UnderlyingPaymentMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("bc")
+      BC("bc"),
+
+      @SerializedName("citi")
+      CITI("citi"),
+
+      @SerializedName("hana")
+      HANA("hana"),
+
+      @SerializedName("hyundai")
+      HYUNDAI("hyundai"),
+
+      @SerializedName("jeju")
+      JEJU("jeju"),
+
+      @SerializedName("jeonbuk")
+      JEONBUK("jeonbuk"),
+
+      @SerializedName("kakaobank")
+      KAKAOBANK("kakaobank"),
+
+      @SerializedName("kakaopay")
+      KAKAOPAY("kakaopay"),
+
+      @SerializedName("kbank")
+      KBANK("kbank"),
+
+      @SerializedName("kdbbank")
+      KDBBANK("kdbbank"),
+
+      @SerializedName("kookmin")
+      KOOKMIN("kookmin"),
+
+      @SerializedName("kwangju")
+      KWANGJU("kwangju"),
+
+      @SerializedName("lotte")
+      LOTTE("lotte"),
+
+      @SerializedName("mg")
+      MG("mg"),
+
+      @SerializedName("naverpaycard")
+      NAVERPAYCARD("naverpaycard"),
+
+      @SerializedName("naverpaypoint")
+      NAVERPAYPOINT("naverpaypoint"),
+
+      @SerializedName("nh")
+      NH("nh"),
+
+      @SerializedName("payco")
+      PAYCO("payco"),
+
+      @SerializedName("post")
+      POST("post"),
+
+      @SerializedName("samsung")
+      SAMSUNG("samsung"),
+
+      @SerializedName("samsungpay")
+      SAMSUNGPAY("samsungpay"),
+
+      @SerializedName("savingsbank")
+      SAVINGSBANK("savingsbank"),
+
+      @SerializedName("shinhan")
+      SHINHAN("shinhan"),
+
+      @SerializedName("shinhyup")
+      SHINHYUP("shinhyup"),
+
+      @SerializedName("suhyup")
+      SUHYUP("suhyup"),
+
+      @SerializedName("tossbank")
+      TOSSBANK("tossbank"),
+
+      @SerializedName("woori")
+      WOORI("woori");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      UnderlyingPaymentMethod(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
   public static class Link {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -4500,6 +4682,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("konbini")
     KONBINI("konbini"),
+
+    @SerializedName("kr_market")
+    KR_MARKET("kr_market"),
 
     @SerializedName("link")
     LINK("link"),

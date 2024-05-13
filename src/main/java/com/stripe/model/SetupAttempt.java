@@ -300,6 +300,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("klarna")
     Klarna klarna;
 
+    @SerializedName("kr_market")
+    KrMarket krMarket;
+
     @SerializedName("link")
     Link link;
 
@@ -793,6 +796,11 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KrMarket extends StripeObject {}
 
     @Getter
     @Setter

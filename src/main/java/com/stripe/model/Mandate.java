@@ -207,6 +207,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    @SerializedName("kr_market")
+    KrMarket krMarket;
+
     @SerializedName("link")
     Link link;
 
@@ -318,6 +321,11 @@ public class Mandate extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cashapp extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KrMarket extends StripeObject {}
 
     @Getter
     @Setter
