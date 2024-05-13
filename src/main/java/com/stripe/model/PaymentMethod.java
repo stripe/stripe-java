@@ -132,6 +132,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("konbini")
   Konbini konbini;
 
+  @SerializedName("kr_market")
+  KrMarket krMarket;
+
   @SerializedName("link")
   Link link;
 
@@ -219,11 +222,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik},
    * {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance},
    * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
-   * interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay}, {@code
-   * multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code payto}, {@code
-   * pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code sepa_debit}, {@code
-   * sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code
-   * zip}.
+   * interac_present}, {@code klarna}, {@code konbini}, {@code kr_market}, {@code link}, {@code
+   * mobilepay}, {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
+   * {@code payto}, {@code pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code
+   * sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
+   * wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -1407,6 +1410,24 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class KrMarket extends StripeObject {
+    /**
+     * Underlying payment method buyer selected to complete the payment.
+     *
+     * <p>One of {@code bc}, {@code citi}, {@code hana}, {@code hyundai}, {@code jeju}, {@code
+     * jeonbuk}, {@code kakaobank}, {@code kakaopay}, {@code kbank}, {@code kdbbank}, {@code
+     * kookmin}, {@code kwangju}, {@code lotte}, {@code mg}, {@code naverpaycard}, {@code
+     * naverpaypoint}, {@code nh}, {@code payco}, {@code post}, {@code samsung}, {@code samsungpay},
+     * {@code savingsbank}, {@code shinhan}, {@code shinhyup}, {@code suhyup}, {@code tossbank}, or
+     * {@code woori}.
+     */
+    @SerializedName("underlying_payment_method")
+    String underlyingPaymentMethod;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Link extends StripeObject {
     /** Account owner's email address. */
     @SerializedName("email")
@@ -1804,6 +1825,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(interacPresent, responseGetter);
     trySetResponseGetter(klarna, responseGetter);
     trySetResponseGetter(konbini, responseGetter);
+    trySetResponseGetter(krMarket, responseGetter);
     trySetResponseGetter(link, responseGetter);
     trySetResponseGetter(mobilepay, responseGetter);
     trySetResponseGetter(multibanco, responseGetter);
