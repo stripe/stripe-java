@@ -283,9 +283,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("konbini")
     Konbini konbini;
 
-    @SerializedName("kr_market")
-    KrMarket krMarket;
-
     @SerializedName("link")
     Link link;
 
@@ -331,10 +328,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
      * blik}, {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code
      * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
-     * {@code interac_present}, {@code klarna}, {@code konbini}, {@code kr_market}, {@code link},
-     * {@code mobilepay}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix},
-     * {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish},
-     * {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * {@code interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay},
+     * {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix}, {@code promptpay},
+     * {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code
+     * us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1105,24 +1102,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Konbini extends StripeObject {}
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class KrMarket extends StripeObject {
-      /**
-       * Underlying payment method buyer selected to complete the payment.
-       *
-       * <p>One of {@code bc}, {@code citi}, {@code hana}, {@code hyundai}, {@code jeju}, {@code
-       * jeonbuk}, {@code kakaobank}, {@code kakaopay}, {@code kbank}, {@code kdbbank}, {@code
-       * kookmin}, {@code kwangju}, {@code lotte}, {@code mg}, {@code naverpaycard}, {@code
-       * naverpaypoint}, {@code nh}, {@code payco}, {@code post}, {@code samsung}, {@code
-       * samsungpay}, {@code savingsbank}, {@code shinhan}, {@code shinhyup}, {@code suhyup}, {@code
-       * tossbank}, or {@code woori}.
-       */
-      @SerializedName("underlying_payment_method")
-      String underlyingPaymentMethod;
-    }
 
     @Getter
     @Setter

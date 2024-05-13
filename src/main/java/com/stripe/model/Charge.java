@@ -1188,9 +1188,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("konbini")
     Konbini konbini;
 
-    @SerializedName("kr_market")
-    KrMarket krMarket;
-
     @SerializedName("link")
     Link link;
 
@@ -2648,11 +2645,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String chain;
       }
     }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class KrMarket extends StripeObject {}
 
     @Getter
     @Setter
