@@ -37,6 +37,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("offline")
   Object offline;
 
+  /** An object containing device type specific settings for Stripe S700 readers. */
+  @SerializedName("stripe_s700")
+  StripeS700 stripeS700;
+
   /** Tipping configurations for readers supporting on-reader tips. */
   @SerializedName("tipping")
   Object tipping;
@@ -51,6 +55,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String name,
       Object offline,
+      StripeS700 stripeS700,
       Object tipping,
       VerifoneP400 verifoneP400) {
     this.bbposWiseposE = bbposWiseposE;
@@ -58,6 +63,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.name = name;
     this.offline = offline;
+    this.stripeS700 = stripeS700;
     this.tipping = tipping;
     this.verifoneP400 = verifoneP400;
   }
@@ -77,6 +83,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private Object offline;
 
+    private StripeS700 stripeS700;
+
     private Object tipping;
 
     private VerifoneP400 verifoneP400;
@@ -89,6 +97,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.extraParams,
           this.name,
           this.offline,
+          this.stripeS700,
           this.tipping,
           this.verifoneP400);
     }
@@ -166,6 +175,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /** Configurations for collecting transactions offline. */
     public Builder setOffline(EmptyParam offline) {
       this.offline = offline;
+      return this;
+    }
+
+    /** An object containing device type specific settings for Stripe S700 readers. */
+    public Builder setStripeS700(ConfigurationCreateParams.StripeS700 stripeS700) {
+      this.stripeS700 = stripeS700;
       return this;
     }
 
@@ -332,6 +347,80 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class StripeS700 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you would like displayed on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private StripeS700(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.StripeS700 build() {
+        return new ConfigurationCreateParams.StripeS700(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.StripeS700#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.StripeS700#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you would like displayed on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you would like displayed on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
         return this;
       }
     }
