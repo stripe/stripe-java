@@ -75,6 +75,24 @@ public class Dispute extends ApiResource
   Boolean livemode;
 
   /**
+   * The enum that describes the dispute loss outcome. If the dispute is not lost, this field will
+   * be absent. New enum values may be added in the future, so be sure to handle unknown values.
+   *
+   * <p>One of {@code cardholder_authentication_issuer_liability}, {@code
+   * eci5_token_transaction_with_tavv}, {@code excess_disputes_in_timeframe}, {@code
+   * has_not_met_the_minimum_dispute_amount_requirements}, {@code invalid_duplicate_dispute}, {@code
+   * invalid_incorrect_amount_dispute}, {@code invalid_no_authorization}, {@code
+   * invalid_use_of_disputes}, {@code merchandise_delivered_or_shipped}, {@code
+   * merchandise_or_service_as_described}, {@code not_cancelled}, {@code other}, {@code
+   * refund_issued}, {@code submitted_beyond_allowable_time_limit}, {@code
+   * transaction_3ds_required}, {@code transaction_approved_after_prior_fraud_dispute}, {@code
+   * transaction_authorized}, {@code transaction_electronically_read}, {@code
+   * transaction_qualifies_for_visa_easy_payment_service}, or {@code transaction_unattended}.
+   */
+  @SerializedName("loss_reason")
+  String lossReason;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
