@@ -70,6 +70,13 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   @SerializedName("currency")
   String currency;
 
+  /**
+   * Polymorphic source of the application fee. Includes the ID of the object the application fee
+   * was created from.
+   */
+  @SerializedName("fee_source")
+  FeeSource feeSource;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -300,6 +307,27 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     return getGlobalResponseGetter().request(request, ApplicationFee.class);
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FeeSource extends StripeObject {
+    /** Charge ID that created this application fee. */
+    @SerializedName("charge")
+    String charge;
+
+    /** Payout ID that created this application fee. */
+    @SerializedName("payout")
+    String payout;
+
+    /**
+     * Type of object that created the application fee, either {@code charge} or {@code payout}.
+     *
+     * <p>One of {@code charge}, or {@code payout}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -307,6 +335,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
+    trySetResponseGetter(feeSource, responseGetter);
     trySetResponseGetter(originatingTransaction, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
   }
