@@ -67,6 +67,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("offline")
   Offline offline;
 
+  @SerializedName("stripe_s700")
+  StripeS700 stripeS700;
+
   @SerializedName("tipping")
   Tipping tipping;
 
@@ -290,6 +293,35 @@ public class Configuration extends ApiResource implements HasId {
      */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeS700 extends StripeObject {
+    /** A File ID representing an image you would like displayed on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter
@@ -653,6 +685,7 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
     trySetResponseGetter(offline, responseGetter);
+    trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
   }
