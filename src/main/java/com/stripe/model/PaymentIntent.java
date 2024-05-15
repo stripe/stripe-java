@@ -3522,6 +3522,22 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("request_incremental_authorization_support")
       Boolean requestIncrementalAuthorizationSupport;
+
+      @SerializedName("routing")
+      Routing routing;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Routing extends StripeObject {
+        /**
+         * Requested routing priority
+         *
+         * <p>One of {@code domestic}, or {@code international}.
+         */
+        @SerializedName("requested_priority")
+        String requestedPriority;
+      }
     }
 
     @Getter
