@@ -228,8 +228,45 @@ public class Balance extends ApiResource {
     @SerializedName("currency")
     String currency;
 
+    /** Breakdown of balance by destination. */
+    @SerializedName("net_available")
+    List<Balance.InstantAvailable.NetAvailable> netAvailable;
+
     @SerializedName("source_types")
     SourceTypes sourceTypes;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetAvailable extends StripeObject {
+      /** Net balance amount, subtracting fees from platform-set pricing. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** ID of the external account for this net balance (not expandable). */
+      @SerializedName("destination")
+      String destination;
+
+      @SerializedName("source_types")
+      SourceTypes sourceTypes;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SourceTypes extends StripeObject {
+        /** Amount for bank account. */
+        @SerializedName("bank_account")
+        Long bankAccount;
+
+        /** Amount for card. */
+        @SerializedName("card")
+        Long card;
+
+        /** Amount for FPX. */
+        @SerializedName("fpx")
+        Long fpx;
+      }
+    }
 
     @Getter
     @Setter
