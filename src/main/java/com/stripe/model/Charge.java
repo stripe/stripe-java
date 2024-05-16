@@ -2172,6 +2172,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("overcapture_supported")
       Boolean overcaptureSupported;
 
+      /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+      @SerializedName("preferred_locales")
+      List<String> preferredLocales;
+
       /**
        * How card details were read in this transaction.
        *

@@ -42,6 +42,24 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   Long amount;
 
   /**
+   * The application fee (if any) for the payout. <a
+   * href="https://stripe.com/docs/connect/instant-payouts#monetization-and-fees">See the Connect
+   * documentation</a> for details.
+   */
+  @SerializedName("application_fee")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<ApplicationFee> applicationFee;
+
+  /**
+   * The amount of the application fee (if any) requested for the payout. <a
+   * href="https://stripe.com/docs/connect/instant-payouts#monetization-and-fees">See the Connect
+   * documentation</a> for details.
+   */
+  @SerializedName("application_fee_amount")
+  Long applicationFeeAmount;
+
+  /**
    * Date that you can expect the payout to arrive in the bank. This factors in delays to account
    * for weekends or bank holidays.
    */
@@ -189,6 +207,25 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   /** Can be {@code bank_account} or {@code card}. */
   @SerializedName("type")
   String type;
+
+  /** Get ID of expandable {@code applicationFee} object. */
+  public String getApplicationFee() {
+    return (this.applicationFee != null) ? this.applicationFee.getId() : null;
+  }
+
+  public void setApplicationFee(String id) {
+    this.applicationFee = ApiResource.setExpandableFieldId(id, this.applicationFee);
+  }
+
+  /** Get expanded {@code applicationFee}. */
+  public ApplicationFee getApplicationFeeObject() {
+    return (this.applicationFee != null) ? this.applicationFee.getExpanded() : null;
+  }
+
+  public void setApplicationFeeObject(ApplicationFee expandableObject) {
+    this.applicationFee =
+        new ExpandableField<ApplicationFee>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
@@ -675,6 +712,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(applicationFee, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(destination, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);

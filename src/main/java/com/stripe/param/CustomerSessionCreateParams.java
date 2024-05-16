@@ -408,7 +408,13 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
         /**
          * Controls whether the Payment Element displays the option to remove a saved payment
-         * method.
+         * method.&quot;
+         *
+         * <p>Allowing buyers to remove their saved payment methods impacts subscriptions that
+         * depend on that payment method. Removing the payment method detaches the <a
+         * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-customer">{@code
+         * customer} object</a> from that <a
+         * href="https://docs.stripe.com/api/payment_methods">PaymentMethod</a>.
          */
         @SerializedName("payment_method_remove")
         PaymentMethodRemove paymentMethodRemove;
@@ -416,6 +422,14 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         /**
          * Controls whether the Payment Element displays a checkbox offering to save a new payment
          * method.
+         *
+         * <p>If a customer checks the box, the <a
+         * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
+         * allow_redisplay}</a> value on the PaymentMethod is set to {@code 'always'} at
+         * confirmation time. For PaymentIntents, the <a
+         * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+         * setup_future_usage}</a> value is also set to the value defined in {@code
+         * payment_method_save_usage}.
          */
         @SerializedName("payment_method_save")
         PaymentMethodSave paymentMethodSave;
@@ -504,7 +518,13 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           /**
            * Controls whether the Payment Element displays the option to remove a saved payment
-           * method.
+           * method.&quot;
+           *
+           * <p>Allowing buyers to remove their saved payment methods impacts subscriptions that
+           * depend on that payment method. Removing the payment method detaches the <a
+           * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-customer">{@code
+           * customer} object</a> from that <a
+           * href="https://docs.stripe.com/api/payment_methods">PaymentMethod</a>.
            */
           public Builder setPaymentMethodRemove(
               CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodRemove
@@ -516,6 +536,14 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           /**
            * Controls whether the Payment Element displays a checkbox offering to save a new payment
            * method.
+           *
+           * <p>If a customer checks the box, the <a
+           * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
+           * allow_redisplay}</a> value on the PaymentMethod is set to {@code 'always'} at
+           * confirmation time. For PaymentIntents, the <a
+           * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+           * setup_future_usage}</a> value is also set to the value defined in {@code
+           * payment_method_save_usage}.
            */
           public Builder setPaymentMethodSave(
               CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodSave

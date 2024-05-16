@@ -16015,13 +16015,22 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("request_incremental_authorization_support")
       Boolean requestIncrementalAuthorizationSupport;
 
+      /**
+       * Network routing priority on co-branded EMV cards supporting domestic debit and
+       * international card schemes.
+       */
+      @SerializedName("routing")
+      Routing routing;
+
       private CardPresent(
           Map<String, Object> extraParams,
           Boolean requestExtendedAuthorization,
-          Boolean requestIncrementalAuthorizationSupport) {
+          Boolean requestIncrementalAuthorizationSupport,
+          Routing routing) {
         this.extraParams = extraParams;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
         this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
+        this.routing = routing;
       }
 
       public static Builder builder() {
@@ -16035,12 +16044,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Boolean requestIncrementalAuthorizationSupport;
 
+        private Routing routing;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent(
               this.extraParams,
               this.requestExtendedAuthorization,
-              this.requestIncrementalAuthorizationSupport);
+              this.requestIncrementalAuthorizationSupport,
+              this.routing);
         }
 
         /**
@@ -16093,6 +16105,107 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             Boolean requestIncrementalAuthorizationSupport) {
           this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
           return this;
+        }
+
+        /**
+         * Network routing priority on co-branded EMV cards supporting domestic debit and
+         * international card schemes.
+         */
+        public Builder setRouting(
+            PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing routing) {
+          this.routing = routing;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Routing {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Routing requested priority. */
+        @SerializedName("requested_priority")
+        RequestedPriority requestedPriority;
+
+        private Routing(Map<String, Object> extraParams, RequestedPriority requestedPriority) {
+          this.extraParams = extraParams;
+          this.requestedPriority = requestedPriority;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private RequestedPriority requestedPriority;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing(
+                this.extraParams, this.requestedPriority);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Routing requested priority. */
+          public Builder setRequestedPriority(
+              PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing.RequestedPriority
+                  requestedPriority) {
+            this.requestedPriority = requestedPriority;
+            return this;
+          }
+        }
+
+        public enum RequestedPriority implements ApiRequestParams.EnumParam {
+          @SerializedName("domestic")
+          DOMESTIC("domestic"),
+
+          @SerializedName("international")
+          INTERNATIONAL("international");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          RequestedPriority(String value) {
+            this.value = value;
+          }
         }
       }
     }
@@ -18232,12 +18345,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         /** [Deprecated] This is a legacy parameter that no longer has any function. */
+        @Deprecated
         public Builder setPersistentToken(String persistentToken) {
           this.persistentToken = persistentToken;
           return this;
         }
 
         /** [Deprecated] This is a legacy parameter that no longer has any function. */
+        @Deprecated
         public Builder setPersistentToken(EmptyParam persistentToken) {
           this.persistentToken = persistentToken;
           return this;

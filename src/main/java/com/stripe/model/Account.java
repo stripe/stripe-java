@@ -1224,8 +1224,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String treasury;
 
     /**
-     * The status of the Twint capability of the account, or whether the account can directly
-     * process Twint charges.
+     * The status of the TWINT capability of the account, or whether the account can directly
+     * process TWINT charges.
      *
      * <p>One of {@code active}, {@code inactive}, or {@code pending}.
      */
@@ -2011,6 +2011,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Charges extends StripeObject {
+      /** Whether a pause of the risk control has been requested. */
       @SerializedName("pause_requested")
       Boolean pauseRequested;
     }
@@ -2019,6 +2020,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Payouts extends StripeObject {
+      /** Whether a pause of the risk control has been requested. */
       @SerializedName("pause_requested")
       Boolean pauseRequested;
     }

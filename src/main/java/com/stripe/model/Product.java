@@ -128,7 +128,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Extra information about a product which will appear on your customer's credit card statement.
    * In the case that multiple products are billed at once, the first statement descriptor will be
-   * used.
+   * used. Only used for subscription payments.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;

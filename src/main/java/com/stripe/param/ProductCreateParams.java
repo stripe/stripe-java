@@ -95,7 +95,7 @@ public class ProductCreateParams extends ApiRequestParams {
    * <p>This may be up to 22 characters. The statement description may not include {@code <}, {@code
    * >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's statement in
    * capital letters. Non-ASCII characters are automatically stripped. It must contain at least one
-   * letter.
+   * letter. Only used for subscription payments.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -423,7 +423,7 @@ public class ProductCreateParams extends ApiRequestParams {
      * <p>This may be up to 22 characters. The statement description may not include {@code <},
      * {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's
      * statement in capital letters. Non-ASCII characters are automatically stripped. It must
-     * contain at least one letter.
+     * contain at least one letter. Only used for subscription payments.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;

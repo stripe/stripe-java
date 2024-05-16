@@ -2523,8 +2523,9 @@ public class Session extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class SavedPaymentMethodOptions extends StripeObject {
     /**
-     * Controls which payment methods are eligible to be redisplayed to returning customers.
-     * Corresponds to {@code allow_redisplay} on the payment method.
+     * Uses the {@code allow_redisplay} value of each saved payment method to filter the set
+     * presented to a returning customer. By default, only saved payment methods with
+     * ’allow_redisplay: ‘always’ are shown in Checkout.
      */
     @SerializedName("allow_redisplay_filters")
     List<String> allowRedisplayFilters;
