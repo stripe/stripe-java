@@ -3,6 +3,23 @@
 ## 25.9.0-beta.1 - 2024-05-16
 * [#1802](https://github.com/stripe/stripe-java/pull/1802) Update generated code for beta
 
+## 25.8.0 - 2024-05-16
+* [#1803](https://github.com/stripe/stripe-java/pull/1803) Update generated code
+  * Add support for `fee_source` on `ApplicationFee`
+  * Add support for `net_available` on `Balance.instant_available[]`
+  * Add support for `preferred_locales` on `Charge.payment_method_details.card_present`, `ConfirmationToken.payment_method_preview.card_present`, and `PaymentMethod.card_present`
+  * Add support for `klarna` on `Dispute.payment_method_details`
+  * Add support for `archived` and `lookup_key` on `entitlements.FeatureListParams`
+  * Change `financialconnections.SessionCreateParams.filters.countries` to be optional
+  * Add support for `no_valid_authorization` on `Issuing.Dispute.evidence`, `issuing.DisputeCreateParams.evidence`, and `issuing.DisputeUpdateParams.evidence`
+  * Add support for new value `no_valid_authorization` on enums `issuing.DisputeCreateParams.evidence.reason` and `issuing.DisputeUpdateParams.evidence.reason`
+  * Add support for `loss_reason` on `Issuing.Dispute`
+  * Add support for `routing` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
+  * Add support for `application_fee_amount` and `application_fee` on `Payout`
+  * Add support for `stripe_s700` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
+* [#1804](https://github.com/stripe/stripe-java/pull/1804) Added deprecated annotation to builder methods
+  * Deprecate Java builder params based on OpenAPI spec
+    * Mark as deprecated the setters for persistent_token property on `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, `SetupIntentConfirmParams`, `SetupIntentCreateParams`, `SetupIntentUpdateParams`. This is a legacy parameter that no longer has any function.
 
 ## 25.7.0 - 2024-05-09
 * [#1801](https://github.com/stripe/stripe-java/pull/1801) Update generated code
