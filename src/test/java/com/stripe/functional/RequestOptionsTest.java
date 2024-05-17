@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -108,14 +107,6 @@ public class RequestOptionsTest extends BaseStripeTest {
     verifyStripeRequest(
         stripeRequest -> {
           assert (stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
-          JsonObject metrics =
-              JsonParser.parseString(
-                      stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").get())
-                  .getAsJsonObject()
-                  .get("last_request_metrics")
-                  .getAsJsonObject();
-
-          assert (metrics.has("usage"));
           String usage =
               new Gson()
                   .fromJson(
