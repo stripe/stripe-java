@@ -68,16 +68,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
   }
 
-  private StripeRequest toStripeRequest(ApiRequest apiRequest) throws StripeException {
+  private StripeRequest toStripeRequest(ApiRequest apiRequest, RequestOptions mergedOptions)
+      throws StripeException {
     String fullUrl = fullUrl(apiRequest);
 
     Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
     StripeRequest request =
-        new StripeRequest(
-            apiRequest.getMethod(),
-            fullUrl,
-            apiRequest.getParams(),
-            RequestOptions.merge(this.options, apiRequest.getOptions()));
+        new StripeRequest(apiRequest.getMethod(), fullUrl, apiRequest.getParams(), mergedOptions);
     if (telemetryHeaderValue.isPresent()) {
       request =
           request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
@@ -90,7 +87,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
       throws StripeException {
 
-    StripeRequest request = toStripeRequest(apiRequest);
+    RequestOptions mergedOptions = RequestOptions.merge(this.options, apiRequest.getOptions());
+
+    if (RequestOptions.unsafeGetStripeVersionOverride(mergedOptions) != null) {
+      apiRequest = apiRequest.addUsage("unsafe_stripe_version_override");
+    }
+
+    StripeRequest request = toStripeRequest(apiRequest, mergedOptions);
     StripeResponse response =
         sendWithTelemetry(request, apiRequest.getUsage(), r -> httpClient.requestWithRetries(r));
 
@@ -121,7 +124,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   @Override
   public InputStream requestStream(ApiRequest apiRequest) throws StripeException {
-    StripeRequest request = toStripeRequest(apiRequest);
+    RequestOptions mergedOptions = RequestOptions.merge(this.options, apiRequest.getOptions());
+
+    if (RequestOptions.unsafeGetStripeVersionOverride(mergedOptions) != null) {
+      apiRequest = apiRequest.addUsage("unsafe_stripe_version_override");
+    }
+
+    StripeRequest request = toStripeRequest(apiRequest, mergedOptions);
     StripeResponseStream responseStream =
         sendWithTelemetry(
             request, apiRequest.getUsage(), r -> httpClient.requestStreamWithRetries(r));
