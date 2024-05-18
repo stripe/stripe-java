@@ -6349,7 +6349,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           public static class Trial {
             /**
              * List of price IDs which, if present on the subscription following a paid trial,
-             * constitute opting-in to the paid trial.
+             * constitute opting-in to the paid trial. Currently only supports at most 1 price ID.
              */
             @SerializedName("converts_to")
             List<String> convertsTo;
@@ -7198,7 +7198,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           public static class Trial {
             /**
              * List of price IDs which, if present on the subscription following a paid trial,
-             * constitute opting-in to the paid trial.
+             * constitute opting-in to the paid trial. Currently only supports at most 1 price ID.
              */
             @SerializedName("converts_to")
             List<String> convertsTo;
@@ -11731,7 +11731,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         public static class Trial {
           /**
            * List of price IDs which, if present on the subscription following a paid trial,
-           * constitute opting-in to the paid trial.
+           * constitute opting-in to the paid trial. Currently only supports at most 1 price ID.
            */
           @SerializedName("converts_to")
           List<String> convertsTo;
