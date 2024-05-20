@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.*;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Cleanup;
@@ -87,5 +90,35 @@ public class RequestOptionsTest extends BaseStripeTest {
     serverOverride.takeRequest();
     assertEquals("override", r2.id);
     serverOverride.shutdown();
+  }
+
+  @Test
+  public void testSendsUsageOnUnsafeSetStripeVersionOverride() throws StripeException {
+    boolean originalTelemetry = Stripe.enableTelemetry;
+    Stripe.enableTelemetry = true;
+
+    RequestOptions options =
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(RequestOptions.builder(), "2012-12-21")
+            .build();
+
+    Balance.retrieve(options);
+    Balance.retrieve(options);
+
+    verifyStripeRequest(
+        stripeRequest -> {
+          assert (stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
+          String usage =
+              new Gson()
+                  .fromJson(
+                      stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").get(),
+                      JsonObject.class)
+                  .get("last_request_metrics")
+                  .getAsJsonObject()
+                  .get("usage")
+                  .getAsString();
+          assertEquals("unsafe_stripe_version_override", usage);
+        });
+
+    Stripe.enableTelemetry = originalTelemetry;
   }
 }
