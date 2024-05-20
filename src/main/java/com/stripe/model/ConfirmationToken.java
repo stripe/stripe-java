@@ -841,6 +841,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("networks")
       Networks networks;
 
+      /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+      @SerializedName("preferred_locales")
+      List<String> preferredLocales;
+
       /**
        * How card details were read in this transaction.
        *

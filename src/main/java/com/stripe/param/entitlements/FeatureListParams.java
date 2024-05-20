@@ -11,6 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class FeatureListParams extends ApiRequestParams {
+  /** If set, filter results to only include features with the given archive status. */
+  @SerializedName("archived")
+  Boolean archived;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -40,6 +44,10 @@ public class FeatureListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** If set, filter results to only include features with the given lookup_key. */
+  @SerializedName("lookup_key")
+  String lookupKey;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -50,15 +58,19 @@ public class FeatureListParams extends ApiRequestParams {
   String startingAfter;
 
   private FeatureListParams(
+      Boolean archived,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String lookupKey,
       String startingAfter) {
+    this.archived = archived;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.lookupKey = lookupKey;
     this.startingAfter = startingAfter;
   }
 
@@ -67,6 +79,8 @@ public class FeatureListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean archived;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -75,12 +89,26 @@ public class FeatureListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String lookupKey;
+
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FeatureListParams build() {
       return new FeatureListParams(
-          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
+          this.archived,
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.lookupKey,
+          this.startingAfter);
+    }
+
+    /** If set, filter results to only include features with the given archive status. */
+    public Builder setArchived(Boolean archived) {
+      this.archived = archived;
+      return this;
     }
 
     /**
@@ -152,6 +180,12 @@ public class FeatureListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /** If set, filter results to only include features with the given lookup_key. */
+    public Builder setLookupKey(String lookupKey) {
+      this.lookupKey = lookupKey;
       return this;
     }
 

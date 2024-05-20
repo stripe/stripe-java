@@ -3539,9 +3539,9 @@ public class TokenCreateParams extends ApiRequestParams {
     String paymentMethod;
 
     /**
-     * The routing number, sort code, or other country-appropriateinstitution number for the bank
-     * account. For US bank accounts, this is required and should bethe ACH routing number, not the
-     * wire routing number. If you are providing an IBAN for{@code account_number}, this field is
+     * The routing number, sort code, or other country-appropriate institution number for the bank
+     * account. For US bank accounts, this is required and should be the ACH routing number, not the
+     * wire routing number. If you are providing an IBAN for {@code account_number}, this field is
      * not required.
      */
     @SerializedName("routing_number")
@@ -3698,10 +3698,10 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The routing number, sort code, or other country-appropriateinstitution number for the bank
-       * account. For US bank accounts, this is required and should bethe ACH routing number, not
-       * the wire routing number. If you are providing an IBAN for{@code account_number}, this field
-       * is not required.
+       * The routing number, sort code, or other country-appropriate institution number for the bank
+       * account. For US bank accounts, this is required and should be the ACH routing number, not
+       * the wire routing number. If you are providing an IBAN for {@code account_number}, this
+       * field is not required.
        */
       public Builder setRoutingNumber(String routingNumber) {
         this.routingNumber = routingNumber;

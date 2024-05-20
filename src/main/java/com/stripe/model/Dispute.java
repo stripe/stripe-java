@@ -807,13 +807,16 @@ public class Dispute extends ApiResource
     @SerializedName("card")
     Card card;
 
+    @SerializedName("klarna")
+    Klarna klarna;
+
     @SerializedName("paypal")
     Paypal paypal;
 
     /**
      * Payment method type.
      *
-     * <p>One of {@code card}, or {@code paypal}.
+     * <p>One of {@code card}, {@code klarna}, or {@code paypal}.
      */
     @SerializedName("type")
     String type;
@@ -837,6 +840,15 @@ public class Dispute extends ApiResource
        */
       @SerializedName("network_reason_code")
       String networkReasonCode;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna extends StripeObject {
+      /** The reason for the dispute as defined by Klarna. */
+      @SerializedName("reason_code")
+      String reasonCode;
     }
 
     @Getter

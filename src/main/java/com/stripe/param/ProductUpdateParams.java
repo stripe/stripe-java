@@ -85,7 +85,7 @@ public class ProductUpdateParams extends ApiRequestParams {
    * <p>This may be up to 22 characters. The statement description may not include {@code <}, {@code
    * >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's statement in
    * capital letters. Non-ASCII characters are automatically stripped. It must contain at least one
-   * letter. May only be set if {@code type=service}.
+   * letter. May only be set if {@code type=service}. Only used for subscription payments.
    */
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
@@ -468,7 +468,8 @@ public class ProductUpdateParams extends ApiRequestParams {
      * <p>This may be up to 22 characters. The statement description may not include {@code <},
      * {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's
      * statement in capital letters. Non-ASCII characters are automatically stripped. It must
-     * contain at least one letter. May only be set if {@code type=service}.
+     * contain at least one letter. May only be set if {@code type=service}. Only used for
+     * subscription payments.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -483,7 +484,8 @@ public class ProductUpdateParams extends ApiRequestParams {
      * <p>This may be up to 22 characters. The statement description may not include {@code <},
      * {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's
      * statement in capital letters. Non-ASCII characters are automatically stripped. It must
-     * contain at least one letter. May only be set if {@code type=service}.
+     * contain at least one letter. May only be set if {@code type=service}. Only used for
+     * subscription payments.
      */
     public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
