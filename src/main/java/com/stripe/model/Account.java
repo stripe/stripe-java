@@ -1083,7 +1083,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String linkPayments;
 
     /**
-     * The status of the MobilepPay capability of the account, or whether the account can directly
+     * The status of the MobilePay capability of the account, or whether the account can directly
      * process MobilePay charges.
      *
      * <p>One of {@code active}, {@code inactive}, or {@code pending}.
