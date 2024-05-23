@@ -1,5 +1,11 @@
 # Changelog
 
+## 25.9.0 - 2024-05-23
+* [#1806](https://github.com/stripe/stripe-java/pull/1806) Update generated code
+  * Add support for `external_account_collection` on `AccountSession.components.balances.features`, `AccountSession.components.payouts.features`, `AccountSessionCreateParams.components.balances.features`, and `AccountSessionCreateParams.components.payouts.features`
+  * Add support for `payment_method_remove` on `Checkout.Session.saved_payment_method_options`
+* [#1808](https://github.com/stripe/stripe-java/pull/1808) Track usage for unsafeSetStripeVersionOverride
+
 ## 25.8.0 - 2024-05-16
 * [#1803](https://github.com/stripe/stripe-java/pull/1803) Update generated code
   * Add support for `fee_source` on `ApplicationFee`
