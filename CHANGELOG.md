@@ -1,5 +1,10 @@
 # Changelog
 
+## 25.10.0-beta.1 - 2024-05-23
+* [#1813](https://github.com/stripe/stripe-java/pull/1813) Update generated code for beta
+  * Change `CreditNoteCreateParams.refunds[].refund`, `CreditNotePreviewLinesParams.refunds[].refund`, and `CreditNotePreviewParams.refunds[].refund` to be optional
+* [#1812](https://github.com/stripe/stripe-java/pull/1812) Merge master into beta
+
 ## 25.9.0-beta.1 - 2024-05-16
 * [#1802](https://github.com/stripe/stripe-java/pull/1802) Update generated code for beta
 
