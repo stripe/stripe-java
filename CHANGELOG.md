@@ -5,6 +5,12 @@
   * Change `CreditNoteCreateParams.refunds[].refund`, `CreditNotePreviewLinesParams.refunds[].refund`, and `CreditNotePreviewParams.refunds[].refund` to be optional
 * [#1812](https://github.com/stripe/stripe-java/pull/1812) Merge master into beta
 
+## 25.9.0 - 2024-05-23
+* [#1806](https://github.com/stripe/stripe-java/pull/1806) Update generated code
+  * Add support for `external_account_collection` on `AccountSession.components.balances.features`, `AccountSession.components.payouts.features`, `AccountSessionCreateParams.components.balances.features`, and `AccountSessionCreateParams.components.payouts.features`
+  * Add support for `payment_method_remove` on `Checkout.Session.saved_payment_method_options`
+* [#1808](https://github.com/stripe/stripe-java/pull/1808) Track usage for unsafeSetStripeVersionOverride
+
 ## 25.9.0-beta.1 - 2024-05-16
 * [#1802](https://github.com/stripe/stripe-java/pull/1802) Update generated code for beta
 
