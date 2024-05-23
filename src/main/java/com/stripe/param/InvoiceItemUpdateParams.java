@@ -83,13 +83,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   @SerializedName("period")
   Period period;
 
-  /** The ID of the price object. */
+  /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
   @SerializedName("price")
   Object price;
 
   /**
    * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-   * inline.
+   * inline. One of {@code price} or {@code price_data} is required.
    */
   @SerializedName("price_data")
   PriceData priceData;
@@ -481,13 +481,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the price object. */
+    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
     public Builder setPrice(String price) {
       this.price = price;
       return this;
     }
 
-    /** The ID of the price object. */
+    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
     public Builder setPrice(EmptyParam price) {
       this.price = price;
       return this;
@@ -495,7 +495,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     public Builder setPriceData(InvoiceItemUpdateParams.PriceData priceData) {
       this.priceData = priceData;

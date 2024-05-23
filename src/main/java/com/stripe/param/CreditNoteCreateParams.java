@@ -865,7 +865,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> ID of an existing refund to link this credit note to. */
+    /** ID of an existing refund to link this credit note to. */
     @SerializedName("refund")
     String refund;
 
@@ -927,7 +927,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> ID of an existing refund to link this credit note to. */
+      /** ID of an existing refund to link this credit note to. */
       public Builder setRefund(String refund) {
         this.refund = refund;
         return this;

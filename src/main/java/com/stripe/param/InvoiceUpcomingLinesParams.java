@@ -2621,13 +2621,13 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     @SerializedName("period")
     Period period;
 
-    /** The ID of the price object. */
+    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -2945,7 +2945,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. */
+      /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
@@ -2953,7 +2953,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(InvoiceUpcomingLinesParams.InvoiceItem.PriceData priceData) {
         this.priceData = priceData;
@@ -6453,7 +6453,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           public static class Trial {
             /**
              * List of price IDs which, if present on the subscription following a paid trial,
-             * constitute opting-in to the paid trial.
+             * constitute opting-in to the paid trial. Currently only supports at most 1 price ID.
              */
             @SerializedName("converts_to")
             List<String> convertsTo;
@@ -7309,7 +7309,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           public static class Trial {
             /**
              * List of price IDs which, if present on the subscription following a paid trial,
-             * constitute opting-in to the paid trial.
+             * constitute opting-in to the paid trial. Currently only supports at most 1 price ID.
              */
             @SerializedName("converts_to")
             List<String> convertsTo;
@@ -8986,13 +8986,13 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The ID of the price object. */
+        /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
         @SerializedName("price")
         String price;
 
         /**
          * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-         * inline.
+         * inline. One of {@code price} or {@code price_data} is required.
          */
         @SerializedName("price_data")
         PriceData priceData;
@@ -9114,7 +9114,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the price object. */
+          /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
@@ -9122,7 +9122,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
           /**
            * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a>
-           * object inline.
+           * object inline. One of {@code price} or {@code price_data} is required.
            */
           public Builder setPriceData(
               InvoiceUpcomingLinesParams.ScheduleDetails.Phase.AddInvoiceItem.PriceData priceData) {
@@ -11878,7 +11878,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         public static class Trial {
           /**
            * List of price IDs which, if present on the subscription following a paid trial,
-           * constitute opting-in to the paid trial.
+           * constitute opting-in to the paid trial. Currently only supports at most 1 price ID.
            */
           @SerializedName("converts_to")
           List<String> convertsTo;
@@ -13431,15 +13431,16 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       String plan;
 
       /**
-       * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-       * set to 1 unless a {@code quantity} parameter is provided.
+       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
+       * quantity} parameter is provided.
        */
       @SerializedName("price")
       String price;
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       @SerializedName("price_data")
       PriceData priceData;
@@ -13710,8 +13711,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         }
 
         /**
-         * The ID of the price object. When changing a subscription item's price, {@code quantity}
-         * is set to 1 unless a {@code quantity} parameter is provided.
+         * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+         * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
+         * quantity} parameter is provided.
          */
         public Builder setPrice(String price) {
           this.price = price;
@@ -13720,7 +13722,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         /**
          * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-         * inline.
+         * inline. One of {@code price} or {@code price_data} is required.
          */
         public Builder setPriceData(
             InvoiceUpcomingLinesParams.SubscriptionDetails.Item.PriceData priceData) {
@@ -14774,15 +14776,16 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     String plan;
 
     /**
-     * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-     * set to 1 unless a {@code quantity} parameter is provided.
+     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
+     * parameter is provided.
      */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -15044,8 +15047,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-       * set to 1 unless a {@code quantity} parameter is provided.
+       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
+       * quantity} parameter is provided.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -15054,7 +15058,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(InvoiceUpcomingLinesParams.SubscriptionItem.PriceData priceData) {
         this.priceData = priceData;

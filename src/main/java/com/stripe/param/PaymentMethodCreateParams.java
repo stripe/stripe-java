@@ -322,7 +322,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Swish swish;
 
   /**
-   * If this is a Twint PaymentMethod, this hash contains details about the Twint payment method.
+   * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
    */
   @SerializedName("twint")
   Twint twint;
@@ -1075,7 +1075,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a Twint PaymentMethod, this hash contains details about the Twint payment method.
+     * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
      */
     public Builder setTwint(PaymentMethodCreateParams.Twint twint) {
       this.twint = twint;

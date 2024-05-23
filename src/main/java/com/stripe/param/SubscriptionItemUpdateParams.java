@@ -86,15 +86,16 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   Object plan;
 
   /**
-   * The ID of the price object. When changing a subscription item's price, {@code quantity} is set
-   * to 1 unless a {@code quantity} parameter is provided.
+   * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+   * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
+   * parameter is provided.
    */
   @SerializedName("price")
   Object price;
 
   /**
    * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-   * inline.
+   * inline. One of {@code price} or {@code price_data} is required.
    */
   @SerializedName("price_data")
   PriceData priceData;
@@ -428,8 +429,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-     * set to 1 unless a {@code quantity} parameter is provided.
+     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
+     * parameter is provided.
      */
     public Builder setPrice(String price) {
       this.price = price;
@@ -437,8 +439,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-     * set to 1 unless a {@code quantity} parameter is provided.
+     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
+     * parameter is provided.
      */
     public Builder setPrice(EmptyParam price) {
       this.price = price;
@@ -447,7 +450,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     public Builder setPriceData(SubscriptionItemUpdateParams.PriceData priceData) {
       this.priceData = priceData;

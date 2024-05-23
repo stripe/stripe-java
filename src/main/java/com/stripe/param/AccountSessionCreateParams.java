@@ -903,6 +903,15 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean editPayoutSchedule;
 
         /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -928,10 +937,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
         private Features(
             Boolean editPayoutSchedule,
+            Boolean externalAccountCollection,
             Map<String, Object> extraParams,
             Boolean instantPayouts,
             Boolean standardPayouts) {
           this.editPayoutSchedule = editPayoutSchedule;
+          this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
           this.instantPayouts = instantPayouts;
           this.standardPayouts = standardPayouts;
@@ -944,6 +955,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Boolean editPayoutSchedule;
 
+          private Boolean externalAccountCollection;
+
           private Map<String, Object> extraParams;
 
           private Boolean instantPayouts;
@@ -954,6 +967,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           public AccountSessionCreateParams.Components.Balances.Features build() {
             return new AccountSessionCreateParams.Components.Balances.Features(
                 this.editPayoutSchedule,
+                this.externalAccountCollection,
                 this.extraParams,
                 this.instantPayouts,
                 this.standardPayouts);
@@ -965,6 +979,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            */
           public Builder setEditPayoutSchedule(Boolean editPayoutSchedule) {
             this.editPayoutSchedule = editPayoutSchedule;
+            return this;
+          }
+
+          /**
+           * Whether to allow platforms to control bank account collection for their connected
+           * accounts. This feature can only be false for custom accounts (or accounts where the
+           * platform is compliance owner). Otherwise, bank account collection is determined by
+           * compliance requirements.
+           */
+          public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+            this.externalAccountCollection = externalAccountCollection;
             return this;
           }
 
@@ -2968,6 +2993,15 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean editPayoutSchedule;
 
         /**
+         * Whether to allow platforms to control bank account collection for their connected
+         * accounts. This feature can only be false for custom accounts (or accounts where the
+         * platform is compliance owner). Otherwise, bank account collection is determined by
+         * compliance requirements.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -2993,10 +3027,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
         private Features(
             Boolean editPayoutSchedule,
+            Boolean externalAccountCollection,
             Map<String, Object> extraParams,
             Boolean instantPayouts,
             Boolean standardPayouts) {
           this.editPayoutSchedule = editPayoutSchedule;
+          this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
           this.instantPayouts = instantPayouts;
           this.standardPayouts = standardPayouts;
@@ -3009,6 +3045,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Boolean editPayoutSchedule;
 
+          private Boolean externalAccountCollection;
+
           private Map<String, Object> extraParams;
 
           private Boolean instantPayouts;
@@ -3019,6 +3057,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           public AccountSessionCreateParams.Components.Payouts.Features build() {
             return new AccountSessionCreateParams.Components.Payouts.Features(
                 this.editPayoutSchedule,
+                this.externalAccountCollection,
                 this.extraParams,
                 this.instantPayouts,
                 this.standardPayouts);
@@ -3030,6 +3069,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            */
           public Builder setEditPayoutSchedule(Boolean editPayoutSchedule) {
             this.editPayoutSchedule = editPayoutSchedule;
+            return this;
+          }
+
+          /**
+           * Whether to allow platforms to control bank account collection for their connected
+           * accounts. This feature can only be false for custom accounts (or accounts where the
+           * platform is compliance owner). Otherwise, bank account collection is determined by
+           * compliance requirements.
+           */
+          public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+            this.externalAccountCollection = externalAccountCollection;
             return this;
           }
 
