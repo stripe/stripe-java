@@ -12030,6 +12030,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName("en-PT")
         EN_PT("en-PT"),
 
+        @SerializedName("en-RO")
+        EN_RO("en-RO"),
+
         @SerializedName("en-SE")
         EN_SE("en-SE"),
 
@@ -12077,6 +12080,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         @SerializedName("pt-PT")
         PT_PT("pt-PT"),
+
+        @SerializedName("ro-RO")
+        RO_RO("ro-RO"),
 
         @SerializedName("sv-FI")
         SV_FI("sv-FI"),
