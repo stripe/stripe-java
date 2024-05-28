@@ -169,7 +169,8 @@ public class AccountCreateParams extends ApiRequestParams {
    * href="https://stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
    * Agreement</a>. This property can only be updated for accounts where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
-   * is {@code application}, which includes Custom accounts.
+   * is {@code application}, which includes Custom accounts. This property defaults to a {@code
+   * full} service agreement when empty.
    */
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
@@ -554,7 +555,8 @@ public class AccountCreateParams extends ApiRequestParams {
      * href="https://stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
      * Agreement</a>. This property can only be updated for accounts where <a
      * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
-     * is {@code application}, which includes Custom accounts.
+     * is {@code application}, which includes Custom accounts. This property defaults to a {@code
+     * full} service agreement when empty.
      */
     public Builder setTosAcceptance(AccountCreateParams.TosAcceptance tosAcceptance) {
       this.tosAcceptance = tosAcceptance;
