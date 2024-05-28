@@ -1884,6 +1884,13 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     public static class Dropdown {
       /**
+       * The value that will pre-fill the field on the payment page.Must match a {@code value} in
+       * the {@code options} array.
+       */
+      @SerializedName("default_value")
+      String defaultValue;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -1900,8 +1907,10 @@ public class SessionCreateParams extends ApiRequestParams {
       List<SessionCreateParams.CustomField.Dropdown.Option> options;
 
       private Dropdown(
+          String defaultValue,
           Map<String, Object> extraParams,
           List<SessionCreateParams.CustomField.Dropdown.Option> options) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.options = options;
       }
@@ -1911,13 +1920,25 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String defaultValue;
+
         private Map<String, Object> extraParams;
 
         private List<SessionCreateParams.CustomField.Dropdown.Option> options;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.CustomField.Dropdown build() {
-          return new SessionCreateParams.CustomField.Dropdown(this.extraParams, this.options);
+          return new SessionCreateParams.CustomField.Dropdown(
+              this.defaultValue, this.extraParams, this.options);
+        }
+
+        /**
+         * The value that will pre-fill the field on the payment page.Must match a {@code value} in
+         * the {@code options} array.
+         */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -2180,6 +2201,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Numeric {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2197,7 +2222,12 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("minimum_length")
       Long minimumLength;
 
-      private Numeric(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+      private Numeric(
+          String defaultValue,
+          Map<String, Object> extraParams,
+          Long maximumLength,
+          Long minimumLength) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.maximumLength = maximumLength;
         this.minimumLength = minimumLength;
@@ -2208,6 +2238,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String defaultValue;
+
         private Map<String, Object> extraParams;
 
         private Long maximumLength;
@@ -2217,7 +2249,13 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.CustomField.Numeric build() {
           return new SessionCreateParams.CustomField.Numeric(
-              this.extraParams, this.maximumLength, this.minimumLength);
+              this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -2264,6 +2302,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Text {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2281,7 +2323,12 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("minimum_length")
       Long minimumLength;
 
-      private Text(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+      private Text(
+          String defaultValue,
+          Map<String, Object> extraParams,
+          Long maximumLength,
+          Long minimumLength) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.maximumLength = maximumLength;
         this.minimumLength = minimumLength;
@@ -2292,6 +2339,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String defaultValue;
+
         private Map<String, Object> extraParams;
 
         private Long maximumLength;
@@ -2301,7 +2350,13 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.CustomField.Text build() {
           return new SessionCreateParams.CustomField.Text(
-              this.extraParams, this.maximumLength, this.minimumLength);
+              this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
