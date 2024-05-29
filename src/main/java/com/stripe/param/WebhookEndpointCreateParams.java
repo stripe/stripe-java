@@ -928,6 +928,18 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("issuing_dispute.updated")
     ISSUING_DISPUTE__UPDATED("issuing_dispute.updated"),
 
+    @SerializedName("issuing_personalization_design.activated")
+    ISSUING_PERSONALIZATION_DESIGN__ACTIVATED("issuing_personalization_design.activated"),
+
+    @SerializedName("issuing_personalization_design.deactivated")
+    ISSUING_PERSONALIZATION_DESIGN__DEACTIVATED("issuing_personalization_design.deactivated"),
+
+    @SerializedName("issuing_personalization_design.rejected")
+    ISSUING_PERSONALIZATION_DESIGN__REJECTED("issuing_personalization_design.rejected"),
+
+    @SerializedName("issuing_personalization_design.updated")
+    ISSUING_PERSONALIZATION_DESIGN__UPDATED("issuing_personalization_design.updated"),
+
     @SerializedName("issuing_token.created")
     ISSUING_TOKEN__CREATED("issuing_token.created"),
 
