@@ -136,10 +136,10 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
   /**
    * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-   * not provided, but a {@code subscription_items} is provided, you will preview creating a
-   * subscription with those items. If neither {@code subscription} nor {@code subscription_items}
-   * is provided, you will retrieve the next upcoming invoice from among the customer's
-   * subscriptions.
+   * not provided, but a {@code subscription_details.items} is provided, you will preview creating a
+   * subscription with those items. If neither {@code subscription} nor {@code
+   * subscription_details.items} is provided, you will retrieve the next upcoming invoice from among
+   * the customer's subscriptions.
    */
   @SerializedName("subscription")
   String subscription;
@@ -698,10 +698,10 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
     /**
      * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-     * not provided, but a {@code subscription_items} is provided, you will preview creating a
-     * subscription with those items. If neither {@code subscription} nor {@code subscription_items}
-     * is provided, you will retrieve the next upcoming invoice from among the customer's
-     * subscriptions.
+     * not provided, but a {@code subscription_details.items} is provided, you will preview creating
+     * a subscription with those items. If neither {@code subscription} nor {@code
+     * subscription_details.items} is provided, you will retrieve the next upcoming invoice from
+     * among the customer's subscriptions.
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
