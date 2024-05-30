@@ -4,6 +4,13 @@
 * [#1814](https://github.com/stripe/stripe-java/pull/1814) Update generated code for beta
   * Add support for new values `en-RO` and `ro-RO` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale` and `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`
 
+## 25.10.0 - 2024-05-30
+* [#1815](https://github.com/stripe/stripe-java/pull/1815) Update generated code
+  * Add support for `default_value` on `Checkout.Session.custom_fields[].dropdown`, `Checkout.Session.custom_fields[].numeric`, `Checkout.Session.custom_fields[].text`, `checkout.SessionCreateParams.custom_fields[].dropdown`, `checkout.SessionCreateParams.custom_fields[].numeric`, and `checkout.SessionCreateParams.custom_fields[].text`
+  * Add support for `generated_from` on `ConfirmationToken.payment_method_preview.card` and `PaymentMethod.card`
+  * Add support for new values `en-RO` and `ro-RO` on enums `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
+  * Add support for new values `issuing_personalization_design.activated`, `issuing_personalization_design.deactivated`, `issuing_personalization_design.rejected`, and `issuing_personalization_design.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 25.10.0-beta.1 - 2024-05-23
 * [#1813](https://github.com/stripe/stripe-java/pull/1813) Update generated code for beta
   * Change `CreditNoteCreateParams.refunds[].refund`, `CreditNotePreviewLinesParams.refunds[].refund`, and `CreditNotePreviewParams.refunds[].refund` to be optional
