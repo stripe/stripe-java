@@ -3611,13 +3611,14 @@ public class OrderUpdateParams extends ApiRequestParams {
         @Getter
         public static class AfterpayClearpay {
           /**
-           * Controls when the funds will be captured from the customer's account.
+           * Controls when the funds are captured from the customer's account.
            *
-           * <p>If provided, this parameter will override the top level behavior of {@code
-           * capture_method} when finalizing the payment with this payment method type.
+           * <p>If provided, this parameter overrides the behavior of the top-level <a
+           * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+           * for this payment method type when finalizing the payment with this payment method type.
            *
            * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-           * value for this parameter will unset the stored value for this payment method type.
+           * value for this parameter unsets the stored value for this payment method type.
            */
           @SerializedName("capture_method")
           CaptureMethod captureMethod;
@@ -3695,13 +3696,15 @@ public class OrderUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Controls when the funds will be captured from the customer's account.
+             * Controls when the funds are captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top level behavior of {@code
-             * capture_method} when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter overrides the behavior of the top-level <a
+             * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+             * for this payment method type when finalizing the payment with this payment method
+             * type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-             * value for this parameter will unset the stored value for this payment method type.
+             * value for this parameter unsets the stored value for this payment method type.
              */
             public Builder setCaptureMethod(
                 OrderUpdateParams.Payment.Settings.PaymentMethodOptions.AfterpayClearpay
@@ -5014,13 +5017,14 @@ public class OrderUpdateParams extends ApiRequestParams {
         @Getter
         public static class Klarna {
           /**
-           * Controls when the funds will be captured from the customer's account.
+           * Controls when the funds are captured from the customer's account.
            *
-           * <p>If provided, this parameter will override the top level behavior of {@code
-           * capture_method} when finalizing the payment with this payment method type.
+           * <p>If provided, this parameter overrides the behavior of the top-level <a
+           * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+           * for this payment method type when finalizing the payment with this payment method type.
            *
            * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-           * value for this parameter will unset the stored value for this payment method type.
+           * value for this parameter unsets the stored value for this payment method type.
            */
           @SerializedName("capture_method")
           ApiRequestParams.EnumParam captureMethod;
@@ -5099,13 +5103,15 @@ public class OrderUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Controls when the funds will be captured from the customer's account.
+             * Controls when the funds are captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top level behavior of {@code
-             * capture_method} when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter overrides the behavior of the top-level <a
+             * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+             * for this payment method type when finalizing the payment with this payment method
+             * type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-             * value for this parameter will unset the stored value for this payment method type.
+             * value for this parameter unsets the stored value for this payment method type.
              */
             public Builder setCaptureMethod(
                 OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.CaptureMethod
@@ -5115,13 +5121,15 @@ public class OrderUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Controls when the funds will be captured from the customer's account.
+             * Controls when the funds are captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top level behavior of {@code
-             * capture_method} when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter overrides the behavior of the top-level <a
+             * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+             * for this payment method type when finalizing the payment with this payment method
+             * type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-             * value for this parameter will unset the stored value for this payment method type.
+             * value for this parameter unsets the stored value for this payment method type.
              */
             public Builder setCaptureMethod(EmptyParam captureMethod) {
               this.captureMethod = captureMethod;
@@ -5289,6 +5297,9 @@ public class OrderUpdateParams extends ApiRequestParams {
             @SerializedName("en-PT")
             EN_PT("en-PT"),
 
+            @SerializedName("en-RO")
+            EN_RO("en-RO"),
+
             @SerializedName("en-SE")
             EN_SE("en-SE"),
 
@@ -5337,6 +5348,9 @@ public class OrderUpdateParams extends ApiRequestParams {
             @SerializedName("pt-PT")
             PT_PT("pt-PT"),
 
+            @SerializedName("ro-RO")
+            RO_RO("ro-RO"),
+
             @SerializedName("sv-FI")
             SV_FI("sv-FI"),
 
@@ -5367,13 +5381,14 @@ public class OrderUpdateParams extends ApiRequestParams {
         @Getter
         public static class Link {
           /**
-           * Controls when the funds will be captured from the customer's account.
+           * Controls when the funds are captured from the customer's account.
            *
-           * <p>If provided, this parameter will override the top level behavior of {@code
-           * capture_method} when finalizing the payment with this payment method type.
+           * <p>If provided, this parameter overrides the behavior of the top-level <a
+           * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+           * for this payment method type when finalizing the payment with this payment method type.
            *
            * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-           * value for this parameter will unset the stored value for this payment method type.
+           * value for this parameter unsets the stored value for this payment method type.
            */
           @SerializedName("capture_method")
           ApiRequestParams.EnumParam captureMethod;
@@ -5451,13 +5466,15 @@ public class OrderUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Controls when the funds will be captured from the customer's account.
+             * Controls when the funds are captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top level behavior of {@code
-             * capture_method} when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter overrides the behavior of the top-level <a
+             * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+             * for this payment method type when finalizing the payment with this payment method
+             * type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-             * value for this parameter will unset the stored value for this payment method type.
+             * value for this parameter unsets the stored value for this payment method type.
              */
             public Builder setCaptureMethod(
                 OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Link.CaptureMethod
@@ -5467,13 +5484,15 @@ public class OrderUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Controls when the funds will be captured from the customer's account.
+             * Controls when the funds are captured from the customer's account.
              *
-             * <p>If provided, this parameter will override the top level behavior of {@code
-             * capture_method} when finalizing the payment with this payment method type.
+             * <p>If provided, this parameter overrides the behavior of the top-level <a
+             * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+             * for this payment method type when finalizing the payment with this payment method
+             * type.
              *
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-             * value for this parameter will unset the stored value for this payment method type.
+             * value for this parameter unsets the stored value for this payment method type.
              */
             public Builder setCaptureMethod(EmptyParam captureMethod) {
               this.captureMethod = captureMethod;
