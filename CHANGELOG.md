@@ -1,5 +1,9 @@
 # Changelog
 
+## 25.11.0-beta.1 - 2024-05-30
+* [#1814](https://github.com/stripe/stripe-java/pull/1814) Update generated code for beta
+  * Add support for new values `en-RO` and `ro-RO` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale` and `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`
+
 ## 25.10.0-beta.1 - 2024-05-23
 * [#1813](https://github.com/stripe/stripe-java/pull/1813) Update generated code for beta
   * Change `CreditNoteCreateParams.refunds[].refund`, `CreditNotePreviewLinesParams.refunds[].refund`, and `CreditNotePreviewParams.refunds[].refund` to be optional
