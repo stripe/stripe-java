@@ -992,6 +992,10 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown extends StripeObject {
+      /** The value that will pre-fill on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The options available for the customer to select. Up to 200 options allowed. */
       @SerializedName("options")
       List<Session.CustomField.Dropdown.Option> options;
@@ -1039,6 +1043,10 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric extends StripeObject {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The maximum character length constraint for the customer's input. */
       @SerializedName("maximum_length")
       Long maximumLength;
@@ -1056,6 +1064,10 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Text extends StripeObject {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The maximum character length constraint for the customer's input. */
       @SerializedName("maximum_length")
       Long maximumLength;
