@@ -1000,6 +1000,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String fpxPayments;
 
     /**
+     * The status of the GB customer_balance payments (GBP currency) capability of the account, or
+     * whether the account can directly process GB customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("gb_bank_transfer_payments")
+    String gbBankTransferPayments;
+
+    /**
      * The status of the giropay payments capability of the account, or whether the account can
      * directly process giropay charges.
      *
@@ -1043,6 +1052,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("jcb_payments")
     String jcbPayments;
+
+    /**
+     * The status of the Japanese customer_balance payments (JPY currency) capability of the
+     * account, or whether the account can directly process Japanese customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("jp_bank_transfer_payments")
+    String jpBankTransferPayments;
 
     /**
      * The status of the Klarna payments capability of the account, or whether the account can
@@ -1089,6 +1107,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String mobilepayPayments;
 
     /**
+     * The status of the Mexican customer_balance payments (MXN currency) capability of the account,
+     * or whether the account can directly process Mexican customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("mx_bank_transfer_payments")
+    String mxBankTransferPayments;
+
+    /**
      * The status of the OXXO payments capability of the account, or whether the account can
      * directly process OXXO charges.
      *
@@ -1132,6 +1159,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("revolut_pay_payments")
     String revolutPayPayments;
+
+    /**
+     * The status of the SEPA customer_balance payments (EUR currency) capability of the account, or
+     * whether the account can directly process SEPA customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sepa_bank_transfer_payments")
+    String sepaBankTransferPayments;
 
     /**
      * The status of the SEPA Direct Debits payments capability of the account, or whether the
@@ -1201,6 +1237,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("us_bank_account_ach_payments")
     String usBankAccountAchPayments;
+
+    /**
+     * The status of the US customer_balance payments (USD currency) capability of the account, or
+     * whether the account can directly process US customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("us_bank_transfer_payments")
+    String usBankTransferPayments;
 
     /**
      * The status of the Zip capability of the account, or whether the account can directly process
