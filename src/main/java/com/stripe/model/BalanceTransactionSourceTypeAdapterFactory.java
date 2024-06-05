@@ -63,6 +63,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Transfer.class));
     final TypeAdapter<com.stripe.model.TransferReversal> transferReversalAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.TransferReversal.class));
+    final TypeAdapter<com.stripe.model.PlatformTaxFee> platformTaxFeeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.PlatformTaxFee.class));
 
     TypeAdapter<BalanceTransactionSource> resultCustomTypeAdapter =
         new TypeAdapter<BalanceTransactionSource>() {
@@ -108,6 +110,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = transferAdapter.fromJsonTree(object);
             } else if ("transfer_reversal".equals(objectType)) {
               objectResult = transferReversalAdapter.fromJsonTree(object);
+            } else if ("platform_tax_fee".equals(objectType)) {
+              objectResult = platformTaxFeeAdapter.fromJsonTree(object);
             } else {
               String id = object.getAsJsonPrimitive("id").getAsString();
               objectResult = new UnknownSubType(id, objectType, object.toString());
