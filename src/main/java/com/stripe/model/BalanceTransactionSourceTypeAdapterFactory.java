@@ -51,6 +51,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.issuing.Transaction.class));
     final TypeAdapter<com.stripe.model.Payout> payoutAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Payout.class));
+    final TypeAdapter<com.stripe.model.PlatformTaxFee> platformTaxFeeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.PlatformTaxFee.class));
     final TypeAdapter<com.stripe.model.Refund> refundAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Refund.class));
     final TypeAdapter<com.stripe.model.ReserveTransaction> reserveTransactionAdapter =
@@ -63,8 +65,6 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Transfer.class));
     final TypeAdapter<com.stripe.model.TransferReversal> transferReversalAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.TransferReversal.class));
-    final TypeAdapter<com.stripe.model.PlatformTaxFee> platformTaxFeeAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.PlatformTaxFee.class));
 
     TypeAdapter<BalanceTransactionSource> resultCustomTypeAdapter =
         new TypeAdapter<BalanceTransactionSource>() {
@@ -98,6 +98,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = issuingTransactionAdapter.fromJsonTree(object);
             } else if ("payout".equals(objectType)) {
               objectResult = payoutAdapter.fromJsonTree(object);
+            } else if ("platform_tax_fee".equals(objectType)) {
+              objectResult = platformTaxFeeAdapter.fromJsonTree(object);
             } else if ("refund".equals(objectType)) {
               objectResult = refundAdapter.fromJsonTree(object);
             } else if ("reserve_transaction".equals(objectType)) {
@@ -110,8 +112,6 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = transferAdapter.fromJsonTree(object);
             } else if ("transfer_reversal".equals(objectType)) {
               objectResult = transferReversalAdapter.fromJsonTree(object);
-            } else if ("platform_tax_fee".equals(objectType)) {
-              objectResult = platformTaxFeeAdapter.fromJsonTree(object);
             } else {
               String id = object.getAsJsonPrimitive("id").getAsString();
               objectResult = new UnknownSubType(id, objectType, object.toString());
