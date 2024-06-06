@@ -197,7 +197,9 @@ public final class SetupIntentService extends ApiService {
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(String intent, SetupIntentCancelParams params) throws StripeException {
     return cancel(intent, params, (RequestOptions) null);
@@ -207,7 +209,9 @@ public final class SetupIntentService extends ApiService {
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(String intent, RequestOptions options) throws StripeException {
     return cancel(intent, (SetupIntentCancelParams) null, options);
@@ -217,7 +221,9 @@ public final class SetupIntentService extends ApiService {
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(String intent) throws StripeException {
     return cancel(intent, (SetupIntentCancelParams) null, (RequestOptions) null);
@@ -227,7 +233,9 @@ public final class SetupIntentService extends ApiService {
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(String intent, SetupIntentCancelParams params, RequestOptions options)
       throws StripeException {

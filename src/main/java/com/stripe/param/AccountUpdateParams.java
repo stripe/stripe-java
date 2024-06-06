@@ -1375,6 +1375,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("fpx_payments")
     FpxPayments fpxPayments;
 
+    /** The gb_bank_transfer_payments capability. */
+    @SerializedName("gb_bank_transfer_payments")
+    GbBankTransferPayments gbBankTransferPayments;
+
     /** The giropay_payments capability. */
     @SerializedName("giropay_payments")
     GiropayPayments giropayPayments;
@@ -1395,6 +1399,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("jcb_payments")
     JcbPayments jcbPayments;
 
+    /** The jp_bank_transfer_payments capability. */
+    @SerializedName("jp_bank_transfer_payments")
+    JpBankTransferPayments jpBankTransferPayments;
+
     /** The klarna_payments capability. */
     @SerializedName("klarna_payments")
     KlarnaPayments klarnaPayments;
@@ -1414,6 +1422,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     /** The mobilepay_payments capability. */
     @SerializedName("mobilepay_payments")
     MobilepayPayments mobilepayPayments;
+
+    /** The mx_bank_transfer_payments capability. */
+    @SerializedName("mx_bank_transfer_payments")
+    MxBankTransferPayments mxBankTransferPayments;
 
     /** The oxxo_payments capability. */
     @SerializedName("oxxo_payments")
@@ -1446,6 +1458,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     /** The revolut_pay_payments capability. */
     @SerializedName("revolut_pay_payments")
     RevolutPayPayments revolutPayPayments;
+
+    /** The sepa_bank_transfer_payments capability. */
+    @SerializedName("sepa_bank_transfer_payments")
+    SepaBankTransferPayments sepaBankTransferPayments;
 
     /** The sepa_debit_payments capability. */
     @SerializedName("sepa_debit_payments")
@@ -1483,6 +1499,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("us_bank_account_ach_payments")
     UsBankAccountAchPayments usBankAccountAchPayments;
 
+    /** The us_bank_transfer_payments capability. */
+    @SerializedName("us_bank_transfer_payments")
+    UsBankTransferPayments usBankTransferPayments;
+
     /** The zip_payments capability. */
     @SerializedName("zip_payments")
     ZipPayments zipPayments;
@@ -1505,16 +1525,19 @@ public class AccountUpdateParams extends ApiRequestParams {
         EpsPayments epsPayments,
         Map<String, Object> extraParams,
         FpxPayments fpxPayments,
+        GbBankTransferPayments gbBankTransferPayments,
         GiropayPayments giropayPayments,
         GrabpayPayments grabpayPayments,
         IdealPayments idealPayments,
         IndiaInternationalPayments indiaInternationalPayments,
         JcbPayments jcbPayments,
+        JpBankTransferPayments jpBankTransferPayments,
         KlarnaPayments klarnaPayments,
         KonbiniPayments konbiniPayments,
         LegacyPayments legacyPayments,
         LinkPayments linkPayments,
         MobilepayPayments mobilepayPayments,
+        MxBankTransferPayments mxBankTransferPayments,
         OxxoPayments oxxoPayments,
         P24Payments p24Payments,
         PaynowPayments paynowPayments,
@@ -1523,6 +1546,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         PromptpayPayments promptpayPayments,
         RechnungPayments rechnungPayments,
         RevolutPayPayments revolutPayPayments,
+        SepaBankTransferPayments sepaBankTransferPayments,
         SepaDebitPayments sepaDebitPayments,
         SofortPayments sofortPayments,
         SwishPayments swishPayments,
@@ -1532,6 +1556,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Treasury treasury,
         TwintPayments twintPayments,
         UsBankAccountAchPayments usBankAccountAchPayments,
+        UsBankTransferPayments usBankTransferPayments,
         ZipPayments zipPayments) {
       this.acssDebitPayments = acssDebitPayments;
       this.affirmPayments = affirmPayments;
@@ -1550,16 +1575,19 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.epsPayments = epsPayments;
       this.extraParams = extraParams;
       this.fpxPayments = fpxPayments;
+      this.gbBankTransferPayments = gbBankTransferPayments;
       this.giropayPayments = giropayPayments;
       this.grabpayPayments = grabpayPayments;
       this.idealPayments = idealPayments;
       this.indiaInternationalPayments = indiaInternationalPayments;
       this.jcbPayments = jcbPayments;
+      this.jpBankTransferPayments = jpBankTransferPayments;
       this.klarnaPayments = klarnaPayments;
       this.konbiniPayments = konbiniPayments;
       this.legacyPayments = legacyPayments;
       this.linkPayments = linkPayments;
       this.mobilepayPayments = mobilepayPayments;
+      this.mxBankTransferPayments = mxBankTransferPayments;
       this.oxxoPayments = oxxoPayments;
       this.p24Payments = p24Payments;
       this.paynowPayments = paynowPayments;
@@ -1568,6 +1596,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.promptpayPayments = promptpayPayments;
       this.rechnungPayments = rechnungPayments;
       this.revolutPayPayments = revolutPayPayments;
+      this.sepaBankTransferPayments = sepaBankTransferPayments;
       this.sepaDebitPayments = sepaDebitPayments;
       this.sofortPayments = sofortPayments;
       this.swishPayments = swishPayments;
@@ -1577,6 +1606,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.treasury = treasury;
       this.twintPayments = twintPayments;
       this.usBankAccountAchPayments = usBankAccountAchPayments;
+      this.usBankTransferPayments = usBankTransferPayments;
       this.zipPayments = zipPayments;
     }
 
@@ -1619,6 +1649,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private FpxPayments fpxPayments;
 
+      private GbBankTransferPayments gbBankTransferPayments;
+
       private GiropayPayments giropayPayments;
 
       private GrabpayPayments grabpayPayments;
@@ -1629,6 +1661,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private JcbPayments jcbPayments;
 
+      private JpBankTransferPayments jpBankTransferPayments;
+
       private KlarnaPayments klarnaPayments;
 
       private KonbiniPayments konbiniPayments;
@@ -1638,6 +1672,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private LinkPayments linkPayments;
 
       private MobilepayPayments mobilepayPayments;
+
+      private MxBankTransferPayments mxBankTransferPayments;
 
       private OxxoPayments oxxoPayments;
 
@@ -1654,6 +1690,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private RechnungPayments rechnungPayments;
 
       private RevolutPayPayments revolutPayPayments;
+
+      private SepaBankTransferPayments sepaBankTransferPayments;
 
       private SepaDebitPayments sepaDebitPayments;
 
@@ -1672,6 +1710,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private TwintPayments twintPayments;
 
       private UsBankAccountAchPayments usBankAccountAchPayments;
+
+      private UsBankTransferPayments usBankTransferPayments;
 
       private ZipPayments zipPayments;
 
@@ -1695,16 +1735,19 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.epsPayments,
             this.extraParams,
             this.fpxPayments,
+            this.gbBankTransferPayments,
             this.giropayPayments,
             this.grabpayPayments,
             this.idealPayments,
             this.indiaInternationalPayments,
             this.jcbPayments,
+            this.jpBankTransferPayments,
             this.klarnaPayments,
             this.konbiniPayments,
             this.legacyPayments,
             this.linkPayments,
             this.mobilepayPayments,
+            this.mxBankTransferPayments,
             this.oxxoPayments,
             this.p24Payments,
             this.paynowPayments,
@@ -1713,6 +1756,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.promptpayPayments,
             this.rechnungPayments,
             this.revolutPayPayments,
+            this.sepaBankTransferPayments,
             this.sepaDebitPayments,
             this.sofortPayments,
             this.swishPayments,
@@ -1722,6 +1766,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.treasury,
             this.twintPayments,
             this.usBankAccountAchPayments,
+            this.usBankTransferPayments,
             this.zipPayments);
       }
 
@@ -1858,6 +1903,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The gb_bank_transfer_payments capability. */
+      public Builder setGbBankTransferPayments(
+          AccountUpdateParams.Capabilities.GbBankTransferPayments gbBankTransferPayments) {
+        this.gbBankTransferPayments = gbBankTransferPayments;
+        return this;
+      }
+
       /** The giropay_payments capability. */
       public Builder setGiropayPayments(
           AccountUpdateParams.Capabilities.GiropayPayments giropayPayments) {
@@ -1892,6 +1944,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The jp_bank_transfer_payments capability. */
+      public Builder setJpBankTransferPayments(
+          AccountUpdateParams.Capabilities.JpBankTransferPayments jpBankTransferPayments) {
+        this.jpBankTransferPayments = jpBankTransferPayments;
+        return this;
+      }
+
       /** The klarna_payments capability. */
       public Builder setKlarnaPayments(
           AccountUpdateParams.Capabilities.KlarnaPayments klarnaPayments) {
@@ -1923,6 +1982,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setMobilepayPayments(
           AccountUpdateParams.Capabilities.MobilepayPayments mobilepayPayments) {
         this.mobilepayPayments = mobilepayPayments;
+        return this;
+      }
+
+      /** The mx_bank_transfer_payments capability. */
+      public Builder setMxBankTransferPayments(
+          AccountUpdateParams.Capabilities.MxBankTransferPayments mxBankTransferPayments) {
+        this.mxBankTransferPayments = mxBankTransferPayments;
         return this;
       }
 
@@ -1977,6 +2043,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setRevolutPayPayments(
           AccountUpdateParams.Capabilities.RevolutPayPayments revolutPayPayments) {
         this.revolutPayPayments = revolutPayPayments;
+        return this;
+      }
+
+      /** The sepa_bank_transfer_payments capability. */
+      public Builder setSepaBankTransferPayments(
+          AccountUpdateParams.Capabilities.SepaBankTransferPayments sepaBankTransferPayments) {
+        this.sepaBankTransferPayments = sepaBankTransferPayments;
         return this;
       }
 
@@ -2038,6 +2111,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setUsBankAccountAchPayments(
           AccountUpdateParams.Capabilities.UsBankAccountAchPayments usBankAccountAchPayments) {
         this.usBankAccountAchPayments = usBankAccountAchPayments;
+        return this;
+      }
+
+      /** The us_bank_transfer_payments capability. */
+      public Builder setUsBankTransferPayments(
+          AccountUpdateParams.Capabilities.UsBankTransferPayments usBankTransferPayments) {
+        this.usBankTransferPayments = usBankTransferPayments;
         return this;
       }
 
@@ -3310,6 +3390,85 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class GbBankTransferPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private GbBankTransferPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.GbBankTransferPayments build() {
+          return new AccountUpdateParams.Capabilities.GbBankTransferPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.GbBankTransferPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.GbBankTransferPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class GiropayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3682,6 +3841,85 @@ public class AccountUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.JcbPayments#extraParams} for the field
          * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class JpBankTransferPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private JpBankTransferPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.JpBankTransferPayments build() {
+          return new AccountUpdateParams.Capabilities.JpBankTransferPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.JpBankTransferPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.JpBankTransferPayments#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -4077,6 +4315,85 @@ public class AccountUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.MobilepayPayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class MxBankTransferPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private MxBankTransferPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.MxBankTransferPayments build() {
+          return new AccountUpdateParams.Capabilities.MxBankTransferPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.MxBankTransferPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.MxBankTransferPayments#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -4708,6 +5025,85 @@ public class AccountUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.RevolutPayPayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class SepaBankTransferPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private SepaBankTransferPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.SepaBankTransferPayments build() {
+          return new AccountUpdateParams.Capabilities.SepaBankTransferPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.SepaBankTransferPayments#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.SepaBankTransferPayments#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -5417,6 +5813,85 @@ public class AccountUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.UsBankAccountAchPayments#extraParams}
          * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class UsBankTransferPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private UsBankTransferPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.UsBankTransferPayments build() {
+          return new AccountUpdateParams.Capabilities.UsBankTransferPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.UsBankTransferPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.UsBankTransferPayments#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
