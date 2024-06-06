@@ -1,5 +1,10 @@
 # Changelog
 
+## 25.11.0 - 2024-06-06
+* [#1817](https://github.com/stripe/stripe-java/pull/1817) Update generated code
+  * Add support for `gb_bank_transfer_payments`, `jp_bank_transfer_payments`, `mx_bank_transfer_payments`, `sepa_bank_transfer_payments`, and `us_bank_transfer_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for new value `swish` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
+
 ## 25.10.0 - 2024-05-30
 * [#1815](https://github.com/stripe/stripe-java/pull/1815) Update generated code
   * Add support for `default_value` on `Checkout.Session.custom_fields[].dropdown`, `Checkout.Session.custom_fields[].numeric`, `Checkout.Session.custom_fields[].text`, `checkout.SessionCreateParams.custom_fields[].dropdown`, `checkout.SessionCreateParams.custom_fields[].numeric`, and `checkout.SessionCreateParams.custom_fields[].text`
