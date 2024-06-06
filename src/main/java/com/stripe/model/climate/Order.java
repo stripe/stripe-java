@@ -176,8 +176,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
-   * reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
+   * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
+   * the reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
    * cancellations. Frontier might cancel reservations if suppliers fail to deliver. If Frontier
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
@@ -187,8 +187,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
-   * reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
+   * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
+   * the reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
    * cancellations. Frontier might cancel reservations if suppliers fail to deliver. If Frontier
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
@@ -198,8 +198,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
-   * reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
+   * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
+   * the reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
    * cancellations. Frontier might cancel reservations if suppliers fail to deliver. If Frontier
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
@@ -209,8 +209,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
-   * reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
+   * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
+   * the reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
    * cancellations. Frontier might cancel reservations if suppliers fail to deliver. If Frontier
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
@@ -225,8 +225,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
-   * reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
+   * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
+   * the reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
    * cancellations. Frontier might cancel reservations if suppliers fail to deliver. If Frontier
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
@@ -236,8 +236,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Cancels a Climate order. You can cancel an order within 30 days of creation. Stripe refunds the
-   * reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
+   * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
+   * the reservation {@code amount_subtotal}, but not the {@code amount_fees} for user-triggered
    * cancellations. Frontier might cancel reservations if suppliers fail to deliver. If Frontier
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.

@@ -242,7 +242,12 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. */
+  /**
+   * The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. You can't confirm or
+   * cancel the PaymentIntent for a Checkout Session. To cancel, <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>
+   * instead.
+   */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -321,7 +326,12 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("saved_payment_method_options")
   SavedPaymentMethodOptions savedPaymentMethodOptions;
 
-  /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
+  /**
+   * The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. You can't confirm or
+   * cancel the SetupIntent for a Checkout Session. To cancel, <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>
+   * instead.
+   */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

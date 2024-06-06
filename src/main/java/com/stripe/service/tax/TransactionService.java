@@ -48,12 +48,18 @@ public final class TransactionService extends ApiService {
             ApiMode.V1);
     return this.request(request, Transaction.class);
   }
-  /** Creates a Tax {@code Transaction} from a calculation. */
+  /**
+   * Creates a Tax Transaction from a calculation, if that calculation hasn’t expired. Calculations
+   * expire after 90 days.
+   */
   public Transaction createFromCalculation(TransactionCreateFromCalculationParams params)
       throws StripeException {
     return createFromCalculation(params, (RequestOptions) null);
   }
-  /** Creates a Tax {@code Transaction} from a calculation. */
+  /**
+   * Creates a Tax Transaction from a calculation, if that calculation hasn’t expired. Calculations
+   * expire after 90 days.
+   */
   public Transaction createFromCalculation(
       TransactionCreateFromCalculationParams params, RequestOptions options)
       throws StripeException {
