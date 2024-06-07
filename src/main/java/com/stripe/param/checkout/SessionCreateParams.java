@@ -12501,10 +12501,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("tax_code")
       String taxCode;
 
-      /**
-       * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
-       * now.
-       */
+      /** The type of calculation to use on the shipping rate. */
       @SerializedName("type")
       Type type;
 
@@ -12665,10 +12662,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
-         * now.
-         */
+        /** The type of calculation to use on the shipping rate. */
         public Builder setType(SessionCreateParams.ShippingOption.ShippingRateData.Type type) {
           this.type = type;
           return this;

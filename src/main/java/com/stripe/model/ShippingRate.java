@@ -99,7 +99,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   ExpandableField<TaxCode> taxCode;
 
   /**
-   * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for now.
+   * The type of calculation to use on the shipping rate.
    *
    * <p>Equal to {@code fixed_amount}.
    */
