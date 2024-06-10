@@ -1302,6 +1302,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("mobilepay_payments")
     MobilepayPayments mobilepayPayments;
 
+    /** The multibanco_payments capability. */
+    @SerializedName("multibanco_payments")
+    MultibancoPayments multibancoPayments;
+
     /** The mx_bank_transfer_payments capability. */
     @SerializedName("mx_bank_transfer_payments")
     MxBankTransferPayments mxBankTransferPayments;
@@ -1400,6 +1404,7 @@ public class AccountCreateParams extends ApiRequestParams {
         LegacyPayments legacyPayments,
         LinkPayments linkPayments,
         MobilepayPayments mobilepayPayments,
+        MultibancoPayments multibancoPayments,
         MxBankTransferPayments mxBankTransferPayments,
         OxxoPayments oxxoPayments,
         P24Payments p24Payments,
@@ -1446,6 +1451,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.legacyPayments = legacyPayments;
       this.linkPayments = linkPayments;
       this.mobilepayPayments = mobilepayPayments;
+      this.multibancoPayments = multibancoPayments;
       this.mxBankTransferPayments = mxBankTransferPayments;
       this.oxxoPayments = oxxoPayments;
       this.p24Payments = p24Payments;
@@ -1528,6 +1534,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private MobilepayPayments mobilepayPayments;
 
+      private MultibancoPayments multibancoPayments;
+
       private MxBankTransferPayments mxBankTransferPayments;
 
       private OxxoPayments oxxoPayments;
@@ -1594,6 +1602,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.legacyPayments,
             this.linkPayments,
             this.mobilepayPayments,
+            this.multibancoPayments,
             this.mxBankTransferPayments,
             this.oxxoPayments,
             this.p24Payments,
@@ -1825,6 +1834,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setMobilepayPayments(
           AccountCreateParams.Capabilities.MobilepayPayments mobilepayPayments) {
         this.mobilepayPayments = mobilepayPayments;
+        return this;
+      }
+
+      /** The multibanco_payments capability. */
+      public Builder setMultibancoPayments(
+          AccountCreateParams.Capabilities.MultibancoPayments multibancoPayments) {
+        this.multibancoPayments = multibancoPayments;
         return this;
       }
 
@@ -4129,6 +4145,85 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.MobilepayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class MultibancoPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private MultibancoPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.MultibancoPayments build() {
+          return new AccountCreateParams.Capabilities.MultibancoPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.MultibancoPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.MultibancoPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

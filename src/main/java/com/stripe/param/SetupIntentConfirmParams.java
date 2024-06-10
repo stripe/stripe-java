@@ -810,6 +810,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Mobilepay mobilepay;
 
     /**
+     * If this is a {@code multibanco} PaymentMethod, this hash contains details about the
+     * Multibanco payment method.
+     */
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
+    /**
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
@@ -942,6 +949,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Link link,
         Map<String, String> metadata,
         Mobilepay mobilepay,
+        Multibanco multibanco,
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
@@ -983,6 +991,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.link = link;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
+      this.multibanco = multibanco;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
@@ -1057,6 +1066,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Mobilepay mobilepay;
 
+      private Multibanco multibanco;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -1116,6 +1127,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.link,
             this.metadata,
             this.mobilepay,
+            this.multibanco,
             this.oxxo,
             this.p24,
             this.paynow,
@@ -1409,6 +1421,16 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setMobilepay(SetupIntentConfirmParams.PaymentMethodData.Mobilepay mobilepay) {
         this.mobilepay = mobilepay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code multibanco} PaymentMethod, this hash contains details about the
+       * Multibanco payment method.
+       */
+      public Builder setMultibanco(
+          SetupIntentConfirmParams.PaymentMethodData.Multibanco multibanco) {
+        this.multibanco = multibanco;
         return this;
       }
 
@@ -3628,6 +3650,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Multibanco {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Multibanco(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Multibanco build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Multibanco(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Multibanco#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Multibanco#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4800,6 +4879,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),
+
+      @SerializedName("multibanco")
+      MULTIBANCO("multibanco"),
 
       @SerializedName("oxxo")
       OXXO("oxxo"),

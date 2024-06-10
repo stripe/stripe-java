@@ -1528,6 +1528,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("konbini_display_details")
     KonbiniDisplayDetails konbiniDisplayDetails;
 
+    @SerializedName("multibanco_display_details")
+    MultibancoDisplayDetails multibancoDisplayDetails;
+
     @SerializedName("oxxo_display_details")
     OxxoDisplayDetails oxxoDisplayDetails;
 
@@ -1994,6 +1997,30 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class MultibancoDisplayDetails extends StripeObject {
+      /** Entity number associated with this Multibanco payment. */
+      @SerializedName("entity")
+      String entity;
+
+      /** The timestamp at which the Multibanco voucher expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * The URL for the hosted Multibanco voucher page, which allows customers to view a Multibanco
+       * voucher.
+       */
+      @SerializedName("hosted_voucher_url")
+      String hostedVoucherUrl;
+
+      /** Reference number associated with this Multibanco payment. */
+      @SerializedName("reference")
+      String reference;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class OxxoDisplayDetails extends StripeObject {
       /** The timestamp after which the OXXO voucher expires. */
       @SerializedName("expires_after")
@@ -2348,6 +2375,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
+
+    @SerializedName("multibanco")
+    Multibanco multibanco;
 
     @SerializedName("oxxo")
     Oxxo oxxo;
@@ -3417,6 +3447,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("capture_method")
       String captureMethod;
 
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *

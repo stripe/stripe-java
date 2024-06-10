@@ -277,6 +277,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
 
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
