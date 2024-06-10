@@ -1110,6 +1110,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String mobilepayPayments;
 
     /**
+     * The status of the Multibanco payments capability of the account, or whether the account can
+     * directly process Multibanco charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("multibanco_payments")
+    String multibancoPayments;
+
+    /**
      * The status of the Mexican customer_balance payments (MXN currency) capability of the account,
      * or whether the account can directly process Mexican customer_balance charges.
      *
