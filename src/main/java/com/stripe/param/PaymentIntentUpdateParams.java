@@ -1016,6 +1016,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Swish swish;
 
     /**
+     * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
+     */
+    @SerializedName("twint")
+    Twint twint;
+
+    /**
      * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
      * the PaymentMethod with a name matching this value. It contains additional information
      * specific to the PaymentMethod type.
@@ -1083,6 +1089,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
+        Twint twint,
         Type type,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
@@ -1125,6 +1132,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
+      this.twint = twint;
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
@@ -1212,6 +1220,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Swish swish;
 
+      private Twint twint;
+
       private Type type;
 
       private UsBankAccount usBankAccount;
@@ -1261,6 +1271,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.swish,
+            this.twint,
             this.type,
             this.usBankAccount,
             this.wechatPay,
@@ -1654,6 +1665,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSwish(PaymentIntentUpdateParams.PaymentMethodData.Swish swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment
+       * method.
+       */
+      public Builder setTwint(PaymentIntentUpdateParams.PaymentMethodData.Twint twint) {
+        this.twint = twint;
         return this;
       }
 
@@ -4746,6 +4766,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Twint {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Twint(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.Twint build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.Twint(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -5159,6 +5236,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("swish")
       SWISH("swish"),
 
+      @SerializedName("twint")
+      TWINT("twint"),
+
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),
 
@@ -5431,6 +5511,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object swish;
 
     /**
+     * If this is a {@code twint} PaymentMethod, this sub-hash contains details about the TWINT
+     * payment method options.
+     */
+    @SerializedName("twint")
+    Object twint;
+
+    /**
      * If this is a {@code us_bank_account} PaymentMethod, this sub-hash contains details about the
      * US bank account payment method options.
      */
@@ -5488,6 +5575,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object sepaDebit,
         Object sofort,
         Object swish,
+        Object twint,
         Object usBankAccount,
         Object wechatPay,
         Object zip) {
@@ -5527,6 +5615,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
+      this.twint = twint;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
       this.zip = zip;
@@ -5609,6 +5698,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Object swish;
 
+      private Object twint;
+
       private Object usBankAccount;
 
       private Object wechatPay;
@@ -5654,6 +5745,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.swish,
+            this.twint,
             this.usBankAccount,
             this.wechatPay,
             this.zip);
@@ -6321,6 +6413,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSwish(EmptyParam swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a {@code twint} PaymentMethod, this sub-hash contains details about the TWINT
+       * payment method options.
+       */
+      public Builder setTwint(PaymentIntentUpdateParams.PaymentMethodOptions.Twint twint) {
+        this.twint = twint;
+        return this;
+      }
+
+      /**
+       * If this is a {@code twint} PaymentMethod, this sub-hash contains details about the TWINT
+       * payment method options.
+       */
+      public Builder setTwint(EmptyParam twint) {
+        this.twint = twint;
         return this;
       }
 
@@ -14877,6 +14987,128 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          */
         public Builder setSetupFutureUsage(
             PaymentIntentUpdateParams.PaymentMethodOptions.Swish.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Twint {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Twint(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodOptions.Twint build() {
+          return new PaymentIntentUpdateParams.PaymentMethodOptions.Twint(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Twint.SetupFutureUsage
                 setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;

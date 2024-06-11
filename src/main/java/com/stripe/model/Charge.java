@@ -1233,6 +1233,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("twint")
+    Twint twint;
+
     /**
      * The type of transaction-specific details of the payment method used in the payment, one of
      * {@code ach_credit_transfer}, {@code ach_debit}, {@code acss_debit}, {@code alipay}, {@code
@@ -3000,6 +3003,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("verified_phone_last4")
       String verifiedPhoneLast4;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {}
 
     @Getter
     @Setter

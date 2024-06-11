@@ -322,6 +322,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("twint")
+    Twint twint;
+
     /**
      * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
      * name matching this value. It contains additional information specific to the PaymentMethod
@@ -334,7 +337,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay},
      * {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix},
      * {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish},
-     * {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1560,6 +1563,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {}
 
     @Getter
     @Setter

@@ -1239,6 +1239,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String treasury;
 
     /**
+     * The status of the TWINT capability of the account, or whether the account can directly
+     * process TWINT charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("twint_payments")
+    String twintPayments;
+
+    /**
      * The status of the US bank account ACH payments capability of the account, or whether the
      * account can directly process US bank account charges.
      *
