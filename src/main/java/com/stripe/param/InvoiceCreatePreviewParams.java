@@ -3595,8 +3595,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       AmendmentStart amendmentStart;
 
       /**
-       * For a point-in-time amendment, this attribute lets you set or update whether the
-       * subscription's billing cycle anchor is reset at the {@code amendment_start} timestamp.
+       * For point-in-time amendments (having no {@code amendment_end}), this attribute lets you set
+       * or remove whether the subscription's billing cycle anchor is reset at the {@code
+       * amendment_start} timestamp.For time-span based amendments (having both {@code
+       * amendment_start} and {@code amendment_end}), the only value valid is {@code automatic},
+       * which removes any previously configured billing cycle anchor resets scheduled to occur
+       * during the window of time spanned by the amendment.
        */
       @SerializedName("billing_cycle_anchor")
       BillingCycleAnchor billingCycleAnchor;
@@ -3746,8 +3750,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * For a point-in-time amendment, this attribute lets you set or update whether the
-         * subscription's billing cycle anchor is reset at the {@code amendment_start} timestamp.
+         * For point-in-time amendments (having no {@code amendment_end}), this attribute lets you
+         * set or remove whether the subscription's billing cycle anchor is reset at the {@code
+         * amendment_start} timestamp.For time-span based amendments (having both {@code
+         * amendment_start} and {@code amendment_end}), the only value valid is {@code automatic},
+         * which removes any previously configured billing cycle anchor resets scheduled to occur
+         * during the window of time spanned by the amendment.
          */
         public Builder setBillingCycleAnchor(
             InvoiceCreatePreviewParams.ScheduleDetails.Amendment.BillingCycleAnchor
