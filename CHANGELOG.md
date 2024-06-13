@@ -1,5 +1,9 @@
 # Changelog
 
+## 25.13.0-beta.1 - 2024-06-13
+* [#1819](https://github.com/stripe/stripe-java/pull/1819) Update generated code for beta
+  * Add support for new value `de_stn` on enums `OrderCreateParams.tax_details.tax_ids[].type` and `OrderUpdateParams.tax_details.tax_ids[].type`
+
 ## 25.12.0 - 2024-06-13
 * [#1818](https://github.com/stripe/stripe-java/pull/1818) Update generated code
   * Add support for `multibanco_payments` and `twint_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
