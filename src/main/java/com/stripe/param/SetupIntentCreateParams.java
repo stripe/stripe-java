@@ -1268,6 +1268,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     Mobilepay mobilepay;
 
     /**
+     * If this is a {@code multibanco} PaymentMethod, this hash contains details about the
+     * Multibanco payment method.
+     */
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
+    /**
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
@@ -1345,6 +1352,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     Swish swish;
 
     /**
+     * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
+     */
+    @SerializedName("twint")
+    Twint twint;
+
+    /**
      * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
      * the PaymentMethod with a name matching this value. It contains additional information
      * specific to the PaymentMethod type.
@@ -1400,6 +1413,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         Link link,
         Map<String, String> metadata,
         Mobilepay mobilepay,
+        Multibanco multibanco,
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
@@ -1411,6 +1425,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
+        Twint twint,
         Type type,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
@@ -1441,6 +1456,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       this.link = link;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
+      this.multibanco = multibanco;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
@@ -1452,6 +1468,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
+      this.twint = twint;
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
@@ -1515,6 +1532,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       private Mobilepay mobilepay;
 
+      private Multibanco multibanco;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -1536,6 +1555,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       private Sofort sofort;
 
       private Swish swish;
+
+      private Twint twint;
 
       private Type type;
 
@@ -1574,6 +1595,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             this.link,
             this.metadata,
             this.mobilepay,
+            this.multibanco,
             this.oxxo,
             this.p24,
             this.paynow,
@@ -1585,6 +1607,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.swish,
+            this.twint,
             this.type,
             this.usBankAccount,
             this.wechatPay,
@@ -1870,6 +1893,16 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code multibanco} PaymentMethod, this hash contains details about the
+       * Multibanco payment method.
+       */
+      public Builder setMultibanco(
+          SetupIntentCreateParams.PaymentMethodData.Multibanco multibanco) {
+        this.multibanco = multibanco;
+        return this;
+      }
+
+      /**
        * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
        * method.
        */
@@ -1967,6 +2000,15 @@ public class SetupIntentCreateParams extends ApiRequestParams {
        */
       public Builder setSwish(SetupIntentCreateParams.PaymentMethodData.Swish swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment
+       * method.
+       */
+      public Builder setTwint(SetupIntentCreateParams.PaymentMethodData.Twint twint) {
+        this.twint = twint;
         return this;
       }
 
@@ -4084,6 +4126,63 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Multibanco {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Multibanco(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentCreateParams.PaymentMethodData.Multibanco build() {
+          return new SetupIntentCreateParams.PaymentMethodData.Multibanco(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Multibanco#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Multibanco#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4895,6 +4994,63 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Twint {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Twint(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentCreateParams.PaymentMethodData.Twint build() {
+          return new SetupIntentCreateParams.PaymentMethodData.Twint(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -5257,6 +5413,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),
 
+      @SerializedName("multibanco")
+      MULTIBANCO("multibanco"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
@@ -5286,6 +5445,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("twint")
+      TWINT("twint"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),

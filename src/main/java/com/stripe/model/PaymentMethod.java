@@ -154,6 +154,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("mobilepay")
   Mobilepay mobilepay;
 
+  @SerializedName("multibanco")
+  Multibanco multibanco;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -199,6 +202,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("swish")
   Swish swish;
 
+  @SerializedName("twint")
+  Twint twint;
+
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
@@ -208,9 +214,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance},
    * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
    * interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay}, {@code
-   * oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix}, {@code promptpay}, {@code
-   * revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code us_bank_account},
-   * {@code wechat_pay}, or {@code zip}.
+   * multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix}, {@code
+   * promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code
+   * twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -1682,6 +1688,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Multibanco extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Oxxo extends StripeObject {}
 
   @Getter
@@ -1859,6 +1870,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Twint extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class UsBankAccount extends StripeObject {
     /**
      * Account holder type: individual or company.
@@ -1992,6 +2008,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(konbini, responseGetter);
     trySetResponseGetter(link, responseGetter);
     trySetResponseGetter(mobilepay, responseGetter);
+    trySetResponseGetter(multibanco, responseGetter);
     trySetResponseGetter(oxxo, responseGetter);
     trySetResponseGetter(p24, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
@@ -2003,6 +2020,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);
+    trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
     trySetResponseGetter(wechatPay, responseGetter);
     trySetResponseGetter(zip, responseGetter);

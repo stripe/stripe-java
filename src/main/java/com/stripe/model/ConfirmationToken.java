@@ -289,6 +289,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
 
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -319,6 +322,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("twint")
+    Twint twint;
+
     /**
      * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
      * name matching this value. It contains additional information specific to the PaymentMethod
@@ -329,9 +335,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * blik}, {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code
      * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
      * {@code interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay},
-     * {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix}, {@code promptpay},
-     * {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code
-     * us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix},
+     * {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish},
+     * {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1396,6 +1402,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {}
 
     @Getter
@@ -1552,6 +1563,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {}
 
     @Getter
     @Setter

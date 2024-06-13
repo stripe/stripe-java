@@ -1212,7 +1212,7 @@ public class Session extends ApiResource implements HasId {
        * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code
        * ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin},
        * {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code
-       * kz_bin}, {@code ng_tin}, {@code om_vat}, or {@code unknown}.
+       * kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -1460,6 +1460,9 @@ public class Session extends ApiResource implements HasId {
 
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
+
+    @SerializedName("multibanco")
+    Multibanco multibanco;
 
     @SerializedName("oxxo")
     Oxxo oxxo;
@@ -2173,6 +2176,31 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *

@@ -306,6 +306,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
 
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
@@ -335,6 +338,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
 
     @SerializedName("swish")
     SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),

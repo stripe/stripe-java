@@ -5650,6 +5650,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
 
+    /** contains details about the Multibanco payment method options. */
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
     /** contains details about the OXXO payment method options. */
     @SerializedName("oxxo")
     Oxxo oxxo;
@@ -5717,6 +5721,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Konbini konbini,
         Link link,
         Mobilepay mobilepay,
+        Multibanco multibanco,
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
@@ -5750,6 +5755,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.konbini = konbini;
       this.link = link;
       this.mobilepay = mobilepay;
+      this.multibanco = multibanco;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
@@ -5812,6 +5818,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Mobilepay mobilepay;
 
+      private Multibanco multibanco;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -5859,6 +5867,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.konbini,
             this.link,
             this.mobilepay,
+            this.multibanco,
             this.oxxo,
             this.p24,
             this.paynow,
@@ -6025,6 +6034,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Mobilepay payment method options. */
       public Builder setMobilepay(SessionCreateParams.PaymentMethodOptions.Mobilepay mobilepay) {
         this.mobilepay = mobilepay;
+        return this;
+      }
+
+      /** contains details about the Multibanco payment method options. */
+      public Builder setMultibanco(SessionCreateParams.PaymentMethodOptions.Multibanco multibanco) {
+        this.multibanco = multibanco;
         return this;
       }
 
@@ -9455,6 +9470,119 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Multibanco {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Multibanco(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Multibanco build() {
+          return new SessionCreateParams.PaymentMethodOptions.Multibanco(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Multibanco#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Multibanco#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Multibanco.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * The number of calendar days before an OXXO voucher expires. For example, if you create an
@@ -12501,10 +12629,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("tax_code")
       String taxCode;
 
-      /**
-       * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
-       * now.
-       */
+      /** The type of calculation to use on the shipping rate. */
       @SerializedName("type")
       Type type;
 
@@ -12665,10 +12790,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
-         * now.
-         */
+        /** The type of calculation to use on the shipping rate. */
         public Builder setType(SessionCreateParams.ShippingOption.ShippingRateData.Type type) {
           this.type = type;
           return this;
@@ -14451,6 +14573,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
 
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
@@ -14480,6 +14605,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("swish")
     SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
