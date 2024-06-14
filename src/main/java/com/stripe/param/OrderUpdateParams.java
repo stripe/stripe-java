@@ -1640,7 +1640,7 @@ public class OrderUpdateParams extends ApiRequestParams {
        * ID of the product this price belongs to.
        *
        * <p>Use this to implement a variable-pricing model in your integration. This is required if
-       * {@code product_data} is not specifed.
+       * {@code product_data} is not specified.
        */
       @SerializedName("product")
       Object product;
@@ -1766,7 +1766,7 @@ public class OrderUpdateParams extends ApiRequestParams {
          * ID of the product this price belongs to.
          *
          * <p>Use this to implement a variable-pricing model in your integration. This is required
-         * if {@code product_data} is not specifed.
+         * if {@code product_data} is not specified.
          */
         public Builder setProduct(String product) {
           this.product = product;
@@ -1777,7 +1777,7 @@ public class OrderUpdateParams extends ApiRequestParams {
          * ID of the product this price belongs to.
          *
          * <p>Use this to implement a variable-pricing model in your integration. This is required
-         * if {@code product_data} is not specifed.
+         * if {@code product_data} is not specified.
          */
         public Builder setProduct(EmptyParam product) {
           this.product = product;
