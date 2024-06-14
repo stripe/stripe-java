@@ -139,18 +139,27 @@ public class Calculation extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems() throws StripeException {
     return listLineItems((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(Map<String, Object> params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
@@ -161,13 +170,19 @@ public class Calculation extends ApiResource implements HasId {
     return getResponseGetter().request(request, CalculationLineItemCollection.class);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(CalculationListLineItemsParams params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(
       CalculationListLineItemsParams params, RequestOptions options) throws StripeException {
     String path =
