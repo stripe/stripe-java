@@ -29,7 +29,7 @@ public class CapabilityUpdateParams extends ApiRequestParams {
    * requested capability becomes active. If the capability has any activation requirements, the
    * response includes them in the {@code requirements} arrays.
    *
-   * <p>If a capability isn't permanent, you can remove it from the account by passing false. Most
+   * <p>If a capability isn't permanent, you can remove it from the account by passing false. Some
    * capabilities are permanent after they've been requested. Attempting to remove a permanent
    * capability returns an error.
    */
@@ -116,7 +116,7 @@ public class CapabilityUpdateParams extends ApiRequestParams {
      * requested capability becomes active. If the capability has any activation requirements, the
      * response includes them in the {@code requirements} arrays.
      *
-     * <p>If a capability isn't permanent, you can remove it from the account by passing false. Most
+     * <p>If a capability isn't permanent, you can remove it from the account by passing false. Some
      * capabilities are permanent after they've been requested. Attempting to remove a permanent
      * capability returns an error.
      */
