@@ -5683,6 +5683,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("link")
     LINK("link"),
 
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
