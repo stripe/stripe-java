@@ -1,5 +1,10 @@
 # Changelog
 
+## 25.13.0 - 2024-06-17
+* [#1823](https://github.com/stripe/stripe-java/pull/1823) Update generated code
+  * Add support for new value `mobilepay` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for `tax_id_collection` on `PaymentLinkUpdateParams`
+
 ## 25.12.0 - 2024-06-13
 * [#1818](https://github.com/stripe/stripe-java/pull/1818) Update generated code
   * Add support for `multibanco_payments` and `twint_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
