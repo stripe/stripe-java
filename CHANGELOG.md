@@ -1,5 +1,10 @@
 # Changelog
 
+## 25.13.0 - 2024-06-17
+* [#1823](https://github.com/stripe/stripe-java/pull/1823) Update generated code
+  * Add support for new value `mobilepay` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for `tax_id_collection` on `PaymentLinkUpdateParams`
+
 ## 25.13.0-beta.1 - 2024-06-13
 * [#1819](https://github.com/stripe/stripe-java/pull/1819) Update generated code for beta
   * Add support for new value `de_stn` on enums `OrderCreateParams.tax_details.tax_ids[].type` and `OrderUpdateParams.tax_details.tax_ids[].type`
