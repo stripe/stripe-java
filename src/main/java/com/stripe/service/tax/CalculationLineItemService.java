@@ -20,21 +20,33 @@ public final class CalculationLineItemService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public StripeCollection<CalculationLineItem> list(
       String calculation, CalculationLineItemListParams params) throws StripeException {
     return list(calculation, params, (RequestOptions) null);
   }
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public StripeCollection<CalculationLineItem> list(String calculation, RequestOptions options)
       throws StripeException {
     return list(calculation, (CalculationLineItemListParams) null, options);
   }
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public StripeCollection<CalculationLineItem> list(String calculation) throws StripeException {
     return list(calculation, (CalculationLineItemListParams) null, (RequestOptions) null);
   }
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public StripeCollection<CalculationLineItem> list(
       String calculation, CalculationLineItemListParams params, RequestOptions options)
       throws StripeException {
