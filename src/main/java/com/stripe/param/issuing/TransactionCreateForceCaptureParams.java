@@ -1794,6 +1794,13 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * The quantity of {@code unit}s of fuel that was dispensed, represented as a decimal string
+       * with at most 12 decimal places.
+       */
+      @SerializedName("quantity_decimal")
+      BigDecimal quantityDecimal;
+
+      /**
        * The type of fuel that was purchased. One of {@code diesel}, {@code unleaded_plus}, {@code
        * unleaded_regular}, {@code unleaded_super}, or {@code other}.
        */
@@ -1801,8 +1808,9 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       Type type;
 
       /**
-       * The units for {@code volume_decimal}. One of {@code liter}, {@code us_gallon}, or {@code
-       * other}.
+       * The units for {@code quantity_decimal}. One of {@code charging_minute}, {@code
+       * imperial_gallon}, {@code kilogram}, {@code kilowatt_hour}, {@code liter}, {@code pound},
+       * {@code us_gallon}, or {@code other}.
        */
       @SerializedName("unit")
       Unit unit;
@@ -1814,24 +1822,17 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       @SerializedName("unit_cost_decimal")
       BigDecimal unitCostDecimal;
 
-      /**
-       * The volume of the fuel that was pumped, represented as a decimal string with at most 12
-       * decimal places.
-       */
-      @SerializedName("volume_decimal")
-      BigDecimal volumeDecimal;
-
       private Fuel(
           Map<String, Object> extraParams,
+          BigDecimal quantityDecimal,
           Type type,
           Unit unit,
-          BigDecimal unitCostDecimal,
-          BigDecimal volumeDecimal) {
+          BigDecimal unitCostDecimal) {
         this.extraParams = extraParams;
+        this.quantityDecimal = quantityDecimal;
         this.type = type;
         this.unit = unit;
         this.unitCostDecimal = unitCostDecimal;
-        this.volumeDecimal = volumeDecimal;
       }
 
       public static Builder builder() {
@@ -1841,18 +1842,18 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private BigDecimal quantityDecimal;
+
         private Type type;
 
         private Unit unit;
 
         private BigDecimal unitCostDecimal;
 
-        private BigDecimal volumeDecimal;
-
         /** Finalize and obtain parameter instance from this builder. */
         public TransactionCreateForceCaptureParams.PurchaseDetails.Fuel build() {
           return new TransactionCreateForceCaptureParams.PurchaseDetails.Fuel(
-              this.extraParams, this.type, this.unit, this.unitCostDecimal, this.volumeDecimal);
+              this.extraParams, this.quantityDecimal, this.type, this.unit, this.unitCostDecimal);
         }
 
         /**
@@ -1884,6 +1885,15 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
         }
 
         /**
+         * The quantity of {@code unit}s of fuel that was dispensed, represented as a decimal string
+         * with at most 12 decimal places.
+         */
+        public Builder setQuantityDecimal(BigDecimal quantityDecimal) {
+          this.quantityDecimal = quantityDecimal;
+          return this;
+        }
+
+        /**
          * The type of fuel that was purchased. One of {@code diesel}, {@code unleaded_plus}, {@code
          * unleaded_regular}, {@code unleaded_super}, or {@code other}.
          */
@@ -1893,8 +1903,9 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
         }
 
         /**
-         * The units for {@code volume_decimal}. One of {@code liter}, {@code us_gallon}, or {@code
-         * other}.
+         * The units for {@code quantity_decimal}. One of {@code charging_minute}, {@code
+         * imperial_gallon}, {@code kilogram}, {@code kilowatt_hour}, {@code liter}, {@code pound},
+         * {@code us_gallon}, or {@code other}.
          */
         public Builder setUnit(TransactionCreateForceCaptureParams.PurchaseDetails.Fuel.Unit unit) {
           this.unit = unit;
@@ -1907,15 +1918,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
          */
         public Builder setUnitCostDecimal(BigDecimal unitCostDecimal) {
           this.unitCostDecimal = unitCostDecimal;
-          return this;
-        }
-
-        /**
-         * The volume of the fuel that was pumped, represented as a decimal string with at most 12
-         * decimal places.
-         */
-        public Builder setVolumeDecimal(BigDecimal volumeDecimal) {
-          this.volumeDecimal = volumeDecimal;
           return this;
         }
       }
@@ -1945,11 +1947,26 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       }
 
       public enum Unit implements ApiRequestParams.EnumParam {
+        @SerializedName("charging_minute")
+        CHARGING_MINUTE("charging_minute"),
+
+        @SerializedName("imperial_gallon")
+        IMPERIAL_GALLON("imperial_gallon"),
+
+        @SerializedName("kilogram")
+        KILOGRAM("kilogram"),
+
+        @SerializedName("kilowatt_hour")
+        KILOWATT_HOUR("kilowatt_hour"),
+
         @SerializedName("liter")
         LITER("liter"),
 
         @SerializedName("other")
         OTHER("other"),
+
+        @SerializedName("pound")
+        POUND("pound"),
 
         @SerializedName("us_gallon")
         US_GALLON("us_gallon");

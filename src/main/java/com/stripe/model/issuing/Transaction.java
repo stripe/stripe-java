@@ -612,6 +612,13 @@ public class Transaction extends ApiResource
     @EqualsAndHashCode(callSuper = false)
     public static class Fuel extends StripeObject {
       /**
+       * The quantity of {@code unit}s of fuel that was dispensed, represented as a decimal string
+       * with at most 12 decimal places.
+       */
+      @SerializedName("quantity_decimal")
+      BigDecimal quantityDecimal;
+
+      /**
        * The type of fuel that was purchased. One of {@code diesel}, {@code unleaded_plus}, {@code
        * unleaded_regular}, {@code unleaded_super}, or {@code other}.
        */
@@ -619,8 +626,9 @@ public class Transaction extends ApiResource
       String type;
 
       /**
-       * The units for {@code volume_decimal}. One of {@code liter}, {@code us_gallon}, or {@code
-       * other}.
+       * The units for {@code quantity_decimal}. One of {@code charging_minute}, {@code
+       * imperial_gallon}, {@code kilogram}, {@code kilowatt_hour}, {@code liter}, {@code pound},
+       * {@code us_gallon}, or {@code other}.
        */
       @SerializedName("unit")
       String unit;
@@ -631,13 +639,6 @@ public class Transaction extends ApiResource
        */
       @SerializedName("unit_cost_decimal")
       BigDecimal unitCostDecimal;
-
-      /**
-       * The volume of the fuel that was pumped, represented as a decimal string with at most 12
-       * decimal places.
-       */
-      @SerializedName("volume_decimal")
-      BigDecimal volumeDecimal;
     }
 
     @Getter
