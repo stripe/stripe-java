@@ -332,7 +332,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("success_url")
   String successUrl;
 
-  /** Controls tax ID collection settings for the session. */
+  /** Controls tax ID collection during checkout. */
   @SerializedName("tax_id_collection")
   TaxIdCollection taxIdCollection;
 
@@ -1082,7 +1082,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Controls tax ID collection settings for the session. */
+    /** Controls tax ID collection during checkout. */
     public Builder setTaxIdCollection(SessionCreateParams.TaxIdCollection taxIdCollection) {
       this.taxIdCollection = taxIdCollection;
       return this;
@@ -14245,7 +14245,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class TaxIdCollection {
-    /** <strong>Required.</strong> Set to true to enable Tax ID collection. */
+    /**
+     * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
+     * false}.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -14277,7 +14280,10 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.TaxIdCollection(this.enabled, this.extraParams);
       }
 
-      /** <strong>Required.</strong> Set to true to enable Tax ID collection. */
+      /**
+       * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
+       * false}.
+       */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
