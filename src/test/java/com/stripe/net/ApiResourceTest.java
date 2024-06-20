@@ -1,16 +1,23 @@
 package com.stripe.net;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.google.gson.JsonIOException;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
+
+import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
+import java.net.URLEncoder;
 import java.util.HashMap;
+
+import com.stripe.model.ExpandableField;
+import com.stripe.model.HasId;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+
+import static com.stripe.net.ApiResource.CHARSET;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mockStatic;
 
 class ApiResourceTest extends BaseStripeTest {
 
@@ -20,6 +27,33 @@ class ApiResourceTest extends BaseStripeTest {
     // legacy Ids allow customer-defined and can have arbitrary names
     assertEquals("Plan+100%24%2Fmonth", ApiResource.urlEncode("Plan 100$/month"));
   }
+
+  @Test
+  public void raulTestUrlEncodeNullReturnsNull() {
+    assertNull(ApiResource.urlEncode(null));
+  }
+
+  @Test
+  public void raulTestUrlEncodeTrowsError() {
+    try (MockedStatic<URLEncoder> mockedStatic = mockStatic(URLEncoder.class)) {
+      mockedStatic.when(() -> URLEncoder.encode("cus_123", CHARSET.name())).thenThrow(UnsupportedEncodingException.class);
+
+      assertThrows(
+        AssertionError.class,
+        () -> {
+          ApiResource.urlEncode("cus_123");
+        });
+    }
+  }
+
+  @Test
+  public void raulTestSetExpandableFieldIdNull() {
+    ExpandableField<HasId> result = ApiResource.setExpandableFieldId("new-id", null);
+
+    assertEquals("new-id", result.getId());
+    assertNull(result.getExpanded());
+  }
+
 
   @Test
   public void testUrlEncodeIdThrowingOnNull() {

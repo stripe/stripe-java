@@ -1,8 +1,8 @@
 package com.stripe.net;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mockStatic;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -10,7 +10,10 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.BaseStripeTest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -29,6 +32,9 @@ import java.util.TreeSet;
 import lombok.Data;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+
+import java.lang.reflect.Method;
 
 public class FormEncoderTest extends BaseStripeTest {
   enum TestEnum {
@@ -67,6 +73,38 @@ public class FormEncoderTest extends BaseStripeTest {
     assertEquals(
         "list[0]=1&list[1]=2&list[2]=3&string=String%21",
         new String(content.byteArrayContent(), StandardCharsets.UTF_8));
+  }
+
+  @Test
+  public void testRaulUrlEncodeNullReturnsNull() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    FormEncoder formEncoder = new FormEncoder();
+
+    Method urlEncode = FormEncoder.class.getDeclaredMethod("urlEncode", String.class);
+
+    urlEncode.setAccessible(true);
+    String result = (String) urlEncode.invoke(formEncoder, (String) null);
+
+    assertNull(result);
+  }
+
+  @Test
+  public void testRaulUrlEncodeTrows() throws NoSuchMethodException {
+    try (MockedStatic<URLEncoder> mockedStatic = mockStatic(URLEncoder.class)) {
+      mockedStatic.when(() -> URLEncoder.encode("foo", StandardCharsets.UTF_8.name())).thenThrow(UnsupportedEncodingException.class);
+
+      FormEncoder formEncoder = new FormEncoder();
+
+      Method urlEncode = FormEncoder.class.getDeclaredMethod("urlEncode", String.class);
+
+      urlEncode.setAccessible(true);
+
+      InvocationTargetException exception = assertThrows(InvocationTargetException.class, () -> {
+        urlEncode.invoke(formEncoder, "foo");
+      });
+
+      Throwable cause = exception.getCause();
+      assertInstanceOf(AssertionError.class, cause) ;
+    }
   }
 
   @Test

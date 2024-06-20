@@ -90,7 +90,7 @@ dependencies {
     implementation group: "com.google.code.gson", name: "gson", version:"2.10.1"
     testImplementation group: "com.google.guava", name: "guava", version:"31.0.1-jre"
     testImplementation group: "com.squareup.okhttp3", name: "mockwebserver", version: "4.9.1"
-    testImplementation group: "org.mockito", name: "mockito-core", version:"4.1.0"
+    testImplementation group: "org.mockito", name: "mockito-inline", version:"4.1.0"
     testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.8.2"
     testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.8.2"
     testRuntimeOnly group: "org.slf4j", name: "slf4j-api", version: "1.7.32"
