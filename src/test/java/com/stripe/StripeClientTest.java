@@ -1,14 +1,13 @@
 package com.stripe;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.*;
 import java.lang.reflect.Type;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StripeClientTest extends BaseStripeTest {
   @Test
@@ -35,5 +34,12 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals(Stripe.CONNECT_API_BASE, options.getConnectBase());
     assertEquals(Stripe.UPLOAD_API_BASE, options.getFilesBase());
     assertEquals(0, options.getMaxNetworkRetries());
+  }
+
+  @Test
+  public void testBuildClientWithNullApiKey() {
+    assertThrowsExactly(IllegalArgumentException.class, () -> {
+      StripeClient.builder().setApiKey(null).buildOptions();
+    });
   }
 }
