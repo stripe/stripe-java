@@ -112,6 +112,7 @@ public class BaseStripeTest {
               version, MOCK_MINIMUM_VERSION));
     }
   }
+  
   /**
    * Activates usage of stripe-mock by overriding the API host and putting a test key into the
    * environment. This is required independent of how stripe-mock is started.
