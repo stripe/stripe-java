@@ -68,6 +68,13 @@ public class BaseStripeTest {
   }
 
   /** Checks that stripe-mock is running and up-to-date. */
+
+  // Our Coverage tests
+  @BeforeAll
+    public static void createCoverageFile() {
+    BranchCoverageUtil.writeDefault();
+  }
+
   @BeforeAll
   public static void checkStripeMock() throws Exception {
     if (StripeMockProcess.start()) {
@@ -105,7 +112,6 @@ public class BaseStripeTest {
               version, MOCK_MINIMUM_VERSION));
     }
   }
-
   /**
    * Activates usage of stripe-mock by overriding the API host and putting a test key into the
    * environment. This is required independent of how stripe-mock is started.
