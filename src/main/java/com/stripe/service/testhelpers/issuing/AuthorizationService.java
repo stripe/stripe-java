@@ -14,6 +14,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.AuthorizationCaptureParams;
 import com.stripe.param.issuing.AuthorizationCreateParams;
 import com.stripe.param.issuing.AuthorizationExpireParams;
+import com.stripe.param.issuing.AuthorizationFinalizeAmountParams;
 import com.stripe.param.issuing.AuthorizationIncrementParams;
 import com.stripe.param.issuing.AuthorizationReverseParams;
 
@@ -92,6 +93,35 @@ public final class AuthorizationService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/authorizations/%s/expire",
+            ApiResource.urlEncodeId(authorization));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Authorization.class);
+  }
+  /**
+   * Finalize the amount on an Authorization prior to capture, when the initial authorization was
+   * for an estimated amount.
+   */
+  public Authorization finalizeAmount(
+      String authorization, AuthorizationFinalizeAmountParams params) throws StripeException {
+    return finalizeAmount(authorization, params, (RequestOptions) null);
+  }
+  /**
+   * Finalize the amount on an Authorization prior to capture, when the initial authorization was
+   * for an estimated amount.
+   */
+  public Authorization finalizeAmount(
+      String authorization, AuthorizationFinalizeAmountParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/issuing/authorizations/%s/finalize_amount",
             ApiResource.urlEncodeId(authorization));
     ApiRequest request =
         new ApiRequest(

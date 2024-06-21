@@ -1334,6 +1334,10 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Fleet-specific information for transactions using Fleet cards. */
+    @SerializedName("fleet")
+    Fleet fleet;
+
     /** Information about the flight that was purchased with this transaction. */
     @SerializedName("flight")
     Flight flight;
@@ -1356,12 +1360,14 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
 
     private PurchaseDetails(
         Map<String, Object> extraParams,
+        Fleet fleet,
         Flight flight,
         Fuel fuel,
         Lodging lodging,
         List<TransactionCreateUnlinkedRefundParams.PurchaseDetails.Receipt> receipt,
         String reference) {
       this.extraParams = extraParams;
+      this.fleet = fleet;
       this.flight = flight;
       this.fuel = fuel;
       this.lodging = lodging;
@@ -1376,6 +1382,8 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private Fleet fleet;
+
       private Flight flight;
 
       private Fuel fuel;
@@ -1389,7 +1397,13 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public TransactionCreateUnlinkedRefundParams.PurchaseDetails build() {
         return new TransactionCreateUnlinkedRefundParams.PurchaseDetails(
-            this.extraParams, this.flight, this.fuel, this.lodging, this.receipt, this.reference);
+            this.extraParams,
+            this.fleet,
+            this.flight,
+            this.fuel,
+            this.lodging,
+            this.receipt,
+            this.reference);
       }
 
       /**
@@ -1417,6 +1431,12 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Fleet-specific information for transactions using Fleet cards. */
+      public Builder setFleet(TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet fleet) {
+        this.fleet = fleet;
         return this;
       }
 
@@ -1472,6 +1492,715 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       public Builder setReference(String reference) {
         this.reference = reference;
         return this;
+      }
+    }
+
+    @Getter
+    public static class Fleet {
+      /**
+       * Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary
+       * depending on the configuration of your physical fleet cards. Typical points of sale support
+       * only numeric entry.
+       */
+      @SerializedName("cardholder_prompt_data")
+      CardholderPromptData cardholderPromptData;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The type of purchase. One of {@code fuel_purchase}, {@code non_fuel_purchase}, or {@code
+       * fuel_and_non_fuel_purchase}.
+       */
+      @SerializedName("purchase_type")
+      PurchaseType purchaseType;
+
+      /**
+       * More information about the total amount. This information is not guaranteed to be accurate
+       * as some merchants may provide unreliable data.
+       */
+      @SerializedName("reported_breakdown")
+      ReportedBreakdown reportedBreakdown;
+
+      /**
+       * The type of fuel service. One of {@code non_fuel_transaction}, {@code full_service}, or
+       * {@code self_service}.
+       */
+      @SerializedName("service_type")
+      ServiceType serviceType;
+
+      private Fleet(
+          CardholderPromptData cardholderPromptData,
+          Map<String, Object> extraParams,
+          PurchaseType purchaseType,
+          ReportedBreakdown reportedBreakdown,
+          ServiceType serviceType) {
+        this.cardholderPromptData = cardholderPromptData;
+        this.extraParams = extraParams;
+        this.purchaseType = purchaseType;
+        this.reportedBreakdown = reportedBreakdown;
+        this.serviceType = serviceType;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CardholderPromptData cardholderPromptData;
+
+        private Map<String, Object> extraParams;
+
+        private PurchaseType purchaseType;
+
+        private ReportedBreakdown reportedBreakdown;
+
+        private ServiceType serviceType;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet build() {
+          return new TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet(
+              this.cardholderPromptData,
+              this.extraParams,
+              this.purchaseType,
+              this.reportedBreakdown,
+              this.serviceType);
+        }
+
+        /**
+         * Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary
+         * depending on the configuration of your physical fleet cards. Typical points of sale
+         * support only numeric entry.
+         */
+        public Builder setCardholderPromptData(
+            TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.CardholderPromptData
+                cardholderPromptData) {
+          this.cardholderPromptData = cardholderPromptData;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The type of purchase. One of {@code fuel_purchase}, {@code non_fuel_purchase}, or {@code
+         * fuel_and_non_fuel_purchase}.
+         */
+        public Builder setPurchaseType(
+            TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.PurchaseType purchaseType) {
+          this.purchaseType = purchaseType;
+          return this;
+        }
+
+        /**
+         * More information about the total amount. This information is not guaranteed to be
+         * accurate as some merchants may provide unreliable data.
+         */
+        public Builder setReportedBreakdown(
+            TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown
+                reportedBreakdown) {
+          this.reportedBreakdown = reportedBreakdown;
+          return this;
+        }
+
+        /**
+         * The type of fuel service. One of {@code non_fuel_transaction}, {@code full_service}, or
+         * {@code self_service}.
+         */
+        public Builder setServiceType(
+            TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ServiceType serviceType) {
+          this.serviceType = serviceType;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class CardholderPromptData {
+        /** Driver ID. */
+        @SerializedName("driver_id")
+        String driverId;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Odometer reading. */
+        @SerializedName("odometer")
+        Long odometer;
+
+        /**
+         * An alphanumeric ID. This field is used when a vehicle ID, driver ID, or generic ID is
+         * entered by the cardholder, but the merchant or card network did not specify the prompt
+         * type.
+         */
+        @SerializedName("unspecified_id")
+        String unspecifiedId;
+
+        /** User ID. */
+        @SerializedName("user_id")
+        String userId;
+
+        /** Vehicle number. */
+        @SerializedName("vehicle_number")
+        String vehicleNumber;
+
+        private CardholderPromptData(
+            String driverId,
+            Map<String, Object> extraParams,
+            Long odometer,
+            String unspecifiedId,
+            String userId,
+            String vehicleNumber) {
+          this.driverId = driverId;
+          this.extraParams = extraParams;
+          this.odometer = odometer;
+          this.unspecifiedId = unspecifiedId;
+          this.userId = userId;
+          this.vehicleNumber = vehicleNumber;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String driverId;
+
+          private Map<String, Object> extraParams;
+
+          private Long odometer;
+
+          private String unspecifiedId;
+
+          private String userId;
+
+          private String vehicleNumber;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.CardholderPromptData
+              build() {
+            return new TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet
+                .CardholderPromptData(
+                this.driverId,
+                this.extraParams,
+                this.odometer,
+                this.unspecifiedId,
+                this.userId,
+                this.vehicleNumber);
+          }
+
+          /** Driver ID. */
+          public Builder setDriverId(String driverId) {
+            this.driverId = driverId;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.CardholderPromptData#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.CardholderPromptData#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Odometer reading. */
+          public Builder setOdometer(Long odometer) {
+            this.odometer = odometer;
+            return this;
+          }
+
+          /**
+           * An alphanumeric ID. This field is used when a vehicle ID, driver ID, or generic ID is
+           * entered by the cardholder, but the merchant or card network did not specify the prompt
+           * type.
+           */
+          public Builder setUnspecifiedId(String unspecifiedId) {
+            this.unspecifiedId = unspecifiedId;
+            return this;
+          }
+
+          /** User ID. */
+          public Builder setUserId(String userId) {
+            this.userId = userId;
+            return this;
+          }
+
+          /** Vehicle number. */
+          public Builder setVehicleNumber(String vehicleNumber) {
+            this.vehicleNumber = vehicleNumber;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class ReportedBreakdown {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Breakdown of fuel portion of the purchase. */
+        @SerializedName("fuel")
+        Fuel fuel;
+
+        /** Breakdown of non-fuel portion of the purchase. */
+        @SerializedName("non_fuel")
+        NonFuel nonFuel;
+
+        /** Information about tax included in this transaction. */
+        @SerializedName("tax")
+        Tax tax;
+
+        private ReportedBreakdown(
+            Map<String, Object> extraParams, Fuel fuel, NonFuel nonFuel, Tax tax) {
+          this.extraParams = extraParams;
+          this.fuel = fuel;
+          this.nonFuel = nonFuel;
+          this.tax = tax;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Fuel fuel;
+
+          private NonFuel nonFuel;
+
+          private Tax tax;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown
+              build() {
+            return new TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet
+                .ReportedBreakdown(this.extraParams, this.fuel, this.nonFuel, this.tax);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Breakdown of fuel portion of the purchase. */
+          public Builder setFuel(
+              TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.Fuel
+                  fuel) {
+            this.fuel = fuel;
+            return this;
+          }
+
+          /** Breakdown of non-fuel portion of the purchase. */
+          public Builder setNonFuel(
+              TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.NonFuel
+                  nonFuel) {
+            this.nonFuel = nonFuel;
+            return this;
+          }
+
+          /** Information about tax included in this transaction. */
+          public Builder setTax(
+              TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.Tax
+                  tax) {
+            this.tax = tax;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class Fuel {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Gross fuel amount that should equal Fuel Volume multipled by Fuel Unit Cost, inclusive
+           * of taxes.
+           */
+          @SerializedName("gross_amount_decimal")
+          BigDecimal grossAmountDecimal;
+
+          private Fuel(Map<String, Object> extraParams, BigDecimal grossAmountDecimal) {
+            this.extraParams = extraParams;
+            this.grossAmountDecimal = grossAmountDecimal;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private BigDecimal grossAmountDecimal;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown
+                    .Fuel
+                build() {
+              return new TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet
+                  .ReportedBreakdown.Fuel(this.extraParams, this.grossAmountDecimal);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.Fuel#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.Fuel#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Gross fuel amount that should equal Fuel Volume multipled by Fuel Unit Cost,
+             * inclusive of taxes.
+             */
+            public Builder setGrossAmountDecimal(BigDecimal grossAmountDecimal) {
+              this.grossAmountDecimal = grossAmountDecimal;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        public static class NonFuel {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
+           */
+          @SerializedName("gross_amount_decimal")
+          BigDecimal grossAmountDecimal;
+
+          private NonFuel(Map<String, Object> extraParams, BigDecimal grossAmountDecimal) {
+            this.extraParams = extraParams;
+            this.grossAmountDecimal = grossAmountDecimal;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private BigDecimal grossAmountDecimal;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown
+                    .NonFuel
+                build() {
+              return new TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet
+                  .ReportedBreakdown.NonFuel(this.extraParams, this.grossAmountDecimal);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.NonFuel#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.NonFuel#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Gross non-fuel amount that should equal the sum of the line items, inclusive of
+             * taxes.
+             */
+            public Builder setGrossAmountDecimal(BigDecimal grossAmountDecimal) {
+              this.grossAmountDecimal = grossAmountDecimal;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        public static class Tax {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Amount of state or provincial Sales Tax included in the transaction amount. Null if not
+           * reported by merchant or not subject to tax.
+           */
+          @SerializedName("local_amount_decimal")
+          BigDecimal localAmountDecimal;
+
+          /**
+           * Amount of national Sales Tax or VAT included in the transaction amount. Null if not
+           * reported by merchant or not subject to tax.
+           */
+          @SerializedName("national_amount_decimal")
+          BigDecimal nationalAmountDecimal;
+
+          private Tax(
+              Map<String, Object> extraParams,
+              BigDecimal localAmountDecimal,
+              BigDecimal nationalAmountDecimal) {
+            this.extraParams = extraParams;
+            this.localAmountDecimal = localAmountDecimal;
+            this.nationalAmountDecimal = nationalAmountDecimal;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private BigDecimal localAmountDecimal;
+
+            private BigDecimal nationalAmountDecimal;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.Tax
+                build() {
+              return new TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet
+                  .ReportedBreakdown.Tax(
+                  this.extraParams, this.localAmountDecimal, this.nationalAmountDecimal);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.Tax#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fleet.ReportedBreakdown.Tax#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Amount of state or provincial Sales Tax included in the transaction amount. Null if
+             * not reported by merchant or not subject to tax.
+             */
+            public Builder setLocalAmountDecimal(BigDecimal localAmountDecimal) {
+              this.localAmountDecimal = localAmountDecimal;
+              return this;
+            }
+
+            /**
+             * Amount of national Sales Tax or VAT included in the transaction amount. Null if not
+             * reported by merchant or not subject to tax.
+             */
+            public Builder setNationalAmountDecimal(BigDecimal nationalAmountDecimal) {
+              this.nationalAmountDecimal = nationalAmountDecimal;
+              return this;
+            }
+          }
+        }
+      }
+
+      public enum PurchaseType implements ApiRequestParams.EnumParam {
+        @SerializedName("fuel_and_non_fuel_purchase")
+        FUEL_AND_NON_FUEL_PURCHASE("fuel_and_non_fuel_purchase"),
+
+        @SerializedName("fuel_purchase")
+        FUEL_PURCHASE("fuel_purchase"),
+
+        @SerializedName("non_fuel_purchase")
+        NON_FUEL_PURCHASE("non_fuel_purchase");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PurchaseType(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum ServiceType implements ApiRequestParams.EnumParam {
+        @SerializedName("full_service")
+        FULL_SERVICE("full_service"),
+
+        @SerializedName("non_fuel_transaction")
+        NON_FUEL_TRANSACTION("non_fuel_transaction"),
+
+        @SerializedName("self_service")
+        SELF_SERVICE("self_service");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        ServiceType(String value) {
+          this.value = value;
+        }
       }
     }
 
@@ -1797,6 +2526,13 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * <a href="https://www.conexxus.org/conexxus-payment-system-product-codes">Conexxus Payment
+       * System Product Code</a> identifying the primary fuel product purchased.
+       */
+      @SerializedName("industry_product_code")
+      String industryProductCode;
+
+      /**
        * The quantity of {@code unit}s of fuel that was dispensed, represented as a decimal string
        * with at most 12 decimal places.
        */
@@ -1827,11 +2563,13 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
 
       private Fuel(
           Map<String, Object> extraParams,
+          String industryProductCode,
           BigDecimal quantityDecimal,
           Type type,
           Unit unit,
           BigDecimal unitCostDecimal) {
         this.extraParams = extraParams;
+        this.industryProductCode = industryProductCode;
         this.quantityDecimal = quantityDecimal;
         this.type = type;
         this.unit = unit;
@@ -1845,6 +2583,8 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private String industryProductCode;
+
         private BigDecimal quantityDecimal;
 
         private Type type;
@@ -1856,7 +2596,12 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fuel build() {
           return new TransactionCreateUnlinkedRefundParams.PurchaseDetails.Fuel(
-              this.extraParams, this.quantityDecimal, this.type, this.unit, this.unitCostDecimal);
+              this.extraParams,
+              this.industryProductCode,
+              this.quantityDecimal,
+              this.type,
+              this.unit,
+              this.unitCostDecimal);
         }
 
         /**
@@ -1884,6 +2629,15 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <a href="https://www.conexxus.org/conexxus-payment-system-product-codes">Conexxus Payment
+         * System Product Code</a> identifying the primary fuel product purchased.
+         */
+        public Builder setIndustryProductCode(String industryProductCode) {
+          this.industryProductCode = industryProductCode;
           return this;
         }
 
