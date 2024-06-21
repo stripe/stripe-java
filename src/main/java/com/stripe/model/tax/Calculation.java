@@ -103,12 +103,12 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("tax_date")
   Long taxDate;
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/calculations";
@@ -118,12 +118,12 @@ public class Calculation extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(CalculationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/calculations";
