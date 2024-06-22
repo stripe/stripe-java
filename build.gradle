@@ -1,3 +1,5 @@
+import java.lang.reflect.Method
+
 buildscript {
     repositories {
         mavenCentral()
@@ -121,6 +123,15 @@ delombok {
 apply from: "deploy.gradle"
 
 test {
+    doFirst {
+        def files = sourceSets.main.runtimeClasspath.files
+        def classLoader = new URLClassLoader((new URL[]{files[0].toURI().toURL()}))
+        def myClass = Class.forName("com.stripe.GlobalSetup", true, classLoader);
+        def myInstance = myClass.newInstance()
+        Method method = myClass.getMethod("setUpBeforeAllTests")
+        method.invoke(myInstance)
+    }
+
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"

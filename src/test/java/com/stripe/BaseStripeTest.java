@@ -69,12 +69,6 @@ public class BaseStripeTest {
 
   /** Checks that stripe-mock is running and up-to-date. */
 
-  // Our Coverage tests
-  @BeforeAll
-  public static void createCoverageFile() {
-    BranchCoverageUtil.writeDefault();
-  }
-
   @BeforeAll
   public static void checkStripeMock() throws Exception {
     if (StripeMockProcess.start()) {
