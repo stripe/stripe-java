@@ -12008,7 +12008,7 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
                                     .Fuel.Unit.LITER)
                             .setUnitCostDecimal(new BigDecimal("3.5"))
-                            .setVolumeDecimal(new BigDecimal("10"))
+                            .setQuantityDecimal(new BigDecimal("10"))
                             .build())
                     .setLodging(
                         com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Lodging
@@ -12077,7 +12077,7 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails
                                     .Fuel.Unit.LITER)
                             .setUnitCostDecimal(new BigDecimal("3.5"))
-                            .setVolumeDecimal(new BigDecimal("10"))
+                            .setQuantityDecimal(new BigDecimal("10"))
                             .build())
                     .setLodging(
                         com.stripe.param.issuing.AuthorizationCaptureParams.PurchaseDetails.Lodging
@@ -12669,7 +12669,7 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.issuing.TransactionCreateForceCaptureParams
                                     .PurchaseDetails.Fuel.Unit.LITER)
                             .setUnitCostDecimal(new BigDecimal("3.5"))
-                            .setVolumeDecimal(new BigDecimal("10"))
+                            .setQuantityDecimal(new BigDecimal("10"))
                             .build())
                     .setLodging(
                         com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
@@ -12754,7 +12754,7 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.issuing.TransactionCreateForceCaptureParams
                                     .PurchaseDetails.Fuel.Unit.LITER)
                             .setUnitCostDecimal(new BigDecimal("3.5"))
-                            .setVolumeDecimal(new BigDecimal("10"))
+                            .setQuantityDecimal(new BigDecimal("10"))
                             .build())
                     .setLodging(
                         com.stripe.param.issuing.TransactionCreateForceCaptureParams.PurchaseDetails
@@ -12837,7 +12837,7 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
                                     .PurchaseDetails.Fuel.Unit.LITER)
                             .setUnitCostDecimal(new BigDecimal("3.5"))
-                            .setVolumeDecimal(new BigDecimal("10"))
+                            .setQuantityDecimal(new BigDecimal("10"))
                             .build())
                     .setLodging(
                         com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
@@ -12923,7 +12923,7 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams
                                     .PurchaseDetails.Fuel.Unit.LITER)
                             .setUnitCostDecimal(new BigDecimal("3.5"))
-                            .setVolumeDecimal(new BigDecimal("10"))
+                            .setQuantityDecimal(new BigDecimal("10"))
                             .build())
                     .setLodging(
                         com.stripe.param.issuing.TransactionCreateUnlinkedRefundParams

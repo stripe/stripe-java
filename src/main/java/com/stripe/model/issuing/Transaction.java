@@ -533,6 +533,10 @@ public class Transaction extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PurchaseDetails extends StripeObject {
+    /** Fleet-specific information for transactions using Fleet cards. */
+    @SerializedName("fleet")
+    Fleet fleet;
+
     /** Information about the flight that was purchased with this transaction. */
     @SerializedName("flight")
     Flight flight;
@@ -552,6 +556,124 @@ public class Transaction extends ApiResource
     /** A merchant-specific order number. */
     @SerializedName("reference")
     String reference;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Fleet extends StripeObject {
+      /** Answers to prompts presented to cardholder at point of sale. */
+      @SerializedName("cardholder_prompt_data")
+      CardholderPromptData cardholderPromptData;
+
+      /**
+       * The type of purchase. One of {@code fuel_purchase}, {@code non_fuel_purchase}, or {@code
+       * fuel_and_non_fuel_purchase}.
+       */
+      @SerializedName("purchase_type")
+      String purchaseType;
+
+      /**
+       * More information about the total amount. This information is not guaranteed to be accurate
+       * as some merchants may provide unreliable data.
+       */
+      @SerializedName("reported_breakdown")
+      ReportedBreakdown reportedBreakdown;
+
+      /**
+       * The type of fuel service. One of {@code non_fuel_transaction}, {@code full_service}, or
+       * {@code self_service}.
+       */
+      @SerializedName("service_type")
+      String serviceType;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CardholderPromptData extends StripeObject {
+        /** Driver ID. */
+        @SerializedName("driver_id")
+        String driverId;
+
+        /** Odometer reading. */
+        @SerializedName("odometer")
+        Long odometer;
+
+        /**
+         * An alphanumeric ID. This field is used when a vehicle ID, driver ID, or generic ID is
+         * entered by the cardholder, but the merchant or card network did not specify the prompt
+         * type.
+         */
+        @SerializedName("unspecified_id")
+        String unspecifiedId;
+
+        /** User ID. */
+        @SerializedName("user_id")
+        String userId;
+
+        /** Vehicle number. */
+        @SerializedName("vehicle_number")
+        String vehicleNumber;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ReportedBreakdown extends StripeObject {
+        /** Breakdown of fuel portion of the purchase. */
+        @SerializedName("fuel")
+        Fuel fuel;
+
+        /** Breakdown of non-fuel portion of the purchase. */
+        @SerializedName("non_fuel")
+        NonFuel nonFuel;
+
+        /** Information about tax included in this transaction. */
+        @SerializedName("tax")
+        Tax tax;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Fuel extends StripeObject {
+          /**
+           * Gross fuel amount that should equal Fuel Volume multipled by Fuel Unit Cost, inclusive
+           * of taxes.
+           */
+          @SerializedName("gross_amount_decimal")
+          BigDecimal grossAmountDecimal;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class NonFuel extends StripeObject {
+          /**
+           * Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
+           */
+          @SerializedName("gross_amount_decimal")
+          BigDecimal grossAmountDecimal;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Tax extends StripeObject {
+          /**
+           * Amount of state or provincial Sales Tax included in the transaction amount. Null if not
+           * reported by merchant or not subject to tax.
+           */
+          @SerializedName("local_amount_decimal")
+          BigDecimal localAmountDecimal;
+
+          /**
+           * Amount of national Sales Tax or VAT included in the transaction amount. Null if not
+           * reported by merchant or not subject to tax.
+           */
+          @SerializedName("national_amount_decimal")
+          BigDecimal nationalAmountDecimal;
+        }
+      }
+    }
 
     @Getter
     @Setter
@@ -612,6 +734,20 @@ public class Transaction extends ApiResource
     @EqualsAndHashCode(callSuper = false)
     public static class Fuel extends StripeObject {
       /**
+       * <a href="https://www.conexxus.org/conexxus-payment-system-product-codes">Conexxus Payment
+       * System Product Code</a> identifying the primary fuel product purchased.
+       */
+      @SerializedName("industry_product_code")
+      String industryProductCode;
+
+      /**
+       * The quantity of {@code unit}s of fuel that was dispensed, represented as a decimal string
+       * with at most 12 decimal places.
+       */
+      @SerializedName("quantity_decimal")
+      BigDecimal quantityDecimal;
+
+      /**
        * The type of fuel that was purchased. One of {@code diesel}, {@code unleaded_plus}, {@code
        * unleaded_regular}, {@code unleaded_super}, or {@code other}.
        */
@@ -619,8 +755,9 @@ public class Transaction extends ApiResource
       String type;
 
       /**
-       * The units for {@code volume_decimal}. One of {@code liter}, {@code us_gallon}, or {@code
-       * other}.
+       * The units for {@code quantity_decimal}. One of {@code charging_minute}, {@code
+       * imperial_gallon}, {@code kilogram}, {@code kilowatt_hour}, {@code liter}, {@code pound},
+       * {@code us_gallon}, or {@code other}.
        */
       @SerializedName("unit")
       String unit;
@@ -631,13 +768,6 @@ public class Transaction extends ApiResource
        */
       @SerializedName("unit_cost_decimal")
       BigDecimal unitCostDecimal;
-
-      /**
-       * The volume of the fuel that was pumped, represented as a decimal string with at most 12
-       * decimal places.
-       */
-      @SerializedName("volume_decimal")
-      BigDecimal volumeDecimal;
     }
 
     @Getter
