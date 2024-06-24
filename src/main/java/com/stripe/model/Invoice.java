@@ -2127,7 +2127,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      * sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat},
      * {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code
      * tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin},
-     * {@code om_vat}, {@code de_stn}, or {@code unknown}.
+     * {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;

@@ -5424,7 +5424,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   @Getter
   public static class TaxIdCollection {
-    /** <strong>Required.</strong> Set to {@code true} to enable tax ID collection. */
+    /**
+     * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
+     * false}.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -5456,7 +5459,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         return new PaymentLinkCreateParams.TaxIdCollection(this.enabled, this.extraParams);
       }
 
-      /** <strong>Required.</strong> Set to {@code true} to enable tax ID collection. */
+      /**
+       * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
+       * false}.
+       */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;

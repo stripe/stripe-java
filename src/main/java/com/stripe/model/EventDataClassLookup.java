@@ -58,7 +58,6 @@ final class EventDataClassLookup {
     classLookup.put("payout", Payout.class);
     classLookup.put("person", Person.class);
     classLookup.put("plan", Plan.class);
-    classLookup.put("platform_tax_fee", PlatformTaxFee.class);
     classLookup.put("price", Price.class);
     classLookup.put("product", Product.class);
     classLookup.put("product_feature", ProductFeature.class);
