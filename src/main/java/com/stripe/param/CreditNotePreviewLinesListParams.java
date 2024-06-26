@@ -36,6 +36,13 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   Long effectiveAt;
 
   /**
+   * Type of email to send to the customer, one of {@code credit_note} or {@code none} and the
+   * default is {@code credit_note}.
+   */
+  @SerializedName("email_type")
+  EmailType emailType;
+
+  /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
    * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
@@ -134,6 +141,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       Long amount,
       Long creditAmount,
       Long effectiveAt,
+      EmailType emailType,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -152,6 +160,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
     this.amount = amount;
     this.creditAmount = creditAmount;
     this.effectiveAt = effectiveAt;
+    this.emailType = emailType;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -179,6 +188,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
     private Long creditAmount;
 
     private Long effectiveAt;
+
+    private EmailType emailType;
 
     private String endingBefore;
 
@@ -216,6 +227,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
           this.amount,
           this.creditAmount,
           this.effectiveAt,
+          this.emailType,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -258,6 +270,15 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
      */
     public Builder setEffectiveAt(Long effectiveAt) {
       this.effectiveAt = effectiveAt;
+      return this;
+    }
+
+    /**
+     * Type of email to send to the customer, one of {@code credit_note} or {@code none} and the
+     * default is {@code credit_note}.
+     */
+    public Builder setEmailType(CreditNotePreviewLinesListParams.EmailType emailType) {
+      this.emailType = emailType;
       return this;
     }
 
@@ -1076,6 +1097,21 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
         this.shippingRate = shippingRate;
         return this;
       }
+    }
+  }
+
+  public enum EmailType implements ApiRequestParams.EnumParam {
+    @SerializedName("credit_note")
+    CREDIT_NOTE("credit_note"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    EmailType(String value) {
+      this.value = value;
     }
   }
 
