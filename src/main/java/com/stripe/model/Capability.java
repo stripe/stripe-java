@@ -168,8 +168,8 @@ public class Capability extends ApiResource implements HasId {
     List<String> currentlyDue;
 
     /**
-     * This is typed as a string for consistency with {@code requirements.disabled_reason}, but it
-     * safe to assume {@code future_requirements.disabled_reason} is empty because fields in {@code
+     * This is typed as an enum for consistency with {@code requirements.disabled_reason}, but it
+     * safe to assume {@code future_requirements.disabled_reason} is null because fields in {@code
      * future_requirements} will never disable the account.
      *
      * <p>One of {@code other}, {@code paused.inactivity}, {@code pending.onboarding}, {@code

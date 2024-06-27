@@ -67,6 +67,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("offline")
   Offline offline;
 
+  @SerializedName("reboot_window")
+  RebootWindow rebootWindow;
+
   @SerializedName("stripe_s700")
   StripeS700 stripeS700;
 
@@ -293,6 +296,22 @@ public class Configuration extends ApiResource implements HasId {
      */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RebootWindow extends StripeObject {
+    /**
+     * Integer between 0 to 23 that represents the end hour of the reboot time window. The value
+     * must be different than the start_hour.
+     */
+    @SerializedName("end_hour")
+    Long endHour;
+
+    /** Integer between 0 to 23 that represents the start hour of the reboot time window. */
+    @SerializedName("start_hour")
+    Long startHour;
   }
 
   @Getter
@@ -685,6 +704,7 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
     trySetResponseGetter(offline, responseGetter);
+    trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
