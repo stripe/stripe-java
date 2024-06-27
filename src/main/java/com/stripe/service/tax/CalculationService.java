@@ -18,11 +18,11 @@ public final class CalculationService extends ApiService {
     super(responseGetter);
   }
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public Calculation create(CalculationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/calculations";

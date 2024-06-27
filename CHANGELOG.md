@@ -1,5 +1,43 @@
 # Changelog
 
+## 26.1.0 - 2024-06-27
+* [#1829](https://github.com/stripe/stripe-java/pull/1829) Update generated code
+  * Add support for `filters` on `Checkout.Session.payment_method_options.us_bank_account.financial_connections`, `Invoice.payment_settings.payment_method_options.us_bank_account.financial_connections`, `InvoiceCreateParams.payment_settings.payment_method_options.us_bank_account.financial_connections`, `InvoiceUpdateParams.payment_settings.payment_method_options.us_bank_account.financial_connections`, `PaymentIntent.payment_method_options.us_bank_account.financial_connections`, `PaymentIntentConfirmParams.payment_method_options.us_bank_account.financial_connections`, `PaymentIntentCreateParams.payment_method_options.us_bank_account.financial_connections`, `PaymentIntentUpdateParams.payment_method_options.us_bank_account.financial_connections`, `SetupIntent.payment_method_options.us_bank_account.financial_connections`, `SetupIntentConfirmParams.payment_method_options.us_bank_account.financial_connections`, `SetupIntentCreateParams.payment_method_options.us_bank_account.financial_connections`, `SetupIntentUpdateParams.payment_method_options.us_bank_account.financial_connections`, `Subscription.payment_settings.payment_method_options.us_bank_account.financial_connections`, `SubscriptionCreateParams.payment_settings.payment_method_options.us_bank_account.financial_connections`, and `SubscriptionUpdateParams.payment_settings.payment_method_options.us_bank_account.financial_connections`
+  * Add support for `email_type` on `CreditNoteCreateParams`, `CreditNotePreviewLinesParams`, and `CreditNotePreviewParams`
+  * Add support for `account_subcategories` on `FinancialConnections.Session.filters` and `financialconnections.SessionCreateParams.filters`
+  * Add support for new values `multibanco`, `twint`, and `zip` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for `reboot_window` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
+
+## 26.0.0 - 2024-06-24
+* [#1825](https://github.com/stripe/stripe-java/pull/1825)
+
+  This release changes the pinned API version to 2024-06-20. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-06-20) and carefully review the API changes before upgrading.
+
+  ### ⚠️ Breaking changes
+
+    * Remove the unused resource `PlatformTaxFee`
+    * Rename `volume_decimal` to `quantity_decimal` on
+       * `Issuing.Transaction.purchase_details.fuel`,
+       * `issuing.AuthorizationCaptureParams.purchase_details.fuel`,
+       *  `issuing.TransactionCreateForceCaptureParams.purchase_details.fuel`, and
+       *  `issuing.TransactionCreateUnlinkedRefundParams.purchase_details.fuel`
+
+  ### Additions
+
+  * Add support for `finalize_amount` test helper method on resource `Issuing.Authorization`
+  * Add support for new values `platform_disabled`, `paused.inactivity` and `other` on enums `Capability.Requirements.disabledReason` and `Capability.FutureRequirements.disabledReason`
+  * Add support for new value `ch_uid` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceCreatePreviewParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `TaxIdCreateParams.type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for `fleet` on `Issuing.Authorization`, `Issuing.Transaction.purchase_details`, `issuing.AuthorizationCaptureParams.purchase_details`, `issuing.AuthorizationCreateParams`, `issuing.TransactionCreateForceCaptureParams.purchase_details`, and `issuing.TransactionCreateUnlinkedRefundParams.purchase_details`
+  * Add support for `fuel` on `Issuing.Authorization` and `issuing.AuthorizationCreateParams`
+  * Add support for `industry_product_code` and `quantity_decimal` on `Issuing.Transaction.purchase_details.fuel`, `issuing.AuthorizationCaptureParams.purchase_details.fuel`, `issuing.TransactionCreateForceCaptureParams.purchase_details.fuel`, and `issuing.TransactionCreateUnlinkedRefundParams.purchase_details.fuel`
+  * Add support for new values `charging_minute`, `imperial_gallon`, `kilogram`, `kilowatt_hour`, and `pound` on enums `issuing.AuthorizationCaptureParams.purchase_details.fuel.unit`, `issuing.TransactionCreateForceCaptureParams.purchase_details.fuel.unit`, and `issuing.TransactionCreateUnlinkedRefundParams.purchase_details.fuel.unit`
+  * Add support for new value `2024-06-20` on enum `WebhookEndpointCreateParams.api_version`
+
+## 25.13.0 - 2024-06-17
+* [#1823](https://github.com/stripe/stripe-java/pull/1823) Update generated code
+  * Add support for new value `mobilepay` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for `tax_id_collection` on `PaymentLinkUpdateParams`
+
 ## 25.13.0-beta.1 - 2024-06-13
 * [#1819](https://github.com/stripe/stripe-java/pull/1819) Update generated code for beta
   * Add support for new value `de_stn` on enums `OrderCreateParams.tax_details.tax_ids[].type` and `OrderUpdateParams.tax_details.tax_ids[].type`

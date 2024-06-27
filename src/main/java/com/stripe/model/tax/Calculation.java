@@ -103,12 +103,12 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("tax_date")
   Long taxDate;
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/calculations";
@@ -118,12 +118,12 @@ public class Calculation extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(CalculationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Calculates tax based on input and returns a Tax {@code Calculation} object. */
+  /** Calculates tax based on the input and returns a Tax {@code Calculation} object. */
   public static Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/calculations";
@@ -139,18 +139,27 @@ public class Calculation extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems() throws StripeException {
     return listLineItems((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(Map<String, Object> params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
@@ -161,13 +170,19 @@ public class Calculation extends ApiResource implements HasId {
     return getResponseGetter().request(request, CalculationLineItemCollection.class);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(CalculationListLineItemsParams params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
-  /** Retrieves the line items of a persisted tax calculation as a collection. */
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
   public CalculationLineItemCollection listLineItems(
       CalculationListLineItemsParams params, RequestOptions options) throws StripeException {
     String path =
@@ -269,7 +284,8 @@ public class Calculation extends ApiResource implements HasId {
        * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code
        * ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin},
        * {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code
-       * kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, or {@code unknown}.
+       * kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code
+       * unknown}.
        */
       @SerializedName("type")
       String type;

@@ -212,15 +212,6 @@ public class CustomerSession extends ApiResource {
         String paymentMethodSave;
 
         /**
-         * Controls whether the Payment Element displays a checkbox offering to set a saved payment
-         * method as the default.
-         *
-         * <p>One of {@code disabled}, or {@code enabled}.
-         */
-        @SerializedName("payment_method_set_as_default")
-        String paymentMethodSetAsDefault;
-
-        /**
          * Controls whether the Payment Element displays the option to update a saved payment
          * method.
          *

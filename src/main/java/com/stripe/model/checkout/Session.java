@@ -1212,7 +1212,8 @@ public class Session extends ApiResource implements HasId {
        * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code
        * ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin},
        * {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code
-       * kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, or {@code unknown}.
+       * kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code
+       * unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2494,6 +2495,9 @@ public class Session extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections extends StripeObject {
+        @SerializedName("filters")
+        Filters filters;
+
         @SerializedName("manual_entry")
         ManualEntry manualEntry;
 
@@ -2514,6 +2518,18 @@ public class Session extends ApiResource implements HasId {
          */
         @SerializedName("return_url")
         String returnUrl;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Filters extends StripeObject {
+          /**
+           * The account subcategories to use to filter for possible accounts to link. Valid
+           * subcategories are {@code checking} and {@code savings}.
+           */
+          @SerializedName("account_subcategories")
+          List<String> accountSubcategories;
+        }
 
         @Getter
         @Setter

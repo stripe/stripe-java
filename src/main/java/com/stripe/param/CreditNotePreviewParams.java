@@ -35,6 +35,13 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   @SerializedName("effective_at")
   Long effectiveAt;
 
+  /**
+   * Type of email to send to the customer, one of {@code credit_note} or {@code none} and the
+   * default is {@code credit_note}.
+   */
+  @SerializedName("email_type")
+  EmailType emailType;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -109,6 +116,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       Long amount,
       Long creditAmount,
       Long effectiveAt,
+      EmailType emailType,
       List<String> expand,
       Map<String, Object> extraParams,
       String invoice,
@@ -124,6 +132,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     this.amount = amount;
     this.creditAmount = creditAmount;
     this.effectiveAt = effectiveAt;
+    this.emailType = emailType;
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoice = invoice;
@@ -148,6 +157,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     private Long creditAmount;
 
     private Long effectiveAt;
+
+    private EmailType emailType;
 
     private List<String> expand;
 
@@ -179,6 +190,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
           this.amount,
           this.creditAmount,
           this.effectiveAt,
+          this.emailType,
           this.expand,
           this.extraParams,
           this.invoice,
@@ -218,6 +230,15 @@ public class CreditNotePreviewParams extends ApiRequestParams {
      */
     public Builder setEffectiveAt(Long effectiveAt) {
       this.effectiveAt = effectiveAt;
+      return this;
+    }
+
+    /**
+     * Type of email to send to the customer, one of {@code credit_note} or {@code none} and the
+     * default is {@code credit_note}.
+     */
+    public Builder setEmailType(CreditNotePreviewParams.EmailType emailType) {
+      this.emailType = emailType;
       return this;
     }
 
@@ -1000,6 +1021,21 @@ public class CreditNotePreviewParams extends ApiRequestParams {
         this.shippingRate = shippingRate;
         return this;
       }
+    }
+  }
+
+  public enum EmailType implements ApiRequestParams.EnumParam {
+    @SerializedName("credit_note")
+    CREDIT_NOTE("credit_note"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    EmailType(String value) {
+      this.value = value;
     }
   }
 

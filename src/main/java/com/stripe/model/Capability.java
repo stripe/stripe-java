@@ -168,9 +168,14 @@ public class Capability extends ApiResource implements HasId {
     List<String> currentlyDue;
 
     /**
-     * This is typed as a string for consistency with {@code requirements.disabled_reason}, but it
-     * safe to assume {@code future_requirements.disabled_reason} is empty because fields in {@code
+     * This is typed as an enum for consistency with {@code requirements.disabled_reason}, but it
+     * safe to assume {@code future_requirements.disabled_reason} is null because fields in {@code
      * future_requirements} will never disable the account.
+     *
+     * <p>One of {@code other}, {@code paused.inactivity}, {@code pending.onboarding}, {@code
+     * pending.review}, {@code platform_disabled}, {@code platform_paused}, {@code
+     * rejected.inactivity}, {@code rejected.other}, {@code rejected.unsupported_business}, or
+     * {@code requirements.fields_needed}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
@@ -333,22 +338,14 @@ public class Capability extends ApiResource implements HasId {
     List<String> currentlyDue;
 
     /**
-     * If the capability is disabled, this string describes why. <a
+     * Description of why the capability is disabled. <a
      * href="https://stripe.com/docs/connect/handling-api-verification">Learn more about handling
-     * verification issues</a>. Can be {@code requirements.fields_needed}, {@code
-     * pending.onboarding}, {@code pending.review}, {@code rejected.other}, {@code platform_paused},
-     * {@code rejected.inactivty}, or {@code rejected.unsupported_business}.
+     * verification issues</a>.
      *
-     * <p>{@code rejected.unsupported_business} means that the account's business is not supported
-     * by the capability. For example, payment methods may restrict the businesses they support in
-     * their terms of service, such as in <a
-     * href="https://stripe.com/afterpay-clearpay/legal#restricted-businesses">Afterpay Clearpay's
-     * terms of service</a>.
-     *
-     * <p>{@code rejected.inactivity} means that the capability has been paused for inactivity. This
-     * disabled reason currently only applies to the Issuing capability. See <a
-     * href="https://support.stripe.com/questions/issuing-managing-inactive-connect-accounts">Issuing:
-     * Managing Inactive Connects</a> for more details.
+     * <p>One of {@code other}, {@code paused.inactivity}, {@code pending.onboarding}, {@code
+     * pending.review}, {@code platform_disabled}, {@code platform_paused}, {@code
+     * rejected.inactivity}, {@code rejected.other}, {@code rejected.unsupported_business}, or
+     * {@code requirements.fields_needed}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;

@@ -1094,7 +1094,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
      * sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat},
      * {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code
      * tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin},
-     * {@code om_vat}, {@code de_stn}, or {@code unknown}.
+     * {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -1403,6 +1403,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class FinancialConnections extends StripeObject {
+          @SerializedName("filters")
+          Filters filters;
+
           /**
            * The list of permissions to request. The {@code payment_method} permission must be
            * included.
@@ -1413,6 +1416,18 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
           /** Data features requested to be retrieved upon account creation. */
           @SerializedName("prefetch")
           List<String> prefetch;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Filters extends StripeObject {
+            /**
+             * The account subcategories to use to filter for possible accounts to link. Valid
+             * subcategories are {@code checking} and {@code savings}.
+             */
+            @SerializedName("account_subcategories")
+            List<String> accountSubcategories;
+          }
         }
       }
     }

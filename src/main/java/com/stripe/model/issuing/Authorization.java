@@ -20,11 +20,13 @@ import com.stripe.param.issuing.AuthorizationCaptureParams;
 import com.stripe.param.issuing.AuthorizationCreateParams;
 import com.stripe.param.issuing.AuthorizationDeclineParams;
 import com.stripe.param.issuing.AuthorizationExpireParams;
+import com.stripe.param.issuing.AuthorizationFinalizeAmountParams;
 import com.stripe.param.issuing.AuthorizationIncrementParams;
 import com.stripe.param.issuing.AuthorizationListParams;
 import com.stripe.param.issuing.AuthorizationRetrieveParams;
 import com.stripe.param.issuing.AuthorizationReverseParams;
 import com.stripe.param.issuing.AuthorizationUpdateParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -103,6 +105,17 @@ public class Authorization extends ApiResource
    */
   @SerializedName("currency")
   String currency;
+
+  /** Fleet-specific information for authorizations using Fleet cards. */
+  @SerializedName("fleet")
+  Fleet fleet;
+
+  /**
+   * Information about fuel that was purchased with this transaction. Typically this information is
+   * received from the merchant after the authorization has been approved and the fuel dispensed.
+   */
+  @SerializedName("fuel")
+  Fuel fuel;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -609,6 +622,184 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Fleet extends StripeObject {
+    /**
+     * Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary
+     * depending on the configuration of your physical fleet cards. Typical points of sale support
+     * only numeric entry.
+     */
+    @SerializedName("cardholder_prompt_data")
+    CardholderPromptData cardholderPromptData;
+
+    /**
+     * The type of purchase.
+     *
+     * <p>One of {@code fuel_and_non_fuel_purchase}, {@code fuel_purchase}, or {@code
+     * non_fuel_purchase}.
+     */
+    @SerializedName("purchase_type")
+    String purchaseType;
+
+    /**
+     * More information about the total amount. Typically this information is received from the
+     * merchant after the authorization has been approved and the fuel dispensed. This information
+     * is not guaranteed to be accurate as some merchants may provide unreliable data.
+     */
+    @SerializedName("reported_breakdown")
+    ReportedBreakdown reportedBreakdown;
+
+    /**
+     * The type of fuel service.
+     *
+     * <p>One of {@code full_service}, {@code non_fuel_transaction}, or {@code self_service}.
+     */
+    @SerializedName("service_type")
+    String serviceType;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardholderPromptData extends StripeObject {
+      /**
+       * [Deprecated] An alphanumeric ID, though typical point of sales only support numeric entry.
+       * The card program can be configured to prompt for a vehicle ID, driver ID, or generic ID.
+       */
+      @SerializedName("alphanumeric_id")
+      @Deprecated
+      String alphanumericId;
+
+      /** Driver ID. */
+      @SerializedName("driver_id")
+      String driverId;
+
+      /** Odometer reading. */
+      @SerializedName("odometer")
+      Long odometer;
+
+      /**
+       * An alphanumeric ID. This field is used when a vehicle ID, driver ID, or generic ID is
+       * entered by the cardholder, but the merchant or card network did not specify the prompt
+       * type.
+       */
+      @SerializedName("unspecified_id")
+      String unspecifiedId;
+
+      /** User ID. */
+      @SerializedName("user_id")
+      String userId;
+
+      /** Vehicle number. */
+      @SerializedName("vehicle_number")
+      String vehicleNumber;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ReportedBreakdown extends StripeObject {
+      /** Breakdown of fuel portion of the purchase. */
+      @SerializedName("fuel")
+      Fuel fuel;
+
+      /** Breakdown of non-fuel portion of the purchase. */
+      @SerializedName("non_fuel")
+      NonFuel nonFuel;
+
+      /** Information about tax included in this transaction. */
+      @SerializedName("tax")
+      Tax tax;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fuel extends StripeObject {
+        /**
+         * Gross fuel amount that should equal Fuel Quantity multiplied by Fuel Unit Cost, inclusive
+         * of taxes.
+         */
+        @SerializedName("gross_amount_decimal")
+        BigDecimal grossAmountDecimal;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class NonFuel extends StripeObject {
+        /**
+         * Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
+         */
+        @SerializedName("gross_amount_decimal")
+        BigDecimal grossAmountDecimal;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /**
+         * Amount of state or provincial Sales Tax included in the transaction amount. {@code null}
+         * if not reported by merchant or not subject to tax.
+         */
+        @SerializedName("local_amount_decimal")
+        BigDecimal localAmountDecimal;
+
+        /**
+         * Amount of national Sales Tax or VAT included in the transaction amount. {@code null} if
+         * not reported by merchant or not subject to tax.
+         */
+        @SerializedName("national_amount_decimal")
+        BigDecimal nationalAmountDecimal;
+      }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Fuel extends StripeObject {
+    /**
+     * <a href="https://www.conexxus.org/conexxus-payment-system-product-codes">Conexxus Payment
+     * System Product Code</a> identifying the primary fuel product purchased.
+     */
+    @SerializedName("industry_product_code")
+    String industryProductCode;
+
+    /**
+     * The quantity of {@code unit}s of fuel that was dispensed, represented as a decimal string
+     * with at most 12 decimal places.
+     */
+    @SerializedName("quantity_decimal")
+    BigDecimal quantityDecimal;
+
+    /**
+     * The type of fuel that was purchased.
+     *
+     * <p>One of {@code diesel}, {@code other}, {@code unleaded_plus}, {@code unleaded_regular}, or
+     * {@code unleaded_super}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * The units for {@code quantity_decimal}.
+     *
+     * <p>One of {@code charging_minute}, {@code imperial_gallon}, {@code kilogram}, {@code
+     * kilowatt_hour}, {@code liter}, {@code other}, {@code pound}, or {@code us_gallon}.
+     */
+    @SerializedName("unit")
+    String unit;
+
+    /**
+     * The cost in cents per each unit of fuel, represented as a decimal string with at most 12
+     * decimal places.
+     */
+    @SerializedName("unit_cost_decimal")
+    BigDecimal unitCostDecimal;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class MerchantData extends StripeObject {
     /**
      * A categorization of the seller's type of business. See our <a
@@ -829,9 +1020,11 @@ public class Authorization extends ApiResource
      * When an authorization is approved or declined by you or by Stripe, this field provides
      * additional detail on the reason for the outcome.
      *
-     * <p>One of {@code account_disabled}, {@code card_active}, {@code card_inactive}, {@code
-     * cardholder_inactive}, {@code cardholder_verification_required}, {@code insufficient_funds},
-     * {@code not_allowed}, {@code spending_controls}, {@code suspected_fraud}, {@code
+     * <p>One of {@code account_disabled}, {@code card_active}, {@code card_canceled}, {@code
+     * card_expired}, {@code card_inactive}, {@code cardholder_blocked}, {@code
+     * cardholder_inactive}, {@code cardholder_verification_required}, {@code
+     * insecure_authorization_method}, {@code insufficient_funds}, {@code not_allowed}, {@code
+     * pin_blocked}, {@code spending_controls}, {@code suspected_fraud}, {@code
      * verification_failed}, {@code webhook_approved}, {@code webhook_declined}, {@code
      * webhook_error}, or {@code webhook_timeout}.
      */
@@ -1133,6 +1326,61 @@ public class Authorization extends ApiResource
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
+    /**
+     * Finalize the amount on an Authorization prior to capture, when the initial authorization was
+     * for an estimated amount.
+     */
+    public Authorization finalizeAmount(Map<String, Object> params) throws StripeException {
+      return finalizeAmount(params, (RequestOptions) null);
+    }
+
+    /**
+     * Finalize the amount on an Authorization prior to capture, when the initial authorization was
+     * for an estimated amount.
+     */
+    public Authorization finalizeAmount(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/finalize_amount",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+      return resource.getResponseGetter().request(request, Authorization.class);
+    }
+
+    /**
+     * Finalize the amount on an Authorization prior to capture, when the initial authorization was
+     * for an estimated amount.
+     */
+    public Authorization finalizeAmount(AuthorizationFinalizeAmountParams params)
+        throws StripeException {
+      return finalizeAmount(params, (RequestOptions) null);
+    }
+
+    /**
+     * Finalize the amount on an Authorization prior to capture, when the initial authorization was
+     * for an estimated amount.
+     */
+    public Authorization finalizeAmount(
+        AuthorizationFinalizeAmountParams params, RequestOptions options) throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/finalize_amount",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options,
+              ApiMode.V1);
+      return resource.getResponseGetter().request(request, Authorization.class);
+    }
+
     /** Increment a test-mode Authorization. */
     public Authorization increment(Map<String, Object> params) throws StripeException {
       return increment(params, (RequestOptions) null);
@@ -1234,6 +1482,8 @@ public class Authorization extends ApiResource
     trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
+    trySetResponseGetter(fleet, responseGetter);
+    trySetResponseGetter(fuel, responseGetter);
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);

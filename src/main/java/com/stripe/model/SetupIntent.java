@@ -1318,6 +1318,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections extends StripeObject {
+        @SerializedName("filters")
+        Filters filters;
+
         @SerializedName("manual_entry")
         ManualEntry manualEntry;
 
@@ -1338,6 +1341,18 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
          */
         @SerializedName("return_url")
         String returnUrl;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Filters extends StripeObject {
+          /**
+           * The account subcategories to use to filter for possible accounts to link. Valid
+           * subcategories are {@code checking} and {@code savings}.
+           */
+          @SerializedName("account_subcategories")
+          List<String> accountSubcategories;
+        }
 
         @Getter
         @Setter

@@ -37,6 +37,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("offline")
   Object offline;
 
+  /** Reboot time settings for readers that support customized reboot time configuration. */
+  @SerializedName("reboot_window")
+  Object rebootWindow;
+
   /** An object containing device type specific settings for Stripe S700 readers. */
   @SerializedName("stripe_s700")
   Object stripeS700;
@@ -55,6 +59,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Object name,
       Object offline,
+      Object rebootWindow,
       Object stripeS700,
       Object tipping,
       Object verifoneP400) {
@@ -63,6 +68,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.name = name;
     this.offline = offline;
+    this.rebootWindow = rebootWindow;
     this.stripeS700 = stripeS700;
     this.tipping = tipping;
     this.verifoneP400 = verifoneP400;
@@ -83,6 +89,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     private Object offline;
 
+    private Object rebootWindow;
+
     private Object stripeS700;
 
     private Object tipping;
@@ -97,6 +105,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.name,
           this.offline,
+          this.rebootWindow,
           this.stripeS700,
           this.tipping,
           this.verifoneP400);
@@ -187,6 +196,18 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /** Configurations for collecting transactions offline. */
     public Builder setOffline(EmptyParam offline) {
       this.offline = offline;
+      return this;
+    }
+
+    /** Reboot time settings for readers that support customized reboot time configuration. */
+    public Builder setRebootWindow(ConfigurationUpdateParams.RebootWindow rebootWindow) {
+      this.rebootWindow = rebootWindow;
+      return this;
+    }
+
+    /** Reboot time settings for readers that support customized reboot time configuration. */
+    public Builder setRebootWindow(EmptyParam rebootWindow) {
+      this.rebootWindow = rebootWindow;
       return this;
     }
 
@@ -371,6 +392,100 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class RebootWindow {
+    /**
+     * <strong>Required.</strong> Integer between 0 to 23 that represents the end hour of the reboot
+     * time window. The value must be different than the start_hour.
+     */
+    @SerializedName("end_hour")
+    Long endHour;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> Integer between 0 to 23 that represents the start hour of the
+     * reboot time window.
+     */
+    @SerializedName("start_hour")
+    Long startHour;
+
+    private RebootWindow(Long endHour, Map<String, Object> extraParams, Long startHour) {
+      this.endHour = endHour;
+      this.extraParams = extraParams;
+      this.startHour = startHour;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long endHour;
+
+      private Map<String, Object> extraParams;
+
+      private Long startHour;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationUpdateParams.RebootWindow build() {
+        return new ConfigurationUpdateParams.RebootWindow(
+            this.endHour, this.extraParams, this.startHour);
+      }
+
+      /**
+       * <strong>Required.</strong> Integer between 0 to 23 that represents the end hour of the
+       * reboot time window. The value must be different than the start_hour.
+       */
+      public Builder setEndHour(Long endHour) {
+        this.endHour = endHour;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationUpdateParams.RebootWindow#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationUpdateParams.RebootWindow#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Integer between 0 to 23 that represents the start hour of the
+       * reboot time window.
+       */
+      public Builder setStartHour(Long startHour) {
+        this.startHour = startHour;
         return this;
       }
     }

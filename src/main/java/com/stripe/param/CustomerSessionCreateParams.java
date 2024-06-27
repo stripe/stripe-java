@@ -435,13 +435,6 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         PaymentMethodSave paymentMethodSave;
 
         /**
-         * Controls whether the Payment Element displays a checkbox offering to set a saved payment
-         * method as the default.
-         */
-        @SerializedName("payment_method_set_as_default")
-        PaymentMethodSetAsDefault paymentMethodSetAsDefault;
-
-        /**
          * Controls whether the Payment Element displays the option to update a saved payment
          * method.
          */
@@ -452,12 +445,10 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             PaymentMethodRemove paymentMethodRemove,
             PaymentMethodSave paymentMethodSave,
-            PaymentMethodSetAsDefault paymentMethodSetAsDefault,
             PaymentMethodUpdate paymentMethodUpdate) {
           this.extraParams = extraParams;
           this.paymentMethodRemove = paymentMethodRemove;
           this.paymentMethodSave = paymentMethodSave;
-          this.paymentMethodSetAsDefault = paymentMethodSetAsDefault;
           this.paymentMethodUpdate = paymentMethodUpdate;
         }
 
@@ -472,8 +463,6 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           private PaymentMethodSave paymentMethodSave;
 
-          private PaymentMethodSetAsDefault paymentMethodSetAsDefault;
-
           private PaymentMethodUpdate paymentMethodUpdate;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -482,7 +471,6 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
                 this.extraParams,
                 this.paymentMethodRemove,
                 this.paymentMethodSave,
-                this.paymentMethodSetAsDefault,
                 this.paymentMethodUpdate);
           }
 
@@ -553,18 +541,6 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Controls whether the Payment Element displays a checkbox offering to set a saved
-           * payment method as the default.
-           */
-          public Builder setPaymentMethodSetAsDefault(
-              CustomerSessionCreateParams.Components.PaymentElement.Features
-                      .PaymentMethodSetAsDefault
-                  paymentMethodSetAsDefault) {
-            this.paymentMethodSetAsDefault = paymentMethodSetAsDefault;
-            return this;
-          }
-
-          /**
            * Controls whether the Payment Element displays the option to update a saved payment
            * method.
            */
@@ -602,21 +578,6 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           private final String value;
 
           PaymentMethodSave(String value) {
-            this.value = value;
-          }
-        }
-
-        public enum PaymentMethodSetAsDefault implements ApiRequestParams.EnumParam {
-          @SerializedName("disabled")
-          DISABLED("disabled"),
-
-          @SerializedName("enabled")
-          ENABLED("enabled");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          PaymentMethodSetAsDefault(String value) {
             this.value = value;
           }
         }
