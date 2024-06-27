@@ -20723,6 +20723,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /**
+         * Provide filters for the linked accounts that the customer can select for the payment
+         * method.
+         */
+        @SerializedName("filters")
+        Filters filters;
+
         /** Customize manual entry behavior. */
         @SerializedName("manual_entry")
         ManualEntry manualEntry;
@@ -20754,6 +20761,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private FinancialConnections(
             Map<String, Object> extraParams,
+            Filters filters,
             ManualEntry manualEntry,
             List<
                     PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
@@ -20765,6 +20773,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                 prefetch,
             String returnUrl) {
           this.extraParams = extraParams;
+          this.filters = filters;
           this.manualEntry = manualEntry;
           this.permissions = permissions;
           this.prefetch = prefetch;
@@ -20777,6 +20786,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         public static class Builder {
           private Map<String, Object> extraParams;
+
+          private Filters filters;
 
           private ManualEntry manualEntry;
 
@@ -20798,6 +20809,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             return new PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
                 .FinancialConnections(
                 this.extraParams,
+                this.filters,
                 this.manualEntry,
                 this.permissions,
                 this.prefetch,
@@ -20831,6 +20843,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Provide filters for the linked accounts that the customer can select for the payment
+           * method.
+           */
+          public Builder setFilters(
+              PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Filters
+                  filters) {
+            this.filters = filters;
             return this;
           }
 
@@ -20921,6 +20945,142 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           public Builder setReturnUrl(String returnUrl) {
             this.returnUrl = returnUrl;
             return this;
+          }
+        }
+
+        @Getter
+        public static class Filters {
+          /**
+           * The account subcategories to use to filter for selectable accounts. Valid subcategories
+           * are {@code checking} and {@code savings}.
+           */
+          @SerializedName("account_subcategories")
+          List<
+                  PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Filters.AccountSubcategory>
+              accountSubcategories;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private Filters(
+              List<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Filters.AccountSubcategory>
+                  accountSubcategories,
+              Map<String, Object> extraParams) {
+            this.accountSubcategories = accountSubcategories;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private List<
+                    PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Filters.AccountSubcategory>
+                accountSubcategories;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                    .FinancialConnections.Filters
+                build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                  .FinancialConnections.Filters(this.accountSubcategories, this.extraParams);
+            }
+
+            /**
+             * Add an element to `accountSubcategories` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#accountSubcategories}
+             * for the field documentation.
+             */
+            public Builder addAccountSubcategory(
+                PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                        .Filters.AccountSubcategory
+                    element) {
+              if (this.accountSubcategories == null) {
+                this.accountSubcategories = new ArrayList<>();
+              }
+              this.accountSubcategories.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `accountSubcategories` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#accountSubcategories}
+             * for the field documentation.
+             */
+            public Builder addAllAccountSubcategory(
+                List<
+                        PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Filters.AccountSubcategory>
+                    elements) {
+              if (this.accountSubcategories == null) {
+                this.accountSubcategories = new ArrayList<>();
+              }
+              this.accountSubcategories.addAll(elements);
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          public enum AccountSubcategory implements ApiRequestParams.EnumParam {
+            @SerializedName("checking")
+            CHECKING("checking"),
+
+            @SerializedName("savings")
+            SAVINGS("savings");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            AccountSubcategory(String value) {
+              this.value = value;
+            }
           }
         }
 

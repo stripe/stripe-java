@@ -1780,6 +1780,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class FinancialConnections extends StripeObject {
+          @SerializedName("filters")
+          Filters filters;
+
           /**
            * The list of permissions to request. The {@code payment_method} permission must be
            * included.
@@ -1790,6 +1793,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           /** Data features requested to be retrieved upon account creation. */
           @SerializedName("prefetch")
           List<String> prefetch;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Filters extends StripeObject {
+            /**
+             * The account subcategories to use to filter for possible accounts to link. Valid
+             * subcategories are {@code checking} and {@code savings}.
+             */
+            @SerializedName("account_subcategories")
+            List<String> accountSubcategories;
+          }
         }
       }
     }
