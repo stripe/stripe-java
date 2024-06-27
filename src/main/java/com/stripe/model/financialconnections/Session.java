@@ -238,6 +238,14 @@ public class Session extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Filters extends StripeObject {
+    /**
+     * Restricts the Session to subcategories of accounts that can be linked. Valid subcategories
+     * are: {@code checking}, {@code savings}, {@code mortgage}, {@code line_of_credit}, {@code
+     * credit_card}.
+     */
+    @SerializedName("account_subcategories")
+    List<String> accountSubcategories;
+
     /** List of countries from which to filter accounts. */
     @SerializedName("countries")
     List<String> countries;

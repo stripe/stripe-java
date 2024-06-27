@@ -351,6 +351,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Filters {
+    /**
+     * Restricts the Session to subcategories of accounts that can be linked. Valid subcategories
+     * are: {@code checking}, {@code savings}, {@code mortgage}, {@code line_of_credit}, {@code
+     * credit_card}.
+     */
+    @SerializedName("account_subcategories")
+    List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories;
+
     /** List of countries from which to collect accounts. */
     @SerializedName("countries")
     List<String> countries;
@@ -364,7 +372,11 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private Filters(List<String> countries, Map<String, Object> extraParams) {
+    private Filters(
+        List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories,
+        List<String> countries,
+        Map<String, Object> extraParams) {
+      this.accountSubcategories = accountSubcategories;
       this.countries = countries;
       this.extraParams = extraParams;
     }
@@ -374,13 +386,43 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories;
+
       private List<String> countries;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Filters build() {
-        return new SessionCreateParams.Filters(this.countries, this.extraParams);
+        return new SessionCreateParams.Filters(
+            this.accountSubcategories, this.countries, this.extraParams);
+      }
+
+      /**
+       * Add an element to `accountSubcategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SessionCreateParams.Filters#accountSubcategories} for the field documentation.
+       */
+      public Builder addAccountSubcategory(SessionCreateParams.Filters.AccountSubcategory element) {
+        if (this.accountSubcategories == null) {
+          this.accountSubcategories = new ArrayList<>();
+        }
+        this.accountSubcategories.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `accountSubcategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SessionCreateParams.Filters#accountSubcategories} for the field documentation.
+       */
+      public Builder addAllAccountSubcategory(
+          List<SessionCreateParams.Filters.AccountSubcategory> elements) {
+        if (this.accountSubcategories == null) {
+          this.accountSubcategories = new ArrayList<>();
+        }
+        this.accountSubcategories.addAll(elements);
+        return this;
       }
 
       /**
@@ -433,6 +475,30 @@ public class SessionCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    public enum AccountSubcategory implements ApiRequestParams.EnumParam {
+      @SerializedName("checking")
+      CHECKING("checking"),
+
+      @SerializedName("credit_card")
+      CREDIT_CARD("credit_card"),
+
+      @SerializedName("line_of_credit")
+      LINE_OF_CREDIT("line_of_credit"),
+
+      @SerializedName("mortgage")
+      MORTGAGE("mortgage"),
+
+      @SerializedName("savings")
+      SAVINGS("savings");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AccountSubcategory(String value) {
+        this.value = value;
       }
     }
   }
