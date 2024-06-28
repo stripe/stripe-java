@@ -17,15 +17,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A customer session allows you to grant client access to Stripe's frontend SDKs (like StripeJs)
- * control over a customer.
+ * A Customer Session allows you to grant Stripe's frontend SDKs (like Stripe.js) client-side access
+ * control over a Customer.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CustomerSession extends ApiResource {
   /**
-   * The client secret of this customer session. Used on the client to set up secure access to the
+   * The client secret of this Customer Session. Used on the client to set up secure access to the
    * given {@code customer}.
    *
    * <p>The client secret can be used to provide access to {@code customer} from your frontend. It
@@ -35,7 +35,7 @@ public class CustomerSession extends ApiResource {
   @SerializedName("client_secret")
   String clientSecret;
 
-  /** Configuration for the components supported by this customer session. */
+  /** Configuration for the components supported by this Customer Session. */
   @SerializedName("components")
   Components components;
 
@@ -43,13 +43,13 @@ public class CustomerSession extends ApiResource {
   @SerializedName("created")
   Long created;
 
-  /** The customer the customer session was created for. */
+  /** The Customer the Customer Session was created for. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** The timestamp at which this customer session will expire. */
+  /** The timestamp at which this Customer Session will expire. */
   @SerializedName("expires_at")
   Long expiresAt;
 
@@ -87,7 +87,7 @@ public class CustomerSession extends ApiResource {
   }
 
   /**
-   * Creates a customer session object that includes a single-use client secret that you can use on
+   * Creates a Customer Session object that includes a single-use client secret that you can use on
    * your front-end to grant client-side API access for certain customer resources.
    */
   public static CustomerSession create(Map<String, Object> params) throws StripeException {
@@ -95,7 +95,7 @@ public class CustomerSession extends ApiResource {
   }
 
   /**
-   * Creates a customer session object that includes a single-use client secret that you can use on
+   * Creates a Customer Session object that includes a single-use client secret that you can use on
    * your front-end to grant client-side API access for certain customer resources.
    */
   public static CustomerSession create(Map<String, Object> params, RequestOptions options)
@@ -108,7 +108,7 @@ public class CustomerSession extends ApiResource {
   }
 
   /**
-   * Creates a customer session object that includes a single-use client secret that you can use on
+   * Creates a Customer Session object that includes a single-use client secret that you can use on
    * your front-end to grant client-side API access for certain customer resources.
    */
   public static CustomerSession create(CustomerSessionCreateParams params) throws StripeException {
@@ -116,7 +116,7 @@ public class CustomerSession extends ApiResource {
   }
 
   /**
-   * Creates a customer session object that includes a single-use client secret that you can use on
+   * Creates a Customer Session object that includes a single-use client secret that you can use on
    * your front-end to grant client-side API access for certain customer resources.
    */
   public static CustomerSession create(CustomerSessionCreateParams params, RequestOptions options)
@@ -134,7 +134,7 @@ public class CustomerSession extends ApiResource {
     return getGlobalResponseGetter().request(request, CustomerSession.class);
   }
 
-  /** Configuration for the components supported by this customer session. */
+  /** Configuration for the components supported by this Customer Session. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

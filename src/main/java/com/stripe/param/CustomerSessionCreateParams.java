@@ -19,8 +19,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   Components components;
 
   /**
-   * <strong>Required.</strong> The ID of an existing customer for which to create the customer
-   * session.
+   * <strong>Required.</strong> The ID of an existing customer for which to create the Customer
+   * Session.
    */
   @SerializedName("customer")
   String customer;
@@ -78,8 +78,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The ID of an existing customer for which to create the customer
-     * session.
+     * <strong>Required.</strong> The ID of an existing customer for which to create the Customer
+     * Session.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
