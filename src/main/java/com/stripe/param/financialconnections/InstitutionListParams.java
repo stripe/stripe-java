@@ -10,7 +10,16 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class AccountSubscribeParams extends ApiRequestParams {
+public class InstitutionListParams extends ApiRequestParams {
+  /**
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
+   */
+  @SerializedName("ending_before")
+  String endingBefore;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -25,18 +34,32 @@ public class AccountSubscribeParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> The list of account features to which you would like to subscribe.
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 10.
    */
-  @SerializedName("features")
-  List<AccountSubscribeParams.Feature> features;
+  @SerializedName("limit")
+  Long limit;
 
-  private AccountSubscribeParams(
+  /**
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
+   */
+  @SerializedName("starting_after")
+  String startingAfter;
+
+  private InstitutionListParams(
+      String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
-      List<AccountSubscribeParams.Feature> features) {
+      Long limit,
+      String startingAfter) {
+    this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.features = features;
+    this.limit = limit;
+    this.startingAfter = startingAfter;
   }
 
   public static Builder builder() {
@@ -44,21 +67,37 @@ public class AccountSubscribeParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String endingBefore;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private List<AccountSubscribeParams.Feature> features;
+    private Long limit;
+
+    private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public AccountSubscribeParams build() {
-      return new AccountSubscribeParams(this.expand, this.extraParams, this.features);
+    public InstitutionListParams build() {
+      return new InstitutionListParams(
+          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
+    }
+
+    /**
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
+     */
+    public Builder setEndingBefore(String endingBefore) {
+      this.endingBefore = endingBefore;
+      return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountSubscribeParams#expand} for the field documentation.
+     * InstitutionListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -71,7 +110,7 @@ public class AccountSubscribeParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountSubscribeParams#expand} for the field documentation.
+     * InstitutionListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -84,7 +123,7 @@ public class AccountSubscribeParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountSubscribeParams#extraParams} for the field documentation.
+     * InstitutionListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -97,7 +136,7 @@ public class AccountSubscribeParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountSubscribeParams#extraParams} for the field documentation.
+     * See {@link InstitutionListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -108,47 +147,23 @@ public class AccountSubscribeParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `features` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * AccountSubscribeParams#features} for the field documentation.
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+     * default is 10.
      */
-    public Builder addFeature(AccountSubscribeParams.Feature element) {
-      if (this.features == null) {
-        this.features = new ArrayList<>();
-      }
-      this.features.add(element);
+    public Builder setLimit(Long limit) {
+      this.limit = limit;
       return this;
     }
 
     /**
-     * Add all elements to `features` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * AccountSubscribeParams#features} for the field documentation.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
-    public Builder addAllFeature(List<AccountSubscribeParams.Feature> elements) {
-      if (this.features == null) {
-        this.features = new ArrayList<>();
-      }
-      this.features.addAll(elements);
+    public Builder setStartingAfter(String startingAfter) {
+      this.startingAfter = startingAfter;
       return this;
-    }
-  }
-
-  public enum Feature implements ApiRequestParams.EnumParam {
-    @SerializedName("balance")
-    BALANCE("balance"),
-
-    @SerializedName("inferred_balances")
-    INFERRED_BALANCES("inferred_balances"),
-
-    @SerializedName("transactions")
-    TRANSACTIONS("transactions");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Feature(String value) {
-      this.value = value;
     }
   }
 }

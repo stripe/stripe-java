@@ -19,8 +19,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   Components components;
 
   /**
-   * <strong>Required.</strong> The ID of an existing customer for which to create the customer
-   * session.
+   * <strong>Required.</strong> The ID of an existing customer for which to create the Customer
+   * Session.
    */
   @SerializedName("customer")
   String customer;
@@ -78,8 +78,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The ID of an existing customer for which to create the customer
-     * session.
+     * <strong>Required.</strong> The ID of an existing customer for which to create the Customer
+     * Session.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -154,7 +154,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Configuration for the payment element. */
+    /** Configuration for the Payment Element. */
     @SerializedName("payment_element")
     PaymentElement paymentElement;
 
@@ -224,7 +224,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Configuration for the payment element. */
+      /** Configuration for the Payment Element. */
       public Builder setPaymentElement(
           CustomerSessionCreateParams.Components.PaymentElement paymentElement) {
         this.paymentElement = paymentElement;
@@ -312,7 +312,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class PaymentElement {
-      /** <strong>Required.</strong> Whether the payment element is enabled. */
+      /** <strong>Required.</strong> Whether the Payment Element is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -325,7 +325,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** This hash defines whether the payment element supports certain features. */
+      /** This hash defines whether the Payment Element supports certain features. */
       @SerializedName("features")
       Features features;
 
@@ -352,7 +352,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
               this.enabled, this.extraParams, this.features);
         }
 
-        /** <strong>Required.</strong> Whether the payment element is enabled. */
+        /** <strong>Required.</strong> Whether the Payment Element is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -386,7 +386,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** This hash defines whether the payment element supports certain features. */
+        /** This hash defines whether the Payment Element supports certain features. */
         public Builder setFeatures(
             CustomerSessionCreateParams.Components.PaymentElement.Features features) {
           this.features = features;
@@ -408,7 +408,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
         /**
          * Controls whether the Payment Element displays the option to remove a saved payment
-         * method.&quot;
+         * method. This parameter defaults to {@code disabled}.
          *
          * <p>Allowing buyers to remove their saved payment methods impacts subscriptions that
          * depend on that payment method. Removing the payment method detaches the <a
@@ -421,7 +421,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
         /**
          * Controls whether the Payment Element displays a checkbox offering to save a new payment
-         * method.
+         * method. This parameter defaults to {@code disabled}.
          *
          * <p>If a customer checks the box, the <a
          * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
@@ -435,8 +435,21 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         PaymentMethodSave paymentMethodSave;
 
         /**
+         * When using PaymentIntents and the customer checks the save checkbox, this field
+         * determines the <a
+         * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+         * setup_future_usage}</a> value used to confirm the PaymentIntent.
+         *
+         * <p>When using SetupIntents, directly configure the <a
+         * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage">{@code
+         * usage}</a> value on SetupIntent creation.
+         */
+        @SerializedName("payment_method_save_usage")
+        PaymentMethodSaveUsage paymentMethodSaveUsage;
+
+        /**
          * Controls whether the Payment Element displays the option to update a saved payment
-         * method.
+         * method. This parameter defaults to {@code disabled}.
          */
         @SerializedName("payment_method_update")
         PaymentMethodUpdate paymentMethodUpdate;
@@ -445,10 +458,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             PaymentMethodRemove paymentMethodRemove,
             PaymentMethodSave paymentMethodSave,
+            PaymentMethodSaveUsage paymentMethodSaveUsage,
             PaymentMethodUpdate paymentMethodUpdate) {
           this.extraParams = extraParams;
           this.paymentMethodRemove = paymentMethodRemove;
           this.paymentMethodSave = paymentMethodSave;
+          this.paymentMethodSaveUsage = paymentMethodSaveUsage;
           this.paymentMethodUpdate = paymentMethodUpdate;
         }
 
@@ -463,6 +478,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           private PaymentMethodSave paymentMethodSave;
 
+          private PaymentMethodSaveUsage paymentMethodSaveUsage;
+
           private PaymentMethodUpdate paymentMethodUpdate;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -471,6 +488,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
                 this.extraParams,
                 this.paymentMethodRemove,
                 this.paymentMethodSave,
+                this.paymentMethodSaveUsage,
                 this.paymentMethodUpdate);
           }
 
@@ -506,7 +524,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           /**
            * Controls whether the Payment Element displays the option to remove a saved payment
-           * method.&quot;
+           * method. This parameter defaults to {@code disabled}.
            *
            * <p>Allowing buyers to remove their saved payment methods impacts subscriptions that
            * depend on that payment method. Removing the payment method detaches the <a
@@ -523,7 +541,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           /**
            * Controls whether the Payment Element displays a checkbox offering to save a new payment
-           * method.
+           * method. This parameter defaults to {@code disabled}.
            *
            * <p>If a customer checks the box, the <a
            * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
@@ -541,8 +559,25 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           }
 
           /**
+           * When using PaymentIntents and the customer checks the save checkbox, this field
+           * determines the <a
+           * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+           * setup_future_usage}</a> value used to confirm the PaymentIntent.
+           *
+           * <p>When using SetupIntents, directly configure the <a
+           * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage">{@code
+           * usage}</a> value on SetupIntent creation.
+           */
+          public Builder setPaymentMethodSaveUsage(
+              CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodSaveUsage
+                  paymentMethodSaveUsage) {
+            this.paymentMethodSaveUsage = paymentMethodSaveUsage;
+            return this;
+          }
+
+          /**
            * Controls whether the Payment Element displays the option to update a saved payment
-           * method.
+           * method. This parameter defaults to {@code disabled}.
            */
           public Builder setPaymentMethodUpdate(
               CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodUpdate
@@ -578,6 +613,21 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           private final String value;
 
           PaymentMethodSave(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentMethodSaveUsage implements ApiRequestParams.EnumParam {
+          @SerializedName("off_session")
+          OFF_SESSION("off_session"),
+
+          @SerializedName("on_session")
+          ON_SESSION("on_session");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentMethodSaveUsage(String value) {
             this.value = value;
           }
         }

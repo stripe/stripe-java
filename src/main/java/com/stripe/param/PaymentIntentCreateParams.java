@@ -21421,14 +21421,20 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** ID of the institution to use to filter for selectable accounts. */
+          @SerializedName("institution")
+          String institution;
+
           private Filters(
               List<
                       PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount
                           .FinancialConnections.Filters.AccountSubcategory>
                   accountSubcategories,
-              Map<String, Object> extraParams) {
+              Map<String, Object> extraParams,
+              String institution) {
             this.accountSubcategories = accountSubcategories;
             this.extraParams = extraParams;
+            this.institution = institution;
           }
 
           public static Builder builder() {
@@ -21443,12 +21449,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private String institution;
+
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
                     .Filters
                 build() {
               return new PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount
-                  .FinancialConnections.Filters(this.accountSubcategories, this.extraParams);
+                  .FinancialConnections.Filters(
+                  this.accountSubcategories, this.extraParams, this.institution);
             }
 
             /**
@@ -21515,6 +21524,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** ID of the institution to use to filter for selectable accounts. */
+            public Builder setInstitution(String institution) {
+              this.institution = institution;
               return this;
             }
           }

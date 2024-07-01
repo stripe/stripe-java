@@ -19,14 +19,14 @@ public final class CustomerSessionService extends ApiService {
   }
 
   /**
-   * Creates a customer session object that includes a single-use client secret that you can use on
+   * Creates a Customer Session object that includes a single-use client secret that you can use on
    * your front-end to grant client-side API access for certain customer resources.
    */
   public CustomerSession create(CustomerSessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Creates a customer session object that includes a single-use client secret that you can use on
+   * Creates a Customer Session object that includes a single-use client secret that you can use on
    * your front-end to grant client-side API access for certain customer resources.
    */
   public CustomerSession create(CustomerSessionCreateParams params, RequestOptions options)

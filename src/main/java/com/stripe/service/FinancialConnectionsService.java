@@ -13,6 +13,10 @@ public final class FinancialConnectionsService extends ApiService {
     return new com.stripe.service.financialconnections.AccountService(this.getResponseGetter());
   }
 
+  public com.stripe.service.financialconnections.InstitutionService institutions() {
+    return new com.stripe.service.financialconnections.InstitutionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.financialconnections.SessionService sessions() {
     return new com.stripe.service.financialconnections.SessionService(this.getResponseGetter());
   }

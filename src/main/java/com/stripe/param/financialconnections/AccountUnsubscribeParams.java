@@ -136,6 +136,9 @@ public class AccountUnsubscribeParams extends ApiRequestParams {
   }
 
   public enum Feature implements ApiRequestParams.EnumParam {
+    @SerializedName("balance")
+    BALANCE("balance"),
+
     @SerializedName("inferred_balances")
     INFERRED_BALANCES("inferred_balances"),
 

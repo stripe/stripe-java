@@ -1804,6 +1804,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
              */
             @SerializedName("account_subcategories")
             List<String> accountSubcategories;
+
+            /** The institution to use to filter for possible accounts to link. */
+            @SerializedName("institution")
+            String institution;
           }
         }
       }

@@ -6215,14 +6215,20 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
+            /** ID of the institution to use to filter for selectable accounts. */
+            @SerializedName("institution")
+            Object institution;
+
             private Filters(
                 List<
                         SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                             .FinancialConnections.Filters.AccountSubcategory>
                     accountSubcategories,
-                Map<String, Object> extraParams) {
+                Map<String, Object> extraParams,
+                Object institution) {
               this.accountSubcategories = accountSubcategories;
               this.extraParams = extraParams;
+              this.institution = institution;
             }
 
             public static Builder builder() {
@@ -6237,13 +6243,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
               private Map<String, Object> extraParams;
 
+              private Object institution;
+
               /** Finalize and obtain parameter instance from this builder. */
               public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                       .FinancialConnections.Filters
                   build() {
                 return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions
                     .UsBankAccount.FinancialConnections.Filters(
-                    this.accountSubcategories, this.extraParams);
+                    this.accountSubcategories, this.extraParams, this.institution);
               }
 
               /**
@@ -6310,6 +6318,18 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
                   this.extraParams = new HashMap<>();
                 }
                 this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** ID of the institution to use to filter for selectable accounts. */
+              public Builder setInstitution(String institution) {
+                this.institution = institution;
+                return this;
+              }
+
+              /** ID of the institution to use to filter for selectable accounts. */
+              public Builder setInstitution(EmptyParam institution) {
+                this.institution = institution;
                 return this;
               }
             }
