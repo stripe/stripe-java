@@ -402,13 +402,19 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Stripe ID of the institution with which the customer should be directed to log in. */
+    @SerializedName("institution")
+    String institution;
+
     private Filters(
         List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories,
         List<String> countries,
-        Map<String, Object> extraParams) {
+        Map<String, Object> extraParams,
+        String institution) {
       this.accountSubcategories = accountSubcategories;
       this.countries = countries;
       this.extraParams = extraParams;
+      this.institution = institution;
     }
 
     public static Builder builder() {
@@ -422,10 +428,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String institution;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Filters build() {
         return new SessionCreateParams.Filters(
-            this.accountSubcategories, this.countries, this.extraParams);
+            this.accountSubcategories, this.countries, this.extraParams, this.institution);
       }
 
       /**
@@ -504,6 +512,12 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Stripe ID of the institution with which the customer should be directed to log in. */
+      public Builder setInstitution(String institution) {
+        this.institution = institution;
         return this;
       }
     }
