@@ -212,6 +212,21 @@ public class CustomerSession extends ApiResource {
         String paymentMethodSave;
 
         /**
+         * When using PaymentIntents and the customer checks the save checkbox, this field
+         * determines the <a
+         * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+         * setup_future_usage}</a> value used to confirm the PaymentIntent.
+         *
+         * <p>When using SetupIntents, directly configure the <a
+         * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage">{@code
+         * usage}</a> value on SetupIntent creation.
+         *
+         * <p>One of {@code off_session}, or {@code on_session}.
+         */
+        @SerializedName("payment_method_save_usage")
+        String paymentMethodSaveUsage;
+
+        /**
          * Controls whether the Payment Element displays the option to update a saved payment
          * method. This parameter defaults to {@code disabled}.
          *

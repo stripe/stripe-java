@@ -435,6 +435,19 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         PaymentMethodSave paymentMethodSave;
 
         /**
+         * When using PaymentIntents and the customer checks the save checkbox, this field
+         * determines the <a
+         * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+         * setup_future_usage}</a> value used to confirm the PaymentIntent.
+         *
+         * <p>When using SetupIntents, directly configure the <a
+         * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage">{@code
+         * usage}</a> value on SetupIntent creation.
+         */
+        @SerializedName("payment_method_save_usage")
+        PaymentMethodSaveUsage paymentMethodSaveUsage;
+
+        /**
          * Controls whether the Payment Element displays the option to update a saved payment
          * method. This parameter defaults to {@code disabled}.
          */
@@ -445,10 +458,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             PaymentMethodRemove paymentMethodRemove,
             PaymentMethodSave paymentMethodSave,
+            PaymentMethodSaveUsage paymentMethodSaveUsage,
             PaymentMethodUpdate paymentMethodUpdate) {
           this.extraParams = extraParams;
           this.paymentMethodRemove = paymentMethodRemove;
           this.paymentMethodSave = paymentMethodSave;
+          this.paymentMethodSaveUsage = paymentMethodSaveUsage;
           this.paymentMethodUpdate = paymentMethodUpdate;
         }
 
@@ -463,6 +478,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           private PaymentMethodSave paymentMethodSave;
 
+          private PaymentMethodSaveUsage paymentMethodSaveUsage;
+
           private PaymentMethodUpdate paymentMethodUpdate;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -471,6 +488,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
                 this.extraParams,
                 this.paymentMethodRemove,
                 this.paymentMethodSave,
+                this.paymentMethodSaveUsage,
                 this.paymentMethodUpdate);
           }
 
@@ -541,6 +559,23 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           }
 
           /**
+           * When using PaymentIntents and the customer checks the save checkbox, this field
+           * determines the <a
+           * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+           * setup_future_usage}</a> value used to confirm the PaymentIntent.
+           *
+           * <p>When using SetupIntents, directly configure the <a
+           * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage">{@code
+           * usage}</a> value on SetupIntent creation.
+           */
+          public Builder setPaymentMethodSaveUsage(
+              CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodSaveUsage
+                  paymentMethodSaveUsage) {
+            this.paymentMethodSaveUsage = paymentMethodSaveUsage;
+            return this;
+          }
+
+          /**
            * Controls whether the Payment Element displays the option to update a saved payment
            * method. This parameter defaults to {@code disabled}.
            */
@@ -578,6 +613,21 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           private final String value;
 
           PaymentMethodSave(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentMethodSaveUsage implements ApiRequestParams.EnumParam {
+          @SerializedName("off_session")
+          OFF_SESSION("off_session"),
+
+          @SerializedName("on_session")
+          ON_SESSION("on_session");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentMethodSaveUsage(String value) {
             this.value = value;
           }
         }
