@@ -447,24 +447,15 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         @SerializedName("payment_method_save_usage")
         PaymentMethodSaveUsage paymentMethodSaveUsage;
 
-        /**
-         * Controls whether the Payment Element displays the option to update a saved payment
-         * method. This parameter defaults to {@code disabled}.
-         */
-        @SerializedName("payment_method_update")
-        PaymentMethodUpdate paymentMethodUpdate;
-
         private Features(
             Map<String, Object> extraParams,
             PaymentMethodRemove paymentMethodRemove,
             PaymentMethodSave paymentMethodSave,
-            PaymentMethodSaveUsage paymentMethodSaveUsage,
-            PaymentMethodUpdate paymentMethodUpdate) {
+            PaymentMethodSaveUsage paymentMethodSaveUsage) {
           this.extraParams = extraParams;
           this.paymentMethodRemove = paymentMethodRemove;
           this.paymentMethodSave = paymentMethodSave;
           this.paymentMethodSaveUsage = paymentMethodSaveUsage;
-          this.paymentMethodUpdate = paymentMethodUpdate;
         }
 
         public static Builder builder() {
@@ -480,16 +471,13 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           private PaymentMethodSaveUsage paymentMethodSaveUsage;
 
-          private PaymentMethodUpdate paymentMethodUpdate;
-
           /** Finalize and obtain parameter instance from this builder. */
           public CustomerSessionCreateParams.Components.PaymentElement.Features build() {
             return new CustomerSessionCreateParams.Components.PaymentElement.Features(
                 this.extraParams,
                 this.paymentMethodRemove,
                 this.paymentMethodSave,
-                this.paymentMethodSaveUsage,
-                this.paymentMethodUpdate);
+                this.paymentMethodSaveUsage);
           }
 
           /**
@@ -574,17 +562,6 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             this.paymentMethodSaveUsage = paymentMethodSaveUsage;
             return this;
           }
-
-          /**
-           * Controls whether the Payment Element displays the option to update a saved payment
-           * method. This parameter defaults to {@code disabled}.
-           */
-          public Builder setPaymentMethodUpdate(
-              CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodUpdate
-                  paymentMethodUpdate) {
-            this.paymentMethodUpdate = paymentMethodUpdate;
-            return this;
-          }
         }
 
         public enum PaymentMethodRemove implements ApiRequestParams.EnumParam {
@@ -628,21 +605,6 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           private final String value;
 
           PaymentMethodSaveUsage(String value) {
-            this.value = value;
-          }
-        }
-
-        public enum PaymentMethodUpdate implements ApiRequestParams.EnumParam {
-          @SerializedName("disabled")
-          DISABLED("disabled"),
-
-          @SerializedName("enabled")
-          ENABLED("enabled");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          PaymentMethodUpdate(String value) {
             this.value = value;
           }
         }

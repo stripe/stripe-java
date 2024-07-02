@@ -225,15 +225,6 @@ public class CustomerSession extends ApiResource {
          */
         @SerializedName("payment_method_save_usage")
         String paymentMethodSaveUsage;
-
-        /**
-         * Controls whether the Payment Element displays the option to update a saved payment
-         * method. This parameter defaults to {@code disabled}.
-         *
-         * <p>One of {@code disabled}, or {@code enabled}.
-         */
-        @SerializedName("payment_method_update")
-        String paymentMethodUpdate;
       }
     }
 
