@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CustomerSessionCreateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -179,6 +180,36 @@ public class CustomerSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
+        /**
+         * A list of <a
+         * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
+         * allow_redisplay}</a> values that controls which saved payment methods the Payment Element
+         * displays by filtering to only show payment methods with an {@code allow_redisplay} value
+         * that is present in this list.
+         *
+         * <p>If not specified, defaults to [&quot;always&quot;]. In order to display all saved
+         * payment methods, specify [&quot;always&quot;, &quot;limited&quot;,
+         * &quot;unspecified&quot;].
+         */
+        @SerializedName("payment_method_allow_redisplay_filters")
+        List<String> paymentMethodAllowRedisplayFilters;
+
+        /**
+         * Controls whether or not the Payment Element shows saved payment methods. This parameter
+         * defaults to {@code disabled}.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
+         */
+        @SerializedName("payment_method_redisplay")
+        String paymentMethodRedisplay;
+
+        /**
+         * Determines the max number of saved payment methods for the Payment Element to display.
+         * This parameter defaults to {@code 10}.
+         */
+        @SerializedName("payment_method_redisplay_limit")
+        Long paymentMethodRedisplayLimit;
+
         /**
          * Controls whether the Payment Element displays the option to remove a saved payment
          * method. This parameter defaults to {@code disabled}.

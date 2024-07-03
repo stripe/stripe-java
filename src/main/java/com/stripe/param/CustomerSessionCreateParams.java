@@ -407,6 +407,37 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
+         * A list of <a
+         * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
+         * allow_redisplay}</a> values that controls which saved payment methods the Payment Element
+         * displays by filtering to only show payment methods with an {@code allow_redisplay} value
+         * that is present in this list.
+         *
+         * <p>If not specified, defaults to [&quot;always&quot;]. In order to display all saved
+         * payment methods, specify [&quot;always&quot;, &quot;limited&quot;,
+         * &quot;unspecified&quot;].
+         */
+        @SerializedName("payment_method_allow_redisplay_filters")
+        List<
+                CustomerSessionCreateParams.Components.PaymentElement.Features
+                    .PaymentMethodAllowRedisplayFilter>
+            paymentMethodAllowRedisplayFilters;
+
+        /**
+         * Controls whether or not the Payment Element shows saved payment methods. This parameter
+         * defaults to {@code disabled}.
+         */
+        @SerializedName("payment_method_redisplay")
+        PaymentMethodRedisplay paymentMethodRedisplay;
+
+        /**
+         * Determines the max number of saved payment methods for the Payment Element to display.
+         * This parameter defaults to {@code 10}.
+         */
+        @SerializedName("payment_method_redisplay_limit")
+        Long paymentMethodRedisplayLimit;
+
+        /**
          * Controls whether the Payment Element displays the option to remove a saved payment
          * method. This parameter defaults to {@code disabled}.
          *
@@ -449,10 +480,19 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
         private Features(
             Map<String, Object> extraParams,
+            List<
+                    CustomerSessionCreateParams.Components.PaymentElement.Features
+                        .PaymentMethodAllowRedisplayFilter>
+                paymentMethodAllowRedisplayFilters,
+            PaymentMethodRedisplay paymentMethodRedisplay,
+            Long paymentMethodRedisplayLimit,
             PaymentMethodRemove paymentMethodRemove,
             PaymentMethodSave paymentMethodSave,
             PaymentMethodSaveUsage paymentMethodSaveUsage) {
           this.extraParams = extraParams;
+          this.paymentMethodAllowRedisplayFilters = paymentMethodAllowRedisplayFilters;
+          this.paymentMethodRedisplay = paymentMethodRedisplay;
+          this.paymentMethodRedisplayLimit = paymentMethodRedisplayLimit;
           this.paymentMethodRemove = paymentMethodRemove;
           this.paymentMethodSave = paymentMethodSave;
           this.paymentMethodSaveUsage = paymentMethodSaveUsage;
@@ -465,6 +505,15 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private List<
+                  CustomerSessionCreateParams.Components.PaymentElement.Features
+                      .PaymentMethodAllowRedisplayFilter>
+              paymentMethodAllowRedisplayFilters;
+
+          private PaymentMethodRedisplay paymentMethodRedisplay;
+
+          private Long paymentMethodRedisplayLimit;
+
           private PaymentMethodRemove paymentMethodRemove;
 
           private PaymentMethodSave paymentMethodSave;
@@ -475,6 +524,9 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           public CustomerSessionCreateParams.Components.PaymentElement.Features build() {
             return new CustomerSessionCreateParams.Components.PaymentElement.Features(
                 this.extraParams,
+                this.paymentMethodAllowRedisplayFilters,
+                this.paymentMethodRedisplay,
+                this.paymentMethodRedisplayLimit,
                 this.paymentMethodRemove,
                 this.paymentMethodSave,
                 this.paymentMethodSaveUsage);
@@ -507,6 +559,63 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `paymentMethodAllowRedisplayFilters` list. A list is initialized for
+           * the first `add/addAll` call, and subsequent calls adds additional elements to the
+           * original list. See {@link
+           * CustomerSessionCreateParams.Components.PaymentElement.Features#paymentMethodAllowRedisplayFilters}
+           * for the field documentation.
+           */
+          public Builder addPaymentMethodAllowRedisplayFilter(
+              CustomerSessionCreateParams.Components.PaymentElement.Features
+                      .PaymentMethodAllowRedisplayFilter
+                  element) {
+            if (this.paymentMethodAllowRedisplayFilters == null) {
+              this.paymentMethodAllowRedisplayFilters = new ArrayList<>();
+            }
+            this.paymentMethodAllowRedisplayFilters.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `paymentMethodAllowRedisplayFilters` list. A list is initialized
+           * for the first `add/addAll` call, and subsequent calls adds additional elements to the
+           * original list. See {@link
+           * CustomerSessionCreateParams.Components.PaymentElement.Features#paymentMethodAllowRedisplayFilters}
+           * for the field documentation.
+           */
+          public Builder addAllPaymentMethodAllowRedisplayFilter(
+              List<
+                      CustomerSessionCreateParams.Components.PaymentElement.Features
+                          .PaymentMethodAllowRedisplayFilter>
+                  elements) {
+            if (this.paymentMethodAllowRedisplayFilters == null) {
+              this.paymentMethodAllowRedisplayFilters = new ArrayList<>();
+            }
+            this.paymentMethodAllowRedisplayFilters.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Controls whether or not the Payment Element shows saved payment methods. This parameter
+           * defaults to {@code disabled}.
+           */
+          public Builder setPaymentMethodRedisplay(
+              CustomerSessionCreateParams.Components.PaymentElement.Features.PaymentMethodRedisplay
+                  paymentMethodRedisplay) {
+            this.paymentMethodRedisplay = paymentMethodRedisplay;
+            return this;
+          }
+
+          /**
+           * Determines the max number of saved payment methods for the Payment Element to display.
+           * This parameter defaults to {@code 10}.
+           */
+          public Builder setPaymentMethodRedisplayLimit(Long paymentMethodRedisplayLimit) {
+            this.paymentMethodRedisplayLimit = paymentMethodRedisplayLimit;
             return this;
           }
 
@@ -561,6 +670,39 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
                   paymentMethodSaveUsage) {
             this.paymentMethodSaveUsage = paymentMethodSaveUsage;
             return this;
+          }
+        }
+
+        public enum PaymentMethodAllowRedisplayFilter implements ApiRequestParams.EnumParam {
+          @SerializedName("always")
+          ALWAYS("always"),
+
+          @SerializedName("limited")
+          LIMITED("limited"),
+
+          @SerializedName("unspecified")
+          UNSPECIFIED("unspecified");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentMethodAllowRedisplayFilter(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentMethodRedisplay implements ApiRequestParams.EnumParam {
+          @SerializedName("disabled")
+          DISABLED("disabled"),
+
+          @SerializedName("enabled")
+          ENABLED("enabled");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentMethodRedisplay(String value) {
+            this.value = value;
           }
         }
 
