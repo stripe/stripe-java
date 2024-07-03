@@ -17,7 +17,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
-   * (exclusive).
+   * (exclusive). Must be aligned with minute boundaries.
    */
   @SerializedName("end_time")
   Long endTime;
@@ -53,7 +53,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The timestamp from when to start aggregating meter events
-   * (inclusive).
+   * (inclusive). Must be aligned with minute boundaries.
    */
   @SerializedName("start_time")
   Long startTime;
@@ -142,7 +142,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
-     * (exclusive).
+     * (exclusive). Must be aligned with minute boundaries.
      */
     public Builder setEndTime(Long endTime) {
       this.endTime = endTime;
@@ -223,7 +223,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The timestamp from when to start aggregating meter events
-     * (inclusive).
+     * (inclusive). Must be aligned with minute boundaries.
      */
     public Builder setStartTime(Long startTime) {
       this.startTime = startTime;
