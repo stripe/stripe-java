@@ -66,10 +66,12 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
-   * be unset by posting an empty value to {@code metadata}. For {@code type=recurring} line items,
-   * the incoming metadata specified on the request is directly used to set this value, in contrast
-   * to {@code type=invoiceitem} line items, where any existing metadata on the invoice line is
-   * merged with the incoming data.
+   * be unset by posting an empty value to {@code metadata}. For <a
+   * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+   * line items, the incoming metadata specified on the request is directly used to set this value,
+   * in contrast to <a
+   * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
+   * where any existing metadata on the invoice line is merged with the incoming data.
    */
   @SerializedName("metadata")
   Object metadata;
@@ -418,10 +420,12 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}. For {@code type=recurring} line
-     * items, the incoming metadata specified on the request is directly used to set this value, in
-     * contrast to {@code type=invoiceitem} line items, where any existing metadata on the invoice
-     * line is merged with the incoming data.
+     * can be unset by posting an empty value to {@code metadata}. For <a
+     * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+     * line items, the incoming metadata specified on the request is directly used to set this
+     * value, in contrast to <a
+     * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
+     * where any existing metadata on the invoice line is merged with the incoming data.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -432,10 +436,12 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}. For {@code type=recurring} line
-     * items, the incoming metadata specified on the request is directly used to set this value, in
-     * contrast to {@code type=invoiceitem} line items, where any existing metadata on the invoice
-     * line is merged with the incoming data.
+     * can be unset by posting an empty value to {@code metadata}. For <a
+     * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+     * line items, the incoming metadata specified on the request is directly used to set this
+     * value, in contrast to <a
+     * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
+     * where any existing metadata on the invoice line is merged with the incoming data.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;

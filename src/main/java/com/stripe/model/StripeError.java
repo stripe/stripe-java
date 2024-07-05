@@ -40,30 +40,30 @@ public class StripeError extends StripeObject {
    * {@code coupon_expired}, {@code customer_max_payment_methods}, {@code
    * customer_max_subscriptions}, {@code customer_tax_location_invalid}, {@code
    * debit_not_authorized}, {@code email_invalid}, {@code expired_card}, {@code
-   * financial_connections_account_inactive}, {@code
-   * financial_connections_no_successful_transaction_refresh}, {@code forwarding_api_inactive},
-   * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_upstream_connection_error},
-   * {@code forwarding_api_upstream_connection_timeout}, {@code gift_card_balance_insufficient},
-   * {@code gift_card_code_exists}, {@code gift_card_inactive}, {@code idempotency_key_in_use},
-   * {@code incorrect_address}, {@code incorrect_cvc}, {@code incorrect_number}, {@code
-   * incorrect_zip}, {@code instant_payouts_config_disabled}, {@code
-   * instant_payouts_currency_disabled}, {@code instant_payouts_limit_exceeded}, {@code
-   * instant_payouts_unsupported}, {@code insufficient_funds}, {@code intent_invalid_state}, {@code
-   * intent_verification_method_missing}, {@code invalid_card_type}, {@code invalid_characters},
-   * {@code invalid_charge_amount}, {@code invalid_cvc}, {@code invalid_expiry_month}, {@code
-   * invalid_expiry_year}, {@code invalid_number}, {@code invalid_source_usage}, {@code
-   * invalid_tax_location}, {@code invoice_no_customer_line_items}, {@code
-   * invoice_no_payment_method_types}, {@code invoice_no_subscription_line_items}, {@code
-   * invoice_not_editable}, {@code invoice_on_behalf_of_not_editable}, {@code
-   * invoice_payment_intent_requires_action}, {@code invoice_upcoming_none}, {@code
-   * livemode_mismatch}, {@code lock_timeout}, {@code missing}, {@code no_account}, {@code
-   * not_allowed_on_standard_account}, {@code out_of_inventory}, {@code
+   * financial_connections_account_inactive}, {@code financial_connections_institution_unavailable},
+   * {@code financial_connections_no_successful_transaction_refresh}, {@code
+   * forwarding_api_inactive}, {@code forwarding_api_invalid_parameter}, {@code
+   * forwarding_api_upstream_connection_error}, {@code forwarding_api_upstream_connection_timeout},
+   * {@code gift_card_balance_insufficient}, {@code gift_card_code_exists}, {@code
+   * gift_card_inactive}, {@code idempotency_key_in_use}, {@code incorrect_address}, {@code
+   * incorrect_cvc}, {@code incorrect_number}, {@code incorrect_zip}, {@code
+   * instant_payouts_config_disabled}, {@code instant_payouts_currency_disabled}, {@code
+   * instant_payouts_limit_exceeded}, {@code instant_payouts_unsupported}, {@code
+   * insufficient_funds}, {@code intent_invalid_state}, {@code intent_verification_method_missing},
+   * {@code invalid_card_type}, {@code invalid_characters}, {@code invalid_charge_amount}, {@code
+   * invalid_cvc}, {@code invalid_expiry_month}, {@code invalid_expiry_year}, {@code
+   * invalid_number}, {@code invalid_source_usage}, {@code invalid_tax_location}, {@code
+   * invoice_no_customer_line_items}, {@code invoice_no_payment_method_types}, {@code
+   * invoice_no_subscription_line_items}, {@code invoice_not_editable}, {@code
+   * invoice_on_behalf_of_not_editable}, {@code invoice_payment_intent_requires_action}, {@code
+   * invoice_upcoming_none}, {@code livemode_mismatch}, {@code lock_timeout}, {@code missing},
+   * {@code no_account}, {@code not_allowed_on_standard_account}, {@code out_of_inventory}, {@code
    * ownership_declaration_not_allowed}, {@code parameter_invalid_empty}, {@code
    * parameter_invalid_integer}, {@code parameter_invalid_string_blank}, {@code
    * parameter_invalid_string_empty}, {@code parameter_missing}, {@code parameter_unknown}, {@code
    * parameters_exclusive}, {@code payment_intent_action_required}, {@code
-   * payment_intent_authentication_failure}, {@code payment_intent_incompatible_payment_method},
-   * {@code payment_intent_invalid_parameter}, {@code
+   * payment_intent_authentication_failure}, {@code payment_intent_fx_quote_invalid}, {@code
+   * payment_intent_incompatible_payment_method}, {@code payment_intent_invalid_parameter}, {@code
    * payment_intent_konbini_rejected_confirmation_number}, {@code payment_intent_mandate_invalid},
    * {@code payment_intent_payment_attempt_expired}, {@code payment_intent_payment_attempt_failed},
    * {@code payment_intent_unexpected_state}, {@code payment_method_bank_account_already_verified},

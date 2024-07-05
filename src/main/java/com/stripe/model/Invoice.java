@@ -2798,6 +2798,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
              */
             @SerializedName("account_subcategories")
             List<String> accountSubcategories;
+
+            /** The institution to use to filter for possible accounts to link. */
+            @SerializedName("institution")
+            String institution;
           }
         }
       }

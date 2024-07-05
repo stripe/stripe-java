@@ -266,6 +266,10 @@ public class Session extends ApiResource implements HasId {
     /** List of countries from which to filter accounts. */
     @SerializedName("countries")
     List<String> countries;
+
+    /** Stripe ID of the institution with which the customer should be directed to log in. */
+    @SerializedName("institution")
+    String institution;
   }
 
   @Getter

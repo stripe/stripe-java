@@ -4,7 +4,18 @@
 
   "editor.renderWhitespace": "all",
   "[java]": {
-    "editor.rulers": [100]
+    "editor.rulers": [100],
+    // use spotless for formatting (to match makefile)
+    "spotlessGradle.format.enable": true,
+    "spotlessGradle.diagnostics.enable": true,
+    "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.spotlessGradle": "explicit",
+      // let spotless handle organizing imports, not the more general tooling
+      "source.organizeImports": "never"
+    }
   },
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  // LSP was ooming and it recommended this change
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable"
 }
