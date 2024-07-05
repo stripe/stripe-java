@@ -85,6 +85,10 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The Unix timestamp representing when the tax liability is assumed or reduced. */
+  @SerializedName("posted_at")
+  Long postedAt;
+
   /** A custom unique identifier, such as 'myOrder_123'. */
   @SerializedName("reference")
   String reference;

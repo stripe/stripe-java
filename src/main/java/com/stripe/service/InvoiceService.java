@@ -14,16 +14,19 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.InvoiceAddLinesParams;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceCreatePreviewParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
 import com.stripe.param.InvoicePayParams;
+import com.stripe.param.InvoiceRemoveLinesParams;
 import com.stripe.param.InvoiceRetrieveParams;
 import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
 import com.stripe.param.InvoiceUpcomingParams;
+import com.stripe.param.InvoiceUpdateLinesParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
 
@@ -368,6 +371,28 @@ public final class InvoiceService extends ApiService {
     return this.request(request, Invoice.class);
   }
   /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(String invoice, InvoiceAddLinesParams params) throws StripeException {
+    return addLines(invoice, params, (RequestOptions) null);
+  }
+  /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(String invoice, InvoiceAddLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(invoice));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Invoice.class);
+  }
+  /**
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
    * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
    */
@@ -499,6 +524,32 @@ public final class InvoiceService extends ApiService {
     return this.request(request, Invoice.class);
   }
   /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(String invoice, InvoiceRemoveLinesParams params)
+      throws StripeException {
+    return removeLines(invoice, params, (RequestOptions) null);
+  }
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(
+      String invoice, InvoiceRemoveLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/remove_lines", ApiResource.urlEncodeId(invoice));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Invoice.class);
+  }
+  /**
    * Stripe will automatically send invoices to customers according to your <a
    * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
    * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
@@ -552,6 +603,32 @@ public final class InvoiceService extends ApiService {
       String invoice, InvoiceSendInvoiceParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(invoice));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Invoice.class);
+  }
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(String invoice, InvoiceUpdateLinesParams params)
+      throws StripeException {
+    return updateLines(invoice, params, (RequestOptions) null);
+  }
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(
+      String invoice, InvoiceUpdateLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/update_lines", ApiResource.urlEncodeId(invoice));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

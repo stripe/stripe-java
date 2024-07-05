@@ -41,6 +41,15 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
+   * The Unix timestamp representing when the tax liability is assumed or reduced, which determines
+   * the liability posting period and handling in tax liability reports. The timestamp must fall
+   * within the {@code tax_date} and the current time, unless the {@code tax_date} is scheduled in
+   * advance. Defaults to the current time.
+   */
+  @SerializedName("posted_at")
+  Long postedAt;
+
+  /**
    * <strong>Required.</strong> A custom order or sale identifier, such as 'myOrder_123'. Must be
    * unique across all transactions, including reversals.
    */
@@ -52,11 +61,13 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      Long postedAt,
       String reference) {
     this.calculation = calculation;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.postedAt = postedAt;
     this.reference = reference;
   }
 
@@ -73,12 +84,19 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Long postedAt;
+
     private String reference;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TransactionCreateFromCalculationParams build() {
       return new TransactionCreateFromCalculationParams(
-          this.calculation, this.expand, this.extraParams, this.metadata, this.reference);
+          this.calculation,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.postedAt,
+          this.reference);
     }
 
     /**
@@ -165,6 +183,17 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * The Unix timestamp representing when the tax liability is assumed or reduced, which
+     * determines the liability posting period and handling in tax liability reports. The timestamp
+     * must fall within the {@code tax_date} and the current time, unless the {@code tax_date} is
+     * scheduled in advance. Defaults to the current time.
+     */
+    public Builder setPostedAt(Long postedAt) {
+      this.postedAt = postedAt;
       return this;
     }
 

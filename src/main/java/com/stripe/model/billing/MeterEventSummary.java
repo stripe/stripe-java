@@ -33,7 +33,7 @@ public class MeterEventSummary extends ApiResource implements HasId {
   @SerializedName("aggregated_value")
   BigDecimal aggregatedValue;
 
-  /** End timestamp for this event summary (inclusive). */
+  /** End timestamp for this event summary (exclusive). Must be aligned with minute boundaries. */
   @SerializedName("end_time")
   Long endTime;
 
@@ -61,7 +61,7 @@ public class MeterEventSummary extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Start timestamp for this event summary (inclusive). */
+  /** Start timestamp for this event summary (inclusive). Must be aligned with minute boundaries. */
   @SerializedName("start_time")
   Long startTime;
 
