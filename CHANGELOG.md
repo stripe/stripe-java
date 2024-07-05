@@ -9,6 +9,12 @@
   * Add support for `payment_method_allow_redisplay_filters`, `payment_method_redisplay_limit`, `payment_method_redisplay`, and `payment_method_save_usage` on `CustomerSession.components.payment_element.features` and `CustomerSessionCreateParams.components.payment_element.features`
   * Add support for new value `balance` on enums `financialconnections.AccountSubscribeParams.features[]` and `financialconnections.AccountUnsubscribeParams.features[]`
 
+## 26.2.0 - 2024-07-05
+* [#1831](https://github.com/stripe/stripe-java/pull/1831) Update generated code
+  * Add support for `add_lines`, `remove_lines`, and `update_lines` methods on resource `Invoice`
+  * Add support for `posted_at` on `Tax.Transaction` and `tax.TransactionCreateFromCalculationParams`
+* [#1833](https://github.com/stripe/stripe-java/pull/1833) Update formatting settings for VSCode
+
 ## 26.2.0-beta.1 - 2024-06-27
 * [#1824](https://github.com/stripe/stripe-java/pull/1824) Update generated code for beta
   * Remove support for `payment_method_set_as_default` on `CustomerSession.components.payment_element.features` and `CustomerSessionCreateParams.components.payment_element.features`
