@@ -57,8 +57,8 @@ public class StripeError extends StripeObject {
    * parameter_invalid_integer}, {@code parameter_invalid_string_blank}, {@code
    * parameter_invalid_string_empty}, {@code parameter_missing}, {@code parameter_unknown}, {@code
    * parameters_exclusive}, {@code payment_intent_action_required}, {@code
-   * payment_intent_authentication_failure}, {@code payment_intent_fx_quote_invalid}, {@code
-   * payment_intent_incompatible_payment_method}, {@code payment_intent_invalid_parameter}, {@code
+   * payment_intent_authentication_failure}, {@code payment_intent_incompatible_payment_method},
+   * {@code payment_intent_invalid_parameter}, {@code
    * payment_intent_konbini_rejected_confirmation_number}, {@code payment_intent_mandate_invalid},
    * {@code payment_intent_payment_attempt_expired}, {@code payment_intent_payment_attempt_failed},
    * {@code payment_intent_unexpected_state}, {@code payment_method_bank_account_already_verified},
