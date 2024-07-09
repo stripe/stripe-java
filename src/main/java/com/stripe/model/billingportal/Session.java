@@ -32,9 +32,7 @@ import lombok.Setter;
  * URL. Create sessions on-demand when customers intend to manage their subscriptions and billing
  * details.
  *
- * <p>Learn more in the <a
- * href="https://stripe.com/docs/billing/subscriptions/integrating-customer-portal">integration
- * guide</a>.
+ * <p>Related guide: <a href="https://stripe.com/customer-management">Customer management</a>
  */
 @Getter
 @Setter

@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CustomerSessionCreateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -143,6 +144,10 @@ public class CustomerSession extends ApiResource {
     @SerializedName("buy_button")
     BuyButton buyButton;
 
+    /** This hash contains whether the Payment Element is enabled and the features it supports. */
+    @SerializedName("payment_element")
+    PaymentElement paymentElement;
+
     /** This hash contains whether the pricing table is enabled. */
     @SerializedName("pricing_table")
     PricingTable pricingTable;
@@ -155,6 +160,103 @@ public class CustomerSession extends ApiResource {
       /** Whether the buy button is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
+    }
+
+    /** This hash contains whether the Payment Element is enabled and the features it supports. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentElement extends StripeObject {
+      /** Whether the Payment Element is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /** This hash defines whether the Payment Element supports certain features. */
+      @SerializedName("features")
+      Features features;
+
+      /** This hash contains the features the Payment Element supports. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * A list of <a
+         * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
+         * allow_redisplay}</a> values that controls which saved payment methods the Payment Element
+         * displays by filtering to only show payment methods with an {@code allow_redisplay} value
+         * that is present in this list.
+         *
+         * <p>If not specified, defaults to [&quot;always&quot;]. In order to display all saved
+         * payment methods, specify [&quot;always&quot;, &quot;limited&quot;,
+         * &quot;unspecified&quot;].
+         */
+        @SerializedName("payment_method_allow_redisplay_filters")
+        List<String> paymentMethodAllowRedisplayFilters;
+
+        /**
+         * Controls whether or not the Payment Element shows saved payment methods. This parameter
+         * defaults to {@code disabled}.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
+         */
+        @SerializedName("payment_method_redisplay")
+        String paymentMethodRedisplay;
+
+        /**
+         * Determines the max number of saved payment methods for the Payment Element to display.
+         * This parameter defaults to {@code 10}.
+         */
+        @SerializedName("payment_method_redisplay_limit")
+        Long paymentMethodRedisplayLimit;
+
+        /**
+         * Controls whether the Payment Element displays the option to remove a saved payment
+         * method. This parameter defaults to {@code disabled}.
+         *
+         * <p>Allowing buyers to remove their saved payment methods impacts subscriptions that
+         * depend on that payment method. Removing the payment method detaches the <a
+         * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-customer">{@code
+         * customer} object</a> from that <a
+         * href="https://docs.stripe.com/api/payment_methods">PaymentMethod</a>.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
+         */
+        @SerializedName("payment_method_remove")
+        String paymentMethodRemove;
+
+        /**
+         * Controls whether the Payment Element displays a checkbox offering to save a new payment
+         * method. This parameter defaults to {@code disabled}.
+         *
+         * <p>If a customer checks the box, the <a
+         * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay">{@code
+         * allow_redisplay}</a> value on the PaymentMethod is set to {@code 'always'} at
+         * confirmation time. For PaymentIntents, the <a
+         * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+         * setup_future_usage}</a> value is also set to the value defined in {@code
+         * payment_method_save_usage}.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
+         */
+        @SerializedName("payment_method_save")
+        String paymentMethodSave;
+
+        /**
+         * When using PaymentIntents and the customer checks the save checkbox, this field
+         * determines the <a
+         * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage">{@code
+         * setup_future_usage}</a> value used to confirm the PaymentIntent.
+         *
+         * <p>When using SetupIntents, directly configure the <a
+         * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage">{@code
+         * usage}</a> value on SetupIntent creation.
+         *
+         * <p>One of {@code off_session}, or {@code on_session}.
+         */
+        @SerializedName("payment_method_save_usage")
+        String paymentMethodSaveUsage;
+      }
     }
 
     /** This hash contains whether the pricing table is enabled. */

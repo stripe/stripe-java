@@ -157,7 +157,7 @@ public final class SubscriptionService extends ApiService {
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -173,12 +173,14 @@ public final class SubscriptionService extends ApiService {
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
@@ -207,7 +209,7 @@ public final class SubscriptionService extends ApiService {
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -223,12 +225,14 @@ public final class SubscriptionService extends ApiService {
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
@@ -257,7 +261,7 @@ public final class SubscriptionService extends ApiService {
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -273,12 +277,14 @@ public final class SubscriptionService extends ApiService {
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
@@ -306,7 +312,7 @@ public final class SubscriptionService extends ApiService {
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -322,12 +328,14 @@ public final class SubscriptionService extends ApiService {
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
