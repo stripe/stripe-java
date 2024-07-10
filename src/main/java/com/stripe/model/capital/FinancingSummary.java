@@ -145,8 +145,8 @@ public class FinancingSummary extends ApiResource {
     public static class CurrentRepaymentInterval extends StripeObject {
       /**
        * The time at which the minimum payment amount will be due. If not met through withholding,
-       * the Connected account's linked bank account will be debited. Given in seconds since unix
-       * epoch.
+       * the Connected account's linked bank account or account balance will be debited. Given in
+       * seconds since unix epoch.
        */
       @SerializedName("due_at")
       Long dueAt;
