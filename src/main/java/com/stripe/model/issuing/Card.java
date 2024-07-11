@@ -422,6 +422,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("address")
     Address address;
 
+    /** Address validation details for the shipment. */
+    @SerializedName("address_validation")
+    AddressValidation addressValidation;
+
     /**
      * The delivery company that shipped a card.
      *
@@ -494,6 +498,33 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AddressValidation extends StripeObject {
+      /**
+       * The address validation capabilities to use.
+       *
+       * <p>One of {@code disabled}, {@code normalization_only}, or {@code
+       * validation_and_normalization}.
+       */
+      @SerializedName("mode")
+      String mode;
+
+      /** The normalized shipping address. */
+      @SerializedName("normalized_address")
+      Address normalizedAddress;
+
+      /**
+       * The validation result for the shipping address.
+       *
+       * <p>One of {@code indeterminate}, {@code likely_deliverable}, or {@code
+       * likely_undeliverable}.
+       */
+      @SerializedName("result")
+      String result;
+    }
 
     @Getter
     @Setter

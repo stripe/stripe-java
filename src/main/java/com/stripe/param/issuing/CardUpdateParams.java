@@ -45,6 +45,10 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("pin")
   Pin pin;
 
+  /** Updated shipping information for the card. */
+  @SerializedName("shipping")
+  Shipping shipping;
+
   /**
    * Rules that control spending for this card. Refer to our <a
    * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
@@ -69,6 +73,7 @@ public class CardUpdateParams extends ApiRequestParams {
       Object metadata,
       Object personalizationDesign,
       Pin pin,
+      Shipping shipping,
       SpendingControls spendingControls,
       Status status) {
     this.cancellationReason = cancellationReason;
@@ -77,6 +82,7 @@ public class CardUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.personalizationDesign = personalizationDesign;
     this.pin = pin;
+    this.shipping = shipping;
     this.spendingControls = spendingControls;
     this.status = status;
   }
@@ -98,6 +104,8 @@ public class CardUpdateParams extends ApiRequestParams {
 
     private Pin pin;
 
+    private Shipping shipping;
+
     private SpendingControls spendingControls;
 
     private Status status;
@@ -111,6 +119,7 @@ public class CardUpdateParams extends ApiRequestParams {
           this.metadata,
           this.personalizationDesign,
           this.pin,
+          this.shipping,
           this.spendingControls,
           this.status);
     }
@@ -239,6 +248,12 @@ public class CardUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Updated shipping information for the card. */
+    public Builder setShipping(CardUpdateParams.Shipping shipping) {
+      this.shipping = shipping;
+      return this;
+    }
+
     /**
      * Rules that control spending for this card. Refer to our <a
      * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
@@ -331,6 +346,600 @@ public class CardUpdateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Shipping {
+    /** <strong>Required.</strong> The address that the card is shipped to. */
+    @SerializedName("address")
+    Address address;
+
+    /** Address validation settings. */
+    @SerializedName("address_validation")
+    AddressValidation addressValidation;
+
+    /** Customs information for the shipment. */
+    @SerializedName("customs")
+    Customs customs;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The name printed on the shipping label when shipping the card. */
+    @SerializedName("name")
+    Object name;
+
+    /** Phone number of the recipient of the shipment. */
+    @SerializedName("phone_number")
+    Object phoneNumber;
+
+    /** Whether a signature is required for card delivery. */
+    @SerializedName("require_signature")
+    Boolean requireSignature;
+
+    /** Shipment service. */
+    @SerializedName("service")
+    Service service;
+
+    /** Packaging options. */
+    @SerializedName("type")
+    Type type;
+
+    private Shipping(
+        Address address,
+        AddressValidation addressValidation,
+        Customs customs,
+        Map<String, Object> extraParams,
+        Object name,
+        Object phoneNumber,
+        Boolean requireSignature,
+        Service service,
+        Type type) {
+      this.address = address;
+      this.addressValidation = addressValidation;
+      this.customs = customs;
+      this.extraParams = extraParams;
+      this.name = name;
+      this.phoneNumber = phoneNumber;
+      this.requireSignature = requireSignature;
+      this.service = service;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Address address;
+
+      private AddressValidation addressValidation;
+
+      private Customs customs;
+
+      private Map<String, Object> extraParams;
+
+      private Object name;
+
+      private Object phoneNumber;
+
+      private Boolean requireSignature;
+
+      private Service service;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CardUpdateParams.Shipping build() {
+        return new CardUpdateParams.Shipping(
+            this.address,
+            this.addressValidation,
+            this.customs,
+            this.extraParams,
+            this.name,
+            this.phoneNumber,
+            this.requireSignature,
+            this.service,
+            this.type);
+      }
+
+      /** <strong>Required.</strong> The address that the card is shipped to. */
+      public Builder setAddress(CardUpdateParams.Shipping.Address address) {
+        this.address = address;
+        return this;
+      }
+
+      /** Address validation settings. */
+      public Builder setAddressValidation(
+          CardUpdateParams.Shipping.AddressValidation addressValidation) {
+        this.addressValidation = addressValidation;
+        return this;
+      }
+
+      /** Customs information for the shipment. */
+      public Builder setCustoms(CardUpdateParams.Shipping.Customs customs) {
+        this.customs = customs;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardUpdateParams.Shipping#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardUpdateParams.Shipping#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The name printed on the shipping label when shipping the card.
+       */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The name printed on the shipping label when shipping the card.
+       */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
+      /** Phone number of the recipient of the shipment. */
+      public Builder setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+      }
+
+      /** Phone number of the recipient of the shipment. */
+      public Builder setPhoneNumber(EmptyParam phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+      }
+
+      /** Whether a signature is required for card delivery. */
+      public Builder setRequireSignature(Boolean requireSignature) {
+        this.requireSignature = requireSignature;
+        return this;
+      }
+
+      /** Shipment service. */
+      public Builder setService(CardUpdateParams.Shipping.Service service) {
+        this.service = service;
+        return this;
+      }
+
+      /** Packaging options. */
+      public Builder setType(CardUpdateParams.Shipping.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Address {
+      /** <strong>Required.</strong> City, district, suburb, town, or village. */
+      @SerializedName("city")
+      Object city;
+
+      /**
+       * <strong>Required.</strong> Two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      Object country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      Object line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      Object line2;
+
+      /** <strong>Required.</strong> ZIP or postal code. */
+      @SerializedName("postal_code")
+      Object postalCode;
+
+      /** State, county, province, or region. */
+      @SerializedName("state")
+      Object state;
+
+      private Address(
+          Object city,
+          Object country,
+          Map<String, Object> extraParams,
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object city;
+
+        private Object country;
+
+        private Map<String, Object> extraParams;
+
+        private Object line1;
+
+        private Object line2;
+
+        private Object postalCode;
+
+        private Object state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardUpdateParams.Shipping.Address build() {
+          return new CardUpdateParams.Shipping.Address(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** <strong>Required.</strong> City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /** <strong>Required.</strong> City, district, suburb, town, or village. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(EmptyParam country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.Shipping.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.Shipping.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(EmptyParam line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** <strong>Required.</strong> ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> ZIP or postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(EmptyParam state) {
+          this.state = state;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class AddressValidation {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The address validation capabilities to use. */
+      @SerializedName("mode")
+      Mode mode;
+
+      private AddressValidation(Map<String, Object> extraParams, Mode mode) {
+        this.extraParams = extraParams;
+        this.mode = mode;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Mode mode;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardUpdateParams.Shipping.AddressValidation build() {
+          return new CardUpdateParams.Shipping.AddressValidation(this.extraParams, this.mode);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.Shipping.AddressValidation#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.Shipping.AddressValidation#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The address validation capabilities to use. */
+        public Builder setMode(CardUpdateParams.Shipping.AddressValidation.Mode mode) {
+          this.mode = mode;
+          return this;
+        }
+      }
+
+      public enum Mode implements ApiRequestParams.EnumParam {
+        @SerializedName("disabled")
+        DISABLED("disabled"),
+
+        @SerializedName("normalization_only")
+        NORMALIZATION_ONLY("normalization_only"),
+
+        @SerializedName("validation_and_normalization")
+        VALIDATION_AND_NORMALIZATION("validation_and_normalization");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Mode(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Customs {
+      /**
+       * The Economic Operators Registration and Identification (EORI) number to use for Customs.
+       * Required for bulk shipments to Europe.
+       */
+      @SerializedName("eori_number")
+      Object eoriNumber;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Customs(Object eoriNumber, Map<String, Object> extraParams) {
+        this.eoriNumber = eoriNumber;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object eoriNumber;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardUpdateParams.Shipping.Customs build() {
+          return new CardUpdateParams.Shipping.Customs(this.eoriNumber, this.extraParams);
+        }
+
+        /**
+         * The Economic Operators Registration and Identification (EORI) number to use for Customs.
+         * Required for bulk shipments to Europe.
+         */
+        public Builder setEoriNumber(String eoriNumber) {
+          this.eoriNumber = eoriNumber;
+          return this;
+        }
+
+        /**
+         * The Economic Operators Registration and Identification (EORI) number to use for Customs.
+         * Required for bulk shipments to Europe.
+         */
+        public Builder setEoriNumber(EmptyParam eoriNumber) {
+          this.eoriNumber = eoriNumber;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.Shipping.Customs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.Shipping.Customs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    public enum Service implements ApiRequestParams.EnumParam {
+      @SerializedName("express")
+      EXPRESS("express"),
+
+      @SerializedName("priority")
+      PRIORITY("priority"),
+
+      @SerializedName("standard")
+      STANDARD("standard");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Service(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("bulk")
+      BULK("bulk"),
+
+      @SerializedName("individual")
+      INDIVIDUAL("individual");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }
