@@ -1,5 +1,12 @@
 # Changelog
 
+## 26.3.0 - 2024-07-11
+* [#1835](https://github.com/stripe/stripe-java/pull/1835) Update generated code
+  * Add support for `payment_method_options` on `ConfirmationToken`
+  * Add support for `payment_element` on `CustomerSession.components` and `CustomerSessionCreateParams.components`
+  * Add support for `address_validation` on `Issuing.Card.shipping` and `issuing.CardCreateParams.shipping`
+  * Add support for `shipping` on `issuing.CardUpdateParams`
+
 ## 26.2.0 - 2024-07-05
 * [#1831](https://github.com/stripe/stripe-java/pull/1831) Update generated code
   * Add support for `add_lines`, `remove_lines`, and `update_lines` methods on resource `Invoice`
