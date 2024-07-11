@@ -1029,8 +1029,8 @@ public class Dispute extends ApiResource
         /**
          * Visa Compelling Evidence 3.0 eligibility status.
          *
-         * <p>One of {@code accepted}, {@code partner_rejected}, {@code qualified}, {@code
-         * requires_action}, or {@code submitted}.
+         * <p>One of {@code accepted}, {@code not_qualified}, {@code partner_rejected}, {@code
+         * qualified}, {@code requires_action}, or {@code submitted}.
          */
         @SerializedName("status")
         String status;
