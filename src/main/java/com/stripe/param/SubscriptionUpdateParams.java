@@ -3588,8 +3588,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object paymentMethodTypes;
 
     /**
-     * Either {@code off}, or {@code on_subscription}. With {@code on_subscription} Stripe updates
-     * {@code subscription.default_payment_method} when a subscription payment succeeds.
+     * Configure whether Stripe updates {@code subscription.default_payment_method} when payment
+     * succeeds. Defaults to {@code off} if unspecified.
      */
     @SerializedName("save_default_payment_method")
     SaveDefaultPaymentMethod saveDefaultPaymentMethod;
@@ -3725,8 +3725,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Either {@code off}, or {@code on_subscription}. With {@code on_subscription} Stripe updates
-       * {@code subscription.default_payment_method} when a subscription payment succeeds.
+       * Configure whether Stripe updates {@code subscription.default_payment_method} when payment
+       * succeeds. Defaults to {@code off} if unspecified.
        */
       public Builder setSaveDefaultPaymentMethod(
           SubscriptionUpdateParams.PaymentSettings.SaveDefaultPaymentMethod
