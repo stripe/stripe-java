@@ -25,7 +25,7 @@ import lombok.Setter;
  * Elements use registered payment method domains to control where certain payment methods are
  * shown.
  *
- * <p>Related guides: <a
+ * <p>Related guide: <a
  * href="https://stripe.com/docs/payments/payment-methods/pmd-registration">Payment method
  * domains</a>.
  */

@@ -33,7 +33,7 @@ import lombok.Setter;
  * VerificationReports, use the <a
  * href="https://stripe.com/docs/api/identity/verification_sessions">VerificationSession</a> API.
  *
- * <p>Related guides: <a
+ * <p>Related guide: <a
  * href="https://stripe.com/docs/identity/verification-sessions#results">Accessing verification
  * results</a>.
  */
