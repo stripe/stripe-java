@@ -2092,6 +2092,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("branding")
     Branding branding;
 
+    @SerializedName("capital")
+    Capital capital;
+
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
 
@@ -2209,6 +2212,19 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       public void setLogoObject(File expandableObject) {
         this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Capital extends StripeObject {
+      /** Per-currency mapping of user-selected destination accounts used to pay out loans. */
+      @SerializedName("payout_destination")
+      Map<String, String> payoutDestination;
+
+      /** Per-currency mapping of all destination accounts eligible to receive loan payouts. */
+      @SerializedName("payout_destination_selector")
+      Map<String, List<String>> payoutDestinationSelector;
     }
 
     @Getter

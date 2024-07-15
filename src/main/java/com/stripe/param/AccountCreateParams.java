@@ -10828,6 +10828,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("branding")
     Branding branding;
 
+    /** Settings specific to the account's use of the Capital product. */
+    @SerializedName("capital")
+    Capital capital;
+
     /** Settings specific to the account's use of the Card Issuing product. */
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
@@ -10864,6 +10868,7 @@ public class AccountCreateParams extends ApiRequestParams {
     private Settings(
         BacsDebitPayments bacsDebitPayments,
         Branding branding,
+        Capital capital,
         CardIssuing cardIssuing,
         CardPayments cardPayments,
         Map<String, Object> extraParams,
@@ -10873,6 +10878,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Treasury treasury) {
       this.bacsDebitPayments = bacsDebitPayments;
       this.branding = branding;
+      this.capital = capital;
       this.cardIssuing = cardIssuing;
       this.cardPayments = cardPayments;
       this.extraParams = extraParams;
@@ -10890,6 +10896,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private BacsDebitPayments bacsDebitPayments;
 
       private Branding branding;
+
+      private Capital capital;
 
       private CardIssuing cardIssuing;
 
@@ -10910,6 +10918,7 @@ public class AccountCreateParams extends ApiRequestParams {
         return new AccountCreateParams.Settings(
             this.bacsDebitPayments,
             this.branding,
+            this.capital,
             this.cardIssuing,
             this.cardPayments,
             this.extraParams,
@@ -10932,6 +10941,12 @@ public class AccountCreateParams extends ApiRequestParams {
        */
       public Builder setBranding(AccountCreateParams.Settings.Branding branding) {
         this.branding = branding;
+        return this;
+      }
+
+      /** Settings specific to the account's use of the Capital product. */
+      public Builder setCapital(AccountCreateParams.Settings.Capital capital) {
+        this.capital = capital;
         return this;
       }
 
@@ -11209,6 +11224,140 @@ public class AccountCreateParams extends ApiRequestParams {
         /** A CSS hex color value representing the secondary branding color for this account. */
         public Builder setSecondaryColor(String secondaryColor) {
           this.secondaryColor = secondaryColor;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Capital {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Per-currency mapping of user-selected destination accounts used to pay out loans. */
+      @SerializedName("payout_destination")
+      Map<String, String> payoutDestination;
+
+      /**
+       * Per-currency mapping of all destination accounts eligible to receive Capital financing
+       * payouts.
+       */
+      @SerializedName("payout_destination_selector")
+      Map<String, List<String>> payoutDestinationSelector;
+
+      private Capital(
+          Map<String, Object> extraParams,
+          Map<String, String> payoutDestination,
+          Map<String, List<String>> payoutDestinationSelector) {
+        this.extraParams = extraParams;
+        this.payoutDestination = payoutDestination;
+        this.payoutDestinationSelector = payoutDestinationSelector;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Map<String, String> payoutDestination;
+
+        private Map<String, List<String>> payoutDestinationSelector;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Settings.Capital build() {
+          return new AccountCreateParams.Settings.Capital(
+              this.extraParams, this.payoutDestination, this.payoutDestinationSelector);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.Capital#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.Capital#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `payoutDestination` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.Capital#payoutDestination} for the field
+         * documentation.
+         */
+        public Builder putPayoutDestination(String key, String value) {
+          if (this.payoutDestination == null) {
+            this.payoutDestination = new HashMap<>();
+          }
+          this.payoutDestination.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `payoutDestination` map. A map is initialized for the
+         * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link AccountCreateParams.Settings.Capital#payoutDestination} for the
+         * field documentation.
+         */
+        public Builder putAllPayoutDestination(Map<String, String> map) {
+          if (this.payoutDestination == null) {
+            this.payoutDestination = new HashMap<>();
+          }
+          this.payoutDestination.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `payoutDestinationSelector` map. A map is initialized for the
+         * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link AccountCreateParams.Settings.Capital#payoutDestinationSelector}
+         * for the field documentation.
+         */
+        public Builder putPayoutDestinationSelector(String key, List<String> value) {
+          if (this.payoutDestinationSelector == null) {
+            this.payoutDestinationSelector = new HashMap<>();
+          }
+          this.payoutDestinationSelector.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `payoutDestinationSelector` map. A map is initialized for
+         * the first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link AccountCreateParams.Settings.Capital#payoutDestinationSelector}
+         * for the field documentation.
+         */
+        public Builder putAllPayoutDestinationSelector(Map<String, List<String>> map) {
+          if (this.payoutDestinationSelector == null) {
+            this.payoutDestinationSelector = new HashMap<>();
+          }
+          this.payoutDestinationSelector.putAll(map);
           return this;
         }
       }
