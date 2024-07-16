@@ -85,6 +85,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
+  @SerializedName("async_workflows")
+  AsyncWorkflows asyncWorkflows;
+
   /**
    * Settings to configure compatible payment methods from the <a
    * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard.</a>
@@ -1609,6 +1612,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Portion of the amount that corresponds to a tip. */
       @SerializedName("amount")
       Long amount;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AsyncWorkflows extends StripeObject {
+    @SerializedName("inputs")
+    Inputs inputs;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Inputs extends StripeObject {
+      @SerializedName("tax")
+      Tax tax;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /** The <a href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id */
+        @SerializedName("calculation")
+        String calculation;
+      }
     }
   }
 
@@ -4692,6 +4720,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(asyncWorkflows, responseGetter);
     trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
