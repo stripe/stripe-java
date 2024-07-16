@@ -15,6 +15,7 @@ public class DisputeListParams extends ApiRequestParams {
   @SerializedName("charge")
   String charge;
 
+  /** Only return disputes that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -119,11 +120,13 @@ public class DisputeListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return disputes that were created during the given date interval. */
     public Builder setCreated(DisputeListParams.Created created) {
       this.created = created;
       return this;
     }
 
+    /** Only return disputes that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;

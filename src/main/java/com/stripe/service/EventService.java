@@ -68,29 +68,29 @@ public final class EventService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Event>>() {}.getType());
   }
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public Event retrieve(String id, EventRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public Event retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (EventRetrieveParams) null, options);
   }
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public Event retrieve(String id) throws StripeException {
     return retrieve(id, (EventRetrieveParams) null, (RequestOptions) null);
   }
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {

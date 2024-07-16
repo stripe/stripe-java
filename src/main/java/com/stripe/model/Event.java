@@ -287,24 +287,24 @@ public class Event extends ApiResource implements HasId {
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -316,8 +316,8 @@ public class Event extends ApiResource implements HasId {
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {
