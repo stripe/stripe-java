@@ -5650,6 +5650,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("link")
       LINK("link"),
 
+      @SerializedName("multibanco")
+      MULTIBANCO("multibanco"),
+
       @SerializedName("p24")
       P24("p24"),
 
