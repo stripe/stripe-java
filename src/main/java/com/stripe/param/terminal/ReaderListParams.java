@@ -250,6 +250,9 @@ public class ReaderListParams extends ApiRequestParams {
     @SerializedName("stripe_m2")
     STRIPE_M2("stripe_m2"),
 
+    @SerializedName("stripe_s700")
+    STRIPE_S700("stripe_s700"),
+
     @SerializedName("verifone_P400")
     VERIFONE_P400("verifone_P400");
 

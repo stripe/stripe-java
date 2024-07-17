@@ -57,9 +57,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   String deviceSwVersion;
 
   /**
-   * Type of reader, one of {@code bbpos_wisepad3}, {@code stripe_m2}, {@code bbpos_chipper2x},
-   * {@code bbpos_wisepos_e}, {@code verifone_P400}, {@code simulated_wisepos_e}, or {@code
-   * mobile_phone_reader}.
+   * Type of reader, one of {@code bbpos_wisepad3}, {@code stripe_m2}, {@code stripe_s700}, {@code
+   * bbpos_chipper2x}, {@code bbpos_wisepos_e}, {@code verifone_P400}, {@code simulated_wisepos_e},
+   * or {@code mobile_phone_reader}.
    */
   @SerializedName("device_type")
   String deviceType;
