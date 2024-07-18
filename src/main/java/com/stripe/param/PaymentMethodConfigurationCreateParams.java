@@ -319,6 +319,15 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   Paypal paypal;
 
   /**
+   * PayTo is a <a href="https://docs.stripe.com/payments/real-time">real-time</a> payment method
+   * that enables customers in Australia to pay by providing their bank account details. Customers
+   * must accept a mandate authorizing you to debit their account. Check this <a
+   * href="https://docs.stripe.com/payments/payto">page</a> for more details.
+   */
+  @SerializedName("payto")
+  Payto payto;
+
+  /**
    * PromptPay is a Thailand-based payment method that allows customers to make a payment using
    * their preferred app from participating banks. Check this <a
    * href="https://stripe.com/docs/payments/promptpay">page</a> for more details.
@@ -427,6 +436,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
       String parent,
       Paynow paynow,
       Paypal paypal,
+      Payto payto,
       Promptpay promptpay,
       RevolutPay revolutPay,
       SepaDebit sepaDebit,
@@ -471,6 +481,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     this.parent = parent;
     this.paynow = paynow;
     this.paypal = paypal;
+    this.payto = payto;
     this.promptpay = promptpay;
     this.revolutPay = revolutPay;
     this.sepaDebit = sepaDebit;
@@ -558,6 +569,8 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
 
     private Paypal paypal;
 
+    private Payto payto;
+
     private Promptpay promptpay;
 
     private RevolutPay revolutPay;
@@ -613,6 +626,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
           this.parent,
           this.paynow,
           this.paypal,
+          this.payto,
           this.promptpay,
           this.revolutPay,
           this.sepaDebit,
@@ -1040,6 +1054,17 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
      */
     public Builder setPaypal(PaymentMethodConfigurationCreateParams.Paypal paypal) {
       this.paypal = paypal;
+      return this;
+    }
+
+    /**
+     * PayTo is a <a href="https://docs.stripe.com/payments/real-time">real-time</a> payment method
+     * that enables customers in Australia to pay by providing their bank account details. Customers
+     * must accept a mandate authorizing you to debit their account. Check this <a
+     * href="https://docs.stripe.com/payments/payto">page</a> for more details.
+     */
+    public Builder setPayto(PaymentMethodConfigurationCreateParams.Payto payto) {
+      this.payto = payto;
       return this;
     }
 
@@ -6342,6 +6367,169 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationCreateParams.Paypal.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class Payto {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Payto(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationCreateParams.Payto build() {
+        return new PaymentMethodConfigurationCreateParams.Payto(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationCreateParams.Payto.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationCreateParams.Payto#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationCreateParams.Payto#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationCreateParams.Payto.DisplayPreference build() {
+          return new PaymentMethodConfigurationCreateParams.Payto.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.Payto.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.Payto.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationCreateParams.Payto.DisplayPreference.Preference preference) {
           this.preference = preference;
           return this;
         }
