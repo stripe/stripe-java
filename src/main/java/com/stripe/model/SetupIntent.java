@@ -359,7 +359,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
@@ -370,7 +372,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
@@ -381,7 +385,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -392,7 +398,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -409,7 +417,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(SetupIntentCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -420,7 +430,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>After you cancel it, setup is abandoned and any operations on the SetupIntent fail with an
-   * error.
+   * error. You can’t cancel the SetupIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead.
    */
   public SetupIntent cancel(SetupIntentCancelParams params, RequestOptions options)
       throws StripeException {
@@ -1217,6 +1229,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections extends StripeObject {
+        @SerializedName("filters")
+        Filters filters;
+
         /**
          * The list of permissions to request. The {@code payment_method} permission must be
          * included.
@@ -1234,6 +1249,18 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
          */
         @SerializedName("return_url")
         String returnUrl;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Filters extends StripeObject {
+          /**
+           * The account subcategories to use to filter for possible accounts to link. Valid
+           * subcategories are {@code checking} and {@code savings}.
+           */
+          @SerializedName("account_subcategories")
+          List<String> accountSubcategories;
+        }
       }
 
       @Getter

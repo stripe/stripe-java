@@ -154,6 +154,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("mobilepay")
   Mobilepay mobilepay;
 
+  @SerializedName("multibanco")
+  Multibanco multibanco;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -199,6 +202,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("swish")
   Swish swish;
 
+  @SerializedName("twint")
+  Twint twint;
+
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
@@ -208,9 +214,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance},
    * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
    * interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay}, {@code
-   * oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix}, {@code promptpay}, {@code
-   * revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code us_bank_account},
-   * {@code wechat_pay}, or {@code zip}.
+   * multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix}, {@code
+   * promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code
+   * twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -833,6 +839,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("funding")
     String funding;
 
+    /** Details of the original PaymentMethod that created this object. */
+    @SerializedName("generated_from")
+    GeneratedFrom generatedFrom;
+
     /**
      * Issuer identification number of the card. (For internal use only and not typically available
      * in standard API requests.)
@@ -887,6 +897,271 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("cvc_check")
       String cvcCheck;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GeneratedFrom extends StripeObject {
+      /** The charge that created this object. */
+      @SerializedName("charge")
+      String charge;
+
+      /** Transaction-specific details of the payment method used in the payment. */
+      @SerializedName("payment_method_details")
+      PaymentMethodDetails paymentMethodDetails;
+
+      /** The ID of the SetupAttempt that generated this PaymentMethod, if any. */
+      @SerializedName("setup_attempt")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<SetupAttempt> setupAttempt;
+
+      /** Get ID of expandable {@code setupAttempt} object. */
+      public String getSetupAttempt() {
+        return (this.setupAttempt != null) ? this.setupAttempt.getId() : null;
+      }
+
+      public void setSetupAttempt(String id) {
+        this.setupAttempt = ApiResource.setExpandableFieldId(id, this.setupAttempt);
+      }
+
+      /** Get expanded {@code setupAttempt}. */
+      public SetupAttempt getSetupAttemptObject() {
+        return (this.setupAttempt != null) ? this.setupAttempt.getExpanded() : null;
+      }
+
+      public void setSetupAttemptObject(SetupAttempt expandableObject) {
+        this.setupAttempt =
+            new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentMethodDetails extends StripeObject {
+        @SerializedName("card_present")
+        CardPresent cardPresent;
+
+        /**
+         * The type of payment method transaction-specific details from the transaction that
+         * generated this {@code card} payment method. Always {@code card_present}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CardPresent extends StripeObject {
+          /** The authorized amount. */
+          @SerializedName("amount_authorized")
+          Long amountAuthorized;
+
+          /**
+           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+           * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+           */
+          @SerializedName("brand")
+          String brand;
+
+          /**
+           * When using manual capture, a future timestamp after which the charge will be
+           * automatically refunded if uncaptured.
+           */
+          @SerializedName("capture_before")
+          Long captureBefore;
+
+          /**
+           * The cardholder name as read from the card, in <a
+           * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
+           * alphanumeric characters, special characters and first/last name separator ({@code /}).
+           * In some cases, the cardholder name may not be available depending on how the issuer has
+           * configured the card. Cardholder name is typically not available on swipe or contactless
+           * payments, such as those made with Apple Pay and Google Pay.
+           */
+          @SerializedName("cardholder_name")
+          String cardholderName;
+
+          /**
+           * Two-letter ISO code representing the country of the card. You could use this attribute
+           * to get a sense of the international breakdown of cards you've collected.
+           */
+          @SerializedName("country")
+          String country;
+
+          /**
+           * A high-level description of the type of cards issued in this range. (For internal use
+           * only and not typically available in standard API requests.)
+           */
+          @SerializedName("description")
+          String description;
+
+          /** Authorization response cryptogram. */
+          @SerializedName("emv_auth_data")
+          String emvAuthData;
+
+          /** Two-digit number representing the card's expiration month. */
+          @SerializedName("exp_month")
+          Long expMonth;
+
+          /** Four-digit number representing the card's expiration year. */
+          @SerializedName("exp_year")
+          Long expYear;
+
+          /**
+           * Uniquely identifies this particular card number. You can use this attribute to check
+           * whether two customers who’ve signed up with you are using the same card number, for
+           * example. For payment methods that tokenize card information (Apple Pay, Google Pay),
+           * the tokenized number might be provided instead of the underlying card number.
+           *
+           * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+           * fingerprints for the same card---one for India and one for the rest of the world.</em>
+           */
+          @SerializedName("fingerprint")
+          String fingerprint;
+
+          /**
+           * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+           * unknown}.
+           */
+          @SerializedName("funding")
+          String funding;
+
+          /**
+           * ID of a card PaymentMethod generated from the card_present PaymentMethod that may be
+           * attached to a Customer for future transactions. Only present if it was possible to
+           * generate a card PaymentMethod.
+           */
+          @SerializedName("generated_card")
+          String generatedCard;
+
+          /**
+           * Issuer identification number of the card. (For internal use only and not typically
+           * available in standard API requests.)
+           */
+          @SerializedName("iin")
+          String iin;
+
+          /**
+           * Whether this <a href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> is
+           * eligible for incremental authorizations. Request support using <a
+           * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
+           */
+          @SerializedName("incremental_authorization_supported")
+          Boolean incrementalAuthorizationSupported;
+
+          /**
+           * The name of the card's issuing bank. (For internal use only and not typically available
+           * in standard API requests.)
+           */
+          @SerializedName("issuer")
+          String issuer;
+
+          /** The last four digits of the card. */
+          @SerializedName("last4")
+          String last4;
+
+          /**
+           * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+           * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
+           * interac}, {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
+           * unknown}.
+           */
+          @SerializedName("network")
+          String network;
+
+          /** Details about payments collected offline. */
+          @SerializedName("offline")
+          Offline offline;
+
+          /** Defines whether the authorized amount can be over-captured or not. */
+          @SerializedName("overcapture_supported")
+          Boolean overcaptureSupported;
+
+          /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+          @SerializedName("preferred_locales")
+          List<String> preferredLocales;
+
+          /**
+           * How card details were read in this transaction.
+           *
+           * <p>One of {@code contact_emv}, {@code contactless_emv}, {@code
+           * contactless_magstripe_mode}, {@code magnetic_stripe_fallback}, or {@code
+           * magnetic_stripe_track2}.
+           */
+          @SerializedName("read_method")
+          String readMethod;
+
+          /**
+           * A collection of fields required to be displayed on receipts. Only required for EMV
+           * transactions.
+           */
+          @SerializedName("receipt")
+          Receipt receipt;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Offline extends StripeObject {
+            /** Time at which the payment was collected while offline. */
+            @SerializedName("stored_at")
+            Long storedAt;
+          }
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Receipt extends StripeObject {
+            /**
+             * The type of account being debited or credited
+             *
+             * <p>One of {@code checking}, {@code credit}, {@code prepaid}, or {@code unknown}.
+             */
+            @SerializedName("account_type")
+            String accountType;
+
+            /** EMV tag 9F26, cryptogram generated by the integrated circuit chip. */
+            @SerializedName("application_cryptogram")
+            String applicationCryptogram;
+
+            /** Mnenomic of the Application Identifier. */
+            @SerializedName("application_preferred_name")
+            String applicationPreferredName;
+
+            /** Identifier for this transaction. */
+            @SerializedName("authorization_code")
+            String authorizationCode;
+
+            /** EMV tag 8A. A code returned by the card issuer. */
+            @SerializedName("authorization_response_code")
+            String authorizationResponseCode;
+
+            /**
+             * Describes the method used by the cardholder to verify ownership of the card. One of
+             * the following: {@code approval}, {@code failure}, {@code none}, {@code offline_pin},
+             * {@code offline_pin_and_signature}, {@code online_pin}, or {@code signature}.
+             */
+            @SerializedName("cardholder_verification_method")
+            String cardholderVerificationMethod;
+
+            /**
+             * EMV tag 84. Similar to the application identifier stored on the integrated circuit
+             * chip.
+             */
+            @SerializedName("dedicated_file_name")
+            String dedicatedFileName;
+
+            /** The outcome of a series of EMV functions performed by the card reader. */
+            @SerializedName("terminal_verification_results")
+            String terminalVerificationResults;
+
+            /** An indication of various EMV functions performed during the transaction. */
+            @SerializedName("transaction_status_information")
+            String transactionStatusInformation;
+          }
+        }
+      }
     }
 
     @Getter
@@ -1129,6 +1404,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** Contains information about card networks that can be used to process the payment. */
     @SerializedName("networks")
     Networks networks;
+
+    /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+    @SerializedName("preferred_locales")
+    List<String> preferredLocales;
 
     /**
      * How card details were read in this transaction.
@@ -1409,6 +1688,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Multibanco extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Oxxo extends StripeObject {}
 
   @Getter
@@ -1586,6 +1870,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Twint extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class UsBankAccount extends StripeObject {
     /**
      * Account holder type: individual or company.
@@ -1719,6 +2008,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(konbini, responseGetter);
     trySetResponseGetter(link, responseGetter);
     trySetResponseGetter(mobilepay, responseGetter);
+    trySetResponseGetter(multibanco, responseGetter);
     trySetResponseGetter(oxxo, responseGetter);
     trySetResponseGetter(p24, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
@@ -1730,6 +2020,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);
+    trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
     trySetResponseGetter(wechatPay, responseGetter);
     trySetResponseGetter(zip, responseGetter);

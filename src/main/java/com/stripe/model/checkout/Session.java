@@ -242,7 +242,12 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. */
+  /**
+   * The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. You can't confirm or
+   * cancel the PaymentIntent for a Checkout Session. To cancel, <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>
+   * instead.
+   */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -321,7 +326,12 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("saved_payment_method_options")
   SavedPaymentMethodOptions savedPaymentMethodOptions;
 
-  /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
+  /**
+   * The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. You can't confirm or
+   * cancel the SetupIntent for a Checkout Session. To cancel, <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>
+   * instead.
+   */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -992,6 +1002,10 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown extends StripeObject {
+      /** The value that will pre-fill on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The options available for the customer to select. Up to 200 options allowed. */
       @SerializedName("options")
       List<Session.CustomField.Dropdown.Option> options;
@@ -1039,6 +1053,10 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric extends StripeObject {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The maximum character length constraint for the customer's input. */
       @SerializedName("maximum_length")
       Long maximumLength;
@@ -1056,6 +1074,10 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Text extends StripeObject {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The maximum character length constraint for the customer's input. */
       @SerializedName("maximum_length")
       Long maximumLength;
@@ -1190,7 +1212,8 @@ public class Session extends ApiResource implements HasId {
        * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code
        * ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin},
        * {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code
-       * kz_bin}, {@code ng_tin}, {@code om_vat}, or {@code unknown}.
+       * kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code
+       * unknown}.
        */
       @SerializedName("type")
       String type;
@@ -1438,6 +1461,9 @@ public class Session extends ApiResource implements HasId {
 
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
+
+    @SerializedName("multibanco")
+    Multibanco multibanco;
 
     @SerializedName("oxxo")
     Oxxo oxxo;
@@ -2175,6 +2201,31 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {
       /**
        * The number of calendar days before an OXXO invoice expires. For example, if you create an
@@ -2435,6 +2486,9 @@ public class Session extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections extends StripeObject {
+        @SerializedName("filters")
+        Filters filters;
+
         /**
          * The list of permissions to request. The {@code payment_method} permission must be
          * included.
@@ -2452,6 +2506,18 @@ public class Session extends ApiResource implements HasId {
          */
         @SerializedName("return_url")
         String returnUrl;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Filters extends StripeObject {
+          /**
+           * The account subcategories to use to filter for possible accounts to link. Valid
+           * subcategories are {@code checking} and {@code savings}.
+           */
+          @SerializedName("account_subcategories")
+          List<String> accountSubcategories;
+        }
       }
     }
   }
@@ -2470,11 +2536,21 @@ public class Session extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class SavedPaymentMethodOptions extends StripeObject {
     /**
-     * Controls which payment methods are eligible to be redisplayed to returning customers.
-     * Corresponds to {@code allow_redisplay} on the payment method.
+     * Uses the {@code allow_redisplay} value of each saved payment method to filter the set
+     * presented to a returning customer. By default, only saved payment methods with
+     * ’allow_redisplay: ‘always’ are shown in Checkout.
      */
     @SerializedName("allow_redisplay_filters")
     List<String> allowRedisplayFilters;
+
+    /**
+     * Enable customers to choose if they wish to remove their saved payment methods. Disabled by
+     * default.
+     *
+     * <p>One of {@code disabled}, or {@code enabled}.
+     */
+    @SerializedName("payment_method_remove")
+    String paymentMethodRemove;
 
     /**
      * Enable customers to choose if they wish to save their payment method for future use. Disabled

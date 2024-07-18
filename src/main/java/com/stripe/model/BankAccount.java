@@ -24,11 +24,8 @@ import lombok.Setter;
  * These bank accounts are payment methods on {@code Customer} objects.
  *
  * <p>On the other hand <a href="https://stripe.com/api#external_accounts">External Accounts</a> are
- * transfer destinations on {@code Account} objects for accounts where <a
- * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
- * is {@code application}, which includes <a
- * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>. They can be bank accounts
- * or debit cards as well, and are documented in the links above.
+ * transfer destinations on {@code Account} objects for connected accounts. They can be bank
+ * accounts or debit cards as well, and are documented in the links above.
  *
  * <p>Related guide: <a href="https://stripe.com/payments/bank-debits-transfers">Bank debits and
  * transfers</a>
@@ -598,8 +595,9 @@ public class BankAccount extends ApiResource
        * verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, or {@code
-       * verification_requires_additional_memorandum_of_associations}.
+       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_requires_additional_memorandum_of_associations}, or {@code
+       * verification_requires_additional_proof_of_registration}.
        */
       @SerializedName("code")
       String code;
@@ -714,8 +712,9 @@ public class BankAccount extends ApiResource
        * verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, or {@code
-       * verification_requires_additional_memorandum_of_associations}.
+       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_requires_additional_memorandum_of_associations}, or {@code
+       * verification_requires_additional_proof_of_registration}.
        */
       @SerializedName("code")
       String code;

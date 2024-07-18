@@ -31,14 +31,14 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
   /**
    * Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending
-   * proration invoice items.
+   * proration invoice items. Defaults to {@code true}.
    */
   @SerializedName("invoice_now")
   Boolean invoiceNow;
 
   /**
    * Will generate a proration invoice item that credits remaining unused time until the
-   * subscription period end.
+   * subscription period end. Defaults to {@code false}.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -138,7 +138,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
     /**
      * Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending
-     * proration invoice items.
+     * proration invoice items. Defaults to {@code true}.
      */
     public Builder setInvoiceNow(Boolean invoiceNow) {
       this.invoiceNow = invoiceNow;
@@ -147,7 +147,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
     /**
      * Will generate a proration invoice item that credits remaining unused time until the
-     * subscription period end.
+     * subscription period end. Defaults to {@code false}.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;

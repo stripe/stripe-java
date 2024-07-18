@@ -136,10 +136,10 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
   /**
    * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-   * not provided, but a {@code subscription_items} is provided, you will preview creating a
-   * subscription with those items. If neither {@code subscription} nor {@code subscription_items}
-   * is provided, you will retrieve the next upcoming invoice from among the customer's
-   * subscriptions.
+   * not provided, but a {@code subscription_details.items} is provided, you will preview creating a
+   * subscription with those items. If neither {@code subscription} nor {@code
+   * subscription_details.items} is provided, you will retrieve the next upcoming invoice from among
+   * the customer's subscriptions.
    */
   @SerializedName("subscription")
   String subscription;
@@ -698,10 +698,10 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
     /**
      * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-     * not provided, but a {@code subscription_items} is provided, you will preview creating a
-     * subscription with those items. If neither {@code subscription} nor {@code subscription_items}
-     * is provided, you will retrieve the next upcoming invoice from among the customer's
-     * subscriptions.
+     * not provided, but a {@code subscription_details.items} is provided, you will preview creating
+     * a subscription with those items. If neither {@code subscription} nor {@code
+     * subscription_details.items} is provided, you will retrieve the next upcoming invoice from
+     * among the customer's subscriptions.
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
@@ -1847,17 +1847,18 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
        * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
        * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
        * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code
-       * cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code do_rcn}, {@code ec_ruc},
-       * {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
-       * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-       * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
-       * kr_brn}, {@code kz_bin}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn},
-       * {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code nz_gst}, {@code
-       * om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn},
-       * {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code
-       * sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein},
-       * {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, or {@code za_vat}
+       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
+       * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
+       * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
+       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp},
+       * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code
+       * jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code mx_rfc},
+       * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
+       * no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin},
+       * {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code
+       * sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat},
+       * {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, or {@code
+       * za_vat}
        */
       @SerializedName("type")
       Type type;
@@ -1921,17 +1922,18 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
          * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
          * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
          * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code
-         * cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code do_rcn}, {@code ec_ruc},
-         * {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat},
-         * {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code
-         * in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin},
-         * {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code
-         * my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code nz_gst},
-         * {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code
-         * ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin},
-         * {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code
-         * us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, or {@code za_vat}
+         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
+         * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
+         * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat},
+         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code
+         * id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn},
+         * {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code
+         * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat},
+         * {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
+         * ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst},
+         * {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code
+         * tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin},
+         * or {@code za_vat}
          */
         public Builder setType(InvoiceUpcomingLinesListParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1994,6 +1996,9 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         @SerializedName("ca_qst")
         CA_QST("ca_qst"),
 
+        @SerializedName("ch_uid")
+        CH_UID("ch_uid"),
+
         @SerializedName("ch_vat")
         CH_VAT("ch_vat"),
 
@@ -2008,6 +2013,9 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
         @SerializedName("cr_tin")
         CR_TIN("cr_tin"),
+
+        @SerializedName("de_stn")
+        DE_STN("de_stn"),
 
         @SerializedName("do_rcn")
         DO_RCN("do_rcn"),
@@ -2352,13 +2360,13 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     @SerializedName("period")
     Period period;
 
-    /** The ID of the price object. */
+    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -2680,7 +2688,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. */
+      /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
@@ -2688,7 +2696,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(InvoiceUpcomingLinesListParams.InvoiceItem.PriceData priceData) {
         this.priceData = priceData;
@@ -4240,13 +4248,13 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The ID of the price object. */
+        /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
         @SerializedName("price")
         String price;
 
         /**
          * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-         * inline.
+         * inline. One of {@code price} or {@code price_data} is required.
          */
         @SerializedName("price_data")
         PriceData priceData;
@@ -4369,7 +4377,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the price object. */
+          /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
@@ -4377,7 +4385,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
           /**
            * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a>
-           * object inline.
+           * object inline. One of {@code price} or {@code price_data} is required.
            */
           public Builder setPriceData(
               InvoiceUpcomingLinesListParams.ScheduleDetails.Phase.AddInvoiceItem.PriceData
@@ -6977,15 +6985,16 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       String plan;
 
       /**
-       * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-       * set to 1 unless a {@code quantity} parameter is provided.
+       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
+       * quantity} parameter is provided.
        */
       @SerializedName("price")
       String price;
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       @SerializedName("price_data")
       PriceData priceData;
@@ -7256,8 +7265,9 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         /**
-         * The ID of the price object. When changing a subscription item's price, {@code quantity}
-         * is set to 1 unless a {@code quantity} parameter is provided.
+         * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+         * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
+         * quantity} parameter is provided.
          */
         public Builder setPrice(String price) {
           this.price = price;
@@ -7266,7 +7276,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
         /**
          * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-         * inline.
+         * inline. One of {@code price} or {@code price_data} is required.
          */
         public Builder setPriceData(
             InvoiceUpcomingLinesListParams.SubscriptionDetails.Item.PriceData priceData) {
@@ -7973,15 +7983,16 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     String plan;
 
     /**
-     * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-     * set to 1 unless a {@code quantity} parameter is provided.
+     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
+     * parameter is provided.
      */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -8246,8 +8257,9 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price object. When changing a subscription item's price, {@code quantity} is
-       * set to 1 unless a {@code quantity} parameter is provided.
+       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
+       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
+       * quantity} parameter is provided.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -8256,7 +8268,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(
           InvoiceUpcomingLinesListParams.SubscriptionItem.PriceData priceData) {

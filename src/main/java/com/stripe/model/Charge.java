@@ -1233,6 +1233,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("twint")
+    Twint twint;
+
     /**
      * The type of transaction-specific details of the payment method used in the payment, one of
      * {@code ach_credit_transfer}, {@code ach_debit}, {@code acss_debit}, {@code alipay}, {@code
@@ -2147,6 +2150,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("overcapture_supported")
       Boolean overcaptureSupported;
 
+      /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+      @SerializedName("preferred_locales")
+      List<String> preferredLocales;
+
       /**
        * How card details were read in this transaction.
        *
@@ -2609,9 +2616,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * fi-FI}, {@code sv-FI}, {@code en-FI}, {@code en-GB}, {@code en-IE}, {@code it-IT}, {@code
        * en-IT}, {@code nl-NL}, {@code en-NL}, {@code nb-NO}, {@code en-NO}, {@code sv-SE}, {@code
        * en-SE}, {@code en-US}, {@code es-US}, {@code fr-FR}, {@code en-FR}, {@code cs-CZ}, {@code
-       * en-CZ}, {@code el-GR}, {@code en-GR}, {@code en-AU}, {@code en-NZ}, {@code en-CA}, {@code
-       * fr-CA}, {@code pl-PL}, {@code en-PL}, {@code pt-PT}, {@code en-PT}, {@code de-CH}, {@code
-       * fr-CH}, {@code it-CH}, or {@code en-CH}
+       * en-CZ}, {@code ro-RO}, {@code en-RO}, {@code el-GR}, {@code en-GR}, {@code en-AU}, {@code
+       * en-NZ}, {@code en-CA}, {@code fr-CA}, {@code pl-PL}, {@code en-PL}, {@code pt-PT}, {@code
+       * en-PT}, {@code de-CH}, {@code fr-CH}, {@code it-CH}, or {@code en-CH}
        */
       @SerializedName("preferred_locale")
       String preferredLocale;
@@ -2996,6 +3003,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("verified_phone_last4")
       String verifiedPhoneLast4;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {}
 
     @Getter
     @Setter

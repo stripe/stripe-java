@@ -85,6 +85,10 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The Unix timestamp representing when the tax liability is assumed or reduced. */
+  @SerializedName("posted_at")
+  Long postedAt;
+
   /** A custom unique identifier, such as 'myOrder_123'. */
   @SerializedName("reference")
   String reference;
@@ -113,13 +117,19 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("type")
   String type;
 
-  /** Creates a Tax {@code Transaction} from a calculation. */
+  /**
+   * Creates a Tax Transaction from a calculation, if that calculation hasn’t expired. Calculations
+   * expire after 90 days.
+   */
   public static Transaction createFromCalculation(Map<String, Object> params)
       throws StripeException {
     return createFromCalculation(params, (RequestOptions) null);
   }
 
-  /** Creates a Tax {@code Transaction} from a calculation. */
+  /**
+   * Creates a Tax Transaction from a calculation, if that calculation hasn’t expired. Calculations
+   * expire after 90 days.
+   */
   public static Transaction createFromCalculation(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/tax/transactions/create_from_calculation";
@@ -129,13 +139,19 @@ public class Transaction extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
-  /** Creates a Tax {@code Transaction} from a calculation. */
+  /**
+   * Creates a Tax Transaction from a calculation, if that calculation hasn’t expired. Calculations
+   * expire after 90 days.
+   */
   public static Transaction createFromCalculation(TransactionCreateFromCalculationParams params)
       throws StripeException {
     return createFromCalculation(params, (RequestOptions) null);
   }
 
-  /** Creates a Tax {@code Transaction} from a calculation. */
+  /**
+   * Creates a Tax Transaction from a calculation, if that calculation hasn’t expired. Calculations
+   * expire after 90 days.
+   */
   public static Transaction createFromCalculation(
       TransactionCreateFromCalculationParams params, RequestOptions options)
       throws StripeException {
@@ -358,7 +374,8 @@ public class Transaction extends ApiResource implements HasId {
        * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code
        * ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin},
        * {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code
-       * kz_bin}, {@code ng_tin}, {@code om_vat}, or {@code unknown}.
+       * kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code
+       * unknown}.
        */
       @SerializedName("type")
       String type;

@@ -1,8 +1,8 @@
 {
-    "recommendations": [
-        "vscjava.vscode-java-pack",
-        "GabrielBB.vscode-lombok",
-        "naco-siren.gradle-language",
-        "EditorConfig.editorconfig"
-    ]
+  "recommendations": [
+    "EditorConfig.editorconfig", // default
+    "vscjava.vscode-java-pack", // intellisense and tooling
+    "richardwillis.vscode-spotless-gradle", // formatting
+    "naco-siren.gradle-language" // also, gradle
+  ]
 }

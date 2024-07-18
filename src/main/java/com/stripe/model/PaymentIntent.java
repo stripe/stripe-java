@@ -1528,6 +1528,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("konbini_display_details")
     KonbiniDisplayDetails konbiniDisplayDetails;
 
+    @SerializedName("multibanco_display_details")
+    MultibancoDisplayDetails multibancoDisplayDetails;
+
     @SerializedName("oxxo_display_details")
     OxxoDisplayDetails oxxoDisplayDetails;
 
@@ -1994,6 +1997,30 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class MultibancoDisplayDetails extends StripeObject {
+      /** Entity number associated with this Multibanco payment. */
+      @SerializedName("entity")
+      String entity;
+
+      /** The timestamp at which the Multibanco voucher expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * The URL for the hosted Multibanco voucher page, which allows customers to view a Multibanco
+       * voucher.
+       */
+      @SerializedName("hosted_voucher_url")
+      String hostedVoucherUrl;
+
+      /** Reference number associated with this Multibanco payment. */
+      @SerializedName("reference")
+      String reference;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class OxxoDisplayDetails extends StripeObject {
       /** The timestamp after which the OXXO voucher expires. */
       @SerializedName("expires_after")
@@ -2349,6 +2376,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
 
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -2378,6 +2408,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("swish")
     Swish swish;
+
+    @SerializedName("twint")
+    Twint twint;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -3014,6 +3047,22 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("request_incremental_authorization_support")
       Boolean requestIncrementalAuthorizationSupport;
+
+      @SerializedName("routing")
+      Routing routing;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Routing extends StripeObject {
+        /**
+         * Requested routing priority
+         *
+         * <p>One of {@code domestic}, or {@code international}.
+         */
+        @SerializedName("requested_priority")
+        String requestedPriority;
+      }
     }
 
     @Getter
@@ -3425,6 +3474,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {
       /**
        * The number of calendar days before an OXXO invoice expires. For example, if you create an
@@ -3740,6 +3814,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
@@ -3787,6 +3886,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections extends StripeObject {
+        @SerializedName("filters")
+        Filters filters;
+
         /**
          * The list of permissions to request. The {@code payment_method} permission must be
          * included.
@@ -3804,6 +3906,18 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("return_url")
         String returnUrl;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Filters extends StripeObject {
+          /**
+           * The account subcategories to use to filter for possible accounts to link. Valid
+           * subcategories are {@code checking} and {@code savings}.
+           */
+          @SerializedName("account_subcategories")
+          List<String> accountSubcategories;
+        }
       }
 
       @Getter

@@ -1000,6 +1000,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String fpxPayments;
 
     /**
+     * The status of the GB customer_balance payments (GBP currency) capability of the account, or
+     * whether the account can directly process GB customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("gb_bank_transfer_payments")
+    String gbBankTransferPayments;
+
+    /**
      * The status of the giropay payments capability of the account, or whether the account can
      * directly process giropay charges.
      *
@@ -1045,6 +1054,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String jcbPayments;
 
     /**
+     * The status of the Japanese customer_balance payments (JPY currency) capability of the
+     * account, or whether the account can directly process Japanese customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("jp_bank_transfer_payments")
+    String jpBankTransferPayments;
+
+    /**
      * The status of the Klarna payments capability of the account, or whether the account can
      * directly process Klarna charges.
      *
@@ -1080,13 +1098,31 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String linkPayments;
 
     /**
-     * The status of the MobilepPay capability of the account, or whether the account can directly
+     * The status of the MobilePay capability of the account, or whether the account can directly
      * process MobilePay charges.
      *
      * <p>One of {@code active}, {@code inactive}, or {@code pending}.
      */
     @SerializedName("mobilepay_payments")
     String mobilepayPayments;
+
+    /**
+     * The status of the Multibanco payments capability of the account, or whether the account can
+     * directly process Multibanco charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("multibanco_payments")
+    String multibancoPayments;
+
+    /**
+     * The status of the Mexican customer_balance payments (MXN currency) capability of the account,
+     * or whether the account can directly process Mexican customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("mx_bank_transfer_payments")
+    String mxBankTransferPayments;
 
     /**
      * The status of the OXXO payments capability of the account, or whether the account can
@@ -1132,6 +1168,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("revolut_pay_payments")
     String revolutPayPayments;
+
+    /**
+     * The status of the SEPA customer_balance payments (EUR currency) capability of the account, or
+     * whether the account can directly process SEPA customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sepa_bank_transfer_payments")
+    String sepaBankTransferPayments;
 
     /**
      * The status of the SEPA Direct Debits payments capability of the account, or whether the
@@ -1194,6 +1239,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String treasury;
 
     /**
+     * The status of the TWINT capability of the account, or whether the account can directly
+     * process TWINT charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("twint_payments")
+    String twintPayments;
+
+    /**
      * The status of the US bank account ACH payments capability of the account, or whether the
      * account can directly process US bank account charges.
      *
@@ -1201,6 +1255,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("us_bank_account_ach_payments")
     String usBankAccountAchPayments;
+
+    /**
+     * The status of the US customer_balance payments (USD currency) capability of the account, or
+     * whether the account can directly process US customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("us_bank_transfer_payments")
+    String usBankTransferPayments;
 
     /**
      * The status of the Zip capability of the account, or whether the account can directly process
@@ -1726,8 +1789,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, or {@code
-       * verification_requires_additional_memorandum_of_associations}.
+       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_requires_additional_memorandum_of_associations}, or {@code
+       * verification_requires_additional_proof_of_registration}.
        */
       @SerializedName("code")
       String code;
@@ -1893,8 +1957,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, or {@code
-       * verification_requires_additional_memorandum_of_associations}.
+       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_requires_additional_memorandum_of_associations}, or {@code
+       * verification_requires_additional_proof_of_registration}.
        */
       @SerializedName("code")
       String code;

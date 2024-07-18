@@ -17,7 +17,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
-   * (exclusive).
+   * (exclusive). Must be aligned with minute boundaries.
    */
   @SerializedName("end_time")
   Long endTime;
@@ -53,7 +53,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The timestamp from when to start aggregating meter events
-   * (inclusive).
+   * (inclusive). Must be aligned with minute boundaries.
    */
   @SerializedName("start_time")
   Long startTime;
@@ -69,7 +69,9 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
   /**
    * Specifies what granularity to use when generating event summaries. If not specified, a single
-   * event summary would be returned for the specified time range.
+   * event summary would be returned for the specified time range. For hourly granularity, start and
+   * end times must align with hour boundaries (e.g., 00:00, 01:00, ..., 23:00). For daily
+   * granularity, start and end times must align with UTC day boundaries (00:00 UTC).
    */
   @SerializedName("value_grouping_window")
   ValueGroupingWindow valueGroupingWindow;
@@ -140,7 +142,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
-     * (exclusive).
+     * (exclusive). Must be aligned with minute boundaries.
      */
     public Builder setEndTime(Long endTime) {
       this.endTime = endTime;
@@ -221,7 +223,7 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The timestamp from when to start aggregating meter events
-     * (inclusive).
+     * (inclusive). Must be aligned with minute boundaries.
      */
     public Builder setStartTime(Long startTime) {
       this.startTime = startTime;
@@ -241,7 +243,9 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
     /**
      * Specifies what granularity to use when generating event summaries. If not specified, a single
-     * event summary would be returned for the specified time range.
+     * event summary would be returned for the specified time range. For hourly granularity, start
+     * and end times must align with hour boundaries (e.g., 00:00, 01:00, ..., 23:00). For daily
+     * granularity, start and end times must align with UTC day boundaries (00:00 UTC).
      */
     public Builder setValueGroupingWindow(
         MeterEventSummaryListParams.ValueGroupingWindow valueGroupingWindow) {
@@ -251,6 +255,9 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
   }
 
   public enum ValueGroupingWindow implements ApiRequestParams.EnumParam {
+    @SerializedName("day")
+    DAY("day"),
+
     @SerializedName("hour")
     HOUR("hour");
 

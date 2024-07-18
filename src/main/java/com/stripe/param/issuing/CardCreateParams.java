@@ -430,6 +430,10 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("address")
     Address address;
 
+    /** Address validation settings. */
+    @SerializedName("address_validation")
+    AddressValidation addressValidation;
+
     /** Customs information for the shipment. */
     @SerializedName("customs")
     Customs customs;
@@ -465,6 +469,7 @@ public class CardCreateParams extends ApiRequestParams {
 
     private Shipping(
         Address address,
+        AddressValidation addressValidation,
         Customs customs,
         Map<String, Object> extraParams,
         String name,
@@ -473,6 +478,7 @@ public class CardCreateParams extends ApiRequestParams {
         Service service,
         Type type) {
       this.address = address;
+      this.addressValidation = addressValidation;
       this.customs = customs;
       this.extraParams = extraParams;
       this.name = name;
@@ -488,6 +494,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private Address address;
+
+      private AddressValidation addressValidation;
 
       private Customs customs;
 
@@ -507,6 +515,7 @@ public class CardCreateParams extends ApiRequestParams {
       public CardCreateParams.Shipping build() {
         return new CardCreateParams.Shipping(
             this.address,
+            this.addressValidation,
             this.customs,
             this.extraParams,
             this.name,
@@ -519,6 +528,13 @@ public class CardCreateParams extends ApiRequestParams {
       /** <strong>Required.</strong> The address that the card is shipped to. */
       public Builder setAddress(CardCreateParams.Shipping.Address address) {
         this.address = address;
+        return this;
+      }
+
+      /** Address validation settings. */
+      public Builder setAddressValidation(
+          CardCreateParams.Shipping.AddressValidation addressValidation) {
+        this.addressValidation = addressValidation;
         return this;
       }
 
@@ -738,6 +754,94 @@ public class CardCreateParams extends ApiRequestParams {
         public Builder setState(String state) {
           this.state = state;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class AddressValidation {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The address validation capabilities to use. */
+      @SerializedName("mode")
+      Mode mode;
+
+      private AddressValidation(Map<String, Object> extraParams, Mode mode) {
+        this.extraParams = extraParams;
+        this.mode = mode;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Mode mode;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardCreateParams.Shipping.AddressValidation build() {
+          return new CardCreateParams.Shipping.AddressValidation(this.extraParams, this.mode);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.Shipping.AddressValidation#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.Shipping.AddressValidation#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The address validation capabilities to use. */
+        public Builder setMode(CardCreateParams.Shipping.AddressValidation.Mode mode) {
+          this.mode = mode;
+          return this;
+        }
+      }
+
+      public enum Mode implements ApiRequestParams.EnumParam {
+        @SerializedName("disabled")
+        DISABLED("disabled"),
+
+        @SerializedName("normalization_only")
+        NORMALIZATION_ONLY("normalization_only"),
+
+        @SerializedName("validation_and_normalization")
+        VALIDATION_AND_NORMALIZATION("validation_and_normalization");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Mode(String value) {
+          this.value = value;
         }
       }
     }

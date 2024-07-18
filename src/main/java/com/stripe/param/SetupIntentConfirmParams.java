@@ -810,6 +810,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Mobilepay mobilepay;
 
     /**
+     * If this is a {@code multibanco} PaymentMethod, this hash contains details about the
+     * Multibanco payment method.
+     */
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
+    /**
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
@@ -887,6 +894,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Swish swish;
 
     /**
+     * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
+     */
+    @SerializedName("twint")
+    Twint twint;
+
+    /**
      * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
      * the PaymentMethod with a name matching this value. It contains additional information
      * specific to the PaymentMethod type.
@@ -942,6 +955,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Link link,
         Map<String, String> metadata,
         Mobilepay mobilepay,
+        Multibanco multibanco,
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
@@ -953,6 +967,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
+        Twint twint,
         Type type,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
@@ -983,6 +998,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.link = link;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
+      this.multibanco = multibanco;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
@@ -994,6 +1010,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
+      this.twint = twint;
       this.type = type;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
@@ -1057,6 +1074,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Mobilepay mobilepay;
 
+      private Multibanco multibanco;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -1078,6 +1097,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       private Sofort sofort;
 
       private Swish swish;
+
+      private Twint twint;
 
       private Type type;
 
@@ -1116,6 +1137,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.link,
             this.metadata,
             this.mobilepay,
+            this.multibanco,
             this.oxxo,
             this.p24,
             this.paynow,
@@ -1127,6 +1149,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.swish,
+            this.twint,
             this.type,
             this.usBankAccount,
             this.wechatPay,
@@ -1413,6 +1436,16 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code multibanco} PaymentMethod, this hash contains details about the
+       * Multibanco payment method.
+       */
+      public Builder setMultibanco(
+          SetupIntentConfirmParams.PaymentMethodData.Multibanco multibanco) {
+        this.multibanco = multibanco;
+        return this;
+      }
+
+      /**
        * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
        * method.
        */
@@ -1510,6 +1543,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setSwish(SetupIntentConfirmParams.PaymentMethodData.Swish swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment
+       * method.
+       */
+      public Builder setTwint(SetupIntentConfirmParams.PaymentMethodData.Twint twint) {
+        this.twint = twint;
         return this;
       }
 
@@ -3628,6 +3670,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Multibanco {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Multibanco(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Multibanco build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Multibanco(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Multibanco#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Multibanco#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4439,6 +4538,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Twint {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Twint(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Twint build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Twint(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Twint#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -4801,6 +4957,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),
 
+      @SerializedName("multibanco")
+      MULTIBANCO("multibanco"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
@@ -4830,6 +4989,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("twint")
+      TWINT("twint"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),
@@ -7112,6 +7274,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
+         * Provide filters for the linked accounts that the customer can select for the payment
+         * method.
+         */
+        @SerializedName("filters")
+        Filters filters;
+
+        /**
          * The list of permissions to request. If this parameter is passed, the {@code
          * payment_method} permission must be included. Valid permissions include: {@code balances},
          * {@code ownership}, {@code payment_method}, and {@code transactions}.
@@ -7138,6 +7307,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private FinancialConnections(
             Map<String, Object> extraParams,
+            Filters filters,
             List<
                     SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
                         .Permission>
@@ -7148,6 +7318,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
                 prefetch,
             String returnUrl) {
           this.extraParams = extraParams;
+          this.filters = filters;
           this.permissions = permissions;
           this.prefetch = prefetch;
           this.returnUrl = returnUrl;
@@ -7159,6 +7330,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         public static class Builder {
           private Map<String, Object> extraParams;
+
+          private Filters filters;
 
           private List<
                   SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
@@ -7177,7 +7350,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
               build() {
             return new SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount
                 .FinancialConnections(
-                this.extraParams, this.permissions, this.prefetch, this.returnUrl);
+                this.extraParams, this.filters, this.permissions, this.prefetch, this.returnUrl);
           }
 
           /**
@@ -7207,6 +7380,18 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Provide filters for the linked accounts that the customer can select for the payment
+           * method.
+           */
+          public Builder setFilters(
+              SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Filters
+                  filters) {
+            this.filters = filters;
             return this;
           }
 
@@ -7288,6 +7473,142 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           public Builder setReturnUrl(String returnUrl) {
             this.returnUrl = returnUrl;
             return this;
+          }
+        }
+
+        @Getter
+        public static class Filters {
+          /**
+           * The account subcategories to use to filter for selectable accounts. Valid subcategories
+           * are {@code checking} and {@code savings}.
+           */
+          @SerializedName("account_subcategories")
+          List<
+                  SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Filters.AccountSubcategory>
+              accountSubcategories;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private Filters(
+              List<
+                      SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Filters.AccountSubcategory>
+                  accountSubcategories,
+              Map<String, Object> extraParams) {
+            this.accountSubcategories = accountSubcategories;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private List<
+                    SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                        .Filters.AccountSubcategory>
+                accountSubcategories;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                    .Filters
+                build() {
+              return new SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                  .FinancialConnections.Filters(this.accountSubcategories, this.extraParams);
+            }
+
+            /**
+             * Add an element to `accountSubcategories` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#accountSubcategories}
+             * for the field documentation.
+             */
+            public Builder addAccountSubcategory(
+                SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                        .Filters.AccountSubcategory
+                    element) {
+              if (this.accountSubcategories == null) {
+                this.accountSubcategories = new ArrayList<>();
+              }
+              this.accountSubcategories.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `accountSubcategories` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#accountSubcategories}
+             * for the field documentation.
+             */
+            public Builder addAllAccountSubcategory(
+                List<
+                        SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Filters.AccountSubcategory>
+                    elements) {
+              if (this.accountSubcategories == null) {
+                this.accountSubcategories = new ArrayList<>();
+              }
+              this.accountSubcategories.addAll(elements);
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          public enum AccountSubcategory implements ApiRequestParams.EnumParam {
+            @SerializedName("checking")
+            CHECKING("checking"),
+
+            @SerializedName("savings")
+            SAVINGS("savings");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            AccountSubcategory(String value) {
+              this.value = value;
+            }
           }
         }
 

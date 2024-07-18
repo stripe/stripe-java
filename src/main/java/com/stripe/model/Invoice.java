@@ -11,17 +11,20 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.InvoiceAddLinesParams;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceCreatePreviewParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
 import com.stripe.param.InvoicePayParams;
+import com.stripe.param.InvoiceRemoveLinesParams;
 import com.stripe.param.InvoiceRetrieveParams;
 import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
 import com.stripe.param.InvoiceUpcomingLinesParams;
 import com.stripe.param.InvoiceUpcomingParams;
+import com.stripe.param.InvoiceUpdateLinesParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
 import java.util.List;
@@ -126,7 +129,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Number of payment attempts made for this invoice, from the perspective of the payment retry
    * schedule. Any payment attempt counts as the first attempt, and subsequently only automatic
    * retries increment the attempt count. In other words, manual payment attempts after the first
-   * attempt do not affect the retry schedule.
+   * attempt do not affect the retry schedule. If a failure is returned with a non-retryable return
+   * code, the invoice can no longer be retried unless a new payment method is obtained. Retries
+   * will continue to be scheduled, and attempt_count will continue to increment, but retries will
+   * only be executed if a new payment method is obtained.
    */
   @SerializedName("attempt_count")
   Long attemptCount;
@@ -910,6 +916,50 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(Map<String, Object> params) throws StripeException {
+    return addLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(InvoiceAddLinesParams params) throws StripeException {
+    return addLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
+   */
+  public Invoice addLines(InvoiceAddLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
    * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
@@ -1439,6 +1489,56 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     return getResponseGetter().request(request, Invoice.class);
   }
 
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(Map<String, Object> params) throws StripeException {
+    return removeLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/remove_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(InvoiceRemoveLinesParams params) throws StripeException {
+    return removeLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Removes multiple line items from an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice removeLines(InvoiceRemoveLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/remove_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
   /** Retrieves the invoice with the given ID. */
   public static Invoice retrieve(String invoice) throws StripeException {
     return retrieve(invoice, (Map<String, Object>) null, (RequestOptions) null);
@@ -1921,6 +2021,56 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(Map<String, Object> params) throws StripeException {
+    return updateLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/update_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(InvoiceUpdateLinesParams params) throws StripeException {
+    return updateLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates multiple line items on an invoice. This is only possible when an invoice is still a
+   * draft.
+   */
+  public Invoice updateLines(InvoiceUpdateLinesParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/update_lines", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
    * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
@@ -2124,7 +2274,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      * sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat},
      * {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code
      * tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin},
-     * {@code om_vat}, or {@code unknown}.
+     * {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -2433,6 +2583,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class FinancialConnections extends StripeObject {
+          @SerializedName("filters")
+          Filters filters;
+
           /**
            * The list of permissions to request. The {@code payment_method} permission must be
            * included.
@@ -2443,6 +2596,18 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
           /** Data features requested to be retrieved upon account creation. */
           @SerializedName("prefetch")
           List<String> prefetch;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Filters extends StripeObject {
+            /**
+             * The account subcategories to use to filter for possible accounts to link. Valid
+             * subcategories are {@code checking} and {@code savings}.
+             */
+            @SerializedName("account_subcategories")
+            List<String> accountSubcategories;
+          }
         }
       }
     }

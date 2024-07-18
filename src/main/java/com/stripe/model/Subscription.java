@@ -213,6 +213,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("id")
   String id;
 
+  @SerializedName("invoice_settings")
+  InvoiceSettings invoiceSettings;
+
   /** List of subscription items, each with an attached price. */
   @SerializedName("items")
   SubscriptionItemCollection items;
@@ -1061,7 +1064,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -1077,12 +1080,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
@@ -1112,7 +1117,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -1128,12 +1133,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
@@ -1168,7 +1175,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -1184,12 +1191,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
@@ -1218,7 +1227,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Updates an existing subscription to match the specified parameters. When changing prices or
    * quantities, we optionally prorate the price we charge next month to make up for any price
    * changes. To preview how the proration is calculated, use the <a
-   * href="https://stripe.com/docs/api/invoices/upcoming">upcoming invoice</a> endpoint.
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    *
    * <p>By default, we prorate subscription changes. For example, if a customer signs up on May 1
    * for a 100 price, they’ll be billed 100 immediately. If on May 15 they switch to a 200 price,
@@ -1234,12 +1243,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <ul>
    *   <li>The billing interval is changed (for example, from monthly to yearly).
-   *   <li>The subscription moves from free to paid, or paid to free.
+   *   <li>The subscription moves from free to paid.
    *   <li>A trial starts or ends.
    * </ul>
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
-   * charge the customer using the new price, and reset the billing date.
+   * charge the customer using the new price, and reset the billing date. Learn about how <a
+   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
    * always_invoice} to create prorations, automatically invoice the customer for those proration
@@ -1402,6 +1413,102 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("reason")
     String reason;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InvoiceSettings extends StripeObject {
+    /**
+     * The account tax IDs associated with the subscription. Will be set on invoices generated by
+     * the subscription.
+     */
+    @SerializedName("account_tax_ids")
+    List<ExpandableField<TaxId>> accountTaxIds;
+
+    @SerializedName("issuer")
+    Issuer issuer;
+
+    /** Get IDs of expandable {@code accountTaxIds} object list. */
+    public List<String> getAccountTaxIds() {
+      return (this.accountTaxIds != null)
+          ? this.accountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setAccountTaxIds(List<String> ids) {
+      if (ids == null) {
+        this.accountTaxIds = null;
+        return;
+      }
+      if (this.accountTaxIds != null
+          && this.accountTaxIds.stream()
+              .map(x -> x.getId())
+              .collect(Collectors.toList())
+              .equals(ids)) {
+        // noop if the ids are equal to what are already present
+        return;
+      }
+      this.accountTaxIds =
+          (ids != null)
+              ? ids.stream()
+                  .map(id -> new ExpandableField<TaxId>(id, null))
+                  .collect(Collectors.toList())
+              : null;
+    }
+
+    /** Get expanded {@code accountTaxIds}. */
+    public List<TaxId> getAccountTaxIdObjects() {
+      return (this.accountTaxIds != null)
+          ? this.accountTaxIds.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setAccountTaxIdObjects(List<TaxId> objs) {
+      this.accountTaxIds =
+          objs != null
+              ? objs.stream()
+                  .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                  .collect(Collectors.toList())
+              : null;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Issuer extends StripeObject {
+      /** The connected account being referenced when {@code type} is {@code account}. */
+      @SerializedName("account")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Account> account;
+
+      /**
+       * Type of the account referenced.
+       *
+       * <p>One of {@code account}, or {@code self}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code account} object. */
+      public String getAccount() {
+        return (this.account != null) ? this.account.getId() : null;
+      }
+
+      public void setAccount(String id) {
+        this.account = ApiResource.setExpandableFieldId(id, this.account);
+      }
+
+      /** Get expanded {@code account}. */
+      public Account getAccountObject() {
+        return (this.account != null) ? this.account.getExpanded() : null;
+      }
+
+      public void setAccountObject(Account expandableObject) {
+        this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+      }
+    }
   }
 
   /**
@@ -1677,6 +1784,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class FinancialConnections extends StripeObject {
+          @SerializedName("filters")
+          Filters filters;
+
           /**
            * The list of permissions to request. The {@code payment_method} permission must be
            * included.
@@ -1687,6 +1797,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           /** Data features requested to be retrieved upon account creation. */
           @SerializedName("prefetch")
           List<String> prefetch;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Filters extends StripeObject {
+            /**
+             * The account subcategories to use to filter for possible accounts to link. Valid
+             * subcategories are {@code checking} and {@code savings}.
+             */
+            @SerializedName("account_subcategories")
+            List<String> accountSubcategories;
+          }
         }
       }
     }
@@ -1836,6 +1958,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
     trySetResponseGetter(discount, responseGetter);
+    trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(items, responseGetter);
     trySetResponseGetter(latestInvoice, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);

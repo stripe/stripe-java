@@ -27,10 +27,7 @@ public class StripeError extends StripeObject {
    * bank_account_bad_routing_numbers}, {@code bank_account_declined}, {@code bank_account_exists},
    * {@code bank_account_restricted}, {@code bank_account_unusable}, {@code
    * bank_account_unverified}, {@code bank_account_verification_failed}, {@code
-   * billing_invalid_mandate}, {@code billing_policy_remote_function_response_invalid}, {@code
-   * billing_policy_remote_function_timeout}, {@code
-   * billing_policy_remote_function_unexpected_status_code}, {@code
-   * billing_policy_remote_function_unreachable}, {@code bitcoin_upgrade_required}, {@code
+   * billing_invalid_mandate}, {@code bitcoin_upgrade_required}, {@code
    * capture_charge_authorization_expired}, {@code capture_unauthorized_payment}, {@code
    * card_decline_rate_limit_exceeded}, {@code card_declined}, {@code
    * cardholder_phone_number_required}, {@code charge_already_captured}, {@code
@@ -90,11 +87,12 @@ public class StripeError extends StripeObject {
    * shipping_calculation_failed}, {@code sku_inactive}, {@code state_unsupported}, {@code
    * status_transition_invalid}, {@code stripe_tax_inactive}, {@code tax_id_invalid}, {@code
    * taxes_calculation_failed}, {@code terminal_location_country_unsupported}, {@code
-   * terminal_reader_busy}, {@code terminal_reader_hardware_fault}, {@code terminal_reader_offline},
-   * {@code terminal_reader_timeout}, {@code testmode_charges_only}, {@code
-   * tls_version_unsupported}, {@code token_already_used}, {@code token_card_network_invalid},
-   * {@code token_in_use}, {@code transfer_source_balance_parameters_mismatch}, {@code
-   * transfers_not_allowed}, or {@code url_invalid}.
+   * terminal_reader_busy}, {@code terminal_reader_hardware_fault}, {@code
+   * terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code
+   * terminal_reader_timeout}, {@code testmode_charges_only}, {@code tls_version_unsupported},
+   * {@code token_already_used}, {@code token_card_network_invalid}, {@code token_in_use}, {@code
+   * transfer_source_balance_parameters_mismatch}, {@code transfers_not_allowed}, or {@code
+   * url_invalid}.
    */
   @SerializedName("code")
   String code;

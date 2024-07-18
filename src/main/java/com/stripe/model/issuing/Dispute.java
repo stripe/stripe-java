@@ -75,6 +75,24 @@ public class Dispute extends ApiResource
   Boolean livemode;
 
   /**
+   * The enum that describes the dispute loss outcome. If the dispute is not lost, this field will
+   * be absent. New enum values may be added in the future, so be sure to handle unknown values.
+   *
+   * <p>One of {@code cardholder_authentication_issuer_liability}, {@code
+   * eci5_token_transaction_with_tavv}, {@code excess_disputes_in_timeframe}, {@code
+   * has_not_met_the_minimum_dispute_amount_requirements}, {@code invalid_duplicate_dispute}, {@code
+   * invalid_incorrect_amount_dispute}, {@code invalid_no_authorization}, {@code
+   * invalid_use_of_disputes}, {@code merchandise_delivered_or_shipped}, {@code
+   * merchandise_or_service_as_described}, {@code not_cancelled}, {@code other}, {@code
+   * refund_issued}, {@code submitted_beyond_allowable_time_limit}, {@code
+   * transaction_3ds_required}, {@code transaction_approved_after_prior_fraud_dispute}, {@code
+   * transaction_authorized}, {@code transaction_electronically_read}, {@code
+   * transaction_qualifies_for_visa_easy_payment_service}, or {@code transaction_unattended}.
+   */
+  @SerializedName("loss_reason")
+  String lossReason;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
@@ -419,6 +437,9 @@ public class Dispute extends ApiResource
     @SerializedName("merchandise_not_as_described")
     MerchandiseNotAsDescribed merchandiseNotAsDescribed;
 
+    @SerializedName("no_valid_authorization")
+    NoValidAuthorization noValidAuthorization;
+
     @SerializedName("not_received")
     NotReceived notReceived;
 
@@ -429,8 +450,8 @@ public class Dispute extends ApiResource
      * The reason for filing the dispute. Its value will match the field containing the evidence.
      *
      * <p>One of {@code canceled}, {@code duplicate}, {@code fraudulent}, {@code
-     * merchandise_not_as_described}, {@code not_received}, {@code other}, or {@code
-     * service_not_as_described}.
+     * merchandise_not_as_described}, {@code no_valid_authorization}, {@code not_received}, {@code
+     * other}, or {@code service_not_as_described}.
      */
     @SerializedName("reason")
     String reason;
@@ -722,6 +743,46 @@ public class Dispute extends ApiResource
       /** Date when the product was returned or attempted to be returned. */
       @SerializedName("returned_at")
       Long returnedAt;
+
+      /** Get ID of expandable {@code additionalDocumentation} object. */
+      public String getAdditionalDocumentation() {
+        return (this.additionalDocumentation != null) ? this.additionalDocumentation.getId() : null;
+      }
+
+      public void setAdditionalDocumentation(String id) {
+        this.additionalDocumentation =
+            ApiResource.setExpandableFieldId(id, this.additionalDocumentation);
+      }
+
+      /** Get expanded {@code additionalDocumentation}. */
+      public File getAdditionalDocumentationObject() {
+        return (this.additionalDocumentation != null)
+            ? this.additionalDocumentation.getExpanded()
+            : null;
+      }
+
+      public void setAdditionalDocumentationObject(File expandableObject) {
+        this.additionalDocumentation =
+            new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NoValidAuthorization extends StripeObject {
+      /**
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+       * documentation supporting the dispute.
+       */
+      @SerializedName("additional_documentation")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> additionalDocumentation;
+
+      /** Explanation of why the cardholder is disputing this transaction. */
+      @SerializedName("explanation")
+      String explanation;
 
       /** Get ID of expandable {@code additionalDocumentation} object. */
       public String getAdditionalDocumentation() {

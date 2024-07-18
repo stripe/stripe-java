@@ -1137,13 +1137,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the price object. */
+    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -1256,7 +1256,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. */
+      /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
@@ -1264,7 +1264,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(SubscriptionCreateParams.AddInvoiceItem.PriceData priceData) {
         this.priceData = priceData;
@@ -4796,6 +4796,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
+           * Provide filters for the linked accounts that the customer can select for the payment
+           * method.
+           */
+          @SerializedName("filters")
+          Filters filters;
+
+          /**
            * The list of permissions to request. If this parameter is passed, the {@code
            * payment_method} permission must be included. Valid permissions include: {@code
            * balances}, {@code ownership}, {@code payment_method}, and {@code transactions}.
@@ -4815,6 +4822,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
           private FinancialConnections(
               Map<String, Object> extraParams,
+              Filters filters,
               List<
                       SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                           .FinancialConnections.Permission>
@@ -4824,6 +4832,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                           .FinancialConnections.Prefetch>
                   prefetch) {
             this.extraParams = extraParams;
+            this.filters = filters;
             this.permissions = permissions;
             this.prefetch = prefetch;
           }
@@ -4834,6 +4843,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
           public static class Builder {
             private Map<String, Object> extraParams;
+
+            private Filters filters;
 
             private List<
                     SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
@@ -4850,7 +4861,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                     .FinancialConnections
                 build() {
               return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
-                  .FinancialConnections(this.extraParams, this.permissions, this.prefetch);
+                  .FinancialConnections(
+                  this.extraParams, this.filters, this.permissions, this.prefetch);
             }
 
             /**
@@ -4880,6 +4892,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Provide filters for the linked accounts that the customer can select for the payment
+             * method.
+             */
+            public Builder setFilters(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Filters
+                    filters) {
+              this.filters = filters;
               return this;
             }
 
@@ -4953,6 +4977,143 @@ public class SubscriptionCreateParams extends ApiRequestParams {
               }
               this.prefetch.addAll(elements);
               return this;
+            }
+          }
+
+          @Getter
+          public static class Filters {
+            /**
+             * The account subcategories to use to filter for selectable accounts. Valid
+             * subcategories are {@code checking} and {@code savings}.
+             */
+            @SerializedName("account_subcategories")
+            List<
+                    SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Filters.AccountSubcategory>
+                accountSubcategories;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private Filters(
+                List<
+                        SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Filters.AccountSubcategory>
+                    accountSubcategories,
+                Map<String, Object> extraParams) {
+              this.accountSubcategories = accountSubcategories;
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private List<
+                      SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Filters.AccountSubcategory>
+                  accountSubcategories;
+
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Filters
+                  build() {
+                return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions
+                    .UsBankAccount.FinancialConnections.Filters(
+                    this.accountSubcategories, this.extraParams);
+              }
+
+              /**
+               * Add an element to `accountSubcategories` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#accountSubcategories}
+               * for the field documentation.
+               */
+              public Builder addAccountSubcategory(
+                  SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Filters.AccountSubcategory
+                      element) {
+                if (this.accountSubcategories == null) {
+                  this.accountSubcategories = new ArrayList<>();
+                }
+                this.accountSubcategories.add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `accountSubcategories` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#accountSubcategories}
+               * for the field documentation.
+               */
+              public Builder addAllAccountSubcategory(
+                  List<
+                          SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions
+                              .UsBankAccount.FinancialConnections.Filters.AccountSubcategory>
+                      elements) {
+                if (this.accountSubcategories == null) {
+                  this.accountSubcategories = new ArrayList<>();
+                }
+                this.accountSubcategories.addAll(elements);
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections.Filters#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
+
+            public enum AccountSubcategory implements ApiRequestParams.EnumParam {
+              @SerializedName("checking")
+              CHECKING("checking"),
+
+              @SerializedName("savings")
+              SAVINGS("savings");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              AccountSubcategory(String value) {
+                this.value = value;
+              }
             }
           }
 
@@ -5094,6 +5255,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("sofort")
       SOFORT("sofort"),
+
+      @SerializedName("swish")
+      SWISH("swish"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),

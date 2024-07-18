@@ -5424,7 +5424,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   @Getter
   public static class TaxIdCollection {
-    /** <strong>Required.</strong> Set to {@code true} to enable tax ID collection. */
+    /**
+     * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
+     * false}.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -5456,7 +5459,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         return new PaymentLinkCreateParams.TaxIdCollection(this.enabled, this.extraParams);
       }
 
-      /** <strong>Required.</strong> Set to {@code true} to enable tax ID collection. */
+      /**
+       * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
+       * false}.
+       */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -5683,6 +5689,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("link")
     LINK("link"),
 
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
@@ -5710,11 +5722,17 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("swish")
     SWISH("swish"),
 
+    @SerializedName("twint")
+    TWINT("twint"),
+
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
 
     @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay");
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

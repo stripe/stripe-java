@@ -58,7 +58,10 @@ public class PriceListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return the price with these lookup_keys, if any exist. */
+  /**
+   * Only return the price with these lookup_keys, if any exist. You can specify up to 10
+   * lookup_keys.
+   */
   @SerializedName("lookup_keys")
   List<String> lookupKeys;
 
