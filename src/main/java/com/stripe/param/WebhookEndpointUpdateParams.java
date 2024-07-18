@@ -589,6 +589,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("issuing_dispute.funds_reinstated")
     ISSUING_DISPUTE__FUNDS_REINSTATED("issuing_dispute.funds_reinstated"),
 
+    @SerializedName("issuing_dispute.funds_rescinded")
+    ISSUING_DISPUTE__FUNDS_RESCINDED("issuing_dispute.funds_rescinded"),
+
     @SerializedName("issuing_dispute.submitted")
     ISSUING_DISPUTE__SUBMITTED("issuing_dispute.submitted"),
 

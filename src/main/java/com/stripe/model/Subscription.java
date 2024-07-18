@@ -1550,8 +1550,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     List<String> paymentMethodTypes;
 
     /**
-     * Either {@code off}, or {@code on_subscription}. With {@code on_subscription} Stripe updates
-     * {@code subscription.default_payment_method} when a subscription payment succeeds.
+     * Configure whether Stripe updates {@code subscription.default_payment_method} when payment
+     * succeeds. Defaults to {@code off}.
      *
      * <p>One of {@code off}, or {@code on_subscription}.
      */

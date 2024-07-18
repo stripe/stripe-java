@@ -280,6 +280,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    /**
+     * The ID of the Customer to which this PaymentMethod is saved. This will not be set when the
+     * PaymentMethod has not been saved to a Customer.
+     */
+    @SerializedName("customer")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Customer> customer;
+
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
@@ -374,6 +383,24 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
     @SerializedName("zip")
     Zip zip;
+
+    /** Get ID of expandable {@code customer} object. */
+    public String getCustomer() {
+      return (this.customer != null) ? this.customer.getId() : null;
+    }
+
+    public void setCustomer(String id) {
+      this.customer = ApiResource.setExpandableFieldId(id, this.customer);
+    }
+
+    /** Get expanded {@code customer}. */
+    public Customer getCustomerObject() {
+      return (this.customer != null) ? this.customer.getExpanded() : null;
+    }
+
+    public void setCustomerObject(Customer expandableObject) {
+      this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+    }
 
     @Getter
     @Setter
