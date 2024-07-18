@@ -26,7 +26,7 @@ public final class RefundService extends ApiService {
 
   /**
    * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
-   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * recent refunds appearing first. The 10 most recent refunds are always available by default on
    * the Charge object.
    */
   public StripeCollection<Refund> list(RefundListParams params) throws StripeException {
@@ -34,7 +34,7 @@ public final class RefundService extends ApiService {
   }
   /**
    * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
-   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * recent refunds appearing first. The 10 most recent refunds are always available by default on
    * the Charge object.
    */
   public StripeCollection<Refund> list(RequestOptions options) throws StripeException {
@@ -42,7 +42,7 @@ public final class RefundService extends ApiService {
   }
   /**
    * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
-   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * recent refunds appearing first. The 10 most recent refunds are always available by default on
    * the Charge object.
    */
   public StripeCollection<Refund> list() throws StripeException {
@@ -50,7 +50,7 @@ public final class RefundService extends ApiService {
   }
   /**
    * Returns a list of all refunds you created. We return the refunds in sorted order, with the most
-   * recent refunds appearing first The 10 most recent refunds are always available by default on
+   * recent refunds appearing first. The 10 most recent refunds are always available by default on
    * the Charge object.
    */
   public StripeCollection<Refund> list(RefundListParams params, RequestOptions options)

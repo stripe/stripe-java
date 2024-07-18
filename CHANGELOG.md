@@ -1,5 +1,13 @@
 # Changelog
 
+## 26.4.0 - 2024-07-18
+* [#1836](https://github.com/stripe/stripe-java/pull/1836) Update generated code
+  * Add support for `customer` on `ConfirmationToken.payment_method_preview`
+  * Add support for new value `multibanco` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
+  * Add support for new value `stripe_s700` on enum `terminal.ReaderListParams.device_type`
+  * Add support for new value `issuing_dispute.funds_rescinded` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1805](https://github.com/stripe/stripe-java/pull/1805) Added missing log to changelog
+
 ## 26.3.0 - 2024-07-11
 * [#1835](https://github.com/stripe/stripe-java/pull/1835) Update generated code
   * Add support for `payment_method_options` on `ConfirmationToken`
@@ -178,6 +186,8 @@
   * Add support for `amazon_pay` and `revolut_pay` on `Mandate.payment_method_details` and `SetupAttempt.payment_method_details`
   * Add support for `ending_before`, `limit`, and `starting_after` on `PaymentMethodConfigurationListParams`
   * Add support for `mobilepay` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
+* Deprecate Java methods based on OpenAPI spec
+  * Mark as deprecated the `approve` and `decline` methods on Authorization. Instead, [respond directly to the webhook request to approve an authorization](https://docs.stripe.com/issuing/controls/real-time-authorizations#authorization-handling).
 
 ## 25.4.0-beta.1 - 2024-04-18
 * [#1781](https://github.com/stripe/stripe-java/pull/1781) Update generated code for beta
