@@ -1537,7 +1537,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Blik extends StripeObject {}
+    public static class Blik extends StripeObject {
+      /** A unique and immutable identifier assigned by BLIK to every buyer. */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
 
     @Getter
     @Setter
