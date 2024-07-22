@@ -578,6 +578,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("invoice.marked_uncollectible")
     INVOICE__MARKED_UNCOLLECTIBLE("invoice.marked_uncollectible"),
 
+    @SerializedName("invoice.overdue")
+    INVOICE__OVERDUE("invoice.overdue"),
+
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),
 
@@ -604,6 +607,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("invoice.voided")
     INVOICE__VOIDED("invoice.voided"),
+
+    @SerializedName("invoice.will_be_due")
+    INVOICE__WILL_BE_DUE("invoice.will_be_due"),
 
     @SerializedName("invoiceitem.created")
     INVOICEITEM__CREATED("invoiceitem.created"),
