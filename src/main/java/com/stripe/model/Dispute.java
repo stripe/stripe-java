@@ -1071,6 +1071,15 @@ public class Dispute extends ApiResource
       String brand;
 
       /**
+       * The type of dispute opened. Different case types may have varying fees and financial
+       * impact.
+       *
+       * <p>One of {@code chargeback}, or {@code inquiry}.
+       */
+      @SerializedName("case_type")
+      String caseType;
+
+      /**
        * The card network's specific dispute reason code, which maps to one of Stripe's primary
        * dispute categories to simplify response guidance. The <a
        * href="https://stripe.com/docs/disputes/categories#network-code-map">Network code map</a>
