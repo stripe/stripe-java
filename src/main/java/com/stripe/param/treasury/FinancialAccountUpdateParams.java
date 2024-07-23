@@ -3,6 +3,7 @@ package com.stripe.param.treasury;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,14 @@ import lombok.Getter;
 
 @Getter
 public class FinancialAccountUpdateParams extends ApiRequestParams {
+  /**
+   * The display name for the FinancialAccount. Use this field to customize the names of the
+   * FinancialAccounts for your connected accounts. Unlike the {@code nickname} field, {@code
+   * display_name} is not internal metadata and will be exposed to connected accounts.
+   */
+  @SerializedName("display_name")
+  Object displayName;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -46,11 +55,13 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   PlatformRestrictions platformRestrictions;
 
   private FinancialAccountUpdateParams(
+      Object displayName,
       List<String> expand,
       Map<String, Object> extraParams,
       Features features,
       Map<String, String> metadata,
       PlatformRestrictions platformRestrictions) {
+    this.displayName = displayName;
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
@@ -63,6 +74,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Object displayName;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -76,7 +89,32 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountUpdateParams build() {
       return new FinancialAccountUpdateParams(
-          this.expand, this.extraParams, this.features, this.metadata, this.platformRestrictions);
+          this.displayName,
+          this.expand,
+          this.extraParams,
+          this.features,
+          this.metadata,
+          this.platformRestrictions);
+    }
+
+    /**
+     * The display name for the FinancialAccount. Use this field to customize the names of the
+     * FinancialAccounts for your connected accounts. Unlike the {@code nickname} field, {@code
+     * display_name} is not internal metadata and will be exposed to connected accounts.
+     */
+    public Builder setDisplayName(String displayName) {
+      this.displayName = displayName;
+      return this;
+    }
+
+    /**
+     * The display name for the FinancialAccount. Use this field to customize the names of the
+     * FinancialAccounts for your connected accounts. Unlike the {@code nickname} field, {@code
+     * display_name} is not internal metadata and will be exposed to connected accounts.
+     */
+    public Builder setDisplayName(EmptyParam displayName) {
+      this.displayName = displayName;
+      return this;
     }
 
     /**
