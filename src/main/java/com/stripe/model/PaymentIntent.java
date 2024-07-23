@@ -189,7 +189,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
 
-  /** The latest charge created by this PaymentIntent. */
+  /**
+   * ID of the latest <a href="https://stripe.com/docs/api/charges">Charge object</a> created by
+   * this PaymentIntent. This property is {@code null} until PaymentIntent confirmation is
+   * attempted.
+   */
   @SerializedName("latest_charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
