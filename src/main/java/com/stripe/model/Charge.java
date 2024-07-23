@@ -1353,7 +1353,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Affirm extends StripeObject {}
+    public static class Affirm extends StripeObject {
+      /** The Affirm transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     @Getter
     @Setter
