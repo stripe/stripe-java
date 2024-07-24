@@ -84,6 +84,9 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
    * reason.
    *
    * <p>One of {@code issuing.account_closed_for_inactivity}, {@code
+   * issuing.account_closed_for_not_providing_business_model_clarification}, {@code
+   * issuing.account_closed_for_not_providing_url_clarification}, {@code
+   * issuing.account_closed_for_not_providing_use_case_clarification}, {@code
    * issuing.account_closed_for_terms_of_service_violation}, {@code
    * issuing.application_rejected_for_failure_to_verify}, {@code
    * issuing.credit_application_rejected}, {@code issuing.credit_increase_application_rejected},
