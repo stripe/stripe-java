@@ -1,5 +1,9 @@
 # Changelog
 
+## 26.5.1 - 2024-07-25
+* [#1840](https://github.com/stripe/stripe-java/pull/1840) Update generated code
+  * Add support for `tax_registrations` and `tax_settings` on `AccountSession.components` and `AccountSessionCreateParams.components`
+
 ## 26.5.0 - 2024-07-25
 * [#1837](https://github.com/stripe/stripe-java/pull/1837) Update generated code
   * Add support for `update` method on resource `Checkout.Session`
