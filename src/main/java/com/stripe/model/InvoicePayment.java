@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiResource;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,15 +34,6 @@ public class InvoicePayment extends StripeObject implements HasId {
   /** Amount intended to be paid toward this invoice, in cents (or local equivalent). */
   @SerializedName("amount_requested")
   Long amountRequested;
-
-  /**
-   * ID of the successful charge for this payment. This field is null when the payment is {@code
-   * open} or {@code canceled}.
-   */
-  @SerializedName("charge")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Charge> charge;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -88,14 +80,8 @@ public class InvoicePayment extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /**
-   * ID of the PaymentIntent associated with this payment. Note: This property is only populated for
-   * invoices finalized on or after March 15th, 2019.
-   */
-  @SerializedName("payment_intent")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<PaymentIntent> paymentIntent;
+  @SerializedName("payment")
+  Payment payment;
 
   /** The status of the payment, one of {@code open}, {@code paid}, or {@code canceled}. */
   @SerializedName("status")
@@ -103,24 +89,6 @@ public class InvoicePayment extends StripeObject implements HasId {
 
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
-
-  /** Get ID of expandable {@code charge} object. */
-  public String getCharge() {
-    return (this.charge != null) ? this.charge.getId() : null;
-  }
-
-  public void setCharge(String id) {
-    this.charge = ApiResource.setExpandableFieldId(id, this.charge);
-  }
-
-  /** Get expanded {@code charge}. */
-  public Charge getChargeObject() {
-    return (this.charge != null) ? this.charge.getExpanded() : null;
-  }
-
-  public void setChargeObject(Charge expandableObject) {
-    this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
-  }
 
   /** Get ID of expandable {@code invoice} object. */
   public String getInvoice() {
@@ -140,23 +108,110 @@ public class InvoicePayment extends StripeObject implements HasId {
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get ID of expandable {@code paymentIntent} object. */
-  public String getPaymentIntent() {
-    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
-  }
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Payment extends StripeObject {
+    /** ID of the successful charge for this payment when {@code type} is {@code charge}. */
+    @SerializedName("charge")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Charge> charge;
 
-  public void setPaymentIntent(String id) {
-    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
-  }
+    @SerializedName("out_of_band_payment")
+    OutOfBandPayment outOfBandPayment;
 
-  /** Get expanded {@code paymentIntent}. */
-  public PaymentIntent getPaymentIntentObject() {
-    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
-  }
+    /**
+     * ID of the PaymentIntent associated with this payment when {@code type} is {@code
+     * payment_intent}. Note: This property is only populated for invoices finalized on or after
+     * March 15th, 2019.
+     */
+    @SerializedName("payment_intent")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentIntent> paymentIntent;
 
-  public void setPaymentIntentObject(PaymentIntent expandableObject) {
-    this.paymentIntent =
-        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    /**
+     * Type of payment object associated with this invoice payment.
+     *
+     * <p>One of {@code charge}, {@code out_of_band_payment}, or {@code payment_intent}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code charge} object. */
+    public String getCharge() {
+      return (this.charge != null) ? this.charge.getId() : null;
+    }
+
+    public void setCharge(String id) {
+      this.charge = ApiResource.setExpandableFieldId(id, this.charge);
+    }
+
+    /** Get expanded {@code charge}. */
+    public Charge getChargeObject() {
+      return (this.charge != null) ? this.charge.getExpanded() : null;
+    }
+
+    public void setChargeObject(Charge expandableObject) {
+      this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code paymentIntent} object. */
+    public String getPaymentIntent() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+    }
+
+    public void setPaymentIntent(String id) {
+      this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+    }
+
+    /** Get expanded {@code paymentIntent}. */
+    public PaymentIntent getPaymentIntentObject() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+    }
+
+    public void setPaymentIntentObject(PaymentIntent expandableObject) {
+      this.paymentIntent =
+          new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OutOfBandPayment extends StripeObject {
+      /** Amount paid on this out of band payment, in cents (or local equivalent). */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** The type of money movement for this out of band payment record. */
+      @SerializedName("money_movement_type")
+      String moneyMovementType;
+
+      /** The timestamp when this out of band payment was paid. */
+      @SerializedName("paid_at")
+      Long paidAt;
+
+      /** The reference for this out of band payment record. */
+      @SerializedName("payment_reference")
+      String paymentReference;
+    }
   }
 
   @Getter
