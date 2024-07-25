@@ -608,7 +608,8 @@ public class Account extends ApiResource implements HasId {
     Credit credit;
 
     /**
-     * The balances owed to (or by) the account holder.
+     * The balances owed to (or by) the account holder, before subtracting any outbound pending
+     * transactions or adding any inbound pending transactions.
      *
      * <p>Each key is a three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
      * currency code</a>, in lowercase.
@@ -633,8 +634,8 @@ public class Account extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Cash extends StripeObject {
       /**
-       * The funds available to the account holder. Typically this is the current balance less any
-       * holds.
+       * The funds available to the account holder. Typically this is the current balance after
+       * subtracting any outbound pending transactions and adding any inbound pending transactions.
        *
        * <p>Each key is a three-letter <a
        * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
