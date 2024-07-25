@@ -966,6 +966,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
           String brand;
 
           /**
+           * The <a href="https://stripe.com/docs/card-product-codes">product code</a> that
+           * identifies the specific program or product associated with a card.
+           */
+          @SerializedName("brand_product")
+          String brandProduct;
+
+          /**
            * When using manual capture, a future timestamp after which the charge will be
            * automatically refunded if uncaptured.
            */
@@ -1070,6 +1077,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
            */
           @SerializedName("network")
           String network;
+
+          /**
+           * This is used by the financial networks to identify a transaction. Visa calls this the
+           * Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the
+           * Acquirer Reference Data. The first three digits of the Trace ID is the Financial
+           * Network Code, the next 6 digits is the Banknet Reference Number, and the last 4 digits
+           * represent the date (MM/DD). This field will be available for successful Visa,
+           * Mastercard, or American Express transactions and always null for other card brands.
+           */
+          @SerializedName("network_transaction_id")
+          String networkTransactionId;
 
           /** Details about payments collected offline. */
           @SerializedName("offline")
@@ -1331,6 +1349,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("brand")
     String brand;
+
+    /**
+     * The <a href="https://stripe.com/docs/card-product-codes">product code</a> that identifies the
+     * specific program or product associated with a card.
+     */
+    @SerializedName("brand_product")
+    String brandProduct;
 
     /**
      * The cardholder name as read from the card, in <a

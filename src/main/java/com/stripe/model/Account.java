@@ -762,7 +762,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Long estimatedWorkerCount;
 
     /**
-     * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+     * <a href="https://stripe.com/connect/setting-mcc">The merchant category code for the
      * account</a>. MCCs are used to classify businesses based on the goods or services they
      * provide.
      */
@@ -809,7 +809,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class AnnualRevenue extends StripeObject {
       /**
        * A non-negative integer representing the amount in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -836,7 +836,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class MonthlyEstimatedRevenue extends StripeObject {
       /**
        * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;

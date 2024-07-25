@@ -30,7 +30,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Calculation extends ApiResource implements HasId {
-  /** Total after taxes. */
+  /**
+   * Total amount after taxes in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
   @SerializedName("amount_total")
   Long amountTotal;
 
