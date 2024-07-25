@@ -636,6 +636,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
 
+    @SerializedName("billing.alert.triggered")
+    BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
+
     @SerializedName("billing_portal.configuration.created")
     BILLING_PORTAL__CONFIGURATION__CREATED("billing_portal.configuration.created"),
 

@@ -101,7 +101,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   /**
    * The full statement descriptor that is passed to card networks, and that is displayed on your
    * customers' credit card and bank statements. Allows you to see what the statement descriptor
-   * looks like after the static and dynamic portions are combined.
+   * looks like after the static and dynamic portions are combined. This only works for card
+   * payments.
    */
   @SerializedName("calculated_statement_descriptor")
   String calculatedStatementDescriptor;
