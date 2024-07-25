@@ -263,7 +263,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
     /**
      * Whether the user described by the data in the token has been shown <a
-     * href="https://docs.stripe.com/connect/account-tokens#stripe-connected-account-agreement">the
+     * href="https://stripe.com/connect/account-tokens#stripe-connected-account-agreement">the
      * Stripe Connected Account Agreement</a>. When creating an account token to create a new
      * Connect account, this value must be {@code true}.
      */
@@ -354,7 +354,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * Whether the user described by the data in the token has been shown <a
-       * href="https://docs.stripe.com/connect/account-tokens#stripe-connected-account-agreement">the
+       * href="https://stripe.com/connect/account-tokens#stripe-connected-account-agreement">the
        * Stripe Connected Account Agreement</a>. When creating an account token to create a new
        * Connect account, this value must be {@code true}.
        */
@@ -380,7 +380,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * Whether the company's directors have been provided. Set this Boolean to {@code true} after
-       * creating all the company's directors with <a href="https://docs.stripe.com/api/persons">the
+       * creating all the company's directors with <a href="https://stripe.com/api/persons">the
        * Persons API</a> for accounts with a {@code relationship.director} requirement. This value
        * is not automatically set to {@code true} after creating directors, so it needs to be
        * updated to indicate all directors have been provided.
@@ -390,9 +390,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * Whether the company's executives have been provided. Set this Boolean to {@code true} after
-       * creating all the company's executives with <a
-       * href="https://docs.stripe.com/api/persons">the Persons API</a> for accounts with a {@code
-       * relationship.executive} requirement.
+       * creating all the company's executives with <a href="https://stripe.com/api/persons">the
+       * Persons API</a> for accounts with a {@code relationship.executive} requirement.
        */
       @SerializedName("executives_provided")
       Boolean executivesProvided;
@@ -431,8 +430,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * Whether the company's owners have been provided. Set this Boolean to {@code true} after
-       * creating all the company's owners with <a href="https://docs.stripe.com/api/persons">the
-       * Persons API</a> for accounts with a {@code relationship.owner} requirement.
+       * creating all the company's owners with <a href="https://stripe.com/api/persons">the Persons
+       * API</a> for accounts with a {@code relationship.owner} requirement.
        */
       @SerializedName("owners_provided")
       Boolean ownersProvided;
@@ -466,7 +465,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * The category identifying the legal structure of the company or legal entity. See <a
-       * href="https://docs.stripe.com/connect/identity-verification#business-structure">Business
+       * href="https://stripe.com/connect/identity-verification#business-structure">Business
        * structure</a> for more details. Pass an empty string to unset this value.
        */
       @SerializedName("structure")
@@ -634,7 +633,7 @@ public class TokenCreateParams extends ApiRequestParams {
         /**
          * Whether the company's directors have been provided. Set this Boolean to {@code true}
          * after creating all the company's directors with <a
-         * href="https://docs.stripe.com/api/persons">the Persons API</a> for accounts with a {@code
+         * href="https://stripe.com/api/persons">the Persons API</a> for accounts with a {@code
          * relationship.director} requirement. This value is not automatically set to {@code true}
          * after creating directors, so it needs to be updated to indicate all directors have been
          * provided.
@@ -647,7 +646,7 @@ public class TokenCreateParams extends ApiRequestParams {
         /**
          * Whether the company's executives have been provided. Set this Boolean to {@code true}
          * after creating all the company's executives with <a
-         * href="https://docs.stripe.com/api/persons">the Persons API</a> for accounts with a {@code
+         * href="https://stripe.com/api/persons">the Persons API</a> for accounts with a {@code
          * relationship.executive} requirement.
          */
         public Builder setExecutivesProvided(Boolean executivesProvided) {
@@ -718,7 +717,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
         /**
          * Whether the company's owners have been provided. Set this Boolean to {@code true} after
-         * creating all the company's owners with <a href="https://docs.stripe.com/api/persons">the
+         * creating all the company's owners with <a href="https://stripe.com/api/persons">the
          * Persons API</a> for accounts with a {@code relationship.owner} requirement.
          */
         public Builder setOwnersProvided(Boolean ownersProvided) {
@@ -765,7 +764,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
         /**
          * The category identifying the legal structure of the company or legal entity. See <a
-         * href="https://docs.stripe.com/connect/identity-verification#business-structure">Business
+         * href="https://stripe.com/connect/identity-verification#business-structure">Business
          * structure</a> for more details. Pass an empty string to unset this value.
          */
         public Builder setStructure(TokenCreateParams.Account.Company.Structure structure) {
@@ -775,7 +774,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
         /**
          * The category identifying the legal structure of the company or legal entity. See <a
-         * href="https://docs.stripe.com/connect/identity-verification#business-structure">Business
+         * href="https://stripe.com/connect/identity-verification#business-structure">Business
          * structure</a> for more details. Pass an empty string to unset this value.
          */
         public Builder setStructure(EmptyParam structure) {
@@ -1734,7 +1733,7 @@ public class TokenCreateParams extends ApiRequestParams {
        * The government-issued ID number of the individual, as appropriate for the representative's
        * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
        * in Canada). Instead of the number itself, you can also provide a <a
-       * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token created with
+       * href="https://stripe.com/js/tokens/create_token?type=pii">PII token created with
        * Stripe.js</a>.
        */
       @SerializedName("id_number")
@@ -1744,8 +1743,8 @@ public class TokenCreateParams extends ApiRequestParams {
        * The government-issued secondary ID number of the individual, as appropriate for the
        * representative's country, will be used for enhanced verification checks. In Thailand, this
        * would be the laser code found on the back of an ID card. Instead of the number itself, you
-       * can also provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII
-       * token created with Stripe.js</a>.
+       * can also provide a <a href="https://stripe.com/js/tokens/create_token?type=pii">PII token
+       * created with Stripe.js</a>.
        */
       @SerializedName("id_number_secondary")
       String idNumberSecondary;
@@ -2075,7 +2074,7 @@ public class TokenCreateParams extends ApiRequestParams {
          * The government-issued ID number of the individual, as appropriate for the
          * representative's country. (Examples are a Social Security Number in the U.S., or a Social
          * Insurance Number in Canada). Instead of the number itself, you can also provide a <a
-         * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token created with
+         * href="https://stripe.com/js/tokens/create_token?type=pii">PII token created with
          * Stripe.js</a>.
          */
         public Builder setIdNumber(String idNumber) {
@@ -2088,7 +2087,7 @@ public class TokenCreateParams extends ApiRequestParams {
          * representative's country, will be used for enhanced verification checks. In Thailand,
          * this would be the laser code found on the back of an ID card. Instead of the number
          * itself, you can also provide a <a
-         * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token created with
+         * href="https://stripe.com/js/tokens/create_token?type=pii">PII token created with
          * Stripe.js</a>.
          */
         public Builder setIdNumberSecondary(String idNumberSecondary) {

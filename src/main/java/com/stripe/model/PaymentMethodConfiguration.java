@@ -186,6 +186,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @SerializedName("paypal")
   Paypal paypal;
 
+  @SerializedName("payto")
+  Payto payto;
+
   @SerializedName("promptpay")
   Promptpay promptpay;
 
@@ -200,6 +203,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
 
   @SerializedName("swish")
   Swish swish;
+
+  @SerializedName("twint")
+  Twint twint;
 
   @SerializedName("us_bank_account")
   UsBankAccount usBankAccount;
@@ -1708,6 +1714,49 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Payto extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Promptpay extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
@@ -1923,6 +1972,49 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Twint extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class UsBankAccount extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
@@ -2083,11 +2175,13 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(p24, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
     trySetResponseGetter(paypal, responseGetter);
+    trySetResponseGetter(payto, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);
+    trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
     trySetResponseGetter(wechatPay, responseGetter);
     trySetResponseGetter(zip, responseGetter);

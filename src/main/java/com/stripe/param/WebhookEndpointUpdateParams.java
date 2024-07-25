@@ -300,6 +300,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
 
+    @SerializedName("billing.alert.triggered")
+    BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
+
     @SerializedName("billing_portal.configuration.created")
     BILLING_PORTAL__CONFIGURATION__CREATED("billing_portal.configuration.created"),
 
@@ -578,6 +581,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("invoice.marked_uncollectible")
     INVOICE__MARKED_UNCOLLECTIBLE("invoice.marked_uncollectible"),
 
+    @SerializedName("invoice.overdue")
+    INVOICE__OVERDUE("invoice.overdue"),
+
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),
 
@@ -604,6 +610,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("invoice.voided")
     INVOICE__VOIDED("invoice.voided"),
+
+    @SerializedName("invoice.will_be_due")
+    INVOICE__WILL_BE_DUE("invoice.will_be_due"),
 
     @SerializedName("invoiceitem.created")
     INVOICEITEM__CREATED("invoiceitem.created"),
@@ -640,6 +649,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("issuing_dispute.funds_reinstated")
     ISSUING_DISPUTE__FUNDS_REINSTATED("issuing_dispute.funds_reinstated"),
+
+    @SerializedName("issuing_dispute.funds_rescinded")
+    ISSUING_DISPUTE__FUNDS_RESCINDED("issuing_dispute.funds_rescinded"),
 
     @SerializedName("issuing_dispute.submitted")
     ISSUING_DISPUTE__SUBMITTED("issuing_dispute.submitted"),

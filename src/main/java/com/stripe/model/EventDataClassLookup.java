@@ -97,6 +97,8 @@ final class EventDataClassLookup {
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
+    classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
+    classLookup.put("billing.alert_triggered", com.stripe.model.billing.AlertTriggered.class);
     classLookup.put("billing.meter", com.stripe.model.billing.Meter.class);
     classLookup.put("billing.meter_event", com.stripe.model.billing.MeterEvent.class);
     classLookup.put(
@@ -178,6 +180,7 @@ final class EventDataClassLookup {
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
+    classLookup.put("tax.association", com.stripe.model.tax.Association.class);
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
     classLookup.put("tax.calculation_line_item", com.stripe.model.tax.CalculationLineItem.class);
     classLookup.put("tax.form", com.stripe.model.tax.Form.class);

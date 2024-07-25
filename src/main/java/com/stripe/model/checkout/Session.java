@@ -10,6 +10,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Invoice;
 import com.stripe.model.LineItemCollection;
+import com.stripe.model.MetadataStore;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
 import com.stripe.model.SetupIntent;
@@ -30,6 +31,7 @@ import com.stripe.param.checkout.SessionExpireParams;
 import com.stripe.param.checkout.SessionListLineItemsParams;
 import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
+import com.stripe.param.checkout.SessionUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Session extends ApiResource implements HasId {
+public class Session extends ApiResource implements HasId, MetadataStore<Session> {
   /** When set, provides configuration for actions to take if this Checkout Session expires. */
   @SerializedName("after_expiration")
   AfterExpiration afterExpiration;
@@ -223,6 +225,7 @@ public class Session extends ApiResource implements HasId {
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -764,6 +767,42 @@ public class Session extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getGlobalResponseGetter().request(request, Session.class);
+  }
+
+  /** Updates a Session object. */
+  @Override
+  public Session update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates a Session object. */
+  @Override
+  public Session update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
+  }
+
+  /** Updates a Session object. */
+  public Session update(SessionUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates a Session object. */
+  public Session update(SessionUpdateParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Session.class);
   }
 
   @Getter

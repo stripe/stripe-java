@@ -280,6 +280,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    /**
+     * The ID of the Customer to which this PaymentMethod is saved. This will not be set when the
+     * PaymentMethod has not been saved to a Customer.
+     */
+    @SerializedName("customer")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Customer> customer;
+
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
@@ -381,6 +390,24 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
     @SerializedName("zip")
     Zip zip;
+
+    /** Get ID of expandable {@code customer} object. */
+    public String getCustomer() {
+      return (this.customer != null) ? this.customer.getId() : null;
+    }
+
+    public void setCustomer(String id) {
+      this.customer = ApiResource.setExpandableFieldId(id, this.customer);
+    }
+
+    /** Get expanded {@code customer}. */
+    public Customer getCustomerObject() {
+      return (this.customer != null) ? this.customer.getExpanded() : null;
+    }
+
+    public void setCustomerObject(Customer expandableObject) {
+      this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+    }
 
     @Getter
     @Setter
@@ -703,6 +730,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
             String brand;
 
             /**
+             * The <a href="https://stripe.com/docs/card-product-codes">product code</a> that
+             * identifies the specific program or product associated with a card.
+             */
+            @SerializedName("brand_product")
+            String brandProduct;
+
+            /**
              * When using manual capture, a future timestamp after which the charge will be
              * automatically refunded if uncaptured.
              */
@@ -808,6 +842,17 @@ public class ConfirmationToken extends ApiResource implements HasId {
              */
             @SerializedName("network")
             String network;
+
+            /**
+             * This is used by the financial networks to identify a transaction. Visa calls this the
+             * Transaction ID, Mastercard calls this the Trace ID, and American Express calls this
+             * the Acquirer Reference Data. The first three digits of the Trace ID is the Financial
+             * Network Code, the next 6 digits is the Banknet Reference Number, and the last 4
+             * digits represent the date (MM/DD). This field will be available for successful Visa,
+             * Mastercard, or American Express transactions and always null for other card brands.
+             */
+            @SerializedName("network_transaction_id")
+            String networkTransactionId;
 
             /** Details about payments collected offline. */
             @SerializedName("offline")
@@ -1074,6 +1119,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
        */
       @SerializedName("brand")
       String brand;
+
+      /**
+       * The <a href="https://stripe.com/docs/card-product-codes">product code</a> that identifies
+       * the specific program or product associated with a card.
+       */
+      @SerializedName("brand_product")
+      String brandProduct;
 
       /**
        * The cardholder name as read from the card, in <a

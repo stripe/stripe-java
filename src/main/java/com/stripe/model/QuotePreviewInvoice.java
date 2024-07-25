@@ -515,7 +515,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /** The subscription that this invoice was prepared for, if any. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

@@ -765,7 +765,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Long estimatedWorkerCount;
 
     /**
-     * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+     * <a href="https://stripe.com/connect/setting-mcc">The merchant category code for the
      * account</a>. MCCs are used to classify businesses based on the goods or services they
      * provide.
      */
@@ -812,7 +812,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class AnnualRevenue extends StripeObject {
       /**
        * A non-negative integer representing the amount in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -839,7 +839,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     public static class MonthlyEstimatedRevenue extends StripeObject {
       /**
        * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -2092,6 +2092,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("branding")
     Branding branding;
 
+    @SerializedName("capital")
+    Capital capital;
+
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
 
@@ -2209,6 +2212,19 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       public void setLogoObject(File expandableObject) {
         this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Capital extends StripeObject {
+      /** Per-currency mapping of user-selected destination accounts used to pay out loans. */
+      @SerializedName("payout_destination")
+      Map<String, String> payoutDestination;
+
+      /** Per-currency mapping of all destination accounts eligible to receive loan payouts. */
+      @SerializedName("payout_destination_selector")
+      Map<String, List<String>> payoutDestinationSelector;
     }
 
     @Getter

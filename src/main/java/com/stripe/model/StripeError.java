@@ -27,10 +27,7 @@ public class StripeError extends StripeObject {
    * bank_account_bad_routing_numbers}, {@code bank_account_declined}, {@code bank_account_exists},
    * {@code bank_account_restricted}, {@code bank_account_unusable}, {@code
    * bank_account_unverified}, {@code bank_account_verification_failed}, {@code
-   * billing_invalid_mandate}, {@code billing_policy_remote_function_response_invalid}, {@code
-   * billing_policy_remote_function_timeout}, {@code
-   * billing_policy_remote_function_unexpected_status_code}, {@code
-   * billing_policy_remote_function_unreachable}, {@code bitcoin_upgrade_required}, {@code
+   * billing_invalid_mandate}, {@code bitcoin_upgrade_required}, {@code
    * capture_charge_authorization_expired}, {@code capture_unauthorized_payment}, {@code
    * card_decline_rate_limit_exceeded}, {@code card_declined}, {@code
    * cardholder_phone_number_required}, {@code charge_already_captured}, {@code
@@ -62,8 +59,8 @@ public class StripeError extends StripeObject {
    * parameter_invalid_integer}, {@code parameter_invalid_string_blank}, {@code
    * parameter_invalid_string_empty}, {@code parameter_missing}, {@code parameter_unknown}, {@code
    * parameters_exclusive}, {@code payment_intent_action_required}, {@code
-   * payment_intent_authentication_failure}, {@code payment_intent_fx_quote_invalid}, {@code
-   * payment_intent_incompatible_payment_method}, {@code payment_intent_invalid_parameter}, {@code
+   * payment_intent_authentication_failure}, {@code payment_intent_incompatible_payment_method},
+   * {@code payment_intent_invalid_parameter}, {@code
    * payment_intent_konbini_rejected_confirmation_number}, {@code payment_intent_mandate_invalid},
    * {@code payment_intent_payment_attempt_expired}, {@code payment_intent_payment_attempt_failed},
    * {@code payment_intent_unexpected_state}, {@code payment_method_bank_account_already_verified},

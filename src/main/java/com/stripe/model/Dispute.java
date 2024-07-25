@@ -1029,8 +1029,8 @@ public class Dispute extends ApiResource
         /**
          * Visa Compelling Evidence 3.0 eligibility status.
          *
-         * <p>One of {@code accepted}, {@code partner_rejected}, {@code qualified}, {@code
-         * requires_action}, or {@code submitted}.
+         * <p>One of {@code accepted}, {@code not_qualified}, {@code partner_rejected}, {@code
+         * qualified}, {@code requires_action}, or {@code submitted}.
          */
         @SerializedName("status")
         String status;
@@ -1069,6 +1069,15 @@ public class Dispute extends ApiResource
        */
       @SerializedName("brand")
       String brand;
+
+      /**
+       * The type of dispute opened. Different case types may have varying fees and financial
+       * impact.
+       *
+       * <p>One of {@code chargeback}, or {@code inquiry}.
+       */
+      @SerializedName("case_type")
+      String caseType;
 
       /**
        * The card network's specific dispute reason code, which maps to one of Stripe's primary

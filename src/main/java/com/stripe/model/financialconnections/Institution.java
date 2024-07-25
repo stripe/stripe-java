@@ -21,8 +21,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * An institution represents a banking institution which may be available for an end user to select
- * in the Financial Connections authentication flow.
+ * An institution represents a financial institution to which an end user can connect using the
+ * Financial Connections authentication flow.
  */
 @Getter
 @Setter
@@ -55,7 +55,11 @@ public class Institution extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** A list of routing numbers which are known to correspond to this institution. */
+  /**
+   * A list of routing numbers which are known to correspond to this institution. Due to the many to
+   * many relationship between institutions and routing numbers, this list may not be comprehensive
+   * and routing numbers may also be shared between institutions.
+   */
   @SerializedName("routing_numbers")
   List<String> routingNumbers;
 
@@ -67,7 +71,10 @@ public class Institution extends ApiResource implements HasId {
   @SerializedName("status")
   String status;
 
-  /** The URL for this institution's website. */
+  /**
+   * A URL corresponding to this institution. This URL is also displayed in the authentication flow
+   * to help end users confirm that they are authenticating with the right institution.
+   */
   @SerializedName("url")
   String url;
 

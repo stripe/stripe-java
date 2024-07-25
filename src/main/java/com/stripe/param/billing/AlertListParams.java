@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,14 +10,10 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class DisputeListParams extends ApiRequestParams {
-  /** Only return disputes associated to the charge specified by this charge ID. */
-  @SerializedName("charge")
-  String charge;
-
-  /** Only return disputes that were created during the given date interval. */
-  @SerializedName("created")
-  Object created;
+public class AlertListParams extends ApiRequestParams {
+  /** Filter results to only include this type of alert. */
+  @SerializedName("alert_type")
+  AlertType alertType;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -48,9 +44,9 @@ public class DisputeListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return disputes associated to the PaymentIntent specified by this PaymentIntent ID. */
-  @SerializedName("payment_intent")
-  String paymentIntent;
+  /** Filter results to only include alerts with the given meter. */
+  @SerializedName("meter")
+  String meter;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -61,22 +57,20 @@ public class DisputeListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private DisputeListParams(
-      String charge,
-      Object created,
+  private AlertListParams(
+      AlertType alertType,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String paymentIntent,
+      String meter,
       String startingAfter) {
-    this.charge = charge;
-    this.created = created;
+    this.alertType = alertType;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.paymentIntent = paymentIntent;
+    this.meter = meter;
     this.startingAfter = startingAfter;
   }
 
@@ -85,9 +79,7 @@ public class DisputeListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String charge;
-
-    private Object created;
+    private AlertType alertType;
 
     private String endingBefore;
 
@@ -97,38 +89,25 @@ public class DisputeListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String paymentIntent;
+    private String meter;
 
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public DisputeListParams build() {
-      return new DisputeListParams(
-          this.charge,
-          this.created,
+    public AlertListParams build() {
+      return new AlertListParams(
+          this.alertType,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.paymentIntent,
+          this.meter,
           this.startingAfter);
     }
 
-    /** Only return disputes associated to the charge specified by this charge ID. */
-    public Builder setCharge(String charge) {
-      this.charge = charge;
-      return this;
-    }
-
-    /** Only return disputes that were created during the given date interval. */
-    public Builder setCreated(DisputeListParams.Created created) {
-      this.created = created;
-      return this;
-    }
-
-    /** Only return disputes that were created during the given date interval. */
-    public Builder setCreated(Long created) {
-      this.created = created;
+    /** Filter results to only include this type of alert. */
+    public Builder setAlertType(AlertListParams.AlertType alertType) {
+      this.alertType = alertType;
       return this;
     }
 
@@ -146,7 +125,7 @@ public class DisputeListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * DisputeListParams#expand} for the field documentation.
+     * AlertListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -159,7 +138,7 @@ public class DisputeListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * DisputeListParams#expand} for the field documentation.
+     * AlertListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -172,7 +151,7 @@ public class DisputeListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * DisputeListParams#extraParams} for the field documentation.
+     * AlertListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -185,7 +164,7 @@ public class DisputeListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link DisputeListParams#extraParams} for the field documentation.
+     * See {@link AlertListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -204,9 +183,9 @@ public class DisputeListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return disputes associated to the PaymentIntent specified by this PaymentIntent ID. */
-    public Builder setPaymentIntent(String paymentIntent) {
-      this.paymentIntent = paymentIntent;
+    /** Filter results to only include alerts with the given meter. */
+    public Builder setMeter(String meter) {
+      this.meter = meter;
       return this;
     }
 
@@ -222,111 +201,15 @@ public class DisputeListParams extends ApiRequestParams {
     }
   }
 
-  @Getter
-  public static class Created {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
+  public enum AlertType implements ApiRequestParams.EnumParam {
+    @SerializedName("usage_threshold")
+    USAGE_THRESHOLD("usage_threshold");
 
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
+    @Getter(onMethod_ = {@Override})
+    private final String value;
 
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
-
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
-      this.extraParams = extraParams;
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Long gt;
-
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public DisputeListParams.Created build() {
-        return new DisputeListParams.Created(
-            this.extraParams, this.gt, this.gte, this.lt, this.lte);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * DisputeListParams.Created#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link DisputeListParams.Created#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
-        return this;
-      }
-
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
-
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
-        return this;
-      }
+    AlertType(String value) {
+      this.value = value;
     }
   }
 }

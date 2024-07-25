@@ -116,26 +116,26 @@ public class Event extends ApiResource implements HasId {
    * account.external_account.updated}, {@code account.updated}, {@code account_notice.created},
    * {@code account_notice.updated}, {@code application_fee.created}, {@code
    * application_fee.refund.updated}, {@code application_fee.refunded}, {@code balance.available},
-   * {@code billing_portal.configuration.created}, {@code billing_portal.configuration.updated},
-   * {@code billing_portal.session.created}, {@code capability.updated}, {@code
-   * capital.financing_offer.accepted}, {@code capital.financing_offer.canceled}, {@code
-   * capital.financing_offer.created}, {@code capital.financing_offer.expired}, {@code
-   * capital.financing_offer.fully_repaid}, {@code capital.financing_offer.paid_out}, {@code
-   * capital.financing_offer.rejected}, {@code capital.financing_offer.replacement_created}, {@code
-   * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
-   * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
-   * charge.dispute.funds_reinstated}, {@code charge.dispute.funds_withdrawn}, {@code
-   * charge.dispute.updated}, {@code charge.expired}, {@code charge.failed}, {@code charge.pending},
-   * {@code charge.refund.updated}, {@code charge.refunded}, {@code charge.succeeded}, {@code
-   * charge.updated}, {@code checkout.session.async_payment_failed}, {@code
-   * checkout.session.async_payment_succeeded}, {@code checkout.session.completed}, {@code
-   * checkout.session.expired}, {@code climate.order.canceled}, {@code climate.order.created},
-   * {@code climate.order.delayed}, {@code climate.order.delivered}, {@code
-   * climate.order.product_substituted}, {@code climate.product.created}, {@code
-   * climate.product.pricing_updated}, {@code coupon.created}, {@code coupon.deleted}, {@code
-   * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
-   * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
-   * customer.discount.created}, {@code customer.discount.deleted}, {@code
+   * {@code billing.alert.triggered}, {@code billing_portal.configuration.created}, {@code
+   * billing_portal.configuration.updated}, {@code billing_portal.session.created}, {@code
+   * capability.updated}, {@code capital.financing_offer.accepted}, {@code
+   * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
+   * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
+   * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
+   * capital.financing_offer.replacement_created}, {@code capital.financing_transaction.created},
+   * {@code cash_balance.funds_available}, {@code charge.captured}, {@code charge.dispute.closed},
+   * {@code charge.dispute.created}, {@code charge.dispute.funds_reinstated}, {@code
+   * charge.dispute.funds_withdrawn}, {@code charge.dispute.updated}, {@code charge.expired}, {@code
+   * charge.failed}, {@code charge.pending}, {@code charge.refund.updated}, {@code charge.refunded},
+   * {@code charge.succeeded}, {@code charge.updated}, {@code
+   * checkout.session.async_payment_failed}, {@code checkout.session.async_payment_succeeded},
+   * {@code checkout.session.completed}, {@code checkout.session.expired}, {@code
+   * climate.order.canceled}, {@code climate.order.created}, {@code climate.order.delayed}, {@code
+   * climate.order.delivered}, {@code climate.order.product_substituted}, {@code
+   * climate.product.created}, {@code climate.product.pricing_updated}, {@code coupon.created},
+   * {@code coupon.deleted}, {@code coupon.updated}, {@code credit_note.created}, {@code
+   * credit_note.updated}, {@code credit_note.voided}, {@code customer.created}, {@code
+   * customer.deleted}, {@code customer.discount.created}, {@code customer.discount.deleted}, {@code
    * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
    * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
    * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
@@ -159,18 +159,20 @@ public class Event extends ApiResource implements HasId {
    * {@code identity.verification_session.redacted}, {@code
    * identity.verification_session.requires_input}, {@code identity.verification_session.verified},
    * {@code invoice.created}, {@code invoice.deleted}, {@code invoice.finalization_failed}, {@code
-   * invoice.finalized}, {@code invoice.marked_uncollectible}, {@code invoice.paid}, {@code
-   * invoice.payment.overpaid}, {@code invoice.payment_action_required}, {@code
-   * invoice.payment_failed}, {@code invoice.payment_succeeded}, {@code invoice.sent}, {@code
+   * invoice.finalized}, {@code invoice.marked_uncollectible}, {@code invoice.overdue}, {@code
+   * invoice.paid}, {@code invoice.payment.overpaid}, {@code invoice.payment_action_required},
+   * {@code invoice.payment_failed}, {@code invoice.payment_succeeded}, {@code invoice.sent}, {@code
    * invoice.upcoming}, {@code invoice.updated}, {@code invoice.voided}, {@code
-   * invoiceitem.created}, {@code invoiceitem.deleted}, {@code issuing_authorization.created},
-   * {@code issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
-   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_cardholder.created}, {@code
-   * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
-   * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.submitted}, {@code
-   * issuing_dispute.updated}, {@code issuing_personalization_design.activated}, {@code
-   * issuing_personalization_design.deactivated}, {@code issuing_personalization_design.rejected},
-   * {@code issuing_personalization_design.updated}, {@code issuing_token.created}, {@code
+   * invoice.will_be_due}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code
+   * issuing_authorization.created}, {@code issuing_authorization.request}, {@code
+   * issuing_authorization.updated}, {@code issuing_card.created}, {@code issuing_card.updated},
+   * {@code issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
+   * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
+   * issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
+   * issuing_dispute.submitted}, {@code issuing_dispute.updated}, {@code
+   * issuing_personalization_design.activated}, {@code issuing_personalization_design.deactivated},
+   * {@code issuing_personalization_design.rejected}, {@code
+   * issuing_personalization_design.updated}, {@code issuing_token.created}, {@code
    * issuing_token.updated}, {@code issuing_transaction.created}, {@code
    * issuing_transaction.updated}, {@code mandate.updated}, {@code
    * payment_intent.amount_capturable_updated}, {@code payment_intent.canceled}, {@code
@@ -287,24 +289,24 @@ public class Event extends ApiResource implements HasId {
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -316,8 +318,8 @@ public class Event extends ApiResource implements HasId {
   }
 
   /**
-   * Retrieves the details of an event. Supply the unique identifier of the event, which you might
-   * have received in a webhook.
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which you might have received in a webhook.
    */
   public static Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {
