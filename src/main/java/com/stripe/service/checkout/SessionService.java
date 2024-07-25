@@ -17,6 +17,7 @@ import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionExpireParams;
 import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
+import com.stripe.param.checkout.SessionUpdateParams;
 
 public final class SessionService extends ApiService {
   public SessionService(StripeResponseGetter responseGetter) {
@@ -94,6 +95,32 @@ public final class SessionService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Session.class);
+  }
+  /** Updates a Session object. */
+  public Session update(String session, SessionUpdateParams params) throws StripeException {
+    return update(session, params, (RequestOptions) null);
+  }
+  /** Updates a Session object. */
+  public Session update(String session, RequestOptions options) throws StripeException {
+    return update(session, (SessionUpdateParams) null, options);
+  }
+  /** Updates a Session object. */
+  public Session update(String session) throws StripeException {
+    return update(session, (SessionUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates a Session object. */
+  public Session update(String session, SessionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options,
