@@ -106,6 +106,10 @@ public class SubscriptionSchedule extends ApiResource
   @SerializedName("id")
   String id;
 
+  /** Details of the most recent price migration that failed for the subscription schedule. */
+  @SerializedName("last_price_migration_error")
+  LastPriceMigrationError lastPriceMigrationError;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -977,6 +981,40 @@ public class SubscriptionSchedule extends ApiResource
       public void setDestinationObject(Account expandableObject) {
         this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LastPriceMigrationError extends StripeObject {
+    /** The time at which the price migration encountered an error. */
+    @SerializedName("errored_at")
+    Long erroredAt;
+
+    /** The involved price pairs in each failed transition. */
+    @SerializedName("failed_transitions")
+    List<SubscriptionSchedule.LastPriceMigrationError.FailedTransition> failedTransitions;
+
+    /**
+     * The type of error encountered by the price migration.
+     *
+     * <p>Equal to {@code price_uniqueness_violation}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FailedTransition extends StripeObject {
+      /** The original price to be migrated. */
+      @SerializedName("source_price")
+      String sourcePrice;
+
+      /** The intended resulting price of the migration. */
+      @SerializedName("target_price")
+      String targetPrice;
     }
   }
 
@@ -2001,6 +2039,7 @@ public class SubscriptionSchedule extends ApiResource
     trySetResponseGetter(currentPhase, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);
+    trySetResponseGetter(lastPriceMigrationError, responseGetter);
     trySetResponseGetter(prebilling, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);

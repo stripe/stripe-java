@@ -822,6 +822,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("customer.subscription.pending_update_expired")
     CUSTOMER__SUBSCRIPTION__PENDING_UPDATE_EXPIRED("customer.subscription.pending_update_expired"),
 
+    @SerializedName("customer.subscription.price_migration_failed")
+    CUSTOMER__SUBSCRIPTION__PRICE_MIGRATION_FAILED("customer.subscription.price_migration_failed"),
+
     @SerializedName("customer.subscription.resumed")
     CUSTOMER__SUBSCRIPTION__RESUMED("customer.subscription.resumed"),
 
@@ -1234,6 +1237,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("subscription_schedule.expiring")
     SUBSCRIPTION_SCHEDULE__EXPIRING("subscription_schedule.expiring"),
+
+    @SerializedName("subscription_schedule.price_migration_failed")
+    SUBSCRIPTION_SCHEDULE__PRICE_MIGRATION_FAILED("subscription_schedule.price_migration_failed"),
 
     @SerializedName("subscription_schedule.released")
     SUBSCRIPTION_SCHEDULE__RELEASED("subscription_schedule.released"),
