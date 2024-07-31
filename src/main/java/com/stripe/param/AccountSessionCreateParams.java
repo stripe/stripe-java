@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -142,6 +143,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
+    /** Configuration for the app install component. */
+    @SerializedName("app_install")
+    AppInstall appInstall;
+
+    /** Configuration for the app viewport component. */
+    @SerializedName("app_viewport")
+    AppViewport appViewport;
+
     /** Configuration for the balances embedded component. */
     @SerializedName("balances")
     Balances balances;
@@ -217,6 +226,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     private Components(
         AccountManagement accountManagement,
         AccountOnboarding accountOnboarding,
+        AppInstall appInstall,
+        AppViewport appViewport,
         Balances balances,
         CapitalFinancingPromotion capitalFinancingPromotion,
         CapitalOverview capitalOverview,
@@ -236,6 +247,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         TaxSettings taxSettings) {
       this.accountManagement = accountManagement;
       this.accountOnboarding = accountOnboarding;
+      this.appInstall = appInstall;
+      this.appViewport = appViewport;
       this.balances = balances;
       this.capitalFinancingPromotion = capitalFinancingPromotion;
       this.capitalOverview = capitalOverview;
@@ -263,6 +276,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       private AccountManagement accountManagement;
 
       private AccountOnboarding accountOnboarding;
+
+      private AppInstall appInstall;
+
+      private AppViewport appViewport;
 
       private Balances balances;
 
@@ -303,6 +320,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return new AccountSessionCreateParams.Components(
             this.accountManagement,
             this.accountOnboarding,
+            this.appInstall,
+            this.appViewport,
             this.balances,
             this.capitalFinancingPromotion,
             this.capitalOverview,
@@ -333,6 +352,18 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       public Builder setAccountOnboarding(
           AccountSessionCreateParams.Components.AccountOnboarding accountOnboarding) {
         this.accountOnboarding = accountOnboarding;
+        return this;
+      }
+
+      /** Configuration for the app install component. */
+      public Builder setAppInstall(AccountSessionCreateParams.Components.AppInstall appInstall) {
+        this.appInstall = appInstall;
+        return this;
+      }
+
+      /** Configuration for the app viewport component. */
+      public Builder setAppViewport(AccountSessionCreateParams.Components.AppViewport appViewport) {
+        this.appViewport = appViewport;
         return this;
       }
 
@@ -797,6 +828,392 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            * map. See {@link
            * AccountSessionCreateParams.Components.AccountOnboarding.Features#extraParams} for the
            * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class AppInstall {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private AppInstall(Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.AppInstall build() {
+          return new AccountSessionCreateParams.Components.AppInstall(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.AppInstall#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.AppInstall#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.AppInstall.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Features {
+        /** List of apps allowed to be enabled for this account session. */
+        @SerializedName("allowed_apps")
+        Object allowedApps;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Object allowedApps, Map<String, Object> extraParams) {
+          this.allowedApps = allowedApps;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object allowedApps;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.AppInstall.Features build() {
+            return new AccountSessionCreateParams.Components.AppInstall.Features(
+                this.allowedApps, this.extraParams);
+          }
+
+          /**
+           * Add an element to `allowedApps` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * AccountSessionCreateParams.Components.AppInstall.Features#allowedApps} for the field
+           * documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllowedApp(String element) {
+            if (this.allowedApps == null || this.allowedApps instanceof EmptyParam) {
+              this.allowedApps = new ArrayList<String>();
+            }
+            ((List<String>) this.allowedApps).add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `allowedApps` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link AccountSessionCreateParams.Components.AppInstall.Features#allowedApps} for
+           * the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllAllowedApp(List<String> elements) {
+            if (this.allowedApps == null || this.allowedApps instanceof EmptyParam) {
+              this.allowedApps = new ArrayList<String>();
+            }
+            ((List<String>) this.allowedApps).addAll(elements);
+            return this;
+          }
+
+          /** List of apps allowed to be enabled for this account session. */
+          public Builder setAllowedApps(EmptyParam allowedApps) {
+            this.allowedApps = allowedApps;
+            return this;
+          }
+
+          /** List of apps allowed to be enabled for this account session. */
+          public Builder setAllowedApps(List<String> allowedApps) {
+            this.allowedApps = allowedApps;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountSessionCreateParams.Components.AppInstall.Features#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountSessionCreateParams.Components.AppInstall.Features#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class AppViewport {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private AppViewport(Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.AppViewport build() {
+          return new AccountSessionCreateParams.Components.AppViewport(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.AppViewport#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.AppViewport#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.AppViewport.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Features {
+        /** List of apps allowed to be enabled for this account session. */
+        @SerializedName("allowed_apps")
+        Object allowedApps;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Object allowedApps, Map<String, Object> extraParams) {
+          this.allowedApps = allowedApps;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object allowedApps;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.AppViewport.Features build() {
+            return new AccountSessionCreateParams.Components.AppViewport.Features(
+                this.allowedApps, this.extraParams);
+          }
+
+          /**
+           * Add an element to `allowedApps` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * AccountSessionCreateParams.Components.AppViewport.Features#allowedApps} for the field
+           * documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllowedApp(String element) {
+            if (this.allowedApps == null || this.allowedApps instanceof EmptyParam) {
+              this.allowedApps = new ArrayList<String>();
+            }
+            ((List<String>) this.allowedApps).add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `allowedApps` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link AccountSessionCreateParams.Components.AppViewport.Features#allowedApps} for
+           * the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllAllowedApp(List<String> elements) {
+            if (this.allowedApps == null || this.allowedApps instanceof EmptyParam) {
+              this.allowedApps = new ArrayList<String>();
+            }
+            ((List<String>) this.allowedApps).addAll(elements);
+            return this;
+          }
+
+          /** List of apps allowed to be enabled for this account session. */
+          public Builder setAllowedApps(EmptyParam allowedApps) {
+            this.allowedApps = allowedApps;
+            return this;
+          }
+
+          /** List of apps allowed to be enabled for this account session. */
+          public Builder setAllowedApps(List<String> allowedApps) {
+            this.allowedApps = allowedApps;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountSessionCreateParams.Components.AppViewport.Features#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountSessionCreateParams.Components.AppViewport.Features#extraParams}
+           * for the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {

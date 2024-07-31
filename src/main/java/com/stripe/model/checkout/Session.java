@@ -127,7 +127,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("currency")
   String currency;
 
-  /** Currency conversion details for automatic currency conversion sessions. */
+  /**
+   * Currency conversion details for <a
+   * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a> sessions
+   */
   @SerializedName("currency_conversion")
   CurrencyConversion currencyConversion;
 
