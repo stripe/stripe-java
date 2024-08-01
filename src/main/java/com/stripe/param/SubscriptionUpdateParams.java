@@ -64,7 +64,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Object cancelAt;
 
   /**
-   * Boolean indicating whether this subscription should cancel at the end of the current period.
+   * Indicate whether this subscription should cancel at the end of the current period ({@code
+   * current_period_end}). Defaults to {@code false}.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -593,7 +594,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Boolean indicating whether this subscription should cancel at the end of the current period.
+     * Indicate whether this subscription should cancel at the end of the current period ({@code
+     * current_period_end}). Defaults to {@code false}.
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
