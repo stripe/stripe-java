@@ -183,7 +183,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
-  /** ID of the payment method used with this SetupIntent. */
+  /**
+   * ID of the payment method used with this SetupIntent. If the payment method is {@code
+   * card_present} and isn't a digital wallet, then the <a
+   * href="https://docs.corp.stripe.com/api/setup_attempts/object#setup_attempt_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * associated with the {@code latest_attempt} is attached to the Customer instead.
+   */
   @SerializedName("payment_method")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
