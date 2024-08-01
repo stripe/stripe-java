@@ -70,7 +70,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
   /**
    * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-   * SetupIntent.
+   * SetupIntent. To unset this field to null, pass in an empty string.
    */
   @SerializedName("payment_method")
   Object paymentMethod;
@@ -351,7 +351,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     /**
      * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-     * SetupIntent.
+     * SetupIntent. To unset this field to null, pass in an empty string.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -360,7 +360,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     /**
      * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-     * SetupIntent.
+     * SetupIntent. To unset this field to null, pass in an empty string.
      */
     public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;

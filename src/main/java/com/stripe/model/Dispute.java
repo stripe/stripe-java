@@ -1010,16 +1010,6 @@ public class Dispute extends ApiResource
       @EqualsAndHashCode(callSuper = false)
       public static class VisaCompellingEvidence3 extends StripeObject {
         /**
-         * Rejection reason for evidence submitted as Visa Compelling Evidence 3.0 to Visa and
-         * rejected by Visa.
-         *
-         * <p>One of {@code fraudulent_prior_transaction}, {@code other}, or {@code
-         * visa_internal_error}.
-         */
-        @SerializedName("partner_rejected_details")
-        String partnerRejectedDetails;
-
-        /**
          * List of actions required to qualify dispute for Visa Compelling Evidence 3.0 evidence
          * submission.
          */

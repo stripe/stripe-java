@@ -1758,6 +1758,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @SerializedName("line_invalid")
         String lineInvalid;
 
+        /**
+         * The IDs of the lines that are invalid if the stale reason type is {@code lines_invalid}.
+         */
+        @SerializedName("lines_invalid")
+        List<Quote.StatusDetails.Stale.LastReason.LinesInvalid> linesInvalid;
+
         /** The user supplied mark stale reason. */
         @SerializedName("marked_stale")
         String markedStale;
@@ -1788,13 +1794,26 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
          * The reason the quote was marked as stale.
          *
          * <p>One of {@code accept_failed_validations}, {@code bill_on_acceptance_invalid}, {@code
-         * line_invalid}, {@code marked_stale}, {@code subscription_canceled}, {@code
-         * subscription_changed}, {@code subscription_expired}, {@code
-         * subscription_schedule_canceled}, {@code subscription_schedule_changed}, or {@code
+         * line_invalid}, {@code lines_invalid}, {@code marked_stale}, {@code
+         * subscription_canceled}, {@code subscription_changed}, {@code subscription_expired},
+         * {@code subscription_schedule_canceled}, {@code subscription_schedule_changed}, or {@code
          * subscription_schedule_released}.
          */
         @SerializedName("type")
         String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class LinesInvalid extends StripeObject {
+          /** The timestamp at which the lines were marked as invalid. */
+          @SerializedName("invalid_at")
+          Long invalidAt;
+
+          /** The list of lines that became invalid at the given timestamp. */
+          @SerializedName("lines")
+          List<String> lines;
+        }
 
         @Getter
         @Setter

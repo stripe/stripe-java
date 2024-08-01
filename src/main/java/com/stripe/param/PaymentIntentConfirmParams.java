@@ -145,12 +145,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    * be <a href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
    * after the transaction completes.
    *
+   * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+   * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * payment method representing the card is created and attached to the Customer instead.
+   *
    * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to dynamically
    * optimize your payment flow and comply with regional legislation and network rules, such as <a
    * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
    *
    * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-   * publishable key, you may only update the value from {@code on_session} to {@code off_session}.
+   * publishable key, you can only update the value from {@code on_session} to {@code off_session}.
    */
   @SerializedName("setup_future_usage")
   ApiRequestParams.EnumParam setupFutureUsage;
@@ -551,12 +555,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * can still be <a href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a
      * Customer after the transaction completes.
      *
+     * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+     * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * payment method representing the card is created and attached to the Customer instead.
+     *
      * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to dynamically
      * optimize your payment flow and comply with regional legislation and network rules, such as <a
      * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
      *
      * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-     * publishable key, you may only update the value from {@code on_session} to {@code
+     * publishable key, you can only update the value from {@code on_session} to {@code
      * off_session}.
      */
     public Builder setSetupFutureUsage(
@@ -575,12 +583,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * can still be <a href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a
      * Customer after the transaction completes.
      *
+     * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+     * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * payment method representing the card is created and attached to the Customer instead.
+     *
      * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to dynamically
      * optimize your payment flow and comply with regional legislation and network rules, such as <a
      * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
      *
      * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-     * publishable key, you may only update the value from {@code on_session} to {@code
+     * publishable key, you can only update the value from {@code on_session} to {@code
      * off_session}.
      */
     public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -11332,12 +11344,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -11428,12 +11444,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -11455,12 +11475,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -11741,12 +11765,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -11861,12 +11889,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -11945,12 +11977,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -12070,12 +12106,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -12133,12 +12173,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -12204,12 +12248,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -12231,12 +12279,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -12295,6 +12347,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * method can still be <a
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
        *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
@@ -12400,6 +12456,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
@@ -12422,6 +12482,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * method can still be <a
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
          *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
@@ -12483,12 +12547,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -12555,12 +12623,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -12582,12 +12654,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -12637,12 +12713,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -12709,12 +12789,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -12736,12 +12820,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -12797,12 +12885,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -12885,12 +12977,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -12912,12 +13008,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -12992,12 +13092,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -13078,12 +13182,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -13105,12 +13213,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -13162,12 +13274,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -13249,12 +13365,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -13276,12 +13396,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -13439,12 +13563,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -13797,12 +13925,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -13824,12 +13956,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -15726,12 +15862,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -15834,12 +15974,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -15861,12 +16005,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -15942,12 +16090,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -16047,12 +16199,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -16414,12 +16570,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -16485,12 +16645,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -16535,12 +16699,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -16606,12 +16774,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -16656,12 +16828,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -16727,12 +16903,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -16778,12 +16958,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -16849,12 +17033,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -16900,12 +17088,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -16971,12 +17163,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -16998,12 +17194,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -17127,12 +17327,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -17249,12 +17453,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -17490,12 +17698,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -17662,12 +17874,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -17731,12 +17947,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -17850,12 +18070,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -17877,12 +18101,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -17954,12 +18182,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -18062,12 +18294,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -18125,12 +18361,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -18196,12 +18436,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -18255,12 +18499,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -18342,12 +18590,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -18393,12 +18645,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -18474,12 +18730,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -18530,12 +18790,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -18601,12 +18865,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -18683,12 +18951,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -18848,12 +19120,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -18875,12 +19151,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -19047,12 +19327,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -19135,12 +19419,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -19162,12 +19450,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -19502,12 +19794,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -19601,12 +19897,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -19651,12 +19951,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -19722,12 +20026,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -19857,6 +20165,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
@@ -19962,6 +20274,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
@@ -19984,6 +20300,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * method can still be <a
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
          *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
@@ -20049,12 +20369,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -20134,12 +20458,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -20161,12 +20489,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -20281,12 +20613,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -20372,12 +20708,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -20399,12 +20739,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -20485,12 +20829,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -20572,12 +20920,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -20623,12 +20975,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -20694,12 +21050,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -20761,12 +21121,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -20903,12 +21267,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -20930,12 +21298,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
@@ -21781,12 +22153,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -21875,12 +22251,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(
@@ -21944,12 +22324,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
        * the transaction completes.
        *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card is created and attached to the Customer instead.
+       *
        * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
        *
        * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-       * publishable key, you may only update the value from {@code on_session} to {@code
+       * publishable key, you can only update the value from {@code on_session} to {@code
        * off_session}.
        */
       @SerializedName("setup_future_usage")
@@ -22015,12 +22399,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
          * after the transaction completes.
          *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
+         * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card is created and attached to the Customer instead.
+         *
          * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
          * dynamically optimize your payment flow and comply with regional legislation and network
          * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
          *
          * <p>If {@code setup_future_usage} is already set and you are performing a request using a
-         * publishable key, you may only update the value from {@code on_session} to {@code
+         * publishable key, you can only update the value from {@code on_session} to {@code
          * off_session}.
          */
         public Builder setSetupFutureUsage(

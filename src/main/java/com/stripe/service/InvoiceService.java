@@ -16,6 +16,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceAddLinesParams;
 import com.stripe.param.InvoiceAttachPaymentIntentParams;
+import com.stripe.param.InvoiceAttachPaymentParams;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceCreatePreviewParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
@@ -383,6 +384,102 @@ public final class InvoiceService extends ApiService {
   public Invoice addLines(String invoice, InvoiceAddLinesParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(invoice));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return this.request(request, Invoice.class);
+  }
+  /**
+   * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
+   * {@code payments}.
+   *
+   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
+   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
+   * {@code paid} if necessary.
+   *
+   * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
+   * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
+   * fully paid, the invoice’s status becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
+   * to the invoice immediately.
+   *
+   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a> to learn more.
+   */
+  public Invoice attachPayment(String invoice, InvoiceAttachPaymentParams params)
+      throws StripeException {
+    return attachPayment(invoice, params, (RequestOptions) null);
+  }
+  /**
+   * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
+   * {@code payments}.
+   *
+   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
+   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
+   * {@code paid} if necessary.
+   *
+   * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
+   * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
+   * fully paid, the invoice’s status becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
+   * to the invoice immediately.
+   *
+   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a> to learn more.
+   */
+  public Invoice attachPayment(String invoice, RequestOptions options) throws StripeException {
+    return attachPayment(invoice, (InvoiceAttachPaymentParams) null, options);
+  }
+  /**
+   * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
+   * {@code payments}.
+   *
+   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
+   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
+   * {@code paid} if necessary.
+   *
+   * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
+   * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
+   * fully paid, the invoice’s status becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
+   * to the invoice immediately.
+   *
+   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a> to learn more.
+   */
+  public Invoice attachPayment(String invoice) throws StripeException {
+    return attachPayment(invoice, (InvoiceAttachPaymentParams) null, (RequestOptions) null);
+  }
+  /**
+   * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
+   * {@code payments}.
+   *
+   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
+   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
+   * {@code paid} if necessary.
+   *
+   * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
+   * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
+   * fully paid, the invoice’s status becomes {@code paid}.
+   *
+   * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
+   * to the invoice immediately.
+   *
+   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
+   * payment</a> to learn more.
+   */
+  public Invoice attachPayment(
+      String invoice, InvoiceAttachPaymentParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s/attach_payment", ApiResource.urlEncodeId(invoice));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

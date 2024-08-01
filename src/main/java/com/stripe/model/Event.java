@@ -142,7 +142,8 @@ public class Event extends ApiResource implements HasId {
    * {@code customer.subscription.created}, {@code customer.subscription.custom_event}, {@code
    * customer.subscription.deleted}, {@code customer.subscription.paused}, {@code
    * customer.subscription.pending_update_applied}, {@code
-   * customer.subscription.pending_update_expired}, {@code customer.subscription.resumed}, {@code
+   * customer.subscription.pending_update_expired}, {@code
+   * customer.subscription.price_migration_failed}, {@code customer.subscription.resumed}, {@code
    * customer.subscription.trial_will_end}, {@code customer.subscription.updated}, {@code
    * customer.tax_id.created}, {@code customer.tax_id.deleted}, {@code customer.tax_id.updated},
    * {@code customer.updated}, {@code customer_cash_balance_transaction.created}, {@code
@@ -201,9 +202,9 @@ public class Event extends ApiResource implements HasId {
    * source.transaction.updated}, {@code subscription_schedule.aborted}, {@code
    * subscription_schedule.canceled}, {@code subscription_schedule.completed}, {@code
    * subscription_schedule.created}, {@code subscription_schedule.expiring}, {@code
-   * subscription_schedule.released}, {@code subscription_schedule.updated}, {@code
-   * tax.form.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
-   * tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
+   * subscription_schedule.price_migration_failed}, {@code subscription_schedule.released}, {@code
+   * subscription_schedule.updated}, {@code tax.form.updated}, {@code tax.settings.updated}, {@code
+   * tax_rate.created}, {@code tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
    * terminal.reader.action_succeeded}, {@code terminal.reader.action_updated}, {@code
    * test_helpers.test_clock.advancing}, {@code test_helpers.test_clock.created}, {@code
    * test_helpers.test_clock.deleted}, {@code test_helpers.test_clock.internal_failure}, {@code

@@ -220,6 +220,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("items")
   SubscriptionItemCollection items;
 
+  /** Details of the most recent price migration that failed for the subscription. */
+  @SerializedName("last_price_migration_error")
+  LastPriceMigrationError lastPriceMigrationError;
+
   /** The most recent invoice this subscription has generated. */
   @SerializedName("latest_invoice")
   @Getter(lombok.AccessLevel.NONE)
@@ -1515,6 +1519,40 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     }
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LastPriceMigrationError extends StripeObject {
+    /** The time at which the price migration encountered an error. */
+    @SerializedName("errored_at")
+    Long erroredAt;
+
+    /** The involved price pairs in each failed transition. */
+    @SerializedName("failed_transitions")
+    List<Subscription.LastPriceMigrationError.FailedTransition> failedTransitions;
+
+    /**
+     * The type of error encountered by the price migration.
+     *
+     * <p>Equal to {@code price_uniqueness_violation}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FailedTransition extends StripeObject {
+      /** The original price to be migrated. */
+      @SerializedName("source_price")
+      String sourcePrice;
+
+      /** The intended resulting price of the migration. */
+      @SerializedName("target_price")
+      String targetPrice;
+    }
+  }
+
   /**
    * The Pause Collection settings determine how we will pause collection for this subscription and
    * for how long the subscription should be paused.
@@ -2019,6 +2057,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(items, responseGetter);
+    trySetResponseGetter(lastPriceMigrationError, responseGetter);
     trySetResponseGetter(latestInvoice, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(pauseCollection, responseGetter);
