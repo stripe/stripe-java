@@ -198,7 +198,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+  /**
+   * Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to
+   * {@code false} (on-session).
+   */
   @SerializedName("off_session")
   Boolean offSession;
 
@@ -949,7 +952,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+    /**
+     * Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults
+     * to {@code false} (on-session).
+     */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
       return this;
