@@ -1,5 +1,13 @@
 # Changelog
 
+## 26.7.0-beta.1 - 2024-08-01
+* [#1842](https://github.com/stripe/stripe-java/pull/1842) Update generated code for beta
+  * Add support for `attach_payment` method on resource `Invoice`
+  * Add support for `app_install` and `app_viewport` on `AccountSessionCreateParams.components`
+  * Remove support for `partner_rejected_details` on `Dispute.evidence_details.enhanced_eligibility.visa_compelling_evidence_3`
+  * Add support for `lines_invalid` on `Quote.status_details.stale.last_reason`
+  * Add support for `last_price_migration_error` on `SubscriptionSchedule` and `Subscription`
+
 ## 26.6.0 - 2024-08-01
 * [#1841](https://github.com/stripe/stripe-java/pull/1841) Update generated code
   * Add support for new resources `Billing.AlertTriggered` and `Billing.Alert`
