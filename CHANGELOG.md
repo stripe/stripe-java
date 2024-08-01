@@ -1,5 +1,11 @@
 # Changelog
 
+## 26.6.0 - 2024-08-01
+* [#1841](https://github.com/stripe/stripe-java/pull/1841) Update generated code
+  * Add support for new resources `Billing.AlertTriggered` and `Billing.Alert`
+  * ⚠️ Remove support for `authorization_code` on `Charge.payment_method_details.card`. This was accidentally released last week. 
+  * Add support for new value `billing.alert.triggered` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 26.5.1 - 2024-07-25
 * [#1840](https://github.com/stripe/stripe-java/pull/1840) Update generated code
   * Add support for `tax_registrations` and `tax_settings` on `AccountSession.components` and `AccountSessionCreateParams.components`
