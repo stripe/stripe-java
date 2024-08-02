@@ -130,6 +130,10 @@ public class VerificationSession extends ApiResource
   @SerializedName("redaction")
   Redaction redaction;
 
+  /** Token referencing a Customer resource. */
+  @SerializedName("related_customer")
+  String relatedCustomer;
+
   /**
    * Status of this VerificationSession. <a
    * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
