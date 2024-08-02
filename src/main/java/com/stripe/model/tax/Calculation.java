@@ -14,6 +14,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.CalculationCreateParams;
 import com.stripe.param.tax.CalculationListLineItemsParams;
+import com.stripe.param.tax.CalculationRetrieveParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -200,6 +201,45 @@ public class Calculation extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, CalculationLineItemCollection.class);
+  }
+
+  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
+  public static Calculation retrieve(String calculation) throws StripeException {
+    return retrieve(calculation, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
+  public static Calculation retrieve(String calculation, RequestOptions options)
+      throws StripeException {
+    return retrieve(calculation, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
+  public static Calculation retrieve(
+      String calculation, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(calculation));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Calculation.class);
+  }
+
+  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
+  public static Calculation retrieve(
+      String calculation, CalculationRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(calculation));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
   @Getter
