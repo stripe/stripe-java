@@ -51,6 +51,9 @@ public class VerificationSessionListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  @SerializedName("related_customer")
+  String relatedCustomer;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -75,6 +78,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String relatedCustomer,
       String startingAfter,
       Status status) {
     this.clientReferenceId = clientReferenceId;
@@ -83,6 +87,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.relatedCustomer = relatedCustomer;
     this.startingAfter = startingAfter;
     this.status = status;
   }
@@ -104,6 +109,8 @@ public class VerificationSessionListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String relatedCustomer;
+
     private String startingAfter;
 
     private Status status;
@@ -117,6 +124,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
+          this.relatedCustomer,
           this.startingAfter,
           this.status);
     }
@@ -211,6 +219,11 @@ public class VerificationSessionListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    public Builder setRelatedCustomer(String relatedCustomer) {
+      this.relatedCustomer = relatedCustomer;
       return this;
     }
 
