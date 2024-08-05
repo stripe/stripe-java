@@ -7540,6 +7540,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("eftpos_au")
         EFTPOS_AU("eftpos_au"),
 
+        @SerializedName("girocard")
+        GIROCARD("girocard"),
+
         @SerializedName("interac")
         INTERAC("interac"),
 
