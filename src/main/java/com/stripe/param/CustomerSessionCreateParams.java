@@ -432,7 +432,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
         /**
          * Determines the max number of saved payment methods for the Payment Element to display.
-         * This parameter defaults to {@code 10}.
+         * This parameter defaults to {@code 3}.
          */
         @SerializedName("payment_method_redisplay_limit")
         Long paymentMethodRedisplayLimit;
@@ -612,7 +612,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
           /**
            * Determines the max number of saved payment methods for the Payment Element to display.
-           * This parameter defaults to {@code 10}.
+           * This parameter defaults to {@code 3}.
            */
           public Builder setPaymentMethodRedisplayLimit(Long paymentMethodRedisplayLimit) {
             this.paymentMethodRedisplayLimit = paymentMethodRedisplayLimit;
