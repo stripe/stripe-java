@@ -10896,22 +10896,32 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The default text that appears on credit card statements when a charge is made. This field
-       * prefixes any dynamic {@code statement_descriptor} specified on the charge.
+       * The default text that appears on statements for non-card charges outside of Japan. For card
+       * charges, if you don't set a {@code statement_descriptor_prefix}, this text is also used as
+       * the statement descriptor prefix. In that case, if concatenating the statement descriptor
+       * suffix causes the combined statement descriptor to exceed 22 characters, we truncate the
+       * {@code statement_descriptor} text to limit the full descriptor to 22 characters. For more
+       * information about statement descriptors and their requirements, see the <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors">account settings
+       * documentation</a>.
        */
       @SerializedName("statement_descriptor")
       String statementDescriptor;
 
       /**
-       * The Kana variation of the default text that appears on credit card statements when a charge
-       * is made (Japan only).
+       * The Kana variation of {@code statement_descriptor} used for charges in Japan. Japanese
+       * statement descriptors have <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+       * requirements</a>.
        */
       @SerializedName("statement_descriptor_kana")
       String statementDescriptorKana;
 
       /**
-       * The Kanji variation of the default text that appears on credit card statements when a
-       * charge is made (Japan only).
+       * The Kanji variation of {@code statement_descriptor} used for charges in Japan. Japanese
+       * statement descriptors have <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+       * requirements</a>.
        */
       @SerializedName("statement_descriptor_kanji")
       String statementDescriptorKanji;
@@ -10978,8 +10988,14 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The default text that appears on credit card statements when a charge is made. This field
-         * prefixes any dynamic {@code statement_descriptor} specified on the charge.
+         * The default text that appears on statements for non-card charges outside of Japan. For
+         * card charges, if you don't set a {@code statement_descriptor_prefix}, this text is also
+         * used as the statement descriptor prefix. In that case, if concatenating the statement
+         * descriptor suffix causes the combined statement descriptor to exceed 22 characters, we
+         * truncate the {@code statement_descriptor} text to limit the full descriptor to 22
+         * characters. For more information about statement descriptors and their requirements, see
+         * the <a href="https://docs.stripe.com/get-started/account/statement-descriptors">account
+         * settings documentation</a>.
          */
         public Builder setStatementDescriptor(String statementDescriptor) {
           this.statementDescriptor = statementDescriptor;
@@ -10987,8 +11003,10 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The Kana variation of the default text that appears on credit card statements when a
-         * charge is made (Japan only).
+         * The Kana variation of {@code statement_descriptor} used for charges in Japan. Japanese
+         * statement descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
          */
         public Builder setStatementDescriptorKana(String statementDescriptorKana) {
           this.statementDescriptorKana = statementDescriptorKana;
@@ -10996,8 +11014,10 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The Kanji variation of the default text that appears on credit card statements when a
-         * charge is made (Japan only).
+         * The Kanji variation of {@code statement_descriptor} used for charges in Japan. Japanese
+         * statement descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
          */
         public Builder setStatementDescriptorKanji(String statementDescriptorKanji) {
           this.statementDescriptorKanji = statementDescriptorKanji;
