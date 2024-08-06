@@ -678,8 +678,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     RadarOptions radarOptions;
 
     /**
-     * If this is a Rechnung PaymentMethod, this hash contains details about the Rechnung payment
-     * method.
+     * If this is a {@code rechnung} PaymentMethod, this hash contains details about the Rechnung
+     * payment method.
      */
     @SerializedName("rechnung")
     Rechnung rechnung;
@@ -1347,8 +1347,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a Rechnung PaymentMethod, this hash contains details about the Rechnung payment
-       * method.
+       * If this is a {@code rechnung} PaymentMethod, this hash contains details about the Rechnung
+       * payment method.
        */
       public Builder setRechnung(SetupIntentUpdateParams.PaymentMethodData.Rechnung rechnung) {
         this.rechnung = rechnung;

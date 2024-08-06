@@ -4426,11 +4426,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Rechnung extends StripeObject {
-      /** A unique identifier that correlates each transaction with the collected risk data. */
-      @SerializedName("risk_correlation_id")
-      String riskCorrelationId;
-    }
+    public static class Rechnung extends StripeObject {}
 
     @Getter
     @Setter

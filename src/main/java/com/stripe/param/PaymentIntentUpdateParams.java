@@ -6100,8 +6100,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     RadarOptions radarOptions;
 
     /**
-     * If this is a Rechnung PaymentMethod, this hash contains details about the Rechnung payment
-     * method.
+     * If this is a {@code rechnung} PaymentMethod, this hash contains details about the Rechnung
+     * payment method.
      */
     @SerializedName("rechnung")
     Rechnung rechnung;
@@ -6770,8 +6770,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a Rechnung PaymentMethod, this hash contains details about the Rechnung payment
-       * method.
+       * If this is a {@code rechnung} PaymentMethod, this hash contains details about the Rechnung
+       * payment method.
        */
       public Builder setRechnung(PaymentIntentUpdateParams.PaymentMethodData.Rechnung rechnung) {
         this.rechnung = rechnung;
@@ -10928,7 +10928,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object promptpay;
 
     /**
-     * If this is a {@code Rechnung} PaymentMethod, this sub-hash contains details about the
+     * If this is a {@code rechnung} PaymentMethod, this sub-hash contains details about the
      * Rechnung payment method options.
      */
     @SerializedName("rechnung")
@@ -11823,7 +11823,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code Rechnung} PaymentMethod, this sub-hash contains details about the
+       * If this is a {@code rechnung} PaymentMethod, this sub-hash contains details about the
        * Rechnung payment method options.
        */
       public Builder setRechnung(PaymentIntentUpdateParams.PaymentMethodOptions.Rechnung rechnung) {
@@ -11832,7 +11832,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code Rechnung} PaymentMethod, this sub-hash contains details about the
+       * If this is a {@code rechnung} PaymentMethod, this sub-hash contains details about the
        * Rechnung payment method options.
        */
       public Builder setRechnung(EmptyParam rechnung) {
@@ -20933,13 +20933,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** A unique identifier that correlates each transaction with the collected risk data. */
-      @SerializedName("risk_correlation_id")
-      Object riskCorrelationId;
-
-      private Rechnung(Map<String, Object> extraParams, Object riskCorrelationId) {
+      private Rechnung(Map<String, Object> extraParams) {
         this.extraParams = extraParams;
-        this.riskCorrelationId = riskCorrelationId;
       }
 
       public static Builder builder() {
@@ -20949,12 +20944,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private Object riskCorrelationId;
-
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Rechnung build() {
-          return new PaymentIntentUpdateParams.PaymentMethodOptions.Rechnung(
-              this.extraParams, this.riskCorrelationId);
+          return new PaymentIntentUpdateParams.PaymentMethodOptions.Rechnung(this.extraParams);
         }
 
         /**
@@ -20982,18 +20974,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** A unique identifier that correlates each transaction with the collected risk data. */
-        public Builder setRiskCorrelationId(String riskCorrelationId) {
-          this.riskCorrelationId = riskCorrelationId;
-          return this;
-        }
-
-        /** A unique identifier that correlates each transaction with the collected risk data. */
-        public Builder setRiskCorrelationId(EmptyParam riskCorrelationId) {
-          this.riskCorrelationId = riskCorrelationId;
           return this;
         }
       }
