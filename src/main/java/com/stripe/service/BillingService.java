@@ -9,6 +9,10 @@ public final class BillingService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.billing.AlertService alerts() {
+    return new com.stripe.service.billing.AlertService(this.getResponseGetter());
+  }
+
   public com.stripe.service.billing.MeterEventAdjustmentService meterEventAdjustments() {
     return new com.stripe.service.billing.MeterEventAdjustmentService(this.getResponseGetter());
   }

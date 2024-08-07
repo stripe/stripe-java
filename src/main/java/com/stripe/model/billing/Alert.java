@@ -2,11 +2,25 @@
 package com.stripe.model.billing;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.billing.AlertActivateParams;
+import com.stripe.param.billing.AlertArchiveParams;
+import com.stripe.param.billing.AlertCreateParams;
+import com.stripe.param.billing.AlertDeactivateParams;
+import com.stripe.param.billing.AlertListParams;
+import com.stripe.param.billing.AlertRetrieveParams;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +33,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Alert extends StripeObject implements HasId {
+public class Alert extends ApiResource implements HasId {
   /**
    * Defines the type of the alert.
    *
@@ -73,6 +87,254 @@ public class Alert extends StripeObject implements HasId {
    */
   @SerializedName("usage_threshold_config")
   UsageThresholdConfig usageThresholdConfig;
+
+  /** Reactivates this alert, allowing it to trigger again. */
+  public Alert activate() throws StripeException {
+    return activate((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Reactivates this alert, allowing it to trigger again. */
+  public Alert activate(RequestOptions options) throws StripeException {
+    return activate((Map<String, Object>) null, options);
+  }
+
+  /** Reactivates this alert, allowing it to trigger again. */
+  public Alert activate(Map<String, Object> params) throws StripeException {
+    return activate(params, (RequestOptions) null);
+  }
+
+  /** Reactivates this alert, allowing it to trigger again. */
+  public Alert activate(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/billing/alerts/%s/activate", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Alert.class);
+  }
+
+  /** Reactivates this alert, allowing it to trigger again. */
+  public Alert activate(AlertActivateParams params) throws StripeException {
+    return activate(params, (RequestOptions) null);
+  }
+
+  /** Reactivates this alert, allowing it to trigger again. */
+  public Alert activate(AlertActivateParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/billing/alerts/%s/activate", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Alert.class);
+  }
+
+  /** Archives this alert, removing it from the list view and APIs. This is non-reversible. */
+  public Alert archive() throws StripeException {
+    return archive((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Archives this alert, removing it from the list view and APIs. This is non-reversible. */
+  public Alert archive(RequestOptions options) throws StripeException {
+    return archive((Map<String, Object>) null, options);
+  }
+
+  /** Archives this alert, removing it from the list view and APIs. This is non-reversible. */
+  public Alert archive(Map<String, Object> params) throws StripeException {
+    return archive(params, (RequestOptions) null);
+  }
+
+  /** Archives this alert, removing it from the list view and APIs. This is non-reversible. */
+  public Alert archive(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/billing/alerts/%s/archive", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Alert.class);
+  }
+
+  /** Archives this alert, removing it from the list view and APIs. This is non-reversible. */
+  public Alert archive(AlertArchiveParams params) throws StripeException {
+    return archive(params, (RequestOptions) null);
+  }
+
+  /** Archives this alert, removing it from the list view and APIs. This is non-reversible. */
+  public Alert archive(AlertArchiveParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/billing/alerts/%s/archive", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Alert.class);
+  }
+
+  /** Creates a billing alert. */
+  public static Alert create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a billing alert. */
+  public static Alert create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/billing/alerts";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Alert.class);
+  }
+
+  /** Creates a billing alert. */
+  public static Alert create(AlertCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a billing alert. */
+  public static Alert create(AlertCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/billing/alerts";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Alert.class);
+  }
+
+  /** Deactivates this alert, preventing it from triggering. */
+  public Alert deactivate() throws StripeException {
+    return deactivate((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deactivates this alert, preventing it from triggering. */
+  public Alert deactivate(RequestOptions options) throws StripeException {
+    return deactivate((Map<String, Object>) null, options);
+  }
+
+  /** Deactivates this alert, preventing it from triggering. */
+  public Alert deactivate(Map<String, Object> params) throws StripeException {
+    return deactivate(params, (RequestOptions) null);
+  }
+
+  /** Deactivates this alert, preventing it from triggering. */
+  public Alert deactivate(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/billing/alerts/%s/deactivate", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, Alert.class);
+  }
+
+  /** Deactivates this alert, preventing it from triggering. */
+  public Alert deactivate(AlertDeactivateParams params) throws StripeException {
+    return deactivate(params, (RequestOptions) null);
+  }
+
+  /** Deactivates this alert, preventing it from triggering. */
+  public Alert deactivate(AlertDeactivateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/billing/alerts/%s/deactivate", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, Alert.class);
+  }
+
+  /** Lists billing active and inactive alerts. */
+  public static AlertCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Lists billing active and inactive alerts. */
+  public static AlertCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/billing/alerts";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AlertCollection.class);
+  }
+
+  /** Lists billing active and inactive alerts. */
+  public static AlertCollection list(AlertListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Lists billing active and inactive alerts. */
+  public static AlertCollection list(AlertListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/billing/alerts";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, AlertCollection.class);
+  }
+
+  /** Retrieves a billing alert given an ID. */
+  public static Alert retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a billing alert given an ID. */
+  public static Alert retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a billing alert given an ID. */
+  public static Alert retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/billing/alerts/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Alert.class);
+  }
+
+  /** Retrieves a billing alert given an ID. */
+  public static Alert retrieve(String id, AlertRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/billing/alerts/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getGlobalResponseGetter().request(request, Alert.class);
+  }
 
   @Getter
   @Setter
@@ -149,5 +411,12 @@ public class Alert extends StripeObject implements HasId {
     public void setMeterObject(Meter expandableObject) {
       this.meter = new ExpandableField<Meter>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(filter, responseGetter);
+    trySetResponseGetter(usageThresholdConfig, responseGetter);
   }
 }
