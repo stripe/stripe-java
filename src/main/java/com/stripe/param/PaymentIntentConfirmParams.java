@@ -9348,8 +9348,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @Getter
         public static class Plan {
           /**
-           * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
-           * number of installment payments your customer will make to their credit card.
+           * For {@code fixed_count} installment plans, this is required. It represents the number
+           * of installment payments your customer will make to their credit card.
            */
           @SerializedName("count")
           Long count;
@@ -9365,9 +9365,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
-           * interval between installment payments your customer will make to their credit card. One
-           * of {@code month}.
+           * For {@code fixed_count} installment plans, this is required. It represents the interval
+           * between installment payments your customer will make to their credit card. One of
+           * {@code month}.
            */
           @SerializedName("interval")
           Interval interval;
@@ -9403,8 +9403,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             }
 
             /**
-             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
-             * number of installment payments your customer will make to their credit card.
+             * For {@code fixed_count} installment plans, this is required. It represents the number
+             * of installment payments your customer will make to their credit card.
              */
             public Builder setCount(Long count) {
               this.count = count;
@@ -9442,7 +9442,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             }
 
             /**
-             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+             * For {@code fixed_count} installment plans, this is required. It represents the
              * interval between installment payments your customer will make to their credit card.
              * One of {@code month}.
              */
