@@ -102,9 +102,11 @@ public class Card extends ApiResource
   String country;
 
   /**
-   * Three-letter <a href="https://stripe.com/docs/payouts">ISO code for currency</a>. Only
-   * applicable on accounts (not customers or recipients). The card can be used as a transfer
-   * destination for funds in this currency. This property is only available for accounts where <a
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO code for
+   * currency</a> in lowercase. Must be a <a href="https://docs.stripe.com/currencies">supported
+   * currency</a>. Only applicable on accounts (not customers or recipients). The card can be used
+   * as a transfer destination for funds in this currency. This property is only available for
+   * accounts where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
    * is {@code application}, which includes Custom accounts.
    */
