@@ -883,6 +883,14 @@ public class ConfirmationToken extends ApiResource implements HasId {
               /** Time at which the payment was collected while offline. */
               @SerializedName("stored_at")
               Long storedAt;
+
+              /**
+               * The method used to process this payment method offline. Only deferred is allowed.
+               *
+               * <p>Equal to {@code deferred}.
+               */
+              @SerializedName("type")
+              String type;
             }
 
             @Getter
@@ -1231,6 +1239,14 @@ public class ConfirmationToken extends ApiResource implements HasId {
         /** Time at which the payment was collected while offline. */
         @SerializedName("stored_at")
         Long storedAt;
+
+        /**
+         * The method used to process this payment method offline. Only deferred is allowed.
+         *
+         * <p>Equal to {@code deferred}.
+         */
+        @SerializedName("type")
+        String type;
       }
     }
 
