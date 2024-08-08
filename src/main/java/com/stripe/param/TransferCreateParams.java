@@ -16,8 +16,9 @@ public class TransferCreateParams extends ApiRequestParams {
   Long amount;
 
   /**
-   * <strong>Required.</strong> 3-letter <a href="https://stripe.com/docs/payouts">ISO code for
-   * currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO code for currency</a> in lowercase.
+   * Must be a <a href="https://docs.stripe.com/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -151,8 +152,9 @@ public class TransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> 3-letter <a href="https://stripe.com/docs/payouts">ISO code for
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO code for currency</a> in
+     * lowercase. Must be a <a href="https://docs.stripe.com/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;

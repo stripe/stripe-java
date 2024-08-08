@@ -55,10 +55,12 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   Map<String, String> metadata;
 
   /**
-   * For card charges, use <a
-   * href="https://stripe.com/docs/payments/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>.
-   * Otherwise, you can use this value as the complete description of a charge on your customers'
-   * statements. It must contain at least one letter and be 1–22 characters long.
+   * Text that appears on the customer's statement as the <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
+   * descriptor</a> for a non-card charge. This value overrides the account's default statement
+   * descriptor. Setting this value for a card charge returns an error. For card charges, set the <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
+   * instead.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -231,10 +233,13 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     }
 
     /**
-     * For card charges, use <a
-     * href="https://stripe.com/docs/payments/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>.
-     * Otherwise, you can use this value as the complete description of a charge on your customers'
-     * statements. It must contain at least one letter and be 1–22 characters long.
+     * Text that appears on the customer's statement as the <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
+     * descriptor</a> for a non-card charge. This value overrides the account's default statement
+     * descriptor. Setting this value for a card charge returns an error. For card charges, set the
+     * <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
+     * instead.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
