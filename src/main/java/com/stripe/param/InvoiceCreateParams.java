@@ -2934,8 +2934,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
           @Getter
           public static class Plan {
             /**
-             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
-             * number of installment payments your customer will make to their credit card.
+             * For {@code fixed_count} installment plans, this is required. It represents the number
+             * of installment payments your customer will make to their credit card.
              */
             @SerializedName("count")
             Long count;
@@ -2951,7 +2951,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+             * For {@code fixed_count} installment plans, this is required. It represents the
              * interval between installment payments your customer will make to their credit card.
              * One of {@code month}.
              */
@@ -2991,7 +2991,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
               }
 
               /**
-               * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+               * For {@code fixed_count} installment plans, this is required. It represents the
                * number of installment payments your customer will make to their credit card.
                */
               public Builder setCount(Long count) {
@@ -3030,7 +3030,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
               }
 
               /**
-               * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+               * For {@code fixed_count} installment plans, this is required. It represents the
                * interval between installment payments your customer will make to their credit card.
                * One of {@code month}.
                */

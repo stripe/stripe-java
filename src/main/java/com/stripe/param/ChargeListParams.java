@@ -63,7 +63,7 @@ public class ChargeListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return charges for this transfer group. */
+  /** Only return charges for this transfer group, limited to 100. */
   @SerializedName("transfer_group")
   String transferGroup;
 
@@ -235,7 +235,7 @@ public class ChargeListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return charges for this transfer group. */
+    /** Only return charges for this transfer group, limited to 100. */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
       return this;

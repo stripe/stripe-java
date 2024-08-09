@@ -285,6 +285,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AdditionalTosAcceptances extends StripeObject {
+    /** Details on the legal guardian's acceptance of the main Stripe service agreement. */
     @SerializedName("account")
     Account account;
 

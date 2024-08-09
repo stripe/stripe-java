@@ -1132,6 +1132,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             /** Time at which the payment was collected while offline. */
             @SerializedName("stored_at")
             Long storedAt;
+
+            /**
+             * The method used to process this payment method offline. Only deferred is allowed.
+             *
+             * <p>Equal to {@code deferred}.
+             */
+            @SerializedName("type")
+            String type;
           }
 
           @Getter
@@ -1437,6 +1445,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("networks")
     Networks networks;
 
+    /** Details about payment methods collected offline. */
+    @SerializedName("offline")
+    Offline offline;
+
     /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
     @SerializedName("preferred_locales")
     List<String> preferredLocales;
@@ -1461,6 +1473,23 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       /** The preferred network for the card. */
       @SerializedName("preferred")
       String preferred;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Offline extends StripeObject {
+      /** Time at which the payment was collected while offline. */
+      @SerializedName("stored_at")
+      Long storedAt;
+
+      /**
+       * The method used to process this payment method offline. Only deferred is allowed.
+       *
+       * <p>Equal to {@code deferred}.
+       */
+      @SerializedName("type")
+      String type;
     }
   }
 

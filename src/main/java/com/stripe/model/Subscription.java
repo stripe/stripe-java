@@ -78,10 +78,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Long cancelAt;
 
   /**
-   * If the subscription has been canceled with the {@code at_period_end} flag set to {@code true},
-   * {@code cancel_at_period_end} on the subscription will be true. You can use this attribute to
-   * determine whether a subscription that has a status of active is scheduled to be canceled at the
-   * end of the current period.
+   * Whether this subscription will (if {@code status=active}) or did (if {@code status=canceled})
+   * cancel at the end of the current billing period.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;

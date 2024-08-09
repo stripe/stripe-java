@@ -81,7 +81,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Long cancelAt;
 
   /**
-   * Boolean indicating whether this subscription should cancel at the end of the current period.
+   * Indicate whether this subscription should cancel at the end of the current period ({@code
+   * current_period_end}). Defaults to {@code false}.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -262,9 +263,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Prebilling prebilling;
 
   /**
-   * The ID of a promotion code to apply to this subscription. A promotion code applied to a
-   * subscription will only affect invoices created for that particular subscription. This field has
-   * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
+   * The promotion code to apply to this subscription. A promotion code applied to a subscription
+   * will only affect invoices created for that particular subscription. This field has been
+   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
    */
   @SerializedName("promotion_code")
   String promotionCode;
@@ -642,7 +643,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Boolean indicating whether this subscription should cancel at the end of the current period.
+     * Indicate whether this subscription should cancel at the end of the current period ({@code
+     * current_period_end}). Defaults to {@code false}.
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -1054,10 +1056,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of a promotion code to apply to this subscription. A promotion code applied to a
-     * subscription will only affect invoices created for that particular subscription. This field
-     * has been deprecated and will be removed in a future API version. Use {@code discounts}
-     * instead.
+     * The promotion code to apply to this subscription. A promotion code applied to a subscription
+     * will only affect invoices created for that particular subscription. This field has been
+     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
      */
     public Builder setPromotionCode(String promotionCode) {
       this.promotionCode = promotionCode;
@@ -5168,6 +5169,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
           @SerializedName("eftpos_au")
           EFTPOS_AU("eftpos_au"),
+
+          @SerializedName("girocard")
+          GIROCARD("girocard"),
 
           @SerializedName("interac")
           INTERAC("interac"),

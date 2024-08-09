@@ -54,17 +54,21 @@ public class ChargeCaptureParams extends ApiRequestParams {
   String receiptEmail;
 
   /**
-   * For card charges, use {@code statement_descriptor_suffix} instead. Otherwise, you can use this
-   * value as the complete description of a charge on your customers’ statements. Must contain at
-   * least one letter, maximum 22 characters.
+   * For a non-card charge, text that appears on the customer's statement as the <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
+   * descriptor</a>. This value overrides the account's default statement descriptor. For a card
+   * charge, this value is ignored unless you don't specify a {@code statement_descriptor_suffix},
+   * in which case this value is used as the suffix.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * Provides information about the charge that customers see on their statements. Concatenated with
-   * the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the
-   * complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   * Provides information about a card charge. Concatenated to the account's <a
+   * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+   * descriptor prefix</a> to form the complete statement descriptor that appears on the customer's
+   * statement. If the account has no prefix value, the suffix is concatenated to the account's
+   * statement descriptor.
    */
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
@@ -247,9 +251,11 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * For card charges, use {@code statement_descriptor_suffix} instead. Otherwise, you can use
-     * this value as the complete description of a charge on your customers’ statements. Must
-     * contain at least one letter, maximum 22 characters.
+     * For a non-card charge, text that appears on the customer's statement as the <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
+     * descriptor</a>. This value overrides the account's default statement descriptor. For a card
+     * charge, this value is ignored unless you don't specify a {@code statement_descriptor_suffix},
+     * in which case this value is used as the suffix.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -257,10 +263,11 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Provides information about the charge that customers see on their statements. Concatenated
-     * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
-     * form the complete statement descriptor. Maximum 22 characters for the concatenated
-     * descriptor.
+     * Provides information about a card charge. Concatenated to the account's <a
+     * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+     * descriptor prefix</a> to form the complete statement descriptor that appears on the
+     * customer's statement. If the account has no prefix value, the suffix is concatenated to the
+     * account's statement descriptor.
      */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;

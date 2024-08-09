@@ -166,9 +166,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
   Object subscriptionCancelAt;
 
   /**
-   * Boolean indicating whether this subscription should cancel at the end of the current period.
-   * This field has been deprecated and will be removed in a future API version. Use {@code
-   * subscription_details.cancel_at_period_end} instead.
+   * Indicate whether this subscription should cancel at the end of the current period ({@code
+   * current_period_end}). Defaults to {@code false}. This field has been deprecated and will be
+   * removed in a future API version. Use {@code subscription_details.cancel_at_period_end} instead.
    */
   @SerializedName("subscription_cancel_at_period_end")
   Boolean subscriptionCancelAtPeriodEnd;
@@ -772,9 +772,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     }
 
     /**
-     * Boolean indicating whether this subscription should cancel at the end of the current period.
-     * This field has been deprecated and will be removed in a future API version. Use {@code
-     * subscription_details.cancel_at_period_end} instead.
+     * Indicate whether this subscription should cancel at the end of the current period ({@code
+     * current_period_end}). Defaults to {@code false}. This field has been deprecated and will be
+     * removed in a future API version. Use {@code subscription_details.cancel_at_period_end}
+     * instead.
      */
     public Builder setSubscriptionCancelAtPeriodEnd(Boolean subscriptionCancelAtPeriodEnd) {
       this.subscriptionCancelAtPeriodEnd = subscriptionCancelAtPeriodEnd;
@@ -13006,7 +13007,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     Object cancelAt;
 
     /**
-     * Boolean indicating whether this subscription should cancel at the end of the current period.
+     * Indicate whether this subscription should cancel at the end of the current period ({@code
+     * current_period_end}). Defaults to {@code false}.
      */
     @SerializedName("cancel_at_period_end")
     Boolean cancelAtPeriodEnd;
@@ -13207,8 +13209,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       }
 
       /**
-       * Boolean indicating whether this subscription should cancel at the end of the current
-       * period.
+       * Indicate whether this subscription should cancel at the end of the current period ({@code
+       * current_period_end}). Defaults to {@code false}.
        */
       public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
         this.cancelAtPeriodEnd = cancelAtPeriodEnd;
