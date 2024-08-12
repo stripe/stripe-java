@@ -1,5 +1,14 @@
 # Changelog
 
+## 26.8.0-beta.1 - 2024-08-12
+* [#1844](https://github.com/stripe/stripe-java/pull/1844) Update generated code for beta
+  * Add support for `capital_financing_application` and `capital_financing` on `AccountSession.components`
+  * Add support for `payto` on `Checkout.Session.payment_method_options` and `checkout.SessionCreateParams.payment_method_options`
+  * Add support for new value `payto` on enum `checkout.SessionCreateParams.payment_method_types[]`
+  * Add support for new value `custom` on enum `checkout.SessionCreateParams.ui_mode`
+  * ⚠️  Remove support for `risk_correlation_id` on `PaymentIntent.payment_method_options.rechnung`, `PaymentIntentConfirmParams.payment_method_options.rechnung`, `PaymentIntentCreateParams.payment_method_options.rechnung`, and `PaymentIntentUpdateParams.payment_method_options.rechnung`
+  * Add support for new value `payto` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+
 ## 26.7.0 - 2024-08-08
 * [#1843](https://github.com/stripe/stripe-java/pull/1843) Update generated code
   * Add support for `activate`, `archive`, `create`, `deactivate`, `list`, and `retrieve` methods on resource `Billing.Alert`
