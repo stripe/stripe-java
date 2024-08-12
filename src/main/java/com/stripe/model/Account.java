@@ -323,7 +323,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -341,7 +341,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -359,7 +359,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -377,7 +377,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
