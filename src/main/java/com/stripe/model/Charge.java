@@ -1578,6 +1578,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("amount_authorized")
       Long amountAuthorized;
 
+      /** Authorization code on the charge. */
+      @SerializedName("authorization_code")
+      String authorizationCode;
+
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
        * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
