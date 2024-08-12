@@ -37,7 +37,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * If set, Checkout displays a back button and customers will be directed to this URL if they
-   * decide to cancel payment and return to your website.
+   * decide to cancel payment and return to your website. This parameter is not allowed if ui_mode
+   * is {@code embedded}.
    */
   @SerializedName("cancel_url")
   String cancelUrl;
@@ -591,7 +592,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * If set, Checkout displays a back button and customers will be directed to this URL if they
-     * decide to cancel payment and return to your website.
+     * decide to cancel payment and return to your website. This parameter is not allowed if ui_mode
+     * is {@code embedded}.
      */
     public Builder setCancelUrl(String cancelUrl) {
       this.cancelUrl = cancelUrl;
