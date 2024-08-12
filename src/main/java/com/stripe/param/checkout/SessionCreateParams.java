@@ -37,7 +37,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * If set, Checkout displays a back button and customers will be directed to this URL if they
-   * decide to cancel payment and return to your website.
+   * decide to cancel payment and return to your website. This parameter is not allowed if ui_mode
+   * is {@code embedded} or {@code custom}.
    */
   @SerializedName("cancel_url")
   String cancelUrl;
@@ -277,8 +278,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
-   * the payment method's app or site. This parameter is required if ui_mode is {@code embedded} and
-   * redirect-based payment methods are enabled on the session.
+   * the payment method's app or site. This parameter is required if {@code ui_mode} is {@code
+   * embedded} or {@code custom} and redirect-based payment methods are enabled on the session.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -324,8 +325,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The URL to which Stripe should send customers when payment or setup is complete. This parameter
-   * is not allowed if ui_mode is {@code embedded}. If you’d like to use information from the
-   * successful Checkout Session on your page, read the guide on <a
+   * is not allowed if ui_mode is {@code embedded} or {@code custom}. If you'd like to use
+   * information from the successful Checkout Session on your page, read the guide on <a
    * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
    * page</a>.
    */
@@ -591,7 +592,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * If set, Checkout displays a back button and customers will be directed to this URL if they
-     * decide to cancel payment and return to your website.
+     * decide to cancel payment and return to your website. This parameter is not allowed if ui_mode
+     * is {@code embedded} or {@code custom}.
      */
     public Builder setCancelUrl(String cancelUrl) {
       this.cancelUrl = cancelUrl;
@@ -989,8 +991,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
-     * the payment method's app or site. This parameter is required if ui_mode is {@code embedded}
-     * and redirect-based payment methods are enabled on the session.
+     * the payment method's app or site. This parameter is required if {@code ui_mode} is {@code
+     * embedded} or {@code custom} and redirect-based payment methods are enabled on the session.
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
@@ -1072,8 +1074,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The URL to which Stripe should send customers when payment or setup is complete. This
-     * parameter is not allowed if ui_mode is {@code embedded}. If you’d like to use information
-     * from the successful Checkout Session on your page, read the guide on <a
+     * parameter is not allowed if ui_mode is {@code embedded} or {@code custom}. If you'd like to
+     * use information from the successful Checkout Session on your page, read the guide on <a
      * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
      * page</a>.
      */
@@ -15452,6 +15454,9 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public enum UiMode implements ApiRequestParams.EnumParam {
+    @SerializedName("custom")
+    CUSTOM("custom"),
+
     @SerializedName("embedded")
     EMBEDDED("embedded"),
 

@@ -101,7 +101,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("client_reference_id")
   String clientReferenceId;
 
-  /** Client secret to be used when initializing Stripe.js embedded checkout. */
+  /**
+   * The client secret of the Session. Use this with <a
+   * href="https://stripe.com/docs/js/custom_checkout/init">initCustomCheckout</a> on your front
+   * end.
+   */
   @SerializedName("client_secret")
   String clientSecret;
 
@@ -319,8 +323,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String redirectOnCompletion;
 
   /**
-   * Applies to Checkout Sessions with {@code ui_mode: embedded}. The URL to redirect your customer
-   * back to after they authenticate or cancel their payment on the payment method's app or site.
+   * Applies to Checkout Sessions with {@code ui_mode: embedded} or {@code ui_mode: custom}. The URL
+   * to redirect your customer back to after they authenticate or cancel their payment on the
+   * payment method's app or site.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -400,7 +405,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * The UI mode of the Session. Defaults to {@code hosted}.
    *
-   * <p>One of {@code embedded}, or {@code hosted}.
+   * <p>One of {@code custom}, {@code embedded}, or {@code hosted}.
    */
   @SerializedName("ui_mode")
   String uiMode;
