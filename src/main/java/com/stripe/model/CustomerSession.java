@@ -205,7 +205,7 @@ public class CustomerSession extends ApiResource {
 
         /**
          * Determines the max number of saved payment methods for the Payment Element to display.
-         * This parameter defaults to {@code 10}.
+         * This parameter defaults to {@code 3}.
          */
         @SerializedName("payment_method_redisplay_limit")
         Long paymentMethodRedisplayLimit;

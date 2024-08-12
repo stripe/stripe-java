@@ -134,6 +134,12 @@ public class AccountSession extends ApiResource {
     @SerializedName("balances")
     Balances balances;
 
+    @SerializedName("capital_financing")
+    CapitalFinancing capitalFinancing;
+
+    @SerializedName("capital_financing_application")
+    CapitalFinancingApplication capitalFinancingApplication;
+
     @SerializedName("capital_financing_promotion")
     CapitalFinancingPromotion capitalFinancingPromotion;
 
@@ -258,6 +264,40 @@ public class AccountSession extends ApiResource {
         @SerializedName("standard_payouts")
         Boolean standardPayouts;
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CapitalFinancing extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CapitalFinancingApplication extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     @Getter

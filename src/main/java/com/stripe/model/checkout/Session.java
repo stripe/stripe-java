@@ -101,7 +101,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("client_reference_id")
   String clientReferenceId;
 
-  /** Client secret to be used when initializing Stripe.js embedded checkout. */
+  /**
+   * The client secret of the Session. Use this with <a
+   * href="https://stripe.com/docs/js/custom_checkout/init">initCustomCheckout</a> on your front
+   * end.
+   */
   @SerializedName("client_secret")
   String clientSecret;
 
@@ -319,8 +323,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String redirectOnCompletion;
 
   /**
-   * Applies to Checkout Sessions with {@code ui_mode: embedded}. The URL to redirect your customer
-   * back to after they authenticate or cancel their payment on the payment method's app or site.
+   * Applies to Checkout Sessions with {@code ui_mode: embedded} or {@code ui_mode: custom}. The URL
+   * to redirect your customer back to after they authenticate or cancel their payment on the
+   * payment method's app or site.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -400,7 +405,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * The UI mode of the Session. Defaults to {@code hosted}.
    *
-   * <p>One of {@code embedded}, or {@code hosted}.
+   * <p>One of {@code custom}, {@code embedded}, or {@code hosted}.
    */
   @SerializedName("ui_mode")
   String uiMode;
@@ -1519,6 +1524,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("payto")
+    Payto payto;
+
     @SerializedName("pix")
     Pix pix;
 
@@ -1555,21 +1563,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
        */
@@ -1631,21 +1639,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -1660,21 +1668,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -1689,21 +1697,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -1718,21 +1726,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, or {@code off_session}.
        */
@@ -1747,21 +1755,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -1776,21 +1784,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
        */
@@ -1805,21 +1813,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -1842,21 +1850,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
        */
@@ -1890,21 +1898,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
        */
@@ -1948,21 +1956,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -1989,21 +1997,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2061,21 +2069,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2090,21 +2098,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2119,21 +2127,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2148,21 +2156,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2177,21 +2185,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2206,21 +2214,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
        */
@@ -2244,21 +2252,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2273,21 +2281,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, or {@code off_session}.
        */
@@ -2302,21 +2310,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2331,21 +2339,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2368,21 +2376,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2397,21 +2405,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2426,21 +2434,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2475,21 +2483,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, or {@code off_session}.
        */
@@ -2509,6 +2517,99 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * The type of amount that will be collected. The amount charged must be exact or up to the
+         * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+         * end date.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * The periodicity at which payments will be collected.
+         *
+         * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
+         * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /**
+         * The number of payments that will be made during a payment period. Defaults to 1 except
+         * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+         * limit.
+         */
+        @SerializedName("payments_per_period")
+        Long paymentsPerPeriod;
+
+        /**
+         * The purpose for which payments are made. Defaults to retail.
+         *
+         * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
+         * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code
+         * tax}, or {@code utility}.
+         */
+        @SerializedName("purpose")
+        String purpose;
+
+        /**
+         * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
+         * confirmation time.
+         */
+        @SerializedName("start_date")
+        String startDate;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pix extends StripeObject {
       /** The number of seconds after which Pix payment will expire. */
       @SerializedName("expires_after_seconds")
@@ -2522,21 +2623,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, or {@code off_session}.
        */
@@ -2551,21 +2652,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
        */
@@ -2580,21 +2681,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>Equal to {@code none}.
        */
@@ -2624,21 +2725,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
        *
-       * <p>If the payment method is {@code card_present} and isn't a digital wallet, then a <a
-       * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
-       * payment method representing the card is created and attached to the Customer instead.
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
        */

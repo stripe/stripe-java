@@ -603,6 +603,13 @@ public class OutboundPayment extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class UsDomesticWire extends StripeObject {
       /**
+       * CHIPS System Sequence Number (SSN) of the OutboundPayment for payments sent over the {@code
+       * us_domestic_wire} network.
+       */
+      @SerializedName("chips")
+      String chips;
+
+      /**
        * IMAD of the OutboundPayment for payments sent over the {@code us_domestic_wire} network.
        */
       @SerializedName("imad")

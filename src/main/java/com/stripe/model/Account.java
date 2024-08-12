@@ -323,7 +323,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -341,7 +341,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -359,7 +359,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -377,7 +377,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
    * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
    * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balanace_object">balances</a> are zero.
+   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -2405,35 +2405,37 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String statementDescriptor;
 
       /**
-       * The Kana variation of the default text that appears on credit card statements when a charge
-       * is made (Japan only).
+       * The Kana variation of {@code statement_descriptor} used for charges in Japan. Japanese
+       * statement descriptors have <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+       * requirements</a>.
        */
       @SerializedName("statement_descriptor_kana")
       String statementDescriptorKana;
 
       /**
-       * The Kanji variation of the default text that appears on credit card statements when a
-       * charge is made (Japan only).
+       * The Kanji variation of {@code statement_descriptor} used for charges in Japan. Japanese
+       * statement descriptors have <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+       * requirements</a>.
        */
       @SerializedName("statement_descriptor_kanji")
       String statementDescriptorKanji;
 
       /**
-       * The Kana variation of the default text that appears on credit card statements when a charge
-       * is made (Japan only). This field prefixes any dynamic {@code
-       * statement_descriptor_suffix_kana} specified on the charge. {@code
-       * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
-       * portion.
+       * The Kana variation of {@code statement_descriptor_prefix} used for card charges in Japan.
+       * Japanese statement descriptors have <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+       * requirements</a>.
        */
       @SerializedName("statement_descriptor_prefix_kana")
       String statementDescriptorPrefixKana;
 
       /**
-       * The Kanji variation of the default text that appears on credit card statements when a
-       * charge is made (Japan only). This field prefixes any dynamic {@code
-       * statement_descriptor_suffix_kanji} specified on the charge. {@code
-       * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the
-       * dynamic portion.
+       * The Kanji variation of {@code statement_descriptor_prefix} used for card charges in Japan.
+       * Japanese statement descriptors have <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+       * requirements</a>.
        */
       @SerializedName("statement_descriptor_prefix_kanji")
       String statementDescriptorPrefixKanji;
