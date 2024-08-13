@@ -1,8 +1,14 @@
 {
   "recommendations": [
     "EditorConfig.editorconfig", // default
-    "vscjava.vscode-java-pack", // intellisense and tooling
-    "richardwillis.vscode-spotless-gradle", // formatting
-    "naco-siren.gradle-language" // also, gradle
+    "redhat.java", // LSP
+    "vscjava.vscode-java-debug", // debugger
+    "vscjava.vscode-gradle", // gradle support
+    "vscjava.vscode-java-test", // test runner
+    "richardwillis.vscode-spotless-gradle" // formatting
+  ],
+  "unwantedRecommendations": [
+    "naco-siren.gradle-language", // old gradle
+    "vscjava.vscode-java-pack" // has extra stuff, we've pulled the important parts out above
   ]
 }
