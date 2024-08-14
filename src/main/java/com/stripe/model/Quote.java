@@ -813,7 +813,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf() throws StripeException {
     return pdf((Map<String, Object>) null, (RequestOptions) null);
@@ -821,7 +821,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(Map<String, Object> params) throws StripeException {
     return pdf(params, (RequestOptions) null);
@@ -829,7 +829,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -842,7 +842,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(QuotePdfParams params) throws StripeException {
     return pdf(params, (RequestOptions) null);
@@ -850,7 +850,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(QuotePdfParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId()));

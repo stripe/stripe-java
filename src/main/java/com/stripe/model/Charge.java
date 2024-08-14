@@ -293,7 +293,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * The transfer ID which created this charge. Only present if the charge came from another Stripe
-   * account. <a href="https://stripe.com/docs/connect/destination-charges">See the Connect
+   * account. <a href="https://docs.stripe.com/connect/destination-charges">See the Connect
    * documentation</a> for details.
    */
   @SerializedName("source_transfer")
@@ -313,7 +313,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Provides information about a card charge. Concatenated to the account's <a
-   * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
    * descriptor prefix</a> to form the complete statement descriptor that appears on the customer's
    * statement. If the account has no prefix value, the suffix is concatenated to the account's
    * statement descriptor.
