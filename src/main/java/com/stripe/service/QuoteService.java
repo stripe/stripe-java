@@ -310,28 +310,28 @@ public final class QuoteService extends ApiService {
   }
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
     return pdf(quote, params, (RequestOptions) null);
   }
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(String quote, RequestOptions options) throws StripeException {
     return pdf(quote, (QuotePdfParams) null, options);
   }
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(String quote) throws StripeException {
     return pdf(quote, (QuotePdfParams) null, (RequestOptions) null);
   }
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
-   * href="https://docs.corp.stripe.com/quotes/overview#quote_pdf">here</a>
+   * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
   public InputStream pdf(String quote, QuotePdfParams params, RequestOptions options)
       throws StripeException {
