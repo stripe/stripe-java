@@ -109,6 +109,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("client_secret")
   String clientSecret;
 
+  /** Information about the customer collected within the Checkout Session. */
+  @SerializedName("collected_information")
+  CollectedInformation collectedInformation;
+
   /** Results of {@code consent_collection} for this session. */
   @SerializedName("consent")
   Consent consent;
@@ -304,6 +308,16 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("payment_status")
   String paymentStatus;
+
+  /**
+   * This property is used to set up permissions for various actions (e.g., update) on the
+   * CheckoutSession object.
+   *
+   * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
+   * permissions.update.shipping_details}.
+   */
+  @SerializedName("permissions")
+  Permissions permissions;
 
   @SerializedName("phone_number_collection")
   PhoneNumberCollection phoneNumberCollection;
@@ -913,6 +927,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CollectedInformation extends StripeObject {
+    /** Shipping information for this Checkout Session. */
+    @SerializedName("shipping_details")
+    ShippingDetails shippingDetails;
   }
 
   @Getter
@@ -2817,6 +2840,36 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Permissions extends StripeObject {
+    /** Permissions for updating the Checkout Session. */
+    @SerializedName("update")
+    Update update;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Update extends StripeObject {
+      /**
+       * Determines which entity is allowed to update the shipping details.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+       * shipping details. If set to {@code server_only}, only your server is allowed to update the
+       * shipping details.
+       *
+       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
+       * when initializing the Stripe Checkout client and manually update the shipping details from
+       * your server using the Stripe API.
+       *
+       * <p>One of {@code client_only}, or {@code server_only}.
+       */
+      @SerializedName("shipping_details")
+      String shippingDetails;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class PhoneNumberCollection extends StripeObject {
     /** Indicates whether phone number collection is enabled for the session. */
     @SerializedName("enabled")
@@ -3092,6 +3145,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
+    trySetResponseGetter(collectedInformation, responseGetter);
     trySetResponseGetter(consent, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
     trySetResponseGetter(currencyConversion, responseGetter);
@@ -3105,6 +3159,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(paymentLink, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(permissions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(savedPaymentMethodOptions, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);
