@@ -288,6 +288,13 @@ public class OutboundPaymentUpdateParams extends ApiRequestParams {
     @Getter
     public static class UsDomesticWire {
       /**
+       * CHIPS System Sequence Number (SSN) for funds sent over the {@code us_domestic_wire}
+       * network.
+       */
+      @SerializedName("chips")
+      Object chips;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -304,7 +311,9 @@ public class OutboundPaymentUpdateParams extends ApiRequestParams {
       @SerializedName("omad")
       Object omad;
 
-      private UsDomesticWire(Map<String, Object> extraParams, Object imad, Object omad) {
+      private UsDomesticWire(
+          Object chips, Map<String, Object> extraParams, Object imad, Object omad) {
+        this.chips = chips;
         this.extraParams = extraParams;
         this.imad = imad;
         this.omad = omad;
@@ -315,6 +324,8 @@ public class OutboundPaymentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object chips;
+
         private Map<String, Object> extraParams;
 
         private Object imad;
@@ -324,7 +335,25 @@ public class OutboundPaymentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public OutboundPaymentUpdateParams.TrackingDetails.UsDomesticWire build() {
           return new OutboundPaymentUpdateParams.TrackingDetails.UsDomesticWire(
-              this.extraParams, this.imad, this.omad);
+              this.chips, this.extraParams, this.imad, this.omad);
+        }
+
+        /**
+         * CHIPS System Sequence Number (SSN) for funds sent over the {@code us_domestic_wire}
+         * network.
+         */
+        public Builder setChips(String chips) {
+          this.chips = chips;
+          return this;
+        }
+
+        /**
+         * CHIPS System Sequence Number (SSN) for funds sent over the {@code us_domestic_wire}
+         * network.
+         */
+        public Builder setChips(EmptyParam chips) {
+          this.chips = chips;
+          return this;
         }
 
         /**

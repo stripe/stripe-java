@@ -293,7 +293,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * The transfer ID which created this charge. Only present if the charge came from another Stripe
-   * account. <a href="https://stripe.com/docs/connect/destination-charges">See the Connect
+   * account. <a href="https://docs.stripe.com/connect/destination-charges">See the Connect
    * documentation</a> for details.
    */
   @SerializedName("source_transfer")
@@ -313,7 +313,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Provides information about a card charge. Concatenated to the account's <a
-   * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
    * descriptor prefix</a> to form the complete statement descriptor that appears on the customer's
    * statement. If the account has no prefix value, the suffix is concatenated to the account's
    * statement descriptor.
@@ -1572,6 +1572,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("amount_authorized")
       Long amountAuthorized;
 
+      /** Authorization code on the charge. */
+      @SerializedName("authorization_code")
+      String authorizationCode;
+
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
        * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
@@ -2201,6 +2205,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("receipt")
       Receipt receipt;
 
+      @SerializedName("wallet")
+      Wallet wallet;
+
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2267,6 +2274,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         /** An indication of various EMV functions performed during the transaction. */
         @SerializedName("transaction_status_information")
         String transactionStatusInformation;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Wallet extends StripeObject {
+        /**
+         * The type of mobile wallet, one of {@code apple_pay}, {@code google_pay}, {@code
+         * samsung_pay}, or {@code unknown}.
+         */
+        @SerializedName("type")
+        String type;
       }
     }
 

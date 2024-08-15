@@ -56,7 +56,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * method attaches to the Customer after the PaymentIntent has been confirmed and any required
    * actions from the user are complete. If the payment method is {@code card_present} and isn't a
    * digital wallet, then a <a
-   * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
    * payment method representing the card is created and attached to the Customer instead.
    */
   @SerializedName("customer")
@@ -172,7 +172,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   /**
    * Provides information about a card charge. Concatenated to the account's <a
-   * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
    * descriptor prefix</a> to form the complete statement descriptor that appears on the customer's
    * statement.
    */
@@ -388,7 +388,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * method attaches to the Customer after the PaymentIntent has been confirmed and any required
      * actions from the user are complete. If the payment method is {@code card_present} and isn't a
      * digital wallet, then a <a
-     * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
      * payment method representing the card is created and attached to the Customer instead.
      */
     public Builder setCustomer(String customer) {
@@ -407,7 +407,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * method attaches to the Customer after the PaymentIntent has been confirmed and any required
      * actions from the user are complete. If the payment method is {@code card_present} and isn't a
      * digital wallet, then a <a
-     * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
      * payment method representing the card is created and attached to the Customer instead.
      */
     public Builder setCustomer(EmptyParam customer) {
@@ -727,7 +727,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * Provides information about a card charge. Concatenated to the account's <a
-     * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
      * descriptor prefix</a> to form the complete statement descriptor that appears on the
      * customer's statement.
      */
@@ -738,7 +738,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * Provides information about a card charge. Concatenated to the account's <a
-     * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
      * descriptor prefix</a> to form the complete statement descriptor that appears on the
      * customer's statement.
      */
@@ -7941,6 +7941,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -7968,8 +7972,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       ApiRequestParams.EnumParam setupFutureUsage;
 
       private BacsDebit(
-          Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -7980,12 +7987,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private MandateOptions mandateOptions;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.setupFutureUsage);
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
         }
 
         /**
@@ -8013,6 +8022,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.MandateOptions
+                mandateOptions) {
+          this.mandateOptions = mandateOptions;
           return this;
         }
 
@@ -8074,6 +8091,67 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      @Getter
+      public static class MandateOptions {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.MandateOptions build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.MandateOptions(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.MandateOptions#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.MandateOptions#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
 

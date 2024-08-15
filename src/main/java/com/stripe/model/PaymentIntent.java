@@ -163,7 +163,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * method attaches to the Customer after the PaymentIntent has been confirmed and any required
    * actions from the user are complete. If the payment method is {@code card_present} and isn't a
    * digital wallet, then a <a
-   * href="https://docs.corp.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
    * payment method representing the card is created and attached to the Customer instead.
    */
   @SerializedName("customer")
@@ -332,7 +332,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Provides information about a card charge. Concatenated to the account's <a
-   * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
    * descriptor prefix</a> to form the complete statement descriptor that appears on the customer's
    * statement.
    */
@@ -2694,6 +2694,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2717,6 +2720,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
     }
 
     @Getter

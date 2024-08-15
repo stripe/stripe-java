@@ -186,7 +186,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * ID of the payment method used with this SetupIntent. If the payment method is {@code
    * card_present} and isn't a digital wallet, then the <a
-   * href="https://docs.corp.stripe.com/api/setup_attempts/object#setup_attempt_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * href="https://docs.stripe.com/api/setup_attempts/object#setup_attempt_object-payment_method_details-card_present-generated_card">generated_card</a>
    * associated with the {@code latest_attempt} is attached to the Customer instead.
    */
   @SerializedName("payment_method")
@@ -987,6 +987,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
+    @SerializedName("bacs_debit")
+    BacsDebit bacsDebit;
+
     @SerializedName("card")
     Card card;
 
@@ -1069,6 +1072,19 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
+    }
 
     @Getter
     @Setter
