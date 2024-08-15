@@ -7,7 +7,8 @@
     "editor.rulers": [100],
     // use spotless for formatting (to match makefile)
     "spotlessGradle.format.enable": true,
-    "spotlessGradle.diagnostics.enable": true,
+    // don't show formatting issues as errors, just fix on save
+    "spotlessGradle.diagnostics.enable": false,
     "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
     "editor.codeActionsOnSave": {
       "source.fixAll.spotlessGradle": "explicit",
