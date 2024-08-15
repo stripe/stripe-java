@@ -2205,6 +2205,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("receipt")
       Receipt receipt;
 
+      @SerializedName("wallet")
+      Wallet wallet;
+
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2271,6 +2274,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         /** An indication of various EMV functions performed during the transaction. */
         @SerializedName("transaction_status_information")
         String transactionStatusInformation;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Wallet extends StripeObject {
+        /**
+         * The type of mobile wallet, one of {@code apple_pay}, {@code google_pay}, {@code
+         * samsung_pay}, or {@code unknown}.
+         */
+        @SerializedName("type")
+        String type;
       }
     }
 

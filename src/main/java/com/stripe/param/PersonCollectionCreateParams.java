@@ -13,7 +13,9 @@ import lombok.Getter;
 
 @Getter
 public class PersonCollectionCreateParams extends ApiRequestParams {
-  /** Details on the legal guardian's acceptance of the required Stripe agreements. */
+  /**
+   * Details on the legal guardian's or authorizer's acceptance of the required Stripe agreements.
+   */
   @SerializedName("additional_tos_acceptances")
   AdditionalTosAcceptances additionalTosAcceptances;
 
@@ -322,7 +324,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
           this.verification);
     }
 
-    /** Details on the legal guardian's acceptance of the required Stripe agreements. */
+    /**
+     * Details on the legal guardian's or authorizer's acceptance of the required Stripe agreements.
+     */
     public Builder setAdditionalTosAcceptances(
         PersonCollectionCreateParams.AdditionalTosAcceptances additionalTosAcceptances) {
       this.additionalTosAcceptances = additionalTosAcceptances;
