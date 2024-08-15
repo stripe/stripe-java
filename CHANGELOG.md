@@ -1,5 +1,12 @@
 # Changelog
 
+## 26.9.0-beta.1 - 2024-08-15
+* [#1848](https://github.com/stripe/stripe-java/pull/1848) Update generated code for beta
+  * Add support for `capital_financing_application` and `capital_financing` on `AccountSessionCreateParams.components`
+  * Add support for `permissions` on `Checkout.Session` and `checkout.SessionCreateParams`
+  * Add support for `collected_information` on `Checkout.Session` and `checkout.SessionUpdateParams`
+  * Add support for `shipping_options` on `checkout.SessionUpdateParams`
+
 ## 26.8.0-beta.1 - 2024-08-12
 * [#1844](https://github.com/stripe/stripe-java/pull/1844) Update generated code for beta
   * Add support for `capital_financing_application` and `capital_financing` on `AccountSession.components`
