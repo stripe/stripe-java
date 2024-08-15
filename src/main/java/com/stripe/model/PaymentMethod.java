@@ -1125,6 +1125,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("receipt")
           Receipt receipt;
 
+          @SerializedName("wallet")
+          Wallet wallet;
+
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1192,6 +1195,18 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             /** An indication of various EMV functions performed during the transaction. */
             @SerializedName("transaction_status_information")
             String transactionStatusInformation;
+          }
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Wallet extends StripeObject {
+            /**
+             * The type of mobile wallet, one of {@code apple_pay}, {@code google_pay}, {@code
+             * samsung_pay}, or {@code unknown}.
+             */
+            @SerializedName("type")
+            String type;
           }
         }
       }
@@ -1462,6 +1477,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("read_method")
     String readMethod;
 
+    @SerializedName("wallet")
+    Wallet wallet;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1487,6 +1505,18 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
        * The method used to process this payment method offline. Only deferred is allowed.
        *
        * <p>Equal to {@code deferred}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Wallet extends StripeObject {
+      /**
+       * The type of mobile wallet, one of {@code apple_pay}, {@code google_pay}, {@code
+       * samsung_pay}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;

@@ -258,6 +258,16 @@ public class SessionCreateParams extends ApiRequestParams {
   List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
 
   /**
+   * This property is used to set up permissions for various actions (e.g., update) on the
+   * CheckoutSession object.
+   *
+   * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
+   * permissions.update.shipping_details}.
+   */
+  @SerializedName("permissions")
+  Permissions permissions;
+
+  /**
    * Controls phone number collection settings for the session.
    *
    * <p>We recommend that you review your privacy policy and check with your legal contacts before
@@ -371,6 +381,7 @@ public class SessionCreateParams extends ApiRequestParams {
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       List<SessionCreateParams.PaymentMethodType> paymentMethodTypes,
+      Permissions permissions,
       PhoneNumberCollection phoneNumberCollection,
       RedirectOnCompletion redirectOnCompletion,
       String returnUrl,
@@ -412,6 +423,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.permissions = permissions;
     this.phoneNumberCollection = phoneNumberCollection;
     this.redirectOnCompletion = redirectOnCompletion;
     this.returnUrl = returnUrl;
@@ -489,6 +501,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
 
+    private Permissions permissions;
+
     private PhoneNumberCollection phoneNumberCollection;
 
     private RedirectOnCompletion redirectOnCompletion;
@@ -545,6 +559,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
+          this.permissions,
           this.phoneNumberCollection,
           this.redirectOnCompletion,
           this.returnUrl,
@@ -961,6 +976,18 @@ public class SessionCreateParams extends ApiRequestParams {
         this.paymentMethodTypes = new ArrayList<>();
       }
       this.paymentMethodTypes.addAll(elements);
+      return this;
+    }
+
+    /**
+     * This property is used to set up permissions for various actions (e.g., update) on the
+     * CheckoutSession object.
+     *
+     * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
+     * permissions.update.shipping_details}.
+     */
+    public Builder setPermissions(SessionCreateParams.Permissions permissions) {
+      this.permissions = permissions;
       return this;
     }
 
@@ -12095,6 +12122,180 @@ public class SessionCreateParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class Permissions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Permissions for updating the Checkout Session. */
+    @SerializedName("update")
+    Update update;
+
+    private Permissions(Map<String, Object> extraParams, Update update) {
+      this.extraParams = extraParams;
+      this.update = update;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Update update;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.Permissions build() {
+        return new SessionCreateParams.Permissions(this.extraParams, this.update);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.Permissions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.Permissions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Permissions for updating the Checkout Session. */
+      public Builder setUpdate(SessionCreateParams.Permissions.Update update) {
+        this.update = update;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Update {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Determines which entity is allowed to update the shipping details.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+       * shipping details. If set to {@code server_only}, only your server is allowed to update the
+       * shipping details.
+       *
+       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
+       * when initializing the Stripe Checkout client and manually update the shipping details from
+       * your server using the Stripe API.
+       */
+      @SerializedName("shipping_details")
+      ShippingDetails shippingDetails;
+
+      private Update(Map<String, Object> extraParams, ShippingDetails shippingDetails) {
+        this.extraParams = extraParams;
+        this.shippingDetails = shippingDetails;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private ShippingDetails shippingDetails;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.Permissions.Update build() {
+          return new SessionCreateParams.Permissions.Update(this.extraParams, this.shippingDetails);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Permissions.Update#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Permissions.Update#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Determines which entity is allowed to update the shipping details.
+         *
+         * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+         * shipping details. If set to {@code server_only}, only your server is allowed to update
+         * the shipping details.
+         *
+         * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event
+         * handler when initializing the Stripe Checkout client and manually update the shipping
+         * details from your server using the Stripe API.
+         */
+        public Builder setShippingDetails(
+            SessionCreateParams.Permissions.Update.ShippingDetails shippingDetails) {
+          this.shippingDetails = shippingDetails;
+          return this;
+        }
+      }
+
+      public enum ShippingDetails implements ApiRequestParams.EnumParam {
+        @SerializedName("client_only")
+        CLIENT_ONLY("client_only"),
+
+        @SerializedName("server_only")
+        SERVER_ONLY("server_only");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        ShippingDetails(String value) {
           this.value = value;
         }
       }
