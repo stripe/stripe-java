@@ -166,9 +166,6 @@ final class EventDataClassLookup {
         com.stripe.model.issuing.CreditUnderwritingRecord.class);
     classLookup.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
     classLookup.put(
-        "issuing.dispute_settlement_detail",
-        com.stripe.model.issuing.DisputeSettlementDetail.class);
-    classLookup.put(
         "issuing.personalization_design", com.stripe.model.issuing.PersonalizationDesign.class);
     classLookup.put("issuing.physical_bundle", com.stripe.model.issuing.PhysicalBundle.class);
     classLookup.put("issuing.token", com.stripe.model.issuing.Token.class);
