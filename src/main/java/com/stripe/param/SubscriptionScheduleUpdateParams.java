@@ -2854,7 +2854,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         /**
          * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
-         * how much to charge.
+         * how much to charge or a negative integer representing the amount to credit to the
+         * customer.
          */
         @SerializedName("unit_amount")
         Long unitAmount;
@@ -2991,7 +2992,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
           /**
            * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
-           * how much to charge.
+           * how much to charge or a negative integer representing the amount to credit to the
+           * customer.
            */
           public Builder setUnitAmount(Long unitAmount) {
             this.unitAmount = unitAmount;
