@@ -794,6 +794,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Link link;
 
     /**
+     * If this is a MB WAY PaymentMethod, this hash contains details about the MB WAY payment
+     * method.
+     */
+    @SerializedName("mb_way")
+    MbWay mbWay;
+
+    /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
@@ -967,6 +974,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Klarna klarna,
         Konbini konbini,
         Link link,
+        MbWay mbWay,
         Map<String, String> metadata,
         Mobilepay mobilepay,
         Multibanco multibanco,
@@ -1012,6 +1020,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.klarna = klarna;
       this.konbini = konbini;
       this.link = link;
+      this.mbWay = mbWay;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
@@ -1088,6 +1097,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Link link;
 
+      private MbWay mbWay;
+
       private Map<String, String> metadata;
 
       private Mobilepay mobilepay;
@@ -1157,6 +1168,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.klarna,
             this.konbini,
             this.link,
+            this.mbWay,
             this.metadata,
             this.mobilepay,
             this.multibanco,
@@ -1420,6 +1432,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setLink(SetupIntentConfirmParams.PaymentMethodData.Link link) {
         this.link = link;
+        return this;
+      }
+
+      /**
+       * If this is a MB WAY PaymentMethod, this hash contains details about the MB WAY payment
+       * method.
+       */
+      public Builder setMbWay(SetupIntentConfirmParams.PaymentMethodData.MbWay mbWay) {
+        this.mbWay = mbWay;
         return this;
       }
 
@@ -3655,6 +3676,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class MbWay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private MbWay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.MbWay build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.MbWay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.MbWay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.MbWay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Mobilepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5262,6 +5340,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("link")
       LINK("link"),
+
+      @SerializedName("mb_way")
+      MB_WAY("mb_way"),
 
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),

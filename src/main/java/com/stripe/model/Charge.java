@@ -1199,6 +1199,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("link")
     Link link;
 
+    @SerializedName("mb_way")
+    MbWay mbWay;
+
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
 
@@ -2754,6 +2757,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("country")
       String country;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MbWay extends StripeObject {}
 
     @Getter
     @Setter

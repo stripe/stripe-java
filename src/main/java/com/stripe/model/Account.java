@@ -1101,6 +1101,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String linkPayments;
 
     /**
+     * The status of the MB WAY payments capability of the account, or whether the account can
+     * directly process MB WAY charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("mb_way_payments")
+    String mbWayPayments;
+
+    /**
      * The status of the MobilePay capability of the account, or whether the account can directly
      * process MobilePay charges.
      *

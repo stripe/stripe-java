@@ -1321,6 +1321,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("link_payments")
     LinkPayments linkPayments;
 
+    /** The mb_way_payments capability. */
+    @SerializedName("mb_way_payments")
+    MbWayPayments mbWayPayments;
+
     /** The mobilepay_payments capability. */
     @SerializedName("mobilepay_payments")
     MobilepayPayments mobilepayPayments;
@@ -1442,6 +1446,7 @@ public class AccountCreateParams extends ApiRequestParams {
         KonbiniPayments konbiniPayments,
         LegacyPayments legacyPayments,
         LinkPayments linkPayments,
+        MbWayPayments mbWayPayments,
         MobilepayPayments mobilepayPayments,
         MultibancoPayments multibancoPayments,
         MxBankTransferPayments mxBankTransferPayments,
@@ -1493,6 +1498,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.konbiniPayments = konbiniPayments;
       this.legacyPayments = legacyPayments;
       this.linkPayments = linkPayments;
+      this.mbWayPayments = mbWayPayments;
       this.mobilepayPayments = mobilepayPayments;
       this.multibancoPayments = multibancoPayments;
       this.mxBankTransferPayments = mxBankTransferPayments;
@@ -1579,6 +1585,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private LinkPayments linkPayments;
 
+      private MbWayPayments mbWayPayments;
+
       private MobilepayPayments mobilepayPayments;
 
       private MultibancoPayments multibancoPayments;
@@ -1656,6 +1664,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.konbiniPayments,
             this.legacyPayments,
             this.linkPayments,
+            this.mbWayPayments,
             this.mobilepayPayments,
             this.multibancoPayments,
             this.mxBankTransferPayments,
@@ -1886,6 +1895,13 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The link_payments capability. */
       public Builder setLinkPayments(AccountCreateParams.Capabilities.LinkPayments linkPayments) {
         this.linkPayments = linkPayments;
+        return this;
+      }
+
+      /** The mb_way_payments capability. */
+      public Builder setMbWayPayments(
+          AccountCreateParams.Capabilities.MbWayPayments mbWayPayments) {
+        this.mbWayPayments = mbWayPayments;
         return this;
       }
 
@@ -4153,6 +4169,85 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.LinkPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class MbWayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private MbWayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.MbWayPayments build() {
+          return new AccountCreateParams.Capabilities.MbWayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.MbWayPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.MbWayPayments#extraParams} for the field
          * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

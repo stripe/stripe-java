@@ -142,6 +142,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("mb_way")
+  MbWay mbWay;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -219,11 +222,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik},
    * {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance},
    * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
-   * interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay}, {@code
-   * multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code payto}, {@code
-   * pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code sepa_debit}, {@code
-   * sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code
-   * zip}.
+   * interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mb_way}, {@code
+   * mobilepay}, {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
+   * {@code payto}, {@code pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code
+   * sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
+   * wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -1774,6 +1777,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class MbWay extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Mobilepay extends StripeObject {}
 
   @Getter
@@ -2158,6 +2166,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(klarna, responseGetter);
     trySetResponseGetter(konbini, responseGetter);
     trySetResponseGetter(link, responseGetter);
+    trySetResponseGetter(mbWay, responseGetter);
     trySetResponseGetter(mobilepay, responseGetter);
     trySetResponseGetter(multibanco, responseGetter);
     trySetResponseGetter(oxxo, responseGetter);
