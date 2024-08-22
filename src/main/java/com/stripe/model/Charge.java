@@ -302,11 +302,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   ExpandableField<Transfer> sourceTransfer;
 
   /**
-   * For a non-card charge, text that appears on the customer's statement as the <a
-   * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
-   * descriptor</a>. This value overrides the account's default statement descriptor. For a card
-   * charge, this value is ignored unless you don't specify a {@code statement_descriptor_suffix},
-   * in which case this value is used as the suffix.
+   * For a non-card charge, text that appears on the customer's statement as the statement
+   * descriptor. This value overrides the account's default statement descriptor. For information
+   * about requirements, including the 22-character limit, see <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+   * Descriptor docs</a>.
+   *
+   * <p>For a card charge, this value is ignored unless you don't specify a {@code
+   * statement_descriptor_suffix}, in which case this value is used as the suffix.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -1195,6 +1198,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("link")
     Link link;
+
+    @SerializedName("mb_way")
+    MbWay mbWay;
 
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
@@ -2751,6 +2757,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("country")
       String country;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MbWay extends StripeObject {}
 
     @Getter
     @Setter

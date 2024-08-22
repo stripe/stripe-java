@@ -319,6 +319,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("mb_way")
+    MbWay mbWay;
+
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
 
@@ -373,11 +376,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
      * blik}, {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code
      * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
-     * {@code interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay},
-     * {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code payto},
-     * {@code pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code sepa_debit},
-     * {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or
-     * {@code zip}.
+     * {@code interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mb_way},
+     * {@code mobilepay}, {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code
+     * paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code rechnung}, {@code
+     * revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code
+     * us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1535,6 +1538,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @Deprecated
       String persistentToken;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MbWay extends StripeObject {}
 
     @Getter
     @Setter

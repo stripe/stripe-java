@@ -336,10 +336,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<PaymentSource> source;
 
   /**
-   * Text that appears on the customer's statement as the <a
-   * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
-   * descriptor</a> for a non-card charge. This value overrides the account's default statement
-   * descriptor. Setting this value for a card charge returns an error. For card charges, set the <a
+   * Text that appears on the customer's statement as the statement descriptor for a non-card
+   * charge. This value overrides the account's default statement descriptor. For information about
+   * requirements, including the 22-character limit, see <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+   * Descriptor docs</a>.
+   *
+   * <p>Setting this value for a card charge returns an error. For card charges, set the <a
    * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
    * instead.
    */
@@ -2832,6 +2835,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("link")
     Link link;
 
+    @SerializedName("mb_way")
+    MbWay mbWay;
+
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
 
@@ -4047,6 +4053,35 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MbWay extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;

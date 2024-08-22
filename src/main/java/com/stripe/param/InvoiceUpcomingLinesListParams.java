@@ -1873,15 +1873,15 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
        * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
        * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
        * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
-       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp},
-       * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code
-       * jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code mx_rfc},
-       * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
-       * no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin},
-       * {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code
-       * sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat},
-       * {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin}, or {@code
-       * za_vat}
+       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hr_oib}, {@code hu_tin},
+       * {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code
+       * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid},
+       * {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code
+       * no_vat}, {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
+       * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
+       * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin},
+       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code
+       * vn_tin}, or {@code za_vat}
        */
       @SerializedName("type")
       Type type;
@@ -1948,15 +1948,15 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
          * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
          * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
          * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat},
-         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code
-         * id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn},
-         * {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code
-         * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat},
-         * {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
-         * ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst},
-         * {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code
-         * tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin},
-         * or {@code za_vat}
+         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hr_oib}, {@code
+         * hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn},
+         * {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code
+         * li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin},
+         * {@code no_vat}, {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
+         * ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
+         * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code
+         * tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif},
+         * {@code vn_tin}, or {@code za_vat}
          */
         public Builder setType(InvoiceUpcomingLinesListParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -2066,6 +2066,9 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
         @SerializedName("hk_br")
         HK_BR("hk_br"),
+
+        @SerializedName("hr_oib")
+        HR_OIB("hr_oib"),
 
         @SerializedName("hu_tin")
         HU_TIN("hu_tin"),
@@ -9688,7 +9691,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
           /**
            * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
-           * how much to charge.
+           * how much to charge or a negative integer representing the amount to credit to the
+           * customer.
            */
           @SerializedName("unit_amount")
           Long unitAmount;
@@ -9811,7 +9815,8 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
 
             /**
              * A positive integer in cents (or local equivalent) (or 0 for a free price)
-             * representing how much to charge.
+             * representing how much to charge or a negative integer representing the amount to
+             * credit to the customer.
              */
             public Builder setUnitAmount(Long unitAmount) {
               this.unitAmount = unitAmount;
