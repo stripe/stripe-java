@@ -933,6 +933,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CollectedInformation extends StripeObject {
+    /** Customer’s email for this Checkout Session. */
+    @SerializedName("email")
+    String email;
+
+    /** Customer’s phone number for this Checkout Session. */
+    @SerializedName("phone")
+    String phone;
+
     /** Shipping information for this Checkout Session. */
     @SerializedName("shipping_details")
     ShippingDetails shippingDetails;
