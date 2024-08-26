@@ -101,6 +101,15 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   String object;
 
   /**
+   * File containing regulatory reporting data for the decision. Required if you are subject to this
+   * <a
+   * href="https://docs.stripe.com/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
+   * requirement</a>.
+   */
+  @SerializedName("regulatory_reporting_file")
+  String regulatoryReportingFile;
+
+  /**
    * If an exception to the usual underwriting criteria was made for this application, details about
    * the exception must be provided. Exceptions should only be granted in rare circumstances, in
    * consultation with Stripe Compliance.
