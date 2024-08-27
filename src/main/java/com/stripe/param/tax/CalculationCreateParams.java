@@ -1498,7 +1498,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     /**
      * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> used to calculate tax
      * on shipping. If not provided, the default shipping tax code from your <a
-     * href="https://stripe.com/settings/tax">Tax Settings</a> is used.
+     * href="https://dashboard.stripe.com/settings/tax">Tax Settings</a> is used.
      */
     @SerializedName("tax_code")
     String taxCode;
@@ -1597,7 +1597,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       /**
        * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> used to calculate tax
        * on shipping. If not provided, the default shipping tax code from your <a
-       * href="https://stripe.com/settings/tax">Tax Settings</a> is used.
+       * href="https://dashboard.stripe.com/settings/tax">Tax Settings</a> is used.
        */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
