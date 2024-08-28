@@ -229,10 +229,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> Specifies whether the platform collects only currently_due
-     * requirements ({@code currently_due}) or both currently_due and eventually_due requirements
-     * ({@code eventually_due}). If you don't specify {@code collection_options}, the default value
-     * is {@code currently_due}.
+     * Specifies whether the platform collects only currently_due requirements ({@code
+     * currently_due}) or both currently_due and eventually_due requirements ({@code
+     * eventually_due}). If you don't specify {@code collection_options}, the default value is
+     * {@code currently_due}.
      */
     @SerializedName("fields")
     Fields fields;
@@ -296,10 +296,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Specifies whether the platform collects only currently_due
-       * requirements ({@code currently_due}) or both currently_due and eventually_due requirements
-       * ({@code eventually_due}). If you don't specify {@code collection_options}, the default
-       * value is {@code currently_due}.
+       * Specifies whether the platform collects only currently_due requirements ({@code
+       * currently_due}) or both currently_due and eventually_due requirements ({@code
+       * eventually_due}). If you don't specify {@code collection_options}, the default value is
+       * {@code currently_due}.
        */
       public Builder setFields(AccountLinkCreateParams.CollectionOptions.Fields fields) {
         this.fields = fields;
