@@ -103,7 +103,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   /**
    * File containing regulatory reporting data for the decision. Required if you are subject to this
    * <a
-   * href="https://docs.stripe.com/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
+   * href="https://stripe.com/docs/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
    * requirement</a>.
    */
   @SerializedName("regulatory_reporting_file")
