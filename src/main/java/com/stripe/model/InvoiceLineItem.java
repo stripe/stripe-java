@@ -18,6 +18,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Invoice Line Items represent the individual lines within an <a
+ * href="https://stripe.com/docs/api/invoices">invoice</a> and only exist within the context of an
+ * invoice.
+ *
+ * <p>Each line item is backed by either an <a
+ * href="https://stripe.com/docs/api/invoiceitems">invoice item</a> or a <a
+ * href="https://stripe.com/docs/api/subscription_items">subscription item</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

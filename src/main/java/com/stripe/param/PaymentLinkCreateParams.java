@@ -3542,11 +3542,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     SetupFutureUsage setupFutureUsage;
 
     /**
-     * Text that appears on the customer's statement as the <a
-     * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
-     * descriptor</a> for a non-card charge. This value overrides the account's default statement
-     * descriptor. Setting this value for a card charge returns an error. For card charges, set the
-     * <a
+     * Text that appears on the customer's statement as the statement descriptor for a non-card
+     * charge. This value overrides the account's default statement descriptor. For information
+     * about requirements, including the 22-character limit, see <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+     * Descriptor docs</a>.
+     *
+     * <p>Setting this value for a card charge returns an error. For card charges, set the <a
      * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
      * instead.
      */
@@ -3555,7 +3557,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * Provides information about a card charge. Concatenated to the account's <a
-     * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
      * descriptor prefix</a> to form the complete statement descriptor that appears on the
      * customer's statement.
      */
@@ -3718,11 +3720,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Text that appears on the customer's statement as the <a
-       * href="https://docs.stripe.com/get-started/account/statement-descriptors">statement
-       * descriptor</a> for a non-card charge. This value overrides the account's default statement
-       * descriptor. Setting this value for a card charge returns an error. For card charges, set
-       * the <a
+       * Text that appears on the customer's statement as the statement descriptor for a non-card
+       * charge. This value overrides the account's default statement descriptor. For information
+       * about requirements, including the 22-character limit, see <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+       * Descriptor docs</a>.
+       *
+       * <p>Setting this value for a card charge returns an error. For card charges, set the <a
        * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
        * instead.
        */
@@ -3733,7 +3737,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * Provides information about a card charge. Concatenated to the account's <a
-       * href="https://docs.corp.stripe.com/get-started/account/statement-descriptors#static">statement
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
        * descriptor prefix</a> to form the complete statement descriptor that appears on the
        * customer's statement.
        */

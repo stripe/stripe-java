@@ -225,10 +225,14 @@ public class Transaction extends ApiResource implements HasId {
 
     /**
      * Use <a
-     * href="https://stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
+     * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
      * to add funds to your <a
      * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> via a
      * PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
+     *
+     * <p>Related guide: <a
+     * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">Moving
+     * money with Treasury using InboundTransfer objects</a>
      */
     @SerializedName("inbound_transfer")
     InboundTransfer inboundTransfer;
@@ -246,7 +250,9 @@ public class Transaction extends ApiResource implements HasId {
     Authorization issuingAuthorization;
 
     /**
-     * Use OutboundPayments to send funds to another party's external bank account or <a
+     * Use <a
+     * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a>
+     * to send funds to another party's external bank account or <a
      * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. To send money to
      * an account belonging to the same user, use an <a
      * href="https://stripe.com/docs/api#outbound_transfers">OutboundTransfer</a>.
@@ -254,12 +260,18 @@ public class Transaction extends ApiResource implements HasId {
      * <p>Simulate OutboundPayment state changes with the {@code
      * /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on
      * test mode objects.
+     *
+     * <p>Related guide: <a
+     * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">Moving
+     * money with Treasury using OutboundPayment objects</a>
      */
     @SerializedName("outbound_payment")
     OutboundPayment outboundPayment;
 
     /**
-     * Use OutboundTransfers to transfer funds from a <a
+     * Use <a
+     * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
+     * to transfer funds from a <a
      * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> to a PaymentMethod
      * belonging to the same entity. To send funds to a different party, use <a
      * href="https://stripe.com/docs/api#outbound_payments">OutboundPayments</a> instead. You can
@@ -269,6 +281,10 @@ public class Transaction extends ApiResource implements HasId {
      * <p>Simulate OutboundTransfer state changes with the {@code
      * /v1/test_helpers/treasury/outbound_transfers} endpoints. These methods can only be called on
      * test mode objects.
+     *
+     * <p>Related guide: <a
+     * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">Moving
+     * money with Treasury using OutboundTransfer objects</a>
      */
     @SerializedName("outbound_transfer")
     OutboundTransfer outboundTransfer;

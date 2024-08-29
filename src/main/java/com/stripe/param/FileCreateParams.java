@@ -177,8 +177,8 @@ public class FileCreateParams extends ApiRequestParams {
      * <strong>Required.</strong> Set this to {@code true} to create a file link for the newly
      * created file. Creating a link is only possible when the file's {@code purpose} is one of the
      * following: {@code business_icon}, {@code business_logo}, {@code customer_signature}, {@code
-     * dispute_evidence}, {@code pci_document}, {@code tax_document_user_upload}, or {@code
-     * terminal_reader_splashscreen}.
+     * dispute_evidence}, {@code issuing_regulatory_reporting}, {@code pci_document}, {@code
+     * tax_document_user_upload}, or {@code terminal_reader_splashscreen}.
      */
     @SerializedName("create")
     Boolean create;
@@ -236,8 +236,8 @@ public class FileCreateParams extends ApiRequestParams {
        * <strong>Required.</strong> Set this to {@code true} to create a file link for the newly
        * created file. Creating a link is only possible when the file's {@code purpose} is one of
        * the following: {@code business_icon}, {@code business_logo}, {@code customer_signature},
-       * {@code dispute_evidence}, {@code pci_document}, {@code tax_document_user_upload}, or {@code
-       * terminal_reader_splashscreen}.
+       * {@code dispute_evidence}, {@code issuing_regulatory_reporting}, {@code pci_document},
+       * {@code tax_document_user_upload}, or {@code terminal_reader_splashscreen}.
        */
       public Builder setCreate(Boolean create) {
         this.create = create;
@@ -349,6 +349,9 @@ public class FileCreateParams extends ApiRequestParams {
 
     @SerializedName("identity_document")
     IDENTITY_DOCUMENT("identity_document"),
+
+    @SerializedName("issuing_regulatory_reporting")
+    ISSUING_REGULATORY_REPORTING("issuing_regulatory_reporting"),
 
     @SerializedName("pci_document")
     PCI_DOCUMENT("pci_document"),
