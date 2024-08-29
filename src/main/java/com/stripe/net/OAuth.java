@@ -53,7 +53,7 @@ public final class OAuth {
             "/oauth/token",
             params,
             options,
-            ApiMode.OAuth);
+            ApiMode.V1);
     return OAuth.globalResponseGetter.request(request, TokenResponse.class);
   }
 
@@ -77,7 +77,7 @@ public final class OAuth {
             "/oauth/deauthorize",
             paramsCopy,
             options,
-            ApiMode.OAuth);
+            ApiMode.V1);
     return OAuth.globalResponseGetter.request(request, DeauthorizedAccount.class);
   }
 
