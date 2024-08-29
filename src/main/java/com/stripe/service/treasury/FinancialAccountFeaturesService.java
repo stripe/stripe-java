@@ -3,7 +3,6 @@ package com.stripe.service.treasury;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.treasury.FinancialAccountFeatures;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -48,8 +47,7 @@ public final class FinancialAccountFeaturesService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, FinancialAccountFeatures.class);
   }
   /** Retrieves Features information associated with the FinancialAccount. */
@@ -84,8 +82,7 @@ public final class FinancialAccountFeaturesService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, FinancialAccountFeatures.class);
   }
 }

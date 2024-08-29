@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -117,8 +116,7 @@ public class Calculation extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tax/calculations";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
@@ -138,8 +136,7 @@ public class Calculation extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
@@ -169,8 +166,7 @@ public class Calculation extends ApiResource implements HasId {
     String path =
         String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, CalculationLineItemCollection.class);
   }
 
@@ -198,8 +194,7 @@ public class Calculation extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, CalculationLineItemCollection.class);
   }
 
@@ -220,8 +215,7 @@ public class Calculation extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(calculation));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
@@ -237,8 +231,7 @@ public class Calculation extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 

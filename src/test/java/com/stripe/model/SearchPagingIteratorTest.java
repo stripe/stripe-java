@@ -30,12 +30,7 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
       return getGlobalResponseGetter()
           .request(
               new ApiRequest(
-                  BaseAddress.API,
-                  RequestMethod.GET,
-                  "/v1/searchable_models",
-                  params,
-                  options,
-                  ApiMode.V1),
+                  BaseAddress.API, RequestMethod.GET, "/v1/searchable_models", params, options),
               SearchableModelCollection.class);
     }
 
@@ -52,8 +47,7 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
                   RequestMethod.DELETE,
                   String.format("/v1/searchable_models/%s", getId()),
                   (Map<String, Object>) null,
-                  null,
-                  ApiMode.V1),
+                  null),
               SearchableModel.class);
     }
   }

@@ -48,12 +48,7 @@ public final class OAuth {
       throws StripeException {
     ApiRequest request =
         new ApiRequest(
-            BaseAddress.CONNECT,
-            ApiResource.RequestMethod.POST,
-            "/oauth/token",
-            params,
-            options,
-            ApiMode.V1);
+            BaseAddress.CONNECT, ApiResource.RequestMethod.POST, "/oauth/token", params, options);
     return OAuth.globalResponseGetter.request(request, TokenResponse.class);
   }
 
@@ -76,8 +71,7 @@ public final class OAuth {
             ApiResource.RequestMethod.POST,
             "/oauth/deauthorize",
             paramsCopy,
-            options,
-            ApiMode.V1);
+            options);
     return OAuth.globalResponseGetter.request(request, DeauthorizedAccount.class);
   }
 

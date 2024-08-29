@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -86,8 +85,7 @@ public class PhysicalBundle extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/issuing/physical_bundles";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PhysicalBundleCollection.class);
   }
 
@@ -114,8 +112,7 @@ public class PhysicalBundle extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PhysicalBundleCollection.class);
   }
 
@@ -137,8 +134,7 @@ public class PhysicalBundle extends ApiResource implements HasId {
     String path =
         String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PhysicalBundle.class);
   }
 
@@ -155,8 +151,7 @@ public class PhysicalBundle extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PhysicalBundle.class);
   }
 

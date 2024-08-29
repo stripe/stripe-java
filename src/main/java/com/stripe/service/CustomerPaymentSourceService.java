@@ -6,7 +6,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.BankAccount;
 import com.stripe.model.PaymentSource;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -51,8 +50,7 @@ public final class CustomerPaymentSourceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<PaymentSource>>() {}.getType());
   }
   /**
@@ -87,8 +85,7 @@ public final class CustomerPaymentSourceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentSource.class);
   }
   /** Retrieve a specified source for a given customer. */
@@ -124,8 +121,7 @@ public final class CustomerPaymentSourceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentSource.class);
   }
   /** Update a specified source for a given customer. */
@@ -156,8 +152,7 @@ public final class CustomerPaymentSourceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentSource.class);
   }
   /** Delete a specified source for a given customer. */
@@ -188,8 +183,7 @@ public final class CustomerPaymentSourceService extends ApiService {
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentSource.class);
   }
   /** Verify a specified bank account for a given customer. */
@@ -220,8 +214,7 @@ public final class CustomerPaymentSourceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, BankAccount.class);
   }
 }

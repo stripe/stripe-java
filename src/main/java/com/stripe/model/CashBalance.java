@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -72,8 +71,7 @@ public class CashBalance extends ApiResource {
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CashBalance.class);
   }
 
@@ -89,8 +87,7 @@ public class CashBalance extends ApiResource {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, CashBalance.class);
   }
 
@@ -105,8 +102,7 @@ public class CashBalance extends ApiResource {
     String path =
         String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, CashBalance.class);
   }
 
@@ -127,8 +123,7 @@ public class CashBalance extends ApiResource {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, CashBalance.class);
   }
 

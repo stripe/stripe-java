@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Person;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -45,8 +44,7 @@ public final class AccountPersonService extends ApiService {
             "/v1/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Person.class);
   }
   /** Retrieves an existing person. */
@@ -77,8 +75,7 @@ public final class AccountPersonService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Person.class);
   }
   /** Updates an existing person. */
@@ -109,8 +106,7 @@ public final class AccountPersonService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Person.class);
   }
   /**
@@ -150,8 +146,7 @@ public final class AccountPersonService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
   }
   /** Creates a new person. */
@@ -176,8 +171,7 @@ public final class AccountPersonService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Person.class);
   }
 }

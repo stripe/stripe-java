@@ -8,17 +8,18 @@ import lombok.Getter;
 @Getter
 public class ApiRequest extends BaseApiRequest {
   private Map<String, Object> params;
+  private final ApiMode apiMode;
 
   private ApiRequest(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,
       RequestOptions options,
-      ApiMode apiMode,
       List<String> usage,
       Map<String, Object> params) {
-    super(baseAddress, method, path, options, apiMode, usage);
+    super(baseAddress, method, path, options, usage);
     this.params = params;
+    this.apiMode = ApiMode.V1;
   }
 
   public ApiRequest(
@@ -26,9 +27,8 @@ public class ApiRequest extends BaseApiRequest {
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
-      RequestOptions options,
-      ApiMode apiMode) {
-    this(baseAddress, method, path, options, apiMode, null, params);
+      RequestOptions options) {
+    this(baseAddress, method, path, options, null, params);
   }
 
   public ApiRequest addUsage(String usage) {
@@ -42,7 +42,6 @@ public class ApiRequest extends BaseApiRequest {
         this.getMethod(),
         this.getPath(),
         this.getOptions(),
-        this.getApiMode(),
         newUsage,
         this.getParams());
   }

@@ -3,7 +3,6 @@ package com.stripe.service.tax;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.tax.Settings;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -41,8 +40,7 @@ public final class SettingsService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Settings.class);
   }
   /**
@@ -79,8 +77,7 @@ public final class SettingsService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Settings.class);
   }
 }

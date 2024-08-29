@@ -1,5 +1,6 @@
 package com.stripe.net;
 
 public enum ApiMode {
-  V1
+  V1,
+  OAuth
 }

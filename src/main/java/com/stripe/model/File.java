@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -116,8 +115,7 @@ public class File extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/files";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.FILES, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.FILES, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, File.class);
   }
 
@@ -149,8 +147,7 @@ public class File extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, File.class);
   }
 
@@ -170,8 +167,7 @@ public class File extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/files";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FileCollection.class);
   }
 
@@ -197,8 +193,7 @@ public class File extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, FileCollection.class);
   }
 
@@ -229,8 +224,7 @@ public class File extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, File.class);
   }
 
@@ -249,8 +243,7 @@ public class File extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, File.class);
   }
 

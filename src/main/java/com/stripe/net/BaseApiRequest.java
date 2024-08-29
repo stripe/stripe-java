@@ -12,7 +12,6 @@ class BaseApiRequest {
   private final ApiResource.RequestMethod method;
   private final String path;
   private final RequestOptions options;
-  private final ApiMode apiMode;
 
   private final List<String> usage;
 }

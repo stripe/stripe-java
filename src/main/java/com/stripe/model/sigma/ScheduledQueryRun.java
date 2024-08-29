@@ -6,7 +6,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -95,8 +94,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/sigma/scheduled_query_runs";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ScheduledQueryRunCollection.class);
   }
 
@@ -117,8 +115,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ScheduledQueryRunCollection.class);
   }
 
@@ -141,8 +138,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
         String.format(
             "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ScheduledQueryRun.class);
   }
 
@@ -160,8 +156,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ScheduledQueryRun.class);
   }
 

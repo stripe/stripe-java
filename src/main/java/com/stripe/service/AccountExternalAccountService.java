@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExternalAccount;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -35,8 +34,7 @@ public final class AccountExternalAccountService extends ApiService {
             "/v1/accounts/%s/external_accounts/%s",
             ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ExternalAccount.class);
   }
   /** Retrieve a specified external account for a given account. */
@@ -72,8 +70,7 @@ public final class AccountExternalAccountService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ExternalAccount.class);
   }
   /**
@@ -152,8 +149,7 @@ public final class AccountExternalAccountService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ExternalAccount.class);
   }
   /** List external accounts for an account. */
@@ -182,8 +178,7 @@ public final class AccountExternalAccountService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
   }
   /** Create an external account for a given account. */
@@ -203,8 +198,7 @@ public final class AccountExternalAccountService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ExternalAccount.class);
   }
 }

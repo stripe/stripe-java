@@ -169,8 +169,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       RequestOptions options,
       ApiMode apiMode)
       throws StripeException {
-    return this.request(
-        new ApiRequest(baseAddress, method, path, params, options, apiMode), typeToken);
+    return this.request(new ApiRequest(baseAddress, method, path, params, options), typeToken);
   }
 
   @Override
@@ -183,7 +182,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       RequestOptions options,
       ApiMode apiMode)
       throws StripeException {
-    return this.requestStream(new ApiRequest(baseAddress, method, path, params, options, apiMode));
+    return this.requestStream(new ApiRequest(baseAddress, method, path, params, options));
   }
 
   private static HttpClient buildDefaultHttpClient() {

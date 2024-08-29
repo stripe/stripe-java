@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -206,8 +205,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
       throws StripeException {
     String path = "/v1/products";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Product.class);
   }
 
@@ -227,8 +225,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Product.class);
   }
 
@@ -267,8 +264,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public Product delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, Product.class);
   }
 
@@ -288,8 +284,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
       throws StripeException {
     String path = "/v1/products";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ProductCollection.class);
   }
 
@@ -315,8 +310,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ProductCollection.class);
   }
 
@@ -347,8 +341,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
       throws StripeException {
     String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Product.class);
   }
 
@@ -367,8 +360,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Product.class);
   }
 
@@ -396,8 +388,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
       throws StripeException {
     String path = "/v1/products/search";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ProductSearchResult.class);
   }
 
@@ -431,8 +422,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ProductSearchResult.class);
   }
 
@@ -453,8 +443,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public Product update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Product.class);
   }
 
@@ -479,8 +468,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Product.class);
   }
 

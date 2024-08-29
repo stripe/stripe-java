@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.terminal.Reader;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -36,8 +35,7 @@ public final class ReaderService extends ApiService {
   public Reader delete(String reader, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Reader.class);
   }
   /** Retrieves a {@code Reader} object. */
@@ -62,8 +60,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /**
@@ -100,8 +97,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Returns a list of {@code Reader} objects. */
@@ -126,8 +122,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Reader>>() {}.getType());
   }
   /** Creates a new {@code Reader} object. */
@@ -143,8 +138,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Cancels the current reader action. */
@@ -171,8 +165,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Initiates a payment flow on a Reader. */
@@ -193,8 +186,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Initiates a setup intent flow on a Reader. */
@@ -215,8 +207,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Initiates a refund on a Reader. */
@@ -244,8 +235,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Sets reader display to show cart details. */
@@ -266,8 +256,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
 }

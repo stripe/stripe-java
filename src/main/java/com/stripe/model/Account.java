@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -206,8 +205,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String path =
         String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, CapabilityCollection.class);
   }
 
@@ -235,8 +233,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, CapabilityCollection.class);
   }
 
@@ -268,8 +265,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       throws StripeException {
     String path = "/v1/accounts";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Account.class);
   }
 
@@ -307,8 +303,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Account.class);
   }
 
@@ -383,8 +378,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, Account.class);
   }
 
@@ -406,8 +400,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       throws StripeException {
     String path = "/v1/accounts";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, AccountCollection.class);
   }
 
@@ -435,8 +428,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, AccountCollection.class);
   }
 
@@ -464,8 +456,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       throws StripeException {
     String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, PersonCollection.class);
   }
 
@@ -491,8 +482,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PersonCollection.class);
   }
 
@@ -519,8 +509,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public Account reject(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Account.class);
   }
 
@@ -553,8 +542,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Account.class);
   }
 
@@ -573,8 +561,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Account.class);
   }
 
@@ -589,8 +576,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Account.class);
   }
 
@@ -609,8 +595,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       throws StripeException {
     String path = "/v1/account";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Account.class);
   }
 
@@ -625,8 +610,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Account.class);
   }
 
@@ -681,8 +665,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public Account update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Account.class);
   }
 
@@ -741,8 +724,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Account.class);
   }
 
