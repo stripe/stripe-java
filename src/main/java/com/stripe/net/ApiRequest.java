@@ -22,6 +22,20 @@ public class ApiRequest extends BaseApiRequest {
     this.apiMode = ApiMode.V1;
   }
 
+  /**
+   * [Deprecated] This constructor that takes apiMode is here for backwards compatibility and
+   * will be removed by Sept 30, 2024.
+   */
+  public ApiRequest(
+      BaseAddress baseAddress,
+      ApiResource.RequestMethod method,
+      String path,
+      Map<String, Object> params,
+      RequestOptions options,
+      ApiMode apiMode) {
+    this(baseAddress, method, path, options, null, params);
+  }
+
   public ApiRequest(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
