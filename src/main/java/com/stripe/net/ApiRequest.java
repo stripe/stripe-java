@@ -23,9 +23,10 @@ public class ApiRequest extends BaseApiRequest {
   }
 
   /**
-   * @deprecated This constructor that takes apiMode is here for backwards compatibility and will
-   * be removed by Sept 30, 2024.
+   * @deprecated This constructor that takes apiMode is here for backwards compatibility and will be
+   * removed by Sept 30, 2024.
    */
+  @Deprecated
   public ApiRequest(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
