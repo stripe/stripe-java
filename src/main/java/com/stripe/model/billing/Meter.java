@@ -14,6 +14,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.billing.MeterCreateParams;
 import com.stripe.param.billing.MeterDeactivateParams;
+import com.stripe.param.billing.MeterEventSummariesParams;
 import com.stripe.param.billing.MeterListParams;
 import com.stripe.param.billing.MeterReactivateParams;
 import com.stripe.param.billing.MeterRetrieveParams;
@@ -182,6 +183,48 @@ public class Meter extends ApiResource implements HasId {
             options,
             ApiMode.V1);
     return getResponseGetter().request(request, Meter.class);
+  }
+
+  /** Retrieve a list of billing meter event summaries. */
+  public MeterEventSummaryCollection eventSummaries(Map<String, Object> params)
+      throws StripeException {
+    return eventSummaries(params, (RequestOptions) null);
+  }
+
+  /** Retrieve a list of billing meter event summaries. */
+  public MeterEventSummaryCollection eventSummaries(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/billing/meters/%s/event_summaries", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+    return getResponseGetter().request(request, MeterEventSummaryCollection.class);
+  }
+
+  /** Retrieve a list of billing meter event summaries. */
+  public MeterEventSummaryCollection eventSummaries(MeterEventSummariesParams params)
+      throws StripeException {
+    return eventSummaries(params, (RequestOptions) null);
+  }
+
+  /** Retrieve a list of billing meter event summaries. */
+  public MeterEventSummaryCollection eventSummaries(
+      MeterEventSummariesParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/billing/meters/%s/event_summaries", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options,
+            ApiMode.V1);
+    return getResponseGetter().request(request, MeterEventSummaryCollection.class);
   }
 
   /** Retrieve a list of billing meters. */

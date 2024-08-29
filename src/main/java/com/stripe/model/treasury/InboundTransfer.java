@@ -29,10 +29,14 @@ import lombok.Setter;
 
 /**
  * Use <a
- * href="https://stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
+ * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
  * to add funds to your <a
  * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> via a PaymentMethod
  * that is owned by you. The funds will be transferred via an ACH debit.
+ *
+ * <p>Related guide: <a
+ * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">Moving
+ * money with Treasury using InboundTransfer objects</a>
  */
 @Getter
 @Setter
