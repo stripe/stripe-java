@@ -23,7 +23,7 @@ public class ApiRequest extends BaseApiRequest {
   }
 
   /**
-   * [Deprecated] This constructor that takes apiMode is here for backwards compatibility and will
+   * @deprecated This constructor that takes apiMode is here for backwards compatibility and will
    * be removed by Sept 30, 2024.
    */
   public ApiRequest(
