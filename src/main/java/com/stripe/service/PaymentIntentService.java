@@ -452,7 +452,9 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt.
+   * next payment attempt. There is a variable upper limit on how many times a PaymentIntent can be
+   * confirmed. After this limit is reached, any further calls to this endpoint will transition the
+   * PaymentIntent to the {@code canceled} state.
    */
   public PaymentIntent confirm(String intent, PaymentIntentConfirmParams params)
       throws StripeException {
@@ -476,7 +478,9 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt.
+   * next payment attempt. There is a variable upper limit on how many times a PaymentIntent can be
+   * confirmed. After this limit is reached, any further calls to this endpoint will transition the
+   * PaymentIntent to the {@code canceled} state.
    */
   public PaymentIntent confirm(String intent, RequestOptions options) throws StripeException {
     return confirm(intent, (PaymentIntentConfirmParams) null, options);
@@ -499,7 +503,9 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt.
+   * next payment attempt. There is a variable upper limit on how many times a PaymentIntent can be
+   * confirmed. After this limit is reached, any further calls to this endpoint will transition the
+   * PaymentIntent to the {@code canceled} state.
    */
   public PaymentIntent confirm(String intent) throws StripeException {
     return confirm(intent, (PaymentIntentConfirmParams) null, (RequestOptions) null);
@@ -522,7 +528,9 @@ public final class PaymentIntentService extends ApiService {
    * attempts must be initiated using a secret key. If any actions are required for the payment, the
    * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
    * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
-   * next payment attempt.
+   * next payment attempt. There is a variable upper limit on how many times a PaymentIntent can be
+   * confirmed. After this limit is reached, any further calls to this endpoint will transition the
+   * PaymentIntent to the {@code canceled} state.
    */
   public PaymentIntent confirm(
       String intent, PaymentIntentConfirmParams params, RequestOptions options)
