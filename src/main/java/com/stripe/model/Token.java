@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -124,8 +123,7 @@ public class Token extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tokens";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Token.class);
   }
 
@@ -159,8 +157,7 @@ public class Token extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Token.class);
   }
 
@@ -179,8 +176,7 @@ public class Token extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Token.class);
   }
 
@@ -195,8 +191,7 @@ public class Token extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Token.class);
   }
 

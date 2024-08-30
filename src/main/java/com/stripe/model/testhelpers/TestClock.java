@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -101,8 +100,7 @@ public class TestClock extends ApiResource implements HasId {
         String.format(
             "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, TestClock.class);
   }
 
@@ -130,8 +128,7 @@ public class TestClock extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, TestClock.class);
   }
 
@@ -145,8 +142,7 @@ public class TestClock extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/test_helpers/test_clocks";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, TestClock.class);
   }
 
@@ -166,8 +162,7 @@ public class TestClock extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, TestClock.class);
   }
 
@@ -192,8 +187,7 @@ public class TestClock extends ApiResource implements HasId {
     String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, TestClock.class);
   }
 
@@ -207,8 +201,7 @@ public class TestClock extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/test_helpers/test_clocks";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, TestClockCollection.class);
   }
 
@@ -228,8 +221,7 @@ public class TestClock extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, TestClockCollection.class);
   }
 
@@ -250,8 +242,7 @@ public class TestClock extends ApiResource implements HasId {
     String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, TestClock.class);
   }
 
@@ -268,8 +259,7 @@ public class TestClock extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, TestClock.class);
   }
 

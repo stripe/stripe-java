@@ -3,7 +3,6 @@ package com.stripe.service.financialconnections;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.financialconnections.Session;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -42,8 +41,7 @@ public final class SessionService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Session.class);
   }
   /**
@@ -65,8 +63,7 @@ public final class SessionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Session.class);
   }
 }

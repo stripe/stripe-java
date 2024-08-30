@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -237,8 +236,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String path = "/v1/plans";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Plan.class);
   }
 
@@ -266,8 +264,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Plan.class);
   }
 
@@ -290,8 +287,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public Plan delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, Plan.class);
   }
 
@@ -305,8 +301,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String path = "/v1/plans";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PlanCollection.class);
   }
 
@@ -326,8 +321,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PlanCollection.class);
   }
 
@@ -346,8 +340,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Plan.class);
   }
 
@@ -362,8 +355,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Plan.class);
   }
 
@@ -386,8 +378,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Plan.class);
   }
 
@@ -414,8 +405,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Plan.class);
   }
 

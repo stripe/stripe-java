@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.billingportal.Configuration;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -46,8 +45,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
   /** Creates a configuration that describes the functionality and behavior of a PortalSession. */
@@ -64,8 +62,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Configuration.class);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
@@ -95,8 +92,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Configuration.class);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
@@ -125,8 +121,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Configuration.class);
   }
 }

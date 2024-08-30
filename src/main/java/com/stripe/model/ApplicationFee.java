@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -225,8 +224,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
       throws StripeException {
     String path = "/v1/application_fees";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ApplicationFeeCollection.class);
   }
 
@@ -253,8 +251,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ApplicationFeeCollection.class);
   }
 
@@ -282,8 +279,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ApplicationFee.class);
   }
 
@@ -302,8 +298,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ApplicationFee.class);
   }
 

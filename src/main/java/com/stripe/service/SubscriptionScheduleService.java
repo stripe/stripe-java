@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.SubscriptionSchedule;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -50,8 +49,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(
         request, new TypeToken<StripeCollection<SubscriptionSchedule>>() {}.getType());
   }
@@ -90,8 +88,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, SubscriptionSchedule.class);
   }
   /**
@@ -131,8 +128,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, SubscriptionSchedule.class);
   }
   /** Updates an existing subscription schedule. */
@@ -160,8 +156,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, SubscriptionSchedule.class);
   }
   /** Amends an existing subscription schedule. */
@@ -236,8 +231,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, SubscriptionSchedule.class);
   }
   /**
@@ -290,8 +284,7 @@ public final class SubscriptionScheduleService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, SubscriptionSchedule.class);
   }
 }

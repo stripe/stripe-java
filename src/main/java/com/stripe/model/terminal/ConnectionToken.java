@@ -3,7 +3,6 @@ package com.stripe.model.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -63,8 +62,7 @@ public class ConnectionToken extends ApiResource {
       throws StripeException {
     String path = "/v1/terminal/connection_tokens";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, ConnectionToken.class);
   }
 
@@ -92,8 +90,7 @@ public class ConnectionToken extends ApiResource {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ConnectionToken.class);
   }
 }

@@ -7,7 +7,6 @@ import com.stripe.model.Customer;
 import com.stripe.model.Discount;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -40,8 +39,7 @@ public final class CustomerService extends ApiService {
   public Customer delete(String customer, RequestOptions options) throws StripeException {
     String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Customer.class);
   }
   /** Retrieves a Customer object. */
@@ -66,8 +64,7 @@ public final class CustomerService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Customer.class);
   }
   /**
@@ -144,8 +141,7 @@ public final class CustomerService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Customer.class);
   }
   /** Removes the currently applied discount on a customer. */
@@ -156,8 +152,7 @@ public final class CustomerService extends ApiService {
   public Discount deleteDiscount(String customer, RequestOptions options) throws StripeException {
     String path = String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(customer));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Discount.class);
   }
   /**
@@ -194,8 +189,7 @@ public final class CustomerService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Customer>>() {}.getType());
   }
   /** Creates a new customer object. */
@@ -220,8 +214,7 @@ public final class CustomerService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Customer.class);
   }
   /**
@@ -252,8 +245,7 @@ public final class CustomerService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
   }
 

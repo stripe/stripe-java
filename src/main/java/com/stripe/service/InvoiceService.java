@@ -6,7 +6,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Invoice;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -55,8 +54,7 @@ public final class InvoiceService extends ApiService {
   public Invoice delete(String invoice, RequestOptions options) throws StripeException {
     String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Invoice.class);
   }
   /** Retrieves the invoice with the given ID. */
@@ -81,8 +79,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -143,8 +140,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -181,8 +177,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Invoice>>() {}.getType());
   }
   /**
@@ -226,8 +221,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -258,8 +252,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeSearchResult<Invoice>>() {}.getType());
   }
   /**
@@ -368,8 +361,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -390,8 +382,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -569,8 +560,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -610,8 +600,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -660,8 +649,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -686,8 +674,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -750,8 +737,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -776,8 +762,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -844,8 +829,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
   /**
@@ -954,8 +938,7 @@ public final class InvoiceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Invoice.class);
   }
 
