@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -103,7 +104,8 @@ public class Capability extends ApiResource implements HasId {
             "/v1/accounts/%s/capabilities/%s",
             ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Capability.class);
   }
 
@@ -132,7 +134,8 @@ public class Capability extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Capability.class);
   }
 

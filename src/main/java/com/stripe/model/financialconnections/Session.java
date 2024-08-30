@@ -8,6 +8,7 @@ import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -96,7 +97,8 @@ public class Session extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/financial_connections/sessions";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
@@ -122,7 +124,8 @@ public class Session extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
@@ -142,7 +145,8 @@ public class Session extends ApiResource implements HasId {
     String path =
         String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
@@ -158,7 +162,8 @@ public class Session extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 

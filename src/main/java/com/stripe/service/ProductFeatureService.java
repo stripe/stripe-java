@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ProductFeature;
 import com.stripe.model.StripeCollection;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -33,7 +34,8 @@ public final class ProductFeatureService extends ApiService {
             "/v1/products/%s/features/%s",
             ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return this.request(request, ProductFeature.class);
   }
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
@@ -64,7 +66,8 @@ public final class ProductFeatureService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, ProductFeature.class);
   }
   /** Retrieve a list of features for a product. */
@@ -92,7 +95,8 @@ public final class ProductFeatureService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<ProductFeature>>() {}.getType());
   }
   /** Creates a product_feature, which represents a feature attachment to a product. */
@@ -111,7 +115,8 @@ public final class ProductFeatureService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, ProductFeature.class);
   }
 }

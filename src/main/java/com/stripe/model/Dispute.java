@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -219,7 +220,8 @@ public class Dispute extends ApiResource
   public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Dispute.class);
   }
 
@@ -250,7 +252,8 @@ public class Dispute extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Dispute.class);
   }
 
@@ -264,7 +267,8 @@ public class Dispute extends ApiResource
       throws StripeException {
     String path = "/v1/disputes";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, DisputeCollection.class);
   }
 
@@ -284,7 +288,8 @@ public class Dispute extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, DisputeCollection.class);
   }
 
@@ -303,7 +308,8 @@ public class Dispute extends ApiResource
       throws StripeException {
     String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Dispute.class);
   }
 
@@ -318,7 +324,8 @@ public class Dispute extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Dispute.class);
   }
 
@@ -351,7 +358,8 @@ public class Dispute extends ApiResource
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Dispute.class);
   }
 
@@ -388,7 +396,8 @@ public class Dispute extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Dispute.class);
   }
 

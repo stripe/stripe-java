@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.testhelpers.TestClock;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -31,7 +32,8 @@ public final class TestClockService extends ApiService {
     String path =
         String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return this.request(request, TestClock.class);
   }
   /** Retrieves a test clock. */
@@ -59,7 +61,8 @@ public final class TestClockService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TestClock.class);
   }
   /** Returns a list of your test clocks. */
@@ -84,7 +87,8 @@ public final class TestClockService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<TestClock>>() {}.getType());
   }
   /** Creates a new test clock that can be attached to new customers and quotes. */
@@ -101,7 +105,8 @@ public final class TestClockService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TestClock.class);
   }
   /**
@@ -126,7 +131,8 @@ public final class TestClockService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TestClock.class);
   }
 }

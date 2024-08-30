@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -137,7 +138,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
     String path =
         String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(confirmationToken));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, ConfirmationToken.class);
   }
 
@@ -154,7 +156,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, ConfirmationToken.class);
   }
 
@@ -1838,7 +1841,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
         throws StripeException {
       String path = "/v1/test_helpers/confirmation_tokens";
       ApiRequest request =
-          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+          new ApiRequest(
+              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
       return getGlobalResponseGetter().request(request, ConfirmationToken.class);
     }
 
@@ -1859,7 +1863,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options);
+              options,
+              ApiMode.V1);
       return getGlobalResponseGetter().request(request, ConfirmationToken.class);
     }
   }

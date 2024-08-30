@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Product;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -40,7 +41,8 @@ public final class ProductService extends ApiService {
   public Product delete(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v1/products/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return this.request(request, Product.class);
   }
   /**
@@ -81,7 +83,8 @@ public final class ProductService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Product.class);
   }
   /**
@@ -118,7 +121,8 @@ public final class ProductService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Product.class);
   }
   /**
@@ -155,7 +159,8 @@ public final class ProductService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
   /** Creates a new product object. */
@@ -171,7 +176,8 @@ public final class ProductService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Product.class);
   }
   /**
@@ -202,7 +208,8 @@ public final class ProductService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
   }
 

@@ -7,6 +7,7 @@ import com.stripe.model.Discount;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.model.Subscription;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -117,7 +118,8 @@ public final class SubscriptionService extends ApiService {
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Subscription.class);
   }
   /** Retrieves the subscription with the given ID. */
@@ -147,7 +149,8 @@ public final class SubscriptionService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Subscription.class);
   }
   /**
@@ -364,7 +367,8 @@ public final class SubscriptionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Subscription.class);
   }
   /** Removes the currently applied discount on a subscription. */
@@ -378,7 +382,8 @@ public final class SubscriptionService extends ApiService {
         String.format(
             "/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(subscriptionExposedId));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return this.request(request, Discount.class);
   }
   /**
@@ -415,7 +420,8 @@ public final class SubscriptionService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<Subscription>>() {}.getType());
   }
   /**
@@ -458,7 +464,8 @@ public final class SubscriptionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Subscription.class);
   }
   /**
@@ -490,7 +497,8 @@ public final class SubscriptionService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
   }
   /**
@@ -542,7 +550,8 @@ public final class SubscriptionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Subscription.class);
   }
 }

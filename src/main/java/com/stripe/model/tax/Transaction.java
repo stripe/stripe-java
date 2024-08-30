@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -133,7 +134,8 @@ public class Transaction extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/tax/transactions/create_from_calculation";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
@@ -161,7 +163,8 @@ public class Transaction extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
@@ -175,7 +178,8 @@ public class Transaction extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tax/transactions/create_reversal";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
@@ -196,7 +200,8 @@ public class Transaction extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
@@ -217,7 +222,8 @@ public class Transaction extends ApiResource implements HasId {
     String path =
         String.format("/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, TransactionLineItemCollection.class);
   }
 
@@ -239,7 +245,8 @@ public class Transaction extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, TransactionLineItemCollection.class);
   }
 
@@ -260,7 +267,8 @@ public class Transaction extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
@@ -276,7 +284,8 @@ public class Transaction extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 

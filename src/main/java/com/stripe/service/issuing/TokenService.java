@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.Token;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -35,7 +36,8 @@ public final class TokenService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<Token>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Token} object. */
@@ -60,7 +62,8 @@ public final class TokenService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Token.class);
   }
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
@@ -77,7 +80,8 @@ public final class TokenService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Token.class);
   }
 }

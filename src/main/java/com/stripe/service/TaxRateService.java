@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TaxRate;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -56,7 +57,8 @@ public final class TaxRateService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<TaxRate>>() {}.getType());
   }
   /** Creates a new tax rate. */
@@ -72,7 +74,8 @@ public final class TaxRateService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TaxRate.class);
   }
   /** Retrieves a tax rate with the given ID. */
@@ -97,7 +100,8 @@ public final class TaxRateService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TaxRate.class);
   }
   /** Updates an existing tax rate. */
@@ -122,7 +126,8 @@ public final class TaxRateService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TaxRate.class);
   }
 }

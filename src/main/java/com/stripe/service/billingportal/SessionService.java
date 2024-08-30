@@ -3,6 +3,7 @@ package com.stripe.service.billingportal;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.billingportal.Session;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -30,7 +31,8 @@ public final class SessionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Session.class);
   }
 }

@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -197,7 +198,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/balance_transactions";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, BalanceTransactionCollection.class);
   }
 
@@ -232,7 +234,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, BalanceTransactionCollection.class);
   }
 
@@ -264,7 +267,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, BalanceTransaction.class);
   }
 
@@ -284,7 +288,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, BalanceTransaction.class);
   }
 

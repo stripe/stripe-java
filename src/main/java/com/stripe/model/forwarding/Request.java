@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -104,7 +105,8 @@ public class Request extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/forwarding/requests";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Request.class);
   }
 
@@ -124,7 +126,8 @@ public class Request extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Request.class);
   }
 
@@ -138,7 +141,8 @@ public class Request extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/forwarding/requests";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, RequestCollection.class);
   }
 
@@ -158,7 +162,8 @@ public class Request extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, RequestCollection.class);
   }
 
@@ -177,7 +182,8 @@ public class Request extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/forwarding/requests/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Request.class);
   }
 
@@ -192,7 +198,8 @@ public class Request extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Request.class);
   }
 

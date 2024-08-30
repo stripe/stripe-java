@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -130,7 +131,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
       throws StripeException {
     String path = "/v1/webhook_endpoints";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, WebhookEndpoint.class);
   }
 
@@ -166,7 +168,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, WebhookEndpoint.class);
   }
 
@@ -206,7 +209,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
       throws StripeException {
     String path = String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
 
@@ -220,7 +224,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
       throws StripeException {
     String path = "/v1/webhook_endpoints";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, WebhookEndpointCollection.class);
   }
 
@@ -241,7 +246,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, WebhookEndpointCollection.class);
   }
 
@@ -263,7 +269,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
     String path =
         String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, WebhookEndpoint.class);
   }
 
@@ -280,7 +287,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, WebhookEndpoint.class);
   }
 
@@ -302,7 +310,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
       throws StripeException {
     String path = String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
 
@@ -328,7 +337,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, WebhookEndpoint.class);
   }
 }

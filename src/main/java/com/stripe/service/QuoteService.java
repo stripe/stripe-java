@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Quote;
 import com.stripe.model.StripeCollection;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -49,7 +50,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<Quote>>() {}.getType());
   }
   /**
@@ -89,7 +91,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Quote.class);
   }
   /** Retrieves the quote with the given ID. */
@@ -114,7 +117,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Quote.class);
   }
   /** A quote models prices and services for a customer. */
@@ -139,7 +143,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Quote.class);
   }
   /** Accepts the specified quote. */
@@ -164,7 +169,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Quote.class);
   }
   /** Cancels the quote. */
@@ -189,7 +195,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Quote.class);
   }
   /** Finalizes the quote. */
@@ -214,7 +221,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Quote.class);
   }
   /**
@@ -251,7 +259,8 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.requestStream(request);
   }
 

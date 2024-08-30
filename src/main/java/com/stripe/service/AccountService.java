@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.StripeCollection;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -58,7 +59,8 @@ public final class AccountService extends ApiService {
   public Account delete(String account, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return this.request(request, Account.class);
   }
   /** Retrieves the details of an account. */
@@ -83,7 +85,8 @@ public final class AccountService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Account.class);
   }
   /**
@@ -188,7 +191,8 @@ public final class AccountService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Account.class);
   }
   /** Retrieves the details of an account. */
@@ -213,7 +217,8 @@ public final class AccountService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Account.class);
   }
   /**
@@ -254,7 +259,8 @@ public final class AccountService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
   /**
@@ -314,7 +320,8 @@ public final class AccountService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Account.class);
   }
   /**
@@ -345,7 +352,8 @@ public final class AccountService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Account.class);
   }
 

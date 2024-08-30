@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -168,7 +169,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   public Topup cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Topup.class);
   }
 
@@ -187,7 +189,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Topup.class);
   }
 
@@ -201,7 +204,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
       throws StripeException {
     String path = "/v1/topups";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Topup.class);
   }
 
@@ -221,7 +225,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Topup.class);
   }
 
@@ -235,7 +240,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
       throws StripeException {
     String path = "/v1/topups";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, TopupCollection.class);
   }
 
@@ -255,7 +261,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, TopupCollection.class);
   }
 
@@ -286,7 +293,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
       throws StripeException {
     String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Topup.class);
   }
 
@@ -305,7 +313,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Topup.class);
   }
 
@@ -320,7 +329,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   public Topup update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Topup.class);
   }
 
@@ -339,7 +349,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Topup.class);
   }
 

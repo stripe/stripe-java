@@ -2,6 +2,7 @@
 package com.stripe.model;
 
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -29,7 +30,8 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
       throws StripeException {
     String path = this.getUrl();
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, CreditNoteLineItemCollection.class);
   }
 
@@ -59,7 +61,8 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, CreditNoteLineItemCollection.class);
   }
 }

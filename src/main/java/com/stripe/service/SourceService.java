@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentSource;
 import com.stripe.model.Source;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -50,7 +51,8 @@ public final class SourceService extends ApiService {
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, PaymentSource.class);
   }
   /**
@@ -87,7 +89,8 @@ public final class SourceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Source.class);
   }
   /**
@@ -140,7 +143,8 @@ public final class SourceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Source.class);
   }
   /** Creates a new source object. */
@@ -164,7 +168,8 @@ public final class SourceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Source.class);
   }
   /** Verify a given source. */
@@ -181,7 +186,8 @@ public final class SourceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Source.class);
   }
 

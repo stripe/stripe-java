@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.SubscriptionItem;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -59,7 +60,8 @@ public final class SubscriptionItemService extends ApiService {
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, SubscriptionItem.class);
   }
   /** Retrieves the subscription item with the given ID. */
@@ -86,7 +88,8 @@ public final class SubscriptionItemService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, SubscriptionItem.class);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
@@ -113,7 +116,8 @@ public final class SubscriptionItemService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, SubscriptionItem.class);
   }
   /** Returns a list of your subscription items for a given subscription. */
@@ -131,7 +135,8 @@ public final class SubscriptionItemService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<SubscriptionItem>>() {}.getType());
   }
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
@@ -148,7 +153,8 @@ public final class SubscriptionItemService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, SubscriptionItem.class);
   }
 

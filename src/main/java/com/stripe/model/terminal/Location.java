@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -92,7 +93,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
       throws StripeException {
     String path = "/v1/terminal/locations";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Location.class);
   }
 
@@ -120,7 +122,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Location.class);
   }
 
@@ -144,7 +147,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
       throws StripeException {
     String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Location.class);
   }
 
@@ -158,7 +162,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
       throws StripeException {
     String path = "/v1/terminal/locations";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, LocationCollection.class);
   }
 
@@ -178,7 +183,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, LocationCollection.class);
   }
 
@@ -197,7 +203,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
       String location, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Location.class);
   }
 
@@ -213,7 +220,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Location.class);
   }
 
@@ -235,7 +243,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
       throws StripeException {
     String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Location.class);
   }
 
@@ -261,7 +270,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Location.class);
   }
 

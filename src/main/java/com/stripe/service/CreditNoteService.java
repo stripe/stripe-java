@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.CreditNote;
 import com.stripe.model.StripeCollection;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -46,7 +47,8 @@ public final class CreditNoteService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<CreditNote>>() {}.getType());
   }
   /**
@@ -109,7 +111,8 @@ public final class CreditNoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, CreditNote.class);
   }
   /** Retrieves the credit note object with the given identifier. */
@@ -134,7 +137,8 @@ public final class CreditNoteService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, CreditNote.class);
   }
   /** Updates an existing credit note. */
@@ -159,7 +163,8 @@ public final class CreditNoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, CreditNote.class);
   }
   /** Get a preview of a credit note without creating it. */
@@ -176,7 +181,8 @@ public final class CreditNoteService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, CreditNote.class);
   }
   /**
@@ -215,7 +221,8 @@ public final class CreditNoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, CreditNote.class);
   }
 

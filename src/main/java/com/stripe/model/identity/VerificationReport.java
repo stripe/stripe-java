@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -121,7 +122,8 @@ public class VerificationReport extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/identity/verification_reports";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, VerificationReportCollection.class);
   }
 
@@ -142,7 +144,8 @@ public class VerificationReport extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, VerificationReportCollection.class);
   }
 
@@ -163,7 +166,8 @@ public class VerificationReport extends ApiResource implements HasId {
     String path =
         String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, VerificationReport.class);
   }
 
@@ -180,7 +184,8 @@ public class VerificationReport extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, VerificationReport.class);
   }
 

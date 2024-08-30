@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -353,7 +354,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   public Payout cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Payout.class);
   }
 
@@ -378,7 +380,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Payout.class);
   }
 
@@ -416,7 +419,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
       throws StripeException {
     String path = "/v1/payouts";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Payout.class);
   }
 
@@ -460,7 +464,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Payout.class);
   }
 
@@ -482,7 +487,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
       throws StripeException {
     String path = "/v1/payouts";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, PayoutCollection.class);
   }
 
@@ -510,7 +516,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, PayoutCollection.class);
   }
 
@@ -538,7 +545,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
       throws StripeException {
     String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Payout.class);
   }
 
@@ -556,7 +564,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Payout.class);
   }
 
@@ -611,7 +620,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   public Payout reverse(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Payout.class);
   }
 
@@ -646,7 +656,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Payout.class);
   }
 
@@ -667,7 +678,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, Payout.class);
   }
 
@@ -692,7 +704,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, Payout.class);
   }
 

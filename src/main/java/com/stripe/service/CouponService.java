@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Coupon;
 import com.stripe.model.StripeCollection;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -40,7 +41,8 @@ public final class CouponService extends ApiService {
   public Coupon delete(String coupon, RequestOptions options) throws StripeException {
     String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return this.request(request, Coupon.class);
   }
   /** Retrieves the coupon with the given ID. */
@@ -65,7 +67,8 @@ public final class CouponService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Coupon.class);
   }
   /**
@@ -102,7 +105,8 @@ public final class CouponService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Coupon.class);
   }
   /** Returns a list of your coupons. */
@@ -127,7 +131,8 @@ public final class CouponService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<Coupon>>() {}.getType());
   }
   /**
@@ -191,7 +196,8 @@ public final class CouponService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Coupon.class);
   }
 }

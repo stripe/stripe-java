@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -82,7 +83,8 @@ public class CountrySpec extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/country_specs";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, CountrySpecCollection.class);
   }
 
@@ -102,7 +104,8 @@ public class CountrySpec extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, CountrySpecCollection.class);
   }
 
@@ -122,7 +125,8 @@ public class CountrySpec extends ApiResource implements HasId {
       String country, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, CountrySpec.class);
   }
 
@@ -138,7 +142,8 @@ public class CountrySpec extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, CountrySpec.class);
   }
 

@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -127,7 +128,8 @@ public class TaxId extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tax_ids";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, TaxId.class);
   }
 
@@ -147,7 +149,8 @@ public class TaxId extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, TaxId.class);
   }
 
@@ -170,7 +173,8 @@ public class TaxId extends ApiResource implements HasId {
   public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/tax_ids/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, TaxId.class);
   }
 
@@ -200,7 +204,8 @@ public class TaxId extends ApiResource implements HasId {
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, TaxId.class);
   }
 
@@ -214,7 +219,8 @@ public class TaxId extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/tax_ids";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, TaxIdCollection.class);
   }
 
@@ -234,7 +240,8 @@ public class TaxId extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, TaxIdCollection.class);
   }
 
@@ -253,7 +260,8 @@ public class TaxId extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/tax_ids/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, TaxId.class);
   }
 
@@ -268,7 +276,8 @@ public class TaxId extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, TaxId.class);
   }
 

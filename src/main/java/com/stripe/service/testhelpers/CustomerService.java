@@ -3,6 +3,7 @@ package com.stripe.service.testhelpers;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.CustomerCashBalanceTransaction;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -35,7 +36,8 @@ public final class CustomerService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, CustomerCashBalanceTransaction.class);
   }
 }

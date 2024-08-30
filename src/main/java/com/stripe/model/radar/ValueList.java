@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -102,7 +103,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
       throws StripeException {
     String path = "/v1/radar/value_lists";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, ValueList.class);
   }
 
@@ -122,7 +124,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, ValueList.class);
   }
 
@@ -158,7 +161,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
       throws StripeException {
     String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, ValueList.class);
   }
 
@@ -178,7 +182,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
       throws StripeException {
     String path = "/v1/radar/value_lists";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, ValueListCollection.class);
   }
 
@@ -204,7 +209,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, ValueListCollection.class);
   }
 
@@ -224,7 +230,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
       String valueList, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, ValueList.class);
   }
 
@@ -240,7 +247,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, ValueList.class);
   }
 
@@ -262,7 +270,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
       throws StripeException {
     String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, ValueList.class);
   }
 
@@ -288,7 +297,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, ValueList.class);
   }
 

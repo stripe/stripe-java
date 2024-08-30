@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Price;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -62,7 +63,8 @@ public final class PriceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<Price>>() {}.getType());
   }
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
@@ -78,7 +80,8 @@ public final class PriceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Price.class);
   }
   /** Retrieves the price with the given ID. */
@@ -103,7 +106,8 @@ public final class PriceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Price.class);
   }
   /**
@@ -140,7 +144,8 @@ public final class PriceService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, Price.class);
   }
   /**
@@ -171,7 +176,8 @@ public final class PriceService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeSearchResult<Price>>() {}.getType());
   }
 }

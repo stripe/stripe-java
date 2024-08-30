@@ -4,6 +4,7 @@ package com.stripe.model.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -76,7 +77,8 @@ public class MeterEventSummary extends ApiResource implements HasId {
     String path =
         String.format("/v1/billing/meters/%s/event_summaries", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, MeterEventSummaryCollection.class);
   }
 
@@ -99,7 +101,8 @@ public class MeterEventSummary extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, MeterEventSummaryCollection.class);
   }
 }

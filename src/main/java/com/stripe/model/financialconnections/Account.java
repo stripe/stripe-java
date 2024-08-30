@@ -7,6 +7,7 @@ import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -201,7 +202,8 @@ public class Account extends ApiResource implements HasId {
             "/v1/financial_connections/accounts/%s/disconnect",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -232,7 +234,8 @@ public class Account extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -247,7 +250,8 @@ public class Account extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/financial_connections/accounts";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, AccountCollection.class);
   }
 
@@ -267,7 +271,8 @@ public class Account extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, AccountCollection.class);
   }
 
@@ -283,7 +288,8 @@ public class Account extends ApiResource implements HasId {
         String.format(
             "/v1/financial_connections/accounts/%s/owners", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, AccountOwnerCollection.class);
   }
 
@@ -305,7 +311,8 @@ public class Account extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, AccountOwnerCollection.class);
   }
 
@@ -322,7 +329,8 @@ public class Account extends ApiResource implements HasId {
         String.format(
             "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -346,7 +354,8 @@ public class Account extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -369,7 +378,8 @@ public class Account extends ApiResource implements HasId {
     String path =
         String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -386,7 +396,8 @@ public class Account extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -411,7 +422,8 @@ public class Account extends ApiResource implements HasId {
             "/v1/financial_connections/accounts/%s/subscribe",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -442,7 +454,8 @@ public class Account extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -467,7 +480,8 @@ public class Account extends ApiResource implements HasId {
             "/v1/financial_connections/accounts/%s/unsubscribe",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
@@ -498,7 +512,8 @@ public class Account extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter()
         .request(request, com.stripe.model.financialconnections.Account.class);
   }

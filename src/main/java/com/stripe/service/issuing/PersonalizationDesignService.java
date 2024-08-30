@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.issuing.PersonalizationDesign;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -58,7 +59,8 @@ public final class PersonalizationDesignService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(
         request, new TypeToken<StripeCollection<PersonalizationDesign>>() {}.getType());
   }
@@ -77,7 +79,8 @@ public final class PersonalizationDesignService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, PersonalizationDesign.class);
   }
   /** Retrieves a personalization design object. */
@@ -112,7 +115,8 @@ public final class PersonalizationDesignService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, PersonalizationDesign.class);
   }
   /** Updates a card personalization object. */
@@ -147,7 +151,8 @@ public final class PersonalizationDesignService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, PersonalizationDesign.class);
   }
 }

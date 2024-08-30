@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TaxId;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -32,7 +33,8 @@ public final class CustomerTaxIdService extends ApiService {
             "/v1/customers/%s/tax_ids/%s",
             ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
     return this.request(request, TaxId.class);
   }
   /** Retrieves the {@code tax_id} object with the given identifier. */
@@ -62,7 +64,8 @@ public final class CustomerTaxIdService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TaxId.class);
   }
   /** Returns a list of tax IDs for a customer. */
@@ -90,7 +93,8 @@ public final class CustomerTaxIdService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, new TypeToken<StripeCollection<TaxId>>() {}.getType());
   }
   /** Creates a new {@code tax_id} object for a customer. */
@@ -107,7 +111,8 @@ public final class CustomerTaxIdService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return this.request(request, TaxId.class);
   }
 }

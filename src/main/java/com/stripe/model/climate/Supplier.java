@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -75,7 +76,8 @@ public class Supplier extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/climate/suppliers";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, SupplierCollection.class);
   }
 
@@ -95,7 +97,8 @@ public class Supplier extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, SupplierCollection.class);
   }
 
@@ -114,7 +117,8 @@ public class Supplier extends ApiResource implements HasId {
       String supplier, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(supplier));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, Supplier.class);
   }
 
@@ -130,7 +134,8 @@ public class Supplier extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, Supplier.class);
   }
 

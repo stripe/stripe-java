@@ -3,6 +3,7 @@ package com.stripe.model.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -73,7 +74,8 @@ public class MeterEvent extends ApiResource {
       throws StripeException {
     String path = "/v1/billing/meter_events";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, MeterEvent.class);
   }
 
@@ -93,7 +95,8 @@ public class MeterEvent extends ApiResource {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, MeterEvent.class);
   }
 }

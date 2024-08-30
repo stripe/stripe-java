@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -186,7 +187,8 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String path = "/v1/subscription_items";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -207,7 +209,8 @@ public class SubscriptionItem extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -243,7 +246,8 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -269,7 +273,8 @@ public class SubscriptionItem extends ApiResource
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -283,7 +288,8 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String path = "/v1/subscription_items";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, SubscriptionItemCollection.class);
   }
 
@@ -304,7 +310,8 @@ public class SubscriptionItem extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, SubscriptionItemCollection.class);
   }
 
@@ -324,7 +331,8 @@ public class SubscriptionItem extends ApiResource
       String item, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getGlobalResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -340,7 +348,8 @@ public class SubscriptionItem extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getGlobalResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -356,7 +365,8 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -376,7 +386,8 @@ public class SubscriptionItem extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
 
@@ -426,7 +437,8 @@ public class SubscriptionItem extends ApiResource
             "/v1/subscription_items/%s/usage_record_summaries",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+        new ApiRequest(
+            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
     return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
   }
 
@@ -469,7 +481,8 @@ public class SubscriptionItem extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options);
+            options,
+            ApiMode.V1);
     return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
   }
 
