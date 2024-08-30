@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -299,8 +298,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
             "/v1/invoices/%s/lines/%s",
             ApiResource.urlEncodeId(this.getInvoice()), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, InvoiceLineItem.class);
   }
 
@@ -335,8 +333,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, InvoiceLineItem.class);
   }
 

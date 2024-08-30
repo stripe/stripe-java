@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ApplePayDomain;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -30,8 +29,7 @@ public final class ApplePayDomainService extends ApiService {
   public ApplePayDomain delete(String domain, RequestOptions options) throws StripeException {
     String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ApplePayDomain.class);
   }
   /** Retrieve an apple pay domain. */
@@ -58,8 +56,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ApplePayDomain.class);
   }
   /** List apple pay domains. */
@@ -85,8 +82,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<ApplePayDomain>>() {}.getType());
   }
   /** Create an apple pay domain. */
@@ -103,8 +99,7 @@ public final class ApplePayDomainService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ApplePayDomain.class);
   }
 }

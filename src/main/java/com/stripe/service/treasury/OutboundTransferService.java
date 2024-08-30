@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.treasury.OutboundTransfer;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -38,8 +37,7 @@ public final class OutboundTransferService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType());
   }
   /** Creates an OutboundTransfer. */
@@ -56,8 +54,7 @@ public final class OutboundTransferService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, OutboundTransfer.class);
   }
   /**
@@ -99,8 +96,7 @@ public final class OutboundTransferService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, OutboundTransfer.class);
   }
   /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
@@ -130,8 +126,7 @@ public final class OutboundTransferService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, OutboundTransfer.class);
   }
 }

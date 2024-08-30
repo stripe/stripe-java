@@ -39,8 +39,7 @@ public class StripeResponseStreamTest extends BaseStripeTest {
                   ApiResource.RequestMethod.GET,
                   String.format("/v1/foos/%s", ApiResource.urlEncodeId(id)),
                   (Map<String, Object>) null,
-                  (RequestOptions) null,
-                  ApiMode.V1),
+                  (RequestOptions) null),
               TestResource.class);
     }
 

@@ -9,7 +9,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObjectInterface;
 import com.stripe.net.*;
-import com.stripe.net.ApiMode;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -347,12 +346,7 @@ public class BaseStripeTest {
       Class<T> clazz, String response) throws StripeException {
     Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy)
-        .request(
-            Mockito.argThat(
-                (req) -> {
-                  return req.getApiMode() == ApiMode.OAuth;
-                }),
-            Mockito.<Type>any());
+        .request(Mockito.any(ApiRequest.class), Mockito.<Type>any());
   }
 
   /**

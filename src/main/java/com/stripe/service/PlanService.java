@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Plan;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -31,8 +30,7 @@ public final class PlanService extends ApiService {
   public Plan delete(String plan, RequestOptions options) throws StripeException {
     String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Plan.class);
   }
   /** Retrieves the plan with the given ID. */
@@ -57,8 +55,7 @@ public final class PlanService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Plan.class);
   }
   /**
@@ -99,8 +96,7 @@ public final class PlanService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Plan.class);
   }
   /** Returns a list of your plans. */
@@ -125,8 +121,7 @@ public final class PlanService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
   }
   /**
@@ -150,8 +145,7 @@ public final class PlanService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Plan.class);
   }
 }

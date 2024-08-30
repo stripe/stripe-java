@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -37,8 +36,7 @@ public final class InvoiceItemService extends ApiService {
   public InvoiceItem delete(String invoiceitem, RequestOptions options) throws StripeException {
     String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, InvoiceItem.class);
   }
   /** Retrieves the invoice item with the given ID. */
@@ -65,8 +63,7 @@ public final class InvoiceItemService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, InvoiceItem.class);
   }
   /**
@@ -105,8 +102,7 @@ public final class InvoiceItemService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, InvoiceItem.class);
   }
   /**
@@ -143,8 +139,7 @@ public final class InvoiceItemService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<InvoiceItem>>() {}.getType());
   }
   /**
@@ -167,8 +162,7 @@ public final class InvoiceItemService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, InvoiceItem.class);
   }
 }

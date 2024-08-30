@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -82,8 +81,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
       throws StripeException {
     String path = "/v1/entitlements/features";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Feature.class);
   }
 
@@ -103,8 +101,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Feature.class);
   }
 
@@ -118,8 +115,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
       throws StripeException {
     String path = "/v1/entitlements/features";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FeatureCollection.class);
   }
 
@@ -139,8 +135,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, FeatureCollection.class);
   }
 
@@ -159,8 +154,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
       throws StripeException {
     String path = String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Feature.class);
   }
 
@@ -175,8 +169,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Feature.class);
   }
 
@@ -192,8 +185,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
     String path =
         String.format("/v1/entitlements/features/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Feature.class);
   }
 
@@ -213,8 +205,7 @@ public class Feature extends ApiResource implements HasId, MetadataStore<Feature
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Feature.class);
   }
 }

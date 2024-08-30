@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -94,8 +93,7 @@ public class EphemeralKey extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             "/v1/ephemeral_keys",
             overriddenParams,
-            overriddenOptions,
-            ApiMode.V1);
+            overriddenOptions);
     return getGlobalResponseGetter().request(request, EphemeralKey.class);
   }
 
@@ -137,8 +135,7 @@ public class EphemeralKey extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, EphemeralKey.class);
   }
 
@@ -158,8 +155,7 @@ public class EphemeralKey extends ApiResource implements HasId {
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, EphemeralKey.class);
   }
 }

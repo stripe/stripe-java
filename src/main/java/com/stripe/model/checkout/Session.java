@@ -19,7 +19,6 @@ import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
 import com.stripe.model.TaxRate;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -534,8 +533,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       throws StripeException {
     String path = "/v1/checkout/sessions";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
@@ -555,8 +553,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
@@ -600,8 +597,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     String path =
         String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Session.class);
   }
 
@@ -631,8 +627,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Session.class);
   }
 
@@ -646,8 +641,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       throws StripeException {
     String path = "/v1/checkout/sessions";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, SessionCollection.class);
   }
 
@@ -667,8 +661,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, SessionCollection.class);
   }
 
@@ -700,8 +693,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     String path =
         String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -731,8 +723,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -751,8 +742,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
@@ -767,8 +757,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
@@ -783,8 +772,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   public Session update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Session.class);
   }
 
@@ -803,8 +791,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Session.class);
   }
 

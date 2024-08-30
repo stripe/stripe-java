@@ -4,7 +4,6 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.testhelpers.TestClock;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -474,8 +473,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   public Quote accept(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Quote.class);
   }
 
@@ -494,8 +492,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Quote.class);
   }
 
@@ -518,8 +515,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   public Quote cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Quote.class);
   }
 
@@ -538,8 +534,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Quote.class);
   }
 
@@ -561,8 +556,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       throws StripeException {
     String path = "/v1/quotes";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Quote.class);
   }
 
@@ -590,8 +584,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Quote.class);
   }
 
@@ -615,8 +608,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       throws StripeException {
     String path = String.format("/v1/quotes/%s/finalize", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Quote.class);
   }
 
@@ -636,8 +628,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Quote.class);
   }
 
@@ -651,8 +642,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       throws StripeException {
     String path = "/v1/quotes";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, QuoteCollection.class);
   }
 
@@ -672,8 +662,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, QuoteCollection.class);
   }
 
@@ -710,8 +699,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         String.format(
             "/v1/quotes/%s/computed_upfront_line_items", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -745,8 +733,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -777,8 +764,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       throws StripeException {
     String path = String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -806,8 +792,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -835,8 +820,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       throws StripeException {
     String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.FILES, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.FILES, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().requestStream(request);
   }
 
@@ -861,8 +845,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().requestStream(request);
   }
 
@@ -881,8 +864,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       throws StripeException {
     String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Quote.class);
   }
 
@@ -897,8 +879,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Quote.class);
   }
 
@@ -913,8 +894,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   public Quote update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Quote.class);
   }
 
@@ -933,8 +913,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Quote.class);
   }
 
