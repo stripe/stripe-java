@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.radar.ValueListItem;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -30,8 +29,7 @@ public final class ValueListItemService extends ApiService {
   public ValueListItem delete(String item, RequestOptions options) throws StripeException {
     String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ValueListItem.class);
   }
   /** Retrieves a {@code ValueListItem} object. */
@@ -58,8 +56,7 @@ public final class ValueListItemService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ValueListItem.class);
   }
   /**
@@ -83,8 +80,7 @@ public final class ValueListItemService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<ValueListItem>>() {}.getType());
   }
   /**
@@ -105,8 +101,7 @@ public final class ValueListItemService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ValueListItem.class);
   }
 }

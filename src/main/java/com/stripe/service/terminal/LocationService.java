@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.terminal.Location;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -31,8 +30,7 @@ public final class LocationService extends ApiService {
   public Location delete(String location, RequestOptions options) throws StripeException {
     String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Location.class);
   }
   /** Retrieves a {@code Location} object. */
@@ -57,8 +55,7 @@ public final class LocationService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Location.class);
   }
   /**
@@ -95,8 +92,7 @@ public final class LocationService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Location.class);
   }
   /** Returns a list of {@code Location} objects. */
@@ -121,8 +117,7 @@ public final class LocationService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Location>>() {}.getType());
   }
   /**
@@ -147,8 +142,7 @@ public final class LocationService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Location.class);
   }
 }

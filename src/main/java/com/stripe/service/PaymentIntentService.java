@@ -6,7 +6,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -54,8 +53,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<PaymentIntent>>() {}.getType());
   }
   /**
@@ -96,8 +94,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /**
@@ -160,8 +157,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /**
@@ -220,8 +216,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /**
@@ -253,8 +248,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeSearchResult<PaymentIntent>>() {}.getType());
   }
   /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
@@ -285,8 +279,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /**
@@ -365,8 +358,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /**
@@ -429,8 +421,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /**
@@ -541,8 +532,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /**
@@ -615,8 +605,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
   /** Verifies microdeposits on a PaymentIntent object. */
@@ -647,8 +636,7 @@ public final class PaymentIntentService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, PaymentIntent.class);
   }
 }

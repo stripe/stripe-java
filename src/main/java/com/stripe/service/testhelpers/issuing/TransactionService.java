@@ -3,7 +3,6 @@ package com.stripe.service.testhelpers.issuing;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Transaction;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -47,8 +46,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
   /** Allows the user to capture an arbitrary amount, also known as a forced capture. */
@@ -66,8 +64,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
   /** Allows the user to refund an arbitrary amount, also known as a unlinked refund. */
@@ -85,8 +82,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
 }

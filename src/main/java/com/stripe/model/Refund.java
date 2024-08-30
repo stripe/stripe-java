@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -319,8 +318,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public Refund cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Refund.class);
   }
 
@@ -349,8 +347,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Refund.class);
   }
 
@@ -390,8 +387,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       throws StripeException {
     String path = "/v1/refunds";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Refund.class);
   }
 
@@ -437,8 +433,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Refund.class);
   }
 
@@ -460,8 +455,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       throws StripeException {
     String path = "/v1/refunds";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, RefundCollection.class);
   }
 
@@ -489,8 +483,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, RefundCollection.class);
   }
 
@@ -509,8 +502,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       throws StripeException {
     String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Refund.class);
   }
 
@@ -525,8 +517,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Refund.class);
   }
 
@@ -551,8 +542,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Refund.class);
   }
 
@@ -581,8 +571,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Refund.class);
   }
 
@@ -1054,8 +1043,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
           String.format(
               "/v1/test_helpers/refunds/%s/expire", ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
       return resource.getResponseGetter().request(request, Refund.class);
     }
 
@@ -1076,8 +1064,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
+              options);
       return resource.getResponseGetter().request(request, Refund.class);
     }
   }

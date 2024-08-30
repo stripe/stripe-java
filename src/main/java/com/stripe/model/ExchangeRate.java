@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -90,8 +89,7 @@ public class ExchangeRate extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/exchange_rates";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ExchangeRateCollection.class);
   }
 
@@ -117,8 +115,7 @@ public class ExchangeRate extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ExchangeRateCollection.class);
   }
 
@@ -138,8 +135,7 @@ public class ExchangeRate extends ApiResource implements HasId {
       String rateId, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ExchangeRate.class);
   }
 
@@ -155,8 +151,7 @@ public class ExchangeRate extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ExchangeRate.class);
   }
 }
