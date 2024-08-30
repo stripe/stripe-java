@@ -49,6 +49,15 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
   Map<String, String> metadata;
 
   /**
+   * File containing regulatory reporting data for the decision. Required if you are subject to this
+   * <a
+   * href="https://stripe.com/docs/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
+   * requirement</a>.
+   */
+  @SerializedName("regulatory_reporting_file")
+  String regulatoryReportingFile;
+
+  /**
    * If an exception to the usual underwriting criteria was made for this decision, details about
    * the exception must be provided. Exceptions should only be granted in rare circumstances, in
    * consultation with Stripe Compliance.
@@ -63,6 +72,7 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      String regulatoryReportingFile,
       UnderwritingException underwritingException) {
     this.creditUser = creditUser;
     this.decidedAt = decidedAt;
@@ -70,6 +80,7 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.regulatoryReportingFile = regulatoryReportingFile;
     this.underwritingException = underwritingException;
   }
 
@@ -90,6 +101,8 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
 
     private Map<String, String> metadata;
 
+    private String regulatoryReportingFile;
+
     private UnderwritingException underwritingException;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -101,6 +114,7 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
           this.expand,
           this.extraParams,
           this.metadata,
+          this.regulatoryReportingFile,
           this.underwritingException);
     }
 
@@ -206,6 +220,17 @@ public class CreditUnderwritingRecordCreateFromProactiveReviewParams extends Api
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * File containing regulatory reporting data for the decision. Required if you are subject to
+     * this <a
+     * href="https://stripe.com/docs/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
+     * requirement</a>.
+     */
+    public Builder setRegulatoryReportingFile(String regulatoryReportingFile) {
+      this.regulatoryReportingFile = regulatoryReportingFile;
       return this;
     }
 

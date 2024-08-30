@@ -351,6 +351,9 @@ public class FileListParams extends ApiRequestParams {
     @SerializedName("identity_document_downloadable")
     IDENTITY_DOCUMENT_DOWNLOADABLE("identity_document_downloadable"),
 
+    @SerializedName("issuing_regulatory_reporting")
+    ISSUING_REGULATORY_REPORTING("issuing_regulatory_reporting"),
+
     @SerializedName("pci_document")
     PCI_DOCUMENT("pci_document"),
 
