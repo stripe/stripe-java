@@ -1,5 +1,13 @@
 # Changelog
 
+## 26.9.0 - 2024-08-29
+* [#1856](https://github.com/stripe/stripe-java/pull/1856) Generate SDK for OpenAPI spec version 1230
+  * Change `AccountLinkCreateParams.collection_options.fields` to be optional
+  * Add support for new value `hr_oib` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceCreatePreviewParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `TaxIdCreateParams.type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for new value `issuing_regulatory_reporting` on enum `FileListParams.purpose`
+  * Add support for new value `issuing_regulatory_reporting` on enum `FileCreateParams.purpose`
+  * Add support for `status_details` on `TestHelpers.TestClock`
+
 ## 26.9.0-beta.2 - 2024-08-22
 * [#1851](https://github.com/stripe/stripe-java/pull/1851) Update generated code for beta
   * Add support for `mb_way_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`

@@ -62,8 +62,7 @@ public class RequestOptionsTest extends BaseStripeTest {
                   ApiResource.RequestMethod.POST,
                   "/v1/foo/bar",
                   params,
-                  options,
-                  ApiMode.V1),
+                  options),
               MyResource.class);
     }
   }
