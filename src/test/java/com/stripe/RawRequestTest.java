@@ -92,7 +92,7 @@ public class RawRequestTest extends BaseStripeTest {
     final StripeResponse response =
         Stripe.rawRequest(
             RequestMethod.POST,
-            "/v1/subscription_schedules",
+            "/v2/subscription_schedules",
             "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
             options);
 
@@ -116,7 +116,7 @@ public class RawRequestTest extends BaseStripeTest {
     final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
-        Stripe.rawRequest(RequestMethod.GET, "/v1/subscription_schedules", "", options);
+        Stripe.rawRequest(RequestMethod.GET, "/v2/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));
@@ -228,7 +228,7 @@ public class RawRequestTest extends BaseStripeTest {
     final StripeResponse response =
         client.rawRequest(
             RequestMethod.POST,
-            "/v1/subscription_schedules",
+            "/v2/subscription_schedules",
             "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
             options);
 
@@ -252,7 +252,7 @@ public class RawRequestTest extends BaseStripeTest {
     final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
-        client.rawRequest(RequestMethod.GET, "/v1/subscription_schedules", "", options);
+        client.rawRequest(RequestMethod.GET, "/v2/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));
