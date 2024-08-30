@@ -3,7 +3,6 @@ package com.stripe.service.tax;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.tax.Association;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -32,8 +31,7 @@ public final class AssociationService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Association.class);
   }
 }

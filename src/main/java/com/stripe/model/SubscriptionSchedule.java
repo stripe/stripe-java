@@ -269,8 +269,7 @@ public class SubscriptionSchedule extends ApiResource
     String path =
         String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
@@ -291,8 +290,7 @@ public class SubscriptionSchedule extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 

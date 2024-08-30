@@ -201,8 +201,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         String.format(
             "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Reader.class);
   }
 
@@ -224,8 +223,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Reader.class);
   }
 
@@ -248,8 +246,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             "/v1/terminal/readers/%s/collect_payment_method",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Reader.class);
   }
 
@@ -279,8 +276,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Reader.class);
   }
 
@@ -297,8 +293,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             "/v1/terminal/readers/%s/confirm_payment_intent",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Reader.class);
   }
 
@@ -322,8 +317,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Reader.class);
   }
 

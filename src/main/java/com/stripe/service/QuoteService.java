@@ -244,8 +244,7 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Quote.class);
   }
   /** Converts a draft or open quote to stale. */
@@ -270,8 +269,7 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Quote.class);
   }
   /** Recompute the upcoming invoice estimate for the quote. */
@@ -296,8 +294,7 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Quote.class);
   }
   /**
@@ -372,8 +369,7 @@ public final class QuoteService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType());
   }
 

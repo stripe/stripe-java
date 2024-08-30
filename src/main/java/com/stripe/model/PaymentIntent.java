@@ -1092,8 +1092,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             "/v1/payment_intents/%s/decrement_authorization",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1154,8 +1153,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 

@@ -188,8 +188,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /**
@@ -216,8 +215,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Finalizes a payment on a Reader. */
@@ -238,8 +236,7 @@ public final class ReaderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Reader.class);
   }
   /** Initiates a payment flow on a Reader. */

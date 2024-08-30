@@ -1113,8 +1113,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     String path =
         String.format("/v1/invoices/%s/attach_payment", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Invoice.class);
   }
 
@@ -1169,8 +1168,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Invoice.class);
   }
 
@@ -1208,8 +1206,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         String.format(
             "/v1/invoices/%s/attach_payment_intent", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Invoice.class);
   }
 
@@ -1254,8 +1251,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Invoice.class);
   }
 

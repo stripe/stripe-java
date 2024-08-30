@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.tax.Form;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -43,8 +42,7 @@ public final class FormService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Form>>() {}.getType());
   }
   /**
@@ -85,8 +83,7 @@ public final class FormService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Form.class);
   }
   /** Download the PDF for a tax form. */
@@ -111,8 +108,7 @@ public final class FormService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.requestStream(request);
   }
 }

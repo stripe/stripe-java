@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -140,8 +139,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             "/v1/issuing/credit_underwriting_records/%s/correct",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -165,8 +163,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -187,8 +184,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/credit_underwriting_records/create_from_application";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -216,8 +212,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -238,8 +233,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/credit_underwriting_records/create_from_proactive_review";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -267,8 +261,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -289,8 +282,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/issuing/credit_underwriting_records";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecordCollection.class);
   }
 
@@ -317,8 +309,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecordCollection.class);
   }
 
@@ -340,8 +331,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             "/v1/issuing/credit_underwriting_records/%s/report_decision",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -370,8 +360,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -396,8 +385,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             "/v1/issuing/credit_underwriting_records/%s",
             ApiResource.urlEncodeId(creditUnderwritingRecord));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
@@ -418,8 +406,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 

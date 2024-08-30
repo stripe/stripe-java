@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Order;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -60,8 +59,7 @@ public final class OrderService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Order>>() {}.getType());
   }
   /** Creates a new {@code open} order object. */
@@ -77,8 +75,7 @@ public final class OrderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Order.class);
   }
   /**
@@ -115,8 +112,7 @@ public final class OrderService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Order.class);
   }
   /**
@@ -153,8 +149,7 @@ public final class OrderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Order.class);
   }
   /** Cancels the order as well as the payment intent if one is attached. */
@@ -179,8 +174,7 @@ public final class OrderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Order.class);
   }
   /** Reopens a {@code submitted} order. */
@@ -205,8 +199,7 @@ public final class OrderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Order.class);
   }
   /**
@@ -235,8 +228,7 @@ public final class OrderService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Order.class);
   }
 
