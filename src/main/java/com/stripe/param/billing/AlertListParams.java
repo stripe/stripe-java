@@ -202,6 +202,9 @@ public class AlertListParams extends ApiRequestParams {
   }
 
   public enum AlertType implements ApiRequestParams.EnumParam {
+    @SerializedName("spend_threshold")
+    SPEND_THRESHOLD("spend_threshold"),
+
     @SerializedName("usage_threshold")
     USAGE_THRESHOLD("usage_threshold");
 
