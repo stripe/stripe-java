@@ -5,8 +5,6 @@ import java.net.Proxy;
 import java.util.Map;
 
 public class RawRequestOptions extends RequestOptions {
-  private ApiMode apiMode;
-
   private Map<String, String> additionalHeaders;
 
   public RawRequestOptions(
@@ -21,7 +19,6 @@ public class RawRequestOptions extends RequestOptions {
       Integer maxNetworkRetries,
       Proxy connectionProxy,
       PasswordAuthentication proxyCredential,
-      ApiMode apiMode,
       Map<String, String> additionalHeaders) {
     super(
         apiKey,
@@ -35,12 +32,7 @@ public class RawRequestOptions extends RequestOptions {
         maxNetworkRetries,
         connectionProxy,
         proxyCredential);
-    this.apiMode = apiMode;
     this.additionalHeaders = additionalHeaders;
-  }
-
-  public ApiMode getApiMode() {
-    return apiMode;
   }
 
   public Map<String, String> getAdditionalHeaders() {
@@ -52,26 +44,11 @@ public class RawRequestOptions extends RequestOptions {
   }
 
   public static final class RawRequestOptionsBuilder extends RequestOptions.RequestOptionsBuilder {
-    private ApiMode apiMode;
-
     private Map<String, String> additionalHeaders;
 
-    /**
-     * Constructs a raw request options builder with default values. ApiMode is set to {@code
-     * ApiMode.STANDARD} by default.
-     */
+    /** Constructs a raw request options builder with default values. */
     public RawRequestOptionsBuilder() {
       super();
-      apiMode = ApiMode.V1;
-    }
-
-    public ApiMode getApiMode() {
-      return this.apiMode;
-    }
-
-    public RawRequestOptionsBuilder setApiMode(ApiMode apiMode) {
-      this.apiMode = apiMode;
-      return this;
     }
 
     public Map<String, String> getAdditionalHeaders() {
@@ -157,7 +134,6 @@ public class RawRequestOptions extends RequestOptions {
           maxNetworkRetries,
           connectionProxy,
           proxyCredential,
-          apiMode,
           additionalHeaders);
     }
   }

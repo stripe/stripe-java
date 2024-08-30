@@ -11,12 +11,7 @@ public class RawApiRequestTest extends BaseStripeTest {
   public void testAddUsage() {
     RawApiRequest req1 =
         new RawApiRequest(
-            BaseAddress.API,
-            RequestMethod.POST,
-            "/v1/customers",
-            "description=foo",
-            null,
-            ApiMode.V1);
+            BaseAddress.API, RequestMethod.POST, "/v1/customers", "description=foo", null);
     RawApiRequest req2 = req1.addUsage("foo");
     RawApiRequest req3 = req2.addUsage("bar");
     assertEquals(null, req1.getUsage());
