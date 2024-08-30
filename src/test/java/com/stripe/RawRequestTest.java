@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource.RequestMethod;
 import com.stripe.net.HttpURLConnectionClient;
 import com.stripe.net.LiveStripeResponseGetter;
@@ -58,12 +57,7 @@ public class RawRequestTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final ApiMode apiMode = ApiMode.V1;
-
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
         Stripe.rawRequest(
@@ -83,7 +77,6 @@ public class RawRequestTest extends BaseStripeTest {
   @Test
   public void testNullOptionsGlobal() throws StripeException, InterruptedException {
     server.enqueue(new MockResponse().setBody("{}"));
-    final ApiMode apiMode = ApiMode.V1;
     final StripeResponse response =
         Stripe.rawRequest(RequestMethod.POST, "/v1/customers", "description=test+customer", null);
     assertNotNull(response);
@@ -94,16 +87,12 @@ public class RawRequestTest extends BaseStripeTest {
     server.enqueue(
         new MockResponse()
             .setBody("{\"id\": \"sub_sched_123\",\n  \"object\": \"subscription_schedule\"}"));
-    final ApiMode apiMode = ApiMode.PREVIEW;
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
         Stripe.rawRequest(
             RequestMethod.POST,
-            "/v1/subscription_schedules",
+            "/v2/subscription_schedules",
             "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
             options);
 
@@ -124,14 +113,10 @@ public class RawRequestTest extends BaseStripeTest {
     server.enqueue(
         new MockResponse()
             .setBody("{\"id\": \"sub_sched_123\",\n  \"object\": \"subscription_schedule\"}"));
-    final ApiMode apiMode = ApiMode.PREVIEW;
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
-        Stripe.rawRequest(RequestMethod.GET, "/v1/subscription_schedules", "", options);
+        Stripe.rawRequest(RequestMethod.GET, "/v2/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));
@@ -176,12 +161,7 @@ public class RawRequestTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final ApiMode apiMode = ApiMode.V1;
-
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
         Stripe.rawRequest(
@@ -209,7 +189,6 @@ public class RawRequestTest extends BaseStripeTest {
   @Test
   public void testNullOptionsClient() throws StripeException, InterruptedException {
     server.enqueue(new MockResponse().setBody("{}"));
-    final ApiMode apiMode = ApiMode.V1;
     final StripeResponse response =
         client.rawRequest(RequestMethod.POST, "/v1/customers", "description=test+customer", null);
     assertNotNull(response);
@@ -222,12 +201,7 @@ public class RawRequestTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final ApiMode apiMode = ApiMode.V1;
-
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
         client.rawRequest(
@@ -249,16 +223,12 @@ public class RawRequestTest extends BaseStripeTest {
     server.enqueue(
         new MockResponse()
             .setBody("{\"id\": \"sub_sched_123\",\n  \"object\": \"subscription_schedule\"}"));
-    final ApiMode apiMode = ApiMode.PREVIEW;
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
         client.rawRequest(
             RequestMethod.POST,
-            "/v1/subscription_schedules",
+            "/v2/subscription_schedules",
             "{\"end_behavior\":\"release\",\"phases\":[{\"items\":[{\"quantity\":1,\"price\":\"price_123\"}],\"iterations\":12}],\"customer\":\"cus_123\",\"start_date\":1683338558}",
             options);
 
@@ -279,14 +249,10 @@ public class RawRequestTest extends BaseStripeTest {
     server.enqueue(
         new MockResponse()
             .setBody("{\"id\": \"sub_sched_123\",\n  \"object\": \"subscription_schedule\"}"));
-    final ApiMode apiMode = ApiMode.PREVIEW;
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
-        client.rawRequest(RequestMethod.GET, "/v1/subscription_schedules", "", options);
+        client.rawRequest(RequestMethod.GET, "/v2/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));
@@ -331,12 +297,7 @@ public class RawRequestTest extends BaseStripeTest {
             .setBody(
                 "{\"id\": \"cus_123\",\n  \"object\": \"customer\",\n  \"description\": \"test customer\"}"));
 
-    final ApiMode apiMode = ApiMode.V1;
-
-    final RawRequestOptions options =
-        RawRequestOptions.builder().setApiMode(apiMode).setApiKey("sk_123").build();
-
-    assertEquals(apiMode, options.getApiMode());
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
         client.rawRequest(

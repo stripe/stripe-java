@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -230,8 +229,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
       throws StripeException {
     String path = "/v1/sources";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Source.class);
   }
 
@@ -251,8 +249,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Source.class);
   }
 
@@ -273,8 +270,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             "/v1/customers/%s/sources/%s",
             ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, Source.class);
   }
 
@@ -296,8 +292,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Source.class);
   }
 
@@ -325,8 +320,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
       throws StripeException {
     String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(source));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Source.class);
   }
 
@@ -344,8 +338,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Source.class);
   }
 
@@ -366,8 +359,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String path =
         String.format("/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, SourceTransactionCollection.class);
   }
 
@@ -389,8 +381,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, SourceTransactionCollection.class);
   }
 
@@ -419,8 +410,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   public Source update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Source.class);
   }
 
@@ -453,8 +443,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Source.class);
   }
 
@@ -467,8 +456,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   public Source verify(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Source.class);
   }
 
@@ -487,8 +475,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Source.class);
   }
 

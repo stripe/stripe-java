@@ -1,6 +1,7 @@
 package com.stripe.net;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import com.stripe.Stripe;
 import com.stripe.exception.*;
@@ -86,7 +87,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private StripeRequest toRawStripeRequest(RawApiRequest apiRequest, RequestOptions mergedOptions)
       throws StripeException {
     String fullUrl = fullUrl(apiRequest);
-
+    ApiMode apiMode = apiRequest.getPath().startsWith("/v2") ? ApiMode.PREVIEW : ApiMode.V1;
     Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
     StripeRequest request =
         StripeRequest.createWithStringContent(
@@ -94,9 +95,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
             fullUrl,
             apiRequest.getRawContent(),
             mergedOptions,
-            apiRequest.getApiMode() == ApiMode.PREVIEW);
+            apiMode == ApiMode.PREVIEW);
 
-    if (apiRequest.getApiMode() == ApiMode.PREVIEW) {
+    if (apiMode == ApiMode.PREVIEW) {
       request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
     }
     if (telemetryHeaderValue.isPresent()) {
@@ -126,7 +127,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     String requestId = response.requestId();
 
     if (responseCode < 200 || responseCode >= 300) {
-      handleError(response, apiRequest.getApiMode());
+      handleError(response);
     }
 
     T resource = null;
@@ -175,7 +176,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
                 Stripe.getApiBase(), e.getMessage()),
             e);
       }
-      handleError(response, apiRequest.getApiMode());
+      handleError(response);
     }
 
     return responseStream.body();
@@ -224,8 +225,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       RequestOptions options,
       ApiMode apiMode)
       throws StripeException {
-    return this.request(
-        new ApiRequest(baseAddress, method, path, params, options, apiMode), typeToken);
+    return this.request(new ApiRequest(baseAddress, method, path, params, options), typeToken);
   }
 
   @Override
@@ -238,7 +238,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       RequestOptions options,
       ApiMode apiMode)
       throws StripeException {
-    return this.requestStream(new ApiRequest(baseAddress, method, path, params, options, apiMode));
+    return this.requestStream(new ApiRequest(baseAddress, method, path, params, options));
   }
 
   private static HttpClient buildDefaultHttpClient() {
@@ -258,11 +258,21 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
         e);
   }
 
-  private void handleError(StripeResponse response, ApiMode apiMode) throws StripeException {
-    if (apiMode == ApiMode.V1) {
+  private void handleError(StripeResponse response) throws StripeException {
+    JsonObject responseBody = ApiResource.GSON.fromJson(response.body(), JsonObject.class);
+
+    /*
+     OAuth errors are JSON objects where `error` is a string. In
+     contrast, in API errors, `error` is a hash with sub-keys. We use
+     this property to distinguish between OAuth and API errors.
+    */
+    if (responseBody.has("error") && responseBody.get("error").isJsonPrimitive()) {
+      JsonPrimitive error = responseBody.getAsJsonPrimitive("error");
+      if (error.isString()) {
+        handleOAuthError(response);
+      }
+    } else {
       handleApiError(response);
-    } else if (apiMode == ApiMode.OAuth) {
-      handleOAuthError(response);
     }
   }
 

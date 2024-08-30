@@ -6,7 +6,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -98,8 +97,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String path = "/v1/gift_cards/cards";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Card.class);
   }
 
@@ -119,8 +117,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Card.class);
   }
 
@@ -134,8 +131,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String path = "/v1/gift_cards/cards";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CardCollection.class);
   }
 
@@ -155,8 +151,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, CardCollection.class);
   }
 
@@ -175,8 +170,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String path = String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Card.class);
   }
 
@@ -191,8 +185,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Card.class);
   }
 
@@ -207,8 +200,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public Card update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/gift_cards/cards/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Card.class);
   }
 
@@ -227,8 +219,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Card.class);
   }
 
@@ -242,8 +233,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String path = "/v1/gift_cards/cards/validate";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Card.class);
   }
 
@@ -263,8 +253,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Card.class);
   }
 

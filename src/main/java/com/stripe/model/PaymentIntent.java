@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -550,8 +549,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String.format(
             "/v1/payment_intents/%s/apply_customer_balance", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -575,8 +573,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -653,8 +650,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     String path =
         String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -701,8 +697,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -763,8 +758,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     String path =
         String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -803,8 +797,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -905,8 +898,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     String path =
         String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -965,8 +957,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1004,8 +995,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String path = "/v1/payment_intents";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1049,8 +1039,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1103,8 +1092,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             "/v1/payment_intents/%s/decrement_authorization",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1165,8 +1153,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1235,8 +1222,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             "/v1/payment_intents/%s/increment_authorization",
             ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1313,8 +1299,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1328,8 +1313,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String path = "/v1/payment_intents";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentIntentCollection.class);
   }
 
@@ -1350,8 +1334,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PaymentIntentCollection.class);
   }
 
@@ -1398,8 +1381,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1424,8 +1406,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1454,8 +1435,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String path = "/v1/payment_intents/search";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentIntentSearchResult.class);
   }
 
@@ -1490,8 +1470,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PaymentIntentSearchResult.class);
   }
 
@@ -1523,8 +1502,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1560,8 +1538,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1587,8 +1564,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String.format(
             "/v1/payment_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
@@ -1612,8 +1588,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 

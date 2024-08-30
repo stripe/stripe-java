@@ -10,7 +10,6 @@ import com.stripe.Stripe;
 import com.stripe.exception.ApiKeyMissingException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.*;
-import com.stripe.net.ApiMode;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.io.IOException;
 import java.util.*;
@@ -35,12 +34,7 @@ public class PagingIteratorTest extends BaseStripeTest {
       return getGlobalResponseGetter()
           .request(
               new ApiRequest(
-                  BaseAddress.API,
-                  RequestMethod.GET,
-                  "/v1/pageable_models",
-                  params,
-                  options,
-                  ApiMode.V1),
+                  BaseAddress.API, RequestMethod.GET, "/v1/pageable_models", params, options),
               PageableModelCollection.class);
     }
 
@@ -57,8 +51,7 @@ public class PagingIteratorTest extends BaseStripeTest {
                   RequestMethod.DELETE,
                   String.format("/v1/pageable_models/%s", getId()),
                   (Map<String, Object>) null,
-                  null,
-                  ApiMode.V1),
+                  null),
               PageableModel.class);
     }
   }
@@ -85,8 +78,7 @@ public class PagingIteratorTest extends BaseStripeTest {
                   ApiResource.RequestMethod.GET,
                   "/v1/references_pageable_models",
                   new HashMap<String, Object>(),
-                  options,
-                  ApiMode.V1),
+                  options),
               ReferencesPageableModel.class);
     }
 

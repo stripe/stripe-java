@@ -4,7 +4,6 @@ package com.stripe.model.financialconnections;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -72,8 +71,7 @@ public class AccountInferredBalance extends ApiResource implements HasId {
             "/v1/financial_connections/accounts/%s/inferred_balances",
             ApiResource.urlEncodeId(account));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, AccountInferredBalanceCollection.class);
   }
 
@@ -98,8 +96,7 @@ public class AccountInferredBalance extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, AccountInferredBalanceCollection.class);
   }
 }

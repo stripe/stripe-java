@@ -7,7 +7,6 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -89,8 +88,7 @@ public class Configuration extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/terminal/configurations";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
@@ -110,8 +108,7 @@ public class Configuration extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
@@ -136,8 +133,7 @@ public class Configuration extends ApiResource implements HasId {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, Configuration.class);
   }
 
@@ -151,8 +147,7 @@ public class Configuration extends ApiResource implements HasId {
       throws StripeException {
     String path = "/v1/terminal/configurations";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ConfigurationCollection.class);
   }
 
@@ -173,8 +168,7 @@ public class Configuration extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ConfigurationCollection.class);
   }
 
@@ -196,8 +190,7 @@ public class Configuration extends ApiResource implements HasId {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
@@ -214,8 +207,7 @@ public class Configuration extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Configuration.class);
   }
 
@@ -230,8 +222,7 @@ public class Configuration extends ApiResource implements HasId {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Configuration.class);
   }
 
@@ -252,8 +243,7 @@ public class Configuration extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Configuration.class);
   }
 

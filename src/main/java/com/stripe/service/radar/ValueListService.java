@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.radar.ValueList;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -37,8 +36,7 @@ public final class ValueListService extends ApiService {
   public ValueList delete(String valueList, RequestOptions options) throws StripeException {
     String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ValueList.class);
   }
   /** Retrieves a {@code ValueList} object. */
@@ -65,8 +63,7 @@ public final class ValueListService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ValueList.class);
   }
   /**
@@ -103,8 +100,7 @@ public final class ValueListService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ValueList.class);
   }
   /**
@@ -141,8 +137,7 @@ public final class ValueListService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<ValueList>>() {}.getType());
   }
   /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
@@ -159,8 +154,7 @@ public final class ValueListService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ValueList.class);
   }
 }

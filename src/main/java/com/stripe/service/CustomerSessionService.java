@@ -3,7 +3,6 @@ package com.stripe.service;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.CustomerSession;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -38,8 +37,7 @@ public final class CustomerSessionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, CustomerSession.class);
   }
 }

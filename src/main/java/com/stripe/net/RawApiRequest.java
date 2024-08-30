@@ -15,10 +15,9 @@ public class RawApiRequest extends BaseApiRequest {
       ApiResource.RequestMethod method,
       String path,
       RawRequestOptions options,
-      ApiMode apiMode,
       List<String> usage,
       String rawContent) {
-    super(baseAddress, method, path, options, apiMode, usage);
+    super(baseAddress, method, path, options, usage);
     this.rawContent = rawContent;
     this.options = options;
   }
@@ -28,9 +27,8 @@ public class RawApiRequest extends BaseApiRequest {
       ApiResource.RequestMethod method,
       String path,
       String rawContent,
-      RawRequestOptions options,
-      ApiMode apiMode) {
-    this(baseAddress, method, path, options, apiMode, null, rawContent);
+      RawRequestOptions options) {
+    this(baseAddress, method, path, options, null, rawContent);
   }
 
   public RawApiRequest addUsage(String usage) {
@@ -44,7 +42,6 @@ public class RawApiRequest extends BaseApiRequest {
         this.getMethod(),
         this.getPath(),
         this.getOptions(),
-        this.getApiMode(),
         newUsage,
         this.getRawContent());
   }

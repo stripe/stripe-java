@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.giftcards.Transaction;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -47,8 +46,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
   /** Create a gift card transaction. */
@@ -65,8 +63,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
   /** Retrieves the gift card transaction. */
@@ -91,8 +88,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
   /** Update a gift card transaction. */
@@ -117,8 +113,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
   /** Cancel a gift card transaction. */
@@ -144,8 +139,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
   /** Confirm a gift card transaction. */
@@ -171,8 +165,7 @@ public final class TransactionService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Transaction.class);
   }
 }
