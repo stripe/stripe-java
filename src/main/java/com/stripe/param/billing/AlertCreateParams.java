@@ -176,9 +176,23 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private Filter(String customer, Map<String, Object> extraParams) {
+    /** Limit the scope of this rated usage alert to this subscription. */
+    @SerializedName("subscription")
+    String subscription;
+
+    /** Limit the scope of this rated usage alert to this subscription item. */
+    @SerializedName("subscription_item")
+    String subscriptionItem;
+
+    private Filter(
+        String customer,
+        Map<String, Object> extraParams,
+        String subscription,
+        String subscriptionItem) {
       this.customer = customer;
       this.extraParams = extraParams;
+      this.subscription = subscription;
+      this.subscriptionItem = subscriptionItem;
     }
 
     public static Builder builder() {
@@ -190,9 +204,14 @@ public class AlertCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String subscription;
+
+      private String subscriptionItem;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AlertCreateParams.Filter build() {
-        return new AlertCreateParams.Filter(this.customer, this.extraParams);
+        return new AlertCreateParams.Filter(
+            this.customer, this.extraParams, this.subscription, this.subscriptionItem);
       }
 
       /** Limit the scope to this alert only to this customer. */
@@ -224,6 +243,18 @@ public class AlertCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Limit the scope of this rated usage alert to this subscription. */
+      public Builder setSubscription(String subscription) {
+        this.subscription = subscription;
+        return this;
+      }
+
+      /** Limit the scope of this rated usage alert to this subscription item. */
+      public Builder setSubscriptionItem(String subscriptionItem) {
+        this.subscriptionItem = subscriptionItem;
         return this;
       }
     }
