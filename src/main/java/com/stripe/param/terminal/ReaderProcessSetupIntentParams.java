@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ReaderProcessSetupIntentParams extends ApiRequestParams {
-  /** <strong>Required.</strong> Customer Consent Collected */
+  /** Customer Consent Collected. */
   @SerializedName("customer_consent_collected")
   Boolean customerConsentCollected;
 
@@ -74,7 +74,7 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
           this.setupIntent);
     }
 
-    /** <strong>Required.</strong> Customer Consent Collected */
+    /** Customer Consent Collected. */
     public Builder setCustomerConsentCollected(Boolean customerConsentCollected) {
       this.customerConsentCollected = customerConsentCollected;
       return this;
