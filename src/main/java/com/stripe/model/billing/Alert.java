@@ -36,7 +36,7 @@ public class Alert extends ApiResource implements HasId {
   /**
    * Defines the type of the alert.
    *
-   * <p>One of {@code spend_threshold}, or {@code usage_threshold}.
+   * <p>Equal to {@code usage_threshold}.
    */
   @SerializedName("alert_type")
   String alertType;
@@ -67,14 +67,6 @@ public class Alert extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
-
-  /**
-   * Encapsulates configuration of the spend to monitoring spend on a <a
-   * href="https://stripe.com/docs/api/subscriptions/object">Subscription</a> or <a
-   * href="https://stripe.com/docs/api/subscription_items/object">Subscription item</a>.
-   */
-  @SerializedName("spend_threshold_config")
-  SpendThresholdConfig spendThresholdConfig;
 
   /**
    * Status of the alert. This can be active, inactive or archived.
@@ -361,44 +353,6 @@ public class Alert extends ApiResource implements HasId {
   }
 
   /**
-   * The spend threshold alert configuration enables setting up alerts for when a certain spend
-   * threshold on a specific subscription or subscription item is crossed.
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SpendThresholdConfig extends StripeObject {
-    /**
-     * Defines if the alert will fire on spend aggregated across a subscription, or on individual
-     * subscription items.
-     *
-     * <p>One of {@code subscription}, or {@code subscription_item}.
-     */
-    @SerializedName("aggregation")
-    String aggregation;
-
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /** The value at which this alert will trigger. */
-    @SerializedName("gte")
-    Long gte;
-
-    /**
-     * Defines how the alert will behave.
-     *
-     * <p>Equal to {@code one_time}.
-     */
-    @SerializedName("recurrence")
-    String recurrence;
-  }
-
-  /**
    * The usage threshold alert configuration enables setting up alerts for when a certain usage
    * threshold on a specific meter is crossed.
    */
@@ -450,7 +404,6 @@ public class Alert extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(filter, responseGetter);
-    trySetResponseGetter(spendThresholdConfig, responseGetter);
     trySetResponseGetter(usageThresholdConfig, responseGetter);
   }
 }
