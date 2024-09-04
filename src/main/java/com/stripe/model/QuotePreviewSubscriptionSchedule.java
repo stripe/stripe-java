@@ -4,7 +4,6 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.testhelpers.TestClock;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -249,8 +248,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         String.format(
             "/v1/quotes/%s/preview_subscription_schedules", ApiResource.urlEncodeId(quote));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter()
         .request(request, QuotePreviewSubscriptionScheduleCollection.class);
   }
@@ -275,8 +273,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter()
         .request(request, QuotePreviewSubscriptionScheduleCollection.class);
   }

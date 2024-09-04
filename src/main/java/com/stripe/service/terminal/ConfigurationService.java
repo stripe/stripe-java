@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.terminal.Configuration;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -32,8 +31,7 @@ public final class ConfigurationService extends ApiService {
     String path =
         String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Configuration.class);
   }
   /** Retrieves a {@code Configuration} object. */
@@ -62,8 +60,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Configuration.class);
   }
   /** Updates a new {@code Configuration} object. */
@@ -91,8 +88,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Configuration.class);
   }
   /** Returns a list of {@code Configuration} objects. */
@@ -118,8 +114,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Configuration>>() {}.getType());
   }
   /** Creates a new {@code Configuration} object. */
@@ -144,8 +139,7 @@ public final class ConfigurationService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Configuration.class);
   }
 }

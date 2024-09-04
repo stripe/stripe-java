@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -244,8 +243,7 @@ public class QuotePhase extends ApiResource implements HasId {
     String path =
         String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -275,8 +273,7 @@ public class QuotePhase extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
@@ -297,8 +294,7 @@ public class QuotePhase extends ApiResource implements HasId {
       throws StripeException {
     String path = String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, QuotePhase.class);
   }
 
@@ -314,8 +310,7 @@ public class QuotePhase extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, QuotePhase.class);
   }
 

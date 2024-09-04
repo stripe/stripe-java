@@ -2,7 +2,6 @@ package com.stripe.net;
 
 import com.google.gson.*;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.exception.StripeException;
 import com.stripe.model.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -116,16 +115,6 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
     }
 
     return urlEncode(id);
-  }
-
-  @Deprecated
-  public static StripeResponse rawRequest(
-      ApiResource.RequestMethod method, String url, String content, RawRequestOptions options)
-      throws StripeException {
-    RawApiRequest req =
-        new RawApiRequest(BaseAddress.API, method, url, content, options, options.getApiMode());
-    req = req.addUsage("raw_request");
-    return globalResponseGetter.rawRequest(req);
   }
 
   /**

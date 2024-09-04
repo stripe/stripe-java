@@ -64,13 +64,13 @@
 ## 26.6.0 - 2024-08-01
 * [#1841](https://github.com/stripe/stripe-java/pull/1841) Update generated code
   * Add support for new resources `Billing.AlertTriggered` and `Billing.Alert`
-  * ⚠️ Remove support for `authorization_code` on `Charge.payment_method_details.card`. This was accidentally released last week. 
+  * ⚠️ Remove support for `authorization_code` on `Charge.payment_method_details.card`. This was accidentally released last week.
   * Add support for new value `billing.alert.triggered` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 26.6.0-beta.1 - 2024-07-25
 * [#1834](https://github.com/stripe/stripe-java/pull/1834) Update generated code for beta
   ⚠️ `InvoicePayment.charge` and `InvoicePayment.paymentIntent` were removed in favor of `InvoicePayment.Payment`, which encapsulates both. The `Charge` and `PaymentIntent` fields are now found at `InvoicePayment.Payment.Charge` `InvoicePaymentPayment.paymentIntent`
-  
+
   * Add support for new resources `Billing.AlertTriggered`, `Billing.Alert`, and `Tax.Association`
   * Add support for `activate`, `archive`, `create`, `deactivate`, `list`, and `retrieve` methods on resource `Alert`
   * Add support for `find` method on resource `Association`

@@ -19,7 +19,7 @@ public class ApiRequest extends BaseApiRequest {
       Map<String, Object> params) {
     super(baseAddress, method, path, options, usage);
     this.params = params;
-    this.apiMode = ApiMode.V1;
+    this.apiMode = path.startsWith("/v2") ? ApiMode.PREVIEW : ApiMode.V1;
   }
 
   /**

@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -228,8 +227,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
       throws StripeException {
     String path = "/v1/prices";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, Price.class);
   }
 
@@ -249,8 +247,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Price.class);
   }
 
@@ -272,8 +269,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
       throws StripeException {
     String path = "/v1/prices";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PriceCollection.class);
   }
 
@@ -301,8 +297,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PriceCollection.class);
   }
 
@@ -321,8 +316,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
       throws StripeException {
     String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Price.class);
   }
 
@@ -337,8 +331,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Price.class);
   }
 
@@ -366,8 +359,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
       throws StripeException {
     String path = "/v1/prices/search";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PriceSearchResult.class);
   }
 
@@ -401,8 +393,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, PriceSearchResult.class);
   }
 
@@ -423,8 +414,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public Price update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Price.class);
   }
 
@@ -449,8 +439,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Price.class);
   }
 

@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.billing.Alert;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -47,8 +46,7 @@ public final class AlertService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<Alert>>() {}.getType());
   }
   /** Creates a billing alert. */
@@ -64,8 +62,7 @@ public final class AlertService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Alert.class);
   }
   /** Retrieves a billing alert given an ID. */
@@ -90,8 +87,7 @@ public final class AlertService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Alert.class);
   }
   /** Reactivates this alert, allowing it to trigger again. */
@@ -116,8 +112,7 @@ public final class AlertService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Alert.class);
   }
   /** Archives this alert, removing it from the list view and APIs. This is non-reversible. */
@@ -142,8 +137,7 @@ public final class AlertService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Alert.class);
   }
   /** Deactivates this alert, preventing it from triggering. */
@@ -168,8 +162,7 @@ public final class AlertService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, Alert.class);
   }
 }

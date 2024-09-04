@@ -3,7 +3,6 @@ package com.stripe.service;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.EphemeralKey;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -41,8 +40,7 @@ public final class EphemeralKeyService extends ApiService {
             ApiResource.RequestMethod.DELETE,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, EphemeralKey.class);
   }
   /** Creates a short-lived API key for a given resource. */
@@ -97,8 +95,7 @@ public final class EphemeralKeyService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             overriddenParams,
-            overriddenOptions,
-            ApiMode.V1);
+            overriddenOptions);
     return getResponseGetter().request(request, EphemeralKey.class);
   }
 }

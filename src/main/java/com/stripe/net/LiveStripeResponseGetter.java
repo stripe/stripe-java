@@ -87,7 +87,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private StripeRequest toRawStripeRequest(RawApiRequest apiRequest, RequestOptions mergedOptions)
       throws StripeException {
     String fullUrl = fullUrl(apiRequest);
-
+    ApiMode apiMode = apiRequest.getPath().startsWith("/v2") ? ApiMode.PREVIEW : ApiMode.V1;
     Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
     StripeRequest request =
         StripeRequest.createWithStringContent(
@@ -95,9 +95,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
             fullUrl,
             apiRequest.getRawContent(),
             mergedOptions,
-            apiRequest.getApiMode() == ApiMode.PREVIEW);
+            apiMode == ApiMode.PREVIEW);
 
-    if (apiRequest.getApiMode() == ApiMode.PREVIEW) {
+    if (apiMode == ApiMode.PREVIEW) {
       request = request.withAdditionalHeader("Stripe-Version", Stripe.PREVIEW_API_VERSION);
     }
     if (telemetryHeaderValue.isPresent()) {

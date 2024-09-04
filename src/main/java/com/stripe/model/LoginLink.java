@@ -3,7 +3,6 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -87,8 +86,7 @@ public class LoginLink extends ApiResource {
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, LoginLink.class);
   }
 
@@ -122,8 +120,7 @@ public class LoginLink extends ApiResource {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, LoginLink.class);
   }
 }

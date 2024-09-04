@@ -4,7 +4,6 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.entitlements.Feature;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -71,8 +70,7 @@ public class ProductFeature extends ApiResource implements HasId {
       String product, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, ProductFeature.class);
   }
 
@@ -94,8 +92,7 @@ public class ProductFeature extends ApiResource implements HasId {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ProductFeature.class);
   }
 
@@ -122,8 +119,7 @@ public class ProductFeature extends ApiResource implements HasId {
             "/v1/products/%s/features/%s",
             ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, ProductFeature.class);
   }
 
@@ -138,8 +134,7 @@ public class ProductFeature extends ApiResource implements HasId {
       String product, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ProductFeatureCollection.class);
   }
 
@@ -161,8 +156,7 @@ public class ProductFeature extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ProductFeatureCollection.class);
   }
 
@@ -186,8 +180,7 @@ public class ProductFeature extends ApiResource implements HasId {
             "/v1/products/%s/features/%s",
             ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ProductFeature.class);
   }
 
@@ -206,8 +199,7 @@ public class ProductFeature extends ApiResource implements HasId {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, ProductFeature.class);
   }
 

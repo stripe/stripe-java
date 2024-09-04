@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -45,8 +44,7 @@ public final class ShippingRateService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, new TypeToken<StripeCollection<ShippingRate>>() {}.getType());
   }
   /** Creates a new shipping rate object. */
@@ -63,8 +61,7 @@ public final class ShippingRateService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ShippingRate.class);
   }
   /** Returns the shipping rate object with the given ID. */
@@ -93,8 +90,7 @@ public final class ShippingRateService extends ApiService {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ShippingRate.class);
   }
   /** Updates an existing shipping rate object. */
@@ -123,8 +119,7 @@ public final class ShippingRateService extends ApiService {
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return this.request(request, ShippingRate.class);
   }
 }

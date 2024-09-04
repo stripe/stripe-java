@@ -665,9 +665,7 @@ public class StripeClient {
       throw new IllegalArgumentException(
           "content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");
     }
-    RawApiRequest req =
-        new RawApiRequest(
-            BaseAddress.API, method, relativeUrl, content, options, options.getApiMode());
+    RawApiRequest req = new RawApiRequest(BaseAddress.API, method, relativeUrl, content, options);
     req = req.addUsage("stripe_client");
     req = req.addUsage("raw_request");
     return this.getResponseGetter().rawRequest(req);

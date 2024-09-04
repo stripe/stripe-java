@@ -264,7 +264,7 @@ Stripe.addBetaVersion("feature_beta", "v3");
 
 ### Custom requests
 
-If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `Stripe`.
+If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `StripeClient`.
 
 ```java
 // Create a RawRequestOptions object, allowing you to set per-request
@@ -277,13 +277,14 @@ RawRequestOptions options =
     .build();
 
 // Make the request using the Stripe.rawRequest() method.
+StripeClient client = new StripeClient("sk_test_...");
 final StripeResponse response =
-  Stripe.rawRequest(
+  client.rawRequest(
     ApiResource.RequestMethod.POST, "/v1/beta_endpoint", "param=123", options);
 
 // (Optional) response.body() is a string. You can call
 // Stripe.deserialize() to get a StripeObject.
-StripeObject obj = Stripe.deserialize(response.body());
+StripeObject obj = client.deserialize(response.body());
 ```
 
 ## Support

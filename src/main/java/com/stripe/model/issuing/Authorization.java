@@ -8,7 +8,6 @@ import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -322,8 +321,7 @@ public class Authorization extends ApiResource
         String.format(
             "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Authorization.class);
   }
 
@@ -361,8 +359,7 @@ public class Authorization extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Authorization.class);
   }
 
@@ -420,8 +417,7 @@ public class Authorization extends ApiResource
         String.format(
             "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Authorization.class);
   }
 
@@ -459,8 +455,7 @@ public class Authorization extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Authorization.class);
   }
 
@@ -480,8 +475,7 @@ public class Authorization extends ApiResource
       throws StripeException {
     String path = "/v1/issuing/authorizations";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, AuthorizationCollection.class);
   }
 
@@ -508,8 +502,7 @@ public class Authorization extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, AuthorizationCollection.class);
   }
 
@@ -531,8 +524,7 @@ public class Authorization extends ApiResource
     String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Authorization.class);
   }
 
@@ -549,8 +541,7 @@ public class Authorization extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, Authorization.class);
   }
 
@@ -573,8 +564,7 @@ public class Authorization extends ApiResource
     String path =
         String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Authorization.class);
   }
 
@@ -601,8 +591,7 @@ public class Authorization extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, Authorization.class);
   }
 
@@ -1196,8 +1185,7 @@ public class Authorization extends ApiResource
         throws StripeException {
       String path = "/v1/test_helpers/issuing/authorizations";
       ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
       return getGlobalResponseGetter().request(request, Authorization.class);
     }
 
@@ -1217,8 +1205,7 @@ public class Authorization extends ApiResource
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
+              options);
       return getGlobalResponseGetter().request(request, Authorization.class);
     }
 
@@ -1245,8 +1232,7 @@ public class Authorization extends ApiResource
               "/v1/test_helpers/issuing/authorizations/%s/capture",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1269,8 +1255,7 @@ public class Authorization extends ApiResource
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
+              options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1297,8 +1282,7 @@ public class Authorization extends ApiResource
               "/v1/test_helpers/issuing/authorizations/%s/expire",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1321,8 +1305,7 @@ public class Authorization extends ApiResource
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
+              options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1345,8 +1328,7 @@ public class Authorization extends ApiResource
               "/v1/test_helpers/issuing/authorizations/%s/finalize_amount",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1376,8 +1358,7 @@ public class Authorization extends ApiResource
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
+              options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1394,8 +1375,7 @@ public class Authorization extends ApiResource
               "/v1/test_helpers/issuing/authorizations/%s/increment",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1418,8 +1398,7 @@ public class Authorization extends ApiResource
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
+              options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1446,8 +1425,7 @@ public class Authorization extends ApiResource
               "/v1/test_helpers/issuing/authorizations/%s/reverse",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiRequest request =
-          new ApiRequest(
-              BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
 
@@ -1470,8 +1448,7 @@ public class Authorization extends ApiResource
               ApiResource.RequestMethod.POST,
               path,
               ApiRequestParams.paramsToMap(params),
-              options,
-              ApiMode.V1);
+              options);
       return resource.getResponseGetter().request(request, Authorization.class);
     }
   }

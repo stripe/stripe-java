@@ -4,7 +4,6 @@ package com.stripe.model.capital;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -71,8 +70,7 @@ public class FinancingSummary extends ApiResource {
       throws StripeException {
     String path = "/v1/capital/financing_summary";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FinancingSummary.class);
   }
 
@@ -87,8 +85,7 @@ public class FinancingSummary extends ApiResource {
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, FinancingSummary.class);
   }
 

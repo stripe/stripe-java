@@ -6,7 +6,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -149,8 +148,7 @@ public class FinancialAccount extends ApiResource
       throws StripeException {
     String path = "/v1/treasury/financial_accounts";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
@@ -177,8 +175,7 @@ public class FinancialAccount extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
@@ -192,8 +189,7 @@ public class FinancialAccount extends ApiResource
       throws StripeException {
     String path = "/v1/treasury/financial_accounts";
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FinancialAccountCollection.class);
   }
 
@@ -214,8 +210,7 @@ public class FinancialAccount extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, FinancialAccountCollection.class);
   }
 
@@ -238,8 +233,7 @@ public class FinancialAccount extends ApiResource
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
@@ -257,8 +251,7 @@ public class FinancialAccount extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getGlobalResponseGetter().request(request, FinancialAccount.class);
   }
 
@@ -280,8 +273,7 @@ public class FinancialAccount extends ApiResource
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
@@ -305,8 +297,7 @@ public class FinancialAccount extends ApiResource
             ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
@@ -323,8 +314,7 @@ public class FinancialAccount extends ApiResource
     String path =
         String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, FinancialAccount.class);
   }
 
@@ -345,8 +335,7 @@ public class FinancialAccount extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, FinancialAccount.class);
   }
 
@@ -373,8 +362,7 @@ public class FinancialAccount extends ApiResource
         String.format(
             "/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options, ApiMode.V1);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
@@ -397,8 +385,7 @@ public class FinancialAccount extends ApiResource
             ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
-            options,
-            ApiMode.V1);
+            options);
     return getResponseGetter().request(request, FinancialAccountFeatures.class);
   }
 
