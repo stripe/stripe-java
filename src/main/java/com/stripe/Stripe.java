@@ -1,9 +1,5 @@
 package com.stripe;
 
-import com.google.gson.JsonObject;
-import com.stripe.exception.*;
-import com.stripe.model.*;
-import com.stripe.net.*;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
@@ -222,65 +218,5 @@ public abstract class Stripe {
 
   public static Map<String, String> getAppInfo() {
     return appInfo;
-  }
-
-  /**
-   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
-   * API. This method is useful for interacting with endpoints that are not covered yet in
-   * stripe-java.
-   *
-   * @param method the HTTP method
-   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
-   * @param content the body of the request as a string
-   * @return the JSON response as a string
-   * @deprecated Use {@link com.stripe.StripeClient#rawRequest(ApiResource.RequestMethod, String,
-   *     String)} instead.
-   */
-  @Deprecated
-  public static StripeResponse rawRequest(
-      final ApiResource.RequestMethod method, final String relativeUrl, final String content)
-      throws StripeException {
-    return rawRequest(method, relativeUrl, content, null);
-  }
-
-  /**
-   * Send raw request to Stripe API. This is the lowest level method for interacting with the Stripe
-   * API. This method is useful for interacting with endpoints that are not covered yet in
-   * stripe-java.
-   *
-   * @param method the HTTP method
-   * @param relativeUrl the relative URL of the request, e.g. "/v1/charges"
-   * @param content the body of the request as a string
-   * @param options the special modifiers of the request
-   * @return the JSON response as a string
-   * @deprecated Use {@link com.stripe.StripeClient#rawRequest(ApiResource.RequestMethod, String,
-   *     String, RawRequestOptions)} instead.
-   */
-  @Deprecated
-  public static StripeResponse rawRequest(
-      final ApiResource.RequestMethod method,
-      final String relativeUrl,
-      final String content,
-      RawRequestOptions options)
-      throws StripeException {
-    if (options == null) {
-      options = RawRequestOptions.builder().build();
-    }
-    if (method != ApiResource.RequestMethod.POST && content != null && !content.equals("")) {
-      throw new IllegalArgumentException(
-          "content is not allowed for non-POST requests. Please pass null and add request parameters to the query string of the URL.");
-    }
-    return ApiResource.rawRequest(method, relativeUrl, content, options);
-  }
-
-  /** Deserializes StripeResponse returned by rawRequest into a similar class. */
-  @Deprecated
-  public static StripeObject deserialize(String rawJson) throws StripeException {
-    if (rawJson == null) {
-      throw new IllegalArgumentException("rawJson cannot be null");
-    }
-
-    return StripeObject.deserializeStripeObject(
-        ApiResource.GSON.fromJson(rawJson, JsonObject.class));
   }
 }
