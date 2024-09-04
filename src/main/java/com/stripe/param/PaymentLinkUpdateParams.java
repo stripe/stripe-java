@@ -5152,6 +5152,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("link")
     LINK("link"),
 
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
 
