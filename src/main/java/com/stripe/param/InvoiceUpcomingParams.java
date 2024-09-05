@@ -68,7 +68,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** List of invoice items to add or update in the upcoming invoice preview. */
+  /** List of invoice items to add or update in the upcoming invoice preview (up to 250). */
   @SerializedName("invoice_items")
   List<InvoiceUpcomingParams.InvoiceItem> invoiceItems;
 

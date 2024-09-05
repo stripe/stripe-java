@@ -309,8 +309,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
   /**
    * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
-   * href="https://stripe.com/docs/payments/checkout/custom-redirect-behavior">redirect behavior</a>
-   * of embedded sessions. Defaults to {@code always}.
+   * href="https://stripe.com/docs/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
+   * behavior</a> of embedded sessions. Defaults to {@code always}.
    *
    * <p>One of {@code always}, {@code if_required}, or {@code never}.
    */
