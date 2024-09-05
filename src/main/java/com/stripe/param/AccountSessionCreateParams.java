@@ -224,6 +224,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("payouts_list")
     PayoutsList payoutsList;
 
+    @SerializedName("recipients")
+    Recipients recipients;
+
     /** Configuration for the tax registrations embedded component. */
     @SerializedName("tax_registrations")
     TaxRegistrations taxRegistrations;
@@ -254,6 +257,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Payments payments,
         Payouts payouts,
         PayoutsList payoutsList,
+        Recipients recipients,
         TaxRegistrations taxRegistrations,
         TaxSettings taxSettings) {
       this.accountManagement = accountManagement;
@@ -277,6 +281,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.payments = payments;
       this.payouts = payouts;
       this.payoutsList = payoutsList;
+      this.recipients = recipients;
       this.taxRegistrations = taxRegistrations;
       this.taxSettings = taxSettings;
     }
@@ -328,6 +333,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       private PayoutsList payoutsList;
 
+      private Recipients recipients;
+
       private TaxRegistrations taxRegistrations;
 
       private TaxSettings taxSettings;
@@ -356,6 +363,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.payments,
             this.payouts,
             this.payoutsList,
+            this.recipients,
             this.taxRegistrations,
             this.taxSettings);
       }
@@ -518,6 +526,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       /** Configuration for the payouts list embedded component. */
       public Builder setPayoutsList(AccountSessionCreateParams.Components.PayoutsList payoutsList) {
         this.payoutsList = payoutsList;
+        return this;
+      }
+
+      public Builder setRecipients(AccountSessionCreateParams.Components.Recipients recipients) {
+        this.recipients = recipients;
         return this;
       }
 
@@ -4011,6 +4024,149 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link AccountSessionCreateParams.Components.PayoutsList.Features#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class Recipients {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private Recipients(Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.Recipients build() {
+          return new AccountSessionCreateParams.Components.Recipients(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.Recipients#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.Recipients#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.Recipients.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Features {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.Recipients.Features build() {
+            return new AccountSessionCreateParams.Components.Recipients.Features(this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountSessionCreateParams.Components.Recipients.Features#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountSessionCreateParams.Components.Recipients.Features#extraParams}
            * for the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
