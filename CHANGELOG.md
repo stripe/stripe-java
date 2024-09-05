@@ -1,4 +1,20 @@
 # Changelog
+## 26.11.0-beta.1 - 2024-09-05
+* [#1859](https://github.com/stripe/stripe-java/pull/1859) Update generated code for beta
+  * Add support for `recipients` on `AccountSessionCreateParams.components`
+  * Add support for new value `mb_way` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for new value `billing.meter_error_report.triggered` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1861](https://github.com/stripe/stripe-java/pull/1861) RawRequest will be on StripeClient only
+  * Remove the deprecated method `Stripe.rawRequest()` and `Stripe.deserialize()` in favor of `StripeClient.rawRequest()` and `StripeClient.deserialize()`
+* [#1857](https://github.com/stripe/stripe-java/pull/1857) Merge from master after the changes to not pass api_mode from individual methods
+* [#1853](https://github.com/stripe/stripe-java/pull/1853) Update generated code for beta
+  * Add support for new resource `Terminal.ReaderCollectedData`
+  * Add support for `retrieve` method on resource `ReaderCollectedData`
+  * Add support for new value `mb_way` on enum `checkout.SessionCreateParams.payment_method_types[]`
+  * Add support for `business_name`, `email`, `phone`, and `tax_ids` on `Checkout.Session.collected_information`
+  * Add support for `regulatory_reporting_file` on `Issuing.CreditUnderwritingRecord`, `issuing.CreditUnderwritingRecordCorrectParams`, `issuing.CreditUnderwritingRecordCreateFromProactiveReviewParams`, and `issuing.CreditUnderwritingRecordReportDecisionParams`
+  * Remove support for `rechnung` on `PaymentMethodUpdateParams`
+
 
 ## 26.9.0 - 2024-08-29
 * [#1856](https://github.com/stripe/stripe-java/pull/1856) Generate SDK for OpenAPI spec version 1230
