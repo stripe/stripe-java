@@ -280,8 +280,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
-   * href="https://stripe.com/docs/payments/checkout/custom-redirect-behavior">redirect behavior</a>
-   * of embedded sessions. Defaults to {@code always}.
+   * href="https://stripe.com/docs/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
+   * behavior</a> of embedded sessions. Defaults to {@code always}.
    */
   @SerializedName("redirect_on_completion")
   RedirectOnCompletion redirectOnCompletion;
@@ -1007,7 +1007,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
-     * href="https://stripe.com/docs/payments/checkout/custom-redirect-behavior">redirect
+     * href="https://stripe.com/docs/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
      * behavior</a> of embedded sessions. Defaults to {@code always}.
      */
     public Builder setRedirectOnCompletion(

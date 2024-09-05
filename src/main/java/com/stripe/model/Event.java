@@ -115,26 +115,27 @@ public class Event extends ApiResource implements HasId {
    * account.external_account.updated}, {@code account.updated}, {@code account_notice.created},
    * {@code account_notice.updated}, {@code application_fee.created}, {@code
    * application_fee.refund.updated}, {@code application_fee.refunded}, {@code balance.available},
-   * {@code billing.alert.triggered}, {@code billing_portal.configuration.created}, {@code
-   * billing_portal.configuration.updated}, {@code billing_portal.session.created}, {@code
-   * capability.updated}, {@code capital.financing_offer.accepted}, {@code
-   * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
-   * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
-   * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
-   * capital.financing_offer.replacement_created}, {@code capital.financing_transaction.created},
-   * {@code cash_balance.funds_available}, {@code charge.captured}, {@code charge.dispute.closed},
-   * {@code charge.dispute.created}, {@code charge.dispute.funds_reinstated}, {@code
-   * charge.dispute.funds_withdrawn}, {@code charge.dispute.updated}, {@code charge.expired}, {@code
-   * charge.failed}, {@code charge.pending}, {@code charge.refund.updated}, {@code charge.refunded},
-   * {@code charge.succeeded}, {@code charge.updated}, {@code
-   * checkout.session.async_payment_failed}, {@code checkout.session.async_payment_succeeded},
-   * {@code checkout.session.completed}, {@code checkout.session.expired}, {@code
-   * climate.order.canceled}, {@code climate.order.created}, {@code climate.order.delayed}, {@code
-   * climate.order.delivered}, {@code climate.order.product_substituted}, {@code
-   * climate.product.created}, {@code climate.product.pricing_updated}, {@code coupon.created},
-   * {@code coupon.deleted}, {@code coupon.updated}, {@code credit_note.created}, {@code
-   * credit_note.updated}, {@code credit_note.voided}, {@code customer.created}, {@code
-   * customer.deleted}, {@code customer.discount.created}, {@code customer.discount.deleted}, {@code
+   * {@code billing.alert.triggered}, {@code billing.meter_error_report.triggered}, {@code
+   * billing_portal.configuration.created}, {@code billing_portal.configuration.updated}, {@code
+   * billing_portal.session.created}, {@code capability.updated}, {@code
+   * capital.financing_offer.accepted}, {@code capital.financing_offer.canceled}, {@code
+   * capital.financing_offer.created}, {@code capital.financing_offer.expired}, {@code
+   * capital.financing_offer.fully_repaid}, {@code capital.financing_offer.paid_out}, {@code
+   * capital.financing_offer.rejected}, {@code capital.financing_offer.replacement_created}, {@code
+   * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
+   * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
+   * charge.dispute.funds_reinstated}, {@code charge.dispute.funds_withdrawn}, {@code
+   * charge.dispute.updated}, {@code charge.expired}, {@code charge.failed}, {@code charge.pending},
+   * {@code charge.refund.updated}, {@code charge.refunded}, {@code charge.succeeded}, {@code
+   * charge.updated}, {@code checkout.session.async_payment_failed}, {@code
+   * checkout.session.async_payment_succeeded}, {@code checkout.session.completed}, {@code
+   * checkout.session.expired}, {@code climate.order.canceled}, {@code climate.order.created},
+   * {@code climate.order.delayed}, {@code climate.order.delivered}, {@code
+   * climate.order.product_substituted}, {@code climate.product.created}, {@code
+   * climate.product.pricing_updated}, {@code coupon.created}, {@code coupon.deleted}, {@code
+   * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
+   * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
+   * customer.discount.created}, {@code customer.discount.deleted}, {@code
    * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
    * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
    * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
