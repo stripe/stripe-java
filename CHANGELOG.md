@@ -1,5 +1,10 @@
 # Changelog
 
+## 26.10.0 - 2024-09-05
+* [#1850](https://github.com/stripe/stripe-java/pull/1850) Update generated code
+  * Add support for `subscription_item` and `subscription` on `billing.AlertCreateParams.filter`
+  * Change `terminal.ReaderProcessSetupIntentParams.customer_consent_collected` to be optional
+
 ## 26.9.0 - 2024-08-29
 * [#1856](https://github.com/stripe/stripe-java/pull/1856) Generate SDK for OpenAPI spec version 1230
   * Change `AccountLinkCreateParams.collection_options.fields` to be optional
@@ -30,7 +35,7 @@
 ## 26.6.0 - 2024-08-01
 * [#1841](https://github.com/stripe/stripe-java/pull/1841) Update generated code
   * Add support for new resources `Billing.AlertTriggered` and `Billing.Alert`
-  * ⚠️ Remove support for `authorization_code` on `Charge.payment_method_details.card`. This was accidentally released last week. 
+  * ⚠️ Remove support for `authorization_code` on `Charge.payment_method_details.card`. This was accidentally released last week.
   * Add support for new value `billing.alert.triggered` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 26.5.1 - 2024-07-25
