@@ -916,6 +916,14 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
       @SerializedName("amount_tax_display")
       String amountTaxDisplay;
+
+      /**
+       * ID of the invoice rendering template to be used for this customer's invoices. If set, the
+       * template will be used on all invoices for this customer unless a template is set directly
+       * on the invoice.
+       */
+      @SerializedName("template")
+      String template;
     }
   }
 
