@@ -45,6 +45,7 @@ final class EventDataClassLookup {
     classLookup.put("file_link", FileLink.class);
     classLookup.put("funding_instructions", FundingInstructions.class);
     classLookup.put("invoice", Invoice.class);
+    classLookup.put("invoice_rendering_template", InvoiceRenderingTemplate.class);
     classLookup.put("invoiceitem", InvoiceItem.class);
     classLookup.put("item", LineItem.class);
     classLookup.put("line_item", InvoiceLineItem.class);
