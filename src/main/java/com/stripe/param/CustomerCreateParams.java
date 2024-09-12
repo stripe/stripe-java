@@ -1180,10 +1180,17 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** ID of the invoice rendering template to use for future invoices. */
+      @SerializedName("template")
+      String template;
+
       private RenderingOptions(
-          ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+          ApiRequestParams.EnumParam amountTaxDisplay,
+          Map<String, Object> extraParams,
+          String template) {
         this.amountTaxDisplay = amountTaxDisplay;
         this.extraParams = extraParams;
+        this.template = template;
       }
 
       public static Builder builder() {
@@ -1195,10 +1202,12 @@ public class CustomerCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String template;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CustomerCreateParams.InvoiceSettings.RenderingOptions build() {
           return new CustomerCreateParams.InvoiceSettings.RenderingOptions(
-              this.amountTaxDisplay, this.extraParams);
+              this.amountTaxDisplay, this.extraParams, this.template);
         }
 
         /**
@@ -1252,6 +1261,12 @@ public class CustomerCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** ID of the invoice rendering template to use for future invoices. */
+        public Builder setTemplate(String template) {
+          this.template = template;
           return this;
         }
       }

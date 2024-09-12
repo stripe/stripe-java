@@ -20,7 +20,7 @@ public class LocationCreateParams extends ApiRequestParams {
   @SerializedName("configuration_overrides")
   String configurationOverrides;
 
-  /** <strong>Required.</strong> A name for the location. */
+  /** <strong>Required.</strong> A name for the location. Maximum length is 1000 characters. */
   @SerializedName("display_name")
   String displayName;
 
@@ -101,7 +101,7 @@ public class LocationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> A name for the location. */
+    /** <strong>Required.</strong> A name for the location. Maximum length is 1000 characters. */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
       return this;

@@ -64,7 +64,7 @@ public class QuoteCreateParams extends ApiRequestParams {
   @SerializedName("description")
   Object description;
 
-  /** The discounts applied to the quote. You can only set up to one discount. */
+  /** The discounts applied to the quote. */
   @SerializedName("discounts")
   Object discounts;
 
@@ -434,13 +434,13 @@ public class QuoteCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The discounts applied to the quote. You can only set up to one discount. */
+    /** The discounts applied to the quote. */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
       return this;
     }
 
-    /** The discounts applied to the quote. You can only set up to one discount. */
+    /** The discounts applied to the quote. */
     public Builder setDiscounts(List<QuoteCreateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;

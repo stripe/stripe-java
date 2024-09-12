@@ -26,9 +26,11 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("created")
   Object created;
 
+  /** Only return subscriptions whose current_period_end falls within the given date interval. */
   @SerializedName("current_period_end")
   Object currentPeriodEnd;
 
+  /** Only return subscriptions whose current_period_start falls within the given date interval. */
   @SerializedName("current_period_start")
   Object currentPeriodStart;
 
@@ -215,22 +217,30 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return subscriptions whose current_period_end falls within the given date interval. */
     public Builder setCurrentPeriodEnd(SubscriptionListParams.CurrentPeriodEnd currentPeriodEnd) {
       this.currentPeriodEnd = currentPeriodEnd;
       return this;
     }
 
+    /** Only return subscriptions whose current_period_end falls within the given date interval. */
     public Builder setCurrentPeriodEnd(Long currentPeriodEnd) {
       this.currentPeriodEnd = currentPeriodEnd;
       return this;
     }
 
+    /**
+     * Only return subscriptions whose current_period_start falls within the given date interval.
+     */
     public Builder setCurrentPeriodStart(
         SubscriptionListParams.CurrentPeriodStart currentPeriodStart) {
       this.currentPeriodStart = currentPeriodStart;
       return this;
     }
 
+    /**
+     * Only return subscriptions whose current_period_start falls within the given date interval.
+     */
     public Builder setCurrentPeriodStart(Long currentPeriodStart) {
       this.currentPeriodStart = currentPeriodStart;
       return this;
