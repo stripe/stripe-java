@@ -1001,12 +1001,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("issuing_dispute.updated")
     ISSUING_DISPUTE__UPDATED("issuing_dispute.updated"),
 
-    @SerializedName("issuing_dispute_settlement_detail.created")
-    ISSUING_DISPUTE_SETTLEMENT_DETAIL__CREATED("issuing_dispute_settlement_detail.created"),
-
-    @SerializedName("issuing_dispute_settlement_detail.updated")
-    ISSUING_DISPUTE_SETTLEMENT_DETAIL__UPDATED("issuing_dispute_settlement_detail.updated"),
-
     @SerializedName("issuing_personalization_design.activated")
     ISSUING_PERSONALIZATION_DESIGN__ACTIVATED("issuing_personalization_design.activated"),
 
@@ -1018,12 +1012,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("issuing_personalization_design.updated")
     ISSUING_PERSONALIZATION_DESIGN__UPDATED("issuing_personalization_design.updated"),
-
-    @SerializedName("issuing_settlement.created")
-    ISSUING_SETTLEMENT__CREATED("issuing_settlement.created"),
-
-    @SerializedName("issuing_settlement.updated")
-    ISSUING_SETTLEMENT__UPDATED("issuing_settlement.updated"),
 
     @SerializedName("issuing_token.created")
     ISSUING_TOKEN__CREATED("issuing_token.created"),

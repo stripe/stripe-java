@@ -1180,9 +1180,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /** Indicates whether tax ID collection is enabled for the session. */
     @SerializedName("enabled")
     Boolean enabled;
-
-    @SerializedName("required")
-    String required;
   }
 
   @Getter

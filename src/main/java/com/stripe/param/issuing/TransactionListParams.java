@@ -52,10 +52,6 @@ public class TransactionListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return transactions that are associated with the given settlement. */
-  @SerializedName("settlement")
-  String settlement;
-
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -79,7 +75,6 @@ public class TransactionListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String settlement,
       String startingAfter,
       Type type) {
     this.card = card;
@@ -89,7 +84,6 @@ public class TransactionListParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.settlement = settlement;
     this.startingAfter = startingAfter;
     this.type = type;
   }
@@ -113,8 +107,6 @@ public class TransactionListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String settlement;
-
     private String startingAfter;
 
     private Type type;
@@ -129,7 +121,6 @@ public class TransactionListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
-          this.settlement,
           this.startingAfter,
           this.type);
     }
@@ -227,12 +218,6 @@ public class TransactionListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
-      return this;
-    }
-
-    /** Only return transactions that are associated with the given settlement. */
-    public Builder setSettlement(String settlement) {
-      this.settlement = settlement;
       return this;
     }
 

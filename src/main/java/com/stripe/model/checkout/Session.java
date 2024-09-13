@@ -3077,14 +3077,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /** Indicates whether tax ID collection is enabled for the session. */
     @SerializedName("enabled")
     Boolean enabled;
-
-    /**
-     * Indicates whether a tax ID is required on the payment page
-     *
-     * <p>One of {@code if_supported}, or {@code never}.
-     */
-    @SerializedName("required")
-    String required;
   }
 
   @Getter
