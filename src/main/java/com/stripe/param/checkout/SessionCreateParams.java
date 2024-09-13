@@ -14529,14 +14529,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
-    @SerializedName("required")
-    Required required;
-
-    private TaxIdCollection(Boolean enabled, Map<String, Object> extraParams, Required required) {
+    private TaxIdCollection(Boolean enabled, Map<String, Object> extraParams) {
       this.enabled = enabled;
       this.extraParams = extraParams;
-      this.required = required;
     }
 
     public static Builder builder() {
@@ -14548,12 +14543,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private Required required;
-
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.TaxIdCollection build() {
-        return new SessionCreateParams.TaxIdCollection(
-            this.enabled, this.extraParams, this.required);
+        return new SessionCreateParams.TaxIdCollection(this.enabled, this.extraParams);
       }
 
       /**
@@ -14589,27 +14581,6 @@ public class SessionCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
-      }
-
-      /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
-      public Builder setRequired(SessionCreateParams.TaxIdCollection.Required required) {
-        this.required = required;
-        return this;
-      }
-    }
-
-    public enum Required implements ApiRequestParams.EnumParam {
-      @SerializedName("if_supported")
-      IF_SUPPORTED("if_supported"),
-
-      @SerializedName("never")
-      NEVER("never");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Required(String value) {
-        this.value = value;
       }
     }
   }
