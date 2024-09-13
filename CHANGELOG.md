@@ -1,4 +1,5 @@
 # Changelog
+
 ## 26.11.0-beta.1 - 2024-09-05
 * [#1859](https://github.com/stripe/stripe-java/pull/1859) Update generated code for beta
   * Add support for `recipients` on `AccountSessionCreateParams.components`
@@ -15,6 +16,10 @@
   * Add support for `regulatory_reporting_file` on `Issuing.CreditUnderwritingRecord`, `issuing.CreditUnderwritingRecordCorrectParams`, `issuing.CreditUnderwritingRecordCreateFromProactiveReviewParams`, and `issuing.CreditUnderwritingRecordReportDecisionParams`
   * Remove support for `rechnung` on `PaymentMethodUpdateParams`
 
+## 26.10.0 - 2024-09-05
+* [#1850](https://github.com/stripe/stripe-java/pull/1850) Update generated code
+  * Add support for `subscription_item` and `subscription` on `billing.AlertCreateParams.filter`
+  * Change `terminal.ReaderProcessSetupIntentParams.customer_consent_collected` to be optional
 
 ## 26.9.0 - 2024-08-29
 * [#1856](https://github.com/stripe/stripe-java/pull/1856) Generate SDK for OpenAPI spec version 1230
@@ -921,6 +926,10 @@
   * Add support for `features` on `AccountSession.components.payment_details`, `AccountSession.components.payments`, `AccountSession.components.payouts`, `AccountSessionCreateParams.components.account_onboarding`, `AccountSessionCreateParams.components.payment_details`, `AccountSessionCreateParams.components.payments`, and `AccountSessionCreateParams.components.payouts`
   * Add support for `reason` on `Event`
 
+## 23.7.0 - 2023-09-28
+* [#1657](https://github.com/stripe/stripe-java/pull/1657) Update generated code
+  * Add support for `rendering` on `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`
+
 ## 23.7.0-beta.1 - 2023-09-21
 * [#1653](https://github.com/stripe/stripe-java/pull/1653) Update generated code for beta
   * Remove support for `customer` on `ConfirmationToken`
@@ -929,6 +938,11 @@
   * Add support for `liability` on `Invoice.automatic_tax`, `InvoiceCreateParams.automatic_tax`, `InvoiceUpcomingLinesParams.automatic_tax`, `InvoiceUpcomingParams.automatic_tax`, `InvoiceUpdateParams.automatic_tax`, `Quote.automatic_tax`, `QuoteCreateParams.automatic_tax`, `QuoteUpdateParams.automatic_tax`, `Subscription.automatic_tax`, `SubscriptionCreateParams.automatic_tax`, `SubscriptionSchedule.default_settings.automatic_tax`, `SubscriptionSchedule.phases[].automatic_tax`, `SubscriptionScheduleCreateParams.default_settings.automatic_tax`, `SubscriptionScheduleCreateParams.phases[].automatic_tax`, `SubscriptionScheduleUpdateParams.default_settings.automatic_tax`, `SubscriptionScheduleUpdateParams.phases[].automatic_tax`, and `SubscriptionUpdateParams.automatic_tax`
   * Change type of `issuing.CardDesignUpdateParams.carrier_text` from `carrier_text_param` to `emptyStringable(carrier_text_param)`
   * Add support for `invoice_settings` on `SubscriptionCreateParams` and `SubscriptionUpdateParams`
+
+## 23.6.0 - 2023-09-21
+* [#1654](https://github.com/stripe/stripe-java/pull/1654) Update generated code
+  * Add support for `terms_of_service_acceptance` on `Checkout.Session.custom_text`, `PaymentLink.custom_text`, `PaymentLinkCreateParams.custom_text`, `PaymentLinkUpdateParams.custom_text`, and `checkout.SessionCreateParams.custom_text`
+* [#1655](https://github.com/stripe/stripe-java/pull/1655) CI: Drop testing for 9, 10, 12-16
 
 ## 23.6.0-beta.1 - 2023-09-14
 * [#1652](https://github.com/stripe/stripe-java/pull/1652) Update generated code for beta
@@ -967,43 +981,6 @@
   * Add support for `card_design` on `issuing.CardUpdateParams`
   * Add support for new value `platform_default` on enum `issuing.CardDesignListParams.preference`
 
-## 23.4.0-beta.1 - 2023-08-31
-* [#1639](https://github.com/stripe/stripe-java/pull/1639) Update generated code for beta
-  * Rename `Quote.list_preview_invoices` to `QuotePreviewInvoice.list` and `Quote.list_preview_subscription_schedules` to `QuotePreviewSchedule.list`
-  * Add support for `tax_forms` on `Account.settings`, `AccountCreateParams.settings`, and `AccountUpdateParams.settings`
-  * Add support for `components` on `AccountSessionCreateParams` and `AccountSession`
-
-## 23.0.0-beta.1 - 2023-08-24
-* [#1630](https://github.com/stripe/stripe-java/pull/1630) Update generated code for beta
-  * Add support for new resources `QuotePreviewInvoice` and `QuotePreviewSchedule`
-  * Remove support for `applies_to` on `Invoice` and `SubscriptionSchedule`
-  * Add support for `cl`, `co`, `id`, `kr`, `mx`, `my`, `sa`, `th`, `tr`, and `vn` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
-  * Remove support for `hk` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
-  * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-* [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
-
-## 23.7.0 - 2023-09-28
-* [#1657](https://github.com/stripe/stripe-java/pull/1657) Update generated code
-  * Add support for `rendering` on `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`
-
-## 23.6.0 - 2023-09-21
-* [#1654](https://github.com/stripe/stripe-java/pull/1654) Update generated code
-  * Add support for `terms_of_service_acceptance` on `Checkout.Session.custom_text`, `PaymentLink.custom_text`, `PaymentLinkCreateParams.custom_text`, `PaymentLinkUpdateParams.custom_text`, and `checkout.SessionCreateParams.custom_text`
-* [#1655](https://github.com/stripe/stripe-java/pull/1655) CI: Drop testing for 9, 10, 12-16
-
-## 23.5.0 - 2023-09-14
-* [#1647](https://github.com/stripe/stripe-java/pull/1647) Update generated code
-  * Add support for new resource `PaymentMethodConfiguration`
-  * Add support for `create`, `list`, `retrieve`, and `update` methods on resource `PaymentMethodConfiguration`
-  * Add support for `capture`, `create`, `expire`, `increment`, and `reverse` test helper methods on resource `Issuing.Authorization`
-  * Add support for `create_force_capture`, `create_unlinked_refund`, and `refund` test helper methods on resource `Issuing.Transaction`
-  * Add support for `payment_method_configuration` on `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, `SetupIntentCreateParams`, `SetupIntentUpdateParams`, and `checkout.SessionCreateParams`
-  * Add support for `payment_method_configuration_details` on `Checkout.Session`, `PaymentIntent`, and `SetupIntent`
-  * Add support for `nonce` on `EphemeralKeyCreateParams`
-  * Add support for `cashback_amount` on `Issuing.Authorization.amount_details`, `Issuing.Authorization.pending_request.amount_details`, `Issuing.Authorization.request_history[].amount_details`, and `Issuing.Transaction.amount_details`
-  * Add support for `serial_number` on `terminal.ReaderListParams`
-* [#1650](https://github.com/stripe/stripe-java/pull/1650) Flow response getters into Event.data.object and models deserialized via ApiResource.GSON
-
 ## 23.4.0 - 2023-09-07
 * [#1643](https://github.com/stripe/stripe-java/pull/1643) Update generated code
   * Add support for new resource `PaymentMethodDomain`
@@ -1012,6 +989,12 @@
   * Add support for `features` on `ProductCreateParams`, `ProductUpdateParams`, and `Product`
   * Remove support for value `invoiceitem.updated` from enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 * [#1646](https://github.com/stripe/stripe-java/pull/1646) Fix EphemeralKeyService.create
+
+## 23.4.0-beta.1 - 2023-08-31
+* [#1639](https://github.com/stripe/stripe-java/pull/1639) Update generated code for beta
+  * Rename `Quote.list_preview_invoices` to `QuotePreviewInvoice.list` and `Quote.list_preview_subscription_schedules` to `QuotePreviewSchedule.list`
+  * Add support for `tax_forms` on `Account.settings`, `AccountCreateParams.settings`, and `AccountUpdateParams.settings`
+  * Add support for `components` on `AccountSessionCreateParams` and `AccountSession`
 
 ## 23.3.0 - 2023-08-31
 * [#1640](https://github.com/stripe/stripe-java/pull/1640) Update generated code
@@ -1089,6 +1072,15 @@
   * **Behavior Changes**
     * ⚠️ `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
     * ⚠️ `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+
+## 23.0.0-beta.1 - 2023-08-24
+* [#1630](https://github.com/stripe/stripe-java/pull/1630) Update generated code for beta
+  * Add support for new resources `QuotePreviewInvoice` and `QuotePreviewSchedule`
+  * Remove support for `applies_to` on `Invoice` and `SubscriptionSchedule`
+  * Add support for `cl`, `co`, `id`, `kr`, `mx`, `my`, `sa`, `th`, `tr`, and `vn` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+  * Remove support for `hk` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+  * Add support for new value `quote.accept_failed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1633](https://github.com/stripe/stripe-java/pull/1633) Merge master
 
 ## 22.32.0-beta.1 - 2023-08-10
 * [#1624](https://github.com/stripe/stripe-java/pull/1624) Update generated code for beta

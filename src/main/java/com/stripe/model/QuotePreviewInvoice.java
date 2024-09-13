@@ -1445,6 +1445,14 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @SerializedName("pdf")
     Pdf pdf;
 
+    /** ID of the rendering template that the invoice is formatted by. */
+    @SerializedName("template")
+    String template;
+
+    /** Version of the rendering template that the invoice is using. */
+    @SerializedName("template_version")
+    Long templateVersion;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

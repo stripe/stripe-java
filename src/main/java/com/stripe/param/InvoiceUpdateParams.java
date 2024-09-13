@@ -4181,11 +4181,25 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @SerializedName("pdf")
     Pdf pdf;
 
+    /** ID of the invoice rendering template to use for this invoice. */
+    @SerializedName("template")
+    Object template;
+
+    /** The specific version of invoice rendering template to use for this invoice. */
+    @SerializedName("template_version")
+    Object templateVersion;
+
     private Rendering(
-        ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams, Pdf pdf) {
+        ApiRequestParams.EnumParam amountTaxDisplay,
+        Map<String, Object> extraParams,
+        Pdf pdf,
+        Object template,
+        Object templateVersion) {
       this.amountTaxDisplay = amountTaxDisplay;
       this.extraParams = extraParams;
       this.pdf = pdf;
+      this.template = template;
+      this.templateVersion = templateVersion;
     }
 
     public static Builder builder() {
@@ -4199,9 +4213,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       private Pdf pdf;
 
+      private Object template;
+
+      private Object templateVersion;
+
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceUpdateParams.Rendering build() {
-        return new InvoiceUpdateParams.Rendering(this.amountTaxDisplay, this.extraParams, this.pdf);
+        return new InvoiceUpdateParams.Rendering(
+            this.amountTaxDisplay, this.extraParams, this.pdf, this.template, this.templateVersion);
       }
 
       /**
@@ -4256,6 +4275,30 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       /** Invoice pdf rendering options. */
       public Builder setPdf(InvoiceUpdateParams.Rendering.Pdf pdf) {
         this.pdf = pdf;
+        return this;
+      }
+
+      /** ID of the invoice rendering template to use for this invoice. */
+      public Builder setTemplate(String template) {
+        this.template = template;
+        return this;
+      }
+
+      /** ID of the invoice rendering template to use for this invoice. */
+      public Builder setTemplate(EmptyParam template) {
+        this.template = template;
+        return this;
+      }
+
+      /** The specific version of invoice rendering template to use for this invoice. */
+      public Builder setTemplateVersion(Long templateVersion) {
+        this.templateVersion = templateVersion;
+        return this;
+      }
+
+      /** The specific version of invoice rendering template to use for this invoice. */
+      public Builder setTemplateVersion(EmptyParam templateVersion) {
+        this.templateVersion = templateVersion;
         return this;
       }
     }

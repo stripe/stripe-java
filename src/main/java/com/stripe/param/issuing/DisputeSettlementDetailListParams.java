@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class QuotePhaseListParams extends ApiRequestParams {
+public class DisputeSettlementDetailListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -40,9 +40,9 @@ public class QuotePhaseListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** <strong>Required.</strong> The ID of the quote whose phases will be retrieved. */
-  @SerializedName("quote")
-  String quote;
+  /** Select the Issuing dispute settlement details for the given settlement. */
+  @SerializedName("settlement")
+  String settlement;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -53,18 +53,18 @@ public class QuotePhaseListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private QuotePhaseListParams(
+  private DisputeSettlementDetailListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String quote,
+      String settlement,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.quote = quote;
+    this.settlement = settlement;
     this.startingAfter = startingAfter;
   }
 
@@ -81,18 +81,18 @@ public class QuotePhaseListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String quote;
+    private String settlement;
 
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public QuotePhaseListParams build() {
-      return new QuotePhaseListParams(
+    public DisputeSettlementDetailListParams build() {
+      return new DisputeSettlementDetailListParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.quote,
+          this.settlement,
           this.startingAfter);
     }
 
@@ -110,7 +110,7 @@ public class QuotePhaseListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuotePhaseListParams#expand} for the field documentation.
+     * DisputeSettlementDetailListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -123,7 +123,7 @@ public class QuotePhaseListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuotePhaseListParams#expand} for the field documentation.
+     * DisputeSettlementDetailListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -136,7 +136,7 @@ public class QuotePhaseListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuotePhaseListParams#extraParams} for the field documentation.
+     * DisputeSettlementDetailListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -149,7 +149,7 @@ public class QuotePhaseListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuotePhaseListParams#extraParams} for the field documentation.
+     * See {@link DisputeSettlementDetailListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -168,9 +168,9 @@ public class QuotePhaseListParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of the quote whose phases will be retrieved. */
-    public Builder setQuote(String quote) {
-      this.quote = quote;
+    /** Select the Issuing dispute settlement details for the given settlement. */
+    public Builder setSettlement(String settlement) {
+      this.settlement = settlement;
       return this;
     }
 

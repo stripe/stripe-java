@@ -466,7 +466,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      * The delivery status of the card.
      *
      * <p>One of {@code canceled}, {@code delivered}, {@code failure}, {@code pending}, {@code
-     * returned}, or {@code shipped}.
+     * returned}, {@code shipped}, or {@code submitted}.
      */
     @SerializedName("status")
     String status;

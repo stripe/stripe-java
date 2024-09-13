@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class QuotePhaseLineItemListParams extends ApiRequestParams {
+public class InvoiceRenderingTemplateListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -49,17 +49,22 @@ public class QuotePhaseLineItemListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private QuotePhaseLineItemListParams(
+  @SerializedName("status")
+  Status status;
+
+  private InvoiceRenderingTemplateListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String startingAfter) {
+      String startingAfter,
+      Status status) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -77,10 +82,17 @@ public class QuotePhaseLineItemListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private Status status;
+
     /** Finalize and obtain parameter instance from this builder. */
-    public QuotePhaseLineItemListParams build() {
-      return new QuotePhaseLineItemListParams(
-          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
+    public InvoiceRenderingTemplateListParams build() {
+      return new InvoiceRenderingTemplateListParams(
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.startingAfter,
+          this.status);
     }
 
     /**
@@ -97,7 +109,7 @@ public class QuotePhaseLineItemListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuotePhaseLineItemListParams#expand} for the field documentation.
+     * InvoiceRenderingTemplateListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -110,7 +122,7 @@ public class QuotePhaseLineItemListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuotePhaseLineItemListParams#expand} for the field documentation.
+     * InvoiceRenderingTemplateListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -123,7 +135,7 @@ public class QuotePhaseLineItemListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuotePhaseLineItemListParams#extraParams} for the field documentation.
+     * InvoiceRenderingTemplateListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -136,7 +148,7 @@ public class QuotePhaseLineItemListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuotePhaseLineItemListParams#extraParams} for the field documentation.
+     * See {@link InvoiceRenderingTemplateListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -164,6 +176,26 @@ public class QuotePhaseLineItemListParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
+    }
+
+    public Builder setStatus(InvoiceRenderingTemplateListParams.Status status) {
+      this.status = status;
+      return this;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("active")
+    ACTIVE("active"),
+
+    @SerializedName("archived")
+    ARCHIVED("archived");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 }
