@@ -927,7 +927,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static class BillingDetails extends StripeObject {
     /** Billing address. */
     @SerializedName("address")
-    Address address;
+    com.stripe.model.Address address;
 
     /** Email address. */
     @SerializedName("email")
@@ -1962,7 +1962,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            * or mutated.
            */
           @SerializedName("billing_address")
-          Address billingAddress;
+          com.stripe.model.Address billingAddress;
 
           /**
            * Owner's verified email. Values are verified or provided by the wallet directly (if
@@ -1984,7 +1984,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            * or mutated.
            */
           @SerializedName("shipping_address")
-          Address shippingAddress;
+          com.stripe.model.Address shippingAddress;
         }
 
         @Getter
@@ -2002,7 +2002,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            * or mutated.
            */
           @SerializedName("billing_address")
-          Address billingAddress;
+          com.stripe.model.Address billingAddress;
 
           /**
            * Owner's verified email. Values are verified or provided by the wallet directly (if
@@ -2024,7 +2024,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            * or mutated.
            */
           @SerializedName("shipping_address")
-          Address shippingAddress;
+          com.stripe.model.Address shippingAddress;
         }
       }
     }
@@ -2661,6 +2661,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
+      /** The payer details for this transaction. */
+      @SerializedName("payer_details")
+      PayerDetails payerDetails;
+
       /**
        * The Klarna payment method used for this transaction. Can be one of {@code pay_later},
        * {@code pay_now}, {@code pay_with_financing}, or {@code pay_in_installments}
@@ -2681,6 +2685,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("preferred_locale")
       String preferredLocale;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PayerDetails extends StripeObject {
+        /** The payer's address. */
+        @SerializedName("address")
+        com.stripe.model.Charge.PaymentMethodDetails.Klarna.PayerDetails.Address address;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Address extends StripeObject {
+          /** The payer address country. */
+          @SerializedName("country")
+          String country;
+        }
+      }
     }
 
     @Getter
