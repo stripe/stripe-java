@@ -4995,9 +4995,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TaxIdCollection(Boolean enabled, Map<String, Object> extraParams) {
+    /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+    @SerializedName("required")
+    Required required;
+
+    private TaxIdCollection(Boolean enabled, Map<String, Object> extraParams, Required required) {
       this.enabled = enabled;
       this.extraParams = extraParams;
+      this.required = required;
     }
 
     public static Builder builder() {
@@ -5009,9 +5014,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Required required;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.TaxIdCollection build() {
-        return new PaymentLinkUpdateParams.TaxIdCollection(this.enabled, this.extraParams);
+        return new PaymentLinkUpdateParams.TaxIdCollection(
+            this.enabled, this.extraParams, this.required);
       }
 
       /**
@@ -5048,6 +5056,27 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+
+      /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+      public Builder setRequired(PaymentLinkUpdateParams.TaxIdCollection.Required required) {
+        this.required = required;
+        return this;
+      }
+    }
+
+    public enum Required implements ApiRequestParams.EnumParam {
+      @SerializedName("if_supported")
+      IF_SUPPORTED("if_supported"),
+
+      @SerializedName("never")
+      NEVER("never");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Required(String value) {
+        this.value = value;
       }
     }
   }
@@ -5181,6 +5210,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
+
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

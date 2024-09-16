@@ -15,6 +15,7 @@ import com.stripe.param.tax.RegistrationCreateParams;
 import com.stripe.param.tax.RegistrationListParams;
 import com.stripe.param.tax.RegistrationRetrieveParams;
 import com.stripe.param.tax.RegistrationUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -1571,6 +1572,9 @@ public class Registration extends ApiResource implements HasId {
       @SerializedName("state")
       String state;
 
+      @SerializedName("state_sales_tax")
+      StateSalesTax stateSalesTax;
+
       /**
        * Type of registration in the US.
        *
@@ -1602,6 +1606,36 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("jurisdiction")
         String jurisdiction;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StateSalesTax extends StripeObject {
+        /** Elections for the state sales tax registration. */
+        @SerializedName("elections")
+        List<Registration.CountryOptions.Us.StateSalesTax.Election> elections;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Election extends StripeObject {
+          /**
+           * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+           * representing the local jurisdiction.
+           */
+          @SerializedName("jurisdiction")
+          String jurisdiction;
+
+          /**
+           * The type of the election for the state sales tax registration.
+           *
+           * <p>One of {@code local_use_tax}, {@code simplified_sellers_use_tax}, or {@code
+           * single_local_use_tax}.
+           */
+          @SerializedName("type")
+          String type;
+        }
       }
     }
 
