@@ -1,5 +1,12 @@
 # Changelog
 
+## 26.12.0 - 2024-09-18
+* [#1866](https://github.com/stripe/stripe-java/pull/1866) Update generated code
+  * Add support for `payer_details` on `Charge.payment_method_details.klarna`
+  * Add support for `amazon_pay` on `Dispute.payment_method_details`
+  * Add support for `automatically_finalizes_at` on `Invoice`
+  * Add support for `state_sales_tax` on `Tax.Registration.country_options.us` and `tax.RegistrationCreateParams.country_options.us`
+
 ## 26.11.0 - 2024-09-12
 * [#1864](https://github.com/stripe/stripe-java/pull/1864) Update generated code
   * Add support for new resource `InvoiceRenderingTemplate`
