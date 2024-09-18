@@ -53,8 +53,8 @@ public class ReceivedDebit extends ApiResource implements HasId {
    * Reason for the failure. A ReceivedDebit might fail because the FinancialAccount doesn't have
    * sufficient funds, is closed, or is frozen.
    *
-   * <p>One of {@code account_closed}, {@code account_frozen}, {@code insufficient_funds}, or {@code
-   * other}.
+   * <p>One of {@code account_closed}, {@code account_frozen}, {@code insufficient_funds}, {@code
+   * international_transaction}, or {@code other}.
    */
   @SerializedName("failure_code")
   String failureCode;
