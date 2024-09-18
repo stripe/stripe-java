@@ -166,6 +166,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   AutomaticTax automaticTax;
 
   /**
+   * The time when this invoice is currently scheduled to be automatically finalized. The field will
+   * be {@code null} if the invoice is not scheduled to finalize in the future. If the invoice is
+   * not in the draft state, this field will always be {@code null} - see {@code finalized_at} for
+   * the time when an already-finalized invoice was finalized.
+   */
+  @SerializedName("automatically_finalizes_at")
+  Long automaticallyFinalizesAt;
+
+  /**
    * Indicates the reason why the invoice was created.
    *
    * <p>* {@code manual}: Unrelated to a subscription, for example, created via the invoice editor.

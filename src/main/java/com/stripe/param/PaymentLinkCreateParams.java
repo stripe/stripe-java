@@ -5762,6 +5762,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
 
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
+
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 

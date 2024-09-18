@@ -275,10 +275,6 @@ public class StripeClient {
     return new com.stripe.service.PromotionCodeService(this.getResponseGetter());
   }
 
-  public com.stripe.service.QuotePhaseService quotePhases() {
-    return new com.stripe.service.QuotePhaseService(this.getResponseGetter());
-  }
-
   public com.stripe.service.QuoteService quotes() {
     return new com.stripe.service.QuoteService(this.getResponseGetter());
   }
