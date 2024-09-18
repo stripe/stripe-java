@@ -795,6 +795,9 @@ public class Dispute extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("amazon_pay")
+    AmazonPay amazonPay;
+
     @SerializedName("card")
     Card card;
 
@@ -807,10 +810,23 @@ public class Dispute extends ApiResource
     /**
      * Payment method type.
      *
-     * <p>One of {@code card}, {@code klarna}, or {@code paypal}.
+     * <p>One of {@code amazon_pay}, {@code card}, {@code klarna}, or {@code paypal}.
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmazonPay extends StripeObject {
+      /**
+       * The AmazonPay dispute type, chargeback or claim
+       *
+       * <p>One of {@code chargeback}, or {@code claim}.
+       */
+      @SerializedName("dispute_type")
+      String disputeType;
+    }
 
     @Getter
     @Setter
