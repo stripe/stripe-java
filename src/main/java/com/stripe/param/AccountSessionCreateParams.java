@@ -2345,13 +2345,25 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName("money_movement")
         Boolean moneyMovement;
 
+        /** Whether to allow sending money. */
+        @SerializedName("send_money")
+        Boolean sendMoney;
+
+        /** Whether to allow transferring balance. */
+        @SerializedName("transfer_balance")
+        Boolean transferBalance;
+
         private Features(
             Boolean externalAccountCollection,
             Map<String, Object> extraParams,
-            Boolean moneyMovement) {
+            Boolean moneyMovement,
+            Boolean sendMoney,
+            Boolean transferBalance) {
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
           this.moneyMovement = moneyMovement;
+          this.sendMoney = sendMoney;
+          this.transferBalance = transferBalance;
         }
 
         public static Builder builder() {
@@ -2365,10 +2377,18 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           private Boolean moneyMovement;
 
+          private Boolean sendMoney;
+
+          private Boolean transferBalance;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.FinancialAccount.Features build() {
             return new AccountSessionCreateParams.Components.FinancialAccount.Features(
-                this.externalAccountCollection, this.extraParams, this.moneyMovement);
+                this.externalAccountCollection,
+                this.extraParams,
+                this.moneyMovement,
+                this.sendMoney,
+                this.transferBalance);
           }
 
           /** Whether to allow external accounts to be linked for money transfer. */
@@ -2410,6 +2430,18 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Whether to allow money movement features. */
           public Builder setMoneyMovement(Boolean moneyMovement) {
             this.moneyMovement = moneyMovement;
+            return this;
+          }
+
+          /** Whether to allow sending money. */
+          public Builder setSendMoney(Boolean sendMoney) {
+            this.sendMoney = sendMoney;
+            return this;
+          }
+
+          /** Whether to allow transferring balance. */
+          public Builder setTransferBalance(Boolean transferBalance) {
+            this.transferBalance = transferBalance;
             return this;
           }
         }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 26.12.0 - 2024-09-18
+* [#1866](https://github.com/stripe/stripe-java/pull/1866) Update generated code
+  * Add support for `payer_details` on `Charge.payment_method_details.klarna`
+  * Add support for `amazon_pay` on `Dispute.payment_method_details`
+  * Add support for `automatically_finalizes_at` on `Invoice`
+  * Add support for `state_sales_tax` on `Tax.Registration.country_options.us` and `tax.RegistrationCreateParams.country_options.us`
+
 ## 26.12.0-beta.1 - 2024-09-13
 * [#1862](https://github.com/stripe/stripe-java/pull/1862) Update generated code for beta
   * Add support for new resources `Issuing.DisputeSettlementDetail` and `Issuing.Settlement`
@@ -8,6 +15,14 @@
   * Add support for new value `rechnung` on enum `checkout.SessionCreateParams.payment_method_types[]`
   * Add support for `settlement` on `Issuing.Transaction` and `issuing.TransactionListParams`
   * Add support for new values `issuing_dispute_settlement_detail.created`, `issuing_dispute_settlement_detail.updated`, `issuing_settlement.created`, and `issuing_settlement.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
+## 26.11.0 - 2024-09-12
+* [#1864](https://github.com/stripe/stripe-java/pull/1864) Update generated code
+  * Add support for new resource `InvoiceRenderingTemplate`
+  * Add support for `archive`, `list`, `retrieve`, and `unarchive` methods on resource `InvoiceRenderingTemplate`
+  * Add support for `required` on `Checkout.Session.tax_id_collection`, `PaymentLink.tax_id_collection`, `PaymentLinkCreateParams.tax_id_collection`, `PaymentLinkUpdateParams.tax_id_collection`, and `checkout.SessionCreateParams.tax_id_collection`
+  * Add support for `template` on `Customer.invoice_settings.rendering_options`, `CustomerCreateParams.invoice_settings.rendering_options`, `CustomerUpdateParams.invoice_settings.rendering_options`, `Invoice.rendering`, `InvoiceCreateParams.rendering`, and `InvoiceUpdateParams.rendering`
+  * Add support for `template_version` on `Invoice.rendering`, `InvoiceCreateParams.rendering`, and `InvoiceUpdateParams.rendering`
 
 ## 26.11.0-beta.1 - 2024-09-05
 * [#1859](https://github.com/stripe/stripe-java/pull/1859) Update generated code for beta

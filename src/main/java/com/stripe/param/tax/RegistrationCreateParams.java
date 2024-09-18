@@ -8698,6 +8698,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName("state")
       String state;
 
+      /** Options for the state sales tax registration. */
+      @SerializedName("state_sales_tax")
+      StateSalesTax stateSalesTax;
+
       /** <strong>Required.</strong> Type of registration to be created in the US. */
       @SerializedName("type")
       Type type;
@@ -8707,11 +8711,13 @@ public class RegistrationCreateParams extends ApiRequestParams {
           LocalAmusementTax localAmusementTax,
           LocalLeaseTax localLeaseTax,
           String state,
+          StateSalesTax stateSalesTax,
           Type type) {
         this.extraParams = extraParams;
         this.localAmusementTax = localAmusementTax;
         this.localLeaseTax = localLeaseTax;
         this.state = state;
+        this.stateSalesTax = stateSalesTax;
         this.type = type;
       }
 
@@ -8728,12 +8734,19 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
         private String state;
 
+        private StateSalesTax stateSalesTax;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Us build() {
           return new RegistrationCreateParams.CountryOptions.Us(
-              this.extraParams, this.localAmusementTax, this.localLeaseTax, this.state, this.type);
+              this.extraParams,
+              this.localAmusementTax,
+              this.localLeaseTax,
+              this.state,
+              this.stateSalesTax,
+              this.type);
         }
 
         /**
@@ -8784,6 +8797,13 @@ public class RegistrationCreateParams extends ApiRequestParams {
          */
         public Builder setState(String state) {
           this.state = state;
+          return this;
+        }
+
+        /** Options for the state sales tax registration. */
+        public Builder setStateSalesTax(
+            RegistrationCreateParams.CountryOptions.Us.StateSalesTax stateSalesTax) {
+          this.stateSalesTax = stateSalesTax;
           return this;
         }
 
@@ -8956,6 +8976,224 @@ public class RegistrationCreateParams extends ApiRequestParams {
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;
             return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class StateSalesTax {
+        /** <strong>Required.</strong> Elections for the state sales tax registration. */
+        @SerializedName("elections")
+        List<RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election> elections;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private StateSalesTax(
+            List<RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election> elections,
+            Map<String, Object> extraParams) {
+          this.elections = elections;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private List<RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election> elections;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.StateSalesTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.StateSalesTax(
+                this.elections, this.extraParams);
+          }
+
+          /**
+           * Add an element to `elections` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.StateSalesTax#elections} for the field
+           * documentation.
+           */
+          public Builder addElection(
+              RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election element) {
+            if (this.elections == null) {
+              this.elections = new ArrayList<>();
+            }
+            this.elections.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `elections` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.StateSalesTax#elections} for the field
+           * documentation.
+           */
+          public Builder addAllElection(
+              List<RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election> elements) {
+            if (this.elections == null) {
+              this.elections = new ArrayList<>();
+            }
+            this.elections.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.StateSalesTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.StateSalesTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        public static class Election {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
+           * representing the local jurisdiction. Supported FIPS codes are: {@code 003} (Allegheny
+           * County) and {@code 60000} (Philadelphia City).
+           */
+          @SerializedName("jurisdiction")
+          String jurisdiction;
+
+          /**
+           * <strong>Required.</strong> The type of the election for the state sales tax
+           * registration.
+           */
+          @SerializedName("type")
+          Type type;
+
+          private Election(Map<String, Object> extraParams, String jurisdiction, Type type) {
+            this.extraParams = extraParams;
+            this.jurisdiction = jurisdiction;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private String jurisdiction;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election build() {
+              return new RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election(
+                  this.extraParams, this.jurisdiction, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS
+             * code</a> representing the local jurisdiction. Supported FIPS codes are: {@code 003}
+             * (Allegheny County) and {@code 60000} (Philadelphia City).
+             */
+            public Builder setJurisdiction(String jurisdiction) {
+              this.jurisdiction = jurisdiction;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The type of the election for the state sales tax
+             * registration.
+             */
+            public Builder setType(
+                RegistrationCreateParams.CountryOptions.Us.StateSalesTax.Election.Type type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("local_use_tax")
+            LOCAL_USE_TAX("local_use_tax"),
+
+            @SerializedName("simplified_sellers_use_tax")
+            SIMPLIFIED_SELLERS_USE_TAX("simplified_sellers_use_tax"),
+
+            @SerializedName("single_local_use_tax")
+            SINGLE_LOCAL_USE_TAX("single_local_use_tax");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
           }
         }
       }
