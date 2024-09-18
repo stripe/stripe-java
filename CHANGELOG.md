@@ -1,5 +1,12 @@
 # Changelog
 
+## 26.13.0-beta.1 - 2024-09-18
+* [#1870](https://github.com/stripe/stripe-java/pull/1870) Update generated code for beta
+  * Remove support for resource `QuotePhase`
+  * Remove support for `list_line_items` and `retrieve` methods on resource `QuotePhase`
+  * Add support for `send_money` and `transfer_balance` on `AccountSessionCreateParams.components.financial_account.features`
+  * Add support for new value `rechnung` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+
 ## 26.12.0 - 2024-09-18
 * [#1866](https://github.com/stripe/stripe-java/pull/1866) Update generated code
   * Add support for `payer_details` on `Charge.payment_method_details.klarna`
