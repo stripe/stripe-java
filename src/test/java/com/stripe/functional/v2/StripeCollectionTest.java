@@ -71,11 +71,12 @@ public class StripeCollectionTest extends BaseStripeTest {
 
       if (nextPage == null) {
         jsonPages.add(
-            String.format("{\"data\": [%s], \"next_page\": null}", String.join(",", objs)));
+            String.format("{\"data\": [%s], \"next_page_url\": null}", String.join(",", objs)));
       } else {
         jsonPages.add(
             String.format(
-                "{\"data\": [%s], \"next_page\": \"page_%d\"}", String.join(",", objs), i));
+                "{\"data\": [%s], \"next_page_url\": \"/v2/pageable_models/page_%d\"}",
+                String.join(",", objs), i));
       }
     }
     return jsonPages;
@@ -152,17 +153,11 @@ public class StripeCollectionTest extends BaseStripeTest {
   public void testAutoPagingIterableMultiplePages() throws Exception {
     setUpMockPages("1,2", "3,4", "5");
     // set some arbitrary parameters so that we can verify that they're
-    // used for requests on ALL pages
+    // used for requests on the first page only
     final Map<String, Object> page0Params = new HashMap<>();
     page0Params.put("foo", "bar");
 
-    final Map<String, Object> page1Params = new HashMap<>();
-    page1Params.put("foo", "bar");
-    page1Params.put("page", "page_1");
-
-    final Map<String, Object> page2Params = new HashMap<>();
-    page2Params.put("foo", "bar");
-    page2Params.put("page", "page_2");
+    final Map<String, Object> nextPageParams = new HashMap<>();
 
     final RequestOptions ro = RequestOptions.builder().build();
 
@@ -184,45 +179,17 @@ public class StripeCollectionTest extends BaseStripeTest {
     verifyRequest(
         BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", page0Params, null);
     verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", page1Params, null);
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/pageable_models/page_1",
+        nextPageParams,
+        null);
     verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", page2Params, null);
-    verifyNoMoreInteractions(networkSpy);
-  }
-
-  @Test
-  public void testAutoPagingIterableWithParams() throws Exception {
-    setUpMockPages("1,2", "3,4", "5");
-
-    final Map<String, Object> params0 = new HashMap<>();
-    params0.put("this_one", "goes_away");
-
-    final Map<String, Object> params = new HashMap<>();
-    params.put("custom_param", "value");
-
-    final Map<String, Object> params2 = new HashMap<>();
-    params2.putAll(params);
-    params2.put("page", "page_1");
-
-    final Map<String, Object> params3 = new HashMap<>();
-    params3.putAll(params);
-    params3.put("page", "page_2");
-
-    final StripeCollection<PageableModel> collection =
-        new PageableService(BaseStripeTest.networkSpy).list(params0, null);
-    final List<PageableModel> models = new ArrayList<>();
-
-    for (PageableModel model : collection.autoPagingIterable(params)) {
-      models.add(model);
-    }
-
-    assertEquals(5, models.size());
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params0, null);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params2, null);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params3, null);
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/pageable_models/page_2",
+        nextPageParams,
+        null);
     verifyNoMoreInteractions(networkSpy);
   }
 
@@ -233,68 +200,33 @@ public class StripeCollectionTest extends BaseStripeTest {
     final RequestOptions requestOptions =
         RequestOptions.builder().setApiKey("custom_api_key").build();
 
-    Map<String, Object> params2 = new HashMap<>();
-    params2.put("page", "page_1");
-
-    Map<String, Object> params3 = new HashMap<>();
-    params3.put("page", "page_2");
-
     final StripeCollection<PageableModel> collection =
         new PageableService(BaseStripeTest.networkSpy).list(null, null);
 
     final List<PageableModel> models = new ArrayList<>();
-    for (PageableModel model : collection.autoPagingIterable(null, requestOptions)) {
+    for (PageableModel model : collection.autoPagingIterable(requestOptions)) {
       models.add(model);
     }
+
+    // no params needed or wanted with the nextPageUrl
+    final Map<String, Object> nextPageParams = new HashMap<>();
 
     assertEquals(5, models.size());
 
     verifyRequest(
         BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", null, null);
     verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params2, null);
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/pageable_models/page_1",
+        nextPageParams,
+        requestOptions);
     verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params3, null);
-
-    verifyNoMoreInteractions(networkSpy);
-  }
-
-  @Test
-  public void testAutoPagingIterableWithParamsAndRequestOptions() throws Exception {
-    setUpMockPages("1,2", "3,4", "5");
-
-    final Map<String, Object> params0 = new HashMap<>();
-    params0.put("this_param", "only_on_initial_request");
-
-    final Map<String, Object> params = new HashMap<>();
-    params.put("custom_param", "value");
-
-    Map<String, Object> params2 = new HashMap<>();
-    params2.putAll(params);
-    params2.put("page", "page_1");
-
-    Map<String, Object> params3 = new HashMap<>();
-    params3.putAll(params);
-    params3.put("page", "page_2");
-
-    final RequestOptions requestOptions =
-        RequestOptions.builder().setApiKey("custom_api_key").build();
-
-    final StripeCollection<PageableModel> collection =
-        new PageableService(BaseStripeTest.networkSpy).list(params0, null);
-    final List<PageableModel> models = new ArrayList<>();
-
-    for (PageableModel model : collection.autoPagingIterable(params, requestOptions)) {
-      models.add(model);
-    }
-
-    assertEquals(5, models.size());
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params0, null);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params2, null);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params3, null);
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/pageable_models/page_2",
+        nextPageParams,
+        requestOptions);
 
     verifyNoMoreInteractions(networkSpy);
   }

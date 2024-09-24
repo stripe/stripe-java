@@ -68,8 +68,8 @@ public class GlobalStripeResponseGetterOptions extends StripeResponseGetterOptio
   }
 
   @Override
-  public String getEventsBase() {
-    return Stripe.getEventsBase();
+  public String getMeterEventsBase() {
+    return Stripe.getMeterEventsBase();
   }
 
   @Override

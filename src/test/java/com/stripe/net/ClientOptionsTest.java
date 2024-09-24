@@ -21,7 +21,7 @@ public class ClientOptionsTest {
     String origApiBase = Stripe.getApiBase();
     String origUploadBase = Stripe.getUploadBase();
     String origConnectBase = Stripe.getConnectBase();
-    String origEventsBase = Stripe.getEventsBase();
+    String origMeterEventsBase = Stripe.getMeterEventsBase();
 
     GlobalStripeResponseGetterOptions global = GlobalStripeResponseGetterOptions.INSTANCE;
 
@@ -40,7 +40,7 @@ public class ClientOptionsTest {
       Stripe.overrideApiBase("http://api.base");
       Stripe.overrideConnectBase("http://connect.base");
       Stripe.overrideUploadBase("http://upload.base");
-      Stripe.overrideEventsBase("http://events.base");
+      Stripe.overrideMeterEventsBase("http://meter-events.base");
 
       assertEquals(1, global.getConnectTimeout());
       assertEquals(1, global.getMaxNetworkRetries());
@@ -51,7 +51,7 @@ public class ClientOptionsTest {
       assertEquals("http://api.base", global.getApiBase());
       assertEquals("http://connect.base", global.getConnectBase());
       assertEquals("http://upload.base", global.getFilesBase());
-      assertEquals("http://events.base", global.getEventsBase());
+      assertEquals("http://meter-events.base", global.getMeterEventsBase());
     } finally {
       Stripe.apiKey = origApiKey;
       Stripe.setConnectTimeout(origConnectTimeout);
@@ -63,7 +63,7 @@ public class ClientOptionsTest {
       Stripe.overrideApiBase(origApiBase);
       Stripe.overrideConnectBase(origConnectBase);
       Stripe.overrideUploadBase(origUploadBase);
-      Stripe.overrideEventsBase(origEventsBase);
+      Stripe.overrideMeterEventsBase(origMeterEventsBase);
     }
   }
 }

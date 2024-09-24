@@ -3,10 +3,8 @@ package com.stripe.model.v2;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.stripe.BaseStripeTest;
+import com.stripe.events.FinancialAccountBalanceOpenedEvent;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Card;
-import com.stripe.model.StripeRawJsonObject;
-import com.stripe.model.ThinEvent;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
 import java.time.Instant;
@@ -27,9 +25,9 @@ public class EventTests extends BaseStripeTest {
             + "  \"type\": \"financial_account.balance.opened\",\n"
             + "  \"created\": \"2022-02-15T00:27:45.330Z\",\n"
             + "  \"related_object\": {\n"
-            + "    \"id\": \"ca_123\",\n"
-            + "    \"type\": \"card\",\n"
-            + "    \"url\": \"/v2/cards/ca_123\",\n"
+            + "    \"id\": \"fa_123\",\n"
+            + "    \"type\": \"financial_account\",\n"
+            + "    \"url\": \"/v2/financial_accounts/fa_123\",\n"
             + "    \"stripe_context\": \"acct_123\"\n"
             + "  }\n"
             + "}";
@@ -40,9 +38,9 @@ public class EventTests extends BaseStripeTest {
             + "  \"type\": \"financial_account.balance.opened\",\n"
             + "  \"created\": \"2022-02-15T00:27:45.330Z\",\n"
             + "  \"related_object\": {\n"
-            + "    \"id\": \"ca_123\",\n"
-            + "    \"type\": \"card\",\n"
-            + "    \"url\": \"/v2/cards/ca_123\",\n"
+            + "    \"id\": \"fa_123\",\n"
+            + "    \"type\": \"financial_account\",\n"
+            + "    \"url\": \"/v2/financial_accounts/fa_123\",\n"
             + "    \"stripe_context\": \"acct_123\"\n"
             + "  },\n"
             + "  \"data\": {\n"
@@ -70,9 +68,20 @@ public class EventTests extends BaseStripeTest {
 
   @Test
   public void parsesUnknownV2Event() {
-    ThinEvent event = ThinEvent.parse(v2UnknownEventPayload);
+    Event event = Event.parse(v2UnknownEventPayload);
     assertEquals("evt_234", event.getId());
     assertEquals("financial_account.features_updated", event.getType());
+    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), event.getCreated());
+
+    // no data or related object on base Event; nothing to check here.
+  }
+
+  @Test
+  public void parsesV2Event() {
+    FinancialAccountBalanceOpenedEvent event =
+        (FinancialAccountBalanceOpenedEvent) Event.parse(v2PayloadNoData);
+    assertEquals("evt_234", event.getId());
+    assertEquals("financial_account.balance.opened", event.getType());
     assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), event.getCreated());
 
     assertEquals("fa_123", event.getRelatedObject().getId());
@@ -81,31 +90,18 @@ public class EventTests extends BaseStripeTest {
   }
 
   @Test
-  public void parsesV2Event() {
+  public void parsesV2EventAndDeserializesEventData() throws StripeException {
     FinancialAccountBalanceOpenedEvent event =
-        (FinancialAccountBalanceOpenedEvent) ThinEvent.parse(v2PayloadNoData);
-    assertEquals("evt_234", event.getId());
-    assertEquals("financial_account.balance.opened", event.getType());
-    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), event.getCreated());
-
-    assertEquals("ca_123", event.getRelatedObject().getId());
-    assertEquals("card", event.getRelatedObject().getType());
-    assertEquals("/v2/cards/ca_123", event.getRelatedObject().getUrl());
-  }
-
-  @Test
-  public void retrieveDataFetchesAndDeserializesEventData() throws StripeException {
-    FinancialAccountBalanceOpenedEvent event =
-        (FinancialAccountBalanceOpenedEvent) ThinEvent.parse(v2PayloadNoData);
+        (FinancialAccountBalanceOpenedEvent) Event.parse(v2PayloadWithData);
     event.setResponseGetter(networkSpy);
     stubRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v2/events/%s", event.getId()),
         null,
-        ThinEvent.class,
+        Event.class,
         v2PayloadWithData);
 
-    FinancialAccountBalanceOpenedEvent.EventData data = event.retrieveData();
+    FinancialAccountBalanceOpenedEvent.EventData data = event.getData();
 
     assertEquals("foo", data.getType());
   }
@@ -113,34 +109,35 @@ public class EventTests extends BaseStripeTest {
   @Test
   public void retrieveObjectFetchesAndDeserializesObject() throws StripeException, IOException {
     FinancialAccountBalanceOpenedEvent event =
-        (FinancialAccountBalanceOpenedEvent) ThinEvent.parse(v2PayloadNoData);
+        (FinancialAccountBalanceOpenedEvent) Event.parse(v2PayloadNoData);
     event.setResponseGetter(networkSpy);
     stubRequest(
         ApiResource.RequestMethod.GET,
-        "/v2/cards/ca_123",
+        "/v2/financial_accounts/fa_123",
         null,
-        Card.class,
-        getResourceAsString("/api_fixtures/card.json"));
+        FinancialAccount.class,
+        getResourceAsString("/api_fixtures/financial_account.json"));
 
-    Card data = (Card) event.retrieveObject();
+    FinancialAccount data = event.fetchRelatedObject();
 
-    assertNotNull(data.getId());
+    assertEquals(data.getId(), event.getRelatedObject().id);
   }
 
-  @Test
-  public void retrieveObjectFetchesAndDeserializesUnknownObject()
-      throws StripeException, IOException {
-    FinancialAccountBalanceOpenedEvent event =
-        (FinancialAccountBalanceOpenedEvent)
-            ThinEvent.parse(v2PayloadNoData.replace("\"type\": \"card\"", "\"type\": \"cardio\""));
-    event.setResponseGetter(networkSpy);
-    stubRequest(
-        ApiResource.RequestMethod.GET,
-        "/v2/cards/ca_123",
-        null,
-        StripeRawJsonObject.class,
-        getResourceAsString("/api_fixtures/card.json"));
+  // FIXME (jar) this should no longer be possible; confirm this and remove before merge
+  // @Test
+  // public void retrieveObjectFetchesAndDeserializesUnknownObject()
+  //     throws StripeException, IOException {
+  //   FinancialAccountBalanceOpenedEvent event =
+  //       (FinancialAccountBalanceOpenedEvent)
+  //           Event.parse(v2PayloadNoData.replace("\"type\": \"card\"", "\"type\": \"cardio\""));
+  //   event.setResponseGetter(networkSpy);
+  //   stubRequest(
+  //       ApiResource.RequestMethod.GET,
+  //       "/v2/financial_accounts/fa_123",
+  //       null,
+  //       StripeRawJsonObject.class,
+  //       getResourceAsString("/api_fixtures/card.json"));
 
-    assertInstanceOf(StripeRawJsonObject.class, event.retrieveObject());
-  }
+  //   assertInstanceOf(StripeRawJsonObject.class, event.fetchObject());
+  // }
 }

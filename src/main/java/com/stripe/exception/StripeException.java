@@ -94,6 +94,9 @@ public abstract class StripeException extends Exception {
       StripeResponseGetter responseGetter) {
     switch (type) {
         // The beginning of the section generated from our OpenAPI spec
+      case "temporary_session_expired":
+        return com.stripe.exception.TemporarySessionExpiredException.parse(
+            body, statusCode, requestId, responseGetter);
       case "financial_account_not_open":
         return com.stripe.exception.FinancialAccountNotOpenException.parse(
             body, statusCode, requestId, responseGetter);

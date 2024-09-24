@@ -293,6 +293,19 @@ public class StripeRequestTest extends BaseStripeTest {
   }
 
   @Test
+  public void testBuildHeadersIgnoresNullAccount() throws StripeException {
+    StripeRequest request =
+        StripeRequest.create(
+            ApiResource.RequestMethod.POST,
+            "http://example.com/post",
+            null,
+            RequestOptions.builder().setStripeAccount(null).setApiKey("123").build(),
+            ApiMode.V2);
+
+    assertFalse(request.headers().map().containsKey("Stripe-Account"));
+  }
+
+  @Test
   public void testBuildHeadersThrowsWhenContextPassedIntoV1Request() {
     assertThrows(
         UnsupportedOperationException.class,

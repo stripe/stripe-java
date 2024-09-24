@@ -25,7 +25,7 @@ public abstract class StripeResponseGetterOptions {
 
   public abstract String getConnectBase();
 
-  public abstract String getEventsBase();
+  public abstract String getMeterEventsBase();
 
   public abstract int getReadTimeout();
 

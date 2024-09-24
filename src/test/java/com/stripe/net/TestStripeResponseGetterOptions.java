@@ -20,7 +20,7 @@ public class TestStripeResponseGetterOptions extends StripeResponseGetterOptions
   private final String apiBase;
   private final String filesBase;
   private final String connectBase;
-  private final String eventsBase;
+  private final String meterEventsBase;
   private final String stripeContext;
 
   public TestStripeResponseGetterOptions(
@@ -34,7 +34,7 @@ public class TestStripeResponseGetterOptions extends StripeResponseGetterOptions
       String apiBase,
       String filesBase,
       String connectBase,
-      String eventsBase,
+      String meterEventsBase,
       String stripeContext) {
     this.authenticator = authenticator;
     this.clientId = clientId;
@@ -46,7 +46,7 @@ public class TestStripeResponseGetterOptions extends StripeResponseGetterOptions
     this.apiBase = apiBase;
     this.filesBase = filesBase;
     this.connectBase = connectBase;
-    this.eventsBase = connectBase;
+    this.meterEventsBase = meterEventsBase;
     this.stripeContext = stripeContext;
   }
 }

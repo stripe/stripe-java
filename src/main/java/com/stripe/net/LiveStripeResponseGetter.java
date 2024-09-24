@@ -132,7 +132,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     if (resource instanceof com.stripe.model.v2.StripeCollection<?>) {
-      ((com.stripe.model.v2.StripeCollection<?>) resource).setLastRequest(apiRequest, typeToken);
+      ((com.stripe.model.v2.StripeCollection<?>) resource)
+          .setRequestOptions(apiRequest.getOptions());
     }
 
     resource.setLastResponse(response);
@@ -448,8 +449,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       case FILES:
         baseUrl = this.options.getFilesBase();
         break;
-      case EVENTS:
-        baseUrl = this.options.getEventsBase();
+      case METER_EVENTS:
+        baseUrl = this.options.getMeterEventsBase();
         break;
       default:
         throw new IllegalArgumentException("Unknown base address " + baseAddress);

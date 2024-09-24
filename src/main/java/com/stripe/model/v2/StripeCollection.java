@@ -10,9 +10,9 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Provides a representation of a single page worth of data from the Stripe API.
@@ -44,95 +44,86 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
     implements StripeActiveObject {
   private transient StripeResponseGetter responseGetter;
 
-  private transient ApiRequest lastApiRequest;
-  private transient Type lastRequestTypeToken;
-
-  public void setLastRequest(ApiRequest apiRequest, Type typeToken) {
-    this.lastApiRequest = apiRequest;
-    this.lastRequestTypeToken = typeToken;
-  }
+  @Setter private transient Type pageTypeToken;
 
   @Getter
   @SerializedName("data")
   List<T> data;
 
   @Getter
-  @SerializedName("next_page")
-  String nextPage;
+  @SerializedName("next_page_url")
+  String nextPageUrl;
 
   @Getter
-  @SerializedName("previous_page")
-  String previousPage;
+  @SerializedName("previous_page_url")
+  String previousPageUrl;
+
+  @Getter @Setter private transient RequestOptions requestOptions;
 
   private static class Page<T> {
     List<T> data;
-    String nextPage;
+    String nextPageUrl;
 
-    Page(List<T> data, String nextPage) {
+    Page(List<T> data, String nextPageUrl) {
       this.data = data;
-      this.nextPage = nextPage;
+      this.nextPageUrl = nextPageUrl;
     }
   }
 
+  /**
+   * An Iterable implementation that starts from the StripeCollection data and will fetch next pages
+   * automatically.
+   */
   private class PagingIterable implements Iterable<T> {
-    Map<String, Object> params;
     RequestOptions options;
 
     public PagingIterable() {
-      this.params = StripeCollection.this.lastApiRequest.getParams();
-      this.options = StripeCollection.this.lastApiRequest.getOptions();
+      this.options = StripeCollection.this.getRequestOptions();
     }
 
-    public PagingIterable(Map<String, Object> params) {
-      this.params = params;
-      this.options = StripeCollection.this.lastApiRequest.getOptions();
-    }
-
-    public PagingIterable(Map<String, Object> params, RequestOptions options) {
-      this.params = params;
+    public PagingIterable(RequestOptions options) {
       this.options = options;
     }
 
-    private Page<T> getPage(String nextPage) throws StripeException {
-      // Strip query params
-      final Map<String, Object> params = new HashMap<>();
-      if (this.params != null) {
-        params.putAll(this.params);
+    private Page<T> getPage(String nextPageUrl) throws StripeException {
+      if (nextPageUrl == null) {
+        throw new IllegalArgumentException("nextPageUrl cannot be null");
       }
-      params.put("page", nextPage);
+
       StripeCollection<T> response =
           StripeCollection.this.responseGetter.request(
               new ApiRequest(
-                  StripeCollection.this.lastApiRequest.getBaseAddress(),
-                  StripeCollection.this.lastApiRequest.getMethod(),
-                  StripeCollection.this.lastApiRequest.getPath(),
-                  params,
+                  BaseAddress.API,
+                  ApiResource.RequestMethod.GET,
+                  nextPageUrl,
+                  new HashMap<>(),
                   this.options),
-              StripeCollection.this.lastRequestTypeToken);
-      return new Page<T>(response.getData(), response.getNextPage());
+              StripeCollection.this.pageTypeToken);
+      return new Page<T>(response.getData(), response.getNextPageUrl());
     }
 
     @Override
     public Iterator<T> iterator() {
-      return new PagingIterator(StripeCollection.this.data, StripeCollection.this.nextPage);
+      return new PagingIterator(
+          StripeCollection.this.getData(), StripeCollection.this.getNextPageUrl());
     }
 
     private class PagingIterator implements Iterator<T> {
       Iterator<T> currentDataIterator;
-      String nextPage;
+      String nextPageUrl;
 
-      public PagingIterator(List<T> currentPage, String nextPage) {
+      public PagingIterator(List<T> currentPage, String nextPageUrl) {
         this.currentDataIterator = currentPage.iterator();
-        this.nextPage = nextPage;
+        this.nextPageUrl = nextPageUrl;
       }
 
       @Override
       public T next() {
-        if (!currentDataIterator.hasNext() && this.nextPage != null) {
+        if (!currentDataIterator.hasNext() && this.nextPageUrl != null) {
           try {
-            Page<T> p = PagingIterable.this.getPage(this.nextPage);
+            Page<T> p = PagingIterable.this.getPage(this.nextPageUrl);
             this.currentDataIterator = p.data.iterator();
-            this.nextPage = p.nextPage;
+            this.nextPageUrl = p.nextPageUrl;
           } catch (final Exception e) {
             throw new RuntimeException("Unable to paginate", e);
           }
@@ -142,17 +133,9 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
 
       @Override
       public boolean hasNext() {
-        return this.currentDataIterator.hasNext() || this.nextPage != null;
+        return this.currentDataIterator.hasNext() || this.nextPageUrl != null;
       }
     }
-  }
-
-  public Iterable<T> autoPagingIterable() {
-    return new PagingIterable();
-  }
-
-  public Iterable<T> autoPagingIterable(Map<String, Object> params) {
-    return new PagingIterable(params);
   }
 
   /**
@@ -160,11 +143,21 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
    * boundaries are encountered, the next page will be fetched automatically for continued
    * iteration.
    *
-   * @param params request parameters (will override the parameters from the initial list request)
+   * <p>This utilizes the options from the initial list request.
+   */
+  public Iterable<T> autoPagingIterable() {
+    return new PagingIterable();
+  }
+
+  /**
+   * Constructs an iterable that can be used to iterate across all objects across all pages. As page
+   * boundaries are encountered, the next page will be fetched automatically for continued
+   * iteration.
+   *
    * @param options request options (will override the options from the initial list request)
    */
-  public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
-    return new PagingIterable(params, options);
+  public Iterable<T> autoPagingIterable(RequestOptions options) {
+    return new PagingIterable(options);
   }
 
   @Override

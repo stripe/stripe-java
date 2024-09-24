@@ -14,8 +14,8 @@ public abstract class Stripe {
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
-  public static final String EVENTS_API_BASE = "https://events.stripe.com";
-  public static final String VERSION = "0.59.0";
+  public static final String METER_EVENTS_API_BASE = "https://meter-events.stripe.com";
+  public static final String VERSION = "0.60.0";
 
   public static volatile String apiKey;
   public static volatile String clientId;
@@ -32,7 +32,7 @@ public abstract class Stripe {
   private static volatile String apiBase = LIVE_API_BASE;
   private static volatile String connectBase = CONNECT_API_BASE;
   private static volatile String uploadBase = UPLOAD_API_BASE;
-  private static volatile String eventsBase = EVENTS_API_BASE;
+  private static volatile String meterEventsBase = METER_EVENTS_API_BASE;
   private static volatile Proxy connectionProxy = null;
   private static volatile PasswordAuthentication proxyCredential = null;
   private static volatile Map<String, String> appInfo = null;
@@ -77,12 +77,12 @@ public abstract class Stripe {
    * (FOR TESTING ONLY) If you'd like your events requests to hit your own (mocked) server, you can
    * set this up here by overriding the base api URL.
    */
-  public static void overrideEventsBase(final String overriddenEventsBase) {
-    eventsBase = overriddenEventsBase;
+  public static void overrideMeterEventsBase(final String overriddenMeterEventsBase) {
+    meterEventsBase = overriddenMeterEventsBase;
   }
 
-  public static String getEventsBase() {
-    return eventsBase;
+  public static String getMeterEventsBase() {
+    return meterEventsBase;
   }
 
   /**

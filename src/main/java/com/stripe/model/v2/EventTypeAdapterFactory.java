@@ -4,7 +4,6 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.stripe.model.ThinEvent;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ public final class EventTypeAdapterFactory implements TypeAdapterFactory {
       return null;
     }
 
-    if (!ThinEvent.class.equals(type.getRawType())) {
+    if (!Event.class.equals(type.getRawType())) {
       return null;
     }
 
@@ -24,7 +23,7 @@ public final class EventTypeAdapterFactory implements TypeAdapterFactory {
     final TypeAdapter<R> fallbackAdapter = gson.getDelegateAdapter(this, type);
     final Map<String, TypeAdapter<?>> eventAdapters = new LinkedHashMap<>();
 
-    for (Map.Entry<String, Class<? extends ThinEvent>> entry :
+    for (Map.Entry<String, Class<? extends Event>> entry :
         EventDataClassLookup.eventClassLookup.entrySet()) {
       TypeAdapter<?> delegate = gson.getDelegateAdapter(this, TypeToken.get(entry.getValue()));
       eventAdapters.put(entry.getKey(), delegate);

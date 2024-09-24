@@ -1,6 +1,7 @@
 package com.stripe;
 
 import com.stripe.exception.SignatureVerificationException;
+import com.stripe.model.ThinEvent;
 import com.stripe.net.*;
 import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;
@@ -49,13 +50,11 @@ public class StripeClient {
    * @return the StripeEvent instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public com.stripe.model.ThinEvent parseThinEvent(String payload, String sigHeader, String secret)
+  public ThinEvent parseThinEvent(String payload, String sigHeader, String secret)
       throws SignatureVerificationException {
     Signature.verifyHeader(payload, sigHeader, secret, Webhook.DEFAULT_TOLERANCE);
 
-    com.stripe.model.ThinEvent event = com.stripe.model.ThinEvent.parse(payload);
-    event.setResponseGetter(this.responseGetter);
-    return event;
+    return ApiResource.GSON.fromJson(payload, ThinEvent.class);
   }
 
   /**
@@ -216,6 +215,10 @@ public class StripeClient {
 
   public com.stripe.service.InvoiceItemService invoiceItems() {
     return new com.stripe.service.InvoiceItemService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.InvoiceRenderingTemplateService invoiceRenderingTemplates() {
+    return new com.stripe.service.InvoiceRenderingTemplateService(this.getResponseGetter());
   }
 
   public com.stripe.service.InvoiceService invoices() {
@@ -401,7 +404,7 @@ public class StripeClient {
     private final String connectBase;
 
     @Getter(onMethod_ = {@Override})
-    private final String eventsBase;
+    private final String meterEventsBase;
 
     @Getter(onMethod_ = {@Override})
     private final String stripeContext;
@@ -417,7 +420,7 @@ public class StripeClient {
         String apiBase,
         String filesBase,
         String connectBase,
-        String eventsBase,
+        String meterEventsBase,
         String stripeContext) {
       this.authenticator = authenticator;
       this.clientId = clientId;
@@ -429,7 +432,7 @@ public class StripeClient {
       this.apiBase = apiBase;
       this.filesBase = filesBase;
       this.connectBase = connectBase;
-      this.eventsBase = eventsBase;
+      this.meterEventsBase = meterEventsBase;
       this.stripeContext = stripeContext;
     }
   }
@@ -453,7 +456,7 @@ public class StripeClient {
     private String apiBase = Stripe.LIVE_API_BASE;
     private String filesBase = Stripe.UPLOAD_API_BASE;
     private String connectBase = Stripe.CONNECT_API_BASE;
-    private String eventsBase = Stripe.EVENTS_API_BASE;
+    private String meterEventsBase = Stripe.METER_EVENTS_API_BASE;
     private String stripeContext;
 
     /**
@@ -625,15 +628,15 @@ public class StripeClient {
      * Set the base URL for the Stripe Meter Events API. By default this is
      * "https://events.stripe.com".
      *
-     * <p>This only affects requests made with a {@link com.stripe.net.BaseAddress} of EVENTS.
+     * <p>This only affects requests made with a {@link com.stripe.net.BaseAddress} of EVENTMES.
      */
-    public StripeClientBuilder setEventsBase(String address) {
-      this.eventsBase = address;
+    public StripeClientBuilder setMeterEventsBase(String address) {
+      this.meterEventsBase = address;
       return this;
     }
 
-    public String getEventsBase() {
-      return this.eventsBase;
+    public String getMeterEventsBase() {
+      return this.meterEventsBase;
     }
 
     public StripeClientBuilder setStripeContext(String context) {
@@ -666,7 +669,7 @@ public class StripeClient {
           apiBase,
           filesBase,
           connectBase,
-          eventsBase,
+          meterEventsBase,
           this.stripeContext);
     }
   }

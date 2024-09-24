@@ -2,6 +2,8 @@ package com.stripe;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.exception.SignatureVerificationException;
@@ -11,6 +13,7 @@ import com.stripe.net.*;
 import java.lang.reflect.Type;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -41,7 +44,7 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals(Stripe.LIVE_API_BASE, options.getApiBase());
     assertEquals(Stripe.CONNECT_API_BASE, options.getConnectBase());
     assertEquals(Stripe.UPLOAD_API_BASE, options.getFilesBase());
-    assertEquals(Stripe.EVENTS_API_BASE, options.getEventsBase());
+    assertEquals(Stripe.METER_EVENTS_API_BASE, options.getMeterEventsBase());
     assertEquals(0, options.getMaxNetworkRetries());
   }
 
@@ -77,5 +80,77 @@ public class StripeClientTest extends BaseStripeTest {
         () -> {
           client.parseThinEvent(payload, signature, secret);
         });
+  }
+
+  static final String v2PushEventWithRelatedObject =
+      "{\n"
+          + "  \"id\": \"evt_234\",\n"
+          + "  \"object\": \"event\",\n"
+          + "  \"type\": \"financial_account.balance.opened\",\n"
+          + "  \"created\": \"2022-02-15T00:27:45.330Z\",\n"
+          + "  \"context\": \"context 123\",\n"
+          + "  \"related_object\": {\n"
+          + "    \"id\": \"fa_123\",\n"
+          + "    \"type\": \"financial_account\",\n"
+          + "    \"url\": \"/v2/financial_accounts/fa_123\",\n"
+          + "    \"stripe_context\": \"acct_123\"\n"
+          + "  }\n"
+          + "}";
+
+  static final String v2PushEventWithoutRelatedObject =
+      "{\n"
+          + "  \"id\": \"evt_234\",\n"
+          + "  \"object\": \"event\",\n"
+          + "  \"type\": \"financial_account.balance.opened\",\n"
+          + "  \"created\": \"2022-02-15T00:27:45.330Z\"\n"
+          + "}";
+
+  @Test
+  public void parsesThinEventWithoutRelatedObject()
+      throws InvalidKeyException, NoSuchAlgorithmException, SignatureVerificationException {
+
+    StripeClient client = new StripeClient("sk_123");
+
+    String secret = "whsec_test_secret";
+
+    Map<String, Object> options = new HashMap<>();
+    options.put("payload", v2PushEventWithoutRelatedObject);
+    options.put("secret", secret);
+
+    String signature = WebhookTest.generateSigHeader(options);
+    ThinEvent baseThinEvent =
+        client.parseThinEvent(v2PushEventWithoutRelatedObject, signature, secret);
+    assertNotNull(baseThinEvent);
+    assertEquals("evt_234", baseThinEvent.getId());
+    assertEquals("financial_account.balance.opened", baseThinEvent.getType());
+    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), baseThinEvent.created);
+    assertNull(baseThinEvent.context);
+    assertNull(baseThinEvent.relatedObject);
+  }
+
+  @Test
+  public void parsesThinEventWithRelatedObject()
+      throws InvalidKeyException, NoSuchAlgorithmException, SignatureVerificationException {
+
+    StripeClient client = new StripeClient("sk_123");
+
+    String secret = "whsec_test_secret";
+
+    Map<String, Object> options = new HashMap<>();
+    options.put("payload", v2PushEventWithRelatedObject);
+    options.put("secret", secret);
+
+    String signature = WebhookTest.generateSigHeader(options);
+    ThinEvent baseThinEvent =
+        client.parseThinEvent(v2PushEventWithRelatedObject, signature, secret);
+    assertNotNull(baseThinEvent);
+    assertEquals("evt_234", baseThinEvent.getId());
+    assertEquals("financial_account.balance.opened", baseThinEvent.getType());
+    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), baseThinEvent.created);
+    assertEquals("context 123", baseThinEvent.context);
+    assertNotNull(baseThinEvent.relatedObject);
+    assertEquals("fa_123", baseThinEvent.relatedObject.id);
+    assertEquals("financial_account", baseThinEvent.relatedObject.type);
+    assertEquals("/v2/financial_accounts/fa_123", baseThinEvent.relatedObject.url);
   }
 }
