@@ -47,12 +47,13 @@ public class StripeResponseStreamTest extends BaseStripeTest {
       String url = String.format("/v1/foobars/%s/pdf", ApiResource.urlEncodeId(this.getId()));
       return getResponseGetter()
           .requestStream(
-              BaseAddress.API,
+            new ApiRequest(
+              BaseAddress.FILES,
               ApiResource.RequestMethod.POST,
               url,
               (Map<String, Object>) null,
-              (RequestOptions) null,
-              ApiMode.V1);
+              (RequestOptions) null)
+              );
     }
   }
 
