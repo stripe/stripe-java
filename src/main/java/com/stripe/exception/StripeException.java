@@ -1,8 +1,9 @@
 package com.stripe.exception;
 
+import com.google.gson.JsonObject;
 import com.stripe.model.StripeError;
+import com.stripe.net.StripeResponseGetter;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public abstract class StripeException extends Exception {
@@ -11,7 +12,11 @@ public abstract class StripeException extends Exception {
   /** The error resource returned by Stripe's API that caused the exception. */
   // transient so the exception can be serialized, as StripeObject does not
   // implement Serializable
-  @Setter transient StripeError stripeError;
+  transient StripeError stripeError;
+
+  public void setStripeError(StripeError err) {
+    stripeError = err;
+  }
 
   /**
    * Returns the error code of the response that triggered this exception. For {@link ApiException}
@@ -63,6 +68,9 @@ public abstract class StripeException extends Exception {
     if (requestId != null) {
       additionalInfo += "; request-id: " + requestId;
     }
+    if (this.getUserMessage() != null) {
+      additionalInfo += "; user-message: " + this.getUserMessage();
+    }
     return super.getMessage() + additionalInfo;
   }
 
@@ -72,6 +80,52 @@ public abstract class StripeException extends Exception {
    * @return a string representation of the user facing exception.
    */
   public String getUserMessage() {
-    return super.getMessage();
+    if (this.getStripeError() != null) {
+      return this.getStripeError().getUserMessage();
+    }
+    return null;
+  }
+
+  public static StripeException parseV2Exception(
+      String type,
+      JsonObject body,
+      int statusCode,
+      String requestId,
+      StripeResponseGetter responseGetter) {
+    switch (type) {
+        // The beginning of the section generated from our OpenAPI spec
+      case "financial_account_not_open":
+        return com.stripe.exception.FinancialAccountNotOpenException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "blocked_by_stripe":
+        return com.stripe.exception.BlockedByStripeException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "already_canceled":
+        return com.stripe.exception.AlreadyCanceledException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "not_cancelable":
+        return com.stripe.exception.NotCancelableException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "insufficient_funds":
+        return com.stripe.exception.InsufficientFundsException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "quota_exceeded":
+        return com.stripe.exception.QuotaExceededException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "recipient_not_notifiable":
+        return com.stripe.exception.RecipientNotNotifiableException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "feature_not_enabled":
+        return com.stripe.exception.FeatureNotEnabledException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "invalid_payment_method":
+        return com.stripe.exception.InvalidPaymentMethodException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "controlled_by_dashboard":
+        return com.stripe.exception.ControlledByDashboardException.parse(
+            body, statusCode, requestId, responseGetter);
+        // The end of the section generated from our OpenAPI spec
+    }
+    return null;
   }
 }

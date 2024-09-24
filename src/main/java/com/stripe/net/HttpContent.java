@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.UUID;
 import lombok.Value;
@@ -107,5 +108,16 @@ public class HttpContent {
 
     return new HttpContent(
         baos.toByteArray(), String.format("multipart/form-data; boundary=%s", boundary));
+  }
+
+  /**
+   * Builds a new HttpContent for {@code application/json} MIME type.
+   *
+   * @param json the JSON value
+   * @return the encoded HttpContent instance
+   * @throws IllegalArgumentException if nameValueCollection is null
+   */
+  public static HttpContent buildJsonContent(String json) {
+    return new HttpContent(json.getBytes(StandardCharsets.UTF_8), "application/json");
   }
 }

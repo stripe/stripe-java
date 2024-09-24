@@ -89,7 +89,6 @@ public class StripeError extends StripeObject {
    * status_transition_invalid}, {@code stripe_tax_inactive}, {@code tax_id_invalid}, {@code
    * taxes_calculation_failed}, {@code terminal_location_country_unsupported}, {@code
    * terminal_reader_busy}, {@code terminal_reader_hardware_fault}, {@code
-   * terminal_reader_invalid_location_for_activation}, {@code
    * terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code
    * terminal_reader_timeout}, {@code testmode_charges_only}, {@code tls_version_unsupported},
    * {@code token_already_used}, {@code token_card_network_invalid}, {@code token_in_use}, {@code
@@ -213,4 +212,8 @@ public class StripeError extends StripeObject {
    */
   @SerializedName("type")
   String type;
+
+  /** The user message associated with the error. */
+  @SerializedName("user_message")
+  String userMessage;
 }

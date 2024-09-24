@@ -7,10 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.param.common.EmptyParam;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
 public class ApiRequestParamsConverterTest {
@@ -113,6 +115,11 @@ public class ApiRequestParamsConverterTest {
   private static class IllegalModelHasWrongExtraParamsType extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     String extraParams;
+  }
+
+  private static class HasInstantParam extends ApiRequestParams {
+    @SerializedName("instant_param")
+    public Instant instantParam;
   }
 
   @Test
@@ -279,6 +286,18 @@ public class ApiRequestParamsConverterTest {
     assertEquals(objBar.get("enum_value"), "enum_bar");
     assertEquals(objBar.get("string_value"), "foo");
     assertEquals(objBar.get("hello"), "world");
+  }
+
+  @Test
+  public void testToMapWithInstantParams() {
+    HasInstantParam params = new HasInstantParam();
+    params.instantParam = Instant.ofEpochSecond(987654321);
+    Map<String, Object> paramMap = toMap(params);
+    TestCase.assertEquals(1, paramMap.size());
+
+    // primitive boolean is default false and is converted into map param accordingly
+    TestCase.assertTrue(paramMap.containsKey("instant_param"));
+    TestCase.assertEquals("2001-04-19T04:25:21Z", paramMap.get("instant_param"));
   }
 
   private Map<String, Object> toMap(ApiRequestParams params) {

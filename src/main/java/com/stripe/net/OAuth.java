@@ -63,7 +63,6 @@ public final class OAuth {
       throws StripeException {
     Map<String, Object> paramsCopy = new HashMap<>();
     paramsCopy.putAll(params);
-
     paramsCopy.put("client_id", getClientId(paramsCopy, options));
     ApiRequest request =
         new ApiRequest(

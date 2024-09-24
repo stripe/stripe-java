@@ -14,7 +14,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 public final class Webhook {
-  private static final long DEFAULT_TOLERANCE = 300;
+  public static final long DEFAULT_TOLERANCE = 300;
 
   /**
    * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the

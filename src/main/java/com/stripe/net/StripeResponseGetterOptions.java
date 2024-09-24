@@ -7,7 +7,7 @@ import java.net.Proxy;
 public abstract class StripeResponseGetterOptions {
   // When adding settings here keep them in sync with settings in RequestOptions and
   // in the RequestOptions.merge method
-  public abstract String getApiKey();
+  public abstract Authenticator getAuthenticator();
 
   public abstract String getClientId();
 
@@ -25,5 +25,9 @@ public abstract class StripeResponseGetterOptions {
 
   public abstract String getConnectBase();
 
+  public abstract String getEventsBase();
+
   public abstract int getReadTimeout();
+
+  public abstract String getStripeContext();
 }

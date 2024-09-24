@@ -1,8 +1,8 @@
 package com.stripe;
 
 import com.stripe.exception.SignatureVerificationException;
-import com.stripe.model.Event;
 import com.stripe.net.*;
+import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import lombok.Getter;
@@ -39,6 +39,26 @@ public class StripeClient {
   }
 
   /**
+   * Returns an StripeEvent instance using the provided JSON payload. Throws a JsonSyntaxException
+   * if the payload is not valid JSON, and a SignatureVerificationException if the signature
+   * verification fails for any reason.
+   *
+   * @param payload the payload sent by Stripe.
+   * @param sigHeader the contents of the signature header sent by Stripe.
+   * @param secret secret used to generate the signature.
+   * @return the StripeEvent instance
+   * @throws SignatureVerificationException if the verification fails.
+   */
+  public com.stripe.model.ThinEvent parseThinEvent(String payload, String sigHeader, String secret)
+      throws SignatureVerificationException {
+    Signature.verifyHeader(payload, sigHeader, secret, Webhook.DEFAULT_TOLERANCE);
+
+    com.stripe.model.ThinEvent event = com.stripe.model.ThinEvent.parse(payload);
+    event.setResponseGetter(this.responseGetter);
+    return event;
+  }
+
+  /**
    * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
    * payload is not valid JSON, and a SignatureVerificationException if the signature verification
    * fails for any reason.
@@ -49,9 +69,9 @@ public class StripeClient {
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public Event constructEvent(String payload, String sigHeader, String secret)
+  public com.stripe.model.Event parseSnapshotEvent(String payload, String sigHeader, String secret)
       throws SignatureVerificationException {
-    Event event = Webhook.constructEvent(payload, sigHeader, secret);
+    com.stripe.model.Event event = Webhook.constructEvent(payload, sigHeader, secret);
     event.setResponseGetter(this.getResponseGetter());
     return event;
   }
@@ -69,9 +89,10 @@ public class StripeClient {
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public Event constructEvent(String payload, String sigHeader, String secret, long tolerance)
+  public com.stripe.model.Event parseSnapshotEvent(
+      String payload, String sigHeader, String secret, long tolerance)
       throws SignatureVerificationException {
-    Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);
+    com.stripe.model.Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);
     event.setResponseGetter(this.getResponseGetter());
     return event;
   }
@@ -195,10 +216,6 @@ public class StripeClient {
 
   public com.stripe.service.InvoiceItemService invoiceItems() {
     return new com.stripe.service.InvoiceItemService(this.getResponseGetter());
-  }
-
-  public com.stripe.service.InvoiceRenderingTemplateService invoiceRenderingTemplates() {
-    return new com.stripe.service.InvoiceRenderingTemplateService(this.getResponseGetter());
   }
 
   public com.stripe.service.InvoiceService invoices() {
@@ -354,7 +371,7 @@ public class StripeClient {
     // When adding setting here keep them in sync with settings in RequestOptions and
     // in the RequestOptions.merge method
     @Getter(onMethod_ = {@Override})
-    private final String apiKey;
+    private final Authenticator authenticator;
 
     @Getter(onMethod_ = {@Override})
     private final String clientId;
@@ -383,8 +400,14 @@ public class StripeClient {
     @Getter(onMethod_ = {@Override})
     private final String connectBase;
 
+    @Getter(onMethod_ = {@Override})
+    private final String eventsBase;
+
+    @Getter(onMethod_ = {@Override})
+    private final String stripeContext;
+
     ClientStripeResponseGetterOptions(
-        String apiKey,
+        Authenticator authenticator,
         String clientId,
         int connectTimeout,
         int readTimeout,
@@ -393,8 +416,10 @@ public class StripeClient {
         PasswordAuthentication proxyCredential,
         String apiBase,
         String filesBase,
-        String connectBase) {
-      this.apiKey = apiKey;
+        String connectBase,
+        String eventsBase,
+        String stripeContext) {
+      this.authenticator = authenticator;
       this.clientId = clientId;
       this.connectTimeout = connectTimeout;
       this.readTimeout = readTimeout;
@@ -404,6 +429,8 @@ public class StripeClient {
       this.apiBase = apiBase;
       this.filesBase = filesBase;
       this.connectBase = connectBase;
+      this.eventsBase = eventsBase;
+      this.stripeContext = stripeContext;
     }
   }
 
@@ -416,7 +443,7 @@ public class StripeClient {
   }
 
   public static final class StripeClientBuilder {
-    private String apiKey;
+    private Authenticator authenticator;
     private String clientId;
     private int connectTimeout = Stripe.DEFAULT_CONNECT_TIMEOUT;
     private int readTimeout = Stripe.DEFAULT_READ_TIMEOUT;
@@ -426,6 +453,8 @@ public class StripeClient {
     private String apiBase = Stripe.LIVE_API_BASE;
     private String filesBase = Stripe.UPLOAD_API_BASE;
     private String connectBase = Stripe.CONNECT_API_BASE;
+    private String eventsBase = Stripe.EVENTS_API_BASE;
+    private String stripeContext;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -433,17 +462,34 @@ public class StripeClient {
      */
     public StripeClientBuilder() {}
 
-    public String getApiKey() {
-      return this.apiKey;
+    public Authenticator getAuthenticator() {
+      return this.authenticator;
     }
 
-    /**
-     * Set API key to use for authenticating requests.
-     *
-     * @param apiKey API key
-     */
+    public StripeClientBuilder setAuthenticator(Authenticator authenticator) {
+      this.authenticator = authenticator;
+      return this;
+    }
+
+    public String getApiKey() {
+      if (authenticator instanceof BearerTokenAuthenticator) {
+        return ((BearerTokenAuthenticator) authenticator).getApiKey();
+      }
+
+      return null;
+    }
+
     public StripeClientBuilder setApiKey(String apiKey) {
-      this.apiKey = apiKey;
+      if (apiKey == null) {
+        this.authenticator = null;
+      } else {
+        this.authenticator = new BearerTokenAuthenticator(apiKey);
+      }
+      return this;
+    }
+
+    public StripeClientBuilder clearApiKey() {
+      this.authenticator = null;
       return this;
     }
 
@@ -575,22 +621,42 @@ public class StripeClient {
       return this;
     }
 
-    public String getConnectBase() {
-      return this.connectBase;
+    /**
+     * Set the base URL for the Stripe Meter Events API. By default this is
+     * "https://events.stripe.com".
+     *
+     * <p>This only affects requests made with a {@link com.stripe.net.BaseAddress} of EVENTS.
+     */
+    public StripeClientBuilder setEventsBase(String address) {
+      this.eventsBase = address;
+      return this;
     }
 
-    /** Constructs a {@link StripeClient} with the specified configuration. */
+    public String getEventsBase() {
+      return this.eventsBase;
+    }
+
+    public StripeClientBuilder setStripeContext(String context) {
+      this.stripeContext = context;
+      return this;
+    }
+
+    public String getStripeContext() {
+      return this.stripeContext;
+    }
+
+    /** Constructs a {@link StripeResponseGetterOptions} with the specified values. */
     public StripeClient build() {
       return new StripeClient(new LiveStripeResponseGetter(buildOptions(), null));
     }
 
     StripeResponseGetterOptions buildOptions() {
-      if (this.apiKey == null) {
+      if (this.authenticator == null) {
         throw new IllegalArgumentException(
-            "No API key provided. Use setApiKey to set the Stripe API key");
+            "No authentication settings provided. Use setApiKey to set the Stripe API key");
       }
       return new ClientStripeResponseGetterOptions(
-          this.apiKey,
+          this.authenticator,
           this.clientId,
           connectTimeout,
           readTimeout,
@@ -599,7 +665,9 @@ public class StripeClient {
           proxyCredential,
           apiBase,
           filesBase,
-          connectBase);
+          connectBase,
+          eventsBase,
+          this.stripeContext);
     }
   }
 }
