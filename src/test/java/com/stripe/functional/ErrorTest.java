@@ -47,7 +47,7 @@ public class ErrorTest extends BaseStripeTest {
   @Test
   public void testV2OutboundPaymentInsufficientFundsError()
       throws StripeException, IOException, InterruptedException {
-    InsufficientFundsException exception = null;
+    TemporarySessionExpiredException exception = null;
     @Cleanup MockWebServer server = new MockWebServer();
     Mockito.doAnswer(
             (Answer<StripeResponse>)
@@ -63,16 +63,16 @@ public class ErrorTest extends BaseStripeTest {
     Stripe.overrideApiBase(server.url("").toString());
 
     try {
-      mockClient.v2().accounts().list();
-    } catch (InsufficientFundsException e) {
+      mockClient.v2().core().events().retrieve("event_123");
+    } catch (TemporarySessionExpiredException e) {
       exception = e;
     }
 
     assertNotNull(exception);
-    assertInstanceOf(InsufficientFundsException.class, exception);
+    assertInstanceOf(TemporarySessionExpiredException.class, exception);
     assertInstanceOf(com.stripe.model.StripeError.class, exception.getStripeError());
     assertEquals(
-        "Financial Account fa_test_xyz with balance type STORAGE does not have sufficient funds. Add funds to the account and try again.; code: outbound_payment_insufficient_funds",
+        "Session expired",
         exception.getMessage());
   }
 
@@ -89,7 +89,7 @@ public class ErrorTest extends BaseStripeTest {
     Stripe.overrideApiBase(server.url("").toString());
 
     try {
-      mockClient.v2().accounts().list();
+      mockClient.v2().core().events().retrieve("event_123");
     } catch (ApiException e) {
       exception = e;
     }
@@ -119,7 +119,7 @@ public class ErrorTest extends BaseStripeTest {
     Stripe.overrideApiBase(server.url("").toString());
 
     try {
-      mockClient.v2().accounts().list();
+      mockClient.v2().core().events().retrieve("event_123");
     } catch (ApiException e) {
       exception = e;
     }
