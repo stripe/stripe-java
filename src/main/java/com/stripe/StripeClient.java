@@ -365,6 +365,10 @@ public class StripeClient {
     return new com.stripe.service.TreasuryService(this.getResponseGetter());
   }
 
+  public com.stripe.service.V2Service v2() {
+    return new com.stripe.service.V2Service(this.getResponseGetter());
+  }
+
   public com.stripe.service.WebhookEndpointService webhookEndpoints() {
     return new com.stripe.service.WebhookEndpointService(this.getResponseGetter());
   }

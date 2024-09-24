@@ -11,7 +11,20 @@ import java.util.Map;
  */
 final class EventDataClassLookup {
   public static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
+  public static final Map<String, Class<? extends Event>> eventClassLookup = new HashMap<>();
 
   static {
+    classLookup.put(
+        "billing.meter_event_adjustment_v2",
+        com.stripe.model.v2.billing.MeterEventAdjustmentV2.class);
+    classLookup.put(
+        "billing.meter_event_session", com.stripe.model.v2.billing.MeterEventSession.class);
+    classLookup.put("billing.meter_event_v2", com.stripe.model.v2.billing.MeterEventV2.class);
+
+    classLookup.put("event", com.stripe.model.v2.Event.class);
+    classLookup.put("event_destination", com.stripe.model.v2.EventDestination.class);
+
+    eventClassLookup.put(
+        "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
   }
 }
