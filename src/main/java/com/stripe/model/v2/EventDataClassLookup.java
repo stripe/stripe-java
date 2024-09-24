@@ -25,6 +25,11 @@ final class EventDataClassLookup {
     classLookup.put("event_destination", com.stripe.model.v2.EventDestination.class);
 
     eventClassLookup.put(
+        "v1.billing.meter.error_report_triggered",
+        com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
+    eventClassLookup.put(
+        "v1.billing.meter.no_meter_found", com.stripe.events.V1BillingMeterNoMeterFoundEvent.class);
+    eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
   }
 }
