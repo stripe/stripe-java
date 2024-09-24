@@ -1,8 +1,8 @@
 {
   "error": {
-    "type": "insufficient_funds",
-    "code": "outbound_payment_insufficient_funds",
-    "message": "Financial Account fa_test_xyz with balance type STORAGE does not have sufficient funds. Add funds to the account and try again.",
+    "type": "temporary_session_expired",
+    "code": "does not matter",
+    "message": "Session expired",
     "request_log_url": "https://dashboard.stripe.com/logs/req_xyz"
   }
 }
