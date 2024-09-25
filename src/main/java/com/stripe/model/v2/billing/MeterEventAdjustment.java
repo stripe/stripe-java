@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class MeterEventAdjustmentV2 extends StripeObject implements HasId {
+public class MeterEventAdjustment extends StripeObject implements HasId {
   /** Specifies which event to cancel. */
   @SerializedName("cancel")
   Cancel cancel;
@@ -41,13 +41,13 @@ public class MeterEventAdjustmentV2 extends StripeObject implements HasId {
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
-   * <p>Equal to {@code v2.billing.meter_event_adjustment}.
+   * <p>Equal to {@code billing.meter_event_adjustment}.
    */
   @SerializedName("object")
   String object;
 
   /**
-   * The meter event adjustment’s status.
+   * Open Enum. The meter event adjustment’s status.
    *
    * <p>One of {@code complete}, or {@code pending}.
    */
@@ -55,8 +55,8 @@ public class MeterEventAdjustmentV2 extends StripeObject implements HasId {
   String status;
 
   /**
-   * Specifies whether to cancel a single event or a range of events for a time period. Time period
-   * cancellation is not supported yet.
+   * Open Enum. Specifies whether to cancel a single event or a range of events for a time period.
+   * Time period cancellation is not supported yet.
    *
    * <p>Equal to {@code cancel}.
    */

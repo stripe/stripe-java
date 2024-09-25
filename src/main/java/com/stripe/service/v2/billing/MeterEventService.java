@@ -2,7 +2,7 @@
 package com.stripe.service.v2.billing;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.v2.billing.MeterEventV2;
+import com.stripe.model.v2.billing.MeterEvent;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -17,12 +17,20 @@ public final class MeterEventService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates a meter event. Validates the event synchronously. */
-  public MeterEventV2 create(MeterEventCreateParams params) throws StripeException {
+  /**
+   * Creates a meter event. Events are validated synchronously, but are processed asynchronously.
+   * Supports up to 1,000 events per second in livemode. For higher rate-limits, please use meter
+   * event streams instead.
+   */
+  public MeterEvent create(MeterEventCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Creates a meter event. Validates the event synchronously. */
-  public MeterEventV2 create(MeterEventCreateParams params, RequestOptions options)
+  /**
+   * Creates a meter event. Events are validated synchronously, but are processed asynchronously.
+   * Supports up to 1,000 events per second in livemode. For higher rate-limits, please use meter
+   * event streams instead.
+   */
+  public MeterEvent create(MeterEventCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/meter_events";
     ApiRequest request =
@@ -32,6 +40,6 @@ public final class MeterEventService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
-    return this.request(request, MeterEventV2.class);
+    return this.request(request, MeterEvent.class);
   }
 }

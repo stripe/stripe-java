@@ -2,7 +2,7 @@
 package com.stripe.service.v2.billing;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.v2.billing.MeterEventAdjustmentV2;
+import com.stripe.model.v2.billing.MeterEventAdjustment;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -18,12 +18,12 @@ public final class MeterEventAdjustmentService extends ApiService {
   }
 
   /** Creates a meter event adjustment to cancel a previously sent meter event. */
-  public MeterEventAdjustmentV2 create(MeterEventAdjustmentCreateParams params)
+  public MeterEventAdjustment create(MeterEventAdjustmentCreateParams params)
       throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /** Creates a meter event adjustment to cancel a previously sent meter event. */
-  public MeterEventAdjustmentV2 create(
+  public MeterEventAdjustment create(
       MeterEventAdjustmentCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v2/billing/meter_event_adjustments";
     ApiRequest request =
@@ -33,6 +33,6 @@ public final class MeterEventAdjustmentService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
-    return this.request(request, MeterEventAdjustmentV2.class);
+    return this.request(request, MeterEventAdjustment.class);
   }
 }

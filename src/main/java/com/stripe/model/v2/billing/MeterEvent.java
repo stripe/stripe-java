@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class MeterEventV2 extends StripeObject {
+public class MeterEvent extends StripeObject {
   /** The creation time of this meter event. */
   @SerializedName("created")
   Instant created;
@@ -39,7 +39,7 @@ public class MeterEventV2 extends StripeObject {
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
-   * <p>Equal to {@code v2.billing.meter_event}.
+   * <p>Equal to {@code billing.meter_event}.
    */
   @SerializedName("object")
   String object;
