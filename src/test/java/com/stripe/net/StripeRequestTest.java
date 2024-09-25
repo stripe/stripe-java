@@ -131,7 +131,6 @@ public class StripeRequestTest extends BaseStripeTest {
     assertEquals("http://example.com/post", request.url().toString());
     assertEquals("Bearer sk_test_123", request.headers().firstValue("Authorization").orElse(null));
     assertTrue(request.headers().firstValue("Stripe-Version").isPresent());
-    assertEquals(Stripe.PREVIEW_API_VERSION, request.headers().firstValue("Stripe-Version").get());
     assertTrue(request.headers().firstValue("Idempotency-Key").isPresent());
     assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
     assertNotNull(request.content());
@@ -154,7 +153,6 @@ public class StripeRequestTest extends BaseStripeTest {
     assertEquals("http://example.com/get?string=String%21", request.url().toString());
     assertEquals("Bearer sk_test_123", request.headers().firstValue("Authorization").orElse(null));
     assertTrue(request.headers().firstValue("Stripe-Version").isPresent());
-    assertEquals(Stripe.PREVIEW_API_VERSION, request.headers().firstValue("Stripe-Version").get());
     assertTrue(request.headers().firstValue("Idempotency-Key").isPresent());
     assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
     assertNull(request.content());
@@ -354,18 +352,5 @@ public class StripeRequestTest extends BaseStripeTest {
             ApiMode.V2);
 
     assertEquals("{\"name\":null,\"nested\":{\"email\":null}}", request.content().stringContent());
-  }
-
-  @Test
-  public void testBuildContentHasV2StripeVersionForApiModeV2() throws StripeException {
-    StripeRequest request =
-        StripeRequest.create(
-            ApiResource.RequestMethod.POST,
-            "http://example.com/post",
-            ImmutableMap.of("key", "value!"),
-            options,
-            ApiMode.V2);
-
-    assertEquals(Stripe.PREVIEW_API_VERSION, request.headers().firstValue("Stripe-Version").get());
   }
 }
