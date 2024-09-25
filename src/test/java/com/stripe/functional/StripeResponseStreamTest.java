@@ -64,6 +64,7 @@ public class StripeResponseStreamTest extends BaseStripeTest {
     server.start();
 
     Stripe.overrideApiBase(server.url("").toString());
+    Stripe.overrideUploadBase(server.url("").toString());
 
     TestResource t = TestResource.retrieve("foo_123");
     server.takeRequest();
@@ -89,6 +90,7 @@ public class StripeResponseStreamTest extends BaseStripeTest {
     server.start();
 
     Stripe.overrideApiBase(server.url("").toString());
+    Stripe.overrideUploadBase(server.url("").toString());
 
     TestResource r = TestResource.retrieve("foo_123");
     server.takeRequest();
