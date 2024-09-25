@@ -191,26 +191,19 @@ public class StripeRequest {
     // Accept-Charset
     headerMap.put("Accept-Charset", Arrays.asList(ApiResource.CHARSET.name()));
 
+    // Stripe-Version
+    if (RequestOptions.unsafeGetStripeVersionOverride(options) != null) {
+      headerMap.put(
+          "Stripe-Version", Arrays.asList(RequestOptions.unsafeGetStripeVersionOverride(options)));
+    } else if (options.getStripeVersion() != null) {
+      headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersion()));
+    }
+
     if (apiMode == ApiMode.V1) {
       if (options.getStripeContext() != null) {
         throw new UnsupportedOperationException("Context is not supported in V1 APIs");
       }
-      // Stripe-Version
-      if (RequestOptions.unsafeGetStripeVersionOverride(options) != null) {
-        headerMap.put(
-            "Stripe-Version",
-            Arrays.asList(RequestOptions.unsafeGetStripeVersionOverride(options)));
-      } else if (options.getStripeVersion() != null) {
-        headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersion()));
-      }
     } else {
-      if (RequestOptions.unsafeGetStripeVersionOverride(options) != null) {
-        throw new UnsupportedOperationException(
-            "Overriding the API version is not supported for v2 APIs");
-      }
-
-      headerMap.put("Stripe-Version", Arrays.asList(Stripe.API_VERSION));
-
       if (options.getStripeContext() != null) {
         headerMap.put("Stripe-Context", Arrays.asList(options.getStripeContext()));
       }
