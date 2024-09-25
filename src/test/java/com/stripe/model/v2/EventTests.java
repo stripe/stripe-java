@@ -102,7 +102,7 @@ public class EventTests extends BaseStripeTest {
         Event.class,
         v2PayloadWithData);
 
-        V1BillingMeterErrorReportTriggeredEvent.EventData data = event.getData();
+    V1BillingMeterErrorReportTriggeredEvent.EventData data = event.getData();
 
     assertEquals("foo", data.getDeveloperMessageSummary());
   }
@@ -119,7 +119,7 @@ public class EventTests extends BaseStripeTest {
         Meter.class,
         getResourceAsString("/api_fixtures/financial_account.json"));
 
-        Meter data = event.fetchRelatedObject();
+    Meter data = event.fetchRelatedObject();
 
     assertEquals(data.getId(), event.getRelatedObject().id);
   }

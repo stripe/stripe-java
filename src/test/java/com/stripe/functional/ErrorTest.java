@@ -71,9 +71,7 @@ public class ErrorTest extends BaseStripeTest {
     assertNotNull(exception);
     assertInstanceOf(TemporarySessionExpiredException.class, exception);
     assertInstanceOf(com.stripe.model.StripeError.class, exception.getStripeError());
-    assertEquals(
-        "Session expired",
-        exception.getMessage());
+    assertEquals("Session expired", exception.getMessage());
   }
 
   @Test

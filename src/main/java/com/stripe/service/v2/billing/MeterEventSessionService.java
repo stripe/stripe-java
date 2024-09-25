@@ -15,11 +15,19 @@ public final class MeterEventSessionService extends ApiService {
     super(responseGetter);
   }
 
-  /** Creates a meter event session to send usage on the high-throughput meter event stream. */
+  /**
+   * Creates a meter event session to send usage on the high-throughput meter event stream.
+   * Authentication tokens are only valid for 15 minutes, so you will need to create a new meter
+   * event session when your token expires.
+   */
   public MeterEventSession create() throws StripeException {
     return create((RequestOptions) null);
   }
-  /** Creates a meter event session to send usage on the high-throughput meter event stream. */
+  /**
+   * Creates a meter event session to send usage on the high-throughput meter event stream.
+   * Authentication tokens are only valid for 15 minutes, so you will need to create a new meter
+   * event session when your token expires.
+   */
   public MeterEventSession create(RequestOptions options) throws StripeException {
     String path = "/v2/billing/meter_event_session";
     ApiRequest request =

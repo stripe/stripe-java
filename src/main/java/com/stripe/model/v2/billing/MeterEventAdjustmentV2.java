@@ -41,7 +41,7 @@ public class MeterEventAdjustmentV2 extends StripeObject implements HasId {
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
-   * <p>Equal to {@code billing.meter_event_adjustment_v2}.
+   * <p>Equal to {@code v2.billing.meter_event_adjustment}.
    */
   @SerializedName("object")
   String object;

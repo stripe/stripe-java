@@ -45,7 +45,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
-   * <p>Equal to {@code event}.
+   * <p>Equal to {@code v2.core.event}.
    */
   @SerializedName("object")
   String object;
