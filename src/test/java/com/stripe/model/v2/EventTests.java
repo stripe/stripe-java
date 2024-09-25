@@ -27,8 +27,8 @@ public class EventTests extends BaseStripeTest {
             + "  \"created\": \"2022-02-15T00:27:45.330Z\",\n"
             + "  \"related_object\": {\n"
             + "    \"id\": \"meter_123\",\n"
-            + "    \"type\": \"meter\",\n"
-            + "    \"url\": \"/v1/meters/meter_123\",\n"
+            + "    \"type\": \"billing.meter\",\n"
+            + "    \"url\": \"/v1/billing/meters/meter_123\",\n"
             + "    \"stripe_context\": \"acct_123\"\n"
             + "  }\n"
             + "}";
@@ -40,14 +40,16 @@ public class EventTests extends BaseStripeTest {
             + "  \"created\": \"2022-02-15T00:27:45.330Z\",\n"
             + "  \"related_object\": {\n"
             + "    \"id\": \"meter_123\",\n"
-            + "    \"type\": \"meter\",\n"
-            + "    \"url\": \"/v1/meters/meter_123\",\n"
+            + "    \"type\": \"billing.meter\",\n"
+            + "    \"url\": \"/v1/billing/meters/meter_123\",\n"
             + "    \"stripe_context\": \"acct_123\"\n"
             + "  },\n"
             + "  \"data\": {\n"
-            + "    \"developerMessageSummary\": \"foo\"\n"
+            + "    \"developer_message_summary\": \"foo\"\n"
             + "  }\n"
             + "}";
+
+    // note this is purposefully not correct; don't try and correct it!
     v2UnknownEventPayload =
         "{\n"
             + "  \"id\": \"evt_234\",\n"
@@ -86,8 +88,8 @@ public class EventTests extends BaseStripeTest {
     assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), event.getCreated());
 
     assertEquals("meter_123", event.getRelatedObject().getId());
-    assertEquals("meter", event.getRelatedObject().getType());
-    assertEquals("/v1/meters/meter_123", event.getRelatedObject().getUrl());
+    assertEquals("billing.meter", event.getRelatedObject().getType());
+    assertEquals("/v1/billing/meters/meter_123", event.getRelatedObject().getUrl());
   }
 
   @Test
@@ -114,14 +116,30 @@ public class EventTests extends BaseStripeTest {
     event.setResponseGetter(networkSpy);
     stubRequest(
         ApiResource.RequestMethod.GET,
-        "/v1/meters/meter_123",
+        "/v1/billing/meters/meter_123",
         null,
         Meter.class,
-        getResourceAsString("/api_fixtures/financial_account.json"));
+        getResourceAsString("/api_fixtures/billing_meter.json"));
 
-    Meter data = event.fetchRelatedObject();
+    assertEquals("/v1/billing/meters/meter_123", event.getRelatedObject().url);
+    assertEquals("meter_123", event.getRelatedObject().id);
+    assertEquals("billing.meter", event.getRelatedObject().type);
 
-    assertEquals(data.getId(), event.getRelatedObject().id);
+    Meter meter = event.fetchRelatedObject();
+
+    assertEquals("meter_123", meter.getId());
+    assertEquals("billing.meter", meter.getObject());
+    assertEquals(1727303036, meter.getCreated());
+    assertEquals("e1", meter.getCustomerMapping().getEventPayloadKey());
+    assertEquals("by_id", meter.getCustomerMapping().getType());
+    assertEquals("sum", meter.getDefaultAggregation().getFormula());
+    assertEquals("API Requests", meter.getDisplayName());
+    assertEquals("API Request Made", meter.getEventName());
+    assertEquals("day", meter.getEventTimeWindow());
+    assertFalse(meter.getLivemode());
+    assertEquals("active", meter.getStatus());
+    assertNull(meter.getStatusTransitions().getDeactivatedAt());
+    assertEquals(1727303036, meter.getUpdated());
   }
 
   // FIXME (jar) this should no longer be possible; confirm this and remove before merge

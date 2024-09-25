@@ -208,6 +208,9 @@ public class StripeRequest {
         throw new UnsupportedOperationException(
             "Overriding the API version is not supported for v2 APIs");
       }
+
+      headerMap.put("Stripe-Version", Arrays.asList(Stripe.API_VERSION));
+
       if (options.getStripeContext() != null) {
         headerMap.put("Stripe-Context", Arrays.asList(options.getStripeContext()));
       }
