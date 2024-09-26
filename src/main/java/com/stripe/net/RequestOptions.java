@@ -35,7 +35,7 @@ public class RequestOptions {
         null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  private RequestOptions(
+  protected RequestOptions(
       Authenticator authenticator,
       String clientId,
       String idempotencyKey,
@@ -161,19 +161,19 @@ public class RequestOptions {
         stripeVersionOverride);
   }
 
-  public static final class RequestOptionsBuilder {
-    private Authenticator authenticator;
-    private String clientId;
-    private String idempotencyKey;
-    private String stripeContext;
-    private String stripeAccount;
-    private String stripeVersionOverride;
-    private Integer connectTimeout;
-    private Integer readTimeout;
-    private Integer maxNetworkRetries;
-    private Proxy connectionProxy;
-    private PasswordAuthentication proxyCredential;
-    private String baseUrl;
+  public static class RequestOptionsBuilder {
+    protected Authenticator authenticator;
+    protected String clientId;
+    protected String idempotencyKey;
+    protected String stripeContext;
+    protected String stripeAccount;
+    protected String stripeVersionOverride;
+    protected Integer connectTimeout;
+    protected Integer readTimeout;
+    protected Integer maxNetworkRetries;
+    protected Proxy connectionProxy;
+    protected PasswordAuthentication proxyCredential;
+    protected String baseUrl;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -371,7 +371,7 @@ public class RequestOptions {
     }
   }
 
-  private static String normalizeApiKey(String apiKey) {
+  protected static String normalizeApiKey(String apiKey) {
     // null apiKeys are considered "valid"
     if (apiKey == null) {
       return null;
@@ -379,7 +379,7 @@ public class RequestOptions {
     return apiKey.trim();
   }
 
-  private static String normalizeClientId(String clientId) {
+  protected static String normalizeClientId(String clientId) {
     // null client_ids are considered "valid"
     if (clientId == null) {
       return null;
@@ -391,7 +391,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeStripeVersion(String stripeVersion) {
+  protected static String normalizeStripeVersion(String stripeVersion) {
     // null stripeVersions are considered "valid" and use Stripe.apiVersion
     if (stripeVersion == null) {
       return null;
@@ -403,7 +403,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeBaseUrl(String baseUrl) {
+  protected static String normalizeBaseUrl(String baseUrl) {
     // null baseUrl is valid, and will fall back to e.g. Stripe.apiBase or Stripe.connectBase
     // (depending on the method)
     if (baseUrl == null) {
@@ -416,7 +416,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeIdempotencyKey(String idempotencyKey) {
+  protected static String normalizeIdempotencyKey(String idempotencyKey) {
     if (idempotencyKey == null) {
       return null;
     }
@@ -433,7 +433,18 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeStripeAccount(String stripeAccount) {
+  protected static String normalizeStripeContext(String stripContext) {
+    if (stripContext == null) {
+      return null;
+    }
+    String normalized = stripContext.trim();
+    if (normalized.isEmpty()) {
+      throw new InvalidRequestOptionsException("Empty stripe context specified!");
+    }
+    return normalized;
+  }
+
+  protected static String normalizeStripeAccount(String stripeAccount) {
     if (stripeAccount == null) {
       return null;
     }

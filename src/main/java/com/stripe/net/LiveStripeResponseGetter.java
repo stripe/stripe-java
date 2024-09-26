@@ -96,6 +96,27 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return request;
   }
 
+  private StripeRequest toRawStripeRequest(RawApiRequest apiRequest, RequestOptions mergedOptions)
+      throws StripeException {
+
+    String fullUrl = fullUrl(apiRequest);
+
+    Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();
+    StripeRequest request =
+        StripeRequest.createWithStringContent(
+            apiRequest.getMethod(),
+            fullUrl,
+            apiRequest.getRawContent(),
+            mergedOptions,
+            apiRequest.getApiMode());
+
+    if (telemetryHeaderValue.isPresent()) {
+      request =
+          request.withAdditionalHeader(RequestTelemetry.HEADER_NAME, telemetryHeaderValue.get());
+    }
+    return request;
+  }
+
   @Override
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
   public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
@@ -177,6 +198,38 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
+  public StripeResponse rawRequest(RawApiRequest apiRequest) throws StripeException {
+    RequestOptions mergedOptions = RequestOptions.merge(this.options, apiRequest.getOptions());
+
+    if (RequestOptions.unsafeGetStripeVersionOverride(mergedOptions) != null) {
+      apiRequest = apiRequest.addUsage("unsafe_stripe_version_override");
+    }
+
+    StripeRequest request = toRawStripeRequest(apiRequest, mergedOptions);
+
+    Map<String, String> additionalHeaders = apiRequest.getOptions().getAdditionalHeaders();
+
+    if (additionalHeaders != null) {
+      for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
+        String key = entry.getKey();
+        String value = entry.getValue();
+        request = request.withAdditionalHeader(key, value);
+      }
+    }
+
+    StripeResponse response =
+        sendWithTelemetry(request, apiRequest.getUsage(), r -> httpClient.requestWithRetries(r));
+
+    int responseCode = response.code();
+
+    if (responseCode < 200 || responseCode >= 300) {
+      handleError(response, apiRequest.getApiMode());
+    }
+
+    return response;
+  }
+
+  @Override
   @SuppressWarnings({"TypeParameterUnusedInFormals", "deprecation"})
   public <T extends StripeObjectInterface> T request(
       BaseAddress baseAddress,
@@ -227,7 +280,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     try {
       JsonObject jsonObject =
           ApiResource.GSON.fromJson(body, JsonObject.class).getAsJsonObject("error");
-      ret = StripeObject.deserializeStripeObject(jsonObject, klass, this);
+      ret = (StripeError) StripeObject.deserializeStripeObject(jsonObject, klass, this);
       if (ret != null) return ret;
     } catch (JsonSyntaxException e) {
       throw makeMalformedJsonError(body, code, requestId, e);

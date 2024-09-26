@@ -25,7 +25,7 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
     ApiResource.globalResponseGetter = srg;
   }
 
-  protected static StripeResponseGetter getGlobalResponseGetter() {
+  public static StripeResponseGetter getGlobalResponseGetter() {
     return ApiResource.globalResponseGetter;
   }
 

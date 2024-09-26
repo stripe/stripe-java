@@ -47,6 +47,8 @@ public class BaseStripeTest {
   private String origClientId;
   private String origUploadBase;
 
+  protected static final String TEST_API_KEY = "sk_test_123";
+
   static {
     // To only stop stripe-mock process after all the test classes.
     // Alternative solution using @AfterClass will stop the stripe-mock after
