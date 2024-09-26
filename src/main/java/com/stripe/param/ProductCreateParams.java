@@ -467,6 +467,13 @@ public class ProductCreateParams extends ApiRequestParams {
     Map<String, ProductCreateParams.DefaultPriceData.CurrencyOption> currencyOptions;
 
     /**
+     * When set, provides configuration for the amount to be adjusted by the customer during
+     * Checkout Sessions and Payment Links.
+     */
+    @SerializedName("custom_unit_amount")
+    CustomUnitAmount customUnitAmount;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -492,7 +499,8 @@ public class ProductCreateParams extends ApiRequestParams {
 
     /**
      * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
-     * much to charge. One of {@code unit_amount} or {@code unit_amount_decimal} is required.
+     * much to charge. One of {@code unit_amount}, {@code unit_amount_decimal}, or {@code
+     * custom_unit_amount} is required.
      */
     @SerializedName("unit_amount")
     Long unitAmount;
@@ -508,6 +516,7 @@ public class ProductCreateParams extends ApiRequestParams {
     private DefaultPriceData(
         String currency,
         Map<String, ProductCreateParams.DefaultPriceData.CurrencyOption> currencyOptions,
+        CustomUnitAmount customUnitAmount,
         Map<String, Object> extraParams,
         Recurring recurring,
         TaxBehavior taxBehavior,
@@ -515,6 +524,7 @@ public class ProductCreateParams extends ApiRequestParams {
         BigDecimal unitAmountDecimal) {
       this.currency = currency;
       this.currencyOptions = currencyOptions;
+      this.customUnitAmount = customUnitAmount;
       this.extraParams = extraParams;
       this.recurring = recurring;
       this.taxBehavior = taxBehavior;
@@ -531,6 +541,8 @@ public class ProductCreateParams extends ApiRequestParams {
 
       private Map<String, ProductCreateParams.DefaultPriceData.CurrencyOption> currencyOptions;
 
+      private CustomUnitAmount customUnitAmount;
+
       private Map<String, Object> extraParams;
 
       private Recurring recurring;
@@ -546,6 +558,7 @@ public class ProductCreateParams extends ApiRequestParams {
         return new ProductCreateParams.DefaultPriceData(
             this.currency,
             this.currencyOptions,
+            this.customUnitAmount,
             this.extraParams,
             this.recurring,
             this.taxBehavior,
@@ -590,6 +603,16 @@ public class ProductCreateParams extends ApiRequestParams {
           this.currencyOptions = new HashMap<>();
         }
         this.currencyOptions.putAll(map);
+        return this;
+      }
+
+      /**
+       * When set, provides configuration for the amount to be adjusted by the customer during
+       * Checkout Sessions and Payment Links.
+       */
+      public Builder setCustomUnitAmount(
+          ProductCreateParams.DefaultPriceData.CustomUnitAmount customUnitAmount) {
+        this.customUnitAmount = customUnitAmount;
         return this;
       }
 
@@ -642,7 +665,8 @@ public class ProductCreateParams extends ApiRequestParams {
 
       /**
        * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
-       * much to charge. One of {@code unit_amount} or {@code unit_amount_decimal} is required.
+       * much to charge. One of {@code unit_amount}, {@code unit_amount_decimal}, or {@code
+       * custom_unit_amount} is required.
        */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
@@ -1186,6 +1210,133 @@ public class ProductCreateParams extends ApiRequestParams {
 
         TaxBehavior(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class CustomUnitAmount {
+      /**
+       * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
+       * otherwise omit {@code custom_unit_amount}.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The maximum unit amount the customer can specify for this item. */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum unit amount the customer can specify for this item. Must be at least the
+       * minimum charge amount.
+       */
+      @SerializedName("minimum")
+      Long minimum;
+
+      /** The starting unit amount which can be updated by the customer. */
+      @SerializedName("preset")
+      Long preset;
+
+      private CustomUnitAmount(
+          Boolean enabled,
+          Map<String, Object> extraParams,
+          Long maximum,
+          Long minimum,
+          Long preset) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.maximum = maximum;
+        this.minimum = minimum;
+        this.preset = preset;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Long maximum;
+
+        private Long minimum;
+
+        private Long preset;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ProductCreateParams.DefaultPriceData.CustomUnitAmount build() {
+          return new ProductCreateParams.DefaultPriceData.CustomUnitAmount(
+              this.enabled, this.extraParams, this.maximum, this.minimum, this.preset);
+        }
+
+        /**
+         * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
+         * otherwise omit {@code custom_unit_amount}.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ProductCreateParams.DefaultPriceData.CustomUnitAmount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ProductCreateParams.DefaultPriceData.CustomUnitAmount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The maximum unit amount the customer can specify for this item. */
+        public Builder setMaximum(Long maximum) {
+          this.maximum = maximum;
+          return this;
+        }
+
+        /**
+         * The minimum unit amount the customer can specify for this item. Must be at least the
+         * minimum charge amount.
+         */
+        public Builder setMinimum(Long minimum) {
+          this.minimum = minimum;
+          return this;
+        }
+
+        /** The starting unit amount which can be updated by the customer. */
+        public Builder setPreset(Long preset) {
+          this.preset = preset;
+          return this;
         }
       }
     }

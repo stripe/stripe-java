@@ -19,6 +19,7 @@ import com.stripe.param.billing.AlertCreateParams;
 import com.stripe.param.billing.AlertDeactivateParams;
 import com.stripe.param.billing.AlertListParams;
 import com.stripe.param.billing.AlertRetrieveParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,13 +41,6 @@ public class Alert extends ApiResource implements HasId {
    */
   @SerializedName("alert_type")
   String alertType;
-
-  /**
-   * Limits the scope of the alert to a specific <a
-   * href="https://stripe.com/docs/api/customers">customer</a>.
-   */
-  @SerializedName("filter")
-  Filter filter;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -84,8 +78,8 @@ public class Alert extends ApiResource implements HasId {
    * Encapsulates configuration of the alert to monitor usage on a specific <a
    * href="https://stripe.com/docs/api/billing/meter">Billing Meter</a>.
    */
-  @SerializedName("usage_threshold_config")
-  UsageThresholdConfig usageThresholdConfig;
+  @SerializedName("usage_threshold")
+  UsageThreshold usageThreshold;
 
   /** Reactivates this alert, allowing it to trigger again. */
   public Alert activate() throws StripeException {
@@ -323,35 +317,6 @@ public class Alert extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Alert.class);
   }
 
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Filter extends StripeObject {
-    /** Limit the scope of the alert to this customer ID. */
-    @SerializedName("customer")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Customer> customer;
-
-    /** Get ID of expandable {@code customer} object. */
-    public String getCustomer() {
-      return (this.customer != null) ? this.customer.getId() : null;
-    }
-
-    public void setCustomer(String id) {
-      this.customer = ApiResource.setExpandableFieldId(id, this.customer);
-    }
-
-    /** Get expanded {@code customer}. */
-    public Customer getCustomerObject() {
-      return (this.customer != null) ? this.customer.getExpanded() : null;
-    }
-
-    public void setCustomerObject(Customer expandableObject) {
-      this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
-    }
-  }
-
   /**
    * The usage threshold alert configuration enables setting up alerts for when a certain usage
    * threshold on a specific meter is crossed.
@@ -359,7 +324,14 @@ public class Alert extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UsageThresholdConfig extends StripeObject {
+  public static class UsageThreshold extends StripeObject {
+    /**
+     * The filters allow limiting the scope of this usage alert. You can only specify up to one
+     * filter at this time.
+     */
+    @SerializedName("filters")
+    List<Alert.UsageThreshold.Filter> filters;
+
     /** The value at which this alert will trigger. */
     @SerializedName("gte")
     Long gte;
@@ -398,12 +370,43 @@ public class Alert extends ApiResource implements HasId {
     public void setMeterObject(Meter expandableObject) {
       this.meter = new ExpandableField<Meter>(expandableObject.getId(), expandableObject);
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Filter extends StripeObject {
+      /** Limit the scope of the alert to this customer ID. */
+      @SerializedName("customer")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Customer> customer;
+
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code customer} object. */
+      public String getCustomer() {
+        return (this.customer != null) ? this.customer.getId() : null;
+      }
+
+      public void setCustomer(String id) {
+        this.customer = ApiResource.setExpandableFieldId(id, this.customer);
+      }
+
+      /** Get expanded {@code customer}. */
+      public Customer getCustomerObject() {
+        return (this.customer != null) ? this.customer.getExpanded() : null;
+      }
+
+      public void setCustomerObject(Customer expandableObject) {
+        this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+      }
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(filter, responseGetter);
-    trySetResponseGetter(usageThresholdConfig, responseGetter);
+    trySetResponseGetter(usageThreshold, responseGetter);
   }
 }

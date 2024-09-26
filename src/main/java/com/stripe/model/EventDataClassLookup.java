@@ -51,6 +51,7 @@ final class EventDataClassLookup {
     classLookup.put("line_item", InvoiceLineItem.class);
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("mandate", Mandate.class);
+    classLookup.put("margin", Margin.class);
     classLookup.put("payment_intent", PaymentIntent.class);
     classLookup.put("payment_link", PaymentLink.class);
     classLookup.put("payment_method", PaymentMethod.class);
@@ -92,6 +93,12 @@ final class EventDataClassLookup {
 
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
     classLookup.put("billing.alert_triggered", com.stripe.model.billing.AlertTriggered.class);
+    classLookup.put(
+        "billing.credit_balance_summary", com.stripe.model.billing.CreditBalanceSummary.class);
+    classLookup.put(
+        "billing.credit_balance_transaction",
+        com.stripe.model.billing.CreditBalanceTransaction.class);
+    classLookup.put("billing.credit_grant", com.stripe.model.billing.CreditGrant.class);
     classLookup.put("billing.meter", com.stripe.model.billing.Meter.class);
     classLookup.put("billing.meter_event", com.stripe.model.billing.MeterEvent.class);
     classLookup.put(

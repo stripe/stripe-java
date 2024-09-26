@@ -51,8 +51,7 @@ public class Settings extends ApiResource {
   String object;
 
   /**
-   * The {@code active} status indicates you have all required settings to calculate tax. A status
-   * can transition out of {@code active} when new required settings are introduced.
+   * The status of the Tax {@code Settings}.
    *
    * <p>One of {@code active}, or {@code pending}.
    */

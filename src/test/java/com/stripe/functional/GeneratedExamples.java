@@ -11889,48 +11889,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testTerminalReadersProcessSetupIntentPost() throws StripeException {
-    com.stripe.model.terminal.Reader resource =
-        com.stripe.model.terminal.Reader.retrieve("tmr_xxxxxxxxxxxxx");
-
-    com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
-        com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
-            .setSetupIntent("seti_xxxxxxxxxxxxx")
-            .setCustomerConsentCollected(true)
-            .build();
-
-    com.stripe.model.terminal.Reader reader = resource.processSetupIntent(params);
-    assertNotNull(reader);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/terminal/readers/tmr_xxxxxxxxxxxxx/process_setup_intent",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testTerminalReadersProcessSetupIntentPostServices() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
-        com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
-            .setSetupIntent("seti_xxxxxxxxxxxxx")
-            .setCustomerConsentCollected(true)
-            .build();
-
-    com.stripe.model.terminal.Reader reader =
-        client.terminal().readers().processSetupIntent("tmr_xxxxxxxxxxxxx", params);
-    assertNotNull(reader);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/terminal/readers/tmr_xxxxxxxxxxxxx/process_setup_intent",
-        params.toMap(),
-        null);
-  }
-
-  @Test
   public void testTestHelpersCustomersFundCashBalancePost() throws StripeException {
     Customer resource = Customer.retrieve("cus_123");
 

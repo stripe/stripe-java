@@ -1137,8 +1137,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @Getter
     public static class SubscriptionUpdate {
       /**
-       * <strong>Required.</strong> The types of subscription updates that are supported. When
-       * empty, subscriptions are not updateable.
+       * The types of subscription updates that are supported. When empty, subscriptions are not
+       * updateable.
        */
       @SerializedName("default_allowed_updates")
       Object defaultAllowedUpdates;
@@ -1156,9 +1156,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * <strong>Required.</strong> The list of up to 10 products that support subscription updates.
-       */
+      /** The list of up to 10 products that support subscription updates. */
       @SerializedName("products")
       Object products;
 
@@ -1251,8 +1249,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The types of subscription updates that are supported. When
-         * empty, subscriptions are not updateable.
+         * The types of subscription updates that are supported. When empty, subscriptions are not
+         * updateable.
          */
         public Builder setDefaultAllowedUpdates(EmptyParam defaultAllowedUpdates) {
           this.defaultAllowedUpdates = defaultAllowedUpdates;
@@ -1260,8 +1258,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The types of subscription updates that are supported. When
-         * empty, subscriptions are not updateable.
+         * The types of subscription updates that are supported. When empty, subscriptions are not
+         * updateable.
          */
         public Builder setDefaultAllowedUpdates(
             List<ConfigurationCreateParams.Features.SubscriptionUpdate.DefaultAllowedUpdate>
@@ -1340,19 +1338,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> The list of up to 10 products that support subscription
-         * updates.
-         */
+        /** The list of up to 10 products that support subscription updates. */
         public Builder setProducts(EmptyParam products) {
           this.products = products;
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> The list of up to 10 products that support subscription
-         * updates.
-         */
+        /** The list of up to 10 products that support subscription updates. */
         public Builder setProducts(
             List<ConfigurationCreateParams.Features.SubscriptionUpdate.Product> products) {
           this.products = products;
