@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.stripe.exception.SignatureVerificationException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.ThinEvent;
 import com.stripe.model.terminal.Reader;
 import com.stripe.net.*;
@@ -16,11 +20,71 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
 public class StripeClientTest extends BaseStripeTest {
+  private Boolean originalTelemetry;
+
+  @BeforeEach
+  public void setUp() {
+    this.originalTelemetry = Stripe.enableTelemetry;
+    Stripe.enableTelemetry = true;
+  }
+
+  @AfterEach
+  public void tearDown() {
+    Stripe.enableTelemetry = originalTelemetry;
+  }
+
+  @Test
+  public void testReportsStripeClientUsageTelemetry() throws StripeException {
+    mockClient.customers().create();
+    mockClient.customers().update("cus_xyz");
+    verifyStripeRequest(
+        (stripeRequest) -> {
+          assert (stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
+          String usage =
+              new Gson()
+                  .fromJson(
+                      stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").get(),
+                      JsonObject.class)
+                  .get("last_request_metrics")
+                  .getAsJsonObject()
+                  .get("usage")
+                  .getAsString();
+          assertEquals("stripe_client", usage);
+        });
+  }
+
+  // TODO: https://go/j/DEVSDK-2178
+  // @Test
+  public void testReportsRawRequestUsageTelemetry() throws StripeException {
+    mockClient.rawRequest(
+        com.stripe.net.ApiResource.RequestMethod.POST, "/v1/customers", "description=foo", null);
+    mockClient.rawRequest(
+        com.stripe.net.ApiResource.RequestMethod.POST, "/v1/customers", "description=foo", null);
+    verifyStripeRequest(
+        (stripeRequest) -> {
+          assert (stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
+          JsonArray usage =
+              new Gson()
+                  .fromJson(
+                      stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").get(),
+                      JsonObject.class)
+                  .get("last_request_metrics")
+                  .getAsJsonObject()
+                  .get("usage")
+                  .getAsJsonArray();
+          assertEquals(2, usage.size());
+          assertEquals("stripe_client", usage.get(0).getAsString());
+          assertEquals("raw_request", usage.get(1).getAsString());
+        });
+  }
+
   @Test
   public void testFlowsStripeResponseGetter() throws Exception {
     StripeResponseGetter responseGetter = Mockito.spy(new LiveStripeResponseGetter());

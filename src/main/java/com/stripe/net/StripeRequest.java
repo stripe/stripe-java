@@ -50,6 +50,43 @@ public class StripeRequest {
    *
    * @param method the HTTP method
    * @param url the URL of the request
+   * @param content the body of the request
+   * @param params the parameters of the request
+   * @param options the special modifiers of the request
+   * @throws StripeException if the request cannot be initialized for any reason
+   */
+  private StripeRequest(
+      ApiResource.RequestMethod method,
+      String url,
+      HttpContent content,
+      Map<String, Object> params,
+      RequestOptions options,
+      ApiMode apiMode)
+      throws StripeException {
+    try {
+      this.content = content;
+      this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
+      this.options = (options != null) ? options : RequestOptions.getDefault();
+      this.method = method;
+      this.url = buildURL(method, url, params, apiMode);
+      this.headers = buildHeaders(method, this.options, this.content, apiMode);
+    } catch (IOException e) {
+      throw new ApiConnectionException(
+          String.format(
+              "IOException during API request to Stripe (%s): %s "
+                  + "Please check your internet connection and try again. If this problem persists,"
+                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                  + " or let us know at support@stripe.com.",
+              Stripe.getApiBase(), e.getMessage()),
+          e);
+    }
+  }
+
+  /**
+   * Initializes a new instance of the {@link StripeRequest} class.
+   *
+   * @param method the HTTP method
+   * @param url the URL of the request
    * @param params the parameters of the request
    * @param options the special modifiers of the request
    * @param apiMode version of the API
@@ -121,6 +158,29 @@ public class StripeRequest {
   }
 
   /**
+   * Initializes a new instance of the {@link StripeRequest} class.
+   *
+   * @param method the HTTP method
+   * @param url the URL of the request
+   * @param content the body of the request
+   * @param options the special modifiers of the request
+   * @throws StripeException if the request cannot be initialized for any reason
+   */
+  public static StripeRequest createWithStringContent(
+      ApiResource.RequestMethod method,
+      String url,
+      String content,
+      RequestOptions options,
+      ApiMode apiMode)
+      throws StripeException {
+    StripeRequest request =
+        new StripeRequest(
+            method, url, buildContentFromString(method, content, apiMode), null, options, apiMode);
+
+    return request;
+  }
+
+  /**
    * Returns a new {@link StripeRequest} instance with an additional header.
    *
    * @param name the additional header's name
@@ -176,6 +236,37 @@ public class StripeRequest {
     }
 
     return FormEncoder.createHttpContent(params);
+  }
+
+  private static HttpContent buildContentFromString(
+      ApiResource.RequestMethod method, String content, ApiMode apiMode)
+      throws ApiConnectionException {
+    if (method != ApiResource.RequestMethod.POST) {
+      return null;
+    }
+
+    if (apiMode == ApiMode.V2) {
+      return HttpContent.buildJsonContent(content);
+    }
+
+    HttpContent httpContent = null;
+    try {
+      httpContent = HttpContent.buildFormURLEncodedContent(content);
+    } catch (IOException e) {
+      handleIOException(e);
+    }
+    return httpContent;
+  }
+
+  private static void handleIOException(IOException e) throws ApiConnectionException {
+    throw new ApiConnectionException(
+        String.format(
+            "IOException during API request to Stripe (%s): %s "
+                + "Please check your internet connection and try again. If this problem persists,"
+                + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                + " or let us know at support@stripe.com.",
+            Stripe.getApiBase(), e.getMessage()),
+        e);
   }
 
   private static HttpHeaders buildHeaders(
