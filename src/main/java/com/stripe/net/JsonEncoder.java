@@ -4,6 +4,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 final class JsonEncoder {
@@ -14,6 +15,9 @@ final class JsonEncoder {
           .create();
 
   public static HttpContent createHttpContent(Map<String, Object> params) throws IOException {
+    if (params == null) {
+      params = new HashMap<String, Object>();
+    }
     return HttpContent.buildJsonContent(BODY_GSON.toJson(params));
   }
 }
