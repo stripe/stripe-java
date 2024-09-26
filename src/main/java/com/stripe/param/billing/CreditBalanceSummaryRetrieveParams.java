@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.terminal;
+package com.stripe.param.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,11 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
+public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
+  /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
+  @SerializedName("customer")
+  String customer;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,23 +28,16 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> PaymentIntent ID */
-  @SerializedName("payment_intent")
-  String paymentIntent;
+  /** <strong>Required.</strong> The filter criteria for the credit balance summary. */
+  @SerializedName("filter")
+  Filter filter;
 
-  /** Configuration overrides. */
-  @SerializedName("process_config")
-  ProcessConfig processConfig;
-
-  private ReaderProcessPaymentIntentParams(
-      List<String> expand,
-      Map<String, Object> extraParams,
-      String paymentIntent,
-      ProcessConfig processConfig) {
+  private CreditBalanceSummaryRetrieveParams(
+      String customer, List<String> expand, Map<String, Object> extraParams, Filter filter) {
+    this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.paymentIntent = paymentIntent;
-    this.processConfig = processConfig;
+    this.filter = filter;
   }
 
   public static Builder builder() {
@@ -48,24 +45,30 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String customer;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String paymentIntent;
-
-    private ProcessConfig processConfig;
+    private Filter filter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public ReaderProcessPaymentIntentParams build() {
-      return new ReaderProcessPaymentIntentParams(
-          this.expand, this.extraParams, this.paymentIntent, this.processConfig);
+    public CreditBalanceSummaryRetrieveParams build() {
+      return new CreditBalanceSummaryRetrieveParams(
+          this.customer, this.expand, this.extraParams, this.filter);
+    }
+
+    /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
+      return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ReaderProcessPaymentIntentParams#expand} for the field documentation.
+     * CreditBalanceSummaryRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -78,7 +81,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ReaderProcessPaymentIntentParams#expand} for the field documentation.
+     * CreditBalanceSummaryRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -91,7 +94,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ReaderProcessPaymentIntentParams#extraParams} for the field documentation.
+     * CreditBalanceSummaryRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -104,7 +107,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ReaderProcessPaymentIntentParams#extraParams} for the field documentation.
+     * See {@link CreditBalanceSummaryRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -114,32 +117,22 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> PaymentIntent ID */
-    public Builder setPaymentIntent(String paymentIntent) {
-      this.paymentIntent = paymentIntent;
-      return this;
-    }
-
-    /** Configuration overrides. */
-    public Builder setProcessConfig(ReaderProcessPaymentIntentParams.ProcessConfig processConfig) {
-      this.processConfig = processConfig;
+    /** <strong>Required.</strong> The filter criteria for the credit balance summary. */
+    public Builder setFilter(CreditBalanceSummaryRetrieveParams.Filter filter) {
+      this.filter = filter;
       return this;
     }
   }
 
   @Getter
-  public static class ProcessConfig {
-    /**
-     * This field indicates whether this payment method can be shown again to its customer in a
-     * checkout flow. Stripe products such as Checkout and Elements use this field to determine
-     * whether a payment method can be shown as a saved payment method in a checkout flow.
-     */
-    @SerializedName("allow_redisplay")
-    AllowRedisplay allowRedisplay;
+  public static class Filter {
+    /** The credit applicability scope for which to fetch balance summary. */
+    @SerializedName("applicability_scope")
+    ApplicabilityScope applicabilityScope;
 
-    /** Enables cancel button on transaction screens. */
-    @SerializedName("enable_customer_cancellation")
-    Boolean enableCustomerCancellation;
+    /** The credit grant for which to fetch balance summary. */
+    @SerializedName("credit_grant")
+    String creditGrant;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -150,25 +143,19 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Override showing a tipping selection screen on this transaction. */
-    @SerializedName("skip_tipping")
-    Boolean skipTipping;
+    /** <strong>Required.</strong> Specify the type of this filter. */
+    @SerializedName("type")
+    Type type;
 
-    /** Tipping configuration for this transaction. */
-    @SerializedName("tipping")
-    Tipping tipping;
-
-    private ProcessConfig(
-        AllowRedisplay allowRedisplay,
-        Boolean enableCustomerCancellation,
+    private Filter(
+        ApplicabilityScope applicabilityScope,
+        String creditGrant,
         Map<String, Object> extraParams,
-        Boolean skipTipping,
-        Tipping tipping) {
-      this.allowRedisplay = allowRedisplay;
-      this.enableCustomerCancellation = enableCustomerCancellation;
+        Type type) {
+      this.applicabilityScope = applicabilityScope;
+      this.creditGrant = creditGrant;
       this.extraParams = extraParams;
-      this.skipTipping = skipTipping;
-      this.tipping = tipping;
+      this.type = type;
     }
 
     public static Builder builder() {
@@ -176,47 +163,37 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private AllowRedisplay allowRedisplay;
+      private ApplicabilityScope applicabilityScope;
 
-      private Boolean enableCustomerCancellation;
+      private String creditGrant;
 
       private Map<String, Object> extraParams;
 
-      private Boolean skipTipping;
-
-      private Tipping tipping;
+      private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ReaderProcessPaymentIntentParams.ProcessConfig build() {
-        return new ReaderProcessPaymentIntentParams.ProcessConfig(
-            this.allowRedisplay,
-            this.enableCustomerCancellation,
-            this.extraParams,
-            this.skipTipping,
-            this.tipping);
+      public CreditBalanceSummaryRetrieveParams.Filter build() {
+        return new CreditBalanceSummaryRetrieveParams.Filter(
+            this.applicabilityScope, this.creditGrant, this.extraParams, this.type);
       }
 
-      /**
-       * This field indicates whether this payment method can be shown again to its customer in a
-       * checkout flow. Stripe products such as Checkout and Elements use this field to determine
-       * whether a payment method can be shown as a saved payment method in a checkout flow.
-       */
-      public Builder setAllowRedisplay(
-          ReaderProcessPaymentIntentParams.ProcessConfig.AllowRedisplay allowRedisplay) {
-        this.allowRedisplay = allowRedisplay;
+      /** The credit applicability scope for which to fetch balance summary. */
+      public Builder setApplicabilityScope(
+          CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope applicabilityScope) {
+        this.applicabilityScope = applicabilityScope;
         return this;
       }
 
-      /** Enables cancel button on transaction screens. */
-      public Builder setEnableCustomerCancellation(Boolean enableCustomerCancellation) {
-        this.enableCustomerCancellation = enableCustomerCancellation;
+      /** The credit grant for which to fetch balance summary. */
+      public Builder setCreditGrant(String creditGrant) {
+        this.creditGrant = creditGrant;
         return this;
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * ReaderProcessPaymentIntentParams.ProcessConfig#extraParams} for the field documentation.
+       * CreditBalanceSummaryRetrieveParams.Filter#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -229,7 +206,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link ReaderProcessPaymentIntentParams.ProcessConfig#extraParams} for the field
+       * See {@link CreditBalanceSummaryRetrieveParams.Filter#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -240,29 +217,15 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
         return this;
       }
 
-      /** Override showing a tipping selection screen on this transaction. */
-      public Builder setSkipTipping(Boolean skipTipping) {
-        this.skipTipping = skipTipping;
-        return this;
-      }
-
-      /** Tipping configuration for this transaction. */
-      public Builder setTipping(ReaderProcessPaymentIntentParams.ProcessConfig.Tipping tipping) {
-        this.tipping = tipping;
+      /** <strong>Required.</strong> Specify the type of this filter. */
+      public Builder setType(CreditBalanceSummaryRetrieveParams.Filter.Type type) {
+        this.type = type;
         return this;
       }
     }
 
     @Getter
-    public static class Tipping {
-      /**
-       * Amount used to calculate tip suggestions on tipping selection screen for this transaction.
-       * Must be a positive integer in the smallest currency unit (e.g., 100 cents to represent
-       * $1.00 or 100 to represent ¥100, a zero-decimal currency).
-       */
-      @SerializedName("amount_eligible")
-      Long amountEligible;
-
+    public static class ApplicabilityScope {
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -272,9 +235,16 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Tipping(Long amountEligible, Map<String, Object> extraParams) {
-        this.amountEligible = amountEligible;
+      /**
+       * <strong>Required.</strong> The price type to which credit grants can apply to. We currently
+       * only support {@code metered} price type.
+       */
+      @SerializedName("price_type")
+      PriceType priceType;
+
+      private ApplicabilityScope(Map<String, Object> extraParams, PriceType priceType) {
         this.extraParams = extraParams;
+        this.priceType = priceType;
       }
 
       public static Builder builder() {
@@ -282,31 +252,21 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Long amountEligible;
-
         private Map<String, Object> extraParams;
 
-        /** Finalize and obtain parameter instance from this builder. */
-        public ReaderProcessPaymentIntentParams.ProcessConfig.Tipping build() {
-          return new ReaderProcessPaymentIntentParams.ProcessConfig.Tipping(
-              this.amountEligible, this.extraParams);
-        }
+        private PriceType priceType;
 
-        /**
-         * Amount used to calculate tip suggestions on tipping selection screen for this
-         * transaction. Must be a positive integer in the smallest currency unit (e.g., 100 cents to
-         * represent $1.00 or 100 to represent ¥100, a zero-decimal currency).
-         */
-        public Builder setAmountEligible(Long amountEligible) {
-          this.amountEligible = amountEligible;
-          return this;
+        /** Finalize and obtain parameter instance from this builder. */
+        public CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope build() {
+          return new CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope(
+              this.extraParams, this.priceType);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ReaderProcessPaymentIntentParams.ProcessConfig.Tipping#extraParams} for
-         * the field documentation.
+         * map. See {@link CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope#extraParams}
+         * for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -319,8 +279,8 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ReaderProcessPaymentIntentParams.ProcessConfig.Tipping#extraParams} for
-         * the field documentation.
+         * map. See {@link CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -329,23 +289,42 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * <strong>Required.</strong> The price type to which credit grants can apply to. We
+         * currently only support {@code metered} price type.
+         */
+        public Builder setPriceType(
+            CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.PriceType priceType) {
+          this.priceType = priceType;
+          return this;
+        }
+      }
+
+      public enum PriceType implements ApiRequestParams.EnumParam {
+        @SerializedName("metered")
+        METERED("metered");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PriceType(String value) {
+          this.value = value;
+        }
       }
     }
 
-    public enum AllowRedisplay implements ApiRequestParams.EnumParam {
-      @SerializedName("always")
-      ALWAYS("always"),
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("applicability_scope")
+      APPLICABILITY_SCOPE("applicability_scope"),
 
-      @SerializedName("limited")
-      LIMITED("limited"),
-
-      @SerializedName("unspecified")
-      UNSPECIFIED("unspecified");
+      @SerializedName("credit_grant")
+      CREDIT_GRANT("credit_grant");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
 
-      AllowRedisplay(String value) {
+      Type(String value) {
         this.value = value;
       }
     }

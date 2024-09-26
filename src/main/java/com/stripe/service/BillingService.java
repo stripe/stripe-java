@@ -13,6 +13,18 @@ public final class BillingService extends ApiService {
     return new com.stripe.service.billing.AlertService(this.getResponseGetter());
   }
 
+  public com.stripe.service.billing.CreditBalanceSummaryService creditBalanceSummary() {
+    return new com.stripe.service.billing.CreditBalanceSummaryService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.billing.CreditBalanceTransactionService creditBalanceTransactions() {
+    return new com.stripe.service.billing.CreditBalanceTransactionService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.billing.CreditGrantService creditGrants() {
+    return new com.stripe.service.billing.CreditGrantService(this.getResponseGetter());
+  }
+
   public com.stripe.service.billing.MeterEventAdjustmentService meterEventAdjustments() {
     return new com.stripe.service.billing.MeterEventAdjustmentService(this.getResponseGetter());
   }

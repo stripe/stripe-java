@@ -11896,7 +11896,8 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
         com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
             .setSetupIntent("seti_xxxxxxxxxxxxx")
-            .setCustomerConsentCollected(true)
+            .setAllowRedisplay(
+                com.stripe.param.terminal.ReaderProcessSetupIntentParams.AllowRedisplay.ALWAYS)
             .build();
 
     com.stripe.model.terminal.Reader reader = resource.processSetupIntent(params);
@@ -11916,7 +11917,8 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
         com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
             .setSetupIntent("seti_xxxxxxxxxxxxx")
-            .setCustomerConsentCollected(true)
+            .setAllowRedisplay(
+                com.stripe.param.terminal.ReaderProcessSetupIntentParams.AllowRedisplay.ALWAYS)
             .build();
 
     com.stripe.model.terminal.Reader reader =
