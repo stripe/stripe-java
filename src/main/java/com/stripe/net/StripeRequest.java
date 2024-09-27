@@ -177,6 +177,21 @@ public class StripeRequest {
         new StripeRequest(
             method, url, buildContentFromString(method, content, apiMode), null, options, apiMode);
 
+    Authenticator authenticator = options.getAuthenticator();
+
+    if (authenticator == null) {
+      throw new AuthenticationException(
+          "No API key provided. Set your API key using `Stripe.apiKey = \"<API-KEY>\"`. You can "
+              + "generate API keys from the Stripe Dashboard. See "
+              + "https://stripe.com/docs/api/authentication for details or contact support at "
+              + "https://support.stripe.com/email if you have any questions.",
+          null,
+          null,
+          0);
+    }
+
+    request = request.options().getAuthenticator().authenticate(request);
+
     return request;
   }
 
