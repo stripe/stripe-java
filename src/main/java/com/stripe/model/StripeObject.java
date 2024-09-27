@@ -9,6 +9,7 @@ import com.stripe.net.StripeResponse;
 import com.stripe.net.StripeResponseGetter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.time.Instant;
 
 public abstract class StripeObject implements StripeObjectInterface {
   public static final Gson PRETTY_PRINT_GSON =
@@ -17,6 +18,7 @@ public abstract class StripeObject implements StripeObjectInterface {
           .serializeNulls()
           .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
           .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
+          .registerTypeAdapter(Instant.class, new InstantSerializer())
           .create();
 
   private transient StripeResponse lastResponse;
@@ -101,9 +103,15 @@ public abstract class StripeObject implements StripeObjectInterface {
     String type = eventDataObjectJson.getAsJsonObject().get("object").getAsString();
     Class<? extends StripeObject> cl = EventDataClassLookup.classLookup.get(type);
     StripeObject object =
-        ApiResource.deserializeStripeObject(
+        StripeObject.deserializeStripeObject(
             eventDataObjectJson, cl != null ? cl : StripeRawJsonObject.class, responseGetter);
     return object;
+  }
+
+  public static StripeObject deserializeStripeObject(
+      String payload, StripeResponseGetter responseGetter) {
+    JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
+    return deserializeStripeObject(jsonObject, responseGetter);
   }
 
   public static StripeObject deserializeStripeObject(

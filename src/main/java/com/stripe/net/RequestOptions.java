@@ -8,8 +8,11 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 public class RequestOptions {
-  private final String apiKey;
+  // When adding setting here keep them in sync with settings in StripeClientOptions and
+  // in the RequestOptions.merge method
+  private final Authenticator authenticator;
   private final String clientId;
+  private final String stripeContext;
   private final String idempotencyKey;
   private final String stripeAccount;
   private final String baseUrl;
@@ -28,13 +31,15 @@ public class RequestOptions {
   private final PasswordAuthentication proxyCredential;
 
   public static RequestOptions getDefault() {
-    return new RequestOptions(null, null, null, null, null, null, null, null, null, null, null);
+    return new RequestOptions(
+        null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  private RequestOptions(
-      String apiKey,
+  protected RequestOptions(
+      Authenticator authenticator,
       String clientId,
       String idempotencyKey,
+      String stripeContext,
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
@@ -43,9 +48,10 @@ public class RequestOptions {
       Integer maxNetworkRetries,
       Proxy connectionProxy,
       PasswordAuthentication proxyCredential) {
-    this.apiKey = apiKey;
+    this.authenticator = authenticator;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
+    this.stripeContext = stripeContext;
     this.stripeAccount = stripeAccount;
     this.stripeVersionOverride = stripeVersionOverride;
     this.baseUrl = baseUrl;
@@ -56,12 +62,24 @@ public class RequestOptions {
     this.proxyCredential = proxyCredential;
   }
 
+  public Authenticator getAuthenticator() {
+    return this.authenticator;
+  }
+
   public String getApiKey() {
-    return apiKey;
+    if (authenticator instanceof BearerTokenAuthenticator) {
+      return ((BearerTokenAuthenticator) authenticator).getApiKey();
+    }
+
+    return null;
   }
 
   public String getClientId() {
     return clientId;
+  }
+
+  public String getStripeContext() {
+    return stripeContext;
   }
 
   public String getIdempotencyKey() {
@@ -117,7 +135,9 @@ public class RequestOptions {
    */
   @Deprecated
   public RequestOptionsBuilder toBuilder() {
-    return new RequestOptionsBuilder().setApiKey(this.apiKey).setStripeAccount(this.stripeAccount);
+    return new RequestOptionsBuilder()
+        .setAuthenticator(this.authenticator)
+        .setStripeAccount(this.stripeAccount);
   }
 
   /**
@@ -128,7 +148,7 @@ public class RequestOptions {
   public RequestOptionsBuilder toBuilderFullCopy() {
     return RequestOptionsBuilder.unsafeSetStripeVersionOverride(
         new RequestOptionsBuilder()
-            .setApiKey(this.apiKey)
+            .setAuthenticator(this.authenticator)
             .setBaseUrl(this.baseUrl)
             .setClientId(this.clientId)
             .setIdempotencyKey(this.idempotencyKey)
@@ -141,18 +161,19 @@ public class RequestOptions {
         stripeVersionOverride);
   }
 
-  public static final class RequestOptionsBuilder {
-    private String apiKey;
-    private String clientId;
-    private String idempotencyKey;
-    private String stripeAccount;
-    private String stripeVersionOverride;
-    private Integer connectTimeout;
-    private Integer readTimeout;
-    private Integer maxNetworkRetries;
-    private Proxy connectionProxy;
-    private PasswordAuthentication proxyCredential;
-    private String baseUrl;
+  public static class RequestOptionsBuilder {
+    protected Authenticator authenticator;
+    protected String clientId;
+    protected String idempotencyKey;
+    protected String stripeContext;
+    protected String stripeAccount;
+    protected String stripeVersionOverride;
+    protected Integer connectTimeout;
+    protected Integer readTimeout;
+    protected Integer maxNetworkRetries;
+    protected Proxy connectionProxy;
+    protected PasswordAuthentication proxyCredential;
+    protected String baseUrl;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -160,17 +181,34 @@ public class RequestOptions {
      */
     public RequestOptionsBuilder() {}
 
+    public Authenticator getAuthenticator() {
+      return this.authenticator;
+    }
+
+    public RequestOptionsBuilder setAuthenticator(Authenticator authenticator) {
+      this.authenticator = authenticator;
+      return this;
+    }
+
     public String getApiKey() {
-      return apiKey;
+      if (authenticator instanceof BearerTokenAuthenticator) {
+        return ((BearerTokenAuthenticator) authenticator).getApiKey();
+      }
+
+      return null;
     }
 
     public RequestOptionsBuilder setApiKey(String apiKey) {
-      this.apiKey = normalizeApiKey(apiKey);
+      if (apiKey == null) {
+        this.authenticator = null;
+      } else {
+        this.authenticator = new BearerTokenAuthenticator(normalizeApiKey(apiKey));
+      }
       return this;
     }
 
     public RequestOptionsBuilder clearApiKey() {
-      this.apiKey = null;
+      this.authenticator = null;
       return this;
     }
 
@@ -188,12 +226,26 @@ public class RequestOptions {
       return this;
     }
 
+    public String getStripeContext() {
+      return stripeContext;
+    }
+
+    public RequestOptionsBuilder setStripeContext(String context) {
+      this.stripeContext = context;
+      return this;
+    }
+
+    public RequestOptionsBuilder clearStripeContext() {
+      this.stripeContext = null;
+      return this;
+    }
+
     public RequestOptionsBuilder setIdempotencyKey(String idempotencyKey) {
       this.idempotencyKey = idempotencyKey;
       return this;
     }
 
-    public int getConnectTimeout() {
+    public Integer getConnectTimeout() {
       return connectTimeout;
     }
 
@@ -304,9 +356,10 @@ public class RequestOptions {
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
-          normalizeApiKey(this.apiKey),
+          this.authenticator,
           normalizeClientId(this.clientId),
           normalizeIdempotencyKey(this.idempotencyKey),
+          stripeContext,
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
           normalizeBaseUrl(this.baseUrl),
@@ -318,7 +371,7 @@ public class RequestOptions {
     }
   }
 
-  private static String normalizeApiKey(String apiKey) {
+  protected static String normalizeApiKey(String apiKey) {
     // null apiKeys are considered "valid"
     if (apiKey == null) {
       return null;
@@ -326,7 +379,7 @@ public class RequestOptions {
     return apiKey.trim();
   }
 
-  private static String normalizeClientId(String clientId) {
+  protected static String normalizeClientId(String clientId) {
     // null client_ids are considered "valid"
     if (clientId == null) {
       return null;
@@ -338,7 +391,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeStripeVersion(String stripeVersion) {
+  protected static String normalizeStripeVersion(String stripeVersion) {
     // null stripeVersions are considered "valid" and use Stripe.apiVersion
     if (stripeVersion == null) {
       return null;
@@ -350,7 +403,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeBaseUrl(String baseUrl) {
+  protected static String normalizeBaseUrl(String baseUrl) {
     // null baseUrl is valid, and will fall back to e.g. Stripe.apiBase or Stripe.connectBase
     // (depending on the method)
     if (baseUrl == null) {
@@ -363,7 +416,7 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeIdempotencyKey(String idempotencyKey) {
+  protected static String normalizeIdempotencyKey(String idempotencyKey) {
     if (idempotencyKey == null) {
       return null;
     }
@@ -380,7 +433,18 @@ public class RequestOptions {
     return normalized;
   }
 
-  private static String normalizeStripeAccount(String stripeAccount) {
+  protected static String normalizeStripeContext(String stripContext) {
+    if (stripContext == null) {
+      return null;
+    }
+    String normalized = stripContext.trim();
+    if (normalized.isEmpty()) {
+      throw new InvalidRequestOptionsException("Empty stripe context specified!");
+    }
+    return normalized;
+  }
+
+  protected static String normalizeStripeAccount(String stripeAccount) {
     if (stripeAccount == null) {
       return null;
     }
@@ -394,9 +458,10 @@ public class RequestOptions {
   static RequestOptions merge(StripeResponseGetterOptions clientOptions, RequestOptions options) {
     if (options == null) {
       return new RequestOptions(
-          clientOptions.getApiKey(), // authenticator
+          clientOptions.getAuthenticator(), // authenticator
           clientOptions.getClientId(), // clientId
           null, // idempotencyKey
+          clientOptions.getStripeContext(), // stripeContext
           null, // stripeAccount
           null, // stripeVersionOverride
           null, // baseUrl
@@ -408,9 +473,14 @@ public class RequestOptions {
           );
     }
     return new RequestOptions(
-        options.getApiKey() != null ? options.getApiKey() : clientOptions.getApiKey(),
+        options.getAuthenticator() != null
+            ? options.getAuthenticator()
+            : clientOptions.getAuthenticator(),
         options.getClientId() != null ? options.getClientId() : clientOptions.getClientId(),
         options.getIdempotencyKey(),
+        options.getStripeContext() != null
+            ? options.getStripeContext()
+            : clientOptions.getStripeContext(),
         options.getStripeAccount(),
         RequestOptions.unsafeGetStripeVersionOverride(options),
         options.getBaseUrl(),

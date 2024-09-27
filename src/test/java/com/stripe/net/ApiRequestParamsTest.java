@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.param.common.EmptyParam;
 import java.util.Map;
 import lombok.Setter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ApiRequestParamsTest {
   enum ParamCode implements ApiRequestParams.EnumParam {

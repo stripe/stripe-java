@@ -1,0 +1,10 @@
+{
+  "id": "fa_123",
+  "object": "financial_account",
+  "description": "test account",
+  "created": "2024-09-16T23:34:07Z",
+  "country": "US",
+  "balance_types": ["payments"],
+  "requested_currencies": ["USD"],
+  "status": "open"
+}

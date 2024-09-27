@@ -15,8 +15,11 @@ public class GlobalStripeResponseGetterOptions extends StripeResponseGetterOptio
   private GlobalStripeResponseGetterOptions() {}
 
   @Override
-  public String getApiKey() {
-    return Stripe.apiKey;
+  public Authenticator getAuthenticator() {
+    if (Stripe.apiKey == null) {
+      return null;
+    }
+    return new BearerTokenAuthenticator(Stripe.apiKey);
   }
 
   @Override
@@ -62,5 +65,15 @@ public class GlobalStripeResponseGetterOptions extends StripeResponseGetterOptio
   @Override
   public String getConnectBase() {
     return Stripe.getConnectBase();
+  }
+
+  @Override
+  public String getMeterEventsBase() {
+    return Stripe.getMeterEventsBase();
+  }
+
+  @Override
+  public String getStripeContext() {
+    return null;
   }
 }

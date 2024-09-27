@@ -27,7 +27,7 @@ public class LiveStripeResponseGetterTest extends BaseStripeTest {
   public void testInvalidJson() throws StripeException {
     HttpClient spy = Mockito.spy(new HttpURLConnectionClient());
     StripeResponseGetter srg = new LiveStripeResponseGetter(spy);
-    ApiResource.setStripeResponseGetter(srg);
+    ApiResource.setGlobalResponseGetter(srg);
     StripeResponse response =
         new StripeResponse(200, HttpHeaders.of(Collections.emptyMap()), "invalid JSON");
     Mockito.doReturn(response).when(spy).requestWithRetries(Mockito.<StripeRequest>any());
