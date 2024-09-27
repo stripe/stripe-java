@@ -14,6 +14,8 @@ final class EventDataClassLookup {
   public static final Map<String, Class<? extends Event>> eventClassLookup = new HashMap<>();
 
   static {
+    classLookup.put("billing.meter", com.stripe.model.billing.Meter.class);
+
     classLookup.put("billing.meter_event", com.stripe.model.v2.billing.MeterEvent.class);
     classLookup.put(
         "billing.meter_event_adjustment", com.stripe.model.v2.billing.MeterEventAdjustment.class);
