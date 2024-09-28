@@ -630,6 +630,10 @@ public class StripeClient {
       return this;
     }
 
+    public String getConnectBase() {
+      return this.connectBase;
+    }
+
     /**
      * Set the base URL for the Stripe Meter Events API. By default this is
      * "https://events.stripe.com".
