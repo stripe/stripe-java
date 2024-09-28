@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.google.gson.JsonSyntaxException;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.ApiException;
+import com.stripe.exception.IdempotencyException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Subscription;
 import com.stripe.net.ApiResource;
@@ -41,5 +42,25 @@ public class LiveStripeResponseGetterTest extends BaseStripeTest {
         exception.getMessage(), CoreMatchers.containsString("Invalid response object from API"));
     assertNotNull(exception.getCause());
     assertThat(exception.getCause(), CoreMatchers.instanceOf(JsonSyntaxException.class));
+  }
+
+  @Test
+  public void testIdempotencyError() throws StripeException {
+    HttpClient spy = Mockito.spy(new HttpURLConnectionClient());
+    StripeResponseGetter srg = new LiveStripeResponseGetter(spy);
+    ApiResource.setGlobalResponseGetter(srg);
+    StripeResponse response =
+        new StripeResponse(
+            400,
+            HttpHeaders.of(Collections.emptyMap()),
+            "{\"error\": {\"message\": \"idempotency\", \"type\": \"idempotency_error\"}}");
+    Mockito.doReturn(response).when(spy).requestWithRetries(Mockito.<StripeRequest>any());
+    Exception exception =
+        assertThrows(
+            IdempotencyException.class,
+            () -> {
+              Subscription.retrieve("sub_123");
+            });
+    assertThat(exception.getMessage(), CoreMatchers.containsString("idempotency"));
   }
 }
