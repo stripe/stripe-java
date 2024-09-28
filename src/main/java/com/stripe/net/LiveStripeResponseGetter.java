@@ -320,12 +320,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       case 404:
         if ("idempotency_error".equals(error.getType())) {
           exception =
-              StripeException.parseV2Exception(
-                  "idempotency_error",
-                  ApiResource.GSON.fromJson(response.body(), JsonObject.class),
-                  response.code(),
-                  response.requestId(),
-                  this);
+              new IdempotencyException(
+                  error.getMessage(), response.requestId(), error.getCode(), response.code());
         } else {
           exception =
               new InvalidRequestException(
