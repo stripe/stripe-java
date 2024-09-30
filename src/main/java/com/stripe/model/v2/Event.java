@@ -130,7 +130,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     Request request;
 
     /**
-     * Open Enum. Event reason type.
+     * Event reason type.
      *
      * <p>Equal to {@code request}.
      */

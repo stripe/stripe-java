@@ -18,6 +18,7 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The page size. */
   @SerializedName("limit")
   Integer limit;
 
@@ -25,6 +26,7 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName("object_id")
   String objectId;
 
+  /** The requested page number. */
   @SerializedName("page")
   String page;
 
@@ -80,6 +82,7 @@ public class EventListParams extends ApiRequestParams {
       return this;
     }
 
+    /** The page size. */
     public Builder setLimit(Integer limit) {
       this.limit = limit;
       return this;
@@ -91,6 +94,7 @@ public class EventListParams extends ApiRequestParams {
       return this;
     }
 
+    /** The requested page number. */
     public Builder setPage(String page) {
       this.page = page;
       return this;
