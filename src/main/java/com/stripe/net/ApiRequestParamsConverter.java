@@ -11,10 +11,12 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.stripe.Stripe;
+import com.stripe.model.InstantSerializer;
 import com.stripe.param.common.EmptyParam;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.time.Instant;
 import java.util.Map;
 
 /**
@@ -28,6 +30,7 @@ class ApiRequestParamsConverter {
           .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
           .registerTypeAdapterFactory(new HasEmptyEnumTypeAdapterFactory())
           .registerTypeAdapterFactory(new NullValuesInMapsTypeAdapterFactory())
+          .registerTypeAdapter(Instant.class, new InstantSerializer())
           .create();
 
   private static final UntypedMapDeserializer FLATTENING_EXTRA_PARAMS_DESERIALIZER =

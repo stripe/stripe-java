@@ -25,6 +25,8 @@ class StripeCollectionItemTypeSettingFactory implements TypeAdapterFactory {
         T obj = delegate.read(in);
         if (obj instanceof StripeCollectionInterface) {
           ((StripeCollectionInterface<?>) obj).setPageTypeToken(type.getType());
+        } else if (obj instanceof com.stripe.model.v2.StripeCollection<?>) {
+          ((com.stripe.model.v2.StripeCollection<?>) obj).setPageTypeToken(type.getType());
         }
         return obj;
       }

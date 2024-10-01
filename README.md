@@ -262,6 +262,31 @@ If your beta feature requires a `Stripe-Version` header to be sent, set the `Str
 Stripe.addBetaVersion("feature_beta", "v3");
 ```
 
+### Custom requests
+
+If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `StripeClient`.
+
+```java
+// Create a RawRequestOptions object, allowing you to set per-request
+// configuration options like additional headers.
+Map<String, String> stripeVersionHeader = new HashMap<>();
+stripeVersionHeader.put("Stripe-Version", "2022-11-15; feature_beta=v3");
+RawRequestOptions options =
+  RawRequestOptions.builder()
+    .setAdditionalHeaders(stripeVersionHeader)
+    .build();
+
+// Make the request using the Stripe.rawRequest() method.
+StripeClient client = new StripeClient("sk_test_...");
+final StripeResponse response =
+  client.rawRequest(
+    ApiResource.RequestMethod.POST, "/v1/beta_endpoint", "param=123", options);
+
+// (Optional) response.body() is a string. You can call
+// Stripe.deserialize() to get a StripeObject.
+StripeObject obj = client.deserialize(response.body());
+```
+
 ## Support
 
 New features and bug fixes are released on the latest major version of the Stripe Java client library. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.

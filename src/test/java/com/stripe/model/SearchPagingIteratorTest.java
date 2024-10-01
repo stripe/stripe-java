@@ -113,6 +113,7 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     assertEquals("pm_126", models.get(3).getId());
     assertEquals("pm_127", models.get(4).getId());
 
+    // First request made using a static method
     verifyRequest(
         BaseAddress.API, ApiResource.RequestMethod.GET, "/v1/searchable_models", page0Params, null);
     verifyRequest(

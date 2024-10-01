@@ -129,6 +129,14 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
 
   @Getter
   public static class ProcessConfig {
+    /**
+     * This field indicates whether this payment method can be shown again to its customer in a
+     * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+     * whether a payment method can be shown as a saved payment method in a checkout flow.
+     */
+    @SerializedName("allow_redisplay")
+    AllowRedisplay allowRedisplay;
+
     /** Enables cancel button on transaction screens. */
     @SerializedName("enable_customer_cancellation")
     Boolean enableCustomerCancellation;
@@ -151,10 +159,12 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     Tipping tipping;
 
     private ProcessConfig(
+        AllowRedisplay allowRedisplay,
         Boolean enableCustomerCancellation,
         Map<String, Object> extraParams,
         Boolean skipTipping,
         Tipping tipping) {
+      this.allowRedisplay = allowRedisplay;
       this.enableCustomerCancellation = enableCustomerCancellation;
       this.extraParams = extraParams;
       this.skipTipping = skipTipping;
@@ -166,6 +176,8 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AllowRedisplay allowRedisplay;
+
       private Boolean enableCustomerCancellation;
 
       private Map<String, Object> extraParams;
@@ -177,7 +189,22 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public ReaderProcessPaymentIntentParams.ProcessConfig build() {
         return new ReaderProcessPaymentIntentParams.ProcessConfig(
-            this.enableCustomerCancellation, this.extraParams, this.skipTipping, this.tipping);
+            this.allowRedisplay,
+            this.enableCustomerCancellation,
+            this.extraParams,
+            this.skipTipping,
+            this.tipping);
+      }
+
+      /**
+       * This field indicates whether this payment method can be shown again to its customer in a
+       * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+       * whether a payment method can be shown as a saved payment method in a checkout flow.
+       */
+      public Builder setAllowRedisplay(
+          ReaderProcessPaymentIntentParams.ProcessConfig.AllowRedisplay allowRedisplay) {
+        this.allowRedisplay = allowRedisplay;
+        return this;
       }
 
       /** Enables cancel button on transaction screens. */
@@ -302,6 +329,24 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+      }
+    }
+
+    public enum AllowRedisplay implements ApiRequestParams.EnumParam {
+      @SerializedName("always")
+      ALWAYS("always"),
+
+      @SerializedName("limited")
+      LIMITED("limited"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AllowRedisplay(String value) {
+        this.value = value;
       }
     }
   }

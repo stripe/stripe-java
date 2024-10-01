@@ -1996,6 +1996,24 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCoreEventsGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/events/ll_123",
+        null,
+        null,
+        com.stripe.model.v2.Event.class,
+        "{\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.Event event = client.v2().core().events().retrieve("ll_123");
+    assertNotNull(event);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events/ll_123", null, null);
+  }
+
+  @Test
   public void testCountrySpecsGet() throws StripeException {
     CountrySpecListParams params = CountrySpecListParams.builder().setLimit(3L).build();
 
@@ -11884,48 +11902,6 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v1/terminal/readers/tmr_xxxxxxxxxxxxx/process_payment_intent",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testTerminalReadersProcessSetupIntentPost() throws StripeException {
-    com.stripe.model.terminal.Reader resource =
-        com.stripe.model.terminal.Reader.retrieve("tmr_xxxxxxxxxxxxx");
-
-    com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
-        com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
-            .setSetupIntent("seti_xxxxxxxxxxxxx")
-            .setCustomerConsentCollected(true)
-            .build();
-
-    com.stripe.model.terminal.Reader reader = resource.processSetupIntent(params);
-    assertNotNull(reader);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/terminal/readers/tmr_xxxxxxxxxxxxx/process_setup_intent",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testTerminalReadersProcessSetupIntentPostServices() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
-        com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
-            .setSetupIntent("seti_xxxxxxxxxxxxx")
-            .setCustomerConsentCollected(true)
-            .build();
-
-    com.stripe.model.terminal.Reader reader =
-        client.terminal().readers().processSetupIntent("tmr_xxxxxxxxxxxxx", params);
-    assertNotNull(reader);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/terminal/readers/tmr_xxxxxxxxxxxxx/process_setup_intent",
         params.toMap(),
         null);
   }

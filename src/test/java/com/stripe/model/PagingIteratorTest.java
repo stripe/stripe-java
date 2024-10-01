@@ -136,6 +136,7 @@ public class PagingIteratorTest extends BaseStripeTest {
                         "{\"id\": \"xyz\", \"pages\": {\"data\": [{\"id\": \"pm_121\"}, {\"id\": \"pm_122\"}], \"url\": \"/v1/pageable_models\", \"has_more\": true}}"))
         .when(httpClientSpy)
         .request(Mockito.any());
+
     Stripe.apiKey = null;
     ReferencesPageableModel model =
         ReferencesPageableModel.retrieve(RequestOptions.builder().setApiKey("sk_test_xyz").build());

@@ -15,7 +15,9 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class StripeSearchResult<T> extends StripeObject
     implements StripeSearchResultInterface<T>, StripeActiveObject {
+
   private transient StripeResponseGetter responseGetter;
+
   String object;
 
   @Getter(onMethod_ = {@Override})

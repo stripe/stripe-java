@@ -28,17 +28,17 @@ public final class SubscriptionService extends ApiService {
   }
 
   /**
-   * Cancels a customer’s subscription immediately. The customer will not be charged again for the
-   * subscription.
+   * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
+   * subscription. After it’s canceled, you can no longer update the subscription or its <a
+   * href="https://stripe.com/metadata">metadata</a>.
    *
-   * <p>Note, however, that any pending invoice items that you’ve created will still be charged for
-   * at the end of the period, unless manually <a
-   * href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve set the
-   * subscription to cancel at the end of the period, any pending prorations will also be left in
-   * place and collected at the end of the period. But if the subscription is set to cancel
-   * immediately, pending prorations will be removed.
+   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
+   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
+   * set the subscription to cancel at the end of the period, any pending prorations are also left
+   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * immediately, pending prorations are removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
    * after the customer has canceled a subscription. However, you can resume automatic collection of
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check
@@ -49,17 +49,17 @@ public final class SubscriptionService extends ApiService {
     return cancel(subscriptionExposedId, params, (RequestOptions) null);
   }
   /**
-   * Cancels a customer’s subscription immediately. The customer will not be charged again for the
-   * subscription.
+   * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
+   * subscription. After it’s canceled, you can no longer update the subscription or its <a
+   * href="https://stripe.com/metadata">metadata</a>.
    *
-   * <p>Note, however, that any pending invoice items that you’ve created will still be charged for
-   * at the end of the period, unless manually <a
-   * href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve set the
-   * subscription to cancel at the end of the period, any pending prorations will also be left in
-   * place and collected at the end of the period. But if the subscription is set to cancel
-   * immediately, pending prorations will be removed.
+   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
+   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
+   * set the subscription to cancel at the end of the period, any pending prorations are also left
+   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * immediately, pending prorations are removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
    * after the customer has canceled a subscription. However, you can resume automatic collection of
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check
@@ -70,17 +70,17 @@ public final class SubscriptionService extends ApiService {
     return cancel(subscriptionExposedId, (SubscriptionCancelParams) null, options);
   }
   /**
-   * Cancels a customer’s subscription immediately. The customer will not be charged again for the
-   * subscription.
+   * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
+   * subscription. After it’s canceled, you can no longer update the subscription or its <a
+   * href="https://stripe.com/metadata">metadata</a>.
    *
-   * <p>Note, however, that any pending invoice items that you’ve created will still be charged for
-   * at the end of the period, unless manually <a
-   * href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve set the
-   * subscription to cancel at the end of the period, any pending prorations will also be left in
-   * place and collected at the end of the period. But if the subscription is set to cancel
-   * immediately, pending prorations will be removed.
+   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
+   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
+   * set the subscription to cancel at the end of the period, any pending prorations are also left
+   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * immediately, pending prorations are removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
    * after the customer has canceled a subscription. However, you can resume automatic collection of
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check
@@ -90,17 +90,17 @@ public final class SubscriptionService extends ApiService {
     return cancel(subscriptionExposedId, (SubscriptionCancelParams) null, (RequestOptions) null);
   }
   /**
-   * Cancels a customer’s subscription immediately. The customer will not be charged again for the
-   * subscription.
+   * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
+   * subscription. After it’s canceled, you can no longer update the subscription or its <a
+   * href="https://stripe.com/metadata">metadata</a>.
    *
-   * <p>Note, however, that any pending invoice items that you’ve created will still be charged for
-   * at the end of the period, unless manually <a
-   * href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve set the
-   * subscription to cancel at the end of the period, any pending prorations will also be left in
-   * place and collected at the end of the period. But if the subscription is set to cancel
-   * immediately, pending prorations will be removed.
+   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
+   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
+   * set the subscription to cancel at the end of the period, any pending prorations are also left
+   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * immediately, pending prorations are removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
    * after the customer has canceled a subscription. However, you can resume automatic collection of
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check

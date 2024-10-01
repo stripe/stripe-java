@@ -28,31 +28,25 @@ public class AlertCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Filters to limit the scope of an alert. */
-  @SerializedName("filter")
-  Filter filter;
-
   /** <strong>Required.</strong> The title of the alert. */
   @SerializedName("title")
   String title;
 
   /** The configuration of the usage threshold. */
-  @SerializedName("usage_threshold_config")
-  UsageThresholdConfig usageThresholdConfig;
+  @SerializedName("usage_threshold")
+  UsageThreshold usageThreshold;
 
   private AlertCreateParams(
       AlertType alertType,
       List<String> expand,
       Map<String, Object> extraParams,
-      Filter filter,
       String title,
-      UsageThresholdConfig usageThresholdConfig) {
+      UsageThreshold usageThreshold) {
     this.alertType = alertType;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.filter = filter;
     this.title = title;
-    this.usageThresholdConfig = usageThresholdConfig;
+    this.usageThreshold = usageThreshold;
   }
 
   public static Builder builder() {
@@ -66,21 +60,14 @@ public class AlertCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Filter filter;
-
     private String title;
 
-    private UsageThresholdConfig usageThresholdConfig;
+    private UsageThreshold usageThreshold;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AlertCreateParams build() {
       return new AlertCreateParams(
-          this.alertType,
-          this.expand,
-          this.extraParams,
-          this.filter,
-          this.title,
-          this.usageThresholdConfig);
+          this.alertType, this.expand, this.extraParams, this.title, this.usageThreshold);
     }
 
     /** <strong>Required.</strong> The type of alert to create. */
@@ -141,12 +128,6 @@ public class AlertCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filters to limit the scope of an alert. */
-    public Builder setFilter(AlertCreateParams.Filter filter) {
-      this.filter = filter;
-      return this;
-    }
-
     /** <strong>Required.</strong> The title of the alert. */
     public Builder setTitle(String title) {
       this.title = title;
@@ -154,19 +135,14 @@ public class AlertCreateParams extends ApiRequestParams {
     }
 
     /** The configuration of the usage threshold. */
-    public Builder setUsageThresholdConfig(
-        AlertCreateParams.UsageThresholdConfig usageThresholdConfig) {
-      this.usageThresholdConfig = usageThresholdConfig;
+    public Builder setUsageThreshold(AlertCreateParams.UsageThreshold usageThreshold) {
+      this.usageThreshold = usageThreshold;
       return this;
     }
   }
 
   @Getter
-  public static class Filter {
-    /** Limit the scope to this alert only to this customer. */
-    @SerializedName("customer")
-    String customer;
-
+  public static class UsageThreshold {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -176,100 +152,12 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Limit the scope of this rated usage alert to this subscription. */
-    @SerializedName("subscription")
-    String subscription;
-
-    /** Limit the scope of this rated usage alert to this subscription item. */
-    @SerializedName("subscription_item")
-    String subscriptionItem;
-
-    private Filter(
-        String customer,
-        Map<String, Object> extraParams,
-        String subscription,
-        String subscriptionItem) {
-      this.customer = customer;
-      this.extraParams = extraParams;
-      this.subscription = subscription;
-      this.subscriptionItem = subscriptionItem;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private String customer;
-
-      private Map<String, Object> extraParams;
-
-      private String subscription;
-
-      private String subscriptionItem;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public AlertCreateParams.Filter build() {
-        return new AlertCreateParams.Filter(
-            this.customer, this.extraParams, this.subscription, this.subscriptionItem);
-      }
-
-      /** Limit the scope to this alert only to this customer. */
-      public Builder setCustomer(String customer) {
-        this.customer = customer;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AlertCreateParams.Filter#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AlertCreateParams.Filter#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** Limit the scope of this rated usage alert to this subscription. */
-      public Builder setSubscription(String subscription) {
-        this.subscription = subscription;
-        return this;
-      }
-
-      /** Limit the scope of this rated usage alert to this subscription item. */
-      public Builder setSubscriptionItem(String subscriptionItem) {
-        this.subscriptionItem = subscriptionItem;
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  public static class UsageThresholdConfig {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * The filters allows limiting the scope of this usage alert. You can only specify up to one
+     * filter at this time.
      */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
+    @SerializedName("filters")
+    List<AlertCreateParams.UsageThreshold.Filter> filters;
 
     /** <strong>Required.</strong> Defines at which value the alert will fire. */
     @SerializedName("gte")
@@ -289,9 +177,14 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName("recurrence")
     Recurrence recurrence;
 
-    private UsageThresholdConfig(
-        Map<String, Object> extraParams, Long gte, String meter, Recurrence recurrence) {
+    private UsageThreshold(
+        Map<String, Object> extraParams,
+        List<AlertCreateParams.UsageThreshold.Filter> filters,
+        Long gte,
+        String meter,
+        Recurrence recurrence) {
       this.extraParams = extraParams;
+      this.filters = filters;
       this.gte = gte;
       this.meter = meter;
       this.recurrence = recurrence;
@@ -304,6 +197,8 @@ public class AlertCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private List<AlertCreateParams.UsageThreshold.Filter> filters;
+
       private Long gte;
 
       private String meter;
@@ -311,15 +206,15 @@ public class AlertCreateParams extends ApiRequestParams {
       private Recurrence recurrence;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AlertCreateParams.UsageThresholdConfig build() {
-        return new AlertCreateParams.UsageThresholdConfig(
-            this.extraParams, this.gte, this.meter, this.recurrence);
+      public AlertCreateParams.UsageThreshold build() {
+        return new AlertCreateParams.UsageThreshold(
+            this.extraParams, this.filters, this.gte, this.meter, this.recurrence);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AlertCreateParams.UsageThresholdConfig#extraParams} for the field documentation.
+       * AlertCreateParams.UsageThreshold#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -332,13 +227,39 @@ public class AlertCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AlertCreateParams.UsageThresholdConfig#extraParams} for the field documentation.
+       * See {@link AlertCreateParams.UsageThreshold#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add an element to `filters` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * AlertCreateParams.UsageThreshold#filters} for the field documentation.
+       */
+      public Builder addFilter(AlertCreateParams.UsageThreshold.Filter element) {
+        if (this.filters == null) {
+          this.filters = new ArrayList<>();
+        }
+        this.filters.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `filters` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * AlertCreateParams.UsageThreshold#filters} for the field documentation.
+       */
+      public Builder addAllFilter(List<AlertCreateParams.UsageThreshold.Filter> elements) {
+        if (this.filters == null) {
+          this.filters = new ArrayList<>();
+        }
+        this.filters.addAll(elements);
         return this;
       }
 
@@ -361,9 +282,105 @@ public class AlertCreateParams extends ApiRequestParams {
        * <strong>Required.</strong> Whether the alert should only fire only once, or once per
        * billing cycle.
        */
-      public Builder setRecurrence(AlertCreateParams.UsageThresholdConfig.Recurrence recurrence) {
+      public Builder setRecurrence(AlertCreateParams.UsageThreshold.Recurrence recurrence) {
         this.recurrence = recurrence;
         return this;
+      }
+    }
+
+    @Getter
+    public static class Filter {
+      /** Limit the scope to this usage alert only to this customer. */
+      @SerializedName("customer")
+      String customer;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> What type of filter is being applied to this usage alert. */
+      @SerializedName("type")
+      Type type;
+
+      private Filter(String customer, Map<String, Object> extraParams, Type type) {
+        this.customer = customer;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String customer;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AlertCreateParams.UsageThreshold.Filter build() {
+          return new AlertCreateParams.UsageThreshold.Filter(
+              this.customer, this.extraParams, this.type);
+        }
+
+        /** Limit the scope to this usage alert only to this customer. */
+        public Builder setCustomer(String customer) {
+          this.customer = customer;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AlertCreateParams.UsageThreshold.Filter#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AlertCreateParams.UsageThreshold.Filter#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> What type of filter is being applied to this usage alert. */
+        public Builder setType(AlertCreateParams.UsageThreshold.Filter.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("customer")
+        CUSTOMER("customer");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 

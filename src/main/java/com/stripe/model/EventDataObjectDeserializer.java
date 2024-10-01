@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.StripeResponseGetter;
 import java.util.Map;
 import java.util.Optional;
@@ -121,7 +122,8 @@ public class EventDataObjectDeserializer {
       return true;
     } else {
       try {
-        object = StripeObject.deserializeStripeObject(rawJsonObject, this.responseGetter);
+        object =
+            StripeObject.deserializeStripeObject(rawJsonObject, this.responseGetter, ApiMode.V1);
         return true;
       } catch (JsonParseException e) {
         // intentionally ignore exception to fulfill simply whether deserialization succeeds
@@ -146,7 +148,7 @@ public class EventDataObjectDeserializer {
    */
   public StripeObject deserializeUnsafe() throws EventDataObjectDeserializationException {
     try {
-      return StripeObject.deserializeStripeObject(rawJsonObject, this.responseGetter);
+      return StripeObject.deserializeStripeObject(rawJsonObject, this.responseGetter, ApiMode.V1);
     } catch (JsonParseException e) {
       String errorMessage;
       if (!apiVersionMatch()) {
@@ -190,7 +192,8 @@ public class EventDataObjectDeserializer {
   public StripeObject deserializeUnsafeWith(CompatibilityTransformer transformer) {
     return StripeObject.deserializeStripeObject(
         transformer.transform(rawJsonObject.deepCopy(), apiVersion, eventType),
-        this.responseGetter);
+        this.responseGetter,
+        ApiMode.V1);
   }
 
   private boolean apiVersionMatch() {

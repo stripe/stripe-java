@@ -22,7 +22,8 @@ public class TimeoutTest extends BaseStripeTest {
         new ServerSocket(0, 1, Inet4Address.getByName("localhost"))) {
       Stripe.overrideApiBase(String.format("http://localhost:%d", serverSocket.getLocalPort()));
 
-      final RequestOptions options = RequestOptions.builder().setReadTimeout(1).build();
+      final RequestOptions options =
+          RequestOptions.builder().setReadTimeout(1).setMaxNetworkRetries(0).build();
 
       Throwable exception =
           assertThrows(
