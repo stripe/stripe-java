@@ -70,7 +70,7 @@ public class StripeClient {
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public com.stripe.model.Event parseSnapshotEvent(String payload, String sigHeader, String secret)
+  public com.stripe.model.Event constructEvent(String payload, String sigHeader, String secret)
       throws SignatureVerificationException {
     com.stripe.model.Event event = Webhook.constructEvent(payload, sigHeader, secret);
     event.setResponseGetter(this.getResponseGetter());
@@ -90,7 +90,7 @@ public class StripeClient {
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public com.stripe.model.Event parseSnapshotEvent(
+  public com.stripe.model.Event constructEvent(
       String payload, String sigHeader, String secret, long tolerance)
       throws SignatureVerificationException {
     com.stripe.model.Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);

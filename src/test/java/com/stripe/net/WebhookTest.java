@@ -285,7 +285,7 @@ public class WebhookTest extends BaseStripeTest {
     options.put("payload", payload);
     final String sigHeader = generateSigHeader(options);
 
-    final Event event = client.parseSnapshotEvent(payload, sigHeader, secret);
+    final Event event = client.constructEvent(payload, sigHeader, secret);
 
     final Reader reader = (Reader) event.getDataObjectDeserializer().getObject().get();
     reader.delete();
@@ -318,7 +318,7 @@ public class WebhookTest extends BaseStripeTest {
     options.put("payload", payload);
     final String sigHeader = generateSigHeader(options);
 
-    final Event event = client.parseSnapshotEvent(payload, sigHeader, secret, 500);
+    final Event event = client.constructEvent(payload, sigHeader, secret, 500);
 
     final Reader reader = (Reader) event.getDataObjectDeserializer().getObject().get();
     reader.delete();
