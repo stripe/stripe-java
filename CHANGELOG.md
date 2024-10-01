@@ -1,6 +1,6 @@
 # Changelog
 
-## 26.13.0 - 2024-10-01
+## 27.0.0 - 2024-10-01
 * [#1880](https://github.com/stripe/stripe-java/pull/1880) Support for APIs in the new API version 2024-09-30.acacia
 
   This release changes the pinned API version to `2024-09-30.acacia`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-09-30.acacia) and carefully review the API changes before upgrading.
