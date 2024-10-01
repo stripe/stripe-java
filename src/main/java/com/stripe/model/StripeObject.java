@@ -4,6 +4,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
 import com.stripe.net.StripeResponse;
 import com.stripe.net.StripeResponseGetter;
@@ -99,19 +100,20 @@ public abstract class StripeObject implements StripeObjectInterface {
    * @return JSON data to be deserialized to super class {@code StripeObject}
    */
   static StripeObject deserializeStripeObject(
-      JsonObject eventDataObjectJson, StripeResponseGetter responseGetter) {
+      JsonObject eventDataObjectJson, StripeResponseGetter responseGetter, ApiMode apiMode) {
     String type = eventDataObjectJson.getAsJsonObject().get("object").getAsString();
-    Class<? extends StripeObject> cl = EventDataClassLookup.classLookup.get(type);
-    StripeObject object =
-        StripeObject.deserializeStripeObject(
-            eventDataObjectJson, cl != null ? cl : StripeRawJsonObject.class, responseGetter);
-    return object;
+    Class<? extends StripeObject> cl =
+        (apiMode == ApiMode.V1)
+            ? com.stripe.model.EventDataClassLookup.classLookup.get(type)
+            : com.stripe.model.v2.EventDataClassLookup.classLookup.get(type);
+    return StripeObject.deserializeStripeObject(
+        eventDataObjectJson, cl != null ? cl : StripeRawJsonObject.class, responseGetter);
   }
 
   public static StripeObject deserializeStripeObject(
-      String payload, StripeResponseGetter responseGetter) {
+      String payload, StripeResponseGetter responseGetter, ApiMode apiMode) {
     JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
-    return deserializeStripeObject(jsonObject, responseGetter);
+    return deserializeStripeObject(jsonObject, responseGetter, apiMode);
   }
 
   public static StripeObject deserializeStripeObject(
