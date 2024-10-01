@@ -7,12 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
+import com.stripe.model.v2.billing.MeterEvent;
+import com.stripe.net.*;
 import com.stripe.net.ApiResource.RequestMethod;
-import com.stripe.net.HttpURLConnectionClient;
-import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RawRequestOptions;
-import com.stripe.net.StripeResponse;
-import com.stripe.net.StripeResponseGetter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -166,7 +163,7 @@ public class RawRequestTest extends BaseStripeTest {
     assertEquals(200, response.code());
     assertTrue(response.body().length() > 0);
 
-    Customer customer = (Customer) client.deserialize(response.body());
+    Customer customer = (Customer) client.deserialize(response.body(), ApiMode.V1);
     assertTrue(customer.getId().startsWith("cus_"));
     assertEquals("test customer", customer.getDescription());
   }
@@ -281,7 +278,7 @@ public class RawRequestTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeserializeClient() throws StripeException, InterruptedException {
+  public void testDeserializeClientV1Api() throws StripeException, InterruptedException {
     server.enqueue(
         new MockResponse()
             .setBody(
@@ -297,9 +294,33 @@ public class RawRequestTest extends BaseStripeTest {
     assertEquals(200, response.code());
     assertTrue(response.body().length() > 0);
 
-    Customer customer = (Customer) client.deserialize(response.body());
+    Customer customer = (Customer) client.deserialize(response.body(), ApiMode.V1);
     assertTrue(customer.getId().startsWith("cus_"));
     assertEquals("test customer", customer.getDescription());
+    assertTrue(Mockito.mockingDetails(responseGetter).getInvocations().stream().count() > 0);
+  }
+
+  @Test
+  public void testDeserializeClientV2Api() throws StripeException, InterruptedException {
+    server.enqueue(
+        new MockResponse()
+            .setBody(
+                "{\"object\":\"billing.meter_event\",\"created\":\"2024-10-01T04:46:22.861Z\",\"event_name\":\"new_meter\",\"identifier\":\"d8a5ab2e-81ec-4bdf-acbf-48bf346\",\"livemode\":false,\"payload\":{\"stripe_customer_id\":\"cus_QvF3b2W6\",\"value\":\"25\"},\"timestamp\":\"2024-10-01T04:46:22.836Z\"}"));
+
+    final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
+    String param =
+        "{\"event_name\":\"new_meter\",\"payload\":{\"stripe_customer_id\":\"cus_QvF3b2W6\",\"value\":\"25\"}}";
+
+    final StripeResponse response =
+        client.rawRequest(RequestMethod.POST, "/v2/billing/meter_event", param, options);
+
+    assertNotNull(response);
+    assertEquals(200, response.code());
+    assertTrue(response.body().length() > 0);
+
+    MeterEvent meterEvent = (MeterEvent) client.deserialize(response.body(), ApiMode.V2);
+    assertEquals("new_meter", meterEvent.getEventName());
+    assertEquals("d8a5ab2e-81ec-4bdf-acbf-48bf346", meterEvent.getIdentifier());
     assertTrue(Mockito.mockingDetails(responseGetter).getInvocations().stream().count() > 0);
   }
 

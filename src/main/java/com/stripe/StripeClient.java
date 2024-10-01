@@ -731,7 +731,7 @@ public class StripeClient {
   }
 
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */
-  public StripeObject deserialize(String rawJson) throws StripeException {
-    return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter());
+  public StripeObject deserialize(String rawJson, ApiMode apiMode) throws StripeException {
+    return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter(), apiMode);
   }
 }
