@@ -36,7 +36,7 @@ public class WebhookTest extends BaseStripeTest {
     payload = "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"event\"\n}";
   }
 
-  public String generateSigHeader() throws NoSuchAlgorithmException, InvalidKeyException {
+  public static String generateSigHeader() throws NoSuchAlgorithmException, InvalidKeyException {
     final Map<String, Object> options = new HashMap<>();
     return generateSigHeader(options);
   }
@@ -47,7 +47,7 @@ public class WebhookTest extends BaseStripeTest {
    * @param options Options map to override default values
    * @return The contents of the generated header
    */
-  public String generateSigHeader(Map<String, Object> options)
+  public static String generateSigHeader(Map<String, Object> options)
       throws NoSuchAlgorithmException, InvalidKeyException {
     final long timestamp =
         (options.get("timestamp") != null)

@@ -3,21 +3,25 @@ package com.stripe.net;
 import com.google.gson.*;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.*;
+import com.stripe.model.v2.EventTypeAdapterFactory;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.Objects;
 
 public abstract class ApiResource extends StripeObject implements StripeActiveObject {
   public static final Charset CHARSET = StandardCharsets.UTF_8;
+
   private static StripeResponseGetter globalResponseGetter = new LiveStripeResponseGetter();
+
   private transient StripeResponseGetter responseGetter;
 
   public static final Gson INTERNAL_GSON = createGson(false);
   public static final Gson GSON = createGson(true);
 
-  public static void setStripeResponseGetter(StripeResponseGetter srg) {
+  public static void setGlobalResponseGetter(StripeResponseGetter srg) {
     ApiResource.globalResponseGetter = srg;
   }
 
@@ -51,6 +55,8 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
             .registerTypeAdapter(Event.Data.class, new EventDataDeserializer())
             .registerTypeAdapter(Event.Request.class, new EventRequestDeserializer())
             .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
+            .registerTypeAdapter(Instant.class, new InstantDeserializer())
+            .registerTypeAdapterFactory(new EventTypeAdapterFactory())
             .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
             .registerTypeAdapterFactory(new StripeCollectionItemTypeSettingFactory())
             .addReflectionAccessFilter(

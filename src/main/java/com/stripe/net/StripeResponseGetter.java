@@ -59,6 +59,7 @@ public interface StripeResponseGetter {
     throw new UnsupportedOperationException(
         "rawRequest is unimplemented for this StripeResponseGetter");
   };
+
   /**
    * This method should e.g. throws an ApiKeyMissingError if a proper API Key cannot be determined
    * by the ResponseGetter or from the RequestOptions passed in.

@@ -1,0 +1,25 @@
+{
+  "id": "meter_123",
+  "object": "billing.meter",
+  "created": 1727303036,
+  "customer_mapping": {
+    "event_payload_key": "e1",
+    "type": "by_id"
+  },
+  "default_aggregation": {
+    "formula": "sum"
+  },
+
+  "display_name": "API Requests",
+  "event_name": "API Request Made",
+  "event_time_window": "day",
+  "livemode": false,
+  "status": "active",
+  "status_transitions": {
+    "deactivated_at": null
+  },
+  "updated": 1727303036,
+  "value_settings": {
+    "event_payload_key": "e1"
+  }
+}

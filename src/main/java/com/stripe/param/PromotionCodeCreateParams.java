@@ -17,7 +17,10 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
 
   /**
    * The customer-facing code. Regardless of case, this code must be unique across all active
-   * promotion codes for a specific customer. If left blank, we will generate one automatically.
+   * promotion codes for a specific customer. Valid characters are lower case letters (a-z), upper
+   * case letters (A-Z), and digits (0-9).
+   *
+   * <p>If left blank, we will generate one automatically.
    */
   @SerializedName("code")
   String code;
@@ -145,7 +148,10 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
 
     /**
      * The customer-facing code. Regardless of case, this code must be unique across all active
-     * promotion codes for a specific customer. If left blank, we will generate one automatically.
+     * promotion codes for a specific customer. Valid characters are lower case letters (a-z), upper
+     * case letters (A-Z), and digits (0-9).
+     *
+     * <p>If left blank, we will generate one automatically.
      */
     public Builder setCode(String code) {
       this.code = code;

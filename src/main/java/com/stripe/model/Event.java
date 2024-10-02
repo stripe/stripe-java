@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -387,7 +388,7 @@ public class Event extends ApiResource implements HasId {
      */
     @Deprecated
     public StripeObject getObject() {
-      return StripeObject.deserializeStripeObject(object, this.responseGetter);
+      return StripeObject.deserializeStripeObject(object, this.responseGetter, ApiMode.V1);
     }
 
     @Override

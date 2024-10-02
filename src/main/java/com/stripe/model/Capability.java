@@ -60,8 +60,10 @@ public class Capability extends ApiResource implements HasId {
   Requirements requirements;
 
   /**
-   * The status of the capability. Can be {@code active}, {@code inactive}, {@code pending}, or
-   * {@code unrequested}.
+   * The status of the capability.
+   *
+   * <p>One of {@code active}, {@code disabled}, {@code inactive}, {@code pending}, or {@code
+   * unrequested}.
    */
   @SerializedName("status")
   String status;

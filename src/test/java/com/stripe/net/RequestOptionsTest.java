@@ -154,13 +154,14 @@ public class RequestOptionsTest extends BaseStripeTest {
 
     StripeResponseGetterOptions clientOptions =
         TestStripeResponseGetterOptions.builder()
-            .setApiKey("key1")
+            .setAuthenticator(new BearerTokenAuthenticator("key1"))
             .setConnectTimeout(1)
             .setMaxNetworkRetries(2)
             .setReadTimeout(3)
             .setClientId("1")
             .setConnectionProxy(clientProxy)
             .setProxyCredential(clientProxyCred)
+            .setStripeContext("globalContext")
             .build();
 
     RequestOptions requestOptions =
@@ -174,6 +175,7 @@ public class RequestOptionsTest extends BaseStripeTest {
             .setProxyCredential(requestProxyCred)
             .setIdempotencyKey("3")
             .setStripeAccount("4")
+            .setStripeContext("5")
             .build();
 
     RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
@@ -186,6 +188,7 @@ public class RequestOptionsTest extends BaseStripeTest {
     assertEquals(requestProxyCred, merged.getProxyCredential());
     assertEquals("3", merged.getIdempotencyKey());
     assertEquals("4", merged.getStripeAccount());
+    assertEquals("5", merged.getStripeContext());
   }
 
   @Test
@@ -196,13 +199,14 @@ public class RequestOptionsTest extends BaseStripeTest {
 
     StripeResponseGetterOptions clientOptions =
         TestStripeResponseGetterOptions.builder()
-            .setApiKey("key1")
+            .setAuthenticator(new BearerTokenAuthenticator("key1"))
             .setConnectTimeout(1)
             .setMaxNetworkRetries(1)
             .setReadTimeout(1)
             .setClientId("1")
             .setConnectionProxy(clientProxy)
             .setProxyCredential(clientProxyCred)
+            .setStripeContext("global context")
             .build();
 
     RequestOptions requestOptions = RequestOptions.builder().build();
@@ -217,6 +221,7 @@ public class RequestOptionsTest extends BaseStripeTest {
     assertEquals(clientProxyCred, merged.getProxyCredential());
     assertEquals(null, merged.getIdempotencyKey());
     assertEquals(null, merged.getStripeAccount());
+    assertEquals("global context", merged.getStripeContext());
   }
 
   @Test

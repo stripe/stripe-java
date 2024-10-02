@@ -54,7 +54,8 @@ public class ReceivedCredit extends ApiResource implements HasId {
    * Reason for the failure. A ReceivedCredit might fail because the receiving FinancialAccount is
    * closed or frozen.
    *
-   * <p>One of {@code account_closed}, {@code account_frozen}, or {@code other}.
+   * <p>One of {@code account_closed}, {@code account_frozen}, {@code international_transaction}, or
+   * {@code other}.
    */
   @SerializedName("failure_code")
   String failureCode;

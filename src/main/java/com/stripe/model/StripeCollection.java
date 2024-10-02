@@ -1,7 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
+import com.stripe.net.*;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +39,7 @@ import lombok.Setter;
 public class StripeCollection<T extends HasId> extends StripeObject
     implements StripeCollectionInterface<T>, StripeActiveObject {
   private transient StripeResponseGetter responseGetter;
+
   String object;
 
   @Getter(onMethod_ = {@Override})
@@ -69,7 +69,6 @@ public class StripeCollection<T extends HasId> extends StripeObject
 
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
     this.responseGetter.validateRequestOptions(this.requestOptions);
-
     this.setRequestParams(params);
     return new PagingIterable<>(this, responseGetter, pageTypeToken);
   }
@@ -92,6 +91,7 @@ public class StripeCollection<T extends HasId> extends StripeObject
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     this.responseGetter = responseGetter;
+
     if (this.data != null) {
       for (T item : data) {
         trySetResponseGetter(item, responseGetter);

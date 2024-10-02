@@ -7,5 +7,7 @@ public enum BaseAddress {
   /** https://connect.stripe.com */
   CONNECT,
   /** https://files.stripe.com */
-  FILES
+  FILES,
+  /** https://events.stripe.com */
+  METER_EVENTS
 }

@@ -1,0 +1,8 @@
+{
+  "error": {
+    "type": "temporary_session_expired",
+    "code": "does not matter",
+    "message": "Session expired",
+    "request_log_url": "https://dashboard.stripe.com/logs/req_xyz"
+  }
+}

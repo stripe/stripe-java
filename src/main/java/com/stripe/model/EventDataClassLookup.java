@@ -7,8 +7,10 @@ import java.util.Map;
 /**
  * Event data class look up used in event deserialization. The key to look up is `object` string of
  * the model.
+ *
+ * <p>For internal use by Stripe SDK only.
  */
-final class EventDataClassLookup {
+public final class EventDataClassLookup {
   public static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
 
   static {
@@ -99,6 +101,12 @@ final class EventDataClassLookup {
 
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
     classLookup.put("billing.alert_triggered", com.stripe.model.billing.AlertTriggered.class);
+    classLookup.put(
+        "billing.credit_balance_summary", com.stripe.model.billing.CreditBalanceSummary.class);
+    classLookup.put(
+        "billing.credit_balance_transaction",
+        com.stripe.model.billing.CreditBalanceTransaction.class);
+    classLookup.put("billing.credit_grant", com.stripe.model.billing.CreditGrant.class);
     classLookup.put("billing.meter", com.stripe.model.billing.Meter.class);
     classLookup.put("billing.meter_error_report", com.stripe.model.billing.MeterErrorReport.class);
     classLookup.put("billing.meter_event", com.stripe.model.billing.MeterEvent.class);
