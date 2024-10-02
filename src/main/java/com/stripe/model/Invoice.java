@@ -2825,12 +2825,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Discount> discount;
 
-    /** The margin that was applied to get this pretax credit amount. */
-    @SerializedName("margin")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Margin> margin;
-
     /**
      * Type of the pretax credit amount referenced.
      *
@@ -2877,24 +2871,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
-    }
-
-    /** Get ID of expandable {@code margin} object. */
-    public String getMargin() {
-      return (this.margin != null) ? this.margin.getId() : null;
-    }
-
-    public void setMargin(String id) {
-      this.margin = ApiResource.setExpandableFieldId(id, this.margin);
-    }
-
-    /** Get expanded {@code margin}. */
-    public Margin getMarginObject() {
-      return (this.margin != null) ? this.margin.getExpanded() : null;
-    }
-
-    public void setMarginObject(Margin expandableObject) {
-      this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
   }
 
