@@ -1874,12 +1874,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("end_behavior")
     String endBehavior;
 
-    /** The id of the subscription schedule that will be updated when the quote is accepted. */
-    @SerializedName("from_schedule")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<com.stripe.model.SubscriptionSchedule> fromSchedule;
-
     /** The id of the subscription that will be updated when the quote is accepted. */
     @SerializedName("from_subscription")
     @Getter(lombok.AccessLevel.NONE)
@@ -1921,26 +1915,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
-
-    /** Get ID of expandable {@code fromSchedule} object. */
-    public String getFromSchedule() {
-      return (this.fromSchedule != null) ? this.fromSchedule.getId() : null;
-    }
-
-    public void setFromSchedule(String id) {
-      this.fromSchedule = ApiResource.setExpandableFieldId(id, this.fromSchedule);
-    }
-
-    /** Get expanded {@code fromSchedule}. */
-    public com.stripe.model.SubscriptionSchedule getFromScheduleObject() {
-      return (this.fromSchedule != null) ? this.fromSchedule.getExpanded() : null;
-    }
-
-    public void setFromScheduleObject(com.stripe.model.SubscriptionSchedule expandableObject) {
-      this.fromSchedule =
-          new ExpandableField<com.stripe.model.SubscriptionSchedule>(
-              expandableObject.getId(), expandableObject);
-    }
 
     /** Get ID of expandable {@code fromSubscription} object. */
     public String getFromSubscription() {

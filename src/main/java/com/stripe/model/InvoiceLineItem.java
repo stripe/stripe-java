@@ -504,7 +504,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     /**
      * Type of the pretax credit amount referenced.
      *
-     * <p>One of {@code credit_balance_transaction}, or {@code discount}.
+     * <p>One of {@code credit_balance_transaction}, {@code discount}, or {@code margin}.
      */
     @SerializedName("type")
     String type;
