@@ -8,6 +8,6 @@ public enum BaseAddress {
   CONNECT,
   /** https://files.stripe.com */
   FILES,
-  /** https://events.stripe.com */
+  /** https://meter-events.stripe.com */
   METER_EVENTS
 }

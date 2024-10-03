@@ -11,7 +11,7 @@ public abstract class ApiRequestParams {
    * Param key for an `extraParams` map. Any param/sub-param specifying a field intended to support
    * extra params from users should have the annotation
    * {@code @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)}. Logic to handle this is in {@link
-   * ApiRequestParamsConverter}.t
+   * ApiRequestParamsConverter}.
    */
   public static final String EXTRA_PARAMS_KEY = "_stripe_java_extra_param_key";
 
