@@ -151,7 +151,7 @@ public class StripeClientTest extends BaseStripeTest {
           + "  \"id\": \"evt_234\",\n"
           + "  \"object\": \"event\",\n"
           + "  \"type\": \"financial_account.balance.opened\",\n"
-          + "  \"livemode\": \"false\",\n"
+          + "  \"livemode\": false,\n"
           + "  \"created\": \"2022-02-15T00:27:45.330Z\",\n"
           + "  \"context\": \"context 123\",\n"
           + "  \"related_object\": {\n"
@@ -167,7 +167,7 @@ public class StripeClientTest extends BaseStripeTest {
           + "  \"id\": \"evt_234\",\n"
           + "  \"object\": \"event\",\n"
           + "  \"type\": \"financial_account.balance.opened\",\n"
-          + "  \"livemode\": \"false\",\n"
+          + "  \"livemode\": false,\n"
           + "  \"created\": \"2022-02-15T00:27:45.330Z\"\n"
           + "}";
 

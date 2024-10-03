@@ -24,7 +24,7 @@ public class ThinEvent {
   @SerializedName("created")
   public Instant created;
 
-  /** Livemode indicates if the event is from a production(true) or test(false) account.  */
+  /** Livemode indicates if the event is from a production(true) or test(false) account. */
   @SerializedName("livemode")
   public Boolean livemode;
 
