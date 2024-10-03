@@ -48,11 +48,6 @@ public class RawRequestOptions extends RequestOptions {
   public static final class RawRequestOptionsBuilder extends RequestOptions.RequestOptionsBuilder {
     private Map<String, String> additionalHeaders;
 
-    /** Constructs a raw request options builder with default values. */
-    public RawRequestOptionsBuilder() {
-      super();
-    }
-
     public Map<String, String> getAdditionalHeaders() {
       return this.additionalHeaders;
     }

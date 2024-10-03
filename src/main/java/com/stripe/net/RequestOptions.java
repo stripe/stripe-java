@@ -394,7 +394,7 @@ public class RequestOptions {
   }
 
   protected static String normalizeStripeVersion(String stripeVersion) {
-    // null stripeVersions are considered "valid" and use Stripe.stripeVersion
+    // null stripeVersions are considered "valid" and use Stripe.apiVersion
     if (stripeVersion == null) {
       return null;
     }
