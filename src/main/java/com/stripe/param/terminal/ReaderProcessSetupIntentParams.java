@@ -11,9 +11,14 @@ import lombok.Getter;
 
 @Getter
 public class ReaderProcessSetupIntentParams extends ApiRequestParams {
-  /** Customer Consent Collected. */
-  @SerializedName("customer_consent_collected")
-  Boolean customerConsentCollected;
+  /**
+   * <strong>Required.</strong> This field indicates whether this payment method can be shown again
+   * to its customer in a checkout flow. Stripe products such as Checkout and Elements use this
+   * field to determine whether a payment method can be shown as a saved payment method in a
+   * checkout flow.
+   */
+  @SerializedName("allow_redisplay")
+  AllowRedisplay allowRedisplay;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -37,12 +42,12 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
   String setupIntent;
 
   private ReaderProcessSetupIntentParams(
-      Boolean customerConsentCollected,
+      AllowRedisplay allowRedisplay,
       List<String> expand,
       Map<String, Object> extraParams,
       ProcessConfig processConfig,
       String setupIntent) {
-    this.customerConsentCollected = customerConsentCollected;
+    this.allowRedisplay = allowRedisplay;
     this.expand = expand;
     this.extraParams = extraParams;
     this.processConfig = processConfig;
@@ -54,7 +59,7 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Boolean customerConsentCollected;
+    private AllowRedisplay allowRedisplay;
 
     private List<String> expand;
 
@@ -67,16 +72,17 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderProcessSetupIntentParams build() {
       return new ReaderProcessSetupIntentParams(
-          this.customerConsentCollected,
-          this.expand,
-          this.extraParams,
-          this.processConfig,
-          this.setupIntent);
+          this.allowRedisplay, this.expand, this.extraParams, this.processConfig, this.setupIntent);
     }
 
-    /** Customer Consent Collected. */
-    public Builder setCustomerConsentCollected(Boolean customerConsentCollected) {
-      this.customerConsentCollected = customerConsentCollected;
+    /**
+     * <strong>Required.</strong> This field indicates whether this payment method can be shown
+     * again to its customer in a checkout flow. Stripe products such as Checkout and Elements use
+     * this field to determine whether a payment method can be shown as a saved payment method in a
+     * checkout flow.
+     */
+    public Builder setAllowRedisplay(ReaderProcessSetupIntentParams.AllowRedisplay allowRedisplay) {
+      this.allowRedisplay = allowRedisplay;
       return this;
     }
 
@@ -212,6 +218,24 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+    }
+  }
+
+  public enum AllowRedisplay implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("limited")
+    LIMITED("limited"),
+
+    @SerializedName("unspecified")
+    UNSPECIFIED("unspecified");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AllowRedisplay(String value) {
+      this.value = value;
     }
   }
 }

@@ -4,15 +4,9 @@ import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
-import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
@@ -66,14 +60,62 @@ public class StripeRequest {
       String url,
       HttpContent content,
       Map<String, Object> params,
-      RequestOptions options)
+      RequestOptions options,
+      ApiMode apiMode)
       throws StripeException {
-    this.content = content;
-    this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
-    this.options = (options != null) ? options : RequestOptions.getDefault();
-    this.method = method;
-    this.url = buildURL(method, url, params);
-    this.headers = buildHeaders(method, this.options);
+    try {
+      this.content = content;
+      this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
+      this.options = (options != null) ? options : RequestOptions.getDefault();
+      this.method = method;
+      this.url = buildURL(method, url, params, apiMode);
+      this.headers = buildHeaders(method, this.options, this.content, apiMode);
+    } catch (IOException e) {
+      throw new ApiConnectionException(
+          String.format(
+              "IOException during API request to Stripe (%s): %s "
+                  + "Please check your internet connection and try again. If this problem persists,"
+                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                  + " or let us know at support@stripe.com.",
+              Stripe.getApiBase(), e.getMessage()),
+          e);
+    }
+  }
+
+  /**
+   * Initializes a new instance of the {@link StripeRequest} class.
+   *
+   * @param method the HTTP method
+   * @param url the URL of the request
+   * @param params the parameters of the request
+   * @param options the special modifiers of the request
+   * @param apiMode version of the API
+   * @throws StripeException if the request cannot be initialized for any reason
+   */
+  StripeRequest(
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options,
+      ApiMode apiMode)
+      throws StripeException {
+    try {
+      this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
+      this.options = options;
+      this.method = method;
+      this.url = buildURL(method, url, params, apiMode);
+      this.content = buildContent(method, params, apiMode);
+      this.headers = buildHeaders(method, this.options, this.content, apiMode);
+    } catch (IOException e) {
+      throw new ApiConnectionException(
+          String.format(
+              "IOException during API request to Stripe (%s): %s "
+                  + "Please check your internet connection and try again. If this problem persists,"
+                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                  + " or let us know at support@stripe.com.",
+              Stripe.getApiBase(), e.getMessage()),
+          e);
+    }
   }
 
   /**
@@ -85,13 +127,34 @@ public class StripeRequest {
    * @param options the special modifiers of the request
    * @throws StripeException if the request cannot be initialized for any reason
    */
-  public StripeRequest(
+  public static StripeRequest create(
       ApiResource.RequestMethod method,
       String url,
       Map<String, Object> params,
-      RequestOptions options)
+      RequestOptions options,
+      ApiMode apiMode)
       throws StripeException {
-    this(method, url, buildContent(method, params), params, options);
+    if (options == null) {
+      throw new IllegalArgumentException("options parameter should not be null");
+    }
+
+    StripeRequest request = new StripeRequest(method, url, params, options, apiMode);
+    Authenticator authenticator = options.getAuthenticator();
+
+    if (authenticator == null) {
+      throw new AuthenticationException(
+          "No API key provided. Set your API key using `Stripe.apiKey = \"<API-KEY>\"`. You can "
+              + "generate API keys from the Stripe Dashboard. See "
+              + "https://stripe.com/docs/api/authentication for details or contact support at "
+              + "https://support.stripe.com/email if you have any questions.",
+          null,
+          null,
+          0);
+    }
+
+    request = request.options().getAuthenticator().authenticate(request);
+
+    return request;
   }
 
   /**
@@ -108,10 +171,26 @@ public class StripeRequest {
       String url,
       String content,
       RequestOptions options,
-      boolean json)
+      ApiMode apiMode)
       throws StripeException {
     StripeRequest request =
-        new StripeRequest(method, url, buildContent(method, content, json), null, options);
+        new StripeRequest(
+            method, url, buildContentFromString(method, content, apiMode), null, options, apiMode);
+
+    Authenticator authenticator = options.getAuthenticator();
+
+    if (authenticator == null) {
+      throw new AuthenticationException(
+          "No API key provided. Set your API key using `Stripe.apiKey = \"<API-KEY>\"`. You can "
+              + "generate API keys from the Stripe Dashboard. See "
+              + "https://stripe.com/docs/api/authentication for details or contact support at "
+              + "https://support.stripe.com/email if you have any questions.",
+          null,
+          null,
+          0);
+    }
+
+    request = request.options().getAuthenticator().authenticate(request);
 
     return request;
   }
@@ -134,60 +213,54 @@ public class StripeRequest {
   }
 
   private static URL buildURL(
-      ApiResource.RequestMethod method, String spec, Map<String, Object> params)
-      throws ApiConnectionException {
+      ApiResource.RequestMethod method, String spec, Map<String, Object> params, ApiMode apiMode)
+      throws IOException {
     StringBuilder sb = new StringBuilder();
 
     sb.append(spec);
 
-    URL url = null;
-    try {
-      URL specUrl = new URL(spec);
-      String specQueryString = specUrl.getQuery();
+    URL specUrl = new URL(spec);
+    String specQueryString = specUrl.getQuery();
 
-      if ((method != ApiResource.RequestMethod.POST) && (params != null)) {
-        String queryString = FormEncoder.createQueryString(params);
+    if ((method != ApiResource.RequestMethod.POST) && (params != null)) {
+      String queryString =
+          FormEncoder.createQueryString(params, apiMode == ApiMode.V2 ? true : false);
 
-        if (queryString != null && !queryString.isEmpty()) {
-          if (specQueryString != null && !specQueryString.isEmpty()) {
-            sb.append("&");
-          } else {
-            sb.append("?");
-          }
-          sb.append(queryString);
+      if (queryString != null && !queryString.isEmpty()) {
+        if (specQueryString != null && !specQueryString.isEmpty()) {
+          sb.append("&");
+        } else {
+          sb.append("?");
         }
+        sb.append(queryString);
       }
-
-      url = new URL(sb.toString());
-    } catch (IOException e) {
-      handleIOException(e);
     }
-    return url;
+
+    return new URL(sb.toString());
   }
 
   private static HttpContent buildContent(
-      ApiResource.RequestMethod method, Map<String, Object> params) throws ApiConnectionException {
+      ApiResource.RequestMethod method, Map<String, Object> params, ApiMode apiMode)
+      throws IOException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
     }
 
-    HttpContent httpContent = null;
-    try {
-      httpContent = FormEncoder.createHttpContent(params);
-    } catch (IOException e) {
-      handleIOException(e);
+    if (apiMode == ApiMode.V2) {
+      return JsonEncoder.createHttpContent(params);
     }
-    return httpContent;
+
+    return FormEncoder.createHttpContent(params);
   }
 
-  private static HttpContent buildContent(
-      ApiResource.RequestMethod method, String content, boolean json)
+  private static HttpContent buildContentFromString(
+      ApiResource.RequestMethod method, String content, ApiMode apiMode)
       throws ApiConnectionException {
     if (method != ApiResource.RequestMethod.POST) {
       return null;
     }
 
-    if (json) {
+    if (apiMode == ApiMode.V2) {
       return HttpContent.buildJsonContent(content);
     }
 
@@ -211,8 +284,11 @@ public class StripeRequest {
         e);
   }
 
-  private static HttpHeaders buildHeaders(ApiResource.RequestMethod method, RequestOptions options)
-      throws AuthenticationException {
+  private static HttpHeaders buildHeaders(
+      ApiResource.RequestMethod method,
+      RequestOptions options,
+      HttpContent content,
+      ApiMode apiMode) {
     Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
 
     // Accept
@@ -221,47 +297,25 @@ public class StripeRequest {
     // Accept-Charset
     headerMap.put("Accept-Charset", Arrays.asList(ApiResource.CHARSET.name()));
 
-    // Authorization
-    String apiKey = options.getApiKey();
-    if (apiKey == null) {
-      throw new AuthenticationException(
-          "No API key provided. Set your API key using `Stripe.apiKey = \"<API-KEY>\"`. You can "
-              + "generate API keys from the Stripe Dashboard. See "
-              + "https://stripe.com/docs/api/authentication for details or contact support at "
-              + "https://support.stripe.com/email if you have any questions.",
-          null,
-          null,
-          0);
-    } else if (apiKey.isEmpty()) {
-      throw new AuthenticationException(
-          "Your API key is invalid, as it is an empty string. You can double-check your API key "
-              + "from the Stripe Dashboard. See "
-              + "https://stripe.com/docs/api/authentication for details or contact support at "
-              + "https://support.stripe.com/email if you have any questions.",
-          null,
-          null,
-          0);
-    } else if (StringUtils.containsWhitespace(apiKey)) {
-      throw new AuthenticationException(
-          "Your API key is invalid, as it contains whitespace. You can double-check your API key "
-              + "from the Stripe Dashboard. See "
-              + "https://stripe.com/docs/api/authentication for details or contact support at "
-              + "https://support.stripe.com/email if you have any questions.",
-          null,
-          null,
-          0);
-    }
-    headerMap.put("Authorization", Arrays.asList(String.format("Bearer %s", apiKey)));
-
     // Stripe-Version
     if (RequestOptions.unsafeGetStripeVersionOverride(options) != null) {
       headerMap.put(
           "Stripe-Version", Arrays.asList(RequestOptions.unsafeGetStripeVersionOverride(options)));
     } else if (options.getStripeVersion() != null) {
       headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersion()));
+    }
+
+    if (apiMode == ApiMode.V1) {
+      if (options.getStripeContext() != null) {
+        throw new UnsupportedOperationException("Context is not supported in V1 APIs");
+      }
     } else {
-      throw new IllegalStateException(
-          "Either `stripeVersion` or `stripeVersionOverride` value must be set.");
+      if (options.getStripeContext() != null) {
+        headerMap.put("Stripe-Context", Arrays.asList(options.getStripeContext()));
+      }
+      if (content != null) {
+        headerMap.put("Content-Type", Arrays.asList(content.contentType()));
+      }
     }
 
     // Stripe-Account
@@ -272,7 +326,8 @@ public class StripeRequest {
     // Idempotency-Key
     if (options.getIdempotencyKey() != null) {
       headerMap.put("Idempotency-Key", Arrays.asList(options.getIdempotencyKey()));
-    } else if (method == ApiResource.RequestMethod.POST) {
+    } else if (method == ApiResource.RequestMethod.POST
+        || (apiMode == ApiMode.V2 && method == ApiResource.RequestMethod.DELETE)) {
       headerMap.put("Idempotency-Key", Arrays.asList(UUID.randomUUID().toString()));
     }
 

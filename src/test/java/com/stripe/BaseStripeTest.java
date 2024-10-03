@@ -128,7 +128,8 @@ public class BaseStripeTest {
     httpClientSpy = Mockito.spy(new HttpURLConnectionClient());
     networkSpy = Mockito.spy(new LiveStripeResponseGetter(null, httpClientSpy));
     mockClient = new StripeClient(networkSpy);
-    ApiResource.setStripeResponseGetter(networkSpy);
+
+    ApiResource.setGlobalResponseGetter(networkSpy);
     OAuth.setGlobalResponseGetter(networkSpy);
   }
 
@@ -138,7 +139,7 @@ public class BaseStripeTest {
    */
   @AfterEach
   public void tearDownStripeMockUsage() {
-    ApiResource.setStripeResponseGetter(new LiveStripeResponseGetter());
+    ApiResource.setGlobalResponseGetter(new LiveStripeResponseGetter());
 
     Stripe.overrideApiBase(this.origApiBase);
     Stripe.overrideUploadBase(this.origUploadBase);
@@ -317,7 +318,7 @@ public class BaseStripeTest {
    * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
    * @param params map containing the parameters. If null, the parameters are not checked.
    * @param options request options. If null, the options are not checked.
-   * @param clazz Class of the API resource that will be returned for the stubbed request.
+   * @param typeToken Class of the API resource that will be returned for the stubbed request.
    * @param response JSON payload of the API resource that will be returned for the stubbed request.
    */
   public static <T extends StripeObjectInterface> void stubRequest(

@@ -8,9 +8,10 @@ public class RawRequestOptions extends RequestOptions {
   private Map<String, String> additionalHeaders;
 
   public RawRequestOptions(
-      String apiKey,
+      Authenticator authenticator,
       String clientId,
       String idempotencyKey,
+      String stripeContext,
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
@@ -21,9 +22,10 @@ public class RawRequestOptions extends RequestOptions {
       PasswordAuthentication proxyCredential,
       Map<String, String> additionalHeaders) {
     super(
-        apiKey,
+        authenticator,
         clientId,
         idempotencyKey,
+        stripeContext,
         stripeAccount,
         stripeVersionOverride,
         baseUrl,
@@ -79,6 +81,12 @@ public class RawRequestOptions extends RequestOptions {
     }
 
     @Override
+    public RawRequestOptionsBuilder setStripeContext(String stripeContext) {
+      super.setStripeContext(stripeContext);
+      return this;
+    }
+
+    @Override
     public RawRequestOptionsBuilder setStripeAccount(String stripeAccount) {
       super.setStripeAccount(stripeAccount);
       return this;
@@ -123,9 +131,10 @@ public class RawRequestOptions extends RequestOptions {
     @Override
     public RawRequestOptions build() {
       return new RawRequestOptions(
-          normalizeApiKey(this.apiKey),
+          authenticator,
           normalizeClientId(this.clientId),
           normalizeIdempotencyKey(this.idempotencyKey),
+          normalizeStripeContext(this.stripeContext),
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
           normalizeBaseUrl(this.baseUrl),

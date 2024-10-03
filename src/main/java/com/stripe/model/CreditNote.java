@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.billing.CreditBalanceTransaction;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -147,6 +148,9 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   @SerializedName("pre_payment_amount")
   Long prePaymentAmount;
+
+  @SerializedName("pretax_credit_amounts")
+  List<CreditNote.PretaxCreditAmount> pretaxCreditAmounts;
 
   /**
    * Reason for issuing this credit note, one of {@code duplicate}, {@code fraudulent}, {@code
@@ -638,6 +642,75 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Discount> discount;
+
+    /** Get ID of expandable {@code discount} object. */
+    public String getDiscount() {
+      return (this.discount != null) ? this.discount.getId() : null;
+    }
+
+    public void setDiscount(String id) {
+      this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+    }
+
+    /** Get expanded {@code discount}. */
+    public Discount getDiscountObject() {
+      return (this.discount != null) ? this.discount.getExpanded() : null;
+    }
+
+    public void setDiscountObject(Discount expandableObject) {
+      this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PretaxCreditAmount extends StripeObject {
+    /** The amount, in cents (or local equivalent), of the pretax credit amount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The credit balance transaction that was applied to get this pretax credit amount. */
+    @SerializedName("credit_balance_transaction")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<CreditBalanceTransaction> creditBalanceTransaction;
+
+    /** The discount that was applied to get this pretax credit amount. */
+    @SerializedName("discount")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Discount> discount;
+
+    /**
+     * Type of the pretax credit amount referenced.
+     *
+     * <p>One of {@code credit_balance_transaction}, or {@code discount}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code creditBalanceTransaction} object. */
+    public String getCreditBalanceTransaction() {
+      return (this.creditBalanceTransaction != null) ? this.creditBalanceTransaction.getId() : null;
+    }
+
+    public void setCreditBalanceTransaction(String id) {
+      this.creditBalanceTransaction =
+          ApiResource.setExpandableFieldId(id, this.creditBalanceTransaction);
+    }
+
+    /** Get expanded {@code creditBalanceTransaction}. */
+    public CreditBalanceTransaction getCreditBalanceTransactionObject() {
+      return (this.creditBalanceTransaction != null)
+          ? this.creditBalanceTransaction.getExpanded()
+          : null;
+    }
+
+    public void setCreditBalanceTransactionObject(CreditBalanceTransaction expandableObject) {
+      this.creditBalanceTransaction =
+          new ExpandableField<CreditBalanceTransaction>(expandableObject.getId(), expandableObject);
+    }
 
     /** Get ID of expandable {@code discount} object. */
     public String getDiscount() {

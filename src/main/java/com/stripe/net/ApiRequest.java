@@ -19,21 +19,7 @@ public class ApiRequest extends BaseApiRequest {
       Map<String, Object> params) {
     super(baseAddress, method, path, options, usage);
     this.params = params;
-    this.apiMode = path.startsWith("/v2") ? ApiMode.PREVIEW : ApiMode.V1;
-  }
-
-  /**
-   * @deprecated This constructor is for backward compatibility and will be removed by Sept 30, 2024
-   */
-  @Deprecated
-  public ApiRequest(
-      BaseAddress baseAddress,
-      ApiResource.RequestMethod method,
-      String path,
-      Map<String, Object> params,
-      RequestOptions options,
-      ApiMode apiMode) {
-    this(baseAddress, method, path, options, null, params);
+    this.apiMode = path.startsWith("/v2") ? ApiMode.V2 : ApiMode.V1;
   }
 
   public ApiRequest(

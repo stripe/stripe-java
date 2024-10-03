@@ -10,16 +10,15 @@ public abstract class Stripe {
   public static final int DEFAULT_READ_TIMEOUT = 80 * 1000;
 
   public static final String API_VERSION = ApiVersion.CURRENT;
-  public static final String PREVIEW_API_VERSION = ApiVersion.PREVIEW_CURRENT;
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
+  public static final String METER_EVENTS_API_BASE = "https://meter-events.stripe.com";
   public static final String VERSION = "26.13.0-beta.1";
 
   public static volatile String apiKey;
   public static volatile String clientId;
   public static volatile boolean enableTelemetry = true;
-  public static volatile String partnerId;
 
   /**
    * Stripe API version which is sent by default on requests. This can be updated to include beta
@@ -48,14 +47,14 @@ public abstract class Stripe {
   private static volatile int connectTimeout = -1;
   private static volatile int readTimeout = -1;
 
-  private static volatile int maxNetworkRetries = 0;
+  private static volatile int maxNetworkRetries = 2;
 
   private static volatile String apiBase = LIVE_API_BASE;
   private static volatile String connectBase = CONNECT_API_BASE;
   private static volatile String uploadBase = UPLOAD_API_BASE;
+  private static volatile String meterEventsBase = METER_EVENTS_API_BASE;
   private static volatile Proxy connectionProxy = null;
   private static volatile PasswordAuthentication proxyCredential = null;
-
   private static volatile Map<String, String> appInfo = null;
 
   /**
@@ -95,6 +94,18 @@ public abstract class Stripe {
   }
 
   /**
+   * (FOR TESTING ONLY) If you'd like your events requests to hit your own (mocked) server, you can
+   * set this up here by overriding the base api URL.
+   */
+  public static void overrideMeterEventsBase(final String overriddenMeterEventsBase) {
+    meterEventsBase = overriddenMeterEventsBase;
+  }
+
+  public static String getMeterEventsBase() {
+    return meterEventsBase;
+  }
+
+  /**
    * Set proxy to tunnel all Stripe connections.
    *
    * @param proxy proxy host and port setting
@@ -116,6 +127,7 @@ public abstract class Stripe {
     if (connectTimeout == -1) {
       return DEFAULT_CONNECT_TIMEOUT;
     }
+
     return connectTimeout;
   }
 

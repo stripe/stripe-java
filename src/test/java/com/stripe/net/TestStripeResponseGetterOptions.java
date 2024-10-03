@@ -10,7 +10,7 @@ import lombok.Getter;
 public class TestStripeResponseGetterOptions extends StripeResponseGetterOptions {
   // When adding setting here keep them in sync with settings in RequestOptions and
   // in the RequestOptions.merge method
-  private final String apiKey;
+  private final Authenticator authenticator;
   private final String clientId;
   private final int connectTimeout;
   private final int readTimeout;
@@ -20,9 +20,11 @@ public class TestStripeResponseGetterOptions extends StripeResponseGetterOptions
   private final String apiBase;
   private final String filesBase;
   private final String connectBase;
+  private final String meterEventsBase;
+  private final String stripeContext;
 
   public TestStripeResponseGetterOptions(
-      String apiKey,
+      Authenticator authenticator,
       String clientId,
       int connectTimeout,
       int readTimeout,
@@ -31,8 +33,10 @@ public class TestStripeResponseGetterOptions extends StripeResponseGetterOptions
       PasswordAuthentication proxyCredential,
       String apiBase,
       String filesBase,
-      String connectBase) {
-    this.apiKey = apiKey;
+      String connectBase,
+      String meterEventsBase,
+      String stripeContext) {
+    this.authenticator = authenticator;
     this.clientId = clientId;
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
@@ -42,5 +46,7 @@ public class TestStripeResponseGetterOptions extends StripeResponseGetterOptions
     this.apiBase = apiBase;
     this.filesBase = filesBase;
     this.connectBase = connectBase;
+    this.meterEventsBase = meterEventsBase;
+    this.stripeContext = stripeContext;
   }
 }

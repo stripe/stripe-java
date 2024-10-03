@@ -9,7 +9,6 @@ import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.net.ApiMode;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
@@ -47,12 +46,12 @@ public class StripeResponseStreamTest extends BaseStripeTest {
       String url = String.format("/v1/foobars/%s/pdf", ApiResource.urlEncodeId(this.getId()));
       return getResponseGetter()
           .requestStream(
-              BaseAddress.API,
-              ApiResource.RequestMethod.POST,
-              url,
-              (Map<String, Object>) null,
-              (RequestOptions) null,
-              ApiMode.V1);
+              new ApiRequest(
+                  BaseAddress.FILES,
+                  ApiResource.RequestMethod.POST,
+                  url,
+                  (Map<String, Object>) null,
+                  (RequestOptions) null));
     }
   }
 
@@ -65,6 +64,7 @@ public class StripeResponseStreamTest extends BaseStripeTest {
     server.start();
 
     Stripe.overrideApiBase(server.url("").toString());
+    Stripe.overrideUploadBase(server.url("").toString());
 
     TestResource t = TestResource.retrieve("foo_123");
     server.takeRequest();
@@ -90,6 +90,7 @@ public class StripeResponseStreamTest extends BaseStripeTest {
     server.start();
 
     Stripe.overrideApiBase(server.url("").toString());
+    Stripe.overrideUploadBase(server.url("").toString());
 
     TestResource r = TestResource.retrieve("foo_123");
     server.takeRequest();

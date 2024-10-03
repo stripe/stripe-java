@@ -7,7 +7,8 @@
     },
     {
       "id": "ba_123",
-      "object": "bank_account"
+      "object": "bank_account",
+      "account": "acc_123"
     },
     {
       "id": "bar_123",

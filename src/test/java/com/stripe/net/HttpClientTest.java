@@ -34,11 +34,12 @@ public class HttpClientTest extends BaseStripeTest {
     this.client.networkRetriesSleep = false;
 
     this.request =
-        new StripeRequest(
+        StripeRequest.create(
             ApiResource.RequestMethod.GET,
             "http://example.com/get",
             null,
-            RequestOptions.builder().setApiKey("sk_test_123").setMaxNetworkRetries(2).build());
+            RequestOptions.builder().setApiKey("sk_test_123").setMaxNetworkRetries(2).build(),
+            ApiMode.V1);
   }
 
   @Test

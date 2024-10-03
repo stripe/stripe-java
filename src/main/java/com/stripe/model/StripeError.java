@@ -216,4 +216,8 @@ public class StripeError extends StripeObject {
    */
   @SerializedName("type")
   String type;
+
+  /** The user message associated with the error. */
+  @SerializedName("user_message")
+  String userMessage;
 }
