@@ -1,5 +1,11 @@
 # Changelog
 
+## 27.1.0 - 2024-10-03
+* [#1890](https://github.com/stripe/stripe-java/pull/1890) Update the class for `ThinEvent` to include `livemode` and `reason`
+* [#1891](https://github.com/stripe/stripe-java/pull/1891) Removed the class `RequestSigningAuthenticator` that was added in the previous release. Request Signing is not supported yet.
+* [#1889](https://github.com/stripe/stripe-java/pull/1889) Update generated code
+  * Remove the support for resource `Margin` that was accidentally made public in the last release
+
 ## 27.0.0 - 2024-10-01
 * [#1880](https://github.com/stripe/stripe-java/pull/1880) Support for APIs in the new API version 2024-09-30.acacia
 
