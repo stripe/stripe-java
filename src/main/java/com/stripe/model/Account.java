@@ -64,7 +64,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("capabilities")
   Capabilities capabilities;
 
-  /** Whether the account can create live charges. */
+  /** Whether the account can process charges. */
   @SerializedName("charges_enabled")
   Boolean chargesEnabled;
 
@@ -159,7 +159,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("object")
   String object;
 
-  /** Whether Stripe can send payouts to this account. */
+  /** Whether the funds in this account can be paid out. */
   @SerializedName("payouts_enabled")
   Boolean payoutsEnabled;
 

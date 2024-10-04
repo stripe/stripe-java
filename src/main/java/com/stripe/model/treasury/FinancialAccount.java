@@ -115,7 +115,7 @@ public class FinancialAccount extends ApiResource
   List<String> restrictedFeatures;
 
   /**
-   * The enum specifying what state the account is in.
+   * Status of this FinancialAccount.
    *
    * <p>One of {@code closed}, or {@code open}.
    */

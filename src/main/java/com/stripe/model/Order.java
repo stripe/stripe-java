@@ -1368,6 +1368,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           @SerializedName("capture_method")
           String captureMethod;
 
+          /** The line items purchased by the customer. */
+          @SerializedName("line_items")
+          List<Order.Payment.Settings.PaymentMethodOptions.Paypal.LineItem> lineItems;
+
           /** Preferred locale of the PayPal checkout page that the customer is redirected to. */
           @SerializedName("preferred_locale")
           String preferredLocale;
@@ -1421,6 +1425,73 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
            */
           @SerializedName("subsellers")
           List<String> subsellers;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class LineItem extends StripeObject {
+            /**
+             * Type of the line item.
+             *
+             * <p>One of {@code digital_goods}, {@code donation}, or {@code physical_goods}.
+             */
+            @SerializedName("category")
+            String category;
+
+            /** Description of the line item. */
+            @SerializedName("description")
+            String description;
+
+            /** Descriptive name of the line item. */
+            @SerializedName("name")
+            String name;
+
+            /** Quantity of the line item. Cannot be a negative number. */
+            @SerializedName("quantity")
+            Long quantity;
+
+            /** Client facing stock keeping unit, article number or similar. */
+            @SerializedName("sku")
+            String sku;
+
+            /**
+             * The Stripe account ID of the connected account that sells the item. This is only
+             * needed when using <a
+             * href="https://docs.stripe.com/connect/separate-charges-and-transfers">Separate
+             * Charges and Transfers</a>.
+             */
+            @SerializedName("sold_by")
+            String soldBy;
+
+            @SerializedName("tax")
+            Tax tax;
+
+            /**
+             * Price for a single unit of the line item in minor units. Cannot be a negative number.
+             */
+            @SerializedName("unit_amount")
+            Long unitAmount;
+
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Tax extends StripeObject {
+              /**
+               * The tax for a single unit of the line item in minor units. Cannot be a negative
+               * number.
+               */
+              @SerializedName("amount")
+              Long amount;
+
+              /**
+               * The tax behavior for the line item.
+               *
+               * <p>One of {@code exclusive}, or {@code inclusive}.
+               */
+              @SerializedName("behavior")
+              String behavior;
+            }
+          }
         }
 
         @Getter
@@ -1717,8 +1788,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
        * ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat},
        * {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code
        * si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat},
-       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code
-       * unknown}.
+       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code
+       * tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or
+       * {@code unknown}.
        */
       @SerializedName("type")
       String type;

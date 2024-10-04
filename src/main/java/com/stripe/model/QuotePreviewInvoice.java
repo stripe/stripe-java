@@ -585,6 +585,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("total_margin_amounts")
   List<QuotePreviewInvoice.TotalMarginAmount> totalMarginAmounts;
 
+  /**
+   * Contains pretax credit amounts (ex: discount, credit grants, etc) that apply to this invoice.
+   * This is a combined list of total_pretax_credit_amounts across all invoice line items.
+   */
   @SerializedName("total_pretax_credit_amounts")
   List<QuotePreviewInvoice.TotalPretaxCreditAmount> totalPretaxCreditAmounts;
 
@@ -1103,7 +1107,8 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
      * cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat},
      * {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code
      * ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code kz_bin},
-     * {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code unknown}.
+     * {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code
+     * uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;

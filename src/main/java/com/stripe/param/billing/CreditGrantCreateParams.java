@@ -23,7 +23,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("category")
   Category category;
 
-  /** <strong>Required.</strong> Id of the customer to whom the credit should be granted. */
+  /** <strong>Required.</strong> ID of the customer to whom the credit should be granted. */
   @SerializedName("customer")
   String customer;
 
@@ -58,7 +58,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** A descriptive name shown in dashboard and on invoices. */
+  /** A descriptive name shown in dashboard. */
   @SerializedName("name")
   String name;
 
@@ -144,7 +144,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Id of the customer to whom the credit should be granted. */
+    /** <strong>Required.</strong> ID of the customer to whom the credit should be granted. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -243,7 +243,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A descriptive name shown in dashboard and on invoices. */
+    /** A descriptive name shown in dashboard. */
     public Builder setName(String name) {
       this.name = name;
       return this;

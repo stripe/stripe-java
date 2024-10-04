@@ -5524,6 +5524,10 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** The line items purchased by the customer. */
+          @SerializedName("line_items")
+          List<OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem> lineItems;
+
           /**
            * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred
            * locale</a> of the PayPal checkout page that the customer is redirected to.
@@ -5592,6 +5596,8 @@ public class OrderCreateParams extends ApiRequestParams {
           private Paypal(
               ApiRequestParams.EnumParam captureMethod,
               Map<String, Object> extraParams,
+              List<OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem>
+                  lineItems,
               PreferredLocale preferredLocale,
               String reference,
               String referenceId,
@@ -5600,6 +5606,7 @@ public class OrderCreateParams extends ApiRequestParams {
               List<String> subsellers) {
             this.captureMethod = captureMethod;
             this.extraParams = extraParams;
+            this.lineItems = lineItems;
             this.preferredLocale = preferredLocale;
             this.reference = reference;
             this.referenceId = referenceId;
@@ -5616,6 +5623,9 @@ public class OrderCreateParams extends ApiRequestParams {
             private ApiRequestParams.EnumParam captureMethod;
 
             private Map<String, Object> extraParams;
+
+            private List<OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem>
+                lineItems;
 
             private PreferredLocale preferredLocale;
 
@@ -5634,6 +5644,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal(
                   this.captureMethod,
                   this.extraParams,
+                  this.lineItems,
                   this.preferredLocale,
                   this.reference,
                   this.referenceId,
@@ -5683,6 +5694,38 @@ public class OrderCreateParams extends ApiRequestParams {
                 this.extraParams = new HashMap<>();
               }
               this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `lineItems` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal#lineItems} for the
+             * field documentation.
+             */
+            public Builder addLineItem(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem element) {
+              if (this.lineItems == null) {
+                this.lineItems = new ArrayList<>();
+              }
+              this.lineItems.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `lineItems` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal#lineItems} for the
+             * field documentation.
+             */
+            public Builder addAllLineItem(
+                List<OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem>
+                    elements) {
+              if (this.lineItems == null) {
+                this.lineItems = new ArrayList<>();
+              }
+              this.lineItems.addAll(elements);
               return this;
             }
 
@@ -5813,6 +5856,330 @@ public class OrderCreateParams extends ApiRequestParams {
               }
               this.subsellers.addAll(elements);
               return this;
+            }
+          }
+
+          @Getter
+          public static class LineItem {
+            /** Type of the line item. */
+            @SerializedName("category")
+            Category category;
+
+            /** Description of the line item. */
+            @SerializedName("description")
+            String description;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Descriptive name of the line item. */
+            @SerializedName("name")
+            String name;
+
+            /** <strong>Required.</strong> Quantity of the line item. Must be a positive number. */
+            @SerializedName("quantity")
+            Long quantity;
+
+            /** Client facing stock keeping unit, article number or similar. */
+            @SerializedName("sku")
+            String sku;
+
+            /** The Stripe account ID of the connected account that sells the item. */
+            @SerializedName("sold_by")
+            String soldBy;
+
+            /** The tax information for the line item. */
+            @SerializedName("tax")
+            Tax tax;
+
+            /**
+             * <strong>Required.</strong> Price for a single unit of the line item in minor units.
+             * Cannot be a negative number.
+             */
+            @SerializedName("unit_amount")
+            Long unitAmount;
+
+            private LineItem(
+                Category category,
+                String description,
+                Map<String, Object> extraParams,
+                String name,
+                Long quantity,
+                String sku,
+                String soldBy,
+                Tax tax,
+                Long unitAmount) {
+              this.category = category;
+              this.description = description;
+              this.extraParams = extraParams;
+              this.name = name;
+              this.quantity = quantity;
+              this.sku = sku;
+              this.soldBy = soldBy;
+              this.tax = tax;
+              this.unitAmount = unitAmount;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Category category;
+
+              private String description;
+
+              private Map<String, Object> extraParams;
+
+              private String name;
+
+              private Long quantity;
+
+              private String sku;
+
+              private String soldBy;
+
+              private Tax tax;
+
+              private Long unitAmount;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem
+                  build() {
+                return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem(
+                    this.category,
+                    this.description,
+                    this.extraParams,
+                    this.name,
+                    this.quantity,
+                    this.sku,
+                    this.soldBy,
+                    this.tax,
+                    this.unitAmount);
+              }
+
+              /** Type of the line item. */
+              public Builder setCategory(
+                  OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem.Category
+                      category) {
+                this.category = category;
+                return this;
+              }
+
+              /** Description of the line item. */
+              public Builder setDescription(String description) {
+                this.description = description;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Descriptive name of the line item. */
+              public Builder setName(String name) {
+                this.name = name;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Quantity of the line item. Must be a positive number.
+               */
+              public Builder setQuantity(Long quantity) {
+                this.quantity = quantity;
+                return this;
+              }
+
+              /** Client facing stock keeping unit, article number or similar. */
+              public Builder setSku(String sku) {
+                this.sku = sku;
+                return this;
+              }
+
+              /** The Stripe account ID of the connected account that sells the item. */
+              public Builder setSoldBy(String soldBy) {
+                this.soldBy = soldBy;
+                return this;
+              }
+
+              /** The tax information for the line item. */
+              public Builder setTax(
+                  OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem.Tax tax) {
+                this.tax = tax;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Price for a single unit of the line item in minor units.
+               * Cannot be a negative number.
+               */
+              public Builder setUnitAmount(Long unitAmount) {
+                this.unitAmount = unitAmount;
+                return this;
+              }
+            }
+
+            @Getter
+            public static class Tax {
+              /**
+               * <strong>Required.</strong> The tax for a single unit of the line item in minor
+               * units. Cannot be a negative number.
+               */
+              @SerializedName("amount")
+              Long amount;
+
+              /** <strong>Required.</strong> The tax behavior for the line item. */
+              @SerializedName("behavior")
+              Behavior behavior;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              private Tax(Long amount, Behavior behavior, Map<String, Object> extraParams) {
+                this.amount = amount;
+                this.behavior = behavior;
+                this.extraParams = extraParams;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Long amount;
+
+                private Behavior behavior;
+
+                private Map<String, Object> extraParams;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem.Tax
+                    build() {
+                  return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem
+                      .Tax(this.amount, this.behavior, this.extraParams);
+                }
+
+                /**
+                 * <strong>Required.</strong> The tax for a single unit of the line item in minor
+                 * units. Cannot be a negative number.
+                 */
+                public Builder setAmount(Long amount) {
+                  this.amount = amount;
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The tax behavior for the line item. */
+                public Builder setBehavior(
+                    OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem.Tax
+                            .Behavior
+                        behavior) {
+                  this.behavior = behavior;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem.Tax#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem.Tax#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+              }
+
+              public enum Behavior implements ApiRequestParams.EnumParam {
+                @SerializedName("exclusive")
+                EXCLUSIVE("exclusive"),
+
+                @SerializedName("inclusive")
+                INCLUSIVE("inclusive");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Behavior(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum Category implements ApiRequestParams.EnumParam {
+              @SerializedName("digital_goods")
+              DIGITAL_GOODS("digital_goods"),
+
+              @SerializedName("donation")
+              DONATION("donation"),
+
+              @SerializedName("physical_goods")
+              PHYSICAL_GOODS("physical_goods");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Category(String value) {
+                this.value = value;
+              }
             }
           }
 
@@ -8075,19 +8442,20 @@ public class OrderCreateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
        * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
-       * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
-       * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
-       * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
-       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hr_oib}, {@code hu_tin},
-       * {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code
-       * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid},
-       * {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code
-       * no_vat}, {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-       * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
-       * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin},
-       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code
-       * vn_tin}, or {@code za_vat}
+       * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code by_tin}, {@code ca_bn}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+       * {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code
+       * cr_tin}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
+       * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
+       * hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
+       * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
+       * kz_bin}, {@code li_uid}, {@code ma_vat}, {@code md_vat}, {@code mx_rfc}, {@code my_frp},
+       * {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code
+       * nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib},
+       * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+       * si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
+       * {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code
+       * ve_rif}, {@code vn_tin}, or {@code za_vat}
        */
       @SerializedName("type")
       Type type;
@@ -8149,19 +8517,20 @@ public class OrderCreateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
          * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
-         * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
-         * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
-         * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat},
-         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hr_oib}, {@code
-         * hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn},
-         * {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code
-         * li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin},
-         * {@code no_vat}, {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
-         * ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
-         * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code
-         * tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif},
-         * {@code vn_tin}, or {@code za_vat}
+         * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code by_tin}, {@code ca_bn}, {@code
+         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+         * {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code
+         * cr_tin}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
+         * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
+         * hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
+         * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
+         * kz_bin}, {@code li_uid}, {@code ma_vat}, {@code md_vat}, {@code mx_rfc}, {@code my_frp},
+         * {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code
+         * nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib},
+         * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+         * si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
+         * {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code
+         * ve_rif}, {@code vn_tin}, or {@code za_vat}
          */
         public Builder setType(OrderCreateParams.TaxDetails.TaxId.Type type) {
           this.type = type;
@@ -8205,6 +8574,9 @@ public class OrderCreateParams extends ApiRequestParams {
 
         @SerializedName("br_cpf")
         BR_CPF("br_cpf"),
+
+        @SerializedName("by_tin")
+        BY_TIN("by_tin"),
 
         @SerializedName("ca_bn")
         CA_BN("ca_bn"),
@@ -8311,6 +8683,12 @@ public class OrderCreateParams extends ApiRequestParams {
         @SerializedName("li_uid")
         LI_UID("li_uid"),
 
+        @SerializedName("ma_vat")
+        MA_VAT("ma_vat"),
+
+        @SerializedName("md_vat")
+        MD_VAT("md_vat"),
+
         @SerializedName("mx_rfc")
         MX_RFC("mx_rfc"),
 
@@ -8380,6 +8758,9 @@ public class OrderCreateParams extends ApiRequestParams {
         @SerializedName("tw_vat")
         TW_VAT("tw_vat"),
 
+        @SerializedName("tz_vat")
+        TZ_VAT("tz_vat"),
+
         @SerializedName("ua_vat")
         UA_VAT("ua_vat"),
 
@@ -8388,6 +8769,12 @@ public class OrderCreateParams extends ApiRequestParams {
 
         @SerializedName("uy_ruc")
         UY_RUC("uy_ruc"),
+
+        @SerializedName("uz_tin")
+        UZ_TIN("uz_tin"),
+
+        @SerializedName("uz_vat")
+        UZ_VAT("uz_vat"),
 
         @SerializedName("ve_rif")
         VE_RIF("ve_rif"),

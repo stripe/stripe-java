@@ -8622,10 +8622,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("full_name_aliases")
     Object fullNameAliases;
 
-    /**
-     * The individual's gender (International regulations require either &quot;male&quot; or
-     * &quot;female&quot;).
-     */
+    /** The individual's gender. */
     @SerializedName("gender")
     Object gender;
 
@@ -8979,19 +8976,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The individual's gender (International regulations require either &quot;male&quot; or
-       * &quot;female&quot;).
-       */
+      /** The individual's gender. */
       public Builder setGender(String gender) {
         this.gender = gender;
         return this;
       }
 
-      /**
-       * The individual's gender (International regulations require either &quot;male&quot; or
-       * &quot;female&quot;).
-       */
+      /** The individual's gender. */
       public Builder setGender(EmptyParam gender) {
         this.gender = gender;
         return this;

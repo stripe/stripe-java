@@ -125,11 +125,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("interac_present")
   InteracPresent interacPresent;
 
+  @SerializedName("kakao_pay")
+  KakaoPay kakaoPay;
+
   @SerializedName("klarna")
   Klarna klarna;
 
   @SerializedName("konbini")
   Konbini konbini;
+
+  @SerializedName("kr_card")
+  KrCard krCard;
 
   @SerializedName("link")
   Link link;
@@ -159,6 +165,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("multibanco")
   Multibanco multibanco;
 
+  @SerializedName("naver_pay")
+  NaverPay naverPay;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -172,6 +181,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   @SerializedName("p24")
   P24 p24;
+
+  @SerializedName("payco")
+  Payco payco;
 
   @SerializedName("paynow")
   Paynow paynow;
@@ -201,6 +213,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("revolut_pay")
   RevolutPay revolutPay;
 
+  @SerializedName("samsung_pay")
+  SamsungPay samsungPay;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -221,11 +236,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik},
    * {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code customer_balance},
    * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
-   * interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mb_way}, {@code
-   * mobilepay}, {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
-   * {@code payto}, {@code pix}, {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code
-   * sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
-   * wechat_pay}, or {@code zip}.
+   * interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card}, {@code
+   * link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code oxxo},
+   * {@code p24}, {@code payco}, {@code paynow}, {@code paypal}, {@code payto}, {@code pix}, {@code
+   * promptpay}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit},
+   * {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or
+   * {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -1719,6 +1735,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class KakaoPay extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Klarna extends StripeObject {
     /** The customer's date of birth, if provided. */
     @SerializedName("dob")
@@ -1746,6 +1767,27 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Konbini extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class KrCard extends StripeObject {
+    /**
+     * The local credit or debit card brand.
+     *
+     * <p>One of {@code bc}, {@code citi}, {@code hana}, {@code hyundai}, {@code jeju}, {@code
+     * jeonbuk}, {@code kakaobank}, {@code kbank}, {@code kdbbank}, {@code kookmin}, {@code
+     * kwangju}, {@code lotte}, {@code mg}, {@code nh}, {@code post}, {@code samsung}, {@code
+     * savingsbank}, {@code shinhan}, {@code shinhyup}, {@code suhyup}, {@code tossbank}, or {@code
+     * woori}.
+     */
+    @SerializedName("brand")
+    String brand;
+
+    /** The last four digits of the card. This may not be present for American Express cards. */
+    @SerializedName("last4")
+    String last4;
+  }
 
   @Getter
   @Setter
@@ -1779,6 +1821,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NaverPay extends StripeObject {
+    /**
+     * Whether to fund this transaction with Naver Pay points or a card.
+     *
+     * <p>One of {@code card}, or {@code points}.
+     */
+    @SerializedName("funding")
+    String funding;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Oxxo extends StripeObject {}
 
   @Getter
@@ -1799,6 +1854,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("bank")
     String bank;
   }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Payco extends StripeObject {}
 
   @Getter
   @Setter
@@ -1908,6 +1968,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class RevolutPay extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SamsungPay extends StripeObject {}
 
   @Getter
   @Setter
@@ -2150,14 +2215,18 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(grabpay, responseGetter);
     trySetResponseGetter(ideal, responseGetter);
     trySetResponseGetter(interacPresent, responseGetter);
+    trySetResponseGetter(kakaoPay, responseGetter);
     trySetResponseGetter(klarna, responseGetter);
     trySetResponseGetter(konbini, responseGetter);
+    trySetResponseGetter(krCard, responseGetter);
     trySetResponseGetter(link, responseGetter);
     trySetResponseGetter(mbWay, responseGetter);
     trySetResponseGetter(mobilepay, responseGetter);
     trySetResponseGetter(multibanco, responseGetter);
+    trySetResponseGetter(naverPay, responseGetter);
     trySetResponseGetter(oxxo, responseGetter);
     trySetResponseGetter(p24, responseGetter);
+    trySetResponseGetter(payco, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
     trySetResponseGetter(paypal, responseGetter);
     trySetResponseGetter(payto, responseGetter);
@@ -2166,6 +2235,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(radarOptions, responseGetter);
     trySetResponseGetter(rechnung, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);
+    trySetResponseGetter(samsungPay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);

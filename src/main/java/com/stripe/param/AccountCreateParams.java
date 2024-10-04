@@ -8948,10 +8948,7 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("full_name_aliases")
     Object fullNameAliases;
 
-    /**
-     * The individual's gender (International regulations require either &quot;male&quot; or
-     * &quot;female&quot;).
-     */
+    /** The individual's gender. */
     @SerializedName("gender")
     String gender;
 
@@ -9281,10 +9278,7 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The individual's gender (International regulations require either &quot;male&quot; or
-       * &quot;female&quot;).
-       */
+      /** The individual's gender. */
       public Builder setGender(String gender) {
         this.gender = gender;
         return this;
