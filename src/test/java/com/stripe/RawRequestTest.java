@@ -238,7 +238,7 @@ public class RawRequestTest extends BaseStripeTest {
     final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
 
     final StripeResponse response =
-        client.rawRequest(RequestMethod.GET, "/v2/subscription_schedules", "", options);
+        client.rawRequest(RequestMethod.GET, "/v1/subscription_schedules", "", options);
 
     RecordedRequest request = server.takeRequest();
     assertEquals(null, request.getHeader("Content-Type"));

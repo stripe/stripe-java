@@ -24,6 +24,10 @@ public class ThinEvent {
   @SerializedName("created")
   public Instant created;
 
+  /** Livemode indicates if the event is from a production(true) or test(false) account. */
+  @SerializedName("livemode")
+  public Boolean livemode;
+
   /** [Optional] Authentication context needed to fetch the event or related object. */
   @SerializedName("context")
   public String context;
@@ -31,4 +35,8 @@ public class ThinEvent {
   /** [Optional] Object containing the reference to API resource relevant to the event. */
   @SerializedName("related_object")
   public ThinEventRelatedObject relatedObject;
+
+  /** [Optional] Reason for the event. */
+  @SerializedName("reason")
+  public com.stripe.model.v2.Event.Reason reason;
 }
