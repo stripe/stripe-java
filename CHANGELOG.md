@@ -1,5 +1,11 @@
 # Changelog
 
+## 27.2.0-beta.1 - 2024-10-03
+* [#1888](https://github.com/stripe/stripe-java/pull/1888) Update generated code
+  * Add support for `reporting_chart` on `AccountSessionCreateParams.components`
+  * Remove support for `from_schedule` on `Quote.subscription_data`
+  * Add support for `allow_redisplay` on `terminal.ReaderCollectPaymentMethodParams.collect_config`
+
 ## 27.1.0 - 2024-10-03
 * [#1890](https://github.com/stripe/stripe-java/pull/1890) Update the class for `ThinEvent` to include `livemode` and `reason`
 * [#1891](https://github.com/stripe/stripe-java/pull/1891) Removed the class `RequestSigningAuthenticator` that was added in the previous release. Request Signing is not supported yet.
