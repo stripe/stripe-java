@@ -64,7 +64,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("capabilities")
   Capabilities capabilities;
 
-  /** Whether the account can create live charges. */
+  /** Whether the account can process charges. */
   @SerializedName("charges_enabled")
   Boolean chargesEnabled;
 
@@ -120,6 +120,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("future_requirements")
   FutureRequirements futureRequirements;
 
+  /** The groups associated with the account. */
+  @SerializedName("groups")
+  Groups groups;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -159,7 +163,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("object")
   String object;
 
-  /** Whether Stripe can send payouts to this account. */
+  /** Whether the funds in this account can be paid out. */
   @SerializedName("payouts_enabled")
   Boolean payoutsEnabled;
 
@@ -1880,6 +1884,19 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Groups extends StripeObject {
+    /**
+     * The group the account is in to determine their payments pricing, and null if the account is
+     * on customized pricing. <a href="https://stripe.com/docs/connect/platform-pricing-tools">See
+     * the Platform pricing tool documentation</a> for details.
+     */
+    @SerializedName("payments_pricing")
+    String paymentsPricing;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
      * Fields that are due and can be satisfied by providing the corresponding alternative fields
@@ -2575,6 +2592,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     trySetResponseGetter(controller, responseGetter);
     trySetResponseGetter(externalAccounts, responseGetter);
     trySetResponseGetter(futureRequirements, responseGetter);
+    trySetResponseGetter(groups, responseGetter);
     trySetResponseGetter(individual, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
     trySetResponseGetter(riskControls, responseGetter);

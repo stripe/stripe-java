@@ -1177,11 +1177,17 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("interac_present")
     InteracPresent interacPresent;
 
+    @SerializedName("kakao_pay")
+    KakaoPay kakaoPay;
+
     @SerializedName("klarna")
     Klarna klarna;
 
     @SerializedName("konbini")
     Konbini konbini;
+
+    @SerializedName("kr_card")
+    KrCard krCard;
 
     @SerializedName("link")
     Link link;
@@ -1195,11 +1201,17 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("multibanco")
     Multibanco multibanco;
 
+    @SerializedName("naver_pay")
+    NaverPay naverPay;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
     @SerializedName("p24")
     P24 p24;
+
+    @SerializedName("payco")
+    Payco payco;
 
     @SerializedName("paynow")
     Paynow paynow;
@@ -1221,6 +1233,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
+
+    @SerializedName("samsung_pay")
+    SamsungPay samsungPay;
 
     @SerializedName("sepa_credit_transfer")
     SepaCreditTransfer sepaCreditTransfer;
@@ -2685,6 +2700,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class KakaoPay extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
       /** The payer details for this transaction. */
       @SerializedName("payer_details")
@@ -2758,6 +2782,31 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class KrCard extends StripeObject {
+      /**
+       * The local credit or debit card brand.
+       *
+       * <p>One of {@code bc}, {@code citi}, {@code hana}, {@code hyundai}, {@code jeju}, {@code
+       * jeonbuk}, {@code kakaobank}, {@code kbank}, {@code kdbbank}, {@code kookmin}, {@code
+       * kwangju}, {@code lotte}, {@code mg}, {@code nh}, {@code post}, {@code samsung}, {@code
+       * savingsbank}, {@code shinhan}, {@code shinhyup}, {@code suhyup}, {@code tossbank}, or
+       * {@code woori}.
+       */
+      @SerializedName("brand")
+      String brand;
+
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+
+      /** The last four digits of the card. This may not be present for American Express cards. */
+      @SerializedName("last4")
+      String last4;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {
       /**
        * Two-letter ISO code representing the funding source country beneath the Link payment. You
@@ -2822,6 +2871,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class NaverPay extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {
       /** OXXO reference number. */
       @SerializedName("number")
@@ -2856,6 +2914,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("verified_name")
       String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payco extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
     }
 
     @Getter
@@ -2996,6 +3063,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SamsungPay extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
 
     @Getter
     @Setter

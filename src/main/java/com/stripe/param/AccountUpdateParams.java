@@ -116,6 +116,13 @@ public class AccountUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * A hash of account group type to tokens. These are account groups this account should be added
+   * to
+   */
+  @SerializedName("groups")
+  Groups groups;
+
+  /**
    * Information about the person represented by the account. This field is null unless {@code
    * business_type} is set to {@code individual}. Once you create an <a
    * href="https://stripe.com/api/account_links">Account Link</a> or <a
@@ -171,6 +178,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       List<String> expand,
       Object externalAccount,
       Map<String, Object> extraParams,
+      Groups groups,
       Individual individual,
       Object metadata,
       RiskControls riskControls,
@@ -187,6 +195,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     this.expand = expand;
     this.externalAccount = externalAccount;
     this.extraParams = extraParams;
+    this.groups = groups;
     this.individual = individual;
     this.metadata = metadata;
     this.riskControls = riskControls;
@@ -221,6 +230,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Groups groups;
+
     private Individual individual;
 
     private Object metadata;
@@ -245,6 +256,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.expand,
           this.externalAccount,
           this.extraParams,
+          this.groups,
           this.individual,
           this.metadata,
           this.riskControls,
@@ -463,6 +475,15 @@ public class AccountUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * A hash of account group type to tokens. These are account groups this account should be added
+     * to
+     */
+    public Builder setGroups(AccountUpdateParams.Groups groups) {
+      this.groups = groups;
       return this;
     }
 
@@ -8576,6 +8597,92 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Groups {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * The group the account is in to determine their payments pricing, and null if the account is
+     * on customized pricing. <a href="https://stripe.com/docs/connect/platform-pricing-tools">See
+     * the Platform pricing tool documentation</a> for details.
+     */
+    @SerializedName("payments_pricing")
+    Object paymentsPricing;
+
+    private Groups(Map<String, Object> extraParams, Object paymentsPricing) {
+      this.extraParams = extraParams;
+      this.paymentsPricing = paymentsPricing;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object paymentsPricing;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountUpdateParams.Groups build() {
+        return new AccountUpdateParams.Groups(this.extraParams, this.paymentsPricing);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountUpdateParams.Groups#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountUpdateParams.Groups#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The group the account is in to determine their payments pricing, and null if the account is
+       * on customized pricing. <a href="https://stripe.com/docs/connect/platform-pricing-tools">See
+       * the Platform pricing tool documentation</a> for details.
+       */
+      public Builder setPaymentsPricing(String paymentsPricing) {
+        this.paymentsPricing = paymentsPricing;
+        return this;
+      }
+
+      /**
+       * The group the account is in to determine their payments pricing, and null if the account is
+       * on customized pricing. <a href="https://stripe.com/docs/connect/platform-pricing-tools">See
+       * the Platform pricing tool documentation</a> for details.
+       */
+      public Builder setPaymentsPricing(EmptyParam paymentsPricing) {
+        this.paymentsPricing = paymentsPricing;
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class Individual {
     /** The individual's primary address. */
     @SerializedName("address")
@@ -8622,10 +8729,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("full_name_aliases")
     Object fullNameAliases;
 
-    /**
-     * The individual's gender (International regulations require either &quot;male&quot; or
-     * &quot;female&quot;).
-     */
+    /** The individual's gender. */
     @SerializedName("gender")
     Object gender;
 
@@ -8979,19 +9083,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The individual's gender (International regulations require either &quot;male&quot; or
-       * &quot;female&quot;).
-       */
+      /** The individual's gender. */
       public Builder setGender(String gender) {
         this.gender = gender;
         return this;
       }
 
-      /**
-       * The individual's gender (International regulations require either &quot;male&quot; or
-       * &quot;female&quot;).
-       */
+      /** The individual's gender. */
       public Builder setGender(EmptyParam gender) {
         this.gender = gender;
         return this;

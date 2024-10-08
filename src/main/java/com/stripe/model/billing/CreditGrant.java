@@ -49,7 +49,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @SerializedName("created")
   Long created;
 
-  /** Id of the customer to whom the credit was granted. */
+  /** ID of the customer to whom the credit was granted. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -84,7 +84,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** A descriptive name shown in dashboard and on invoices. */
+  /** A descriptive name shown in dashboard. */
   @SerializedName("name")
   String name;
 

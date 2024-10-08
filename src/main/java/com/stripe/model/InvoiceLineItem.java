@@ -131,6 +131,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("plan")
   Plan plan;
 
+  /**
+   * Contains pretax credit amounts (ex: discount, credit grants, etc) that apply to this line item.
+   */
   @SerializedName("pretax_credit_amounts")
   List<InvoiceLineItem.PretaxCreditAmount> pretaxCreditAmounts;
 

@@ -621,8 +621,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
     Object city;
 
     /**
-     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-     * 3166-1 alpha-2</a>).
+     * A freeform text field for the country. However, in order to activate some tax features, the
+     * format should be a two-letter country code (<a
+     * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     Object country;
@@ -713,8 +714,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
+       * A freeform text field for the country. However, in order to activate some tax features, the
+       * format should be a two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -722,8 +724,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
+       * A freeform text field for the country. However, in order to activate some tax features, the
+       * format should be a two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       public Builder setCountry(EmptyParam country) {
         this.country = country;
@@ -1527,8 +1530,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Object city;
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
+       * A freeform text field for the country. However, in order to activate some tax features, the
+       * format should be a two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       Object country;
@@ -1619,8 +1623,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
+         * A freeform text field for the country. However, in order to activate some tax features,
+         * the format should be a two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1628,8 +1633,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
+         * A freeform text field for the country. However, in order to activate some tax features,
+         * the format should be a two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
          */
         public Builder setCountry(EmptyParam country) {
           this.country = country;

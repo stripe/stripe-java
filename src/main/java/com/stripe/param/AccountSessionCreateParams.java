@@ -652,10 +652,20 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and true otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -670,7 +680,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Boolean externalAccountCollection, Map<String, Object> extraParams) {
+        private Features(
+            Boolean disableStripeUserAuthentication,
+            Boolean externalAccountCollection,
+            Map<String, Object> extraParams) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
         }
@@ -680,6 +694,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
           private Boolean externalAccountCollection;
 
           private Map<String, Object> extraParams;
@@ -687,14 +703,30 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.AccountManagement.Features build() {
             return new AccountSessionCreateParams.Components.AccountManagement.Features(
-                this.externalAccountCollection, this.extraParams);
+                this.disableStripeUserAuthentication,
+                this.externalAccountCollection,
+                this.extraParams);
+          }
+
+          /**
+           * Disables Stripe user authentication for this embedded component. This feature can only
+           * be false for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like custom accounts. The default value for this
+           * feature is {@code false} when {@code external_account_collection} is enabled and true
+           * otherwise.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
           }
 
           /**
            * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for custom accounts (or accounts where the
-           * platform is compliance owner). Otherwise, bank account collection is determined by
-           * compliance requirements.
+           * accounts. This feature can only be false for accounts where you’re responsible for
+           * collecting updated information when requirements are due or change, like custom
+           * accounts. Otherwise, bank account collection is determined by compliance requirements.
+           * The default value for this feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -822,10 +854,20 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and true otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -840,7 +882,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Boolean externalAccountCollection, Map<String, Object> extraParams) {
+        private Features(
+            Boolean disableStripeUserAuthentication,
+            Boolean externalAccountCollection,
+            Map<String, Object> extraParams) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
         }
@@ -850,6 +896,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
           private Boolean externalAccountCollection;
 
           private Map<String, Object> extraParams;
@@ -857,14 +905,30 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.AccountOnboarding.Features build() {
             return new AccountSessionCreateParams.Components.AccountOnboarding.Features(
-                this.externalAccountCollection, this.extraParams);
+                this.disableStripeUserAuthentication,
+                this.externalAccountCollection,
+                this.extraParams);
+          }
+
+          /**
+           * Disables Stripe user authentication for this embedded component. This feature can only
+           * be false for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like custom accounts. The default value for this
+           * feature is {@code false} when {@code external_account_collection} is enabled and true
+           * otherwise.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
           }
 
           /**
            * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for custom accounts (or accounts where the
-           * platform is compliance owner). Otherwise, bank account collection is determined by
-           * compliance requirements.
+           * accounts. This feature can only be false for accounts where you’re responsible for
+           * collecting updated information when requirements are due or change, like custom
+           * accounts. Otherwise, bank account collection is determined by compliance requirements.
+           * The default value for this feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -1377,6 +1441,16 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
          * Loss Liability, default {@code false} otherwise.
          */
@@ -1385,9 +1459,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
         /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -1417,11 +1492,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean standardPayouts;
 
         private Features(
+            Boolean disableStripeUserAuthentication,
             Boolean editPayoutSchedule,
             Boolean externalAccountCollection,
             Map<String, Object> extraParams,
             Boolean instantPayouts,
             Boolean standardPayouts) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.editPayoutSchedule = editPayoutSchedule;
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
@@ -1434,6 +1511,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
           private Boolean editPayoutSchedule;
 
           private Boolean externalAccountCollection;
@@ -1447,11 +1526,25 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.Balances.Features build() {
             return new AccountSessionCreateParams.Components.Balances.Features(
+                this.disableStripeUserAuthentication,
                 this.editPayoutSchedule,
                 this.externalAccountCollection,
                 this.extraParams,
                 this.instantPayouts,
                 this.standardPayouts);
+          }
+
+          /**
+           * Disables Stripe user authentication for this embedded component. This feature can only
+           * be false for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like custom accounts. The default value for this
+           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+           * true} otherwise.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
           }
 
           /**
@@ -1465,9 +1558,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           /**
            * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for custom accounts (or accounts where the
-           * platform is compliance owner). Otherwise, bank account collection is determined by
-           * compliance requirements.
+           * accounts. This feature can only be false for accounts where you’re responsible for
+           * collecting updated information when requirements are due or change, like custom
+           * accounts. Otherwise, bank account collection is determined by compliance requirements.
+           * The default value for this feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -2343,6 +2437,16 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       @Getter
       public static class Features {
+        /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
         /** Whether to allow external accounts to be linked for money transfer. */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -2370,11 +2474,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean transferBalance;
 
         private Features(
+            Boolean disableStripeUserAuthentication,
             Boolean externalAccountCollection,
             Map<String, Object> extraParams,
             Boolean moneyMovement,
             Boolean sendMoney,
             Boolean transferBalance) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
           this.moneyMovement = moneyMovement;
@@ -2387,6 +2493,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
           private Boolean externalAccountCollection;
 
           private Map<String, Object> extraParams;
@@ -2400,11 +2508,25 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.FinancialAccount.Features build() {
             return new AccountSessionCreateParams.Components.FinancialAccount.Features(
+                this.disableStripeUserAuthentication,
                 this.externalAccountCollection,
                 this.extraParams,
                 this.moneyMovement,
                 this.sendMoney,
                 this.transferBalance);
+          }
+
+          /**
+           * Disables Stripe user authentication for this embedded component. This feature can only
+           * be false for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like custom accounts. The default value for this
+           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+           * true} otherwise.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
           }
 
           /** Whether to allow external accounts to be linked for money transfer. */
@@ -2551,7 +2673,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       @Getter
       public static class Features {
-        /** Whether to allow card spend dispute features. */
+        /** Whether to allow card spend dispute management features. */
         @SerializedName("card_spend_dispute_management")
         Boolean cardSpendDisputeManagement;
 
@@ -2586,7 +2708,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
                 this.cardSpendDisputeManagement, this.extraParams);
           }
 
-          /** Whether to allow card spend dispute features. */
+          /** Whether to allow card spend dispute management features. */
           public Builder setCardSpendDisputeManagement(Boolean cardSpendDisputeManagement) {
             this.cardSpendDisputeManagement = cardSpendDisputeManagement;
             return this;
@@ -2859,6 +2981,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName("card_management")
         Boolean cardManagement;
 
+        /** Whether to allow card spend dispute management features. */
+        @SerializedName("card_spend_dispute_management")
+        Boolean cardSpendDisputeManagement;
+
         /** Whether to allow cardholder management features. */
         @SerializedName("cardholder_management")
         Boolean cardholderManagement;
@@ -2873,11 +2999,21 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** Whether to allow spend control management features. */
+        @SerializedName("spend_control_management")
+        Boolean spendControlManagement;
+
         private Features(
-            Boolean cardManagement, Boolean cardholderManagement, Map<String, Object> extraParams) {
+            Boolean cardManagement,
+            Boolean cardSpendDisputeManagement,
+            Boolean cardholderManagement,
+            Map<String, Object> extraParams,
+            Boolean spendControlManagement) {
           this.cardManagement = cardManagement;
+          this.cardSpendDisputeManagement = cardSpendDisputeManagement;
           this.cardholderManagement = cardholderManagement;
           this.extraParams = extraParams;
+          this.spendControlManagement = spendControlManagement;
         }
 
         public static Builder builder() {
@@ -2887,19 +3023,33 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Boolean cardManagement;
 
+          private Boolean cardSpendDisputeManagement;
+
           private Boolean cardholderManagement;
 
           private Map<String, Object> extraParams;
 
+          private Boolean spendControlManagement;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.IssuingCardsList.Features build() {
             return new AccountSessionCreateParams.Components.IssuingCardsList.Features(
-                this.cardManagement, this.cardholderManagement, this.extraParams);
+                this.cardManagement,
+                this.cardSpendDisputeManagement,
+                this.cardholderManagement,
+                this.extraParams,
+                this.spendControlManagement);
           }
 
           /** Whether to allow card management features. */
           public Builder setCardManagement(Boolean cardManagement) {
             this.cardManagement = cardManagement;
+            return this;
+          }
+
+          /** Whether to allow card spend dispute management features. */
+          public Builder setCardSpendDisputeManagement(Boolean cardSpendDisputeManagement) {
+            this.cardSpendDisputeManagement = cardSpendDisputeManagement;
             return this;
           }
 
@@ -2936,6 +3086,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Whether to allow spend control management features. */
+          public Builder setSpendControlManagement(Boolean spendControlManagement) {
+            this.spendControlManagement = spendControlManagement;
             return this;
           }
         }
@@ -3030,10 +3186,20 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and true otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -3048,7 +3214,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Boolean externalAccountCollection, Map<String, Object> extraParams) {
+        private Features(
+            Boolean disableStripeUserAuthentication,
+            Boolean externalAccountCollection,
+            Map<String, Object> extraParams) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
         }
@@ -3058,6 +3228,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
           private Boolean externalAccountCollection;
 
           private Map<String, Object> extraParams;
@@ -3065,14 +3237,30 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.NotificationBanner.Features build() {
             return new AccountSessionCreateParams.Components.NotificationBanner.Features(
-                this.externalAccountCollection, this.extraParams);
+                this.disableStripeUserAuthentication,
+                this.externalAccountCollection,
+                this.extraParams);
+          }
+
+          /**
+           * Disables Stripe user authentication for this embedded component. This feature can only
+           * be false for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like custom accounts. The default value for this
+           * feature is {@code false} when {@code external_account_collection} is enabled and true
+           * otherwise.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
           }
 
           /**
            * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for custom accounts (or accounts where the
-           * platform is compliance owner). Otherwise, bank account collection is determined by
-           * compliance requirements.
+           * accounts. This feature can only be false for accounts where you’re responsible for
+           * collecting updated information when requirements are due or change, like custom
+           * accounts. Otherwise, bank account collection is determined by compliance requirements.
+           * The default value for this feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -3796,6 +3984,16 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
          * Loss Liability, default {@code false} otherwise.
          */
@@ -3804,9 +4002,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
         /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -3836,11 +4035,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean standardPayouts;
 
         private Features(
+            Boolean disableStripeUserAuthentication,
             Boolean editPayoutSchedule,
             Boolean externalAccountCollection,
             Map<String, Object> extraParams,
             Boolean instantPayouts,
             Boolean standardPayouts) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.editPayoutSchedule = editPayoutSchedule;
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
@@ -3853,6 +4054,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
           private Boolean editPayoutSchedule;
 
           private Boolean externalAccountCollection;
@@ -3866,11 +4069,25 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.Payouts.Features build() {
             return new AccountSessionCreateParams.Components.Payouts.Features(
+                this.disableStripeUserAuthentication,
                 this.editPayoutSchedule,
                 this.externalAccountCollection,
                 this.extraParams,
                 this.instantPayouts,
                 this.standardPayouts);
+          }
+
+          /**
+           * Disables Stripe user authentication for this embedded component. This feature can only
+           * be false for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like custom accounts. The default value for this
+           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+           * true} otherwise.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
           }
 
           /**
@@ -3884,9 +4101,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           /**
            * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for custom accounts (or accounts where the
-           * platform is compliance owner). Otherwise, bank account collection is determined by
-           * compliance requirements.
+           * accounts. This feature can only be false for accounts where you’re responsible for
+           * collecting updated information when requirements are due or change, like custom
+           * accounts. Otherwise, bank account collection is determined by compliance requirements.
+           * The default value for this feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;

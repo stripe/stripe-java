@@ -8,6 +8,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.TaxRateCreateParams;
 import com.stripe.param.TaxRateListParams;
 import com.stripe.param.TaxRateRetrieveParams;
@@ -73,6 +74,14 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   @SerializedName("effective_percentage")
   BigDecimal effectivePercentage;
 
+  /**
+   * The amount of the tax rate when the {@code rate_type} is {@code flat_amount}. Tax rates with
+   * {@code rate_type} {@code percentage} can vary based on the transaction, resulting in this field
+   * being {@code null}. This field exposes the amount and currency of the flat tax rate.
+   */
+  @SerializedName("flat_amount")
+  FlatAmount flatAmount;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -131,6 +140,15 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   BigDecimal percentage;
 
   /**
+   * Indicates the type of tax rate applied to the taxable amount. This value can be {@code null}
+   * when no tax applies to the location.
+   *
+   * <p>One of {@code flat_amount}, or {@code percentage}.
+   */
+  @SerializedName("rate_type")
+  String rateType;
+
+  /**
    * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>, without
    * country prefix. For example, &quot;NY&quot; for New York, United States.
    */
@@ -141,8 +159,8 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
    * The high-level tax type, such as {@code vat} or {@code sales_tax}.
    *
    * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst}, {@code
-   * igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code rst}, {@code
-   * sales_tax}, or {@code vat}.
+   * igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code retail_delivery_fee},
+   * {@code rst}, {@code sales_tax}, or {@code vat}.
    */
   @SerializedName("tax_type")
   String taxType;
@@ -293,5 +311,34 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, TaxRate.class);
+  }
+
+  /**
+   * The amount of the tax rate when the {@code rate_type`` is }flat_amount{@code . Tax rates with
+   * }rate_type{@code }percentage{@code can vary based on the transaction, resulting in this field
+   * being}null`. This field exposes the amount and currency of the flat tax rate.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FlatAmount extends StripeObject {
+    /**
+     * Amount of the tax when the {@code rate_type} is {@code flat_amount}. This positive integer
+     * represents how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00
+     * or 100 to charge ¥100, a zero-decimal currency). The amount value supports up to eight digits
+     * (e.g., a value of 99999999 for a USD charge of $999,999.99).
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Three-letter ISO currency code, in lowercase. */
+    @SerializedName("currency")
+    String currency;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(flatAmount, responseGetter);
   }
 }

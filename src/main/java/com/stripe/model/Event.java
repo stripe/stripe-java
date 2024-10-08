@@ -194,9 +194,9 @@ public class Event extends ApiResource implements HasId {
    * quote.accepted}, {@code quote.accepting}, {@code quote.canceled}, {@code quote.created}, {@code
    * quote.draft}, {@code quote.finalized}, {@code quote.reestimate_failed}, {@code
    * quote.reestimated}, {@code quote.stale}, {@code radar.early_fraud_warning.created}, {@code
-   * radar.early_fraud_warning.updated}, {@code refund.created}, {@code refund.updated}, {@code
-   * reporting.report_run.failed}, {@code reporting.report_run.succeeded}, {@code
-   * reporting.report_type.updated}, {@code review.closed}, {@code review.opened}, {@code
+   * radar.early_fraud_warning.updated}, {@code refund.created}, {@code refund.failed}, {@code
+   * refund.updated}, {@code reporting.report_run.failed}, {@code reporting.report_run.succeeded},
+   * {@code reporting.report_type.updated}, {@code review.closed}, {@code review.opened}, {@code
    * setup_intent.canceled}, {@code setup_intent.created}, {@code setup_intent.requires_action},
    * {@code setup_intent.setup_failed}, {@code setup_intent.succeeded}, {@code
    * sigma.scheduled_query_run.created}, {@code source.canceled}, {@code source.chargeable}, {@code

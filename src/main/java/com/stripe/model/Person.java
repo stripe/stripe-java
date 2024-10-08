@@ -93,10 +93,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("future_requirements")
   FutureRequirements futureRequirements;
 
-  /**
-   * The person's gender (International regulations require either &quot;male&quot; or
-   * &quot;female&quot;).
-   */
+  /** The person's gender. */
   @SerializedName("gender")
   String gender;
 

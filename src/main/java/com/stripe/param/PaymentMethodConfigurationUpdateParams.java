@@ -384,7 +384,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   /**
    * Stripe users in the United States can accept ACH direct debit payments from customers with a US
    * bank account using the Automated Clearing House (ACH) payments system operated by Nacha. Check
-   * this <a href="https://stripe.com/docs/payments/ach-debit">page</a> for more details.
+   * this <a href="https://stripe.com/docs/payments/ach-direct-debit">page</a> for more details.
    */
   @SerializedName("us_bank_account")
   UsBankAccount usBankAccount;
@@ -1156,7 +1156,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     /**
      * Stripe users in the United States can accept ACH direct debit payments from customers with a
      * US bank account using the Automated Clearing House (ACH) payments system operated by Nacha.
-     * Check this <a href="https://stripe.com/docs/payments/ach-debit">page</a> for more details.
+     * Check this <a href="https://stripe.com/docs/payments/ach-direct-debit">page</a> for more
+     * details.
      */
     public Builder setUsBankAccount(
         PaymentMethodConfigurationUpdateParams.UsBankAccount usBankAccount) {

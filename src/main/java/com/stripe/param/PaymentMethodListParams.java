@@ -265,11 +265,17 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("ideal")
     IDEAL("ideal"),
 
+    @SerializedName("kakao_pay")
+    KAKAO_PAY("kakao_pay"),
+
     @SerializedName("klarna")
     KLARNA("klarna"),
 
     @SerializedName("konbini")
     KONBINI("konbini"),
+
+    @SerializedName("kr_card")
+    KR_CARD("kr_card"),
 
     @SerializedName("link")
     LINK("link"),
@@ -283,11 +289,17 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("multibanco")
     MULTIBANCO("multibanco"),
 
+    @SerializedName("naver_pay")
+    NAVER_PAY("naver_pay"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
     @SerializedName("p24")
     P24("p24"),
+
+    @SerializedName("payco")
+    PAYCO("payco"),
 
     @SerializedName("paynow")
     PAYNOW("paynow"),
@@ -309,6 +321,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("revolut_pay")
     REVOLUT_PAY("revolut_pay"),
+
+    @SerializedName("samsung_pay")
+    SAMSUNG_PAY("samsung_pay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
