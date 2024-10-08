@@ -179,6 +179,14 @@ public class FinancialAccountFeatures extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Aba extends StripeObject {
+      /**
+       * Requested bank partner for this Financial Account
+       *
+       * <p>One of {@code evolve}, {@code fifth_third}, or {@code goldman_sachs}.
+       */
+      @SerializedName("bank")
+      String bank;
+
       /** Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;

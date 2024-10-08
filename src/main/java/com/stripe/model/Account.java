@@ -1264,6 +1264,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String treasury;
 
     /**
+     * The status of the treasury_evolve capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_evolve")
+    String treasuryEvolve;
+
+    /**
+     * The status of the treasury_fifth_third capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_fifth_third")
+    String treasuryFifthThird;
+
+    /**
+     * The status of the treasury_goldman_sachs capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_goldman_sachs")
+    String treasuryGoldmanSachs;
+
+    /**
      * The status of the TWINT capability of the account, or whether the account can directly
      * process TWINT charges.
      *
