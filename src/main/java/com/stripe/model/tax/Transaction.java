@@ -582,8 +582,8 @@ public class Transaction extends ApiResource implements HasId {
          * The tax type, such as {@code vat} or {@code sales_tax}.
          *
          * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code rst},
-         * {@code sales_tax}, or {@code vat}.
+         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
+         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, or {@code vat}.
          */
         @SerializedName("tax_type")
         String taxType;

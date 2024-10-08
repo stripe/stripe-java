@@ -9999,6 +9999,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         @SerializedName("state_communications_tax")
         STATE_COMMUNICATIONS_TAX("state_communications_tax"),
 
+        @SerializedName("state_retail_delivery_fee")
+        STATE_RETAIL_DELIVERY_FEE("state_retail_delivery_fee"),
+
         @SerializedName("state_sales_tax")
         STATE_SALES_TAX("state_sales_tax");
 
