@@ -294,6 +294,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("ideal")
     Ideal ideal;
 
+    @SerializedName("kakao_pay")
+    KakaoPay kakaoPay;
+
     @SerializedName("klarna")
     Klarna klarna;
 
@@ -799,6 +802,11 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KakaoPay extends StripeObject {}
 
     @Getter
     @Setter
