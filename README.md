@@ -267,24 +267,26 @@ Stripe.addBetaVersion("feature_beta", "v3");
 If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `StripeClient`.
 
 ```java
-// Create a RawRequestOptions object, allowing you to set per-request
+// (Optional) Create a RawRequestOptions object, allowing you to set per-request
 // configuration options like additional headers.
 Map<String, String> stripeVersionHeader = new HashMap<>();
-stripeVersionHeader.put("Stripe-Version", "2022-11-15; feature_beta=v3");
-RawRequestOptions options =
-  RawRequestOptions.builder()
-    .setAdditionalHeaders(stripeVersionHeader)
-    .build();
+stripeVersionHeader.put("Stripe-Version", "2024-09-30.acacia");
+RawRequestOptions options = RawRequestOptions.builder()
+        .setAdditionalHeaders(stripeVersionHeader)
+        .build();
 
-// Make the request using the Stripe.rawRequest() method.
+// Make the request using the StripeClient.rawRequest() method.
 StripeClient client = new StripeClient("sk_test_...");
 final StripeResponse response =
-  client.rawRequest(
-    ApiResource.RequestMethod.POST, "/v1/beta_endpoint", "param=123", options);
+        client.rawRequest(
+                ApiResource.RequestMethod.POST, "/v1/customers", "name=johndoe&email=johndoe@example.com", options);
 
 // (Optional) response.body() is a string. You can call
-// Stripe.deserialize() to get a StripeObject.
-StripeObject obj = client.deserialize(response.body());
+// StripeClient.deserialize() to get a StripeObject
+// Pass ApiMode.V2 if the endpoint you are targeting starts with "/v2", else pass ApiMode.V1
+StripeObject object = client.deserialize(response.body(), ApiMode.V1);
+// or cast it if a corresponding response class exists in the SDK
+Customer customer = (Customer) client.deserialize(response.body(), ApiMode.V1);
 ```
 
 ## Support
