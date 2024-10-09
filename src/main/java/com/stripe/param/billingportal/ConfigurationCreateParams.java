@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class ConfigurationCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The business information shown to customers in the portal. */
+  /** The business information shown to customers in the portal. */
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
@@ -107,7 +107,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.metadata);
     }
 
-    /** <strong>Required.</strong> The business information shown to customers in the portal. */
+    /** The business information shown to customers in the portal. */
     public Builder setBusinessProfile(ConfigurationCreateParams.BusinessProfile businessProfile) {
       this.businessProfile = businessProfile;
       return this;
