@@ -1326,6 +1326,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("jp_bank_transfer_payments")
     JpBankTransferPayments jpBankTransferPayments;
 
+    /** The kakao_pay_payments capability. */
+    @SerializedName("kakao_pay_payments")
+    KakaoPayPayments kakaoPayPayments;
+
     /** The klarna_payments capability. */
     @SerializedName("klarna_payments")
     KlarnaPayments klarnaPayments;
@@ -1333,6 +1337,10 @@ public class AccountCreateParams extends ApiRequestParams {
     /** The konbini_payments capability. */
     @SerializedName("konbini_payments")
     KonbiniPayments konbiniPayments;
+
+    /** The kr_card_payments capability. */
+    @SerializedName("kr_card_payments")
+    KrCardPayments krCardPayments;
 
     /** The legacy_payments capability. */
     @SerializedName("legacy_payments")
@@ -1358,6 +1366,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("mx_bank_transfer_payments")
     MxBankTransferPayments mxBankTransferPayments;
 
+    /** The naver_pay_payments capability. */
+    @SerializedName("naver_pay_payments")
+    NaverPayPayments naverPayPayments;
+
     /** The oxxo_payments capability. */
     @SerializedName("oxxo_payments")
     OxxoPayments oxxoPayments;
@@ -1365,6 +1377,10 @@ public class AccountCreateParams extends ApiRequestParams {
     /** The p24_payments capability. */
     @SerializedName("p24_payments")
     P24Payments p24Payments;
+
+    /** The payco_payments capability. */
+    @SerializedName("payco_payments")
+    PaycoPayments paycoPayments;
 
     /** The paynow_payments capability. */
     @SerializedName("paynow_payments")
@@ -1389,6 +1405,10 @@ public class AccountCreateParams extends ApiRequestParams {
     /** The revolut_pay_payments capability. */
     @SerializedName("revolut_pay_payments")
     RevolutPayPayments revolutPayPayments;
+
+    /** The samsung_pay_payments capability. */
+    @SerializedName("samsung_pay_payments")
+    SamsungPayPayments samsungPayPayments;
 
     /** The sepa_bank_transfer_payments capability. */
     @SerializedName("sepa_bank_transfer_payments")
@@ -1421,6 +1441,18 @@ public class AccountCreateParams extends ApiRequestParams {
     /** The treasury capability. */
     @SerializedName("treasury")
     Treasury treasury;
+
+    /** The treasury_evolve capability. */
+    @SerializedName("treasury_evolve")
+    TreasuryEvolve treasuryEvolve;
+
+    /** The treasury_fifth_third capability. */
+    @SerializedName("treasury_fifth_third")
+    TreasuryFifthThird treasuryFifthThird;
+
+    /** The treasury_goldman_sachs capability. */
+    @SerializedName("treasury_goldman_sachs")
+    TreasuryGoldmanSachs treasuryGoldmanSachs;
 
     /** The twint_payments capability. */
     @SerializedName("twint_payments")
@@ -1463,22 +1495,27 @@ public class AccountCreateParams extends ApiRequestParams {
         IndiaInternationalPayments indiaInternationalPayments,
         JcbPayments jcbPayments,
         JpBankTransferPayments jpBankTransferPayments,
+        KakaoPayPayments kakaoPayPayments,
         KlarnaPayments klarnaPayments,
         KonbiniPayments konbiniPayments,
+        KrCardPayments krCardPayments,
         LegacyPayments legacyPayments,
         LinkPayments linkPayments,
         MbWayPayments mbWayPayments,
         MobilepayPayments mobilepayPayments,
         MultibancoPayments multibancoPayments,
         MxBankTransferPayments mxBankTransferPayments,
+        NaverPayPayments naverPayPayments,
         OxxoPayments oxxoPayments,
         P24Payments p24Payments,
+        PaycoPayments paycoPayments,
         PaynowPayments paynowPayments,
         PaypalPayments paypalPayments,
         PaytoPayments paytoPayments,
         PromptpayPayments promptpayPayments,
         RechnungPayments rechnungPayments,
         RevolutPayPayments revolutPayPayments,
+        SamsungPayPayments samsungPayPayments,
         SepaBankTransferPayments sepaBankTransferPayments,
         SepaDebitPayments sepaDebitPayments,
         SofortPayments sofortPayments,
@@ -1487,6 +1524,9 @@ public class AccountCreateParams extends ApiRequestParams {
         TaxReportingUs1099Misc taxReportingUs1099Misc,
         Transfers transfers,
         Treasury treasury,
+        TreasuryEvolve treasuryEvolve,
+        TreasuryFifthThird treasuryFifthThird,
+        TreasuryGoldmanSachs treasuryGoldmanSachs,
         TwintPayments twintPayments,
         UsBankAccountAchPayments usBankAccountAchPayments,
         UsBankTransferPayments usBankTransferPayments,
@@ -1515,22 +1555,27 @@ public class AccountCreateParams extends ApiRequestParams {
       this.indiaInternationalPayments = indiaInternationalPayments;
       this.jcbPayments = jcbPayments;
       this.jpBankTransferPayments = jpBankTransferPayments;
+      this.kakaoPayPayments = kakaoPayPayments;
       this.klarnaPayments = klarnaPayments;
       this.konbiniPayments = konbiniPayments;
+      this.krCardPayments = krCardPayments;
       this.legacyPayments = legacyPayments;
       this.linkPayments = linkPayments;
       this.mbWayPayments = mbWayPayments;
       this.mobilepayPayments = mobilepayPayments;
       this.multibancoPayments = multibancoPayments;
       this.mxBankTransferPayments = mxBankTransferPayments;
+      this.naverPayPayments = naverPayPayments;
       this.oxxoPayments = oxxoPayments;
       this.p24Payments = p24Payments;
+      this.paycoPayments = paycoPayments;
       this.paynowPayments = paynowPayments;
       this.paypalPayments = paypalPayments;
       this.paytoPayments = paytoPayments;
       this.promptpayPayments = promptpayPayments;
       this.rechnungPayments = rechnungPayments;
       this.revolutPayPayments = revolutPayPayments;
+      this.samsungPayPayments = samsungPayPayments;
       this.sepaBankTransferPayments = sepaBankTransferPayments;
       this.sepaDebitPayments = sepaDebitPayments;
       this.sofortPayments = sofortPayments;
@@ -1539,6 +1584,9 @@ public class AccountCreateParams extends ApiRequestParams {
       this.taxReportingUs1099Misc = taxReportingUs1099Misc;
       this.transfers = transfers;
       this.treasury = treasury;
+      this.treasuryEvolve = treasuryEvolve;
+      this.treasuryFifthThird = treasuryFifthThird;
+      this.treasuryGoldmanSachs = treasuryGoldmanSachs;
       this.twintPayments = twintPayments;
       this.usBankAccountAchPayments = usBankAccountAchPayments;
       this.usBankTransferPayments = usBankTransferPayments;
@@ -1598,9 +1646,13 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private JpBankTransferPayments jpBankTransferPayments;
 
+      private KakaoPayPayments kakaoPayPayments;
+
       private KlarnaPayments klarnaPayments;
 
       private KonbiniPayments konbiniPayments;
+
+      private KrCardPayments krCardPayments;
 
       private LegacyPayments legacyPayments;
 
@@ -1614,9 +1666,13 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private MxBankTransferPayments mxBankTransferPayments;
 
+      private NaverPayPayments naverPayPayments;
+
       private OxxoPayments oxxoPayments;
 
       private P24Payments p24Payments;
+
+      private PaycoPayments paycoPayments;
 
       private PaynowPayments paynowPayments;
 
@@ -1629,6 +1685,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private RechnungPayments rechnungPayments;
 
       private RevolutPayPayments revolutPayPayments;
+
+      private SamsungPayPayments samsungPayPayments;
 
       private SepaBankTransferPayments sepaBankTransferPayments;
 
@@ -1645,6 +1703,12 @@ public class AccountCreateParams extends ApiRequestParams {
       private Transfers transfers;
 
       private Treasury treasury;
+
+      private TreasuryEvolve treasuryEvolve;
+
+      private TreasuryFifthThird treasuryFifthThird;
+
+      private TreasuryGoldmanSachs treasuryGoldmanSachs;
 
       private TwintPayments twintPayments;
 
@@ -1681,22 +1745,27 @@ public class AccountCreateParams extends ApiRequestParams {
             this.indiaInternationalPayments,
             this.jcbPayments,
             this.jpBankTransferPayments,
+            this.kakaoPayPayments,
             this.klarnaPayments,
             this.konbiniPayments,
+            this.krCardPayments,
             this.legacyPayments,
             this.linkPayments,
             this.mbWayPayments,
             this.mobilepayPayments,
             this.multibancoPayments,
             this.mxBankTransferPayments,
+            this.naverPayPayments,
             this.oxxoPayments,
             this.p24Payments,
+            this.paycoPayments,
             this.paynowPayments,
             this.paypalPayments,
             this.paytoPayments,
             this.promptpayPayments,
             this.rechnungPayments,
             this.revolutPayPayments,
+            this.samsungPayPayments,
             this.sepaBankTransferPayments,
             this.sepaDebitPayments,
             this.sofortPayments,
@@ -1705,6 +1774,9 @@ public class AccountCreateParams extends ApiRequestParams {
             this.taxReportingUs1099Misc,
             this.transfers,
             this.treasury,
+            this.treasuryEvolve,
+            this.treasuryFifthThird,
+            this.treasuryGoldmanSachs,
             this.twintPayments,
             this.usBankAccountAchPayments,
             this.usBankTransferPayments,
@@ -1892,6 +1964,13 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The kakao_pay_payments capability. */
+      public Builder setKakaoPayPayments(
+          AccountCreateParams.Capabilities.KakaoPayPayments kakaoPayPayments) {
+        this.kakaoPayPayments = kakaoPayPayments;
+        return this;
+      }
+
       /** The klarna_payments capability. */
       public Builder setKlarnaPayments(
           AccountCreateParams.Capabilities.KlarnaPayments klarnaPayments) {
@@ -1903,6 +1982,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setKonbiniPayments(
           AccountCreateParams.Capabilities.KonbiniPayments konbiniPayments) {
         this.konbiniPayments = konbiniPayments;
+        return this;
+      }
+
+      /** The kr_card_payments capability. */
+      public Builder setKrCardPayments(
+          AccountCreateParams.Capabilities.KrCardPayments krCardPayments) {
+        this.krCardPayments = krCardPayments;
         return this;
       }
 
@@ -1947,6 +2033,13 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The naver_pay_payments capability. */
+      public Builder setNaverPayPayments(
+          AccountCreateParams.Capabilities.NaverPayPayments naverPayPayments) {
+        this.naverPayPayments = naverPayPayments;
+        return this;
+      }
+
       /** The oxxo_payments capability. */
       public Builder setOxxoPayments(AccountCreateParams.Capabilities.OxxoPayments oxxoPayments) {
         this.oxxoPayments = oxxoPayments;
@@ -1956,6 +2049,13 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The p24_payments capability. */
       public Builder setP24Payments(AccountCreateParams.Capabilities.P24Payments p24Payments) {
         this.p24Payments = p24Payments;
+        return this;
+      }
+
+      /** The payco_payments capability. */
+      public Builder setPaycoPayments(
+          AccountCreateParams.Capabilities.PaycoPayments paycoPayments) {
+        this.paycoPayments = paycoPayments;
         return this;
       }
 
@@ -1998,6 +2098,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setRevolutPayPayments(
           AccountCreateParams.Capabilities.RevolutPayPayments revolutPayPayments) {
         this.revolutPayPayments = revolutPayPayments;
+        return this;
+      }
+
+      /** The samsung_pay_payments capability. */
+      public Builder setSamsungPayPayments(
+          AccountCreateParams.Capabilities.SamsungPayPayments samsungPayPayments) {
+        this.samsungPayPayments = samsungPayPayments;
         return this;
       }
 
@@ -2052,6 +2159,27 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The treasury capability. */
       public Builder setTreasury(AccountCreateParams.Capabilities.Treasury treasury) {
         this.treasury = treasury;
+        return this;
+      }
+
+      /** The treasury_evolve capability. */
+      public Builder setTreasuryEvolve(
+          AccountCreateParams.Capabilities.TreasuryEvolve treasuryEvolve) {
+        this.treasuryEvolve = treasuryEvolve;
+        return this;
+      }
+
+      /** The treasury_fifth_third capability. */
+      public Builder setTreasuryFifthThird(
+          AccountCreateParams.Capabilities.TreasuryFifthThird treasuryFifthThird) {
+        this.treasuryFifthThird = treasuryFifthThird;
+        return this;
+      }
+
+      /** The treasury_goldman_sachs capability. */
+      public Builder setTreasuryGoldmanSachs(
+          AccountCreateParams.Capabilities.TreasuryGoldmanSachs treasuryGoldmanSachs) {
+        this.treasuryGoldmanSachs = treasuryGoldmanSachs;
         return this;
       }
 
@@ -3897,6 +4025,85 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class KakaoPayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private KakaoPayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.KakaoPayPayments build() {
+          return new AccountCreateParams.Capabilities.KakaoPayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.KakaoPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.KakaoPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class KlarnaPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4032,6 +4239,85 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.KonbiniPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class KrCardPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private KrCardPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.KrCardPayments build() {
+          return new AccountCreateParams.Capabilities.KrCardPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.KrCardPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.KrCardPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -4529,6 +4815,85 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class NaverPayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private NaverPayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.NaverPayPayments build() {
+          return new AccountCreateParams.Capabilities.NaverPayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.NaverPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.NaverPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class OxxoPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4663,6 +5028,85 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.P24Payments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class PaycoPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private PaycoPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.PaycoPayments build() {
+          return new AccountCreateParams.Capabilities.PaycoPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.PaycoPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.PaycoPayments#extraParams} for the field
          * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -5137,6 +5581,85 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.RevolutPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class SamsungPayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private SamsungPayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.SamsungPayPayments build() {
+          return new AccountCreateParams.Capabilities.SamsungPayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.SamsungPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.SamsungPayPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -5768,6 +6291,243 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.Treasury#extraParams} for the field
          * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TreasuryEvolve {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private TreasuryEvolve(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.TreasuryEvolve build() {
+          return new AccountCreateParams.Capabilities.TreasuryEvolve(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.TreasuryEvolve#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.TreasuryEvolve#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TreasuryFifthThird {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private TreasuryFifthThird(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.TreasuryFifthThird build() {
+          return new AccountCreateParams.Capabilities.TreasuryFifthThird(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.TreasuryFifthThird#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.TreasuryFifthThird#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TreasuryGoldmanSachs {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private TreasuryGoldmanSachs(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.TreasuryGoldmanSachs build() {
+          return new AccountCreateParams.Capabilities.TreasuryGoldmanSachs(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.TreasuryGoldmanSachs#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.TreasuryGoldmanSachs#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

@@ -25,6 +25,15 @@ public class RequestCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
+   * be unset by posting an empty value to {@code metadata}.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
+  /**
    * <strong>Required.</strong> The PaymentMethod to insert into the forwarded request. Forwarding
    * previously consumed PaymentMethods is allowed.
    */
@@ -51,12 +60,14 @@ public class RequestCreateParams extends ApiRequestParams {
   private RequestCreateParams(
       List<String> expand,
       Map<String, Object> extraParams,
+      Map<String, String> metadata,
       String paymentMethod,
       List<RequestCreateParams.Replacement> replacements,
       Request request,
       String url) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.metadata = metadata;
     this.paymentMethod = paymentMethod;
     this.replacements = replacements;
     this.request = request;
@@ -72,6 +83,8 @@ public class RequestCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Map<String, String> metadata;
+
     private String paymentMethod;
 
     private List<RequestCreateParams.Replacement> replacements;
@@ -85,6 +98,7 @@ public class RequestCreateParams extends ApiRequestParams {
       return new RequestCreateParams(
           this.expand,
           this.extraParams,
+          this.metadata,
           this.paymentMethod,
           this.replacements,
           this.request,
@@ -140,6 +154,32 @@ public class RequestCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * RequestCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link RequestCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
