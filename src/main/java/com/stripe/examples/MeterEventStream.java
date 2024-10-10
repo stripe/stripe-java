@@ -5,12 +5,26 @@ import com.stripe.model.v2.billing.MeterEventSession;
 import com.stripe.param.v2.billing.MeterEventStreamCreateParams;
 import java.time.Instant;
 
-public class MeterEventManager {
+/**
+ * Use the high-throughput meter event stream API to report create billing meter events.
+ *
+ * <p>In this example, we:
+ *
+ * <ul>
+ *   <li>create a meter event session and store the session's authentication token
+ *   <li>define an event with a payload
+ *   <li>use the meterEventStream service to create an event stream that reports this event
+ * </ul>
+ *
+ * <p>This example expects a billing meter with an event_name of 'alpaca_ai_tokens'. If you have a
+ * different meter event name, you can change it before running this example.
+ */
+public class MeterEventStream {
 
   private String apiKey;
   private MeterEventSession meterEventSession;
 
-  public MeterEventManager(String apiKey) {
+  public MeterEventStream(String apiKey) {
     this.apiKey = apiKey;
   }
 
@@ -55,7 +69,7 @@ public class MeterEventManager {
     String apiKey = "{{API_KEY}}";
     String customerId = "{{CUSTOMER_ID}}"; // Replace with actual customer ID
 
-    MeterEventManager manager = new MeterEventManager(apiKey);
+    MeterEventStream manager = new MeterEventStream(apiKey);
     manager.sendMeterEvent("alpaca_ai_tokens", customerId, "28");
   }
 }
