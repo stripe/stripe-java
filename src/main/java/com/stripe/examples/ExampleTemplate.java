@@ -3,7 +3,7 @@ package com.stripe.examples;
 /**
  * This is a template for defining new examples. It is not intended to be used directly.
  *
- * <p><describe what this example does>
+ * <p>describe what this example does
  *
  * <p>In this example, we:
  *
@@ -13,8 +13,8 @@ package com.stripe.examples;
  *   <li>...
  * </ul>
  *
- * <p><describe assumptions about the user's stripe account, environment, or configuration; or
- * things to watch out for when running>
+ * <p>describe assumptions about the user's stripe account, environment, or configuration; or things
+ * to watch out for when running
  */
 public class ExampleTemplate {
 
