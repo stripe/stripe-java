@@ -13,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.treasury.InboundTransferCancelParams;
+import com.stripe.param.treasury.InboundTransferConfirmParams;
 import com.stripe.param.treasury.InboundTransferCreateParams;
 import com.stripe.param.treasury.InboundTransferListParams;
 import com.stripe.param.treasury.InboundTransferRetrieveParams;
@@ -105,6 +106,36 @@ public final class InboundTransferService extends ApiService {
     String path =
         String.format(
             "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(inboundTransfer));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, InboundTransfer.class);
+  }
+  /** Confirm an InboundTransfer. */
+  public InboundTransfer confirm(String inboundTransfer, InboundTransferConfirmParams params)
+      throws StripeException {
+    return confirm(inboundTransfer, params, (RequestOptions) null);
+  }
+  /** Confirm an InboundTransfer. */
+  public InboundTransfer confirm(String inboundTransfer, RequestOptions options)
+      throws StripeException {
+    return confirm(inboundTransfer, (InboundTransferConfirmParams) null, options);
+  }
+  /** Confirm an InboundTransfer. */
+  public InboundTransfer confirm(String inboundTransfer) throws StripeException {
+    return confirm(inboundTransfer, (InboundTransferConfirmParams) null, (RequestOptions) null);
+  }
+  /** Confirm an InboundTransfer. */
+  public InboundTransfer confirm(
+      String inboundTransfer, InboundTransferConfirmParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/treasury/inbound_transfers/%s/confirm", ApiResource.urlEncodeId(inboundTransfer));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
