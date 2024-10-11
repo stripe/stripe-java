@@ -19,14 +19,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Indicates the credit balance for credits granted to a customer. */
+/** Indicates the billing credit balance for billing credits granted to a customer. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CreditBalanceSummary extends ApiResource {
   /**
-   * The credit balances. One entry per credit grant currency. If a customer only has credit grants
-   * in a single currency, then this will have a single balance entry.
+   * The billing credit balances. One entry per credit grant currency. If a customer only has credit
+   * grants in a single currency, then this will have a single balance entry.
    */
   @SerializedName("balances")
   List<CreditBalanceSummary.Balance> balances;
@@ -123,7 +123,7 @@ public class CreditBalanceSummary extends ApiResource {
       Monetary monetary;
 
       /**
-       * The type of this amount. We currently only support {@code monetary} credits.
+       * The type of this amount. We currently only support {@code monetary} billing credits.
        *
        * <p>Equal to {@code monetary}.
        */
@@ -157,7 +157,7 @@ public class CreditBalanceSummary extends ApiResource {
       Monetary monetary;
 
       /**
-       * The type of this amount. We currently only support {@code monetary} credits.
+       * The type of this amount. We currently only support {@code monetary} billing credits.
        *
        * <p>Equal to {@code monetary}.
        */
