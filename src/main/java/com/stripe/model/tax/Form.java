@@ -78,7 +78,7 @@ public class Form extends ApiResource implements HasId {
    * The type of the tax form. An additional hash is included on the tax form with a name matching
    * this value. It contains additional information specific to the tax form type.
    *
-   * <p>One of {@code us_1099_k}, {@code us_1099_misc}, or {@code us_1099_nec}.
+   * <p>One of {@code ca_mrdp}, {@code us_1099_k}, {@code us_1099_misc}, or {@code us_1099_nec}.
    */
   @SerializedName("type")
   String type;
@@ -301,10 +301,14 @@ public class Form extends ApiResource implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> account;
 
+    /** The external reference to this payee. */
+    @SerializedName("external_reference")
+    String externalReference;
+
     /**
-     * Always {@code account}.
+     * Either {@code account} or {@code external_reference}.
      *
-     * <p>Equal to {@code account}.
+     * <p>One of {@code account}, or {@code external_reference}.
      */
     @SerializedName("type")
     String type;
