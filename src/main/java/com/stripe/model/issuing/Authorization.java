@@ -192,7 +192,7 @@ public class Authorization extends ApiResource
   /**
    * The current status of the authorization in its lifecycle.
    *
-   * <p>One of {@code closed}, {@code expired}, {@code pending}, or {@code reversed}.
+   * <p>One of {@code closed}, {@code pending}, or {@code reversed}.
    */
   @SerializedName("status")
   String status;
