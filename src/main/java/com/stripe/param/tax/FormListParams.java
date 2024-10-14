@@ -321,8 +321,20 @@ public class FormListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("au_serr")
+    AU_SERR("au_serr"),
+
     @SerializedName("ca_mrdp")
     CA_MRDP("ca_mrdp"),
+
+    @SerializedName("eu_dac7")
+    EU_DAC7("eu_dac7"),
+
+    @SerializedName("gb_mrdp")
+    GB_MRDP("gb_mrdp"),
+
+    @SerializedName("nz_mrdp")
+    NZ_MRDP("nz_mrdp"),
 
     @SerializedName("us_1099_k")
     US_1099_K("us_1099_k"),
