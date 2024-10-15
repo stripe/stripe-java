@@ -2,7 +2,15 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.CustomerCashBalanceTransactionCreateParams;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CustomerCashBalanceTransaction extends StripeObject
+public class CustomerCashBalanceTransaction extends ApiResource
     implements BalanceTransactionSource {
   @SerializedName("adjusted_for_overdraft")
   AdjustedForOverdraft adjustedForOverdraft;
@@ -419,5 +427,70 @@ public class CustomerCashBalanceTransaction extends StripeObject
       this.paymentIntent =
           new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  public static class TestHelpers {
+    private TestHelpers() {}
+
+    /**
+     * Simulate various customer cash balance side-effects by creating synthetic cash balance
+     * transactions in testmode.
+     */
+    public static CustomerCashBalanceTransaction create(Map<String, Object> params)
+        throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /**
+     * Simulate various customer cash balance side-effects by creating synthetic cash balance
+     * transactions in testmode.
+     */
+    public static CustomerCashBalanceTransaction create(
+        Map<String, Object> params, RequestOptions options) throws StripeException {
+      String path = "/v1/test_helpers/customer_cash_balance_transactions";
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return getGlobalResponseGetter().request(request, CustomerCashBalanceTransaction.class);
+    }
+
+    /**
+     * Simulate various customer cash balance side-effects by creating synthetic cash balance
+     * transactions in testmode.
+     */
+    public static CustomerCashBalanceTransaction create(
+        CustomerCashBalanceTransactionCreateParams params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /**
+     * Simulate various customer cash balance side-effects by creating synthetic cash balance
+     * transactions in testmode.
+     */
+    public static CustomerCashBalanceTransaction create(
+        CustomerCashBalanceTransactionCreateParams params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/customer_cash_balance_transactions";
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return getGlobalResponseGetter().request(request, CustomerCashBalanceTransaction.class);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(adjustedForOverdraft, responseGetter);
+    trySetResponseGetter(appliedToPayment, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(funded, responseGetter);
+    trySetResponseGetter(refundedFromPayment, responseGetter);
+    trySetResponseGetter(transferredToBalance, responseGetter);
+    trySetResponseGetter(unappliedFromPayment, responseGetter);
   }
 }
