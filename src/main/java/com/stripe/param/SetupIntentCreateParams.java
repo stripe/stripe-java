@@ -3773,7 +3773,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Ideal {
-      /** The customer's bank. */
+      /**
+       * The customer's bank. Only use this parameter for existing customers. Don't use it for new
+       * customers.
+       */
       @SerializedName("bank")
       Bank bank;
 
@@ -3805,7 +3808,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           return new SetupIntentCreateParams.PaymentMethodData.Ideal(this.bank, this.extraParams);
         }
 
-        /** The customer's bank. */
+        /**
+         * The customer's bank. Only use this parameter for existing customers. Don't use it for new
+         * customers.
+         */
         public Builder setBank(SetupIntentCreateParams.PaymentMethodData.Ideal.Bank bank) {
           this.bank = bank;
           return this;
