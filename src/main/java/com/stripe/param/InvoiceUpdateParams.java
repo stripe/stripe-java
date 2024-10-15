@@ -4106,6 +4106,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("ideal")
       IDEAL("ideal"),
 
+      @SerializedName("jp_credit_transfer")
+      JP_CREDIT_TRANSFER("jp_credit_transfer"),
+
       @SerializedName("konbini")
       KONBINI("konbini"),
 
