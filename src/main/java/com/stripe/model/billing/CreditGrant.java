@@ -26,7 +26,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A credit grant is a resource that records a grant of billing credits to a customer. */
+/**
+ * A credit grant is an API resource that documents the allocation of some billing credits to a
+ * customer.
+ *
+ * <p>Related guide: <a
+ * href="https://docs.stripe.com/billing/subscriptions/usage-based/billing-credits">Billing
+ * credits</a> end
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -38,7 +45,8 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   ApplicabilityConfig applicabilityConfig;
 
   /**
-   * The category of this credit grant.
+   * The category of this credit grant. This is for tracking purposes and will not be displayed to
+   * the customer.
    *
    * <p>One of {@code paid}, or {@code promotional}.
    */
@@ -431,7 +439,8 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     public static class Scope extends StripeObject {
       /**
        * The price type to which credit grants can apply to. We currently only support {@code
-       * metered} price type.
+       * metered} price type. This refers to prices that have a <a
+       * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
        *
        * <p>Equal to {@code metered}.
        */
