@@ -933,7 +933,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard() throws StripeException {
       return submitCard((Map<String, Object>) null, (RequestOptions) null);
@@ -941,7 +941,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(RequestOptions options) throws StripeException {
       return submitCard((Map<String, Object>) null, options);
@@ -949,7 +949,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(Map<String, Object> params) throws StripeException {
       return submitCard(params, (RequestOptions) null);
@@ -957,7 +957,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -972,7 +972,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(CardSubmitCardParams params) throws StripeException {
       return submitCard(params, (RequestOptions) null);
@@ -980,7 +980,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(CardSubmitCardParams params, RequestOptions options)
         throws StripeException {

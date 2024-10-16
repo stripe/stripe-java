@@ -163,28 +163,28 @@ public final class CardService extends ApiService {
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   * This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+   * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
   public Card submitCard(String card, CardSubmitCardParams params) throws StripeException {
     return submitCard(card, params, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   * This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+   * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
   public Card submitCard(String card, RequestOptions options) throws StripeException {
     return submitCard(card, (CardSubmitCardParams) null, options);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   * This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+   * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
   public Card submitCard(String card) throws StripeException {
     return submitCard(card, (CardSubmitCardParams) null, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
-   * This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+   * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
   public Card submitCard(String card, CardSubmitCardParams params, RequestOptions options)
       throws StripeException {
