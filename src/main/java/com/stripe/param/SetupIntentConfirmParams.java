@@ -659,6 +659,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     AllowRedisplay allowRedisplay;
 
     /**
+     * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+     */
+    @SerializedName("alma")
+    Alma alma;
+
+    /**
      * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
      * method.
      */
@@ -990,6 +996,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
         AllowRedisplay allowRedisplay,
+        Alma alma,
         AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
@@ -1041,6 +1048,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
       this.allowRedisplay = allowRedisplay;
+      this.alma = alma;
       this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
@@ -1103,6 +1111,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       private Alipay alipay;
 
       private AllowRedisplay allowRedisplay;
+
+      private Alma alma;
 
       private AmazonPay amazonPay;
 
@@ -1204,6 +1214,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.afterpayClearpay,
             this.alipay,
             this.allowRedisplay,
+            this.alma,
             this.amazonPay,
             this.auBecsDebit,
             this.bacsDebit,
@@ -1298,6 +1309,14 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       public Builder setAllowRedisplay(
           SetupIntentConfirmParams.PaymentMethodData.AllowRedisplay allowRedisplay) {
         this.allowRedisplay = allowRedisplay;
+        return this;
+      }
+
+      /**
+       * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+       */
+      public Builder setAlma(SetupIntentConfirmParams.PaymentMethodData.Alma alma) {
+        this.alma = alma;
         return this;
       }
 
@@ -2023,6 +2042,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Alipay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Alma {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Alma(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Alma build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Alma(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Alma#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Alma#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -5725,6 +5801,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("alipay")
       ALIPAY("alipay"),
+
+      @SerializedName("alma")
+      ALMA("alma"),
 
       @SerializedName("amazon_pay")
       AMAZON_PAY("amazon_pay"),

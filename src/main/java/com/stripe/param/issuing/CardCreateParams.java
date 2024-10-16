@@ -66,7 +66,7 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("replacement_reason")
   ReplacementReason replacementReason;
 
-  /** The second line to print on the card. */
+  /** The second line to print on the card. Max length: 24 characters. */
   @SerializedName("second_line")
   Object secondLine;
 
@@ -309,13 +309,13 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The second line to print on the card. */
+    /** The second line to print on the card. Max length: 24 characters. */
     public Builder setSecondLine(String secondLine) {
       this.secondLine = secondLine;
       return this;
     }
 
-    /** The second line to print on the card. */
+    /** The second line to print on the card. Max length: 24 characters. */
     public Builder setSecondLine(EmptyParam secondLine) {
       this.secondLine = secondLine;
       return this;

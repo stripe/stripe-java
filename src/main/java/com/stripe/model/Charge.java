@@ -1129,6 +1129,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("alma")
+    Alma alma;
+
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
@@ -1413,6 +1416,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alma extends StripeObject {}
 
     @Getter
     @Setter

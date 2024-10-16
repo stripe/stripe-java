@@ -252,6 +252,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("alipay")
     ALIPAY("alipay"),
 
+    @SerializedName("alma")
+    ALMA("alma"),
+
     @SerializedName("amazon_pay")
     AMAZON_PAY("amazon_pay"),
 
