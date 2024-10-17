@@ -45,6 +45,10 @@ public class UsageRecordSummary extends StripeObject implements HasId {
   @SerializedName("total_usage")
   Long totalUsage;
 
+  /**
+   * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

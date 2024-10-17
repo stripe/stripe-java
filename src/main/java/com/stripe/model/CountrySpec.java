@@ -142,6 +142,10 @@ public class CountrySpec extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, CountrySpec.class);
   }
 
+  /**
+   * For more details about VerificationFields, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -152,6 +156,10 @@ public class CountrySpec extends ApiResource implements HasId {
     @SerializedName("individual")
     Individual individual;
 
+    /**
+     * For more details about Company, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -165,6 +173,10 @@ public class CountrySpec extends ApiResource implements HasId {
       List<String> minimum;
     }
 
+    /**
+     * For more details about Individual, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

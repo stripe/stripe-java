@@ -473,6 +473,10 @@ public class SubscriptionItem extends ApiResource
     return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
   }
 
+  /**
+   * For more details about BillingThresholds, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

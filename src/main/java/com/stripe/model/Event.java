@@ -333,6 +333,10 @@ public class Event extends ApiResource implements HasId {
     return new EventDataObjectDeserializer(apiVersion, type, data.object, getResponseGetter());
   }
 
+  /**
+   * For more details about Data, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -373,6 +377,10 @@ public class Event extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Request, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

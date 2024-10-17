@@ -917,6 +917,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     return getResponseGetter().request(request, Quote.class);
   }
 
+  /**
+   * For more details about AutomaticTax, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -941,6 +945,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("status")
     String status;
 
+    /**
+     * For more details about Liability, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -979,6 +987,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     }
   }
 
+  /**
+   * For more details about Computed, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -994,6 +1006,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("upfront")
     Upfront upfront;
 
+    /**
+     * For more details about Recurring, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1024,6 +1040,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @SerializedName("total_details")
       TotalDetails totalDetails;
 
+      /**
+       * For more details about TotalDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1043,6 +1063,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @SerializedName("breakdown")
         Breakdown breakdown;
 
+        /**
+         * For more details about Breakdown, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1055,6 +1079,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           @SerializedName("taxes")
           List<Quote.Computed.Recurring.TotalDetails.Breakdown.Tax> taxes;
 
+          /**
+           * For more details about Discount, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1078,6 +1106,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             com.stripe.model.Discount discount;
           }
 
+          /**
+           * For more details about Tax, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1121,6 +1153,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       }
     }
 
+    /**
+     * For more details about Upfront, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1144,6 +1180,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @SerializedName("total_details")
       TotalDetails totalDetails;
 
+      /**
+       * For more details about TotalDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1163,6 +1203,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @SerializedName("breakdown")
         Breakdown breakdown;
 
+        /**
+         * For more details about Breakdown, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1175,6 +1219,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           @SerializedName("taxes")
           List<Quote.Computed.Upfront.TotalDetails.Breakdown.Tax> taxes;
 
+          /**
+           * For more details about Discount, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1198,6 +1246,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             com.stripe.model.Discount discount;
           }
 
+          /**
+           * For more details about Tax, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1242,6 +1294,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     }
   }
 
+  /**
+   * For more details about FromQuote, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1275,6 +1331,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     }
   }
 
+  /**
+   * For more details about InvoiceSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1289,6 +1349,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("issuer")
     Issuer issuer;
 
+    /**
+     * For more details about Issuer, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1327,6 +1391,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     }
   }
 
+  /**
+   * For more details about StatusTransitions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1344,6 +1412,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     Long finalizedAt;
   }
 
+  /**
+   * For more details about SubscriptionData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1384,6 +1456,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     Long trialPeriodDays;
   }
 
+  /**
+   * For more details about TotalDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1403,6 +1479,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("breakdown")
     Breakdown breakdown;
 
+    /**
+     * For more details about Breakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1415,6 +1495,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @SerializedName("taxes")
       List<Quote.TotalDetails.Breakdown.Tax> taxes;
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1437,6 +1521,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         com.stripe.model.Discount discount;
       }
 
+      /**
+       * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1477,6 +1565,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     }
   }
 
+  /**
+   * For more details about TransferData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

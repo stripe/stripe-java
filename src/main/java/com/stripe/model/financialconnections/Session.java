@@ -162,6 +162,10 @@ public class Session extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
+  /**
+   * For more details about AccountHolder, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -229,6 +233,10 @@ public class Session extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Filters, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

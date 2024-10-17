@@ -366,6 +366,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     return getResponseGetter().request(request, PaymentMethodConfiguration.class);
   }
 
+  /**
+   * For more details about AcssDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -380,6 +384,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -409,6 +417,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -423,6 +435,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -452,6 +468,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about AfterpayClearpay, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -466,6 +486,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -495,6 +519,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -509,6 +537,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -538,6 +570,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about AmazonPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -552,6 +588,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -581,6 +621,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about ApplePay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -595,6 +639,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -624,6 +672,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about AuBecsDebit, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -638,6 +690,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -667,6 +723,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about BacsDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -681,6 +741,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -710,6 +774,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Bancontact, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -724,6 +792,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -753,6 +825,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -767,6 +843,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -796,6 +876,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -810,6 +894,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -839,6 +927,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -853,6 +945,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -882,6 +978,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about CartesBancaires, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -896,6 +996,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -925,6 +1029,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -939,6 +1047,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -968,6 +1080,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about CustomerBalance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -982,6 +1098,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1011,6 +1131,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1025,6 +1149,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1054,6 +1182,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Fpx, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1068,6 +1200,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1097,6 +1233,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1111,6 +1251,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1140,6 +1284,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about GooglePay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1154,6 +1302,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1183,6 +1335,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1197,6 +1353,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1226,6 +1386,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1240,6 +1404,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1269,6 +1437,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Jcb, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1283,6 +1455,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1312,6 +1488,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1326,6 +1506,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1355,6 +1539,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Konbini, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1369,6 +1557,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1398,6 +1590,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1412,6 +1608,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1441,6 +1641,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Mobilepay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1455,6 +1659,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1484,6 +1692,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Multibanco, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1498,6 +1710,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1527,6 +1743,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Oxxo, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1541,6 +1761,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1570,6 +1794,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1584,6 +1812,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1613,6 +1845,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Paynow, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1627,6 +1863,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1656,6 +1896,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1670,6 +1914,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1699,6 +1947,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Promptpay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1713,6 +1965,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1742,6 +1998,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about RevolutPay, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1756,6 +2016,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1785,6 +2049,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about SepaDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1799,6 +2067,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1828,6 +2100,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1842,6 +2118,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1871,6 +2151,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1885,6 +2169,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1914,6 +2202,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1928,6 +2220,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1957,6 +2253,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about UsBankAccount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1971,6 +2271,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2000,6 +2304,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about WechatPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2014,6 +2322,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2043,6 +2355,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2057,6 +2373,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     @SerializedName("display_preference")
     DisplayPreference displayPreference;
 
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

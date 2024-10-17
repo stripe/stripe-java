@@ -223,6 +223,10 @@ public class TransactionEntry extends ApiResource implements HasId {
     Long outboundPending;
   }
 
+  /**
+   * For more details about FlowDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

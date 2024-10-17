@@ -118,6 +118,10 @@ public class AccountSession extends ApiResource {
     return getGlobalResponseGetter().request(request, AccountSession.class);
   }
 
+  /**
+   * For more details about Components, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -155,6 +159,10 @@ public class AccountSession extends ApiResource {
     @SerializedName("tax_settings")
     TaxSettings taxSettings;
 
+    /**
+     * For more details about AccountManagement, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -166,6 +174,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -181,6 +193,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about AccountOnboarding, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -192,6 +208,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -207,6 +227,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about Balances, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -218,6 +242,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -254,6 +282,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about Documents, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -265,12 +297,20 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
     }
 
+    /**
+     * For more details about NotificationBanner, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -282,6 +322,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -297,6 +341,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about PaymentDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -308,6 +356,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -339,6 +391,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about Payments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -350,6 +406,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -381,6 +441,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about Payouts, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -392,6 +456,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -428,6 +496,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about PayoutsList, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -439,12 +511,20 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
     }
 
+    /**
+     * For more details about TaxRegistrations, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -456,12 +536,20 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
     }
 
+    /**
+     * For more details about TaxSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -473,6 +561,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
