@@ -15,7 +15,6 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.treasury.InboundTransferCancelParams;
-import com.stripe.param.treasury.InboundTransferConfirmParams;
 import com.stripe.param.treasury.InboundTransferCreateParams;
 import com.stripe.param.treasury.InboundTransferFailParams;
 import com.stripe.param.treasury.InboundTransferListParams;
@@ -209,54 +208,6 @@ public class InboundTransfer extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, InboundTransfer.class);
-  }
-
-  /** Confirm an InboundTransfer. */
-  public InboundTransfer confirm() throws StripeException {
-    return confirm((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Confirm an InboundTransfer. */
-  public InboundTransfer confirm(RequestOptions options) throws StripeException {
-    return confirm((Map<String, Object>) null, options);
-  }
-
-  /** Confirm an InboundTransfer. */
-  public InboundTransfer confirm(Map<String, Object> params) throws StripeException {
-    return confirm(params, (RequestOptions) null);
-  }
-
-  /** Confirm an InboundTransfer. */
-  public InboundTransfer confirm(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/inbound_transfers/%s/confirm", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, InboundTransfer.class);
-  }
-
-  /** Confirm an InboundTransfer. */
-  public InboundTransfer confirm(InboundTransferConfirmParams params) throws StripeException {
-    return confirm(params, (RequestOptions) null);
-  }
-
-  /** Confirm an InboundTransfer. */
-  public InboundTransfer confirm(InboundTransferConfirmParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/inbound_transfers/%s/confirm", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
