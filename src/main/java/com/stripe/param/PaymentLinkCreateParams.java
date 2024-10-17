@@ -5717,6 +5717,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("giropay")
     GIROPAY("giropay"),
 
+    @SerializedName("gopay")
+    GOPAY("gopay"),
+
     @SerializedName("grabpay")
     GRABPAY("grabpay"),
 
@@ -5762,11 +5765,17 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
 
+    @SerializedName("qris")
+    QRIS("qris"),
+
     @SerializedName("rechnung")
     RECHNUNG("rechnung"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),

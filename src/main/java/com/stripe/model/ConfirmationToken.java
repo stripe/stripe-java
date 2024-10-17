@@ -301,6 +301,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("giropay")
     Giropay giropay;
 
+    @SerializedName("gopay")
+    Gopay gopay;
+
     @SerializedName("grabpay")
     Grabpay grabpay;
 
@@ -361,6 +364,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("qris")
+    Qris qris;
+
     @SerializedName("rechnung")
     Rechnung rechnung;
 
@@ -372,6 +378,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
+
+    @SerializedName("shopeepay")
+    Shopeepay shopeepay;
 
     @SerializedName("sofort")
     Sofort sofort;
@@ -390,13 +399,14 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay},
      * {@code alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code
      * bancontact}, {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code
-     * cashapp}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code
-     * grabpay}, {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code
-     * konbini}, {@code kr_card}, {@code link}, {@code mb_way}, {@code mobilepay}, {@code
+     * cashapp}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code gopay},
+     * {@code grabpay}, {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna},
+     * {@code konbini}, {@code kr_card}, {@code link}, {@code mb_way}, {@code mobilepay}, {@code
      * multibanco}, {@code naver_pay}, {@code oxxo}, {@code p24}, {@code payco}, {@code paynow},
-     * {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code rechnung}, {@code
-     * revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code
-     * twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code
+     * rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code shopeepay},
+     * {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or
+     * {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1533,6 +1543,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
     public static class Giropay extends StripeObject {}
 
     /**
+     * For more details about Gopay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gopay extends StripeObject {}
+
+    /**
      * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1950,6 +1969,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
     public static class Promptpay extends StripeObject {}
 
     /**
+     * For more details about Qris, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Qris extends StripeObject {}
+
+    /**
      * For more details about Rechnung, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -2093,6 +2121,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
         }
       }
     }
+
+    /**
+     * For more details about Shopeepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Shopeepay extends StripeObject {}
 
     /**
      * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API

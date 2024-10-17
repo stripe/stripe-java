@@ -1023,6 +1023,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String giropayPayments;
 
     /**
+     * The status of the Gopay capability of the account, or whether the account can directly
+     * process Gopay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("gopay_payments")
+    String gopayPayments;
+
+    /**
      * The status of the GrabPay payments capability of the account, or whether the account can
      * directly process GrabPay charges.
      *
@@ -1229,6 +1238,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String promptpayPayments;
 
     /**
+     * The status of the Qris capability of the account, or whether the account can directly process
+     * Qris payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("qris_payments")
+    String qrisPayments;
+
+    /**
      * The status of the Rechnung capability of the account, or whether the account can directly
      * process Rechnung payments.
      *
@@ -1272,6 +1290,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("sepa_debit_payments")
     String sepaDebitPayments;
+
+    /**
+     * The status of the ShopeePay capability of the account, or whether the account can directly
+     * process ShopeePay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("shopeepay_payments")
+    String shopeepayPayments;
 
     /**
      * The status of the Sofort payments capability of the account, or whether the account can

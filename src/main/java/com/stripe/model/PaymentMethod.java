@@ -114,6 +114,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("giropay")
   Giropay giropay;
 
+  @SerializedName("gopay")
+  Gopay gopay;
+
   @SerializedName("grabpay")
   Grabpay grabpay;
 
@@ -203,6 +206,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("promptpay")
   Promptpay promptpay;
 
+  @SerializedName("qris")
+  Qris qris;
+
   /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
@@ -222,6 +228,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
+  @SerializedName("shopeepay")
+  Shopeepay shopeepay;
+
   @SerializedName("sofort")
   Sofort sofort;
 
@@ -238,13 +247,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay}, {@code
    * alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact},
    * {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code
-   * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
-   * {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card},
-   * {@code link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code
-   * oxxo}, {@code p24}, {@code payco}, {@code paynow}, {@code paypal}, {@code payto}, {@code pix},
-   * {@code promptpay}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code
-   * sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
-   * wechat_pay}, or {@code zip}.
+   * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code gopay}, {@code grabpay},
+   * {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini},
+   * {@code kr_card}, {@code link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code
+   * naver_pay}, {@code oxxo}, {@code p24}, {@code payco}, {@code paynow}, {@code paypal}, {@code
+   * payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code rechnung}, {@code revolut_pay},
+   * {@code samsung_pay}, {@code sepa_debit}, {@code shopeepay}, {@code sofort}, {@code swish},
+   * {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -1759,6 +1768,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Giropay extends StripeObject {}
 
   /**
+   * For more details about Gopay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Gopay extends StripeObject {}
+
+  /**
    * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -2175,6 +2193,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Promptpay extends StripeObject {}
 
   /**
+   * For more details about Qris, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Qris extends StripeObject {}
+
+  /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
    */
@@ -2335,6 +2362,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       }
     }
   }
+
+  /**
+   * For more details about Shopeepay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Shopeepay extends StripeObject {}
 
   /**
    * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2525,6 +2561,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(eps, responseGetter);
     trySetResponseGetter(fpx, responseGetter);
     trySetResponseGetter(giropay, responseGetter);
+    trySetResponseGetter(gopay, responseGetter);
     trySetResponseGetter(grabpay, responseGetter);
     trySetResponseGetter(ideal, responseGetter);
     trySetResponseGetter(interacPresent, responseGetter);
@@ -2545,11 +2582,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(payto, responseGetter);
     trySetResponseGetter(pix, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
+    trySetResponseGetter(qris, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);
     trySetResponseGetter(rechnung, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(samsungPay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
+    trySetResponseGetter(shopeepay, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);
     trySetResponseGetter(twint, responseGetter);

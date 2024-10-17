@@ -1199,6 +1199,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("giropay")
     Giropay giropay;
 
+    @SerializedName("gopay")
+    Gopay gopay;
+
     @SerializedName("grabpay")
     Grabpay grabpay;
 
@@ -1259,6 +1262,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("qris")
+    Qris qris;
+
     @SerializedName("rechnung")
     Rechnung rechnung;
 
@@ -1273,6 +1279,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
+
+    @SerializedName("shopeepay")
+    Shopeepay shopeepay;
 
     @SerializedName("sofort")
     Sofort sofort;
@@ -2617,6 +2626,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
 
     /**
+     * For more details about Gopay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gopay extends StripeObject {}
+
+    /**
      * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -3359,6 +3377,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
 
     /**
+     * For more details about Qris, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Qris extends StripeObject {}
+
+    /**
      * For more details about Rechnung, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -3450,6 +3477,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("mandate")
       String mandate;
     }
+
+    /**
+     * For more details about Shopeepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Shopeepay extends StripeObject {}
 
     /**
      * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
