@@ -278,6 +278,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         .request(request, QuotePreviewSubscriptionScheduleCollection.class);
   }
 
+  /**
+   * For more details about AppliesTo, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -303,6 +307,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     String type;
   }
 
+  /**
+   * For more details about CurrentPhase, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -316,6 +324,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     Long startDate;
   }
 
+  /**
+   * For more details about DefaultSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -435,6 +447,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about AutomaticTax, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -451,6 +467,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       @SerializedName("liability")
       Liability liability;
 
+      /**
+       * For more details about Liability, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -489,6 +509,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       }
     }
 
+    /**
+     * For more details about BillingThresholds, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -508,6 +532,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       Boolean resetBillingCycleAnchor;
     }
 
+    /**
+     * For more details about InvoiceSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -574,6 +602,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
                 : null;
       }
 
+      /**
+       * For more details about Issuer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -612,6 +644,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       }
     }
 
+    /**
+     * For more details about TransferData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -650,6 +686,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     }
   }
 
+  /**
+   * For more details about LastPriceMigrationError, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -671,6 +711,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about FailedTransition, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -968,6 +1012,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1051,6 +1099,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
               new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
         }
 
+        /**
+         * For more details about DiscountEnd, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1070,6 +1122,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       }
     }
 
+    /**
+     * For more details about AutomaticTax, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1086,6 +1142,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       @SerializedName("liability")
       Liability liability;
 
+      /**
+       * For more details about Liability, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1124,6 +1184,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       }
     }
 
+    /**
+     * For more details about BillingThresholds, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1143,6 +1207,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       Boolean resetBillingCycleAnchor;
     }
 
+    /**
+     * For more details about Discount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1226,6 +1294,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
             new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about DiscountEnd, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1244,6 +1316,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       }
     }
 
+    /**
+     * For more details about InvoiceSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1314,6 +1390,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
                 : null;
       }
 
+      /**
+       * For more details about Issuer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1442,6 +1522,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about BillingThresholds, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1451,6 +1535,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         Long usageGte;
       }
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1534,6 +1622,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
               new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
         }
 
+        /**
+         * For more details about DiscountEnd, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1552,6 +1644,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         }
       }
 
+      /**
+       * For more details about Trial, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1589,6 +1685,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       String behavior;
     }
 
+    /**
+     * For more details about TransferData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

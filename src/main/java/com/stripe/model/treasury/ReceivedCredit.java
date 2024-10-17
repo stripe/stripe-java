@@ -230,6 +230,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, ReceivedCredit.class);
   }
 
+  /**
+   * For more details about InitiatingPaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -268,6 +272,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /**
+     * For more details about BillingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -284,6 +292,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
       String name;
     }
 
+    /**
+     * For more details about FinancialAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -303,6 +315,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
       String network;
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -321,6 +337,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about LinkedFlows, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -361,6 +381,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @SerializedName("source_flow_type")
     String sourceFlowType;
 
+    /**
+     * For more details about SourceFlowDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -417,6 +441,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about NetworkDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -433,6 +461,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Ach, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -443,6 +475,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about ReversalDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

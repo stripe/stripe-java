@@ -257,6 +257,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     return getGlobalResponseGetter().request(request, Card.class);
   }
 
+  /**
+   * For more details about CreatedBy, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -278,6 +282,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Checkout, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -291,6 +299,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       String lineItem;
     }
 
+    /**
+     * For more details about Order, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -304,6 +316,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       String order;
     }
 
+    /**
+     * For more details about Payment, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

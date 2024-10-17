@@ -34,6 +34,12 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Form extends ApiResource implements HasId {
+  @SerializedName("au_serr")
+  AuSerr auSerr;
+
+  @SerializedName("ca_mrdp")
+  CaMrdp caMrdp;
+
   /** The form that corrects this form, if any. */
   @SerializedName("corrected_by")
   @Getter(lombok.AccessLevel.NONE)
@@ -44,12 +50,18 @@ public class Form extends ApiResource implements HasId {
   @SerializedName("created")
   Long created;
 
+  @SerializedName("eu_dac7")
+  EuDac7 euDac7;
+
   /**
    * A list of tax filing statuses. Note that a filing status will only be included if the form has
    * been filed directly with the jurisdiction’s tax authority.
    */
   @SerializedName("filing_statuses")
   List<Form.FilingStatus> filingStatuses;
+
+  @SerializedName("gb_mrdp")
+  GbMrdp gbMrdp;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -62,6 +74,9 @@ public class Form extends ApiResource implements HasId {
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  @SerializedName("nz_mrdp")
+  NzMrdp nzMrdp;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -78,7 +93,8 @@ public class Form extends ApiResource implements HasId {
    * The type of the tax form. An additional hash is included on the tax form with a name matching
    * this value. It contains additional information specific to the tax form type.
    *
-   * <p>One of {@code us_1099_k}, {@code us_1099_misc}, or {@code us_1099_nec}.
+   * <p>One of {@code au_serr}, {@code ca_mrdp}, {@code eu_dac7}, {@code gb_mrdp}, {@code nz_mrdp},
+   * {@code us_1099_k}, {@code us_1099_misc}, or {@code us_1099_nec}.
    */
   @SerializedName("type")
   String type;
@@ -244,6 +260,61 @@ public class Form extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Form.class);
   }
 
+  /**
+   * For more details about AuSerr, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AuSerr extends StripeObject {
+    /** End date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_end_date")
+    String reportingPeriodEndDate;
+
+    /** Start date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_start_date")
+    String reportingPeriodStartDate;
+  }
+
+  /**
+   * For more details about CaMrdp, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CaMrdp extends StripeObject {
+    /** End date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_end_date")
+    String reportingPeriodEndDate;
+
+    /** Start date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_start_date")
+    String reportingPeriodStartDate;
+  }
+
+  /**
+   * For more details about EuDac7, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EuDac7 extends StripeObject {
+    /** End date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_end_date")
+    String reportingPeriodEndDate;
+
+    /** Start date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_start_date")
+    String reportingPeriodStartDate;
+  }
+
+  /**
+   * For more details about FilingStatus, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -263,6 +334,10 @@ public class Form extends ApiResource implements HasId {
     @SerializedName("value")
     String value;
 
+    /**
+     * For more details about Jurisdiction, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -291,6 +366,44 @@ public class Form extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about GbMrdp, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class GbMrdp extends StripeObject {
+    /** End date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_end_date")
+    String reportingPeriodEndDate;
+
+    /** Start date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_start_date")
+    String reportingPeriodStartDate;
+  }
+
+  /**
+   * For more details about NzMrdp, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NzMrdp extends StripeObject {
+    /** End date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_end_date")
+    String reportingPeriodEndDate;
+
+    /** Start date of the period represented by the information reported on the tax form. */
+    @SerializedName("reporting_period_start_date")
+    String reportingPeriodStartDate;
+  }
+
+  /**
+   * For more details about Payee, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -301,10 +414,14 @@ public class Form extends ApiResource implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> account;
 
+    /** The external reference to this payee. */
+    @SerializedName("external_reference")
+    String externalReference;
+
     /**
-     * Always {@code account}.
+     * Either {@code account} or {@code external_reference}.
      *
-     * <p>Equal to {@code account}.
+     * <p>One of {@code account}, or {@code external_reference}.
      */
     @SerializedName("type")
     String type;
@@ -328,6 +445,10 @@ public class Form extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Us1099K, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -337,6 +458,10 @@ public class Form extends ApiResource implements HasId {
     Long reportingYear;
   }
 
+  /**
+   * For more details about Us1099Misc, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -346,6 +471,10 @@ public class Form extends ApiResource implements HasId {
     Long reportingYear;
   }
 
+  /**
+   * For more details about Us1099Nec, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -358,7 +487,12 @@ public class Form extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(auSerr, responseGetter);
+    trySetResponseGetter(caMrdp, responseGetter);
     trySetResponseGetter(correctedBy, responseGetter);
+    trySetResponseGetter(euDac7, responseGetter);
+    trySetResponseGetter(gbMrdp, responseGetter);
+    trySetResponseGetter(nzMrdp, responseGetter);
     trySetResponseGetter(payee, responseGetter);
     trySetResponseGetter(us1099K, responseGetter);
     trySetResponseGetter(us1099Misc, responseGetter);

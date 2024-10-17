@@ -467,6 +467,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     return getResponseGetter().request(request, PaymentLink.class);
   }
 
+  /**
+   * For more details about AfterCompletion, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -485,6 +489,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about HostedConfirmation, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -494,6 +502,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       String customMessage;
     }
 
+    /**
+     * For more details about Redirect, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -504,6 +516,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about AutomaticTax, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -520,6 +536,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("liability")
     Liability liability;
 
+    /**
+     * For more details about Liability, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -558,6 +578,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about ConsentCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -585,6 +609,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("terms_of_service")
     String termsOfService;
 
+    /**
+     * For more details about PaymentMethodReuseAgreement, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -603,6 +631,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about CustomField, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -641,6 +673,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Dropdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -649,6 +685,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("options")
       List<PaymentLink.CustomField.Dropdown.Option> options;
 
+      /**
+       * For more details about Option, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -667,6 +707,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       }
     }
 
+    /**
+     * For more details about Label, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -684,6 +728,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       String type;
     }
 
+    /**
+     * For more details about Numeric, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -697,6 +745,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       Long minimumLength;
     }
 
+    /**
+     * For more details about Text, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -711,6 +763,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about CustomText, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -733,6 +789,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("terms_of_service_acceptance")
     TermsOfServiceAcceptance termsOfServiceAcceptance;
 
+    /**
+     * For more details about AfterSubmit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -742,6 +802,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       String message;
     }
 
+    /**
+     * For more details about ShippingAddress, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -751,6 +815,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       String message;
     }
 
+    /**
+     * For more details about Submit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -760,6 +828,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       String message;
     }
 
+    /**
+     * For more details about TermsOfServiceAcceptance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -770,6 +842,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about InvoiceCreation, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -782,6 +858,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("invoice_data")
     InvoiceData invoiceData;
 
+    /**
+     * For more details about InvoiceData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -865,6 +945,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
                 : null;
       }
 
+      /**
+       * For more details about CustomField, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -878,6 +962,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         String value;
       }
 
+      /**
+       * For more details about Issuer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -915,6 +1003,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         }
       }
 
+      /**
+       * For more details about RenderingOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -928,6 +1020,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about PaymentIntentData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -985,6 +1081,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     String transferGroup;
   }
 
+  /**
+   * For more details about PhoneNumberCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -994,6 +1094,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     Boolean enabled;
   }
 
+  /**
+   * For more details about Restrictions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1001,6 +1105,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("completed_sessions")
     CompletedSessions completedSessions;
 
+    /**
+     * For more details about CompletedSessions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1021,6 +1129,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about ShippingAddressCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1034,6 +1146,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     List<String> allowedCountries;
   }
 
+  /**
+   * For more details about ShippingOption, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1068,6 +1184,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about SubscriptionData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1102,6 +1222,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("trial_settings")
     TrialSettings trialSettings;
 
+    /**
+     * For more details about InvoiceSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1109,6 +1233,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("issuer")
       Issuer issuer;
 
+      /**
+       * For more details about Issuer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1173,6 +1301,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     }
   }
 
+  /**
+   * For more details about TaxIdCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1185,6 +1317,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     String required;
   }
 
+  /**
+   * For more details about TransferData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

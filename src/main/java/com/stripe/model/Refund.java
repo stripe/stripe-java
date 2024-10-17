@@ -575,6 +575,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     return getResponseGetter().request(request, Refund.class);
   }
 
+  /**
+   * For more details about DestinationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -587,6 +591,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
 
     @SerializedName("alipay")
     Alipay alipay;
+
+    @SerializedName("alma")
+    Alma alma;
 
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
@@ -677,31 +684,64 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("zip")
     Zip zip;
 
+    /**
+     * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {}
 
+    /**
+     * For more details about AfterpayClearpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay extends StripeObject {}
 
+    /**
+     * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
 
+    /**
+     * For more details about Alma, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alma extends StripeObject {}
+
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {}
 
+    /**
+     * For more details about AuBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AuBankTransfer extends StripeObject {}
 
+    /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -718,6 +758,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about BrBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -734,6 +778,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -762,21 +810,37 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String type;
     }
 
+    /**
+     * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cashapp extends StripeObject {}
 
+    /**
+     * For more details about CustomerCashBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CustomerCashBalance extends StripeObject {}
 
+    /**
+     * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Eps extends StripeObject {}
 
+    /**
+     * For more details about EuBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -793,6 +857,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about GbBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -809,16 +877,28 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Giropay extends StripeObject {}
 
+    /**
+     * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Grabpay extends StripeObject {}
 
+    /**
+     * For more details about JpBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -835,11 +915,19 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {}
 
+    /**
+     * For more details about Multibanco, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -856,6 +944,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about MxBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -872,6 +964,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -888,31 +984,55 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about Paynow, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paynow extends StripeObject {}
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paypal extends StripeObject {}
 
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix extends StripeObject {}
 
+    /**
+     * For more details about Revolut, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Revolut extends StripeObject {}
 
+    /**
+     * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Sofort extends StripeObject {}
 
+    /**
+     * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -929,6 +1049,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about ThBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -945,6 +1069,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about UsBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -961,17 +1089,29 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       String referenceStatus;
     }
 
+    /**
+     * For more details about WechatPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class WechatPay extends StripeObject {}
 
+    /**
+     * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
   }
 
+  /**
+   * For more details about NextAction, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -984,6 +1124,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about DisplayDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -995,6 +1139,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       @SerializedName("expires_at")
       Long expiresAt;
 
+      /**
+       * For more details about EmailSent, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

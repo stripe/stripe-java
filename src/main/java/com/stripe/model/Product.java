@@ -476,6 +476,10 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     return getResponseGetter().request(request, Product.class);
   }
 
+  /**
+   * For more details about MarketingFeature, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -485,6 +489,10 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     String name;
   }
 
+  /**
+   * For more details about PackageDimensions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -506,6 +514,10 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     BigDecimal width;
   }
 
+  /**
+   * For more details about Provisioning, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -521,6 +533,10 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about GiftCard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -536,6 +552,10 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about FixedAmount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

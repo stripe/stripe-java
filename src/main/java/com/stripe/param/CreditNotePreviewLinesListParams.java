@@ -501,7 +501,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   @Getter
   public static class Line {
     /**
-     * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}.
+     * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}. If
+     * invoice is set up with {@code automatic_tax[enabled]=true}, this amount is tax exclusive
      */
     @SerializedName("amount")
     Long amount;
@@ -635,6 +636,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       /**
        * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}.
+       * If invoice is set up with {@code automatic_tax[enabled]=true}, this amount is tax exclusive
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;

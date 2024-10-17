@@ -89,6 +89,10 @@ public class FinancingSummary extends ApiResource {
     return getGlobalResponseGetter().request(request, FinancingSummary.class);
   }
 
+  /**
+   * For more details about Details, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

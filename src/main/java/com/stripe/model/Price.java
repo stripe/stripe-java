@@ -443,6 +443,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     return getResponseGetter().request(request, Price.class);
   }
 
+  /**
+   * For more details about CurrencyOption, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -486,6 +490,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
 
+    /**
+     * For more details about CustomUnitAmount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -506,6 +514,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
       Long preset;
     }
 
+    /**
+     * For more details about Tier, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -536,6 +548,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     }
   }
 
+  /**
+   * For more details about CustomUnitAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -556,6 +572,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     Long preset;
   }
 
+  /**
+   * For more details about MigrateTo, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -577,6 +597,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     String price;
   }
 
+  /**
+   * For more details about Recurring, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -627,6 +651,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     String usageType;
   }
 
+  /**
+   * For more details about Tier, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -652,6 +680,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     Long upTo;
   }
 
+  /**
+   * For more details about TransformQuantity, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

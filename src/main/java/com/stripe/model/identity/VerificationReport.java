@@ -266,6 +266,10 @@ public class VerificationReport extends ApiResource implements HasId {
       Long year;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -345,6 +349,10 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("status")
     String status;
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -427,6 +435,10 @@ public class VerificationReport extends ApiResource implements HasId {
       Long year;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -449,6 +461,10 @@ public class VerificationReport extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Options, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -459,6 +475,10 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("id_number")
     IdNumber idNumber;
 
+    /**
+     * For more details about Document, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -496,6 +516,10 @@ public class VerificationReport extends ApiResource implements HasId {
       Boolean requireMatchingSelfie;
     }
 
+    /**
+     * For more details about IdNumber, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -523,6 +547,10 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("status")
     String status;
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -575,6 +603,10 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("status")
     String status;
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

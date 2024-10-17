@@ -222,6 +222,10 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
     return getResponseGetter().request(request, AccountNotice.class);
   }
 
+  /**
+   * For more details about Email, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -242,6 +246,10 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
     String subject;
   }
 
+  /**
+   * For more details about LinkedObjects, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

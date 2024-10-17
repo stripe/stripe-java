@@ -407,6 +407,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     return getResponseGetter().request(request, Card.class);
   }
 
+  /**
+   * For more details about Shipping, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -491,6 +495,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about AddressValidation, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -518,6 +526,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       String result;
     }
 
+    /**
+     * For more details about Customs, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -533,6 +545,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
   }
 
+  /**
+   * For more details about SpendingControls, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -587,6 +603,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("spending_limits_currency")
     String spendingLimitsCurrency;
 
+    /**
+     * For more details about SpendingLimit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -617,6 +637,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
   }
 
+  /**
+   * For more details about Wallets, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -631,6 +655,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("primary_account_identifier")
     String primaryAccountIdentifier;
 
+    /**
+     * For more details about ApplePay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -649,6 +677,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       String ineligibleReason;
     }
 
+    /**
+     * For more details about GooglePay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -933,7 +965,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard() throws StripeException {
       return submitCard((Map<String, Object>) null, (RequestOptions) null);
@@ -941,7 +973,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(RequestOptions options) throws StripeException {
       return submitCard((Map<String, Object>) null, options);
@@ -949,7 +981,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(Map<String, Object> params) throws StripeException {
       return submitCard(params, (RequestOptions) null);
@@ -957,7 +989,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -972,7 +1004,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(CardSubmitCardParams params) throws StripeException {
       return submitCard(params, (RequestOptions) null);
@@ -980,7 +1012,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Updates the shipping status of the specified Issuing {@code Card} object to {@code
-     * submitted}. This method is only available with Stripe Version ‘2024-09-30.acacia’ or above.
+     * submitted}. This method requires Stripe Version ‘2024-09-30.acacia’ or later.
      */
     public Card submitCard(CardSubmitCardParams params, RequestOptions options)
         throws StripeException {

@@ -152,6 +152,10 @@ public class Institution extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Institution.class);
   }
 
+  /**
+   * For more details about Features, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -168,6 +172,10 @@ public class Institution extends ApiResource implements HasId {
     @SerializedName("transactions")
     Transactions transactions;
 
+    /**
+     * For more details about Balances, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -177,6 +185,10 @@ public class Institution extends ApiResource implements HasId {
       Boolean supported;
     }
 
+    /**
+     * For more details about Ownership, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -186,6 +198,10 @@ public class Institution extends ApiResource implements HasId {
       Boolean supported;
     }
 
+    /**
+     * For more details about PaymentMethod, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -195,6 +211,10 @@ public class Institution extends ApiResource implements HasId {
       Boolean supported;
     }
 
+    /**
+     * For more details about Transactions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

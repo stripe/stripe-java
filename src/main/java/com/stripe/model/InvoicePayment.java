@@ -108,6 +108,10 @@ public class InvoicePayment extends StripeObject implements HasId {
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
+  /**
+   * For more details about Payment, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -176,6 +180,10 @@ public class InvoicePayment extends StripeObject implements HasId {
           new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about OutOfBandPayment, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -214,6 +222,10 @@ public class InvoicePayment extends StripeObject implements HasId {
     }
   }
 
+  /**
+   * For more details about StatusTransitions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

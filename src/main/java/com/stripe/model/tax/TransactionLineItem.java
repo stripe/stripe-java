@@ -98,6 +98,10 @@ public class TransactionLineItem extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
+  /**
+   * For more details about Reversal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

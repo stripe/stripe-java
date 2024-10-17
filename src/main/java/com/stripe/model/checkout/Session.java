@@ -814,6 +814,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, Session.class);
   }
 
+  /**
+   * For more details about AfterExpiration, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -822,6 +826,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("recovery")
     Recovery recovery;
 
+    /**
+     * For more details about Recovery, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -854,6 +862,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about AutomaticTax, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -878,6 +890,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("status")
     String status;
 
+    /**
+     * For more details about Liability, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -916,6 +932,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about CollectedInformation, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -940,6 +960,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("tax_ids")
     List<Session.CollectedInformation.TaxId> taxIds;
 
+    /**
+     * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -971,6 +995,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about Consent, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -994,6 +1022,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     String termsOfService;
   }
 
+  /**
+   * For more details about ConsentCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1024,6 +1056,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("terms_of_service")
     String termsOfService;
 
+    /**
+     * For more details about PaymentMethodReuseAgreement, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1042,6 +1078,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about CurrencyConversion, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1063,6 +1103,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     String sourceCurrency;
   }
 
+  /**
+   * For more details about CustomField, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1101,6 +1145,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Dropdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1117,6 +1165,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("value")
       String value;
 
+      /**
+       * For more details about Option, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1135,6 +1187,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       }
     }
 
+    /**
+     * For more details about Label, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1152,6 +1208,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String type;
     }
 
+    /**
+     * For more details about Numeric, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1173,6 +1233,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String value;
     }
 
+    /**
+     * For more details about Text, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1195,6 +1259,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about CustomText, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1217,6 +1285,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("terms_of_service_acceptance")
     TermsOfServiceAcceptance termsOfServiceAcceptance;
 
+    /**
+     * For more details about AfterSubmit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1226,6 +1298,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String message;
     }
 
+    /**
+     * For more details about ShippingAddress, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1235,6 +1311,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String message;
     }
 
+    /**
+     * For more details about Submit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1244,6 +1324,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String message;
     }
 
+    /**
+     * For more details about TermsOfServiceAcceptance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1254,6 +1338,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about CustomerDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1297,6 +1385,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("tax_ids")
     List<Session.CustomerDetails.TaxId> taxIds;
 
+    /**
+     * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1328,6 +1420,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about InvoiceCreation, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1339,6 +1435,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("invoice_data")
     InvoiceData invoiceData;
 
+    /**
+     * For more details about InvoiceData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1422,6 +1522,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
                 : null;
       }
 
+      /**
+       * For more details about CustomField, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1435,6 +1539,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         String value;
       }
 
+      /**
+       * For more details about Issuer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1472,6 +1580,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         }
       }
 
+      /**
+       * For more details about RenderingOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1485,6 +1597,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about PaymentMethodConfigurationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1499,6 +1615,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     String parent;
   }
 
+  /**
+   * For more details about PaymentMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1602,6 +1722,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /**
+     * For more details about AcssDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1649,6 +1773,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("verification_method")
       String verificationMethod;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1689,6 +1817,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       }
     }
 
+    /**
+     * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1718,6 +1850,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about AfterpayClearpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1747,6 +1883,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1776,6 +1916,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1805,6 +1949,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about AuBecsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1834,6 +1982,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about BacsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1863,6 +2015,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Bancontact, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1892,6 +2048,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1929,6 +2089,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1996,6 +2160,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("statement_descriptor_suffix_kanji")
       String statementDescriptorSuffixKanji;
 
+      /**
+       * For more details about Installments, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2006,6 +2174,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       }
     }
 
+    /**
+     * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2035,6 +2207,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about CustomerBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2075,6 +2251,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      /**
+       * For more details about BankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2103,6 +2283,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("type")
         String type;
 
+        /**
+         * For more details about EuBankTransfer, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2119,6 +2303,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       }
     }
 
+    /**
+     * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2148,6 +2336,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Fpx, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2177,6 +2369,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2206,6 +2402,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2235,6 +2435,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2264,6 +2468,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2293,6 +2501,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Konbini, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2331,6 +2543,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2360,6 +2576,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Mobilepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2389,6 +2609,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Multibanco, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2418,6 +2642,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Oxxo, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2455,6 +2683,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2484,6 +2716,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Paynow, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2513,6 +2749,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2571,6 +2811,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       List<String> subsellers;
     }
 
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2602,6 +2846,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2664,6 +2912,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       }
     }
 
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2673,6 +2925,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       Long expiresAfterSeconds;
     }
 
+    /**
+     * For more details about RevolutPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2702,6 +2958,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about SepaDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2731,6 +2991,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2760,6 +3024,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2772,6 +3040,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String reference;
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2811,6 +3083,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("verification_method")
       String verificationMethod;
 
+      /**
+       * For more details about FinancialConnections, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2839,6 +3115,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("return_url")
         String returnUrl;
 
+        /**
+         * For more details about Filters, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2855,6 +3135,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
           String institution;
         }
 
+        /**
+         * For more details about ManualEntry, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2871,6 +3155,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about Permissions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2879,6 +3167,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("update")
     Update update;
 
+    /**
+     * For more details about Update, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2901,6 +3193,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about PhoneNumberCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2910,6 +3206,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     Boolean enabled;
   }
 
+  /**
+   * For more details about SavedPaymentMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2941,6 +3241,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     String paymentMethodSave;
   }
 
+  /**
+   * For more details about ShippingAddressCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2954,6 +3258,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     List<String> allowedCountries;
   }
 
+  /**
+   * For more details about ShippingCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2999,6 +3307,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
           new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3038,6 +3350,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about ShippingOption, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -3072,6 +3388,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about TaxIdCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -3089,6 +3409,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     String required;
   }
 
+  /**
+   * For more details about TotalDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -3108,6 +3432,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("breakdown")
     Breakdown breakdown;
 
+    /**
+     * For more details about Breakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3120,6 +3448,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("taxes")
       List<Session.TotalDetails.Breakdown.Tax> taxes;
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3142,6 +3474,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         com.stripe.model.Discount discount;
       }
 
+      /**
+       * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

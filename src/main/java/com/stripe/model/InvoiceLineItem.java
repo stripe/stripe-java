@@ -396,6 +396,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     return getResponseGetter().request(request, InvoiceLineItem.class);
   }
 
+  /**
+   * For more details about DiscountAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -429,6 +433,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
   }
 
+  /**
+   * For more details about MarginAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -462,6 +470,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
   }
 
+  /**
+   * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -478,6 +490,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     Long start;
   }
 
+  /**
+   * For more details about PretaxCreditAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -571,6 +587,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
   }
 
+  /**
+   * For more details about ProrationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -582,6 +602,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @SerializedName("credited_items")
     CreditedItems creditedItems;
 
+    /**
+     * For more details about CreditedItems, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -596,6 +620,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
   }
 
+  /**
+   * For more details about TaxAmount, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

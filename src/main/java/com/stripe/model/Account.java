@@ -735,6 +735,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     return getResponseGetter().request(request, Account.class);
   }
 
+  /**
+   * For more details about BusinessProfile, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -792,6 +796,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("url")
     String url;
 
+    /**
+     * For more details about AnnualRevenue, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -819,6 +827,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String fiscalYearEnd;
     }
 
+    /**
+     * For more details about MonthlyEstimatedRevenue, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -840,6 +852,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
   }
 
+  /**
+   * For more details about Capabilities, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -870,6 +886,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("afterpay_clearpay_payments")
     String afterpayClearpayPayments;
+
+    /**
+     * The status of the Alma capability of the account, or whether the account can directly process
+     * Alma payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("alma_payments")
+    String almaPayments;
 
     /**
      * The status of the AmazonPay capability of the account, or whether the account can directly
@@ -1007,6 +1032,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String giropayPayments;
 
     /**
+     * The status of the Gopay capability of the account, or whether the account can directly
+     * process Gopay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("gopay_payments")
+    String gopayPayments;
+
+    /**
      * The status of the GrabPay payments capability of the account, or whether the account can
      * directly process GrabPay charges.
      *
@@ -1052,6 +1086,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String jpBankTransferPayments;
 
     /**
+     * The status of the KakaoPay capability of the account, or whether the account can directly
+     * process KakaoPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("kakao_pay_payments")
+    String kakaoPayPayments;
+
+    /**
      * The status of the Klarna payments capability of the account, or whether the account can
      * directly process Klarna charges.
      *
@@ -1068,6 +1111,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("konbini_payments")
     String konbiniPayments;
+
+    /**
+     * The status of the KrCard capability of the account, or whether the account can directly
+     * process KrCard payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("kr_card_payments")
+    String krCardPayments;
 
     /**
      * The status of the legacy payments capability of the account.
@@ -1123,6 +1175,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String mxBankTransferPayments;
 
     /**
+     * The status of the NaverPay capability of the account, or whether the account can directly
+     * process NaverPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("naver_pay_payments")
+    String naverPayPayments;
+
+    /**
      * The status of the OXXO payments capability of the account, or whether the account can
      * directly process OXXO charges.
      *
@@ -1139,6 +1200,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("p24_payments")
     String p24Payments;
+
+    /**
+     * The status of the Payco capability of the account, or whether the account can directly
+     * process Payco payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("payco_payments")
+    String paycoPayments;
 
     /**
      * The status of the paynow payments capability of the account, or whether the account can
@@ -1177,6 +1247,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String promptpayPayments;
 
     /**
+     * The status of the Qris capability of the account, or whether the account can directly process
+     * Qris payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("qris_payments")
+    String qrisPayments;
+
+    /**
      * The status of the Rechnung capability of the account, or whether the account can directly
      * process Rechnung payments.
      *
@@ -1195,6 +1274,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String revolutPayPayments;
 
     /**
+     * The status of the SamsungPay capability of the account, or whether the account can directly
+     * process SamsungPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("samsung_pay_payments")
+    String samsungPayPayments;
+
+    /**
      * The status of the SEPA customer_balance payments (EUR currency) capability of the account, or
      * whether the account can directly process SEPA customer_balance charges.
      *
@@ -1211,6 +1299,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("sepa_debit_payments")
     String sepaDebitPayments;
+
+    /**
+     * The status of the ShopeePay capability of the account, or whether the account can directly
+     * process ShopeePay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("shopeepay_payments")
+    String shopeepayPayments;
 
     /**
      * The status of the Sofort payments capability of the account, or whether the account can
@@ -1264,6 +1361,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String treasury;
 
     /**
+     * The status of the treasury_evolve capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_evolve")
+    String treasuryEvolve;
+
+    /**
+     * The status of the treasury_fifth_third capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_fifth_third")
+    String treasuryFifthThird;
+
+    /**
+     * The status of the treasury_goldman_sachs capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_goldman_sachs")
+    String treasuryGoldmanSachs;
+
+    /**
      * The status of the TWINT capability of the account, or whether the account can directly
      * process TWINT charges.
      *
@@ -1300,6 +1421,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String zipPayments;
   }
 
+  /**
+   * For more details about Company, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1416,6 +1541,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("verification")
     Verification verification;
 
+    /**
+     * For more details about AddressKana, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1452,6 +1581,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String town;
     }
 
+    /**
+     * For more details about AddressKanji, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1488,6 +1621,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String town;
     }
 
+    /**
+     * For more details about OwnershipDeclaration, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1505,6 +1642,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String userAgent;
     }
 
+    /**
+     * For more details about Verification, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1512,6 +1653,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("document")
       Document document;
 
+      /**
+       * For more details about Document, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1591,6 +1736,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
   }
 
+  /**
+   * For more details about Controller, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1635,6 +1784,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Application, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1658,6 +1811,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       Boolean pricingControls;
     }
 
+    /**
+     * For more details about Dashboard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1672,6 +1829,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String type;
     }
 
+    /**
+     * For more details about Fees, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1689,6 +1850,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String payer;
     }
 
+    /**
+     * For more details about Losses, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1703,6 +1868,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String payments;
     }
 
+    /**
+     * For more details about StripeDashboard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1718,6 +1887,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
   }
 
+  /**
+   * For more details about FutureRequirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1783,6 +1956,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1799,6 +1976,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       List<String> originalFieldsDue;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1881,6 +2062,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
   }
 
+  /**
+   * For more details about Groups, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1894,6 +2079,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String paymentsPricing;
   }
 
+  /**
+   * For more details about Requirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1965,6 +2154,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1981,6 +2174,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       List<String> originalFieldsDue;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2063,6 +2260,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
   }
 
+  /**
+   * For more details about RiskControls, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2073,6 +2274,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("payouts")
     Payouts payouts;
 
+    /**
+     * For more details about Charges, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2082,6 +2287,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       Boolean pauseRequested;
     }
 
+    /**
+     * For more details about Payouts, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2092,6 +2301,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
   }
 
+  /**
+   * For more details about Settings, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2132,6 +2345,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("treasury")
     Treasury treasury;
 
+    /**
+     * For more details about BacsDebitPayments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2156,6 +2373,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String serviceUserNumber;
     }
 
+    /**
+     * For more details about Branding, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2224,6 +2445,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       }
     }
 
+    /**
+     * For more details about Capital, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2237,6 +2462,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       Map<String, List<String>> payoutDestinationSelector;
     }
 
+    /**
+     * For more details about CardIssuing, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2244,6 +2473,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
+      /**
+       * For more details about TosAcceptance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2268,6 +2501,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       }
     }
 
+    /**
+     * For more details about CardPayments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2304,6 +2541,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("statement_descriptor_prefix_kanji")
       String statementDescriptorPrefixKanji;
 
+      /**
+       * For more details about DeclineOn, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2325,6 +2566,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       }
     }
 
+    /**
+     * For more details about Dashboard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2345,6 +2590,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String timezone;
     }
 
+    /**
+     * For more details about Invoices, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2403,6 +2652,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       }
     }
 
+    /**
+     * For more details about Payments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2451,6 +2704,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String statementDescriptorPrefixKanji;
     }
 
+    /**
+     * For more details about Payouts, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2475,6 +2732,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("statement_descriptor")
       String statementDescriptor;
 
+      /**
+       * For more details about Schedule, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2507,6 +2768,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       }
     }
 
+    /**
+     * For more details about SepaDebitPayments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2516,6 +2781,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       String creditorId;
     }
 
+    /**
+     * For more details about TaxForms, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2525,6 +2794,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       Boolean consentedToPaperlessDelivery;
     }
 
+    /**
+     * For more details about Treasury, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2532,6 +2805,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
+      /**
+       * For more details about TosAcceptance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2557,6 +2834,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
   }
 
+  /**
+   * For more details about TosAcceptance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

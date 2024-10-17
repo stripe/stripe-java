@@ -12,10 +12,8 @@ import lombok.Getter;
 @Getter
 public class SubscriptionResumeParams extends ApiRequestParams {
   /**
-   * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-   * subscription's billing cycle anchor to the current time (in UTC). Setting the value to {@code
-   * unchanged} advances the subscription's billing cycle anchor to the period that surrounds the
-   * current time. For more information, see the billing cycle <a
+   * The billing cycle anchor that applies when the subscription is resumed. Either {@code now} or
+   * {@code unchanged}. The default is {@code now}. For more information, see the billing cycle <a
    * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
    */
   @SerializedName("billing_cycle_anchor")
@@ -91,10 +89,8 @@ public class SubscriptionResumeParams extends ApiRequestParams {
     }
 
     /**
-     * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-     * subscription's billing cycle anchor to the current time (in UTC). Setting the value to {@code
-     * unchanged} advances the subscription's billing cycle anchor to the period that surrounds the
-     * current time. For more information, see the billing cycle <a
+     * The billing cycle anchor that applies when the subscription is resumed. Either {@code now} or
+     * {@code unchanged}. The default is {@code now}. For more information, see the billing cycle <a
      * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
      */
     public Builder setBillingCycleAnchor(

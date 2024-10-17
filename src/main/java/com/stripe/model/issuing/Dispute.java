@@ -410,6 +410,10 @@ public class Dispute extends ApiResource
     return getResponseGetter().request(request, Dispute.class);
   }
 
+  /**
+   * For more details about Evidence, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -448,6 +452,10 @@ public class Dispute extends ApiResource
     @SerializedName("service_not_as_described")
     ServiceNotAsDescribed serviceNotAsDescribed;
 
+    /**
+     * For more details about Canceled, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -528,6 +536,10 @@ public class Dispute extends ApiResource
       }
     }
 
+    /**
+     * For more details about Duplicate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -656,6 +668,10 @@ public class Dispute extends ApiResource
       }
     }
 
+    /**
+     * For more details about Fraudulent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -696,6 +712,10 @@ public class Dispute extends ApiResource
       }
     }
 
+    /**
+     * For more details about MerchandiseNotAsDescribed, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -756,6 +776,10 @@ public class Dispute extends ApiResource
       }
     }
 
+    /**
+     * For more details about NoValidAuthorization, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -796,6 +820,10 @@ public class Dispute extends ApiResource
       }
     }
 
+    /**
+     * For more details about NotReceived, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -852,6 +880,10 @@ public class Dispute extends ApiResource
       }
     }
 
+    /**
+     * For more details about Other, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -904,6 +936,10 @@ public class Dispute extends ApiResource
       }
     }
 
+    /**
+     * For more details about ServiceNotAsDescribed, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -957,6 +993,10 @@ public class Dispute extends ApiResource
     }
   }
 
+  /**
+   * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

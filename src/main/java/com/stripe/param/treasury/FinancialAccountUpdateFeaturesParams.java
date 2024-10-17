@@ -460,6 +460,10 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
 
     @Getter
     public static class Aba {
+      /** Requested bank partner. */
+      @SerializedName("bank")
+      Bank bank;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -473,7 +477,8 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
       @SerializedName("requested")
       Boolean requested;
 
-      private Aba(Map<String, Object> extraParams, Boolean requested) {
+      private Aba(Bank bank, Map<String, Object> extraParams, Boolean requested) {
+        this.bank = bank;
         this.extraParams = extraParams;
         this.requested = requested;
       }
@@ -483,6 +488,8 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Bank bank;
+
         private Map<String, Object> extraParams;
 
         private Boolean requested;
@@ -490,7 +497,14 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public FinancialAccountUpdateFeaturesParams.FinancialAddresses.Aba build() {
           return new FinancialAccountUpdateFeaturesParams.FinancialAddresses.Aba(
-              this.extraParams, this.requested);
+              this.bank, this.extraParams, this.requested);
+        }
+
+        /** Requested bank partner. */
+        public Builder setBank(
+            FinancialAccountUpdateFeaturesParams.FinancialAddresses.Aba.Bank bank) {
+          this.bank = bank;
+          return this;
         }
 
         /**
@@ -525,6 +539,24 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
         public Builder setRequested(Boolean requested) {
           this.requested = requested;
           return this;
+        }
+      }
+
+      public enum Bank implements ApiRequestParams.EnumParam {
+        @SerializedName("evolve")
+        EVOLVE("evolve"),
+
+        @SerializedName("fifth_third")
+        FIFTH_THIRD("fifth_third"),
+
+        @SerializedName("goldman_sachs")
+        GOLDMAN_SACHS("goldman_sachs");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Bank(String value) {
+          this.value = value;
         }
       }
     }

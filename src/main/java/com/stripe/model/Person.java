@@ -274,6 +274,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     return getResponseGetter().request(request, Person.class);
   }
 
+  /**
+   * For more details about AdditionalTosAcceptances, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -282,6 +286,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @SerializedName("account")
     Account account;
 
+    /**
+     * For more details about Account, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -302,6 +310,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     }
   }
 
+  /**
+   * For more details about AddressKana, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -338,6 +350,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     String town;
   }
 
+  /**
+   * For more details about AddressKanji, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -374,6 +390,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     String town;
   }
 
+  /**
+   * For more details about Dob, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -391,6 +411,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     Long year;
   }
 
+  /**
+   * For more details about FutureRequirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -446,6 +470,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -462,6 +490,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       List<String> originalFieldsDue;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -544,6 +576,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     }
   }
 
+  /**
+   * For more details about Relationship, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -590,6 +626,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     String title;
   }
 
+  /**
+   * For more details about Requirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -641,6 +681,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -657,6 +701,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       List<String> originalFieldsDue;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -739,6 +787,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     }
   }
 
+  /**
+   * For more details about Verification, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -777,6 +829,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @SerializedName("status")
     String status;
 
+    /**
+     * For more details about AdditionalDocument, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -857,6 +913,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       }
     }
 
+    /**
+     * For more details about Document, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

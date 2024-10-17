@@ -1276,6 +1276,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return getResponseGetter().request(request, Subscription.class);
   }
 
+  /**
+   * For more details about AutomaticTax, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1292,6 +1296,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("liability")
     Liability liability;
 
+    /**
+     * For more details about Liability, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1330,6 +1338,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     }
   }
 
+  /**
+   * For more details about BillingCycleAnchorConfig, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1355,6 +1367,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long second;
   }
 
+  /**
+   * For more details about BillingThresholds, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1373,6 +1389,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Boolean resetBillingCycleAnchor;
   }
 
+  /**
+   * For more details about CancellationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1405,6 +1425,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     String reason;
   }
 
+  /**
+   * For more details about InvoiceSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1463,6 +1487,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
               : null;
     }
 
+    /**
+     * For more details about Issuer, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1501,6 +1529,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     }
   }
 
+  /**
+   * For more details about LastPriceMigrationError, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1521,6 +1553,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about FailedTransition, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1555,6 +1591,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long resumesAt;
   }
 
+  /**
+   * For more details about PaymentSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1582,6 +1622,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("save_default_payment_method")
     String saveDefaultPaymentMethod;
 
+    /**
+     * For more details about PaymentMethodOptions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1635,6 +1679,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @SerializedName("us_bank_account")
       UsBankAccount usBankAccount;
 
+      /**
+       * For more details about AcssDebit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1650,6 +1698,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @SerializedName("verification_method")
         String verificationMethod;
 
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1664,6 +1716,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         }
       }
 
+      /**
+       * For more details about Bancontact, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1678,6 +1734,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         String preferredLanguage;
       }
 
+      /**
+       * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1707,6 +1767,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @SerializedName("request_three_d_secure")
         String requestThreeDSecure;
 
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1732,6 +1796,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         }
       }
 
+      /**
+       * For more details about CustomerBalance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1748,6 +1816,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @SerializedName("funding_type")
         String fundingType;
 
+        /**
+         * For more details about BankTransfer, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1763,6 +1835,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("type")
           String type;
 
+          /**
+           * For more details about EuBankTransfer, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1779,16 +1855,28 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         }
       }
 
+      /**
+       * For more details about Konbini, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
 
+      /**
+       * For more details about SepaDebit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit extends StripeObject {}
 
+      /**
+       * For more details about UsBankAccount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1804,6 +1892,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @SerializedName("verification_method")
         String verificationMethod;
 
+        /**
+         * For more details about FinancialConnections, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1822,6 +1914,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("prefetch")
           List<String> prefetch;
 
+          /**
+           * For more details about Filters, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1842,6 +1938,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     }
   }
 
+  /**
+   * For more details about PendingInvoiceItemInterval, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1963,6 +2063,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     }
   }
 
+  /**
+   * For more details about TransferData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

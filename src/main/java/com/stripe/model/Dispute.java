@@ -396,6 +396,10 @@ public class Dispute extends ApiResource
     return getResponseGetter().request(request, Dispute.class);
   }
 
+  /**
+   * For more details about Evidence, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -765,6 +769,10 @@ public class Dispute extends ApiResource
           new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about EnhancedEvidence, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -772,6 +780,10 @@ public class Dispute extends ApiResource
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
+      /**
+       * For more details about VisaCompellingEvidence3, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -788,6 +800,10 @@ public class Dispute extends ApiResource
         List<Dispute.Evidence.EnhancedEvidence.VisaCompellingEvidence3.PriorUndisputedTransaction>
             priorUndisputedTransactions;
 
+        /**
+         * For more details about DisputedTransaction, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -839,6 +855,10 @@ public class Dispute extends ApiResource
           @SerializedName("shipping_address")
           ShippingAddress shippingAddress;
 
+          /**
+           * For more details about ShippingAddress, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -872,6 +892,10 @@ public class Dispute extends ApiResource
           }
         }
 
+        /**
+         * For more details about PriorUndisputedTransaction, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -919,6 +943,10 @@ public class Dispute extends ApiResource
           @SerializedName("shipping_address")
           ShippingAddress shippingAddress;
 
+          /**
+           * For more details about ShippingAddress, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -955,6 +983,10 @@ public class Dispute extends ApiResource
     }
   }
 
+  /**
+   * For more details about EvidenceDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -989,6 +1021,10 @@ public class Dispute extends ApiResource
     @SerializedName("submission_count")
     Long submissionCount;
 
+    /**
+     * For more details about EnhancedEligibility, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -996,6 +1032,10 @@ public class Dispute extends ApiResource
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
+      /**
+       * For more details about VisaCompellingEvidence3, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1018,6 +1058,10 @@ public class Dispute extends ApiResource
     }
   }
 
+  /**
+   * For more details about PaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1042,6 +1086,10 @@ public class Dispute extends ApiResource
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1055,6 +1103,10 @@ public class Dispute extends ApiResource
       String disputeType;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1085,6 +1137,10 @@ public class Dispute extends ApiResource
       String networkReasonCode;
     }
 
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1094,6 +1150,10 @@ public class Dispute extends ApiResource
       String reasonCode;
     }
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

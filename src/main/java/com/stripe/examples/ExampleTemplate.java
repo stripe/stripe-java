@@ -1,17 +1,27 @@
 package com.stripe.examples;
 
 /**
- * To create a new example, clone this file and implement your example.
+ * This is a template for defining new examples. It is not intended to be used directly.
  *
- * <p>To run from VS Code: 1. make sure the recommended extensions are installed 2. right click on
- * your new file in the Explorer 3. click Run Java or Debug Java 4. witness greatness.
+ * <p>describe what this example does
+ *
+ * <p>In this example, we:
+ *
+ * <ul>
+ *   <li>key step 1
+ *   <li>key step 2
+ *   <li>...
+ * </ul>
+ *
+ * <p>describe assumptions about the user's stripe account, environment, or configuration; or things
+ * to watch out for when running
  */
-public class NewExample {
+public class ExampleTemplate {
 
   @SuppressWarnings("unused")
   private String apiKey;
 
-  public NewExample(String apiKey) {
+  public ExampleTemplate(String apiKey) {
     this.apiKey = apiKey;
   }
 
@@ -30,7 +40,7 @@ public class NewExample {
   public static void main(String[] args) {
     String apiKey = "{{API_KEY}}";
 
-    NewExample example = new NewExample(apiKey);
+    ExampleTemplate example = new ExampleTemplate(apiKey);
     example.doSomethingGreat();
   }
 }
