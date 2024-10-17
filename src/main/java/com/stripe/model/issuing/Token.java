@@ -221,6 +221,10 @@ public class Token extends ApiResource implements HasId {
     return getResponseGetter().request(request, Token.class);
   }
 
+  /**
+   * For more details about NetworkData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -246,6 +250,10 @@ public class Token extends ApiResource implements HasId {
     @SerializedName("wallet_provider")
     WalletProvider walletProvider;
 
+    /**
+     * For more details about Device, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -282,6 +290,10 @@ public class Token extends ApiResource implements HasId {
       String type;
     }
 
+    /**
+     * For more details about Mastercard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -306,6 +318,10 @@ public class Token extends ApiResource implements HasId {
       String tokenRequestorName;
     }
 
+    /**
+     * For more details about Visa, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -331,6 +347,10 @@ public class Token extends ApiResource implements HasId {
       String tokenRiskScore;
     }
 
+    /**
+     * For more details about WalletProvider, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -388,6 +408,10 @@ public class Token extends ApiResource implements HasId {
       @SerializedName("suggested_decision_version")
       String suggestedDecisionVersion;
 
+      /**
+       * For more details about CardholderAddress, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

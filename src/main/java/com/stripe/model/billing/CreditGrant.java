@@ -392,6 +392,10 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     return getResponseGetter().request(request, CreditGrant.class);
   }
 
+  /**
+   * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -408,6 +412,10 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Monetary, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -426,6 +434,10 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     }
   }
 
+  /**
+   * For more details about ApplicabilityConfig, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -433,6 +445,10 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     @SerializedName("scope")
     Scope scope;
 
+    /**
+     * For more details about Scope, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

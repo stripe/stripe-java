@@ -260,6 +260,10 @@ public class SetupAttempt extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, SetupAttemptCollection.class);
   }
 
+  /**
+   * For more details about PaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -332,26 +336,46 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /**
+     * For more details about AcssDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {}
 
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {}
 
+    /**
+     * For more details about AuBecsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AuBecsDebit extends StripeObject {}
 
+    /**
+     * For more details about BacsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {}
 
+    /**
+     * For more details about Bancontact, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -445,11 +469,19 @@ public class SetupAttempt extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Boleto extends StripeObject {}
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -540,6 +572,10 @@ public class SetupAttempt extends ApiResource implements HasId {
       @SerializedName("wallet")
       Wallet wallet;
 
+      /**
+       * For more details about Checks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -566,6 +602,10 @@ public class SetupAttempt extends ApiResource implements HasId {
         String cvcCheck;
       }
 
+      /**
+       * For more details about ThreeDSecure, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -623,6 +663,10 @@ public class SetupAttempt extends ApiResource implements HasId {
         String version;
       }
 
+      /**
+       * For more details about Wallet, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -641,11 +685,19 @@ public class SetupAttempt extends ApiResource implements HasId {
         @SerializedName("type")
         String type;
 
+        /**
+         * For more details about ApplePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class ApplePay extends StripeObject {}
 
+        /**
+         * For more details about GooglePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -653,6 +705,10 @@ public class SetupAttempt extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about CardPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -686,6 +742,10 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about Offline, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -704,11 +764,19 @@ public class SetupAttempt extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cashapp extends StripeObject {}
 
+    /**
+     * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -803,46 +871,82 @@ public class SetupAttempt extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about KakaoPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class KakaoPay extends StripeObject {}
 
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {}
 
+    /**
+     * For more details about KrCard, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class KrCard extends StripeObject {}
 
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {}
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paypal extends StripeObject {}
 
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Payto extends StripeObject {}
 
+    /**
+     * For more details about RevolutPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {}
 
+    /**
+     * For more details about SepaDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit extends StripeObject {}
 
+    /**
+     * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -936,6 +1040,10 @@ public class SetupAttempt extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

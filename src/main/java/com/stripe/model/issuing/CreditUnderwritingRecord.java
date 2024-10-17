@@ -410,6 +410,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
   }
 
+  /**
+   * For more details about Application, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -435,6 +439,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     Long submittedAt;
   }
 
+  /**
+   * For more details about CreditUser, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -448,6 +456,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     String name;
   }
 
+  /**
+   * For more details about Decision, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -478,6 +490,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about ApplicationRejected, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -493,6 +509,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
       List<String> reasons;
     }
 
+    /**
+     * For more details about CreditLimitApproved, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -513,6 +533,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
       String currency;
     }
 
+    /**
+     * For more details about CreditLimitDecreased, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -545,6 +569,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
       List<String> reasons;
     }
 
+    /**
+     * For more details about CreditLineClosed, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -562,6 +590,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about UnderwritingException, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

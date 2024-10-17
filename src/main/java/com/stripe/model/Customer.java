@@ -851,6 +851,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     return getResponseGetter().request(request, Customer.class);
   }
 
+  /**
+   * For more details about InvoiceSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -895,6 +899,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about CustomField, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -908,6 +916,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       String value;
     }
 
+    /**
+     * For more details about RenderingOptions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -926,6 +938,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     }
   }
 
+  /**
+   * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -948,6 +964,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("location")
     Location location;
 
+    /**
+     * For more details about Location, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

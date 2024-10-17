@@ -45,6 +45,10 @@ public class MeterErrorReport extends StripeObject implements HasId {
   @SerializedName("validation_start")
   Long validationStart;
 
+  /**
+   * For more details about Reason, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -57,6 +61,10 @@ public class MeterErrorReport extends StripeObject implements HasId {
     @SerializedName("error_types")
     List<MeterErrorReport.Reason.ErrorType> errorTypes;
 
+    /**
+     * For more details about ErrorType, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -64,6 +72,10 @@ public class MeterErrorReport extends StripeObject implements HasId {
       @SerializedName("sample_errors")
       List<MeterErrorReport.Reason.ErrorType.SampleError> sampleErrors;
 
+      /**
+       * For more details about SampleError, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -75,6 +87,10 @@ public class MeterErrorReport extends StripeObject implements HasId {
         @SerializedName("error_message")
         String errorMessage;
 
+        /**
+         * For more details about ApiRequest, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -92,6 +108,10 @@ public class MeterErrorReport extends StripeObject implements HasId {
     }
   }
 
+  /**
+   * For more details about RelatedObject, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

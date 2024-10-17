@@ -269,6 +269,10 @@ public class Review extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Review.class);
   }
 
+  /**
+   * For more details about IpAddressLocation, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -294,6 +298,10 @@ public class Review extends ApiResource implements HasId {
     String region;
   }
 
+  /**
+   * For more details about Session, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

@@ -700,6 +700,10 @@ public class VerificationSession extends ApiResource
     String reason;
   }
 
+  /**
+   * For more details about Options, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -716,6 +720,10 @@ public class VerificationSession extends ApiResource
     @SerializedName("phone")
     Phone phone;
 
+    /**
+     * For more details about Document, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -753,6 +761,10 @@ public class VerificationSession extends ApiResource
       Boolean requireMatchingSelfie;
     }
 
+    /**
+     * For more details about Email, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -762,11 +774,19 @@ public class VerificationSession extends ApiResource
       Boolean requireVerification;
     }
 
+    /**
+     * For more details about IdNumber, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class IdNumber extends StripeObject {}
 
+    /**
+     * For more details about Phone, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -777,6 +797,10 @@ public class VerificationSession extends ApiResource
     }
   }
 
+  /**
+   * For more details about ProvidedDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -790,6 +814,10 @@ public class VerificationSession extends ApiResource
     String phone;
   }
 
+  /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -803,6 +831,10 @@ public class VerificationSession extends ApiResource
     String status;
   }
 
+  /**
+   * For more details about VerifiedOutputs, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

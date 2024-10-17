@@ -477,6 +477,10 @@ public class SubscriptionItem extends ApiResource
     return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
   }
 
+  /**
+   * For more details about BillingThresholds, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -486,6 +490,10 @@ public class SubscriptionItem extends ApiResource
     Long usageGte;
   }
 
+  /**
+   * For more details about Trial, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

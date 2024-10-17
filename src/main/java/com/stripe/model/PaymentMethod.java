@@ -662,6 +662,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PaymentMethod.class);
   }
 
+  /**
+   * For more details about AcssDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -690,31 +694,55 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String transitNumber;
   }
 
+  /**
+   * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Affirm extends StripeObject {}
 
+  /**
+   * For more details about AfterpayClearpay, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AfterpayClearpay extends StripeObject {}
 
+  /**
+   * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Alipay extends StripeObject {}
 
+  /**
+   * For more details about Alma, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Alma extends StripeObject {}
 
+  /**
+   * For more details about AmazonPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmazonPay extends StripeObject {}
 
+  /**
+   * For more details about AuBecsDebit, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -735,6 +763,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String last4;
   }
 
+  /**
+   * For more details about BacsDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -755,11 +787,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String sortCode;
   }
 
+  /**
+   * For more details about Bancontact, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Bancontact extends StripeObject {}
 
+  /**
+   * For more details about BillingDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -781,11 +821,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String phone;
   }
 
+  /**
+   * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Blik extends StripeObject {}
 
+  /**
+   * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -795,6 +843,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String taxId;
   }
 
+  /**
+   * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -894,6 +946,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("wallet")
     Wallet wallet;
 
+    /**
+     * For more details about Checks, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -920,6 +976,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       String cvcCheck;
     }
 
+    /**
+     * For more details about GeneratedFrom, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -957,6 +1017,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about PaymentMethodDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -971,6 +1035,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("type")
         String type;
 
+        /**
+         * For more details about CardPresent, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1142,6 +1210,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("wallet")
           Wallet wallet;
 
+          /**
+           * For more details about Offline, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1159,6 +1231,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             String type;
           }
 
+          /**
+           * For more details about Receipt, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1211,6 +1287,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             String transactionStatusInformation;
           }
 
+          /**
+           * For more details about Wallet, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1226,6 +1306,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about Networks, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1243,6 +1327,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       String preferred;
     }
 
+    /**
+     * For more details about ThreeDSecureUsage, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1252,6 +1340,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       Boolean supported;
     }
 
+    /**
+     * For more details about Wallet, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1290,26 +1382,46 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("visa_checkout")
       VisaCheckout visaCheckout;
 
+      /**
+       * For more details about AmexExpressCheckout, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class AmexExpressCheckout extends StripeObject {}
 
+      /**
+       * For more details about ApplePay, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ApplePay extends StripeObject {}
 
+      /**
+       * For more details about GooglePay, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class GooglePay extends StripeObject {}
 
+      /**
+       * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Link extends StripeObject {}
 
+      /**
+       * For more details about Masterpass, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1343,11 +1455,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         Address shippingAddress;
       }
 
+      /**
+       * For more details about SamsungPay, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SamsungPay extends StripeObject {}
 
+      /**
+       * For more details about VisaCheckout, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1383,6 +1503,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about CardPresent, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1494,6 +1618,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("wallet")
     Wallet wallet;
 
+    /**
+     * For more details about Networks, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1507,6 +1635,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       String preferred;
     }
 
+    /**
+     * For more details about Offline, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1524,6 +1656,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       String type;
     }
 
+    /**
+     * For more details about Wallet, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1537,6 +1673,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1550,11 +1690,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String cashtag;
   }
 
+  /**
+   * For more details about CustomerBalance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerBalance extends StripeObject {}
 
+  /**
+   * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1577,6 +1725,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String bank;
   }
 
+  /**
+   * For more details about Fpx, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1597,16 +1749,28 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String bank;
   }
 
+  /**
+   * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Giropay extends StripeObject {}
 
+  /**
+   * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Grabpay extends StripeObject {}
 
+  /**
+   * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1632,6 +1796,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String bic;
   }
 
+  /**
+   * For more details about InteracPresent, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1726,6 +1894,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("read_method")
     String readMethod;
 
+    /**
+     * For more details about Networks, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1740,11 +1912,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about KakaoPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class KakaoPay extends StripeObject {}
 
+  /**
+   * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1753,6 +1933,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("dob")
     Dob dob;
 
+    /**
+     * For more details about Dob, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1771,11 +1955,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about Konbini, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Konbini extends StripeObject {}
 
+  /**
+   * For more details about KrCard, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1797,6 +1989,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String last4;
   }
 
+  /**
+   * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1811,21 +2007,37 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String persistentToken;
   }
 
+  /**
+   * For more details about MbWay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class MbWay extends StripeObject {}
 
+  /**
+   * For more details about Mobilepay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Mobilepay extends StripeObject {}
 
+  /**
+   * For more details about Multibanco, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Multibanco extends StripeObject {}
 
+  /**
+   * For more details about NaverPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1839,11 +2051,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String funding;
   }
 
+  /**
+   * For more details about Oxxo, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Oxxo extends StripeObject {}
 
+  /**
+   * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1863,16 +2083,28 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String bank;
   }
 
+  /**
+   * For more details about Payco, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Payco extends StripeObject {}
 
+  /**
+   * For more details about Paynow, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Paynow extends StripeObject {}
 
+  /**
+   * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1903,6 +2135,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String verifiedEmail;
   }
 
+  /**
+   * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1920,11 +2156,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String payId;
   }
 
+  /**
+   * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Pix extends StripeObject {}
 
+  /**
+   * For more details about Promptpay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1947,6 +2191,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String session;
   }
 
+  /**
+   * For more details about Rechnung, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1954,6 +2202,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("dob")
     Dob dob;
 
+    /**
+     * For more details about Dob, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1972,16 +2224,28 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about RevolutPay, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class RevolutPay extends StripeObject {}
 
+  /**
+   * For more details about SamsungPay, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SamsungPay extends StripeObject {}
 
+  /**
+   * For more details about SepaDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2013,6 +2277,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("last4")
     String last4;
 
+    /**
+     * For more details about GeneratedFrom, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2068,6 +2336,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2077,16 +2349,28 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String country;
   }
 
+  /**
+   * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Swish extends StripeObject {}
 
+  /**
+   * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Twint extends StripeObject {}
 
+  /**
+   * For more details about UsBankAccount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2142,6 +2426,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("status_details")
     StatusDetails statusDetails;
 
+    /**
+     * For more details about Networks, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2155,6 +2443,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       List<String> supported;
     }
 
+    /**
+     * For more details about StatusDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2162,6 +2454,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("blocked")
       Blocked blocked;
 
+      /**
+       * For more details about Blocked, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2188,11 +2484,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about WechatPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class WechatPay extends StripeObject {}
 
+  /**
+   * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

@@ -108,6 +108,10 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @SerializedName("unit_amount_excluding_tax")
   BigDecimal unitAmountExcludingTax;
 
+  /**
+   * For more details about DiscountAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -141,6 +145,10 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     }
   }
 
+  /**
+   * For more details about PretaxCreditAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -210,6 +218,10 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     }
   }
 
+  /**
+   * For more details about TaxAmount, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

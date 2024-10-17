@@ -627,6 +627,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     return getResponseGetter().request(request, Order.class);
   }
 
+  /**
+   * For more details about AutomaticTax, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -644,6 +648,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     String status;
   }
 
+  /**
+   * For more details about BillingDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -665,6 +673,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     String phone;
   }
 
+  /**
+   * For more details about Credit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -689,6 +701,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about GiftCard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -699,6 +715,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     }
   }
 
+  /**
+   * For more details about Payment, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -743,6 +763,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about Settings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -799,6 +823,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       @SerializedName("transfer_data")
       TransferData transferData;
 
+      /**
+       * For more details about AutomaticPaymentMethods, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -811,6 +839,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         Boolean enabled;
       }
 
+      /**
+       * For more details about PaymentMethodOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -860,6 +892,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         @SerializedName("wechat_pay")
         WechatPay wechatPay;
 
+        /**
+         * For more details about AcssDebit, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -900,6 +936,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           @SerializedName("verification_method")
           String verificationMethod;
 
+          /**
+           * For more details about MandateOptions, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -933,6 +973,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           }
         }
 
+        /**
+         * For more details about AfterpayClearpay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -980,6 +1024,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about Alipay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1010,6 +1058,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about Bancontact, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1049,6 +1101,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about Card, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1087,6 +1143,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about CustomerBalance, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1128,6 +1188,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           @SerializedName("setup_future_usage")
           String setupFutureUsage;
 
+          /**
+           * For more details about BankTransfer, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1156,6 +1220,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             @SerializedName("type")
             String type;
 
+            /**
+             * For more details about EuBankTransfer, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
             @Getter
             @Setter
             @EqualsAndHashCode(callSuper = false)
@@ -1173,6 +1241,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           }
         }
 
+        /**
+         * For more details about Ideal, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1203,6 +1275,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about Klarna, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1245,6 +1321,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about Link, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1288,6 +1368,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about Oxxo, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1326,6 +1410,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+         * Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1356,6 +1444,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about Paypal, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1426,6 +1518,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           @SerializedName("subsellers")
           List<String> subsellers;
 
+          /**
+           * For more details about LineItem, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -1472,6 +1568,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             @SerializedName("unit_amount")
             Long unitAmount;
 
+            /**
+             * For more details about Tax, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
             @Getter
             @Setter
             @EqualsAndHashCode(callSuper = false)
@@ -1494,6 +1594,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           }
         }
 
+        /**
+         * For more details about SepaDebit, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1526,12 +1630,20 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           @SerializedName("setup_future_usage")
           String setupFutureUsage;
 
+          /**
+           * For more details about MandateOptions, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class MandateOptions extends StripeObject {}
         }
 
+        /**
+         * For more details about Sofort, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1571,6 +1683,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
         }
 
+        /**
+         * For more details about WechatPay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1614,6 +1730,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         }
       }
 
+      /**
+       * For more details about TransferData, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1654,6 +1774,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     }
   }
 
+  /**
+   * For more details about ShippingCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1699,6 +1823,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1738,6 +1866,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     }
   }
 
+  /**
+   * For more details about ShippingDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1755,6 +1887,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     String phone;
   }
 
+  /**
+   * For more details about TaxDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1770,6 +1906,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     @SerializedName("tax_ids")
     List<Order.TaxDetails.TaxId> taxIds;
 
+    /**
+     * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1801,6 +1941,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     }
   }
 
+  /**
+   * For more details about TotalDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1823,6 +1967,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     @SerializedName("breakdown")
     Breakdown breakdown;
 
+    /**
+     * For more details about Breakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1835,6 +1983,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       @SerializedName("taxes")
       List<Order.TotalDetails.Breakdown.Tax> taxes;
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1857,6 +2009,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         com.stripe.model.Discount discount;
       }
 
+      /**
+       * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

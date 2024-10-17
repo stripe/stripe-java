@@ -309,6 +309,10 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PromotionCode.class);
   }
 
+  /**
+   * For more details about Restrictions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -339,6 +343,10 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("minimum_amount_currency")
     String minimumAmountCurrency;
 
+    /**
+     * For more details about CurrencyOption, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

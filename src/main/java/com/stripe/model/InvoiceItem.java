@@ -557,6 +557,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     return getResponseGetter().request(request, InvoiceItem.class);
   }
 
+  /**
+   * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

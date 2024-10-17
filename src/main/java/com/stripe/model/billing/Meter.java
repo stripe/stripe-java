@@ -369,6 +369,10 @@ public class Meter extends ApiResource implements HasId {
     return getResponseGetter().request(request, Meter.class);
   }
 
+  /**
+   * For more details about CustomerMapping, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -386,6 +390,10 @@ public class Meter extends ApiResource implements HasId {
     String type;
   }
 
+  /**
+   * For more details about DefaultAggregation, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -399,6 +407,10 @@ public class Meter extends ApiResource implements HasId {
     String formula;
   }
 
+  /**
+   * For more details about StatusTransitions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -408,6 +420,10 @@ public class Meter extends ApiResource implements HasId {
     Long deactivatedAt;
   }
 
+  /**
+   * For more details about ValueSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

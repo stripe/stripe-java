@@ -121,6 +121,10 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     String url;
   }
 
+  /**
+   * For more details about Reason, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -137,6 +141,10 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Request, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

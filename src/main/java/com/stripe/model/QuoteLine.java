@@ -98,6 +98,10 @@ public class QuoteLine extends StripeObject implements HasId {
   @SerializedName("trial_settings")
   TrialSettings trialSettings;
 
+  /**
+   * For more details about Action, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -148,6 +152,10 @@ public class QuoteLine extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about AddDiscount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -238,6 +246,10 @@ public class QuoteLine extends StripeObject implements HasId {
             new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about DiscountEnd, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -252,6 +264,10 @@ public class QuoteLine extends StripeObject implements HasId {
       }
     }
 
+    /**
+     * For more details about AddItem, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -310,6 +326,10 @@ public class QuoteLine extends StripeObject implements HasId {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -393,6 +413,10 @@ public class QuoteLine extends StripeObject implements HasId {
               new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
         }
 
+        /**
+         * For more details about DiscountEnd, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -411,6 +435,10 @@ public class QuoteLine extends StripeObject implements HasId {
         }
       }
 
+      /**
+       * For more details about Trial, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -432,6 +460,10 @@ public class QuoteLine extends StripeObject implements HasId {
       }
     }
 
+    /**
+     * For more details about RemoveDiscount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -515,6 +547,10 @@ public class QuoteLine extends StripeObject implements HasId {
             new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about DiscountEnd, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -533,6 +569,10 @@ public class QuoteLine extends StripeObject implements HasId {
       }
     }
 
+    /**
+     * For more details about RemoveItem, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -562,6 +602,10 @@ public class QuoteLine extends StripeObject implements HasId {
       }
     }
 
+    /**
+     * For more details about SetDiscount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -645,6 +689,10 @@ public class QuoteLine extends StripeObject implements HasId {
             new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about DiscountEnd, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -663,6 +711,10 @@ public class QuoteLine extends StripeObject implements HasId {
       }
     }
 
+    /**
+     * For more details about SetItem, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -721,6 +773,10 @@ public class QuoteLine extends StripeObject implements HasId {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -804,6 +860,10 @@ public class QuoteLine extends StripeObject implements HasId {
               new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
         }
 
+        /**
+         * For more details about DiscountEnd, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -822,6 +882,10 @@ public class QuoteLine extends StripeObject implements HasId {
         }
       }
 
+      /**
+       * For more details about Trial, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -844,6 +908,10 @@ public class QuoteLine extends StripeObject implements HasId {
     }
   }
 
+  /**
+   * For more details about AppliesTo, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -899,6 +967,10 @@ public class QuoteLine extends StripeObject implements HasId {
     Boolean prorate;
   }
 
+  /**
+   * For more details about EndsAt, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -935,6 +1007,10 @@ public class QuoteLine extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about DiscountEnd, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -944,6 +1020,10 @@ public class QuoteLine extends StripeObject implements HasId {
       String discount;
     }
 
+    /**
+     * For more details about Duration, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1005,6 +1085,10 @@ public class QuoteLine extends StripeObject implements HasId {
     }
   }
 
+  /**
+   * For more details about StartsAt, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1041,6 +1125,10 @@ public class QuoteLine extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about DiscountEnd, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1050,6 +1138,10 @@ public class QuoteLine extends StripeObject implements HasId {
       String discount;
     }
 
+    /**
+     * For more details about LineEndsAt, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
