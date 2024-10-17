@@ -888,6 +888,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String afterpayClearpayPayments;
 
     /**
+     * The status of the Alma capability of the account, or whether the account can directly process
+     * Alma payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("alma_payments")
+    String almaPayments;
+
+    /**
      * The status of the AmazonPay capability of the account, or whether the account can directly
      * process AmazonPay payments.
      *

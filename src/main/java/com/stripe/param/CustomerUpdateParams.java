@@ -1832,6 +1832,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     public enum ValidateLocation implements ApiRequestParams.EnumParam {
+      @SerializedName("auto")
+      AUTO("auto"),
+
       @SerializedName("deferred")
       DEFERRED("deferred"),
 
