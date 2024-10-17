@@ -235,6 +235,10 @@ public class Calculation extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
+  /**
+   * For more details about CustomerDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -267,6 +271,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("taxability_override")
     String taxabilityOverride;
 
+    /**
+     * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -302,6 +310,10 @@ public class Calculation extends ApiResource implements HasId {
       String state;
     }
 
+    /**
+     * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -332,6 +344,10 @@ public class Calculation extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about ShipFromDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -339,6 +355,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("address")
     Address address;
 
+    /**
+     * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -375,6 +395,10 @@ public class Calculation extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about ShippingCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -420,6 +444,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("tax_code")
     String taxCode;
 
+    /**
+     * For more details about TaxBreakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -470,6 +498,10 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("taxable_amount")
       Long taxableAmount;
 
+      /**
+       * For more details about Jurisdiction, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -502,6 +534,10 @@ public class Calculation extends ApiResource implements HasId {
         String state;
       }
 
+      /**
+       * For more details about TaxRateDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -533,6 +569,10 @@ public class Calculation extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about TaxBreakdown, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -571,6 +611,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

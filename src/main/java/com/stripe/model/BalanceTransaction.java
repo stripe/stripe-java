@@ -288,6 +288,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, BalanceTransaction.class);
   }
 
+  /**
+   * For more details about FeeDetail, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

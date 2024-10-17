@@ -138,6 +138,10 @@ public class Capability extends ApiResource implements HasId {
     return getResponseGetter().request(request, Capability.class);
   }
 
+  /**
+   * For more details about FutureRequirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -212,6 +216,10 @@ public class Capability extends ApiResource implements HasId {
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -228,6 +236,10 @@ public class Capability extends ApiResource implements HasId {
       List<String> originalFieldsDue;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -310,6 +322,10 @@ public class Capability extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Requirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -382,6 +398,10 @@ public class Capability extends ApiResource implements HasId {
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -398,6 +418,10 @@ public class Capability extends ApiResource implements HasId {
       List<String> originalFieldsDue;
     }
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

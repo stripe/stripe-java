@@ -392,6 +392,10 @@ public class Dispute extends ApiResource
     return getResponseGetter().request(request, Dispute.class);
   }
 
+  /**
+   * For more details about Evidence, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -759,6 +763,10 @@ public class Dispute extends ApiResource
     }
   }
 
+  /**
+   * For more details about EvidenceDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -791,6 +799,10 @@ public class Dispute extends ApiResource
     Long submissionCount;
   }
 
+  /**
+   * For more details about PaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -815,6 +827,10 @@ public class Dispute extends ApiResource
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -828,6 +844,10 @@ public class Dispute extends ApiResource
       String disputeType;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -858,6 +878,10 @@ public class Dispute extends ApiResource
       String networkReasonCode;
     }
 
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -867,6 +891,10 @@ public class Dispute extends ApiResource
       String reasonCode;
     }
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

@@ -104,6 +104,10 @@ public class CreditBalanceSummary extends ApiResource {
     return getGlobalResponseGetter().request(request, CreditBalanceSummary.class);
   }
 
+  /**
+   * For more details about Balance, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -114,6 +118,10 @@ public class CreditBalanceSummary extends ApiResource {
     @SerializedName("ledger_balance")
     LedgerBalance ledgerBalance;
 
+    /**
+     * For more details about AvailableBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -130,6 +138,10 @@ public class CreditBalanceSummary extends ApiResource {
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about Monetary, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -148,6 +160,10 @@ public class CreditBalanceSummary extends ApiResource {
       }
     }
 
+    /**
+     * For more details about LedgerBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -164,6 +180,10 @@ public class CreditBalanceSummary extends ApiResource {
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about Monetary, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

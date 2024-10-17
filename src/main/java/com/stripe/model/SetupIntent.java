@@ -818,6 +818,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     return getResponseGetter().request(request, SetupIntent.class);
   }
 
+  /**
+   * For more details about AutomaticPaymentMethods, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -841,6 +845,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     Boolean enabled;
   }
 
+  /**
+   * For more details about NextAction, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -870,6 +878,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("verify_with_microdeposits")
     VerifyWithMicrodeposits verifyWithMicrodeposits;
 
+    /**
+     * For more details about CashappHandleRedirectOrDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -888,6 +900,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("qr_code")
       QrCode qrCode;
 
+      /**
+       * For more details about QrCode, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -906,6 +922,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       }
     }
 
+    /**
+     * For more details about RedirectToUrl, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -922,6 +942,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       String url;
     }
 
+    /**
+     * For more details about VerifyWithMicrodeposits, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -948,6 +972,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     }
   }
 
+  /**
+   * For more details about PaymentMethodConfigurationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -962,6 +990,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     String parent;
   }
 
+  /**
+   * For more details about PaymentMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -993,6 +1025,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /**
+     * For more details about AcssDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1016,6 +1052,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("verification_method")
       String verificationMethod;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1053,11 +1093,19 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       }
     }
 
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {}
 
+    /**
+     * For more details about BacsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1065,12 +1113,20 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions extends StripeObject {}
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1102,6 +1158,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1173,11 +1233,19 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       }
     }
 
+    /**
+     * For more details about CardPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {}
 
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1188,6 +1256,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       String persistentToken;
     }
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1200,6 +1272,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       String billingAgreementId;
     }
 
+    /**
+     * For more details about SepaDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1207,12 +1283,20 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions extends StripeObject {}
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1231,6 +1315,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("verification_method")
       String verificationMethod;
 
+      /**
+       * For more details about FinancialConnections, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1256,6 +1344,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("return_url")
         String returnUrl;
 
+        /**
+         * For more details about Filters, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1269,6 +1361,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         }
       }
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

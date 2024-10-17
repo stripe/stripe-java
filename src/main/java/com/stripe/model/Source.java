@@ -476,6 +476,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     return getResponseGetter().request(request, Source.class);
   }
 
+  /**
+   * For more details about AchCreditTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -505,6 +509,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String swiftCode;
   }
 
+  /**
+   * For more details about AchDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -528,6 +536,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String type;
   }
 
+  /**
+   * For more details about AcssDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -563,6 +575,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String routingNumber;
   }
 
+  /**
+   * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -577,6 +593,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String statementDescriptor;
   }
 
+  /**
+   * For more details about AuBecsDebit, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -591,6 +611,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String last4;
   }
 
+  /**
+   * For more details about Bancontact, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -614,6 +638,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String statementDescriptor;
   }
 
+  /**
+   * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -670,6 +698,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String tokenizationMethod;
   }
 
+  /**
+   * For more details about CardPresent, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -753,6 +785,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String transactionStatusInformation;
   }
 
+  /**
+   * For more details about CodeVerification, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -773,6 +809,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String status;
   }
 
+  /**
+   * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -784,6 +824,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String statementDescriptor;
   }
 
+  /**
+   * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -801,6 +845,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String statementDescriptor;
   }
 
+  /**
+   * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -818,6 +866,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String statementDescriptor;
   }
 
+  /**
+   * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -901,6 +953,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String shippingLastName;
   }
 
+  /**
+   * For more details about Multibanco, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -936,6 +992,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String refundIban;
   }
 
+  /**
+   * For more details about Owner, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -989,6 +1049,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String verifiedPhone;
   }
 
+  /**
+   * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -997,6 +1061,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String reference;
   }
 
+  /**
+   * For more details about Receiver, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1044,6 +1112,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String refundAttributesStatus;
   }
 
+  /**
+   * For more details about Redirect, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1078,6 +1150,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String url;
   }
 
+  /**
+   * For more details about SepaCreditTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1116,6 +1192,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String refundIban;
   }
 
+  /**
+   * For more details about SepaDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1142,6 +1222,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String mandateUrl;
   }
 
+  /**
+   * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1168,6 +1252,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String statementDescriptor;
   }
 
+  /**
+   * For more details about SourceOrder, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1198,6 +1286,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("shipping")
     ShippingDetails shipping;
 
+    /**
+     * For more details about Item, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1234,6 +1326,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     }
   }
 
+  /**
+   * For more details about ThreeDSecure, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1299,6 +1395,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String tokenizationMethod;
   }
 
+  /**
+   * For more details about Wechat, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

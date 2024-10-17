@@ -141,6 +141,10 @@ public class Settings extends ApiResource {
     return getGlobalResponseGetter().request(request, Settings.class);
   }
 
+  /**
+   * For more details about Defaults, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -165,6 +169,10 @@ public class Settings extends ApiResource {
     String taxCode;
   }
 
+  /**
+   * For more details about HeadOffice, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -173,6 +181,10 @@ public class Settings extends ApiResource {
     Address address;
   }
 
+  /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -183,11 +195,19 @@ public class Settings extends ApiResource {
     @SerializedName("pending")
     Pending pending;
 
+    /**
+     * For more details about Active, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Active extends StripeObject {}
 
+    /**
+     * For more details about Pending, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

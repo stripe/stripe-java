@@ -100,6 +100,10 @@ public class MeterEventAdjustment extends ApiResource {
     return getGlobalResponseGetter().request(request, MeterEventAdjustment.class);
   }
 
+  /**
+   * For more details about Cancel, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

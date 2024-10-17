@@ -270,6 +270,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     return getResponseGetter().request(request, Configuration.class);
   }
 
+  /**
+   * For more details about BusinessProfile, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -287,6 +291,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     String termsOfServiceUrl;
   }
 
+  /**
+   * For more details about Features, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -306,6 +314,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     @SerializedName("subscription_update")
     SubscriptionUpdate subscriptionUpdate;
 
+    /**
+     * For more details about CustomerUpdate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -321,6 +333,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       Boolean enabled;
     }
 
+    /**
+     * For more details about InvoiceHistory, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -330,6 +346,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       Boolean enabled;
     }
 
+    /**
+     * For more details about PaymentMethodUpdate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -339,6 +359,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       Boolean enabled;
     }
 
+    /**
+     * For more details about SubscriptionCancel, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -367,6 +391,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @SerializedName("proration_behavior")
       String prorationBehavior;
 
+      /**
+       * For more details about CancellationReason, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -381,6 +409,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       }
     }
 
+    /**
+     * For more details about SubscriptionUpdate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -410,6 +442,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @SerializedName("proration_behavior")
       String prorationBehavior;
 
+      /**
+       * For more details about Product, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -425,6 +461,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     }
   }
 
+  /**
+   * For more details about LoginPage, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

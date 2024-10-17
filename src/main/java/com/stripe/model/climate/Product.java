@@ -144,6 +144,10 @@ public class Product extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Product.class);
   }
 
+  /**
+   * For more details about CurrentPricesPerMetricTon, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
