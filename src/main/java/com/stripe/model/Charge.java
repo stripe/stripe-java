@@ -921,6 +921,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     return getResponseGetter().request(request, Charge.class);
   }
 
+  /**
+   * For more details about BillingDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -942,6 +946,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     String phone;
   }
 
+  /**
+   * For more details about FraudDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -958,6 +966,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     String userReport;
   }
 
+  /**
+   * For more details about Level3, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -980,6 +992,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("shipping_from_zip")
     String shippingFromZip;
 
+    /**
+     * For more details about LineItem, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1004,6 +1020,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
   }
 
+  /**
+   * For more details about Outcome, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1088,6 +1108,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       this.rule = new ExpandableField<Rule>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about Rule, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1107,6 +1131,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
   }
 
+  /**
+   * For more details about PaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1255,6 +1283,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("zip")
     Zip zip;
 
+    /**
+     * For more details about AchCreditTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1276,6 +1308,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String swiftCode;
     }
 
+    /**
+     * For more details about AchDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1313,6 +1349,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String routingNumber;
     }
 
+    /**
+     * For more details about AcssDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1345,6 +1385,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String transitNumber;
     }
 
+    /**
+     * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1354,6 +1398,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String transactionId;
     }
 
+    /**
+     * For more details about AfterpayClearpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1367,6 +1415,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String reference;
     }
 
+    /**
+     * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1390,11 +1442,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String transactionId;
     }
 
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {}
 
+    /**
+     * For more details about AuBecsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1419,6 +1479,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String mandate;
     }
 
+    /**
+     * For more details about BacsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1443,6 +1507,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String sortCode;
     }
 
+    /**
+     * For more details about Bancontact, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1533,6 +1601,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1542,6 +1614,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String buyerId;
     }
 
+    /**
+     * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1554,6 +1630,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String taxId;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1695,6 +1775,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("wallet")
       Wallet wallet;
 
+      /**
+       * For more details about Checks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1721,6 +1805,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String cvcCheck;
       }
 
+      /**
+       * For more details about ExtendedAuthorization, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1735,6 +1823,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String status;
       }
 
+      /**
+       * For more details about IncrementalAuthorization, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1748,6 +1840,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String status;
       }
 
+      /**
+       * For more details about Installments, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1756,6 +1852,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("plan")
         Plan plan;
 
+        /**
+         * For more details about Plan, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1780,6 +1880,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         }
       }
 
+      /**
+       * For more details about Multicapture, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1793,6 +1897,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String status;
       }
 
+      /**
+       * For more details about NetworkToken, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1805,6 +1913,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         Boolean used;
       }
 
+      /**
+       * For more details about Overcapture, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1822,6 +1934,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String status;
       }
 
+      /**
+       * For more details about ThreeDSecure, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1894,6 +2010,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String version;
       }
 
+      /**
+       * For more details about Wallet, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1932,26 +2052,46 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("visa_checkout")
         VisaCheckout visaCheckout;
 
+        /**
+         * For more details about AmexExpressCheckout, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class AmexExpressCheckout extends StripeObject {}
 
+        /**
+         * For more details about ApplePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class ApplePay extends StripeObject {}
 
+        /**
+         * For more details about GooglePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class GooglePay extends StripeObject {}
 
+        /**
+         * For more details about Link, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Link extends StripeObject {}
 
+        /**
+         * For more details about Masterpass, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1987,11 +2127,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
           com.stripe.model.Address shippingAddress;
         }
 
+        /**
+         * For more details about SamsungPay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class SamsungPay extends StripeObject {}
 
+        /**
+         * For more details about VisaCheckout, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2029,6 +2177,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about CardPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2198,6 +2350,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("wallet")
       Wallet wallet;
 
+      /**
+       * For more details about Offline, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2215,6 +2371,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String type;
       }
 
+      /**
+       * For more details about Receipt, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2266,6 +2426,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String transactionStatusInformation;
       }
 
+      /**
+       * For more details about Wallet, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2279,6 +2443,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2292,11 +2460,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String cashtag;
     }
 
+    /**
+     * For more details about CustomerBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance extends StripeObject {}
 
+    /**
+     * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2327,6 +2503,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String verifiedName;
     }
 
+    /**
+     * For more details about Fpx, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2351,6 +2531,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String transactionId;
     }
 
+    /**
+     * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2376,6 +2560,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String verifiedName;
     }
 
+    /**
+     * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2385,6 +2573,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String transactionId;
     }
 
+    /**
+     * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2476,6 +2668,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about InteracPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2605,6 +2801,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("receipt")
       Receipt receipt;
 
+      /**
+       * For more details about Receipt, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2657,6 +2857,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2686,6 +2890,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("preferred_locale")
       String preferredLocale;
 
+      /**
+       * For more details about PayerDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2694,6 +2902,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("address")
         com.stripe.model.Charge.PaymentMethodDetails.Klarna.PayerDetails.Address address;
 
+        /**
+         * For more details about Address, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2705,6 +2917,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Konbini, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2716,6 +2932,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("store")
       Store store;
 
+      /**
+       * For more details about Store, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2730,6 +2950,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2742,6 +2966,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String country;
     }
 
+    /**
+     * For more details about Mobilepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2750,6 +2978,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("card")
       Card card;
 
+      /**
+       * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2776,6 +3008,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Multibanco, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2789,6 +3025,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String reference;
     }
 
+    /**
+     * For more details about Oxxo, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2798,6 +3038,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String number;
     }
 
+    /**
+     * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2828,6 +3072,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String verifiedName;
     }
 
+    /**
+     * For more details about Paynow, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2837,6 +3085,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String reference;
     }
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2870,6 +3122,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transaction_id")
       String transactionId;
 
+      /**
+       * For more details about SellerProtection, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2888,6 +3144,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2897,6 +3157,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String bankTransactionId;
     }
 
+    /**
+     * For more details about Promptpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2906,11 +3170,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String reference;
     }
 
+    /**
+     * For more details about RevolutPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {}
 
+    /**
+     * For more details about SepaCreditTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2928,6 +3200,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String iban;
     }
 
+    /**
+     * For more details about SepaDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2965,6 +3241,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String mandate;
     }
 
+    /**
+     * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3060,11 +3340,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about StripeAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeAccount extends StripeObject {}
 
+    /**
+     * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3085,11 +3373,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String verifiedPhoneLast4;
     }
 
+    /**
+     * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Twint extends StripeObject {}
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3158,11 +3454,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       }
     }
 
+    /**
+     * For more details about Wechat, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Wechat extends StripeObject {}
 
+    /**
+     * For more details about WechatPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3179,6 +3483,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String transactionId;
     }
 
+    /**
+     * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3202,6 +3510,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     String session;
   }
 
+  /**
+   * For more details about TransferData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

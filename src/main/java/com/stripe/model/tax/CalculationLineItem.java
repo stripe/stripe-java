@@ -82,6 +82,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
   @SerializedName("tax_code")
   String taxCode;
 
+  /**
+   * For more details about TaxBreakdown, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -132,6 +136,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
+    /**
+     * For more details about Jurisdiction, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -164,6 +172,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
       String state;
     }
 
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

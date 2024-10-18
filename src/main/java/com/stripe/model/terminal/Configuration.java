@@ -247,6 +247,10 @@ public class Configuration extends ApiResource implements HasId {
     return getResponseGetter().request(request, Configuration.class);
   }
 
+  /**
+   * For more details about BbposWiseposE, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -276,6 +280,10 @@ public class Configuration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Offline, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -288,6 +296,10 @@ public class Configuration extends ApiResource implements HasId {
     Boolean enabled;
   }
 
+  /**
+   * For more details about RebootWindow, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -304,6 +316,10 @@ public class Configuration extends ApiResource implements HasId {
     Long startHour;
   }
 
+  /**
+   * For more details about StripeS700, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -333,6 +349,10 @@ public class Configuration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Tipping, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -379,6 +399,10 @@ public class Configuration extends ApiResource implements HasId {
     @SerializedName("usd")
     Usd usd;
 
+    /**
+     * For more details about Aud, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -399,6 +423,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Cad, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -419,6 +447,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Chf, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -439,6 +471,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Czk, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -459,6 +495,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Dkk, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -479,6 +519,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Eur, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -499,6 +543,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Gbp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -519,6 +567,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Hkd, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -539,6 +591,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Myr, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -559,6 +615,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Nok, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -579,6 +639,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Nzd, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -599,6 +663,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Sek, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -619,6 +687,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Sgd, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -639,6 +711,10 @@ public class Configuration extends ApiResource implements HasId {
       Long smartTipThreshold;
     }
 
+    /**
+     * For more details about Usd, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -660,6 +736,10 @@ public class Configuration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about VerifoneP400, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

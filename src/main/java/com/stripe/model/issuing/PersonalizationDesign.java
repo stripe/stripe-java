@@ -320,6 +320,10 @@ public class PersonalizationDesign extends ApiResource
     return getResponseGetter().request(request, PersonalizationDesign.class);
   }
 
+  /**
+   * For more details about CarrierText, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -341,6 +345,10 @@ public class PersonalizationDesign extends ApiResource
     String headerTitle;
   }
 
+  /**
+   * For more details about Preferences, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -361,6 +369,10 @@ public class PersonalizationDesign extends ApiResource
     Boolean isPlatformDefault;
   }
 
+  /**
+   * For more details about RejectionReasons, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

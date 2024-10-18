@@ -71,6 +71,10 @@ public class LineItem extends StripeObject implements HasId {
   @SerializedName("taxes")
   List<LineItem.Tax> taxes;
 
+  /**
+   * For more details about Discount, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -92,6 +96,10 @@ public class LineItem extends StripeObject implements HasId {
     com.stripe.model.Discount discount;
   }
 
+  /**
+   * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

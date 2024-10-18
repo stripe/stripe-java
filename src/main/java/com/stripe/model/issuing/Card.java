@@ -406,6 +406,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     return getResponseGetter().request(request, Card.class);
   }
 
+  /**
+   * For more details about Shipping, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -490,6 +494,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about AddressValidation, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -517,6 +525,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       String result;
     }
 
+    /**
+     * For more details about Customs, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -532,6 +544,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
   }
 
+  /**
+   * For more details about SpendingControls, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -586,6 +602,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("spending_limits_currency")
     String spendingLimitsCurrency;
 
+    /**
+     * For more details about SpendingLimit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -616,6 +636,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
   }
 
+  /**
+   * For more details about Wallets, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -630,6 +654,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("primary_account_identifier")
     String primaryAccountIdentifier;
 
+    /**
+     * For more details about ApplePay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -648,6 +676,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       String ineligibleReason;
     }
 
+    /**
+     * For more details about GooglePay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

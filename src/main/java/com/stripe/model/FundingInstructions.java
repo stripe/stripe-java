@@ -53,6 +53,10 @@ public class FundingInstructions extends StripeObject {
   @SerializedName("object")
   String object;
 
+  /**
+   * For more details about BankTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

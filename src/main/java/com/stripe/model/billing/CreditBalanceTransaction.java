@@ -195,6 +195,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, CreditBalanceTransaction.class);
   }
 
+  /**
+   * For more details about Credit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -210,6 +214,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -226,6 +234,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about Monetary, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -245,6 +257,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Debit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -267,6 +283,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -283,6 +303,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about Monetary, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -301,6 +325,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about CreditsApplied, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

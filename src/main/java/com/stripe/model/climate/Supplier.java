@@ -134,6 +134,10 @@ public class Supplier extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Supplier.class);
   }
 
+  /**
+   * For more details about Location, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

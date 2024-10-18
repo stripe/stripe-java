@@ -171,6 +171,10 @@ public class Session extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
+  /**
+   * For more details about Flow, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -199,6 +203,10 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about AfterCompletion, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -219,6 +227,10 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about HostedConfirmation, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -228,6 +240,10 @@ public class Session extends ApiResource implements HasId {
         String customMessage;
       }
 
+      /**
+       * For more details about Redirect, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -238,6 +254,10 @@ public class Session extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about SubscriptionCancel, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -250,6 +270,10 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("subscription")
       String subscription;
 
+      /**
+       * For more details about Retention, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -266,6 +290,10 @@ public class Session extends ApiResource implements HasId {
         @SerializedName("type")
         String type;
 
+        /**
+         * For more details about CouponOffer, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -277,6 +305,10 @@ public class Session extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about SubscriptionUpdate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -286,6 +318,10 @@ public class Session extends ApiResource implements HasId {
       String subscription;
     }
 
+    /**
+     * For more details about SubscriptionUpdateConfirm, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -309,6 +345,10 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("subscription")
       String subscription;
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -322,6 +362,10 @@ public class Session extends ApiResource implements HasId {
         String promotionCode;
       }
 
+      /**
+       * For more details about Item, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

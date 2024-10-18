@@ -555,6 +555,10 @@ public class SubscriptionSchedule extends ApiResource
     return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
+  /**
+   * For more details about CurrentPhase, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -568,6 +572,10 @@ public class SubscriptionSchedule extends ApiResource
     Long startDate;
   }
 
+  /**
+   * For more details about DefaultSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -687,6 +695,10 @@ public class SubscriptionSchedule extends ApiResource
       this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about AutomaticTax, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -703,6 +715,10 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("liability")
       Liability liability;
 
+      /**
+       * For more details about Liability, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -741,6 +757,10 @@ public class SubscriptionSchedule extends ApiResource
       }
     }
 
+    /**
+     * For more details about BillingThresholds, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -760,6 +780,10 @@ public class SubscriptionSchedule extends ApiResource
       Boolean resetBillingCycleAnchor;
     }
 
+    /**
+     * For more details about InvoiceSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -826,6 +850,10 @@ public class SubscriptionSchedule extends ApiResource
                 : null;
       }
 
+      /**
+       * For more details about Issuer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -864,6 +892,10 @@ public class SubscriptionSchedule extends ApiResource
       }
     }
 
+    /**
+     * For more details about TransferData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1164,6 +1196,10 @@ public class SubscriptionSchedule extends ApiResource
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1245,6 +1281,10 @@ public class SubscriptionSchedule extends ApiResource
       }
     }
 
+    /**
+     * For more details about AutomaticTax, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1261,6 +1301,10 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("liability")
       Liability liability;
 
+      /**
+       * For more details about Liability, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1299,6 +1343,10 @@ public class SubscriptionSchedule extends ApiResource
       }
     }
 
+    /**
+     * For more details about BillingThresholds, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1318,6 +1366,10 @@ public class SubscriptionSchedule extends ApiResource
       Boolean resetBillingCycleAnchor;
     }
 
+    /**
+     * For more details about Discount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1398,6 +1450,10 @@ public class SubscriptionSchedule extends ApiResource
       }
     }
 
+    /**
+     * For more details about InvoiceSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1468,6 +1524,10 @@ public class SubscriptionSchedule extends ApiResource
                 : null;
       }
 
+      /**
+       * For more details about Issuer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1592,6 +1652,10 @@ public class SubscriptionSchedule extends ApiResource
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
 
+      /**
+       * For more details about BillingThresholds, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1601,6 +1665,10 @@ public class SubscriptionSchedule extends ApiResource
         Long usageGte;
       }
 
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1682,6 +1750,10 @@ public class SubscriptionSchedule extends ApiResource
       }
     }
 
+    /**
+     * For more details about TransferData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

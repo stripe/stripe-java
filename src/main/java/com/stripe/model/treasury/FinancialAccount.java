@@ -472,6 +472,10 @@ public class FinancialAccount extends ApiResource
     String outboundFlows;
   }
 
+  /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -480,6 +484,10 @@ public class FinancialAccount extends ApiResource
     @SerializedName("closed")
     Closed closed;
 
+    /**
+     * For more details about Closed, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
