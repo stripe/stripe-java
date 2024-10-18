@@ -20,7 +20,6 @@ plugins {
     id "org.ajoberstar.git-publish" version "3.0.1"
 }
 
-
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 group = GROUP
