@@ -20,6 +20,7 @@ plugins {
     id "org.ajoberstar.git-publish" version "3.0.1"
 }
 
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 group = GROUP
@@ -163,4 +164,24 @@ jacoco
 {
     // test code instrumentation for Java 18
     toolVersion = "0.8.8"
+}
+
+
+// Used when developing in vscode-java; some of our examples use
+// com.sun.net.httpserver.  This is safe to do because the JDK
+// team has committed to ensuring jdk.httpserver is exported.
+// See https://openjdk.org/jeps/403, "Exported com.sun APIs"
+import org.gradle.plugins.ide.eclipse.model.AccessRule
+
+apply plugin: 'eclipse'
+
+eclipse {
+    classpath {
+        file {
+            whenMerged {
+                def jre = entries.find { it.path.contains 'org.eclipse.jdt.launching.JRE_CONTAINER' }
+                jre.accessRules.add(new AccessRule('0', 'com/sun/net/httpserver/**'))
+            }
+        }
+    }
 }
