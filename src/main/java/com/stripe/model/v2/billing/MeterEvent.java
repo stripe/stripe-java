@@ -39,7 +39,7 @@ public class MeterEvent extends StripeObject {
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
-   * <p>Equal to {@code billing.meter_event}.
+   * <p>Equal to {@code v2.billing.meter_event}.
    */
   @SerializedName("object")
   String object;
