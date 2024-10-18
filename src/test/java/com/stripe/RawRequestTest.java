@@ -304,7 +304,7 @@ public class RawRequestTest extends BaseStripeTest {
     server.enqueue(
         new MockResponse()
             .setBody(
-                "{\"object\":\"billing.meter_event\",\"created\":\"2024-10-01T04:46:22.861Z\",\"event_name\":\"new_meter\",\"identifier\":\"d8a5ab2e-81ec-4bdf-acbf-48bf346\",\"livemode\":false,\"payload\":{\"stripe_customer_id\":\"cus_QvF3b2W6\",\"value\":\"25\"},\"timestamp\":\"2024-10-01T04:46:22.836Z\"}"));
+                "{\"object\":\"v2.billing.meter_event\",\"created\":\"2024-10-01T04:46:22.861Z\",\"event_name\":\"new_meter\",\"identifier\":\"d8a5ab2e-81ec-4bdf-acbf-48bf346\",\"livemode\":false,\"payload\":{\"stripe_customer_id\":\"cus_QvF3b2W6\",\"value\":\"25\"},\"timestamp\":\"2024-10-01T04:46:22.836Z\"}"));
 
     final RawRequestOptions options = RawRequestOptions.builder().setApiKey("sk_123").build();
     String param =
