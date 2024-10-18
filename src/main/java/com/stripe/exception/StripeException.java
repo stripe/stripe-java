@@ -81,7 +81,10 @@ public abstract class StripeException extends Exception {
    */
   public String getUserMessage() {
     if (this.getStripeError() != null) {
-      return this.getStripeError().getUserMessage();
+     // If userMessage is null, fallback to the regular error message
+     return this.getStripeError().getUserMessage() != null
+     ? this.getStripeError().getUserMessage()
+     : this.getStripeError().getMessage(); // Fallback to message
     }
     return null;
   }
