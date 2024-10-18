@@ -507,6 +507,10 @@ public class Account extends ApiResource implements HasId {
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
 
+  /**
+   * For more details about AccountHolder, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -575,6 +579,10 @@ public class Account extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Balance, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -614,6 +622,10 @@ public class Account extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Cash, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -633,6 +645,10 @@ public class Account extends ApiResource implements HasId {
       Map<String, Long> available;
     }
 
+    /**
+     * For more details about Credit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -652,6 +668,10 @@ public class Account extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about BalanceRefresh, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -679,6 +699,10 @@ public class Account extends ApiResource implements HasId {
     String status;
   }
 
+  /**
+   * For more details about InferredBalancesRefresh, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -706,6 +730,10 @@ public class Account extends ApiResource implements HasId {
     String status;
   }
 
+  /**
+   * For more details about OwnershipRefresh, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -733,6 +761,10 @@ public class Account extends ApiResource implements HasId {
     String status;
   }
 
+  /**
+   * For more details about TransactionRefresh, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

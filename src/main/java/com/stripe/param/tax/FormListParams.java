@@ -215,6 +215,10 @@ public class FormListParams extends ApiRequestParams {
     @SerializedName("account")
     String account;
 
+    /** The external reference to the payee whose forms will be retrieved. */
+    @SerializedName("external_reference")
+    String externalReference;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -224,12 +228,14 @@ public class FormListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Specifies the payee type. Always {@code account}. */
+    /** Specifies the payee type. Either {@code account} or {@code external_reference}. */
     @SerializedName("type")
     Type type;
 
-    private Payee(String account, Map<String, Object> extraParams, Type type) {
+    private Payee(
+        String account, String externalReference, Map<String, Object> extraParams, Type type) {
       this.account = account;
+      this.externalReference = externalReference;
       this.extraParams = extraParams;
       this.type = type;
     }
@@ -241,18 +247,27 @@ public class FormListParams extends ApiRequestParams {
     public static class Builder {
       private String account;
 
+      private String externalReference;
+
       private Map<String, Object> extraParams;
 
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public FormListParams.Payee build() {
-        return new FormListParams.Payee(this.account, this.extraParams, this.type);
+        return new FormListParams.Payee(
+            this.account, this.externalReference, this.extraParams, this.type);
       }
 
       /** The ID of the Stripe account whose forms will be retrieved. */
       public Builder setAccount(String account) {
         this.account = account;
+        return this;
+      }
+
+      /** The external reference to the payee whose forms will be retrieved. */
+      public Builder setExternalReference(String externalReference) {
+        this.externalReference = externalReference;
         return this;
       }
 
@@ -282,7 +297,7 @@ public class FormListParams extends ApiRequestParams {
         return this;
       }
 
-      /** Specifies the payee type. Always {@code account}. */
+      /** Specifies the payee type. Either {@code account} or {@code external_reference}. */
       public Builder setType(FormListParams.Payee.Type type) {
         this.type = type;
         return this;
@@ -291,7 +306,10 @@ public class FormListParams extends ApiRequestParams {
 
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("account")
-      ACCOUNT("account");
+      ACCOUNT("account"),
+
+      @SerializedName("external_reference")
+      EXTERNAL_REFERENCE("external_reference");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -303,6 +321,21 @@ public class FormListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("au_serr")
+    AU_SERR("au_serr"),
+
+    @SerializedName("ca_mrdp")
+    CA_MRDP("ca_mrdp"),
+
+    @SerializedName("eu_dac7")
+    EU_DAC7("eu_dac7"),
+
+    @SerializedName("gb_mrdp")
+    GB_MRDP("gb_mrdp"),
+
+    @SerializedName("nz_mrdp")
+    NZ_MRDP("nz_mrdp"),
+
     @SerializedName("us_1099_k")
     US_1099_K("us_1099_k"),
 

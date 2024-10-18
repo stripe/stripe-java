@@ -491,6 +491,10 @@ public class Card extends ApiResource
     return getResponseGetter().request(request, Card.class);
   }
 
+  /**
+   * For more details about Networks, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

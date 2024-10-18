@@ -192,7 +192,7 @@ public class Authorization extends ApiResource
   /**
    * The current status of the authorization in its lifecycle.
    *
-   * <p>One of {@code closed}, {@code expired}, {@code pending}, or {@code reversed}.
+   * <p>One of {@code closed}, {@code pending}, or {@code reversed}.
    */
   @SerializedName("status")
   String status;
@@ -595,6 +595,10 @@ public class Authorization extends ApiResource
     return getResponseGetter().request(request, Authorization.class);
   }
 
+  /**
+   * For more details about AmountDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -608,6 +612,10 @@ public class Authorization extends ApiResource
     Long cashbackAmount;
   }
 
+  /**
+   * For more details about Fleet, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -645,6 +653,10 @@ public class Authorization extends ApiResource
     @SerializedName("service_type")
     String serviceType;
 
+    /**
+     * For more details about CardholderPromptData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -682,6 +694,10 @@ public class Authorization extends ApiResource
       String vehicleNumber;
     }
 
+    /**
+     * For more details about ReportedBreakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -698,6 +714,10 @@ public class Authorization extends ApiResource
       @SerializedName("tax")
       Tax tax;
 
+      /**
+       * For more details about Fuel, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -710,6 +730,10 @@ public class Authorization extends ApiResource
         BigDecimal grossAmountDecimal;
       }
 
+      /**
+       * For more details about NonFuel, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -721,6 +745,10 @@ public class Authorization extends ApiResource
         BigDecimal grossAmountDecimal;
       }
 
+      /**
+       * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -742,6 +770,10 @@ public class Authorization extends ApiResource
     }
   }
 
+  /**
+   * For more details about Fuel, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -786,6 +818,10 @@ public class Authorization extends ApiResource
     BigDecimal unitCostDecimal;
   }
 
+  /**
+   * For more details about MerchantData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -838,6 +874,10 @@ public class Authorization extends ApiResource
     String url;
   }
 
+  /**
+   * For more details about NetworkData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -864,6 +904,10 @@ public class Authorization extends ApiResource
     String transactionId;
   }
 
+  /**
+   * For more details about PendingRequest, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -920,6 +964,10 @@ public class Authorization extends ApiResource
     @SerializedName("network_risk_score")
     Long networkRiskScore;
 
+    /**
+     * For more details about AmountDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -934,6 +982,10 @@ public class Authorization extends ApiResource
     }
   }
 
+  /**
+   * For more details about RequestHistory, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1035,6 +1087,10 @@ public class Authorization extends ApiResource
     @SerializedName("requested_at")
     Long requestedAt;
 
+    /**
+     * For more details about AmountDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1049,6 +1105,10 @@ public class Authorization extends ApiResource
     }
   }
 
+  /**
+   * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1077,6 +1137,10 @@ public class Authorization extends ApiResource
     String transaction;
   }
 
+  /**
+   * For more details about VerificationData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1127,6 +1191,10 @@ public class Authorization extends ApiResource
     @SerializedName("three_d_secure")
     ThreeDSecure threeDSecure;
 
+    /**
+     * For more details about AuthenticationExemption, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1149,6 +1217,10 @@ public class Authorization extends ApiResource
       String type;
     }
 
+    /**
+     * For more details about ThreeDSecure, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

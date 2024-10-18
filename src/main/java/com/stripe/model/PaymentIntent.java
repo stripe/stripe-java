@@ -1604,6 +1604,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
+  /**
+   * For more details about AmountDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1611,6 +1615,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("tip")
     Tip tip;
 
+    /**
+     * For more details about Tip, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1621,6 +1629,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about AsyncWorkflows, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1628,6 +1640,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("inputs")
     Inputs inputs;
 
+    /**
+     * For more details about Inputs, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1635,6 +1651,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("tax")
       Tax tax;
 
+      /**
+       * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1646,6 +1666,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about AutomaticPaymentMethods, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1669,6 +1693,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     Boolean enabled;
   }
 
+  /**
+   * For more details about NextAction, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1740,6 +1768,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("wechat_pay_redirect_to_ios_app")
     WechatPayRedirectToIosApp wechatPayRedirectToIosApp;
 
+    /**
+     * For more details about AlipayHandleRedirect, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1770,6 +1802,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String url;
     }
 
+    /**
+     * For more details about BoletoDisplayDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1794,6 +1830,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String pdf;
     }
 
+    /**
+     * For more details about CardAwaitNotification, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1813,6 +1853,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       Boolean customerApprovalRequired;
     }
 
+    /**
+     * For more details about CashappHandleRedirectOrDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1831,6 +1875,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("qr_code")
       QrCode qrCode;
 
+      /**
+       * For more details about QrCode, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1849,6 +1897,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about DisplayBankTransferInstructions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2065,6 +2117,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about KonbiniDisplayDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2083,6 +2139,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("stores")
       Stores stores;
 
+      /**
+       * For more details about Stores, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2103,6 +2163,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("seicomart")
         Seicomart seicomart;
 
+        /**
+         * For more details about Familymart, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2116,6 +2180,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String paymentCode;
         }
 
+        /**
+         * For more details about Lawson, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2129,6 +2197,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String paymentCode;
         }
 
+        /**
+         * For more details about Ministop, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2142,6 +2214,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String paymentCode;
         }
 
+        /**
+         * For more details about Seicomart, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2157,6 +2233,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about MultibancoDisplayDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2181,6 +2261,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String reference;
     }
 
+    /**
+     * For more details about OxxoDisplayDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2201,6 +2285,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String number;
     }
 
+    /**
+     * For more details about PaynowDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2228,6 +2316,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String imageUrlSvg;
     }
 
+    /**
+     * For more details about PixDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2259,6 +2351,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String imageUrlSvg;
     }
 
+    /**
+     * For more details about PromptpayDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2286,6 +2382,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String imageUrlSvg;
     }
 
+    /**
+     * For more details about RedirectToUrl, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2302,6 +2402,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String url;
     }
 
+    /**
+     * For more details about SwishHandleRedirectOrDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2322,6 +2426,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("qr_code")
       QrCode qrCode;
 
+      /**
+       * For more details about QrCode, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2343,6 +2451,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about VerifyWithMicrodeposits, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2368,6 +2480,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String microdepositType;
     }
 
+    /**
+     * For more details about WechatPayDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2396,6 +2512,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String imageUrlSvg;
     }
 
+    /**
+     * For more details about WechatPayRedirectToAndroidApp, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2439,6 +2559,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about WechatPayRedirectToIosApp, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2449,6 +2573,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about PaymentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2462,6 +2590,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("subscription")
     Subscription subscription;
 
+    /**
+     * For more details about CarRental, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2545,6 +2677,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("tax_exempt")
       Boolean taxExempt;
 
+      /**
+       * For more details about Affiliate, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2554,6 +2690,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String name;
       }
 
+      /**
+       * For more details about Delivery, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2569,6 +2709,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("recipient")
         Recipient recipient;
 
+        /**
+         * For more details about Recipient, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2587,6 +2731,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         }
       }
 
+      /**
+       * For more details about Driver, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2597,6 +2745,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about EventDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2634,6 +2786,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("starts_at")
       Long startsAt;
 
+      /**
+       * For more details about Affiliate, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2643,6 +2799,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String name;
       }
 
+      /**
+       * For more details about Delivery, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2658,6 +2818,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("recipient")
         Recipient recipient;
 
+        /**
+         * For more details about Recipient, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2677,6 +2841,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about Subscription, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2703,6 +2871,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("starts_at")
       Long startsAt;
 
+      /**
+       * For more details about Affiliate, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2712,6 +2884,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String name;
       }
 
+      /**
+       * For more details about BillingInterval, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2735,6 +2911,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about PaymentMethodConfigurationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2749,6 +2929,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     String parent;
   }
 
+  /**
+   * For more details about PaymentMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -2764,6 +2948,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("alipay")
     Alipay alipay;
+
+    @SerializedName("alma")
+    Alma alma;
 
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
@@ -2803,6 +2990,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("giropay")
     Giropay giropay;
+
+    @SerializedName("gopay")
+    Gopay gopay;
 
     @SerializedName("grabpay")
     Grabpay grabpay;
@@ -2864,6 +3054,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("promptpay")
     Promptpay promptpay;
 
+    @SerializedName("qris")
+    Qris qris;
+
     @SerializedName("rechnung")
     Rechnung rechnung;
 
@@ -2875,6 +3068,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
+
+    @SerializedName("shopeepay")
+    Shopeepay shopeepay;
 
     @SerializedName("sofort")
     Sofort sofort;
@@ -2894,6 +3090,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("zip")
     Zip zip;
 
+    /**
+     * For more details about AcssDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2933,6 +3133,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("verification_method")
       String verificationMethod;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -2966,6 +3170,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3007,6 +3215,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about AfterpayClearpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3052,6 +3264,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3081,6 +3297,27 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Alma, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alma extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3118,6 +3355,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about AuBecsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3147,6 +3388,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about BacsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3178,12 +3423,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions extends StripeObject {}
     }
 
+    /**
+     * For more details about Bancontact, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3221,6 +3474,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3250,6 +3507,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3287,6 +3548,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3437,6 +3702,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("statement_details")
       StatementDetails statementDetails;
 
+      /**
+       * For more details about Installments, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3453,6 +3722,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("plan")
         Plan plan;
 
+        /**
+         * For more details about AvailablePlan, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3476,6 +3749,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String type;
         }
 
+        /**
+         * For more details about Plan, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3500,6 +3777,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         }
       }
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3562,6 +3843,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         List<String> supportedTypes;
       }
 
+      /**
+       * For more details about StatementDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3573,6 +3858,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("phone")
         String phone;
 
+        /**
+         * For more details about Address, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3607,6 +3896,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about CardPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3633,6 +3926,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("routing")
       Routing routing;
 
+      /**
+       * For more details about Routing, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3647,6 +3944,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3684,6 +3985,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about CustomerBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3724,6 +4029,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      /**
+       * For more details about BankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3752,6 +4061,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("type")
         String type;
 
+        /**
+         * For more details about EuBankTransfer, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3768,6 +4081,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3797,6 +4114,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Fpx, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3826,6 +4147,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3855,6 +4180,43 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Gopay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gopay extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    /**
+     * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3884,6 +4246,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3913,11 +4279,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about InteracPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class InteracPresent extends StripeObject {}
 
+    /**
+     * For more details about KakaoPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3955,6 +4329,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3996,6 +4374,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Konbini, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4055,6 +4437,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about KrCard, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4092,6 +4478,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4134,6 +4524,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about MbWay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4163,6 +4557,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Mobilepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4200,6 +4598,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Multibanco, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4229,6 +4631,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about NaverPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4242,6 +4648,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String captureMethod;
     }
 
+    /**
+     * For more details about Oxxo, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4279,6 +4689,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4308,6 +4722,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Payco, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4321,6 +4739,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String captureMethod;
     }
 
+    /**
+     * For more details about Paynow, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4350,6 +4772,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4419,6 +4845,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("subsellers")
       List<String> subsellers;
 
+      /**
+       * For more details about LineItem, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -4463,6 +4893,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("unit_amount")
         Long unitAmount;
 
+        /**
+         * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+         * Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4484,6 +4918,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4515,6 +4953,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -4570,6 +5012,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4607,6 +5053,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Promptpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4636,11 +5086,52 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Qris, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Qris extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    /**
+     * For more details about Rechnung, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Rechnung extends StripeObject {}
 
+    /**
+     * For more details about RevolutPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4678,6 +5169,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about SamsungPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4691,6 +5186,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String captureMethod;
     }
 
+    /**
+     * For more details about SepaDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4722,12 +5221,53 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions extends StripeObject {}
     }
 
+    /**
+     * For more details about Shopeepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Shopeepay extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    /**
+     * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4766,6 +5306,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4799,6 +5343,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4828,6 +5376,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4878,6 +5430,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("verification_method")
       String verificationMethod;
 
+      /**
+       * For more details about FinancialConnections, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -4906,6 +5462,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("return_url")
         String returnUrl;
 
+        /**
+         * For more details about Filters, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4922,6 +5482,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String institution;
         }
 
+        /**
+         * For more details about ManualEntry, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4936,6 +5500,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         }
       }
 
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -4950,6 +5518,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
     }
 
+    /**
+     * For more details about WechatPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4991,6 +5563,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
     }
 
+    /**
+     * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -5021,6 +5597,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about Processing, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -5035,6 +5615,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -5042,6 +5626,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("customer_notification")
       CustomerNotification customerNotification;
 
+      /**
+       * For more details about CustomerNotification, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5061,6 +5649,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
   }
 
+  /**
+   * For more details about TransferData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

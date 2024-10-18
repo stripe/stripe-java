@@ -5136,6 +5136,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("alipay")
     ALIPAY("alipay"),
 
+    @SerializedName("alma")
+    ALMA("alma"),
+
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
 
@@ -5165,6 +5168,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @SerializedName("giropay")
     GIROPAY("giropay"),
+
+    @SerializedName("gopay")
+    GOPAY("gopay"),
 
     @SerializedName("grabpay")
     GRABPAY("grabpay"),
@@ -5211,11 +5217,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
 
+    @SerializedName("qris")
+    QRIS("qris"),
+
     @SerializedName("rechnung")
     RECHNUNG("rechnung"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),

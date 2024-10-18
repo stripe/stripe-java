@@ -339,6 +339,10 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
     return getResponseGetter().request(request, Transaction.class);
   }
 
+  /**
+   * For more details about CreatedBy, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -360,6 +364,10 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Checkout, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -373,6 +381,10 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
       String lineItem;
     }
 
+    /**
+     * For more details about Order, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -386,6 +398,10 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
       String order;
     }
 
+    /**
+     * For more details about Payment, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

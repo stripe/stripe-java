@@ -120,6 +120,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
+  /**
+   * For more details about AdjustedForOverdraft, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -182,6 +186,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
     }
   }
 
+  /**
+   * For more details about AppliedToPayment, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -215,6 +223,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
     }
   }
 
+  /**
+   * For more details about Funded, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -222,6 +234,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
     @SerializedName("bank_transfer")
     BankTransfer bankTransfer;
 
+    /**
+     * For more details about BankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -253,6 +269,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
       @SerializedName("us_bank_transfer")
       UsBankTransfer usBankTransfer;
 
+      /**
+       * For more details about EuBankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -270,6 +290,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
         String senderName;
       }
 
+      /**
+       * For more details about GbBankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -287,6 +311,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
         String sortCode;
       }
 
+      /**
+       * For more details about JpBankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -304,6 +332,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
         String senderName;
       }
 
+      /**
+       * For more details about UsBankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -323,6 +355,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
     }
   }
 
+  /**
+   * For more details about RefundedFromPayment, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -355,6 +391,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
     }
   }
 
+  /**
+   * For more details about TransferredToBalance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -388,6 +428,10 @@ public class CustomerCashBalanceTransaction extends StripeObject
     }
   }
 
+  /**
+   * For more details about UnappliedFromPayment, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

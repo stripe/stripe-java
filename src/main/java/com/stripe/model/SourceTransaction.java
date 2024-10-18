@@ -90,6 +90,10 @@ public class SourceTransaction extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
+  /**
+   * For more details about AchCreditTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -111,6 +115,10 @@ public class SourceTransaction extends StripeObject implements HasId {
     String routingNumber;
   }
 
+  /**
+   * For more details about ChfCreditTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -136,6 +144,10 @@ public class SourceTransaction extends StripeObject implements HasId {
     String senderName;
   }
 
+  /**
+   * For more details about GbpCreditTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -176,6 +188,10 @@ public class SourceTransaction extends StripeObject implements HasId {
     String senderSortCode;
   }
 
+  /**
+   * For more details about PaperCheck, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -192,6 +208,10 @@ public class SourceTransaction extends StripeObject implements HasId {
     String invoices;
   }
 
+  /**
+   * For more details about SepaCreditTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

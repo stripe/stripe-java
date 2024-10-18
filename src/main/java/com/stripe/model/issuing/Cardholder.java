@@ -299,6 +299,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     return getResponseGetter().request(request, Cardholder.class);
   }
 
+  /**
+   * For more details about Billing, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -307,6 +311,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     Address address;
   }
 
+  /**
+   * For more details about Company, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -316,6 +324,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     Boolean taxIdProvided;
   }
 
+  /**
+   * For more details about Individual, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -348,6 +360,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @SerializedName("verification")
     Verification verification;
 
+    /**
+     * For more details about CardIssuing, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -360,6 +376,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @SerializedName("user_terms_acceptance")
       UserTermsAcceptance userTermsAcceptance;
 
+      /**
+       * For more details about UserTermsAcceptance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -381,6 +401,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       }
     }
 
+    /**
+     * For more details about Dob, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -398,6 +422,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       Long year;
     }
 
+    /**
+     * For more details about Verification, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -406,6 +434,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @SerializedName("document")
       Document document;
 
+      /**
+       * For more details about Document, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -469,6 +501,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     }
   }
 
+  /**
+   * For more details about Requirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -490,6 +526,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     List<String> pastDue;
   }
 
+  /**
+   * For more details about SpendingControls, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -537,6 +577,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @SerializedName("spending_limits_currency")
     String spendingLimitsCurrency;
 
+    /**
+     * For more details about SpendingLimit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

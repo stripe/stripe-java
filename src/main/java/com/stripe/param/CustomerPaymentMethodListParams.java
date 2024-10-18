@@ -252,6 +252,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("alipay")
     ALIPAY("alipay"),
 
+    @SerializedName("alma")
+    ALMA("alma"),
+
     @SerializedName("amazon_pay")
     AMAZON_PAY("amazon_pay"),
 
@@ -287,6 +290,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("giropay")
     GIROPAY("giropay"),
+
+    @SerializedName("gopay")
+    GOPAY("gopay"),
 
     @SerializedName("grabpay")
     GRABPAY("grabpay"),
@@ -345,6 +351,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
 
+    @SerializedName("qris")
+    QRIS("qris"),
+
     @SerializedName("rechnung")
     RECHNUNG("rechnung"),
 
@@ -356,6 +365,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),

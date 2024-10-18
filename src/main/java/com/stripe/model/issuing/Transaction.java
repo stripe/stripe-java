@@ -450,6 +450,10 @@ public class Transaction extends ApiResource
     return getResponseGetter().request(request, Transaction.class);
   }
 
+  /**
+   * For more details about AmountDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -463,6 +467,10 @@ public class Transaction extends ApiResource
     Long cashbackAmount;
   }
 
+  /**
+   * For more details about MerchantData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -515,6 +523,10 @@ public class Transaction extends ApiResource
     String url;
   }
 
+  /**
+   * For more details about NetworkData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -545,6 +557,10 @@ public class Transaction extends ApiResource
     String transactionId;
   }
 
+  /**
+   * For more details about PurchaseDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -573,6 +589,10 @@ public class Transaction extends ApiResource
     @SerializedName("reference")
     String reference;
 
+    /**
+     * For more details about Fleet, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -602,6 +622,10 @@ public class Transaction extends ApiResource
       @SerializedName("service_type")
       String serviceType;
 
+      /**
+       * For more details about CardholderPromptData, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -631,6 +655,10 @@ public class Transaction extends ApiResource
         String vehicleNumber;
       }
 
+      /**
+       * For more details about ReportedBreakdown, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -647,6 +675,10 @@ public class Transaction extends ApiResource
         @SerializedName("tax")
         Tax tax;
 
+        /**
+         * For more details about Fuel, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -659,6 +691,10 @@ public class Transaction extends ApiResource
           BigDecimal grossAmountDecimal;
         }
 
+        /**
+         * For more details about NonFuel, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -670,6 +706,10 @@ public class Transaction extends ApiResource
           BigDecimal grossAmountDecimal;
         }
 
+        /**
+         * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+         * Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -691,6 +731,10 @@ public class Transaction extends ApiResource
       }
     }
 
+    /**
+     * For more details about Flight, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -715,6 +759,10 @@ public class Transaction extends ApiResource
       @SerializedName("travel_agency")
       String travelAgency;
 
+      /**
+       * For more details about Segment, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -745,6 +793,10 @@ public class Transaction extends ApiResource
       }
     }
 
+    /**
+     * For more details about Fuel, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -786,6 +838,10 @@ public class Transaction extends ApiResource
       BigDecimal unitCostDecimal;
     }
 
+    /**
+     * For more details about Lodging, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -799,6 +855,10 @@ public class Transaction extends ApiResource
       Long nights;
     }
 
+    /**
+     * For more details about Receipt, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -821,6 +881,10 @@ public class Transaction extends ApiResource
     }
   }
 
+  /**
+   * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

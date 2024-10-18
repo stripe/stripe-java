@@ -135,6 +135,10 @@ public class Mandate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Mandate.class);
   }
 
+  /**
+   * For more details about CustomerAcceptance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -158,11 +162,19 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /**
+     * For more details about Offline, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Offline extends StripeObject {}
 
+    /**
+     * For more details about Online, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -177,11 +189,19 @@ public class Mandate extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about MultiUse, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class MultiUse extends StripeObject {}
 
+  /**
+   * For more details about PaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -236,6 +256,10 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /**
+     * For more details about AcssDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -268,11 +292,19 @@ public class Mandate extends ApiResource implements HasId {
       String transactionType;
     }
 
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {}
 
+    /**
+     * For more details about AuBecsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -285,6 +317,10 @@ public class Mandate extends ApiResource implements HasId {
       String url;
     }
 
+    /**
+     * For more details about BacsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -315,31 +351,55 @@ public class Mandate extends ApiResource implements HasId {
       String url;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {}
 
+    /**
+     * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cashapp extends StripeObject {}
 
+    /**
+     * For more details about KakaoPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class KakaoPay extends StripeObject {}
 
+    /**
+     * For more details about KrCard, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class KrCard extends StripeObject {}
 
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {}
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -370,6 +430,10 @@ public class Mandate extends ApiResource implements HasId {
       String verifiedEmail;
     }
 
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -430,11 +494,19 @@ public class Mandate extends ApiResource implements HasId {
       String startDate;
     }
 
+    /**
+     * For more details about RevolutPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {}
 
+    /**
+     * For more details about SepaDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -451,6 +523,10 @@ public class Mandate extends ApiResource implements HasId {
       String url;
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -465,6 +541,10 @@ public class Mandate extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about SingleUse, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

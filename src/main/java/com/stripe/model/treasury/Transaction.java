@@ -202,6 +202,10 @@ public class Transaction extends ApiResource implements HasId {
     Long outboundPending;
   }
 
+  /**
+   * For more details about FlowDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -316,6 +320,10 @@ public class Transaction extends ApiResource implements HasId {
     String type;
   }
 
+  /**
+   * For more details about StatusTransitions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
