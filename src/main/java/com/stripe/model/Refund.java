@@ -592,6 +592,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("alma")
+    Alma alma;
+
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
@@ -707,6 +710,15 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
+
+    /**
+     * For more details about Alma, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alma extends StripeObject {}
 
     /**
      * For more details about AmazonPay, please refer to the <a

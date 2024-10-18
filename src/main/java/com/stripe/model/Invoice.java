@@ -616,6 +616,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("total_excluding_tax")
   Long totalExcludingTax;
 
+  /**
+   * Contains pretax credit amounts (ex: discount, credit grants, etc) that apply to this invoice.
+   * This is a combined list of total_pretax_credit_amounts across all invoice line items.
+   */
   @SerializedName("total_pretax_credit_amounts")
   List<Invoice.TotalPretaxCreditAmount> totalPretaxCreditAmounts;
 
@@ -2269,7 +2273,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      * cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat},
      * {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code
      * ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat}, {@code kz_bin},
-     * {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code unknown}.
+     * {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code
+     * uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -2949,12 +2954,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Discount> discount;
 
-    /** The margin that was applied to get this pretax credit amount. */
-    @SerializedName("margin")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Margin> margin;
-
     /**
      * Type of the pretax credit amount referenced.
      *
@@ -3001,24 +3000,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
-    }
-
-    /** Get ID of expandable {@code margin} object. */
-    public String getMargin() {
-      return (this.margin != null) ? this.margin.getId() : null;
-    }
-
-    public void setMargin(String id) {
-      this.margin = ApiResource.setExpandableFieldId(id, this.margin);
-    }
-
-    /** Get expanded {@code margin}. */
-    public Margin getMarginObject() {
-      return (this.margin != null) ? this.margin.getExpanded() : null;
-    }
-
-    public void setMarginObject(Margin expandableObject) {
-      this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
   }
 

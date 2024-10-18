@@ -31,7 +31,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
   /**
    * Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending
-   * proration invoice items. Defaults to {@code true}.
+   * proration invoice items. Defaults to {@code false}.
    */
   @SerializedName("invoice_now")
   Boolean invoiceNow;
@@ -138,7 +138,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
     /**
      * Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending
-     * proration invoice items. Defaults to {@code true}.
+     * proration invoice items. Defaults to {@code false}.
      */
     public Builder setInvoiceNow(Boolean invoiceNow) {
       this.invoiceNow = invoiceNow;

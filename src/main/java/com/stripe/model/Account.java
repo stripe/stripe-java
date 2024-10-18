@@ -64,7 +64,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("capabilities")
   Capabilities capabilities;
 
-  /** Whether the account can create live charges. */
+  /** Whether the account can process charges. */
   @SerializedName("charges_enabled")
   Boolean chargesEnabled;
 
@@ -120,6 +120,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("future_requirements")
   FutureRequirements futureRequirements;
 
+  /** The groups associated with the account. */
+  @SerializedName("groups")
+  Groups groups;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -159,7 +163,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("object")
   String object;
 
-  /** Whether Stripe can send payouts to this account. */
+  /** Whether the funds in this account can be paid out. */
   @SerializedName("payouts_enabled")
   Boolean payoutsEnabled;
 
@@ -881,6 +885,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String afterpayClearpayPayments;
 
     /**
+     * The status of the Alma capability of the account, or whether the account can directly process
+     * Alma payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("alma_payments")
+    String almaPayments;
+
+    /**
      * The status of the AmazonPay capability of the account, or whether the account can directly
      * process AmazonPay payments.
      *
@@ -1061,6 +1074,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String jpBankTransferPayments;
 
     /**
+     * The status of the KakaoPay capability of the account, or whether the account can directly
+     * process KakaoPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("kakao_pay_payments")
+    String kakaoPayPayments;
+
+    /**
      * The status of the Klarna payments capability of the account, or whether the account can
      * directly process Klarna charges.
      *
@@ -1077,6 +1099,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("konbini_payments")
     String konbiniPayments;
+
+    /**
+     * The status of the KrCard capability of the account, or whether the account can directly
+     * process KrCard payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("kr_card_payments")
+    String krCardPayments;
 
     /**
      * The status of the legacy payments capability of the account.
@@ -1123,6 +1154,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String mxBankTransferPayments;
 
     /**
+     * The status of the NaverPay capability of the account, or whether the account can directly
+     * process NaverPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("naver_pay_payments")
+    String naverPayPayments;
+
+    /**
      * The status of the OXXO payments capability of the account, or whether the account can
      * directly process OXXO charges.
      *
@@ -1139,6 +1179,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("p24_payments")
     String p24Payments;
+
+    /**
+     * The status of the Payco capability of the account, or whether the account can directly
+     * process Payco payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("payco_payments")
+    String paycoPayments;
 
     /**
      * The status of the paynow payments capability of the account, or whether the account can
@@ -1166,6 +1215,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("revolut_pay_payments")
     String revolutPayPayments;
+
+    /**
+     * The status of the SamsungPay capability of the account, or whether the account can directly
+     * process SamsungPay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("samsung_pay_payments")
+    String samsungPayPayments;
 
     /**
      * The status of the SEPA customer_balance payments (EUR currency) capability of the account, or
@@ -1861,6 +1919,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("requirement")
       String requirement;
     }
+  }
+
+  /**
+   * For more details about Groups, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Groups extends StripeObject {
+    /**
+     * The group the account is in to determine their payments pricing, and null if the account is
+     * on customized pricing. <a href="https://stripe.com/docs/connect/platform-pricing-tools">See
+     * the Platform pricing tool documentation</a> for details.
+     */
+    @SerializedName("payments_pricing")
+    String paymentsPricing;
   }
 
   /**
@@ -2580,6 +2655,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     trySetResponseGetter(controller, responseGetter);
     trySetResponseGetter(externalAccounts, responseGetter);
     trySetResponseGetter(futureRequirements, responseGetter);
+    trySetResponseGetter(groups, responseGetter);
     trySetResponseGetter(individual, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
     trySetResponseGetter(settings, responseGetter);

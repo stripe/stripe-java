@@ -76,13 +76,14 @@ public class StripeError extends StripeObject {
    * payment_method_provider_decline}, {@code payment_method_provider_timeout}, {@code
    * payment_method_unactivated}, {@code payment_method_unexpected_state}, {@code
    * payment_method_unsupported_type}, {@code payout_reconciliation_not_ready}, {@code
-   * payouts_limit_exceeded}, {@code payouts_not_allowed}, {@code platform_account_required}, {@code
-   * platform_api_key_expired}, {@code postal_code_invalid}, {@code processing_error}, {@code
-   * product_inactive}, {@code progressive_onboarding_limit_exceeded}, {@code rate_limit}, {@code
-   * refer_to_customer}, {@code refund_disputed_payment}, {@code resource_already_exists}, {@code
-   * resource_missing}, {@code return_intent_already_processed}, {@code routing_number_invalid},
-   * {@code secret_key_required}, {@code sepa_unsupported_account}, {@code setup_attempt_failed},
-   * {@code setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
+   * payout_statement_descriptor_profanity}, {@code payouts_limit_exceeded}, {@code
+   * payouts_not_allowed}, {@code platform_account_required}, {@code platform_api_key_expired},
+   * {@code postal_code_invalid}, {@code processing_error}, {@code product_inactive}, {@code
+   * progressive_onboarding_limit_exceeded}, {@code rate_limit}, {@code refer_to_customer}, {@code
+   * refund_disputed_payment}, {@code resource_already_exists}, {@code resource_missing}, {@code
+   * return_intent_already_processed}, {@code routing_number_invalid}, {@code secret_key_required},
+   * {@code sepa_unsupported_account}, {@code setup_attempt_failed}, {@code
+   * setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
    * setup_intent_mandate_invalid}, {@code setup_intent_setup_attempt_expired}, {@code
    * setup_intent_unexpected_state}, {@code shipping_address_invalid}, {@code
    * shipping_calculation_failed}, {@code sku_inactive}, {@code state_unsupported}, {@code

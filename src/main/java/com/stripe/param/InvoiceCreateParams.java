@@ -3576,8 +3576,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("ideal")
       IDEAL("ideal"),
 
+      @SerializedName("jp_credit_transfer")
+      JP_CREDIT_TRANSFER("jp_credit_transfer"),
+
+      @SerializedName("kakao_pay")
+      KAKAO_PAY("kakao_pay"),
+
       @SerializedName("konbini")
       KONBINI("konbini"),
+
+      @SerializedName("kr_card")
+      KR_CARD("kr_card"),
 
       @SerializedName("link")
       LINK("link"),
@@ -3585,8 +3594,14 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
 
+      @SerializedName("naver_pay")
+      NAVER_PAY("naver_pay"),
+
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("payco")
+      PAYCO("payco"),
 
       @SerializedName("paynow")
       PAYNOW("paynow"),

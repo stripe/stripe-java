@@ -26,7 +26,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A credit grant is a resource that records a grant of some credit to a customer. */
+/**
+ * A credit grant is an API resource that documents the allocation of some billing credits to a
+ * customer.
+ *
+ * <p>Related guide: <a
+ * href="https://docs.stripe.com/billing/subscriptions/usage-based/billing-credits">Billing
+ * credits</a> end
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -38,7 +45,8 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   ApplicabilityConfig applicabilityConfig;
 
   /**
-   * The category of this credit grant.
+   * The category of this credit grant. This is for tracking purposes and will not be displayed to
+   * the customer.
    *
    * <p>One of {@code paid}, or {@code promotional}.
    */
@@ -49,17 +57,20 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @SerializedName("created")
   Long created;
 
-  /** Id of the customer to whom the credit was granted. */
+  /** ID of the customer to whom the billing credits are granted. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** The time when the credit becomes effective i.e when it is eligible to be used. */
+  /** The time when the billing credits become effective i.e when they are eligible to be used. */
   @SerializedName("effective_at")
   Long effectiveAt;
 
-  /** The time when the credit will expire. If not present, the credit will never expire. */
+  /**
+   * The time when the billing credits will expire. If not present, the billing credits will never
+   * expire.
+   */
   @SerializedName("expires_at")
   Long expiresAt;
 
@@ -84,7 +95,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** A descriptive name shown in dashboard and on invoices. */
+  /** A descriptive name shown in dashboard. */
   @SerializedName("name")
   String name;
 
@@ -394,7 +405,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     Monetary monetary;
 
     /**
-     * The type of this amount. We currently only support {@code monetary} credits.
+     * The type of this amount. We currently only support {@code monetary} billing credits.
      *
      * <p>Equal to {@code monetary}.
      */
@@ -444,7 +455,8 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     public static class Scope extends StripeObject {
       /**
        * The price type to which credit grants can apply to. We currently only support {@code
-       * metered} price type.
+       * metered} price type. This refers to prices that have a <a
+       * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
        *
        * <p>Equal to {@code metered}.
        */

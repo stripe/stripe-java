@@ -143,6 +143,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("pdf")
   String pdf;
 
+  /** The pretax credit amounts (ex: discount, credit grants, etc) for all line items. */
   @SerializedName("pretax_credit_amounts")
   List<CreditNote.PretaxCreditAmount> pretaxCreditAmounts;
 

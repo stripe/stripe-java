@@ -33,21 +33,21 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
   @SerializedName("created")
   Long created;
 
-  /** Credit details for this balance transaction. Only present if type is {@code credit}. */
+  /** Credit details for this credit balance transaction. Only present if type is {@code credit}. */
   @SerializedName("credit")
   Credit credit;
 
-  /** The credit grant associated with this balance transaction. */
+  /** The credit grant associated with this credit balance transaction. */
   @SerializedName("credit_grant")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<CreditGrant> creditGrant;
 
-  /** Debit details for this balance transaction. Only present if type is {@code debit}. */
+  /** Debit details for this credit balance transaction. Only present if type is {@code debit}. */
   @SerializedName("debit")
   Debit debit;
 
-  /** The effective time of this balance transaction. */
+  /** The effective time of this credit balance transaction. */
   @SerializedName("effective_at")
   Long effectiveAt;
 
@@ -78,7 +78,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
   ExpandableField<TestClock> testClock;
 
   /**
-   * The type of balance transaction (credit or debit).
+   * The type of credit balance transaction (credit or debit).
    *
    * <p>One of {@code credit}, or {@code debit}.
    */
@@ -227,7 +227,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       Monetary monetary;
 
       /**
-       * The type of this amount. We currently only support {@code monetary} credits.
+       * The type of this amount. We currently only support {@code monetary} billing credits.
        *
        * <p>Equal to {@code monetary}.
        */
@@ -269,8 +269,8 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     Amount amount;
 
     /**
-     * Details of how the credits were applied to an invoice. Only present if {@code type} is {@code
-     * credits_applied}.
+     * Details of how the billing credits were applied to an invoice. Only present if {@code type}
+     * is {@code credits_applied}.
      */
     @SerializedName("credits_applied")
     CreditsApplied creditsApplied;
@@ -296,7 +296,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       Monetary monetary;
 
       /**
-       * The type of this amount. We currently only support {@code monetary} credits.
+       * The type of this amount. We currently only support {@code monetary} billing credits.
        *
        * <p>Equal to {@code monetary}.
        */
@@ -333,13 +333,13 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CreditsApplied extends StripeObject {
-      /** The invoice to which the credits were applied. */
+      /** The invoice to which the billing credits were applied. */
       @SerializedName("invoice")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
       ExpandableField<Invoice> invoice;
 
-      /** The invoice line item to which the credits were applied. */
+      /** The invoice line item to which the billing credits were applied. */
       @SerializedName("invoice_line_item")
       String invoiceLineItem;
 

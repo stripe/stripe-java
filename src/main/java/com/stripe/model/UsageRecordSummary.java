@@ -6,6 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A usage record summary represents an aggregated view of how much usage was accrued for a
+ * subscription item within a subscription billing period.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -442,6 +442,9 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @SerializedName("proration_behavior")
       String prorationBehavior;
 
+      @SerializedName("schedule_at_period_end")
+      ScheduleAtPeriodEnd scheduleAtPeriodEnd;
+
       /**
        * For more details about Product, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -457,6 +460,39 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
         /** The product ID. */
         @SerializedName("product")
         String product;
+      }
+
+      /**
+       * For more details about ScheduleAtPeriodEnd, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ScheduleAtPeriodEnd extends StripeObject {
+        /**
+         * List of conditions. When any condition is true, an update will be scheduled at the end of
+         * the current period.
+         */
+        @SerializedName("conditions")
+        List<Configuration.Features.SubscriptionUpdate.ScheduleAtPeriodEnd.Condition> conditions;
+
+        /**
+         * For more details about Condition, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Condition extends StripeObject {
+          /**
+           * The type of condition.
+           *
+           * <p>One of {@code decreasing_item_amount}, or {@code shortening_interval}.
+           */
+          @SerializedName("type")
+          String type;
+        }
       }
     }
   }

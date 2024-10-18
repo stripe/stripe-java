@@ -390,6 +390,9 @@ public class Configuration extends ApiResource implements HasId {
     @SerializedName("nzd")
     Nzd nzd;
 
+    @SerializedName("pln")
+    Pln pln;
+
     @SerializedName("sek")
     Sek sek;
 
@@ -647,6 +650,30 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Nzd extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
+     * For more details about Pln, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pln extends StripeObject {
       /** Fixed amounts displayed when collecting a tip. */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;

@@ -68,6 +68,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The pretax credit amounts (ex: discount, credit grants, etc) for this line item. */
   @SerializedName("pretax_credit_amounts")
   List<CreditNoteLineItem.PretaxCreditAmount> pretaxCreditAmounts;
 

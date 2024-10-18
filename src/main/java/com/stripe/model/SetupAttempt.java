@@ -298,8 +298,14 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("ideal")
     Ideal ideal;
 
+    @SerializedName("kakao_pay")
+    KakaoPay kakaoPay;
+
     @SerializedName("klarna")
     Klarna klarna;
+
+    @SerializedName("kr_card")
+    KrCard krCard;
 
     @SerializedName("link")
     Link link;
@@ -863,6 +869,15 @@ public class SetupAttempt extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about KakaoPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KakaoPay extends StripeObject {}
+
+    /**
      * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -870,6 +885,15 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {}
+
+    /**
+     * For more details about KrCard, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KrCard extends StripeObject {}
 
     /**
      * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
