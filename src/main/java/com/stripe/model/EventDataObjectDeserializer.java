@@ -206,15 +206,15 @@ public class EventDataObjectDeserializer {
     }
 
     // If the event api version is from before we started adding
-    // a release train, there's no way its compatible with this
+    // a major release identifier, there's no way its compatible with this
     // version
     if (!this.apiVersion.contains(".")) {
       return false;
     }
 
-    // versions are yyyy-MM-dd.train
-    String eventReleaseTrain = this.apiVersion.split("\\.")[1];
-    String currentReleaseTrain = getIntegrationApiVersion().split("\\.")[1];
+    // versions are yyyy-MM-dd.releaseIdentifier
+    String eventReleaseTrain = this.apiVersion.split("\\.", 2)[1];
+    String currentReleaseTrain = getIntegrationApiVersion().split("\\.", 2)[1];
     return eventReleaseTrain.equals(currentReleaseTrain);
   }
 
