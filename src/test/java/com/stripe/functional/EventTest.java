@@ -68,10 +68,37 @@ public class EventTest extends BaseStripeTest {
   }
 
   @Test
-  public void testGetDataObjectWithDifferentApiVersion() throws StripeException {
+  public void testGetDataObjectWithNewApiVersionInSameReleaseTrain() throws StripeException {
+    String expectedReleaseTrain = Stripe.API_VERSION.split("\\.")[1];
+    final Event event = Event.retrieve(EVENT_ID);
+    // Suppose event has a different API version within the same release train as the
+    // library's pinned version
+    event.setApiVersion("2999-10-10." + expectedReleaseTrain);
+
+    Optional<StripeObject> stripeObject = event.getDataObjectDeserializer().getObject();
+
+    assertTrue(stripeObject.isPresent());
+  }
+
+  @Test
+  public void testGetDataObjectWithLegacyApiVersion() throws StripeException {
     final Event event = Event.retrieve(EVENT_ID);
     // Suppose event has different API version from the library's pinned version
     event.setApiVersion("2017-05-25");
+
+    Optional<StripeObject> stripeObject = event.getDataObjectDeserializer().getObject();
+
+    // See compatibility helper in `EventDataObjectDeserializerTest` for
+    // handling schema incompatibility
+    assertFalse(stripeObject.isPresent());
+  }
+
+  @Test
+  public void testGetDataObjectWithReleaseTrainMismatch() throws StripeException {
+    final Event event = Event.retrieve(EVENT_ID);
+    // Suppose event has different API version and different release train from
+    // the libraries pinned version
+    event.setApiVersion("2999-10-10.the_larch");
 
     Optional<StripeObject> stripeObject = event.getDataObjectDeserializer().getObject();
 
