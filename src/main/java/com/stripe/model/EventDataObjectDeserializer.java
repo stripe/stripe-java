@@ -198,10 +198,17 @@ public class EventDataObjectDeserializer {
 
   private boolean apiVersionMatch() {
 
+    // Preserved for testing; we have tests that hook getIntegrationApiVersion
+    // to test with other api versions.
+    String currentApiVersion = getIntegrationApiVersion();
+    if (!currentApiVersion.contains(".")) {
+      return this.apiVersion.equals(currentApiVersion);
+    }
+
     // If the event api version is from before we started adding
     // a release train, there's no way its compatible with this
     // version
-    if (this.apiVersion.indexOf(".") < 0) {
+    if (!this.apiVersion.contains(".")) {
       return false;
     }
 
