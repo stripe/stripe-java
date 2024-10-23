@@ -198,7 +198,25 @@ public class EventDataObjectDeserializer {
     // Trim the locally configured API version to not include beta headers, since the payload won't
     // have any.
     String localApiVersion = StringUtils.trimApiVersion(Stripe.stripeVersion);
-    return localApiVersion.equals(StringUtils.trimApiVersion(this.apiVersion));
+    String eventApiVersion = StringUtils.trimApiVersion(this.apiVersion);
+
+    // Preserved for testing; we have tests that hook getIntegrationApiVersion
+    // to test with other api versions.
+    if (!localApiVersion.contains(".")) {
+      return eventApiVersion.equals(localApiVersion);
+    }
+
+    // If the event api version is from before we started adding
+    // a major release identifier, there's no way its compatible with this
+    // version
+    if (!eventApiVersion.contains(".")) {
+      return false;
+    }
+
+    // versions are yyyy-MM-dd.releaseIdentifier
+    String eventReleaseTrain = eventApiVersion.split("\\.", 2)[1];
+    String currentReleaseTrain = localApiVersion.split("\\.", 2)[1];
+    return eventReleaseTrain.equals(currentReleaseTrain);
   }
 
   /**

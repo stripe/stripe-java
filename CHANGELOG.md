@@ -49,6 +49,13 @@
   * Remove support for `from_schedule` on `Quote.subscription_data`
   * Add support for `allow_redisplay` on `terminal.ReaderCollectPaymentMethodParams.collect_config`
 
+## 27.1.1 - 2024-10-18
+* [#1901](https://github.com/stripe/stripe-java/pull/1901) update object tags for meter-related classes
+  
+  - fixes a bug where the `object` property of the `MeterEvent`, `MeterEventAdjustment`, and `MeterEventSession` didn't match the server.
+* [#1898](https://github.com/stripe/stripe-java/pull/1898) Clean up examples
+* [#1894](https://github.com/stripe/stripe-java/pull/1894) Fixed example for raw request in readme file
+
 ## 27.1.0 - 2024-10-03
 * [#1890](https://github.com/stripe/stripe-java/pull/1890) Update the class for `ThinEvent` to include `livemode` and `reason`
 * [#1891](https://github.com/stripe/stripe-java/pull/1891) Removed the class `RequestSigningAuthenticator` that was added in the previous release. Request Signing is not supported yet.
