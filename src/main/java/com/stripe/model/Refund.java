@@ -1116,7 +1116,6 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
-    /** Contains the refund details. */
     @SerializedName("display_details")
     DisplayDetails displayDetails;
 
