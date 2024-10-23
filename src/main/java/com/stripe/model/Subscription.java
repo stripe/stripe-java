@@ -1659,6 +1659,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       CustomerBalance customerBalance;
 
       /**
+       * This sub-hash contains details about the Indonesia bank transfer payment method options to
+       * pass to invoices created by the subscription.
+       */
+      @SerializedName("id_bank_transfer")
+      IdBankTransfer idBankTransfer;
+
+      /**
        * This sub-hash contains details about the Konbini payment method options to pass to invoices
        * created by the subscription.
        */
@@ -1854,6 +1861,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           }
         }
       }
+
+      /**
+       * For more details about IdBankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class IdBankTransfer extends StripeObject {}
 
       /**
        * For more details about Konbini, please refer to the <a

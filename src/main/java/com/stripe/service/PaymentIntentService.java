@@ -23,6 +23,7 @@ import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
+import com.stripe.param.PaymentIntentTriggerActionParams;
 import com.stripe.param.PaymentIntentUpdateParams;
 import com.stripe.param.PaymentIntentVerifyMicrodepositsParams;
 
@@ -688,6 +689,27 @@ public final class PaymentIntentService extends ApiService {
     String path =
         String.format(
             "/v1/payment_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentIntent.class);
+  }
+  /** Trigger an external action on a PaymentIntent. */
+  public PaymentIntent triggerAction(String intent, PaymentIntentTriggerActionParams params)
+      throws StripeException {
+    return triggerAction(intent, params, (RequestOptions) null);
+  }
+  /** Trigger an external action on a PaymentIntent. */
+  public PaymentIntent triggerAction(
+      String intent, PaymentIntentTriggerActionParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test/payment_intents/%s/trigger_action", ApiResource.urlEncodeId(intent));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

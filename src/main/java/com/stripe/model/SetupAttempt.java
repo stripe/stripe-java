@@ -295,6 +295,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
+
     @SerializedName("ideal")
     Ideal ideal;
 
@@ -772,6 +775,38 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cashapp extends StripeObject {}
+
+    /**
+     * For more details about IdBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IdBankTransfer extends StripeObject {
+      /**
+       * Bank where the account is located.
+       *
+       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, or {@code permata}.
+       */
+      @SerializedName("bank")
+      String bank;
+
+      /** Local bank code of the bank. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /**
+       * Merchant name and billing details name, for the customer to check for the correct merchant
+       * when performing the bank transfer.
+       */
+      @SerializedName("display_name")
+      String displayName;
+    }
 
     /**
      * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
