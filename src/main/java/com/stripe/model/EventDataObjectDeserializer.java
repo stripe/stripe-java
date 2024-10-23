@@ -197,7 +197,18 @@ public class EventDataObjectDeserializer {
   }
 
   private boolean apiVersionMatch() {
-    return getIntegrationApiVersion().equals(this.apiVersion);
+
+    // If the event api version is from before we started adding
+    // a release train, there's no way its compatible with this
+    // version
+    if (this.apiVersion.indexOf(".") < 0) {
+      return false;
+    }
+
+    // versions are yyyy-MM-dd.train
+    String eventReleaseTrain = this.apiVersion.split("\\.")[1];
+    String currentReleaseTrain = getIntegrationApiVersion().split("\\.")[1];
+    return eventReleaseTrain.equals(currentReleaseTrain);
   }
 
   /** Internal method to allow for testing with different Stripe version. */
