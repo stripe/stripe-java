@@ -1286,6 +1286,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       CustomerBalance customerBalance;
 
       /**
+       * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+       * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("id_bank_transfer")
+      IdBankTransfer idBankTransfer;
+
+      /**
        * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment
        * method options to pass to the invoice’s PaymentIntent.
        */
@@ -1459,6 +1466,15 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
           }
         }
       }
+
+      /**
+       * For more details about IdBankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class IdBankTransfer extends StripeObject {}
 
       /**
        * For more details about Konbini, please refer to the <a

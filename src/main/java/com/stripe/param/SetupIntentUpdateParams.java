@@ -576,6 +576,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Grabpay grabpay;
 
     /**
+     * If this is an {@code IdBankTransfer} PaymentMethod, this hash contains details about the
+     * IdBankTransfer payment method.
+     */
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
+
+    /**
      * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
      * method.
      */
@@ -837,6 +844,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Giropay giropay,
         Gopay gopay,
         Grabpay grabpay,
+        IdBankTransfer idBankTransfer,
         Ideal ideal,
         InteracPresent interacPresent,
         KakaoPay kakaoPay,
@@ -892,6 +900,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.giropay = giropay;
       this.gopay = gopay;
       this.grabpay = grabpay;
+      this.idBankTransfer = idBankTransfer;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.kakaoPay = kakaoPay;
@@ -974,6 +983,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private Gopay gopay;
 
       private Grabpay grabpay;
+
+      private IdBankTransfer idBankTransfer;
 
       private Ideal ideal;
 
@@ -1067,6 +1078,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.giropay,
             this.gopay,
             this.grabpay,
+            this.idBankTransfer,
             this.ideal,
             this.interacPresent,
             this.kakaoPay,
@@ -1314,6 +1326,16 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setGrabpay(SetupIntentUpdateParams.PaymentMethodData.Grabpay grabpay) {
         this.grabpay = grabpay;
+        return this;
+      }
+
+      /**
+       * If this is an {@code IdBankTransfer} PaymentMethod, this hash contains details about the
+       * IdBankTransfer payment method.
+       */
+      public Builder setIdBankTransfer(
+          SetupIntentUpdateParams.PaymentMethodData.IdBankTransfer idBankTransfer) {
+        this.idBankTransfer = idBankTransfer;
         return this;
       }
 
@@ -3399,6 +3421,101 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class IdBankTransfer {
+      /** Bank where the account is held. */
+      @SerializedName("bank")
+      Bank bank;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private IdBankTransfer(Bank bank, Map<String, Object> extraParams) {
+        this.bank = bank;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Bank bank;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.IdBankTransfer build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.IdBankTransfer(
+              this.bank, this.extraParams);
+        }
+
+        /** Bank where the account is held. */
+        public Builder setBank(SetupIntentUpdateParams.PaymentMethodData.IdBankTransfer.Bank bank) {
+          this.bank = bank;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.IdBankTransfer#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.IdBankTransfer#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum Bank implements ApiRequestParams.EnumParam {
+        @SerializedName("bca")
+        BCA("bca"),
+
+        @SerializedName("bni")
+        BNI("bni"),
+
+        @SerializedName("bri")
+        BRI("bri"),
+
+        @SerializedName("cimb")
+        CIMB("cimb"),
+
+        @SerializedName("permata")
+        PERMATA("permata");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Bank(String value) {
+          this.value = value;
         }
       }
     }
@@ -6020,6 +6137,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("grabpay")
       GRABPAY("grabpay"),
+
+      @SerializedName("id_bank_transfer")
+      ID_BANK_TRANSFER("id_bank_transfer"),
 
       @SerializedName("ideal")
       IDEAL("ideal"),

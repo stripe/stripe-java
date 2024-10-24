@@ -218,6 +218,13 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   Grabpay grabpay;
 
   /**
+   * Stripe users in Indonesia can receive bank transfers from customers in Indonesia. Bank
+   * transfers are a popular B2C and B2B payment method in Indonesia.
+   */
+  @SerializedName("id_bank_transfer")
+  IdBankTransfer idBankTransfer;
+
+  /**
    * iDEAL is a Netherlands-based payment method that allows customers to complete transactions
    * online using their bank credentials. All major Dutch banks are members of Currence, the scheme
    * that operates iDEAL, making it the most popular online payment method in the Netherlands with a
@@ -438,6 +445,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
       Giropay giropay,
       GooglePay googlePay,
       Grabpay grabpay,
+      IdBankTransfer idBankTransfer,
       Ideal ideal,
       Jcb jcb,
       Klarna klarna,
@@ -485,6 +493,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     this.giropay = giropay;
     this.googlePay = googlePay;
     this.grabpay = grabpay;
+    this.idBankTransfer = idBankTransfer;
     this.ideal = ideal;
     this.jcb = jcb;
     this.klarna = klarna;
@@ -563,6 +572,8 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
 
     private Grabpay grabpay;
 
+    private IdBankTransfer idBankTransfer;
+
     private Ideal ideal;
 
     private Jcb jcb;
@@ -636,6 +647,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
           this.giropay,
           this.googlePay,
           this.grabpay,
+          this.idBankTransfer,
           this.ideal,
           this.jcb,
           this.klarna,
@@ -951,6 +963,16 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
      */
     public Builder setGrabpay(PaymentMethodConfigurationCreateParams.Grabpay grabpay) {
       this.grabpay = grabpay;
+      return this;
+    }
+
+    /**
+     * Stripe users in Indonesia can receive bank transfers from customers in Indonesia. Bank
+     * transfers are a popular B2C and B2B payment method in Indonesia.
+     */
+    public Builder setIdBankTransfer(
+        PaymentMethodConfigurationCreateParams.IdBankTransfer idBankTransfer) {
+      this.idBankTransfer = idBankTransfer;
       return this;
     }
 
@@ -4781,6 +4803,172 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationCreateParams.Grabpay.DisplayPreference.Preference
+                preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class IdBankTransfer {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private IdBankTransfer(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationCreateParams.IdBankTransfer build() {
+        return new PaymentMethodConfigurationCreateParams.IdBankTransfer(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationCreateParams.IdBankTransfer.DisplayPreference
+              displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationCreateParams.IdBankTransfer#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationCreateParams.IdBankTransfer#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationCreateParams.IdBankTransfer.DisplayPreference build() {
+          return new PaymentMethodConfigurationCreateParams.IdBankTransfer.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.IdBankTransfer.DisplayPreference#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.IdBankTransfer.DisplayPreference#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationCreateParams.IdBankTransfer.DisplayPreference.Preference
                 preference) {
           this.preference = preference;
           return this;

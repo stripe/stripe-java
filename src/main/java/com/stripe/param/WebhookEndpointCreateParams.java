@@ -1037,6 +1037,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("issuing_transaction.created")
     ISSUING_TRANSACTION__CREATED("issuing_transaction.created"),
 
+    @SerializedName("issuing_transaction.purchase_details_receipt_updated")
+    ISSUING_TRANSACTION__PURCHASE_DETAILS_RECEIPT_UPDATED(
+        "issuing_transaction.purchase_details_receipt_updated"),
+
     @SerializedName("issuing_transaction.updated")
     ISSUING_TRANSACTION__UPDATED("issuing_transaction.updated"),
 

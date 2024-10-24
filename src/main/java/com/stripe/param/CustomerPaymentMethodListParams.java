@@ -297,6 +297,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("grabpay")
     GRABPAY("grabpay"),
 
+    @SerializedName("id_bank_transfer")
+    ID_BANK_TRANSFER("id_bank_transfer"),
+
     @SerializedName("ideal")
     IDEAL("ideal"),
 

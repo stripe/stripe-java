@@ -307,6 +307,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("grabpay")
     Grabpay grabpay;
 
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
+
     @SerializedName("ideal")
     Ideal ideal;
 
@@ -400,13 +403,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code
      * bancontact}, {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code
      * cashapp}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code gopay},
-     * {@code grabpay}, {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna},
-     * {@code konbini}, {@code kr_card}, {@code link}, {@code mb_way}, {@code mobilepay}, {@code
-     * multibanco}, {@code naver_pay}, {@code oxxo}, {@code p24}, {@code payco}, {@code paynow},
-     * {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code
-     * rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code shopeepay},
-     * {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or
-     * {@code zip}.
+     * {@code grabpay}, {@code id_bank_transfer}, {@code ideal}, {@code interac_present}, {@code
+     * kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card}, {@code link}, {@code mb_way},
+     * {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code oxxo}, {@code p24}, {@code
+     * payco}, {@code paynow}, {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code
+     * qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code
+     * shopeepay}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
+     * wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1559,6 +1562,27 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Grabpay extends StripeObject {}
+
+    /**
+     * For more details about IdBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IdBankTransfer extends StripeObject {
+      @SerializedName("bank")
+      String bank;
+
+      @SerializedName("bank_code")
+      String bankCode;
+
+      @SerializedName("bank_name")
+      String bankName;
+
+      @SerializedName("display_name")
+      String displayName;
+    }
 
     /**
      * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API

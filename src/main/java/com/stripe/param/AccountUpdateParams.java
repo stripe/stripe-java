@@ -1416,6 +1416,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("grabpay_payments")
     GrabpayPayments grabpayPayments;
 
+    /** The id_bank_transfer_payments capability. */
+    @SerializedName("id_bank_transfer_payments")
+    IdBankTransferPayments idBankTransferPayments;
+
+    /** The id_bank_transfer_payments_bca capability. */
+    @SerializedName("id_bank_transfer_payments_bca")
+    IdBankTransferPaymentsBca idBankTransferPaymentsBca;
+
     /** The ideal_payments capability. */
     @SerializedName("ideal_payments")
     IdealPayments idealPayments;
@@ -1607,6 +1615,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         GiropayPayments giropayPayments,
         GopayPayments gopayPayments,
         GrabpayPayments grabpayPayments,
+        IdBankTransferPayments idBankTransferPayments,
+        IdBankTransferPaymentsBca idBankTransferPaymentsBca,
         IdealPayments idealPayments,
         IndiaInternationalPayments indiaInternationalPayments,
         JcbPayments jcbPayments,
@@ -1671,6 +1681,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.giropayPayments = giropayPayments;
       this.gopayPayments = gopayPayments;
       this.grabpayPayments = grabpayPayments;
+      this.idBankTransferPayments = idBankTransferPayments;
+      this.idBankTransferPaymentsBca = idBankTransferPaymentsBca;
       this.idealPayments = idealPayments;
       this.indiaInternationalPayments = indiaInternationalPayments;
       this.jcbPayments = jcbPayments;
@@ -1763,6 +1775,10 @@ public class AccountUpdateParams extends ApiRequestParams {
       private GopayPayments gopayPayments;
 
       private GrabpayPayments grabpayPayments;
+
+      private IdBankTransferPayments idBankTransferPayments;
+
+      private IdBankTransferPaymentsBca idBankTransferPaymentsBca;
 
       private IdealPayments idealPayments;
 
@@ -1873,6 +1889,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.giropayPayments,
             this.gopayPayments,
             this.grabpayPayments,
+            this.idBankTransferPayments,
+            this.idBankTransferPaymentsBca,
             this.idealPayments,
             this.indiaInternationalPayments,
             this.jcbPayments,
@@ -2081,6 +2099,20 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setGrabpayPayments(
           AccountUpdateParams.Capabilities.GrabpayPayments grabpayPayments) {
         this.grabpayPayments = grabpayPayments;
+        return this;
+      }
+
+      /** The id_bank_transfer_payments capability. */
+      public Builder setIdBankTransferPayments(
+          AccountUpdateParams.Capabilities.IdBankTransferPayments idBankTransferPayments) {
+        this.idBankTransferPayments = idBankTransferPayments;
+        return this;
+      }
+
+      /** The id_bank_transfer_payments_bca capability. */
+      public Builder setIdBankTransferPaymentsBca(
+          AccountUpdateParams.Capabilities.IdBankTransferPaymentsBca idBankTransferPaymentsBca) {
+        this.idBankTransferPaymentsBca = idBankTransferPaymentsBca;
         return this;
       }
 
@@ -4006,6 +4038,164 @@ public class AccountUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.GrabpayPayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class IdBankTransferPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private IdBankTransferPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.IdBankTransferPayments build() {
+          return new AccountUpdateParams.Capabilities.IdBankTransferPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.IdBankTransferPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.IdBankTransferPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class IdBankTransferPaymentsBca {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private IdBankTransferPaymentsBca(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.IdBankTransferPaymentsBca build() {
+          return new AccountUpdateParams.Capabilities.IdBankTransferPaymentsBca(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.IdBankTransferPaymentsBca#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.IdBankTransferPaymentsBca#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -12136,6 +12326,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("bacs_debit_payments")
     BacsDebitPayments bacsDebitPayments;
 
+    /** Settings specific to bank BCA onboarding for Indonesia bank transfers payments method. */
+    @SerializedName("bank_bca_onboarding")
+    BankBcaOnboarding bankBcaOnboarding;
+
     /**
      * Settings used to apply the account's branding to email receipts, invoices, Checkout, and
      * other products.
@@ -12186,6 +12380,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     private Settings(
         BacsDebitPayments bacsDebitPayments,
+        BankBcaOnboarding bankBcaOnboarding,
         Branding branding,
         Capital capital,
         CardIssuing cardIssuing,
@@ -12197,6 +12392,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         TaxForms taxForms,
         Treasury treasury) {
       this.bacsDebitPayments = bacsDebitPayments;
+      this.bankBcaOnboarding = bankBcaOnboarding;
       this.branding = branding;
       this.capital = capital;
       this.cardIssuing = cardIssuing;
@@ -12215,6 +12411,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     public static class Builder {
       private BacsDebitPayments bacsDebitPayments;
+
+      private BankBcaOnboarding bankBcaOnboarding;
 
       private Branding branding;
 
@@ -12240,6 +12438,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       public AccountUpdateParams.Settings build() {
         return new AccountUpdateParams.Settings(
             this.bacsDebitPayments,
+            this.bankBcaOnboarding,
             this.branding,
             this.capital,
             this.cardIssuing,
@@ -12256,6 +12455,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setBacsDebitPayments(
           AccountUpdateParams.Settings.BacsDebitPayments bacsDebitPayments) {
         this.bacsDebitPayments = bacsDebitPayments;
+        return this;
+      }
+
+      /** Settings specific to bank BCA onboarding for Indonesia bank transfers payments method. */
+      public Builder setBankBcaOnboarding(
+          AccountUpdateParams.Settings.BankBcaOnboarding bankBcaOnboarding) {
+        this.bankBcaOnboarding = bankBcaOnboarding;
         return this;
       }
 
@@ -12432,6 +12638,103 @@ public class AccountUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Settings.BacsDebitPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class BankBcaOnboarding {
+      /** Bank BCA business account holder name. */
+      @SerializedName("account_holder_name")
+      Object accountHolderName;
+
+      /** Bank BCA business account number. */
+      @SerializedName("business_account_number")
+      Object businessAccountNumber;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private BankBcaOnboarding(
+          Object accountHolderName, Object businessAccountNumber, Map<String, Object> extraParams) {
+        this.accountHolderName = accountHolderName;
+        this.businessAccountNumber = businessAccountNumber;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object accountHolderName;
+
+        private Object businessAccountNumber;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Settings.BankBcaOnboarding build() {
+          return new AccountUpdateParams.Settings.BankBcaOnboarding(
+              this.accountHolderName, this.businessAccountNumber, this.extraParams);
+        }
+
+        /** Bank BCA business account holder name. */
+        public Builder setAccountHolderName(String accountHolderName) {
+          this.accountHolderName = accountHolderName;
+          return this;
+        }
+
+        /** Bank BCA business account holder name. */
+        public Builder setAccountHolderName(EmptyParam accountHolderName) {
+          this.accountHolderName = accountHolderName;
+          return this;
+        }
+
+        /** Bank BCA business account number. */
+        public Builder setBusinessAccountNumber(String businessAccountNumber) {
+          this.businessAccountNumber = businessAccountNumber;
+          return this;
+        }
+
+        /** Bank BCA business account number. */
+        public Builder setBusinessAccountNumber(EmptyParam businessAccountNumber) {
+          this.businessAccountNumber = businessAccountNumber;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.BankBcaOnboarding#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.BankBcaOnboarding#extraParams} for the field
          * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

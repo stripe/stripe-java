@@ -2165,6 +2165,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+       * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("id_bank_transfer")
+      Object idBankTransfer;
+
+      /**
        * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment
        * method options to pass to the invoice’s PaymentIntent.
        */
@@ -2191,6 +2198,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           Object card,
           Object customerBalance,
           Map<String, Object> extraParams,
+          Object idBankTransfer,
           Object konbini,
           Object sepaDebit,
           Object usBankAccount) {
@@ -2199,6 +2207,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
         this.card = card;
         this.customerBalance = customerBalance;
         this.extraParams = extraParams;
+        this.idBankTransfer = idBankTransfer;
         this.konbini = konbini;
         this.sepaDebit = sepaDebit;
         this.usBankAccount = usBankAccount;
@@ -2219,6 +2228,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Object idBankTransfer;
+
         private Object konbini;
 
         private Object sepaDebit;
@@ -2233,6 +2244,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
               this.card,
               this.customerBalance,
               this.extraParams,
+              this.idBankTransfer,
               this.konbini,
               this.sepaDebit,
               this.usBankAccount);
@@ -2339,6 +2351,26 @@ public class InvoiceCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+         * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setIdBankTransfer(
+            InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer
+                idBankTransfer) {
+          this.idBankTransfer = idBankTransfer;
+          return this;
+        }
+
+        /**
+         * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+         * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setIdBankTransfer(EmptyParam idBankTransfer) {
+          this.idBankTransfer = idBankTransfer;
           return this;
         }
 
@@ -3387,6 +3419,67 @@ public class InvoiceCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      public static class IdBankTransfer {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private IdBankTransfer(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
       public static class Konbini {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4059,6 +4152,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       @SerializedName("grabpay")
       GRABPAY("grabpay"),
+
+      @SerializedName("id_bank_transfer")
+      ID_BANK_TRANSFER("id_bank_transfer"),
 
       @SerializedName("ideal")
       IDEAL("ideal"),
