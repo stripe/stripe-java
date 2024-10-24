@@ -83,7 +83,7 @@ public class HttpURLConnectionClient extends HttpClient {
   static HttpHeaders getHeaders(StripeRequest request) {
     Map<String, List<String>> userAgentHeadersMap = new HashMap<>();
 
-    userAgentHeadersMap.put("User-Agent", Arrays.asList(buildUserAgentString()));
+    userAgentHeadersMap.put("User-Agent", Arrays.asList(buildUserAgentString(request)));
     userAgentHeadersMap.put(
         "X-Stripe-Client-User-Agent", Arrays.asList(buildXStripeClientUserAgentString()));
 
