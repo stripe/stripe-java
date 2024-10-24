@@ -12,13 +12,14 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
   /**
-   * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance.
+   * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance. If the
+   * PaymentIntent was created by an Invoice, the full amount of the PaymentIntent is applied
+   * regardless of this parameter.
    *
    * <p>A positive integer representing how much to charge in the <a
    * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for example,
-   * 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency).
-   *
-   * <p>The maximum amount is the amount of the PaymentIntent.
+   * 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency). The maximum
+   * amount is the amount of the PaymentIntent.
    *
    * <p>When you omit the amount, it defaults to the remaining amount requested on the
    * PaymentIntent.
@@ -74,13 +75,14 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
     }
 
     /**
-     * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance.
+     * Amount that you intend to apply to this PaymentIntent from the customer’s cash balance. If
+     * the PaymentIntent was created by an Invoice, the full amount of the PaymentIntent is applied
+     * regardless of this parameter.
      *
      * <p>A positive integer representing how much to charge in the <a
      * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for
-     * example, 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency).
-     *
-     * <p>The maximum amount is the amount of the PaymentIntent.
+     * example, 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency). The
+     * maximum amount is the amount of the PaymentIntent.
      *
      * <p>When you omit the amount, it defaults to the remaining amount requested on the
      * PaymentIntent.

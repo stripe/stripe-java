@@ -23,13 +23,15 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("category")
   Category category;
 
-  /** <strong>Required.</strong> Id of the customer to whom the credit should be granted. */
+  /**
+   * <strong>Required.</strong> ID of the customer to whom the billing credits should be granted.
+   */
   @SerializedName("customer")
   String customer;
 
   /**
-   * The time when the credit becomes effective i.e when it is eligible to be used. Defaults to the
-   * current timestamp if not specified.
+   * The time when the billing credits become effective i.e when they are eligible to be used.
+   * Defaults to the current timestamp if not specified.
    */
   @SerializedName("effective_at")
   Long effectiveAt;
@@ -38,7 +40,10 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** The time when the credit will expire. If not specified, the credit will never expire. */
+  /**
+   * The time when the billing credits will expire. If not specified, the billing credits will never
+   * expire.
+   */
   @SerializedName("expires_at")
   Long expiresAt;
 
@@ -58,7 +63,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** A descriptive name shown in dashboard and on invoices. */
+  /** A descriptive name shown in dashboard. */
   @SerializedName("name")
   String name;
 
@@ -144,15 +149,17 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Id of the customer to whom the credit should be granted. */
+    /**
+     * <strong>Required.</strong> ID of the customer to whom the billing credits should be granted.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
     /**
-     * The time when the credit becomes effective i.e when it is eligible to be used. Defaults to
-     * the current timestamp if not specified.
+     * The time when the billing credits become effective i.e when they are eligible to be used.
+     * Defaults to the current timestamp if not specified.
      */
     public Builder setEffectiveAt(Long effectiveAt) {
       this.effectiveAt = effectiveAt;
@@ -185,7 +192,10 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The time when the credit will expire. If not specified, the credit will never expire. */
+    /**
+     * The time when the billing credits will expire. If not specified, the billing credits will
+     * never expire.
+     */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
       return this;
@@ -243,7 +253,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A descriptive name shown in dashboard and on invoices. */
+    /** A descriptive name shown in dashboard. */
     public Builder setName(String name) {
       this.name = name;
       return this;
@@ -267,7 +277,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Specify the type of this amount. We currently only support {@code
-     * monetary} credits.
+     * monetary} billing credits.
      */
     @SerializedName("type")
     Type type;
@@ -328,7 +338,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Specify the type of this amount. We currently only support
-       * {@code monetary} credits.
+       * {@code monetary} billing credits.
        */
       public Builder setType(CreditGrantCreateParams.Amount.Type type) {
         this.type = type;

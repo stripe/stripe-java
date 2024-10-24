@@ -1209,17 +1209,26 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       @SerializedName("proration_behavior")
       ProrationBehavior prorationBehavior;
 
+      /**
+       * Setting to control when an update should be scheduled at the end of the period instead of
+       * applying immediately.
+       */
+      @SerializedName("schedule_at_period_end")
+      ScheduleAtPeriodEnd scheduleAtPeriodEnd;
+
       private SubscriptionUpdate(
           Object defaultAllowedUpdates,
           Boolean enabled,
           Map<String, Object> extraParams,
           Object products,
-          ProrationBehavior prorationBehavior) {
+          ProrationBehavior prorationBehavior,
+          ScheduleAtPeriodEnd scheduleAtPeriodEnd) {
         this.defaultAllowedUpdates = defaultAllowedUpdates;
         this.enabled = enabled;
         this.extraParams = extraParams;
         this.products = products;
         this.prorationBehavior = prorationBehavior;
+        this.scheduleAtPeriodEnd = scheduleAtPeriodEnd;
       }
 
       public static Builder builder() {
@@ -1237,6 +1246,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
         private ProrationBehavior prorationBehavior;
 
+        private ScheduleAtPeriodEnd scheduleAtPeriodEnd;
+
         /** Finalize and obtain parameter instance from this builder. */
         public ConfigurationUpdateParams.Features.SubscriptionUpdate build() {
           return new ConfigurationUpdateParams.Features.SubscriptionUpdate(
@@ -1244,7 +1255,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
               this.enabled,
               this.extraParams,
               this.products,
-              this.prorationBehavior);
+              this.prorationBehavior,
+              this.scheduleAtPeriodEnd);
         }
 
         /**
@@ -1403,6 +1415,17 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           this.prorationBehavior = prorationBehavior;
           return this;
         }
+
+        /**
+         * Setting to control when an update should be scheduled at the end of the period instead of
+         * applying immediately.
+         */
+        public Builder setScheduleAtPeriodEnd(
+            ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                scheduleAtPeriodEnd) {
+          this.scheduleAtPeriodEnd = scheduleAtPeriodEnd;
+          return this;
+        }
       }
 
       @Getter
@@ -1519,6 +1542,243 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           public Builder setProduct(EmptyParam product) {
             this.product = product;
             return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class ScheduleAtPeriodEnd {
+        /**
+         * List of conditions. When any condition is true, the update will be scheduled at the end
+         * of the current period.
+         */
+        @SerializedName("conditions")
+        Object conditions;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private ScheduleAtPeriodEnd(Object conditions, Map<String, Object> extraParams) {
+          this.conditions = conditions;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object conditions;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd build() {
+            return new ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd(
+                this.conditions, this.extraParams);
+          }
+
+          /**
+           * Add an element to `conditions` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd#conditions}
+           * for the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addCondition(
+              ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd.Condition
+                  element) {
+            if (this.conditions == null || this.conditions instanceof EmptyParam) {
+              this.conditions =
+                  new ArrayList<
+                      ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                          .Condition>();
+            }
+            ((List<
+                        ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                            .Condition>)
+                    this.conditions)
+                .add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `conditions` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd#conditions}
+           * for the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllCondition(
+              List<
+                      ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                          .Condition>
+                  elements) {
+            if (this.conditions == null || this.conditions instanceof EmptyParam) {
+              this.conditions =
+                  new ArrayList<
+                      ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                          .Condition>();
+            }
+            ((List<
+                        ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                            .Condition>)
+                    this.conditions)
+                .addAll(elements);
+            return this;
+          }
+
+          /**
+           * List of conditions. When any condition is true, the update will be scheduled at the end
+           * of the current period.
+           */
+          public Builder setConditions(EmptyParam conditions) {
+            this.conditions = conditions;
+            return this;
+          }
+
+          /**
+           * List of conditions. When any condition is true, the update will be scheduled at the end
+           * of the current period.
+           */
+          public Builder setConditions(
+              List<
+                      ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                          .Condition>
+                  conditions) {
+            this.conditions = conditions;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        public static class Condition {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> The type of condition. */
+          @SerializedName("type")
+          Type type;
+
+          private Condition(Map<String, Object> extraParams, Type type) {
+            this.extraParams = extraParams;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                    .Condition
+                build() {
+              return new ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
+                  .Condition(this.extraParams, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd.Condition#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd.Condition#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** <strong>Required.</strong> The type of condition. */
+            public Builder setType(
+                ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd.Condition
+                        .Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("decreasing_item_amount")
+            DECREASING_ITEM_AMOUNT("decreasing_item_amount"),
+
+            @SerializedName("shortening_interval")
+            SHORTENING_INTERVAL("shortening_interval");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
           }
         }
       }

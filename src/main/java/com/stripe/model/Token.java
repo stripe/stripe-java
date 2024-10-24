@@ -101,8 +101,8 @@ public class Token extends ApiResource implements HasId {
 
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
-   * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * with any v1 API method in place of a bank account dictionary. You can only use this token once.
+   * To do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
    * where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
    * is {@code application}, which includes Custom accounts.
@@ -113,8 +113,8 @@ public class Token extends ApiResource implements HasId {
 
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
-   * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * with any v1 API method in place of a bank account dictionary. You can only use this token once.
+   * To do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
    * where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
    * is {@code application}, which includes Custom accounts.
@@ -129,8 +129,8 @@ public class Token extends ApiResource implements HasId {
 
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
-   * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * with any v1 API method in place of a bank account dictionary. You can only use this token once.
+   * To do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
    * where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
    * is {@code application}, which includes Custom accounts.
@@ -141,8 +141,8 @@ public class Token extends ApiResource implements HasId {
 
   /**
    * Creates a single-use token that represents a bank account’s details. You can use this token
-   * with any API method in place of a bank account dictionary. You can only use this token once. To
-   * do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
+   * with any v1 API method in place of a bank account dictionary. You can only use this token once.
+   * To do so, attach it to a <a href="https://stripe.com/docs/api#accounts">connected account</a>
    * where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
    * is {@code application}, which includes Custom accounts.

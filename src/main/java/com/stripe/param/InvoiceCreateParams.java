@@ -40,6 +40,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
+   * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
+   * this time if it is still in draft state.
+   */
+  @SerializedName("automatically_finalizes_at")
+  Long automaticallyFinalizesAt;
+
+  /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this invoice using the default source attached to the customer. When
    * sending an invoice, Stripe will email this invoice to the customer with payment instructions.
@@ -240,6 +247,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Long applicationFeeAmount,
       Boolean autoAdvance,
       AutomaticTax automaticTax,
+      Long automaticallyFinalizesAt,
       CollectionMethod collectionMethod,
       String currency,
       Object customFields,
@@ -272,6 +280,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
     this.automaticTax = automaticTax;
+    this.automaticallyFinalizesAt = automaticallyFinalizesAt;
     this.collectionMethod = collectionMethod;
     this.currency = currency;
     this.customFields = customFields;
@@ -314,6 +323,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private Boolean autoAdvance;
 
     private AutomaticTax automaticTax;
+
+    private Long automaticallyFinalizesAt;
 
     private CollectionMethod collectionMethod;
 
@@ -378,6 +389,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.applicationFeeAmount,
           this.autoAdvance,
           this.automaticTax,
+          this.automaticallyFinalizesAt,
           this.collectionMethod,
           this.currency,
           this.customFields,
@@ -478,6 +490,15 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice. */
     public Builder setAutomaticTax(InvoiceCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
+      return this;
+    }
+
+    /**
+     * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
+     * this time if it is still in draft state.
+     */
+    public Builder setAutomaticallyFinalizesAt(Long automaticallyFinalizesAt) {
+      this.automaticallyFinalizesAt = automaticallyFinalizesAt;
       return this;
     }
 
@@ -3576,8 +3597,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("ideal")
       IDEAL("ideal"),
 
+      @SerializedName("jp_credit_transfer")
+      JP_CREDIT_TRANSFER("jp_credit_transfer"),
+
+      @SerializedName("kakao_pay")
+      KAKAO_PAY("kakao_pay"),
+
       @SerializedName("konbini")
       KONBINI("konbini"),
+
+      @SerializedName("kr_card")
+      KR_CARD("kr_card"),
 
       @SerializedName("link")
       LINK("link"),
@@ -3585,8 +3615,14 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
 
+      @SerializedName("naver_pay")
+      NAVER_PAY("naver_pay"),
+
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("payco")
+      PAYCO("payco"),
 
       @SerializedName("paynow")
       PAYNOW("paynow"),

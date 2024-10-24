@@ -409,6 +409,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     return getResponseGetter().request(request, Plan.class);
   }
 
+  /**
+   * For more details about Tier, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -434,6 +438,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     Long upTo;
   }
 
+  /**
+   * For more details about TransformUsage, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

@@ -28,6 +28,9 @@ import lombok.Setter;
  * you might create a billing meter to track the number of API calls made by a particular user. You
  * can then attach the billing meter to a price and attach the price to a subscription to charge the
  * user for the number of API calls they make.
+ *
+ * <p>Related guide: <a href="https://docs.stripe.com/billing/subscriptions/usage-based">Usage based
+ * billing</a>
  */
 @Getter
 @Setter
@@ -366,6 +369,10 @@ public class Meter extends ApiResource implements HasId {
     return getResponseGetter().request(request, Meter.class);
   }
 
+  /**
+   * For more details about CustomerMapping, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -383,6 +390,10 @@ public class Meter extends ApiResource implements HasId {
     String type;
   }
 
+  /**
+   * For more details about DefaultAggregation, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -396,6 +407,10 @@ public class Meter extends ApiResource implements HasId {
     String formula;
   }
 
+  /**
+   * For more details about StatusTransitions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -405,6 +420,10 @@ public class Meter extends ApiResource implements HasId {
     Long deactivatedAt;
   }
 
+  /**
+   * For more details about ValueSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

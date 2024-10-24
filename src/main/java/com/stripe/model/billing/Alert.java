@@ -371,6 +371,10 @@ public class Alert extends ApiResource implements HasId {
       this.meter = new ExpandableField<Meter>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about Filter, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

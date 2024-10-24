@@ -292,6 +292,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("duplicate_charge_id")
     Object duplicateChargeId;
 
+    /** Additional evidence for qualifying evidence programs. */
+    @SerializedName("enhanced_evidence")
+    Object enhancedEvidence;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -413,6 +417,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
         Object duplicateChargeDocumentation,
         Object duplicateChargeExplanation,
         Object duplicateChargeId,
+        Object enhancedEvidence,
         Map<String, Object> extraParams,
         Object productDescription,
         Object receipt,
@@ -441,6 +446,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
       this.duplicateChargeDocumentation = duplicateChargeDocumentation;
       this.duplicateChargeExplanation = duplicateChargeExplanation;
       this.duplicateChargeId = duplicateChargeId;
+      this.enhancedEvidence = enhancedEvidence;
       this.extraParams = extraParams;
       this.productDescription = productDescription;
       this.receipt = receipt;
@@ -489,6 +495,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       private Object duplicateChargeId;
 
+      private Object enhancedEvidence;
+
       private Map<String, Object> extraParams;
 
       private Object productDescription;
@@ -535,6 +543,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
             this.duplicateChargeDocumentation,
             this.duplicateChargeExplanation,
             this.duplicateChargeId,
+            this.enhancedEvidence,
             this.extraParams,
             this.productDescription,
             this.receipt,
@@ -767,6 +776,19 @@ public class DisputeUpdateParams extends ApiRequestParams {
        */
       public Builder setDuplicateChargeId(EmptyParam duplicateChargeId) {
         this.duplicateChargeId = duplicateChargeId;
+        return this;
+      }
+
+      /** Additional evidence for qualifying evidence programs. */
+      public Builder setEnhancedEvidence(
+          DisputeUpdateParams.Evidence.EnhancedEvidence enhancedEvidence) {
+        this.enhancedEvidence = enhancedEvidence;
+        return this;
+      }
+
+      /** Additional evidence for qualifying evidence programs. */
+      public Builder setEnhancedEvidence(EmptyParam enhancedEvidence) {
+        this.enhancedEvidence = enhancedEvidence;
         return this;
       }
 
@@ -1046,6 +1068,1157 @@ public class DisputeUpdateParams extends ApiRequestParams {
       public Builder setUncategorizedText(EmptyParam uncategorizedText) {
         this.uncategorizedText = uncategorizedText;
         return this;
+      }
+    }
+
+    @Getter
+    public static class EnhancedEvidence {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Evidence provided for Visa Compelling Evidence 3.0 evidence submission. */
+      @SerializedName("visa_compelling_evidence_3")
+      VisaCompellingEvidence3 visaCompellingEvidence3;
+
+      private EnhancedEvidence(
+          Map<String, Object> extraParams, VisaCompellingEvidence3 visaCompellingEvidence3) {
+        this.extraParams = extraParams;
+        this.visaCompellingEvidence3 = visaCompellingEvidence3;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private VisaCompellingEvidence3 visaCompellingEvidence3;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public DisputeUpdateParams.Evidence.EnhancedEvidence build() {
+          return new DisputeUpdateParams.Evidence.EnhancedEvidence(
+              this.extraParams, this.visaCompellingEvidence3);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeUpdateParams.Evidence.EnhancedEvidence#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeUpdateParams.Evidence.EnhancedEvidence#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Evidence provided for Visa Compelling Evidence 3.0 evidence submission. */
+        public Builder setVisaCompellingEvidence3(
+            DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                visaCompellingEvidence3) {
+          this.visaCompellingEvidence3 = visaCompellingEvidence3;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class VisaCompellingEvidence3 {
+        /** Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission. */
+        @SerializedName("disputed_transaction")
+        DisputedTransaction disputedTransaction;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * List of exactly two prior undisputed transaction objects for Visa Compelling Evidence 3.0
+         * evidence submission.
+         */
+        @SerializedName("prior_undisputed_transactions")
+        List<
+                DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                    .PriorUndisputedTransaction>
+            priorUndisputedTransactions;
+
+        private VisaCompellingEvidence3(
+            DisputedTransaction disputedTransaction,
+            Map<String, Object> extraParams,
+            List<
+                    DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                        .PriorUndisputedTransaction>
+                priorUndisputedTransactions) {
+          this.disputedTransaction = disputedTransaction;
+          this.extraParams = extraParams;
+          this.priorUndisputedTransactions = priorUndisputedTransactions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private DisputedTransaction disputedTransaction;
+
+          private Map<String, Object> extraParams;
+
+          private List<
+                  DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                      .PriorUndisputedTransaction>
+              priorUndisputedTransactions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3 build() {
+            return new DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3(
+                this.disputedTransaction, this.extraParams, this.priorUndisputedTransactions);
+          }
+
+          /** Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission. */
+          public Builder setDisputedTransaction(
+              DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                      .DisputedTransaction
+                  disputedTransaction) {
+            this.disputedTransaction = disputedTransaction;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `priorUndisputedTransactions` list. A list is initialized for the
+           * first `add/addAll` call, and subsequent calls adds additional elements to the original
+           * list. See {@link
+           * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3#priorUndisputedTransactions}
+           * for the field documentation.
+           */
+          public Builder addPriorUndisputedTransaction(
+              DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                      .PriorUndisputedTransaction
+                  element) {
+            if (this.priorUndisputedTransactions == null) {
+              this.priorUndisputedTransactions = new ArrayList<>();
+            }
+            this.priorUndisputedTransactions.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `priorUndisputedTransactions` list. A list is initialized for the
+           * first `add/addAll` call, and subsequent calls adds additional elements to the original
+           * list. See {@link
+           * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3#priorUndisputedTransactions}
+           * for the field documentation.
+           */
+          public Builder addAllPriorUndisputedTransaction(
+              List<
+                      DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                          .PriorUndisputedTransaction>
+                  elements) {
+            if (this.priorUndisputedTransactions == null) {
+              this.priorUndisputedTransactions = new ArrayList<>();
+            }
+            this.priorUndisputedTransactions.addAll(elements);
+            return this;
+          }
+        }
+
+        @Getter
+        public static class DisputedTransaction {
+          /**
+           * User Account ID used to log into business platform. Must be recognizable by the user.
+           */
+          @SerializedName("customer_account_id")
+          Object customerAccountId;
+
+          /**
+           * Unique identifier of the cardholder’s device derived from a combination of at least two
+           * hardware and software attributes. Must be at least 20 characters.
+           */
+          @SerializedName("customer_device_fingerprint")
+          Object customerDeviceFingerprint;
+
+          /**
+           * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+           * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+           */
+          @SerializedName("customer_device_id")
+          Object customerDeviceId;
+
+          /** The email address of the customer. */
+          @SerializedName("customer_email_address")
+          Object customerEmailAddress;
+
+          /** The IP address that the customer used when making the purchase. */
+          @SerializedName("customer_purchase_ip")
+          Object customerPurchaseIp;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Categorization of disputed payment. */
+          @SerializedName("merchandise_or_services")
+          MerchandiseOrServices merchandiseOrServices;
+
+          /** A description of the product or service that was sold. */
+          @SerializedName("product_description")
+          Object productDescription;
+
+          /**
+           * The address to which a physical product was shipped. All fields are required for Visa
+           * Compelling Evidence 3.0 evidence submission.
+           */
+          @SerializedName("shipping_address")
+          ShippingAddress shippingAddress;
+
+          private DisputedTransaction(
+              Object customerAccountId,
+              Object customerDeviceFingerprint,
+              Object customerDeviceId,
+              Object customerEmailAddress,
+              Object customerPurchaseIp,
+              Map<String, Object> extraParams,
+              MerchandiseOrServices merchandiseOrServices,
+              Object productDescription,
+              ShippingAddress shippingAddress) {
+            this.customerAccountId = customerAccountId;
+            this.customerDeviceFingerprint = customerDeviceFingerprint;
+            this.customerDeviceId = customerDeviceId;
+            this.customerEmailAddress = customerEmailAddress;
+            this.customerPurchaseIp = customerPurchaseIp;
+            this.extraParams = extraParams;
+            this.merchandiseOrServices = merchandiseOrServices;
+            this.productDescription = productDescription;
+            this.shippingAddress = shippingAddress;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object customerAccountId;
+
+            private Object customerDeviceFingerprint;
+
+            private Object customerDeviceId;
+
+            private Object customerEmailAddress;
+
+            private Object customerPurchaseIp;
+
+            private Map<String, Object> extraParams;
+
+            private MerchandiseOrServices merchandiseOrServices;
+
+            private Object productDescription;
+
+            private ShippingAddress shippingAddress;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                    .DisputedTransaction
+                build() {
+              return new DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                  .DisputedTransaction(
+                  this.customerAccountId,
+                  this.customerDeviceFingerprint,
+                  this.customerDeviceId,
+                  this.customerEmailAddress,
+                  this.customerPurchaseIp,
+                  this.extraParams,
+                  this.merchandiseOrServices,
+                  this.productDescription,
+                  this.shippingAddress);
+            }
+
+            /**
+             * User Account ID used to log into business platform. Must be recognizable by the user.
+             */
+            public Builder setCustomerAccountId(String customerAccountId) {
+              this.customerAccountId = customerAccountId;
+              return this;
+            }
+
+            /**
+             * User Account ID used to log into business platform. Must be recognizable by the user.
+             */
+            public Builder setCustomerAccountId(EmptyParam customerAccountId) {
+              this.customerAccountId = customerAccountId;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device derived from a combination of at least
+             * two hardware and software attributes. Must be at least 20 characters.
+             */
+            public Builder setCustomerDeviceFingerprint(String customerDeviceFingerprint) {
+              this.customerDeviceFingerprint = customerDeviceFingerprint;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device derived from a combination of at least
+             * two hardware and software attributes. Must be at least 20 characters.
+             */
+            public Builder setCustomerDeviceFingerprint(EmptyParam customerDeviceFingerprint) {
+              this.customerDeviceFingerprint = customerDeviceFingerprint;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+             * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+             */
+            public Builder setCustomerDeviceId(String customerDeviceId) {
+              this.customerDeviceId = customerDeviceId;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+             * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+             */
+            public Builder setCustomerDeviceId(EmptyParam customerDeviceId) {
+              this.customerDeviceId = customerDeviceId;
+              return this;
+            }
+
+            /** The email address of the customer. */
+            public Builder setCustomerEmailAddress(String customerEmailAddress) {
+              this.customerEmailAddress = customerEmailAddress;
+              return this;
+            }
+
+            /** The email address of the customer. */
+            public Builder setCustomerEmailAddress(EmptyParam customerEmailAddress) {
+              this.customerEmailAddress = customerEmailAddress;
+              return this;
+            }
+
+            /** The IP address that the customer used when making the purchase. */
+            public Builder setCustomerPurchaseIp(String customerPurchaseIp) {
+              this.customerPurchaseIp = customerPurchaseIp;
+              return this;
+            }
+
+            /** The IP address that the customer used when making the purchase. */
+            public Builder setCustomerPurchaseIp(EmptyParam customerPurchaseIp) {
+              this.customerPurchaseIp = customerPurchaseIp;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.DisputedTransaction#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.DisputedTransaction#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Categorization of disputed payment. */
+            public Builder setMerchandiseOrServices(
+                DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                        .DisputedTransaction.MerchandiseOrServices
+                    merchandiseOrServices) {
+              this.merchandiseOrServices = merchandiseOrServices;
+              return this;
+            }
+
+            /** A description of the product or service that was sold. */
+            public Builder setProductDescription(String productDescription) {
+              this.productDescription = productDescription;
+              return this;
+            }
+
+            /** A description of the product or service that was sold. */
+            public Builder setProductDescription(EmptyParam productDescription) {
+              this.productDescription = productDescription;
+              return this;
+            }
+
+            /**
+             * The address to which a physical product was shipped. All fields are required for Visa
+             * Compelling Evidence 3.0 evidence submission.
+             */
+            public Builder setShippingAddress(
+                DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                        .DisputedTransaction.ShippingAddress
+                    shippingAddress) {
+              this.shippingAddress = shippingAddress;
+              return this;
+            }
+          }
+
+          @Getter
+          public static class ShippingAddress {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            Object city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            Object country;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            @SerializedName("line1")
+            Object line1;
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            Object line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            Object postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            Object state;
+
+            private ShippingAddress(
+                Object city,
+                Object country,
+                Map<String, Object> extraParams,
+                Object line1,
+                Object line2,
+                Object postalCode,
+                Object state) {
+              this.city = city;
+              this.country = country;
+              this.extraParams = extraParams;
+              this.line1 = line1;
+              this.line2 = line2;
+              this.postalCode = postalCode;
+              this.state = state;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object city;
+
+              private Object country;
+
+              private Map<String, Object> extraParams;
+
+              private Object line1;
+
+              private Object line2;
+
+              private Object postalCode;
+
+              private Object state;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                      .DisputedTransaction.ShippingAddress
+                  build() {
+                return new DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                    .DisputedTransaction.ShippingAddress(
+                    this.city,
+                    this.country,
+                    this.extraParams,
+                    this.line1,
+                    this.line2,
+                    this.postalCode,
+                    this.state);
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(String city) {
+                this.city = city;
+                return this;
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(EmptyParam city) {
+                this.city = city;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(String country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(EmptyParam country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.DisputedTransaction.ShippingAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.DisputedTransaction.ShippingAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Address line 1 (e.g., street, PO Box, or company name). */
+              public Builder setLine1(String line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 1 (e.g., street, PO Box, or company name). */
+              public Builder setLine1(EmptyParam line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              public Builder setLine2(String line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              public Builder setLine2(EmptyParam line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(EmptyParam postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** State, county, province, or region. */
+              public Builder setState(String state) {
+                this.state = state;
+                return this;
+              }
+
+              /** State, county, province, or region. */
+              public Builder setState(EmptyParam state) {
+                this.state = state;
+                return this;
+              }
+            }
+          }
+
+          public enum MerchandiseOrServices implements ApiRequestParams.EnumParam {
+            @SerializedName("merchandise")
+            MERCHANDISE("merchandise"),
+
+            @SerializedName("services")
+            SERVICES("services");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            MerchandiseOrServices(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        public static class PriorUndisputedTransaction {
+          /**
+           * <strong>Required.</strong> Stripe charge ID for the Visa Compelling Evidence 3.0
+           * eligible prior charge.
+           */
+          @SerializedName("charge")
+          Object charge;
+
+          /**
+           * User Account ID used to log into business platform. Must be recognizable by the user.
+           */
+          @SerializedName("customer_account_id")
+          Object customerAccountId;
+
+          /**
+           * Unique identifier of the cardholder’s device derived from a combination of at least two
+           * hardware and software attributes. Must be at least 20 characters.
+           */
+          @SerializedName("customer_device_fingerprint")
+          Object customerDeviceFingerprint;
+
+          /**
+           * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+           * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+           */
+          @SerializedName("customer_device_id")
+          Object customerDeviceId;
+
+          /** The email address of the customer. */
+          @SerializedName("customer_email_address")
+          Object customerEmailAddress;
+
+          /** The IP address that the customer used when making the purchase. */
+          @SerializedName("customer_purchase_ip")
+          Object customerPurchaseIp;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** A description of the product or service that was sold. */
+          @SerializedName("product_description")
+          Object productDescription;
+
+          /**
+           * The address to which a physical product was shipped. All fields are required for Visa
+           * Compelling Evidence 3.0 evidence submission.
+           */
+          @SerializedName("shipping_address")
+          ShippingAddress shippingAddress;
+
+          private PriorUndisputedTransaction(
+              Object charge,
+              Object customerAccountId,
+              Object customerDeviceFingerprint,
+              Object customerDeviceId,
+              Object customerEmailAddress,
+              Object customerPurchaseIp,
+              Map<String, Object> extraParams,
+              Object productDescription,
+              ShippingAddress shippingAddress) {
+            this.charge = charge;
+            this.customerAccountId = customerAccountId;
+            this.customerDeviceFingerprint = customerDeviceFingerprint;
+            this.customerDeviceId = customerDeviceId;
+            this.customerEmailAddress = customerEmailAddress;
+            this.customerPurchaseIp = customerPurchaseIp;
+            this.extraParams = extraParams;
+            this.productDescription = productDescription;
+            this.shippingAddress = shippingAddress;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object charge;
+
+            private Object customerAccountId;
+
+            private Object customerDeviceFingerprint;
+
+            private Object customerDeviceId;
+
+            private Object customerEmailAddress;
+
+            private Object customerPurchaseIp;
+
+            private Map<String, Object> extraParams;
+
+            private Object productDescription;
+
+            private ShippingAddress shippingAddress;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                    .PriorUndisputedTransaction
+                build() {
+              return new DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                  .PriorUndisputedTransaction(
+                  this.charge,
+                  this.customerAccountId,
+                  this.customerDeviceFingerprint,
+                  this.customerDeviceId,
+                  this.customerEmailAddress,
+                  this.customerPurchaseIp,
+                  this.extraParams,
+                  this.productDescription,
+                  this.shippingAddress);
+            }
+
+            /**
+             * <strong>Required.</strong> Stripe charge ID for the Visa Compelling Evidence 3.0
+             * eligible prior charge.
+             */
+            public Builder setCharge(String charge) {
+              this.charge = charge;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Stripe charge ID for the Visa Compelling Evidence 3.0
+             * eligible prior charge.
+             */
+            public Builder setCharge(EmptyParam charge) {
+              this.charge = charge;
+              return this;
+            }
+
+            /**
+             * User Account ID used to log into business platform. Must be recognizable by the user.
+             */
+            public Builder setCustomerAccountId(String customerAccountId) {
+              this.customerAccountId = customerAccountId;
+              return this;
+            }
+
+            /**
+             * User Account ID used to log into business platform. Must be recognizable by the user.
+             */
+            public Builder setCustomerAccountId(EmptyParam customerAccountId) {
+              this.customerAccountId = customerAccountId;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device derived from a combination of at least
+             * two hardware and software attributes. Must be at least 20 characters.
+             */
+            public Builder setCustomerDeviceFingerprint(String customerDeviceFingerprint) {
+              this.customerDeviceFingerprint = customerDeviceFingerprint;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device derived from a combination of at least
+             * two hardware and software attributes. Must be at least 20 characters.
+             */
+            public Builder setCustomerDeviceFingerprint(EmptyParam customerDeviceFingerprint) {
+              this.customerDeviceFingerprint = customerDeviceFingerprint;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+             * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+             */
+            public Builder setCustomerDeviceId(String customerDeviceId) {
+              this.customerDeviceId = customerDeviceId;
+              return this;
+            }
+
+            /**
+             * Unique identifier of the cardholder’s device such as a device serial number (e.g.,
+             * International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
+             */
+            public Builder setCustomerDeviceId(EmptyParam customerDeviceId) {
+              this.customerDeviceId = customerDeviceId;
+              return this;
+            }
+
+            /** The email address of the customer. */
+            public Builder setCustomerEmailAddress(String customerEmailAddress) {
+              this.customerEmailAddress = customerEmailAddress;
+              return this;
+            }
+
+            /** The email address of the customer. */
+            public Builder setCustomerEmailAddress(EmptyParam customerEmailAddress) {
+              this.customerEmailAddress = customerEmailAddress;
+              return this;
+            }
+
+            /** The IP address that the customer used when making the purchase. */
+            public Builder setCustomerPurchaseIp(String customerPurchaseIp) {
+              this.customerPurchaseIp = customerPurchaseIp;
+              return this;
+            }
+
+            /** The IP address that the customer used when making the purchase. */
+            public Builder setCustomerPurchaseIp(EmptyParam customerPurchaseIp) {
+              this.customerPurchaseIp = customerPurchaseIp;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.PriorUndisputedTransaction#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.PriorUndisputedTransaction#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** A description of the product or service that was sold. */
+            public Builder setProductDescription(String productDescription) {
+              this.productDescription = productDescription;
+              return this;
+            }
+
+            /** A description of the product or service that was sold. */
+            public Builder setProductDescription(EmptyParam productDescription) {
+              this.productDescription = productDescription;
+              return this;
+            }
+
+            /**
+             * The address to which a physical product was shipped. All fields are required for Visa
+             * Compelling Evidence 3.0 evidence submission.
+             */
+            public Builder setShippingAddress(
+                DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                        .PriorUndisputedTransaction.ShippingAddress
+                    shippingAddress) {
+              this.shippingAddress = shippingAddress;
+              return this;
+            }
+          }
+
+          @Getter
+          public static class ShippingAddress {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            Object city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            Object country;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            @SerializedName("line1")
+            Object line1;
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            Object line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            Object postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            Object state;
+
+            private ShippingAddress(
+                Object city,
+                Object country,
+                Map<String, Object> extraParams,
+                Object line1,
+                Object line2,
+                Object postalCode,
+                Object state) {
+              this.city = city;
+              this.country = country;
+              this.extraParams = extraParams;
+              this.line1 = line1;
+              this.line2 = line2;
+              this.postalCode = postalCode;
+              this.state = state;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object city;
+
+              private Object country;
+
+              private Map<String, Object> extraParams;
+
+              private Object line1;
+
+              private Object line2;
+
+              private Object postalCode;
+
+              private Object state;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                      .PriorUndisputedTransaction.ShippingAddress
+                  build() {
+                return new DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
+                    .PriorUndisputedTransaction.ShippingAddress(
+                    this.city,
+                    this.country,
+                    this.extraParams,
+                    this.line1,
+                    this.line2,
+                    this.postalCode,
+                    this.state);
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(String city) {
+                this.city = city;
+                return this;
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(EmptyParam city) {
+                this.city = city;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(String country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(EmptyParam country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.PriorUndisputedTransaction.ShippingAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3.PriorUndisputedTransaction.ShippingAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Address line 1 (e.g., street, PO Box, or company name). */
+              public Builder setLine1(String line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 1 (e.g., street, PO Box, or company name). */
+              public Builder setLine1(EmptyParam line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              public Builder setLine2(String line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              public Builder setLine2(EmptyParam line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(EmptyParam postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** State, county, province, or region. */
+              public Builder setState(String state) {
+                this.state = state;
+                return this;
+              }
+
+              /** State, county, province, or region. */
+              public Builder setState(EmptyParam state) {
+                this.state = state;
+                return this;
+              }
+            }
+          }
+        }
       }
     }
   }

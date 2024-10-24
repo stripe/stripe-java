@@ -263,6 +263,10 @@ public class TestClock extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, TestClock.class);
   }
 
+  /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -270,6 +274,10 @@ public class TestClock extends ApiResource implements HasId {
     @SerializedName("advancing")
     Advancing advancing;
 
+    /**
+     * For more details about Advancing, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

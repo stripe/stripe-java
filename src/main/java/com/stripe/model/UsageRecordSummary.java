@@ -6,6 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A usage record summary represents an aggregated view of how much usage was accrued for a
+ * subscription item within a subscription billing period.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -45,6 +49,10 @@ public class UsageRecordSummary extends StripeObject implements HasId {
   @SerializedName("total_usage")
   Long totalUsage;
 
+  /**
+   * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

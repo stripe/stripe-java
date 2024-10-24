@@ -1097,8 +1097,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         String city;
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
+         * A freeform text field for the country. However, in order to activate some tax features,
+         * the format should be a two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
         String country;
@@ -1184,8 +1185,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           /**
-           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-           * 3166-1 alpha-2</a>).
+           * A freeform text field for the country. However, in order to activate some tax features,
+           * the format should be a two-letter country code (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
            */
           public Builder setCountry(String country) {
             this.country = country;
@@ -1355,19 +1357,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
        * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
-       * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
-       * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
-       * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
-       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hr_oib}, {@code hu_tin},
-       * {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code
-       * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid},
-       * {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code
-       * no_vat}, {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-       * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
-       * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin},
-       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif}, {@code
-       * vn_tin}, or {@code za_vat}
+       * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code by_tin}, {@code ca_bn}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+       * {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code
+       * cr_tin}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
+       * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
+       * hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
+       * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
+       * kz_bin}, {@code li_uid}, {@code ma_vat}, {@code md_vat}, {@code mx_rfc}, {@code my_frp},
+       * {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code
+       * nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib},
+       * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+       * si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
+       * {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code
+       * ve_rif}, {@code vn_tin}, or {@code za_vat}
        */
       @SerializedName("type")
       Type type;
@@ -1430,19 +1433,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
          * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
-         * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_uid}, {@code
-         * ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code de_stn},
-         * {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat},
-         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hr_oib}, {@code
-         * hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn},
-         * {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code kz_bin}, {@code
-         * li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin},
-         * {@code no_vat}, {@code no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
-         * ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
-         * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code
-         * tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code ve_rif},
-         * {@code vn_tin}, or {@code za_vat}
+         * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code by_tin}, {@code ca_bn}, {@code
+         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+         * {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code
+         * cr_tin}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
+         * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
+         * hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
+         * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
+         * kz_bin}, {@code li_uid}, {@code ma_vat}, {@code md_vat}, {@code mx_rfc}, {@code my_frp},
+         * {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code
+         * nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin}, {@code rs_pib},
+         * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+         * si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
+         * {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code
+         * ve_rif}, {@code vn_tin}, or {@code za_vat}
          */
         public Builder setType(InvoiceCreatePreviewParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1486,6 +1490,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("br_cpf")
         BR_CPF("br_cpf"),
+
+        @SerializedName("by_tin")
+        BY_TIN("by_tin"),
 
         @SerializedName("ca_bn")
         CA_BN("ca_bn"),
@@ -1592,6 +1599,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("li_uid")
         LI_UID("li_uid"),
 
+        @SerializedName("ma_vat")
+        MA_VAT("ma_vat"),
+
+        @SerializedName("md_vat")
+        MD_VAT("md_vat"),
+
         @SerializedName("mx_rfc")
         MX_RFC("mx_rfc"),
 
@@ -1661,6 +1674,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("tw_vat")
         TW_VAT("tw_vat"),
 
+        @SerializedName("tz_vat")
+        TZ_VAT("tz_vat"),
+
         @SerializedName("ua_vat")
         UA_VAT("ua_vat"),
 
@@ -1669,6 +1685,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("uy_ruc")
         UY_RUC("uy_ruc"),
+
+        @SerializedName("uz_tin")
+        UZ_TIN("uz_tin"),
+
+        @SerializedName("uz_vat")
+        UZ_VAT("uz_vat"),
 
         @SerializedName("ve_rif")
         VE_RIF("ve_rif"),

@@ -247,6 +247,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("allow_redisplay")
     String allowRedisplay;
 
+    @SerializedName("alma")
+    Alma alma;
+
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
@@ -307,11 +310,17 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("interac_present")
     InteracPresent interacPresent;
 
+    @SerializedName("kakao_pay")
+    KakaoPay kakaoPay;
+
     @SerializedName("klarna")
     Klarna klarna;
 
     @SerializedName("konbini")
     Konbini konbini;
+
+    @SerializedName("kr_card")
+    KrCard krCard;
 
     @SerializedName("link")
     Link link;
@@ -322,11 +331,17 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("multibanco")
     Multibanco multibanco;
 
+    @SerializedName("naver_pay")
+    NaverPay naverPay;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
     @SerializedName("p24")
     P24 p24;
+
+    @SerializedName("payco")
+    Payco payco;
 
     @SerializedName("paynow")
     Paynow paynow;
@@ -342,6 +357,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
+
+    @SerializedName("samsung_pay")
+    SamsungPay samsungPay;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -361,13 +379,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * type.
      *
      * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay},
-     * {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
-     * blik}, {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code
-     * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
-     * {@code interac_present}, {@code klarna}, {@code konbini}, {@code link}, {@code mobilepay},
-     * {@code multibanco}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix},
-     * {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code swish},
-     * {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+     * {@code alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code
+     * bancontact}, {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code
+     * cashapp}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code
+     * grabpay}, {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code
+     * konbini}, {@code kr_card}, {@code link}, {@code mobilepay}, {@code multibanco}, {@code
+     * naver_pay}, {@code oxxo}, {@code p24}, {@code payco}, {@code paynow}, {@code paypal}, {@code
+     * pix}, {@code promptpay}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code
+     * sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code
+     * zip}.
      */
     @SerializedName("type")
     String type;
@@ -399,6 +419,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about AcssDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -427,26 +451,55 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String transitNumber;
     }
 
+    /**
+     * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {}
 
+    /**
+     * For more details about AfterpayClearpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay extends StripeObject {}
 
+    /**
+     * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
 
+    /**
+     * For more details about Alma, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alma extends StripeObject {}
+
+    /**
+     * For more details about AmazonPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {}
 
+    /**
+     * For more details about AuBecsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -467,6 +520,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String last4;
     }
 
+    /**
+     * For more details about BacsDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -487,11 +544,19 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String sortCode;
     }
 
+    /**
+     * For more details about Bancontact, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Bancontact extends StripeObject {}
 
+    /**
+     * For more details about BillingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -513,11 +578,19 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String phone;
     }
 
+    /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Blik extends StripeObject {}
 
+    /**
+     * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -527,6 +600,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String taxId;
     }
 
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -627,6 +704,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("wallet")
       Wallet wallet;
 
+      /**
+       * For more details about Checks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -653,6 +734,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         String cvcCheck;
       }
 
+      /**
+       * For more details about GeneratedFrom, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -690,6 +775,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
               new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
         }
 
+        /**
+         * For more details about PaymentMethodDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -704,6 +793,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
           @SerializedName("type")
           String type;
 
+          /**
+           * For more details about CardPresent, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -876,6 +969,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
             @SerializedName("wallet")
             Wallet wallet;
 
+            /**
+             * For more details about Offline, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
             @Getter
             @Setter
             @EqualsAndHashCode(callSuper = false)
@@ -893,6 +990,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
               String type;
             }
 
+            /**
+             * For more details about Receipt, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
             @Getter
             @Setter
             @EqualsAndHashCode(callSuper = false)
@@ -946,6 +1047,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
               String transactionStatusInformation;
             }
 
+            /**
+             * For more details about Wallet, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
             @Getter
             @Setter
             @EqualsAndHashCode(callSuper = false)
@@ -961,6 +1066,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         }
       }
 
+      /**
+       * For more details about Networks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -978,6 +1087,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         String preferred;
       }
 
+      /**
+       * For more details about ThreeDSecureUsage, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -987,6 +1100,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         Boolean supported;
       }
 
+      /**
+       * For more details about Wallet, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1025,26 +1142,46 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @SerializedName("visa_checkout")
         VisaCheckout visaCheckout;
 
+        /**
+         * For more details about AmexExpressCheckout, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class AmexExpressCheckout extends StripeObject {}
 
+        /**
+         * For more details about ApplePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class ApplePay extends StripeObject {}
 
+        /**
+         * For more details about GooglePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class GooglePay extends StripeObject {}
 
+        /**
+         * For more details about Link, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Link extends StripeObject {}
 
+        /**
+         * For more details about Masterpass, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1080,11 +1217,19 @@ public class ConfirmationToken extends ApiResource implements HasId {
           Address shippingAddress;
         }
 
+        /**
+         * For more details about SamsungPay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class SamsungPay extends StripeObject {}
 
+        /**
+         * For more details about VisaCheckout, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1122,6 +1267,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about CardPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1234,6 +1383,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("wallet")
       Wallet wallet;
 
+      /**
+       * For more details about Networks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1247,6 +1400,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         String preferred;
       }
 
+      /**
+       * For more details about Offline, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1264,6 +1421,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         String type;
       }
 
+      /**
+       * For more details about Wallet, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1277,6 +1438,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1290,11 +1455,19 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String cashtag;
     }
 
+    /**
+     * For more details about CustomerBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance extends StripeObject {}
 
+    /**
+     * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1317,6 +1490,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String bank;
     }
 
+    /**
+     * For more details about Fpx, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1337,16 +1514,28 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String bank;
     }
 
+    /**
+     * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Giropay extends StripeObject {}
 
+    /**
+     * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Grabpay extends StripeObject {}
 
+    /**
+     * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1372,6 +1561,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String bic;
     }
 
+    /**
+     * For more details about InteracPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1467,6 +1660,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("read_method")
       String readMethod;
 
+      /**
+       * For more details about Networks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1481,6 +1678,19 @@ public class ConfirmationToken extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about KakaoPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KakaoPay extends StripeObject {}
+
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1489,6 +1699,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("dob")
       Dob dob;
 
+      /**
+       * For more details about Dob, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1507,11 +1721,44 @@ public class ConfirmationToken extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about Konbini, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Konbini extends StripeObject {}
 
+    /**
+     * For more details about KrCard, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KrCard extends StripeObject {
+      /**
+       * The local credit or debit card brand.
+       *
+       * <p>One of {@code bc}, {@code citi}, {@code hana}, {@code hyundai}, {@code jeju}, {@code
+       * jeonbuk}, {@code kakaobank}, {@code kbank}, {@code kdbbank}, {@code kookmin}, {@code
+       * kwangju}, {@code lotte}, {@code mg}, {@code nh}, {@code post}, {@code samsung}, {@code
+       * savingsbank}, {@code shinhan}, {@code shinhyup}, {@code suhyup}, {@code tossbank}, or
+       * {@code woori}.
+       */
+      @SerializedName("brand")
+      String brand;
+
+      /** The last four digits of the card. This may not be present for American Express cards. */
+      @SerializedName("last4")
+      String last4;
+    }
+
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1526,21 +1773,54 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String persistentToken;
     }
 
+    /**
+     * For more details about Mobilepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay extends StripeObject {}
 
+    /**
+     * For more details about Multibanco, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Multibanco extends StripeObject {}
 
+    /**
+     * For more details about NaverPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NaverPay extends StripeObject {
+      /**
+       * Whether to fund this transaction with Naver Pay points or a card.
+       *
+       * <p>One of {@code card}, or {@code points}.
+       */
+      @SerializedName("funding")
+      String funding;
+    }
+
+    /**
+     * For more details about Oxxo, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Oxxo extends StripeObject {}
 
+    /**
+     * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1560,11 +1840,28 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String bank;
     }
 
+    /**
+     * For more details about Payco, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payco extends StripeObject {}
+
+    /**
+     * For more details about Paynow, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paynow extends StripeObject {}
 
+    /**
+     * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1581,21 +1878,46 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String payerId;
     }
 
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix extends StripeObject {}
 
+    /**
+     * For more details about Promptpay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Promptpay extends StripeObject {}
 
+    /**
+     * For more details about RevolutPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {}
 
+    /**
+     * For more details about SamsungPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SamsungPay extends StripeObject {}
+
+    /**
+     * For more details about SepaDebit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1627,6 +1949,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("last4")
       String last4;
 
+      /**
+       * For more details about GeneratedFrom, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1682,6 +2008,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1691,16 +2021,28 @@ public class ConfirmationToken extends ApiResource implements HasId {
       String country;
     }
 
+    /**
+     * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {}
 
+    /**
+     * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Twint extends StripeObject {}
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1752,6 +2094,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("status_details")
       StatusDetails statusDetails;
 
+      /**
+       * For more details about Networks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1765,6 +2111,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         List<String> supported;
       }
 
+      /**
+       * For more details about StatusDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1772,6 +2122,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @SerializedName("blocked")
         Blocked blocked;
 
+        /**
+         * For more details about Blocked, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1798,17 +2152,29 @@ public class ConfirmationToken extends ApiResource implements HasId {
       }
     }
 
+    /**
+     * For more details about WechatPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class WechatPay extends StripeObject {}
 
+    /**
+     * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
   }
 
+  /**
+   * For more details about Shipping, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

@@ -26,7 +26,7 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName("object_id")
   String objectId;
 
-  /** The requested page number. */
+  /** The requested page. */
   @SerializedName("page")
   String page;
 
@@ -94,7 +94,7 @@ public class EventListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The requested page number. */
+    /** The requested page. */
     public Builder setPage(String page) {
       this.page = page;
       return this;

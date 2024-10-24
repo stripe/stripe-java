@@ -18,7 +18,7 @@ public final class AccountLoginLinkService extends ApiService {
   }
 
   /**
-   * Creates a single-use login link for a connected account to access the Express Dashboard.
+   * Creates a login link for a connected account to access the Express Dashboard.
    *
    * <p><strong>You can only create login links for accounts that use the <a
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
@@ -29,7 +29,7 @@ public final class AccountLoginLinkService extends ApiService {
     return create(account, params, (RequestOptions) null);
   }
   /**
-   * Creates a single-use login link for a connected account to access the Express Dashboard.
+   * Creates a login link for a connected account to access the Express Dashboard.
    *
    * <p><strong>You can only create login links for accounts that use the <a
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
@@ -39,7 +39,7 @@ public final class AccountLoginLinkService extends ApiService {
     return create(account, (AccountLoginLinkCreateParams) null, options);
   }
   /**
-   * Creates a single-use login link for a connected account to access the Express Dashboard.
+   * Creates a login link for a connected account to access the Express Dashboard.
    *
    * <p><strong>You can only create login links for accounts that use the <a
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
@@ -49,7 +49,7 @@ public final class AccountLoginLinkService extends ApiService {
     return create(account, (AccountLoginLinkCreateParams) null, (RequestOptions) null);
   }
   /**
-   * Creates a single-use login link for a connected account to access the Express Dashboard.
+   * Creates a login link for a connected account to access the Express Dashboard.
    *
    * <p><strong>You can only create login links for accounts that use the <a
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to

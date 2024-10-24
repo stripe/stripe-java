@@ -39,6 +39,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
+   * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
+   * this time if it is still in draft state. To turn off automatic finalization, set {@code
+   * auto_advance} to false.
+   */
+  @SerializedName("automatically_finalizes_at")
+  Long automaticallyFinalizesAt;
+
+  /**
    * Either {@code charge_automatically} or {@code send_invoice}. This field can be updated only on
    * {@code draft} invoices.
    */
@@ -212,6 +220,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Long applicationFeeAmount,
       Boolean autoAdvance,
       AutomaticTax automaticTax,
+      Long automaticallyFinalizesAt,
       CollectionMethod collectionMethod,
       Object customFields,
       Long daysUntilDue,
@@ -239,6 +248,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
     this.automaticTax = automaticTax;
+    this.automaticallyFinalizesAt = automaticallyFinalizesAt;
     this.collectionMethod = collectionMethod;
     this.customFields = customFields;
     this.daysUntilDue = daysUntilDue;
@@ -276,6 +286,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     private Boolean autoAdvance;
 
     private AutomaticTax automaticTax;
+
+    private Long automaticallyFinalizesAt;
 
     private CollectionMethod collectionMethod;
 
@@ -330,6 +342,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.applicationFeeAmount,
           this.autoAdvance,
           this.automaticTax,
+          this.automaticallyFinalizesAt,
           this.collectionMethod,
           this.customFields,
           this.daysUntilDue,
@@ -424,6 +437,16 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice. */
     public Builder setAutomaticTax(InvoiceUpdateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
+      return this;
+    }
+
+    /**
+     * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
+     * this time if it is still in draft state. To turn off automatic finalization, set {@code
+     * auto_advance} to false.
+     */
+    public Builder setAutomaticallyFinalizesAt(Long automaticallyFinalizesAt) {
+      this.automaticallyFinalizesAt = automaticallyFinalizesAt;
       return this;
     }
 
@@ -3584,8 +3607,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("ideal")
       IDEAL("ideal"),
 
+      @SerializedName("jp_credit_transfer")
+      JP_CREDIT_TRANSFER("jp_credit_transfer"),
+
+      @SerializedName("kakao_pay")
+      KAKAO_PAY("kakao_pay"),
+
       @SerializedName("konbini")
       KONBINI("konbini"),
+
+      @SerializedName("kr_card")
+      KR_CARD("kr_card"),
 
       @SerializedName("link")
       LINK("link"),
@@ -3593,8 +3625,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
 
+      @SerializedName("naver_pay")
+      NAVER_PAY("naver_pay"),
+
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("payco")
+      PAYCO("payco"),
 
       @SerializedName("paynow")
       PAYNOW("paynow"),

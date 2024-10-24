@@ -494,6 +494,10 @@ public class BankAccount extends ApiResource
     return getResponseGetter().request(request, BankAccount.class);
   }
 
+  /**
+   * For more details about FutureRequirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -530,6 +534,10 @@ public class BankAccount extends ApiResource
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -612,6 +620,10 @@ public class BankAccount extends ApiResource
     }
   }
 
+  /**
+   * For more details about Requirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -648,6 +660,10 @@ public class BankAccount extends ApiResource
     @SerializedName("pending_verification")
     List<String> pendingVerification;
 
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

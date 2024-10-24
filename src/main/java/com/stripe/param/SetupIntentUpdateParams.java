@@ -464,6 +464,12 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     AllowRedisplay allowRedisplay;
 
     /**
+     * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+     */
+    @SerializedName("alma")
+    Alma alma;
+
+    /**
      * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
      * method.
      */
@@ -578,6 +584,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     InteracPresent interacPresent;
 
     /**
+     * If this is a {@code kakao_pay} PaymentMethod, this hash contains details about the Kakao Pay
+     * payment method.
+     */
+    @SerializedName("kakao_pay")
+    KakaoPay kakaoPay;
+
+    /**
      * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
      * payment method.
      */
@@ -590,6 +603,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("konbini")
     Konbini konbini;
+
+    /**
+     * If this is a {@code kr_card} PaymentMethod, this hash contains details about the Korean Card
+     * payment method.
+     */
+    @SerializedName("kr_card")
+    KrCard krCard;
 
     /**
      * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
@@ -622,6 +642,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Multibanco multibanco;
 
     /**
+     * If this is a {@code naver_pay} PaymentMethod, this hash contains details about the Naver Pay
+     * payment method.
+     */
+    @SerializedName("naver_pay")
+    NaverPay naverPay;
+
+    /**
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
@@ -634,6 +661,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("p24")
     P24 p24;
+
+    /**
+     * If this is a {@code payco} PaymentMethod, this hash contains details about the PAYCO payment
+     * method.
+     */
+    @SerializedName("payco")
+    Payco payco;
 
     /**
      * If this is a {@code paynow} PaymentMethod, this hash contains details about the PayNow
@@ -676,6 +710,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
+
+    /**
+     * If this is a {@code samsung_pay} PaymentMethod, this hash contains details about the
+     * SamsungPay payment method.
+     */
+    @SerializedName("samsung_pay")
+    SamsungPay samsungPay;
 
     /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
@@ -739,6 +780,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
         AllowRedisplay allowRedisplay,
+        Alma alma,
         AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
@@ -755,20 +797,25 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Grabpay grabpay,
         Ideal ideal,
         InteracPresent interacPresent,
+        KakaoPay kakaoPay,
         Klarna klarna,
         Konbini konbini,
+        KrCard krCard,
         Link link,
         Map<String, String> metadata,
         Mobilepay mobilepay,
         Multibanco multibanco,
+        NaverPay naverPay,
         Oxxo oxxo,
         P24 p24,
+        Payco payco,
         Paynow paynow,
         Paypal paypal,
         Pix pix,
         Promptpay promptpay,
         RadarOptions radarOptions,
         RevolutPay revolutPay,
+        SamsungPay samsungPay,
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
@@ -782,6 +829,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
       this.allowRedisplay = allowRedisplay;
+      this.alma = alma;
       this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
@@ -798,20 +846,25 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.grabpay = grabpay;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
+      this.kakaoPay = kakaoPay;
       this.klarna = klarna;
       this.konbini = konbini;
+      this.krCard = krCard;
       this.link = link;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
+      this.naverPay = naverPay;
       this.oxxo = oxxo;
       this.p24 = p24;
+      this.payco = payco;
       this.paynow = paynow;
       this.paypal = paypal;
       this.pix = pix;
       this.promptpay = promptpay;
       this.radarOptions = radarOptions;
       this.revolutPay = revolutPay;
+      this.samsungPay = samsungPay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
@@ -836,6 +889,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private Alipay alipay;
 
       private AllowRedisplay allowRedisplay;
+
+      private Alma alma;
 
       private AmazonPay amazonPay;
 
@@ -869,9 +924,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private InteracPresent interacPresent;
 
+      private KakaoPay kakaoPay;
+
       private Klarna klarna;
 
       private Konbini konbini;
+
+      private KrCard krCard;
 
       private Link link;
 
@@ -881,9 +940,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Multibanco multibanco;
 
+      private NaverPay naverPay;
+
       private Oxxo oxxo;
 
       private P24 p24;
+
+      private Payco payco;
 
       private Paynow paynow;
 
@@ -896,6 +959,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private RadarOptions radarOptions;
 
       private RevolutPay revolutPay;
+
+      private SamsungPay samsungPay;
 
       private SepaDebit sepaDebit;
 
@@ -921,6 +986,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.afterpayClearpay,
             this.alipay,
             this.allowRedisplay,
+            this.alma,
             this.amazonPay,
             this.auBecsDebit,
             this.bacsDebit,
@@ -937,20 +1003,25 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.grabpay,
             this.ideal,
             this.interacPresent,
+            this.kakaoPay,
             this.klarna,
             this.konbini,
+            this.krCard,
             this.link,
             this.metadata,
             this.mobilepay,
             this.multibanco,
+            this.naverPay,
             this.oxxo,
             this.p24,
+            this.payco,
             this.paynow,
             this.paypal,
             this.pix,
             this.promptpay,
             this.radarOptions,
             this.revolutPay,
+            this.samsungPay,
             this.sepaDebit,
             this.sofort,
             this.swish,
@@ -1007,6 +1078,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setAllowRedisplay(
           SetupIntentUpdateParams.PaymentMethodData.AllowRedisplay allowRedisplay) {
         this.allowRedisplay = allowRedisplay;
+        return this;
+      }
+
+      /**
+       * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+       */
+      public Builder setAlma(SetupIntentUpdateParams.PaymentMethodData.Alma alma) {
+        this.alma = alma;
         return this;
       }
 
@@ -1178,6 +1257,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code kakao_pay} PaymentMethod, this hash contains details about the Kakao
+       * Pay payment method.
+       */
+      public Builder setKakaoPay(SetupIntentUpdateParams.PaymentMethodData.KakaoPay kakaoPay) {
+        this.kakaoPay = kakaoPay;
+        return this;
+      }
+
+      /**
        * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
        * payment method.
        */
@@ -1192,6 +1280,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setKonbini(SetupIntentUpdateParams.PaymentMethodData.Konbini konbini) {
         this.konbini = konbini;
+        return this;
+      }
+
+      /**
+       * If this is a {@code kr_card} PaymentMethod, this hash contains details about the Korean
+       * Card payment method.
+       */
+      public Builder setKrCard(SetupIntentUpdateParams.PaymentMethodData.KrCard krCard) {
+        this.krCard = krCard;
         return this;
       }
 
@@ -1250,6 +1347,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code naver_pay} PaymentMethod, this hash contains details about the Naver
+       * Pay payment method.
+       */
+      public Builder setNaverPay(SetupIntentUpdateParams.PaymentMethodData.NaverPay naverPay) {
+        this.naverPay = naverPay;
+        return this;
+      }
+
+      /**
        * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
        * method.
        */
@@ -1264,6 +1370,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setP24(SetupIntentUpdateParams.PaymentMethodData.P24 p24) {
         this.p24 = p24;
+        return this;
+      }
+
+      /**
+       * If this is a {@code payco} PaymentMethod, this hash contains details about the PAYCO
+       * payment method.
+       */
+      public Builder setPayco(SetupIntentUpdateParams.PaymentMethodData.Payco payco) {
+        this.payco = payco;
         return this;
       }
 
@@ -1320,6 +1435,16 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setRevolutPay(
           SetupIntentUpdateParams.PaymentMethodData.RevolutPay revolutPay) {
         this.revolutPay = revolutPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code samsung_pay} PaymentMethod, this hash contains details about the
+       * SamsungPay payment method.
+       */
+      public Builder setSamsungPay(
+          SetupIntentUpdateParams.PaymentMethodData.SamsungPay samsungPay) {
+        this.samsungPay = samsungPay;
         return this;
       }
 
@@ -1677,6 +1802,63 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Alipay#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Alma {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Alma(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Alma build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Alma(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Alma#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Alma#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -3041,7 +3223,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Ideal {
-      /** The customer's bank. */
+      /**
+       * The customer's bank. Only use this parameter for existing customers. Don't use it for new
+       * customers.
+       */
       @SerializedName("bank")
       Bank bank;
 
@@ -3073,7 +3258,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           return new SetupIntentUpdateParams.PaymentMethodData.Ideal(this.bank, this.extraParams);
         }
 
-        /** The customer's bank. */
+        /**
+         * The customer's bank. Only use this parameter for existing customers. Don't use it for new
+         * customers.
+         */
         public Builder setBank(SetupIntentUpdateParams.PaymentMethodData.Ideal.Bank bank) {
           this.bank = bank;
           return this;
@@ -3212,6 +3400,63 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.InteracPresent#extraParams} for
          * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class KakaoPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private KakaoPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.KakaoPay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.KakaoPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.KakaoPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.KakaoPay#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -3449,6 +3694,63 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class KrCard {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private KrCard(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.KrCard build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.KrCard(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.KrCard#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.KrCard#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Link {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3615,6 +3917,99 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class NaverPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Whether to use Naver Pay points or a card to fund this transaction. If not provided, this
+       * defaults to {@code card}.
+       */
+      @SerializedName("funding")
+      Funding funding;
+
+      private NaverPay(Map<String, Object> extraParams, Funding funding) {
+        this.extraParams = extraParams;
+        this.funding = funding;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Funding funding;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.NaverPay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.NaverPay(
+              this.extraParams, this.funding);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.NaverPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.NaverPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Whether to use Naver Pay points or a card to fund this transaction. If not provided, this
+         * defaults to {@code card}.
+         */
+        public Builder setFunding(
+            SetupIntentUpdateParams.PaymentMethodData.NaverPay.Funding funding) {
+          this.funding = funding;
+          return this;
+        }
+      }
+
+      public enum Funding implements ApiRequestParams.EnumParam {
+        @SerializedName("card")
+        CARD("card"),
+
+        @SerializedName("points")
+        POINTS("points");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Funding(String value) {
+          this.value = value;
         }
       }
     }
@@ -3829,6 +4224,63 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         Bank(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Payco {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Payco(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Payco build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Payco(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Payco#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Payco#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -4195,6 +4647,63 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.RevolutPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class SamsungPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private SamsungPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.SamsungPay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.SamsungPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.SamsungPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.SamsungPay#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -4833,6 +5342,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("alipay")
       ALIPAY("alipay"),
 
+      @SerializedName("alma")
+      ALMA("alma"),
+
       @SerializedName("amazon_pay")
       AMAZON_PAY("amazon_pay"),
 
@@ -4872,11 +5384,17 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("ideal")
       IDEAL("ideal"),
 
+      @SerializedName("kakao_pay")
+      KAKAO_PAY("kakao_pay"),
+
       @SerializedName("klarna")
       KLARNA("klarna"),
 
       @SerializedName("konbini")
       KONBINI("konbini"),
+
+      @SerializedName("kr_card")
+      KR_CARD("kr_card"),
 
       @SerializedName("link")
       LINK("link"),
@@ -4887,11 +5405,17 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
 
+      @SerializedName("naver_pay")
+      NAVER_PAY("naver_pay"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("payco")
+      PAYCO("payco"),
 
       @SerializedName("paynow")
       PAYNOW("paynow"),
@@ -4907,6 +5431,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("revolut_pay")
       REVOLUT_PAY("revolut_pay"),
+
+      @SerializedName("samsung_pay")
+      SAMSUNG_PAY("samsung_pay"),
 
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
