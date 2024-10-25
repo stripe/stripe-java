@@ -589,7 +589,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2024_06_20("2024-06-20"),
 
     @SerializedName("2024-09-30.acacia")
-    VERSION_2024_09_30_ACACIA("2024-09-30.acacia");
+    VERSION_2024_09_30_ACACIA("2024-09-30.acacia"),
+
+    @SerializedName("2024-10-28.acacia")
+    VERSION_2024_10_28_ACACIA("2024-10-28.acacia");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -1036,6 +1039,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("issuing_transaction.created")
     ISSUING_TRANSACTION__CREATED("issuing_transaction.created"),
+
+    @SerializedName("issuing_transaction.purchase_details_receipt_updated")
+    ISSUING_TRANSACTION__PURCHASE_DETAILS_RECEIPT_UPDATED(
+        "issuing_transaction.purchase_details_receipt_updated"),
 
     @SerializedName("issuing_transaction.updated")
     ISSUING_TRANSACTION__UPDATED("issuing_transaction.updated"),

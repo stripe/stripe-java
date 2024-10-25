@@ -46,6 +46,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
+   * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
+   * this time if it is still in draft state. To turn off automatic finalization, set {@code
+   * auto_advance} to false.
+   */
+  @SerializedName("automatically_finalizes_at")
+  Long automaticallyFinalizesAt;
+
+  /**
    * Either {@code charge_automatically} or {@code send_invoice}. This field can be updated only on
    * {@code draft} invoices.
    */
@@ -226,6 +234,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Long applicationFeeAmount,
       Boolean autoAdvance,
       AutomaticTax automaticTax,
+      Long automaticallyFinalizesAt,
       CollectionMethod collectionMethod,
       Object customFields,
       Long daysUntilDue,
@@ -255,6 +264,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
     this.automaticTax = automaticTax;
+    this.automaticallyFinalizesAt = automaticallyFinalizesAt;
     this.collectionMethod = collectionMethod;
     this.customFields = customFields;
     this.daysUntilDue = daysUntilDue;
@@ -295,6 +305,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     private Boolean autoAdvance;
 
     private AutomaticTax automaticTax;
+
+    private Long automaticallyFinalizesAt;
 
     private CollectionMethod collectionMethod;
 
@@ -352,6 +364,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.applicationFeeAmount,
           this.autoAdvance,
           this.automaticTax,
+          this.automaticallyFinalizesAt,
           this.collectionMethod,
           this.customFields,
           this.daysUntilDue,
@@ -493,6 +506,16 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice. */
     public Builder setAutomaticTax(InvoiceUpdateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
+      return this;
+    }
+
+    /**
+     * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
+     * this time if it is still in draft state. To turn off automatic finalization, set {@code
+     * auto_advance} to false.
+     */
+    public Builder setAutomaticallyFinalizesAt(Long automaticallyFinalizesAt) {
+      this.automaticallyFinalizesAt = automaticallyFinalizesAt;
       return this;
     }
 
@@ -2173,6 +2196,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+       * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("id_bank_transfer")
+      Object idBankTransfer;
+
+      /**
        * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment
        * method options to pass to the invoice’s PaymentIntent.
        */
@@ -2199,6 +2229,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           Object card,
           Object customerBalance,
           Map<String, Object> extraParams,
+          Object idBankTransfer,
           Object konbini,
           Object sepaDebit,
           Object usBankAccount) {
@@ -2207,6 +2238,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         this.card = card;
         this.customerBalance = customerBalance;
         this.extraParams = extraParams;
+        this.idBankTransfer = idBankTransfer;
         this.konbini = konbini;
         this.sepaDebit = sepaDebit;
         this.usBankAccount = usBankAccount;
@@ -2227,6 +2259,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Object idBankTransfer;
+
         private Object konbini;
 
         private Object sepaDebit;
@@ -2241,6 +2275,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               this.card,
               this.customerBalance,
               this.extraParams,
+              this.idBankTransfer,
               this.konbini,
               this.sepaDebit,
               this.usBankAccount);
@@ -2347,6 +2382,26 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+         * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setIdBankTransfer(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer
+                idBankTransfer) {
+          this.idBankTransfer = idBankTransfer;
+          return this;
+        }
+
+        /**
+         * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+         * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setIdBankTransfer(EmptyParam idBankTransfer) {
+          this.idBankTransfer = idBankTransfer;
           return this;
         }
 
@@ -3424,6 +3479,67 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      public static class IdBankTransfer {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private IdBankTransfer(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.IdBankTransfer#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
       public static class Konbini {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4102,6 +4218,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("grabpay")
       GRABPAY("grabpay"),
+
+      @SerializedName("id_bank_transfer")
+      ID_BANK_TRANSFER("id_bank_transfer"),
 
       @SerializedName("ideal")
       IDEAL("ideal"),

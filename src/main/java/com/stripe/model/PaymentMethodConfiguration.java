@@ -120,6 +120,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @SerializedName("google_pay")
   GooglePay googlePay;
 
+  @SerializedName("gopay")
+  Gopay gopay;
+
   @SerializedName("grabpay")
   Grabpay grabpay;
 
@@ -127,6 +130,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  @SerializedName("id_bank_transfer")
+  IdBankTransfer idBankTransfer;
 
   @SerializedName("ideal")
   Ideal ideal;
@@ -194,11 +200,17 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @SerializedName("promptpay")
   Promptpay promptpay;
 
+  @SerializedName("qris")
+  Qris qris;
+
   @SerializedName("revolut_pay")
   RevolutPay revolutPay;
 
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
+
+  @SerializedName("shopeepay")
+  Shopeepay shopeepay;
 
   @SerializedName("sofort")
   Sofort sofort;
@@ -1393,6 +1405,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Gopay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Gopay extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
    * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1400,6 +1463,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Grabpay extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
+   * For more details about IdBankTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class IdBankTransfer extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2107,6 +2221,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Qris, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Qris extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
    * For more details about RevolutPay, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2165,6 +2330,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SepaDebit extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
+   * For more details about Shopeepay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Shopeepay extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2537,7 +2753,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(fpx, responseGetter);
     trySetResponseGetter(giropay, responseGetter);
     trySetResponseGetter(googlePay, responseGetter);
+    trySetResponseGetter(gopay, responseGetter);
     trySetResponseGetter(grabpay, responseGetter);
+    trySetResponseGetter(idBankTransfer, responseGetter);
     trySetResponseGetter(ideal, responseGetter);
     trySetResponseGetter(jcb, responseGetter);
     trySetResponseGetter(klarna, responseGetter);
@@ -2551,8 +2769,10 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(paypal, responseGetter);
     trySetResponseGetter(payto, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
+    trySetResponseGetter(qris, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
+    trySetResponseGetter(shopeepay, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);
     trySetResponseGetter(twint, responseGetter);

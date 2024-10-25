@@ -224,6 +224,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("payouts_list")
     PayoutsList payoutsList;
 
+    /** Configuration for the recipients component. */
     @SerializedName("recipients")
     Recipients recipients;
 
@@ -538,6 +539,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Configuration for the recipients component. */
       public Builder setRecipients(AccountSessionCreateParams.Components.Recipients recipients) {
         this.recipients = recipients;
         return this;
@@ -2369,6 +2371,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** The list of features enabled in the embedded component. */
       @SerializedName("features")
       Features features;
 
@@ -2430,6 +2433,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The list of features enabled in the embedded component. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.FinancialAccount.Features features) {
           this.features = features;
@@ -4321,7 +4325,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
       @SerializedName("features")
       Features features;
 
@@ -4382,7 +4385,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.Recipients.Features features) {
           this.features = features;
@@ -4402,8 +4404,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Map<String, Object> extraParams) {
+        /** Whether to allow sending money. */
+        @SerializedName("send_money")
+        Boolean sendMoney;
+
+        private Features(Map<String, Object> extraParams, Boolean sendMoney) {
           this.extraParams = extraParams;
+          this.sendMoney = sendMoney;
         }
 
         public static Builder builder() {
@@ -4413,9 +4420,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private Boolean sendMoney;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.Recipients.Features build() {
-            return new AccountSessionCreateParams.Components.Recipients.Features(this.extraParams);
+            return new AccountSessionCreateParams.Components.Recipients.Features(
+                this.extraParams, this.sendMoney);
           }
 
           /**
@@ -4443,6 +4453,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Whether to allow sending money. */
+          public Builder setSendMoney(Boolean sendMoney) {
+            this.sendMoney = sendMoney;
             return this;
           }
         }

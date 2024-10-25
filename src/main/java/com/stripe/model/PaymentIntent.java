@@ -19,6 +19,7 @@ import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
+import com.stripe.param.PaymentIntentTriggerActionParams;
 import com.stripe.param.PaymentIntentUpdateParams;
 import com.stripe.param.PaymentIntentVerifyMicrodepositsParams;
 import java.util.List;
@@ -1484,6 +1485,47 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, PaymentIntentSearchResult.class);
+  }
+
+  /** Trigger an external action on a PaymentIntent. */
+  public static PaymentIntent triggerAction(String intent, Map<String, Object> params)
+      throws StripeException {
+    return triggerAction(intent, params, (RequestOptions) null);
+  }
+
+  /** Trigger an external action on a PaymentIntent. */
+  public static PaymentIntent triggerAction(
+      String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/test/payment_intents/%s/trigger_action", ApiResource.urlEncodeId(intent));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /** Trigger an external action on a PaymentIntent. */
+  public static PaymentIntent triggerAction(String intent, PaymentIntentTriggerActionParams params)
+      throws StripeException {
+    return triggerAction(intent, params, (RequestOptions) null);
+  }
+
+  /** Trigger an external action on a PaymentIntent. */
+  public static PaymentIntent triggerAction(
+      String intent, PaymentIntentTriggerActionParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test/payment_intents/%s/trigger_action", ApiResource.urlEncodeId(intent));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentIntent.class);
   }
 
   /**
@@ -2997,6 +3039,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("grabpay")
     Grabpay grabpay;
 
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
+
     @SerializedName("ideal")
     Ideal ideal;
 
@@ -4221,6 +4266,53 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Grabpay extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    /**
+     * For more details about IdBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IdBankTransfer extends StripeObject {
+      /**
+       * The UNIX timestamp until which the virtual bank account is valid. Permitted range is from
+       * now till 2678400 seconds (31 days) from now.
+       */
+      @SerializedName("expires_after")
+      Long expiresAfter;
+
+      /**
+       * The UNIX timestamp until which the virtual bank account is valid. Permitted range is from
+       * now until 30 days from now. If unset, it defaults to 1 days from now.
+       */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
