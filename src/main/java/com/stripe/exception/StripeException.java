@@ -15,6 +15,8 @@ public abstract class StripeException extends Exception {
   // implement Serializable
   transient StripeError stripeError;
 
+  // This field and its getter are used internally and may change in a non-major version
+  // of the SDK
   ApiMode stripeErrorApiMode;
 
   public void setStripeError(StripeError err) {
