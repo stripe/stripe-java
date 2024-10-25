@@ -409,7 +409,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     error.setLastResponse(response);
     exception =
         new ApiException(error.getMessage(), response.requestId(), code, response.code(), null);
-    exception.setStripeError(error);
+    exception.setStripeV2Error(error);
     throw exception;
   }
 
