@@ -165,7 +165,10 @@ public class EventDataObjectDeserializer {
                     + "consider transforming the raw JSON data object to be compatible with this "
                     + "current model class schemas using `deserializeUnsafeWith`. "
                     + "Original error message: %s",
-                Stripe.stripeVersion, this.apiVersion, Stripe.stripeVersion, e.getMessage());
+                Stripe.getStripeVersionWithBetaHeaders(),
+                this.apiVersion,
+                Stripe.getStripeVersionWithBetaHeaders(),
+                e.getMessage());
       } else {
         errorMessage =
             String.format(
