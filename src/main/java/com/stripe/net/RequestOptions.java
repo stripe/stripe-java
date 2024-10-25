@@ -17,8 +17,8 @@ public class RequestOptions {
   private final String stripeAccount;
 
   private final String baseUrl;
-  /** Uses the globally set version by defaeult, unless an override is provided. */
-  private final String stripeVersion = Stripe.stripeVersion;
+  /** Uses the globally set version by default, unless an override is provided. */
+  private final String stripeVersion = Stripe.getStripeVersionWithBetaHeaders();
 
   /**
    * Stripe version override when made on behalf of others. This can be used when the returned
