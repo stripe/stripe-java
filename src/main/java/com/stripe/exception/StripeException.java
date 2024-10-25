@@ -2,6 +2,7 @@ package com.stripe.exception;
 
 import com.google.gson.JsonObject;
 import com.stripe.model.StripeError;
+import com.stripe.net.ApiMode;
 import com.stripe.net.StripeResponseGetter;
 import lombok.Getter;
 
@@ -14,10 +15,17 @@ public abstract class StripeException extends Exception {
   // implement Serializable
   transient StripeError stripeError;
 
+  ApiMode stripeErrorApiMode;
+
   public void setStripeError(StripeError err) {
     stripeError = err;
+    stripeErrorApiMode = ApiMode.V1;
   }
 
+  public void setStripeV2Error(StripeError err) {
+    stripeError = err;
+    stripeErrorApiMode = ApiMode.V2;
+  }
   /**
    * Returns the error code of the response that triggered this exception. For {@link ApiException}
    * the error code will be equal to {@link StripeError#getCode()}.
@@ -68,7 +76,8 @@ public abstract class StripeException extends Exception {
     if (requestId != null) {
       additionalInfo += "; request-id: " + requestId;
     }
-    if (this.getUserMessage() != null) {
+    // a separate user message is only available on v2 errors
+    if (stripeErrorApiMode == ApiMode.V2 && this.getUserMessage() != null) {
       additionalInfo += "; user-message: " + this.getUserMessage();
     }
     return super.getMessage() + additionalInfo;
@@ -81,7 +90,12 @@ public abstract class StripeException extends Exception {
    */
   public String getUserMessage() {
     if (this.getStripeError() != null) {
-      return this.getStripeError().getUserMessage();
+      switch (stripeErrorApiMode) {
+        case V1:
+          return this.getStripeError().getMessage();
+        case V2:
+          return this.getStripeError().getUserMessage();
+      }
     }
     return null;
   }
