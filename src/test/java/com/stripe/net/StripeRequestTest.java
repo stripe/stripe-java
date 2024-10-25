@@ -1,3 +1,5 @@
+package com.stripe.net;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -8,7 +10,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
-import com.stripe.net.*;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import com.stripe.param.common.EmptyParam;
 import java.nio.charset.StandardCharsets;

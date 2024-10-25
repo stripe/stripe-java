@@ -51,24 +51,6 @@ public class RequestOptionsTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUsesGlobalStripeVersionWithDefault() {
-    String originalVersion = Stripe.stripeVersion;
-    assertEquals(originalVersion, RequestOptions.getDefault().getStripeVersion());
-
-    Stripe.stripeVersion = "2022-08-19";
-    assertEquals("2022-08-19", RequestOptions.getDefault().getStripeVersion());
-  }
-
-  @Test
-  public void testUsesGlobalStripeVersionWithBuilder() {
-    String originalVersion = Stripe.stripeVersion;
-    assertEquals(originalVersion, RequestOptions.builder().build().getStripeVersion());
-
-    Stripe.stripeVersion = "2022-08-19";
-    assertEquals("2022-08-19", RequestOptions.builder().build().getStripeVersion());
-  }
-
-  @Test
   public void testToBuilderFullCopy() {
     RequestOptions opts =
         RequestOptionsBuilder.unsafeSetStripeVersionOverride(

@@ -4,6 +4,7 @@ import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Getter;
 
 public abstract class Stripe {
   public static final int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;
@@ -21,24 +22,30 @@ public abstract class Stripe {
   public static volatile boolean enableTelemetry = true;
 
   /**
-   * Stripe API version which is sent by default on requests. This can be updated to include beta
-   * headers.
-   *
-   * <p>Pointing to different API versions than {@code API_VERSION} can lead to deserialziation
-   * errors and should be avoided.
+   * Stripe API version which is sent by default on requests. This is set to the API version that is
+   * linked to this SDK version. Call {@link Stripe#addBetaVersion(String,String)} to add beta
+   * version information.
    */
-  public static volatile String stripeVersion = API_VERSION;
+  public static final String stripeVersion = API_VERSION;
+
+  // Used to set the default version in RequestOptions
+  @Getter private static String stripeVersionWithBetaHeaders = stripeVersion;
 
   /** Add a specified beta to the global Stripe API Version. Only call this method once per beta. */
   public static void addBetaVersion(String betaName, String betaVersion) {
-    if (stripeVersion.indexOf("; " + betaName + "=") >= 0) {
+    if (stripeVersionWithBetaHeaders.indexOf("; " + betaName + "=") >= 0) {
       throw new RuntimeException(
           String.format(
               "Stripe version header %s already contains entry for beta %s",
-              stripeVersion, betaName));
+              stripeVersionWithBetaHeaders, betaName));
     }
 
-    stripeVersion = String.format("%s; %s=%s", stripeVersion, betaName, betaVersion);
+    stripeVersionWithBetaHeaders = String.format("%s; %s=%s", stripeVersion, betaName, betaVersion);
+  }
+
+  // For testing only.  This is not part of a stable API and could change in non-major versions.
+  public static void clearBetaVersion() {
+    stripeVersionWithBetaHeaders = stripeVersion;
   }
 
   // Note that URLConnection reserves the value of 0 to mean "infinite

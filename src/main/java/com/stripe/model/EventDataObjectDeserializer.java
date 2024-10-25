@@ -195,15 +195,10 @@ public class EventDataObjectDeserializer {
   }
 
   private boolean apiVersionMatch() {
-    // Trim the locally configured API version to not include beta headers, since the payload won't
-    // have any.
-    String localApiVersion = StringUtils.trimApiVersion(Stripe.stripeVersion);
-    String eventApiVersion = StringUtils.trimApiVersion(this.apiVersion);
 
-    // Preserved for testing; we have tests that hook getIntegrationApiVersion
-    // to test with other api versions.
-    if (!localApiVersion.contains(".")) {
-      return eventApiVersion.equals(localApiVersion);
+    String eventApiVersion = StringUtils.trimApiVersion(this.apiVersion);
+    if (!Stripe.API_VERSION.contains(".")) {
+      return eventApiVersion.equals(Stripe.API_VERSION);
     }
 
     // If the event api version is from before we started adding
@@ -215,7 +210,7 @@ public class EventDataObjectDeserializer {
 
     // versions are yyyy-MM-dd.releaseIdentifier
     String eventReleaseTrain = eventApiVersion.split("\\.", 2)[1];
-    String currentReleaseTrain = localApiVersion.split("\\.", 2)[1];
+    String currentReleaseTrain = Stripe.API_VERSION.split("\\.", 2)[1];
     return eventReleaseTrain.equals(currentReleaseTrain);
   }
 

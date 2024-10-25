@@ -46,7 +46,6 @@ public class BaseStripeTest {
   private String origApiKey;
   private String origClientId;
   private String origUploadBase;
-  private String origStripeVersion;
   protected static final String TEST_API_KEY = "sk_test_123";
 
   static {
@@ -117,7 +116,8 @@ public class BaseStripeTest {
     this.origUploadBase = Stripe.getUploadBase();
     this.origApiKey = Stripe.apiKey;
     this.origClientId = Stripe.clientId;
-    this.origStripeVersion = Stripe.stripeVersion;
+
+    Stripe.clearBetaVersion();
 
     Stripe.overrideApiBase("http://localhost:" + port);
     Stripe.overrideUploadBase("http://localhost:" + port);
@@ -145,7 +145,6 @@ public class BaseStripeTest {
     Stripe.overrideUploadBase(this.origUploadBase);
     Stripe.apiKey = this.origApiKey;
     Stripe.clientId = this.origClientId;
-    Stripe.stripeVersion = this.origStripeVersion;
   }
 
   /**

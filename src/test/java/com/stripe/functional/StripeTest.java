@@ -11,9 +11,8 @@ public class StripeTest extends BaseStripeTest {
 
   @Test
   public void testAddBetaVersion() {
-    Stripe.stripeVersion = "2024-02-23";
     Stripe.addBetaVersion("super_cool_beta", "v1");
-    assertEquals(Stripe.stripeVersion, "2024-02-23; super_cool_beta=v1");
+    assertEquals(Stripe.stripeVersion, Stripe.API_VERSION + "; super_cool_beta=v1");
     assertThrows(
         RuntimeException.class,
         () -> {
