@@ -40,7 +40,8 @@ public abstract class Stripe {
               stripeVersionWithBetaHeaders, betaName));
     }
 
-    stripeVersionWithBetaHeaders = String.format("%s; %s=%s", stripeVersion, betaName, betaVersion);
+    stripeVersionWithBetaHeaders =
+        String.format("%s; %s=%s", stripeVersionWithBetaHeaders, betaName, betaVersion);
   }
 
   // For testing only.  This is not part of a stable API and could change in non-major versions.
