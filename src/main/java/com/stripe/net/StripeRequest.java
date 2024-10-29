@@ -45,6 +45,9 @@ public class StripeRequest {
   /** The special modifiers of the request. */
   RequestOptions options;
 
+  /** The version of the API (ApiMode.V1 or ApiMode.V2) */
+  ApiMode apiMode;
+
   /**
    * Initializes a new instance of the {@link StripeRequest} class.
    *
@@ -70,6 +73,7 @@ public class StripeRequest {
       this.method = method;
       this.url = buildURL(method, url, params, apiMode);
       this.headers = buildHeaders(method, this.options, this.content, apiMode);
+      this.apiMode = apiMode;
     } catch (IOException e) {
       throw new ApiConnectionException(
           String.format(
@@ -106,6 +110,7 @@ public class StripeRequest {
       this.url = buildURL(method, url, params, apiMode);
       this.content = buildContent(method, params, apiMode);
       this.headers = buildHeaders(method, this.options, this.content, apiMode);
+      this.apiMode = apiMode;
     } catch (IOException e) {
       throw new ApiConnectionException(
           String.format(
@@ -209,7 +214,8 @@ public class StripeRequest {
         this.content,
         this.headers.withAdditionalHeader(name, value),
         this.params,
-        this.options);
+        this.options,
+        this.apiMode);
   }
 
   private static URL buildURL(

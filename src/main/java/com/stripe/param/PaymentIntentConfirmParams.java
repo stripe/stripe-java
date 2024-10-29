@@ -5459,6 +5459,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Grabpay grabpay;
 
     /**
+     * If this is an {@code IdBankTransfer} PaymentMethod, this hash contains details about the
+     * IdBankTransfer payment method.
+     */
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
+
+    /**
      * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
      * method.
      */
@@ -5720,6 +5727,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Giropay giropay,
         Gopay gopay,
         Grabpay grabpay,
+        IdBankTransfer idBankTransfer,
         Ideal ideal,
         InteracPresent interacPresent,
         KakaoPay kakaoPay,
@@ -5775,6 +5783,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.giropay = giropay;
       this.gopay = gopay;
       this.grabpay = grabpay;
+      this.idBankTransfer = idBankTransfer;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.kakaoPay = kakaoPay;
@@ -5857,6 +5866,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Gopay gopay;
 
       private Grabpay grabpay;
+
+      private IdBankTransfer idBankTransfer;
 
       private Ideal ideal;
 
@@ -5950,6 +5961,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.giropay,
             this.gopay,
             this.grabpay,
+            this.idBankTransfer,
             this.ideal,
             this.interacPresent,
             this.kakaoPay,
@@ -6200,6 +6212,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setGrabpay(PaymentIntentConfirmParams.PaymentMethodData.Grabpay grabpay) {
         this.grabpay = grabpay;
+        return this;
+      }
+
+      /**
+       * If this is an {@code IdBankTransfer} PaymentMethod, this hash contains details about the
+       * IdBankTransfer payment method.
+       */
+      public Builder setIdBankTransfer(
+          PaymentIntentConfirmParams.PaymentMethodData.IdBankTransfer idBankTransfer) {
+        this.idBankTransfer = idBankTransfer;
         return this;
       }
 
@@ -8205,6 +8227,102 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class IdBankTransfer {
+      /** Bank where the account is held. */
+      @SerializedName("bank")
+      Bank bank;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private IdBankTransfer(Bank bank, Map<String, Object> extraParams) {
+        this.bank = bank;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Bank bank;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodData.IdBankTransfer build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.IdBankTransfer(
+              this.bank, this.extraParams);
+        }
+
+        /** Bank where the account is held. */
+        public Builder setBank(
+            PaymentIntentConfirmParams.PaymentMethodData.IdBankTransfer.Bank bank) {
+          this.bank = bank;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.IdBankTransfer#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.IdBankTransfer#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum Bank implements ApiRequestParams.EnumParam {
+        @SerializedName("bca")
+        BCA("bca"),
+
+        @SerializedName("bni")
+        BNI("bni"),
+
+        @SerializedName("bri")
+        BRI("bri"),
+
+        @SerializedName("cimb")
+        CIMB("cimb"),
+
+        @SerializedName("permata")
+        PERMATA("permata");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Bank(String value) {
+          this.value = value;
         }
       }
     }
@@ -10778,6 +10896,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("grabpay")
       GRABPAY("grabpay"),
 
+      @SerializedName("id_bank_transfer")
+      ID_BANK_TRANSFER("id_bank_transfer"),
+
       @SerializedName("ideal")
       IDEAL("ideal"),
 
@@ -11026,6 +11147,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object grabpay;
 
     /**
+     * If this is a {@code id_bank_transfer} PaymentMethod, this sub-hash contains details about the
+     * Indonesia Bank Transfer payment method options.
+     */
+    @SerializedName("id_bank_transfer")
+    Object idBankTransfer;
+
+    /**
      * If this is a {@code ideal} PaymentMethod, this sub-hash contains details about the Ideal
      * payment method options.
      */
@@ -11264,6 +11392,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object giropay,
         Object gopay,
         Object grabpay,
+        Object idBankTransfer,
         Object ideal,
         Object interacPresent,
         Object kakaoPay,
@@ -11316,6 +11445,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.giropay = giropay;
       this.gopay = gopay;
       this.grabpay = grabpay;
+      this.idBankTransfer = idBankTransfer;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.kakaoPay = kakaoPay;
@@ -11395,6 +11525,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Object gopay;
 
       private Object grabpay;
+
+      private Object idBankTransfer;
 
       private Object ideal;
 
@@ -11482,6 +11614,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.giropay,
             this.gopay,
             this.grabpay,
+            this.idBankTransfer,
             this.ideal,
             this.interacPresent,
             this.kakaoPay,
@@ -11901,6 +12034,25 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setGrabpay(EmptyParam grabpay) {
         this.grabpay = grabpay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code id_bank_transfer} PaymentMethod, this sub-hash contains details about
+       * the Indonesia Bank Transfer payment method options.
+       */
+      public Builder setIdBankTransfer(
+          PaymentIntentConfirmParams.PaymentMethodOptions.IdBankTransfer idBankTransfer) {
+        this.idBankTransfer = idBankTransfer;
+        return this;
+      }
+
+      /**
+       * If this is a {@code id_bank_transfer} PaymentMethod, this sub-hash contains details about
+       * the Indonesia Bank Transfer payment method options.
+       */
+      public Builder setIdBankTransfer(EmptyParam idBankTransfer) {
+        this.idBankTransfer = idBankTransfer;
         return this;
       }
 
@@ -18533,6 +18685,180 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setSetupFutureUsage(
             PaymentIntentConfirmParams.PaymentMethodOptions.Grabpay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class IdBankTransfer {
+      /**
+       * The UNIX timestamp until which the virtual bank account is valid. Permitted range is from 5
+       * minutes from now until 31 days from now. If unset, it defaults to 3 days from now.
+       */
+      @SerializedName("expires_after")
+      Long expiresAfter;
+
+      /**
+       * The UNIX timestamp until which the virtual bank account is valid. Permitted range is from
+       * now until 30 days from now. If unset, it defaults to 1 days from now.
+       */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If you've already set {@code setup_future_usage} and you're performing a request using a
+       * publishable key, you can only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private IdBankTransfer(
+          Long expiresAfter,
+          Long expiresAt,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.expiresAfter = expiresAfter;
+        this.expiresAt = expiresAt;
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long expiresAfter;
+
+        private Long expiresAt;
+
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.IdBankTransfer build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.IdBankTransfer(
+              this.expiresAfter, this.expiresAt, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * The UNIX timestamp until which the virtual bank account is valid. Permitted range is from
+         * 5 minutes from now until 31 days from now. If unset, it defaults to 3 days from now.
+         */
+        public Builder setExpiresAfter(Long expiresAfter) {
+          this.expiresAfter = expiresAfter;
+          return this;
+        }
+
+        /**
+         * The UNIX timestamp until which the virtual bank account is valid. Permitted range is from
+         * now until 30 days from now. If unset, it defaults to 1 days from now.
+         */
+        public Builder setExpiresAt(Long expiresAt) {
+          this.expiresAt = expiresAt;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentConfirmParams.PaymentMethodOptions.IdBankTransfer#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentConfirmParams.PaymentMethodOptions.IdBankTransfer#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.IdBankTransfer.SetupFutureUsage
                 setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;

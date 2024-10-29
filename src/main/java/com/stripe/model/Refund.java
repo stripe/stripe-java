@@ -631,6 +631,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("grabpay")
     Grabpay grabpay;
 
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
+
     @SerializedName("jp_bank_transfer")
     JpBankTransfer jpBankTransfer;
 
@@ -896,6 +899,26 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     public static class Grabpay extends StripeObject {}
 
     /**
+     * For more details about IdBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IdBankTransfer extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    /**
      * For more details about JpBankTransfer, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1116,7 +1139,6 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
-    /** Contains the refund details. */
     @SerializedName("display_details")
     DisplayDetails displayDetails;
 

@@ -138,8 +138,10 @@ public abstract class HttpClient {
    *
    * @return a string containing the value of the {@code User-Agent} header
    */
-  protected static String buildUserAgentString() {
-    String userAgent = String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION);
+  protected static String buildUserAgentString(StripeRequest request) {
+    String apiMode = request.apiMode() == ApiMode.V2 ? "v2" : "v1";
+
+    String userAgent = String.format("Stripe/%s JavaBindings/%s", apiMode, Stripe.VERSION);
 
     if (Stripe.getAppInfo() != null) {
       userAgent += " " + formatAppInfo(Stripe.getAppInfo());

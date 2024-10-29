@@ -1050,6 +1050,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String grabpayPayments;
 
     /**
+     * The status of the Indonesia Bank Transfer payments capability of the account, or whether the
+     * account can directly process Indonesia Bank Transfer charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("id_bank_transfer_payments")
+    String idBankTransferPayments;
+
+    /**
+     * The status of Bank BCA onboarding of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("id_bank_transfer_payments_bca")
+    String idBankTransferPaymentsBca;
+
+    /**
      * The status of the iDEAL payments capability of the account, or whether the account can
      * directly process iDEAL charges.
      *
@@ -2312,6 +2329,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("bacs_debit_payments")
     BacsDebitPayments bacsDebitPayments;
 
+    @SerializedName("bank_bca_onboarding")
+    BankBcaOnboarding bankBcaOnboarding;
+
     @SerializedName("branding")
     Branding branding;
 
@@ -2371,6 +2391,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("service_user_number")
       String serviceUserNumber;
+    }
+
+    /**
+     * For more details about BankBcaOnboarding, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankBcaOnboarding extends StripeObject {
+      /** Bank BCA business account holder name. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** Bank BCA business account number. */
+      @SerializedName("business_account_number")
+      String businessAccountNumber;
     }
 
     /**

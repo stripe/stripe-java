@@ -9,6 +9,7 @@ import static org.mockito.Mockito.withSettings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeTest;
+import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import java.net.ConnectException;
@@ -179,5 +180,35 @@ public class HttpClientTest extends BaseStripeTest {
     assertNotNull(response);
     assertEquals(200, response.code());
     assertEquals(1, response.numRetries());
+  }
+
+  @Test
+  public void testV1RequestSetsCorrectUserAgent() throws StripeException {
+    StripeRequest request =
+        StripeRequest.create(
+            ApiResource.RequestMethod.GET,
+            "http://example.com/get",
+            null,
+            RequestOptions.builder().setApiKey("sk_test_123").setMaxNetworkRetries(2).build(),
+            ApiMode.V1);
+
+    assertEquals(
+        HttpClient.buildUserAgentString(request),
+        String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION));
+  }
+
+  @Test
+  public void testV2RequestSetsCorrectUserAgent() throws StripeException {
+    StripeRequest request =
+        StripeRequest.create(
+            ApiResource.RequestMethod.GET,
+            "http://example.com/get",
+            null,
+            RequestOptions.builder().setApiKey("sk_test_123").setMaxNetworkRetries(2).build(),
+            ApiMode.V2);
+
+    assertEquals(
+        HttpClient.buildUserAgentString(request),
+        String.format("Stripe/v2 JavaBindings/%s", Stripe.VERSION));
   }
 }
