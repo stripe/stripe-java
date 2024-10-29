@@ -1,8 +1,16 @@
 # Changelog
 
+## 27.1.2 - 2024-10-29
+* [#1912](https://github.com/stripe/stripe-java/pull/1912) add `tolerance` argument to `parseThinEvent`
+  - The default `tolerance` value is still what most users will want, but this fixes an oversight where it wasn't possible to set `tolerance` at all when parsing thin events
+* [#1911](https://github.com/stripe/stripe-java/pull/1911) Fixes bug [#1899](https://github.com/stripe/stripe-java/issues/1899)
+  - Fixes the bug introduced in v27 where StripeException#getUserMessage on v1 API errors would return null instead of the error message.
+* [#1906](https://github.com/stripe/stripe-java/pull/1906) Update webhook API version validation
+  - Update webhook event processing to accept events from any API version within the supported major release
+
 ## 27.1.1 - 2024-10-18
 * [#1901](https://github.com/stripe/stripe-java/pull/1901) update object tags for meter-related classes
-  
+
   - fixes a bug where the `object` property of the `MeterEvent`, `MeterEventAdjustment`, and `MeterEventSession` didn't match the server.
 * [#1898](https://github.com/stripe/stripe-java/pull/1898) Clean up examples
 * [#1894](https://github.com/stripe/stripe-java/pull/1894) Fixed example for raw request in readme file
