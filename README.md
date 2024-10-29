@@ -1,6 +1,6 @@
 # Stripe Java client library
 
-[![Maven Central](https://img.shields.io/badge/maven--central-v27.1.0-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
+[![Maven Central](https://img.shields.io/badge/maven--central-v27.1.1-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/stripe/stripe-java/badge.svg?branch=master)](https://coveralls.io/github/stripe/stripe-java?branch=master)
@@ -18,7 +18,7 @@ The official [Stripe][stripe] Java client library.
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:27.1.0"
+implementation "com.stripe:stripe-java:27.1.1"
 ```
 
 ### Maven users
@@ -29,7 +29,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>27.1.0</version>
+  <version>27.1.1</version>
 </dependency>
 ```
 
@@ -37,7 +37,7 @@ Add this dependency to your project's POM:
 
 You'll need to manually install the following JARs:
 
-- [The Stripe JAR](https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/27.1.0/stripe-java-27.1.0.jar)
+- [The Stripe JAR](https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/27.1.1/stripe-java-27.1.1.jar)
 - [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar>.
 
 ### [ProGuard][proguard]
@@ -267,24 +267,26 @@ Stripe.addBetaVersion("feature_beta", "v3");
 If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `StripeClient`.
 
 ```java
-// Create a RawRequestOptions object, allowing you to set per-request
+// (Optional) Create a RawRequestOptions object, allowing you to set per-request
 // configuration options like additional headers.
 Map<String, String> stripeVersionHeader = new HashMap<>();
-stripeVersionHeader.put("Stripe-Version", "2022-11-15; feature_beta=v3");
-RawRequestOptions options =
-  RawRequestOptions.builder()
-    .setAdditionalHeaders(stripeVersionHeader)
-    .build();
+stripeVersionHeader.put("Stripe-Version", "2024-09-30.acacia");
+RawRequestOptions options = RawRequestOptions.builder()
+        .setAdditionalHeaders(stripeVersionHeader)
+        .build();
 
-// Make the request using the Stripe.rawRequest() method.
+// Make the request using the StripeClient.rawRequest() method.
 StripeClient client = new StripeClient("sk_test_...");
 final StripeResponse response =
-  client.rawRequest(
-    ApiResource.RequestMethod.POST, "/v1/beta_endpoint", "param=123", options);
+        client.rawRequest(
+                ApiResource.RequestMethod.POST, "/v1/customers", "name=johndoe&email=johndoe@example.com", options);
 
 // (Optional) response.body() is a string. You can call
-// Stripe.deserialize() to get a StripeObject.
-StripeObject obj = client.deserialize(response.body());
+// StripeClient.deserialize() to get a StripeObject
+// Pass ApiMode.V2 if the endpoint you are targeting starts with "/v2", else pass ApiMode.V1
+StripeObject object = client.deserialize(response.body(), ApiMode.V1);
+// or cast it if a corresponding response class exists in the SDK
+Customer customer = (Customer) client.deserialize(response.body(), ApiMode.V1);
 ```
 
 ## Support
