@@ -54,7 +54,25 @@ public class StripeClient {
    */
   public ThinEvent parseThinEvent(String payload, String sigHeader, String secret)
       throws SignatureVerificationException {
-    Signature.verifyHeader(payload, sigHeader, secret, Webhook.DEFAULT_TOLERANCE);
+    return parseThinEvent(payload, sigHeader, secret, Webhook.DEFAULT_TOLERANCE);
+  }
+
+  /**
+   * Returns an StripeEvent instance using the provided JSON payload. Throws a JsonSyntaxException
+   * if the payload is not valid JSON, and a SignatureVerificationException if the signature
+   * verification fails for any reason.
+   *
+   * @param payload the payload sent by Stripe.
+   * @param sigHeader the contents of the signature header sent by Stripe.
+   * @param secret secret used to generate the signature.
+   * @param tolerance number of seconds that the event's timestamp can differ from the system time.
+   *     Passing `0` will disable the time check entirely and is **strongly discouraged**.
+   * @return the StripeEvent instance
+   * @throws SignatureVerificationException if the verification fails.
+   */
+  public ThinEvent parseThinEvent(String payload, String sigHeader, String secret, long tolerance)
+      throws SignatureVerificationException {
+    Signature.verifyHeader(payload, sigHeader, secret, tolerance);
 
     return ApiResource.GSON.fromJson(payload, ThinEvent.class);
   }

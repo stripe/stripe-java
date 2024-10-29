@@ -78,23 +78,22 @@ public class StripeError extends StripeObject {
    * payment_method_provider_decline}, {@code payment_method_provider_timeout}, {@code
    * payment_method_unactivated}, {@code payment_method_unexpected_state}, {@code
    * payment_method_unsupported_type}, {@code payout_reconciliation_not_ready}, {@code
-   * payout_statement_descriptor_profanity}, {@code payouts_limit_exceeded}, {@code
-   * payouts_not_allowed}, {@code platform_account_required}, {@code platform_api_key_expired},
-   * {@code postal_code_invalid}, {@code processing_error}, {@code product_inactive}, {@code
-   * progressive_onboarding_limit_exceeded}, {@code rate_limit}, {@code refer_to_customer}, {@code
-   * refund_disputed_payment}, {@code resource_already_exists}, {@code resource_missing}, {@code
-   * return_intent_already_processed}, {@code routing_number_invalid}, {@code secret_key_required},
-   * {@code sensitive_data_access_expired}, {@code sepa_unsupported_account}, {@code
-   * setup_attempt_failed}, {@code setup_intent_authentication_failure}, {@code
-   * setup_intent_invalid_parameter}, {@code setup_intent_mandate_invalid}, {@code
-   * setup_intent_setup_attempt_expired}, {@code setup_intent_unexpected_state}, {@code
-   * shipping_address_invalid}, {@code shipping_calculation_failed}, {@code sku_inactive}, {@code
-   * state_unsupported}, {@code status_transition_invalid}, {@code stripe_tax_inactive}, {@code
-   * tax_id_invalid}, {@code taxes_calculation_failed}, {@code
-   * terminal_location_country_unsupported}, {@code terminal_reader_busy}, {@code
-   * terminal_reader_collected_data_invalid}, {@code terminal_reader_hardware_fault}, {@code
-   * terminal_reader_invalid_location_for_activation}, {@code
-   * terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code
+   * payouts_limit_exceeded}, {@code payouts_not_allowed}, {@code platform_account_required}, {@code
+   * platform_api_key_expired}, {@code postal_code_invalid}, {@code processing_error}, {@code
+   * product_inactive}, {@code progressive_onboarding_limit_exceeded}, {@code rate_limit}, {@code
+   * refer_to_customer}, {@code refund_disputed_payment}, {@code resource_already_exists}, {@code
+   * resource_missing}, {@code return_intent_already_processed}, {@code routing_number_invalid},
+   * {@code secret_key_required}, {@code sensitive_data_access_expired}, {@code
+   * sepa_unsupported_account}, {@code setup_attempt_failed}, {@code
+   * setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
+   * setup_intent_mandate_invalid}, {@code setup_intent_setup_attempt_expired}, {@code
+   * setup_intent_unexpected_state}, {@code shipping_address_invalid}, {@code
+   * shipping_calculation_failed}, {@code sku_inactive}, {@code state_unsupported}, {@code
+   * status_transition_invalid}, {@code stripe_tax_inactive}, {@code tax_id_invalid}, {@code
+   * taxes_calculation_failed}, {@code terminal_location_country_unsupported}, {@code
+   * terminal_reader_busy}, {@code terminal_reader_collected_data_invalid}, {@code
+   * terminal_reader_hardware_fault}, {@code terminal_reader_invalid_location_for_activation},
+   * {@code terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code
    * terminal_reader_timeout}, {@code testmode_charges_only}, {@code tls_version_unsupported},
    * {@code token_already_used}, {@code token_card_network_invalid}, {@code token_in_use}, {@code
    * transfer_source_balance_parameters_mismatch}, {@code transfers_not_allowed}, or {@code
