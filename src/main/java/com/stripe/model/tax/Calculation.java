@@ -235,6 +235,10 @@ public class Calculation extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Calculation.class);
   }
 
+  /**
+   * For more details about CustomerDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -267,6 +271,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("taxability_override")
     String taxabilityOverride;
 
+    /**
+     * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -302,6 +310,10 @@ public class Calculation extends ApiResource implements HasId {
       String state;
     }
 
+    /**
+     * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -320,8 +332,9 @@ public class Calculation extends ApiResource implements HasId {
        * ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat},
        * {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code
        * si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat},
-       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code
-       * unknown}.
+       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code
+       * tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or
+       * {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -332,6 +345,10 @@ public class Calculation extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about ShipFromDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -339,6 +356,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("address")
     Address address;
 
+    /**
+     * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -375,6 +396,10 @@ public class Calculation extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about ShippingCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -420,6 +445,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("tax_code")
     String taxCode;
 
+    /**
+     * For more details about TaxBreakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -470,6 +499,10 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("taxable_amount")
       Long taxableAmount;
 
+      /**
+       * For more details about Jurisdiction, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -502,6 +535,10 @@ public class Calculation extends ApiResource implements HasId {
         String state;
       }
 
+      /**
+       * For more details about TaxRateDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -524,8 +561,8 @@ public class Calculation extends ApiResource implements HasId {
          * The tax type, such as {@code vat} or {@code sales_tax}.
          *
          * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code rst},
-         * {@code sales_tax}, or {@code vat}.
+         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
+         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, or {@code vat}.
          */
         @SerializedName("tax_type")
         String taxType;
@@ -533,6 +570,10 @@ public class Calculation extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about TaxBreakdown, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -571,6 +612,10 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -582,9 +627,27 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("country")
       String country;
 
+      /**
+       * The amount of the tax rate when the {@code rate_type} is {@code flat_amount}. Tax rates
+       * with {@code rate_type} {@code percentage} can vary based on the transaction, resulting in
+       * this field being {@code null}. This field exposes the amount and currency of the flat tax
+       * rate.
+       */
+      @SerializedName("flat_amount")
+      FlatAmount flatAmount;
+
       /** The tax rate percentage as a string. For example, 8.5% is represented as {@code "8.5"}. */
       @SerializedName("percentage_decimal")
       String percentageDecimal;
+
+      /**
+       * Indicates the type of tax rate applied to the taxable amount. This value can be {@code
+       * null} when no tax applies to the location.
+       *
+       * <p>One of {@code flat_amount}, or {@code percentage}.
+       */
+      @SerializedName("rate_type")
+      String rateType;
 
       /** State, county, province, or region. */
       @SerializedName("state")
@@ -594,11 +657,34 @@ public class Calculation extends ApiResource implements HasId {
        * The tax type, such as {@code vat} or {@code sales_tax}.
        *
        * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-       * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code rst}, {@code
-       * sales_tax}, or {@code vat}.
+       * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
+       * retail_delivery_fee}, {@code rst}, {@code sales_tax}, or {@code vat}.
        */
       @SerializedName("tax_type")
       String taxType;
+
+      /**
+       * The amount of the tax rate when the {@code rate_type`` is }flat_amount{@code . Tax rates
+       * with }rate_type{@code }percentage{@code can vary based on the transaction, resulting in
+       * this field being}null`. This field exposes the amount and currency of the flat tax rate.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FlatAmount extends StripeObject {
+        /**
+         * Amount of the tax when the {@code rate_type} is {@code flat_amount}. This positive
+         * integer represents how much to charge in the smallest currency unit (e.g., 100 cents to
+         * charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The amount value supports
+         * up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Three-letter ISO currency code, in lowercase. */
+        @SerializedName("currency")
+        String currency;
+      }
     }
   }
 

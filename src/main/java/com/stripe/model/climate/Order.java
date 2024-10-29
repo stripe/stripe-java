@@ -414,6 +414,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     return getResponseGetter().request(request, Order.class);
   }
 
+  /**
+   * For more details about Beneficiary, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -448,6 +452,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     @SerializedName("supplier")
     Supplier supplier;
 
+    /**
+     * For more details about Location, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

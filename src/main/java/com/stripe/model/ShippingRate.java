@@ -266,6 +266,10 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     return getResponseGetter().request(request, ShippingRate.class);
   }
 
+  /**
+   * For more details about DeliveryEstimate, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -280,6 +284,10 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     @SerializedName("minimum")
     Minimum minimum;
 
+    /**
+     * For more details about Maximum, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -297,6 +305,10 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
       Long value;
     }
 
+    /**
+     * For more details about Minimum, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -315,6 +327,10 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     }
   }
 
+  /**
+   * For more details about FixedAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -339,6 +355,10 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     @SerializedName("currency_options")
     Map<String, ShippingRate.FixedAmount.CurrencyOption> currencyOptions;
 
+    /**
+     * For more details about CurrencyOption, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

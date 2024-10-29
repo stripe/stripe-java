@@ -5687,6 +5687,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("alipay")
     ALIPAY("alipay"),
 
+    @SerializedName("alma")
+    ALMA("alma"),
+
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
 

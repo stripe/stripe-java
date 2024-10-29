@@ -19,14 +19,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Indicates the credit balance for credits granted to a customer. */
+/** Indicates the billing credit balance for billing credits granted to a customer. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CreditBalanceSummary extends ApiResource {
   /**
-   * The credit balances. One entry per credit grant currency. If a customer only has credit grants
-   * in a single currency, then this will have a single balance entry.
+   * The billing credit balances. One entry per credit grant currency. If a customer only has credit
+   * grants in a single currency, then this will have a single balance entry.
    */
   @SerializedName("balances")
   List<CreditBalanceSummary.Balance> balances;
@@ -104,6 +104,10 @@ public class CreditBalanceSummary extends ApiResource {
     return getGlobalResponseGetter().request(request, CreditBalanceSummary.class);
   }
 
+  /**
+   * For more details about Balance, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -114,6 +118,10 @@ public class CreditBalanceSummary extends ApiResource {
     @SerializedName("ledger_balance")
     LedgerBalance ledgerBalance;
 
+    /**
+     * For more details about AvailableBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -123,13 +131,17 @@ public class CreditBalanceSummary extends ApiResource {
       Monetary monetary;
 
       /**
-       * The type of this amount. We currently only support {@code monetary} credits.
+       * The type of this amount. We currently only support {@code monetary} billing credits.
        *
        * <p>Equal to {@code monetary}.
        */
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about Monetary, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -148,6 +160,10 @@ public class CreditBalanceSummary extends ApiResource {
       }
     }
 
+    /**
+     * For more details about LedgerBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -157,13 +173,17 @@ public class CreditBalanceSummary extends ApiResource {
       Monetary monetary;
 
       /**
-       * The type of this amount. We currently only support {@code monetary} credits.
+       * The type of this amount. We currently only support {@code monetary} billing credits.
        *
        * <p>Equal to {@code monetary}.
        */
       @SerializedName("type")
       String type;
 
+      /**
+       * For more details about Monetary, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

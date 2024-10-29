@@ -302,6 +302,10 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     return getGlobalResponseGetter().request(request, ApplicationFee.class);
   }
 
+  /**
+   * For more details about FeeSource, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

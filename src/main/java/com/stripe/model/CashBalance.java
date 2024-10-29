@@ -127,6 +127,10 @@ public class CashBalance extends ApiResource {
     return getResponseGetter().request(request, CashBalance.class);
   }
 
+  /**
+   * For more details about Settings, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

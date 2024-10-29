@@ -280,6 +280,10 @@ public class Transaction extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Transaction.class);
   }
 
+  /**
+   * For more details about CustomerDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -312,6 +316,10 @@ public class Transaction extends ApiResource implements HasId {
     @SerializedName("taxability_override")
     String taxabilityOverride;
 
+    /**
+     * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -347,6 +355,10 @@ public class Transaction extends ApiResource implements HasId {
       String state;
     }
 
+    /**
+     * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -365,8 +377,9 @@ public class Transaction extends ApiResource implements HasId {
        * ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat},
        * {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code
        * si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat},
-       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, or {@code
-       * unknown}.
+       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code
+       * tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or
+       * {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -377,6 +390,10 @@ public class Transaction extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Reversal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -386,6 +403,10 @@ public class Transaction extends ApiResource implements HasId {
     String originalTransaction;
   }
 
+  /**
+   * For more details about ShipFromDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -393,6 +414,10 @@ public class Transaction extends ApiResource implements HasId {
     @SerializedName("address")
     Address address;
 
+    /**
+     * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -429,6 +454,10 @@ public class Transaction extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about ShippingCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -477,6 +506,10 @@ public class Transaction extends ApiResource implements HasId {
     @SerializedName("tax_code")
     String taxCode;
 
+    /**
+     * For more details about TaxBreakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -527,6 +560,10 @@ public class Transaction extends ApiResource implements HasId {
       @SerializedName("taxable_amount")
       Long taxableAmount;
 
+      /**
+       * For more details about Jurisdiction, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -559,6 +596,10 @@ public class Transaction extends ApiResource implements HasId {
         String state;
       }
 
+      /**
+       * For more details about TaxRateDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -581,8 +622,8 @@ public class Transaction extends ApiResource implements HasId {
          * The tax type, such as {@code vat} or {@code sales_tax}.
          *
          * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code rst},
-         * {@code sales_tax}, or {@code vat}.
+         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
+         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, or {@code vat}.
          */
         @SerializedName("tax_type")
         String taxType;

@@ -323,6 +323,10 @@ public class InboundTransfer extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, InboundTransfer.class);
   }
 
+  /**
+   * For more details about FailureDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -340,6 +344,10 @@ public class InboundTransfer extends ApiResource implements HasId {
     String code;
   }
 
+  /**
+   * For more details about LinkedFlows, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -352,6 +360,10 @@ public class InboundTransfer extends ApiResource implements HasId {
     String receivedDebit;
   }
 
+  /**
+   * For more details about OriginPaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -370,6 +382,10 @@ public class InboundTransfer extends ApiResource implements HasId {
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /**
+     * For more details about BillingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -386,6 +402,10 @@ public class InboundTransfer extends ApiResource implements HasId {
       String name;
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -461,6 +481,10 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about StatusTransitions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

@@ -33,6 +33,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class PaymentMethodDomain extends ApiResource implements HasId {
   /** Indicates the status of a specific payment method on a payment method domain. */
+  @SerializedName("amazon_pay")
+  AmazonPay amazonPay;
+
+  /** Indicates the status of a specific payment method on a payment method domain. */
   @SerializedName("apple_pay")
   ApplePay applePay;
 
@@ -362,6 +366,40 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AmazonPay extends StripeObject {
+    /**
+     * The status of the payment method on the domain.
+     *
+     * <p>One of {@code active}, or {@code inactive}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /**
+     * Contains additional details about the status of a payment method for a specific payment
+     * method domain.
+     */
+    @SerializedName("status_details")
+    StatusDetails statusDetails;
+
+    /**
+     * Contains additional details about the status of a payment method for a specific payment
+     * method domain.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StatusDetails extends StripeObject {
+      /** The error message associated with the status of the payment method on the domain. */
+      @SerializedName("error_message")
+      String errorMessage;
+    }
+  }
+
+  /** Indicates the status of a specific payment method on a payment method domain. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class ApplePay extends StripeObject {
     /**
      * The status of the payment method on the domain.
@@ -497,6 +535,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(amazonPay, responseGetter);
     trySetResponseGetter(applePay, responseGetter);
     trySetResponseGetter(googlePay, responseGetter);
     trySetResponseGetter(link, responseGetter);

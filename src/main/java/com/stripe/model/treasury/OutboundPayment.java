@@ -356,6 +356,10 @@ public class OutboundPayment extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, OutboundPayment.class);
   }
 
+  /**
+   * For more details about DestinationPaymentMethodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -377,6 +381,10 @@ public class OutboundPayment extends ApiResource implements HasId {
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /**
+     * For more details about BillingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -393,6 +401,10 @@ public class OutboundPayment extends ApiResource implements HasId {
       String name;
     }
 
+    /**
+     * For more details about FinancialAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -411,6 +423,10 @@ public class OutboundPayment extends ApiResource implements HasId {
       String network;
     }
 
+    /**
+     * For more details about UsBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -486,6 +502,10 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about EndUserDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -506,6 +526,10 @@ public class OutboundPayment extends ApiResource implements HasId {
     Boolean present;
   }
 
+  /**
+   * For more details about ReturnedDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -547,6 +571,10 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about StatusTransitions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -568,6 +596,10 @@ public class OutboundPayment extends ApiResource implements HasId {
     Long returnedAt;
   }
 
+  /**
+   * For more details about TrackingDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -586,6 +618,10 @@ public class OutboundPayment extends ApiResource implements HasId {
     @SerializedName("us_domestic_wire")
     UsDomesticWire usDomesticWire;
 
+    /**
+     * For more details about Ach, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -595,6 +631,10 @@ public class OutboundPayment extends ApiResource implements HasId {
       String traceId;
     }
 
+    /**
+     * For more details about UsDomesticWire, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

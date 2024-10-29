@@ -93,6 +93,10 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
+  /**
+   * For more details about AcssDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -102,6 +106,10 @@ public class SourceMandateNotification extends StripeObject implements HasId {
     String statementDescriptor;
   }
 
+  /**
+   * For more details about BacsDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -111,6 +119,10 @@ public class SourceMandateNotification extends StripeObject implements HasId {
     String last4;
   }
 
+  /**
+   * For more details about SepaDebit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

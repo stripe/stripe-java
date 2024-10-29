@@ -82,6 +82,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
   @SerializedName("tax_code")
   String taxCode;
 
+  /**
+   * For more details about TaxBreakdown, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -132,6 +136,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
+    /**
+     * For more details about Jurisdiction, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -164,6 +172,10 @@ public class CalculationLineItem extends StripeObject implements HasId {
       String state;
     }
 
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -186,8 +198,8 @@ public class CalculationLineItem extends StripeObject implements HasId {
        * The tax type, such as {@code vat} or {@code sales_tax}.
        *
        * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-       * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code rst}, {@code
-       * sales_tax}, or {@code vat}.
+       * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
+       * retail_delivery_fee}, {@code rst}, {@code sales_tax}, or {@code vat}.
        */
       @SerializedName("tax_type")
       String taxType;

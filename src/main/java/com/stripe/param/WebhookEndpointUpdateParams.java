@@ -628,6 +628,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("issuing_transaction.created")
     ISSUING_TRANSACTION__CREATED("issuing_transaction.created"),
 
+    @SerializedName("issuing_transaction.purchase_details_receipt_updated")
+    ISSUING_TRANSACTION__PURCHASE_DETAILS_RECEIPT_UPDATED(
+        "issuing_transaction.purchase_details_receipt_updated"),
+
     @SerializedName("issuing_transaction.updated")
     ISSUING_TRANSACTION__UPDATED("issuing_transaction.updated"),
 
@@ -756,6 +760,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("refund.created")
     REFUND__CREATED("refund.created"),
+
+    @SerializedName("refund.failed")
+    REFUND__FAILED("refund.failed"),
 
     @SerializedName("refund.updated")
     REFUND__UPDATED("refund.updated"),

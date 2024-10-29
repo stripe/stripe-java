@@ -375,6 +375,10 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     return getResponseGetter().request(request, Coupon.class);
   }
 
+  /**
+   * For more details about AppliesTo, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -384,6 +388,10 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     List<String> products;
   }
 
+  /**
+   * For more details about CurrencyOption, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

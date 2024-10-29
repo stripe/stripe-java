@@ -1656,6 +1656,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
           @SerializedName("qst")
           QST("qst"),
 
+          @SerializedName("retail_delivery_fee")
+          RETAIL_DELIVERY_FEE("retail_delivery_fee"),
+
           @SerializedName("rst")
           RST("rst"),
 

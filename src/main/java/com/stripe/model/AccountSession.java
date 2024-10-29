@@ -118,6 +118,10 @@ public class AccountSession extends ApiResource {
     return getGlobalResponseGetter().request(request, AccountSession.class);
   }
 
+  /**
+   * For more details about Components, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -155,6 +159,10 @@ public class AccountSession extends ApiResource {
     @SerializedName("tax_settings")
     TaxSettings taxSettings;
 
+    /**
+     * For more details about AccountManagement, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -166,21 +174,40 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
       }
     }
 
+    /**
+     * For more details about AccountOnboarding, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -192,21 +219,40 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
       }
     }
 
+    /**
+     * For more details about Balances, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -218,10 +264,24 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
+        /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
         /**
          * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
          * Loss Liability, default {@code false} otherwise.
@@ -231,9 +291,10 @@ public class AccountSession extends ApiResource {
 
         /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -254,6 +315,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about Documents, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -265,12 +330,20 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
     }
 
+    /**
+     * For more details about NotificationBanner, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -282,21 +355,40 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
       }
     }
 
+    /**
+     * For more details about PaymentDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -308,6 +400,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -339,6 +435,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about Payments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -350,6 +450,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -381,6 +485,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about Payouts, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -392,10 +500,24 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
+        /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts. The default value for this feature
+         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
+         * otherwise.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
         /**
          * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
          * Loss Liability, default {@code false} otherwise.
@@ -405,9 +527,10 @@ public class AccountSession extends ApiResource {
 
         /**
          * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for custom accounts (or accounts where the
-         * platform is compliance owner). Otherwise, bank account collection is determined by
-         * compliance requirements.
+         * accounts. This feature can only be false for accounts where you’re responsible for
+         * collecting updated information when requirements are due or change, like custom accounts.
+         * Otherwise, bank account collection is determined by compliance requirements. The default
+         * value for this feature is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -428,6 +551,10 @@ public class AccountSession extends ApiResource {
       }
     }
 
+    /**
+     * For more details about PayoutsList, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -439,12 +566,20 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
     }
 
+    /**
+     * For more details about TaxRegistrations, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -456,12 +591,20 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
     }
 
+    /**
+     * For more details about TaxSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -473,6 +616,10 @@ public class AccountSession extends ApiResource {
       @SerializedName("features")
       Features features;
 
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

@@ -126,11 +126,11 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
 
   @Getter
   public static class Filter {
-    /** The credit applicability scope for which to fetch balance summary. */
+    /** The billing credit applicability scope for which to fetch credit balance summary. */
     @SerializedName("applicability_scope")
     ApplicabilityScope applicabilityScope;
 
-    /** The credit grant for which to fetch balance summary. */
+    /** The credit grant for which to fetch credit balance summary. */
     @SerializedName("credit_grant")
     String creditGrant;
 
@@ -177,14 +177,14 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
             this.applicabilityScope, this.creditGrant, this.extraParams, this.type);
       }
 
-      /** The credit applicability scope for which to fetch balance summary. */
+      /** The billing credit applicability scope for which to fetch credit balance summary. */
       public Builder setApplicabilityScope(
           CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope applicabilityScope) {
         this.applicabilityScope = applicabilityScope;
         return this;
       }
 
-      /** The credit grant for which to fetch balance summary. */
+      /** The credit grant for which to fetch credit balance summary. */
       public Builder setCreditGrant(String creditGrant) {
         this.creditGrant = creditGrant;
         return this;

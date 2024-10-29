@@ -135,6 +135,10 @@ public class Balance extends ApiResource {
     return getGlobalResponseGetter().request(request, Balance.class);
   }
 
+  /**
+   * For more details about Available, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -154,6 +158,10 @@ public class Balance extends ApiResource {
     @SerializedName("source_types")
     SourceTypes sourceTypes;
 
+    /**
+     * For more details about SourceTypes, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -172,6 +180,10 @@ public class Balance extends ApiResource {
     }
   }
 
+  /**
+   * For more details about ConnectReserved, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -191,6 +203,10 @@ public class Balance extends ApiResource {
     @SerializedName("source_types")
     SourceTypes sourceTypes;
 
+    /**
+     * For more details about SourceTypes, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -209,6 +225,10 @@ public class Balance extends ApiResource {
     }
   }
 
+  /**
+   * For more details about InstantAvailable, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -232,6 +252,10 @@ public class Balance extends ApiResource {
     @SerializedName("source_types")
     SourceTypes sourceTypes;
 
+    /**
+     * For more details about NetAvailable, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -247,6 +271,10 @@ public class Balance extends ApiResource {
       @SerializedName("source_types")
       SourceTypes sourceTypes;
 
+      /**
+       * For more details about SourceTypes, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -265,6 +293,10 @@ public class Balance extends ApiResource {
       }
     }
 
+    /**
+     * For more details about SourceTypes, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -283,6 +315,10 @@ public class Balance extends ApiResource {
     }
   }
 
+  /**
+   * For more details about Issuing, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -291,6 +327,10 @@ public class Balance extends ApiResource {
     @SerializedName("available")
     List<Balance.Issuing.Available> available;
 
+    /**
+     * For more details about Available, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -310,6 +350,10 @@ public class Balance extends ApiResource {
       @SerializedName("source_types")
       SourceTypes sourceTypes;
 
+      /**
+       * For more details about SourceTypes, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -329,6 +373,10 @@ public class Balance extends ApiResource {
     }
   }
 
+  /**
+   * For more details about Pending, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -348,6 +396,10 @@ public class Balance extends ApiResource {
     @SerializedName("source_types")
     SourceTypes sourceTypes;
 
+    /**
+     * For more details about SourceTypes, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

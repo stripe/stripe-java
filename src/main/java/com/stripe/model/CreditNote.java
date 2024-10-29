@@ -143,6 +143,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("pdf")
   String pdf;
 
+  /** The pretax credit amounts (ex: discount, credit grants, etc) for all line items. */
   @SerializedName("pretax_credit_amounts")
   List<CreditNote.PretaxCreditAmount> pretaxCreditAmounts;
 
@@ -618,6 +619,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     return getResponseGetter().request(request, CreditNote.class);
   }
 
+  /**
+   * For more details about DiscountAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -651,6 +656,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     }
   }
 
+  /**
+   * For more details about PretaxCreditAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -720,6 +729,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     }
   }
 
+  /**
+   * For more details about ShippingCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -765,6 +778,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
           new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
     }
 
+    /**
+     * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -804,6 +821,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     }
   }
 
+  /**
+   * For more details about TaxAmount, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
