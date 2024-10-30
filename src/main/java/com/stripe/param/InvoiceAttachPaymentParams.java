@@ -32,25 +32,31 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The out of band payment to attach to the invoice. */
-  @SerializedName("out_of_band_payment")
-  OutOfBandPayment outOfBandPayment;
-
   /** The ID of the PaymentIntent to attach to the invoice. */
   @SerializedName("payment_intent")
   String paymentIntent;
+
+  /** The ID of the PaymentRecord to detach from the invoice. */
+  @SerializedName("payment_record")
+  String paymentRecord;
+
+  /** The PaymentRecord data for attaching an out of band payment to the invoice. */
+  @SerializedName("payment_record_data")
+  PaymentRecordData paymentRecordData;
 
   private InvoiceAttachPaymentParams(
       Long amountRequested,
       List<String> expand,
       Map<String, Object> extraParams,
-      OutOfBandPayment outOfBandPayment,
-      String paymentIntent) {
+      String paymentIntent,
+      String paymentRecord,
+      PaymentRecordData paymentRecordData) {
     this.amountRequested = amountRequested;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.outOfBandPayment = outOfBandPayment;
     this.paymentIntent = paymentIntent;
+    this.paymentRecord = paymentRecord;
+    this.paymentRecordData = paymentRecordData;
   }
 
   public static Builder builder() {
@@ -64,9 +70,11 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private OutOfBandPayment outOfBandPayment;
-
     private String paymentIntent;
+
+    private String paymentRecord;
+
+    private PaymentRecordData paymentRecordData;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceAttachPaymentParams build() {
@@ -74,8 +82,9 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
           this.amountRequested,
           this.expand,
           this.extraParams,
-          this.outOfBandPayment,
-          this.paymentIntent);
+          this.paymentIntent,
+          this.paymentRecord,
+          this.paymentRecordData);
     }
 
     /**
@@ -139,22 +148,28 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
       return this;
     }
 
-    /** The out of band payment to attach to the invoice. */
-    public Builder setOutOfBandPayment(
-        InvoiceAttachPaymentParams.OutOfBandPayment outOfBandPayment) {
-      this.outOfBandPayment = outOfBandPayment;
-      return this;
-    }
-
     /** The ID of the PaymentIntent to attach to the invoice. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
     }
+
+    /** The ID of the PaymentRecord to detach from the invoice. */
+    public Builder setPaymentRecord(String paymentRecord) {
+      this.paymentRecord = paymentRecord;
+      return this;
+    }
+
+    /** The PaymentRecord data for attaching an out of band payment to the invoice. */
+    public Builder setPaymentRecordData(
+        InvoiceAttachPaymentParams.PaymentRecordData paymentRecordData) {
+      this.paymentRecordData = paymentRecordData;
+      return this;
+    }
   }
 
   @Getter
-  public static class OutOfBandPayment {
+  public static class PaymentRecordData {
     /** <strong>Required.</strong> The amount that was paid out of band. */
     @SerializedName("amount")
     Long amount;
@@ -195,7 +210,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
     @SerializedName("payment_reference")
     String paymentReference;
 
-    private OutOfBandPayment(
+    private PaymentRecordData(
         Long amount,
         String currency,
         Map<String, Object> extraParams,
@@ -232,8 +247,8 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
       private String paymentReference;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceAttachPaymentParams.OutOfBandPayment build() {
-        return new InvoiceAttachPaymentParams.OutOfBandPayment(
+      public InvoiceAttachPaymentParams.PaymentRecordData build() {
+        return new InvoiceAttachPaymentParams.PaymentRecordData(
             this.amount,
             this.currency,
             this.extraParams,
@@ -258,7 +273,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceAttachPaymentParams.OutOfBandPayment#extraParams} for the field documentation.
+       * InvoiceAttachPaymentParams.PaymentRecordData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -271,7 +286,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceAttachPaymentParams.OutOfBandPayment#extraParams} for the field
+       * See {@link InvoiceAttachPaymentParams.PaymentRecordData#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -285,7 +300,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceAttachPaymentParams.OutOfBandPayment#metadata} for the field documentation.
+       * InvoiceAttachPaymentParams.PaymentRecordData#metadata} for the field documentation.
        */
       @SuppressWarnings("unchecked")
       public Builder putMetadata(String key, String value) {
@@ -299,7 +314,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceAttachPaymentParams.OutOfBandPayment#metadata} for the field
+       * See {@link InvoiceAttachPaymentParams.PaymentRecordData#metadata} for the field
        * documentation.
        */
       @SuppressWarnings("unchecked")

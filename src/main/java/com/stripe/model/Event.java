@@ -163,19 +163,20 @@ public class Event extends ApiResource implements HasId {
    * {@code invoice.created}, {@code invoice.deleted}, {@code invoice.finalization_failed}, {@code
    * invoice.finalized}, {@code invoice.marked_uncollectible}, {@code invoice.overdue}, {@code
    * invoice.paid}, {@code invoice.payment.overpaid}, {@code invoice.payment_action_required},
-   * {@code invoice.payment_failed}, {@code invoice.payment_succeeded}, {@code invoice.sent}, {@code
-   * invoice.upcoming}, {@code invoice.updated}, {@code invoice.voided}, {@code
-   * invoice.will_be_due}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code
-   * issuing_authorization.created}, {@code issuing_authorization.request}, {@code
-   * issuing_authorization.updated}, {@code issuing_card.created}, {@code issuing_card.updated},
-   * {@code issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
-   * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
-   * issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
+   * {@code invoice.payment_attempt_required}, {@code invoice.payment_failed}, {@code
+   * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
+   * invoice.updated}, {@code invoice.voided}, {@code invoice.will_be_due}, {@code
+   * invoiceitem.created}, {@code invoiceitem.deleted}, {@code issuing_authorization.created},
+   * {@code issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
+   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_cardholder.created}, {@code
+   * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
+   * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
    * issuing_dispute.submitted}, {@code issuing_dispute.updated}, {@code
    * issuing_dispute_settlement_detail.created}, {@code issuing_dispute_settlement_detail.updated},
-   * {@code issuing_personalization_design.activated}, {@code
-   * issuing_personalization_design.deactivated}, {@code issuing_personalization_design.rejected},
-   * {@code issuing_personalization_design.updated}, {@code issuing_settlement.created}, {@code
+   * {@code issuing_fraud_liability_debit.created}, {@code
+   * issuing_personalization_design.activated}, {@code issuing_personalization_design.deactivated},
+   * {@code issuing_personalization_design.rejected}, {@code
+   * issuing_personalization_design.updated}, {@code issuing_settlement.created}, {@code
    * issuing_settlement.updated}, {@code issuing_token.created}, {@code issuing_token.updated},
    * {@code issuing_transaction.created}, {@code
    * issuing_transaction.purchase_details_receipt_updated}, {@code issuing_transaction.updated},

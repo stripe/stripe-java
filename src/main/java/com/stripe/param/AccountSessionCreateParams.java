@@ -2996,6 +2996,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean cardholderManagement;
 
         /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -3013,11 +3021,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             Boolean cardManagement,
             Boolean cardSpendDisputeManagement,
             Boolean cardholderManagement,
+            Boolean disableStripeUserAuthentication,
             Map<String, Object> extraParams,
             Boolean spendControlManagement) {
           this.cardManagement = cardManagement;
           this.cardSpendDisputeManagement = cardSpendDisputeManagement;
           this.cardholderManagement = cardholderManagement;
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.extraParams = extraParams;
           this.spendControlManagement = spendControlManagement;
         }
@@ -3033,6 +3043,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           private Boolean cardholderManagement;
 
+          private Boolean disableStripeUserAuthentication;
+
           private Map<String, Object> extraParams;
 
           private Boolean spendControlManagement;
@@ -3043,6 +3055,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
                 this.cardManagement,
                 this.cardSpendDisputeManagement,
                 this.cardholderManagement,
+                this.disableStripeUserAuthentication,
                 this.extraParams,
                 this.spendControlManagement);
           }
@@ -3062,6 +3075,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Whether to allow cardholder management features. */
           public Builder setCardholderManagement(Boolean cardholderManagement) {
             this.cardholderManagement = cardholderManagement;
+            return this;
+          }
+
+          /**
+           * Disables Stripe user authentication for this embedded component. This feature can only
+           * be false for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like custom accounts.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
             return this;
           }
 

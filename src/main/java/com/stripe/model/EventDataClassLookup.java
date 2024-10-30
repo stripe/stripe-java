@@ -62,6 +62,7 @@ public final class EventDataClassLookup {
     classLookup.put("payment_method", PaymentMethod.class);
     classLookup.put("payment_method_configuration", PaymentMethodConfiguration.class);
     classLookup.put("payment_method_domain", PaymentMethodDomain.class);
+    classLookup.put("payment_record", PaymentRecord.class);
     classLookup.put("payout", Payout.class);
     classLookup.put("person", Person.class);
     classLookup.put("plan", Plan.class);
@@ -177,6 +178,8 @@ public final class EventDataClassLookup {
     classLookup.put(
         "issuing.dispute_settlement_detail",
         com.stripe.model.issuing.DisputeSettlementDetail.class);
+    classLookup.put(
+        "issuing.fraud_liability_debit", com.stripe.model.issuing.FraudLiabilityDebit.class);
     classLookup.put(
         "issuing.personalization_design", com.stripe.model.issuing.PersonalizationDesign.class);
     classLookup.put("issuing.physical_bundle", com.stripe.model.issuing.PhysicalBundle.class);

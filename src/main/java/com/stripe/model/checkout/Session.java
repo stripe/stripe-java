@@ -2005,6 +2005,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2028,6 +2031,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
     }
 
     /**

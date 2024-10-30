@@ -4204,6 +4204,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
 
+      @SerializedName("custom")
+      CUSTOM("custom"),
+
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
 
