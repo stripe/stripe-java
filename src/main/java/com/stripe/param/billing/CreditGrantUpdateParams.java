@@ -17,8 +17,8 @@ public class CreditGrantUpdateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
-   * The time when the billing credits created by this credit grant will expire. If set to empty,
-   * the billing credits will never expire.
+   * The time when the billing credits created by this credit grant expire. If set to empty, the
+   * billing credits never expire.
    */
   @SerializedName("expires_at")
   Object expiresAt;
@@ -33,8 +33,8 @@ public class CreditGrantUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object (ex: cost basis) in a structured format.
+   * Set of key-value pairs you can attach to an object. This can be useful for storing additional
+   * information about the object (for example, cost basis) in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -96,8 +96,8 @@ public class CreditGrantUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The time when the billing credits created by this credit grant will expire. If set to empty,
-     * the billing credits will never expire.
+     * The time when the billing credits created by this credit grant expire. If set to empty, the
+     * billing credits never expire.
      */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
@@ -105,8 +105,8 @@ public class CreditGrantUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The time when the billing credits created by this credit grant will expire. If set to empty,
-     * the billing credits will never expire.
+     * The time when the billing credits created by this credit grant expire. If set to empty, the
+     * billing credits never expire.
      */
     public Builder setExpiresAt(EmptyParam expiresAt) {
       this.expiresAt = expiresAt;

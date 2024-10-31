@@ -129,7 +129,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   /**
    * The list of payment method types (for example, card) that this SetupIntent can use. If you
-   * don't provide this, it defaults to [&quot;card&quot;].
+   * don't provide this, Stripe will dynamically show relevant payment methods from your <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
