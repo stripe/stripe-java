@@ -7,28 +7,34 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A PaymentRecord represents a payment that happened on or off Stripe. */
+/**
+ * A Payment Record is a resource that allows you to represent payments that occur on- or
+ * off-Stripe. For example, you can create a Payment Record to model a payment made on a different
+ * payment processor, in order to mark an Invoice as paid and a Subscription as active. Payment
+ * Records consist of one or more Payment Attempt Records, which represent individual attempts made
+ * on a payment network.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentRecord extends StripeObject implements HasId {
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_canceled")
   AmountCanceled amountCanceled;
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_failed")
   AmountFailed amountFailed;
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_guaranteed")
   AmountGuaranteed amountGuaranteed;
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_refunded")
   AmountRefunded amountRefunded;
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_requested")
   AmountRequested amountRequested;
 
@@ -41,7 +47,7 @@ public class PaymentRecord extends StripeObject implements HasId {
   CustomerDetails customerDetails;
 
   /**
-   * Whether the customer was present during the transaction.
+   * Indicates whether the customer was present in your checkout flow during this payment.
    *
    * <p>One of {@code off_session}, or {@code on_session}.
    */
@@ -57,7 +63,7 @@ public class PaymentRecord extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
-  /** ID of the latest PaymentAttemptRecord attached to this PaymentRecord. */
+  /** ID of the latest Payment Attempt Record attached to this Payment Record. */
   @SerializedName("latest_payment_attempt_record")
   String latestPaymentAttemptRecord;
 
@@ -84,11 +90,14 @@ public class PaymentRecord extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Information about the method used to make this payment. */
+  /** Information about the Payment Method debited for this payment. */
   @SerializedName("payment_method_details")
   PaymentMethodDetails paymentMethodDetails;
 
-  /** An opaque string for manual reconciliation of this payment, for example a check number. */
+  /**
+   * An opaque string for manual reconciliation of this payment, for example a check number or a
+   * payment processor ID.
+   */
   @SerializedName("payment_reference")
   String paymentReference;
 
@@ -96,7 +105,7 @@ public class PaymentRecord extends StripeObject implements HasId {
   @SerializedName("shipping_details")
   ShippingDetails shippingDetails;
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -118,7 +127,7 @@ public class PaymentRecord extends StripeObject implements HasId {
     Long value;
   }
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -140,7 +149,7 @@ public class PaymentRecord extends StripeObject implements HasId {
     Long value;
   }
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -162,7 +171,7 @@ public class PaymentRecord extends StripeObject implements HasId {
     Long value;
   }
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -184,7 +193,7 @@ public class PaymentRecord extends StripeObject implements HasId {
     Long value;
   }
 
-  /** Amount object. */
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -211,7 +220,7 @@ public class PaymentRecord extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails extends StripeObject {
-    /** ID of the Stripe customer for this payment. */
+    /** ID of the Stripe Customer associated with this payment. */
     @SerializedName("customer")
     String customer;
 
@@ -228,7 +237,7 @@ public class PaymentRecord extends StripeObject implements HasId {
     String phone;
   }
 
-  /** Details about the method used to make this payment. */
+  /** Details about the Payment Method used in this payment attempt. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -246,19 +255,19 @@ public class PaymentRecord extends StripeObject implements HasId {
     String paymentMethod;
 
     /**
-     * The type of payment method used for this payment attempt.
+     * The type of Payment Method used for this payment attempt.
      *
      * <p>Equal to {@code custom}.
      */
     @SerializedName("type")
     String type;
 
-    /** Billing details used for this payment. */
+    /** Billing details used by the customer for this payment. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BillingDetails extends StripeObject {
-      /** Address data. */
+      /** A representation of a physical address. */
       @SerializedName("address")
       Address address;
 
@@ -274,7 +283,7 @@ public class PaymentRecord extends StripeObject implements HasId {
       @SerializedName("phone")
       String phone;
 
-      /** Address data. */
+      /** A representation of a physical address. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -308,7 +317,11 @@ public class PaymentRecord extends StripeObject implements HasId {
       }
     }
 
-    /** Details about the custom payment method used in this payment. */
+    /**
+     * Custom Payment Methods represent Payment Method types not modeled directly in the Stripe API.
+     * This resource consists of details about the custom payment method used for this payment
+     * attempt.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -319,30 +332,30 @@ public class PaymentRecord extends StripeObject implements HasId {
       @SerializedName("display_name")
       String displayName;
 
-      /** The Custom Payment Method Type associated with this payment. */
+      /** The custom payment method type associated with this payment. */
       @SerializedName("type")
       String type;
     }
   }
 
-  /** Shipping information for this payment. */
+  /** The customer's shipping information associated with this payment. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingDetails extends StripeObject {
-    /** Address data. */
+    /** A representation of a physical address. */
     @SerializedName("address")
     Address address;
 
-    /** The recipient's name. */
+    /** The shipping recipient's name. */
     @SerializedName("name")
     String name;
 
-    /** The recipient's phone number. */
+    /** The shipping recipient's phone number. */
     @SerializedName("phone")
     String phone;
 
-    /** Address data. */
+    /** A representation of a physical address. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

@@ -7813,6 +7813,42 @@ public class SessionCreateParams extends ApiRequestParams {
       Installments installments;
 
       /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       */
+      @SerializedName("request_decremental_authorization")
+      RequestDecrementalAuthorization requestDecrementalAuthorization;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       */
+      @SerializedName("request_extended_authorization")
+      RequestExtendedAuthorization requestExtendedAuthorization;
+
+      /**
+       * Request ability to <a
+       * href="https://stripe.com/payments/incremental-authorization">increment the
+       * authorization</a> for this CheckoutSession.
+       */
+      @SerializedName("request_incremental_authorization")
+      RequestIncrementalAuthorization requestIncrementalAuthorization;
+
+      /**
+       * Request ability to make <a href="https://stripe.com/payments/multicapture">multiple
+       * captures</a> for this CheckoutSession.
+       */
+      @SerializedName("request_multicapture")
+      RequestMulticapture requestMulticapture;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/overcapture">overcapture</a> for
+       * this CheckoutSession.
+       */
+      @SerializedName("request_overcapture")
+      RequestOvercapture requestOvercapture;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -7871,12 +7907,22 @@ public class SessionCreateParams extends ApiRequestParams {
       private Card(
           Map<String, Object> extraParams,
           Installments installments,
+          RequestDecrementalAuthorization requestDecrementalAuthorization,
+          RequestExtendedAuthorization requestExtendedAuthorization,
+          RequestIncrementalAuthorization requestIncrementalAuthorization,
+          RequestMulticapture requestMulticapture,
+          RequestOvercapture requestOvercapture,
           RequestThreeDSecure requestThreeDSecure,
           SetupFutureUsage setupFutureUsage,
           String statementDescriptorSuffixKana,
           String statementDescriptorSuffixKanji) {
         this.extraParams = extraParams;
         this.installments = installments;
+        this.requestDecrementalAuthorization = requestDecrementalAuthorization;
+        this.requestExtendedAuthorization = requestExtendedAuthorization;
+        this.requestIncrementalAuthorization = requestIncrementalAuthorization;
+        this.requestMulticapture = requestMulticapture;
+        this.requestOvercapture = requestOvercapture;
         this.requestThreeDSecure = requestThreeDSecure;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
@@ -7892,6 +7938,16 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Installments installments;
 
+        private RequestDecrementalAuthorization requestDecrementalAuthorization;
+
+        private RequestExtendedAuthorization requestExtendedAuthorization;
+
+        private RequestIncrementalAuthorization requestIncrementalAuthorization;
+
+        private RequestMulticapture requestMulticapture;
+
+        private RequestOvercapture requestOvercapture;
+
         private RequestThreeDSecure requestThreeDSecure;
 
         private SetupFutureUsage setupFutureUsage;
@@ -7905,6 +7961,11 @@ public class SessionCreateParams extends ApiRequestParams {
           return new SessionCreateParams.PaymentMethodOptions.Card(
               this.extraParams,
               this.installments,
+              this.requestDecrementalAuthorization,
+              this.requestExtendedAuthorization,
+              this.requestIncrementalAuthorization,
+              this.requestMulticapture,
+              this.requestOvercapture,
               this.requestThreeDSecure,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
@@ -7943,6 +8004,60 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setInstallments(
             SessionCreateParams.PaymentMethodOptions.Card.Installments installments) {
           this.installments = installments;
+          return this;
+        }
+
+        /**
+         * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+         * beyond the standard authorization validity window</a> for this CheckoutSession.
+         */
+        public Builder setRequestDecrementalAuthorization(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestDecrementalAuthorization
+                requestDecrementalAuthorization) {
+          this.requestDecrementalAuthorization = requestDecrementalAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+         * beyond the standard authorization validity window</a> for this CheckoutSession.
+         */
+        public Builder setRequestExtendedAuthorization(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestExtendedAuthorization
+                requestExtendedAuthorization) {
+          this.requestExtendedAuthorization = requestExtendedAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to <a
+         * href="https://stripe.com/payments/incremental-authorization">increment the
+         * authorization</a> for this CheckoutSession.
+         */
+        public Builder setRequestIncrementalAuthorization(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestIncrementalAuthorization
+                requestIncrementalAuthorization) {
+          this.requestIncrementalAuthorization = requestIncrementalAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to make <a href="https://stripe.com/payments/multicapture">multiple
+         * captures</a> for this CheckoutSession.
+         */
+        public Builder setRequestMulticapture(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestMulticapture requestMulticapture) {
+          this.requestMulticapture = requestMulticapture;
+          return this;
+        }
+
+        /**
+         * Request ability to <a href="https://stripe.com/payments/overcapture">overcapture</a> for
+         * this CheckoutSession.
+         */
+        public Builder setRequestOvercapture(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestOvercapture requestOvercapture) {
+          this.requestOvercapture = requestOvercapture;
           return this;
         }
 
@@ -8089,6 +8204,81 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams.putAll(map);
             return this;
           }
+        }
+      }
+
+      public enum RequestDecrementalAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestDecrementalAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestExtendedAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestExtendedAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestIncrementalAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestIncrementalAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestMulticapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestMulticapture(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestOvercapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestOvercapture(String value) {
+          this.value = value;
         }
       }
 

@@ -2128,6 +2128,52 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       Installments installments;
 
       /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_decremental_authorization")
+      String requestDecrementalAuthorization;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_extended_authorization")
+      String requestExtendedAuthorization;
+
+      /**
+       * Request ability to <a
+       * href="https://stripe.com/payments/incremental-authorization">increment the
+       * authorization</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_incremental_authorization")
+      String requestIncrementalAuthorization;
+
+      /**
+       * Request ability to make <a href="https://stripe.com/payments/multicapture">multiple
+       * captures</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_multicapture")
+      String requestMulticapture;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/overcapture">overcapture</a> for
+       * this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_overcapture")
+      String requestOvercapture;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
