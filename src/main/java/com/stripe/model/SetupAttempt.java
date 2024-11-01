@@ -491,7 +491,8 @@ public class SetupAttempt extends ApiResource implements HasId {
     public static class Card extends StripeObject {
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
+       * unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -562,7 +563,8 @@ public class SetupAttempt extends ApiResource implements HasId {
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
-       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
+       * unknown}.
        */
       @SerializedName("network")
       String network;

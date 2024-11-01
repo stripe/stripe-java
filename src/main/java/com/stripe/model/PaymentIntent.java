@@ -259,7 +259,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentMethod> paymentMethod;
 
-  /** Information about the payment method configuration used for this PaymentIntent. */
+  /**
+   * Information about the <a
+   * href="https://stripe.com/docs/api/payment_method_configurations">payment method
+   * configuration</a> used for this PaymentIntent.
+   */
   @SerializedName("payment_method_configuration_details")
   PaymentMethodConfigurationDetails paymentMethodConfigurationDetails;
 

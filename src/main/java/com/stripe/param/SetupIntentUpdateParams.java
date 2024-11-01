@@ -75,7 +75,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   Object paymentMethod;
 
-  /** The ID of the payment method configuration to use with this SetupIntent. */
+  /**
+   * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+   * method configuration</a> to use with this SetupIntent.
+   */
   @SerializedName("payment_method_configuration")
   Object paymentMethodConfiguration;
 
@@ -368,13 +371,19 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the payment method configuration to use with this SetupIntent. */
+    /**
+     * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+     * method configuration</a> to use with this SetupIntent.
+     */
     public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
       this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
     }
 
-    /** The ID of the payment method configuration to use with this SetupIntent. */
+    /**
+     * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+     * method configuration</a> to use with this SetupIntent.
+     */
     public Builder setPaymentMethodConfiguration(EmptyParam paymentMethodConfiguration) {
       this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
@@ -8237,6 +8246,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         @SerializedName("jcb")
         JCB("jcb"),
+
+        @SerializedName("link")
+        LINK("link"),
 
         @SerializedName("mastercard")
         MASTERCARD("mastercard"),

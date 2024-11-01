@@ -5468,6 +5468,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           @SerializedName("jcb")
           JCB("jcb"),
 
+          @SerializedName("link")
+          LINK("link"),
+
           @SerializedName("mastercard")
           MASTERCARD("mastercard"),
 
