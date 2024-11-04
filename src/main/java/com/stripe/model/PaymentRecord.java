@@ -2,6 +2,19 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
+import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
+import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
+import com.stripe.param.PaymentRecordReportPaymentAttemptParams;
+import com.stripe.param.PaymentRecordReportPaymentParams;
+import com.stripe.param.PaymentRecordRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRecord extends StripeObject implements HasId {
+public class PaymentRecord extends ApiResource implements HasId {
   /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_canceled")
   AmountCanceled amountCanceled;
@@ -104,6 +117,281 @@ public class PaymentRecord extends StripeObject implements HasId {
   /** Shipping information for this payment. */
   @SerializedName("shipping_details")
   ShippingDetails shippingDetails;
+
+  /**
+   * Report a new Payment Record. You may report a Payment Record as it is initialized and later
+   * report updates through the other report_* methods, or report Payment Records in a terminal
+   * state directly, through this method.
+   */
+  public static PaymentRecord reportPayment(Map<String, Object> params) throws StripeException {
+    return reportPayment(params, (RequestOptions) null);
+  }
+
+  /**
+   * Report a new Payment Record. You may report a Payment Record as it is initialized and later
+   * report updates through the other report_* methods, or report Payment Records in a terminal
+   * state directly, through this method.
+   */
+  public static PaymentRecord reportPayment(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_records/report_payment";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /**
+   * Report a new Payment Record. You may report a Payment Record as it is initialized and later
+   * report updates through the other report_* methods, or report Payment Records in a terminal
+   * state directly, through this method.
+   */
+  public static PaymentRecord reportPayment(PaymentRecordReportPaymentParams params)
+      throws StripeException {
+    return reportPayment(params, (RequestOptions) null);
+  }
+
+  /**
+   * Report a new Payment Record. You may report a Payment Record as it is initialized and later
+   * report updates through the other report_* methods, or report Payment Records in a terminal
+   * state directly, through this method.
+   */
+  public static PaymentRecord reportPayment(
+      PaymentRecordReportPaymentParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_records/report_payment";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /**
+   * Report a new payment attempt on the specified Payment Record. A new payment attempt can only be
+   * specified if all other payment attempts are canceled or failed.
+   */
+  public PaymentRecord reportPaymentAttempt(Map<String, Object> params) throws StripeException {
+    return reportPaymentAttempt(params, (RequestOptions) null);
+  }
+
+  /**
+   * Report a new payment attempt on the specified Payment Record. A new payment attempt can only be
+   * specified if all other payment attempts are canceled or failed.
+   */
+  public PaymentRecord reportPaymentAttempt(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /**
+   * Report a new payment attempt on the specified Payment Record. A new payment attempt can only be
+   * specified if all other payment attempts are canceled or failed.
+   */
+  public PaymentRecord reportPaymentAttempt(PaymentRecordReportPaymentAttemptParams params)
+      throws StripeException {
+    return reportPaymentAttempt(params, (RequestOptions) null);
+  }
+
+  /**
+   * Report a new payment attempt on the specified Payment Record. A new payment attempt can only be
+   * specified if all other payment attempts are canceled or failed.
+   */
+  public PaymentRecord reportPaymentAttempt(
+      PaymentRecordReportPaymentAttemptParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled(Map<String, Object> params)
+      throws StripeException {
+    return reportPaymentAttemptCanceled(params, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_canceled",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled(
+      PaymentRecordReportPaymentAttemptCanceledParams params) throws StripeException {
+    return reportPaymentAttemptCanceled(params, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled(
+      PaymentRecordReportPaymentAttemptCanceledParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_canceled",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
+  public PaymentRecord reportPaymentAttemptFailed(Map<String, Object> params)
+      throws StripeException {
+    return reportPaymentAttemptFailed(params, (RequestOptions) null);
+  }
+
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
+  public PaymentRecord reportPaymentAttemptFailed(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_failed",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
+  public PaymentRecord reportPaymentAttemptFailed(
+      PaymentRecordReportPaymentAttemptFailedParams params) throws StripeException {
+    return reportPaymentAttemptFailed(params, (RequestOptions) null);
+  }
+
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
+  public PaymentRecord reportPaymentAttemptFailed(
+      PaymentRecordReportPaymentAttemptFailedParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_failed",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed(Map<String, Object> params)
+      throws StripeException {
+    return reportPaymentAttemptGuaranteed(params, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_guaranteed",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed(
+      PaymentRecordReportPaymentAttemptGuaranteedParams params) throws StripeException {
+    return reportPaymentAttemptGuaranteed(params, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed(
+      PaymentRecordReportPaymentAttemptGuaranteedParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_guaranteed",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Retrieves a Payment Record with the given ID. */
+  public static PaymentRecord retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a Payment Record with the given ID. */
+  public static PaymentRecord retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a Payment Record with the given ID. */
+  public static PaymentRecord retrieve(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/payment_records/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Retrieves a Payment Record with the given ID. */
+  public static PaymentRecord retrieve(
+      String id, PaymentRecordRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/payment_records/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentRecord.class);
+  }
 
   /** A representation of an amount of money, consisting of an amount and a currency. */
   @Getter
@@ -387,5 +675,18 @@ public class PaymentRecord extends StripeObject implements HasId {
       @SerializedName("state")
       String state;
     }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(amountCanceled, responseGetter);
+    trySetResponseGetter(amountFailed, responseGetter);
+    trySetResponseGetter(amountGuaranteed, responseGetter);
+    trySetResponseGetter(amountRefunded, responseGetter);
+    trySetResponseGetter(amountRequested, responseGetter);
+    trySetResponseGetter(customerDetails, responseGetter);
+    trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(shippingDetails, responseGetter);
   }
 }
