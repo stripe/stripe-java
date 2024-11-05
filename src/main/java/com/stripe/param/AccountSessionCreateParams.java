@@ -2467,10 +2467,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether to allow money movement features. */
-        @SerializedName("money_movement")
-        Boolean moneyMovement;
-
         /** Whether to allow sending money. */
         @SerializedName("send_money")
         Boolean sendMoney;
@@ -2483,13 +2479,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             Boolean disableStripeUserAuthentication,
             Boolean externalAccountCollection,
             Map<String, Object> extraParams,
-            Boolean moneyMovement,
             Boolean sendMoney,
             Boolean transferBalance) {
           this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.externalAccountCollection = externalAccountCollection;
           this.extraParams = extraParams;
-          this.moneyMovement = moneyMovement;
           this.sendMoney = sendMoney;
           this.transferBalance = transferBalance;
         }
@@ -2505,8 +2499,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
-          private Boolean moneyMovement;
-
           private Boolean sendMoney;
 
           private Boolean transferBalance;
@@ -2517,7 +2509,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
                 this.disableStripeUserAuthentication,
                 this.externalAccountCollection,
                 this.extraParams,
-                this.moneyMovement,
                 this.sendMoney,
                 this.transferBalance);
           }
@@ -2571,12 +2562,6 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether to allow money movement features. */
-          public Builder setMoneyMovement(Boolean moneyMovement) {
-            this.moneyMovement = moneyMovement;
-            return this;
-          }
-
           /** Whether to allow sending money. */
           public Builder setSendMoney(Boolean sendMoney) {
             this.sendMoney = sendMoney;
@@ -2607,6 +2592,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** The list of features enabled in the embedded component. */
       @SerializedName("features")
       Features features;
 
@@ -2670,6 +2656,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The list of features enabled in the embedded component. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.FinancialAccountTransactions.Features features) {
           this.features = features;
@@ -2839,6 +2826,18 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       @Getter
       public static class Features {
+        /** Whether to allow card management features. */
+        @SerializedName("card_management")
+        Boolean cardManagement;
+
+        /** Whether to allow card spend dispute management features. */
+        @SerializedName("card_spend_dispute_management")
+        Boolean cardSpendDisputeManagement;
+
+        /** Whether to allow cardholder management features. */
+        @SerializedName("cardholder_management")
+        Boolean cardholderManagement;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2849,8 +2848,21 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Map<String, Object> extraParams) {
+        /** Whether to allow spend control management features. */
+        @SerializedName("spend_control_management")
+        Boolean spendControlManagement;
+
+        private Features(
+            Boolean cardManagement,
+            Boolean cardSpendDisputeManagement,
+            Boolean cardholderManagement,
+            Map<String, Object> extraParams,
+            Boolean spendControlManagement) {
+          this.cardManagement = cardManagement;
+          this.cardSpendDisputeManagement = cardSpendDisputeManagement;
+          this.cardholderManagement = cardholderManagement;
           this.extraParams = extraParams;
+          this.spendControlManagement = spendControlManagement;
         }
 
         public static Builder builder() {
@@ -2858,11 +2870,42 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean cardManagement;
+
+          private Boolean cardSpendDisputeManagement;
+
+          private Boolean cardholderManagement;
+
           private Map<String, Object> extraParams;
+
+          private Boolean spendControlManagement;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.IssuingCard.Features build() {
-            return new AccountSessionCreateParams.Components.IssuingCard.Features(this.extraParams);
+            return new AccountSessionCreateParams.Components.IssuingCard.Features(
+                this.cardManagement,
+                this.cardSpendDisputeManagement,
+                this.cardholderManagement,
+                this.extraParams,
+                this.spendControlManagement);
+          }
+
+          /** Whether to allow card management features. */
+          public Builder setCardManagement(Boolean cardManagement) {
+            this.cardManagement = cardManagement;
+            return this;
+          }
+
+          /** Whether to allow card spend dispute management features. */
+          public Builder setCardSpendDisputeManagement(Boolean cardSpendDisputeManagement) {
+            this.cardSpendDisputeManagement = cardSpendDisputeManagement;
+            return this;
+          }
+
+          /** Whether to allow cardholder management features. */
+          public Builder setCardholderManagement(Boolean cardholderManagement) {
+            this.cardholderManagement = cardholderManagement;
+            return this;
           }
 
           /**
@@ -2890,6 +2933,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Whether to allow spend control management features. */
+          public Builder setSpendControlManagement(Boolean spendControlManagement) {
+            this.spendControlManagement = spendControlManagement;
             return this;
           }
         }
