@@ -929,8 +929,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
         String city;
 
         /**
-         * <strong>Required.</strong> Two-letter country code (<a
-         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
         String country;
@@ -1017,8 +1017,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
           }
 
           /**
-           * <strong>Required.</strong> Two-letter country code (<a
-           * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
           public Builder setCountry(String country) {
             this.country = country;
@@ -1085,8 +1085,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     @Getter
     public static class Custom {
       /**
-       * <strong>Required.</strong> Display name for the custom (user-defined) payment method type
-       * used to make this payment.
+       * Display name for the custom (user-defined) payment method type used to make this payment.
        */
       @SerializedName("display_name")
       String displayName;
@@ -1100,9 +1099,14 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Custom(String displayName, Map<String, Object> extraParams) {
+      /** The custom payment method type associated with this payment. */
+      @SerializedName("type")
+      String type;
+
+      private Custom(String displayName, Map<String, Object> extraParams, String type) {
         this.displayName = displayName;
         this.extraParams = extraParams;
+        this.type = type;
       }
 
       public static Builder builder() {
@@ -1114,15 +1118,16 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String type;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentRecordReportPaymentParams.PaymentMethodDetails.Custom build() {
           return new PaymentRecordReportPaymentParams.PaymentMethodDetails.Custom(
-              this.displayName, this.extraParams);
+              this.displayName, this.extraParams, this.type);
         }
 
         /**
-         * <strong>Required.</strong> Display name for the custom (user-defined) payment method type
-         * used to make this payment.
+         * Display name for the custom (user-defined) payment method type used to make this payment.
          */
         public Builder setDisplayName(String displayName) {
           this.displayName = displayName;
@@ -1154,6 +1159,12 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The custom payment method type associated with this payment. */
+        public Builder setType(String type) {
+          this.type = type;
           return this;
         }
       }
@@ -1275,8 +1286,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
       String city;
 
       /**
-       * <strong>Required.</strong> Two-letter country code (<a
-       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1361,8 +1372,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Two-letter country code (<a
-         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
