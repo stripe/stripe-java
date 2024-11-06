@@ -63,4 +63,19 @@ public class LiveStripeResponseGetterTest extends BaseStripeTest {
             });
     assertThat(exception.getMessage(), CoreMatchers.containsString("idempotency"));
   }
+
+  @Test
+  public void testErrorWithJsonSyntaxException() throws Exception {
+    HttpClient spy = Mockito.spy(new HttpURLConnectionClient());
+    StripeResponseGetter srg = new LiveStripeResponseGetter(spy);
+    ApiResource.setGlobalResponseGetter(srg);
+    StripeResponse response =
+        new StripeResponse(400, HttpHeaders.of(Collections.emptyMap()), "I am not JSON :)");
+    Mockito.doReturn(response).when(spy).requestWithRetries(Mockito.<StripeRequest>any());
+    assertThrows(
+        StripeException.class,
+        () -> {
+          Subscription.retrieve("sub_123");
+        });
+  }
 }

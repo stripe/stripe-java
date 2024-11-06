@@ -6,7 +6,6 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import com.stripe.Stripe;
 import com.stripe.exception.*;
-import com.stripe.exception.ApiKeyMissingException;
 import com.stripe.exception.oauth.InvalidClientException;
 import com.stripe.exception.oauth.InvalidGrantException;
 import com.stripe.exception.oauth.InvalidScopeException;
@@ -289,22 +288,27 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private void handleError(StripeResponse response, ApiMode apiMode) throws StripeException {
-    JsonObject responseBody = ApiResource.GSON.fromJson(response.body(), JsonObject.class);
+    try {
+      /*
+      OAuth errors are JSON objects where `error` is a string. In
+      contrast, in API errors, `error` is a hash with sub-keys. We use
+      this property to distinguish between OAuth and API errors.
 
-    /*
-     OAuth errors are JSON objects where `error` is a string. In
-     contrast, in API errors, `error` is a hash with sub-keys. We use
-     this property to distinguish between OAuth and API errors.
-    */
-    if (responseBody.has("error") && responseBody.get("error").isJsonPrimitive()) {
-      JsonPrimitive error = responseBody.getAsJsonPrimitive("error");
-      if (error.isString()) {
-        handleOAuthError(response);
+      Try to read the response body to see if it must be
+      */
+      JsonObject responseBody = ApiResource.GSON.fromJson(response.body(), JsonObject.class);
+      if (responseBody.has("error") && responseBody.get("error").isJsonPrimitive()) {
+        JsonPrimitive error = responseBody.getAsJsonPrimitive("error");
+        if (error.isString()) {
+          handleOAuthError(response);
+        }
+      } else if (apiMode == ApiMode.V2) {
+        handleV2ApiError(response);
+      } else {
+        handleV1ApiError(response);
       }
-    } else if (apiMode == ApiMode.V2) {
-      handleV2ApiError(response);
-    } else {
-      handleV1ApiError(response);
+    } catch (JsonSyntaxException e) {
+      throw makeMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }
   }
 
