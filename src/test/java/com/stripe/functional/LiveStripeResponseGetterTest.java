@@ -1,6 +1,8 @@
 package com.stripe.functional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -10,6 +12,7 @@ import com.stripe.exception.ApiException;
 import com.stripe.exception.IdempotencyException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Subscription;
+import com.stripe.model.oauth.OAuthError;
 import com.stripe.net.ApiResource;
 import com.stripe.net.HttpClient;
 import com.stripe.net.HttpHeaders;
@@ -63,4 +66,22 @@ public class LiveStripeResponseGetterTest extends BaseStripeTest {
             });
     assertThat(exception.getMessage(), CoreMatchers.containsString("idempotency"));
   }
+
+  @Test
+  public void testErrorWithJsonSyntaxException() throws Exception {
+    HttpClient spy = Mockito.spy(new HttpURLConnectionClient());
+    StripeResponseGetter srg = new LiveStripeResponseGetter(spy);
+    ApiResource.setGlobalResponseGetter(srg);
+    StripeResponse response =
+        new StripeResponse(
+            400,
+            HttpHeaders.of(Collections.emptyMap()),
+            "I am not JSON :)");
+    Mockito.doReturn(response).when(spy).requestWithRetries(Mockito.<StripeRequest>any());
+    assertThrows(
+        StripeException.class,
+        () -> {
+          Subscription.retrieve("sub_123");
+        });
+      }
 }
