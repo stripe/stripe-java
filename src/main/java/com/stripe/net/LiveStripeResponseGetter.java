@@ -293,8 +293,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       OAuth errors are JSON objects where `error` is a string. In
       contrast, in API errors, `error` is a hash with sub-keys. We use
       this property to distinguish between OAuth and API errors.
-
-      Try to read the response body to see if it must be
       */
       JsonObject responseBody = ApiResource.GSON.fromJson(response.body(), JsonObject.class);
       if (responseBody.has("error") && responseBody.get("error").isJsonPrimitive()) {
