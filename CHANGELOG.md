@@ -1,5 +1,10 @@
 # Changelog
 
+## 28.0.1 - 2024-11-06
+* [#1919](https://github.com/stripe/stripe-java/pull/1919) Catch `JsonSyntaxException` when processing all errors
+* [#1916](https://github.com/stripe/stripe-java/pull/1916) Restore `testReportsRawRequestUsageTelemetry` test
+* [#1915](https://github.com/stripe/stripe-java/pull/1915) add major version blurb to changelog
+
 ## 28.0.0 - 2024-10-29
 
 Historically, when upgrading webhooks to a new API version, you also had to upgrade your SDK version. Your webhook's API version needed to match the API version pinned by the SDK you were using to ensure successful deserialization of events. With the `2024-09-30.acacia` release, Stripe follows a [new API release process](https://stripe.com/blog/introducing-stripes-new-api-release-process). As a result, you can safely upgrade your webhook endpoints to any API version within a biannual release (like `acacia`) without upgrading the SDK.
