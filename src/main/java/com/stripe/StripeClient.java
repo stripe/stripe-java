@@ -273,6 +273,10 @@ public class StripeClient {
     return new com.stripe.service.OrderService(this.getResponseGetter());
   }
 
+  public com.stripe.service.PaymentAttemptRecordService paymentAttemptRecords() {
+    return new com.stripe.service.PaymentAttemptRecordService(this.getResponseGetter());
+  }
+
   public com.stripe.service.PaymentIntentService paymentIntents() {
     return new com.stripe.service.PaymentIntentService(this.getResponseGetter());
   }
@@ -291,6 +295,10 @@ public class StripeClient {
 
   public com.stripe.service.PaymentMethodService paymentMethods() {
     return new com.stripe.service.PaymentMethodService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.PaymentRecordService paymentRecords() {
+    return new com.stripe.service.PaymentRecordService(this.getResponseGetter());
   }
 
   public com.stripe.service.PayoutService payouts() {

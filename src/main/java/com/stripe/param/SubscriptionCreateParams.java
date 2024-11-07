@@ -5212,6 +5212,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           @SerializedName("jcb")
           JCB("jcb"),
 
+          @SerializedName("link")
+          LINK("link"),
+
           @SerializedName("mastercard")
           MASTERCARD("mastercard"),
 
@@ -6261,6 +6264,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
+
+      @SerializedName("custom")
+      CUSTOM("custom"),
 
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),

@@ -60,8 +60,7 @@ public class StripeClientTest extends BaseStripeTest {
         });
   }
 
-  // TODO: https://go/j/DEVSDK-2178
-  // @Test
+  @Test
   public void testReportsRawRequestUsageTelemetry() throws StripeException {
     mockClient.rawRequest(
         com.stripe.net.ApiResource.RequestMethod.POST, "/v1/customers", "description=foo", null);

@@ -58,6 +58,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId, MetadataStore<Session> {
+  /**
+   * Settings for price localization with <a
+   * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
+   */
+  @SerializedName("adaptive_pricing")
+  AdaptivePricing adaptivePricing;
+
   /** When set, provides configuration for actions to take if this Checkout Session expires. */
   @SerializedName("after_expiration")
   AfterExpiration afterExpiration;
@@ -815,6 +822,19 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about AdaptivePricing, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AdaptivePricing extends StripeObject {
+    /** Whether Adaptive Pricing is enabled. */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
    * For more details about AfterExpiration, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -977,14 +997,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * no_vat}, {@code no_voec}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
        * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
        * tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid},
-       * {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code
-       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code
-       * ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat},
-       * {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code
-       * si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat},
-       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code
-       * tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or
-       * {@code unknown}.
+       * {@code li_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst},
+       * {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code
+       * my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic},
+       * {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code
+       * ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn},
+       * {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code
+       * ma_vat}, {@code by_tin}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -1402,14 +1422,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * no_vat}, {@code no_voec}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
        * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
        * tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid},
-       * {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code
-       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code
-       * ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat},
-       * {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code
-       * si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat},
-       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code
-       * tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or
-       * {@code unknown}.
+       * {@code li_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst},
+       * {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code
+       * my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic},
+       * {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code
+       * ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn},
+       * {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code
+       * ma_vat}, {@code by_tin}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2005,6 +2025,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2028,6 +2051,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
     }
 
     /**
@@ -2114,6 +2146,52 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     public static class Card extends StripeObject {
       @SerializedName("installments")
       Installments installments;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_decremental_authorization")
+      String requestDecrementalAuthorization;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_extended_authorization")
+      String requestExtendedAuthorization;
+
+      /**
+       * Request ability to <a
+       * href="https://stripe.com/payments/incremental-authorization">increment the
+       * authorization</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_incremental_authorization")
+      String requestIncrementalAuthorization;
+
+      /**
+       * Request ability to make <a href="https://stripe.com/payments/multicapture">multiple
+       * captures</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_multicapture")
+      String requestMulticapture;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/overcapture">overcapture</a> for
+       * this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_overcapture")
+      String requestOvercapture;
 
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
@@ -3114,6 +3192,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -3137,6 +3218,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
     }
 
     /**
@@ -3669,6 +3759,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(adaptivePricing, responseGetter);
     trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(collectedInformation, responseGetter);

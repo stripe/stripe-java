@@ -941,6 +941,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
 
+    @SerializedName("invoice.payment_attempt_required")
+    INVOICE__PAYMENT_ATTEMPT_REQUIRED("invoice.payment_attempt_required"),
+
     @SerializedName("invoice.payment_failed")
     INVOICE__PAYMENT_FAILED("invoice.payment_failed"),
 
@@ -1012,6 +1015,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("issuing_dispute_settlement_detail.updated")
     ISSUING_DISPUTE_SETTLEMENT_DETAIL__UPDATED("issuing_dispute_settlement_detail.updated"),
+
+    @SerializedName("issuing_fraud_liability_debit.created")
+    ISSUING_FRAUD_LIABILITY_DEBIT__CREATED("issuing_fraud_liability_debit.created"),
 
     @SerializedName("issuing_personalization_design.activated")
     ISSUING_PERSONALIZATION_DESIGN__ACTIVATED("issuing_personalization_design.activated"),

@@ -33,6 +33,10 @@ public final class IssuingService extends ApiService {
     return new com.stripe.service.issuing.DisputeService(this.getResponseGetter());
   }
 
+  public com.stripe.service.issuing.FraudLiabilityDebitService fraudLiabilityDebits() {
+    return new com.stripe.service.issuing.FraudLiabilityDebitService(this.getResponseGetter());
+  }
+
   public com.stripe.service.issuing.PersonalizationDesignService personalizationDesigns() {
     return new com.stripe.service.issuing.PersonalizationDesignService(this.getResponseGetter());
   }

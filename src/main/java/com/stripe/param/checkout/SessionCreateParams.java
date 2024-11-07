@@ -13,6 +13,13 @@ import lombok.Getter;
 
 @Getter
 public class SessionCreateParams extends ApiRequestParams {
+  /**
+   * Settings for price localization with <a
+   * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
+   */
+  @SerializedName("adaptive_pricing")
+  AdaptivePricing adaptivePricing;
+
   /** Configure actions after a Checkout Session has expired. */
   @SerializedName("after_expiration")
   AfterExpiration afterExpiration;
@@ -352,6 +359,7 @@ public class SessionCreateParams extends ApiRequestParams {
   UiMode uiMode;
 
   private SessionCreateParams(
+      AdaptivePricing adaptivePricing,
       AfterExpiration afterExpiration,
       Boolean allowPromotionCodes,
       AutomaticTax automaticTax,
@@ -394,6 +402,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String successUrl,
       TaxIdCollection taxIdCollection,
       UiMode uiMode) {
+    this.adaptivePricing = adaptivePricing;
     this.afterExpiration = afterExpiration;
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
@@ -443,6 +452,8 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AdaptivePricing adaptivePricing;
+
     private AfterExpiration afterExpiration;
 
     private Boolean allowPromotionCodes;
@@ -530,6 +541,7 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
+          this.adaptivePricing,
           this.afterExpiration,
           this.allowPromotionCodes,
           this.automaticTax,
@@ -572,6 +584,15 @@ public class SessionCreateParams extends ApiRequestParams {
           this.successUrl,
           this.taxIdCollection,
           this.uiMode);
+    }
+
+    /**
+     * Settings for price localization with <a
+     * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
+     */
+    public Builder setAdaptivePricing(SessionCreateParams.AdaptivePricing adaptivePricing) {
+      this.adaptivePricing = adaptivePricing;
+      return this;
     }
 
     /** Configure actions after a Checkout Session has expired. */
@@ -1121,6 +1142,84 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setUiMode(SessionCreateParams.UiMode uiMode) {
       this.uiMode = uiMode;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AdaptivePricing {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
+     * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
+     * setting</a>.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AdaptivePricing(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.AdaptivePricing build() {
+        return new SessionCreateParams.AdaptivePricing(this.enabled, this.extraParams);
+      }
+
+      /**
+       * Set to {@code true} to enable <a
+       * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
+       * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
+       * setting</a>.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.AdaptivePricing#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.AdaptivePricing#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 
@@ -5703,7 +5802,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("multibanco")
     Multibanco multibanco;
 
-    /** contains details about the Kakao Pay payment method options. */
+    /** contains details about the Naver Pay payment method options. */
     @SerializedName("naver_pay")
     NaverPay naverPay;
 
@@ -6150,7 +6249,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** contains details about the Kakao Pay payment method options. */
+      /** contains details about the Naver Pay payment method options. */
       public Builder setNaverPay(SessionCreateParams.PaymentMethodOptions.NaverPay naverPay) {
         this.naverPay = naverPay;
         return this;
@@ -7331,6 +7430,10 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -7353,8 +7456,12 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private BacsDebit(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      private BacsDebit(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          SetupFutureUsage setupFutureUsage) {
         this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -7365,12 +7472,14 @@ public class SessionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private MandateOptions mandateOptions;
+
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.BacsDebit build() {
           return new SessionCreateParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.setupFutureUsage);
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
         }
 
         /**
@@ -7401,6 +7510,13 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            SessionCreateParams.PaymentMethodOptions.BacsDebit.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
         /**
          * Indicates that you intend to make future payments with this PaymentIntent's payment
          * method.
@@ -7425,6 +7541,67 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.PaymentMethodOptions.BacsDebit.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      @Getter
+      public static class MandateOptions {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentMethodOptions.BacsDebit.MandateOptions build() {
+            return new SessionCreateParams.PaymentMethodOptions.BacsDebit.MandateOptions(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.BacsDebit.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.BacsDebit.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
 
@@ -7735,6 +7912,42 @@ public class SessionCreateParams extends ApiRequestParams {
       Installments installments;
 
       /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       */
+      @SerializedName("request_decremental_authorization")
+      RequestDecrementalAuthorization requestDecrementalAuthorization;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       */
+      @SerializedName("request_extended_authorization")
+      RequestExtendedAuthorization requestExtendedAuthorization;
+
+      /**
+       * Request ability to <a
+       * href="https://stripe.com/payments/incremental-authorization">increment the
+       * authorization</a> for this CheckoutSession.
+       */
+      @SerializedName("request_incremental_authorization")
+      RequestIncrementalAuthorization requestIncrementalAuthorization;
+
+      /**
+       * Request ability to make <a href="https://stripe.com/payments/multicapture">multiple
+       * captures</a> for this CheckoutSession.
+       */
+      @SerializedName("request_multicapture")
+      RequestMulticapture requestMulticapture;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/overcapture">overcapture</a> for
+       * this CheckoutSession.
+       */
+      @SerializedName("request_overcapture")
+      RequestOvercapture requestOvercapture;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -7793,12 +8006,22 @@ public class SessionCreateParams extends ApiRequestParams {
       private Card(
           Map<String, Object> extraParams,
           Installments installments,
+          RequestDecrementalAuthorization requestDecrementalAuthorization,
+          RequestExtendedAuthorization requestExtendedAuthorization,
+          RequestIncrementalAuthorization requestIncrementalAuthorization,
+          RequestMulticapture requestMulticapture,
+          RequestOvercapture requestOvercapture,
           RequestThreeDSecure requestThreeDSecure,
           SetupFutureUsage setupFutureUsage,
           String statementDescriptorSuffixKana,
           String statementDescriptorSuffixKanji) {
         this.extraParams = extraParams;
         this.installments = installments;
+        this.requestDecrementalAuthorization = requestDecrementalAuthorization;
+        this.requestExtendedAuthorization = requestExtendedAuthorization;
+        this.requestIncrementalAuthorization = requestIncrementalAuthorization;
+        this.requestMulticapture = requestMulticapture;
+        this.requestOvercapture = requestOvercapture;
         this.requestThreeDSecure = requestThreeDSecure;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
@@ -7814,6 +8037,16 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Installments installments;
 
+        private RequestDecrementalAuthorization requestDecrementalAuthorization;
+
+        private RequestExtendedAuthorization requestExtendedAuthorization;
+
+        private RequestIncrementalAuthorization requestIncrementalAuthorization;
+
+        private RequestMulticapture requestMulticapture;
+
+        private RequestOvercapture requestOvercapture;
+
         private RequestThreeDSecure requestThreeDSecure;
 
         private SetupFutureUsage setupFutureUsage;
@@ -7827,6 +8060,11 @@ public class SessionCreateParams extends ApiRequestParams {
           return new SessionCreateParams.PaymentMethodOptions.Card(
               this.extraParams,
               this.installments,
+              this.requestDecrementalAuthorization,
+              this.requestExtendedAuthorization,
+              this.requestIncrementalAuthorization,
+              this.requestMulticapture,
+              this.requestOvercapture,
               this.requestThreeDSecure,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
@@ -7865,6 +8103,60 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setInstallments(
             SessionCreateParams.PaymentMethodOptions.Card.Installments installments) {
           this.installments = installments;
+          return this;
+        }
+
+        /**
+         * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+         * beyond the standard authorization validity window</a> for this CheckoutSession.
+         */
+        public Builder setRequestDecrementalAuthorization(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestDecrementalAuthorization
+                requestDecrementalAuthorization) {
+          this.requestDecrementalAuthorization = requestDecrementalAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+         * beyond the standard authorization validity window</a> for this CheckoutSession.
+         */
+        public Builder setRequestExtendedAuthorization(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestExtendedAuthorization
+                requestExtendedAuthorization) {
+          this.requestExtendedAuthorization = requestExtendedAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to <a
+         * href="https://stripe.com/payments/incremental-authorization">increment the
+         * authorization</a> for this CheckoutSession.
+         */
+        public Builder setRequestIncrementalAuthorization(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestIncrementalAuthorization
+                requestIncrementalAuthorization) {
+          this.requestIncrementalAuthorization = requestIncrementalAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to make <a href="https://stripe.com/payments/multicapture">multiple
+         * captures</a> for this CheckoutSession.
+         */
+        public Builder setRequestMulticapture(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestMulticapture requestMulticapture) {
+          this.requestMulticapture = requestMulticapture;
+          return this;
+        }
+
+        /**
+         * Request ability to <a href="https://stripe.com/payments/overcapture">overcapture</a> for
+         * this CheckoutSession.
+         */
+        public Builder setRequestOvercapture(
+            SessionCreateParams.PaymentMethodOptions.Card.RequestOvercapture requestOvercapture) {
+          this.requestOvercapture = requestOvercapture;
           return this;
         }
 
@@ -8011,6 +8303,81 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams.putAll(map);
             return this;
           }
+        }
+      }
+
+      public enum RequestDecrementalAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestDecrementalAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestExtendedAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestExtendedAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestIncrementalAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestIncrementalAuthorization(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestMulticapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestMulticapture(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestOvercapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestOvercapture(String value) {
+          this.value = value;
         }
       }
 
@@ -9257,6 +9624,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class KakaoPay {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -9288,7 +9659,11 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private KakaoPay(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      private KakaoPay(
+          CaptureMethod captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -9298,6 +9673,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureMethod captureMethod;
+
         private Map<String, Object> extraParams;
 
         private SetupFutureUsage setupFutureUsage;
@@ -9305,7 +9682,14 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.KakaoPay build() {
           return new SessionCreateParams.PaymentMethodOptions.KakaoPay(
-              this.extraParams, this.setupFutureUsage);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.KakaoPay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -9360,6 +9744,18 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.PaymentMethodOptions.KakaoPay.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
 
@@ -9649,6 +10045,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class KrCard {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -9680,7 +10080,11 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private KrCard(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      private KrCard(
+          CaptureMethod captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -9690,6 +10094,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureMethod captureMethod;
+
         private Map<String, Object> extraParams;
 
         private SetupFutureUsage setupFutureUsage;
@@ -9697,7 +10103,14 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.KrCard build() {
           return new SessionCreateParams.PaymentMethodOptions.KrCard(
-              this.extraParams, this.setupFutureUsage);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.KrCard.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -9752,6 +10165,18 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.PaymentMethodOptions.KrCard.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
 
@@ -10139,6 +10564,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class NaverPay {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10170,7 +10599,11 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private NaverPay(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      private NaverPay(
+          CaptureMethod captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -10180,6 +10613,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureMethod captureMethod;
+
         private Map<String, Object> extraParams;
 
         private SetupFutureUsage setupFutureUsage;
@@ -10187,7 +10622,14 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.NaverPay build() {
           return new SessionCreateParams.PaymentMethodOptions.NaverPay(
-              this.extraParams, this.setupFutureUsage);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.NaverPay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -10242,6 +10684,18 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.PaymentMethodOptions.NaverPay.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
 
@@ -10545,6 +10999,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Payco {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10554,7 +11012,8 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Payco(Map<String, Object> extraParams) {
+      private Payco(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
       }
 
@@ -10563,11 +11022,21 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureMethod captureMethod;
+
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Payco build() {
-          return new SessionCreateParams.PaymentMethodOptions.Payco(this.extraParams);
+          return new SessionCreateParams.PaymentMethodOptions.Payco(
+              this.captureMethod, this.extraParams);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.Payco.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -10596,6 +11065,18 @@ public class SessionCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
     }
@@ -11753,6 +12234,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class SamsungPay {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -11762,7 +12247,8 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private SamsungPay(Map<String, Object> extraParams) {
+      private SamsungPay(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
       }
 
@@ -11771,11 +12257,21 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureMethod captureMethod;
+
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.SamsungPay build() {
-          return new SessionCreateParams.PaymentMethodOptions.SamsungPay(this.extraParams);
+          return new SessionCreateParams.PaymentMethodOptions.SamsungPay(
+              this.captureMethod, this.extraParams);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.SamsungPay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -11806,6 +12302,18 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
       }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
     }
 
     @Getter
@@ -11818,6 +12326,10 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
+
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -11841,8 +12353,12 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private SepaDebit(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      private SepaDebit(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          SetupFutureUsage setupFutureUsage) {
         this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -11853,12 +12369,14 @@ public class SessionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private MandateOptions mandateOptions;
+
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.SepaDebit build() {
           return new SessionCreateParams.PaymentMethodOptions.SepaDebit(
-              this.extraParams, this.setupFutureUsage);
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
         }
 
         /**
@@ -11886,6 +12404,13 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            SessionCreateParams.PaymentMethodOptions.SepaDebit.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
           return this;
         }
 
@@ -11913,6 +12438,67 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.PaymentMethodOptions.SepaDebit.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      @Getter
+      public static class MandateOptions {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentMethodOptions.SepaDebit.MandateOptions build() {
+            return new SessionCreateParams.PaymentMethodOptions.SepaDebit.MandateOptions(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.SepaDebit.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.SepaDebit.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
 
@@ -13218,8 +13804,7 @@ public class SessionCreateParams extends ApiRequestParams {
   public static class ShippingAddressCollection {
     /**
      * <strong>Required.</strong> An array of two-letter ISO country codes representing which
-     * countries Checkout should provide as options for shipping locations. Unsupported country
-     * codes: {@code AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
+     * countries Checkout should provide as options for shipping locations.
      */
     @SerializedName("allowed_countries")
     List<SessionCreateParams.ShippingAddressCollection.AllowedCountry> allowedCountries;

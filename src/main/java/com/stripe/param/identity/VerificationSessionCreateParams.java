@@ -66,7 +66,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   Type type;
 
   /**
-   * The ID of a Verification Flow from the Dashboard. See
+   * The ID of a verification flow from the Dashboard. See
    * https://docs.stripe.com/identity/verification-flows.
    */
   @SerializedName("verification_flow")
@@ -258,7 +258,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of a Verification Flow from the Dashboard. See
+     * The ID of a verification flow from the Dashboard. See
      * https://docs.stripe.com/identity/verification-flows.
      */
     public Builder setVerificationFlow(String verificationFlow) {
