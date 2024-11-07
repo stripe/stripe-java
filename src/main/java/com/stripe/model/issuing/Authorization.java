@@ -80,8 +80,8 @@ public class Authorization extends ApiResource
   List<BalanceTransaction> balanceTransactions;
 
   /**
-   * You can <a href="https://stripe.com/docs/issuing/cards">create physical or virtual cards</a>
-   * that are issued to cardholders.
+   * You can <a href="https://stripe.com/docs/issuing">create physical or virtual cards</a> that are
+   * issued to cardholders.
    */
   @SerializedName("card")
   Card card;

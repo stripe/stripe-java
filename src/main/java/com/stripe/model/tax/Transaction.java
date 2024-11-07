@@ -372,14 +372,14 @@ public class Transaction extends ApiResource implements HasId {
        * no_vat}, {@code no_voec}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
        * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
        * tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid},
-       * {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code
-       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code
-       * ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat},
-       * {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code
-       * si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code bh_vat},
-       * {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code
-       * tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, or
-       * {@code unknown}.
+       * {@code li_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst},
+       * {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code
+       * my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic},
+       * {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code
+       * ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn},
+       * {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code
+       * ma_vat}, {@code by_tin}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;

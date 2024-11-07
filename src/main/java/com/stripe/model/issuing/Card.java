@@ -30,8 +30,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can <a href="https://stripe.com/docs/issuing/cards">create physical or virtual cards</a> that
- * are issued to cardholders.
+ * You can <a href="https://stripe.com/docs/issuing">create physical or virtual cards</a> that are
+ * issued to cardholders.
  */
 @Getter
 @Setter
