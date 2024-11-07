@@ -15,6 +15,7 @@ import com.stripe.param.issuing.AuthorizationCreateParams;
 import com.stripe.param.issuing.AuthorizationExpireParams;
 import com.stripe.param.issuing.AuthorizationFinalizeAmountParams;
 import com.stripe.param.issuing.AuthorizationIncrementParams;
+import com.stripe.param.issuing.AuthorizationRespondParams;
 import com.stripe.param.issuing.AuthorizationReverseParams;
 
 public final class AuthorizationService extends ApiService {
@@ -118,6 +119,34 @@ public final class AuthorizationService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/authorizations/%s/finalize_amount",
+            ApiResource.urlEncodeId(authorization));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Authorization.class);
+  }
+  /**
+   * Respond to a fraud challenge on a testmode Issuing authorization, simulating either a
+   * confirmation of fraud or a correction of legitimacy.
+   */
+  public Authorization respond(String authorization, AuthorizationRespondParams params)
+      throws StripeException {
+    return respond(authorization, params, (RequestOptions) null);
+  }
+  /**
+   * Respond to a fraud challenge on a testmode Issuing authorization, simulating either a
+   * confirmation of fraud or a correction of legitimacy.
+   */
+  public Authorization respond(
+      String authorization, AuthorizationRespondParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/issuing/authorizations/%s/fraud_challenges/respond",
             ApiResource.urlEncodeId(authorization));
     ApiRequest request =
         new ApiRequest(

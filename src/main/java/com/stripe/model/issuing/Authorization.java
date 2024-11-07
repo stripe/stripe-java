@@ -22,6 +22,7 @@ import com.stripe.param.issuing.AuthorizationExpireParams;
 import com.stripe.param.issuing.AuthorizationFinalizeAmountParams;
 import com.stripe.param.issuing.AuthorizationIncrementParams;
 import com.stripe.param.issuing.AuthorizationListParams;
+import com.stripe.param.issuing.AuthorizationRespondParams;
 import com.stripe.param.issuing.AuthorizationRetrieveParams;
 import com.stripe.param.issuing.AuthorizationReverseParams;
 import com.stripe.param.issuing.AuthorizationUpdateParams;
@@ -108,6 +109,13 @@ public class Authorization extends ApiResource
   /** Fleet-specific information for authorizations using Fleet cards. */
   @SerializedName("fleet")
   Fleet fleet;
+
+  /**
+   * Fraud challenges sent to the cardholder, if this authorization was declined for fraud risk
+   * reasons.
+   */
+  @SerializedName("fraud_challenges")
+  List<Authorization.FraudChallenge> fraudChallenges;
 
   /**
    * Information about fuel that was purchased with this transaction. Typically this information is
@@ -223,6 +231,13 @@ public class Authorization extends ApiResource
 
   @SerializedName("verification_data")
   VerificationData verificationData;
+
+  /**
+   * Whether the authorization bypassed fraud risk checks because the cardholder has previously
+   * completed a fraud challenge on a similar high-risk authorization from the same merchant.
+   */
+  @SerializedName("verified_by_fraud_challenge")
+  Boolean verifiedByFraudChallenge;
 
   /**
    * The digital wallet used for this transaction. One of {@code apple_pay}, {@code google_pay}, or
@@ -768,6 +783,40 @@ public class Authorization extends ApiResource
         BigDecimal nationalAmountDecimal;
       }
     }
+  }
+
+  /**
+   * For more details about FraudChallenge, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FraudChallenge extends StripeObject {
+    /**
+     * The method by which the fraud challenge was delivered to the cardholder.
+     *
+     * <p>Equal to {@code sms}.
+     */
+    @SerializedName("channel")
+    String channel;
+
+    /**
+     * The status of the fraud challenge.
+     *
+     * <p>One of {@code expired}, {@code pending}, {@code rejected}, {@code undeliverable}, or
+     * {@code verified}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /**
+     * If the challenge is not deliverable, the reason why.
+     *
+     * <p>One of {@code no_phone_number}, or {@code unsupported_phone_number}.
+     */
+    @SerializedName("undeliverable_reason")
+    String undeliverableReason;
   }
 
   /**
@@ -1422,6 +1471,58 @@ public class Authorization extends ApiResource
       String path =
           String.format(
               "/v1/test_helpers/issuing/authorizations/%s/finalize_amount",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, Authorization.class);
+    }
+
+    /**
+     * Respond to a fraud challenge on a testmode Issuing authorization, simulating either a
+     * confirmation of fraud or a correction of legitimacy.
+     */
+    public Authorization respond(Map<String, Object> params) throws StripeException {
+      return respond(params, (RequestOptions) null);
+    }
+
+    /**
+     * Respond to a fraud challenge on a testmode Issuing authorization, simulating either a
+     * confirmation of fraud or a correction of legitimacy.
+     */
+    public Authorization respond(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/fraud_challenges/respond",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, Authorization.class);
+    }
+
+    /**
+     * Respond to a fraud challenge on a testmode Issuing authorization, simulating either a
+     * confirmation of fraud or a correction of legitimacy.
+     */
+    public Authorization respond(AuthorizationRespondParams params) throws StripeException {
+      return respond(params, (RequestOptions) null);
+    }
+
+    /**
+     * Respond to a fraud challenge on a testmode Issuing authorization, simulating either a
+     * confirmation of fraud or a correction of legitimacy.
+     */
+    public Authorization respond(AuthorizationRespondParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/authorizations/%s/fraud_challenges/respond",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
       ApiRequest request =
