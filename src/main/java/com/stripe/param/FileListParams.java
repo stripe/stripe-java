@@ -345,6 +345,9 @@ public class FileListParams extends ApiRequestParams {
     @SerializedName("finance_report_run")
     FINANCE_REPORT_RUN("finance_report_run"),
 
+    @SerializedName("financial_account_statement")
+    FINANCIAL_ACCOUNT_STATEMENT("financial_account_statement"),
+
     @SerializedName("identity_document")
     IDENTITY_DOCUMENT("identity_document"),
 
