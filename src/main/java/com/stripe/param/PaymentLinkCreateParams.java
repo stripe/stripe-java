@@ -5816,7 +5816,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     DONATE("donate"),
 
     @SerializedName("pay")
-    PAY("pay");
+    PAY("pay"),
+
+    @SerializedName("subscribe")
+    SUBSCRIBE("subscribe");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
