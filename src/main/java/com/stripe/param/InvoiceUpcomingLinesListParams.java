@@ -8380,7 +8380,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       /**
        * If specified, payment collection for this subscription will be paused. Note that the
        * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-       * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+       * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
        * collection</a>.
        */
       @SerializedName("pause_collection")
@@ -8976,7 +8976,7 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         /**
          * If specified, payment collection for this subscription will be paused. Note that the
          * subscription status will be unchanged and will not be updated to {@code paused}. Learn
-         * more about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+         * more about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
          * collection</a>.
          */
         public Builder setPauseCollection(

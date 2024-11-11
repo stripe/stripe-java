@@ -270,7 +270,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   /**
    * If specified, payment collection for this subscription will be paused. Note that the
    * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-   * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing collection</a>.
+   * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+   * collection</a>.
    */
   @SerializedName("pause_collection")
   PauseCollection pauseCollection;
@@ -340,12 +341,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * active} when the trial period is over.
    *
    * <p>A subscription can only enter a {@code paused} status <a
-   * href="https://stripe.com/billing/subscriptions/trials#create-free-trials-without-payment">when
+   * href="https://stripe.com/docs/billing/subscriptions/trials#create-free-trials-without-payment">when
    * a trial ends without a payment method</a>. A {@code paused} subscription doesn't generate
    * invoices and can be resumed after your customer adds their payment method. The {@code paused}
    * status is different from <a
-   * href="https://stripe.com/billing/subscriptions/pause-payment">pausing collection</a>, which
-   * still generates invoices and leaves the subscription's status unchanged.
+   * href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing collection</a>,
+   * which still generates invoices and leaves the subscription's status unchanged.
    *
    * <p>If subscription {@code collection_method=charge_automatically}, it becomes {@code past_due}
    * when payment is required but cannot be paid (due to failed payment or awaiting additional user
@@ -1078,7 +1079,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
    * charge the customer using the new price, and reset the billing date. Learn about how <a
-   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * href="https://stripe.com/docs/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
    * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
@@ -1131,7 +1132,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
    * charge the customer using the new price, and reset the billing date. Learn about how <a
-   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * href="https://stripe.com/docs/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
    * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
@@ -1188,7 +1189,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
    * charge the customer using the new price, and reset the billing date. Learn about how <a
-   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * href="https://stripe.com/docs/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
    * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
@@ -1240,7 +1241,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    *
    * <p>In these cases, we apply a credit for the unused time on the previous price, immediately
    * charge the customer using the new price, and reset the billing date. Learn about how <a
-   * href="https://stripe.com/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
+   * href="https://stripe.com/docs/billing/subscriptions/upgrade-downgrade#immediate-payment">Stripe
    * immediately attempts payment for subscription changes</a>.
    *
    * <p>If you want to charge for an upgrade immediately, pass {@code proration_behavior} as {@code
