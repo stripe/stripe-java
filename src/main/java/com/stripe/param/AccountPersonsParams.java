@@ -195,6 +195,13 @@ public class AccountPersonsParams extends ApiRequestParams {
   @Getter
   public static class Relationship {
     /**
+     * A filter on the list of people returned based on whether these people are authorizers of the
+     * account's representative.
+     */
+    @SerializedName("authorizer")
+    Boolean authorizer;
+
+    /**
      * A filter on the list of people returned based on whether these people are directors of the
      * account's company.
      */
@@ -239,12 +246,14 @@ public class AccountPersonsParams extends ApiRequestParams {
     Boolean representative;
 
     private Relationship(
+        Boolean authorizer,
         Boolean director,
         Boolean executive,
         Map<String, Object> extraParams,
         Boolean legalGuardian,
         Boolean owner,
         Boolean representative) {
+      this.authorizer = authorizer;
       this.director = director;
       this.executive = executive;
       this.extraParams = extraParams;
@@ -258,6 +267,8 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean authorizer;
+
       private Boolean director;
 
       private Boolean executive;
@@ -273,12 +284,22 @@ public class AccountPersonsParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountPersonsParams.Relationship build() {
         return new AccountPersonsParams.Relationship(
+            this.authorizer,
             this.director,
             this.executive,
             this.extraParams,
             this.legalGuardian,
             this.owner,
             this.representative);
+      }
+
+      /**
+       * A filter on the list of people returned based on whether these people are authorizers of
+       * the account's representative.
+       */
+      public Builder setAuthorizer(Boolean authorizer) {
+        this.authorizer = authorizer;
+        return this;
       }
 
       /**

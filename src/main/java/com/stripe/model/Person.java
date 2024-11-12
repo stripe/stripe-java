@@ -584,6 +584,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Relationship extends StripeObject {
+    /** Whether the person is the authorizer of the account's representative. */
+    @SerializedName("authorizer")
+    Boolean authorizer;
+
     /**
      * Whether the person is a director of the account's legal entity. Directors are typically
      * members of the governing board of the company, or responsible for ensuring the company meets
