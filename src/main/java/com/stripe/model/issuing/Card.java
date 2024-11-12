@@ -30,8 +30,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can <a href="https://stripe.com/docs/issuing/cards">create physical or virtual cards</a> that
- * are issued to cardholders.
+ * You can <a href="https://stripe.com/docs/issuing">create physical or virtual cards</a> that are
+ * issued to cardholders.
  */
 @Getter
 @Setter
@@ -53,7 +53,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
    * An Issuing {@code Cardholder} object represents an individual or business entity who is <a
    * href="https://stripe.com/docs/issuing">issued</a> cards.
    *
-   * <p>Related guide: <a href="https://stripe.com/docs/issuing/cards#create-cardholder">How to
+   * <p>Related guide: <a
+   * href="https://stripe.com/docs/issuing/cards/virtual/issue-cards#create-cardholder">How to
    * create a cardholder</a>
    */
   @SerializedName("cardholder")

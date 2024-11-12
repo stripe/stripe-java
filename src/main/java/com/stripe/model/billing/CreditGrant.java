@@ -32,7 +32,7 @@ import lombok.Setter;
  *
  * <p>Related guide: <a
  * href="https://docs.stripe.com/billing/subscriptions/usage-based/billing-credits">Billing
- * credits</a> end
+ * credits</a>
  */
 @Getter
 @Setter
@@ -45,8 +45,8 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   ApplicabilityConfig applicabilityConfig;
 
   /**
-   * The category of this credit grant. This is for tracking purposes and will not be displayed to
-   * the customer.
+   * The category of this credit grant. This is for tracking purposes and isn't displayed to the
+   * customer.
    *
    * <p>One of {@code paid}, or {@code promotional}.
    */
@@ -57,20 +57,17 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @SerializedName("created")
   Long created;
 
-  /** ID of the customer to whom the billing credits are granted. */
+  /** ID of the customer receiving the billing credits. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** The time when the billing credits become effective i.e when they are eligible to be used. */
+  /** The time when the billing credits become effective—when they're eligible for use. */
   @SerializedName("effective_at")
   Long effectiveAt;
 
-  /**
-   * The time when the billing credits will expire. If not present, the billing credits will never
-   * expire.
-   */
+  /** The time when the billing credits expire. If not present, the billing credits don't expire. */
   @SerializedName("expires_at")
   Long expiresAt;
 
@@ -454,7 +451,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     @EqualsAndHashCode(callSuper = false)
     public static class Scope extends StripeObject {
       /**
-       * The price type to which credit grants can apply to. We currently only support {@code
+       * The price type for which credit grants can apply. We currently only support the {@code
        * metered} price type. This refers to prices that have a <a
        * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
        *

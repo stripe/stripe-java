@@ -1113,7 +1113,8 @@ public class Dispute extends ApiResource
     public static class Card extends StripeObject {
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
+       * unknown}.
        */
       @SerializedName("brand")
       String brand;

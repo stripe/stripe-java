@@ -182,7 +182,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   String paymentMethod;
 
-  /** The ID of the payment method configuration to use with this PaymentIntent. */
+  /**
+   * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+   * method configuration</a> to use with this PaymentIntent.
+   */
   @SerializedName("payment_method_configuration")
   String paymentMethodConfiguration;
 
@@ -201,9 +204,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The list of payment method types (for example, a card) that this PaymentIntent can use. If you
-   * don't provide this, it defaults to [&quot;card&quot;]. Use {@code automatic_payment_methods} to
-   * manage payment methods from the <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
+   * don't provide this, Stripe will dynamically show relevant payment methods from your <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -769,7 +771,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the payment method configuration to use with this PaymentIntent. */
+    /**
+     * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+     * method configuration</a> to use with this PaymentIntent.
+     */
     public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
       this.paymentMethodConfiguration = paymentMethodConfiguration;
       return this;
@@ -11813,6 +11818,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("jcb")
         JCB("jcb"),
+
+        @SerializedName("link")
+        LINK("link"),
 
         @SerializedName("mastercard")
         MASTERCARD("mastercard"),

@@ -124,9 +124,23 @@ public class FundingInstructions extends StripeObject {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Aba extends StripeObject {
+        @SerializedName("account_holder_address")
+        Address accountHolderAddress;
+
+        /** The account holder name. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
         /** The ABA account number. */
         @SerializedName("account_number")
         String accountNumber;
+
+        /** The account type. */
+        @SerializedName("account_type")
+        String accountType;
+
+        @SerializedName("bank_address")
+        Address bankAddress;
 
         /** The bank name. */
         @SerializedName("bank_name")
@@ -203,9 +217,23 @@ public class FundingInstructions extends StripeObject {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Swift extends StripeObject {
+        @SerializedName("account_holder_address")
+        Address accountHolderAddress;
+
+        /** The account holder name. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
         /** The account number. */
         @SerializedName("account_number")
         String accountNumber;
+
+        /** The account type. */
+        @SerializedName("account_type")
+        String accountType;
+
+        @SerializedName("bank_address")
+        Address bankAddress;
 
         /** The bank name. */
         @SerializedName("bank_name")

@@ -13,8 +13,8 @@ import lombok.Getter;
 @Getter
 public class AuthorizationCreateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> The total amount to attempt to authorize. This amount is in the
-   * provided currency, or defaults to the card's currency, and in the <a
+   * The total amount to attempt to authorize. This amount is in the provided currency, or defaults
+   * to the card's currency, and in the <a
    * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("amount")
@@ -73,6 +73,21 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   Boolean isAmountControllable;
 
   /**
+   * The total amount to attempt to authorize. This amount is in the provided merchant currency, and
+   * in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
+  @SerializedName("merchant_amount")
+  Long merchantAmount;
+
+  /**
+   * The currency of the authorization. If not provided, defaults to the currency of the card.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("merchant_currency")
+  String merchantCurrency;
+
+  /**
    * Details about the seller (grocery store, e-commerce website, etc.) where the card authorization
    * happened.
    */
@@ -108,6 +123,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       Fleet fleet,
       Fuel fuel,
       Boolean isAmountControllable,
+      Long merchantAmount,
+      String merchantCurrency,
       MerchantData merchantData,
       NetworkData networkData,
       VerificationData verificationData,
@@ -122,6 +139,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     this.fleet = fleet;
     this.fuel = fuel;
     this.isAmountControllable = isAmountControllable;
+    this.merchantAmount = merchantAmount;
+    this.merchantCurrency = merchantCurrency;
     this.merchantData = merchantData;
     this.networkData = networkData;
     this.verificationData = verificationData;
@@ -153,6 +172,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     private Boolean isAmountControllable;
 
+    private Long merchantAmount;
+
+    private String merchantCurrency;
+
     private MerchantData merchantData;
 
     private NetworkData networkData;
@@ -174,6 +197,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
           this.fleet,
           this.fuel,
           this.isAmountControllable,
+          this.merchantAmount,
+          this.merchantCurrency,
           this.merchantData,
           this.networkData,
           this.verificationData,
@@ -181,8 +206,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The total amount to attempt to authorize. This amount is in the
-     * provided currency, or defaults to the card's currency, and in the <a
+     * The total amount to attempt to authorize. This amount is in the provided currency, or
+     * defaults to the card's currency, and in the <a
      * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
      */
     public Builder setAmount(Long amount) {
@@ -295,6 +320,27 @@ public class AuthorizationCreateParams extends ApiRequestParams {
      */
     public Builder setIsAmountControllable(Boolean isAmountControllable) {
       this.isAmountControllable = isAmountControllable;
+      return this;
+    }
+
+    /**
+     * The total amount to attempt to authorize. This amount is in the provided merchant currency,
+     * and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+     * unit</a>.
+     */
+    public Builder setMerchantAmount(Long merchantAmount) {
+      this.merchantAmount = merchantAmount;
+      return this;
+    }
+
+    /**
+     * The currency of the authorization. If not provided, defaults to the currency of the card.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    public Builder setMerchantCurrency(String merchantCurrency) {
+      this.merchantCurrency = merchantCurrency;
       return this;
     }
 

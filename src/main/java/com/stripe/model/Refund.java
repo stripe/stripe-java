@@ -746,6 +746,13 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Blik extends StripeObject {
+      /**
+       * For refunds declined by the network, a decline code provided by the network which indicates
+       * the reason the refund failed.
+       */
+      @SerializedName("network_decline_code")
+      String networkDeclineCode;
+
       /** The reference assigned to the refund. */
       @SerializedName("reference")
       String reference;
@@ -1037,6 +1044,13 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {
+      /**
+       * For refunds declined by the network, a decline code provided by the network which indicates
+       * the reason the refund failed.
+       */
+      @SerializedName("network_decline_code")
+      String networkDeclineCode;
+
       /** The reference assigned to the refund. */
       @SerializedName("reference")
       String reference;

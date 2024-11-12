@@ -251,7 +251,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentMethod> paymentMethod;
 
-  /** Information about the payment method configuration used for this PaymentIntent. */
+  /**
+   * Information about the <a
+   * href="https://stripe.com/docs/api/payment_method_configurations">payment method
+   * configuration</a> used for this PaymentIntent.
+   */
   @SerializedName("payment_method_configuration_details")
   PaymentMethodConfigurationDetails paymentMethodConfigurationDetails;
 
@@ -1822,9 +1826,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Aba extends StripeObject {
+          @SerializedName("account_holder_address")
+          Address accountHolderAddress;
+
+          /** The account holder name. */
+          @SerializedName("account_holder_name")
+          String accountHolderName;
+
           /** The ABA account number. */
           @SerializedName("account_number")
           String accountNumber;
+
+          /** The account type. */
+          @SerializedName("account_type")
+          String accountType;
+
+          @SerializedName("bank_address")
+          Address bankAddress;
 
           /** The bank name. */
           @SerializedName("bank_name")
@@ -1901,9 +1919,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Swift extends StripeObject {
+          @SerializedName("account_holder_address")
+          Address accountHolderAddress;
+
+          /** The account holder name. */
+          @SerializedName("account_holder_name")
+          String accountHolderName;
+
           /** The account number. */
           @SerializedName("account_number")
           String accountNumber;
+
+          /** The account type. */
+          @SerializedName("account_type")
+          String accountType;
+
+          @SerializedName("bank_address")
+          Address bankAddress;
 
           /** The bank name. */
           @SerializedName("bank_name")
