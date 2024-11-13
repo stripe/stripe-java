@@ -2166,6 +2166,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Zengin extends StripeObject {
+          @SerializedName("account_holder_address")
+          com.stripe.model.Address accountHolderAddress;
+
           /** The account holder name. */
           @SerializedName("account_holder_name")
           String accountHolderName;
@@ -2177,6 +2180,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           /** The bank account type. In Japan, this can only be {@code futsu} or {@code toza}. */
           @SerializedName("account_type")
           String accountType;
+
+          @SerializedName("bank_address")
+          com.stripe.model.Address bankAddress;
 
           /** The bank code of the account. */
           @SerializedName("bank_code")
