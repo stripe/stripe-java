@@ -2116,6 +2116,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Spei extends StripeObject {
+          @SerializedName("account_holder_address")
+          com.stripe.model.Address accountHolderAddress;
+
+          /** The account holder name. */
+          @SerializedName("account_holder_name")
+          String accountHolderName;
+
+          @SerializedName("bank_address")
+          com.stripe.model.Address bankAddress;
+
           /** The three-digit bank code. */
           @SerializedName("bank_code")
           String bankCode;

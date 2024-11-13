@@ -205,6 +205,16 @@ public class FundingInstructions extends StripeObject {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Spei extends StripeObject {
+        @SerializedName("account_holder_address")
+        Address accountHolderAddress;
+
+        /** The account holder name. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        @SerializedName("bank_address")
+        Address bankAddress;
+
         /** The three-digit bank code. */
         @SerializedName("bank_code")
         String bankCode;
