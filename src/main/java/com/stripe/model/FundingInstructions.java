@@ -156,9 +156,15 @@ public class FundingInstructions extends StripeObject {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Iban extends StripeObject {
+        @SerializedName("account_holder_address")
+        Address accountHolderAddress;
+
         /** The name of the person or business that owns the bank account. */
         @SerializedName("account_holder_name")
         String accountHolderName;
+
+        @SerializedName("bank_address")
+        Address bankAddress;
 
         /** The BIC/SWIFT code of the account. */
         @SerializedName("bic")
