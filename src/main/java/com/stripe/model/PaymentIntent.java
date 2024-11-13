@@ -2067,15 +2067,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Iban extends StripeObject {
-          @SerializedName("account_holder_address")
-          com.stripe.model.Address accountHolderAddress;
-
           /** The name of the person or business that owns the bank account. */
           @SerializedName("account_holder_name")
           String accountHolderName;
-
-          @SerializedName("bank_address")
-          com.stripe.model.Address bankAddress;
 
           /** The BIC/SWIFT code of the account. */
           @SerializedName("bic")
