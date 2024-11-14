@@ -1920,7 +1920,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<Account.FutureRequirements.Alternative> alternatives;
 
     /**
-     * Date on which {@code future_requirements} merges with the main {@code requirements} hash and
+     * Date on which {@code future_requirements} becomes the main {@code requirements} hash and
      * {@code future_requirements} becomes empty. After the transition, {@code currently_due}
      * requirements may immediately become {@code past_due}, but the account may also be given a
      * grace period depending on its enablement state prior to transitioning.
