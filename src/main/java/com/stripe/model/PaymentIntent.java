@@ -5460,7 +5460,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {
-      /** The order ID displayed in the Swish app after the payment is authorized. */
+      /** A reference for this payment to be displayed in the Swish app. */
       @SerializedName("reference")
       String reference;
 

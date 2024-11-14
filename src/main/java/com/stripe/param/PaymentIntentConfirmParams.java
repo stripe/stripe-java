@@ -24139,7 +24139,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The order ID displayed in the Swish app after the payment is authorized. */
+      /** A reference for this payment to be displayed in the Swish app. */
       @SerializedName("reference")
       Object reference;
 
@@ -24221,13 +24221,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /** The order ID displayed in the Swish app after the payment is authorized. */
+        /** A reference for this payment to be displayed in the Swish app. */
         public Builder setReference(String reference) {
           this.reference = reference;
           return this;
         }
 
-        /** The order ID displayed in the Swish app after the payment is authorized. */
+        /** A reference for this payment to be displayed in the Swish app. */
         public Builder setReference(EmptyParam reference) {
           this.reference = reference;
           return this;
