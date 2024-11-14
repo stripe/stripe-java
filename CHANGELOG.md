@@ -1,5 +1,11 @@
 # Changelog
 
+## 28.1.0-beta.3 - 2024-11-14
+* [#1922](https://github.com/stripe/stripe-java/pull/1922) Update generated code for beta
+  * Add support for `account_holder_address` and `bank_address` on `FundingInstructions.bank_transfer.financial_addresses[].iban`, `FundingInstructions.bank_transfer.financial_addresses[].sort_code`, `FundingInstructions.bank_transfer.financial_addresses[].spei`, `FundingInstructions.bank_transfer.financial_addresses[].zengin`, `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[].iban`, `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[].sort_code`, `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[].spei`, and `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[].zengin`
+  * Add support for `account_holder_name` on `FundingInstructions.bank_transfer.financial_addresses[].spei` and `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[].spei`
+  * Add support for new value `subscribe` on enum `PaymentLinkUpdateParams.submit_type`
+
 ## 28.1.0-beta.2 - 2024-11-07
 * [#1917](https://github.com/stripe/stripe-java/pull/1917) Update generated code for beta
   * Add support for new resources `Issuing.FraudLiabilityDebit`, `PaymentAttemptRecord`, and `PaymentRecord`
