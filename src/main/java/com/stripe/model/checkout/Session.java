@@ -397,7 +397,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
    * Checkout Sessions in {@code payment} mode. If blank or {@code auto}, {@code pay} is used.
    *
-   * <p>One of {@code auto}, {@code book}, {@code donate}, or {@code pay}.
+   * <p>One of {@code auto}, {@code book}, {@code donate}, {@code pay}, or {@code subscribe}.
    */
   @SerializedName("submit_type")
   String submitType;

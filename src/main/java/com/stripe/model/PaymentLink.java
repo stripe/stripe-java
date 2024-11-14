@@ -202,7 +202,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
    * Indicates the type of transaction being performed which customizes relevant text on the page,
    * such as the submit button.
    *
-   * <p>One of {@code auto}, {@code book}, {@code donate}, or {@code pay}.
+   * <p>One of {@code auto}, {@code book}, {@code donate}, {@code pay}, or {@code subscribe}.
    */
   @SerializedName("submit_type")
   String submitType;

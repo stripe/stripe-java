@@ -2067,9 +2067,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Iban extends StripeObject {
+          @SerializedName("account_holder_address")
+          com.stripe.model.Address accountHolderAddress;
+
           /** The name of the person or business that owns the bank account. */
           @SerializedName("account_holder_name")
           String accountHolderName;
+
+          @SerializedName("bank_address")
+          com.stripe.model.Address bankAddress;
 
           /** The BIC/SWIFT code of the account. */
           @SerializedName("bic")
@@ -2092,6 +2098,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class SortCode extends StripeObject {
+          @SerializedName("account_holder_address")
+          com.stripe.model.Address accountHolderAddress;
+
           /** The name of the person or business that owns the bank account. */
           @SerializedName("account_holder_name")
           String accountHolderName;
@@ -2099,6 +2108,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           /** The account number. */
           @SerializedName("account_number")
           String accountNumber;
+
+          @SerializedName("bank_address")
+          com.stripe.model.Address bankAddress;
 
           /** The six-digit sort code. */
           @SerializedName("sort_code")
@@ -2110,6 +2122,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Spei extends StripeObject {
+          @SerializedName("account_holder_address")
+          com.stripe.model.Address accountHolderAddress;
+
+          /** The account holder name. */
+          @SerializedName("account_holder_name")
+          String accountHolderName;
+
+          @SerializedName("bank_address")
+          com.stripe.model.Address bankAddress;
+
           /** The three-digit bank code. */
           @SerializedName("bank_code")
           String bankCode;
@@ -2160,6 +2182,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Zengin extends StripeObject {
+          @SerializedName("account_holder_address")
+          com.stripe.model.Address accountHolderAddress;
+
           /** The account holder name. */
           @SerializedName("account_holder_name")
           String accountHolderName;
@@ -2171,6 +2196,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           /** The bank account type. In Japan, this can only be {@code futsu} or {@code toza}. */
           @SerializedName("account_type")
           String accountType;
+
+          @SerializedName("bank_address")
+          com.stripe.model.Address bankAddress;
 
           /** The bank code of the account. */
           @SerializedName("bank_code")
@@ -5438,7 +5466,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {
-      /** The order ID displayed in the Swish app after the payment is authorized. */
+      /** A reference for this payment to be displayed in the Swish app. */
       @SerializedName("reference")
       String reference;
 

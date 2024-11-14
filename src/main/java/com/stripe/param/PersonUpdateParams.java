@@ -2265,6 +2265,10 @@ public class PersonUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Relationship {
+    /** Whether the person is the authorizer of the account's representative. */
+    @SerializedName("authorizer")
+    Boolean authorizer;
+
     /**
      * Whether the person is a director of the account's legal entity. Directors are typically
      * members of the governing board of the company, or responsible for ensuring the company meets
@@ -2316,6 +2320,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     Object title;
 
     private Relationship(
+        Boolean authorizer,
         Boolean director,
         Boolean executive,
         Map<String, Object> extraParams,
@@ -2324,6 +2329,7 @@ public class PersonUpdateParams extends ApiRequestParams {
         Object percentOwnership,
         Boolean representative,
         Object title) {
+      this.authorizer = authorizer;
       this.director = director;
       this.executive = executive;
       this.extraParams = extraParams;
@@ -2339,6 +2345,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean authorizer;
+
       private Boolean director;
 
       private Boolean executive;
@@ -2358,6 +2366,7 @@ public class PersonUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PersonUpdateParams.Relationship build() {
         return new PersonUpdateParams.Relationship(
+            this.authorizer,
             this.director,
             this.executive,
             this.extraParams,
@@ -2366,6 +2375,12 @@ public class PersonUpdateParams extends ApiRequestParams {
             this.percentOwnership,
             this.representative,
             this.title);
+      }
+
+      /** Whether the person is the authorizer of the account's representative. */
+      public Builder setAuthorizer(Boolean authorizer) {
+        this.authorizer = authorizer;
+        return this;
       }
 
       /**
