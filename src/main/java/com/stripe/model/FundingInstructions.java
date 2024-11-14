@@ -187,6 +187,9 @@ public class FundingInstructions extends StripeObject {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SortCode extends StripeObject {
+        @SerializedName("account_holder_address")
+        Address accountHolderAddress;
+
         /** The name of the person or business that owns the bank account. */
         @SerializedName("account_holder_name")
         String accountHolderName;
@@ -194,6 +197,9 @@ public class FundingInstructions extends StripeObject {
         /** The account number. */
         @SerializedName("account_number")
         String accountNumber;
+
+        @SerializedName("bank_address")
+        Address bankAddress;
 
         /** The six-digit sort code. */
         @SerializedName("sort_code")
