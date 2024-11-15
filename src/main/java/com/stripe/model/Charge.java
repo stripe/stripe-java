@@ -1029,6 +1029,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @EqualsAndHashCode(callSuper = false)
   public static class Outcome extends StripeObject {
     /**
+     * For charges declined by the network, a 2 digit code which indicates the advice returned by
+     * the network on how to proceed with an error.
+     */
+    @SerializedName("network_advice_code")
+    String networkAdviceCode;
+
+    /**
+     * For charges declined by the network, a brand specific 2, 3, or 4 digit code which indicates
+     * the reason the authorization failed.
+     */
+    @SerializedName("network_decline_code")
+    String networkDeclineCode;
+
+    /**
      * Possible values are {@code approved_by_network}, {@code declined_by_network}, {@code
      * not_sent_to_network}, and {@code reversed_after_approval}. The value {@code
      * reversed_after_approval} indicates the payment was <a
