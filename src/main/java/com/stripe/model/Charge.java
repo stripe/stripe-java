@@ -1497,7 +1497,73 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AmazonPay extends StripeObject {}
+    public static class AmazonPay extends StripeObject {
+      @SerializedName("funding")
+      Funding funding;
+
+      /**
+       * For more details about Funding, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Funding extends StripeObject {
+        @SerializedName("card")
+        Card card;
+
+        /**
+         * funding type of the underlying payment method.
+         *
+         * <p>Equal to {@code card}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Card, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Card extends StripeObject {
+          /**
+           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
+           * {@code unknown}.
+           */
+          @SerializedName("brand")
+          String brand;
+
+          /**
+           * Two-letter ISO code representing the country of the card. You could use this attribute
+           * to get a sense of the international breakdown of cards you've collected.
+           */
+          @SerializedName("country")
+          String country;
+
+          /** Two-digit number representing the card's expiration month. */
+          @SerializedName("exp_month")
+          Long expMonth;
+
+          /** Four-digit number representing the card's expiration year. */
+          @SerializedName("exp_year")
+          Long expYear;
+
+          /**
+           * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+           * unknown}.
+           */
+          @SerializedName("funding")
+          String funding;
+
+          /** The last four digits of the card. */
+          @SerializedName("last4")
+          String last4;
+        }
+      }
+    }
 
     /**
      * For more details about AuBecsDebit, please refer to the <a
@@ -3445,7 +3511,73 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RevolutPay extends StripeObject {}
+    public static class RevolutPay extends StripeObject {
+      @SerializedName("funding")
+      Funding funding;
+
+      /**
+       * For more details about Funding, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Funding extends StripeObject {
+        @SerializedName("card")
+        Card card;
+
+        /**
+         * funding type of the underlying payment method.
+         *
+         * <p>Equal to {@code card}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Card, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Card extends StripeObject {
+          /**
+           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
+           * {@code unknown}.
+           */
+          @SerializedName("brand")
+          String brand;
+
+          /**
+           * Two-letter ISO code representing the country of the card. You could use this attribute
+           * to get a sense of the international breakdown of cards you've collected.
+           */
+          @SerializedName("country")
+          String country;
+
+          /** Two-digit number representing the card's expiration month. */
+          @SerializedName("exp_month")
+          Long expMonth;
+
+          /** Four-digit number representing the card's expiration year. */
+          @SerializedName("exp_year")
+          Long expYear;
+
+          /**
+           * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+           * unknown}.
+           */
+          @SerializedName("funding")
+          String funding;
+
+          /** The last four digits of the card. */
+          @SerializedName("last4")
+          String last4;
+        }
+      }
+    }
 
     /**
      * For more details about SamsungPay, please refer to the <a
