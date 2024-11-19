@@ -935,6 +935,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoice.overdue")
     INVOICE__OVERDUE("invoice.overdue"),
 
+    @SerializedName("invoice.overpaid")
+    INVOICE__OVERPAID("invoice.overpaid"),
+
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),
 
