@@ -1770,6 +1770,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("amount_authorized")
       Long amountAuthorized;
 
+      /** The latest amount intended to be authorized by this charge. */
+      @SerializedName("amount_requested")
+      Long amountRequested;
+
       /** Authorization code on the charge. */
       @SerializedName("authorization_code")
       String authorizationCode;
@@ -1899,6 +1903,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       @SerializedName("overcapture")
       Overcapture overcapture;
+
+      @SerializedName("partial_authorization")
+      PartialAuthorization partialAuthorization;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
@@ -2079,6 +2086,25 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          * Indicates whether or not the authorized amount can be over-captured.
          *
          * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+
+      /**
+       * For more details about PartialAuthorization, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PartialAuthorization extends StripeObject {
+        /**
+         * Indicates whether the transaction requested for partial authorization feature and the
+         * authorization outcome.
+         *
+         * <p>One of {@code declined}, {@code fully_authorized}, {@code not_requested}, or {@code
+         * partially_authorized}.
          */
         @SerializedName("status")
         String status;
