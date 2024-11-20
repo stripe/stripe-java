@@ -1392,7 +1392,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class AutomaticTax {
-    /** <strong>Required.</strong> Set to true to enable automatic taxes. */
+    /**
+     * <strong>Required.</strong> Set to {@code true} to <a
+     * href="https://docs.stripe.com/tax">calculate tax automatically</a> using the customer's
+     * location.
+     *
+     * <p>Enabling this parameter causes Checkout to collect any billing address information
+     * necessary for tax calculation.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -1435,7 +1442,14 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.AutomaticTax(this.enabled, this.extraParams, this.liability);
       }
 
-      /** <strong>Required.</strong> Set to true to enable automatic taxes. */
+      /**
+       * <strong>Required.</strong> Set to {@code true} to <a
+       * href="https://docs.stripe.com/tax">calculate tax automatically</a> using the customer's
+       * location.
+       *
+       * <p>Enabling this parameter causes Checkout to collect any billing address information
+       * necessary for tax calculation.
+       */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
