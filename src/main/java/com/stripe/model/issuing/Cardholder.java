@@ -29,7 +29,8 @@ import lombok.Setter;
  * An Issuing {@code Cardholder} object represents an individual or business entity who is <a
  * href="https://stripe.com/docs/issuing">issued</a> cards.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/issuing/cards#create-cardholder">How to create
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/issuing/cards/virtual/issue-cards#create-cardholder">How to create
  * a cardholder</a>
  */
 @Getter

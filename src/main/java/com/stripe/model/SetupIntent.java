@@ -193,7 +193,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentMethod> paymentMethod;
 
-  /** Information about the payment method configuration used for this Setup Intent. */
+  /**
+   * Information about the <a
+   * href="https://stripe.com/docs/api/payment_method_configurations">payment method
+   * configuration</a> used for this Setup Intent.
+   */
   @SerializedName("payment_method_configuration_details")
   PaymentMethodConfigurationDetails paymentMethodConfigurationDetails;
 

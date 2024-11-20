@@ -189,7 +189,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * If specified, payment collection for this subscription will be paused. Note that the
    * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-   * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing collection</a>.
+   * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+   * collection</a>.
    */
   @SerializedName("pause_collection")
   Object pauseCollection;
@@ -977,7 +978,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * If specified, payment collection for this subscription will be paused. Note that the
      * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
      * collection</a>.
      */
     public Builder setPauseCollection(SubscriptionUpdateParams.PauseCollection pauseCollection) {
@@ -988,7 +989,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * If specified, payment collection for this subscription will be paused. Note that the
      * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/billing/subscriptions/pause-payment">pausing
+     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
      * collection</a>.
      */
     public Builder setPauseCollection(EmptyParam pauseCollection) {
@@ -4640,6 +4641,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
           @SerializedName("jcb")
           JCB("jcb"),
+
+          @SerializedName("link")
+          LINK("link"),
 
           @SerializedName("mastercard")
           MASTERCARD("mastercard"),

@@ -4015,8 +4015,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   public static class ShippingAddressCollection {
     /**
      * <strong>Required.</strong> An array of two-letter ISO country codes representing which
-     * countries Checkout should provide as options for shipping locations. Unsupported country
-     * codes: {@code AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
+     * countries Checkout should provide as options for shipping locations.
      */
     @SerializedName("allowed_countries")
     List<PaymentLinkCreateParams.ShippingAddressCollection.AllowedCountry> allowedCountries;
@@ -5799,7 +5798,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     DONATE("donate"),
 
     @SerializedName("pay")
-    PAY("pay");
+    PAY("pay"),
+
+    @SerializedName("subscribe")
+    SUBSCRIBE("subscribe");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

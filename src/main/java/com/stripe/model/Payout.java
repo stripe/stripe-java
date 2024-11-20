@@ -203,6 +203,13 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @SerializedName("status")
   String status;
 
+  /**
+   * A value that generates from the beneficiary's bank that allows users to track payouts with
+   * their bank. Banks might call this a &quot;reference number&quot; or something similar.
+   */
+  @SerializedName("trace_id")
+  TraceId traceId;
+
   /** Can be {@code bank_account} or {@code card}. */
   @SerializedName("type")
   String type;
@@ -696,6 +703,32 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
     return getResponseGetter().request(request, Payout.class);
   }
 
+  /**
+   * For more details about TraceId, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TraceId extends StripeObject {
+    /**
+     * Possible values are {@code pending}, {@code supported}, and {@code unsupported}. When {@code
+     * payout.status} is {@code pending} or {@code in_transit}, this will be {@code pending}. When
+     * the payout transitions to {@code paid}, {@code failed}, or {@code canceled}, this status will
+     * become {@code supported} or {@code unsupported} shortly after in most cases. In some cases,
+     * this may appear as {@code pending} for up to 10 days after {@code arrival_date} until
+     * transitioning to {@code supported} or {@code unsupported}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /**
+     * The trace ID value if {@code trace_id.status} is {@code supported}, otherwise {@code nil}.
+     */
+    @SerializedName("value")
+    String value;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -705,5 +738,6 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(originalPayout, responseGetter);
     trySetResponseGetter(reversedBy, responseGetter);
+    trySetResponseGetter(traceId, responseGetter);
   }
 }

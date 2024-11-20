@@ -102,7 +102,7 @@ public class VerificationReport extends ApiResource implements HasId {
   @SerializedName("type")
   String type;
 
-  /** The configuration token of a Verification Flow from the dashboard. */
+  /** The configuration token of a verification flow from the dashboard. */
   @SerializedName("verification_flow")
   String verificationFlow;
 

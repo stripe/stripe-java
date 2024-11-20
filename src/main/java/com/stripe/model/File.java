@@ -67,10 +67,11 @@ public class File extends ApiResource implements HasId {
    *
    * <p>One of {@code account_requirement}, {@code additional_verification}, {@code business_icon},
    * {@code business_logo}, {@code customer_signature}, {@code dispute_evidence}, {@code
-   * document_provider_identity_document}, {@code finance_report_run}, {@code identity_document},
-   * {@code identity_document_downloadable}, {@code issuing_regulatory_reporting}, {@code
-   * pci_document}, {@code selfie}, {@code sigma_scheduled_query}, {@code tax_document_user_upload},
-   * or {@code terminal_reader_splashscreen}.
+   * document_provider_identity_document}, {@code finance_report_run}, {@code
+   * financial_account_statement}, {@code identity_document}, {@code
+   * identity_document_downloadable}, {@code issuing_regulatory_reporting}, {@code pci_document},
+   * {@code selfie}, {@code sigma_scheduled_query}, {@code tax_document_user_upload}, or {@code
+   * terminal_reader_splashscreen}.
    */
   @SerializedName("purpose")
   String purpose;

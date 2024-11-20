@@ -843,7 +843,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Card extends StripeObject {
     /**
      * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
-     * jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+     * jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
      */
     @SerializedName("brand")
     String brand;
@@ -1039,7 +1039,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
           /**
            * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-           * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
+           * {@code unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -1151,8 +1152,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
           /**
            * Identifies which network this charge was processed on. Can be {@code amex}, {@code
            * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
-           * interac}, {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
-           * unknown}.
+           * interac}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
+           * visa}, or {@code unknown}.
            */
           @SerializedName("network")
           String network;
@@ -1503,7 +1504,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class CardPresent extends StripeObject {
     /**
      * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
-     * jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+     * jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
      */
     @SerializedName("brand")
     String brand;

@@ -132,6 +132,15 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   Object shippingAddressCollection;
 
   /**
+   * Describes the type of transaction being performed in order to customize relevant text on the
+   * page, such as the submit button. Changing this value will also affect the hostname in the <a
+   * href="https://stripe.com/docs/api/payment_links/payment_links/object#url">url</a> property
+   * (example: {@code donate.stripe.com}).
+   */
+  @SerializedName("submit_type")
+  SubmitType submitType;
+
+  /**
    * When creating a subscription, the specified configuration data will be used. There must be at
    * least one line item with a recurring price to use {@code subscription_data}.
    */
@@ -162,6 +171,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       Object paymentMethodTypes,
       Object restrictions,
       Object shippingAddressCollection,
+      SubmitType submitType,
       SubscriptionData subscriptionData,
       TaxIdCollection taxIdCollection) {
     this.active = active;
@@ -183,6 +193,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.paymentMethodTypes = paymentMethodTypes;
     this.restrictions = restrictions;
     this.shippingAddressCollection = shippingAddressCollection;
+    this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.taxIdCollection = taxIdCollection;
   }
@@ -230,6 +241,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Object shippingAddressCollection;
 
+    private SubmitType submitType;
+
     private SubscriptionData subscriptionData;
 
     private TaxIdCollection taxIdCollection;
@@ -256,6 +269,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.paymentMethodTypes,
           this.restrictions,
           this.shippingAddressCollection,
+          this.submitType,
           this.subscriptionData,
           this.taxIdCollection);
     }
@@ -577,6 +591,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     /** Configuration for collecting the customer's shipping address. */
     public Builder setShippingAddressCollection(EmptyParam shippingAddressCollection) {
       this.shippingAddressCollection = shippingAddressCollection;
+      return this;
+    }
+
+    /**
+     * Describes the type of transaction being performed in order to customize relevant text on the
+     * page, such as the submit button. Changing this value will also affect the hostname in the <a
+     * href="https://stripe.com/docs/api/payment_links/payment_links/object#url">url</a> property
+     * (example: {@code donate.stripe.com}).
+     */
+    public Builder setSubmitType(PaymentLinkUpdateParams.SubmitType submitType) {
+      this.submitType = submitType;
       return this;
     }
 
@@ -3633,8 +3658,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   public static class ShippingAddressCollection {
     /**
      * <strong>Required.</strong> An array of two-letter ISO country codes representing which
-     * countries Checkout should provide as options for shipping locations. Unsupported country
-     * codes: {@code AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
+     * countries Checkout should provide as options for shipping locations.
      */
     @SerializedName("allowed_countries")
     List<PaymentLinkUpdateParams.ShippingAddressCollection.AllowedCountry> allowedCountries;
@@ -5233,6 +5257,30 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     private final String value;
 
     PaymentMethodType(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum SubmitType implements ApiRequestParams.EnumParam {
+    @SerializedName("auto")
+    AUTO("auto"),
+
+    @SerializedName("book")
+    BOOK("book"),
+
+    @SerializedName("donate")
+    DONATE("donate"),
+
+    @SerializedName("pay")
+    PAY("pay"),
+
+    @SerializedName("subscribe")
+    SUBSCRIBE("subscribe");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SubmitType(String value) {
       this.value = value;
     }
   }
