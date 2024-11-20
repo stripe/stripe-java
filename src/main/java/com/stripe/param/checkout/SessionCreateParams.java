@@ -3930,6 +3930,15 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
      * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price} or {@code
      * price_data} is required.
@@ -3962,6 +3971,7 @@ public class SessionCreateParams extends ApiRequestParams {
         AdjustableQuantity adjustableQuantity,
         List<String> dynamicTaxRates,
         Map<String, Object> extraParams,
+        Map<String, String> metadata,
         String price,
         PriceData priceData,
         Long quantity,
@@ -3969,6 +3979,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.adjustableQuantity = adjustableQuantity;
       this.dynamicTaxRates = dynamicTaxRates;
       this.extraParams = extraParams;
+      this.metadata = metadata;
       this.price = price;
       this.priceData = priceData;
       this.quantity = quantity;
@@ -3986,6 +3997,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Map<String, String> metadata;
+
       private String price;
 
       private PriceData priceData;
@@ -4000,6 +4013,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.adjustableQuantity,
             this.dynamicTaxRates,
             this.extraParams,
+            this.metadata,
             this.price,
             this.priceData,
             this.quantity,
@@ -4065,6 +4079,32 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.LineItem#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.LineItem#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 
@@ -13356,6 +13396,20 @@ public class SessionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * Determines which entity is allowed to update the line items.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+       * line items. If set to {@code server_only}, only your server is allowed to update the line
+       * items.
+       *
+       * <p>When set to {@code server_only}, you must add the onLineItemsChange event handler when
+       * initializing the Stripe Checkout client and manually update the line items from your server
+       * using the Stripe API.
+       */
+      @SerializedName("line_items")
+      LineItems lineItems;
+
+      /**
        * Determines which entity is allowed to update the shipping details.
        *
        * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
@@ -13369,8 +13423,10 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("shipping_details")
       ShippingDetails shippingDetails;
 
-      private Update(Map<String, Object> extraParams, ShippingDetails shippingDetails) {
+      private Update(
+          Map<String, Object> extraParams, LineItems lineItems, ShippingDetails shippingDetails) {
         this.extraParams = extraParams;
+        this.lineItems = lineItems;
         this.shippingDetails = shippingDetails;
       }
 
@@ -13381,11 +13437,14 @@ public class SessionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private LineItems lineItems;
+
         private ShippingDetails shippingDetails;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.Permissions.Update build() {
-          return new SessionCreateParams.Permissions.Update(this.extraParams, this.shippingDetails);
+          return new SessionCreateParams.Permissions.Update(
+              this.extraParams, this.lineItems, this.shippingDetails);
         }
 
         /**
@@ -13417,6 +13476,22 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
+         * Determines which entity is allowed to update the line items.
+         *
+         * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+         * line items. If set to {@code server_only}, only your server is allowed to update the line
+         * items.
+         *
+         * <p>When set to {@code server_only}, you must add the onLineItemsChange event handler when
+         * initializing the Stripe Checkout client and manually update the line items from your
+         * server using the Stripe API.
+         */
+        public Builder setLineItems(SessionCreateParams.Permissions.Update.LineItems lineItems) {
+          this.lineItems = lineItems;
+          return this;
+        }
+
+        /**
          * Determines which entity is allowed to update the shipping details.
          *
          * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
@@ -13431,6 +13506,21 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.Permissions.Update.ShippingDetails shippingDetails) {
           this.shippingDetails = shippingDetails;
           return this;
+        }
+      }
+
+      public enum LineItems implements ApiRequestParams.EnumParam {
+        @SerializedName("client_only")
+        CLIENT_ONLY("client_only"),
+
+        @SerializedName("server_only")
+        SERVER_ONLY("server_only");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        LineItems(String value) {
+          this.value = value;
         }
       }
 

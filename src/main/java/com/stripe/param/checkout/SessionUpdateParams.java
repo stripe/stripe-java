@@ -30,6 +30,26 @@ public class SessionUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * A list of items the customer is purchasing.
+   *
+   * <p>When updating line items, the entire array of line items must be retransmitted.
+   *
+   * <p>To retain an existing line item, specify its {@code id}.
+   *
+   * <p>To update an existing line item, specify its {@code id} along with the new values of the
+   * fields to be updated.
+   *
+   * <p>To add a new line item, specify a {@code price} and {@code quantity}. Recurring prices are
+   * not supported yet.
+   *
+   * <p>To remove an existing line item, omit the line item's ID from the retransmitted array.
+   *
+   * <p>To reorder a line item, specify it at the desired position in the retransmitted array.
+   */
+  @SerializedName("line_items")
+  List<SessionUpdateParams.LineItem> lineItems;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -46,11 +66,13 @@ public class SessionUpdateParams extends ApiRequestParams {
       CollectedInformation collectedInformation,
       List<String> expand,
       Map<String, Object> extraParams,
+      List<SessionUpdateParams.LineItem> lineItems,
       Object metadata,
       Object shippingOptions) {
     this.collectedInformation = collectedInformation;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.lineItems = lineItems;
     this.metadata = metadata;
     this.shippingOptions = shippingOptions;
   }
@@ -66,6 +88,8 @@ public class SessionUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private List<SessionUpdateParams.LineItem> lineItems;
+
     private Object metadata;
 
     private Object shippingOptions;
@@ -76,6 +100,7 @@ public class SessionUpdateParams extends ApiRequestParams {
           this.collectedInformation,
           this.expand,
           this.extraParams,
+          this.lineItems,
           this.metadata,
           this.shippingOptions);
     }
@@ -136,6 +161,32 @@ public class SessionUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionUpdateParams#lineItems} for the field documentation.
+     */
+    public Builder addLineItem(SessionUpdateParams.LineItem element) {
+      if (this.lineItems == null) {
+        this.lineItems = new ArrayList<>();
+      }
+      this.lineItems.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionUpdateParams#lineItems} for the field documentation.
+     */
+    public Builder addAllLineItem(List<SessionUpdateParams.LineItem> elements) {
+      if (this.lineItems == null) {
+        this.lineItems = new ArrayList<>();
+      }
+      this.lineItems.addAll(elements);
       return this;
     }
 
@@ -583,6 +634,380 @@ public class SessionUpdateParams extends ApiRequestParams {
             this.state = state;
             return this;
           }
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class LineItem {
+    /**
+     * When set, provides configuration for this item’s quantity to be adjusted by the customer
+     * during Checkout.
+     */
+    @SerializedName("adjustable_quantity")
+    AdjustableQuantity adjustableQuantity;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** ID of an existing line item. */
+    @SerializedName("id")
+    Object id;
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Object metadata;
+
+    /** The ID of the <a href="https://stripe.com/docs/api/prices">Price</a>. */
+    @SerializedName("price")
+    Object price;
+
+    /** The quantity of the line item being purchased. */
+    @SerializedName("quantity")
+    Long quantity;
+
+    /**
+     * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
+     * item.
+     */
+    @SerializedName("tax_rates")
+    Object taxRates;
+
+    private LineItem(
+        AdjustableQuantity adjustableQuantity,
+        Map<String, Object> extraParams,
+        Object id,
+        Object metadata,
+        Object price,
+        Long quantity,
+        Object taxRates) {
+      this.adjustableQuantity = adjustableQuantity;
+      this.extraParams = extraParams;
+      this.id = id;
+      this.metadata = metadata;
+      this.price = price;
+      this.quantity = quantity;
+      this.taxRates = taxRates;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AdjustableQuantity adjustableQuantity;
+
+      private Map<String, Object> extraParams;
+
+      private Object id;
+
+      private Object metadata;
+
+      private Object price;
+
+      private Long quantity;
+
+      private Object taxRates;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionUpdateParams.LineItem build() {
+        return new SessionUpdateParams.LineItem(
+            this.adjustableQuantity,
+            this.extraParams,
+            this.id,
+            this.metadata,
+            this.price,
+            this.quantity,
+            this.taxRates);
+      }
+
+      /**
+       * When set, provides configuration for this item’s quantity to be adjusted by the customer
+       * during Checkout.
+       */
+      public Builder setAdjustableQuantity(
+          SessionUpdateParams.LineItem.AdjustableQuantity adjustableQuantity) {
+        this.adjustableQuantity = adjustableQuantity;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionUpdateParams.LineItem#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionUpdateParams.LineItem#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** ID of an existing line item. */
+      public Builder setId(String id) {
+        this.id = id;
+        return this;
+      }
+
+      /** ID of an existing line item. */
+      public Builder setId(EmptyParam id) {
+        this.id = id;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionUpdateParams.LineItem#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionUpdateParams.LineItem#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /** The ID of the <a href="https://stripe.com/docs/api/prices">Price</a>. */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
+      }
+
+      /** The ID of the <a href="https://stripe.com/docs/api/prices">Price</a>. */
+      public Builder setPrice(EmptyParam price) {
+        this.price = price;
+        return this;
+      }
+
+      /** The quantity of the line item being purchased. */
+      public Builder setQuantity(Long quantity) {
+        this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionUpdateParams.LineItem#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addTaxRate(String element) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionUpdateParams.LineItem#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllTaxRate(List<String> elements) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).addAll(elements);
+        return this;
+      }
+
+      /**
+       * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
+       * item.
+       */
+      public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      /**
+       * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
+       * item.
+       */
+      public Builder setTaxRates(List<String> taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class AdjustableQuantity {
+      /**
+       * <strong>Required.</strong> Set to true if the quantity can be adjusted to any positive
+       * integer. Setting to false will remove any previously specified constraints on quantity.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The maximum quantity the customer can purchase for the Checkout Session. By default this
+       * value is 99. You can specify a value up to 999999.
+       */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum quantity the customer must purchase for the Checkout Session. By default this
+       * value is 0.
+       */
+      @SerializedName("minimum")
+      Long minimum;
+
+      private AdjustableQuantity(
+          Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.maximum = maximum;
+        this.minimum = minimum;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Long maximum;
+
+        private Long minimum;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionUpdateParams.LineItem.AdjustableQuantity build() {
+          return new SessionUpdateParams.LineItem.AdjustableQuantity(
+              this.enabled, this.extraParams, this.maximum, this.minimum);
+        }
+
+        /**
+         * <strong>Required.</strong> Set to true if the quantity can be adjusted to any positive
+         * integer. Setting to false will remove any previously specified constraints on quantity.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionUpdateParams.LineItem.AdjustableQuantity#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionUpdateParams.LineItem.AdjustableQuantity#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The maximum quantity the customer can purchase for the Checkout Session. By default this
+         * value is 99. You can specify a value up to 999999.
+         */
+        public Builder setMaximum(Long maximum) {
+          this.maximum = maximum;
+          return this;
+        }
+
+        /**
+         * The minimum quantity the customer must purchase for the Checkout Session. By default this
+         * value is 0.
+         */
+        public Builder setMinimum(Long minimum) {
+          this.minimum = minimum;
+          return this;
         }
       }
     }
