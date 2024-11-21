@@ -117,7 +117,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * A hash of account group type to tokens. These are account groups this account should be added
-   * to
+   * to.
    */
   @SerializedName("groups")
   Groups groups;
@@ -480,7 +480,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * A hash of account group type to tokens. These are account groups this account should be added
-     * to
+     * to.
      */
     public Builder setGroups(AccountUpdateParams.Groups groups) {
       this.groups = groups;
