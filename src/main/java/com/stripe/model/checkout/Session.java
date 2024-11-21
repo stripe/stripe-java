@@ -3414,6 +3414,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @EqualsAndHashCode(callSuper = false)
     public static class Update extends StripeObject {
       /**
+       * Determines which entity is allowed to update the line items.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+       * line items. If set to {@code server_only}, only your server is allowed to update the line
+       * items.
+       *
+       * <p>When set to {@code server_only}, you must add the onLineItemsChange event handler when
+       * initializing the Stripe Checkout client and manually update the line items from your server
+       * using the Stripe API.
+       *
+       * <p>One of {@code client_only}, or {@code server_only}.
+       */
+      @SerializedName("line_items")
+      String lineItems;
+
+      /**
        * Determines which entity is allowed to update the shipping details.
        *
        * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the

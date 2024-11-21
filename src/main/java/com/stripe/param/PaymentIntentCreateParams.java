@@ -15514,6 +15514,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("request_overcapture")
       RequestOvercapture requestOvercapture;
 
+      /** Request partial authorization on this PaymentIntent. */
+      @SerializedName("request_partial_authorization")
+      RequestPartialAuthorization requestPartialAuthorization;
+
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
@@ -15608,6 +15612,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           RequestIncrementalAuthorization requestIncrementalAuthorization,
           RequestMulticapture requestMulticapture,
           RequestOvercapture requestOvercapture,
+          RequestPartialAuthorization requestPartialAuthorization,
           RequestThreeDSecure requestThreeDSecure,
           Boolean requireCvcRecollection,
           ApiRequestParams.EnumParam setupFutureUsage,
@@ -15627,6 +15632,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.requestIncrementalAuthorization = requestIncrementalAuthorization;
         this.requestMulticapture = requestMulticapture;
         this.requestOvercapture = requestOvercapture;
+        this.requestPartialAuthorization = requestPartialAuthorization;
         this.requestThreeDSecure = requestThreeDSecure;
         this.requireCvcRecollection = requireCvcRecollection;
         this.setupFutureUsage = setupFutureUsage;
@@ -15665,6 +15671,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private RequestOvercapture requestOvercapture;
 
+        private RequestPartialAuthorization requestPartialAuthorization;
+
         private RequestThreeDSecure requestThreeDSecure;
 
         private Boolean requireCvcRecollection;
@@ -15694,6 +15702,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.requestIncrementalAuthorization,
               this.requestMulticapture,
               this.requestOvercapture,
+              this.requestPartialAuthorization,
               this.requestThreeDSecure,
               this.requireCvcRecollection,
               this.setupFutureUsage,
@@ -15866,6 +15875,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestOvercapture
                 requestOvercapture) {
           this.requestOvercapture = requestOvercapture;
+          return this;
+        }
+
+        /** Request partial authorization on this PaymentIntent. */
+        public Builder setRequestPartialAuthorization(
+            PaymentIntentCreateParams.PaymentMethodOptions.Card.RequestPartialAuthorization
+                requestPartialAuthorization) {
+          this.requestPartialAuthorization = requestPartialAuthorization;
           return this;
         }
 
@@ -17546,6 +17563,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         private final String value;
 
         RequestOvercapture(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestPartialAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestPartialAuthorization(String value) {
           this.value = value;
         }
       }

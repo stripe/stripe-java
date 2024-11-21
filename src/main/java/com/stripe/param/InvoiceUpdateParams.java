@@ -2006,6 +2006,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * invoice’s default payment method, the subscription’s default payment method, the customer’s
      * default payment method, and your <a
      * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+     * Should not be specified with payment_method_configuration
      */
     @SerializedName("payment_method_types")
     Object paymentMethodTypes;
@@ -2136,6 +2137,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
        * invoice’s default payment method, the subscription’s default payment method, the customer’s
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+       * Should not be specified with payment_method_configuration
        */
       public Builder setPaymentMethodTypes(EmptyParam paymentMethodTypes) {
         this.paymentMethodTypes = paymentMethodTypes;
@@ -2148,6 +2150,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
        * invoice’s default payment method, the subscription’s default payment method, the customer’s
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+       * Should not be specified with payment_method_configuration
        */
       public Builder setPaymentMethodTypes(
           List<InvoiceUpdateParams.PaymentSettings.PaymentMethodType> paymentMethodTypes) {

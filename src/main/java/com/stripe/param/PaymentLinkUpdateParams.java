@@ -917,8 +917,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @Getter
   public static class AutomaticTax {
     /**
-     * <strong>Required.</strong> If {@code true}, tax will be calculated automatically using the
-     * customer's location.
+     * <strong>Required.</strong> Set to {@code true} to <a
+     * href="https://docs.stripe.com/tax">calculate tax automatically</a> using the customer's
+     * location.
+     *
+     * <p>Enabling this parameter causes the payment link to collect any billing address information
+     * necessary for tax calculation.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -964,8 +968,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> If {@code true}, tax will be calculated automatically using the
-       * customer's location.
+       * <strong>Required.</strong> Set to {@code true} to <a
+       * href="https://docs.stripe.com/tax">calculate tax automatically</a> using the customer's
+       * location.
+       *
+       * <p>Enabling this parameter causes the payment link to collect any billing address
+       * information necessary for tax calculation.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;

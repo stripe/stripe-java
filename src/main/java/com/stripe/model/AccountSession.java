@@ -193,10 +193,10 @@ public class AccountSession extends ApiResource {
       public static class Features extends StripeObject {
         /**
          * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * {@code true} for accounts where you’re responsible for collecting updated information
+         * when requirements are due or change, like Custom accounts. The default value for this
+         * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+         * true} otherwise.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -238,10 +238,10 @@ public class AccountSession extends ApiResource {
       public static class Features extends StripeObject {
         /**
          * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * {@code true} for accounts where you’re responsible for collecting updated information
+         * when requirements are due or change, like Custom accounts. The default value for this
+         * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+         * true} otherwise.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -283,10 +283,10 @@ public class AccountSession extends ApiResource {
       public static class Features extends StripeObject {
         /**
          * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * {@code true} for accounts where you’re responsible for collecting updated information
+         * when requirements are due or change, like Custom accounts. The default value for this
+         * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+         * true} otherwise.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -449,10 +449,10 @@ public class AccountSession extends ApiResource {
       public static class Features extends StripeObject {
         /**
          * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * {@code true} for accounts where you’re responsible for collecting updated information
+         * when requirements are due or change, like Custom accounts. The default value for this
+         * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+         * true} otherwise.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -594,10 +594,10 @@ public class AccountSession extends ApiResource {
       public static class Features extends StripeObject {
         /**
          * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * {@code true} for accounts where you’re responsible for collecting updated information
+         * when requirements are due or change, like Custom accounts. The default value for this
+         * feature is {@code false} when {@code external_account_collection} is enabled and {@code
+         * true} otherwise.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;

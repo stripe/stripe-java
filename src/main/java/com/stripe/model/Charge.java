@@ -1029,6 +1029,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @EqualsAndHashCode(callSuper = false)
   public static class Outcome extends StripeObject {
     /**
+     * For charges declined by the network, a 2 digit code which indicates the advice returned by
+     * the network on how to proceed with an error.
+     */
+    @SerializedName("network_advice_code")
+    String networkAdviceCode;
+
+    /**
+     * For charges declined by the network, a brand specific 2, 3, or 4 digit code which indicates
+     * the reason the authorization failed.
+     */
+    @SerializedName("network_decline_code")
+    String networkDeclineCode;
+
+    /**
      * Possible values are {@code approved_by_network}, {@code declined_by_network}, {@code
      * not_sent_to_network}, and {@code reversed_after_approval}. The value {@code
      * reversed_after_approval} indicates the payment was <a
@@ -1497,7 +1511,73 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AmazonPay extends StripeObject {}
+    public static class AmazonPay extends StripeObject {
+      @SerializedName("funding")
+      Funding funding;
+
+      /**
+       * For more details about Funding, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Funding extends StripeObject {
+        @SerializedName("card")
+        Card card;
+
+        /**
+         * funding type of the underlying payment method.
+         *
+         * <p>Equal to {@code card}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Card, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Card extends StripeObject {
+          /**
+           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
+           * {@code unknown}.
+           */
+          @SerializedName("brand")
+          String brand;
+
+          /**
+           * Two-letter ISO code representing the country of the card. You could use this attribute
+           * to get a sense of the international breakdown of cards you've collected.
+           */
+          @SerializedName("country")
+          String country;
+
+          /** Two-digit number representing the card's expiration month. */
+          @SerializedName("exp_month")
+          Long expMonth;
+
+          /** Four-digit number representing the card's expiration year. */
+          @SerializedName("exp_year")
+          Long expYear;
+
+          /**
+           * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+           * unknown}.
+           */
+          @SerializedName("funding")
+          String funding;
+
+          /** The last four digits of the card. */
+          @SerializedName("last4")
+          String last4;
+        }
+      }
+    }
 
     /**
      * For more details about AuBecsDebit, please refer to the <a
@@ -1690,6 +1770,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("amount_authorized")
       Long amountAuthorized;
 
+      /** The latest amount intended to be authorized by this charge. */
+      @SerializedName("amount_requested")
+      Long amountRequested;
+
       /** Authorization code on the charge. */
       @SerializedName("authorization_code")
       String authorizationCode;
@@ -1819,6 +1903,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       @SerializedName("overcapture")
       Overcapture overcapture;
+
+      @SerializedName("partial_authorization")
+      PartialAuthorization partialAuthorization;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
@@ -1999,6 +2086,25 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          * Indicates whether or not the authorized amount can be over-captured.
          *
          * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+
+      /**
+       * For more details about PartialAuthorization, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PartialAuthorization extends StripeObject {
+        /**
+         * Indicates whether the transaction requested for partial authorization feature and the
+         * authorization outcome.
+         *
+         * <p>One of {@code declined}, {@code fully_authorized}, {@code not_requested}, or {@code
+         * partially_authorized}.
          */
         @SerializedName("status")
         String status;
@@ -3445,7 +3551,73 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RevolutPay extends StripeObject {}
+    public static class RevolutPay extends StripeObject {
+      @SerializedName("funding")
+      Funding funding;
+
+      /**
+       * For more details about Funding, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Funding extends StripeObject {
+        @SerializedName("card")
+        Card card;
+
+        /**
+         * funding type of the underlying payment method.
+         *
+         * <p>Equal to {@code card}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Card, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Card extends StripeObject {
+          /**
+           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
+           * {@code unknown}.
+           */
+          @SerializedName("brand")
+          String brand;
+
+          /**
+           * Two-letter ISO code representing the country of the card. You could use this attribute
+           * to get a sense of the international breakdown of cards you've collected.
+           */
+          @SerializedName("country")
+          String country;
+
+          /** Two-digit number representing the card's expiration month. */
+          @SerializedName("exp_month")
+          Long expMonth;
+
+          /** Four-digit number representing the card's expiration year. */
+          @SerializedName("exp_year")
+          Long expYear;
+
+          /**
+           * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+           * unknown}.
+           */
+          @SerializedName("funding")
+          String funding;
+
+          /** The last four digits of the card. */
+          @SerializedName("last4")
+          String last4;
+        }
+      }
+    }
 
     /**
      * For more details about SamsungPay, please refer to the <a
