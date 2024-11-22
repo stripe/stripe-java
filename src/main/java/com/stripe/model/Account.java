@@ -915,6 +915,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String auBecsDebitPayments;
 
     /**
+     * The status of the automatic_indirect_tax capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("automatic_indirect_tax")
+    String automaticIndirectTax;
+
+    /**
      * The status of the Bacs Direct Debits payments capability of the account, or whether the
      * account can directly process Bacs Direct Debits charges.
      *
