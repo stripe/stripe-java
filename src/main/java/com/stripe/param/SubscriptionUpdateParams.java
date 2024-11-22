@@ -3042,8 +3042,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object billingThresholds;
 
     /**
-     * Delete all usage for a given subscription item. Allowed only when {@code deleted} is set to
-     * {@code true} and the current plan's {@code usage_type} is {@code metered}.
+     * Delete all usage for a given subscription item. You must pass this when deleting a usage
+     * records subscription item. {@code clear_usage} has no effect if the plan has a billing meter
+     * attached.
      */
     @SerializedName("clear_usage")
     Boolean clearUsage;
@@ -3206,8 +3207,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Delete all usage for a given subscription item. Allowed only when {@code deleted} is set to
-       * {@code true} and the current plan's {@code usage_type} is {@code metered}.
+       * Delete all usage for a given subscription item. You must pass this when deleting a usage
+       * records subscription item. {@code clear_usage} has no effect if the plan has a billing
+       * meter attached.
        */
       public Builder setClearUsage(Boolean clearUsage) {
         this.clearUsage = clearUsage;
