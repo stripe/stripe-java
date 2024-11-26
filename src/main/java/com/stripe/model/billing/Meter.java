@@ -24,10 +24,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A billing meter is a resource that allows you to track usage of a particular event. For example,
- * you might create a billing meter to track the number of API calls made by a particular user. You
- * can then attach the billing meter to a price and attach the price to a subscription to charge the
- * user for the number of API calls they make.
+ * Meters specify how to aggregate meter events over a billing period. Meter events represent the
+ * actions that customers take in your system. Meters attach to prices and form the basis of the
+ * bill.
  *
  * <p>Related guide: <a href="https://docs.stripe.com/billing/subscriptions/usage-based">Usage based
  * billing</a>
@@ -137,22 +136,34 @@ public class Meter extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Meter.class);
   }
 
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate() throws StripeException {
     return deactivate((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(RequestOptions options) throws StripeException {
     return deactivate((Map<String, Object>) null, options);
   }
 
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(Map<String, Object> params) throws StripeException {
     return deactivate(params, (RequestOptions) null);
   }
 
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -162,12 +173,18 @@ public class Meter extends ApiResource implements HasId {
     return getResponseGetter().request(request, Meter.class);
   }
 
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(MeterDeactivateParams params) throws StripeException {
     return deactivate(params, (RequestOptions) null);
   }
 
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(MeterDeactivateParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -257,22 +274,34 @@ public class Meter extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, MeterCollection.class);
   }
 
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate() throws StripeException {
     return reactivate((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(RequestOptions options) throws StripeException {
     return reactivate((Map<String, Object>) null, options);
   }
 
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(Map<String, Object> params) throws StripeException {
     return reactivate(params, (RequestOptions) null);
   }
 
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -282,12 +311,18 @@ public class Meter extends ApiResource implements HasId {
     return getResponseGetter().request(request, Meter.class);
   }
 
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(MeterReactivateParams params) throws StripeException {
     return reactivate(params, (RequestOptions) null);
   }
 
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(MeterReactivateParams params, RequestOptions options)
       throws StripeException {
     String path =
