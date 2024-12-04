@@ -4507,6 +4507,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Object metadata;
 
+    /**
+     * Integer representing the number of trial period days before the customer is charged for the
+     * first time. Has to be at least 1.
+     */
+    @SerializedName("trial_period_days")
+    Object trialPeriodDays;
+
     /** Settings related to subscription trials. */
     @SerializedName("trial_settings")
     Object trialSettings;
@@ -4515,10 +4522,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
         Object metadata,
+        Object trialPeriodDays,
         Object trialSettings) {
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
       this.metadata = metadata;
+      this.trialPeriodDays = trialPeriodDays;
       this.trialSettings = trialSettings;
     }
 
@@ -4533,12 +4542,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Object metadata;
 
+      private Object trialPeriodDays;
+
       private Object trialSettings;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.SubscriptionData build() {
         return new PaymentLinkUpdateParams.SubscriptionData(
-            this.extraParams, this.invoiceSettings, this.metadata, this.trialSettings);
+            this.extraParams,
+            this.invoiceSettings,
+            this.metadata,
+            this.trialPeriodDays,
+            this.trialSettings);
       }
 
       /**
@@ -4624,6 +4639,24 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
        */
       public Builder setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Integer representing the number of trial period days before the customer is charged for the
+       * first time. Has to be at least 1.
+       */
+      public Builder setTrialPeriodDays(Long trialPeriodDays) {
+        this.trialPeriodDays = trialPeriodDays;
+        return this;
+      }
+
+      /**
+       * Integer representing the number of trial period days before the customer is charged for the
+       * first time. Has to be at least 1.
+       */
+      public Builder setTrialPeriodDays(EmptyParam trialPeriodDays) {
+        this.trialPeriodDays = trialPeriodDays;
         return this;
       }
 

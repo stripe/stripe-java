@@ -3535,7 +3535,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {}
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+         * consist of only uppercase letters, numbers, spaces, or the following special characters:
+         * '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
+         */
+        @SerializedName("reference_prefix")
+        String referencePrefix;
+      }
     }
 
     /**
@@ -5388,7 +5396,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {}
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+         * consist of only uppercase letters, numbers, spaces, or the following special characters:
+         * '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
+         */
+        @SerializedName("reference_prefix")
+        String referencePrefix;
+      }
     }
 
     /**
