@@ -244,11 +244,11 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class InboundTransfers extends StripeObject {
-    /** Toggle settings for enabling/disabling an ACH specific feature. */
+    /** Toggle settings for enabling/disabling an inbound ACH specific feature. */
     @SerializedName("ach")
     Ach ach;
 
-    /** Toggle settings for enabling/disabling an ACH specific feature. */
+    /** Toggle settings for enabling/disabling an inbound ACH specific feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -366,7 +366,7 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OutboundPayments extends StripeObject {
-    /** Toggle settings for enabling/disabling an ACH specific feature. */
+    /** Toggle settings for enabling/disabling an outbound ACH specific feature. */
     @SerializedName("ach")
     Ach ach;
 
@@ -374,7 +374,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("us_domestic_wire")
     UsDomesticWire usDomesticWire;
 
-    /** Toggle settings for enabling/disabling an ACH specific feature. */
+    /** Toggle settings for enabling/disabling an outbound ACH specific feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -492,7 +492,7 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OutboundTransfers extends StripeObject {
-    /** Toggle settings for enabling/disabling an ACH specific feature. */
+    /** Toggle settings for enabling/disabling an outbound ACH specific feature. */
     @SerializedName("ach")
     Ach ach;
 
@@ -500,7 +500,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("us_domestic_wire")
     UsDomesticWire usDomesticWire;
 
-    /** Toggle settings for enabling/disabling an ACH specific feature. */
+    /** Toggle settings for enabling/disabling an outbound ACH specific feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

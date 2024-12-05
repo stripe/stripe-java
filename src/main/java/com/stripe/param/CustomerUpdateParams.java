@@ -1743,7 +1743,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /**
      * A flag that indicates when Stripe should validate the customer tax location. Defaults to
-     * {@code deferred}.
+     * {@code auto}.
      */
     @SerializedName("validate_location")
     ValidateLocation validateLocation;
@@ -1822,7 +1822,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       /**
        * A flag that indicates when Stripe should validate the customer tax location. Defaults to
-       * {@code deferred}.
+       * {@code auto}.
        */
       public Builder setValidateLocation(
           CustomerUpdateParams.Tax.ValidateLocation validateLocation) {

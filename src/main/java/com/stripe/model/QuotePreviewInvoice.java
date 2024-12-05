@@ -1033,6 +1033,15 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax extends StripeObject {
     /**
+     * If Stripe disabled automatic tax, this enum describes why.
+     *
+     * <p>One of {@code finalization_requires_location_inputs}, or {@code
+     * finalization_system_error}.
+     */
+    @SerializedName("disabled_reason")
+    String disabledReason;
+
+    /**
      * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
      * items (invoice items with manually specified <a
      * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code

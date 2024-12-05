@@ -32,15 +32,15 @@ public class SessionUpdateParams extends ApiRequestParams {
   /**
    * A list of items the customer is purchasing.
    *
-   * <p>When updating line items, the entire array of line items must be retransmitted.
+   * <p>When updating line items, you must retransmit the entire array of line items.
    *
    * <p>To retain an existing line item, specify its {@code id}.
    *
    * <p>To update an existing line item, specify its {@code id} along with the new values of the
-   * fields to be updated.
+   * fields to update.
    *
-   * <p>To add a new line item, specify a {@code price} and {@code quantity}. Recurring prices are
-   * not supported yet.
+   * <p>To add a new line item, specify a {@code price} and {@code quantity}. We don't currently
+   * support recurring prices.
    *
    * <p>To remove an existing line item, omit the line item's ID from the retransmitted array.
    *

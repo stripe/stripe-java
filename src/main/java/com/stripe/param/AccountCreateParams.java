@@ -133,7 +133,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * A hash of account group type to tokens. These are account groups this account should be added
-   * to
+   * to.
    */
   @SerializedName("groups")
   Groups groups;
@@ -484,7 +484,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * A hash of account group type to tokens. These are account groups this account should be added
-     * to
+     * to.
      */
     public Builder setGroups(AccountCreateParams.Groups groups) {
       this.groups = groups;
@@ -1249,6 +1249,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("au_becs_debit_payments")
     AuBecsDebitPayments auBecsDebitPayments;
 
+    /** The automatic_indirect_tax capability. */
+    @SerializedName("automatic_indirect_tax")
+    AutomaticIndirectTax automaticIndirectTax;
+
     /** The bacs_debit_payments capability. */
     @SerializedName("bacs_debit_payments")
     BacsDebitPayments bacsDebitPayments;
@@ -1501,6 +1505,7 @@ public class AccountCreateParams extends ApiRequestParams {
         AlmaPayments almaPayments,
         AmazonPayPayments amazonPayPayments,
         AuBecsDebitPayments auBecsDebitPayments,
+        AutomaticIndirectTax automaticIndirectTax,
         BacsDebitPayments bacsDebitPayments,
         BancontactPayments bancontactPayments,
         BankTransferPayments bankTransferPayments,
@@ -1567,6 +1572,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.almaPayments = almaPayments;
       this.amazonPayPayments = amazonPayPayments;
       this.auBecsDebitPayments = auBecsDebitPayments;
+      this.automaticIndirectTax = automaticIndirectTax;
       this.bacsDebitPayments = bacsDebitPayments;
       this.bancontactPayments = bancontactPayments;
       this.bankTransferPayments = bankTransferPayments;
@@ -1645,6 +1651,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private AmazonPayPayments amazonPayPayments;
 
       private AuBecsDebitPayments auBecsDebitPayments;
+
+      private AutomaticIndirectTax automaticIndirectTax;
 
       private BacsDebitPayments bacsDebitPayments;
 
@@ -1775,6 +1783,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.almaPayments,
             this.amazonPayPayments,
             this.auBecsDebitPayments,
+            this.automaticIndirectTax,
             this.bacsDebitPayments,
             this.bancontactPayments,
             this.bankTransferPayments,
@@ -1875,6 +1884,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setAuBecsDebitPayments(
           AccountCreateParams.Capabilities.AuBecsDebitPayments auBecsDebitPayments) {
         this.auBecsDebitPayments = auBecsDebitPayments;
+        return this;
+      }
+
+      /** The automatic_indirect_tax capability. */
+      public Builder setAutomaticIndirectTax(
+          AccountCreateParams.Capabilities.AutomaticIndirectTax automaticIndirectTax) {
+        this.automaticIndirectTax = automaticIndirectTax;
         return this;
       }
 
@@ -2758,6 +2774,85 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.AuBecsDebitPayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class AutomaticIndirectTax {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private AutomaticIndirectTax(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.AutomaticIndirectTax build() {
+          return new AccountCreateParams.Capabilities.AutomaticIndirectTax(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.AutomaticIndirectTax#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.AutomaticIndirectTax#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

@@ -455,6 +455,14 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AutomaticTax extends StripeObject {
+      /**
+       * If Stripe disabled automatic tax, this enum describes why.
+       *
+       * <p>Equal to {@code requires_location_inputs}.
+       */
+      @SerializedName("disabled_reason")
+      String disabledReason;
+
       /** Whether Stripe automatically computes tax on invoices created during this phase. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1130,6 +1138,14 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AutomaticTax extends StripeObject {
+      /**
+       * If Stripe disabled automatic tax, this enum describes why.
+       *
+       * <p>Equal to {@code requires_location_inputs}.
+       */
+      @SerializedName("disabled_reason")
+      String disabledReason;
+
       /** Whether Stripe automatically computes tax on invoices created during this phase. */
       @SerializedName("enabled")
       Boolean enabled;
