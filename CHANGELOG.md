@@ -1,5 +1,9 @@
 # Changelog
 
+## 28.2.0-beta.3 - 2024-12-06
+* [#1930](https://github.com/stripe/stripe-java/pull/1930) Change types for capital FinancingSummary back to BigDecimal
+  * The type for `Capital.FinancingSummary.Details.advancePaidOutAt`, `Capital.FinancingSummary.Details.repaymentsBeginAt`, `Capital.FinancingSummary.Details.CurrentRepaymentInterval.repaymentsBeginAt` have been changed to `BigDecimal` to reflect the API
+
 ## 28.2.0-beta.2 - 2024-12-05
 * [#1926](https://github.com/stripe/stripe-java/pull/1926) Update generated code for beta
   * Add support for `automatic_indirect_tax` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
