@@ -1900,6 +1900,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("overcapture")
       Overcapture overcapture;
 
+      /**
+       * Status of a card based on the card issuer.
+       *
+       * <p>One of {@code regulated}, or {@code unregulated}.
+       */
+      @SerializedName("regulated_status")
+      String regulatedStatus;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
