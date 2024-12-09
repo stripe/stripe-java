@@ -13,9 +13,9 @@ import lombok.Getter;
 @Getter
 public class LocationUpdateParams extends ApiRequestParams {
   /**
-   * The full address of the location. If you're updating the {@code address} field, avoid changing
-   * the {@code country}. If you need to modify the {@code country} field, create a new {@code
-   * Location} object and re-register any existing readers to that location.
+   * The full address of the location. You can't change the location's {@code country}. If you need
+   * to modify the {@code country} field, create a new {@code Location} object and re-register any
+   * existing readers to that location.
    */
   @SerializedName("address")
   Address address;
@@ -94,9 +94,9 @@ public class LocationUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The full address of the location. If you're updating the {@code address} field, avoid
-     * changing the {@code country}. If you need to modify the {@code country} field, create a new
-     * {@code Location} object and re-register any existing readers to that location.
+     * The full address of the location. You can't change the location's {@code country}. If you
+     * need to modify the {@code country} field, create a new {@code Location} object and
+     * re-register any existing readers to that location.
      */
     public Builder setAddress(LocationUpdateParams.Address address) {
       this.address = address;
